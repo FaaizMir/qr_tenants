@@ -1,0 +1,20 @@
+{
+  "title": "QR Scanner Feedback System",
+  "subtitle": "Transform customer feedback into valuable insights. Scan QR codes, leave feedback, and earn coupons.",
+  "multiTierSystem": "Multi-Tier System",
+  "multiTierDescription": "Super Admin, Merchants, and White Label Agents working together seamlessly.",
+  "qrCodeFeedback": "QR Code Feedback",
+  "qrCodeDescription": "Customers scan QR codes at physical stores to leave instant feedback.",
+  "rewardSystem": "Reward System",
+  "rewardDescription": "Customers receive coupons as rewards for their valuable feedback.",
+  "howItWorks": "How It Works",
+  "step1": "Merchants Subscribe",
+  "step1Description": "Merchants purchase subscriptions from Super Admin",
+  "step2": "Hire Agents",
+  "step2Description": "Merchants hire White Label Agents who purchase points",
+  "step3": "Scan & Feedback",
+  "step3Description": "Customers scan QR codes at agent stores and leave feedback",
+  "step4": "Get Rewards",
+  "step4Description": "Customers receive coupons as rewards for their feedback"
+}
+

@@ -1,0 +1,22 @@
+{
+  "allMerchants": "すべての加盟店",
+  "addMerchant": "加盟店を追加",
+  "merchantReports": "加盟店レポート",
+  "allSubscriptions": "すべてのサブスクリプション",
+  "activePlans": "アクティブなプラン",
+  "paymentHistory": "支払い履歴",
+  "allAgents": "すべての代理店",
+  "agentPoints": "代理店ポイント",
+  "agentReports": "代理店レポート",
+  "allFeedbacks": "すべてのフィードバック",
+  "pendingReview": "レビュー待ち",
+  "feedbackAnalytics": "フィードバック分析",
+  "allCoupons": "すべてのクーポン",
+  "redeemedCoupons": "交換済みクーポン",
+  "couponAnalytics": "クーポン分析",
+  "revenueAnalytics": "収益分析",
+  "userAnalytics": "ユーザー分析",
+  "generalSettings": "一般設定",
+  "paymentSettings": "支払い設定",
+  "systemSettings": "システム設定"
+}

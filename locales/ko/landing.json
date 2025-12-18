@@ -1,0 +1,19 @@
+{
+  "title": "QR 스캐너 피드백 시스템",
+  "subtitle": "고객 피드백을 가치 있는 인사이트로 전환하세요. QR 코드를 스캔하고, 피드백을 남기고, 쿠폰을 획득하세요.",
+  "multiTierSystem": "다층 시스템",
+  "multiTierDescription": "슈퍼 관리자, 가맹점, 화이트 라벨 에이전트가 원활하게 협력합니다.",
+  "qrCodeFeedback": "QR 코드 피드백",
+  "qrCodeDescription": "고객이 실제 매장에서 QR 코드를 스캔하여 즉시 피드백을 남깁니다.",
+  "rewardSystem": "보상 시스템",
+  "rewardDescription": "고객은 소중한 피드백에 대한 보상으로 쿠폰을 받습니다.",
+  "howItWorks": "작동 방식",
+  "step1": "가맹점 구독",
+  "step1Description": "가맹점이 슈퍼 관리자로부터 구독을 구매합니다",
+  "step2": "에이전트 고용",
+  "step2Description": "가맹점이 포인트를 구매하는 화이트 라벨 에이전트를 고용합니다",
+  "step3": "스캔 및 피드백",
+  "step3Description": "고객이 에이전트 매장에서 QR 코드를 스캔하고 피드백을 남깁니다",
+  "step4": "보상 받기",
+  "step4Description": "고객은 피드백에 대한 보상으로 쿠폰을 받습니다"
+}

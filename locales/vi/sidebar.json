@@ -1,0 +1,22 @@
+{
+  "allMerchants": "Tất cả Thương nhân",
+  "addMerchant": "Thêm Thương nhân",
+  "merchantReports": "Báo cáo Thương nhân",
+  "allSubscriptions": "Tất cả Gói đăng ký",
+  "activePlans": "Gói đang hoạt động",
+  "paymentHistory": "Lịch sử Thanh toán",
+  "allAgents": "Tất cả Đại lý",
+  "agentPoints": "Điểm Đại lý",
+  "agentReports": "Báo cáo Đại lý",
+  "allFeedbacks": "Tất cả Phản hồi",
+  "pendingReview": "Đang chờ Xem xét",
+  "feedbackAnalytics": "Phân tích Phản hồi",
+  "allCoupons": "Tất cả Phiếu giảm giá",
+  "redeemedCoupons": "Phiếu giảm giá đã sử dụng",
+  "couponAnalytics": "Phân tích Phiếu giảm giá",
+  "revenueAnalytics": "Phân tích Doanh thu",
+  "userAnalytics": "Phân tích Người dùng",
+  "generalSettings": "Cài đặt Chung",
+  "paymentSettings": "Cài đặt Thanh toán",
+  "systemSettings": "Cài đặt Hệ thống"
+}

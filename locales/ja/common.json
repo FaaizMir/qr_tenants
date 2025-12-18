@@ -1,0 +1,14 @@
+{
+  "home": "ホーム",
+  "dashboard": "ダッシュボード",
+  "merchants": "加盟店",
+  "subscriptions": "サブスクリプション",
+  "whiteLabelAgents": "ホワイトラベル代理店",
+  "feedbacks": "フィードバック",
+  "coupons": "クーポン",
+  "analytics": "分析",
+  "settings": "設定",
+  "logout": "ログアウト",
+  "viewAll": "すべて表示",
+  "goToDashboard": "ダッシュボードへ移動"
+}

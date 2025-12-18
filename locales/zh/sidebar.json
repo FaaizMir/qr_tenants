@@ -1,0 +1,22 @@
+{
+  "allMerchants": "所有商家",
+  "addMerchant": "添加商家",
+  "merchantReports": "商家报告",
+  "allSubscriptions": "所有订阅",
+  "activePlans": "活跃计划",
+  "paymentHistory": "支付历史",
+  "allAgents": "所有代理",
+  "agentPoints": "代理积分",
+  "agentReports": "代理报告",
+  "allFeedbacks": "所有反馈",
+  "pendingReview": "待审核",
+  "feedbackAnalytics": "反馈分析",
+  "allCoupons": "所有优惠券",
+  "redeemedCoupons": "已兑换优惠券",
+  "couponAnalytics": "优惠券分析",
+  "revenueAnalytics": "收入分析",
+  "userAnalytics": "用户分析",
+  "generalSettings": "常规设置",
+  "paymentSettings": "支付设置",
+  "systemSettings": "系统设置"
+}

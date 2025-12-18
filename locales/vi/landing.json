@@ -1,0 +1,19 @@
+{
+  "title": "Hệ thống Phản hồi QR Scanner",
+  "subtitle": "Chuyển đổi phản hồi khách hàng thành những hiểu biết có giá trị. Quét mã QR, để lại phản hồi và nhận phiếu giảm giá.",
+  "multiTierSystem": "Hệ thống Đa cấp",
+  "multiTierDescription": "Super Admin, Thương nhân và Đại lý White Label làm việc cùng nhau một cách liền mạch.",
+  "qrCodeFeedback": "Phản hồi Mã QR",
+  "qrCodeDescription": "Khách hàng quét mã QR tại cửa hàng thực tế để để lại phản hồi ngay lập tức.",
+  "rewardSystem": "Hệ thống Phần thưởng",
+  "rewardDescription": "Khách hàng nhận phiếu giảm giá như một phần thưởng cho phản hồi có giá trị của họ.",
+  "howItWorks": "Cách hoạt động",
+  "step1": "Thương nhân Đăng ký",
+  "step1Description": "Thương nhân mua gói đăng ký từ Super Admin",
+  "step2": "Thuê Đại lý",
+  "step2Description": "Thương nhân thuê Đại lý White Label, những người mua điểm",
+  "step3": "Quét & Phản hồi",
+  "step3Description": "Khách hàng quét mã QR tại cửa hàng đại lý và để lại phản hồi",
+  "step4": "Nhận Phần thưởng",
+  "step4Description": "Khách hàng nhận phiếu giảm giá như một phần thưởng cho phản hồi của họ"
+}

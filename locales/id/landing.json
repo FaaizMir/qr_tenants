@@ -1,0 +1,19 @@
+{
+  "title": "Sistem Umpan Balik QR Scanner",
+  "subtitle": "Ubah umpan balik pelanggan menjadi wawasan berharga. Pindai kode QR, berikan umpan balik, dan dapatkan kupon.",
+  "multiTierSystem": "Sistem Multi-Tingkat",
+  "multiTierDescription": "Super Admin, Pedagang, dan Agen White Label bekerja sama dengan mulus.",
+  "qrCodeFeedback": "Umpan Balik Kode QR",
+  "qrCodeDescription": "Pelanggan memindai kode QR di toko fisik untuk memberikan umpan balik instan.",
+  "rewardSystem": "Sistem Hadiah",
+  "rewardDescription": "Pelanggan menerima kupon sebagai hadiah atas umpan balik berharga mereka.",
+  "howItWorks": "Cara Kerjanya",
+  "step1": "Pedagang Berlangganan",
+  "step1Description": "Pedagang membeli langganan dari Super Admin",
+  "step2": "Menyewa Agen",
+  "step2Description": "Pedagang menyewa Agen White Label yang membeli poin",
+  "step3": "Pindai & Umpan Balik",
+  "step3Description": "Pelanggan memindai kode QR di toko agen dan memberikan umpan balik",
+  "step4": "Dapatkan Hadiah",
+  "step4Description": "Pelanggan menerima kupon sebagai hadiah atas umpan balik mereka"
+}

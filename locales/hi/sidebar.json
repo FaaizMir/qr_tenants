@@ -1,0 +1,22 @@
+{
+  "allMerchants": "सभी व्यापारी",
+  "addMerchant": "व्यापारी जोड़ें",
+  "merchantReports": "व्यापारी रिपोर्ट",
+  "allSubscriptions": "सभी सदस्यताएं",
+  "activePlans": "सक्रिय योजनाएं",
+  "paymentHistory": "भुगतान इतिहास",
+  "allAgents": "सभी एजेंट",
+  "agentPoints": "एजेंट अंक",
+  "agentReports": "एजेंट रिपोर्ट",
+  "allFeedbacks": "सभी प्रतिक्रियाएं",
+  "pendingReview": "लंबित समीक्षा",
+  "feedbackAnalytics": "प्रतिक्रिया विश्लेषण",
+  "allCoupons": "सभी कूपन",
+  "redeemedCoupons": "मोचित कूपन",
+  "couponAnalytics": "कूपन विश्लेषण",
+  "revenueAnalytics": "राजस्व विश्लेषण",
+  "userAnalytics": "उपयोगकर्ता विश्लेषण",
+  "generalSettings": "सामान्य सेटिंग्स",
+  "paymentSettings": "भुगतान सेटिंग्स",
+  "systemSettings": "सिस्टम सेटिंग्स"
+}

@@ -1,0 +1,22 @@
+{
+  "allMerchants": "모든 가맹점",
+  "addMerchant": "가맹점 추가",
+  "merchantReports": "가맹점 보고서",
+  "allSubscriptions": "모든 구독",
+  "activePlans": "활성 플랜",
+  "paymentHistory": "결제 내역",
+  "allAgents": "모든 에이전트",
+  "agentPoints": "에이전트 포인트",
+  "agentReports": "에이전트 보고서",
+  "allFeedbacks": "모든 피드백",
+  "pendingReview": "검토 대기 중",
+  "feedbackAnalytics": "피드백 분석",
+  "allCoupons": "모든 쿠폰",
+  "redeemedCoupons": "사용된 쿠폰",
+  "couponAnalytics": "쿠폰 분석",
+  "revenueAnalytics": "수익 분석",
+  "userAnalytics": "사용자 분석",
+  "generalSettings": "일반 설정",
+  "paymentSettings": "결제 설정",
+  "systemSettings": "시스템 설정"
+}

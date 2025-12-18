@@ -1,0 +1,22 @@
+{
+  "allMerchants": "ผู้ประกอบการทั้งหมด",
+  "addMerchant": "เพิ่มผู้ประกอบการ",
+  "merchantReports": "รายงานผู้ประกอบการ",
+  "allSubscriptions": "การสมัครใช้บริการทั้งหมด",
+  "activePlans": "แผนงานที่ใช้งานอยู่",
+  "paymentHistory": "ประวัติการชำระเงิน",
+  "allAgents": "ตัวแทนทั้งหมด",
+  "agentPoints": "คะแนนของตัวแทน",
+  "agentReports": "รายงานตัวแทน",
+  "allFeedbacks": "ความคิดเห็นทั้งหมด",
+  "pendingReview": "รอตรวจสอบ",
+  "feedbackAnalytics": "การวิเคราะห์ความคิดเห็น",
+  "allCoupons": "คูปองทั้งหมด",
+  "redeemedCoupons": "คูปองที่ใช้แล้ว",
+  "couponAnalytics": "การวิเคราะห์คูปอง",
+  "revenueAnalytics": "การวิเคราะห์รายได้",
+  "userAnalytics": "การวิเคราะห์ผู้ใช้",
+  "generalSettings": "การตั้งค่าทั่วไป",
+  "paymentSettings": "การตั้งค่าการชำระเงิน",
+  "systemSettings": "การตั้งค่าระบบ"
+}

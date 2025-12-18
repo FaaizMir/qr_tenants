@@ -1,0 +1,14 @@
+{
+  "home": "หน้าหลัก",
+  "dashboard": "แดชบอร์ด",
+  "merchants": "ผู้ค้า",
+  "subscriptions": "การสมัครสมาชิก",
+  "whiteLabelAgents": "ตัวแทนไวท์เลเบล",
+  "feedbacks": "คำติชม",
+  "coupons": "คูปอง",
+  "analytics": "การวิเคราะห์",
+  "settings": "การตั้งค่า",
+  "logout": "ออกจากระบบ",
+  "viewAll": "ดูทั้งหมด",
+  "goToDashboard": "ไปที่แดชบอร์ด"
+}

@@ -1,0 +1,14 @@
+{
+  "home": "홈",
+  "dashboard": "대시보드",
+  "merchants": "가맹점",
+  "subscriptions": "구독",
+  "whiteLabelAgents": "화이트 라벨 에이전트",
+  "feedbacks": "피드백",
+  "coupons": "쿠폰",
+  "analytics": "분석",
+  "settings": "설정",
+  "logout": "로그아웃",
+  "viewAll": "전체 보기",
+  "goToDashboard": "대시보드로 이동"
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Dashboard",
+  "totalRevenue": "Total Revenue",
+  "merchants": "Merchants",
+  "whiteLabelAgents": "White Label Agents",
+  "totalFeedbacks": "Total Feedbacks",
+  "activeSubscriptions": "Active Subscriptions",
+  "couponsIssued": "Coupons Issued",
+  "qrCodesScanned": "QR Codes Scanned",
+  "pointsPurchased": "Points Purchased",
+  "revenueOverview": "Revenue Overview",
+  "userDistribution": "User Distribution",
+  "recentFeedbacks": "Recent Feedbacks",
+  "feedbackId": "Feedback ID",
+  "customer": "Customer",
+  "whiteLabelAgent": "White Label Agent",
+  "rating": "Rating",
+  "date": "Date",
+  "status": "Status",
+  "approved": "Approved",
+  "pending": "Pending",
+  "fromLastMonth": "from last month",
+  "monthlyRecurring": "Monthly recurring",
+  "totalPointsSold": "Total points sold"
+}
+

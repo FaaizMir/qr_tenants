@@ -1,0 +1,19 @@
+{
+  "title": "Sistem Maklum Balas Pengimbas QR",
+  "subtitle": "Tukar maklum balas pelanggan menjadi pandangan berharga. Imbas kod QR, tinggalkan maklum balas, dan dapatkan kupon.",
+  "multiTierSystem": "Sistem Pelbagai Peringkat",
+  "multiTierDescription": "Super Admin, Peniaga, dan Ejen Label Putih bekerjasama dengan lancar.",
+  "qrCodeFeedback": "Maklum Balas Kod QR",
+  "qrCodeDescription": "Pelanggan mengimbas kod QR di kedai fizikal untuk meninggalkan maklum balas segera.",
+  "rewardSystem": "Sistem Ganjaran",
+  "rewardDescription": "Pelanggan menerima kupon sebagai ganjaran untuk maklum balas berharga mereka.",
+  "howItWorks": "Cara Ia Berfungsi",
+  "step1": "Peniaga Langgan",
+  "step1Description": "Peniaga membeli langganan daripada Super Admin",
+  "step2": "Mengupah Ejen",
+  "step2Description": "Peniaga mengupah Ejen Label Putih yang membeli mata",
+  "step3": "Imbas & Maklum Balas",
+  "step3Description": "Pelanggan mengimbas kod QR di kedai ejen dan meninggalkan maklum balas",
+  "step4": "Dapatkan Ganjaran",
+  "step4Description": "Pelanggan menerima kupon sebagai ganjaran untuk maklum balas mereka"
+}

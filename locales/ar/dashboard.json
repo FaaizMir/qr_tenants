@@ -1,0 +1,26 @@
+{
+  "title": "لوحة التحكم",
+  "totalRevenue": "إجمالي الإيرادات",
+  "merchants": "التجار",
+  "whiteLabelAgents": "وكلاء العلامة البيضاء",
+  "totalFeedbacks": "إجمالي التعليقات",
+  "activeSubscriptions": "الاشتراكات النشطة",
+  "couponsIssued": "الكوبونات الصادرة",
+  "qrCodesScanned": "رموز QR الممسوحة",
+  "pointsPurchased": "النقاط المشتراة",
+  "revenueOverview": "نظرة عامة على الإيرادات",
+  "userDistribution": "توزيع المستخدمين",
+  "recentFeedbacks": "التعليقات الأخيرة",
+  "feedbackId": "معرف التعليق",
+  "customer": "العميل",
+  "whiteLabelAgent": "وكيل العلامة البيضاء",
+  "rating": "التقييم",
+  "date": "التاريخ",
+  "status": "الحالة",
+  "approved": "موافق عليه",
+  "pending": "قيد الانتظار",
+  "fromLastMonth": "من الشهر الماضي",
+  "monthlyRecurring": "متكرر شهرياً",
+  "totalPointsSold": "إجمالي النقاط المباعة"
+}
+

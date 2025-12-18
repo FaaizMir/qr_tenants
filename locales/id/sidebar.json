@@ -1,0 +1,22 @@
+{
+  "allMerchants": "Semua Pedagang",
+  "addMerchant": "Tambah Pedagang",
+  "merchantReports": "Laporan Pedagang",
+  "allSubscriptions": "Semua Langganan",
+  "activePlans": "Paket Aktif",
+  "paymentHistory": "Riwayat Pembayaran",
+  "allAgents": "Semua Agen",
+  "agentPoints": "Poin Agen",
+  "agentReports": "Laporan Agen",
+  "allFeedbacks": "Semua Umpan Balik",
+  "pendingReview": "Menunggu Tinjauan",
+  "feedbackAnalytics": "Analitik Umpan Balik",
+  "allCoupons": "Semua Kupon",
+  "redeemedCoupons": "Kupon yang Ditukar",
+  "couponAnalytics": "Analitik Kupon",
+  "revenueAnalytics": "Analitik Pendapatan",
+  "userAnalytics": "Analitik Pengguna",
+  "generalSettings": "Pengaturan Umum",
+  "paymentSettings": "Pengaturan Pembayaran",
+  "systemSettings": "Pengaturan Sistem"
+}

@@ -1,0 +1,23 @@
+{
+  "allMerchants": "All Merchants",
+  "addMerchant": "Add Merchant",
+  "merchantReports": "Merchant Reports",
+  "allSubscriptions": "All Subscriptions",
+  "activePlans": "Active Plans",
+  "paymentHistory": "Payment History",
+  "allAgents": "All Agents",
+  "agentPoints": "Agent Points",
+  "agentReports": "Agent Reports",
+  "allFeedbacks": "All Feedbacks",
+  "pendingReview": "Pending Review",
+  "feedbackAnalytics": "Feedback Analytics",
+  "allCoupons": "All Coupons",
+  "redeemedCoupons": "Redeemed Coupons",
+  "couponAnalytics": "Coupon Analytics",
+  "revenueAnalytics": "Revenue Analytics",
+  "userAnalytics": "User Analytics",
+  "generalSettings": "General Settings",
+  "paymentSettings": "Payment Settings",
+  "systemSettings": "System Settings"
+}
+

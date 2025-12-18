@@ -1,0 +1,14 @@
+{
+  "home": "首页",
+  "dashboard": "仪表板",
+  "merchants": "商家",
+  "subscriptions": "订阅",
+  "whiteLabelAgents": "白标代理",
+  "feedbacks": "反馈",
+  "coupons": "优惠券",
+  "analytics": "分析",
+  "settings": "设置",
+  "logout": "退出登录",
+  "viewAll": "查看全部",
+  "goToDashboard": "前往仪表板"
+}

@@ -1,0 +1,23 @@
+{
+  "allMerchants": "جميع التجار",
+  "addMerchant": "إضافة تاجر",
+  "merchantReports": "تقارير التجار",
+  "allSubscriptions": "جميع الاشتراكات",
+  "activePlans": "الخطط النشطة",
+  "paymentHistory": "سجل الدفع",
+  "allAgents": "جميع الوكلاء",
+  "agentPoints": "نقاط الوكيل",
+  "agentReports": "تقارير الوكيل",
+  "allFeedbacks": "جميع التعليقات",
+  "pendingReview": "قيد المراجعة",
+  "feedbackAnalytics": "تحليلات التعليقات",
+  "allCoupons": "جميع الكوبونات",
+  "redeemedCoupons": "الكوبونات المستردة",
+  "couponAnalytics": "تحليلات الكوبونات",
+  "revenueAnalytics": "تحليلات الإيرادات",
+  "userAnalytics": "تحليلات المستخدمين",
+  "generalSettings": "الإعدادات العامة",
+  "paymentSettings": "إعدادات الدفع",
+  "systemSettings": "إعدادات النظام"
+}
+

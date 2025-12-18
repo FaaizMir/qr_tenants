@@ -1,0 +1,19 @@
+{
+  "title": "二维码扫描器反馈系统",
+  "subtitle": "将客户反馈转化为有价值的洞察。扫描二维码，留下反馈，并获得优惠券。",
+  "multiTierSystem": "多层系统",
+  "multiTierDescription": "超级管理员、商家和白标代理无缝协作。",
+  "qrCodeFeedback": "二维码反馈",
+  "qrCodeDescription": "客户在实体店扫描二维码以留下即时反馈。",
+  "rewardSystem": "奖励系统",
+  "rewardDescription": "客户因其有价值的反馈而获得优惠券作为奖励。",
+  "howItWorks": "工作原理",
+  "step1": "商家订阅",
+  "step1Description": "商家从超级管理员处购买订阅",
+  "step2": "雇佣代理",
+  "step2Description": "商家雇佣购买积分的白标代理",
+  "step3": "扫描和反馈",
+  "step3Description": "客户在代理商店扫描二维码并留下反馈",
+  "step4": "获得奖励",
+  "step4Description": "客户因其反馈而获得优惠券作为奖励"
+}

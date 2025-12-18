@@ -1,0 +1,15 @@
+{
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "merchants": "Merchants",
+  "subscriptions": "Subscriptions",
+  "whiteLabelAgents": "White Label Agents",
+  "feedbacks": "Feedbacks",
+  "coupons": "Coupons",
+  "analytics": "Analytics",
+  "settings": "Settings",
+  "logout": "Logout",
+  "viewAll": "View all",
+  "goToDashboard": "Go to Dashboard"
+}
+

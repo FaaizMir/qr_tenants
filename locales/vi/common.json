@@ -1,0 +1,14 @@
+{ 
+  "home": "Trang chủ",
+  "dashboard": "Bảng điều khiển",
+  "merchants": "Thương nhân",
+  "subscriptions": "Gói đăng ký",
+  "whiteLabelAgents": "Đại lý White Label",
+  "feedbacks": "Phản hồi",
+  "coupons": "Phiếu giảm giá",
+  "analytics": "Phân tích",
+  "settings": "Cài đặt",
+  "logout": "Đăng xuất",
+  "viewAll": "Xem tất cả",
+  "goToDashboard": "Đi đến bảng điều khiển"
+}
