@@ -1,20 +1,21 @@
-"use client";
-
-// Logic moved to src/containers/merchant/coupons/create/index.jsx
-import MerchantCreateCouponContainer from "@/containers/merchant/coupons/create";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
+import MerchantCreateCouponContainer from "@/containers/merchant/coupons/create";
+import { getTranslations } from "next-intl/server";
 
-export default function CreateCouponPage() {
-    const breadcrumbData = [
-        { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-        { name: "Coupon Batches", url: "/en/merchant/coupons" },
-        { name: "Create Batch", url: "/en/merchant/coupons/create" },
-    ];
+export default async function CreateCouponPage({ params }) {
+  const tCommon = await getTranslations("common");
 
-    return (
-        <div className="space-y-6">
-            <BreadcrumbComponent data={breadcrumbData} />
-            <MerchantCreateCouponContainer />
-        </div>
-    );
+  const breadcrumbData = [
+    { name: tCommon("dashboard"), url: "/merchant/dashboard" },
+    { name: "Coupons", url: "/merchant/coupons" },
+    { name: "Create Coupon Batch", url: "/merchant/coupons/create" },
+  ];
+
+  return (
+    <>
+      <BreadcrumbComponent data={breadcrumbData} />
+      <MerchantCreateCouponContainer />
+    </>
+  );
 }
+

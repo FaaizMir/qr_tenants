@@ -6,9 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getSubscriptionType } from "@/lib/auth-utils";
+import { getSubscriptionType, getCurrentUser } from "@/lib/auth-utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axios";
+import { toast } from "sonner";
 
 export default function MerchantCreateCouponContainer() {
     const router = useRouter();
@@ -16,14 +18,50 @@ export default function MerchantCreateCouponContainer() {
     const isAnnual = subscriptionType === "annual";
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    // form state
+    const [batchName, setBatchName] = useState("");
+    const [batchType, setBatchType] = useState("temporary");
+    const [totalQuantity, setTotalQuantity] = useState(isAnnual ? 1000 : 100);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [isActive, setIsActive] = useState(true);
+    const [whatsappEnabled, setWhatsappEnabled] = useState(true);
+    const [luckyDrawEnabled, setLuckyDrawEnabled] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
+
+        try {
+            const currentUser = getCurrentUser();
+            const merchant_id = currentUser?.merchant_id || currentUser?.merchant?.id || currentUser?.id;
+            if (!merchant_id) {
+                toast.error("Unable to determine merchant id. Please contact support.");
+                setLoading(false);
+                return;
+            }
+
+            const payload = {
+                merchant_id: Number(merchant_id),
+                batch_name: batchName,
+                batch_type: batchType,
+                total_quantity: Number(totalQuantity),
+                start_date: startDate ? `${startDate}T00:00:00Z` : null,
+                end_date: endDate ? `${endDate}T23:59:59Z` : null,
+                is_active: Boolean(isActive),
+                whatsapp_enabled: Boolean(whatsappEnabled),
+                lucky_draw_enabled: Boolean(luckyDrawEnabled),
+            };
+
+            const resp = await axiosInstance.post("/coupon-batches", payload);
+            toast.success("Coupon batch created successfully");
             router.push("/en/merchant/coupons");
-        }, 1500);
+        } catch (err) {
+            const msg = err?.response?.data?.message || err.message || "Failed to create coupon batch.";
+            toast.error(msg);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -52,7 +90,7 @@ export default function MerchantCreateCouponContainer() {
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="name">Batch Name</Label>
-                                    <Input id="name" placeholder="e.g. Summer Sale 2024" required />
+                                    <Input id="name" placeholder="e.g. Summer Sale 2025" required value={batchName} onChange={(e)=>setBatchName(e.target.value)} />
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4">
@@ -64,6 +102,8 @@ export default function MerchantCreateCouponContainer() {
                                             placeholder="100"
                                             max={isAnnual ? 10000 : 500}
                                             required
+                                            value={totalQuantity}
+                                            onChange={(e)=>setTotalQuantity(e.target.value)}
                                         />
                                         <p className="text-xs text-muted-foreground">
                                             Limit: {isAnnual ? "10,000" : "500"} codes
@@ -71,14 +111,20 @@ export default function MerchantCreateCouponContainer() {
                                         </p>
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="discount">Discount Value</Label>
-                                        <Input id="discount" placeholder="e.g. 20%" required />
+                                        <Label htmlFor="type">Batch Type</Label>
+                                        <Input id="type" placeholder="temporary" required value={batchType} onChange={(e)=>setBatchType(e.target.value)} />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="validity">Valid Until</Label>
-                                    <Input id="validity" type="date" required />
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="start">Start Date</Label>
+                                        <Input id="start" type="date" required value={startDate} onChange={(e)=>setStartDate(e.target.value)} />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="end">End Date</Label>
+                                        <Input id="end" type="date" required value={endDate} onChange={(e)=>setEndDate(e.target.value)} />
+                                    </div>
                                 </div>
 
                                 <div className="space-y-2">
@@ -94,6 +140,12 @@ export default function MerchantCreateCouponContainer() {
                                             <span className="text-sm font-medium">Use Template</span>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="grid grid-cols-3 gap-4">
+                                    <label className="flex items-center gap-2"><input type="checkbox" checked={isActive} onChange={(e)=>setIsActive(e.target.checked)} /> Active</label>
+                                    <label className="flex items-center gap-2"><input type="checkbox" checked={whatsappEnabled} onChange={(e)=>setWhatsappEnabled(e.target.checked)} /> WhatsApp Enabled</label>
+                                    <label className="flex items-center gap-2"><input type="checkbox" checked={luckyDrawEnabled} onChange={(e)=>setLuckyDrawEnabled(e.target.checked)} /> Lucky Draw</label>
                                 </div>
 
                                 <Button type="submit" className="w-full" disabled={loading}>
@@ -117,12 +169,12 @@ export default function MerchantCreateCouponContainer() {
                                 </div>
                                 <div className="h-full flex flex-col justify-between">
                                     <div className="text-center mt-2">
-                                        <h3 className="font-bold text-lg">Summer Sale</h3>
+                                        <h3 className="font-bold text-lg">{batchName || "Summer Sale"}</h3>
                                         <p className="text-2xl font-black text-primary my-1">20% OFF</p>
-                                        <p className="text-xs text-muted-foreground">Valid until Dec 31, 2024</p>
+                                        <p className="text-xs text-muted-foreground">Valid until {endDate || "Dec 31, 2025"}</p>
                                     </div>
                                     <div className="bg-gray-100 p-2 text-center rounded border border-dashed border-gray-300">
-                                        <p className="font-mono text-sm tracking-widest">ABCD-1234</p>
+                                        <p className="font-mono text-sm tracking-widest">{Array.from({length:6}).map(()=>String.fromCharCode(65+Math.floor(Math.random()*26))).join("")}-{Math.floor(Math.random()*9000+1000)}</p>
                                     </div>
                                 </div>
                             </div>
