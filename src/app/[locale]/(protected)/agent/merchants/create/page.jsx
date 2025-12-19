@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import MerchantForm from "@/containers/merchants/merchant-form";
+import MerchantForm from "@/containers/merchant/merchant-form";
 import { getTranslations } from "next-intl/server";
 
 export default async function CreateMerchantPage({ params }) {
@@ -8,8 +8,8 @@ export default async function CreateMerchantPage({ params }) {
 
   const breadcrumbData = [
     { name: tCommon("dashboard"), url: "/dashboard" },
-    { name: "Merchants", url: "/merchants" },
-    { name: "Create Merchant", url: "/merchants/create" },
+    { name: "Merchants", url: "/agent/merchants" },
+    { name: "Create Merchant", url: "/agent/merchants/create" },
   ];
 
   return (

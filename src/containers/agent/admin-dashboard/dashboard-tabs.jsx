@@ -23,7 +23,7 @@ export const getDashboardTabs = ({ kpiData, recentActivities }) => [
                         <CardTitle>Quick Actions</CardTitle>
                     </CardHeader>
                     <CardContent className="flex gap-4">
-                        <Link href="/en/agent/merchants">
+                        <Link href="/agent/merchants/create">
                             <Button>Add New Merchant</Button>
                         </Link>
                         <Link href="/en/agent/earnings">

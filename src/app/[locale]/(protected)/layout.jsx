@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, use, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { getCurrentUser, getSubscriptionType } from "@/lib/auth-utils";
 import { AppSidebar } from "@/components/layouts/app-sidebar";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
@@ -20,6 +20,7 @@ export default function ProtectedLayout({ children, params }) {
   const user = getCurrentUser();
   const subscriptionType = getSubscriptionType();
   const [mounted, setMounted] = useState(false);
+  const pathnameHook = usePathname();
 
   useEffect(() => {
     setMounted(true);
@@ -30,6 +31,28 @@ export default function ProtectedLayout({ children, params }) {
       router.push(`/${locale}/login`);
     }
   }, [user, router, locale]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const pathname = pathnameHook || (typeof window !== "undefined" ? window.location.pathname : "");
+    if (!pathname) return;
+
+    const parts = pathname.split("/").filter(Boolean);
+    const LOCALES = ["zh","ms","th","vi","id","ko","ja","hi","ar","en"];
+    const routeSegment = LOCALES.includes(parts[0]) ? parts[1] || "" : parts[0] || "";
+
+    // Client-side role enforcement on route segment
+    if (routeSegment.startsWith("merchant") && user.role !== "merchant") {
+      router.push(`/${locale}/login`);
+      return;
+    }
+
+    if ((routeSegment.startsWith("agent") || routeSegment.startsWith("admin")) && !(user.role === "agent" || user.role === "admin")) {
+      router.push(`/${locale}/login`);
+      return;
+    }
+  }, [user, router, locale, pathnameHook]);
 
   if (!mounted || !user) {
     return null; // Or a loading spinner

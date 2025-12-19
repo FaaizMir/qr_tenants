@@ -3,7 +3,7 @@
 import { use, useMemo, useState } from "react";
 import { ShieldCheck, QrCode, MessageSquare, Sparkles } from "lucide-react";
 import { useRouter, Link } from "@/i18n/routing";
-import { authenticateUser, setCurrentUser } from "@/lib/auth-utils";
+import { login as authLogin } from "@/lib/services/auth";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,29 +33,31 @@ export default function LoginPage({ params }) {
     setLoading(true);
 
     try {
-      const user = authenticateUser(username, password);
-
-      if (!user) {
-        setError("Invalid username or password");
-        setLoading(false);
-        return;
-      }
-
-      // Save user to localStorage
-      setCurrentUser(user);
+      const { user } = await authLogin(username, password);
 
       // Redirect based on role
-      if (user.role === 'agent') {
-        router.push(`/agent/dashboard`);
-      } else if (user.role === 'merchant') {
+      const role = (user.role || "").toLowerCase();
+      if (role === "merchant") {
         router.push(`/merchant/dashboard`);
+      } else if (role === "agent" || role === "admin") {
+        router.push(`/agent/dashboard`);
       } else {
         router.push(`/dashboard`);
       }
 
       router.refresh();
     } catch (err) {
-      setError(err?.message || "Something went wrong. Please try again.");
+      const respData = err?.response?.data;
+      let message = err?.message || "Something went wrong. Please try again.";
+
+      if (respData) {
+        if (typeof respData === "string") message = respData;
+        else if (respData.message) message = respData.message;
+        else message = JSON.stringify(respData);
+      }
+
+      setError(message);
+    } finally {
       setLoading(false);
     }
   };

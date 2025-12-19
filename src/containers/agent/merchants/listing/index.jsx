@@ -9,13 +9,14 @@ import TableToolbar from "@/components/common/table-toolbar";
 
 import { merchants } from "./merchants-listing-data";
 import { merchantsColumns } from "./merchants-listing-columns";
+import { useRouter } from "next/navigation";
 
 export default function AgentMerchantsListingContainer() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
-
+const router =useRouter()
   const filteredMerchants = merchants.filter(
     (item) =>
       item.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -36,7 +37,7 @@ export default function AgentMerchantsListingContainer() {
             Manage all your merchants here
           </p>
         </div>
-        <Button>
+        <Button onClick={() => router.push("/agent/merchants/create")}>
           <Plus className="mr-2 h-4 w-4" />
           Add Merchant
         </Button>

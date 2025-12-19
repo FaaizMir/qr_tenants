@@ -1,25 +1,26 @@
 import axios from "axios";
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "";
+
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 axiosInstance.interceptors.request.use(
-  async (config) => {
+  (config) => {
     try {
-      let session = null;
-
       if (typeof window !== "undefined") {
-        const { getSession } = await import("next-auth/react");
-        session = await getSession();
-      }
-      const token = session?.accessToken;
-
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        const token = localStorage.getItem("authToken");
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
       }
     } catch (error) {
       console.error("Error attaching token:", error);
@@ -46,8 +47,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401 && !shouldSkipAuthRedirect(error)) {
       if (typeof window !== "undefined") {
-        localStorage.removeItem("persist:auth");
-        localStorage.removeItem("authUser");
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("currentUser");
 
         window.location.href = "/login";
       }
