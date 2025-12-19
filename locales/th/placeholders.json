@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "ใช้งานอยู่",
+    "dblocalhost": "localhost",
+    "dbname": "โซลูชันเทคมาร์ทสำหรับผู้เช่า",
+    "dbpassword": "กรอกพาสเวิร์ดฐานข้อมูล",
+    "dbport": "5432",
+    "dbusername": "โพสต์เกรส",
+    "email": "contact@techmart.com",
+    "inactive": "ไม่ทำงาน",
+    "name": "เทคมาร์ท โซลูชั่นส์",
+    "phone": "+1-555-0123",
+    "status": "เลือกสถานะ",
+    "subdomain": "เทคมาร์ท-โซลูชันส์",
+    "suspended": "ถูกระงับ",
+    "typeannual": "ประจำปี",
+    "typetemporary": "ชั่วคราว"
+  },
+  "reports": {
+    "search": "ค้นหาชุดโดยชื่อ สถานะ หรือประเภท..."
+  },
+  "signin": {
+    "loadingText": "กำลังเข้าสู่ระบบ...",
+    "submitLoading": "เข้าสู่ระบบเพื่อไปยังแดชบอร์ด",
+    "username": "ผู้ดูแลระบบหรือผู้ค้า"
+  }
+}

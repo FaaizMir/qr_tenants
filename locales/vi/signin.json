@@ -1,0 +1,15 @@
+{
+  "description": "Không gian làm việc an toàn, đa người dùng cho đại lý và thương nhân.\nXem bảng điều khiển, phát hành phiếu giảm giá và theo dõi phản hồi của khách hàng từ một nơi.",
+  "description2": "Sử dụng thông tin đăng nhập đại lý hoặc thương nhân của bạn để tiếp tục.",
+  "forgotPassword": "Quên mật khẩu?",
+  "heading1": "Đăng nhập để khởi động phản hồi QR, phiếu giảm giá và thông báo WhatsApp.",
+  "label1": "Phản hồi QR trong vài giây",
+  "label2": "Theo dõi WhatsApp đã sẵn sàng",
+  "label3": "Người thuê được cách ly và an toàn",
+  "label4": "Tên người dùng",
+  "label5": "Mật khẩu",
+  "qrReview": "Đánh giá QR SaaS",
+  "registerAgent": "Đăng ký làm đại lý",
+  "signin": "Đăng nhập",
+  "welcome": "Chào mừng trở lại"
+}

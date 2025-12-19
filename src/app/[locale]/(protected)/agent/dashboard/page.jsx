@@ -1,9 +1,11 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import AgentDashboardContainer from "@/containers/agent/admin-dashboard";
+import { getTranslations } from "next-intl/server";
 
-export default function AgentDashboardPage() {
+export default async function AgentDashboardPage() {
+  const tAgentDashboard = await getTranslations("dashboard.agentDashboard");
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/en/agent/dashboard" },
+    { name: tAgentDashboard("agentdashboard"), url: "/en/agent/dashboard" },
   ];
   return (
     <>

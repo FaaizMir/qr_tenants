@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "활성",
+    "dblocalhost": "로컬호스트",
+    "dbname": "테넌트_테크마트_솔루션",
+    "dbpassword": "데이터베이스 비밀번호를 입력하세요",
+    "dbport": "5432",
+    "dbusername": "포스트그레스",
+    "email": "contact@techmart.com",
+    "inactive": "비활성",
+    "name": "테크마트 솔루션",
+    "phone": "+1-555-0123",
+    "status": "상태 선택",
+    "subdomain": "테크마트 솔루션",
+    "suspended": "정지됨",
+    "typeannual": "연간",
+    "typetemporary": "임시"
+  },
+  "reports": {
+    "search": "이름, 상태 또는 유형으로 배치를 검색..."
+  },
+  "signin": {
+    "loadingText": "로그인 중...",
+    "submitLoading": "대시보드에 로그인",
+    "username": "관리자 또는 상인"
+  }
+}

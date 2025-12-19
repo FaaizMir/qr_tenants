@@ -1,0 +1,15 @@
+{
+  "description": "Secure, multi-tenant workspace for agents and merchants.\nView dashboards, issue coupons, and track customer feedback from one place.",
+  "description2": "Use your agent or merchant credentials to continue.",
+  "forgotPassword": "Forgot password?",
+  "heading1": "Sign in to launch QR feedback, coupons, and WhatsApp nudges.",
+  "label1": "QR feedback in seconds",
+  "label2": "WhatsApp follow-up ready",
+  "label3": "Tenant isolated & secure",
+  "label4": "Username",
+  "label5": "Password",
+  "qrReview": "QR Review SaaS",
+  "registerAgent": "Register as agent",
+  "signin": "Sign in",
+  "welcome": "Welcome back"
+}

@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "活跃",
+    "dblocalhost": "本地主机",
+    "dbname": "租户_科技市场_解决方案",
+    "dbpassword": "输入数据库密码",
+    "dbport": "5432",
+    "dbusername": "postgres",
+    "email": "contact@techmart.com",
+    "inactive": "不活跃",
+    "name": "TechMart 解决方案",
+    "phone": "+1-555-0123",
+    "status": "选择状态",
+    "subdomain": "科技市场解决方案",
+    "suspended": "已暂停",
+    "typeannual": "年度",
+    "typetemporary": "临时"
+  },
+  "reports": {
+    "search": "按名称、状态或类型搜索批次..."
+  },
+  "signin": {
+    "loadingText": "正在登录...",
+    "submitLoading": "登录仪表板",
+    "username": "管理员或商家"
+  }
+}

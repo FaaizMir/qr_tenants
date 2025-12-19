@@ -7,12 +7,8 @@ import { login as authLogin } from "@/lib/services/auth";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-const highlights = [
-  { icon: QrCode, label: "QR feedback in seconds" },
-  { icon: MessageSquare, label: "WhatsApp follow-up ready" },
-  { icon: ShieldCheck, label: "Tenant isolated & secure" },
-];
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/common/language-switcher";
 
 export default function LoginPage({ params }) {
   const { locale } = use(params);
@@ -21,23 +17,41 @@ export default function LoginPage({ params }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const tSignin = useTranslations("signin");
+  const tPlaceholders = useTranslations("placeholders.signin");
+  const tValidation = useTranslations("validations.signin");
 
   const isDisabled = useMemo(
     () => loading || !username.trim() || !password.trim(),
-    [loading, username, password],
+    [loading, username, password]
   );
 
+  const highlights = [
+    { icon: QrCode, label: tSignin("label1") },
+    { icon: MessageSquare, label: tSignin("label2") },
+    { icon: ShieldCheck, label: tSignin("label3") },
+  ];
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      const { user } = await authLogin(username, password);
+      const user = authenticateUser(username, password);
+
+      if (!user) {
+        setError(tValidation("error1"));
+        setLoading(false);
+        return;
+      }
+
+      // Save user to localStorage
+      setCurrentUser(user);
 
       // Redirect based on role
-      const role = (user.role || "").toLowerCase();
-      if (role === "merchant") {
+      if (user.role === "agent") {
+        router.push(`/agent/dashboard`);
+      } else if (user.role === "merchant") {
         router.push(`/merchant/dashboard`);
       } else if (role === "agent" || role === "admin") {
         router.push(`/agent/dashboard`);
@@ -47,6 +61,7 @@ export default function LoginPage({ params }) {
 
       router.refresh();
     } catch (err) {
+      setError(err?.message || tValidation("error2"));
       const respData = err?.response?.data;
       let message = err?.message || "Something went wrong. Please try again.";
 
@@ -63,20 +78,22 @@ export default function LoginPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+    <div className="min-h-screen bg-linear-to-br from-primary/10 via-background to-secondary/10">
+      <div className="fixed right-6 top-6 z-50">
+        <LanguageSwitcher />
+      </div>
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-10 px-4 py-10 lg:flex-row lg:items-center">
         {/* Left: Hero */}
         <div className="flex-1 space-y-6 text-left">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
             <Sparkles className="h-4 w-4" />
-            QR Review SaaS
+            {tSignin("qrReview")}
           </div>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
-            Sign in to launch QR feedback, coupons, and WhatsApp nudges.
+            {tSignin("heading1")}
           </h1>
           <p className="max-w-xl text-base text-muted-foreground">
-            Secure, multi-tenant workspace for agents and merchants.
-            View dashboards, issue coupons, and track customer feedback from one place.
+            {tSignin("description")}
           </p>
           <div className="grid gap-3 sm:grid-cols-3">
             {highlights.map(({ icon: Icon, label }) => (
@@ -100,22 +117,24 @@ export default function LoginPage({ params }) {
           <div className="relative rounded-2xl border border-border bg-card/90 p-8 shadow-2xl shadow-primary/10 backdrop-blur">
             <div className="mb-6 space-y-2 text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                Welcome back
+                {tSignin("welcome")}
               </p>
-              <h2 className="text-2xl font-bold text-foreground">Sign in</h2>
+              <h2 className="text-2xl font-bold text-foreground">
+                {tSignin("signin")}
+              </h2>
               <p className="text-sm text-muted-foreground">
-                Use your agent or merchant credentials to continue.
+                {tSignin("description2")}{" "}
               </p>
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  Username
+                  {tSignin("label4")}
                 </label>
                 <Input
                   type="text"
-                  placeholder="admin or merchant"
+                  placeholder={tPlaceholders("username")}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
@@ -125,7 +144,7 @@ export default function LoginPage({ params }) {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  Password
+                  {tSignin("label5")}
                 </label>
                 <Input
                   type="password"
@@ -144,28 +163,33 @@ export default function LoginPage({ params }) {
               )}
 
               <Button type="submit" className="w-full" disabled={isDisabled}>
-                {loading ? "Signing in..." : "Sign in to dashboard"}
+                {loading
+                  ? tPlaceholders("loadingText")
+                  : tPlaceholders("submitLoading")}
               </Button>
             </form>
 
             <div className="mt-6 space-y-3">
               <p className="text-xs text-muted-foreground bg-muted rounded-lg p-3">
-                <strong>Demo Credentials:</strong><br />
-                Agent: <code className="font-mono">admin / admin123</code><br />
-                Merchant: <code className="font-mono">merchant / merchant123</code>
+                <strong>Demo Credentials:</strong>
+                <br />
+                Agent: <code className="font-mono">admin / admin123</code>
+                <br />
+                Merchant:{" "}
+                <code className="font-mono">merchant / merchant123</code>
               </p>
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <Link
                   href="/login"
                   className="underline underline-offset-4 hover:text-foreground"
                 >
-                  Forgot password?
+                  {tSignin("forgotPassword")}
                 </Link>
                 <Link
                   href="/register/agent"
                   className="font-semibold text-primary hover:text-primary/80"
                 >
-                  Register as agent
+                  {tSignin("registerAgent")}
                 </Link>
               </div>
             </div>
@@ -175,4 +199,3 @@ export default function LoginPage({ params }) {
     </div>
   );
 }
-

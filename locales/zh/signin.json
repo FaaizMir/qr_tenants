@@ -1,0 +1,15 @@
+{
+  "description": "安全的多租户工作区，供代理和商户使用。\n从一个地方查看仪表板、发放优惠券并跟踪客户反馈。",
+  "description2": "使用您的代理或商户凭据继续。",
+  "forgotPassword": "忘记密码？",
+  "heading1": "登录以启动二维码反馈、优惠券和WhatsApp提醒。",
+  "label1": "二维码反馈在几秒钟内",
+  "label2": "WhatsApp 跟进准备好了",
+  "label3": "租户隔离与安全",
+  "label4": "用户名",
+  "label5": "密码",
+  "qrReview": "二维码审核SaaS",
+  "registerAgent": "注册为代理人",
+  "signin": "登录",
+  "welcome": "欢迎回来"
+}

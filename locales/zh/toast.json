@@ -1,0 +1,6 @@
+{
+  "errorCreate": "创建商户失败",
+  "errorUpdate": "更新商户失败",
+  "successCreate": "商户创建成功",
+  "successUpdate": "商户更新成功"
+}

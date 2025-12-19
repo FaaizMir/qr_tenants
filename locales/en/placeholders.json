@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "Active",
+    "dblocalhost": "localhost",
+    "dbname": "tenant_techmart_solutions",
+    "dbpassword": "Enter database password",
+    "dbport": "5432",
+    "dbusername": "postgres",
+    "email": "contact@techmart.com",
+    "inactive": "Inactive",
+    "name": "TechMart Solutions",
+    "phone": "+1-555-0123",
+    "status": "Select status",
+    "subdomain": "techmart-solutions",
+    "suspended": "Suspended",
+    "typeannual": "Annual",
+    "typetemporary": "Temporary"
+  },
+  "reports": {
+    "search": "Search batches by name, status, or type..."
+  },
+  "signin": {
+    "loadingText": "Signing in...",
+    "submitLoading": "Sign in to dashboard",
+    "username": "admin or merchant"
+  }
+}

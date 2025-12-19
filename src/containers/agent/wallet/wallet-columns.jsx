@@ -1,9 +1,9 @@
-export const transactionColumns = [
-  { accessorKey: "date", header: "Date" },
-  { accessorKey: "description", header: "Description" },
+export const transactionColumns = (tAgentWallet) => [
+  { accessorKey: "date", header: tAgentWallet("date") },
+  { accessorKey: "description", header: tAgentWallet("descriptioncolumn") },
   {
     accessorKey: "amount",
-    header: "Amount",
+    header: tAgentWallet("amount"),
     cell: ({ row }) => (
       <span
         className={row.original.amount >= 0 ? "text-green-600" : "text-red-600"}
@@ -12,18 +12,18 @@ export const transactionColumns = [
       </span>
     ),
   },
-  { accessorKey: "status", header: "Status" },
+  { accessorKey: "status", header: tAgentWallet("status") },
 ];
 
-export const deductionColumns = [
-  { accessorKey: "date", header: "Date" },
-  { accessorKey: "description", header: "Description" },
+export const deductionColumns = (tAgentWallet) => [
+  { accessorKey: "date", header: tAgentWallet("date") },
+  { accessorKey: "description", header: tAgentWallet("descriptioncolumn") },
   {
     accessorKey: "amount",
-    header: "Amount",
+    header: tAgentWallet("amount"),
     cell: ({ row }) => (
       <span className="text-red-600">-${row.original.amount}</span>
     ),
   },
-  { accessorKey: "frequency", header: "Frequency" },
+  { accessorKey: "frequency", header: tAgentWallet("frequency") },
 ];

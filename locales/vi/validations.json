@@ -1,0 +1,15 @@
+{
+  "createMerchants": {
+    "dbportMax": "Cổng phải nhỏ hơn 65535",
+    "dbportMin": "Cổng phải lớn hơn 0",
+    "name": "Tên người bán là bắt buộc",
+    "nameMessage": "Tên phải có ít nhất 3 ký tự",
+    "subdomain": "Cần có subdomain",
+    "subdomainMinLength": "Tên miền phụ phải có ít nhất 3 ký tự",
+    "subdomainPattern": "Tên miền phụ chỉ có thể chứa chữ cái thường, số và dấu gạch ngang"
+  },
+  "signin": {
+    "error1": "Tên người dùng hoặc mật khẩu không hợp lệ",
+    "error2": "Có gì đó không đúng. Vui lòng thử lại."
+  }
+}

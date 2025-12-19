@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "نشط",
+    "dblocalhost": "localhost",
+    "dbname": "حلول تكنولوجيا المستأجر",
+    "dbpassword": "أدخل كلمة مرور قاعدة البيانات",
+    "dbport": "5432",
+    "dbusername": "بوستجرس",
+    "email": "contact@techmart.com",
+    "inactive": "غير نشط",
+    "name": "تقنيات مارت للحلول",
+    "phone": "+1-555-0123",
+    "status": "اختر الحالة",
+    "subdomain": "تقنيات مارت - الحلول",
+    "suspended": "معلق",
+    "typeannual": "سنوي",
+    "typetemporary": "مؤقت"
+  },
+  "reports": {
+    "search": "ابحث عن الدفعات حسب الاسم أو الحالة أو النوع..."
+  },
+  "signin": {
+    "loadingText": "تسجيل الدخول...",
+    "submitLoading": "تسجيل الدخول إلى لوحة التحكم",
+    "username": "مدير أو تاجر"
+  }
+}

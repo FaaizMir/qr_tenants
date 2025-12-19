@@ -1,0 +1,6 @@
+{
+  "errorCreate": "Gagal membuat pedagang",
+  "errorUpdate": "Gagal memperbarui pedagang",
+  "successCreate": "Merchant berhasil dibuat",
+  "successUpdate": "Merchant berhasil diperbarui"
+}

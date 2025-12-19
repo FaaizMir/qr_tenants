@@ -1,0 +1,6 @@
+{
+  "errorCreate": "상인 생성에 실패했습니다.",
+  "errorUpdate": "상인 업데이트에 실패했습니다.",
+  "successCreate": "상인이 성공적으로 생성되었습니다.",
+  "successUpdate": "상인이 성공적으로 업데이트되었습니다."
+}

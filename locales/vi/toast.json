@@ -1,0 +1,6 @@
+{
+  "errorCreate": "Không thể tạo thương nhân",
+  "errorUpdate": "Cập nhật thương nhân không thành công",
+  "successCreate": "Người bán đã được tạo thành công",
+  "successUpdate": "Người bán đã được cập nhật thành công"
+}

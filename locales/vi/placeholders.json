@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "Kích hoạt",
+    "dblocalhost": "localhost",
+    "dbname": "giải pháp công nghệ thuê nhà",
+    "dbpassword": "Nhập mật khẩu cơ sở dữ liệu",
+    "dbport": "5432",
+    "dbusername": "postgres",
+    "email": "contact@techmart.com",
+    "inactive": "Không hoạt động",
+    "name": "Giải pháp TechMart",
+    "phone": "+1-555-0123",
+    "status": "Chọn trạng thái",
+    "subdomain": "giải pháp công nghệ",
+    "suspended": "Đã tạm ngưng",
+    "typeannual": "Hàng năm",
+    "typetemporary": "Tạm thời"
+  },
+  "reports": {
+    "search": "Tìm kiếm các lô theo tên, trạng thái hoặc loại..."
+  },
+  "signin": {
+    "loadingText": "Đang đăng nhập...",
+    "submitLoading": "Đăng nhập vào bảng điều khiển",
+    "username": "quản trị viên hoặc thương nhân"
+  }
+}

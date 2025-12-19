@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "सक्रिय",
+    "dblocalhost": "लोकलहोस्ट",
+    "dbname": "टेनेंट_टेकमार्ट_सॉल्यूशंस",
+    "dbpassword": "डेटाबेस पासवर्ड दर्ज करें",
+    "dbport": "5432",
+    "dbusername": "पोस्टग्रेस",
+    "email": "contact@techmart.com",
+    "inactive": "निष्क्रिय",
+    "name": "टेकमार्ट सॉल्यूशंस",
+    "phone": "+1-555-0123",
+    "status": "स्थिति चुनें",
+    "subdomain": "टेकमार्ट-समाधान",
+    "suspended": "निलंबित",
+    "typeannual": "वार्षिक",
+    "typetemporary": "अस्थायी"
+  },
+  "reports": {
+    "search": "नाम, स्थिति, या प्रकार द्वारा बैच खोजें..."
+  },
+  "signin": {
+    "loadingText": "साइन इन कर रहे हैं...",
+    "submitLoading": "डैशबोर्ड में साइन इन करें",
+    "username": "व्यवस्थापक या व्यापारी"
+  }
+}

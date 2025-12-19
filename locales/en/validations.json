@@ -1,0 +1,15 @@
+{
+  "createMerchants": {
+    "dbportMax": "Port must be less than 65535",
+    "dbportMin": "Port must be greater than 0",
+    "name": "Merchant name is required",
+    "nameMessage": "Name must be at least 3 characters",
+    "subdomain": "Subdomain is required",
+    "subdomainMinLength": "Subdomain must be at least 3 characters",
+    "subdomainPattern": "Subdomain can only contain lowercase letters, numbers, and hyphens"
+  },
+  "signin": {
+    "error1": "Invalid username or password",
+    "error2": "Something went wrong. Please try again."
+  }
+}

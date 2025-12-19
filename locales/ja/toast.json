@@ -1,0 +1,6 @@
+{
+  "errorCreate": "マーチャントの作成に失敗しました",
+  "errorUpdate": "マーチャントの更新に失敗しました",
+  "successCreate": "マーチャントが正常に作成されました",
+  "successUpdate": "マーチャントが正常に更新されました"
+}

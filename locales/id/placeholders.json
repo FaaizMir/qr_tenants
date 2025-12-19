@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "Aktif",
+    "dblocalhost": "localhost",
+    "dbname": "solusi_techmart_sewa",
+    "dbpassword": "Masukkan kata sandi database",
+    "dbport": "5432",
+    "dbusername": "postgres",
+    "email": "contact@techmart.com",
+    "inactive": "Tidak Aktif",
+    "name": "Solusi TechMart",
+    "phone": "+1-555-0123",
+    "status": "Pilih status",
+    "subdomain": "solusi-techmart",
+    "suspended": "Ditangguhkan",
+    "typeannual": "Tahunan",
+    "typetemporary": "Sementara"
+  },
+  "reports": {
+    "search": "Cari batch berdasarkan nama, status, atau tipe..."
+  },
+  "signin": {
+    "loadingText": "Masuk...",
+    "submitLoading": "Masuk ke dasbor",
+    "username": "admin atau pedagang"
+  }
+}

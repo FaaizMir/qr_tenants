@@ -1,0 +1,27 @@
+{
+  "createMerchants": {
+    "active": "アクティブ",
+    "dblocalhost": "ローカルホスト",
+    "dbname": "テナントテックマートソリューション",
+    "dbpassword": "データベースのパスワードを入力してください",
+    "dbport": "5432",
+    "dbusername": "ポストグレス",
+    "email": "contact@techmart.com",
+    "inactive": "非アクティブ",
+    "name": "テックマートソリューションズ",
+    "phone": "+1-555-0123",
+    "status": "ステータスを選択",
+    "subdomain": "テックマートソリューションズ",
+    "suspended": "一時停止",
+    "typeannual": "年次",
+    "typetemporary": "一時的な"
+  },
+  "reports": {
+    "search": "名前、ステータス、またはタイプでバッチを検索..."
+  },
+  "signin": {
+    "loadingText": "サインイン中...",
+    "submitLoading": "ダッシュボードにサインイン",
+    "username": "管理者または商人"
+  }
+}

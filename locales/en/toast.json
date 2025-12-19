@@ -1,0 +1,6 @@
+{
+  "errorCreate": "Failed to create merchant",
+  "errorUpdate": "Failed to update merchant",
+  "successCreate": "Merchant created successfully",
+  "successUpdate": "Merchant updated successfully"
+}

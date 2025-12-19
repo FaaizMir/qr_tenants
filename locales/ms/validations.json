@@ -1,0 +1,15 @@
+{
+  "createMerchants": {
+    "dbportMax": "Port mesti kurang daripada 65535",
+    "dbportMin": "Port mesti lebih besar daripada 0",
+    "name": "Nama peniaga adalah diperlukan",
+    "nameMessage": "Nama mesti sekurang-kurangnya 3 aksara",
+    "subdomain": "Subdomain diperlukan",
+    "subdomainMinLength": "Subdomain mesti sekurang-kurangnya 3 aksara",
+    "subdomainPattern": "Subdomain hanya boleh mengandungi huruf kecil, nombor, dan tanda hubung"
+  },
+  "signin": {
+    "error1": "Nama pengguna atau kata laluan tidak sah",
+    "error2": "Sesuatu telah berlaku. Sila cuba lagi."
+  }
+}

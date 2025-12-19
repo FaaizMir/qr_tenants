@@ -1,0 +1,15 @@
+{
+  "description": "에이전트와 상인을 위한 안전한 다중 임대 작업 공간.\n대시보드를 보고, 쿠폰을 발행하고, 한 곳에서 고객 피드백을 추적하세요.",
+  "description2": "계속하려면 에이전트 또는 상인 자격 증명을 사용하세요.",
+  "forgotPassword": "비밀번호를 잊으셨나요?",
+  "heading1": "QR 피드백, 쿠폰 및 WhatsApp 알림을 시작하려면 로그인하세요.",
+  "label1": "QR 피드백을 몇 초 안에",
+  "label2": "WhatsApp 후속 조치 준비 완료",
+  "label3": "세입자 격리 및 보안",
+  "label4": "사용자 이름",
+  "label5": "비밀번호",
+  "qrReview": "QR 리뷰 SaaS",
+  "registerAgent": "에이전트로 등록하기",
+  "signin": "로그인",
+  "welcome": "다시 오신 것을 환영합니다"
+}

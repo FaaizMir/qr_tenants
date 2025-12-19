@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
 
@@ -49,10 +49,10 @@ export function NavMain({ items }) {
   const rotateClass = isRTL
     ? "group-data-[state=open]/collapsible:rotate-[-90deg]"
     : "group-data-[state=open]/collapsible:rotate-90";
-
+  const tMerchant = useTranslations("dashboard.merchantSidebar");
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{tMerchant("platform")}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           if (item.items && item.items.length > 0) {
@@ -61,7 +61,8 @@ export function NavMain({ items }) {
                 key={item.title}
                 asChild
                 defaultOpen={item.isActive}
-                className="group/collapsible">
+                className="group/collapsible"
+              >
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={item.title}>

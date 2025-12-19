@@ -1,10 +1,15 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import AgentWalletContainer from "@/containers/agent/wallet";
+import { getTranslations } from "next-intl/server";
 
-export default function AgentWalletPage() {
+export default async function AgentWalletPage() {
+  const tAgentWallet = await getTranslations("dashboard.agentWallet");
+  const tAgentDashboard = await getTranslations(
+    "dashboard.agentMerchantManagement"
+  );
   const data = [
-    { name: "Agent Dashboard", url: "/en/agent/dashboard" },
-    { name: "Agent Wallet", url: "/en/agent/wallet" },
+    { name: tAgentDashboard("agentdashboard"), url: "/en/agent/dashboard" },
+    { name: tAgentWallet("agentwallet"), url: "/en/agent/wallet" },
   ];
 
   return (

@@ -9,12 +9,16 @@ import { useState } from "react";
 
 import { kpiData, monthlyEarnings, commissionBreakdown } from "./earnings-data";
 import { earningsColumns } from "./earnings-columns";
+import { useTranslations } from "next-intl";
 
 export default function AgentEarningsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const tAgentEarnings = useTranslations("dashboard.agentEarnings");
 
+  const KpiData = kpiData(tAgentEarnings);
+  const EarningColumns = earningsColumns(tAgentEarnings);
   const filteredBreakdown = commissionBreakdown.filter((item) =>
     item.merchant.toLowerCase().includes(search.toLowerCase())
   );
@@ -27,21 +31,19 @@ export default function AgentEarningsContainer() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Earnings</h1>
-        <p className="text-muted-foreground">
-          Track your commission and earnings
-        </p>
+        <h1 className="text-3xl font-bold">{tAgentEarnings("earnings")}</h1>
+        <p className="text-muted-foreground">{tAgentEarnings("description")}</p>
       </div>
 
       {/* KPI Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        {kpiData.map((kpi, index) => (
+        {KpiData.map((kpi, index) => (
           <KpiCard key={index} {...kpi} />
         ))}
       </div>
 
       {/* Monthly Earnings Chart */}
-      <ChartWrapper title="Monthly Earnings (Last 6 Months)">
+      <ChartWrapper title={tAgentEarnings("monthlyearnings")}>
         <div className="h-[300px] flex items-center justify-center text-muted-foreground">
           Bar chart showing monthly earnings trend: $
           {monthlyEarnings.map((m) => m.earnings).join(", ")}
@@ -51,16 +53,16 @@ export default function AgentEarningsContainer() {
       {/* Commission Calculation */}
       <Card>
         <CardHeader>
-          <CardTitle>Commission Breakdown by Merchant</CardTitle>
+          <CardTitle>{tAgentEarnings("commissionbreakdown")}</CardTitle>
         </CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search merchants..."
+            placeholder={tAgentEarnings("searchmerchants")}
             onSearchChange={setSearch}
           />
           <DataTable
             data={paginatedData}
-            columns={earningsColumns}
+            columns={EarningColumns}
             page={page}
             pageSize={pageSize}
             total={filteredBreakdown.length}
@@ -73,7 +75,7 @@ export default function AgentEarningsContainer() {
       {/* Top Performing Merchants */}
       <Card>
         <CardHeader>
-          <CardTitle>Top Performing Merchants</CardTitle>
+          <CardTitle>{tAgentEarnings("topperformingmerchants")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

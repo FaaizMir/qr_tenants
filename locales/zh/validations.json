@@ -1,0 +1,15 @@
+{
+  "createMerchants": {
+    "dbportMax": "端口必须小于65535",
+    "dbportMin": "端口必须大于0",
+    "name": "商户名称是必需的",
+    "nameMessage": "名称必须至少为 3 个字符",
+    "subdomain": "子域名是必需的",
+    "subdomainMinLength": "子域名必须至少为 3 个字符",
+    "subdomainPattern": "子域名只能包含小写字母、数字和连字符"
+  },
+  "signin": {
+    "error1": "无效的用户名或密码",
+    "error2": "出现了问题。请再试一次。"
+  }
+}

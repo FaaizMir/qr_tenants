@@ -10,16 +10,19 @@ export const getWalletTabs = ({
   deductions,
   transactionTable,
   deductionTable,
+  tAgentWallet,
 }) => [
   {
     value: "balance",
-    label: "Balance",
+    label: tAgentWallet("balance"),
     content: (
       <div className="space-y-6">
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <CardHeader className="flex justify-between">
-              <CardTitle className="text-sm">Current Balance</CardTitle>
+              <CardTitle className="text-sm">
+                {tAgentWallet("currentbalance")}
+              </CardTitle>
               <Wallet className="h-4 w-4" />
             </CardHeader>
             <CardContent>
@@ -29,14 +32,16 @@ export const getWalletTabs = ({
               <p className="text-xs flex gap-1 mt-2">
                 <TrendingUp className="h-3 w-3 text-green-500" />
                 <span className="text-green-500">+12.5%</span>
-                from last month
+                {tAgentWallet("lastmonth")}
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Pending Balance</CardTitle>
+              <CardTitle className="text-sm">
+                {tAgentWallet("pendingbalance")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">
@@ -48,10 +53,10 @@ export const getWalletTabs = ({
 
         <Card>
           <CardHeader>
-            <CardTitle>Withdrawal Request</CardTitle>
+            <CardTitle>{tAgentWallet("withdrawal")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Button>Request Withdrawal</Button>
+            <Button>{tAgentWallet("requestwithdrawal")}</Button>
           </CardContent>
         </Card>
       </div>
@@ -59,12 +64,12 @@ export const getWalletTabs = ({
   },
   {
     value: "transactions",
-    label: "Transactions",
+    label: tAgentWallet("transactions"),
     content: transactionTable,
   },
   {
     value: "auto-deductions",
-    label: "Auto-Deductions",
+    label: tAgentWallet("autodeduction"),
     content: deductionTable,
   },
 ];

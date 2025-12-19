@@ -1,0 +1,15 @@
+{
+  "createMerchants": {
+    "dbportMax": "Port harus kurang dari 65535",
+    "dbportMin": "Port harus lebih besar dari 0",
+    "name": "Nama pedagang diperlukan",
+    "nameMessage": "Nama harus terdiri dari setidaknya 3 karakter",
+    "subdomain": "Subdomain diperlukan",
+    "subdomainMinLength": "Subdomain harus terdiri dari setidaknya 3 karakter",
+    "subdomainPattern": "Subdomain hanya dapat berisi huruf kecil, angka, dan tanda hubung"
+  },
+  "signin": {
+    "error1": "Nama pengguna atau kata sandi tidak valid",
+    "error2": "Sesuatu telah salah. Silakan coba lagi."
+  }
+}
