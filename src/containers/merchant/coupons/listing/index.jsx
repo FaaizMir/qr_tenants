@@ -5,25 +5,54 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import { batches } from "./coupons-listing-data";
-import { batchesColumns } from "./coupons-listing-columns";
+import axiosInstance from "@/lib/axios";
+import { couponsColumns } from "./coupons-listing-columns";
+import { toast } from "sonner";
 
 export default function MerchantCouponsListingContainer({ embedded = false }) {
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [coupons, setCoupons] = useState([]);
+    const [total, setTotal] = useState(0);
 
-    const filteredData = batches.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-    );
+    useEffect(() => {
+        const fetchCoupons = async () => {
+            setLoading(true);
+            try {
+                const resp = await axiosInstance.get("/coupons", {
+                    params: { page: page + 1, pageSize },
+                });
+                const data = resp?.data?.data || {};
+                setCoupons(data.coupons || []);
+                setTotal(data.total || (data.coupons || []).length);
+            } catch (err) {
+                const msg = err?.response?.data?.message || err.message || "Failed to load coupons";
+                toast.error(msg);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const paginatedData = filteredData.slice(
-        page * pageSize,
-        (page + 1) * pageSize
-    );
+        fetchCoupons();
+    }, [page, pageSize]);
+
+    const filteredData = coupons.filter((item) => {
+        if (!search) return true;
+        const q = search.toLowerCase();
+        return (
+            (item.coupon_code || "").toLowerCase().includes(q) ||
+            (item.qr_hash || "").toLowerCase().includes(q) ||
+            (item.batch?.batch_name || "").toLowerCase().includes(q) ||
+            (item.merchant?.business_name || "").toLowerCase().includes(q)
+        );
+    });
+
+    const paginatedData = filteredData;
 
     return (
         <div className="space-y-6">
@@ -44,7 +73,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>All Batches</CardTitle>
+                    <CardTitle>Coupons</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <TableToolbar
@@ -53,12 +82,13 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
                     />
                     <DataTable
                         data={paginatedData}
-                        columns={batchesColumns}
+                        columns={couponsColumns}
                         page={page}
                         pageSize={pageSize}
-                        total={filteredData.length}
+                        total={total}
                         setPage={setPage}
                         setPageSize={setPageSize}
+                        loading={loading}
                     />
                 </CardContent>
             </Card>
