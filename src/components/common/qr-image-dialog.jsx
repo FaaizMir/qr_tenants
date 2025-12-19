@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,8 +9,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Download, X } from "lucide-react";
 
-export default function QRImageDialogHover({ imageBase64, filename = "qr-code.png", label = "QR Code" }) {
+export default function QRImageDialogHover({
+  imageBase64,
+  filename = "qr-code.png",
+  label = "QR Code",
+  openOnHover = false,
+  sizeClass = "w-8 h-8",
+}) {
   const [open, setOpen] = useState(false);
+  const closeTimer = useRef(null);
 
   const handleDownload = async () => {
     try {
@@ -32,25 +39,50 @@ export default function QRImageDialogHover({ imageBase64, filename = "qr-code.pn
 
   if (!imageBase64) return null;
 
+  const clearCloseTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    clearCloseTimer();
+    closeTimer.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  const triggerEnter = () => {
+    if (!openOnHover) return;
+    clearCloseTimer();
+    setOpen(true);
+  };
+
+  const triggerLeave = () => {
+    if (!openOnHover) return;
+    scheduleClose();
+  };
+
   return (
     <div className="inline-block">
       <button
         type="button"
-        className="w-8 h-8 rounded overflow-hidden cursor-pointer p-0 border-0 bg-transparent"
+        className={`${sizeClass} rounded overflow-hidden cursor-pointer p-0 border-0 bg-transparent`}
         onClick={() => setOpen(true)}
+        onMouseEnter={triggerEnter}
+        onMouseLeave={triggerLeave}
         aria-label={label}
       >
-        <img src={imageBase64} alt={label} className="w-8 h-8 object-cover" />
+        <img src={imageBase64} alt={label} className={`${sizeClass} object-cover`} />
       </button>
 
       <Dialog open={open} onOpenChange={(v) => setOpen(v)}>
-        <DialogContent className="sm:max-w-sm">
+        <DialogContent className="sm:max-w-sm" onMouseEnter={() => { clearCloseTimer(); }} onMouseLeave={() => { if (openOnHover) scheduleClose(); }}>
           <DialogHeader>
             <DialogTitle>{label}</DialogTitle>
           </DialogHeader>
 
           <div className="flex flex-col items-center gap-4 py-4">
-            <img src={imageBase64} alt={label} className="max-w-[320px] max-h-[320px]" />
+            <img src={imageBase64} alt={label} className="max-w-[360px] max-h-[360px]" />
             <div className="w-full flex gap-2">
               <Button onClick={handleDownload} variant="outline" className="flex-1">
                 <Download className="h-4 w-4 mr-2" /> Download
