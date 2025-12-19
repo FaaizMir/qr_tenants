@@ -11,56 +11,30 @@ import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 
+import { getBatchDetails, serialCodes } from "./coupons-detail-data";
+import { serialCodesColumns } from "./coupons-detail-columns";
+
 export default function MerchantCouponDetailContainer({ params }) {
     const { id } = use(params);
 
     // Dummy batch data
-    const batch = {
-        id,
-        name: "Summer Special",
-        discount: "20%",
-        quantity: 500,
-        used: 125,
-        status: "active",
-        created: "2024-06-01",
-        validUntil: "2024-12-31",
-    };
-
-    // Dummy serial codes
-    // Dummy serial codes
-    const serialCodes = [
-        { code: "SUM-8X92", status: "used", customer: "John Doe", usedDate: "2024-06-02" },
-        { code: "SUM-3A7B", status: "used", customer: "Jane Smith", usedDate: "2024-06-01" },
-        { code: "SUM-2C4D", status: "unused", customer: "-", usedDate: "-" },
-        { code: "SUM-9E1F", status: "unused", customer: "-", usedDate: "-" },
-        { code: "SUM-5G6H", status: "unused", customer: "-", usedDate: "-" },
-    ];
+    const batch = getBatchDetails(id);
 
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState("");
 
-    const filteredCodes = serialCodes.filter(item =>
-        item.code.toLowerCase().includes(search.toLowerCase()) ||
-        (item.customer && item.customer.toLowerCase().includes(search.toLowerCase()))
+    const filteredCodes = serialCodes.filter(
+        (item) =>
+            item.code.toLowerCase().includes(search.toLowerCase()) ||
+            (item.customer &&
+                item.customer.toLowerCase().includes(search.toLowerCase()))
     );
 
-    const paginatedData = filteredCodes.slice(page * pageSize, (page + 1) * pageSize);
-
-    const columns = [
-        {
-            accessorKey: "code",
-            header: "Code",
-            cell: ({ row }) => <span className="font-mono">{row.original.code}</span>
-        },
-        {
-            accessorKey: "status",
-            header: "Status",
-            cell: ({ row }) => <StatusBadge status={row.original.status} />
-        },
-        { accessorKey: "customer", header: "Redeemed By" },
-        { accessorKey: "usedDate", header: "Redemption Date" },
-    ];
+    const paginatedData = filteredCodes.slice(
+        page * pageSize,
+        (page + 1) * pageSize
+    );
 
     return (
         <div className="space-y-6">
@@ -107,7 +81,9 @@ export default function MerchantCouponDetailContainer({ params }) {
                         <div className="mt-6 pt-6 border-t">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="text-sm font-medium">Usage Progress</span>
-                                <span className="text-sm text-muted-foreground">{batch.used} / {batch.quantity} codes used</span>
+                                <span className="text-sm text-muted-foreground">
+                                    {batch.used} / {batch.quantity} codes used
+                                </span>
                             </div>
                             <div className="h-2 bg-secondary rounded-full overflow-hidden">
                                 <div
@@ -126,7 +102,10 @@ export default function MerchantCouponDetailContainer({ params }) {
                     </CardHeader>
                     <CardContent className="flex flex-col items-center">
                         <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-                            <QRCodeSVG value={`https://qrscanner.com/claim/${batch.id}`} size={150} />
+                            <QRCodeSVG
+                                value={`https://qrscanner.com/claim/${batch.id}`}
+                                size={150}
+                            />
                         </div>
                         <p className="text-sm text-center text-muted-foreground mb-4">
                             Scan to claim a random coupon from this batch
@@ -155,7 +134,7 @@ export default function MerchantCouponDetailContainer({ params }) {
                     />
                     <DataTable
                         data={paginatedData}
-                        columns={columns}
+                        columns={serialCodesColumns}
                         page={page}
                         pageSize={pageSize}
                         total={filteredCodes.length}

@@ -10,6 +10,9 @@ import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 
+import { transactions, activityLog } from "./merchants-detail-data";
+import { transactionColumns } from "./merchants-detail-columns";
+
 export default function AgentMerchantDetailContainer({ params }) {
     const { id } = use(params);
 
@@ -26,15 +29,6 @@ export default function AgentMerchantDetailContainer({ params }) {
         credits: 2500,
     };
 
-    // Dummy transaction history
-    // Dummy transaction history
-    const transactions = [
-        { id: 1, date: "2024-06-01", description: "Credit purchase", amount: 500, type: "credit", status: "paid" },
-        { id: 2, date: "2024-05-28", description: "WhatsApp campaign", amount: -50, type: "debit", status: "completed" },
-        { id: 3, date: "2024-05-25", description: "Coupon batch created", amount: -100, type: "debit", status: "completed" },
-        { id: 4, date: "2024-05-20", description: "Credit purchase", amount: 1000, type: "credit", status: "paid" },
-    ];
-
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState("");
@@ -44,31 +38,6 @@ export default function AgentMerchantDetailContainer({ params }) {
     );
 
     const paginatedData = filteredTransactions.slice(page * pageSize, (page + 1) * pageSize);
-
-    const columns = [
-        { accessorKey: "date", header: "Date" },
-        { accessorKey: "description", header: "Description" },
-        {
-            accessorKey: "amount",
-            header: "Amount",
-            cell: ({ row }) => (
-                <span className={row.original.type === 'credit' ? 'text-green-600' : 'text-red-600'}>
-                    {row.original.type === 'credit' ? '+' : '-'}${Math.abs(row.original.amount)}
-                </span>
-            )
-        },
-        {
-            accessorKey: "status",
-            header: "Status",
-            cell: ({ row }) => <StatusBadge status={row.original.status} />
-        }
-    ];
-
-    const activityLog = [
-        { id: 1, date: "2024-06-02", action: "Logged in", details: "User logged in from Chrome" },
-        { id: 2, date: "2024-06-01", action: "Coupon created", details: "Created new coupon batch 'Summer Special'" },
-        { id: 3, date: "2024-05-30", action: "Settings updated", details: "Updated WhatsApp automation settings" },
-    ];
 
     const breadcrumbData = [
         { name: "Agent Dashboard", url: "/en/agent/dashboard" },
@@ -171,7 +140,7 @@ export default function AgentMerchantDetailContainer({ params }) {
                     />
                     <DataTable
                         data={paginatedData}
-                        columns={columns}
+                        columns={transactionColumns}
                         page={page}
                         pageSize={pageSize}
                         total={filteredTransactions.length}

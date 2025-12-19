@@ -1,0 +1,42 @@
+export const merchants = [
+    {
+        id: 1,
+        name: "Coffee House",
+        email: "coffee@example.com",
+        status: "active",
+        subscription: "annual",
+        joinDate: "2024-01-15",
+    },
+    {
+        id: 2,
+        name: "Pizza Palace",
+        email: "pizza@example.com",
+        status: "active",
+        subscription: "temporary",
+        joinDate: "2024-02-20",
+    },
+    {
+        id: 3,
+        name: "Beauty Salon",
+        email: "beauty@example.com",
+        status: "active",
+        subscription: "annual",
+        joinDate: "2024-03-10",
+    },
+    {
+        id: 4,
+        name: "Pet Store",
+        email: "pets@example.com",
+        status: "inactive",
+        subscription: "temporary",
+        joinDate: "2024-01-05",
+    },
+    {
+        id: 5,
+        name: "Book Shop",
+        email: "books@example.com",
+        status: "active",
+        subscription: "annual",
+        joinDate: "2024-04-18",
+    },
+];

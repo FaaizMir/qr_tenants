@@ -1,54 +1,17 @@
 "use client";
 
-import { RefreshCw, Play } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 
-export default function AgentCouponSyncContainer() {
-  // Dummy sync data
-  const syncHistory = [
-    {
-      id: 1,
-      merchant: "Coffee House",
-      items: 50,
-      status: "completed",
-      date: "2024-06-02 10:30 AM",
-    },
-    {
-      id: 2,
-      merchant: "Pizza Palace",
-      items: 100,
-      status: "in-progress",
-      date: "2024-06-02 11:15 AM",
-    },
-    {
-      id: 3,
-      merchant: "Beauty Salon",
-      items: 25,
-      status: "completed",
-      date: "2024-06-01 02:45 PM",
-    },
-    {
-      id: 4,
-      merchant: "Pet Store",
-      items: 0,
-      status: "failed",
-      date: "2024-05-31 09:20 AM",
-    },
-    {
-      id: 5,
-      merchant: "Book Shop",
-      items: 75,
-      status: "completed",
-      date: "2024-05-30 04:10 PM",
-    },
-  ];
+import { syncHistory } from "./sync-data";
+import { syncColumns } from "./sync-columns";
 
+export default function AgentCouponSyncContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -61,35 +24,6 @@ export default function AgentCouponSyncContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    { accessorKey: "merchant", header: "Merchant" },
-    {
-      accessorKey: "items",
-      header: "Items Synced",
-      cell: ({ row }) => `${row.original.items} codes`,
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => <StatusBadge status={row.original.status} />,
-    },
-    { accessorKey: "date", header: "Date & Time" },
-    {
-      id: "actions",
-      header: "Actions",
-      cell: ({ row }) =>
-        row.original.status === "failed" && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-blue-600 hover:text-blue-700"
-          >
-            <Play className="h-4 w-4 mr-1" /> Retry
-          </Button>
-        ),
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -141,7 +75,7 @@ export default function AgentCouponSyncContainer() {
           />
           <DataTable
             data={paginatedData}
-            columns={columns}
+            columns={syncColumns}
             page={page}
             pageSize={pageSize}
             total={filteredHistory.length}

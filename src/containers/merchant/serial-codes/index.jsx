@@ -1,12 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Search } from "lucide-react";
-import { StatusBadge } from "@/components/common/status-badge";
 import { ExportButton } from "@/components/common/export-button";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import {
@@ -17,64 +13,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { serialCodes } from "./serial-codes-data";
+import { serialCodesColumns } from "./serial-codes-columns";
+
 export default function MerchantSerialCodesContainer() {
   const [searchTerm, setSearchTerm] = useState("");
-
-  // Dummy serial codes data
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
-
-  // Dummy serial codes data
-  const serialCodes = [
-    {
-      id: 1,
-      code: "SUM-8X92",
-      batch: "Summer Special",
-      status: "used",
-      customer: "John Doe",
-      date: "2024-06-02",
-    },
-    {
-      id: 2,
-      code: "SUM-3A7B",
-      batch: "Summer Special",
-      status: "used",
-      customer: "Jane Smith",
-      date: "2024-06-01",
-    },
-    {
-      id: 3,
-      code: "WEL-9Y8Z",
-      batch: "Welcome Offer",
-      status: "unused",
-      customer: "-",
-      date: "-",
-    },
-    {
-      id: 4,
-      code: "WEL-4K2L",
-      batch: "Welcome Offer",
-      status: "unused",
-      customer: "-",
-      date: "-",
-    },
-    {
-      id: 5,
-      code: "FLA-1M2N",
-      batch: "Flash Sale",
-      status: "used",
-      customer: "Mike Johnson",
-      date: "2024-05-25",
-    },
-    {
-      id: 6,
-      code: "FLA-3P4Q",
-      batch: "Flash Sale",
-      status: "used",
-      customer: "Sarah Wilson",
-      date: "2024-05-25",
-    },
-  ];
 
   const filteredCodes = serialCodes.filter(
     (item) =>
@@ -86,24 +31,6 @@ export default function MerchantSerialCodesContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    {
-      accessorKey: "code",
-      header: "Serial Code",
-      cell: ({ row }) => (
-        <span className="font-mono font-medium">{row.original.code}</span>
-      ),
-    },
-    { accessorKey: "batch", header: "Batch Name" },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => <StatusBadge status={row.original.status} />,
-    },
-    { accessorKey: "customer", header: "Customer" },
-    { accessorKey: "date", header: "Used Date" },
-  ];
 
   return (
     <div className="space-y-6">
@@ -140,7 +67,7 @@ export default function MerchantSerialCodesContainer() {
           />
           <DataTable
             data={paginatedData}
-            columns={columns}
+            columns={serialCodesColumns}
             page={page}
             pageSize={pageSize}
             total={filteredCodes.length}

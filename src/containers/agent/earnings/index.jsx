@@ -1,72 +1,16 @@
 "use client";
 
-import { DollarSign, TrendingUp, Award } from "lucide-react";
 import { KpiCard } from "@/components/common/kpi-card";
 import { ChartWrapper } from "@/components/common/chart-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 
+import { kpiData, monthlyEarnings, commissionBreakdown } from "./earnings-data";
+import { earningsColumns } from "./earnings-columns";
+
 export default function AgentEarningsContainer() {
-  // Dummy KPI data
-  const kpiData = [
-    {
-      title: "Total Earnings (YTD)",
-      value: "$45,230",
-      icon: DollarSign,
-      trend: "up",
-      trendValue: "+15.3%",
-    },
-    { title: "Commission Rate", value: "12.5%", icon: TrendingUp },
-    { title: "Top Merchant", value: "Coffee House", icon: Award },
-  ];
-
-  // Dummy monthly earnings
-  const monthlyEarnings = [
-    { month: "January", earnings: 3200 },
-    { month: "February", earnings: 3800 },
-    { month: "March", earnings: 3500 },
-    { month: "April", earnings: 4200 },
-    { month: "May", earnings: 4800 },
-    { month: "June", earnings: 5200 },
-  ];
-
-  // Dummy commission breakdown
-  const commissionBreakdown = [
-    {
-      merchant: "Coffee House",
-      totalSales: 25000,
-      commission: 3125,
-      rate: "12.5%",
-    },
-    {
-      merchant: "Pizza Palace",
-      totalSales: 18000,
-      commission: 2250,
-      rate: "12.5%",
-    },
-    {
-      merchant: "Beauty Salon",
-      totalSales: 15000,
-      commission: 1875,
-      rate: "12.5%",
-    },
-    {
-      merchant: "Pet Store",
-      totalSales: 12000,
-      commission: 1500,
-      rate: "12.5%",
-    },
-    {
-      merchant: "Book Shop",
-      totalSales: 10000,
-      commission: 1250,
-      rate: "12.5%",
-    },
-  ];
-
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -79,31 +23,6 @@ export default function AgentEarningsContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    {
-      accessorKey: "merchant",
-      header: "Merchant",
-      cell: ({ row }) => (
-        <span className="font-medium">{row.original.merchant}</span>
-      ),
-    },
-    {
-      accessorKey: "totalSales",
-      header: "Total Sales",
-      cell: ({ row }) => `$${row.original.totalSales.toLocaleString()}`,
-    },
-    { accessorKey: "rate", header: "Commission Rate" },
-    {
-      accessorKey: "commission",
-      header: "Commission Earned",
-      cell: ({ row }) => (
-        <span className="text-green-600 font-semibold">
-          ${row.original.commission.toLocaleString()}
-        </span>
-      ),
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -141,7 +60,7 @@ export default function AgentEarningsContainer() {
           />
           <DataTable
             data={paginatedData}
-            columns={columns}
+            columns={earningsColumns}
             page={page}
             pageSize={pageSize}
             total={filteredBreakdown.length}

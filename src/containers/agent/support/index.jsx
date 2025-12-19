@@ -7,46 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
+
+import { tickets } from "./support-data";
 
 export default function AgentSupportContainer() {
   const [selectedTicket, setSelectedTicket] = useState(null);
-
-  // Dummy ticket data
-  const tickets = [
-    {
-      id: 1,
-      merchant: "Coffee House",
-      subject: "Issue with coupon redemption",
-      status: "open",
-      date: "2024-06-02",
-      lastMessage: "The QR code scanner is not responding...",
-    },
-    {
-      id: 2,
-      merchant: "Pizza Palace",
-      subject: "Question about billing",
-      status: "resolved",
-      date: "2024-05-30",
-      lastMessage: "Thank you for clarifying the charges.",
-    },
-    {
-      id: 3,
-      merchant: "Beauty Salon",
-      subject: "Feature request",
-      status: "open",
-      date: "2024-06-01",
-      lastMessage: "Can we add birthday automations?",
-    },
-    {
-      id: 4,
-      merchant: "Pet Store",
-      subject: "Login trouble",
-      status: "resolved",
-      date: "2024-05-25",
-      lastMessage: "Password reset worked, thanks!",
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -66,9 +31,8 @@ export default function AgentSupportContainer() {
               <div
                 key={ticket.id}
                 onClick={() => setSelectedTicket(ticket)}
-                className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors ${
-                  selectedTicket?.id === ticket.id ? "bg-muted" : ""
-                }`}
+                className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors ${selectedTicket?.id === ticket.id ? "bg-muted" : ""
+                  }`}
               >
                 <div className="flex justify-between items-start mb-1">
                   <span className="font-semibold truncate">

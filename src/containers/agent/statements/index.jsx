@@ -1,54 +1,17 @@
 "use client";
 
-import { FileText, Download, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 
-export default function AgentStatementsContainer() {
-  // Dummy statement data
-  const statements = [
-    {
-      id: 1,
-      month: "May 2024",
-      totalEarnings: 5200,
-      commission: 650,
-      downloads: 3,
-    },
-    {
-      id: 2,
-      month: "April 2024",
-      totalEarnings: 4800,
-      commission: 600,
-      downloads: 1,
-    },
-    {
-      id: 3,
-      month: "March 2024",
-      totalEarnings: 3500,
-      commission: 437.5,
-      downloads: 2,
-    },
-    {
-      id: 4,
-      month: "February 2024",
-      totalEarnings: 3800,
-      commission: 475,
-      downloads: 1,
-    },
-    {
-      id: 5,
-      month: "January 2024",
-      totalEarnings: 3200,
-      commission: 400,
-      downloads: 4,
-    },
-  ];
+import { statements } from "./statements-data";
+import { statementsColumns } from "./statements-columns";
 
+export default function AgentStatementsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -61,36 +24,6 @@ export default function AgentStatementsContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    {
-      accessorKey: "month",
-      header: "Month",
-      cell: ({ row }) => (
-        <span className="font-medium">{row.original.month}</span>
-      ),
-    },
-    {
-      accessorKey: "totalEarnings",
-      header: "Total Earnings",
-      cell: ({ row }) => `$${row.original.totalEarnings.toLocaleString()}`,
-    },
-    {
-      accessorKey: "commission",
-      header: "Commission",
-      cell: ({ row }) => `$${row.original.commission.toLocaleString()}`,
-    },
-    {
-      id: "actions",
-      header: "Actions",
-      cell: ({ row }) => (
-        <Button variant="outline" size="sm" className="gap-2">
-          <Download className="h-4 w-4" />
-          Download PDF
-        </Button>
-      ),
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -153,7 +86,7 @@ export default function AgentStatementsContainer() {
           />
           <DataTable
             data={paginatedData}
-            columns={columns}
+            columns={statementsColumns}
             page={page}
             pageSize={pageSize}
             total={filteredStatements.length}

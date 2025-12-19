@@ -14,35 +14,11 @@ import { Label } from "@/components/ui/label";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
-import { StatusBadge } from "@/components/common/status-badge";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
+
+import { winners } from "./lucky-draw-data";
+import { winnersColumns } from "./lucky-draw-columns";
 
 export default function MerchantLuckyDrawContainer() {
-  // Dummy winners
-  const winners = [
-    {
-      id: 1,
-      name: "John Doe",
-      prize: "Free Dinner",
-      date: "2024-06-01",
-      status: "claimed",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      prize: "$50 Voucher",
-      date: "2024-05-15",
-      status: "claimed",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      prize: "Free Coffee",
-      date: "2024-05-01",
-      status: "expired",
-    },
-  ];
-
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -55,32 +31,6 @@ export default function MerchantLuckyDrawContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    {
-      accessorKey: "name",
-      header: "Winner Name",
-      cell: ({ row }) => (
-        <div className="font-medium flex items-center gap-2">
-          <div className="h-6 w-6 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
-            <Trophy className="h-3 w-3" />
-          </div>
-          {row.original.name}
-        </div>
-      ),
-    },
-    { accessorKey: "prize", header: "Prize" },
-    { accessorKey: "date", header: "Draw Date" },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => (
-        <StatusBadge
-          status={row.original.status === "claimed" ? "completed" : "expired"}
-        />
-      ),
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -171,7 +121,7 @@ export default function MerchantLuckyDrawContainer() {
           />
           <DataTable
             data={paginatedData}
-            columns={columns}
+            columns={winnersColumns}
             page={page}
             pageSize={pageSize}
             total={filteredWinners.length}

@@ -12,35 +12,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { StatusBadge } from "@/components/common/status-badge";
-import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 
-export default function MerchantAdsContainer() {
-  // Dummy ads data
-  const activeAds = [
-    {
-      id: 1,
-      campaign: "Summer Sale Boost",
-      type: "Banner Ad",
-      budget: "$100",
-      status: "active",
-      impressions: 1540,
-      clicks: 45,
-    },
-    {
-      id: 2,
-      campaign: "Weekend Special",
-      type: "Sidebar Ad",
-      budget: "$50",
-      status: "completed",
-      impressions: 890,
-      clicks: 22,
-    },
-  ];
+import { activeAds } from "./ads-data";
+import { adsColumns } from "./ads-columns";
 
+export default function MerchantAdsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -53,27 +32,6 @@ export default function MerchantAdsContainer() {
     page * pageSize,
     (page + 1) * pageSize
   );
-
-  const columns = [
-    {
-      accessorKey: "campaign",
-      header: "Campaign",
-      cell: ({ row }) => (
-        <div className="font-medium">
-          {row.original.campaign}
-          <span className="block text-xs text-muted-foreground">
-            {row.original.type}
-          </span>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => <StatusBadge status={row.original.status} />,
-    },
-    { accessorKey: "clicks", header: "Clicks" },
-  ];
 
   return (
     <div className="space-y-6">
@@ -168,7 +126,7 @@ export default function MerchantAdsContainer() {
               />
               <DataTable
                 data={paginatedData}
-                columns={columns}
+                columns={adsColumns}
                 page={page}
                 pageSize={pageSize}
                 total={filteredAds.length}
