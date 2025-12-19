@@ -3,6 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { TrendingUp, Star } from "lucide-react";
 import { ChartWrapper } from "@/components/common/chart-wrapper";
+import LineChart from "@/components/common/charts/line-chart";
+import BarChart from "@/components/common/charts/bar-chart";
+import HorizontalBarChart from "@/components/common/charts/horizontal-bar-chart";
 import { KpiCard } from "@/components/common/kpi-card";
 
 import { metrics, redemptionTrend } from "./analytics-data";
@@ -33,35 +36,41 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
 
             {/* Charts */}
             <div className="grid gap-6 md:grid-cols-2">
-                <ChartWrapper title="Redemption Trends (Last 6 Months)">
-                    <div className="h-[300px] flex flex-col items-center justify-center text-muted-foreground border border-dashed rounded-lg bg-slate-50">
-                        <TrendingUp className="h-10 w-10 mb-2 opacity-20" />
-                        <p className="text-sm">Chart Placeholder</p>
-                        <p className="text-xs mt-1">
-                            Showing upward trend: {redemptionTrend.join(" → ")}
-                        </p>
-                    </div>
-                </ChartWrapper>
-
-                <ChartWrapper title="Review Distribution">
-                    <div className="h-[300px] flex flex-col items-center justify-center text-muted-foreground border border-dashed rounded-lg bg-slate-50">
-                        <Star className="h-10 w-10 mb-2 opacity-20" />
-                        <p className="text-sm">Chart Placeholder</p>
-                        <p className="text-xs mt-1">
-                            5★: 70%, 4★: 20%, 3★: 5%, 2★: 2%, 1★: 3%
-                        </p>
-                    </div>
-                </ChartWrapper>
-            </div>
-
-            <ChartWrapper title="Top Performing Coupons">
-                <div className="h-[300px] flex flex-col items-center justify-center text-muted-foreground border border-dashed rounded-lg bg-slate-50">
-                    <p className="text-sm">Table or Horizontal Bar Chart Placeholder</p>
-                    <p className="text-xs mt-1">
-                        Summer Sale (85% redeemed), Welcome Offer (60% redeemed)
-                    </p>
+                <div className="md:col-span-2">
+                    <ChartWrapper title="Redemption Trends (Last 6 Months)">
+                        <div className="h-[340px]">
+                            <LineChart data={redemptionTrend} color="#06b6d4" height={340} />
+                        </div>
+                    </ChartWrapper>
                 </div>
-            </ChartWrapper>
+
+                <div>
+                    <ChartWrapper title="Review Distribution">
+                        <div className="h-[300px] p-4 flex items-center">
+                            <BarChart
+                                data={[70, 20, 5, 2, 3]}
+                                labels={["5★", "4★", "3★", "2★", "1★"]}
+                                colors={["#16a34a", "#059669", "#f97316", "#f43f5e", "#6b21a8"]}
+                            />
+                        </div>
+                    </ChartWrapper>
+                </div>
+
+                <div>
+                    <ChartWrapper title="Top Performing Coupons">
+                        <div className="p-4 h-[300px]" >
+                            <HorizontalBarChart
+                                items={[
+                                    { label: "Summer Sale", value: 85 },
+                                    { label: "Welcome Offer", value: 60 },
+                                    { label: "Holiday Promo", value: 48 },
+                                ]}
+                                color="#06b6d4"
+                            />
+                        </div>
+                    </ChartWrapper>
+                </div>
+            </div>
         </div>
     );
 }

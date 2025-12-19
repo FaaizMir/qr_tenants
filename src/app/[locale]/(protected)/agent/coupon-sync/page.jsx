@@ -3,8 +3,8 @@ import AgentCouponSyncContainer from "@/containers/agent/coupon-sync";
 
 export default function AgentCouponSyncPage() {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/en/agent/dashboard" },
-    { name: "Coupon Sync", url: "/en/agent/coupon-sync" },
+    { name: "Agent Dashboard", url: "/agent/dashboard" },
+    { name: "Coupon Sync", url: "/agent/coupon-sync" },
   ];
   return (
     <>

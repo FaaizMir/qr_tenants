@@ -6,12 +6,12 @@ import MerchantSerialCodesContainer from "@/containers/merchant/serial-codes";
 
 export default function MerchantSerialCodesPage() {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-    { name: "Serial Codes", url: "/en/merchant/serial-codes" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Serial Codes", url: "/merchant/serial-codes" },
   ];
   return (
     <>
-      <BreadcrumbComponent data={breadcrumbData} />{" "}
+      <BreadcrumbComponent data={breadcrumbData} />
       <MerchantSerialCodesContainer />
     </>
   );

@@ -6,8 +6,8 @@ import MerchantAdsContainer from "@/containers/merchant/ads";
 
 export default function MerchantAdsPage() {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-    { name: "Ads & Promotions", url: "/en/merchant/ads" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Ads & Promotions", url: "/merchant/ads" },
   ];
 
   return (

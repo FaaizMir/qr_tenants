@@ -46,11 +46,11 @@ export const getDashboardTabs = ({
         label: "Activity",
         content: (
             <div className="space-y-6">
-                <ChartWrapper title="Monthly Activity">
+                {/* <ChartWrapper title="Monthly Activity">
                     <div className="h-[300px] flex items-center justify-center text-muted-foreground">
                         Chart will display monthly merchant activity trends
                     </div>
-                </ChartWrapper>
+                </ChartWrapper> */}
 
         <Card>
           <CardHeader>

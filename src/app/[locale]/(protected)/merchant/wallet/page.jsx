@@ -6,8 +6,8 @@ import MerchantWalletContainer from "@/containers/merchant/wallet";
 
 export default function MerchantWalletPage({ embedded = false }) {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-    { name: "Wallet", url: "/en/merchant/wallet" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Wallet", url: "/merchant/wallet" },
   ];
   return (
     <>

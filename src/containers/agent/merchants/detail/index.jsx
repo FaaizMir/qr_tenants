@@ -259,7 +259,7 @@ export default function AgentMerchantDetailContainer({ params }) {
                     </Card>
 
                     {/* Transaction History (unchanged, still using dummy data) */}
-                    <Card>
+                    {/* <Card>
                         <CardHeader>
                             <CardTitle>Transaction History</CardTitle>
                         </CardHeader>
@@ -278,10 +278,10 @@ export default function AgentMerchantDetailContainer({ params }) {
                                 setPageSize={setPageSize}
                             />
                         </CardContent>
-                    </Card>
+                    </Card> */}
 
                     {/* Activity Log (unchanged) */}
-                    <Card>
+                    {/* <Card>
                         <CardHeader>
                             <CardTitle>Activity Log</CardTitle>
                         </CardHeader>
@@ -298,7 +298,7 @@ export default function AgentMerchantDetailContainer({ params }) {
                                 ))}
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
                 </>
             )}
         </div>

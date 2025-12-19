@@ -6,7 +6,7 @@ import MerchantDashboardContainer from "@/containers/merchant/merchant-dashboard
 
 export default function MerchantDashboardPage() {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
   ];
   return (
     <>

@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download, Copy, Tag, Calendar, Users, MapPin, DownloadCloud } from "lucide-react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { DataTable } from "@/components/common/data-table";
@@ -26,6 +29,28 @@ export default function MerchantCouponDetailContainer({ params }) {
     const [search, setSearch] = useState("");
 
     const paginatedData = [];
+
+    const copyToClipboard = async (text, label = "Text") => {
+        try {
+            await navigator.clipboard.writeText(text || "");
+            toast.success(`${label} copied to clipboard`);
+        } catch (e) {
+            toast.error(`Failed to copy ${label}`);
+        }
+    };
+
+    const downloadDataUrl = (dataUrl, filename = "qr.png") => {
+        try {
+            const a = document.createElement("a");
+            a.href = dataUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } catch (e) {
+            toast.error("Failed to download image");
+        }
+    };
 
     useEffect(() => {
         if (!id) return;
@@ -58,86 +83,162 @@ export default function MerchantCouponDetailContainer({ params }) {
     }, [id]);
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center gap-4">
-                <Link href="/en/merchant/coupons">
-                    <Button variant="ghost" size="icon">
-                        <ArrowLeft className="h-4 w-4" />
-                    </Button>
-                </Link>
-                <div>
-                    <h1 className="text-3xl font-bold">{coupon ? coupon.coupon_code : "Coupon Detail"}</h1>
-                    <p className="text-muted-foreground">{coupon?.batch?.batch_name || "Coupon & Batch details"}</p>
+        <div className="space-y-8">
+  {/* Header */}
+  <div className="flex items-center justify-between rounded-2xl  p-6 border shadow-sm">
+    <div className="flex items-center gap-4">
+      <Link href="/en/merchant/coupons">
+        <Button variant="ghost" size="icon" className="hover:bg-white">
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+      </Link>
+
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {coupon ? coupon.coupon_code : "Coupon Detail"}
+        </h1>
+        <p className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
+          <Tag className="h-4 w-4" />
+          {coupon?.batch?.batch_name || "Coupon & Batch details"}
+        </p>
+      </div>
+    </div>
+
+    {coupon?.pdf_url && (
+      <a href={coupon.pdf_url} target="_blank" rel="noreferrer">
+        <Button className="rounded-xl shadow-md">
+          <DownloadCloud className="mr-2 h-4 w-4" /> Download PDF
+        </Button>
+      </a>
+    )}
+  </div>
+
+  {/* Content */}
+  <div className="grid gap-6 md:grid-cols-3">
+    {/* Main Card */}
+    <Card className="md:col-span-2 rounded-2xl border bg-white/80 backdrop-blur shadow-lg">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="text-lg">Batch Information</CardTitle>
+        <Badge variant="outline" className="rounded-lg">
+          ID: {coupon?.id ?? "-"}
+        </Badge>
+      </CardHeader>
+
+      <CardContent>
+        {coupon ? (
+          <div className="space-y-6">
+            {/* Status Row */}
+            <div className="flex flex-wrap items-center gap-6">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  Status
+                </p>
+                <div className="mt-2">
+                  <StatusBadge status={coupon.status} />
                 </div>
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  Batch Type
+                </p>
+                <p className="font-semibold">
+                  {coupon.batch?.batch_type || "-"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  Issued At
+                </p>
+                <p className="font-semibold">
+                  {coupon.issued_at
+                    ? new Date(coupon.issued_at).toLocaleString()
+                    : "-"}
+                </p>
+              </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3">
-                {/* Info Card */}
-                <Card className="md:col-span-2">
-                    <CardHeader>
-                        <CardTitle>Batch Information</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        {coupon ? (
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="text-sm text-muted-foreground">Status</p>
-                                    <div className="mt-1">
-                                        <StatusBadge status={coupon.status} />
-                                    </div>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-muted-foreground">Coupon Code</p>
-                                    <p className="font-medium text-lg">{coupon.coupon_code}</p>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-muted-foreground">Issued At</p>
-                                    <p className="font-medium">{coupon.issued_at ? new Date(coupon.issued_at).toLocaleString() : "-"}</p>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-muted-foreground">Batch Type</p>
-                                    <p className="font-medium">{coupon.batch?.batch_type || "-"}</p>
-                                </div>
-
-                                <div className="col-span-2 mt-4">
-                                    <p className="text-sm text-muted-foreground">Merchant</p>
-                                    <p className="font-medium">{coupon.merchant?.business_name || "-"}</p>
-                                    <p className="text-sm text-muted-foreground">{coupon.merchant?.address}</p>
-                                </div>
-                            </div>
-                        ) : (
-                            <p className="text-muted-foreground">Loading...</p>
-                        )}
-                    </CardContent>
-                </Card>
-
-                {/* QR Code */}
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Master QR Code</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex flex-col items-center">
-                        <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-                            {coupon?.merchant?.qr_code_image ? (
-                                // merchant-provided base64 image
-                                <img src={coupon.merchant.qr_code_image} alt="QR" width={150} height={150} />
-                            ) : (
-                                <QRCodeSVG value={coupon?.merchant?.qr_code_url || ""} size={150} />
-                            )}
-                        </div>
-                        <p className="text-sm text-center text-muted-foreground mb-4">
-                            Scan to claim this coupon / view feedback
-                        </p>
-                        <Button variant="outline" className="w-full">
-                            <Download className="mr-2 h-4 w-4" />
-                            Download QR
-                        </Button>
-                    </CardContent>
-                </Card>
+            {/* Coupon Code */}
+            <div className="rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 p-4 border">
+              <p className="text-sm text-muted-foreground">Coupon Code</p>
+              <div className="flex items-center gap-3 mt-2">
+                <h2 className="font-mono text-3xl font-bold tracking-widest text-indigo-600">
+                  {coupon.coupon_code}
+                </h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-white"
+                  onClick={() =>
+                    copyToClipboard(coupon.coupon_code, "Coupon code")
+                  }
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
 
-            {/* Serial Codes */}
-            {/* If you want serial codes per batch, backend endpoint can be used to fetch them and render here. */}
-        </div>
+            {/* Batch & Merchant */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t">
+              {/* Batch */}
+              <div className="rounded-xl bg-white p-4 shadow-sm border">
+                <p className="text-sm text-muted-foreground">Batch</p>
+                <p className="font-semibold text-lg">
+                  {coupon.batch?.batch_name || "-"}
+                </p>
+
+                <div className="mt-3 space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    Start:
+                    <span className="font-medium ml-auto">
+                      {coupon.batch?.start_date || "-"}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    End:
+                    <span className="font-medium ml-auto">
+                      {coupon.batch?.end_date || "-"}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    Quantity:
+                    <span className="font-medium ml-auto">
+                      {coupon.batch?.total_quantity ?? "-"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Merchant */}
+              <div className="rounded-xl bg-white p-4 shadow-sm border">
+                <p className="text-sm text-muted-foreground">Merchant</p>
+                <p className="font-semibold text-lg">
+                  {coupon.merchant?.business_name || "-"}
+                </p>
+
+                <div className="mt-3 text-sm text-muted-foreground flex items-center gap-2">
+                  <Tag className="h-4 w-4" />
+                  QR Hash:
+                  <span className="font-medium ml-auto">
+                    {coupon.merchant?.qr_code_hash || "-"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className="text-muted-foreground">Loading...</p>
+        )}
+      </CardContent>
+    </Card>
+  </div>
+</div>
+
     );
 }

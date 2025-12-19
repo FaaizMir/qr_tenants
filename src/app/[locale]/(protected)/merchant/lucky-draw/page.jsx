@@ -6,12 +6,12 @@ import MerchantLuckyDrawContainer from "@/containers/merchant/lucky-draw";
 
 export default function MerchantLuckyDrawPage() {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-    { name: "Lucky Draw", url: "/en/merchant/lucky-draw" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Lucky Draw", url: "/merchant/lucky-draw" },
   ];
   return (
     <>
-      <BreadcrumbComponent data={breadcrumbData} />{" "}
+      <BreadcrumbComponent data={breadcrumbData} />
       <MerchantLuckyDrawContainer />
     </>
   );

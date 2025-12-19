@@ -6,8 +6,8 @@ import MerchantCustomerDataContainer from "@/containers/merchant/customer-data";
 
 export default function MerchantCustomerDataPage() {
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-    { name: "Customer Data", url: "/en/merchant/customer-data" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Customer Data", url: "/merchant/customer-data" },
   ];
 
   return (

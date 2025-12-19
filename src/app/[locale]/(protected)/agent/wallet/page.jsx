@@ -8,8 +8,8 @@ export default async function AgentWalletPage() {
     "dashboard.agentMerchantManagement"
   );
   const data = [
-    { name: tAgentDashboard("agentdashboard"), url: "/en/agent/dashboard" },
-    { name: tAgentWallet("agentwallet"), url: "/en/agent/wallet" },
+    { name: tAgentDashboard("agentdashboard"), url: "/agent/dashboard" },
+    { name: tAgentWallet("agentwallet"), url: "/agent/wallet" },
   ];
 
   return (

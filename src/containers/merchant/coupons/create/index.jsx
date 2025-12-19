@@ -127,7 +127,7 @@ export default function MerchantCreateCouponContainer() {
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                {/* <div className="space-y-2">
                                     <Label>Coupon Design</Label>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center hover:bg-muted/50 transition cursor-pointer h-32">
@@ -140,9 +140,9 @@ export default function MerchantCreateCouponContainer() {
                                             <span className="text-sm font-medium">Use Template</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <div className="grid grid-cols-3 gap-4">
+                                <div className="grid grid-cols-3 gap-4 ">
                                     <label className="flex items-center gap-2"><input type="checkbox" checked={isActive} onChange={(e)=>setIsActive(e.target.checked)} /> Active</label>
                                     <label className="flex items-center gap-2"><input type="checkbox" checked={whatsappEnabled} onChange={(e)=>setWhatsappEnabled(e.target.checked)} /> WhatsApp Enabled</label>
                                     <label className="flex items-center gap-2"><input type="checkbox" checked={luckyDrawEnabled} onChange={(e)=>setLuckyDrawEnabled(e.target.checked)} /> Lucky Draw</label>
@@ -158,7 +158,7 @@ export default function MerchantCreateCouponContainer() {
 
                 {/* Preview & Tips */}
                 <div className="space-y-6">
-                    <Card className="bg-primary/5 border-primary/20">
+                    {/* <Card className="bg-primary/5 border-primary/20">
                         <CardHeader>
                             <CardTitle className="text-lg text-primary">Preview</CardTitle>
                         </CardHeader>
@@ -179,7 +179,7 @@ export default function MerchantCreateCouponContainer() {
                                 </div>
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
 
                     <Card>
                         <CardHeader>

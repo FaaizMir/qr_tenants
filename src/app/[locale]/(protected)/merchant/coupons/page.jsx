@@ -6,8 +6,8 @@ import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 
 export default function MerchantCouponsPage({ embedded = false }) {
     const breadcrumbData = [
-        { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-        { name: "Coupon Batches", url: "/en/merchant/coupons" },
+        { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+        { name: "Coupon Batches", url: "/merchant/coupons" },
     ];
 
     return (

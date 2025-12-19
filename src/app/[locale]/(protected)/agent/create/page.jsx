@@ -6,9 +6,8 @@ export default async function CreateAgentPage() {
   const tCommon = await getTranslations("common");
 
   const breadcrumbData = [
-    { name: tCommon("dashboard"), url: "/dashboard" },
-    { name: "Agents", url: "/agents" },
-    { name: "Create Agent", url: "/agents/create" },
+    { name: "Agent Dashboard", url: "/agent/dashboard" },
+    { name: "Create Agent", url: "/agent/create" },
   ];
 
   return (

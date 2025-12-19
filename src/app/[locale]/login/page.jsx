@@ -202,30 +202,7 @@ const handleSubmit = async (event) => {
               </Button>
             </form>
 
-            <div className="mt-6 space-y-3">
-              <p className="text-xs text-muted-foreground bg-muted rounded-lg p-3">
-                <strong>Demo Credentials:</strong>
-                <br />
-                Agent: <code className="font-mono">admin / admin123</code>
-                <br />
-                Merchant:{" "}
-                <code className="font-mono">merchant / merchant123</code>
-              </p>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <Link
-                  href="/login"
-                  className="underline underline-offset-4 hover:text-foreground"
-                >
-                  {tSignin("forgotPassword")}
-                </Link>
-                <Link
-                  href="/register/agent"
-                  className="font-semibold text-primary hover:text-primary/80"
-                >
-                  {tSignin("registerAgent")}
-                </Link>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

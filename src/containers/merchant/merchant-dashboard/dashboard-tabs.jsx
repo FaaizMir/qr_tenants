@@ -24,7 +24,7 @@ export const getDashboardTabs = ({ kpiData, recentRedemptions }) => [
 
                 <div className="grid gap-6 md:grid-cols-3">
                     {/* Recent Redemptions */}
-                    <Card className="md:col-span-2">
+                    {/* <Card className="md:col-span-2">
                         <CardHeader>
                             <CardTitle>Recent Redemptions</CardTitle>
                         </CardHeader>
@@ -58,10 +58,10 @@ export const getDashboardTabs = ({ kpiData, recentRedemptions }) => [
                                 ))}
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
 
                     {/* Automation Status */}
-                    <Card>
+                    {/* <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <MessageSquare className="h-5 w-5 text-blue-500" />
@@ -89,11 +89,10 @@ export const getDashboardTabs = ({ kpiData, recentRedemptions }) => [
                                 </Link>
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
                 </div>
 
                 {/* Integrated Analytics */}
-                <div className="pt-4">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xl font-semibold italic text-gray-700">
                             Analytics Overview
@@ -101,7 +100,7 @@ export const getDashboardTabs = ({ kpiData, recentRedemptions }) => [
                     </div>
                     <MerchantAnalyticsContainer embedded={true} />
                 </div>
-            </div>
+           
         ),
     },
     {

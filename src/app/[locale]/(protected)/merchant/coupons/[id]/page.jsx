@@ -3,8 +3,8 @@ import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 
 export default function CouponBatchDetailPage({ params }) {
     const breadcrumbData = [
-        { name: "Merchant Dashboard", url: "/en/merchant/dashboard" },
-        { name: "Coupon Batches", url: "/en/merchant/coupons" },
+        { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+        { name: "Coupon Batches", url: "/merchant/coupons" },
         { name: "Detail", url: "#" }, // Name will be dynamic in container, but for breadcrumb in page we can use static or pass it
     ];
 

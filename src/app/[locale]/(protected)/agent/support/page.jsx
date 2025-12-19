@@ -3,8 +3,8 @@ import AgentSupportContainer from "@/containers/agent/support";
 
 export default function AgentSupportPage() {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/en/agent/dashboard" },
-    { name: "Support", url: "/en/agent/support" },
+    { name: "Agent Dashboard", url: "/agent/dashboard" },
+    { name: "Support", url: "/agent/support" },
   ];
   return (
     <>

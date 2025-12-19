@@ -43,12 +43,12 @@ export default function AgentEarningsContainer() {
       </div>
 
       {/* Monthly Earnings Chart */}
-      <ChartWrapper title={tAgentEarnings("monthlyearnings")}>
+      {/* <ChartWrapper title={tAgentEarnings("monthlyearnings")}>
         <div className="h-[300px] flex items-center justify-center text-muted-foreground">
           Bar chart showing monthly earnings trend: $
           {monthlyEarnings.map((m) => m.earnings).join(", ")}
         </div>
-      </ChartWrapper>
+      </ChartWrapper> */}
 
       {/* Commission Calculation */}
       <Card>

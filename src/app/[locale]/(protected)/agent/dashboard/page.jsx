@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 export default async function AgentDashboardPage() {
   const tAgentDashboard = await getTranslations("dashboard.agentDashboard");
   const breadcrumbData = [
-    { name: tAgentDashboard("agentdashboard"), url: "/en/agent/dashboard" },
+    { name: tAgentDashboard("agentdashboard"), url: "/agent/dashboard" },
   ];
   return (
     <>
