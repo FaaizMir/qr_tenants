@@ -27,7 +27,7 @@ export const getDashboardTabs = ({
             <CardTitle>{tAgentDashboard("quickactions")}</CardTitle>
           </CardHeader>
           <CardContent className="flex gap-4">
-            <Link href="/en/agent/merchants">
+            <Link href="/agent/merchants/create">
               <Button>{tAgentDashboard("addnewmerchant")}</Button>
             </Link>
             <Link href="/en/agent/earnings">
