@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Download } from "lucide-react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,32 +9,53 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axios";
+import { toast } from "sonner";
 
-import { getBatchDetails, serialCodes } from "./coupons-detail-data";
 import { serialCodesColumns } from "./coupons-detail-columns";
 
 export default function MerchantCouponDetailContainer({ params }) {
-    const { id } = use(params);
+    const id = useParams()?.id;
+    const router = useRouter();
 
-    // Dummy batch data
-    const batch = getBatchDetails(id);
-
+    const [coupon, setCoupon] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState("");
 
-    const filteredCodes = serialCodes.filter(
-        (item) =>
-            item.code.toLowerCase().includes(search.toLowerCase()) ||
-            (item.customer &&
-                item.customer.toLowerCase().includes(search.toLowerCase()))
-    );
+    const paginatedData = [];
 
-    const paginatedData = filteredCodes.slice(
-        page * pageSize,
-        (page + 1) * pageSize
-    );
+    useEffect(() => {
+        if (!id) return;
+        const fetchCoupon = async () => {
+            setLoading(true);
+            try {
+                // debug: log id and resolved URL to help trace why backend isn't receiving the request
+                try {
+                    // eslint-disable-next-line no-console
+                    console.debug("Fetching coupon", { id, baseURL: axiosInstance.defaults.baseURL, path: `/coupons/${id}` });
+                } catch (e) {}
+                try {
+                    if (typeof window !== "undefined") {
+                        // show a visible toast so it's easier to see in the UI when the request is attempted
+                        toast.success(`Requesting coupon id: ${id} -> ${axiosInstance.defaults.baseURL || ""}/coupons/${id}`);
+                    }
+                } catch (e) {}
+                const resp = await axiosInstance.get(`/coupons/${id}`);
+                const data = resp?.data?.data || resp?.data;
+                setCoupon(data);
+            } catch (err) {
+                const msg = err?.response?.data?.message || err.message || "Failed to load coupon";
+                toast.error(msg);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCoupon();
+    }, [id]);
 
     return (
         <div className="space-y-6">
@@ -45,8 +66,8 @@ export default function MerchantCouponDetailContainer({ params }) {
                     </Button>
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold">{batch.name}</h1>
-                    <p className="text-muted-foreground">Batch Details & Serial Codes</p>
+                    <h1 className="text-3xl font-bold">{coupon ? coupon.coupon_code : "Coupon Detail"}</h1>
+                    <p className="text-muted-foreground">{coupon?.batch?.batch_name || "Coupon & Batch details"}</p>
                 </div>
             </div>
 
@@ -57,41 +78,36 @@ export default function MerchantCouponDetailContainer({ params }) {
                         <CardTitle>Batch Information</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <p className="text-sm text-muted-foreground">Status</p>
-                                <div className="mt-1">
-                                    <StatusBadge status={batch.status} />
+                        {coupon ? (
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Status</p>
+                                    <div className="mt-1">
+                                        <StatusBadge status={coupon.status} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Coupon Code</p>
+                                    <p className="font-medium text-lg">{coupon.coupon_code}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Issued At</p>
+                                    <p className="font-medium">{coupon.issued_at ? new Date(coupon.issued_at).toLocaleString() : "-"}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Batch Type</p>
+                                    <p className="font-medium">{coupon.batch?.batch_type || "-"}</p>
+                                </div>
+
+                                <div className="col-span-2 mt-4">
+                                    <p className="text-sm text-muted-foreground">Merchant</p>
+                                    <p className="font-medium">{coupon.merchant?.business_name || "-"}</p>
+                                    <p className="text-sm text-muted-foreground">{coupon.merchant?.address}</p>
                                 </div>
                             </div>
-                            <div>
-                                <p className="text-sm text-muted-foreground">Discount</p>
-                                <p className="font-medium text-lg">{batch.discount}</p>
-                            </div>
-                            <div>
-                                <p className="text-sm text-muted-foreground">Created Date</p>
-                                <p className="font-medium">{batch.created}</p>
-                            </div>
-                            <div>
-                                <p className="text-sm text-muted-foreground">Valid Untill</p>
-                                <p className="font-medium">{batch.validUntil}</p>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 pt-6 border-t">
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-sm font-medium">Usage Progress</span>
-                                <span className="text-sm text-muted-foreground">
-                                    {batch.used} / {batch.quantity} codes used
-                                </span>
-                            </div>
-                            <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-primary"
-                                    style={{ width: `${(batch.used / batch.quantity) * 100}%` }}
-                                />
-                            </div>
-                        </div>
+                        ) : (
+                            <p className="text-muted-foreground">Loading...</p>
+                        )}
                     </CardContent>
                 </Card>
 
@@ -102,13 +118,15 @@ export default function MerchantCouponDetailContainer({ params }) {
                     </CardHeader>
                     <CardContent className="flex flex-col items-center">
                         <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-                            <QRCodeSVG
-                                value={`https://qrscanner.com/claim/${batch.id}`}
-                                size={150}
-                            />
+                            {coupon?.merchant?.qr_code_image ? (
+                                // merchant-provided base64 image
+                                <img src={coupon.merchant.qr_code_image} alt="QR" width={150} height={150} />
+                            ) : (
+                                <QRCodeSVG value={coupon?.merchant?.qr_code_url || ""} size={150} />
+                            )}
                         </div>
                         <p className="text-sm text-center text-muted-foreground mb-4">
-                            Scan to claim a random coupon from this batch
+                            Scan to claim this coupon / view feedback
                         </p>
                         <Button variant="outline" className="w-full">
                             <Download className="mr-2 h-4 w-4" />
@@ -119,31 +137,7 @@ export default function MerchantCouponDetailContainer({ params }) {
             </div>
 
             {/* Serial Codes */}
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle>Serial Codes</CardTitle>
-                    <Button variant="outline" size="sm">
-                        <Download className="mr-2 h-4 w-4" />
-                        Export CSV
-                    </Button>
-                </CardHeader>
-                <CardContent>
-                    <TableToolbar
-                        placeholder="Search codes..."
-                        onSearchChange={setSearch}
-                    />
-                    <DataTable
-                        data={paginatedData}
-                        columns={serialCodesColumns}
-                        page={page}
-                        pageSize={pageSize}
-                        total={filteredCodes.length}
-                        setPage={setPage}
-                        setPageSize={setPageSize}
-                        style={{ marginTop: "1rem" }}
-                    />
-                </CardContent>
-            </Card>
+            {/* If you want serial codes per batch, backend endpoint can be used to fetch them and render here. */}
         </div>
     );
 }

@@ -34,7 +34,7 @@ export const couponsColumns = [
         header: "Actions",
         cell: ({ row }) => (
             <div className="flex gap-2">
-                <Link href={`/en/merchant/coupons/${row.original.batch?.id}`}>
+                <Link href={`/en/merchant/coupons/${row.original.id}`}>
                     <Button variant="ghost" size="icon" title="View Batch">
                         <Eye className="h-4 w-4" />
                     </Button>
