@@ -1,41 +1,11 @@
-// Static authentication utilities (temporary until backend is ready)
-
-const USERS = [
-  {
-    username: 'admin',
-    password: 'admin123',
-    role: 'agent',
-    name: 'Agent Admin',
-    email: 'agent@qrscanner.com',
-  },
-  {
-    username: 'merchant',
-    password: 'merchant123',
-    role: 'merchant',
-    name: 'Merchant User',
-    email: 'merchant@qrscanner.com',
-  },
-];
-
-export function authenticateUser(username, password) {
-  const user = USERS.find(
-    (u) => u.username === username && u.password === password
-  );
-  
-  if (user) {
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
-  }
-  
-  return null;
-}
+// Authentication utilities (persist user + token in localStorage)
 
 export function getCurrentUser() {
   if (typeof window === 'undefined') return null;
-  
+
   const userStr = localStorage.getItem('currentUser');
   if (!userStr) return null;
-  
+
   try {
     return JSON.parse(userStr);
   } catch (e) {
@@ -48,10 +18,42 @@ export function setCurrentUser(user) {
   localStorage.setItem('currentUser', JSON.stringify(user));
 }
 
+export function setToken(token) {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem('authToken', token);
+}
+
+export function getToken() {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('authToken');
+}
+
+export function setAuth(user, token) {
+  setCurrentUser(user);
+  if (token) {
+    setToken(token);
+    // also set cookies so middleware can read role/token on server-side
+    try {
+      const maxAge = 60 * 60 * 24 * 7; // 7 days
+      document.cookie = `authToken=${token}; path=/; max-age=${maxAge}`;
+      const role = (user?.role || "").toLowerCase();
+      document.cookie = `userRole=${role}; path=/; max-age=${maxAge}`;
+    } catch (e) {
+      // ignore in non-browser environments
+    }
+  }
+}
+
 export function logout() {
   if (typeof window === 'undefined') return;
   localStorage.removeItem('currentUser');
+  localStorage.removeItem('authToken');
   localStorage.removeItem('subscriptionType');
+  try {
+    // clear cookies
+    document.cookie = 'authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'userRole=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  } catch (e) {}
 }
 
 export function getSubscriptionType() {

@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import AgentForm from "@/containers/agents/agent-form";
+import AgentForm from "@/containers/agent/agent-form";
 import { getTranslations } from "next-intl/server";
 
 export default async function CreateAgentPage() {
