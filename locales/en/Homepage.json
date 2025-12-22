@@ -1,0 +1,36 @@
+{
+  "fetaures": {
+    "card1Description": "Customers scan a QR code to leave reviews in seconds. Capture negative feedback privately before it hits Google.",
+    "card1Heading": "Instant Feedback",
+    "card2Description": "Issue unique, trackable serial codes. Prevent fraud with secure validation and usage limits.",
+    "card2Heading": "Smart Coupons",
+    "card3Description": "Automatically send birthday wishes, review requests, and \"we miss you\" offers via WhatsApp.",
+    "card3Heading": "WhatsApp Automation",
+    "description": "Powerful tools to help you understand your customers and keep them coming back.",
+    "h1": "Everything you need to grow"
+  },
+  "footer": {
+    "Contact": "Contact",
+    "Privacy": "Privacy",
+    "Terms": "Terms",
+    "text": "© 2024 QR Rev Inc. All rights reserved."
+  },
+  "heroSection": {
+    "1": "Turn Customers into",
+    "2": "Loyal Fans",
+    "3": "with Smart QR Codes",
+    "description": "The all-in-one platform to collect reviews, distribute coupons, and automate customer retention. No coding required.",
+    "freeTrial": "Start Free Trial",
+    "para": "Now with WhatsApp Integration",
+    "viewDemo": "View Demo"
+  },
+  "howitworks": {
+    "descp1": "Customise it with your brand colors and logo.",
+    "descp2": "Place it on tables, counters, or receipts.",
+    "descp3": "Collect reviews and build a customer database automatically.",
+    "h1": "Simple 3-step process",
+    "h3": "Watch your business grow",
+    "heading1": "Generate your QR Code",
+    "heading2": "Display it in your store"
+  }
+}

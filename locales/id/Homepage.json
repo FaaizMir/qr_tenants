@@ -1,0 +1,36 @@
+{
+  "fetaures": {
+    "card1Description": "Pelanggan memindai kode QR untuk meninggalkan ulasan dalam hitungan detik. Tangkap umpan balik negatif secara pribadi sebelum muncul di Google.",
+    "card1Heading": "Umpan Balik Instan",
+    "card2Description": "Masalah kode serial unik yang dapat dilacak. Cegah penipuan dengan validasi yang aman dan batas penggunaan.",
+    "card2Heading": "Kupon Cerdas",
+    "card3Description": "Secara otomatis mengirimkan ucapan selamat ulang tahun, permintaan ulasan, dan tawaran \"kami merindukan Anda\" melalui WhatsApp.",
+    "card3Heading": "Automasi WhatsApp",
+    "description": "Alat yang kuat untuk membantu Anda memahami pelanggan Anda dan membuat mereka kembali.",
+    "h1": "Segala yang Anda butuhkan untuk tumbuh"
+  },
+  "footer": {
+    "Contact": "Kontak",
+    "Privacy": "Privasi",
+    "Terms": "Syarat",
+    "text": "© 2024 QR Rev Inc. Semua hak dilindungi."
+  },
+  "heroSection": {
+    "1": "Ubah Pelanggan menjadi",
+    "2": "Penggemar Setia",
+    "3": "dengan Kode QR Cerdas",
+    "description": "Platform all-in-one untuk mengumpulkan ulasan, mendistribusikan kupon, dan mengotomatiskan retensi pelanggan. Tanpa memerlukan pengkodean.",
+    "freeTrial": "Mulai Uji Coba Gratis",
+    "para": "Sekarang dengan Integrasi WhatsApp",
+    "viewDemo": "Lihat Demo"
+  },
+  "howitworks": {
+    "descp1": "Sesuaikan dengan warna dan logo merek Anda.",
+    "descp2": "Tempatkan di atas meja, counter, atau struk.",
+    "descp3": "Kumpulkan ulasan dan bangun basis data pelanggan secara otomatis.",
+    "h1": "Proses sederhana 3 langkah",
+    "h3": "Saksikan bisnis Anda tumbuh",
+    "heading1": "Hasilkan Kode QR Anda",
+    "heading2": "Tampilkan di toko Anda"
+  }
+}

@@ -9,6 +9,7 @@ export const namespaces = [
   "signin",
   "placeholders",
   "validations",
+  "Homepage",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

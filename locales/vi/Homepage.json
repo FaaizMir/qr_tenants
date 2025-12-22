@@ -1,0 +1,36 @@
+{
+  "fetaures": {
+    "card1Description": "Khách hàng quét mã QR để để lại đánh giá trong vài giây. Nắm bắt phản hồi tiêu cực một cách riêng tư trước khi nó xuất hiện trên Google.",
+    "card1Heading": "Phản hồi ngay lập tức",
+    "card2Description": "Cấp mã serial duy nhất, có thể theo dõi. Ngăn chặn gian lận với xác thực an toàn và giới hạn sử dụng.",
+    "card2Heading": "Phiếu giảm giá thông minh",
+    "card3Description": "Tự động gửi lời chúc sinh nhật, yêu cầu đánh giá và các ưu đãi \"chúng tôi nhớ bạn\" qua WhatsApp.",
+    "card3Heading": "Tự động hóa WhatsApp",
+    "description": "Công cụ mạnh mẽ giúp bạn hiểu khách hàng của mình và giữ họ quay lại.",
+    "h1": "Mọi thứ bạn cần để phát triển"
+  },
+  "footer": {
+    "Contact": "Liên hệ",
+    "Privacy": "Quyền riêng tư",
+    "Terms": "Điều khoản",
+    "text": "© 2024 QR Rev Inc. Tất cả các quyền được bảo lưu."
+  },
+  "heroSection": {
+    "1": "Biến Khách Hàng thành",
+    "2": "Người hâm mộ trung thành",
+    "3": "với Mã QR Thông minh",
+    "description": "Nền tảng tất cả trong một để thu thập đánh giá, phân phối phiếu giảm giá và tự động hóa việc giữ chân khách hàng. Không cần lập trình.",
+    "freeTrial": "Bắt đầu dùng thử miễn phí",
+    "para": "Bây giờ có tích hợp WhatsApp",
+    "viewDemo": "Xem bản demo"
+  },
+  "howitworks": {
+    "descp1": "Tùy chỉnh nó với màu sắc và logo thương hiệu của bạn.",
+    "descp2": "Đặt nó trên bàn, quầy, hoặc biên lai.",
+    "descp3": "Thu thập đánh giá và tự động xây dựng cơ sở dữ liệu khách hàng.",
+    "h1": "Quy trình 3 bước đơn giản",
+    "h3": "Theo dõi sự phát triển của doanh nghiệp bạn",
+    "heading1": "Tạo mã QR của bạn",
+    "heading2": "Hiển thị nó trong cửa hàng của bạn"
+  }
+}

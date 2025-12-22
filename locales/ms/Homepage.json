@@ -1,0 +1,36 @@
+{
+  "fetaures": {
+    "card1Description": "Pelanggan mengimbas kod QR untuk meninggalkan ulasan dalam beberapa saat. Tangkap maklum balas negatif secara peribadi sebelum ia sampai ke Google.",
+    "card1Heading": "Maklum Balas Segera",
+    "card2Description": "Masalah kod siri yang unik dan boleh dijejaki. Mencegah penipuan dengan pengesahan yang selamat dan had penggunaan.",
+    "card2Heading": "Kupon Pintar",
+    "card3Description": "Hantar ucapan selamat hari jadi, permintaan ulasan, dan tawaran \"kami merindui anda\" secara automatik melalui WhatsApp.",
+    "card3Heading": "Automasi WhatsApp",
+    "description": "Alat yang berkuasa untuk membantu anda memahami pelanggan anda dan memastikan mereka kembali.",
+    "h1": "Segala yang anda perlukan untuk berkembang"
+  },
+  "footer": {
+    "Contact": "Hubungi",
+    "Privacy": "Privasi",
+    "Terms": "Terma",
+    "text": "© 2024 QR Rev Inc. Semua hak terpelihara."
+  },
+  "heroSection": {
+    "1": "Tukar Pelanggan menjadi",
+    "2": "Peminat Setia",
+    "3": "dengan Kod QR Pintar",
+    "description": "Platform serba boleh untuk mengumpul ulasan, mengedarkan kupon, dan mengautomasikan pengekalan pelanggan. Tiada pengkodan diperlukan.",
+    "freeTrial": "Mula Percubaan Percuma",
+    "para": "Kini dengan Integrasi WhatsApp",
+    "viewDemo": "Lihat Demo"
+  },
+  "howitworks": {
+    "descp1": "Sesuaikan dengan warna dan logo jenama anda.",
+    "descp2": "Letakkan di atas meja, kaunter, atau resit.",
+    "descp3": "Kumpul ulasan dan bina pangkalan data pelanggan secara automatik.",
+    "h1": "Proses 3 langkah yang mudah",
+    "h3": "Tonton perniagaan anda berkembang",
+    "heading1": "Hasilkan Kod QR anda",
+    "heading2": "Paparkan di kedai anda"
+  }
+}

@@ -31,8 +31,9 @@ export default function AgentSupportContainer() {
               <div
                 key={ticket.id}
                 onClick={() => setSelectedTicket(ticket)}
-                className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors ${selectedTicket?.id === ticket.id ? "bg-muted" : ""
-                  }`}
+                className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors ${
+                  selectedTicket?.id === ticket.id ? "bg-muted" : ""
+                }`}
               >
                 <div className="flex justify-between items-start mb-1">
                   <span className="font-semibold truncate">

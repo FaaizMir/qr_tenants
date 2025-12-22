@@ -1,10 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, QrCode, TrendingUp, Shield, Smartphone, Globe, Check } from "lucide-react";
+import {
+  ArrowRight,
+  QrCode,
+  TrendingUp,
+  Shield,
+  Smartphone,
+  Globe,
+  Check,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/common/language-switcher";
 
 export default function LandingPage() {
+  const tHeroSection = useTranslations("Homepage.heroSection");
+  const tFeatures = useTranslations("Homepage.fetaures");
+  const tHowItWorks = useTranslations("Homepage.howitworks");
+  const tFooter = useTranslations("Homepage.footer");
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Navigation */}
@@ -16,7 +31,11 @@ export default function LandingPage() {
           QR Rev
         </div>
         <div className="flex items-center gap-4">
-          <Link href="/en/login" className="text-sm font-medium hover:underline underline-offset-4">
+          <LanguageSwitcher />
+          <Link
+            href="/en/login"
+            className="text-sm font-medium hover:underline underline-offset-4"
+          >
             Sign In
           </Link>
           <Link href="/en/login">
@@ -29,22 +48,25 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="px-6 lg:px-10 py-20 lg:py-32 flex flex-col items-center text-center max-w-5xl mx-auto space-y-8">
           <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 hover:bg-primary/20">
-            Now with WhatsApp Integration
+            {tHeroSection("para")}
           </div>
           <h1 className="text-4xl lg:text-7xl font-extrabold tracking-tight">
-            Turn Customers into <span className="text-primary">Loyal Fans</span> with Smart QR Codes
+            {tHeroSection("1")}{" "}
+            <span className="text-primary">{tHeroSection("2")}</span>
+            {tHeroSection("3")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The all-in-one platform to collect reviews, distribute coupons, and automate customer retention. No coding required.
+            {tHeroSection("description")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link href="/en/login">
               <Button size="lg" className="h-12 px-8 text-lg">
-                Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
+                {tHeroSection("freeTrial")}
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Button size="lg" variant="outline" className="h-12 px-8 text-lg">
-              View Demo
+              {tHeroSection("viewDemo")}
             </Button>
           </div>
         </section>
@@ -54,10 +76,10 @@ export default function LandingPage() {
           <div className="px-6 lg:px-10 max-w-7xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-                Everything you need to grow
+                {tFeatures("h1")}
               </h2>
               <p className="text-muted-foreground text-lg">
-                Powerful tools to help you understand your customers and keep them coming back.
+                {tFeatures("description")}
               </p>
             </div>
 
@@ -66,27 +88,33 @@ export default function LandingPage() {
                 <div className="h-12 w-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
                   <Smartphone className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Instant Feedback</h3>
+                <h3 className="text-xl font-bold mb-3">
+                  {tFeatures("card1Heading")}
+                </h3>
                 <p className="text-muted-foreground">
-                  Customers scan a QR code to leave reviews in seconds. Capture negative feedback privately before it hits Google.
+                  {tFeatures("card1Description")}
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-sm border hover:shadow-md transition">
                 <div className="h-12 w-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
                   <TrendingUp className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Smart Coupons</h3>
+                <h3 className="text-xl font-bold mb-3">
+                  {tFeatures("card2Heading")}
+                </h3>
                 <p className="text-muted-foreground">
-                  Issue unique, trackable serial codes. Prevent fraud with secure validation and usage limits.
+                  {tFeatures("card2Description")}
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-sm border hover:shadow-md transition">
                 <div className="h-12 w-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-6">
                   <Globe className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">WhatsApp Automation</h3>
+                <h3 className="text-xl font-bold mb-3">
+                  {tFeatures("card3Heading")}
+                </h3>
                 <p className="text-muted-foreground">
-                  Automatically send birthday wishes, review requests, and "we miss you" offers via WhatsApp.
+                  {tFeatures("card3Description")}
                 </p>
               </div>
             </div>
@@ -98,28 +126,44 @@ export default function LandingPage() {
           <div className="px-6 lg:px-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 space-y-8">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Simple 3-step process
+                {tHowItWorks("h1")}
               </h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">1</div>
+                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
+                    1
+                  </div>
                   <div>
-                    <h3 className="text-lg font-bold">Generate your QR Code</h3>
-                    <p className="text-muted-foreground">Customise it with your brand colors and logo.</p>
+                    <h3 className="text-lg font-bold">
+                      {tHowItWorks("heading1")}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {tHowItWorks("descp1")}{" "}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">2</div>
+                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
+                    2
+                  </div>
                   <div>
-                    <h3 className="text-lg font-bold">Display it in your store</h3>
-                    <p className="text-muted-foreground">Place it on tables, counters, or receipts.</p>
+                    <h3 className="text-lg font-bold">
+                      {tHowItWorks("heading2")}{" "}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {tHowItWorks("descp2")}{" "}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">3</div>
+                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
+                    3
+                  </div>
                   <div>
-                    <h3 className="text-lg font-bold">Watch your business grow</h3>
-                    <p className="text-muted-foreground">Collect reviews and build a customer database automatically.</p>
+                    <h3 className="text-lg font-bold">{tHowItWorks("h3")} </h3>
+                    <p className="text-muted-foreground">
+                      {tHowItWorks("descp3")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -148,14 +192,31 @@ export default function LandingPage() {
               {/* Standard */}
               <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
                 <h3 className="text-xl font-bold mb-2">Temporary Plan</h3>
-                <div className="text-3xl font-bold mb-6">$29<span className="text-lg text-slate-400 font-normal">/month</span></div>
+                <div className="text-3xl font-bold mb-6">
+                  $29
+                  <span className="text-lg text-slate-400 font-normal">
+                    /month
+                  </span>
+                </div>
                 <ul className="space-y-3 mb-8 text-slate-300">
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-400" /> 500 Coupons per Batch</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-400" /> Basic Analytics</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-400" /> Standard Support</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4 text-green-400" /> 1 Location</li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-400" /> 500 Coupons per
+                    Batch
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-400" /> Basic Analytics
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-400" /> Standard
+                    Support
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-green-400" /> 1 Location
+                  </li>
                 </ul>
-                <Button className="w-full" variant="outline">Get Started</Button>
+                <Button className="w-full" variant="outline">
+                  Get Started
+                </Button>
               </div>
 
               {/* Annual */}
@@ -163,16 +224,35 @@ export default function LandingPage() {
                 <div className="absolute top-0 right-0 bg-white text-primary text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                   BEST VALUE
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-primary-foreground">Annual Plan</h3>
-                <div className="text-3xl font-bold mb-6 text-primary-foreground">$290<span className="text-lg text-primary-foreground/70 font-normal">/year</span></div>
+                <h3 className="text-xl font-bold mb-2 text-primary-foreground">
+                  Annual Plan
+                </h3>
+                <div className="text-3xl font-bold mb-6 text-primary-foreground">
+                  $290
+                  <span className="text-lg text-primary-foreground/70 font-normal">
+                    /year
+                  </span>
+                </div>
                 <ul className="space-y-3 mb-8 text-primary-foreground/90">
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4" /> 10,000 Coupons per Batch</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4" /> Full Customer Data Access</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4" /> Priority Support</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4" /> Multi-Location Support</li>
-                  <li className="flex items-center gap-2"><Check className="h-4 w-4" /> Advanced Automation</li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4" /> 10,000 Coupons per Batch
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4" /> Full Customer Data Access
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4" /> Priority Support
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4" /> Multi-Location Support
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4" /> Advanced Automation
+                  </li>
                 </ul>
-                <Button className="w-full bg-white text-primary hover:bg-white/90">Choose Annual</Button>
+                <Button className="w-full bg-white text-primary hover:bg-white/90">
+                  Choose Annual
+                </Button>
               </div>
             </div>
           </div>
@@ -187,13 +267,17 @@ export default function LandingPage() {
             </div>
             QR Rev
           </div>
-          <div className="text-sm text-muted-foreground">
-            © 2024 QR Rev Inc. All rights reserved.
-          </div>
+          <div className="text-sm text-muted-foreground">{tFooter("text")}</div>
           <div className="flex gap-6 text-sm font-medium">
-            <Link href="#" className="hover:underline">Privacy</Link>
-            <Link href="#" className="hover:underline">Terms</Link>
-            <Link href="#" className="hover:underline">Contact</Link>
+            <Link href="#" className="hover:underline">
+              {tFooter("Privacy")}
+            </Link>
+            <Link href="#" className="hover:underline">
+              {tFooter("Terms")}
+            </Link>
+            <Link href="#" className="hover:underline">
+              {tFooter("Contact")}
+            </Link>
           </div>
         </div>
       </footer>

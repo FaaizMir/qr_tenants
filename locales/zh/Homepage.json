@@ -1,0 +1,36 @@
+{
+  "fetaures": {
+    "card1Description": "客户扫描二维码即可在几秒钟内留下评价。在负面反馈在谷歌上发布之前，私下捕捉。",
+    "card1Heading": "即时反馈",
+    "card2Description": "发放独特的、可追踪的序列代码。通过安全验证和使用限制防止欺诈。",
+    "card2Heading": "智能优惠券",
+    "card3Description": "通过WhatsApp自动发送生日祝福、评论请求和“我们想念您”的优惠。",
+    "card3Heading": "WhatsApp 自动化",
+    "description": "强大的工具帮助您了解客户并让他们不断回归。",
+    "h1": "您所需的一切来成长"
+  },
+  "footer": {
+    "Contact": "联系",
+    "Privacy": "隐私",
+    "Terms": "条款",
+    "text": "© 2024 QR Rev Inc. 版权所有。"
+  },
+  "heroSection": {
+    "1": "将客户转化为",
+    "2": "忠实粉丝",
+    "3": "使用智能二维码",
+    "description": "一个集成的平台，用于收集评论、分发优惠券和自动化客户保留。无需编码。",
+    "freeTrial": "开始免费试用",
+    "para": "现在支持WhatsApp集成",
+    "viewDemo": "查看演示"
+  },
+  "howitworks": {
+    "descp1": "使用您的品牌颜色和徽标进行自定义。",
+    "descp2": "将其放在桌子、柜台或收据上。",
+    "descp3": "自动收集评论并建立客户数据库。",
+    "h1": "简单的三步流程",
+    "h3": "观察您的业务增长",
+    "heading1": "生成您的二维码",
+    "heading2": "在您的商店中显示它"
+  }
+}

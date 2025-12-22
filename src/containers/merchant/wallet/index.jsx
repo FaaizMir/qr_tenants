@@ -32,7 +32,7 @@ export default function MerchantWalletContainer({ embedded = false }) {
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Balance Card */}
-        <Card className="md:col-span-1 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+        <Card className="md:col-span-1 bg-linear-to-br from-primary/10 to-primary/5 border-primary/20">
           <CardHeader>
             <CardTitle>Current Balance</CardTitle>
             <CardDescription>Available credits for campaigns</CardDescription>
@@ -56,8 +56,9 @@ export default function MerchantWalletContainer({ embedded = false }) {
           {creditPackages.map((pkg, index) => (
             <Card
               key={index}
-              className={`relative flex flex-col ${pkg.popular ? "border-primary ring-1 ring-primary" : ""
-                }`}
+              className={`relative flex flex-col ${
+                pkg.popular ? "border-primary ring-1 ring-primary" : ""
+              }`}
             >
               {pkg.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
