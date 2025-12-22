@@ -1,5 +1,4 @@
 import axiosInstance from "../axios";
-import { setAuth } from "../auth-utils";
 
 const looksLikeEmail = (input) => /\S+@\S+\.\S+/.test(input);
 
@@ -31,9 +30,7 @@ export async function login(username, password) {
     throw new Error("Invalid login response");
   }
 
-  // persist token + user
-  setAuth(user, token);
-
+  // Do not persist token here — NextAuth will manage sessions.
   return { user, token, data };
 }
 

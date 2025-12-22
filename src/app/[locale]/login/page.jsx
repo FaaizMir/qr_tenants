@@ -3,7 +3,7 @@
 import { use, useMemo, useState } from "react";
 import { ShieldCheck, QrCode, MessageSquare, Sparkles } from "lucide-react";
 import { useRouter, Link } from "@/i18n/routing";
-import { login as authLogin } from "@/lib/services/auth";
+import { signIn, getSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -76,36 +76,44 @@ export default function LoginPage({ params }) {
   //     setLoading(false);
   //   }
   // };
-const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setLoading(true);
- 
+
     try {
-      const { user } = await authLogin(username, password);
- 
-      // Redirect based on role
-      const role = (user.role || "").toLowerCase();
-      if (role === "merchant") {
-        router.push(`/merchant/dashboard`);
-      } else if (role === "agent" || role === "admin") {
-        router.push(`/agent/dashboard`);
+      // Use NextAuth signIn with credentials
+      const result = await signIn("credentials", {
+        email: username, // Assuming username is email; adjust if needed
+        password,
+        redirect: false, // Prevent automatic redirect
+      });
+
+      if (result?.error) {
+        setError("Invalid credentials"); // Customize error message
+        setLoading(false);
+        return;
+      }
+
+      // On success, get session to retrieve user data
+      const session = await getSession();
+      const user = session?.user;
+      console.log("Logged in user:", user);
+      if (user?.role) {
+
+        const role = user.role.toLowerCase();
+        if (role === "admin") {
+          router.push("/agent/dashboard"); // Redirect admin to agent dashboard
+        } else if (role === "merchant") {
+          router.push("/merchant/dashboard");
+        } else {
+          router.push("/dashboard"); // Fallback
+        }
       } else {
-        router.push(`/dashboard`);
+        setError("Unable to determine user role");
       }
- 
-      router.refresh();
     } catch (err) {
-      const respData = err?.response?.data;
-      let message = err?.message || "Something went wrong. Please try again.";
- 
-      if (respData) {
-        if (typeof respData === "string") message = respData;
-        else if (respData.message) message = respData.message;
-        else message = JSON.stringify(respData);
-      }
- 
-      setError(message);
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -202,7 +210,7 @@ const handleSubmit = async (event) => {
               </Button>
             </form>
 
-           
+
           </div>
         </div>
       </div>

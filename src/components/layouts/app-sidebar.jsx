@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
+import { useSession } from "next-auth/react"; // Add import
 import { NavMain } from "@/components/layouts/nav-main";
 import { NavUser } from "@/components/layouts/nav-user";
 import {
@@ -36,20 +37,12 @@ export function AppSidebar({ role: roleProp = "agent", subscriptionType: subscri
   const isRTL = direction === "rtl";
   const tAgent = useTranslations("dashboard.agentSidebar");
   const tMerchant = useTranslations("dashboard.merchantSidebar");
-  const [role, setRole] = React.useState((roleProp || "agent").toLowerCase());
-  const [subscriptionType, setSubscriptionType] = React.useState(subscriptionProp || "temporary");
+  const { data: session } = useSession(); // Get session
+  const user = session?.user;
 
-  React.useEffect(() => {
-    try {
-      const { getCurrentUser, getSubscriptionType } = require("@/lib/auth-utils");
-      const user = getCurrentUser();
-      if (user && user.role) setRole((user.role || "").toLowerCase());
-      const sub = getSubscriptionType();
-      if (sub) setSubscriptionType(sub);
-    } catch (e) {
-      // If auth-utils isn't available (SSR) keep props
-    }
-  }, []);
+  // Use user from session for role and subscriptionType
+  const role = (user?.role || roleProp || "agent").toLowerCase();
+  const subscriptionType = user?.subscriptionType || subscriptionProp || "temporary";
 
   // Agent navigation
   const agentNav = [
