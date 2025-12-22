@@ -76,7 +76,7 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         name: data.name,
         email: data.email,
         password: data.password,
-        role: currentUser?.role || "merchant",
+        role: "merchant",
         address: data.address || "",
         business_name: data.businessName,
         business_type: data.businessType,
