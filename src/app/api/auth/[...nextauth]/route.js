@@ -30,28 +30,28 @@ export const authOptions = {
 
           console.log("API response:", data);
 
-          if (data?.access_token && data?.user) {
-            // Try to infer merchant subscription type (annual vs temporary)
-            const subscriptionType =
-              data.user.subscriptionType ||
-              data.user.subscription_type ||
-              data.user.merchantType ||
-              data.user.merchant_type ||
-              data.merchantType ||
-              data.merchant_type ||
-              data?.merchant?.merchant_type ||
-              data?.merchant?.merchantType ||
-              "temporary";
+            if (data?.access_token && data?.user) {
+              // Try to infer merchant subscription type (annual vs temporary)
+              const subscriptionType =
+                data?.merchant?.merchant_type ||
+                "temporary";
 
-            return {
-              id: data.user.id,
-              email: data.user.email,
-              name: data.user.name,
-              avatar: data.user.avatar,
-              access_token: data.access_token,
-              role: data.user.role?.toLowerCase?.() || data.user.role,
-              subscriptionType,
-            };
+              return {
+                id: data.user.id,
+                email: data.user.email,
+                name: data.user.name,
+                avatar: data.user.avatar,
+                access_token: data.access_token,
+                role: data.user.role?.toLowerCase?.() || data.user.role,
+                subscriptionType,
+                merchant_id: data.merchant?.id || null,
+              };
+            }
+            console.log("Invalid response: missing access_token or user");
+            return null;
+          } catch (error) {
+            console.error("Login failed:", error.response?.data || error.message);
+            return null;
           }
           console.log("Invalid response: missing access_token or user");
           return null;
@@ -70,6 +70,7 @@ export const authOptions = {
         token.accessToken =
           user.access_token ?? user.accessToken ?? token.accessToken;
         token.role = user.role ?? token.role;
+        token.merchantId = user.merchant_id ?? user.merchantId ?? token.merchantId;
         token.subscriptionType =
           user.subscriptionType ||
           user.subscription_type ||
@@ -87,6 +88,8 @@ export const authOptions = {
       if (token?.role) session.user.role = token.role;
       if (token?.subscriptionType)
         session.user.subscriptionType = token.subscriptionType;
+      if (token?.merchantId)
+    session.user.merchantId = token.merchantId;
       if (token?.accessToken) session.accessToken = token.accessToken;
       return session;
     },
