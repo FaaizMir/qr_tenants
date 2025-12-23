@@ -2,12 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
+import axiosInstance from "@/lib/axios";
 import { LoadingSpinner } from "@/helper/Loader";
 import AnnualWalletView from "./parts/annual-wallet-view";
 import TemporaryWalletView from "./parts/temporary-wallet-view";
 
-const WALLET_API = "/api/merchant/wallet";
-const WALLET_SUMMARY_API = "/api/merchant/wallet/summary";
 const VALIDATE_API = "/api/merchant/wallet/validate";
 
 const deriveType = (wallet, sessionType) => {
@@ -25,14 +24,18 @@ const deriveType = (wallet, sessionType) => {
 
 export default function MerchantWalletContainer({ embedded = false }) {
   const { data: session } = useSession();
+  const user = session?.user;
   const sessionType =
-    session?.user?.subscriptionType?.toString().toLowerCase() || "temporary";
+    user?.subscriptionType?.toString().toLowerCase() || "temporary";
 
   const [wallet, setWallet] = useState(null);
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [validating, setValidating] = useState(false);
   const [error, setError] = useState(null);
+
+  const merchantId =
+    session?.user?.merchantId || user?.merchant_id || user?.merchant?.id || null;
 
   const merchantType = useMemo(
     () => deriveType(wallet, sessionType),
@@ -41,21 +44,97 @@ export default function MerchantWalletContainer({ embedded = false }) {
 
   useEffect(() => {
     let mounted = true;
+
+    if (!merchantId) {
+      setError("Unable to determine merchant wallet. Please contact support.");
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [wRes, sRes] = await Promise.all([
-          fetch(WALLET_API),
-          fetch(WALLET_SUMMARY_API),
+        const [wRes, tRes] = await Promise.all([
+          axiosInstance.get(`/wallets/merchant/${merchantId}`),
+          axiosInstance.get(`/wallets/merchant/${merchantId}/transactions`, {
+            params: { page: 1, limit: 50 },
+          }),
         ]);
-        const wJson = await wRes.json().catch(() => ({}));
-        const sJson = await sRes.json().catch(() => ({}));
+
+        const rawWallet = wRes?.data?.data || wRes?.data || {};
+
+        // Normalize backend wallet response into the shape expected by views
+        const messageCredits =
+          Number(rawWallet.message_credits ?? rawWallet.marketing_credits) || 0;
+        const marketingCredits =
+          Number(rawWallet.marketing_credits ?? rawWallet.message_credits) || 0;
+        const utilityCredits = Number(rawWallet.utility_credits) || 0;
+        const totalPurchased =
+          Number(rawWallet.total_credits_purchased) ||
+          messageCredits + marketingCredits + utilityCredits;
+        const totalUsed = Number(rawWallet.total_credits_used) || 0;
+
+        const expiresAt =
+          rawWallet.subscription_expires_at || rawWallet.expires_at || null;
+
+        const rawTransactions = tRes?.data?.data || [];
+
+        const normalizedTransactions = (rawTransactions || []).map((tx) => {
+          let currency = rawWallet.currency || "USD";
+          try {
+            const meta =
+              typeof tx.metadata === "string"
+                ? JSON.parse(tx.metadata)
+                : tx.metadata || {};
+            currency =
+              meta?.package?.currency ||
+              meta?.currency ||
+              currency;
+          } catch {
+            // ignore parse errors, keep fallback
+          }
+
+          return {
+            id: tx.id,
+            date: tx.completed_at || tx.created_at,
+            description: tx.description,
+            amount: Number(tx.amount) || 0,
+            type: "debit", // purchases reduce merchant balance
+            status: tx.status,
+            currency,
+          };
+        });
+
+        const normalizedWallet = {
+          ...rawWallet,
+          // balance seen in UI
+          balance: totalPurchased - totalUsed,
+          // keep tiers for Annual view
+          tiers: ["MARKETING", "UTILITY"],
+          // attach normalized transactions for annual view table
+          transactions: normalizedTransactions,
+          // align expiry field naming for warnings / summary
+          expiresAt,
+          subscriptionType:
+            rawWallet.subscription_type || rawWallet.subscriptionType,
+        };
+
+        const normalizedSummary = {
+          usage: {
+            used: totalUsed,
+          },
+          batches: rawWallet.batches || [],
+          expiresAt,
+          currency: rawWallet.currency,
+        };
+
         if (!mounted) return;
-        setWallet(wJson?.data || wJson || {});
-        setSummary(sJson?.data || sJson || {});
+        setWallet(normalizedWallet);
+        setSummary(normalizedSummary);
         setError(null);
       } catch (err) {
         if (!mounted) return;
+        console.error("Failed to load merchant wallet:", err);
         setError("Unable to load wallet. Please retry.");
       } finally {
         if (mounted) setLoading(false);
@@ -66,7 +145,7 @@ export default function MerchantWalletContainer({ embedded = false }) {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [merchantId]);
 
   const handleValidateBalance = async () => {
     try {
