@@ -16,6 +16,7 @@ import {
   BarChart3,
   Database,
   Settings,
+  ShoppingCart,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
@@ -108,6 +109,11 @@ export function AppSidebar({
       title: tMerchant("wallet"),
       url: "/merchant/wallet",
       icon: Wallet,
+    },
+    {
+      title: tMerchant("purchase"),
+      url: "/merchant/purchase",
+      icon: ShoppingCart,
     },
     {
       title: tMerchant("campaigns"),
