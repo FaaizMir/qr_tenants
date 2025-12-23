@@ -9,20 +9,26 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-          email: { label: "Email", type: "text" },
-          username: { label: "Username", type: "text" },
-          password: { label: "Password", type: "password" },
-        },
-        async authorize(credentials) {
-          try {
-            const payload = credentials?.email
-              ? { email: credentials.email, password: credentials.password }
-              : { username: credentials.username, password: credentials.password };
+        email: { label: "Email", type: "text" },
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          const payload = credentials?.email
+            ? { email: credentials.email, password: credentials.password }
+            : {
+                username: credentials.username,
+                password: credentials.password,
+              };
 
-            const res = await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login", payload);
-            const data = res?.data;
+          const res = await axios.post(
+            process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login",
+            payload
+          );
+          const data = res?.data;
 
-            console.log("API response:", data);
+          console.log("API response:", data);
 
             if (data?.access_token && data?.user) {
               // Try to infer merchant subscription type (annual vs temporary)
@@ -47,7 +53,13 @@ export const authOptions = {
             console.error("Login failed:", error.response?.data || error.message);
             return null;
           }
-        },
+          console.log("Invalid response: missing access_token or user");
+          return null;
+        } catch (error) {
+          console.error("Login failed:", error.response?.data || error.message);
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {
@@ -55,7 +67,8 @@ export const authOptions = {
       if (user) {
         token.id = user.id ?? token.id;
         token.email = user.email ?? token.email;
-        token.accessToken = user.access_token ?? user.accessToken ?? token.accessToken;
+        token.accessToken =
+          user.access_token ?? user.accessToken ?? token.accessToken;
         token.role = user.role ?? token.role;
         token.merchantId = user.merchant_id ?? user.merchantId ?? token.merchantId;
         token.subscriptionType =
