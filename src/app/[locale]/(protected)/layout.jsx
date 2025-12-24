@@ -102,9 +102,9 @@ export default function ProtectedLayout({ children, params }) {
               <h1 className="text-xl font-bold text-gray-900">QR Scanner</h1>
             </div>
             <div className="flex items-center gap-4">
-              {user.role === "merchant" && (
+              {/* {user.role === "merchant" && (
                 <CreditDisplay credits={merchantCredits} />
-              )}
+              )} */}
               <LanguageSwitcher />
               <LogoutButton />
             </div>

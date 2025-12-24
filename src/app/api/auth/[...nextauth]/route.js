@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
-
+ 
 export const authOptions = {
   session: {
     strategy: "jwt",
@@ -33,7 +33,7 @@ export const authOptions = {
                 username: credentials.username,
                 password: credentials.password,
               };
-
+ 
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
             payload
@@ -112,6 +112,6 @@ export const authOptions = {
 
   secret: process.env.NEXTAUTH_SECRET,
 };
-
+ 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

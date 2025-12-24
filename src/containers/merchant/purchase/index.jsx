@@ -6,7 +6,9 @@ import axiosInstance from "@/lib/axios";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { LoadingSpinner } from "@/helper/Loader";
+import StripeCheckout from "@/components/stripe/stripeCheckout";
 import { toast } from "sonner";
 
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
@@ -24,6 +26,8 @@ export default function MerchantPurchase() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [purchasingId, setPurchasingId] = useState(null);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
 
   useEffect(() => {
     let mounted = true;
@@ -55,10 +59,7 @@ console.log("Fetching credit packages for merchant type:", merchantType);
   }, [merchantType]);
 
   const handlePurchase = async (pkg) => {
-    const merchant_id =
-      session?.user?.merchantId ;
-      // user?.merchant_id ||
-      // user?.merchant?.id;
+    const merchant_id = session?.user?.merchantId;
 
     console.log("Initiating purchase for package:", pkg, "with merchant_id:", merchant_id);
 
@@ -89,6 +90,8 @@ console.log("Fetching credit packages for merchant type:", merchantType);
       );
 
       toast.success("Package purchased successfully.");
+      setCheckoutOpen(false);
+      setSelectedPackage(null);
     } catch (err) {
       console.log(
         "Purchase error:",
@@ -106,6 +109,11 @@ console.log("Fetching credit packages for merchant type:", merchantType);
     } finally {
       setPurchasingId(null);
     }
+  };
+
+  const handleStartCheckout = (pkg) => {
+    setSelectedPackage(pkg);
+    setCheckoutOpen(true);
   };
 
   if (loading) {
@@ -211,7 +219,7 @@ console.log("Fetching credit packages for merchant type:", merchantType);
                     variant="default"
                     size="sm"
                     disabled={Boolean(purchasingId) && purchasingId === pkg.id}
-                    onClick={() => handlePurchase(pkg)}
+                    onClick={() => handleStartCheckout(pkg)}
                   >
                     {purchasingId === pkg.id ? "Processing..." : "Purchase"}
                   </Button>
@@ -221,6 +229,47 @@ console.log("Fetching credit packages for merchant type:", merchantType);
           })}
         </div>
       )}
+
+      <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Checkout with Stripe</DialogTitle>
+          </DialogHeader>
+
+          {selectedPackage ? (
+            <div className="grid gap-4 md:grid-cols-5">
+              <div className="md:col-span-2 space-y-2 rounded-lg border bg-muted/40 p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-lg font-semibold">{selectedPackage.name}</p>
+                  <Badge variant="outline" className="capitalize">
+                    {selectedPackage.merchant_type || merchantType}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {selectedPackage.description}
+                </p>
+                <div className="text-2xl font-bold">
+                  {selectedPackage.currency || "USD"}{" "}
+                  {Number(selectedPackage.price || 0).toLocaleString()}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {selectedPackage.credits} credits •{" "}
+                  {selectedPackage.credit_type || "general"}
+                </div>
+              </div>
+
+              <div className="md:col-span-3 space-y-4">
+                <StripeCheckout
+                  pkg={selectedPackage}
+                  onSuccess={() => handlePurchase(selectedPackage)}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="text-sm text-muted-foreground">No package selected.</div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
