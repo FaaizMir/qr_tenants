@@ -11,6 +11,8 @@ const VALIDATE_API = "/api/merchant/wallet/validate";
 
 const deriveType = (wallet, sessionType) => {
   const fromApi =
+    wallet?.subscriptionType ||
+    wallet?.subscription_type ||
     wallet?.merchantType ||
     wallet?.merchant_type ||
     wallet?.merchant?.merchant_type ||
@@ -62,6 +64,7 @@ export default function MerchantWalletContainer({ embedded = false }) {
         ]);
 
         const rawWallet = wRes?.data?.data || wRes?.data || {};
+        console.log("Raw Wallet Response:", rawWallet);
 
         // Normalize backend wallet response into the shape expected by views
         const messageCredits =
@@ -117,6 +120,18 @@ export default function MerchantWalletContainer({ embedded = false }) {
           expiresAt,
           subscriptionType:
             rawWallet.subscription_type || rawWallet.subscriptionType,
+          creditBreakdown: {
+            message: messageCredits,
+            marketing: marketingCredits,
+            utility: utilityCredits,
+            purchased: totalPurchased,
+            used: totalUsed,
+          },
+          status: {
+            isActive: rawWallet.is_active,
+            annualFeePaid: rawWallet.annual_fee_paid,
+            currency: rawWallet.currency || "USD",
+          },
         };
 
         const normalizedSummary = {

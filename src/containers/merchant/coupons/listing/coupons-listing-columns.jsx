@@ -5,57 +5,89 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export const couponsColumns = [
-    { accessorKey: "coupon_code", header: "Code" },
-    {
-        id: "batch",
-        header: "Batch",
-        accessorFn: (row) => row.batch?.batch_name || "-",
+  {
+    accessorKey: "batch_name",
+    header: "Batch Name",
+    cell: ({ row }) => (
+      <div className="flex flex-col">
+        <span className="font-medium text-primary">
+          {row.original.batch_name}
+        </span>
+      </div>
+    ),
+  },
+  {
+    accessorKey: "batch_type",
+    header: "Type",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.original.batch_type}</div>
+    ),
+  },
+  {
+    id: "usage",
+    header: "Usage",
+    cell: ({ row }) => {
+      const issued = row.original.issued_quantity ?? 0;
+      const total = row.original.total_quantity ?? 0;
+      const pct = total > 0 ? Math.round((issued / total) * 100) : 0;
+      return (
+        <div className="flex flex-col gap-1 w-[90px]">
+          <div className="flex justify-between items-center text-xs">
+            <span>{issued} issued</span>
+            <span className="text-muted-foreground">/ {total}</span>
+          </div>
+        </div>
+      );
     },
-    {
-        id: "merchant",
-        header: "Merchant",
-        accessorFn: (row) => row.merchant?.business_name || "-",
+  },
+  {
+    id: "validity",
+    header: "Validity",
+    cell: ({ row }) => {
+      const start = row.original.start_date;
+      const end = row.original.end_date;
+      if (!start && !end) return "-";
+      return (
+        <div className="flex flex-col text-xs space-y-0.5">
+          {start && <span>From: {new Date(start).toLocaleDateString()}</span>}
+          {end && (
+            <span>
+              To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {new Date(end).toLocaleDateString()}
+            </span>
+          )}
+        </div>
+      );
     },
-    {
-        accessorKey: "status",
-        header: "Status",
-        cell: ({ row }) => <StatusBadge status={row.original.status} />,
+  },
+  {
+    accessorKey: "is_active",
+    header: "Status",
+    cell: ({ row }) => {
+      const isActive = row.original.is_active;
+      return (
+        <span
+          className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${isActive
+              ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+              : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            }`}
+        >
+          {isActive ? "Active" : "Inactive"}
+        </span>
+      );
     },
-    {
-        accessorKey: "issued_at",
-        header: "Issued At",
-        cell: ({ row }) => {
-            const v = row.original.issued_at;
-            return v ? new Date(v).toLocaleString() : "-";
-        },
-    },
-    {
-        id: "actions",
-        header: "Actions",
-        cell: ({ row }) => (
-            <div className="flex gap-2">
-                <Link href={`/en/merchant/coupons/${row.original.id}`}>
-                    <Button variant="ghost" size="icon" title="View Batch">
-                        <Eye className="h-4 w-4" />
-                    </Button>
-                </Link>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    title="Copy QR hash"
-                    onClick={async () => {
-                        try {
-                            await navigator.clipboard.writeText(row.original.qr_hash || "");
-                            toast.success("QR hash copied to clipboard");
-                        } catch (err) {
-                            toast.error("Failed to copy");
-                        }
-                    }}
-                >
-                    <Copy className="h-4 w-4" />
-                </Button>
-            </div>
-        ),
-    },
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <div className="flex gap-2">
+        <Link href={`/en/merchant/coupons/${row.original.id}`}>
+          <Button variant="ghost" size="icon" title="View Batch Details">
+            <Eye className="h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
+    ),
+  },
 ];
-

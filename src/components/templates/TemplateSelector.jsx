@@ -1,7 +1,6 @@
-// TemplateSelector.jsx
 "use client";
 
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { annualTemplates, temporaryTemplates } from "./templates.config";
 import { TemplateCard } from "./TemplateCard";
@@ -20,26 +19,19 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
     [isAnnual]
   );
 
+  const [selectedId, setSelectedId] = useState(() => templates[0]?.id);
   const [content, setContent] = useState(defaultContent);
-  const [selectedId, setSelectedId] = useState(templates[0]?.id);
   const [editorOpen, setEditorOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
 
   useEffect(() => {
-    const firstId = templates[0]?.id;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSelectedId(firstId);
-  }, [templates]);
-
-  useEffect(() => {
-    const templateId = selectedId || templates[0]?.id;
-    if (!templateId) return;
+    if (!selectedId) return;
 
     onChange({
-      templateId,
+      templateId: selectedId,
       content,
     });
-  }, [selectedId, content, templates, onChange]);
+  }, [selectedId, content, onChange]);
 
   const selectedTemplate =
     templates.find((t) => t.id === selectedId) || templates[0];
@@ -65,6 +57,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
 
         <div className="flex gap-2">
           <Button
+            type="button"
             variant="outline"
             size="sm"
             onClick={() => setEditorOpen(true)}
@@ -73,6 +66,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
           </Button>
 
           <Button
+            type="button"
             variant="secondary"
             size="sm"
             onClick={() => setPreviewOpen(true)}
@@ -82,6 +76,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
         </div>
       </div>
 
+      {/* Templates Grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {templates.map((tpl) => (
           <TemplateCard
@@ -92,11 +87,12 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
             disabled={!isAnnual && tpl.id !== selectedId}
             onSelect={() => handleSelect(tpl.id)}
             onPreview={() => setPreviewOpen(true)}
-            ref={tpl.id === selectedId ? cardRef : null} 
+            ref={tpl.id === selectedId ? cardRef : null}
           />
         ))}
       </div>
 
+      {/* Modals */}
       {selectedTemplate && (
         <TemplateEditorModal
           open={editorOpen}

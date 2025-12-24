@@ -7,12 +7,12 @@ export const authOptions = {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 1 day
   },
- 
+
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
     maxAge: 24 * 60 * 60,
   },
- 
+
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -21,7 +21,7 @@ export const authOptions = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
- 
+
       async authorize(credentials) {
         try {
           const payload = credentials?.email
@@ -38,17 +38,17 @@ export const authOptions = {
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
             payload
           );
- 
+
           const data = res?.data;
           console.log("API response:", data);
- 
+
           if (!data?.access_token || !data?.user) {
             console.error("Invalid login response");
             return null;
           }
- 
+
           const subscriptionType = data?.merchant?.merchant_type || "temporary";
- 
+
           return {
             id: data.user.id,
             email: data.user.email,
@@ -69,7 +69,7 @@ export const authOptions = {
       },
     }),
   ],
- 
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -90,10 +90,10 @@ export const authOptions = {
       }
       return token;
     },
- 
+
     async session({ session, token }) {
       session.user = session.user || {};
- 
+
       if (token?.id) session.user.id = token.id;
       if (token?.email) session.user.email = token.email;
       if (token?.role) session.user.role = token.role;
@@ -101,15 +101,15 @@ export const authOptions = {
         session.user.subscriptionType = token.subscriptionType;
       if (token?.merchantId) session.user.merchantId = token.merchantId;
       if (token?.accessToken) session.accessToken = token.accessToken;
- 
+
       return session;
     },
   },
- 
+
   pages: {
     signIn: "/login",
   },
- 
+
   secret: process.env.NEXTAUTH_SECRET,
 };
  

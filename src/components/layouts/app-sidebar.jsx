@@ -100,11 +100,11 @@ export function AppSidebar({
       url: "/merchant/coupons",
       icon: Ticket,
     },
-    {
+    /*{
       title: tMerchant("serialCodes"),
       url: "/merchant/serial-codes",
       icon: Hash,
-    },
+    },*/
     {
       title: tMerchant("wallet"),
       url: "/merchant/wallet",
@@ -133,20 +133,15 @@ export function AppSidebar({
             url: "/merchant/customer-data",
             icon: Database,
           },
-          {
+          /*{
             title: "Analytics",
             url: "/merchant/analytics",
             icon: BarChart3,
-          },
+          },*/
           {
             title: "Data Export",
             url: "/merchant/analytics",
             icon: FileText,
-          },
-          {
-            title: "Templates",
-            url: "/merchant/campaigns",
-            icon: Settings,
           },
         ]
       : []),

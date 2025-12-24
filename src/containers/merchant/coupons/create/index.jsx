@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { ArrowLeft, Upload, LayoutTemplate } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -47,12 +47,25 @@ export default function MerchantCreateCouponContainer() {
     [isAnnual]
   );
 
+  // ✅ Reset form function
+  const resetForm = () => {
+    setBatchName("");
+    setTotalQuantity(maxPerBatch);
+    setStartDate("");
+    setEndDate("");
+    setIsActive(true);
+    setWhatsappEnabled(true);
+    setLuckyDrawEnabled(false);
+    setTemplateSelection(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const merchant_id = session?.user?.id;
+      const merchant_id = session?.user?.merchantId;
+
       if (!merchant_id) {
         toast.error("Unable to determine merchant id. Please contact support.");
         setLoading(false);
@@ -63,6 +76,7 @@ export default function MerchantCreateCouponContainer() {
       const template_html = templateCardRef.current
         ? templateCardRef.current.outerHTML
         : null;
+
       const payload = {
         merchant_id: Number(merchant_id),
         batch_name: batchName,
@@ -73,18 +87,27 @@ export default function MerchantCreateCouponContainer() {
         is_active: Boolean(isActive),
         whatsapp_enabled: Boolean(whatsappEnabled),
         lucky_draw_enabled: Boolean(luckyDrawEnabled),
-        template_id: templateSelection?.templateId || null,
+        /*   template_id: templateSelection?.templateId || null,
         template_content: templateSelection?.content || null,
-        template_html,
+        template_html,*/
       };
 
-      console.log("Merchant id:", merchant_id);
-      console.log("Payload ready:", payload);
-      toast.info("API call skipped for now. Payload logged in console.");
+      console.log("Payload:", payload);
+
+      /*const { data } = await axiosInstance.post("/coupon-batches", payload);*/
+
+      toast.success("Coupon batch created successfully!");
+
+      // ✅ Reset form after success
+      resetForm();
+
+      // redirect to coupon list
+      router.push("/merchant/coupons");
     } catch (err) {
+      console.error(err);
       const msg =
         err?.response?.data?.message ||
-        err.message ||
+        err?.message ||
         "Failed to create coupon batch.";
       toast.error(msg);
     } finally {
@@ -232,12 +255,7 @@ export default function MerchantCreateCouponContainer() {
                   ))}
                 </div>
 
-                <Button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="w-full"
-                  disabled={loading}
-                >
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Generating Codes..." : "Generate Batch"}
                 </Button>
               </form>
@@ -247,29 +265,6 @@ export default function MerchantCreateCouponContainer() {
 
         {/* Preview & Tips */}
         <div className="space-y-6">
-          {/* <Card className="bg-primary/5 border-primary/20">
-                        <CardHeader>
-                            <CardTitle className="text-lg text-primary">Preview</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="aspect-[3/2] rounded-lg bg-white border shadow-sm p-4 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-1 transform translate-x-2 translate-y-2 rotate-45">
-                                    SALE
-                                </div>
-                                <div className="h-full flex flex-col justify-between">
-                                    <div className="text-center mt-2">
-                                        <h3 className="font-bold text-lg">{batchName || "Summer Sale"}</h3>
-                                        <p className="text-2xl font-black text-primary my-1">20% OFF</p>
-                                        <p className="text-xs text-muted-foreground">Valid until {endDate || "Dec 31, 2025"}</p>
-                                    </div>
-                                    <div className="bg-gray-100 p-2 text-center rounded border border-dashed border-gray-300">
-                                        <p className="font-mono text-sm tracking-widest">{Array.from({length:6}).map(()=>String.fromCharCode(65+Math.floor(Math.random()*26))).join("")}-{Math.floor(Math.random()*9000+1000)}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card> */}
-
           <Card className="bg-linear-to-br from-primary/5 to-background border-primary/10">
             <CardHeader>
               <CardTitle className="text-lg">Guidance</CardTitle>

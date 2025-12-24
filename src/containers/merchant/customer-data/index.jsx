@@ -19,17 +19,10 @@ import { customersColumns } from "./customers-columns";
 
 export default function MerchantCustomerDataContainer() {
   const { data: session, status } = useSession();
-  const [subscription, setSubscription] = useState("temporary");
-  const [loading, setLoading] = useState(true);
 
   // subscription check from session
-  useEffect(() => {
-    if (status === "loading") return;
-    const type = session?.user?.subscriptionType || "temporary";
-    setSubscription(type);
-    setLoading(false);
-  }, [session, status]);
-
+  const loading = status === "loading";
+  const subscription = session?.user?.subscriptionType ?? "temporary";
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");

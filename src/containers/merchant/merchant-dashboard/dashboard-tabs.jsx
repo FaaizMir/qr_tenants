@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Ticket, MessageSquare } from "lucide-react";
 import { KpiCard } from "@/components/common/kpi-card";
+import { CreditsOverview } from "@/containers/merchant/merchant-dashboard/credits-overview";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +14,7 @@ export const getDashboardTabs = ({
   kpiData,
   recentRedemptions,
   subscriptionType = "temporary",
+  creditStats,
 }) => {
   const isAnnual = subscriptionType === "annual";
 
@@ -23,11 +25,8 @@ export const getDashboardTabs = ({
       content: (
         <div className="space-y-6">
           {/* Stats Grid */}
-          <div className="grid gap-4 md:grid-cols-4">
-            {kpiData.map((kpi, index) => (
-              <KpiCard key={index} {...kpi} />
-            ))}
-          </div>
+          {/* Stats Grid */}
+          <CreditsOverview data={creditStats} />
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Placeholder for future: redemptions/automation */}
@@ -36,12 +35,13 @@ export const getDashboardTabs = ({
           {/* Integrated Analytics (annual only) */}
           {isAnnual ? (
             <>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold italic text-gray-700">
-                  Analytics Overview
-                </h2>
+              <div className="flex flex-col space-y-1.5 mb-6">
+                <h2 className="text-2xl font-bold tracking-tight">Analytics Overview</h2>
+                <p className="text-muted-foreground">
+                  Track your coupon performance, redemptions, and customer engagement.
+                </p>
               </div>
-              <MerchantAnalyticsContainer embedded={true} />
+              <MerchantAnalyticsContainer embedded={true} creditsUsed={creditStats?.creditsUsed} />
             </>
           ) : (
             <Card className="border-dashed">
@@ -84,12 +84,12 @@ export const getDashboardTabs = ({
     },
     ...(isAnnual
       ? [
-          {
-            value: "analytics",
-            label: "Analytics",
-            content: <MerchantAnalyticsContainer embedded={false} />,
-          },
-        ]
+        {
+          value: "analytics",
+          label: "Analytics",
+          content: <MerchantAnalyticsContainer embedded={false} />,
+        },
+      ]
       : []),
     {
       value: "settings",
