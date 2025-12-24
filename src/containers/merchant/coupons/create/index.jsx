@@ -94,7 +94,7 @@ export default function MerchantCreateCouponContainer() {
 
       console.log("Payload:", payload);
 
-      /*const { data } = await axiosInstance.post("/coupon-batches", payload);*/
+      const { data } = await axiosInstance.post("/coupon-batches", payload);
 
       toast.success("Coupon batch created successfully!");
 
