@@ -48,99 +48,50 @@ export default function MerchantCouponDetailContainer() {
   };
 
   const handleExportPdf = async () => {
+    if (!id) {
+      toast.error("Batch ID not available");
+      return;
+    }
+
+    setLoading(true);
     try {
-      if (!batch) {
-        toast.error("Batch info not loaded yet");
-        return;
-      }
-      toast.info("Fetching all coupons for PDF export...");
+      toast.info("Fetching PDF...");
 
-      // Fetch ALL coupons for this batch
-      const resp = await axiosInstance.get(`/coupons`, {
-        params: { batchId: id, page: 1, pageSize: 10000 },
-      });
+      const resp = await axiosInstance.get(`/coupon-batches/export/pdf/${id}`);
 
-      const allCoupons = resp?.data?.data?.coupons || resp?.data?.coupons || [];
-
-      if (!allCoupons || allCoupons.length === 0) {
-        toast.error("No data to export");
+      const base64 = resp?.data?.data?.base64;
+      console.log("Base64: ", base64);
+      if (!base64) {
+        toast.error("No PDF data received");
+        setLoading(false);
         return;
       }
 
-      const doc = new jsPDF();
+      // Convert base64 to blob
+      const byteCharacters = atob(base64);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
 
-      // --- Title ---
-      doc.setFontSize(18);
-      doc.text("Batch Details Report", 14, 20);
+      console.log("byteCharacters: ", byteCharacters);
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: "application/pdf" });
 
-      // --- Batch Info Section ---
-      doc.setFontSize(11);
-      doc.setTextColor(100);
+      console.log("blob: ", blob);
+      // Trigger download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `coupon_batch_${id}.pdf`;
+      link.click();
+      URL.revokeObjectURL(link.href);
 
-      // Display batch info in a simple list or just text lines
-      let yPos = 30;
-      const lineHeight = 7;
-
-      doc.text(`Batch Name: ${batch.batch_name || "-"}`, 14, yPos);
-      yPos += lineHeight;
-      doc.text(`Batch ID: ${batch.id || "-"}`, 14, yPos);
-      yPos += lineHeight;
-      doc.text(`Type: ${batch.batch_type || "-"}`, 14, yPos);
-      yPos += lineHeight;
-      doc.text(`Status: ${batch.is_active ? "Active" : "Inactive"}`, 14, yPos);
-      yPos += lineHeight;
-      doc.text(
-        `Validity: ${batch.start_date || "-"} to ${batch.end_date || "-"}`,
-        14,
-        yPos
-      );
-      yPos += lineHeight;
-      doc.text(
-        `Utilization: ${batch.issued_quantity} / ${batch.total_quantity}`,
-        14,
-        yPos
-      );
-
-      yPos += 10; // Extra spacing before table
-
-      // --- Coupons Table ---
-      const tableColumn = [
-        "Code",
-        "Status",
-        "Issued At",
-        "Redeemed At",
-      ];
-      const tableRows = [];
-
-      allCoupons.forEach((c) => {
-       
-
-        const rowData = [
-          c.coupon_code || "-",
-          c.status || "-",
-          c.issued_at ? new Date(c.issued_at).toLocaleString() : "-",
-          c.redeemed_at ? new Date(c.redeemed_at).toLocaleString() : "-",
-        ];
-        tableRows.push(rowData);
-      });
-
-      autoTable(doc, {
-        startY: yPos,
-        head: [tableColumn],
-        body: tableRows,
-        theme: "grid",
-        styles: { fontSize: 9 },
-        headStyles: { fillColor: [22, 163, 74] }, // Greenish header to match active badge or primary brand color
-      });
-
-      const sanitizedBatchName = (batch.batch_name || "batch")
-        .replace(/[^a-z0-9]/gi, "_")
-        .toLowerCase();
-      doc.save(`${sanitizedBatchName}_${id}_report.pdf`);
-      toast.success("PDF Export complete");
-    } catch (e) {
-      console.error(e);
-      toast.error("Failed to export PDF");
+      toast.success("PDF downloaded successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to download PDF");
+    } finally {
+      setLoading(false);
     }
   };
 
