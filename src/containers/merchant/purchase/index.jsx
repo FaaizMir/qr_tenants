@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { LoadingSpinner } from "@/helper/Loader";
 import StripeCheckout from "@/components/stripe/stripeCheckout";
 import { toast } from "sonner";
+import { ArrowRight } from "lucide-react";
 
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
@@ -31,7 +32,7 @@ export default function MerchantPurchase() {
 
   useEffect(() => {
     let mounted = true;
-console.log("Fetching credit packages for merchant type:", merchantType);
+    console.log("Fetching credit packages for merchant type:", merchantType);
     const fetchPackages = async () => {
       try {
         setLoading(true);
@@ -75,7 +76,7 @@ console.log("Fetching credit packages for merchant type:", merchantType);
         credits: Number(pkg.credits) || 0,
         credit_type: pkg.credit_type || "general",
         amount: Number(pkg.price) || 0,
-        admin_id:1,
+        admin_id: 1,
         description: `${pkg.name} purchase`,
         metadata: {
           package_id: pkg.id,
@@ -146,85 +147,105 @@ console.log("Fetching credit packages for merchant type:", merchantType);
           No credit packages found for your merchant type.
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {packages.map((pkg, idx) => {
             const isPopular = idx === 0;
             const price = Number(pkg.price || 0);
             const currency = pkg.currency || "USD";
+
+            // Design configuration cycling based on index
+            const styles = [
+              { gradient: "from-blue-600 to-indigo-600", icon: "🚀", shadow: "shadow-indigo-500/20" },
+              { gradient: "from-emerald-500 to-teal-500", icon: "💎", shadow: "shadow-emerald-500/20" },
+              { gradient: "from-orange-500 to-amber-500", icon: "⚡", shadow: "shadow-orange-500/20" },
+              { gradient: "from-rose-500 to-pink-600", icon: "🛡️", shadow: "shadow-rose-500/20" },
+              { gradient: "from-violet-600 to-purple-600", icon: "🔮", shadow: "shadow-purple-500/20" },
+            ];
+            const style = styles[idx % styles.length];
+
             return (
-              <Card
+              <div
                 key={pkg.id}
-                className="relative flex h-full flex-col overflow-hidden border border-border/70 bg-card/60 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+                className="group relative flex flex-col bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-primary/70 via-primary to-primary/70" />
-                <CardHeader className="space-y-2 pb-0 pt-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1.5">
-                      <CardTitle className="text-lg">{pkg.name}</CardTitle>
-                      <CardDescription className="line-clamp-2 text-sm">
-                        {pkg.description}
-                      </CardDescription>
+                {/* Image/Gradient Area */}
+                <div className={`h-48 relative bg-gradient-to-br ${style.gradient} p-6 flex flex-col justify-between`}>
+                  <div className="flex justify-between items-start w-full">
+                    <div className="flex gap-2">
+                      <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
+                        {pkg.credit_type || "Credits"}
+                      </span>
+                      {isPopular && (
+                        <span className="bg-amber-400 text-amber-900 border border-amber-500/20 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                          Recommended
+                        </span>
+                      )}
                     </div>
-                    <Badge variant="secondary" className="capitalize px-2.5 py-1 text-xs">
-                      {pkg.merchant_type || merchantType}
-                    </Badge>
+                    <div className="h-10 w-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-xl shadow-inner text-white transition-transform group-hover:scale-110">
+                      {style.icon}
+                    </div>
                   </div>
-                  {isPopular && (
-                    <Badge variant="outline" className="w-fit text-xs bg-primary/10 text-primary">
-                      Recommended
-                    </Badge>
-                  )}
-                </CardHeader>
+                  <div className="relative z-10">
+                    <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">
+                      {pkg.credits} Total Credits
+                    </p>
+                    <h3 className="text-white text-2xl font-bold leading-tight truncate">
+                      {pkg.name}
+                    </h3>
+                  </div>
 
-                <CardContent className="flex flex-1 flex-col gap-4 px-5 pb-5 pt-3">
-                  <div className="flex items-end justify-between gap-3">
-                    <div>
-                      <div className="text-2xl font-semibold leading-tight">
+                  {/* Decorative shine */}
+                  <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all duration-500"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-bold text-slate-900">
                         {currency} {price.toLocaleString()}
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        {pkg.price_per_credit
-                          ? `${currency} ${pkg.price_per_credit} per credit`
-                          : "Flexible pricing"}
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
-                      {pkg.credit_type || "general"} credits
+                      </span>
+                      <span className="text-xs font-medium text-slate-500">
+                        {currency} {pkg.price_per_credit || "0.00"} / credit
+                      </span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="rounded-lg border bg-muted/40 p-3">
-                      <p className="text-muted-foreground">Credits</p>
-                      <p className="text-lg font-semibold">{pkg.credits}</p>
+                  {/* Details Grid */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Credits</p>
+                      <p className="text-lg font-bold text-slate-700 leading-none">{pkg.credits}</p>
                     </div>
-                    <div className="rounded-lg border bg-muted/40 p-3">
-                      <p className="text-muted-foreground">Bonus</p>
-                      <p className="text-lg font-semibold">{pkg.bonus_credits || 0}</p>
+                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Bonus</p>
+                      <p className="text-lg font-bold text-slate-700 leading-none">{pkg.bonus_credits || 0}</p>
                     </div>
-                    <div className="rounded-lg border bg-muted/40 p-3">
-                      <p className="text-muted-foreground">Type</p>
-                      <p className="text-sm font-semibold capitalize">
-                        {pkg.credit_type || "general"}
-                      </p>
+                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Type</p>
+                      <p className="text-sm font-bold text-slate-700 leading-none capitalize truncate">{pkg.credit_type || "General"}</p>
                     </div>
-                    <div className="rounded-lg border bg-muted/40 p-3">
-                      <p className="text-muted-foreground">Sort Order</p>
-                      <p className="text-sm font-semibold">{pkg.sort_order ?? "-"}</p>
+                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Sort Order</p>
+                      <p className="text-sm font-bold text-slate-700 leading-none">{pkg.sort_order ?? "-"}</p>
                     </div>
                   </div>
+
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
+                    {pkg.description || "Unlock more power for your campaigns with this credit package."}
+                  </p>
 
                   <Button
-                    className="mt-auto w-full"
-                    variant="default"
-                    size="sm"
-                    disabled={Boolean(purchasingId) && purchasingId === pkg.id}
+                    className={`w-full py-6 rounded-xl text-base font-semibold shadow-none transition-all duration-300 group-hover:shadow-lg ${purchasingId === pkg.id ? "opacity-75 cursor-wait" : ""
+                      }`}
                     onClick={() => handleStartCheckout(pkg)}
+                    disabled={Boolean(purchasingId) && purchasingId === pkg.id}
                   >
-                    {purchasingId === pkg.id ? "Processing..." : "Purchase"}
+                    {purchasingId === pkg.id ? "Processing..." : "Purchase Package"}
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             );
           })}
         </div>
