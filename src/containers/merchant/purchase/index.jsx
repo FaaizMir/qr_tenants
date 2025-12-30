@@ -3,10 +3,21 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { LoadingSpinner } from "@/helper/Loader";
 import StripeCheckout from "@/components/stripe/stripeCheckout";
 import { toast } from "sonner";
@@ -20,7 +31,9 @@ export default function MerchantPurchase() {
 
   const merchantType = useMemo(() => {
     const rawType = user?.subscriptionType;
-    return rawType?.toString?.().toLowerCase() === "annual" ? "annual" : "temporary";
+    return rawType?.toString?.().toLowerCase() === "annual"
+      ? "annual"
+      : "temporary";
   }, [user]);
 
   const [packages, setPackages] = useState([]);
@@ -62,7 +75,12 @@ export default function MerchantPurchase() {
   const handlePurchase = async (pkg) => {
     const merchant_id = session?.user?.merchantId;
 
-    console.log("Initiating purchase for package:", pkg, "with merchant_id:", merchant_id);
+    console.log(
+      "Initiating purchase for package:",
+      pkg,
+      "with merchant_id:",
+      merchant_id
+    );
 
     if (!merchant_id) {
       toast.error("Unable to determine merchant id. Please contact support.");
@@ -155,11 +173,31 @@ export default function MerchantPurchase() {
 
             // Design configuration cycling based on index
             const styles = [
-              { gradient: "from-blue-600 to-indigo-600", icon: "🚀", shadow: "shadow-indigo-500/20" },
-              { gradient: "from-emerald-500 to-teal-500", icon: "💎", shadow: "shadow-emerald-500/20" },
-              { gradient: "from-orange-500 to-amber-500", icon: "⚡", shadow: "shadow-orange-500/20" },
-              { gradient: "from-rose-500 to-pink-600", icon: "🛡️", shadow: "shadow-rose-500/20" },
-              { gradient: "from-violet-600 to-purple-600", icon: "🔮", shadow: "shadow-purple-500/20" },
+              {
+                gradient: "from-blue-600 to-indigo-600",
+                icon: "🚀",
+                shadow: "shadow-indigo-500/20",
+              },
+              {
+                gradient: "from-emerald-500 to-teal-500",
+                icon: "💎",
+                shadow: "shadow-emerald-500/20",
+              },
+              {
+                gradient: "from-orange-500 to-amber-500",
+                icon: "⚡",
+                shadow: "shadow-orange-500/20",
+              },
+              {
+                gradient: "from-rose-500 to-pink-600",
+                icon: "🛡️",
+                shadow: "shadow-rose-500/20",
+              },
+              {
+                gradient: "from-violet-600 to-purple-600",
+                icon: "🔮",
+                shadow: "shadow-purple-500/20",
+              },
             ];
             const style = styles[idx % styles.length];
 
@@ -169,7 +207,9 @@ export default function MerchantPurchase() {
                 className="group relative flex flex-col bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 {/* Image/Gradient Area */}
-                <div className={`h-48 relative bg-gradient-to-br ${style.gradient} p-6 flex flex-col justify-between`}>
+                <div
+                  className={`h-48 relative bg-linear-to-br ${style.gradient} p-6 flex flex-col justify-between`}
+                >
                   <div className="flex justify-between items-start w-full">
                     <div className="flex gap-2">
                       <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
@@ -214,34 +254,54 @@ export default function MerchantPurchase() {
                   {/* Details Grid */}
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Credits</p>
-                      <p className="text-lg font-bold text-slate-700 leading-none">{pkg.credits}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                        Credits
+                      </p>
+                      <p className="text-lg font-bold text-slate-700 leading-none">
+                        {pkg.credits}
+                      </p>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Bonus</p>
-                      <p className="text-lg font-bold text-slate-700 leading-none">{pkg.bonus_credits || 0}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                        Bonus
+                      </p>
+                      <p className="text-lg font-bold text-slate-700 leading-none">
+                        {pkg.bonus_credits || 0}
+                      </p>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Type</p>
-                      <p className="text-sm font-bold text-slate-700 leading-none capitalize truncate">{pkg.credit_type || "General"}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                        Type
+                      </p>
+                      <p className="text-sm font-bold text-slate-700 leading-none capitalize truncate">
+                        {pkg.credit_type || "General"}
+                      </p>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Sort Order</p>
-                      <p className="text-sm font-bold text-slate-700 leading-none">{pkg.sort_order ?? "-"}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                        Sort Order
+                      </p>
+                      <p className="text-sm font-bold text-slate-700 leading-none">
+                        {pkg.sort_order ?? "-"}
+                      </p>
                     </div>
                   </div>
 
                   <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-                    {pkg.description || "Unlock more power for your campaigns with this credit package."}
+                    {pkg.description ||
+                      "Unlock more power for your campaigns with this credit package."}
                   </p>
 
                   <Button
-                    className={`w-full py-6 rounded-xl text-base font-semibold shadow-none transition-all duration-300 group-hover:shadow-lg ${purchasingId === pkg.id ? "opacity-75 cursor-wait" : ""
-                      }`}
+                    className={`w-full py-6 rounded-xl text-base font-semibold shadow-none transition-all duration-300 group-hover:shadow-lg ${
+                      purchasingId === pkg.id ? "opacity-75 cursor-wait" : ""
+                    }`}
                     onClick={() => handleStartCheckout(pkg)}
                     disabled={Boolean(purchasingId) && purchasingId === pkg.id}
                   >
-                    {purchasingId === pkg.id ? "Processing..." : "Purchase Package"}
+                    {purchasingId === pkg.id
+                      ? "Processing..."
+                      : "Purchase Package"}
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
@@ -261,7 +321,9 @@ export default function MerchantPurchase() {
             <div className="grid gap-4 md:grid-cols-5">
               <div className="md:col-span-2 space-y-2 rounded-lg border bg-muted/40 p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="text-lg font-semibold">{selectedPackage.name}</p>
+                  <p className="text-lg font-semibold">
+                    {selectedPackage.name}
+                  </p>
                   <Badge variant="outline" className="capitalize">
                     {selectedPackage.merchant_type || merchantType}
                   </Badge>
@@ -287,7 +349,9 @@ export default function MerchantPurchase() {
               </div>
             </div>
           ) : (
-            <div className="text-sm text-muted-foreground">No package selected.</div>
+            <div className="text-sm text-muted-foreground">
+              No package selected.
+            </div>
           )}
         </DialogContent>
       </Dialog>
