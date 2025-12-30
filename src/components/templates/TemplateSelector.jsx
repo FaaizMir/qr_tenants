@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TemplateCard } from "./TemplateCard";
 import { TemplateEditorModal } from "./TemplateEditorModal";
 import { TemplatePreviewModal } from "./TemplatePreviewModal";
+import { TemplateSafelist } from "./TemplateSafelist";
 import axiosInstance from "@/lib/axios";
 
 const defaultContent = {
