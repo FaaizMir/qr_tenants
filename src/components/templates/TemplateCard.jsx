@@ -2,73 +2,88 @@
 
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
-const variantClasses = {
-  sunrise:
-    "bg-gradient-to-br from-amber-100 via-white to-orange-50 border-amber-200 text-amber-900",
-  midnight:
-    "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-slate-700 text-white",
-  mint: "bg-gradient-to-br from-emerald-50 via-white to-emerald-100 border-emerald-200 text-emerald-900",
-  amber:
-    "bg-gradient-to-br from-yellow-50 via-white to-amber-100 border-amber-200 text-amber-900",
-  slate:
-    "bg-gradient-to-br from-slate-50 via-white to-slate-100 border-slate-200 text-slate-900",
-};
+function injectContent(html, content) {
+  // Strip hardcoded "Selected" badges if they exist in the HTML
+  // Matches <div/span/p ...> ... Selected ... </div> without destroying the whole layout if used carefully
+  // This is a heuristic to fix the "double badge" issue where backend HTML already has it.
+  const cleanedHtml = html.replace(
+    /<(div|span|p)[^>]*class="[^"]*badge[^"]*"[^>]*>\s*Selected\s*<\/\1>/gi,
+    ""
+  ).replace(
+    // Fallback: remove any small element strictly containing just "Selected"
+    /<(div|span|p)[^>]*>\s*Selected\s*<\/\1>/gi,
+    ""
+  );
+
+  return cleanedHtml
+    .replace(/{{header}}/g, content.header || "Header")
+    .replace(/{{title}}/g, content.title || "Title")
+    .replace(/{{description}}/g, content.description || "Description");
+}
 
 export const TemplateCard = forwardRef(
-  ({ template, content, selected, disabled, onSelect, onPreview }, ref) => {
-    const body = {
-      header: content?.header || template?.header || "Header",
-      title: content?.title || template?.title || "Title",
-      description:
-        content?.description || template?.description || "Description",
-    };
+  (
+    {
+      template,
+      content,
+      selected,
+      disabled,
+      readOnly,
+      onSelect,
+      onPreview,
+      className,
+    },
+    ref
+  ) => {
+    const finalHtml = injectContent(template.html, content);
 
     return (
-      <button
+      <div
         ref={ref}
-        type="button"
         onClick={() => {
-          if (!disabled) {
+          if (!disabled && !readOnly) {
             onSelect();
             onPreview();
           }
         }}
         className={cn(
-          "group relative w-full overflow-hidden rounded-xl border p-4 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-primary",
-          variantClasses[template.styleVariant],
+          "group relative w-full overflow-hidden rounded-xl border bg-background transition-all cursor-pointer",
+          selected ? "border-primary ring-1 ring-primary" : "border-border",
           disabled && "cursor-not-allowed opacity-60",
-          selected && "ring-2 ring-offset-2 ring-primary"
+          readOnly && "cursor-default",
+          !disabled && !readOnly && "hover:shadow-lg",
+          className
         )}
       >
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] opacity-70">
-          {template.name}
-        </div>
+        {/* HTML Content */}
+        <div
+          className="h-full w-full"
+          dangerouslySetInnerHTML={{ __html: finalHtml }}
+        />
 
-        <div className="mt-2 text-sm font-medium opacity-80">{body.header}</div>
-
-        <div className="mt-1 text-2xl font-bold leading-tight">
-          {body.title}
-        </div>
-
-        <p className="mt-2 text-sm opacity-80 line-clamp-3">
-          {body.description}
-        </p>
-
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/0 transition group-hover:from-black/5 group-hover:to-black/20" />
-
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
-          <div className="rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white shadow-lg">
-            Click to Preview
-          </div>
-        </div>
-
+        {/* Selected Badge */}
         {selected && (
-          <div className="absolute top-3 right-3 rounded-full bg-primary text-primary-foreground px-3 py-1 text-[11px] font-semibold shadow">
-            Selected
+          <div className="absolute right-3 top-3 z-10">
+            <Badge variant="default" className="bg-blue-600 hover:bg-blue-700">
+              Selected
+            </Badge>
           </div>
         )}
-      </button>
+
+        {/* Hover Overlay */}
+        {!disabled && !readOnly && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-lg  cursor-pointer border-primary px-4 py-2 text-xs font-medium text-white transition  hover:border-primary"
+            >
+              Click to Preview
+            </button>
+          </div>
+        )}
+      </div>
     );
   }
 );
