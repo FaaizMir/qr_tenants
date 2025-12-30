@@ -72,11 +72,6 @@ export default function MerchantCreateCouponContainer() {
         return;
       }
 
-      // Capture HTML from selected template card
-      const template_html = templateCardRef.current
-        ? templateCardRef.current.outerHTML
-        : null;
-
       const payload = {
         merchant_id: Number(merchant_id),
         batch_name: batchName,
@@ -87,9 +82,10 @@ export default function MerchantCreateCouponContainer() {
         is_active: Boolean(isActive),
         whatsapp_enabled: Boolean(whatsappEnabled),
         lucky_draw_enabled: Boolean(luckyDrawEnabled),
-        /*   template_id: templateSelection?.templateId || null,
-        template_content: templateSelection?.content || null,
-        template_html,*/
+        template_id: templateSelection?.templateId || null,
+        header: templateSelection?.content?.header || "",
+        title: templateSelection?.content?.title || "",
+        description: templateSelection?.content?.description || "",
       };
 
       console.log("Payload:", payload);

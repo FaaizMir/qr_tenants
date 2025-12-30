@@ -20,21 +20,17 @@ export function TemplatePreviewModal({
       <DialogContent className="max-w-xl">
         <DialogHeader>
           <DialogTitle>Template Preview</DialogTitle>
-          <DialogDescription>
-            Read-only preview with current content.
-          </DialogDescription>
+          <DialogDescription>Read-only preview</DialogDescription>
         </DialogHeader>
 
-        <div className="pt-2">
-          <TemplateCard
-            template={template}
-            content={content}
-            selected
-            onSelect={() => {}}
-            onPreview={() => {}}
-            disabled
-          />
-        </div>
+        <TemplateCard
+          template={template}
+          content={content}
+          selected={false}
+          readOnly={true}
+          onSelect={() => {}}
+          onPreview={() => {}}
+        />
       </DialogContent>
     </Dialog>
   );

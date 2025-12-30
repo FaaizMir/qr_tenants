@@ -52,7 +52,11 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange }) {
         </div>
 
         <DialogFooter>
-          <Button variant="secondary" onClick={() => onOpenChange(false)}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => onOpenChange(false)}
+          >
             Done
           </Button>
         </DialogFooter>
