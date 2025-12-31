@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
- 
+
 export const authOptions = {
   session: {
     strategy: "jwt",
@@ -33,7 +33,7 @@ export const authOptions = {
                 username: credentials.username,
                 password: credentials.password,
               };
- 
+
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
             payload
@@ -58,6 +58,7 @@ export const authOptions = {
             role: data.user.role?.toLowerCase?.() || data.user.role,
             subscriptionType,
             merchant_id: data.merchant?.id || null,
+            admin_id: data.admin?.id || null,
           };
         } catch (error) {
           console.error(
@@ -80,6 +81,7 @@ export const authOptions = {
         token.role = user.role ?? token.role;
         token.merchantId =
           user.merchant_id ?? user.merchantId ?? token.merchantId;
+        token.adminId = user.admin_id ?? user.adminId ?? token.adminId;
         token.subscriptionType =
           user.subscriptionType ||
           user.subscription_type ||
@@ -100,6 +102,7 @@ export const authOptions = {
       if (token?.subscriptionType)
         session.user.subscriptionType = token.subscriptionType;
       if (token?.merchantId) session.user.merchantId = token.merchantId;
+      if (token?.adminId) session.user.adminId = token.adminId;
       if (token?.accessToken) session.accessToken = token.accessToken;
 
       return session;
@@ -112,6 +115,6 @@ export const authOptions = {
 
   secret: process.env.NEXTAUTH_SECRET,
 };
- 
+
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
