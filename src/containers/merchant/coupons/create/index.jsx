@@ -37,6 +37,7 @@ export default function MerchantCreateCouponContainer() {
   const [isActive, setIsActive] = useState(true);
   const [whatsappEnabled, setWhatsappEnabled] = useState(true);
   const [luckyDrawEnabled, setLuckyDrawEnabled] = useState(false);
+  const [isHalal, setIsHalal] = useState(false);
   const [templateSelection, setTemplateSelection] = useState(null);
 
   const templateCardRef = useRef(null);
@@ -55,7 +56,9 @@ export default function MerchantCreateCouponContainer() {
     setEndDate("");
     setIsActive(true);
     setWhatsappEnabled(true);
+    setWhatsappEnabled(true);
     setLuckyDrawEnabled(false);
+    setIsHalal(false);
     setTemplateSelection(null);
   };
 
@@ -82,6 +85,7 @@ export default function MerchantCreateCouponContainer() {
         is_active: Boolean(isActive),
         whatsapp_enabled: Boolean(whatsappEnabled),
         lucky_draw_enabled: Boolean(luckyDrawEnabled),
+        is_halal: Boolean(isHalal),
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
@@ -229,6 +233,12 @@ export default function MerchantCreateCouponContainer() {
                       checked: luckyDrawEnabled,
                       onChange: setLuckyDrawEnabled,
                       desc: "Include this batch in lucky draw flows.",
+                    },
+                    {
+                      label: "Halal Certified",
+                      checked: isHalal,
+                      onChange: setIsHalal,
+                      desc: "Mark this coupon/batch as Halal compliant.",
                     },
                   ].map((item) => (
                     <label
