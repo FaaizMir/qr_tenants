@@ -10,6 +10,9 @@ import MerchantCouponsListingContainer from "@/containers/merchant/coupons/listi
 import MerchantWalletContainer from "@/containers/merchant/wallet";
 import MerchantAnalyticsContainer from "@/containers/merchant/analytics";
 import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
+import ReviewSettings from "@/containers/merchant/reviews/ReviewSettings";
+import AutomationSettings from "@/containers/merchant/automation";
+import MerchantAdsContainer from "@/containers/merchant/ads";
 
 export const getDashboardTabs = ({
   kpiData,
@@ -37,12 +40,18 @@ export const getDashboardTabs = ({
           {isAnnual ? (
             <>
               <div className="flex flex-col space-y-1.5 mb-6">
-                <h2 className="text-2xl font-bold tracking-tight">Analytics Overview</h2>
+                <h2 className="text-2xl font-bold tracking-tight">
+                  Analytics Overview
+                </h2>
                 <p className="text-muted-foreground">
-                  Track your coupon performance, redemptions, and customer engagement.
+                  Track your coupon performance, redemptions, and customer
+                  engagement.
                 </p>
               </div>
-              <MerchantAnalyticsContainer embedded={true} creditsUsed={creditStats?.creditsUsed} />
+              <MerchantAnalyticsContainer
+                embedded={true}
+                creditsUsed={creditStats?.creditsUsed}
+              />
             </>
           ) : (
             <Card className="border-dashed">
@@ -85,20 +94,35 @@ export const getDashboardTabs = ({
     },
     ...(isAnnual
       ? [
-        {
-          value: "analytics",
-          label: "Analytics",
-          content: <MerchantAnalyticsContainer embedded={false} />,
-        },
-      ]
+          {
+            value: "analytics",
+            label: "Analytics",
+            content: <MerchantAnalyticsContainer embedded={false} />,
+          },
+        ]
       : []),
     {
+      value: "reviews",
+      label: "Reviews & Rewards",
+      content: <ReviewSettings />,
+    },
+    {
+      value: "automation",
+      label: "Automation",
+      content: <AutomationSettings />,
+    },
+    {
+      value: "ads",
+      label: "Ads & Marketplace",
+      content: <MerchantAdsContainer />,
+    },
+    /* {
       value: "feedback-form",
       label: "Feedback Form",
       content: (
         <MerchantFeedbackFormContainer />
       ),
-    },
+    }, */
     {
       value: "settings",
       label: "Settings",
@@ -115,6 +139,5 @@ export const getDashboardTabs = ({
         </Card>
       ),
     },
-
   ];
 };

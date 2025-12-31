@@ -11,13 +11,29 @@ import {
   Megaphone,
   Gift,
   Sparkles,
-  Copy,
   CheckCircle2,
+  Search,
+  MapPin,
+  Store,
+  Filter,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 export default function LandingPage() {
   const tHeroSection = useTranslations("Homepage.heroSection");
@@ -25,40 +41,32 @@ export default function LandingPage() {
   const tHowItWorks = useTranslations("Homepage.howitworks");
   const tFooter = useTranslations("Homepage.footer");
   const locale = useLocale();
-  const [copiedCode, setCopiedCode] = useState(null);
+
+  // -- Marketplace State --
   const [selectedMerchantId, setSelectedMerchantId] = useState("brewlab");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [halalOnly, setHalalOnly] = useState(false);
 
-  const sponsoredAds = [
-    {
-      title: "Boosted Reach",
-      description: "Premium placement to get your QR campaigns noticed first.",
-      cta: "Book a slot",
-      accent: "from $79/week",
-      tag: "Sponsored",
-    },
-    {
-      title: "Seasonal Spotlight",
-      description:
-        "Highlight your holiday or event deals with vibrant banners.",
-      cta: "Reserve now",
-      accent: "Limited spots",
-      tag: "Hot",
-    },
-    {
-      title: "Local Favorites",
-      description:
-        "Show up in neighborhoods that matter with geo-targeted ads.",
-      cta: "Plan campaign",
-      accent: "Hyper-local",
-      tag: "New",
-    },
-  ];
+  // -- Coupon Redemption Flow State --
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [customerForm, setCustomerForm] = useState({
+    name: "",
+    phone: "",
+    dob: "",
+  });
+  const [isRedeeming, setIsRedeeming] = useState(false);
+  const [redemptionSuccess, setRedemptionSuccess] = useState(false);
 
+  // -- Mock Data --
   const merchants = [
     {
       id: "brewlab",
       name: "BrewLab Coffee",
-      category: "Specialty Cafe",
+      category: "Restaurant",
+      region: "downtown",
       highlight: "Loyalty perks on every 5th scan.",
       tone: "Warm & cozy rewards for coffee loyalists.",
       coupons: [
@@ -68,6 +76,7 @@ export default function LandingPage() {
           description: "Apply on any handcrafted drink before 11 AM.",
           badge: "Best for regulars",
           expires: "Ends soon",
+          isHalal: true,
         },
         {
           code: "BREWFREE",
@@ -75,13 +84,15 @@ export default function LandingPage() {
           description: "Scan in-store and apply at checkout.",
           badge: "In-store exclusive",
           expires: "Weekend only",
+          isHalal: true,
         },
       ],
     },
     {
       id: "urbanfit",
       name: "UrbanFit Studio",
-      category: "Fitness & Wellness",
+      category: "Services",
+      region: "north",
       highlight: "Scan-based passes that convert trial users.",
       tone: "Perfect for fitness creators and studios.",
       coupons: [
@@ -91,43 +102,15 @@ export default function LandingPage() {
           description: "Access all classes with a single QR.",
           badge: "Top converting",
           expires: "Limited slots",
-        },
-        {
-          code: "FITDUO30",
-          title: "Bring a friend • 30% off",
-          description: "Applied when two passes are scanned together.",
-          badge: "Partner offer",
-          expires: "Valid this month",
-        },
-      ],
-    },
-    {
-      id: "streetbites",
-      name: "StreetBites",
-      category: "Quick Service Restaurant",
-      highlight: "Serial codes that keep queues moving.",
-      tone: "Designed for high-volume counters.",
-      coupons: [
-        {
-          code: "BITES15",
-          title: "Combo deals • 15% off",
-          description: "Works on QR-based combo menus.",
-          badge: "Rush hour",
-          expires: "5–7 PM daily",
-        },
-        {
-          code: "QRQUEUE",
-          title: "Skip-the-line upgrade",
-          description: "Scan to unlock priority pickup.",
-          badge: "VIP lane",
-          expires: "Selected outlets",
+          isHalal: false,
         },
       ],
     },
     {
       id: "glowbar",
       name: "Glow Bar Beauty",
-      category: "Salon & Spa",
+      category: "Beauty",
+      region: "south",
       highlight: "Memberships driven by QR-linked referrals.",
       tone: "For beauty chains going phygital.",
       coupons: [
@@ -137,43 +120,15 @@ export default function LandingPage() {
           description: "Redeemable on any service above $40.",
           badge: "New guests",
           expires: "This quarter",
-        },
-        {
-          code: "GLOWFRIENDS",
-          title: "Refer & relax",
-          description: "Both get 15% off on the next booking.",
-          badge: "Referral booster",
-          expires: "No hard expiry",
-        },
-      ],
-    },
-    {
-      id: "cineplex",
-      name: "CinePlex QR",
-      category: "Cinema & Events",
-      highlight: "Serial coupons linked to specific shows.",
-      tone: "Ideal for premieres and live events.",
-      coupons: [
-        {
-          code: "SEATUP",
-          title: "Seat upgrade on check‑in",
-          description: "Scan on arrival to unlock better seats.",
-          badge: "Experience",
-          expires: "While seats last",
-        },
-        {
-          code: "SNACKQR",
-          title: "Snacks combo • 25% off",
-          description: "Attach to QR tickets and redeem at the counter.",
-          badge: "Upsell",
-          expires: "All shows today",
+          isHalal: false,
         },
       ],
     },
     {
       id: "freshmart",
       name: "FreshMart Local",
-      category: "Grocery & Retail",
+      category: "Retail",
+      region: "west",
       highlight: "Shelf QR tags that rotate seasonal offers.",
       tone: "Perfect for multi-location retail teams.",
       coupons: [
@@ -183,64 +138,54 @@ export default function LandingPage() {
           description: "Applies on curated fresh produce bundles.",
           badge: "Seasonal",
           expires: "This week only",
-        },
-        {
-          code: "SCANBULK",
-          title: "Bulk & save",
-          description: "Scan in aisle to unlock volume discounts.",
-          badge: "Inventory push",
-          expires: "Selected SKUs",
-        },
-      ],
-    },
-    {
-      id: "stayhub",
-      name: "StayHub Stays",
-      category: "Hotels & Stays",
-      highlight: "Room QR that unlock on‑property perks.",
-      tone: "For hosts who want every scan to delight.",
-      coupons: [
-        {
-          code: "LATEOUT",
-          title: "Late checkout unlock",
-          description: "Guests scan room QR for a free 2‑hour extension.",
-          badge: "Guest delight",
-          expires: "Subject to availability",
-        },
-        {
-          code: "QRBREAKFAST",
-          title: "Breakfast for 2",
-          description: "Attach to booking confirmations via QR.",
-          badge: "Add‑on",
-          expires: "Weekends only",
+          isHalal: true,
         },
       ],
     },
   ];
 
-  const visibleMerchants = merchants.slice(0, 6);
-  const showSeeAll = merchants.length > visibleMerchants.length;
+  // -- Filtering Logic --
+  const filteredMerchants = merchants.filter((m) => {
+    const matchesSearch =
+      m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.highlight.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesRegion =
+      selectedRegion === "all" || m.region === selectedRegion;
+    const matchesCategory =
+      selectedCategory === "all" || m.category === selectedCategory;
+
+    // Check if at least one coupon has the Halal tag if filter is active
+    const matchesHalal = !halalOnly || m.coupons.some((c) => c.isHalal);
+
+    return matchesSearch && matchesRegion && matchesCategory && matchesHalal;
+  });
+
   const activeMerchant =
     merchants.find((m) => m.id === selectedMerchantId) ?? merchants[0];
 
-  useEffect(() => {
-    if (!copiedCode) return;
-    const timer = setTimeout(() => setCopiedCode(null), 2000);
-    return () => clearTimeout(timer);
-  }, [copiedCode]);
+  // -- Handlers --
+  const handleGetCoupon = (coupon, merchantName) => {
+    setSelectedCoupon({ ...coupon, merchantName });
+    setRedemptionSuccess(false);
+    setCustomerForm({ name: "", phone: "", dob: "" });
+    setModalOpen(true);
+  };
 
-  const handleCopy = async (code) => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopiedCode(code);
-    } catch (err) {
-      console.error("Failed to copy code", err);
-    }
+  const handleRedeemSubmit = async (e) => {
+    e.preventDefault();
+    setIsRedeeming(true);
+
+    // Simulate Backend API Call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    setIsRedeeming(false);
+    setRedemptionSuccess(true);
+    toast.success("Coupon sent via WhatsApp!");
   };
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* Navigation */}
+    <div className="flex min-h-screen flex-col font-sans text-slate-900">
+      {/* -- Navigation -- */}
       <header className="px-6 lg:px-10 py-5 flex items-center justify-between border-b bg-white/80 backdrop-blur sticky top-0 z-50">
         <div className="flex items-center gap-2 font-bold text-xl">
           <div className="h-8 w-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
@@ -252,7 +197,7 @@ export default function LandingPage() {
           <LanguageSwitcher />
           <Link
             href={`/${locale}/login`}
-            className="text-sm font-medium hover:underline underline-offset-4"
+            className="text-sm font-medium hover:text-primary"
           >
             Sign In
           </Link>
@@ -263,14 +208,19 @@ export default function LandingPage() {
       </header>
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="px-6 lg:px-10 py-20 lg:py-32 flex flex-col items-center text-center max-w-5xl mx-auto space-y-8">
-          <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 hover:bg-primary/20">
+        {/* -- Hero Section -- */}
+        <section className="px-6 lg:px-10 py-20 lg:py-28 flex flex-col items-center text-center max-w-5xl mx-auto space-y-8">
+          <Badge
+            variant="outline"
+            className="bg-primary/5 text-primary border-primary/20 px-4 py-1.5 text-sm"
+          >
             {tHeroSection("para")}
-          </div>
-          <h1 className="text-4xl lg:text-7xl font-extrabold tracking-tight">
+          </Badge>
+          <h1 className="text-4xl lg:text-7xl font-extrabold tracking-tight leading-tight">
             {tHeroSection("1")}{" "}
-            <span className="text-primary">{tHeroSection("2")}</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-600 animate-gradient">
+              {tHeroSection("2")}
+            </span>
             {tHeroSection("3")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -278,127 +228,248 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Link href={`/${locale}/login`}>
-              <Button size="lg" className="h-12 px-8 text-lg">
-                {tHeroSection("freeTrial")}
+              <Button
+                size="lg"
+                className="h-14 px-8 text-lg shadow-lg shadow-primary/20"
+              >
+                {tHeroSection("freeTrial")}{" "}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="h-12 px-8 text-lg">
-              {tHeroSection("viewDemo")}
-            </Button>
           </div>
         </section>
 
-        {/* Strategy: Full-Width Leaderboard Ad */}
-        <section className="px-6 lg:px-10 pb-8 flex justify-center">
-          <div className="w-full max-w-7xl mx-auto">
-            <div className="relative overflow-hidden rounded-xl bg-slate-900 shadow-xl border border-slate-800">
-              <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-size-[250%_250%] hover:animate-shine" />
-              <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-8 relative z-10 gap-6">
-                <div className="text-center md:text-left">
-                  <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-slate-900 uppercase tracking-wide mb-2">
-                    Exclusive Offer
+        {/* -- Sponsored Ad Slot (Homepage Featured) -- */}
+        <section className="px-6 lg:px-10 pb-16 flex justify-center">
+          <div className="w-full max-w-7xl mx-auto relative overflow-hidden rounded-2xl bg-slate-900 shadow-2xl border border-slate-800">
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.05)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.05)_50%,rgba(255,255,255,0.05)_75%,transparent_75%,transparent)] bg-size-[20px_20px]" />
+            <div className="flex flex-col md:flex-row items-center justify-between p-8 relative z-10 gap-8">
+              <div className="text-center md:text-left space-y-4">
+                <Badge className="bg-amber-500 text-slate-900 hover:bg-amber-600 border-0">
+                  FEATURED PARTNER
+                </Badge>
+                <h3 className="text-3xl md:text-4xl font-extrabold text-white">
+                  CloudScale Pro
+                  <span className="block text-amber-400">
+                    50% Off Annual Plans
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
-                    Scale your SaaS with{" "}
-                    <span className="text-amber-400">CloudScale Pro</span>
-                  </h3>
-                  <p className="text-slate-300 max-w-xl">
-                    Get $500 in free credits when you sign up today. Limited
-                    time offer for QR Rev users.
-                  </p>
+                </h3>
+                <p className="text-slate-300 text-lg max-w-xl">
+                  Exclusive offer for QR Rev users. Scale your infrastructure
+                  with $500 free credits.
+                </p>
+              </div>
+              <Button
+                size="lg"
+                className="bg-amber-500 text-slate-900 font-bold hover:bg-amber-600 border-0 px-8 h-12"
+              >
+                Claim Offer
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* -- Public Coupon Marketplace -- */}
+        <section
+          className="bg-slate-50 py-20 border-y border-slate-200"
+          id="marketplace"
+        >
+          <div className="px-6 lg:px-10 max-w-7xl mx-auto space-y-12">
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <h2 className="text-3xl font-bold">Explore Local Deals</h2>
+              <p className="text-muted-foreground text-lg">
+                Discover coupons from top merchants in your area.
+              </p>
+            </div>
+
+            {/* -- Search & Filters -- */}
+            <div className="bg-white p-4 rounded-xl shadow-sm border flex flex-col md:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+                <Input
+                  placeholder="Search businesses or offers..."
+                  className="pl-10 h-11 text-base bg-slate-50 border-0 focus-visible:ring-1"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <div className="flex gap-4 overflow-x-auto pb-2 md:pb-0">
+                <select
+                  className="h-11 px-4 rounded-md border bg-slate-50 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="all">All Categories</option>
+                  <option value="Restaurant">Restaurants</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Beauty">Beauty & Spa</option>
+                  <option value="Services">Services</option>
+                </select>
+                <select
+                  className="h-11 px-4 rounded-md border bg-slate-50 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+                  value={selectedRegion}
+                  onChange={(e) => setSelectedRegion(e.target.value)}
+                >
+                  <option value="all">All Regions</option>
+                  <option value="downtown">Downtown</option>
+                  <option value="north">North District</option>
+                  <option value="south">South Bay</option>
+                  <option value="west">West Side</option>
+                </select>
+
+                <div className="flex items-center space-x-2 bg-white px-3 border rounded-md h-11 shrink-0">
+                  <Checkbox
+                    id="halal"
+                    checked={halalOnly}
+                    onCheckedChange={setHalalOnly}
+                  />
+                  <Label
+                    htmlFor="halal"
+                    className="text-sm cursor-pointer font-medium text-emerald-800"
+                  >
+                    Halal Only
+                  </Label>
                 </div>
-                <button className="whitespace-nowrap rounded-lg bg-amber-500 px-6 py-3 text-sm font-bold text-slate-900 shadow-lg transition-transform hover:scale-105 active:scale-95">
-                  Claim $500 Credits
-                </button>
               </div>
             </div>
-            <div className="text-center mt-2">
-              <span className="text-[10px] uppercase text-slate-400 tracking-widest">
-                Sponsored Advertisement
-              </span>
-            </div>
-          </div>
-        </section>
 
-        {/* Strategy: Featured Partners Grid */}
-        <section className="bg-slate-50 py-16 border-t border-slate-200">
-          <div className="px-6 lg:px-10 max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Megaphone className="w-5 h-5 text-indigo-600" />
-                Featured Partners
-              </h3>
-              <a
-                href="#"
-                className="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
-              >
-                Advertise with us <ArrowRight className="w-3 h-3" />
-              </a>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  title: "TechGear",
-                  desc: "Enterprise Hardware Solutions",
-                  img: "bg-blue-50",
-                  textColor: "text-blue-600",
-                  tag: "Tech",
-                },
-                {
-                  title: "GrowthFlow",
-                  desc: "Marketing Automation SaaS",
-                  img: "bg-purple-50",
-                  textColor: "text-purple-600",
-                  tag: "SaaS",
-                },
-                {
-                  title: "SecureNet",
-                  desc: "Cybersecurity for Startups",
-                  img: "bg-emerald-50",
-                  textColor: "text-emerald-600",
-                  tag: "Security",
-                },
-                {
-                  title: "DataViz",
-                  desc: "AI-Powered Analytics",
-                  img: "bg-rose-50",
-                  textColor: "text-rose-600",
-                  tag: "AI",
-                },
-              ].map((ad, idx) => (
-                <div
-                  key={idx}
-                  className="group relative bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow"
-                >
+            {/* -- Results Grid -- */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredMerchants.length > 0 ? (
+                filteredMerchants.map((merchant) => (
                   <div
-                    className={`h-32 ${ad.img} flex items-center justify-center`}
+                    key={merchant.id}
+                    className="group relative bg-white dark:bg-zinc-900 rounded-2xl border border-slate-100 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden h-[400px]"
                   >
-                    <span
-                      className={`text-4xl font-black uppercase tracking-widest opacity-20 ${ad.textColor}`}
+                    {/* Decorative Gradient Cover */}
+                    <div
+                      className={`h-24 shrink-0 w-full relative overflow-hidden ${
+                        merchant.category === "Restaurant"
+                          ? "bg-linear-to-br from-orange-400 to-rose-500"
+                          : merchant.category === "Beauty"
+                          ? "bg-linear-to-br from-pink-400 to-purple-500"
+                          : merchant.category === "Retail"
+                          ? "bg-linear-to-br from-blue-400 to-cyan-500"
+                          : "bg-linear-to-br from-emerald-400 to-teal-500"
+                      }`}
                     >
-                      {ad.tag}
-                    </span>
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+                      <div className="absolute top-3 left-4 flex gap-2">
+                        <Badge className="bg-white/90 text-slate-900 hover:bg-white backdrop-blur shadow-sm font-bold uppercase tracking-wider text-[10px] h-5">
+                          {merchant.category}
+                        </Badge>
+                        {merchant.coupons.some((c) => c.isHalal) && (
+                          <Badge className="bg-emerald-500 text-white border-0 font-bold uppercase tracking-wider text-[10px] flex items-center gap-1 h-5">
+                            <CheckCircle2 className="w-3 h-3" /> Halal
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="p-4 flex-1 flex flex-col relative overflow-hidden">
+                      {/* Floating Icon/Logo */}
+                      <div className="absolute top-1 right-5 h-12 w-12 bg-white dark:bg-zinc-900 rounded-xl shadow-lg flex items-center justify-center border-[3px] border-white dark:border-zinc-900 z-10">
+                        <Store className="h-6 w-6 text-slate-700 dark:text-slate-300" />
+                      </div>
+
+                      <div className="mb-2 pr-12">
+                        <h3 className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors truncate">
+                          {merchant.name}
+                        </h3>
+                        <div className="flex items-center text-xs text-muted-foreground mt-0.5 font-medium">
+                          <MapPin className="h-3 w-3 mr-1 text-primary" />
+                          <span className="capitalize">{merchant.region}</span>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed border-l-2 border-primary/20 pl-3 italic line-clamp-2 min-h-[2.5em]">
+                        {merchant.highlight}
+                      </p>
+
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2">
+                        <Gift className="w-3 h-3" /> Available Offers
+                      </div>
+
+                      {/* Scrollable Coupon Area */}
+                      <div className="space-y-3 overflow-y-auto pr-1 -mr-1 flex-1 min-h-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+                        {merchant.coupons.map((coupon) => (
+                          <div
+                            key={coupon.code}
+                            className="group/coupon relative overflow-hidden bg-slate-50 dark:bg-zinc-800/50 rounded-lg border border-slate-200 dark:border-zinc-700 hover:border-primary/50 transition-colors p-3 flex flex-col gap-2 shrink-0"
+                          >
+                            <div className="flex justify-between items-start gap-3">
+                              <div className="min-w-0">
+                                <p className="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">
+                                  {coupon.title}
+                                </p>
+                                <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-1">
+                                  {coupon.description}
+                                </p>
+                              </div>
+                              {coupon.badge && (
+                                <span className="shrink-0 px-1.5 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase rounded-full">
+                                  {coupon.badge}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="pt-2 border-t border-dashed border-slate-200 dark:border-zinc-700 flex items-center justify-between">
+                              <div className="text-[10px] font-medium text-slate-400 hidden sm:block">
+                                WhatsApp Only
+                              </div>
+                              <Button
+                                size="sm"
+                                onClick={() =>
+                                  handleGetCoupon(coupon, merchant.name)
+                                }
+                                className="h-7 px-3 bg-slate-900 text-white hover:bg-primary hover:text-white shadow-none transition-all rounded-md text-[10px] font-bold ml-auto"
+                              >
+                                Get{" "}
+                                <ArrowRight className="ml-1 w-2.5 h-2.5 group-hover/coupon:translate-x-0.5 transition-transform" />
+                              </Button>
+                            </div>
+
+                            {/* Decorative Circles */}
+                            <div className="absolute -left-1.5 top-1/2 -mt-1 h-3 w-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700" />
+                            <div className="absolute -right-1.5 top-1/2 -mt-1 h-3 w-3 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <span className="absolute top-2 right-2 bg-white/80 backdrop-blur border border-slate-200 text-slate-500 text-[9px] font-bold px-1.5 py-0.5 rounded">
-                    AD
-                  </span>
-                  <div className="p-4">
-                    <h4 className="font-bold text-slate-900">{ad.title}</h4>
-                    <p className="text-xs text-slate-500 mb-4">{ad.desc}</p>
-                    <button className="text-indigo-600 text-xs font-bold uppercase tracking-wide group-hover:underline">
-                      Learn More
-                    </button>
-                  </div>
+                ))
+              ) : (
+                <div className="col-span-full py-12 text-center text-muted-foreground">
+                  <Search className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                  <p className="text-lg">
+                    No merchants found matching your filters.
+                  </p>
                 </div>
-              ))}
+              )}
+            </div>
+
+            {/* -- Inline Ad (Category Placement) -- */}
+            <div className="rounded-xl border border-dashed border-slate-300 p-8 flex flex-col md:flex-row items-center gap-8 justify-between bg-slate-50/50">
+              <div>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">
+                  Sponsored Ads
+                </span>
+                <h4 className="text-lg font-bold">
+                  Want to see your business here?
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Boost your visibility with our new Paid Ad Placements.
+                </p>
+              </div>
+              <Link href={`/${locale}/login`}>
+                <Button variant="outline">Advertise with us</Button>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* Features Grid */}
-        <section className="bg-slate-50 py-20 lg:py-32">
+        {/* -- Features -- */}
+        <section className="bg-white py-20 lg:py-32">
           <div className="px-6 lg:px-10 max-w-7xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
@@ -408,380 +479,168 @@ export default function LandingPage() {
                 {tFeatures("description")}
               </p>
             </div>
-
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-2xl shadow-sm border hover:shadow-md transition">
-                <div className="h-12 w-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
-                  <Smartphone className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">
-                  {tFeatures("card1Heading")}
-                </h3>
-                <p className="text-muted-foreground">
-                  {tFeatures("card1Description")}
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-2xl shadow-sm border hover:shadow-md transition">
-                <div className="h-12 w-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
-                  <TrendingUp className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">
-                  {tFeatures("card2Heading")}
-                </h3>
-                <p className="text-muted-foreground">
-                  {tFeatures("card2Description")}
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-2xl shadow-sm border hover:shadow-md transition">
-                <div className="h-12 w-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-6">
-                  <Globe className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">
-                  {tFeatures("card3Heading")}
-                </h3>
-                <p className="text-muted-foreground">
-                  {tFeatures("card3Description")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Strategy: Native Inline Ad */}
-        <section className="px-6 lg:px-10 py-12 flex justify-center bg-white">
-          <div className="w-full max-w-4xl mx-auto border-y border-slate-100 py-8">
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="w-full sm:w-1/3 aspect-video bg-slate-100 rounded-lg flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
-                <span className="relative z-10 text-slate-400 font-bold">
-                  AD IMAGE
-                </span>
-              </div>
-              <div className="flex-1 text-center sm:text-left">
-                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border px-1.5 rounded">
-                    Sponsored
-                  </span>
-                  <span className="text-xs font-semibold text-slate-600">
-                    MasterClass
-                  </span>
-                </div>
-                <h4 className="text-lg font-bold text-slate-900 mb-2">
-                  Unlock Your Potential with Expert-Led Courses
-                </h4>
-                <p className="text-sm text-slate-500 mb-4">
-                  Join millions of learners. Get unlimited access to 180+
-                  classes taught by the world&apos;s best.
-                </p>
-                <button className="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center justify-center sm:justify-start gap-1 group">
-                  Start Learning{" "}
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works */}
-        <section className="py-20 lg:py-32">
-          <div className="px-6 lg:px-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2 space-y-8">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                {tHowItWorks("h1")}
-              </h2>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
-                    1
+              {[
+                {
+                  icon: Smartphone,
+                  color: "text-blue-600",
+                  bg: "bg-blue-100",
+                  h: tFeatures("card1Heading"),
+                  d: tFeatures("card1Description"),
+                },
+                {
+                  icon: TrendingUp,
+                  color: "text-orange-600",
+                  bg: "bg-orange-100",
+                  h: tFeatures("card2Heading"),
+                  d: tFeatures("card2Description"),
+                },
+                {
+                  icon: Globe,
+                  color: "text-green-600",
+                  bg: "bg-green-100",
+                  h: tFeatures("card3Heading"),
+                  d: tFeatures("card3Description"),
+                },
+              ].map((fet, i) => (
+                <div
+                  key={i}
+                  className="bg-slate-50 p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
+                >
+                  <div
+                    className={`h-12 w-12 rounded-xl headers ${fet.bg} ${fet.color} flex items-center justify-center mb-6`}
+                  >
+                    <fet.icon className="h-6 w-6" />
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold">
-                      {tHowItWorks("heading1")}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {tHowItWorks("descp1")}{" "}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-bold mb-3">{fet.h}</h3>
+                  <p className="text-muted-foreground">{fet.d}</p>
                 </div>
-                <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold">
-                      {tHowItWorks("heading2")}{" "}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {tHowItWorks("descp2")}{" "}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center shrink-0">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold">{tHowItWorks("h3")} </h3>
-                    <p className="text-muted-foreground">
-                      {tHowItWorks("descp3")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="lg:w-1/2">
-              <div className="bg-slate-100 rounded-2xl aspect-video w-full flex items-center justify-center text-slate-400">
-                <QrCode className="h-32 w-32 opacity-20" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Merchants, coupons & paid ads */}
-        <section className="relative overflow-hidden bg-linear-to-b from-slate-950 via-slate-900 to-black text-white py-20 lg:py-32">
-          <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top,#38bdf880,transparent_40%),radial-gradient(circle_at_bottom,#a855f780,transparent_45%)]" />
-          <div className="px-6 lg:px-10 max-w-7xl mx-auto relative">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]">
-                  <Sparkles className="h-4 w-4 text-amber-300" />
-                  Live merchant drops
-                </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  Tap a merchant. Copy a coupon. Run it with QR.
-                </h2>
-                <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
-                  Preview how multi-merchant coupon walls look inside QR Rev.
-                  Each brand carries its own coupon stack, ready to be scanned,
-                  copied, and redeemed.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3 items-center">
-                <div className="flex items-center gap-2 rounded-full bg-white text-slate-900 px-4 py-2 text-xs sm:text-sm font-semibold shadow-lg">
-                  <Megaphone className="h-4 w-4" />
-                  Paid placements available
-                </div>
-                {showSeeAll && (
-                  <Link href={`/${locale}/merchants`}>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-white/40 text-white hover:bg-white hover:text-slate-900"
-                    >
-                      View more merchants
-                    </Button>
-                  </Link>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] lg:items-stretch">
-              {/* Merchant list */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 backdrop-blur flex flex-col">
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-white/60">
-                    <div className="h-px w-8 bg-white/30" />
-                    Merchants
-                  </div>
-                  <span className="rounded-full bg-emerald-400/10 border border-emerald-300/40 px-2.5 py-1 text-[10px] font-semibold text-emerald-100">
-                    {merchants.length} live examples
-                  </span>
-                </div>
-                <div className="space-y-2 flex-1 min-h-0 overflow-y-auto pr-1 pb-1">
-                  {visibleMerchants.map((merchant) => {
-                    const isActive = merchant.id === activeMerchant.id;
-                    return (
-                      <button
-                        key={merchant.id}
-                        type="button"
-                        onClick={() => setSelectedMerchantId(merchant.id)}
-                        className={`w-full text-left rounded-xl border px-3.5 py-3 transition flex flex-col gap-1.5 ${
-                          isActive
-                            ? "border-emerald-400/70 bg-emerald-400/10 shadow-[0_0_0_1px_rgba(16,185,129,0.5)]"
-                            : "border-white/5 bg-black/20 hover:border-white/30 hover:bg-white/5"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-2">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-[11px] font-semibold uppercase tracking-wide">
-                              {merchant.name
-                                .split(" ")
-                                .map((w) => w[0])
-                                .join("")
-                                .slice(0, 3)}
-                            </div>
-                            <div>
-                              <p className="text-sm font-semibold">
-                                {merchant.name}
-                              </p>
-                              <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">
-                                {merchant.category}
-                              </p>
-                            </div>
-                          </div>
-                          <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-white/70">
-                            {merchant.coupons.length} coupons
-                          </span>
-                        </div>
-                        <p className="text-xs text-white/70 line-clamp-2">
-                          {merchant.highlight}
-                        </p>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Active merchant coupons + ads */}
-              <div className="space-y-5 ">
-                <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 sm:p-7 shadow-[0_30px_100px_-60px_rgba(99,102,241,0.7)] h-[700px] flex justify-center items-center flex-col">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
-                        Coupon wall preview
-                      </p>
-                      <h3 className="mt-1 text-xl sm:text-2xl font-bold">
-                        {activeMerchant.name}
-                      </h3>
-                      <p className="text-xs uppercase tracking-[0.18em] text-white/50">
-                        {activeMerchant.category}
-                      </p>
-                    </div>
-                    <div className="rounded-xl border border-emerald-300/40 bg-emerald-400/10 px-4 py-2 text-xs text-emerald-100 flex items-center gap-2">
-                      <QrCode className="h-3.5 w-3.5" />
-                      <span>Optimized for scan‑to‑redeem flows</span>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-sm text-white/70">
-                    {activeMerchant.tone}
-                  </p>
-
-                  <div className="mt-6 space-y-4">
-                    {activeMerchant.coupons.map((coupon) => (
-                      <div
-                        key={coupon.code}
-                        className="flex flex-col gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 md:flex-row md:items-center md:justify-between"
-                      >
-                        <div className="flex flex-col gap-1">
-                          <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
-                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-sky-200">
-                              {coupon.badge}
-                            </span>
-                            <span>{coupon.expires}</span>
-                          </div>
-                          <div className="text-sm sm:text-base font-semibold flex items-center gap-2">
-                            <Gift className="h-4 w-4 text-amber-300" />
-                            {coupon.title}
-                          </div>
-                          <p className="text-xs sm:text-sm text-white/65">
-                            {coupon.description}
-                          </p>
-                        </div>
-                        <div className="flex flex-col items-start gap-2 md:items-end">
-                          <div className="flex items-center gap-2 rounded-full bg-white text-slate-900 px-3 py-1 text-xs sm:text-sm font-semibold shadow-md">
-                            <QrCode className="h-4 w-4" />
-                            {coupon.code}
-                          </div>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="border-white/30 text-white hover:bg-white hover:text-slate-900"
-                            onClick={() => handleCopy(coupon.code)}
-                          >
-                            {copiedCode === coupon.code ? (
-                              <>
-                                <CheckCircle2 className="mr-2 h-4 w-4 text-emerald-400" />
-                                Copied
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="mr-2 h-4 w-4" />
-                                Copy code
-                              </>
-                            )}
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Inline paid ads strip */}
-                {/* <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
-                    <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-white/60">
-                      <div className="h-px w-6 bg-white/30" />
-                      Sponsored placements
-                    </div>
-                    <Button
-                      size="xs"
-                      variant="ghost"
-                      className="h-7 px-2 text-[11px] text-white/70 hover:bg-white/10"
-                    >
-                      <Megaphone className="mr-1.5 h-3.5 w-3.5" />
-                      Promote your brand here
-                    </Button>
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-3">
-                    {sponsoredAds.map((ad) => (
-                      <div
-                        key={ad.title}
-                        className="rounded-xl border border-white/10 bg-black/20 p-3 text-xs sm:text-sm flex flex-col justify-between"
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="text-[10px] uppercase tracking-[0.2em] text-white/55">
-                            {ad.tag}
-                          </span>
-                          <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-amber-200">
-                            {ad.accent}
-                          </span>
-                        </div>
-                        <div className="mt-2">
-                          <p className="font-semibold text-xs sm:text-sm">
-                            {ad.title}
-                          </p>
-                          <p className="mt-1 text-[11px] text-white/70">
-                            {ad.description}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          className="mt-3 inline-flex items-center justify-center rounded-full border border-white/25 bg-white/5 px-3 py-1 text-[11px] font-medium text-white hover:bg-white hover:text-slate-900 transition"
-                        >
-                          {ad.cta}
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div> */}
-              </div>
+              ))}
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-white border-t py-12 px-6 lg:px-10">
+      {/* -- Footer -- */}
+      <footer className="bg-slate-900 text-slate-300 py-12 px-6 lg:px-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 font-bold text-lg">
+          <div className="flex items-center gap-2 font-bold text-lg text-white">
             <div className="h-6 w-6 rounded bg-primary text-primary-foreground flex items-center justify-center">
               <QrCode className="h-4 w-4" />
             </div>
             QR Rev
           </div>
-          <div className="text-sm text-muted-foreground">{tFooter("text")}</div>
+          <div className="text-sm">{tFooter("text")}</div>
           <div className="flex gap-6 text-sm font-medium">
-            <Link href="#" className="hover:underline">
-              {tFooter("Privacy")}
+            <Link href="#" className="hover:text-white transition">
+              Privacy
             </Link>
-            <Link href="#" className="hover:underline">
-              {tFooter("Terms")}
+            <Link href="#" className="hover:text-white transition">
+              Terms
             </Link>
-            <Link href="#" className="hover:underline">
-              {tFooter("Contact")}
+            <Link href="#" className="hover:text-white transition">
+              Contact
             </Link>
           </div>
         </div>
       </footer>
+
+      {/* -- Get Coupon Dialog -- */}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          {!redemptionSuccess ? (
+            <>
+              <DialogHeader>
+                <DialogTitle>Get Coupon</DialogTitle>
+                <DialogDescription>
+                  Receive your <b>{selectedCoupon?.title}</b> voucher from{" "}
+                  {selectedCoupon?.merchantName} via WhatsApp.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleRedeemSubmit} className="space-y-4 py-2">
+                <div className="space-y-2">
+                  <Label>Full Name</Label>
+                  <Input
+                    required
+                    placeholder="e.g. Jane Doe"
+                    value={customerForm.name}
+                    onChange={(e) =>
+                      setCustomerForm({ ...customerForm, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Phone Number (WhatsApp)</Label>
+                  <Input
+                    required
+                    type="tel"
+                    placeholder="+1 234 567 890"
+                    value={customerForm.phone}
+                    onChange={(e) =>
+                      setCustomerForm({
+                        ...customerForm,
+                        phone: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Birthday</Label>
+                  <Input
+                    required
+                    type="date"
+                    value={customerForm.dob}
+                    onChange={(e) =>
+                      setCustomerForm({ ...customerForm, dob: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="space-y-2 pt-2">
+                  <div className="flex items-start gap-2 text-xs text-muted-foreground">
+                    <Shield className="h-3 w-3 mt-0.5" />
+                    <p>
+                      We&apos;ll use this to send your unique QR code. No spam.
+                    </p>
+                  </div>
+                </div>
+                <DialogFooter className="pt-2">
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isRedeeming}
+                  >
+                    {isRedeeming ? "Processing..." : "Send to WhatsApp"}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </>
+          ) : (
+            <div className="text-center py-6 space-y-4 animate-in zoom-in duration-300">
+              <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <CheckCircle2 className="h-8 w-8 text-green-600" />
+              </div>
+              <div className="space-y-2">
+                <DialogTitle className="text-2xl text-green-700">
+                  Sent Successfully!
+                </DialogTitle>
+                <DialogDescription>
+                  Your coupon for <b>{selectedCoupon?.title}</b> has been sent
+                  to <b>{customerForm.phone}</b>.
+                </DialogDescription>
+              </div>
+              <div className="pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setModalOpen(false)}
+                  className="w-full"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

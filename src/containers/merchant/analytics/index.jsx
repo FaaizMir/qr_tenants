@@ -59,12 +59,12 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
       </div>
 
       {/* KPI Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {metrics.map((metric, index) => (
           <KpiCard
             key={index}
             {...metric}
-            // Using default premium styling from component
+          // Using default premium styling from component
           />
         ))}
       </div>
