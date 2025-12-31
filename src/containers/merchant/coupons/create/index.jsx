@@ -85,7 +85,7 @@ export default function MerchantCreateCouponContainer() {
         is_active: Boolean(isActive),
         whatsapp_enabled: Boolean(whatsappEnabled),
         lucky_draw_enabled: Boolean(luckyDrawEnabled),
-        is_halal: Boolean(isHalal),
+        /*is_halal: Boolean(isHalal),*/
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
