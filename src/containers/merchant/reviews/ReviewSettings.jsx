@@ -16,6 +16,10 @@ export default function ReviewSettings() {
     const [config, setConfig] = useState({
         rewardType: "lucky_draw", // options: "none", "coupon", "lucky_draw"
         enablePresetReviews: true,
+        enableGoogle: true,
+        enableFacebook: false,
+        enableInstagram: false,
+        enableRed: false,
         googleReviewLink: "https://g.page/...",
         facebookReviewLink: "",
         instagramReviewLink: "",
@@ -69,35 +73,63 @@ export default function ReviewSettings() {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
-                            <Label>Google Business Profile Link</Label>
+                            <div className="flex items-center justify-between">
+                                <Label>Google Business Profile</Label>
+                                <Switch
+                                    checked={config.enableGoogle}
+                                    onCheckedChange={(c) => setConfig({ ...config, enableGoogle: c })}
+                                />
+                            </div>
                             <Input
                                 placeholder="https://g.page/r/..."
                                 value={config.googleReviewLink}
                                 onChange={e => setConfig({ ...config, googleReviewLink: e.target.value })}
+                                disabled={!config.enableGoogle}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Facebook Page Review Link</Label>
+                            <div className="flex items-center justify-between">
+                                <Label>Facebook Page</Label>
+                                <Switch
+                                    checked={config.enableFacebook}
+                                    onCheckedChange={(c) => setConfig({ ...config, enableFacebook: c })}
+                                />
+                            </div>
                             <Input
                                 placeholder="https://facebook.com/..."
                                 value={config.facebookReviewLink}
                                 onChange={e => setConfig({ ...config, facebookReviewLink: e.target.value })}
+                                disabled={!config.enableFacebook}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Instagram Profile/Post Link</Label>
+                            <div className="flex items-center justify-between">
+                                <Label>Instagram Profile/Post</Label>
+                                <Switch
+                                    checked={config.enableInstagram}
+                                    onCheckedChange={(c) => setConfig({ ...config, enableInstagram: c })}
+                                />
+                            </div>
                             <Input
                                 placeholder="https://instagram.com/..."
                                 value={config.instagramReviewLink}
                                 onChange={e => setConfig({ ...config, instagramReviewLink: e.target.value })}
+                                disabled={!config.enableInstagram}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>XiaoHongShu (RED) Link</Label>
+                            <div className="flex items-center justify-between">
+                                <Label>XiaoHongShu (RED)</Label>
+                                <Switch
+                                    checked={config.enableRed}
+                                    onCheckedChange={(c) => setConfig({ ...config, enableRed: c })}
+                                />
+                            </div>
                             <Input
                                 placeholder="https://..."
                                 value={config.redReviewLink}
                                 onChange={e => setConfig({ ...config, redReviewLink: e.target.value })}
+                                disabled={!config.enableRed}
                             />
                         </div>
                     </CardContent>

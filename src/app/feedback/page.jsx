@@ -32,6 +32,20 @@ export default function FeedbackPage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const [showSocialSelect, setShowSocialSelect] = useState(false);
+
+  // Mock Merchant Configuration (In real app, fetch this from API based on mid)
+  const mockMerchantConfig = {
+    enableGoogle: true,
+    enableFacebook: true,
+    enableInstagram: false,
+    enableRed: true, // XiaoHongShu
+    googleReviewLink: "https://g.page/example/review",
+    facebookReviewLink: "https://facebook.com/example/reviews",
+    instagramReviewLink: "https://instagram.com/example",
+    redReviewLink: "https://xiaohongshu.com/user/example",
+  };
+
   const formatDateToDDMMYYYY = (iso) => {
     if (!iso) return "";
     const d = new Date(iso);
@@ -44,6 +58,18 @@ export default function FeedbackPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
+  };
+
+  const handleSocialRedirect = (platform) => {
+    let url = "";
+    switch (platform) {
+      case "google": url = mockMerchantConfig.googleReviewLink; break;
+      case "facebook": url = mockMerchantConfig.facebookReviewLink; break;
+      case "instagram": url = mockMerchantConfig.instagramReviewLink; break;
+      case "red": url = mockMerchantConfig.redReviewLink; break;
+      default: break;
+    }
+    if (url) window.open(url, "_blank");
   };
 
   const handleSubmit = async (e) => {
@@ -73,20 +99,28 @@ export default function FeedbackPage() {
       setLoading(true);
       const resp = await axiosInstance.post(`/feedbacks`, payload);
       setSuccess("Feedback submitted successfully.");
-      // optionally redirect or clear
-      setTimeout(() => {
-        let locale = null;
-        try {
-          if (typeof window !== "undefined") {
-            const parts = (pathname || window.location.pathname).split("/").filter(Boolean);
-            if (parts.length && parts[0].length <= 5) locale = parts[0];
+
+      // Check if any social platforms are enabled to show the selector
+      const hasSocial = mockMerchantConfig.enableGoogle || mockMerchantConfig.enableFacebook || mockMerchantConfig.enableInstagram || mockMerchantConfig.enableRed;
+
+      if (hasSocial) {
+        setShowSocialSelect(true);
+      } else {
+        // Default redirect behavior
+        setTimeout(() => {
+          let locale = null;
+          try {
+            if (typeof window !== "undefined") {
+              const parts = (pathname || window.location.pathname).split("/").filter(Boolean);
+              if (parts.length && parts[0].length <= 5) locale = parts[0];
+            }
+          } catch (e) {
+            locale = null;
           }
-        } catch (e) {
-          locale = null;
-        }
-        const target = locale ? `/${locale}/agent/dashboard` : "/agent/dashboard";
-        router.push(target);
-      }, 1500);
+          const target = locale ? `/${locale}/agent/dashboard` : "/agent/dashboard";
+          router.push(target);
+        }, 1500);
+      }
     } catch (err) {
       const msg = err?.response?.data?.message || err.message || "Failed to submit feedback.";
       setError(msg);
@@ -95,6 +129,50 @@ export default function FeedbackPage() {
     }
   };
 
+  if (showSocialSelect) {
+    return (
+      <div className="max-w-md mx-auto py-12 px-4">
+        <Card className="text-center">
+          <CardHeader>
+            <CardTitle className="text-xl text-green-600">Thank you!</CardTitle>
+            <p className="text-muted-foreground">Your feedback has been received.</p>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Share your experience</h3>
+              <p className="text-sm text-muted-foreground mb-4">Please select a platform to leave a public review:</p>
+
+              <div className="grid grid-cols-1 gap-3">
+                {mockMerchantConfig.enableGoogle && (
+                  <Button variant="outline" className="w-full h-12 justify-start gap-3 hover:bg-slate-50" onClick={() => handleSocialRedirect('google')}>
+                    <span className="text-xl">🇬</span> Google Reviews
+                  </Button>
+                )}
+                {mockMerchantConfig.enableFacebook && (
+                  <Button variant="outline" className="w-full h-12 justify-start gap-3 hover:bg-blue-50" onClick={() => handleSocialRedirect('facebook')}>
+                    <span className="text-xl">🇫</span> Facebook Page
+                  </Button>
+                )}
+                {mockMerchantConfig.enableInstagram && (
+                  <Button variant="outline" className="w-full h-12 justify-start gap-3 hover:bg-pink-50" onClick={() => handleSocialRedirect('instagram')}>
+                    <span className="text-xl">📸</span> Instagram
+                  </Button>
+                )}
+                {mockMerchantConfig.enableRed && (
+                  <Button variant="outline" className="w-full h-12 justify-start gap-3 hover:bg-red-50" onClick={() => handleSocialRedirect('red')}>
+                    <span className="text-xl">📕</span> XiaoHongShu (RED)
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            <Button variant="ghost" size="sm" onClick={() => window.location.reload()}>Return to Home</Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-3xl mx-auto py-12">
       <Card>
@@ -102,7 +180,7 @@ export default function FeedbackPage() {
           <CardTitle>Feedback</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground mb-4">Please leave your feedback for the merchant. Merchant id: <strong>{mid || "-"}</strong>{hash ? <span className="ml-2 text-xs text-muted-foreground">(ref: {hash.slice(0,8)}...)</span> : null}</p>
+          <p className="text-sm text-muted-foreground mb-4">Please leave your feedback for the merchant. Merchant id: <strong>{mid || "-"}</strong>{hash ? <span className="ml-2 text-xs text-muted-foreground">(ref: {hash.slice(0, 8)}...)</span> : null}</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -149,7 +227,7 @@ export default function FeedbackPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="text-sm text-muted-foreground">Gender</label>
-                <Select name="gender" value={form.gender} onValueChange={(v)=>setForm(s=>({...s, gender:v}))}>
+                <Select name="gender" value={form.gender} onValueChange={(v) => setForm(s => ({ ...s, gender: v }))}>
                   <SelectTrigger className="mt-1">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -165,7 +243,7 @@ export default function FeedbackPage() {
 
               <div>
                 <label className="text-sm text-muted-foreground">Rating</label>
-                <Select name="rating" value={String(form.rating)} onValueChange={(v)=>setForm(s=>({...s, rating:Number(v)}))}>
+                <Select name="rating" value={String(form.rating)} onValueChange={(v) => setForm(s => ({ ...s, rating: Number(v) }))}>
                   <SelectTrigger className="mt-1">
                     <SelectValue />
                   </SelectTrigger>
