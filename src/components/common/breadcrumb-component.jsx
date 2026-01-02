@@ -13,6 +13,8 @@ import { useLocale } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export const BreadcrumbComponent = ({ data }) => {
   const locale = useLocale();
@@ -20,6 +22,16 @@ export const BreadcrumbComponent = ({ data }) => {
   const isRTL = direction === "rtl";
   const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
   const t = useTranslations("common");
+  const router = useRouter();
+  const { data: session } = useSession();
+  const role = (session?.user?.role || "").toLowerCase();
+
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    if (role === "merchant") router.replace(`/${locale}/merchant/dashboard`);
+    if (role === "agent" || role === "admin")
+      router.replace(`/${locale}/agent/dashboard`);
+  };
 
   return (
     <Breadcrumb>
@@ -27,8 +39,10 @@ export const BreadcrumbComponent = ({ data }) => {
         <div className="flex items-center">
           <BreadcrumbItem>
             <BreadcrumbLink
+              onClick={handleHomeClick}
               href="/"
-              className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium">
+              className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
+            >
               {t("home")}
             </BreadcrumbLink>
             {data?.length && (
@@ -42,7 +56,8 @@ export const BreadcrumbComponent = ({ data }) => {
               <BreadcrumbItem>
                 <Link
                   href={item.url}
-                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium">
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
+                >
                   {item.name}
                 </Link>
                 {index !== data.length - 1 && (
