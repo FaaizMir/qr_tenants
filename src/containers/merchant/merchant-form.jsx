@@ -23,6 +23,7 @@ import {
   NumberField,
   PasswordField,
 } from "@/components/form-fields";
+import AddressAutocomplete from "@/components/address-autocomplete";
 
 const statusOptions = [
   { value: "active", label: "Active" },
@@ -42,6 +43,7 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
     control,
     reset,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -49,6 +51,9 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
       email: "",
       password: "",
       address: "",
+      latitude: null,
+      longitude: null,
+      mapUrl: "",
       businessName: "",
       businessType: "",
       merchantType: "annual",
@@ -78,6 +83,9 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         password: data.password,
         role: "merchant",
         address: data.address || "",
+        latitude: data.latitude || null,
+        longitude: data.longitude || null,
+        map_url: data.mapUrl || "",
         business_name: data.businessName,
         business_type: data.businessType,
         merchant_type: data.merchantType,
@@ -91,12 +99,12 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         // debug payload
         try {
           console.debug("Creating merchant payload:", payload);
-        } catch (e) {}
+        } catch (e) { }
 
         resp = await createMerchant(payload);
         try {
           console.debug("Create merchant response:", resp);
-        } catch (e) {}
+        } catch (e) { }
       }
 
       toast.success(
@@ -109,7 +117,7 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
       console.error("Error saving merchant:", error);
       toast.error(
         error?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} merchant`
+        `Failed to ${isEdit ? "update" : "create"} merchant`
       );
     } finally {
       setIsFormSubmitting(false);
@@ -196,13 +204,20 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 validation={{ required: "Business name is required" }}
               />
 
-              <TextField
+              <AddressAutocomplete
                 label="Address"
                 name="address"
-                placeholder="123 Main St, City, Country"
-                register={register}
+                placeholder="Start typing an address..."
+                value={watch("address")}
+                onChange={(locationData) => {
+                  // Update all location-related fields
+                  setValue("address", locationData.address);
+                  setValue("latitude", locationData.latitude);
+                  setValue("longitude", locationData.longitude);
+                  setValue("mapUrl", locationData.mapUrl);
+                }}
                 errors={errors}
-                validation={{ required: false }}
+                required={false}
               />
             </div>
 
