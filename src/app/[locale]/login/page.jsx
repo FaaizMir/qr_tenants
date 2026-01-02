@@ -106,7 +106,7 @@ export default function LoginPage({ params }) {
         } else if (role === "merchant") {
           router.push("/merchant/dashboard");
         } else {
-          router.push("/dashboard"); // Fallback
+          router.push("/login"); // Fallback
         }
       } else {
         setError("Unable to determine user role");
