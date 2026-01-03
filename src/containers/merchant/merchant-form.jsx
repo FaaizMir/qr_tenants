@@ -99,12 +99,12 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         // debug payload
         try {
           console.debug("Creating merchant payload:", payload);
-        } catch (e) { }
+        } catch (e) {}
 
         resp = await createMerchant(payload);
         try {
           console.debug("Create merchant response:", resp);
-        } catch (e) { }
+        } catch (e) {}
       }
 
       toast.success(
@@ -117,7 +117,7 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
       console.error("Error saving merchant:", error);
       toast.error(
         error?.response?.data?.message ||
-        `Failed to ${isEdit ? "update" : "create"} merchant`
+          `Failed to ${isEdit ? "update" : "create"} merchant`
       );
     } finally {
       setIsFormSubmitting(false);

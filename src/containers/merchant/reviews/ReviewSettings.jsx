@@ -39,7 +39,7 @@ export default function ReviewSettings() {
   });
 
   const { data: session } = useSession();
-
+  const merchantId = session?.user?.merchantId;
   const handlePresetChange = (index, value) => {
     const newPresets = [...config.presets];
     newPresets[index] = value;
@@ -50,7 +50,9 @@ export default function ReviewSettings() {
     setLoadingPresets(true);
 
     try {
-      const res = await axiosInstance.get("/preset-reviews");
+      const res = await axiosInstance.get("/preset-reviews", {
+        params: { merchantId },
+      });
 
       const reviews = res?.data?.data || [];
 
@@ -74,41 +76,6 @@ export default function ReviewSettings() {
       setLoadingPresets(false);
     }
   };
-  const fetchMerchantSettings = async () => {
-    try {
-      const res = await axiosInstance.get("/merchant-settings");
-      const data = res?.data?.data;
-
-      if (data) {
-        setConfig((prev) => ({
-          ...prev,
-          rewardType: data.reward_type || data.rewardType || "none",
-          enablePresetReviews:
-            data.enable_preset_reviews ?? data.enablePresetReviews ?? false,
-          enableGoogle:
-            data.enable_google_reviews ?? data.enableGoogleReviews ?? false,
-          enableFacebook:
-            data.enable_facebook_reviews ?? data.enableFacebookReviews ?? false,
-          enableInstagram:
-            data.enable_instagram_reviews ??
-            data.enableInstagramReviews ??
-            false,
-          enableRed:
-            data.enable_xiaohongshu_reviews ??
-            data.enableXiaohongshuReviews ??
-            false,
-          googleReviewLink:
-            data.google_review_url || data.googleReviewUrl || "",
-          facebookReviewLink:
-            data.facebook_page_url || data.facebookPageUrl || "",
-          instagramReviewLink: data.instagram_url || data.instagramUrl || "",
-          redReviewLink: data.xiaohongshu_url || data.xiaohongshuUrl || "",
-        }));
-      }
-    } catch (error) {
-      console.error("Failed to fetch merchant settings", error);
-    }
-  };
 
   useEffect(() => {
     fetchPresetReviews();
@@ -121,12 +88,12 @@ export default function ReviewSettings() {
       const payload = {
         reviews: config.enablePresetReviews
           ? config.presets.map((text, index) => ({
-            id: index + 1,
-            merchantId: session?.user?.merchantId || 1,
-            reviewText: text.trim(),
-            isActive: true,
-            displayOrder: index + 1,
-          }))
+              id: index + 1,
+              merchant_id: merchantId,
+              reviewText: text.trim(),
+              isActive: true,
+              displayOrder: index + 1,
+            }))
           : [],
       };
 
@@ -152,7 +119,8 @@ export default function ReviewSettings() {
 
     try {
       const payload = {
-        merchantId: session?.user?.merchantId,
+        merchantId: merchantId,
+        enablePresetReviews: config.enablePresetReviews,
         enableGoogleReviews: config.enableGoogle,
         enableFacebookReviews: config.enableFacebook,
         enableInstagramReviews: config.enableInstagram,
@@ -167,8 +135,10 @@ export default function ReviewSettings() {
         xiaohongshuUrl: config.enableRed ? config.redReviewLink : null,
       };
 
-      await axiosInstance.post("/merchant-settings", payload);
-
+      await axiosInstance.patch(
+        `/merchant-settings/merchant/${merchantId}`,
+        payload
+      );
       toast.success("Platform settings updated successfully");
     } catch (error) {
       console.error(error);
@@ -184,7 +154,7 @@ export default function ReviewSettings() {
     setLoadingFeatures(true);
     try {
       const payload = {
-        merchantId: session?.user?.merchantId,
+        merchantId: merchantId,
         rewardType: config.rewardType,
       };
 
@@ -329,10 +299,11 @@ export default function ReviewSettings() {
               <Label className="text-base font-semibold">Reward Strategy</Label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div
-                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "none"
+                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${
+                    config.rewardType === "none"
                       ? "border-primary bg-primary/5"
                       : "hover:bg-muted"
-                    }`}
+                  }`}
                   onClick={() => setConfig({ ...config, rewardType: "none" })}
                 >
                   <div className="font-bold mb-1">No Reward</div>
@@ -341,10 +312,11 @@ export default function ReviewSettings() {
                   </div>
                 </div>
                 <div
-                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "coupon"
+                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${
+                    config.rewardType === "coupon"
                       ? "border-primary bg-primary/5"
                       : "hover:bg-muted"
-                    }`}
+                  }`}
                   onClick={() => setConfig({ ...config, rewardType: "coupon" })}
                 >
                   <div className="font-bold mb-1">Direct Coupon</div>
@@ -353,10 +325,11 @@ export default function ReviewSettings() {
                   </div>
                 </div>
                 <div
-                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "lucky_draw"
+                  className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${
+                    config.rewardType === "lucky_draw"
                       ? "border-primary bg-primary/5"
                       : "hover:bg-muted"
-                    }`}
+                  }`}
                   onClick={() =>
                     setConfig({ ...config, rewardType: "lucky_draw" })
                   }
