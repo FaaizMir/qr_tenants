@@ -58,6 +58,8 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
       businessType: "",
       merchantType: "annual",
       taxId: "",
+      city: "",
+      countryRegion: "",
     },
   });
   const name = watch("name");
@@ -85,11 +87,13 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         address: data.address || "",
         latitude: data.latitude || null,
         longitude: data.longitude || null,
-        map_url: data.mapUrl || "",
+        map_link: data.mapUrl || "",
         business_name: data.businessName,
         business_type: data.businessType,
         merchant_type: data.merchantType,
         tax_id: data.taxId || "",
+        country: data.countryRegion,
+        city: data.city,
       };
 
       let resp;
@@ -163,10 +167,6 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 }}
               />
 
-              <div></div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <EmailField
                 label="Email Address"
                 name="email"
@@ -175,7 +175,9 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 errors={errors}
                 validation={{ required: "Email is required" }}
               />
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <PasswordField
                 label="Password"
                 name="password"
@@ -192,18 +194,6 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                   },
                 }}
               />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <TextField
-                label="Business Name"
-                name="businessName"
-                placeholder="Business / Trading Name"
-                register={register}
-                errors={errors}
-                validation={{ required: "Business name is required" }}
-              />
-
               <AddressAutocomplete
                 label="Address"
                 name="address"
@@ -220,8 +210,33 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 required={false}
               />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextField
+                label="City"
+                name="city"
+                placeholder="City"
+                register={register}
+                errors={errors}
+                validation={{ required: "City name is required" }}
+              />
+              <TextField
+                label="Country / Region"
+                name="countryRegion"
+                placeholder="Country / Region"
+                register={register}
+                errors={errors}
+                validation={{ required: "Country name is required" }}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextField
+                label="Business Name"
+                name="businessName"
+                placeholder="Business / Trading Name"
+                register={register}
+                errors={errors}
+                validation={{ required: "Business name is required" }}
+              />
               <SelectField
                 label="Business Type"
                 name="businessType"
@@ -238,7 +253,17 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 errors={errors}
                 validation={{ required: "Business type is required" }}
               />
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextField
+                label="Tax ID"
+                name="taxId"
+                placeholder="TAX123456"
+                register={register}
+                errors={errors}
+                validation={{ required: false }}
+              />
               <SelectField
                 label="Merchant Type"
                 name="merchantType"
@@ -250,17 +275,6 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
                 control={control}
                 errors={errors}
                 validation={{ required: "Merchant type is required" }}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <TextField
-                label="Tax ID"
-                name="taxId"
-                placeholder="TAX123456"
-                register={register}
-                errors={errors}
-                validation={{ required: false }}
               />
             </div>
           </CardContent>

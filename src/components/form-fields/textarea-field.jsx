@@ -1,5 +1,6 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 export function TextareaField({
   label,
@@ -9,6 +10,7 @@ export function TextareaField({
   errors,
   validation = {},
   rows = 4,
+  className,
   ...props
 }) {
   const defaultPlaceholder =
@@ -24,7 +26,10 @@ export function TextareaField({
         id={name}
         rows={rows}
         placeholder={defaultPlaceholder}
-        className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        className={cn(
+          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
         {...register(name, validation)}
         {...props}
       />

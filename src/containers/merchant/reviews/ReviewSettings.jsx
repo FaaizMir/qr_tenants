@@ -66,8 +66,7 @@ export default function ReviewSettings() {
 
       setConfig((prev) => ({
         ...prev,
-        presets: presetTexts.length > 0 ? presetTexts : prev.presets, // fallback
-        enablePresetReviews: sorted.length > 0,
+        presets: presetTexts.length > 0 ? presetTexts : prev.presets,
       }));
     } catch (error) {
       console.error(error);
@@ -77,9 +76,42 @@ export default function ReviewSettings() {
     }
   };
 
+  const fetchMerchantSettings = async () => {
+    if (!merchantId) return;
+
+    try {
+      const res = await axiosInstance.get(
+        `/merchant-settings/merchant/${merchantId}`
+      );
+
+      const data = res?.data?.data;
+      if (!data) return;
+
+      setConfig((prev) => ({
+        ...prev,
+
+        enablePresetReviews: data.enable_preset_reviews ?? false,
+        enableGoogle: data.enable_google_reviews ?? false,
+        enableFacebook: data.enable_facebook_reviews ?? false,
+        enableInstagram: data.enable_instagram_reviews ?? false,
+        enableRed: data.enable_xiaohongshu_reviews ?? false,
+        googleReviewLink: data.google_review_url || "",
+        facebookReviewLink: data.facebook_page_url || "",
+        instagramReviewLink: data.instagram_url || "",
+        redReviewLink: data.xiaohongshu_url || "",
+      }));
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to load merchant settings");
+    }
+  };
+
   useEffect(() => {
+    if (!merchantId) return;
+
+    fetchMerchantSettings();
     fetchPresetReviews();
-  }, []);
+  }, [merchantId]);
 
   const handleSavePresets = async () => {
     setLoadingPresets(true);
