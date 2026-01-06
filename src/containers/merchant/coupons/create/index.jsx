@@ -14,6 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
@@ -37,8 +45,11 @@ export default function MerchantCreateCouponContainer() {
   const [isActive, setIsActive] = useState(true);
   const [whatsappEnabled, setWhatsappEnabled] = useState(true);
   const [luckyDrawEnabled, setLuckyDrawEnabled] = useState(false);
+
   const [isHalal, setIsHalal] = useState(false);
   const [templateSelection, setTemplateSelection] = useState(null);
+  const [visibility, setVisibility] = useState(false);
+  const [placement, setPlacement] = useState("top");
 
   const templateCardRef = useRef(null);
 
@@ -59,7 +70,10 @@ export default function MerchantCreateCouponContainer() {
     setWhatsappEnabled(true);
     setLuckyDrawEnabled(false);
     setIsHalal(false);
+
     setTemplateSelection(null);
+    setVisibility(false);
+    setPlacement("top");
   };
 
   const handleSubmit = async (e) => {
@@ -85,7 +99,10 @@ export default function MerchantCreateCouponContainer() {
         is_active: Boolean(isActive),
         whatsapp_enabled: Boolean(whatsappEnabled),
         lucky_draw_enabled: Boolean(luckyDrawEnabled),
+
         /*is_halal: Boolean(isHalal),*/
+        visibility: Boolean(visibility),
+        placement: placement,
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
@@ -205,6 +222,36 @@ export default function MerchantCreateCouponContainer() {
                   </div>
                 </div>
 
+
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <Label>Placement</Label>
+                    <Select value={placement} onValueChange={setPlacement}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select placement" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="top">Top</SelectItem>
+                        <SelectItem value="mid">Mid</SelectItem>
+                        <SelectItem value="bottom">Bottom</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <Label className="text-base">Visibility</Label>
+                      <CardDescription>
+                        Show this batch publicly
+                      </CardDescription>
+                    </div>
+                    <Switch
+                      checked={visibility}
+                      onCheckedChange={setVisibility}
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <Label>Template</Label>
                   <TemplateSelector
@@ -286,6 +333,7 @@ export default function MerchantCreateCouponContainer() {
           </Card>
         </div>
       </div>
+
     </div>
   );
 }
