@@ -34,6 +34,8 @@ export function CustomerReviewFlow() {
     },
   });
 
+  const formValues = watch();
+
   // Configuration (Mock)
   const [merchantConfig] = useState({
     name: "The Gourmet Bistro",
