@@ -257,32 +257,29 @@ export default function ReviewSettings() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">
-            Review & Reward Settings
-          </h2>
-          <p className="text-muted-foreground">
-            Configure how customers review your business and what rewards they
-            get.
-          </p>
-        </div>
+    <div className="space-y-8">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-3xl font-bold tracking-tight">
+          Review & Reward Settings
+        </h2>
+        <p className="text-muted-foreground text-base">
+          Configure how customers review your business and what rewards they receive.
+        </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Platform Links */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Review Platforms</CardTitle>
-            <CardDescription>
-              Where do you want customers to post reviews?
+        <Card className="border-muted/60">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl">Review Platforms</CardTitle>
+            <CardDescription className="text-sm">
+              Enable platforms where customers can post reviews
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label>Google Business Profile</Label>
+          <CardContent className="space-y-5">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                <Label className="font-medium cursor-pointer">Google Business Profile</Label>
                 <Switch
                   checked={config.enableGoogle}
                   onCheckedChange={(c) =>
@@ -290,18 +287,20 @@ export default function ReviewSettings() {
                   }
                 />
               </div>
-              <Input
-                placeholder="https://g.page/r/..."
-                value={config.googleReviewLink}
-                onChange={(e) =>
-                  setConfig({ ...config, googleReviewLink: e.target.value })
-                }
-                disabled={!config.enableGoogle}
-              />
+              {config.enableGoogle && (
+                <Input
+                  placeholder="https://g.page/r/..."
+                  value={config.googleReviewLink}
+                  onChange={(e) =>
+                    setConfig({ ...config, googleReviewLink: e.target.value })
+                  }
+                  className="animate-in fade-in slide-in-from-top-2"
+                />
+              )}
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label>Facebook Page</Label>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                <Label className="font-medium cursor-pointer">Facebook Page</Label>
                 <Switch
                   checked={config.enableFacebook}
                   onCheckedChange={(c) =>
@@ -309,18 +308,20 @@ export default function ReviewSettings() {
                   }
                 />
               </div>
-              <Input
-                placeholder="https://facebook.com/..."
-                value={config.facebookReviewLink}
-                onChange={(e) =>
-                  setConfig({ ...config, facebookReviewLink: e.target.value })
-                }
-                disabled={!config.enableFacebook}
-              />
+              {config.enableFacebook && (
+                <Input
+                  placeholder="https://facebook.com/..."
+                  value={config.facebookReviewLink}
+                  onChange={(e) =>
+                    setConfig({ ...config, facebookReviewLink: e.target.value })
+                  }
+                  className="animate-in fade-in slide-in-from-top-2"
+                />
+              )}
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label>Instagram Profile/Post</Label>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                <Label className="font-medium cursor-pointer">Instagram Profile/Post</Label>
                 <Switch
                   checked={config.enableInstagram}
                   onCheckedChange={(c) =>
@@ -328,18 +329,20 @@ export default function ReviewSettings() {
                   }
                 />
               </div>
-              <Input
-                placeholder="https://instagram.com/..."
-                value={config.instagramReviewLink}
-                onChange={(e) =>
-                  setConfig({ ...config, instagramReviewLink: e.target.value })
-                }
-                disabled={!config.enableInstagram}
-              />
+              {config.enableInstagram && (
+                <Input
+                  placeholder="https://instagram.com/..."
+                  value={config.instagramReviewLink}
+                  onChange={(e) =>
+                    setConfig({ ...config, instagramReviewLink: e.target.value })
+                  }
+                  className="animate-in fade-in slide-in-from-top-2"
+                />
+              )}
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label>XiaoHongShu (RED)</Label>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                <Label className="font-medium cursor-pointer">XiaoHongShu (RED)</Label>
                 <Switch
                   checked={config.enableRed}
                   onCheckedChange={(c) =>
@@ -347,14 +350,16 @@ export default function ReviewSettings() {
                   }
                 />
               </div>
-              <Input
-                placeholder="https://..."
-                value={config.redReviewLink}
-                onChange={(e) =>
-                  setConfig({ ...config, redReviewLink: e.target.value })
-                }
-                disabled={!config.enableRed}
-              />
+              {config.enableRed && (
+                <Input
+                  placeholder="https://..."
+                  value={config.redReviewLink}
+                  onChange={(e) =>
+                    setConfig({ ...config, redReviewLink: e.target.value })
+                  }
+                  className="animate-in fade-in slide-in-from-top-2"
+                />
+              )}
             </div>
 
             <Separator />
@@ -393,11 +398,11 @@ export default function ReviewSettings() {
               </div> */}
 
               <div className="space-y-4 pt-2">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <Label className="text-base">Paid Ads</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Enable promotional images on your review page.
+                <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
+                  <div className="space-y-0.5">
+                    <Label className="text-base font-medium">Paid Ads</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Enable promotional images on your review page
                     </p>
                   </div>
                   <Switch
@@ -473,61 +478,61 @@ export default function ReviewSettings() {
         </Card>
 
         {/* Feature Toggles */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Features & Rewards</CardTitle>
-            <CardDescription>
-              Enable lucky draws or direct coupons.
+        <Card className="border-muted/60">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl">Features & Rewards</CardTitle>
+            <CardDescription className="text-sm">
+              Choose your customer reward strategy
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-10">
-            <div className="space-y-6">
+          <CardContent className="space-y-6">
+            <div className="space-y-4">
               <Label className="text-base font-semibold">Reward Strategy</Label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-3">
                 <div
                   className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "none"
-                    ? "border-primary bg-primary/5"
-                    : "hover:bg-muted"
+                    ? "border-primary bg-primary/10 shadow-sm"
+                    : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
                     }`}
                   onClick={() => setConfig({ ...config, rewardType: "none" })}
                 >
-                  <div className="font-bold mb-1">No Reward</div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="font-semibold mb-1.5">No Reward</div>
+                  <div className="text-sm text-muted-foreground">
                     Review only. No incentive provided.
                   </div>
                 </div>
                 <div
                   className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "coupon"
-                    ? "border-primary bg-primary/5"
-                    : "hover:bg-muted"
+                    ? "border-primary bg-primary/10 shadow-sm"
+                    : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
                     }`}
                   onClick={() => setConfig({ ...config, rewardType: "coupon" })}
                 >
-                  <div className="font-bold mb-1">Direct Coupon</div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="font-semibold mb-1.5">Direct Coupon</div>
+                  <div className="text-sm text-muted-foreground">
                     Send a fixed coupon via WhatsApp immediately.
                   </div>
                 </div>
                 <div
                   className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${config.rewardType === "lucky_draw"
-                    ? "border-primary bg-primary/5"
-                    : "hover:bg-muted"
+                    ? "border-primary bg-primary/10 shadow-sm"
+                    : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
                     }`}
                   onClick={() =>
                     setConfig({ ...config, rewardType: "lucky_draw" })
                   }
                 >
-                  <div className="font-bold mb-1">Lucky Draw</div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="font-semibold mb-1.5">Lucky Draw</div>
+                  <div className="text-sm text-muted-foreground">
                     Gamified experience with variable prizes.
                   </div>
                 </div>
               </div>
 
               {config.rewardType === "lucky_draw" && (
-                <div className="text-xs text-orange-600 bg-orange-50 p-2 rounded mt-2 border border-orange-100">
-                  Manage prizes and probabilities in the <b>Lucky Draw</b> tab.
+                <div className="text-sm text-orange-700 bg-orange-50 p-3 rounded-lg border border-orange-200 animate-in fade-in slide-in-from-top-2">
+                  💡 Manage prizes and probabilities in the <b>Lucky Draw</b> tab.
                 </div>
               )}
             </div>
@@ -546,21 +551,21 @@ export default function ReviewSettings() {
         </Card>
 
         {/* Preset Sentences Editor */}
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <div className="flex items-start justify-between gap-4">
+        <Card className="lg:col-span-2 border-muted/60">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* Left side: Title + Description */}
-              <div>
-                <CardTitle>Preset Review Sentences (10 Max)</CardTitle>
-                <CardDescription>
-                  Customize the quick-reply options your customers see.
+              <div className="flex-1">
+                <CardTitle className="text-xl">Preset Review Sentences</CardTitle>
+                <CardDescription className="text-sm mt-1.5">
+                  Customize quick-reply options your customers see (max 10)
                 </CardDescription>
               </div>
 
               {/* Right side: Toggle */}
-              <div className="flex items-center space-x-2">
-                <Label className="text-sm font-medium whitespace-nowrap">
-                  Use Preset Sentences
+              <div className="flex items-center gap-3 rounded-lg border border-muted/60 bg-muted/20 px-4 py-2.5 hover:border-primary/40 hover:bg-primary/5 transition">
+                <Label className="text-sm font-medium whitespace-nowrap cursor-pointer">
+                  Enable Presets
                 </Label>
                 <Switch
                   checked={config.enablePresetReviews}
@@ -573,16 +578,18 @@ export default function ReviewSettings() {
           </CardHeader>
 
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {config.presets.map((preset, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  <div className="bg-muted w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium">
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="bg-primary/10 text-primary w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold shrink-0">
                     {idx + 1}
                   </div>
                   <Input
                     value={preset}
                     onChange={(e) => handlePresetChange(idx, e.target.value)}
                     disabled={!config.enablePresetReviews || loadingPresets}
+                    className="flex-1"
+                    placeholder={`Preset review ${idx + 1}`}
                   />
                 </div>
               ))}

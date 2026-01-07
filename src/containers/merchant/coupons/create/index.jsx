@@ -222,13 +222,16 @@ export default function MerchantCreateCouponContainer() {
                   </div>
                 </div>
 
-
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <Label>Placement</Label>
+                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
+                    <div className="space-y-0.5 flex-1">
+                      <Label className="text-base font-medium">Placement</Label>
+                      <p className="text-xs text-muted-foreground">
+                        Position where coupon appears
+                      </p>
+                    </div>
                     <Select value={placement} onValueChange={setPlacement}>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-background w-[120px]">
                         <SelectValue placeholder="Select placement" />
                       </SelectTrigger>
                       <SelectContent>
@@ -238,12 +241,15 @@ export default function MerchantCreateCouponContainer() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="flex items-center justify-between rounded-lg border p-4">
+
+                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
                     <div className="space-y-0.5">
-                      <Label className="text-base">Visibility</Label>
-                      <CardDescription>
+                      <Label className="text-base font-medium">
+                        Visibility
+                      </Label>
+                      <p className="text-xs text-muted-foreground">
                         Show this batch publicly
-                      </CardDescription>
+                      </p>
                     </div>
                     <Switch
                       checked={visibility}
@@ -261,46 +267,48 @@ export default function MerchantCreateCouponContainer() {
                   />
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   {[
                     {
                       label: "Active",
                       checked: isActive,
                       onChange: setIsActive,
-                      desc: "Batch is enabled for redemption.",
+                      desc: "Enable for redemption",
                     },
                     {
-                      label: "WhatsApp Enabled",
+                      label: "WhatsApp",
                       checked: whatsappEnabled,
                       onChange: setWhatsappEnabled,
-                      desc: "Allow WhatsApp messages for this batch.",
+                      desc: "Allow WhatsApp messages",
                     },
                     {
                       label: "Lucky Draw",
                       checked: luckyDrawEnabled,
                       onChange: setLuckyDrawEnabled,
-                      desc: "Include this batch in lucky draw flows.",
+                      desc: "Include in lucky draw",
                     },
                     {
                       label: "Halal Certified",
                       checked: isHalal,
                       onChange: setIsHalal,
-                      desc: "Mark this coupon/batch as Halal compliant.",
+                      desc: "Halal compliant",
                     },
                   ].map((item) => (
                     <label
                       key={item.label}
-                      className="flex items-start gap-3 rounded-lg border border-muted/60 bg-muted/20 px-3 py-3 hover:border-primary/40 hover:bg-primary/5 transition"
+                      className="flex items-center gap-2.5 rounded-lg border border-muted/60 bg-muted/20 px-3 py-2.5 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer"
                     >
                       <input
                         type="checkbox"
-                        className="mt-1 h-4 w-4 rounded border-muted-foreground/50 text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded border-muted-foreground/50 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-0 cursor-pointer"
                         checked={item.checked}
                         onChange={(e) => item.onChange(e.target.checked)}
                       />
-                      <div className="space-y-1">
-                        <span className="font-medium">{item.label}</span>
-                        <p className="text-xs text-muted-foreground">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium leading-none">
+                          {item.label}
+                        </span>
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           {item.desc}
                         </p>
                       </div>
@@ -333,7 +341,6 @@ export default function MerchantCreateCouponContainer() {
           </Card>
         </div>
       </div>
-
     </div>
   );
 }

@@ -56,14 +56,12 @@ export default function PrizeForm({ isEdit = false }) {
 
     const fetchPrize = async () => {
       try {
-        const response = await axiosInstance.get(
-          `/lucky-draw/prizes/${prizeId}`
-        );
-        const prize = response?.data?.data || response?.data;
+        const res = await axiosInstance.get(`/lucky-draw/prizes/${prizeId}`);
+        const prize = res?.data?.data;
 
         if (!prize) return;
 
-        // Populate form with prize data
+        // Set form values
         setValue("prize_name", prize.prize_name);
         setValue("prize_description", prize.prize_description);
         setValue("prize_type", prize.prize_type);
@@ -74,15 +72,23 @@ export default function PrizeForm({ isEdit = false }) {
         setValue("sort_order", prize.sort_order);
         setValue("batch_id", prize.batch_id);
 
-        // Set selected batch for the combobox
+        // 👉 Fetch batch name using batch_id
         if (prize.batch_id) {
-          setSelectedBatch({
-            id: prize.batch_id,
-            batch_name: prize.batch_name || "Selected Batch",
-          });
+          const batchRes = await axiosInstance.get(
+            `/coupon-batches/${prize.batch_id}`
+          );
+
+          const batch = batchRes?.data?.data;
+
+          if (batch) {
+            setSelectedBatch({
+              id: batch.id,
+              batch_name: batch.batch_name,
+            });
+          }
         }
       } catch (err) {
-        console.error("Failed to fetch prize:", err);
+        console.error(err);
         toast.error("Failed to load prize details");
       }
     };
@@ -107,9 +113,21 @@ export default function PrizeForm({ isEdit = false }) {
 
     setLoading(true);
     try {
-      const payload = {
+      const Postpayload = {
         merchant_id: merchantId,
         batch_id: data.batch_id,
+        prize_name: data.prize_name,
+        prize_description: data.prize_description,
+        prize_type: data.prize_type,
+        probability: Number(data.probability),
+        daily_limit: Number(data.daily_limit),
+        total_limit: Number(data.total_limit),
+        is_active: data.is_active === "true",
+        sort_order: Number(data.sort_order),
+      };
+      const Patchpayload = {
+        /*  merchant_id: merchantId,
+        batch_id: data.batch_id,*/
         prize_name: data.prize_name,
         prize_description: data.prize_description,
         prize_type: data.prize_type,
@@ -122,11 +140,14 @@ export default function PrizeForm({ isEdit = false }) {
 
       if (isEdit && prizeId) {
         // Update existing prize
-        await axiosInstance.patch(`/lucky-draw/prizes/${prizeId}`, payload);
+        await axiosInstance.patch(
+          `/lucky-draw/prizes/${prizeId}`,
+          Patchpayload
+        );
         toast.success("Prize updated successfully!");
       } else {
         // Create new prize
-        await axiosInstance.post("/lucky-draw/prizes", payload);
+        await axiosInstance.post("/lucky-draw/prizes", Postpayload);
         toast.success("Prize created successfully!");
       }
 
@@ -187,8 +208,8 @@ export default function PrizeForm({ isEdit = false }) {
                     options={[
                       { value: "coupon", label: "Coupon" },
                       { value: "discount", label: "Discount" },
-                      { value: "freebie", label: "Freebie" },
-                      { value: "none", label: "Better Luck Next Time" },
+                      { value: "free_item", label: "Freebie" },
+                      { value: "no_prize", label: "Better Luck Next Time" },
                     ]}
                   />
                 </div>
@@ -216,6 +237,7 @@ export default function PrizeForm({ isEdit = false }) {
                   searchParam="search"
                   selectedItem={selectedBatch}
                   setSelectedItem={setSelectedBatch}
+                  disabled={isEdit}
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
