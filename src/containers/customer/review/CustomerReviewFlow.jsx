@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
 import axiosInstance from "@/lib/axios";
 
 import { IdentityForm } from "./components/IdentityForm";
@@ -58,34 +60,82 @@ export function CustomerReviewFlow() {
   });
 
   const [initializing, setInitializing] = useState(true);
-  const id = 1;
-  React.useEffect(() => {
+  const searchParams = useSearchParams();
+  const merchantId =
+    searchParams.get("merchantId") || searchParams.get("mid") || "1";
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch Settings
-        const settingsRes = await axiosInstance.get(
-          `/merchant-settings/merchant/${id}`
-        );
-        const settings = settingsRes.data?.data;
+        // 1. Try to load from sessionStorage first
+        const cachedData = sessionStorage.getItem("couponReviewData");
+        if (cachedData) {
+          const { merchant } = JSON.parse(cachedData);
+          if (merchant && (merchant.id == merchantId || merchantId === "1")) {
+            setMerchantConfig((prev) => ({
+              ...prev,
+              name: merchant.name || merchant.business_name || prev.name,
+              address: merchant.address || prev.address,
+              enablePresetReviews:
+                merchant.settings?.enable_preset_reviews ??
+                prev.enablePresetReviews,
+              enableGoogle:
+                merchant.settings?.enable_google_reviews ?? prev.enableGoogle,
+              enableFacebook:
+                merchant.settings?.enable_facebook_reviews ??
+                prev.enableFacebook,
+              enableInstagram:
+                merchant.settings?.enable_instagram_reviews ??
+                prev.enableInstagram,
+              enableRed:
+                merchant.settings?.enable_xiaohongshu_reviews ?? prev.enableRed,
+              googleReviewLink:
+                merchant.settings?.google_review_url || prev.googleReviewLink,
+              facebookReviewLink:
+                merchant.settings?.facebook_page_url || prev.facebookReviewLink,
+              instagramReviewLink:
+                merchant.settings?.instagram_url || prev.instagramReviewLink,
+              redReviewLink:
+                merchant.settings?.xiaohongshu_url || prev.redReviewLink,
+            }));
 
-        // Fetch Merchant Details (for Name)
-        const merchantRes = await axiosInstance.get(`/merchants/${id}`);
-        const merchant = merchantRes.data?.data;
+            if (merchant.settings) {
+              setInitializing(false);
+              return;
+            }
+          }
+        }
 
-        if (settings) {
+        // 2. Fetch remote data using publicAxios to avoid 401s
+        const [settingsRes, merchantRes] = await Promise.all([
+          axiosInstance
+            .get(`/merchant-settings/merchant/${merchantId}`)
+            .catch(() => null),
+        ]);
+
+        const settings = settingsRes?.data?.data;
+        const merchant = merchantRes?.data?.data;
+
+        if (settings || merchant) {
           setMerchantConfig((prev) => ({
             ...prev,
-            name: merchant?.name || "The Gourmet Bistro",
+            name: merchant?.name || merchant?.business_name || prev.name,
             address: merchant?.address || prev.address,
-            enablePresetReviews: settings.enable_preset_reviews,
-            enableGoogle: settings.enable_google_reviews,
-            enableFacebook: settings.enable_facebook_reviews,
-            enableInstagram: settings.enable_instagram_reviews,
-            enableRed: settings.enable_xiaohongshu_reviews,
-            googleReviewLink: settings.google_review_url,
-            facebookReviewLink: settings.facebook_page_url,
-            instagramReviewLink: settings.instagram_url,
-            redReviewLink: settings.xiaohongshu_url,
+            enablePresetReviews:
+              settings?.enable_preset_reviews ?? prev.enablePresetReviews,
+            enableGoogle: settings?.enable_google_reviews ?? prev.enableGoogle,
+            enableFacebook:
+              settings?.enable_facebook_reviews ?? prev.enableFacebook,
+            enableInstagram:
+              settings?.enable_instagram_reviews ?? prev.enableInstagram,
+            enableRed: settings?.enable_xiaohongshu_reviews ?? prev.enableRed,
+            googleReviewLink:
+              settings?.google_review_url || prev.googleReviewLink,
+            facebookReviewLink:
+              settings?.facebook_page_url || prev.facebookReviewLink,
+            instagramReviewLink:
+              settings?.instagram_url || prev.instagramReviewLink,
+            redReviewLink: settings?.xiaohongshu_url || prev.redReviewLink,
           }));
         }
       } catch (error) {
@@ -95,10 +145,16 @@ export function CustomerReviewFlow() {
       }
     };
     fetchData();
-  }, []);
+  }, [merchantId]);
 
   const nextStep = () => setStep((s) => s + 1);
   const prevStep = () => setStep((s) => s - 1);
+  const resetFlow = () => {
+    setValue("text", "");
+    setValue("rating", 5);
+    setReward(null);
+    setStep(1);
+  };
 
   if (initializing) {
     return (
@@ -130,39 +186,66 @@ export function CustomerReviewFlow() {
             setValue={setValue}
             control={control}
             errors={errors}
-            watch={watch}
+            merchantConfig={merchantConfig}
           />
         )}
         {step === 2 && (
           <ReviewForm
             merchantConfig={merchantConfig}
+            register={register}
             setValue={setValue}
             formValues={formValues}
-            register={register}
             nextStep={nextStep}
             prevStep={prevStep}
             loading={loading}
             setLoading={setLoading}
           />
         )}
-        {step === 3 && <RedirectWait nextStep={nextStep} />}
+        {step === 3 && (
+          <RedirectWait
+            nextStep={nextStep}
+            prevStep={prevStep}
+            merchantConfig={merchantConfig}
+          />
+        )}
         {step === 4 &&
           (merchantConfig.rewardType === "lucky_draw" ? (
-            <LuckyDraw nextStep={nextStep} setReward={setReward} />
-          ) : merchantConfig.rewardType === "coupon" ? (
-            <RewardSuccess reward={reward} formValues={formValues} />
+            <LuckyDraw
+              nextStep={nextStep}
+              prevStep={prevStep}
+              setReward={setReward}
+              merchantConfig={merchantConfig}
+            />
           ) : (
-            <ThankYou merchantConfig={merchantConfig} />
+            <RewardSuccess
+              reward={reward}
+              formValues={formValues}
+              merchantConfig={merchantConfig}
+              prevStep={prevStep}
+            />
           ))}
         {step === 5 && (
-          <RewardSuccess reward={reward} formValues={formValues} />
+          <RewardSuccess
+            reward={reward}
+            formValues={formValues}
+            merchantConfig={merchantConfig}
+            prevStep={prevStep}
+          />
         )}
+        {(step === 6 ||
+          (step === 5 && merchantConfig.rewardType !== "lucky_draw")) && (
+            <ThankYou
+              resetFlow={resetFlow}
+              merchantConfig={merchantConfig}
+              prevStep={prevStep}
+            />
+          )}
       </div>
 
-      {/* Footer Branding */}
-      <div className="fixed bottom-6 left-0 w-full text-center pointer-events-none">
-        <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-[0.3em]">
-          Experience by QR Tenants
+      {/* Footer Branding - Global but subtle */}
+      <div className="fixed bottom-6 left-0 w-full text-center pointer-events-none z-0">
+        <p className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-[0.3em]">
+          Powered by QR Tenants Experience
         </p>
       </div>
     </main>
