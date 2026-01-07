@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Star,
@@ -12,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import StarRatingInput from "@/components/form-fields/star-rating-input";
 import { TextareaField } from "@/components/form-fields/textarea-field";
+import axios from "axios";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
 import {
@@ -21,6 +24,14 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { useSearchParams } from "next/navigation";
 
 const PLATFORMS = [
   {
@@ -62,13 +73,19 @@ export const ReviewForm = ({
   const [presetReviews, setPresetReviews] = React.useState([]);
   const [loadingPresets, setLoadingPresets] = React.useState(true);
   const [selectedPresetId, setSelectedPresetId] = React.useState(null);
-  const [showPlatforms, setShowPlatforms] = React.useState(false);
+  const [showPlatformModal, setShowPlatformModal] = React.useState(false);
+  const [recordedFeedbackId, setRecordedFeedbackId] = React.useState(null);
+
+  const queryParams = useSearchParams();
+  const merchantId =
+    queryParams.get("merchantId") || queryParams.get("mid") || "1";
+  const batchId = queryParams.get("batchId") || queryParams.get("bid") || "1";
 
   React.useEffect(() => {
     const fetchPresets = async () => {
       try {
         const response = await axiosInstance.get(
-          "/preset-reviews?merchantId=1"
+          `/preset-reviews?merchantId=${merchantId}`
         );
         setPresetReviews(response.data?.data || []);
       } catch (error) {
@@ -78,7 +95,7 @@ export const ReviewForm = ({
       }
     };
     fetchPresets();
-  }, []);
+  }, [merchantId]);
 
   const handlePresetClick = (text, id) => {
     setValue("text", text);
@@ -90,27 +107,32 @@ export const ReviewForm = ({
     setSelectedPresetId(null);
   };
 
-  const handleInitialSubmit = () => {
+  const handleFormSubmit = () => {
     if (!formValues.rating) {
-      toast.error("Please provide a rating ⭐");
+      toast.error("Please provide a rating");
       return;
     }
-    if (!formValues.text?.trim()) {
-      toast.error("Please provide some feedback ✍️");
+    if (!formValues.text && !selectedPresetId) {
+      toast.error("Please share some feedback");
       return;
     }
-    setShowPlatforms(true);
+    // Show modal to pick platform before system submission since backend requires it
+    setShowPlatformModal(true);
   };
 
-  const handleSubmitFinal = async (platformId) => {
+  const handlePlatformSelection = async (platformId) => {
     try {
       setLoading(true);
       setValue("platform", platformId);
 
       const isPresetReview = selectedPresetId !== null;
 
+      // Map 'red' to 'xiaohongshu' as required by backend
+      const mappedPlatform = platformId === "red" ? "xiaohongshu" : platformId;
+
       const payload = {
-        merchantId: 1,
+        merchantId: parseInt(merchantId),
+        coupon_batch_id: parseInt(batchId),
         email: formValues.email,
         name: formValues.name,
         phoneNumber: formValues.phone,
@@ -118,35 +140,44 @@ export const ReviewForm = ({
         address: formValues.address,
         gender: formValues.gender,
         rating: formValues.rating,
-        comment: formValues.text,
         reviewType: isPresetReview ? "preset" : "custom",
-        customReviewText: !isPresetReview ? formValues.text : null,
-        presetReviewId: isPresetReview ? selectedPresetId : null,
-        selectedPlatform: platformId,
+        presetReviewId: isPresetReview ? selectedPresetId : undefined,
+        comment: !isPresetReview ? formValues.text : undefined,
+        selectedPlatform: mappedPlatform, // Backend requires this in POST
         redirectCompleted: false,
       };
 
-      await axiosInstance.post("/feedbacks", payload);
+      // 1. Submit feedback to system
+      const response = await axiosInstance.post("/feedbacks", payload);
+      const feedbackId = response.data?.data?.id || response.data?.id;
 
-      const platformMap = {
-        google: merchantConfig.googleReviewLink,
-        facebook: merchantConfig.facebookReviewLink,
-        instagram: merchantConfig.instagramReviewLink,
-        red: merchantConfig.redReviewLink,
-      };
+      if (feedbackId) {
+        // 2. Mark redirect as complete
+        await axiosInstance
+          .patch(`/feedbacks/${feedbackId}/complete-redirect`)
+          .then((res) => console.log("Redirect status updated:", res.data))
+          .catch((err) => console.error("Error completing redirect:", err));
 
-      const redirectUrl = platformMap[platformId] || merchantConfig.mapLink;
+        const platformMap = {
+          google: merchantConfig.googleReviewLink,
+          facebook: merchantConfig.facebookReviewLink,
+          instagram: merchantConfig.instagramReviewLink,
+          red: merchantConfig.redReviewLink,
+        };
 
-      toast.success("Feedback recorded successfully!");
+        const redirectUrl = platformMap[platformId] || merchantConfig.mapLink;
 
-      setTimeout(() => {
+        // 3. Open the URL
         if (redirectUrl) {
           window.open(redirectUrl, "_blank");
         }
+
+        setShowPlatformModal(false);
+        toast.success("Feedback submitted successfully!");
         nextStep();
-      }, 1000);
+      }
     } catch (error) {
-      console.error("Submission Error:", error);
+      console.error("Platform Redirect Error:", error);
       toast.error("Failed to submit feedback");
     } finally {
       setLoading(false);
@@ -161,190 +192,185 @@ export const ReviewForm = ({
     return false;
   });
 
-  if (!showPlatforms) {
-    return (
-      <div className="w-full">
-        <Card className="w-full border-muted/60 shadow-lg">
-          <CardHeader className="text-center pb-6">
-            <div className="flex items-center justify-between mb-4 w-full">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={prevStep}
-                className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 px-0"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-xs font-semibold uppercase tracking-wider">
-                  Back
-                </span>
-              </Button>
-              <div className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded-full uppercase tracking-tighter">
-                Step 2 of 2
-              </div>
-            </div>
-
-            <div className="mx-auto w-16 h-16 rounded-full bg-yellow-400/10 flex items-center justify-center mb-4">
-              <Star className="w-8 h-8 text-yellow-500 fill-yellow-500" />
-            </div>
-            <CardTitle className="text-2xl font-bold tracking-tight">
-              Your Experience
-            </CardTitle>
-            <CardDescription className="text-sm">
-              How was your time at {merchantConfig.name}?
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="space-y-5 pb-8">
-            <div className="flex justify-center py-6 bg-muted/20 rounded-xl border-2 border-dashed border-muted/40 transition-colors hover:bg-muted/30">
-              <StarRatingInput
-                label=""
-                name="rating"
-                register={register}
-                setValue={setValue}
-                value={formValues.rating}
-              />
-            </div>
-
-            {merchantConfig.enablePresetReviews && (
-              <div className="space-y-3 pt-4">
-                <div className="flex items-center justify-center gap-2">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                  <Label className="text-sm font-semibold">Quick Review</Label>
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {loadingPresets ? (
-                    <div className="flex items-center gap-2 py-2">
-                      <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                      <span className="text-xs text-muted-foreground">
-                        Loading...
-                      </span>
-                    </div>
-                  ) : (
-                    presetReviews.map((review) => (
-                      <button
-                        key={review.id}
-                        type="button"
-                        onClick={() =>
-                          handlePresetClick(review.review_text, review.id)
-                        }
-                        className={cn(
-                          "px-4 py-2 rounded-lg text-sm font-medium border transition-all",
-                          selectedPresetId === review.id
-                            ? "bg-primary text-primary-foreground border-primary shadow-sm scale-[1.02]"
-                            : "bg-muted/20 border-muted/60 text-muted-foreground hover:border-primary/40 hover:bg-primary/5"
-                        )}
-                      >
-                        {review.review_text}
-                      </button>
-                    ))
-                  )}
-                </div>
-              </div>
-            )}
-
-            <div className="space-y-3 pt-4">
-              <div className="flex items-center justify-center gap-2">
-                <MessageSquare className="w-4 h-4 text-primary" />
-                <Label className="text-sm font-semibold">
-                  Custom Feedback <span className="text-red-500">*</span>
-                </Label>
-              </div>
-              <TextareaField
-                label=""
-                name="text"
-                placeholder="Tell us what you loved or how we can improve..."
-                register={register}
-                onChange={onTextChange}
-                errors={{}}
-                rows={3}
-                className="rounded-xl border-muted/60 focus:border-primary transition-colors resize-none text-sm"
-              />
-            </div>
-
-            <Button
-              className="w-full h-12 text-base font-bold shadow-md transition-all active:scale-95 mt-4"
-              onClick={handleInitialSubmit}
-            >
-              Continue <Send className="ml-2 w-4 h-4" />
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full">
-      <Card className="w-full border-muted/60 shadow-lg text-center">
-        <CardHeader className="pb-6">
-          <div className="mx-auto w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-8 h-8 text-green-500" />
-          </div>
-          <CardTitle className="text-2xl font-bold tracking-tight">
-            Almost Done!
-          </CardTitle>
-          <CardDescription className="text-sm">
-            Please share your feedback on one of these platforms:
-          </CardDescription>
-        </CardHeader>
+      <Card className="w-full border-muted/60 shadow-lg overflow-hidden">
+        {/* Merchant Branding Banner */}
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 py-8 px-4 text-center text-white">
+          <h2 className="text-2xl font-bold tracking-tight mb-1">
+            {merchantConfig.name}
+          </h2>
+          <p className="text-xs opacity-90">{merchantConfig.address}</p>
+        </div>
 
-        <CardContent className="space-y-6 pb-8">
-          <div className="grid grid-cols-2 gap-4">
-            {availablePlatforms.length > 0 ? (
-              availablePlatforms.map((platform) => (
-                <Button
-                  key={platform.id}
-                  variant="outline"
-                  type="button"
-                  className={cn(
-                    "h-28 flex-col gap-3 relative overflow-hidden group border-2 transition-all rounded-xl",
-                    formValues.platform === platform.id
-                      ? "border-primary bg-primary/5 shadow-md"
-                      : "border-muted/60 hover:border-primary/40 hover:bg-primary/5"
-                  )}
-                  onClick={() => handleSubmitFinal(platform.id)}
-                  disabled={loading}
-                >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold text-white shadow-sm transition-transform group-hover:scale-105"
-                    style={{ backgroundColor: platform.brandColor }}
-                  >
-                    {platform.icon}
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">
-                    {platform.name}
-                  </span>
-
-                  {loading && formValues.platform === platform.id && (
-                    <div className="absolute inset-0 bg-background/80 backdrop-blur-[1px] flex items-center justify-center z-20">
-                      <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  )}
-                </Button>
-              ))
-            ) : (
-              <div className="col-span-2 py-8 bg-muted/20 rounded-xl border-2 border-dashed border-muted/40">
-                <p className="text-muted-foreground text-sm italic">
-                  Configuring platforms...
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="pt-2">
+        <CardHeader className="text-center pb-6 pt-10 relative">
+          <div className="absolute top-4 left-4">
             <Button
               variant="ghost"
               size="sm"
-              className="text-muted-foreground hover:text-primary font-bold flex items-center gap-2 mx-auto"
-              onClick={() => setShowPlatforms(false)}
-              disabled={loading}
+              onClick={prevStep}
+              className="hover:bg-primary/5 text-muted-foreground hover:text-primary transition-colors pr-4"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Edit My Feedback
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              <span className="text-[11px] font-bold uppercase tracking-wider">
+                Back
+              </span>
             </Button>
           </div>
+
+          <div className="absolute top-4 right-4">
+            <div className="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full uppercase tracking-tighter">
+              Review Form
+            </div>
+          </div>
+
+          <div className="mx-auto w-16 h-16 rounded-full bg-yellow-400/10 flex items-center justify-center mb-4">
+            <Sparkles className="w-8 h-8 text-yellow-600" />
+          </div>
+          <CardTitle className="text-2xl font-bold tracking-tight">
+            Share Your Experience
+          </CardTitle>
+          <CardDescription className="text-sm">
+            Your feedback matters to us!
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-5 pb-10">
+          <div className="flex justify-center py-6 bg-muted/20 rounded-xl border-2 border-dashed border-muted/40 transition-colors hover:bg-muted/30">
+            <StarRatingInput
+              label=""
+              name="rating"
+              register={register}
+              setValue={setValue}
+              value={formValues.rating}
+              size="lg"
+            />
+          </div>
+
+          {merchantConfig.enablePresetReviews && presetReviews.length > 0 && (
+            <div className="space-y-3 pt-4">
+              <div className="flex items-center justify-center gap-2 px-1">
+                <MessageSquare className="w-3.5 h-3.5 text-primary" />
+                <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
+                  Quick Selection
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 items-center justify-center">
+                {loadingPresets ? (
+                  <div className="flex items-center gap-2 py-2">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                    <span className="text-xs text-muted-foreground">
+                      Loading...
+                    </span>
+                  </div>
+                ) : (
+                  presetReviews.map((review) => (
+                    <button
+                      key={review.id}
+                      type="button"
+                      onClick={() =>
+                        handlePresetClick(review.review_text, review.id)
+                      }
+                      className={cn(
+                        "px-4 py-2 rounded-full text-xs font-medium transition-all border shadow-sm ",
+                        selectedPresetId === review.id
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white text-muted-foreground border-muted/60 hover:border-primary/40 hover:bg-primary/5"
+                      )}
+                    >
+                      {review.review_text}
+                    </button>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-1.5 pt-4">
+            <div className="flex items-center justify-center gap-2 px-1">
+              <MessageSquare className="w-3.5 h-3.5 text-primary" />
+              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
+                Write Your Own Review
+              </p>
+            </div>
+
+            <TextareaField
+              label=""
+              name="text"
+              placeholder="Write your thoughts here..."
+              register={register}
+              value={formValues.text}
+              onChange={onTextChange}
+              errors={{}}
+              rows={3}
+              className="rounded-xl border-muted/60 focus:border-primary transition-colors resize-none text-sm"
+            />
+          </div>
+
+          <Button
+            className="w-full h-12 text-base font-bold shadow-md transition-all active:scale-95 mt-4 bg-blue-700 hover:bg-blue-800"
+            onClick={handleFormSubmit}
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit Feedback"}{" "}
+            <Send className="ml-2 w-4 h-4" />
+          </Button>
         </CardContent>
+
+        <div className="bg-muted/30 py-4 text-center text-[10px] text-muted-foreground uppercase tracking-widest border-t">
+          Powered by QR Tenants
+        </div>
       </Card>
+
+      {/* Platform Selection Modal */}
+      <Dialog open={showPlatformModal} onOpenChange={setShowPlatformModal}>
+        <DialogContent className="sm:max-w-md border-none shadow-2xl p-0 overflow-hidden">
+          <div className="bg-linear-to-br from-blue-700 via-blue-600 to-indigo-700 p-8 text-center text-white relative">
+            <div className="mx-auto w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+              <CheckCircle2 className="w-8 h-8 text-white" />
+            </div>
+            <DialogTitle className="text-2xl font-black tracking-tight mb-2">
+              Almost Done!
+            </DialogTitle>
+            <DialogDescription className="text-blue-100 text-sm opacity-90">
+              To claim your reward, please post your review on one of these
+              platforms.
+            </DialogDescription>
+          </div>
+
+          <div className="p-6 space-y-4 bg-white">
+            <div className="grid grid-cols-2 gap-3">
+              {availablePlatforms.length > 0 ? (
+                availablePlatforms.map((platform) => (
+                  <button
+                    key={platform.id}
+                    onClick={() => handlePlatformSelection(platform.id)}
+                    className="flex flex-col items-center justify-center p-5 rounded-2xl border-2 border-slate-100 hover:border-primary hover:bg-primary/[0.03] transition-all group"
+                  >
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-black mb-3 transition-transform group-hover:scale-110 shadow-lg"
+                      style={{ backgroundColor: platform.brandColor }}
+                    >
+                      {platform.icon}
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary transition-colors">
+                      {platform.name}
+                    </span>
+                  </button>
+                ))
+              ) : (
+                <div className="col-span-2 py-4 text-center text-slate-400 italic text-xs">
+                  No social platforms configured.
+                </div>
+              )}
+            </div>
+
+            <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-wider py-2">
+              * You will be redirected to the selected app
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -102,7 +102,7 @@ export default function MerchantCreateCouponContainer() {
 
         /*is_halal: Boolean(isHalal),*/
         visibility: Boolean(visibility),
-        placement: placement,
+        /*   placement: placement,*/
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",

@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import { useEffect, useState } from "react";
 import {
@@ -27,7 +28,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -41,14 +41,15 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import axios from "axios";
+import axiosInstance from "@/lib/axios";
 
 export default function LandingPage() {
-
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const tHeroSection = useTranslations("Homepage.heroSection");
   const tFeatures = useTranslations("Homepage.fetaures");
   const tFooter = useTranslations("Homepage.footer");
   const locale = useLocale();
+  const router = useRouter();
 
   // -- Marketplace State --
   const [merchants, setMerchants] = useState([]);
@@ -81,7 +82,7 @@ export default function LandingPage() {
       setError(null);
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v1/coupons/public-feed"
+          "https://qr-review.mustservices.io/backend/api/v1/coupons/public-feed"
         );
 
         // The API returns { data: { merchants: [ ... ] } }
@@ -89,7 +90,10 @@ export default function LandingPage() {
         const merchantsData = responseData?.merchants || [];
 
         if (!Array.isArray(merchantsData)) {
-          console.error("API response structure unexpected. Expected data.merchants to be an array:", response.data);
+          console.error(
+            "API response structure unexpected. Expected data.merchants to be an array:",
+            response.data
+          );
           setMerchants([]);
           return;
         }
@@ -100,15 +104,22 @@ export default function LandingPage() {
           name: merchant.business_name,
           category: merchant.business_type,
           address: merchant.address,
-          city: merchant.city || merchant.address?.split(',')?.pop()?.trim() || "Unknown", // Fallback to parsing address if city is missing
+          city:
+            merchant.city ||
+            merchant.address?.split(",")?.pop()?.trim() ||
+            "Unknown", // Fallback to parsing address if city is missing
           batches: merchant.batches.filter((batch) => batch.visibility == true),
-          user: merchant.user
+          user: merchant.user,
         }));
 
         setMerchants(transformedMerchants);
 
         // Extract unique cities
-        const uniqueCities = [...new Set(transformedMerchants.map(m => m.city))].filter(Boolean).sort();
+        const uniqueCities = [
+          ...new Set(transformedMerchants.map((m) => m.city)),
+        ]
+          .filter(Boolean)
+          .sort();
         setCities(uniqueCities);
 
         // Don't auto-select any merchant - let user click to see batches
@@ -126,20 +137,21 @@ export default function LandingPage() {
 
   // -- Filtering Logic (Client-side for Search and Business Type) --
   const filteredMerchants = merchants.filter((m) => {
-    const matchesSearch =
-      m.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = m.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     const matchesCategory =
       selectedCategory === "all" || m.category === selectedCategory;
-    const matchesRegion =
-      selectedRegion === "all" || m.city === selectedRegion;
+    const matchesRegion = selectedRegion === "all" || m.city === selectedRegion;
 
     return matchesSearch && matchesCategory && matchesRegion;
   });
 
   // Show only first 5 merchants by default when no filters are applied
-  const displayedMerchants = (searchQuery === "" && selectedCategory === "all" && selectedRegion === "all")
-    ? filteredMerchants.slice(0, 5)
-    : filteredMerchants;
+  const displayedMerchants =
+    searchQuery === "" && selectedCategory === "all" && selectedRegion === "all"
+      ? filteredMerchants.slice(0, 5)
+      : filteredMerchants;
 
   // Clear selection when filters change
   useEffect(() => {
@@ -151,12 +163,15 @@ export default function LandingPage() {
     : null;
 
   // -- Handlers --
-  // const handleGetBatch = (batch, merchantName) => {
-  //   setSelectedCoupon({ ...batch, merchantName });
-  //   setRedemptionSuccess(false);
-  //   setCustomerForm({ name: "", phone: "", dob: "" });
-  //   setModalOpen(true);
-  // };
+  const handleGetCoupon = (merchant, batch) => {
+    const merchantId = merchant.id;
+    const batchId = batch.id;
+    router.push(`/${locale}/customer/review?merchantId=${merchantId}&batchId=${batchId}`);
+    sessionStorage.setItem(
+      "couponReviewData",
+      JSON.stringify({ merchant, batch })
+    );
+  };
 
   // const handleRedeemSubmit = async (e) => {
   //   e.preventDefault();
@@ -281,13 +296,18 @@ export default function LandingPage() {
                 />
               </div>
               <div className="flex gap-4 w-full lg:w-auto flex-col sm:flex-row">
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <Select
+                  value={selectedCategory}
+                  onValueChange={setSelectedCategory}
+                >
                   <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
                     <SelectValue placeholder="Business Type" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
-                    <SelectItem value="Food and Beverage">Food and Beverage</SelectItem>
+                    <SelectItem value="Food and Beverage">
+                      Food and Beverage
+                    </SelectItem>
                     <SelectItem value="Retails">Retails</SelectItem>
                     <SelectItem value="Services">Services</SelectItem>
                     <SelectItem value="Health">Health</SelectItem>
@@ -297,7 +317,10 @@ export default function LandingPage() {
                   </SelectContent>
                 </Select>
 
-                <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+                <Select
+                  value={selectedRegion}
+                  onValueChange={setSelectedRegion}
+                >
                   <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
                     <SelectValue placeholder="Region (City)" />
                   </SelectTrigger>
@@ -327,7 +350,12 @@ export default function LandingPage() {
                 ) : error ? (
                   <div className="flex flex-col items-center justify-center py-20 space-y-4 text-red-500">
                     <p>{error}</p>
-                    <Button variant="outline" onClick={() => setSelectedCategory(selectedCategory)}>Retry</Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => setSelectedCategory(selectedCategory)}
+                    >
+                      Retry
+                    </Button>
                   </div>
                 ) : filteredMerchants.length > 0 ? (
                   displayedMerchants.map((merchant) => (
@@ -341,16 +369,25 @@ export default function LandingPage() {
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className={`font-bold text-lg ${selectedMerchantId === merchant.id ? "text-primary" : "text-slate-900"
-                            }`}>
+                          <h3
+                            className={`font-bold text-lg ${selectedMerchantId === merchant.id
+                              ? "text-primary"
+                              : "text-slate-900"
+                              }`}
+                          >
                             {merchant.name}
                           </h3>
                           <div className="flex items-center text-xs text-muted-foreground mt-1">
                             <MapPin className="h-3 w-3 mr-1" />
-                            <span className="capitalize">{merchant.address}</span>
+                            <span className="capitalize">
+                              {merchant.address}
+                            </span>
                           </div>
                         </div>
-                        <Badge variant="secondary" className="text-[10px] bg-slate-100">
+                        <Badge
+                          variant="secondary"
+                          className="text-[10px] bg-slate-100"
+                        >
                           {merchant.category}
                         </Badge>
                       </div>
@@ -378,10 +415,16 @@ export default function LandingPage() {
                   <>
                     <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-r from-slate-100 to-slate-50 z-0">
                       {/* Optional background or banner for merchant */}
-                      <div className={`w-full h-full opacity-10 ${activeMerchant.category === "Restaurant" ? "bg-orange-500" :
-                        activeMerchant.category === "Beauty" ? "bg-pink-500" :
-                          activeMerchant.category === "Retail" ? "bg-blue-500" : "bg-emerald-500"
-                        }`} />
+                      <div
+                        className={`w-full h-full opacity-10 ${activeMerchant.category === "Restaurant"
+                          ? "bg-orange-500"
+                          : activeMerchant.category === "Beauty"
+                            ? "bg-pink-500"
+                            : activeMerchant.category === "Retail"
+                              ? "bg-blue-500"
+                              : "bg-emerald-500"
+                          }`}
+                      />
                     </div>
 
                     <div className="relative z-10">
@@ -390,8 +433,12 @@ export default function LandingPage() {
                           <Store className="h-10 w-10" />
                         </div>
                         <div className="flex-1">
-                          <h2 className="text-2xl font-bold text-slate-900">{activeMerchant.name}</h2>
-                          <p className="text-slate-500 mt-1">{activeMerchant.tone || activeMerchant.highlight}</p>
+                          <h2 className="text-2xl font-bold text-slate-900">
+                            {activeMerchant.name}
+                          </h2>
+                          <p className="text-slate-500 mt-1">
+                            {activeMerchant.tone || activeMerchant.highlight}
+                          </p>
                         </div>
                       </div>
 
@@ -400,7 +447,8 @@ export default function LandingPage() {
                       </div>
 
                       <div className="grid sm:grid-cols-2 gap-4">
-                        {activeMerchant.batches && activeMerchant.batches.length > 0 ? (
+                        {activeMerchant.batches &&
+                          activeMerchant.batches.length > 0 ? (
                           activeMerchant.batches.map((batch) => (
                             <div
                               key={batch.id}
@@ -408,30 +456,52 @@ export default function LandingPage() {
                             >
                               {/* Render the batch HTML */}
                               <div
-                                dangerouslySetInnerHTML={{ __html: batch.rendered_html }}
-                                onClick={() => handleGetBatch(batch, activeMerchant.name)}
+                                dangerouslySetInnerHTML={{
+                                  __html: batch.rendered_html,
+                                }}
+                                onClick={() =>
+                                  handleGetCoupon(activeMerchant, batch)
+                                }
                                 className="cursor-pointer"
                               />
 
                               {/* Batch metadata overlay */}
                               <div className="p-4 bg-slate-50 border-t border-slate-200">
                                 <div className="flex items-center justify-between text-xs text-slate-600 mb-2">
-                                  <span className="font-semibold">{batch.batch_name}</span>
-                                  <Badge variant={batch.is_active ? "default" : "secondary"} className="text-[10px]">
+                                  <span className="font-semibold">
+                                    {batch.batch_name}
+                                  </span>
+                                  <Badge
+                                    variant={
+                                      batch.is_active ? "default" : "secondary"
+                                    }
+                                    className="text-[10px]"
+                                  >
                                     {batch.is_active ? "Active" : "Inactive"}
                                   </Badge>
                                 </div>
                                 <div className="flex items-center justify-between text-xs text-slate-500">
-                                  <span>{batch.issued_quantity}/{batch.total_quantity} issued</span>
-                                  <span>{new Date(batch.start_date).toLocaleDateString()} - {new Date(batch.end_date).toLocaleDateString()}</span>
+                                  <span>
+                                    {batch.issued_quantity}/
+                                    {batch.total_quantity} issued
+                                  </span>
+                                  <span>
+                                    {new Date(
+                                      batch.start_date
+                                    ).toLocaleDateString()}{" "}
+                                    -{" "}
+                                    {new Date(
+                                      batch.end_date
+                                    ).toLocaleDateString()}
+                                  </span>
                                 </div>
-                                {/* <Button
+                                <Button
                                   size="sm"
-                                  onClick={() => handleGetBatch(batch, activeMerchant.name)}
+                                  onClick={() => handleGetCoupon(activeMerchant, batch)}
                                   className="w-full mt-3 bg-slate-900 hover:bg-primary transition-colors"
                                 >
-                                  Redeem <ArrowRight className="w-3 h-3 ml-1" />
-                                </Button> */}
+                                  Get Coupon <ArrowRight className="w-3 h-3 ml-1" />
+                                </Button>
                               </div>
                             </div>
                           ))
@@ -441,13 +511,14 @@ export default function LandingPage() {
                           </div>
                         )}
                       </div>
-
                     </div>
                   </>
                 ) : (
                   <div className="h-full flex flex-col items-center justify-center text-muted-foreground space-y-4">
                     <Store className="h-16 w-16 opacity-10" />
-                    <p className="text-lg font-medium">Select a merchant to view offers</p>
+                    <p className="text-lg font-medium">
+                      Select a merchant to view offers
+                    </p>
                   </div>
                 )}
               </div>
@@ -470,7 +541,6 @@ export default function LandingPage() {
                 <Button variant="outline">Advertise with us</Button>
               </Link>
             </div>
-
           </div>
         </section>
 
