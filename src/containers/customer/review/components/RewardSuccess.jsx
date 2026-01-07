@@ -1,70 +1,63 @@
 import React from "react";
 import { CheckCircle2, MessageSquare, Gift, QrCode } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import {
-    Card,
-    CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export const RewardSuccess = ({ reward, formValues }) => {
     return (
-        <div className="space-y-6 animate-in fade-in zoom-in duration-700">
-            <div className="text-center space-y-4">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="w-10 h-10 text-green-600" />
-                </div>
-                <div className="space-y-2">
-                    <h2 className="text-3xl font-bold text-green-700">
-                        Sent to WhatsApp!
-                    </h2>
-                    <Badge
-                        variant="outline"
-                        className="bg-green-50 text-green-700 border-green-200"
-                    >
-                        <MessageSquare className="w-3 h-3 mr-1" /> Check your phone
-                    </Badge>
-                </div>
-                <p className="text-muted-foreground px-4">
-                    We have sent your <b>{reward?.name || "Discount Code"}</b> directly to:
-                    <span className="font-semibold block text-foreground mt-1 text-lg">
-                        {formValues.phone}
-                    </span>
-                </p>
-            </div>
-
-            <Card className="border-2 border-dashed border-primary/30 bg-primary/5">
-                <CardContent className="p-6 flex flex-col items-center space-y-4">
-                    <Gift className="w-12 h-12 text-primary" />
-                    <div className="text-center space-y-1">
-                        <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
-                            Your Reward
-                        </p>
-                        <h3 className="text-2xl font-bold text-primary">
-                            {reward?.name || "Special Offer"}
-                        </h3>
+        <div className="w-full">
+            <Card className="w-full border-muted/60 shadow-lg text-center overflow-hidden">
+                <CardHeader className="pb-4">
+                    <div className="mx-auto w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
+                        <CheckCircle2 className="w-8 h-8 text-green-500" />
                     </div>
-                    <div className="w-full h-px bg-border"></div>
-                    <div className="flex items-center gap-3 text-sm text-left text-muted-foreground w-full bg-white p-3 rounded border">
-                        <QrCode className="w-8 h-8 text-primary shrink-0" />
-                        <div>
-                            <p className="font-semibold text-foreground">
-                                Strictly No Copying
-                            </p>
-                            <p className="text-xs">
-                                Your unique redemption QR code is waiting in your WhatsApp chat.
+                    <CardTitle className="text-2xl font-bold tracking-tight text-green-600">
+                        Success!
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                        Your reward is ready for collection
+                    </CardDescription>
+                </CardHeader>
+
+                <CardContent className="space-y-6 pb-10">
+                    <div className="space-y-2">
+                        <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100 border-none px-3 py-1 text-[10px] font-bold uppercase tracking-wider">
+                            <MessageSquare className="w-3.5 h-3.5 mr-1.5" /> Check WhatsApp
+                        </Badge>
+                        <p className="text-muted-foreground text-sm">
+                            Sent to <span className="font-bold text-foreground">{formValues.phone}</span>
+                        </p>
+                    </div>
+
+                    <div className="relative p-6 rounded-2xl bg-primary/5 border-2 border-dashed border-primary/20 overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Gift className="w-16 h-16 -rotate-12" />
+                        </div>
+                        <div className="relative z-10 space-y-1">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/70">Unique Reward</p>
+                            <h3 className="text-3xl font-black text-primary tracking-tight">
+                                {reward?.name || "Special Offer"}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-4 text-left p-4 rounded-xl bg-muted/30 border border-muted/60">
+                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm shrink-0 border border-muted/40">
+                            <QrCode className="w-7 h-7 text-primary" />
+                        </div>
+                        <div className="space-y-0.5">
+                            <p className="text-sm font-bold text-foreground">Redemption Ready</p>
+                            <p className="text-[11px] text-muted-foreground leading-relaxed">
+                                Simply show the WhatsApp message to our staff to redeem your gift!
                             </p>
                         </div>
                     </div>
+
+                    <p className="text-[10px] text-muted-foreground italic">
+                        * Powered by QR Tenants Experience
+                    </p>
                 </CardContent>
             </Card>
-
-            <div className="bg-muted p-4 rounded-lg flex items-start gap-3 text-sm">
-                <div className="mt-0.5">ℹ️</div>
-                <p>
-                    Simply show the WhatsApp message to our staff to redeem your reward. No
-                    need to copy codes!
-                </p>
-            </div>
         </div>
     );
 };

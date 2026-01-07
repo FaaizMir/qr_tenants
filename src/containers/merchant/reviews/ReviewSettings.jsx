@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import { Save, Plus, Trash2, HelpCircle, Upload, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -58,7 +59,7 @@ export default function ReviewSettings() {
     setConfig({ ...config, presets: newPresets });
   };
 
-  const fetchPresetReviews = async () => {
+  const fetchPresetReviews = useCallback(async () => {
     setLoadingPresets(true);
 
     try {
@@ -86,9 +87,9 @@ export default function ReviewSettings() {
     } finally {
       setLoadingPresets(false);
     }
-  };
+  }, [merchantId]);
 
-  const fetchMerchantSettings = async () => {
+  const fetchMerchantSettings = useCallback(async () => {
     if (!merchantId) return;
 
     try {
@@ -120,14 +121,14 @@ export default function ReviewSettings() {
       console.error(error);
       toast.error("Failed to load merchant settings");
     }
-  };
+  }, [merchantId]);
 
   useEffect(() => {
     if (!merchantId) return;
 
     fetchMerchantSettings();
     fetchPresetReviews();
-  }, [merchantId]);
+  }, [merchantId, fetchMerchantSettings, fetchPresetReviews]);
 
   const handleSavePresets = async () => {
     setLoadingPresets(true);
@@ -418,10 +419,11 @@ export default function ReviewSettings() {
                       <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 bg-muted/50 transition-colors hover:bg-muted/80">
                         {config.paid_ad_image ? (
                           <div className="relative w-full aspect-video rounded-md overflow-hidden">
-                            <img
+                            <Image
                               src={config.paid_ad_image}
                               alt="Paid Ad"
-                              className="w-full h-full object-cover"
+                              fill
+                              className="object-cover"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                               <Label

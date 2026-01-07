@@ -44,9 +44,9 @@ export default function MerchantLuckyDrawContainer() {
   useEffect(() => {
     if (!merchantId) return;
     fetchPrizes();
-  }, [merchantId]);
+  }, [merchantId, fetchPrizes]);
 
-  const fetchPrizes = async () => {
+  const fetchPrizes = React.useCallback(async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(
@@ -60,7 +60,7 @@ export default function MerchantLuckyDrawContainer() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [merchantId]);
 
   const handleEdit = (prize) => {
     router.push(`/merchant/lucky-draw/edit/${prize.id}`);
