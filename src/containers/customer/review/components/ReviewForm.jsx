@@ -77,13 +77,16 @@ export const ReviewForm = ({
   const [recordedFeedbackId, setRecordedFeedbackId] = React.useState(null);
 
   const queryParams = useSearchParams();
-  const merchantId = queryParams.get("merchantId") || queryParams.get("mid") || "1";
+  const merchantId =
+    queryParams.get("merchantId") || queryParams.get("mid") || "1";
   const batchId = queryParams.get("batchId") || queryParams.get("bid") || "1";
 
   React.useEffect(() => {
     const fetchPresets = async () => {
       try {
-        const response = await axiosInstance.get(`/preset-reviews?merchantId=${merchantId}`);
+        const response = await axiosInstance.get(
+          `/preset-reviews?merchantId=${merchantId}`
+        );
         setPresetReviews(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching presets:", error);
@@ -139,9 +142,8 @@ export const ReviewForm = ({
         rating: formValues.rating,
         reviewType: isPresetReview ? "preset" : "custom",
         presetReviewId: isPresetReview ? selectedPresetId : undefined,
-        customReviewText: !isPresetReview ? formValues.text : undefined,
         comment: !isPresetReview ? formValues.text : undefined,
-        selectedPlatform: mappedPlatform,
+        selectedPlatform: mappedPlatform, // Backend requires this in POST
         redirectCompleted: false,
       };
 
@@ -153,7 +155,7 @@ export const ReviewForm = ({
         // 2. Mark redirect as complete
         await axiosInstance
           .patch(`/feedbacks/${feedbackId}/complete-redirect`)
-          .then(res => console.log("Redirect status updated:", res.data))
+          .then((res) => console.log("Redirect status updated:", res.data))
           .catch((err) => console.error("Error completing redirect:", err));
 
         const platformMap = {
@@ -194,7 +196,7 @@ export const ReviewForm = ({
     <div className="w-full">
       <Card className="w-full border-muted/60 shadow-lg overflow-hidden">
         {/* Merchant Branding Banner */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-8 px-4 text-center text-white">
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 py-8 px-4 text-center text-white">
           <h2 className="text-2xl font-bold tracking-tight mb-1">
             {merchantConfig.name}
           </h2>
@@ -257,14 +259,18 @@ export const ReviewForm = ({
                 {loadingPresets ? (
                   <div className="flex items-center gap-2 py-2">
                     <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                    <span className="text-xs text-muted-foreground">Loading...</span>
+                    <span className="text-xs text-muted-foreground">
+                      Loading...
+                    </span>
                   </div>
                 ) : (
                   presetReviews.map((review) => (
                     <button
                       key={review.id}
                       type="button"
-                      onClick={() => handlePresetClick(review.review_text, review.id)}
+                      onClick={() =>
+                        handlePresetClick(review.review_text, review.id)
+                      }
                       className={cn(
                         "px-4 py-2 rounded-full text-xs font-medium transition-all border shadow-sm ",
                         selectedPresetId === review.id
@@ -306,7 +312,8 @@ export const ReviewForm = ({
             onClick={handleFormSubmit}
             disabled={loading}
           >
-            {loading ? "Submitting..." : "Submit Feedback"} <Send className="ml-2 w-4 h-4" />
+            {loading ? "Submitting..." : "Submit Feedback"}{" "}
+            <Send className="ml-2 w-4 h-4" />
           </Button>
         </CardContent>
 
@@ -318,13 +325,16 @@ export const ReviewForm = ({
       {/* Platform Selection Modal */}
       <Dialog open={showPlatformModal} onOpenChange={setShowPlatformModal}>
         <DialogContent className="sm:max-w-md border-none shadow-2xl p-0 overflow-hidden">
-          <div className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 p-8 text-center text-white relative">
+          <div className="bg-linear-to-br from-blue-700 via-blue-600 to-indigo-700 p-8 text-center text-white relative">
             <div className="mx-auto w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
-            <DialogTitle className="text-2xl font-black tracking-tight mb-2">Almost Done!</DialogTitle>
+            <DialogTitle className="text-2xl font-black tracking-tight mb-2">
+              Almost Done!
+            </DialogTitle>
             <DialogDescription className="text-blue-100 text-sm opacity-90">
-              To claim your reward, please post your review on one of these platforms.
+              To claim your reward, please post your review on one of these
+              platforms.
             </DialogDescription>
           </div>
 
