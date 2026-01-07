@@ -45,7 +45,7 @@ export default function ReviewSettings() {
     redReviewLink: "",
     presets: [],
     // visibility_logic: 0,
-    // placement: "top",
+    placement: "top",
     paid_ads: false,
     paid_ad_image: "",
   });
@@ -113,7 +113,7 @@ export default function ReviewSettings() {
         instagramReviewLink: data.instagram_url || "",
         redReviewLink: data.xiaohongshu_url || "",
         // visibility_logic: data.visibility_logic ?? 0,
-        // placement: data.placement || "top",
+        placement: data.placement || "top",
         paid_ads: data.paid_ads ?? false,
         paid_ad_image: data.paid_ad_image || "",
       }));
@@ -217,7 +217,7 @@ export default function ReviewSettings() {
           : null,
         xiaohongshu_url: config.enableRed ? config.redReviewLink : null,
         // visibility_logic: parseInt(config.visibility_logic) || 0,
-        // placement: config.placement,
+        placement: config.placement,
         paid_ads: config.paid_ads,
       };
 
@@ -367,8 +367,8 @@ export default function ReviewSettings() {
 
             <div className="space-y-4 pt-4">
               {/* <h3 className="text-lg font-medium">Display & Ads</h3> */}
-              {/* <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* <div className="space-y-2">
                   <Label htmlFor="visibility_logic">Visibility Logic (Number)</Label>
                   <Input
                     id="visibility_logic"
@@ -379,7 +379,7 @@ export default function ReviewSettings() {
                       setConfig({ ...config, visibility_logic: e.target.value })
                     }
                   />
-                </div>
+                </div> */}
                 <div className="space-y-2">
                   <Label htmlFor="placement">Placement</Label>
                   <Select
@@ -396,7 +396,8 @@ export default function ReviewSettings() {
                     </SelectContent>
                   </Select>
                 </div>
-              </div> */}
+
+              </div>
 
               <div className="space-y-4 pt-2">
                 <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">

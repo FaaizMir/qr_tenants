@@ -288,7 +288,7 @@ export default function LandingPage() {
                   <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
                     <SelectItem value="Food and Beverage">Food and Beverage</SelectItem>
-                    <SelectItem value="Retails">Retails</SelectItem>
+                    <SelectItem value="Retail">Retail</SelectItem>
                     <SelectItem value="Services">Services</SelectItem>
                     <SelectItem value="Health">Health</SelectItem>
                     <SelectItem value="Technology">Technology</SelectItem>
