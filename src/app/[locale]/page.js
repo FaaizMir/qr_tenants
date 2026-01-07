@@ -27,7 +27,15 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
+
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -35,6 +43,8 @@ import { toast } from "sonner";
 import axios from "axios";
 
 export default function LandingPage() {
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const tHeroSection = useTranslations("Homepage.heroSection");
   const tFeatures = useTranslations("Homepage.fetaures");
   const tFooter = useTranslations("Homepage.footer");
@@ -47,6 +57,8 @@ export default function LandingPage() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedRegion, setSelectedRegion] = useState("all");
+  const [cities, setCities] = useState([]);
 
   // -- Selection State --
   const [selectedMerchantId, setSelectedMerchantId] = useState(null);
@@ -88,11 +100,16 @@ export default function LandingPage() {
           name: merchant.business_name,
           category: merchant.business_type,
           address: merchant.address,
-          batches: merchant.batches || [],
+          city: merchant.city || merchant.address?.split(',')?.pop()?.trim() || "Unknown", // Fallback to parsing address if city is missing
+          batches: merchant.batches.filter((batch) => batch.visibility == true),
           user: merchant.user
         }));
 
         setMerchants(transformedMerchants);
+
+        // Extract unique cities
+        const uniqueCities = [...new Set(transformedMerchants.map(m => m.city))].filter(Boolean).sort();
+        setCities(uniqueCities);
 
         // Don't auto-select any merchant - let user click to see batches
         setSelectedMerchantId(null);
@@ -113,19 +130,21 @@ export default function LandingPage() {
       m.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory =
       selectedCategory === "all" || m.category === selectedCategory;
+    const matchesRegion =
+      selectedRegion === "all" || m.city === selectedRegion;
 
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory && matchesRegion;
   });
 
   // Show only first 5 merchants by default when no filters are applied
-  const displayedMerchants = (searchQuery === "" && selectedCategory === "all")
+  const displayedMerchants = (searchQuery === "" && selectedCategory === "all" && selectedRegion === "all")
     ? filteredMerchants.slice(0, 5)
     : filteredMerchants;
 
   // Clear selection when filters change
   useEffect(() => {
     setSelectedMerchantId(null);
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedRegion]);
 
   const activeMerchant = selectedMerchantId
     ? merchants.find((m) => m.id === selectedMerchantId)
@@ -261,19 +280,36 @@ export default function LandingPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <div className="flex gap-4 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0">
-                <select
-                  className="h-11 px-4 rounded-md border bg-slate-50 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option value="all">All Categories</option>
-                  <option value="Restaurant">Restaurants</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Beauty">Beauty & Spa</option>
-                  <option value="Services">Services</option>
-                  <option value="Technology">Technology</option>
-                </select>
+              <div className="flex gap-4 w-full lg:w-auto flex-col sm:flex-row">
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
+                    <SelectValue placeholder="Business Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Types</SelectItem>
+                    <SelectItem value="Food and Beverage">Food and Beverage</SelectItem>
+                    <SelectItem value="Retails">Retails</SelectItem>
+                    <SelectItem value="Services">Services</SelectItem>
+                    <SelectItem value="Health">Health</SelectItem>
+                    <SelectItem value="Technology">Technology</SelectItem>
+                    <SelectItem value="Education">Education</SelectItem>
+                    <SelectItem value="Hospitality">Hospitality</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+                  <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
+                    <SelectValue placeholder="Region (City)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Regions</SelectItem>
+                    {cities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
