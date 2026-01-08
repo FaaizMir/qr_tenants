@@ -137,7 +137,8 @@ export const ReviewForm = ({
       const safePresetId = isPresetReview ? parseInt(selectedPresetId) : null;
 
       const payload = {
-        merchantId: isNaN(safeMerchantId) ? 1 : safeMerchantId,
+        merchantId: isNaN(safeMerchantId) ? null : safeMerchantId,
+        coupon_batch_id: isNaN(safeBatchId) ? null : safeBatchId,
         email: formValues.email,
         name: formValues.name,
         phoneNumber: formValues.phone,
@@ -189,7 +190,9 @@ export const ReviewForm = ({
       }
     } catch (error) {
       console.error("Platform Redirect Error:", error);
-      const errorMsg = error.response?.data?.message || "Internal server error. Ensure your Email and Phone are unique!";
+      const errorMsg =
+        error.response?.data?.message ||
+        "Internal server error. Ensure your Email and Phone are unique!";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -357,7 +360,7 @@ export const ReviewForm = ({
                   <button
                     key={platform.id}
                     onClick={() => handlePlatformSelection(platform.id)}
-                    className="flex flex-col items-center justify-center p-5 rounded-2xl border-2 border-slate-100 hover:border-primary hover:bg-primary/[0.03] transition-all group"
+                    className="flex flex-col items-center justify-center p-5 rounded-2xl border-2 border-slate-100 hover:border-primary hover:bg-primary/3 transition-all group"
                   >
                     <div
                       className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-black mb-3 transition-transform group-hover:scale-110 shadow-lg"

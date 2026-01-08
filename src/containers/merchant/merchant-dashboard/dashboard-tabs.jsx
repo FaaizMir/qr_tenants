@@ -123,7 +123,7 @@ export const getDashboardTabs = ({
         <MerchantFeedbackFormContainer />
       ),
     }, */
-    {
+    /*{
       value: "settings",
       label: "Settings",
       content: (
@@ -138,6 +138,6 @@ export const getDashboardTabs = ({
           </CardContent>
         </Card>
       ),
-    },
+    },*/
   ];
 };

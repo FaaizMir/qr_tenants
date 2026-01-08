@@ -166,24 +166,14 @@ export default function LandingPage() {
   const handleGetCoupon = (merchant, batch) => {
     const merchantId = merchant.id;
     const batchId = batch.id;
-    router.push(`/${locale}/customer/review?merchantId=${merchantId}&batchId=${batchId}`);
+    router.push(
+      `/${locale}/customer/review?merchantId=${merchantId}&batchId=${batchId}`
+    );
     sessionStorage.setItem(
       "couponReviewData",
       JSON.stringify({ merchant, batch })
     );
   };
-
-  // const handleRedeemSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsRedeeming(true);
-
-  // Simulate Backend API Call
-  //   await new Promise((resolve) => setTimeout(resolve, 1500));
-
-  //   setIsRedeeming(false);
-  //   setRedemptionSuccess(true);
-  //   toast.success("Coupon sent via WhatsApp!");
-  // };
 
   return (
     <div className="flex min-h-screen flex-col font-sans text-slate-900">
@@ -221,7 +211,7 @@ export default function LandingPage() {
           <h1 className="text-4xl lg:text-7xl font-extrabold tracking-tight leading-tight">
             {tHeroSection("1")}{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-600 animate-gradient">
-              {tHeroSection("2")}
+              {tHeroSection("2")}{" "}
             </span>
             {tHeroSection("3")}
           </h1>
@@ -362,18 +352,20 @@ export default function LandingPage() {
                     <div
                       key={merchant.id}
                       onClick={() => setSelectedMerchantId(merchant.id)}
-                      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 hover:shadow-md ${selectedMerchantId === merchant.id
-                        ? "bg-white border-primary ring-1 ring-primary shadow-sm"
-                        : "bg-white border-slate-200 hover:border-slate-300"
-                        }`}
+                      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 hover:shadow-md ${
+                        selectedMerchantId === merchant.id
+                          ? "bg-white border-primary ring-1 ring-primary shadow-sm"
+                          : "bg-white border-slate-200 hover:border-slate-300"
+                      }`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <h3
-                            className={`font-bold text-lg ${selectedMerchantId === merchant.id
-                              ? "text-primary"
-                              : "text-slate-900"
-                              }`}
+                            className={`font-bold text-lg ${
+                              selectedMerchantId === merchant.id
+                                ? "text-primary"
+                                : "text-slate-900"
+                            }`}
                           >
                             {merchant.name}
                           </h3>
@@ -416,14 +408,15 @@ export default function LandingPage() {
                     <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-r from-slate-100 to-slate-50 z-0">
                       {/* Optional background or banner for merchant */}
                       <div
-                        className={`w-full h-full opacity-10 ${activeMerchant.category === "Restaurant"
-                          ? "bg-orange-500"
-                          : activeMerchant.category === "Beauty"
+                        className={`w-full h-full opacity-10 ${
+                          activeMerchant.category === "Restaurant"
+                            ? "bg-orange-500"
+                            : activeMerchant.category === "Beauty"
                             ? "bg-pink-500"
                             : activeMerchant.category === "Retail"
-                              ? "bg-blue-500"
-                              : "bg-emerald-500"
-                          }`}
+                            ? "bg-blue-500"
+                            : "bg-emerald-500"
+                        }`}
                       />
                     </div>
 
@@ -448,7 +441,7 @@ export default function LandingPage() {
 
                       <div className="grid sm:grid-cols-2 gap-4">
                         {activeMerchant.batches &&
-                          activeMerchant.batches.length > 0 ? (
+                        activeMerchant.batches.length > 0 ? (
                           activeMerchant.batches.map((batch) => (
                             <div
                               key={batch.id}
@@ -497,10 +490,13 @@ export default function LandingPage() {
                                 </div>
                                 <Button
                                   size="sm"
-                                  onClick={() => handleGetCoupon(activeMerchant, batch)}
+                                  onClick={() =>
+                                    handleGetCoupon(activeMerchant, batch)
+                                  }
                                   className="w-full mt-3 bg-slate-900 hover:bg-primary transition-colors"
                                 >
-                                  Get Coupon <ArrowRight className="w-3 h-3 ml-1" />
+                                  Get Coupon{" "}
+                                  <ArrowRight className="w-3 h-3 ml-1" />
                                 </Button>
                               </div>
                             </div>

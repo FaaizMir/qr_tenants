@@ -234,19 +234,12 @@ export function CustomerReviewFlow() {
         )}
         {(step === 6 ||
           (step === 5 && merchantConfig.rewardType !== "lucky_draw")) && (
-            <ThankYou
-              resetFlow={resetFlow}
-              merchantConfig={merchantConfig}
-              prevStep={prevStep}
-            />
-          )}
-      </div>
-
-      {/* Footer Branding - Global but subtle */}
-      <div className="fixed bottom-6 left-0 w-full text-center pointer-events-none z-0">
-        <p className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-[0.3em]">
-          Powered by QR Tenants Experience
-        </p>
+          <ThankYou
+            resetFlow={resetFlow}
+            merchantConfig={merchantConfig}
+            prevStep={prevStep}
+          />
+        )}
       </div>
     </main>
   );
