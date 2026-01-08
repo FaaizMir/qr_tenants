@@ -40,12 +40,6 @@ export default function MerchantLuckyDrawContainer() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [prizeToDelete, setPrizeToDelete] = useState(null);
 
-  // Fetch prizes
-  useEffect(() => {
-    if (!merchantId) return;
-    fetchPrizes();
-  }, [merchantId, fetchPrizes]);
-
   const fetchPrizes = React.useCallback(async () => {
     setLoading(true);
     try {
@@ -62,6 +56,11 @@ export default function MerchantLuckyDrawContainer() {
     }
   }, [merchantId]);
 
+  // Fetch prizes
+  useEffect(() => {
+    if (!merchantId) return;
+    fetchPrizes();
+  }, [merchantId, fetchPrizes]);
   const handleEdit = (prize) => {
     router.push(`/merchant/lucky-draw/edit/${prize.id}`);
   };
