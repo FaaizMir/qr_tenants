@@ -1,0 +1,20 @@
+{
+    "settings": {
+        "platformSettings": "Platform Settings",
+        "settingsDescription": "Configure your white-label branding and preferences.",
+        "visualIdentity": "Visual Identity",
+        "customizeLook": "Customize how the platform looks to your merchants and customers.",
+        "platformName": "Platform Name",
+        "platformNameHelp": "This name will appear in emails, dashboards, and page titles.",
+        "primaryColor": "Primary Color",
+        "platformLogo": "Platform Logo",
+        "uploadText": "Click to upload",
+        "uploadHelp": "SVG, PNG, JPG (Max 2MB)",
+        "communicationChannels": "Communication Channels",
+        "communicationHelp": "Configure how you appear in chat and support channels.",
+        "whatsappSender": "WhatsApp Sender Name",
+        "supportEmail": "Support Email",
+        "saveChanges": "Save Changes",
+        "resetChanges": "Reset Changes"
+    }
+}

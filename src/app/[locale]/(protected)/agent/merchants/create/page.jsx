@@ -1,22 +1,17 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import MerchantForm from "@/containers/merchant/merchant-form";
-import { getTranslations } from "next-intl/server";
+import CreateMerchantContainer from "@/containers/agent/merchants/create";
 
-export default async function CreateMerchantPage({ params }) {
-  const paramsData = await params;
-  const tCommon = await getTranslations("common");
-
+export default function CreateMerchantPage() {
   const breadcrumbData = [
-    { name: tCommon("dashboard"), url: "/dashboard" },
+    { name: "Dashboard", url: "/agent/dashboard" },
     { name: "Merchants", url: "/agent/merchants" },
-    { name: "Create Merchant", url: "/agent/merchants/create" },
+    { name: "Onboard", url: "/agent/merchants/create" },
   ];
 
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <MerchantForm isEdit={false} />
+      <CreateMerchantContainer />
     </>
   );
 }
-

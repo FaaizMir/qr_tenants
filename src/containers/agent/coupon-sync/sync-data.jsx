@@ -2,36 +2,58 @@ export const syncHistory = [
     {
         id: 1,
         merchant: "Coffee House",
-        items: 50,
-        status: "completed",
-        date: "2024-06-02 10:30 AM",
+        region: "Downtown",
+        duration: 30,
+        status: "approved",
+        date: "2024-06-02",
     },
     {
         id: 2,
         merchant: "Pizza Palace",
-        items: 100,
-        status: "in-progress",
-        date: "2024-06-02 11:15 AM",
+        region: "Westside",
+        duration: 15,
+        status: "pending",
+        date: "2024-06-05",
     },
     {
         id: 3,
         merchant: "Beauty Salon",
-        items: 25,
-        status: "completed",
-        date: "2024-06-01 02:45 PM",
+        region: "Mall District",
+        duration: 7,
+        status: "rejected",
+        date: "2024-06-01",
+    },
+];
+
+export const adRequests = [
+    {
+        id: "ad_1",
+        merchant: "Coffee House",
+        campaignName: "Morning Brew Boost",
+        type: "Region Boost",
+        cost: 150,
+        impressions: "12k",
+        clicks: 450,
+        status: "active"
     },
     {
-        id: 4,
-        merchant: "Pet Store",
-        items: 0,
-        status: "failed",
-        date: "2024-05-31 09:20 AM",
+        id: "ad_2",
+        merchant: "Tech Gadgets",
+        campaignName: "Cyber Week Homepage",
+        type: "Homepage Banner",
+        cost: 500,
+        impressions: "45k",
+        clicks: 1200,
+        status: "active"
     },
     {
-        id: 5,
-        merchant: "Book Shop",
-        items: 75,
-        status: "completed",
-        date: "2024-05-30 04:10 PM",
-    },
+        id: "ad_3",
+        merchant: "Pizza Palace",
+        campaignName: "Weekend Special",
+        type: "Category Top",
+        cost: 75,
+        impressions: "5k",
+        clicks: 120,
+        status: "scheduled"
+    }
 ];

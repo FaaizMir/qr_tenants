@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Heart, RefreshCcw, ArrowLeft } from "lucide-react";
+import { Heart, RefreshCcw, ArrowLeft, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,66 +13,88 @@ import {
 
 export const ThankYou = ({ resetFlow, merchantConfig, prevStep }) => {
   return (
-    <div className="w-full">
-      <Card className="w-full border-muted/60 shadow-lg text-center overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto p-2 md:p-4 animate-in fade-in zoom-in-95 duration-700">
+      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-[2rem] text-center">
         {/* Merchant Branding Banner */}
-        <div className="bg-linear-to-r from-blue-600 to-purple-600 py-8 px-4 text-center text-white">
-          <h2 className="text-2xl font-bold tracking-tight mb-1">
-            {merchantConfig.name}
-          </h2>
-          <p className="text-xs opacity-90">{merchantConfig.address}</p>
+        <div className="relative h-32 md:h-44 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
+          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl scale-150"></div>
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl scale-150"></div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
+            {merchantConfig?.logo && (
+              <div className="mb-3 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-2 overflow-hidden shadow-2xl">
+                <img src={merchantConfig.logo} alt="Merchant Logo" className="w-full h-full object-contain" />
+              </div>
+            )}
+            <h2 className="text-2xl md:text-3xl font-black tracking-tighter mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+              {merchantConfig?.name && merchantConfig.name !== "Loading..." ? merchantConfig.name : "Thank You"}
+            </h2>
+          </div>
         </div>
 
-        <CardHeader className="pb-4 pt-10 relative">
-          <div className="absolute top-4 left-4">
+        <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
+          <div className="absolute top-4 left-6">
             <Button
               variant="ghost"
               size="sm"
               onClick={prevStep}
-              className="hover:bg-primary/5 text-muted-foreground hover:text-primary transition-colors pr-4"
+              className="h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95"
             >
-              <ArrowLeft className="w-4 h-4 mr-1" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">
-                Back
-              </span>
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Back
             </Button>
           </div>
-          <div className="mx-auto w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-4">
-            <Heart className="w-8 h-8 text-red-500 fill-red-500" />
+
+          <div className="mx-auto w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 shadow-xs animate-in zoom-in-50 duration-700">
+            <Heart className="w-10 h-10 text-red-500 fill-red-500 animate-pulse" />
           </div>
-          <CardTitle className="text-2xl font-bold tracking-tight">
-            Thank You!
+
+          <CardTitle className="text-3xl md:text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 italic uppercase">
+            HEARTFELT THANKS!
           </CardTitle>
-          <CardDescription className="text-sm">
-            We hope to see you again soon at {merchantConfig.name}
+          <CardDescription className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[280px] mx-auto mt-2 leading-tight">
+            We truly value your support and can't wait to serve you again at {merchantConfig.name}.
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-6 pb-12">
-          <div className="bg-muted/30 p-6 rounded-2xl border border-muted/60">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Your feedback helps us grow and provide better service to all our
-              customers. We truly appreciate your time!
-            </p>
+        <CardContent className="space-y-10 pb-12 px-6 md:px-10">
+          <div className="relative group p-1">
+            <div className="absolute -inset-1 bg-linear-to-r from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 rounded-[2rem] opacity-50 blur-sm"></div>
+            <div className="relative bg-zinc-50 dark:bg-zinc-800/40 p-8 rounded-[2rem] border border-zinc-100 dark:border-zinc-700/50 shadow-inner">
+              <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed italic">
+                "Your feedback is the cornerstone of our growth. Every word you share helps us craft a more perfect experience for you."
+              </p>
+            </div>
           </div>
 
           <div className="pt-4">
             <Button
               onClick={resetFlow}
-              className="w-full h-12 text-base font-bold shadow-md transition-all active:scale-95 bg-blue-700 hover:bg-blue-800"
+              className="w-full h-15 rounded-2xl text-lg font-black uppercase tracking-[0.1em] shadow-[0_20px_40px_-12px_rgba(16,185,129,0.3)] hover:shadow-[0_24px_48px_-12px_rgba(16,185,129,0.4)] transition-all active:scale-[0.98] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 border-none group"
             >
-              <RefreshCcw className="w-4 h-4 mr-2" /> Submit Another Review
+              <RefreshCcw className="w-5 h-5 mr-3 group-hover:rotate-180 transition-transform duration-700" />
+              Submit Another Review
             </Button>
           </div>
 
-          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-50">
-            QR Tenants Platform
-          </p>
+          <div className="flex flex-col items-center gap-1.5 opacity-40">
+            <p className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.4em]">
+              Official QR Tenants Platform
+            </p>
+            <div className="h-0.5 w-12 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
+          </div>
         </CardContent>
 
         {/* Footer branding */}
-        <div className="bg-muted/30 py-4 text-center text-[10px] text-muted-foreground uppercase tracking-widest border-t">
-          Powered by QR Tenants
+        <div className="bg-zinc-50 dark:bg-zinc-800/20 py-5 text-center border-t border-zinc-100 dark:border-zinc-800">
+          <div className="flex items-center justify-center gap-2">
+            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
+            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em]">
+              Powered by QR Tenants
+            </p>
+            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
+          </div>
         </div>
       </Card>
     </div>

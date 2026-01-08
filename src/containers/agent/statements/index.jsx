@@ -1,13 +1,15 @@
 "use client";
 
-import { Calendar } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Download, FileText, Filter } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+// Update imports to point to local data if needed, or define locally for now
 import { statements } from "./statements-data";
 import { statementsColumns } from "./statements-columns";
 
@@ -15,6 +17,7 @@ export default function AgentStatementsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const [year, setYear] = useState("2024");
 
   const filteredStatements = statements.filter((item) =>
     item.month.toLowerCase().includes(search.toLowerCase())
@@ -31,57 +34,80 @@ export default function AgentStatementsContainer() {
         <div>
           <h1 className="text-3xl font-bold">Financial Statements</h1>
           <p className="text-muted-foreground">
-            View and download your monthly statements
+            Monthly generated reports of earnings, commissions, and deductions.
           </p>
         </div>
+        <Button variant="outline" className="gap-2">
+          <Download className="h-4 w-4" /> Export All (CSV)
+        </Button>
       </div>
 
-      {/* Current Month Summary */}
-      <Card className="bg-primary/5 border-primary/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-primary" />
-            Current Month (June 2024)
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Estimated Earnings
-              </p>
-              <p className="text-2xl font-bold">$2,450.00</p>
+      {/* Current Month Projection Widget */}
+      <div className="grid md:grid-cols-3 gap-6">
+        <Card className="md:col-span-2 bg-gradient-to-r from-primary/5 to-transparent border-primary/20">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-primary">
+              <Calendar className="h-5 w-5" />
+              Current Period: June 2024
+            </CardTitle>
+            <CardDescription>Projected statement execution on July 1st, 2024.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-8 mt-2">
+              <div>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Gross Earnings</p>
+                <p className="text-2xl font-bold mt-1">$2,450.00</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Est. Deductions</p>
+                <p className="text-2xl font-bold mt-1 text-red-600">-$306.25</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Net Profit</p>
+                <p className="text-2xl font-bold mt-1 text-emerald-600">$2,143.75</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Commission</p>
-              <p className="text-2xl font-bold">$306.25</p>
-            </div>
-            <div className="flex items-end">
-              <p className="text-sm text-muted-foreground italic">
-                Statement will be available on July 1st
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* Filter */}
-      <div className="flex items-center gap-4 max-w-sm">
-        <label className="text-sm font-medium whitespace-nowrap">
-          Filter by year:
-        </label>
-        <Input type="number" defaultValue="2024" className="w-32" />
-        <Button variant="secondary">Apply</Button>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">Statement Settings</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-xs font-medium text-muted-foreground">Fiscal Year</label>
+              <Select value={year} onValueChange={setYear}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2024">2024</SelectItem>
+                  <SelectItem value="2023">2023</SelectItem>
+                  <SelectItem value="2022">2022</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="text-xs text-muted-foreground text-center pt-2">
+              Statements are read-only and immutable once generated.
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Statements Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Previous Statements</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-muted-foreground" />
+              Statement History
+            </CardTitle>
+          </div>
         </CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search statements..."
+            placeholder="Search by month..."
             onSearchChange={setSearch}
           />
           <DataTable

@@ -1,58 +1,99 @@
-import { Users, DollarSign, UserCheck } from "lucide-react";
+import {
+  Users,
+  CreditCard,
+  DollarSign,
+  Activity,
+  ShoppingBag,
+  Ticket,
+  Wallet
+} from "lucide-react";
 
 export const getKpiData = (t) => [
   {
-    title: t("totalmerchants"),
-    value: "45",
+    title: t("totalmerchants") || "Total Merchants",
+    value: "124",
     icon: Users,
     trend: "up",
     trendValue: "+12%",
+    description: "14 new this month",
   },
   {
-    title: t("totalearnings"),
-    value: "$12,450",
+    title: t("monthlyrevenue") || "Monthly Revenue",
+    value: "$4,250",
     icon: DollarSign,
     trend: "up",
-    trendValue: "+8.2%",
+    trendValue: "+8%",
+    description: "vs. $3,935 last month",
   },
   {
-    title: t("activemerchants"),
-    value: "38",
-    icon: UserCheck,
+    title: "Wallet Balance",
+    value: "$1,200.50",
+    icon: Wallet,
+    trend: "neutral",
+    trendValue: "Stable",
+    description: "Prepaid Credits Available",
+  },
+  {
+    title: "Active Campaigns",
+    value: "45",
+    icon: Ticket,
     trend: "up",
-    trendValue: "+5%",
+    trendValue: "+5",
+    description: "Global campaigns running",
   },
 ];
 
-export const getRecentActivities = (tAgentDashboard) => [
+export const getRecentActivities = (t) => [
   {
     id: 1,
-    merchant: "Coffee House",
-    action: "New subscription",
-    time: "2 hours ago",
+    merchant: "Burger King - Downtown",
+    action: "Purchased 'Boost' Package (30 Days)",
+    amount: "+$45.00",
+    time: "2 mins ago",
+    type: "credit",
   },
   {
     id: 2,
-    merchant: "Pizza Palace",
-    action: "Coupon batch created",
-    time: "5 hours ago",
+    merchant: "System: WhatsApp Usage",
+    action: "Daily Message Deduction (150 msgs)",
+    amount: "-$1.50",
+    time: "1 hour ago",
+    type: "debit",
   },
   {
     id: 3,
-    merchant: "Beauty Salon",
-    action: "Credits purchased",
-    time: "1 day ago",
+    merchant: "Pizza Hut - Mall",
+    action: "New Merchant Registration",
+    amount: "",
+    time: "3 hours ago",
+    type: "info",
   },
   {
     id: 4,
-    merchant: "Pet Store",
-    action: "WhatsApp campaign activated",
-    time: "2 days ago",
+    merchant: "Subway - Central",
+    action: "Coupon Limit Reached Alert",
+    amount: "",
+    time: "5 hours ago",
+    type: "alert",
   },
   {
     id: 5,
-    merchant: "Book Shop",
-    action: "Annual subscription renewed",
-    time: "3 days ago",
+    merchant: "Wallet Top-up",
+    action: "Manual Deposit via Stripe",
+    amount: "+$500.00",
+    time: "1 day ago",
+    type: "credit",
   },
 ];
+
+export const getFinancialSummary = () => ({
+  earnings: {
+    monthly: "$4,250",
+    total: "$152,000",
+    growth: "+12.5%",
+  },
+  costs: {
+    platformFees: "$850",
+    whatsappFees: "$320",
+  }
+});

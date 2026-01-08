@@ -43,8 +43,8 @@ export function CustomerReviewFlow() {
 
   // Configuration
   const [merchantConfig, setMerchantConfig] = useState({
-    name: "Loading...",
-    logo: "/placeholder-logo.png",
+    name: "",
+    logo: null,
     rewardType: "lucky_draw",
     address: "",
     mapLink: "https://maps.google.com",
@@ -111,6 +111,9 @@ export function CustomerReviewFlow() {
           axiosInstance
             .get(`/merchant-settings/merchant/${merchantId}`)
             .catch(() => null),
+          axiosInstance
+            .get(`/merchants/${merchantId}`)
+            .catch(() => null),
         ]);
 
         const settings = settingsRes?.data?.data;
@@ -121,6 +124,8 @@ export function CustomerReviewFlow() {
             ...prev,
             name: merchant?.name || merchant?.business_name || prev.name,
             address: merchant?.address || prev.address,
+            logo: merchant?.logo_url || prev.logo,
+            rewardType: settings?.reward_type || prev.rewardType,
             enablePresetReviews:
               settings?.enable_preset_reviews ?? prev.enablePresetReviews,
             enableGoogle: settings?.enable_google_reviews ?? prev.enableGoogle,
@@ -158,26 +163,37 @@ export function CustomerReviewFlow() {
 
   if (initializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-muted-foreground font-bold text-xs uppercase tracking-widest animate-pulse">
-            Initialising...
-          </p>
+      <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
+        <div className="flex flex-col items-center gap-6 relative">
+          <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full animate-pulse-slow font-sans tracking-tight"></div>
+          <div className="relative w-16 h-16">
+            <div className="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <div className="flex flex-col items-center gap-2 relative">
+            <p className="text-zinc-900 dark:text-zinc-100 font-black text-sm uppercase tracking-[0.3em]">
+              QR Tenants
+            </p>
+            <div className="h-0.5 w-12 bg-linear-to-r from-transparent via-primary to-transparent"></div>
+            <p className="text-zinc-400 font-medium text-[10px] uppercase tracking-widest animate-pulse">
+              Preparing your experience
+            </p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-background p-4 flex flex-col items-center justify-center font-sans tracking-tight">
-      {/* Dynamic Background Effects */}
+    <main className="min-h-screen relative overflow-hidden bg-zinc-50 dark:bg-zinc-950 p-4 pt-8 md:p-8 flex flex-col items-center justify-center font-sans">
+      {/* Background Orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[150px]"></div>
+        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-emerald-500/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px]"></div>
+        <div className="absolute -bottom-[10%] left-[10%] w-[45%] h-[45%] bg-indigo-500/10 rounded-full blur-[130px] animate-bounce-slow"></div>
       </div>
 
-      <div className="w-full max-w-5xl relative z-10 transition-all duration-500">
+      <div className="w-full max-w-4xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700">
         {step === 1 && (
           <IdentityForm
             register={register}
@@ -192,9 +208,9 @@ export function CustomerReviewFlow() {
         {step === 2 && (
           <ReviewForm
             merchantConfig={merchantConfig}
-            register={register}
             setValue={setValue}
-            formValues={formValues}
+            formValues={watch()}
+            register={register}
             nextStep={nextStep}
             prevStep={prevStep}
             loading={loading}
@@ -208,32 +224,23 @@ export function CustomerReviewFlow() {
             merchantConfig={merchantConfig}
           />
         )}
-        {step === 4 &&
-          (merchantConfig.rewardType === "lucky_draw" ? (
-            <LuckyDraw
-              nextStep={nextStep}
-              prevStep={prevStep}
-              setReward={setReward}
-              merchantConfig={merchantConfig}
-            />
-          ) : (
-            <RewardSuccess
-              reward={reward}
-              formValues={formValues}
-              merchantConfig={merchantConfig}
-              prevStep={prevStep}
-            />
-          ))}
+        {step === 4 && (
+          <LuckyDraw
+            merchantConfig={merchantConfig}
+            nextStep={nextStep}
+            prevStep={prevStep}
+            setReward={setReward}
+          />
+        )}
         {step === 5 && (
           <RewardSuccess
             reward={reward}
-            formValues={formValues}
             merchantConfig={merchantConfig}
+            formValues={watch()}
             prevStep={prevStep}
           />
         )}
-        {(step === 6 ||
-          (step === 5 && merchantConfig.rewardType !== "lucky_draw")) && (
+        {step === 6 && (
           <ThankYou
             resetFlow={resetFlow}
             merchantConfig={merchantConfig}
