@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Lock, Download } from "lucide-react";
 import { useSession } from "next-auth/react";
+import axios from "@/lib/axios"; // 👈 your axios instance
+
 import {
   Card,
   CardContent,
@@ -14,38 +16,64 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 
-import { customers } from "./customers-data";
 import { customersColumns } from "./customers-columns";
 
 export default function MerchantCustomerDataContainer() {
   const { data: session, status } = useSession();
 
-  // subscription check from session
-  const loading = status === "loading";
+  const loadingSession = status === "loading";
   const subscription = session?.user?.subscriptionType ?? "temporary";
-  const [page, setPage] = useState(0);
+
+  const [customers, setCustomers] = useState();
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [page, setPage] = useState(0); // DataTable is 0-based
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
 
-  const filteredCustomers = customers.filter(
-    (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.email.toLowerCase().includes(search.toLowerCase())
-  );
+  // -----------------------------
+  // Fetch Customers (API)
+  // -----------------------------
+  useEffect(() => {
+    if (subscription !== "annual") return;
 
-  const paginatedData = filteredCustomers.slice(
-    page * pageSize,
-    (page + 1) * pageSize
-  );
+    const fetchCustomers = async () => {
+      try {
+        setLoading(true);
 
-  if (loading) return null;
+        const res = await axios.get("/customers", {
+          params: {
+            page: page + 1, // backend is 1-based
+            pageSize,
+            search,
+          },
+        });
 
+        setCustomers(res.data.data);
+        setTotal(res.data.meta.total);
+      } catch (error) {
+        console.error("Failed to fetch customers", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, [page, pageSize, search, subscription]);
+
+  if (loadingSession) return null;
+
+  // -----------------------------
+  // LOCKED (TEMPORARY PLAN)
+  // -----------------------------
   if (subscription !== "annual") {
     return (
       <div className="flex h-[80vh] flex-col items-center justify-center text-center space-y-6">
         <div className="bg-muted p-6 rounded-full">
           <Lock className="h-12 w-12 text-muted-foreground" />
         </div>
+
         <div className="max-w-md space-y-2">
           <h1 className="text-3xl font-bold">Premium Feature</h1>
           <p className="text-muted-foreground">
@@ -53,6 +81,7 @@ export default function MerchantCustomerDataContainer() {
             Subscription plan members.
           </p>
         </div>
+
         <Card className="max-w-sm w-full border-primary/20 bg-primary/5">
           <CardHeader>
             <CardTitle>Upgrade to Annual</CardTitle>
@@ -72,6 +101,9 @@ export default function MerchantCustomerDataContainer() {
     );
   }
 
+  // -----------------------------
+  // ANNUAL USER VIEW
+  // -----------------------------
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -81,31 +113,36 @@ export default function MerchantCustomerDataContainer() {
             View and manage your customer database
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            Export CSV
-          </Button>
-        </div>
+
+        <Button variant="outline">
+          <Download className="mr-2 h-4 w-4" />
+          Export CSV
+        </Button>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>Registered Customers</CardTitle>
         </CardHeader>
+
         <CardContent>
           <TableToolbar
             placeholder="Search customers..."
-            onSearchChange={setSearch}
+            onSearchChange={(value) => {
+              setPage(0); // reset page on search
+              setSearch(value);
+            }}
           />
+
           <DataTable
-            data={paginatedData}
+            data={customers}
             columns={customersColumns}
             page={page}
             pageSize={pageSize}
-            total={filteredCustomers.length}
+            total={total}
             setPage={setPage}
             setPageSize={setPageSize}
+            loading={loading}
           />
         </CardContent>
       </Card>
