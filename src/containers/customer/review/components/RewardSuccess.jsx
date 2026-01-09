@@ -82,11 +82,11 @@ export const RewardSuccess = ({
 
               <div className="flex flex-col items-center">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6 italic">
-                  Voucher Code: <span className="text-white ml-2">#REWARDV2</span>
+                  Voucher Code: <span className="text-white ml-2">{reward?.coupon?.coupon_code || "#REWARDV2"}</span>
                 </p>
 
                 <h3 className="text-4xl md:text-5xl font-black text-white tracking-widest mb-4 italic uppercase">
-                  {reward?.name || "SPECIAL DISCOUNT"}
+                  {reward?.prize?.prize_name || reward?.name || "SPECIAL DISCOUNT"}
                 </h3>
 
                 <div className="h-1.5 w-12 bg-linear-to-r from-emerald-600 to-teal-500 rounded-full mb-8"></div>
