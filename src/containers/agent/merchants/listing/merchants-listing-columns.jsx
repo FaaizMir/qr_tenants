@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import QRImageDialogHover from "@/components/common/qr-image-dialog";
 import { MerchantStatusToggle } from "./merchant-status-toggle";
+import { DeleteMerchantAction } from "./delete-merchant-action";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,7 +11,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, FileText, Edit, Trash } from "lucide-react";
+import { MoreHorizontal, FileText, Edit } from "lucide-react";
 
 export const merchantsColumns = [
     {
@@ -74,12 +75,14 @@ export const merchantsColumns = [
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-red-600 focus:text-red-600 cursor-pointer">
-                            <Trash className="mr-2 h-4 w-4" /> Delete Merchant
-                        </DropdownMenuItem>
+                        <DeleteMerchantAction
+                            merchantId={row.original.id}
+                            merchantName={row.original.name}
+                        />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );
         },
     },
 ];
+
