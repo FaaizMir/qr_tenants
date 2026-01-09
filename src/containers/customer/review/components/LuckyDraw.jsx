@@ -29,32 +29,47 @@ export const LuckyDraw = ({
   const [result, setResult] = useState(null);
 
   const handleSpin = async () => {
-    if (isSpinning || hasSpun) return;
+    console.log("[LuckyDraw] Spin button clicked");
+    console.log("[LuckyDraw] Current State:", { isSpinning, hasSpun });
+    console.log("[LuckyDraw] Props Received:", { merchantId, customerId });
+
+    if (isSpinning || hasSpun) {
+      console.log("[LuckyDraw] Spin blocked: isSpinning or hasSpun is true");
+      return;
+    }
 
     // Validate IDs
     const safeMerchantId = parseInt(merchantId);
     const safeCustomerId = parseInt(customerId);
 
+    console.log("[LuckyDraw] Parsed IDs:", { safeMerchantId, safeCustomerId });
+
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
-      console.error("Missing valid IDs for spin:", { merchantId, customerId });
-      toast.error("Error: Session data missing. Please try refreshing.");
+      const errorMsg = `Session data missing. Merchant: ${merchantId}, Customer: ${customerId}`;
+      console.error("[LuckyDraw] Validation failed:", errorMsg);
+      toast.error("Error: Session data missing. Review might not have saved correctly.");
       return;
     }
 
     setIsSpinning(true);
+    toast.info("Spinning... Good luck!");
 
-    // Smooth spin animation: at least 4 full rotations + random angle
+    // Smooth spin animation
     const extraDegrees = Math.floor(Math.random() * 360);
     const newRotation = rotation + 360 * 5 + extraDegrees;
+    console.log("[LuckyDraw] Setting rotation to:", newRotation);
     setRotation(newRotation);
 
     try {
-      // API call to spin as per requested payload structure
-      const response = await axiosInstance.post("/lucky-draw/spin", {
+      const payload = {
         customer_id: safeCustomerId,
         merchant_id: safeMerchantId,
-      });
+      };
+      console.log("[LuckyDraw] Hitting API: /lucky-draw/spin with payload:", payload);
 
+      const response = await axiosInstance.post("/lucky-draw/spin", payload);
+
+      console.log("[LuckyDraw] API Success:", response.data);
       const prizeData = response.data?.data;
 
       // Sync animation with result display

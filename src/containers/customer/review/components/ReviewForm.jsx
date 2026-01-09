@@ -218,6 +218,7 @@ export const ReviewForm = ({
 
       // 1. Submit feedback to system
       const response = await axiosInstance.post("/feedbacks", payload);
+      console.log("[ReviewForm] Feedback Response:", response.data);
       const feedbackId = response.data?.data?.id || response.data?.id;
 
       if (feedbackId) {

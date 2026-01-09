@@ -169,6 +169,7 @@ export function CustomerReviewFlow() {
   }, [merchantId]);
 
   const handleReviewSubmission = (data) => {
+    console.log("Review submission received data:", data);
     if (data) {
       setSubmissionData(data);
     }
