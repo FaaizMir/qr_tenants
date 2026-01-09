@@ -2,161 +2,320 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, Store, User, CreditCard } from "lucide-react";
 import { toast } from "sonner";
+import { createMerchant } from "@/lib/services/helper";
+import AddressAutocomplete from "@/components/address-autocomplete";
 
 export function MerchantForm() {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        businessName: "",
-        merchantType: "annual", // annual | temporary
-        planId: "",
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "merchant",
+    business_name: "",
+    business_type: "",
+    merchant_type: "annual", // annual | temporary
+    address: "",
+    city: "",
+    country: "",
+    map_link: "",
+    latitude: "",
+    longitude: "",
+    tax_id: "",
+    planId: "",
+  });
 
-    const handleChange = (field, value) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
-    };
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
-            toast.success("Merchant account created successfully.");
-            router.push("/agent/merchants");
-        }, 1500);
-    };
+    try {
+      const payload = {
+        admin_id: session?.user?.id || 1, // Fallback to 1 if session unavailable (dev mode)
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: "merchant",
+        business_name: formData.business_name,
+        business_type: formData.business_type,
+        merchant_type: formData.merchant_type,
+        address: formData.address,
+        city: formData.city,
+        country: formData.country,
+        map_link: formData.map_link,
+        latitude: parseFloat(formData.latitude) || null,
+        longitude: parseFloat(formData.longitude) || null,
+        tax_id: formData.tax_id,
+        // planId: formData.planId,
+      };
 
-    return (
-        <form onSubmit={handleSubmit} className="space-y-8">
+      console.debug("Creating merchant payload:", payload);
+      const resp = await createMerchant(payload);
+      console.debug("Create merchant response:", resp);
 
-            {/* Account Info */}
-            <Card className="border-l-4 border-l-primary shadow-md">
-                <CardHeader>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="p-2 bg-primary/10 rounded-full text-primary"><User className="h-4 w-4" /></div>
-                        <CardTitle>Account Credentials</CardTitle>
-                    </div>
-                    <CardDescription>
-                        Login details for the merchant administrator.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-6 md:grid-cols-2">
-                    <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input id="firstName" placeholder="John" required value={formData.firstName} onChange={e => handleChange("firstName", e.target.value)} />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input id="lastName" placeholder="Doe" required value={formData.lastName} onChange={e => handleChange("lastName", e.target.value)} />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input id="email" type="email" placeholder="merchant@business.com" required value={formData.email} onChange={e => handleChange("email", e.target.value)} />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="password">Initial Password</Label>
-                        <Input id="password" type="password" required value={formData.password} onChange={e => handleChange("password", e.target.value)} />
-                    </div>
-                </CardContent>
-            </Card>
+      toast.success("Merchant account created successfully.");
+      router.push("/agent/merchants");
+    } catch (error) {
+      console.error("Error creating merchant:", error);
+      toast.error(
+        error?.response?.data?.message || "Failed to create merchant"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            {/* Business Info */}
-            <Card className="shadow-md">
-                <CardHeader>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="p-2 bg-indigo-500/10 rounded-full text-indigo-600"><Store className="h-4 w-4" /></div>
-                        <CardTitle>Business Profile</CardTitle>
-                    </div>
-                    <CardDescription>Primary business details displayed to customers.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="space-y-2 md:w-1/2">
-                        <Label htmlFor="businessName">Business Name</Label>
-                        <Input id="businessName" placeholder="e.g. Acme Café" required value={formData.businessName} onChange={e => handleChange("businessName", e.target.value)} />
-                    </div>
-                </CardContent>
-            </Card>
+  return (
+    <form onSubmit={handleSubmit} className="space-y-8">
+      {/* Account Info */}
+      <Card className="border-l-4 border-l-primary shadow-md">
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="p-2 bg-primary/10 rounded-full text-primary">
+              <User className="h-4 w-4" />
+            </div>
+            <CardTitle>Account Credentials</CardTitle>
+          </div>
+          <CardDescription>
+            Login details for the merchant administrator.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-6 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="name">Admin Name</Label>
+            <Input
+              id="name"
+              placeholder="John Doe"
+              required
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email Address</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="merchant@business.com"
+              required
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password">Initial Password</Label>
+            <Input
+              id="password"
+              type="password"
+              required
+              value={formData.password}
+              onChange={(e) => handleChange("password", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="role">Role</Label>
+            <Input id="role" disabled value={formData.role} />
+          </div>
+        </CardContent>
+      </Card>
 
-            {/* Subscription Plan */}
-            <Card className="shadow-md">
-                <CardHeader>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="p-2 bg-emerald-500/10 rounded-full text-emerald-600"><CreditCard className="h-4 w-4" /></div>
-                        <CardTitle>Subscription & Billing</CardTitle>
-                    </div>
-                    <CardDescription>Select the billing model and feature set.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <Label>Merchant Type</Label>
-                            <Select value={formData.merchantType} onValueChange={v => handleChange("merchantType", v)}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="annual">Annual Subscription</SelectItem>
-                                    <SelectItem value="temporary">Temporary / Pop-up</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <p className="text-xs text-muted-foreground">
-                                Annual merchants are billed yearly. Temporary merchants pay per active day/week.
-                            </p>
-                        </div>
+      {/* Business Info */}
+      <Card className="shadow-md">
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="p-2 bg-indigo-500/10 rounded-full text-indigo-600">
+              <Store className="h-4 w-4" />
+            </div>
+            <CardTitle>Business Profile</CardTitle>
+          </div>
+          <CardDescription>
+            Primary business details displayed to customers.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-6 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="business_name">Business Name</Label>
+            <Input
+              id="business_name"
+              placeholder="e.g. Acme Café"
+              required
+              value={formData.business_name}
+              onChange={(e) => handleChange("business_name", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Business Type</Label>
+            <Select
+              value={formData.business_type}
+              onValueChange={(v) => handleChange("business_type", v)}
+              required
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select business type..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Food & Beverage">Food & Beverage</SelectItem>
+                <SelectItem value="Retail">Retail</SelectItem>
+                <SelectItem value="Services">Services</SelectItem>
+                <SelectItem value="Health">Health</SelectItem>
+                <SelectItem value="Education">Education</SelectItem>
+                <SelectItem value="Technology">Technology</SelectItem>
+                <SelectItem value="Hospitality">Hospitality</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="tax_id">Tax ID</Label>
+            <Input
+              id="tax_id"
+              placeholder="e.g. TX123456"
+              required
+              value={formData.tax_id}
+              onChange={(e) => handleChange("tax_id", e.target.value)}
+            />
+          </div>
+        </CardContent>
+      </Card>
 
-                        <div className="space-y-2">
-                            <Label>Plan Tier</Label>
-                            <Select value={formData.planId} onValueChange={v => handleChange("planId", v)}>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select a plan..." />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="basic">Basic Starter (Lim: 500 Credits)</SelectItem>
-                                    <SelectItem value="pro">Pro Business (Lim: 2000 Credits)</SelectItem>
-                                    <SelectItem value="enterprise">Unlimited Enterprise</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
+      {/* Location Details */}
+      <Card className="shadow-md">
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="p-2 bg-orange-500/10 rounded-full text-orange-600">
+              <Store className="h-4 w-4" />
+            </div>
+            <CardTitle>Location Details</CardTitle>
+          </div>
+          <CardDescription>
+            Search explicitly for the business address to auto-fill details.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-6 md:grid-cols-2">
+          <div className="space-y-2 md:col-span-2">
+            <Label htmlFor="address">Search Address</Label>
+            <AddressAutocomplete
+              label="Address"
+              name="address"
+              placeholder="123 Main St, City, Country"
+              value={formData.address}
+              onChange={(locationData) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  address: locationData.address,
+                  latitude: locationData.latitude,
+                  longitude: locationData.longitude,
+                  map_link: locationData.mapUrl,
+                  city: locationData.city || prev.city,
+                  country: locationData.country || prev.country,
+                }));
+                toast.success("Location updated");
+              }}
+            />
+          </div>
 
-                    <Separator />
+          <div className="space-y-2">
+            <Label htmlFor="city">City</Label>
+            <Input
+              id="city"
+              placeholder="City"
+              required
+              value={formData.city}
+              onChange={(e) => handleChange("city", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="country">Country</Label>
+            <Input
+              id="country"
+              placeholder="Country"
+              required
+              value={formData.country}
+              onChange={(e) => handleChange("country", e.target.value)}
+            />
+          </div>
 
-                    <div className="bg-muted/30 p-4 rounded-lg flex items-center gap-4 border">
-                        <Checkbox id="marketing" defaultChecked />
-                        <div className="grid gap-1.5 leading-none">
-                            <Label htmlFor="marketing" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                Enable Marketing Module
-                            </Label>
-                            <p className="text-xs text-muted-foreground">
-                                Allows merchant to send WhatsApp campaigns (billed separately).
-                            </p>
-                        </div>
-                    </div>
-                </CardContent>
-                <CardFooter className="bg-muted/10 border-t px-6 py-4 flex justify-between items-center">
-                    <Button variant="ghost" type="button" onClick={() => router.back()}>Cancel</Button>
-                    <Button type="submit" disabled={loading} className="min-w-[140px]">
-                        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        {loading ? "Creating..." : "Create Account"}
-                    </Button>
-                </CardFooter>
-            </Card>
-        </form>
-    );
+          {/* Hidden Lat/Lng for form submission */}
+          <input type="hidden" name="latitude" value={formData.latitude} />
+          <input type="hidden" name="longitude" value={formData.longitude} />
+        </CardContent>
+      </Card>
+
+      {/* Subscription Plan */}
+      <Card className="shadow-md">
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="p-2 bg-emerald-500/10 rounded-full text-emerald-600">
+              <CreditCard className="h-4 w-4" />
+            </div>
+            <CardTitle>Subscription & Billing</CardTitle>
+          </div>
+          <CardDescription>
+            Select the billing model and feature set.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid md:grid-cols-1 gap-6">
+            <div className="space-y-2">
+              <Label>Merchant Type</Label>
+              <Select
+                value={formData.merchant_type}
+                onValueChange={(v) => handleChange("merchant_type", v)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="annual">Annual Subscription</SelectItem>
+                  <SelectItem value="temporary">Temporary / Pop-up</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                Annual merchants are billed yearly. Temporary merchants pay per
+                active day/week.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter className="bg-muted/10 border-t px-6 py-4 flex justify-between items-center">
+          <Button variant="ghost" type="button" onClick={() => router.back()}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={loading} className="min-w-[140px]">
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading ? "Creating..." : "Create Account"}
+          </Button>
+        </CardFooter>
+      </Card>
+    </form>
+  );
 }

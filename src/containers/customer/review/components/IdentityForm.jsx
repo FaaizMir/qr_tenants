@@ -7,11 +7,12 @@ import {
   Calendar,
   Mail,
   MapPin,
-  Phone,
   CheckCircle2,
   ArrowLeft,
 } from "lucide-react";
-import { useWatch } from "react-hook-form";
+import { useWatch, Controller } from "react-hook-form";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -213,18 +214,28 @@ export const IdentityForm = ({
                   Phone Number <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Phone className="w-4 h-4 text-zinc-400 group-focus-within:text-primary transition-colors" />
-                  </div>
-                  <Input
-                    type="tel"
-                    {...register("phone", {
+                  <Controller
+                    name="phone"
+                    control={control}
+                    rules={{
                       required: "Phone number is required",
                       minLength: { value: 8, message: "Too short" },
                       maxLength: { value: 15, message: "Too long" },
-                    })}
-                    placeholder="+1 234 567 890"
-                    className="pl-11 h-13 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm font-medium"
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <PhoneInput
+                        international
+                        defaultCountry="US"
+                        value={value}
+                        onChange={onChange}
+                        placeholder="+1 234 567 890"
+                        className="flex items-center gap-3 pl-4 pr-4 h-13 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10 transition-all text-sm font-medium [&_.PhoneInputCountry]:mr-0 [&_.PhoneInputCountryIcon]:w-6 [&_.PhoneInputCountryIcon]:h-auto [&_.PhoneInputCountrySelect]:cursor-pointer"
+                        numberInputProps={{
+                          className:
+                            "bg-transparent border-none outline-none w-full h-full text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500",
+                        }}
+                      />
+                    )}
                   />
                 </div>
                 {formErrors.phone && (

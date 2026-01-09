@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { StatusBadge } from "@/components/common/status-badge";
 import QRImageDialogHover from "@/components/common/qr-image-dialog";
+import { MerchantStatusToggle } from "./merchant-status-toggle";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, FileText, Ban, Power, Settings } from "lucide-react";
+import { MoreHorizontal, FileText, Edit, Trash } from "lucide-react";
 
 export const merchantsColumns = [
     {
@@ -33,7 +33,12 @@ export const merchantsColumns = [
     {
         accessorKey: "status",
         header: "Status",
-        cell: ({ row }) => <StatusBadge status={row.original.status} />,
+        cell: ({ row }) => (
+            <MerchantStatusToggle
+                initialStatus={row.original.status}
+                merchantId={row.original.id}
+            />
+        ),
     },
     {
         accessorKey: "qr",
@@ -48,7 +53,6 @@ export const merchantsColumns = [
         id: "actions",
         header: "Actions",
         cell: ({ row }) => {
-            const isActive = row.original.status === 'active';
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -64,21 +68,15 @@ export const merchantsColumns = [
                                 <FileText className="mr-2 h-4 w-4" /> View Details
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Settings className="mr-2 h-4 w-4" /> Manage Limits
+                        <DropdownMenuItem asChild>
+                            <Link href={`/agent/merchants/edit/${row.original.id}`} className="cursor-pointer">
+                                <Edit className="mr-2 h-4 w-4" /> Edit Details
+                            </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-
-                        {isActive ? (
-                            <DropdownMenuItem className="text-red-600 focus:text-red-600">
-                                <Ban className="mr-2 h-4 w-4" /> Suspend Account
-                            </DropdownMenuItem>
-                        ) : (
-                            <DropdownMenuItem className="text-green-600 focus:text-green-600">
-                                <Power className="mr-2 h-4 w-4" /> Activate Account
-                            </DropdownMenuItem>
-                        )}
-
+                        <DropdownMenuItem className="text-red-600 focus:text-red-600 cursor-pointer">
+                            <Trash className="mr-2 h-4 w-4" /> Delete Merchant
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             );
