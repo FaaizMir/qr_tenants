@@ -17,8 +17,12 @@ export default function MerchantDashboardContainer() {
   const { data: session } = useSession();
   const [batches, setBatches] = useState([]);
   const [walletCredits, setWalletCredits] = useState(0);
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loadingDashboard, setLoadingDashboard] = useState(true);
 
   useEffect(() => {
+    if (!session?.user?.merchantId) return;
+
     const fetchBatches = async () => {
       try {
         const resp = await axiosInstance.get("/coupon-batches", {
@@ -32,23 +36,31 @@ export default function MerchantDashboardContainer() {
     };
 
     const fetchWallet = async () => {
-      if (!session?.user?.merchantId) return;
       try {
         const resp = await axiosInstance.get(`/wallets/merchant/${session.user.merchantId}`);
         const data = resp?.data || resp || {};
-        // Assuming message_credits is the main balance or sum of usable credits
-        // Based on response, total_purchased is 1300, message/marketing are 1300. 
-        // Likely a shared pool or message is the primary display.
         setWalletCredits(data.message_credits || 0);
       } catch (err) {
         console.error("Failed to fetch wallet", err);
       }
     };
 
+    const fetchDashboardData = async () => {
+      try {
+        setLoadingDashboard(true);
+        const resp = await axiosInstance.get(`/merchants/${session.user.merchantId}/dashboard`);
+        const data = resp?.data?.data || null;
+        setDashboardData(data);
+      } catch (err) {
+        console.error("Failed to fetch dashboard analytics", err);
+      } finally {
+        setLoadingDashboard(false);
+      }
+    };
+
     fetchBatches();
-    if (session?.user?.merchantId) {
-      fetchWallet();
-    }
+    fetchWallet();
+    fetchDashboardData();
   }, [session?.user?.merchantId]);
 
   const creditStats = useMemo(() => {
@@ -65,14 +77,17 @@ export default function MerchantDashboardContainer() {
 
     return { totalIssued, totalRedeemed, remainingCredits, creditsUsed };
   }, [batches]);
+
   const subscriptionType = session?.user?.subscriptionType || "temporary";
-  // const credits = 2500; // Removed hardcoded value
-  const kpiData = getKpiData(walletCredits); // Pass real credits to KPI generator if needed
+  const kpiData = getKpiData(walletCredits);
+
   const tabs = getDashboardTabs({
     kpiData,
     recentRedemptions,
     subscriptionType,
     creditStats,
+    dashboardData,
+    loadingDashboard
   });
 
   return (

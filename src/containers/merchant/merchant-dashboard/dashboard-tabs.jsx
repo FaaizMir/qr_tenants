@@ -19,6 +19,8 @@ export const getDashboardTabs = ({
   recentRedemptions,
   subscriptionType = "temporary",
   creditStats,
+  dashboardData,
+  loadingDashboard,
 }) => {
   const isAnnual = subscriptionType === "annual";
 
@@ -29,8 +31,7 @@ export const getDashboardTabs = ({
       content: (
         <div className="space-y-6">
           {/* Stats Grid */}
-          {/* Stats Grid */}
-          <CreditsOverview data={creditStats} />
+          <CreditsOverview data={creditStats} dashboardData={dashboardData} loading={loadingDashboard} />
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Placeholder for future: redemptions/automation */}
@@ -52,12 +53,12 @@ export const getDashboardTabs = ({
     },
     ...(isAnnual
       ? [
-          {
-            value: "analytics",
-            label: "Analytics",
-            content: <MerchantAnalyticsContainer embedded={false} />,
-          },
-        ]
+        {
+          value: "analytics",
+          label: "Analytics",
+          content: <MerchantAnalyticsContainer embedded={false} />,
+        },
+      ]
       : []),
     {
       value: "reviews",
