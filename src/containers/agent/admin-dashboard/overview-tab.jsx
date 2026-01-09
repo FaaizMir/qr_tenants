@@ -44,7 +44,7 @@ const formatDisplayDate = (date) => {
 
 export default function AdminOverviewTab() {
     const { data: session } = useSession();
-    const adminId = session?.user?.adminId;
+    const adminId = session?.adminId;
 
     // Date State
     const [dateRange, setDateRange] = useState({

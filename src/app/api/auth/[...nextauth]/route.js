@@ -71,6 +71,7 @@ export const authOptions = {
             subscriptionType: data?.merchant?.merchant_type || "temporary",
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
+            admin_id: data?.user?.adminId,
           };
         } catch (error) {
           const apiError = error?.response?.data?.message || error?.response?.data;
@@ -106,6 +107,7 @@ export const authOptions = {
           user.merchant_type ||
           token.subscriptionType ||
           "temporary";
+        token.adminId = user.admin_id ?? user.adminId ?? token.adminId;
       }
       return token;
     },
@@ -122,6 +124,7 @@ export const authOptions = {
       if (token?.merchantId) session.user.merchantId = token.merchantId;
       if (token?.adminId) session.user.adminId = token.adminId;
       if (token?.accessToken) session.accessToken = token.accessToken;
+      if (token?.adminId) session.adminId = token.adminId;
 
       return session;
     },
