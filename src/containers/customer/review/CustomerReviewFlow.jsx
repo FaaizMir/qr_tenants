@@ -14,7 +14,7 @@ import { RewardSuccess } from "./components/RewardSuccess";
 import { ThankYou } from "./components/ThankYou";
 
 export function CustomerReviewFlow() {
-  const [step, setStep] = useState(1); // 1: Identity, 2: Review, 3: Redirect, 4: Lucky/Reward
+  const [step, setStep] = useState(1); // 1: Identity, 2: Review, 3: Redirect, 4: Lucky/Reward or ThankYou
   const [loading, setLoading] = useState(false);
   const [reward, setReward] = useState(null);
 
@@ -57,8 +57,12 @@ export function CustomerReviewFlow() {
     facebookReviewLink: "",
     instagramReviewLink: "",
     redReviewLink: "",
+    // Lucky draw vs direct coupon settings
+    luckyDrawEnabled: false,
+    whatsappBatchId: null, // The batch ID to use when lucky draw is disabled
   });
 
+  const [submissionData, setSubmissionData] = useState(null);
   const [initializing, setInitializing] = useState(true);
   const searchParams = useSearchParams();
   const merchantId =
@@ -97,6 +101,11 @@ export function CustomerReviewFlow() {
                 merchant.settings?.instagram_url || prev.instagramReviewLink,
               redReviewLink:
                 merchant.settings?.xiaohongshu_url || prev.redReviewLink,
+              // Lucky draw settings from cache
+              luckyDrawEnabled:
+                merchant.settings?.luckydraw_enabled ?? prev.luckyDrawEnabled,
+              whatsappBatchId:
+                merchant.settings?.whatsapp_enabled_for_batch_id ?? prev.whatsappBatchId,
             }));
 
             if (merchant.settings) {
@@ -118,6 +127,10 @@ export function CustomerReviewFlow() {
 
         const settings = settingsRes?.data?.data;
         const merchant = merchantRes?.data?.data;
+
+        console.log("Merchant Settings:", settings);
+        console.log("Lucky Draw Enabled:", settings?.luckydraw_enabled);
+        console.log("WhatsApp Batch ID:", settings?.whatsapp_enabled_for_batch_id);
 
         if (settings || merchant) {
           setMerchantConfig((prev) => ({
@@ -141,6 +154,9 @@ export function CustomerReviewFlow() {
             instagramReviewLink:
               settings?.instagram_url || prev.instagramReviewLink,
             redReviewLink: settings?.xiaohongshu_url || prev.redReviewLink,
+            // Lucky draw vs direct coupon settings
+            luckyDrawEnabled: settings?.luckydraw_enabled ?? false,
+            whatsappBatchId: settings?.whatsapp_enabled_for_batch_id ?? null,
           }));
         }
       } catch (error) {
@@ -152,12 +168,32 @@ export function CustomerReviewFlow() {
     fetchData();
   }, [merchantId]);
 
+  const handleReviewSubmission = (data) => {
+    if (data) {
+      setSubmissionData(data);
+    }
+    setStep(3);
+  };
+
+  // Dynamic next step handler based on lucky draw setting
+  const handlePostReviewStep = () => {
+    // After review submission (step 3 = RedirectWait), decide where to go
+    if (merchantConfig.luckyDrawEnabled) {
+      // Go to Lucky Draw (step 4)
+      setStep(4);
+    } else {
+      // Skip Lucky Draw, go directly to Thank You (step 6)
+      setStep(6);
+    }
+  };
+
   const nextStep = () => setStep((s) => s + 1);
   const prevStep = () => setStep((s) => s - 1);
   const resetFlow = () => {
     setValue("text", "");
     setValue("rating", 5);
     setReward(null);
+    setSubmissionData(null);
     setStep(1);
   };
 
@@ -211,7 +247,7 @@ export function CustomerReviewFlow() {
             setValue={setValue}
             formValues={watch()}
             register={register}
-            nextStep={nextStep}
+            nextStep={handleReviewSubmission}
             prevStep={prevStep}
             loading={loading}
             setLoading={setLoading}
@@ -219,7 +255,7 @@ export function CustomerReviewFlow() {
         )}
         {step === 3 && (
           <RedirectWait
-            nextStep={nextStep}
+            nextStep={handlePostReviewStep}
             prevStep={prevStep}
             merchantConfig={merchantConfig}
           />
@@ -230,6 +266,8 @@ export function CustomerReviewFlow() {
             nextStep={nextStep}
             prevStep={prevStep}
             setReward={setReward}
+            customerId={submissionData?.customer_id || submissionData?.customer?.id || submissionData?.id}
+            merchantId={merchantId}
           />
         )}
         {step === 5 && (
@@ -251,3 +289,4 @@ export function CustomerReviewFlow() {
     </main>
   );
 }
+

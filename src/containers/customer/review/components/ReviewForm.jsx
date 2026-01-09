@@ -80,7 +80,14 @@ export const ReviewForm = ({
   const queryParams = useSearchParams();
   const merchantId =
     queryParams.get("merchantId") || queryParams.get("mid") || "1";
-  const batchId = queryParams.get("batchId") || queryParams.get("bid") || "1";
+
+  // Determine batch ID based on lucky draw setting
+  // If lucky draw is enabled, don't send batch ID (null)
+  // If lucky draw is disabled, use whatsappBatchId from merchant settings
+  const urlBatchId = queryParams.get("batchId") || queryParams.get("bid");
+  const effectiveBatchId = merchantConfig.luckyDrawEnabled
+    ? null
+    : (merchantConfig.whatsappBatchId || urlBatchId || null);
 
   React.useEffect(() => {
     const fetchPresets = async () => {
@@ -109,14 +116,52 @@ export const ReviewForm = ({
   };
 
   const handleFormSubmit = () => {
-    if (!formValues.rating) {
-      toast.error("Please provide a rating");
+    // Validate rating
+    if (!formValues.rating || formValues.rating < 1) {
+      toast.error("Please provide a star rating (1-5 stars)");
       return;
     }
+
+    // Validate review content (either preset or custom text)
     if (!formValues.text && !selectedPresetId) {
-      toast.error("Please share some feedback");
+      toast.error(
+        "Please share your feedback - select a quick expression or write your own"
+      );
       return;
     }
+
+    // Validate minimum text length if custom review
+    if (
+      !selectedPresetId &&
+      formValues.text &&
+      formValues.text.trim().length < 3
+    ) {
+      toast.error(
+        "Please provide more detailed feedback (at least 3 characters)"
+      );
+      return;
+    }
+
+    // Validate identity fields were filled (from previous step)
+    if (!formValues.name || formValues.name.trim().length === 0) {
+      toast.error("Name is required. Please go back and fill in your details.");
+      return;
+    }
+
+    if (!formValues.email || formValues.email.trim().length === 0) {
+      toast.error(
+        "Email is required. Please go back and fill in your details."
+      );
+      return;
+    }
+
+    if (!formValues.phone || formValues.phone.trim().length === 0) {
+      toast.error(
+        "Phone number is required. Please go back and fill in your details."
+      );
+      return;
+    }
+
     // Show modal to pick platform before system submission since backend requires it
     setShowPlatformModal(true);
   };
@@ -133,32 +178,43 @@ export const ReviewForm = ({
 
       // Safety check for numeric values to prevent NaN 500 errors
       const safeMerchantId = parseInt(merchantId);
-      const safeBatchId = parseInt(batchId);
+      const safeBatchId = effectiveBatchId ? parseInt(effectiveBatchId) : null;
       const safeRating = parseInt(formValues.rating) || 5;
       const safePresetId = isPresetReview ? parseInt(selectedPresetId) : null;
 
+      console.log("Lucky Draw Enabled:", merchantConfig.luckyDrawEnabled);
+      console.log("Effective Batch ID:", effectiveBatchId);
+      console.log("Safe Batch ID:", safeBatchId);
+
+      // Validate merchantId is required
+      if (isNaN(safeMerchantId)) {
+        toast.error("Invalid merchant. Please scan the QR code again.");
+        return;
+      }
+
       const payload = {
-        merchantId: isNaN(safeMerchantId) ? null : safeMerchantId,
-        coupon_batch_id: isNaN(safeBatchId) ? null : safeBatchId,
-        email: formValues.email,
-        name: formValues.name,
-        phoneNumber: formValues.phone,
+        merchantId: safeMerchantId,
+        // Only include batch ID if lucky draw is disabled and batch ID is valid
+        ...(safeBatchId && !isNaN(safeBatchId) && safeBatchId > 0 && { coupon_batch_id: safeBatchId }),
+        email: formValues.email?.trim() || null,
+        name: formValues.name?.trim() || null,
+        phoneNumber: formValues.phone?.trim() || null,
         date_of_birth: formValues.dob || null,
-        address: formValues.address,
-        gender: formValues.gender,
+        address: formValues.address?.trim() || null,
+        gender: formValues.gender || null,
         rating: safeRating,
         reviewType: isPresetReview ? "preset" : "custom",
-        presetReviewId: isNaN(safePresetId) ? null : safePresetId,
-        customReviewText: !isPresetReview ? formValues.text : null,
-        comment: formValues.text || "No específico feedback provided",
+        presetReviewId:
+          isPresetReview && !isNaN(safePresetId) ? safePresetId : null,
+        customReviewText: !isPresetReview
+          ? formValues.text?.trim() || null
+          : null,
+        comment: formValues.text?.trim() || "No specific feedback provided",
         selectedPlatform: mappedPlatform,
         redirectCompleted: false,
       };
 
-      // Only add batch ID if it's a valid number to avoid foreign key errors
-      if (!isNaN(safeBatchId)) {
-        payload.coupon_batch_id = safeBatchId;
-      }
+      console.log("Submitting feedback payload:", payload);
 
       // 1. Submit feedback to system
       const response = await axiosInstance.post("/feedbacks", payload);
@@ -187,24 +243,49 @@ export const ReviewForm = ({
 
         setShowPlatformModal(false);
         toast.success("Feedback submitted successfully!");
-        nextStep();
+        nextStep(response.data?.data || response.data);
+      } else {
+        toast.error("Failed to save feedback. Please try again.");
       }
     } catch (error) {
       console.error("Platform Redirect Error:", error);
+      console.error("Error Response:", error.response?.data);
 
       const responseData = error.response?.data;
       const status = error.response?.status;
 
       if (status === 500) {
-        toast.error(
-          "Internal Server Error (500): The system encountered an unexpected issue while saving your feedback. Please try again or contact support."
+        // Log the full error for debugging
+        console.error(
+          "500 Error Details:",
+          JSON.stringify(responseData, null, 2)
         );
+        toast.error(
+          "Server error: Unable to save your feedback. This might be due to a configuration issue. Please try again or contact support."
+        );
+      } else if (status === 400) {
+        // Bad request - likely validation error
+        const message =
+          responseData?.message || "Invalid request. Please check your inputs.";
+        toast.error(message);
       } else if (responseData?.errors) {
-        // Handle Laravel-style validation errors
-        const errorMessages = Object.values(responseData.errors).flat();
-        errorMessages.forEach((msg) => toast.error(`Validation Error: ${msg}`));
+        // Handle validation errors (array or object format)
+        const errors = responseData.errors;
+        if (Array.isArray(errors)) {
+          errors.slice(0, 3).forEach((msg) => toast.error(msg));
+        } else if (typeof errors === "object") {
+          const errorMessages = Object.entries(errors).slice(0, 3);
+          errorMessages.forEach(([field, msgs]) => {
+            const fieldName = field
+              .replace(/_/g, " ")
+              .replace(/([A-Z])/g, " $1")
+              .trim();
+            const message = Array.isArray(msgs) ? msgs[0] : msgs;
+            toast.error(`${fieldName}: ${message}`);
+          });
+        }
       } else if (responseData?.message) {
-        toast.error(`Error: ${responseData.message}`);
+        toast.error(responseData.message);
       } else {
         toast.error(
           "An unexpected error occurred. Please check your internet connection and try again."
@@ -301,8 +382,8 @@ export const ReviewForm = ({
                 {formValues.rating >= 4
                   ? "Excellent!"
                   : formValues.rating >= 3
-                  ? "Good"
-                  : "Could be better"}
+                    ? "Good"
+                    : "Could be better"}
               </div>
             </div>
           </div>
