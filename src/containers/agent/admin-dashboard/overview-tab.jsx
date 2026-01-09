@@ -1,17 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
-import {
-    format,
-    subDays,
-    startOfMonth,
-    endOfMonth,
-    subMonths,
-} from "date-fns"; // Standard imports, check if avail, else fallback to native
-// Since date-fns is not confirmed, I will use native JS for safety in a helper or inline.
-
 import {
     Calendar as CalendarIcon,
     Users,
@@ -39,11 +30,8 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 
-// --- Native Date Helpers to avoid missing dependency issues ---
+// --- Native Date Helpers ---
 const formatDate = (date) => {
     if (!date) return "";
     return date.toISOString().split("T")[0]; // YYYY-MM-DD
@@ -101,9 +89,7 @@ export default function AdminOverviewTab() {
             try {
                 const startDate = formatDate(dateRange.from);
                 const endDate = formatDate(dateRange.to);
-                // const res = await axiosInstance.get(`/admins/${adminId}/dashboard`, { params: { startDate, endDate } });
                 const res = await axiosInstance.get(`/admins/${adminId}/dashboard`);
-
                 if (res?.data?.data) setData(res.data.data);
             } catch (error) {
                 console.error("Failed to fetch admin dashboard", error);
@@ -132,7 +118,6 @@ export default function AdminOverviewTab() {
 
     return (
         <div className="space-y-6">
-            {/* Filter Bar */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-2 border-b">
                 <div className="flex items-center gap-2">
                     <h2 className="text-lg font-semibold">Admin Overview</h2>
@@ -176,7 +161,6 @@ export default function AdminOverviewTab() {
                 </div>
             </div>
 
-            {/* Metrics Section */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <OverviewCard label="Total Revenue" value={`$${overview.totalRevenue?.toLocaleString() || 0}`} icon={Wallet} color="text-emerald-600" bg="bg-emerald-100" />
                 <OverviewCard label="Total Merchants" value={overview.totalMerchants || 0} icon={Store} color="text-blue-600" bg="bg-blue-100" />
@@ -186,7 +170,6 @@ export default function AdminOverviewTab() {
                 <OverviewCard label="Temporary Merchants" value={overview.temporaryMerchants || 0} icon={Users} color="text-orange-600" bg="bg-orange-100" />
             </div>
 
-            {/* Chart Section */}
             <div className="grid gap-6">
                 <Card>
                     <CardHeader>
@@ -205,8 +188,6 @@ export default function AdminOverviewTab() {
         </div>
     );
 }
-
-// --- Sub-components ---
 
 function OverviewCard({ label, value, icon: Icon, color, bg }) {
     return (
@@ -236,7 +217,6 @@ function MerchantTypeChart({ annual, temporary, total }) {
                 style={{
                     background: `conic-gradient(#8b5cf6 0% ${pAnnual}%, #fb923c ${pAnnual}% ${pAnnual + pTemp}%, #e2e8f0 ${pAnnual + pTemp}% 100%)`
                 }}>
-                {/* Center hole for donut look */}
                 <div className="absolute w-44 h-44 bg-card rounded-full flex flex-col items-center justify-center shadow-inner">
                     <span className="text-4xl font-bold">{total}</span>
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">Total</span>
