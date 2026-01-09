@@ -34,18 +34,6 @@ export const ThankYou = ({ resetFlow, merchantConfig, prevStep }) => {
         </div>
 
         <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
-          <div className="absolute top-4 left-6">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={prevStep}
-              className="h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              Back
-            </Button>
-          </div>
-
           <div className="mx-auto w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 shadow-xs animate-in zoom-in-50 duration-700">
             <Heart className="w-10 h-10 text-red-500 fill-red-500 animate-pulse" />
           </div>

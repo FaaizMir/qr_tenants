@@ -48,18 +48,6 @@ export const RewardSuccess = ({
         </div>
 
         <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
-          <div className="absolute top-4 left-6">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={prevStep}
-              className="h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              Back
-            </Button>
-          </div>
-
           <div className="mx-auto w-20 h-20 rounded-3xl bg-linear-to-br from-emerald-500/5 to-emerald-500/20 flex items-center justify-center mb-6 rotate-3 hover:rotate-0 transition-transform duration-500 shadow-inner">
             <Gift className="w-10 h-10 text-emerald-500" />
           </div>
@@ -99,9 +87,12 @@ export const RewardSuccess = ({
             </div>
           </div>
 
-          <div className="mx-4 p-5 rounded-3xl bg-zinc-50 dark:bg-zinc-800/10 border border-zinc-100 dark:border-zinc-800">
-            <p className="text-[11px] text-zinc-500 italic font-bold">
-              Present this screen to the staff or check your email to redeem your benefit.
+          <div className="mx-4 p-5 rounded-3xl bg-zinc-50 dark:bg-zinc-800/10 border border-zinc-100 dark:border-zinc-800 shadow-sm">
+            <p className="text-[11px] text-zinc-500 italic font-bold leading-relaxed px-4">
+              Present this screen to the staff or check your WhatsApp to redeem your benefit. <br />
+              <span className="text-emerald-600 dark:text-emerald-400 font-black not-italic uppercase tracking-widest text-[9px] mt-2 block">
+                Official confirmation sent to your WhatsApp at {formValues?.phone || "your registered number"}
+              </span>
             </p>
           </div>
         </CardContent>

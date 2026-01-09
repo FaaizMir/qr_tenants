@@ -169,7 +169,6 @@ export function CustomerReviewFlow() {
   }, [merchantId]);
 
   const handleReviewSubmission = (data) => {
-    console.log("Review submission received data:", data);
     if (data) {
       setSubmissionData(data);
     }
@@ -269,6 +268,7 @@ export function CustomerReviewFlow() {
             setReward={setReward}
             customerId={submissionData?.customer_id || submissionData?.customer?.id || submissionData?.id}
             merchantId={merchantId}
+            formValues={watch()}
           />
         )}
         {step === 5 && (

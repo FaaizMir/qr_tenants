@@ -6,14 +6,17 @@ import {
   Trophy,
   Gift,
   ArrowRight,
+  ArrowLeft,
   RotateCw,
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import axiosInstance from "@/lib/axios";
+import axios from "axios";
 import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
+
 
 export const LuckyDraw = ({
   merchantConfig,
@@ -22,6 +25,7 @@ export const LuckyDraw = ({
   setReward,
   customerId,
   merchantId,
+  formValues,
 }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [hasSpun, setHasSpun] = useState(false);
@@ -29,35 +33,27 @@ export const LuckyDraw = ({
   const [result, setResult] = useState(null);
 
   const handleSpin = async () => {
-    console.log("[LuckyDraw] Spin button clicked");
-    console.log("[LuckyDraw] Current State:", { isSpinning, hasSpun });
-    console.log("[LuckyDraw] Props Received:", { merchantId, customerId });
-
-    if (isSpinning || hasSpun) {
-      console.log("[LuckyDraw] Spin blocked: isSpinning or hasSpun is true");
-      return;
-    }
+    toast.info("Spin initiated...");
+    console.log("Spin button clicked. State:", { isSpinning, hasSpun });
+    if (isSpinning || hasSpun) return;
 
     // Validate IDs
     const safeMerchantId = parseInt(merchantId);
     const safeCustomerId = parseInt(customerId);
 
-    console.log("[LuckyDraw] Parsed IDs:", { safeMerchantId, safeCustomerId });
+    console.log("DEBUG IDs:", { merchantId, customerId, safeMerchantId, safeCustomerId });
 
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
-      const errorMsg = `Session data missing. Merchant: ${merchantId}, Customer: ${customerId}`;
-      console.error("[LuckyDraw] Validation failed:", errorMsg);
-      toast.error("Error: Session data missing. Review might not have saved correctly.");
+      console.error("DEBUG: One or more IDs are NaN");
+      toast.error("Error: Missing session data. Please refresh.");
       return;
     }
 
     setIsSpinning(true);
-    toast.info("Spinning... Good luck!");
 
     // Smooth spin animation
     const extraDegrees = Math.floor(Math.random() * 360);
     const newRotation = rotation + 360 * 5 + extraDegrees;
-    console.log("[LuckyDraw] Setting rotation to:", newRotation);
     setRotation(newRotation);
 
     try {
@@ -65,11 +61,24 @@ export const LuckyDraw = ({
         customer_id: safeCustomerId,
         merchant_id: safeMerchantId,
       };
-      console.log("[LuckyDraw] Hitting API: /lucky-draw/spin with payload:", payload);
 
-      const response = await axiosInstance.post("/lucky-draw/spin", payload);
+      // Build URL safely
+      const apiBase = axiosInstance.defaults.baseURL || '';
+      const spinUrl = apiBase.endsWith('/')
+        ? `${apiBase}lucky-draw/spin`
+        : `${apiBase}/lucky-draw/spin`;
 
-      console.log("[LuckyDraw] API Success:", response.data);
+      console.log("DEBUG: Final Spin URL:", spinUrl);
+
+      // Use direct axios to bypass any next-auth interceptors that might be hanging
+      const response = await axios({
+        method: 'post',
+        url: spinUrl,
+        data: payload,
+        headers: { "Content-Type": "application/json" }
+      });
+
+      console.log("DEBUG: API Status:", response.status, "Data:", response.data);
       const prizeData = response.data?.data;
 
       // Sync animation with result display
@@ -79,7 +88,7 @@ export const LuckyDraw = ({
         setHasSpun(true);
         setResult(prizeData);
         setReward(prizeData);
-        toast.success(response.data?.message || "Success! You won a prize!");
+        toast.success(`Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`);
       }, 3000);
     } catch (error) {
       console.error("Lucky Draw Error:", error);
@@ -106,8 +115,20 @@ export const LuckyDraw = ({
       <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-4xl border-none">
         {/* Decorative Header */}
         <div className="relative h-40 md:h-48 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
+          <div className="absolute inset-x-6 top-4 z-40">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={prevStep}
+              disabled={isSpinning || hasSpun}
+              className="h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95 disabled:opacity-0"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Back
+            </Button>
+          </div>
           <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white pt-8">
             <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-4 shadow-2xl animate-bounce-slow">
               <Trophy className="w-7 h-7 text-yellow-500" />
             </div>
@@ -234,6 +255,12 @@ export const LuckyDraw = ({
                   </div>
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                     Code: {result?.coupon?.coupon_code || "Processing"}
+                  </p>
+                </div>
+
+                <div className="bg-zinc-50 dark:bg-zinc-800/20 p-5 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-700/50 max-w-sm mt-4">
+                  <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wide italic">
+                    "Reward sent to your WhatsApp with the number <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic">{formValues?.phone || "you provided"}</span> you entered while submitting the review form."
                   </p>
                 </div>
               </div>
