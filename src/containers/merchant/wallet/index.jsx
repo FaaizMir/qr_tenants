@@ -56,22 +56,24 @@ export default function MerchantWalletContainer({ embedded = false }) {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [wRes, tRes] = await Promise.all([
+        const [wRes, tRes, walletResponse] = await Promise.all([
           axiosInstance.get(`/wallets/merchant/${merchantId}`),
           axiosInstance.get(`/wallets/merchant/${merchantId}/transactions`, {
             params: { page: 1, limit: 50 },
           }),
+          axiosInstance.get(`/wallets/merchant/${merchantId}`),
         ]);
 
         const rawWallet = wRes?.data?.data || wRes?.data || {};
         console.log("Raw Wallet Response:", rawWallet);
+        console.log("walletResponse", walletResponse)
 
         // Normalize backend wallet response into the shape expected by views
         const messageCredits =
-          Number(rawWallet.message_credits ?? rawWallet.marketing_credits) || 0;
+          Number(walletResponse.data?.whatsapp_message_credits);
         const marketingCredits =
-          Number(rawWallet.marketing_credits ?? rawWallet.message_credits) || 0;
-        const utilityCredits = Number(rawWallet.utility_credits) || 0;
+          Number(walletResponse.data?.coupon_credits);
+        const utilityCredits = Number(walletResponse.data?.paid_ad_credits);
         const totalPurchased =
           Number(rawWallet.total_credits_purchased) ||
           messageCredits + marketingCredits + utilityCredits;

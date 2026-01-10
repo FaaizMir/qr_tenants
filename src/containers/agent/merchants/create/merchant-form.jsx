@@ -157,7 +157,7 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="name">Admin Name</Label>
+            <Label htmlFor="name">Merchant Name</Label>
             <Input
               id="name"
               placeholder="John Doe"
