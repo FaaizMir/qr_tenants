@@ -77,21 +77,21 @@ export function AppSidebar({
       url: "/agent/earnings",
       icon: DollarSign,
     },
-    {
-      title: tAgent("statements"),
-      url: "/agent/statements",
-      icon: FileText,
-    },
-    {
-      title: tAgent("couponsync"),
-      url: "/agent/coupon-sync",
-      icon: RefreshCw,
-    },
-    {
-      title: tAgent("support"),
-      url: "/agent/support",
-      icon: MessageSquare,
-    },
+    // {
+    //   title: tAgent("statements"),
+    //   url: "/agent/statements",
+    //   icon: FileText,
+    // },
+    // {
+    //   title: tAgent("couponsync"),
+    //   url: "/agent/coupon-sync",
+    //   icon: RefreshCw,
+    // },
+    // {
+    //   title: tAgent("support"),
+    //   url: "/agent/support",
+    //   icon: MessageSquare,
+    // },
   ];
 
   // Merchant navigation
@@ -134,12 +134,12 @@ export function AppSidebar({
     // Annual-only sections
     ...(subscriptionType === "annual"
       ? [
-          {
-            title: "Customer Data",
-            url: "/merchant/customer-data",
-            icon: Database,
-          },
-        ]
+        {
+          title: "Customer Data",
+          url: "/merchant/customer-data",
+          icon: Database,
+        },
+      ]
       : []),
   ];
 
