@@ -16,16 +16,7 @@ export function KpiCard({
   const isTrendNeutral = trend === "neutral";
 
   // Handle translations safely or default to standard text
-  let footerText = "from last month";
-  try {
-    const t = useTranslations("dashboard.agentDashboard");
-    footerText = t("lastmonth");
-  } catch (error) {
-    // Fallback if provider is missing
-  }
-
-  // Allow override
-  if (description) footerText = description;
+  let footerText = description || null;
 
   return (
     <Card
@@ -65,10 +56,12 @@ export function KpiCard({
           <div className="text-3xl font-bold tracking-tight text-foreground">{value}</div>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground flex items-center gap-1.5">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
-          {footerText}
-        </div>
+        {footerText && (
+          <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground flex items-center gap-1.5">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
+            {footerText}
+          </div>
+        )}
       </CardContent>
     </Card>
   );

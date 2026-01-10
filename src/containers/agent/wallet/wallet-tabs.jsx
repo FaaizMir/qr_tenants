@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import TableToolbar from "@/components/common/table-toolbar";
 import { DataTable } from "@/components/common/data-table";
+import AgentEarningsContainer from "../earnings";
 
 export const getWalletTabs = ({
   walletStats,
@@ -104,5 +105,10 @@ export const getWalletTabs = ({
       value: "transactions",
       label: tAgentWallet("transactions"),
       content: transactionTable,
+    },
+    {
+      value: "earnings",
+      label: "Earnings",
+      content: <AgentEarningsContainer />,
     },
   ];

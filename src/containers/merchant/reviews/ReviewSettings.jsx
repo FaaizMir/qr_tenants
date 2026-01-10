@@ -414,8 +414,8 @@ export default function ReviewSettings() {
             <CardContent className="flex-1 space-y-4">
               <div
                 className={`flex items-center justify-between rounded-xl border-2 p-4 transition-all ${config.luckyDrawEnabled
-                    ? "border-primary bg-primary/5 shadow-sm"
-                    : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
+                  ? "border-primary bg-primary/5 shadow-sm"
+                  : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
                   }`}
               >
                 <div className="flex items-center gap-4">
@@ -425,8 +425,8 @@ export default function ReviewSettings() {
                   >
                     <Sparkles
                       className={`h-6 w-6 ${config.luckyDrawEnabled
-                          ? "text-primary"
-                          : "text-muted-foreground"
+                        ? "text-primary"
+                        : "text-muted-foreground"
                         }`}
                     />
                   </div>
@@ -458,8 +458,8 @@ export default function ReviewSettings() {
                 <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
                   <div
                     className={`flex items-center justify-between rounded-xl border-2 p-4 transition-all ${config.selectedBatchId
-                        ? "border-primary bg-primary/5 shadow-sm"
-                        : "border-muted/60 bg-muted/20"
+                      ? "border-primary bg-primary/5 shadow-sm"
+                      : "border-muted/60 bg-muted/20"
                       }`}
                   >
                     <div className="flex items-center gap-4">
@@ -469,8 +469,8 @@ export default function ReviewSettings() {
                       >
                         <Ticket
                           className={`h-6 w-6 ${config.selectedBatchId
-                              ? "text-primary"
-                              : "text-muted-foreground"
+                            ? "text-primary"
+                            : "text-muted-foreground"
                             }`}
                         />
                       </div>
@@ -493,14 +493,14 @@ export default function ReviewSettings() {
                       type="button"
                       onClick={() => setBatchDropdownOpen(!batchDropdownOpen)}
                       className={`w-full flex items-center justify-between rounded-lg border-2 px-4 py-2.5 text-left transition-all ${batchDropdownOpen
-                          ? "border-primary ring-2 ring-primary/20"
-                          : "border-muted/60 hover:border-primary/40"
+                        ? "border-primary ring-2 ring-primary/20"
+                        : "border-muted/60 hover:border-primary/40"
                         } bg-background`}
                     >
                       <span
                         className={`text-sm ${config.selectedBatchId
-                            ? "text-foreground"
-                            : "text-muted-foreground"
+                          ? "text-foreground"
+                          : "text-muted-foreground"
                           }`}
                       >
                         {config.selectedBatchId
@@ -538,8 +538,8 @@ export default function ReviewSettings() {
                                 setBatchDropdownOpen(false);
                               }}
                               className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors ${config.selectedBatchId === batch.id
-                                  ? "bg-primary/5"
-                                  : ""
+                                ? "bg-primary/5"
+                                : ""
                                 }`}
                             >
                               <div>

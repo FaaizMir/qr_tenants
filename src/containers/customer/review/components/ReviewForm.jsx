@@ -65,6 +65,7 @@ export const ReviewForm = ({
   merchantConfig,
   setValue,
   formValues,
+  control,
   register,
   nextStep,
   prevStep,
@@ -445,7 +446,7 @@ export const ReviewForm = ({
                 label=""
                 name="text"
                 placeholder="Share the details that made your visit special..."
-                register={register}
+                control={control}
                 value={formValues.text}
                 onChange={onTextChange}
                 errors={{}}

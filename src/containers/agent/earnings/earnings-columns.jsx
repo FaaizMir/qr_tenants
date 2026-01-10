@@ -1,24 +1,45 @@
 export const earningsColumns = (tAgentEarnings) => [
   {
+    accessorKey: "date",
+    header: "Date",
+    cell: ({ row }) => {
+      const date = row.original.date;
+      return date ? new Date(date).toLocaleDateString() : "—";
+    },
+  },
+  {
     accessorKey: "merchant",
     header: tAgentEarnings("merchant"),
     cell: ({ row }) => (
-      <span className="font-medium">{row.original.merchant}</span>
+      <div className="flex flex-col">
+        <span className="font-medium">{row.original.merchant}</span>
+        <span className="text-[10px] text-muted-foreground uppercase">{row.original.source || "Commission"}</span>
+      </div>
     ),
   },
   {
     accessorKey: "totalSales",
-    header: tAgentEarnings("totalsales"),
-    cell: ({ row }) => `$${row.original.totalSales.toLocaleString()}`,
+    header: () => <div className="text-right">{tAgentEarnings("totalsales")}</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-mono text-sm">
+        ${(Number(row.original.totalSales) || 0).toLocaleString()}
+      </div>
+    ),
   },
-  { accessorKey: "rate", header: tAgentEarnings("commissionrate") },
+  {
+    accessorKey: "rate",
+    header: () => <div className="text-right">{tAgentEarnings("commissionrate")}</div>,
+    cell: ({ row }) => <div className="text-right text-muted-foreground">{row.original.rate}</div>
+  },
   {
     accessorKey: "commission",
-    header: tAgentEarnings("commissionearned"),
+    header: () => <div className="text-right">{tAgentEarnings("commissionearned")}</div>,
     cell: ({ row }) => (
-      <span className="text-green-600 font-semibold">
-        ${row.original.commission.toLocaleString()}
-      </span>
+      <div className="text-right">
+        <span className="text-emerald-600 font-bold">
+          +${(Number(row.original.commission) || 0).toLocaleString()}
+        </span>
+      </div>
     ),
   },
 ];

@@ -72,11 +72,11 @@ export function AppSidebar({
       url: "/agent/packages",
       icon: Package,
     },
-    {
-      title: tAgent("earnings"),
-      url: "/agent/earnings",
-      icon: DollarSign,
-    },
+    // {
+    //   title: tAgent("earnings"),
+    //   url: "/agent/earnings",
+    //   icon: DollarSign,
+    // },
     // {
     //   title: tAgent("statements"),
     //   url: "/agent/statements",
@@ -121,11 +121,11 @@ export function AppSidebar({
       url: "/merchant/purchase",
       icon: ShoppingCart,
     },
-    {
-      title: tMerchant("campaigns"),
-      url: "/merchant/campaigns",
-      icon: Megaphone,
-    },
+    // {
+    //   title: tMerchant("campaigns"),
+    //   url: "/merchant/campaigns",
+    //   icon: Megaphone,
+    // },
     {
       title: tMerchant("luckydraw"),
       url: "/merchant/lucky-draw",

@@ -1,85 +1,146 @@
 "use client";
 
+import { useState, useEffect, useMemo } from "react";
+import { useSession } from "next-auth/react";
+import axiosInstance from "@/lib/axios";
 import { useTranslations } from "next-intl";
-import { kpiData, monthlyEarnings, commissionBreakdown } from "./earnings-data";
+import { kpiData as getKpiData, monthlyEarnings, commissionBreakdown as mockBreakdown } from "./earnings-data";
 import { earningsColumns } from "./earnings-columns";
 import { KpiCard } from "@/components/common/kpi-card";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
-import { useState } from "react";
-import { Download, PieChart, TrendingUp, DollarSign, Calendar, Lock } from "lucide-react";
+import { Download, PieChart, TrendingUp, DollarSign, Calendar, Lock, Loader2, Activity, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 export default function AgentEarningsContainer() {
+  const { data: session } = useSession();
+  const adminId = session?.user?.adminId;
+
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
+  const [total, setTotal] = useState(0);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [earnings, setEarnings] = useState([]);
+  const [stats, setStats] = useState({
+    totalEarned: 0,
+    avgRate: 0,
+    topMerchant: "—",
+  });
+
   const tAgentEarnings = useTranslations("dashboard.agentEarnings");
 
-  const KpiData = kpiData(tAgentEarnings);
+  useEffect(() => {
+    if (!adminId) return;
+
+    const fetchEarnings = async () => {
+      setLoading(true);
+      try {
+        const res = await axiosInstance.get(`/wallets/admin/${adminId}/transactions`, {
+          params: {
+            page: 1,
+            limit: 100, // Fetch more to allow for client-side aggregation
+            type: "commission",
+          },
+        });
+
+        const rawData = res.data.data || [];
+
+        // Grouping by merchant_id and source (merchant type)
+        const grouped = rawData.reduce((acc, item) => {
+          let meta = {};
+          try {
+            meta = typeof item.metadata === "string" ? JSON.parse(item.metadata) : item.metadata || {};
+          } catch (e) {
+            console.error("Failed to parse metadata", e);
+          }
+
+          const merchantId = meta.merchant_id || "unknown";
+          const sourceType = meta.credit_type ? `${meta.credit_type} purchase` : item.description;
+          const groupKey = `${merchantId}_${sourceType}`;
+
+          if (!acc[groupKey]) {
+            acc[groupKey] = {
+              merchant_id: merchantId,
+              merchant: meta.merchant_id ? `Merchant #${meta.merchant_id}` : "Unknown",
+              totalSales: 0,
+              commission: 0,
+              rate: meta.commission_rate ? `${(meta.commission_rate * 100).toFixed(1)}%` : "—",
+              source: sourceType,
+              date: item.completed_at || item.created_at,
+            };
+          }
+
+          acc[groupKey].totalSales += Number(meta.purchase_amount) || 0;
+          acc[groupKey].commission += Number(item.amount) || 0;
+
+          return acc;
+        }, {});
+
+        const processed = Object.values(grouped);
+
+        setEarnings(processed);
+        setTotal(processed.length);
+
+        const totalEarned = processed.reduce((acc, curr) => acc + curr.commission, 0);
+        setStats(prev => ({
+          ...prev,
+          totalEarned: totalEarned || prev.totalEarned,
+        }));
+
+      } catch (error) {
+        console.error("Failed to fetch earnings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEarnings();
+  }, [adminId]);
+
+  const KpiData = [
+    {
+      title: tAgentEarnings("totalearnings"),
+      value: `$${stats.totalEarned.toLocaleString()}`,
+      icon: DollarSign,
+      trend: "up",
+      trendValue: "Live Data",
+    },
+    {
+      title: "Active Merchants",
+      value: earnings.length.toString(),
+      icon: TrendingUp,
+    },
+    {
+      title: "Earnings Type",
+      value: "Prepaid ",
+      icon: Lock,
+    }
+  ];
+
   const EarningColumns = earningsColumns(tAgentEarnings);
 
-  // Filter logic
-  const filteredBreakdown = commissionBreakdown.filter((item) =>
+  const filteredEarnings = earnings.filter((item) =>
     item.merchant.toLowerCase().includes(search.toLowerCase()) ||
-    item.source.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const paginatedData = filteredBreakdown.slice(
-    page * pageSize,
-    (page + 1) * pageSize
+    item.source?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{tAgentEarnings("earnings")}</h1>
-          <p className="text-muted-foreground"> {tAgentEarnings("description")}</p>
-        </div>
-        <Button variant="outline" className="gap-2">
-          <Download className="h-4 w-4" /> Export Report (Annual Only)
-        </Button>
-      </div>
-
-      {/* Enhanced KPI Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {KpiData.map((kpi, index) => (
-          <KpiCard key={index} {...kpi} className="border-muted/60" />
+          <KpiCard key={index} {...kpi} className="border-muted/60 shadow-sm" />
         ))}
-        {/* Add Profit After Deductions Card */}
-        <Card className="border-muted/60 bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-950/30 dark:to-background">
-          <CardContent className="p-6">
-            <div className="flex justify-between items-start mb-4">
-              <div className="p-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900 text-emerald-600">
-                <DollarSign className="w-5 h-5" />
-              </div>
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-sm font-medium text-muted-foreground">Net Profit</h3>
-              <div className="text-3xl font-bold tracking-tight">$85,240</div>
-            </div>
-            <div className="mt-4 pt-4 border-t border-emerald-100 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-400">
-              After all system deductions
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-7">
-        {/* Main Breakdown Table */}
-        <Card className="col-span-4 lg:col-span-5">
-          <CardHeader>
-            <div className="flex justify-between items-center">
-              <div>
-                <CardTitle>{tAgentEarnings("commissionbreakdown")}</CardTitle>
-                <CardDescription>Detailed log of earnings from subscriptions, ads, and coupons.</CardDescription>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
-                <Lock className="h-3 w-3" /> Base pricing fixed by Admin
-              </div>
-            </div>
+      <div className="grid gap-6">
+        {/* Main Breakdown Table - Now Full Width */}
+        <Card className="shadow-sm">
+          <CardHeader className="pb-4">
+            <CardTitle>{tAgentEarnings("commissionbreakdown")}</CardTitle>
+            <CardDescription className="text-xs">Consolidated commissions per merchant.</CardDescription>
           </CardHeader>
           <CardContent>
             <TableToolbar
@@ -87,70 +148,18 @@ export default function AgentEarningsContainer() {
               onSearchChange={setSearch}
             />
             <DataTable
-              data={paginatedData}
+              data={filteredEarnings}
               columns={EarningColumns}
               page={page}
               pageSize={pageSize}
-              total={filteredBreakdown.length}
+              total={total}
               setPage={setPage}
               setPageSize={setPageSize}
+              loading={loading}
             />
           </CardContent>
         </Card>
-
-        {/* ... (Revenue Sources Widget Remains) ... */}
-        {/* Earnings by Service Type (Mini Widget) */}
-        <Card className="col-span-3 lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="text-base">Revenue Sources</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {[
-              { label: "Subscriptions", val: "65%", color: "bg-blue-500" },
-              { label: "WhatsApp Markup", val: "15%", color: "bg-green-500" },
-              { label: "Ad Boosts", val: "12%", color: "bg-purple-500" },
-              { label: "Temp. Merchants", val: "8%", color: "bg-orange-500" },
-            ].map((item, i) => (
-              <div key={i} className="space-y-1">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{item.label}</span>
-                  <span className="font-bold">{item.val}</span>
-                </div>
-                <div className="h-2 rounded-full bg-muted overflow-hidden">
-                  <div className={`h-full ${item.color}`} style={{ width: item.val }}></div>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-          <div className="p-4 border-t mt-auto">
-            <h4 className="text-sm font-medium mb-3">Top Campaign</h4>
-            <div className="bg-muted/30 p-3 rounded-md text-sm">
-              <div className="flex gap-2 items-center mb-1">
-                <TrendingUp className="h-4 w-4 text-green-600" />
-                <span className="font-semibold">Summer Sale Boost</span>
-              </div>
-              <p className="text-xs text-muted-foreground">Generated $450 in 3 days</p>
-            </div>
-          </div>
-        </Card>
       </div>
-
-      {/* ... (Monthly Performance Remains) ... */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Calendar className="h-5 w-5" /> Monthly Profit History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {monthlyEarnings.slice(0, 4).map((m, i) => (
-              <div key={i} className="p-4 border rounded-lg text-center hover:bg-muted/30 transition-colors">
-                <div className="text-sm text-muted-foreground mb-1">{m.month}</div>
-                <div className="text-xl font-bold">${m.earnings}</div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }

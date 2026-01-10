@@ -51,30 +51,30 @@ export const getDashboardTabs = ({
       label: "Wallet",
       content: <MerchantWalletContainer embedded={true} />,
     },
-    ...(isAnnual
-      ? [
-        {
-          value: "analytics",
-          label: "Analytics",
-          content: <MerchantAnalyticsContainer embedded={false} />,
-        },
-      ]
-      : []),
+    // ...(isAnnual
+    //   ? [
+    //     {
+    //       value: "analytics",
+    //       label: "Analytics",
+    //       content: <MerchantAnalyticsContainer embedded={false} />,
+    //     },
+    //   ]
+    //   : []),
     {
       value: "reviews",
-      label: "Reviews & Rewards",
+      label: "Settings",
       content: <ReviewSettings />,
     },
-    {
-      value: "automation",
-      label: "Automation",
-      content: <AutomationSettings />,
-    },
-    {
-      value: "ads",
-      label: "Ads & Marketplace",
-      content: <MerchantAdsContainer />,
-    },
+    // {
+    //   value: "automation",
+    //   label: "Automation",
+    //   content: <AutomationSettings />,
+    // },
+    // {
+    //   value: "ads",
+    //   label: "Ads & Marketplace",
+    //   content: <MerchantAdsContainer />,
+    // },
     /* {
       value: "feedback-form",
       label: "Feedback Form",

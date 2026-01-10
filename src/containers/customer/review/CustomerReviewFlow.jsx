@@ -247,6 +247,7 @@ export function CustomerReviewFlow() {
             setValue={setValue}
             formValues={watch()}
             register={register}
+            control={control}
             nextStep={handleReviewSubmission}
             prevStep={prevStep}
             loading={loading}
