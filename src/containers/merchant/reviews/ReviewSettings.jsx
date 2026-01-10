@@ -2,7 +2,15 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import { Save, Upload, Loader2, Sparkles, Ticket, ChevronDown, Check } from "lucide-react";
+import {
+  Save,
+  Upload,
+  Loader2,
+  Sparkles,
+  Ticket,
+  ChevronDown,
+  Check,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -144,7 +152,12 @@ export default function ReviewSettings() {
     fetchMerchantSettings();
     fetchPresetReviews();
     fetchCouponBatches();
-  }, [merchantId, fetchMerchantSettings, fetchPresetReviews, fetchCouponBatches]);
+  }, [
+    merchantId,
+    fetchMerchantSettings,
+    fetchPresetReviews,
+    fetchCouponBatches,
+  ]);
 
   const handleSavePresets = async () => {
     setLoadingPresets(true);
@@ -236,7 +249,9 @@ export default function ReviewSettings() {
         paid_ads: config.paid_ads,
         // Reward settings - Lucky Draw or Coupon Batch
         luckydraw_enabled: config.luckyDrawEnabled,
-        whatsapp_enabled_for_batch_id: config.luckyDrawEnabled ? null : config.selectedBatchId,
+        whatsapp_enabled_for_batch_id: config.luckyDrawEnabled
+          ? null
+          : config.selectedBatchId,
       };
 
       await axiosInstance.patch(
@@ -246,9 +261,7 @@ export default function ReviewSettings() {
       toast.success("Settings saved successfully");
     } catch (error) {
       console.error(error);
-      toast.error(
-        error?.response?.data?.message || "Error saving settings"
-      );
+      toast.error(error?.response?.data?.message || "Error saving settings");
     } finally {
       setLoadingSettings(false);
     }
@@ -267,151 +280,162 @@ export default function ReviewSettings() {
       </div>
 
       <div className="space-y-6">
-        {/* Combined Platform & Reward Settings Card */}
+        {/* Review Platforms Card */}
         <Card className="border-muted/60">
           <CardHeader className="pb-4">
-            <CardTitle className="text-xl">Platform & Reward Settings</CardTitle>
+            <CardTitle className="text-xl">Review Platforms</CardTitle>
             <CardDescription className="text-sm">
-              Configure review platforms and customer reward strategy
+              Enable platforms where customers can post reviews and provide URLs
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Review Platforms Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-semibold">Review Platforms</h3>
-                <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                  Enable where customers can post reviews
-                </span>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Google */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                  <Label className="font-medium cursor-pointer">
+                    Google Business Profile
+                  </Label>
+                  <Switch
+                    checked={config.enableGoogle}
+                    onCheckedChange={(c) =>
+                      setConfig({ ...config, enableGoogle: c })
+                    }
+                  />
+                </div>
+                {config.enableGoogle && (
+                  <Input
+                    placeholder="https://g.page/r/..."
+                    value={config.googleReviewLink}
+                    onChange={(e) =>
+                      setConfig({
+                        ...config,
+                        googleReviewLink: e.target.value,
+                      })
+                    }
+                    className="animate-in fade-in slide-in-from-top-2"
+                  />
+                )}
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <Label className="font-medium cursor-pointer">
-                      Google Business Profile
-                    </Label>
-                    <Switch
-                      checked={config.enableGoogle}
-                      onCheckedChange={(c) =>
-                        setConfig({ ...config, enableGoogle: c })
-                      }
-                    />
-                  </div>
-                  {config.enableGoogle && (
-                    <Input
-                      placeholder="https://g.page/r/..."
-                      value={config.googleReviewLink}
-                      onChange={(e) =>
-                        setConfig({ ...config, googleReviewLink: e.target.value })
-                      }
-                      className="animate-in fade-in slide-in-from-top-2"
-                    />
-                  )}
+              {/* Facebook */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                  <Label className="font-medium cursor-pointer">
+                    Facebook Page
+                  </Label>
+                  <Switch
+                    checked={config.enableFacebook}
+                    onCheckedChange={(c) =>
+                      setConfig({ ...config, enableFacebook: c })
+                    }
+                  />
                 </div>
+                {config.enableFacebook && (
+                  <Input
+                    placeholder="https://facebook.com/..."
+                    value={config.facebookReviewLink}
+                    onChange={(e) =>
+                      setConfig({
+                        ...config,
+                        facebookReviewLink: e.target.value,
+                      })
+                    }
+                    className="animate-in fade-in slide-in-from-top-2"
+                  />
+                )}
+              </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <Label className="font-medium cursor-pointer">
-                      Facebook Page
-                    </Label>
-                    <Switch
-                      checked={config.enableFacebook}
-                      onCheckedChange={(c) =>
-                        setConfig({ ...config, enableFacebook: c })
-                      }
-                    />
-                  </div>
-                  {config.enableFacebook && (
-                    <Input
-                      placeholder="https://facebook.com/..."
-                      value={config.facebookReviewLink}
-                      onChange={(e) =>
-                        setConfig({ ...config, facebookReviewLink: e.target.value })
-                      }
-                      className="animate-in fade-in slide-in-from-top-2"
-                    />
-                  )}
+              {/* Instagram */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                  <Label className="font-medium cursor-pointer">
+                    Instagram Profile/Post
+                  </Label>
+                  <Switch
+                    checked={config.enableInstagram}
+                    onCheckedChange={(c) =>
+                      setConfig({ ...config, enableInstagram: c })
+                    }
+                  />
                 </div>
+                {config.enableInstagram && (
+                  <Input
+                    placeholder="https://instagram.com/..."
+                    value={config.instagramReviewLink}
+                    onChange={(e) =>
+                      setConfig({
+                        ...config,
+                        instagramReviewLink: e.target.value,
+                      })
+                    }
+                    className="animate-in fade-in slide-in-from-top-2"
+                  />
+                )}
+              </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <Label className="font-medium cursor-pointer">
-                      Instagram Profile/Post
-                    </Label>
-                    <Switch
-                      checked={config.enableInstagram}
-                      onCheckedChange={(c) =>
-                        setConfig({ ...config, enableInstagram: c })
-                      }
-                    />
-                  </div>
-                  {config.enableInstagram && (
-                    <Input
-                      placeholder="https://instagram.com/..."
-                      value={config.instagramReviewLink}
-                      onChange={(e) =>
-                        setConfig({
-                          ...config,
-                          instagramReviewLink: e.target.value,
-                        })
-                      }
-                      className="animate-in fade-in slide-in-from-top-2"
-                    />
-                  )}
+              {/* RED */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
+                  <Label className="font-medium cursor-pointer">
+                    XiaoHongShu (RED)
+                  </Label>
+                  <Switch
+                    checked={config.enableRed}
+                    onCheckedChange={(c) =>
+                      setConfig({ ...config, enableRed: c })
+                    }
+                  />
                 </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-3 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <Label className="font-medium cursor-pointer">
-                      XiaoHongShu (RED)
-                    </Label>
-                    <Switch
-                      checked={config.enableRed}
-                      onCheckedChange={(c) =>
-                        setConfig({ ...config, enableRed: c })
-                      }
-                    />
-                  </div>
-                  {config.enableRed && (
-                    <Input
-                      placeholder="https://..."
-                      value={config.redReviewLink}
-                      onChange={(e) =>
-                        setConfig({ ...config, redReviewLink: e.target.value })
-                      }
-                      className="animate-in fade-in slide-in-from-top-2"
-                    />
-                  )}
-                </div>
+                {config.enableRed && (
+                  <Input
+                    placeholder="https://..."
+                    value={config.redReviewLink}
+                    onChange={(e) =>
+                      setConfig({ ...config, redReviewLink: e.target.value })
+                    }
+                    className="animate-in fade-in slide-in-from-top-2"
+                  />
+                )}
               </div>
             </div>
+          </CardContent>
+        </Card>
 
-            <Separator />
-
-            {/* Lucky Draw Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-semibold">Reward Strategy</h3>
-                <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                  Enable lucky draw rewards
-                </span>
-              </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Reward Strategy Card */}
+          <Card className="border-muted/60 flex flex-col">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl">Reward Strategy</CardTitle>
+              <CardDescription className="text-sm">
+                Enable lucky draw rewards or direct coupons
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 space-y-4">
               <div
                 className={`flex items-center justify-between rounded-xl border-2 p-4 transition-all ${config.luckyDrawEnabled
-                  ? "border-primary bg-primary/5 shadow-sm"
-                  : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
+                    ? "border-primary bg-primary/5 shadow-sm"
+                    : "border-muted/60 bg-muted/20 hover:border-primary/40 hover:bg-primary/5"
                   }`}
               >
                 <div className="flex items-center gap-4">
-                  <div className={`p-3 rounded-xl ${config.luckyDrawEnabled ? "bg-primary/20" : "bg-muted"}`}>
-                    <Sparkles className={`h-6 w-6 ${config.luckyDrawEnabled ? "text-primary" : "text-muted-foreground"}`} />
+                  <div
+                    className={`p-3 rounded-xl ${config.luckyDrawEnabled ? "bg-primary/20" : "bg-muted"
+                      }`}
+                  >
+                    <Sparkles
+                      className={`h-6 w-6 ${config.luckyDrawEnabled
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                        }`}
+                    />
                   </div>
                   <div>
-                    <Label className="text-base font-semibold cursor-pointer">Lucky Draw</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Gamified experience with variable prizes for customers
+                    <Label className="text-base font-semibold cursor-pointer">
+                      Lucky Draw
+                    </Label>
+                    <p className="text-xs text-muted-foreground">
+                      Gamified experience for customers
                     </p>
                   </div>
                 </div>
@@ -430,45 +454,65 @@ export default function ReviewSettings() {
                 </div>
               )}
 
-              {/* Coupon Batch Selector - Show when Lucky Draw is disabled */}
               {!config.luckyDrawEnabled && (
                 <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
                   <div
                     className={`flex items-center justify-between rounded-xl border-2 p-4 transition-all ${config.selectedBatchId
-                      ? "border-primary bg-primary/5 shadow-sm"
-                      : "border-muted/60 bg-muted/20"
+                        ? "border-primary bg-primary/5 shadow-sm"
+                        : "border-muted/60 bg-muted/20"
                       }`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl ${config.selectedBatchId ? "bg-primary/20" : "bg-muted"}`}>
-                        <Ticket className={`h-6 w-6 ${config.selectedBatchId ? "text-primary" : "text-muted-foreground"}`} />
+                      <div
+                        className={`p-3 rounded-xl ${config.selectedBatchId ? "bg-primary/20" : "bg-muted"
+                          }`}
+                      >
+                        <Ticket
+                          className={`h-6 w-6 ${config.selectedBatchId
+                              ? "text-primary"
+                              : "text-muted-foreground"
+                            }`}
+                        />
                       </div>
                       <div className="flex-1">
-                        <Label className="text-base font-semibold">Direct Coupon</Label>
-                        <p className="text-sm text-muted-foreground">
-                          Send coupons from a batch via WhatsApp
+                        <Label className="text-base font-semibold">
+                          Direct Coupon
+                        </Label>
+                        <p className="text-xs text-muted-foreground">
+                          Send coupons via WhatsApp
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Batch Selector Dropdown */}
                   <div className="relative">
-                    <Label className="text-sm font-medium mb-2 block">Select Coupon Batch</Label>
+                    <Label className="text-sm font-medium mb-2 block">
+                      Select Coupon Batch
+                    </Label>
                     <button
                       type="button"
                       onClick={() => setBatchDropdownOpen(!batchDropdownOpen)}
-                      className={`w-full flex items-center justify-between rounded-lg border-2 px-4 py-3 text-left transition-all ${batchDropdownOpen
-                        ? "border-primary ring-2 ring-primary/20"
-                        : "border-muted/60 hover:border-primary/40"
+                      className={`w-full flex items-center justify-between rounded-lg border-2 px-4 py-2.5 text-left transition-all ${batchDropdownOpen
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-muted/60 hover:border-primary/40"
                         } bg-background`}
                     >
-                      <span className={config.selectedBatchId ? "text-foreground" : "text-muted-foreground"}>
+                      <span
+                        className={`text-sm ${config.selectedBatchId
+                            ? "text-foreground"
+                            : "text-muted-foreground"
+                          }`}
+                      >
                         {config.selectedBatchId
-                          ? couponBatches.find(b => b.id === config.selectedBatchId)?.batch_name || "Selected Batch"
+                          ? couponBatches.find(
+                            (b) => b.id === config.selectedBatchId
+                          )?.batch_name || "Selected Batch"
                           : "Choose a coupon batch..."}
                       </span>
-                      <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${batchDropdownOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown
+                        className={`h-4 w-4 text-muted-foreground transition-transform ${batchDropdownOpen ? "rotate-180" : ""
+                          }`}
+                      />
                     </button>
 
                     {batchDropdownOpen && (
@@ -476,11 +520,10 @@ export default function ReviewSettings() {
                         {loadingBatches ? (
                           <div className="flex items-center justify-center py-4">
                             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
-                            <span className="ml-2 text-sm text-muted-foreground">Loading batches...</span>
                           </div>
                         ) : couponBatches.length === 0 ? (
                           <div className="py-4 px-4 text-sm text-muted-foreground text-center">
-                            No coupon batches found. Create one first.
+                            No coupon batches found.
                           </div>
                         ) : (
                           couponBatches.map((batch) => (
@@ -488,16 +531,24 @@ export default function ReviewSettings() {
                               key={batch.id}
                               type="button"
                               onClick={() => {
-                                setConfig({ ...config, selectedBatchId: batch.id });
+                                setConfig({
+                                  ...config,
+                                  selectedBatchId: batch.id,
+                                });
                                 setBatchDropdownOpen(false);
                               }}
-                              className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors ${config.selectedBatchId === batch.id ? "bg-primary/5" : ""
+                              className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors ${config.selectedBatchId === batch.id
+                                  ? "bg-primary/5"
+                                  : ""
                                 }`}
                             >
                               <div>
-                                <div className="font-medium">{batch.batch_name}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  {batch.issued_quantity || 0} / {batch.total_quantity || 0} issued • {batch.batch_type || "coupon"}
+                                <div className="font-medium text-sm">
+                                  {batch.batch_name}
+                                </div>
+                                <div className="text-[10px] text-muted-foreground">
+                                  {batch.issued_quantity || 0} /{" "}
+                                  {batch.total_quantity || 0} issued
                                 </div>
                               </div>
                               {config.selectedBatchId === batch.id && (
@@ -509,30 +560,28 @@ export default function ReviewSettings() {
                       </div>
                     )}
                   </div>
-
-                  {config.selectedBatchId && (
-                    <div className="text-sm text-blue-700 bg-blue-50 p-3 rounded-lg border border-blue-200">
-                      💳 Customers will receive coupons from the selected batch after completing their review.
-                    </div>
-                  )}
                 </div>
               )}
-            </div>
+            </CardContent>
+          </Card>
 
-            <Separator />
-
-            {/* Additional Settings */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-semibold">Additional Settings</h3>
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-2">
+          {/* Additional Settings Card */}
+          <Card className="border-muted/60 flex flex-col">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl">Additional Settings</CardTitle>
+              <CardDescription className="text-sm">
+                Configure preset reviews and promotional ads
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 space-y-4">
+              <div className="grid gap-3">
                 <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
                   <div className="space-y-0.5">
-                    <Label className="text-base font-medium">Enable Preset Reviews</Label>
+                    <Label className="text-base font-medium">
+                      Enable Preset Reviews
+                    </Label>
                     <p className="text-xs text-muted-foreground">
-                      Show quick-reply review options to customers
+                      Show quick-reply review options
                     </p>
                   </div>
                   <Switch
@@ -547,7 +596,7 @@ export default function ReviewSettings() {
                   <div className="space-y-0.5">
                     <Label className="text-base font-medium">Paid Ads</Label>
                     <p className="text-xs text-muted-foreground">
-                      Enable promotional images on your review page
+                      Display promotional images
                     </p>
                   </div>
                   <Switch
@@ -560,12 +609,12 @@ export default function ReviewSettings() {
               </div>
 
               {config.paid_ads && (
-                <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2">
-                  <Label>Ad Image</Label>
+                <div className="space-y-3 pt-2 animate-in fade-in slide-in-from-top-2">
+                  <Label className="text-sm font-medium">Ad Image</Label>
                   <div className="relative group">
-                    <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 bg-muted/50 transition-colors hover:bg-muted/80">
+                    <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-4 bg-muted/50 transition-colors hover:bg-muted/80">
                       {config.paid_ad_image ? (
-                        <div className="relative w-full max-w-md aspect-video rounded-md overflow-hidden">
+                        <div className="relative w-full aspect-video rounded-md overflow-hidden">
                           <Image
                             src={config.paid_ad_image}
                             alt="Paid Ad"
@@ -575,25 +624,22 @@ export default function ReviewSettings() {
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <Label
                               htmlFor="ad-image-upload"
-                              className="cursor-pointer bg-white text-black px-3 py-1.5 rounded-md text-sm font-medium flex items-center gap-2"
+                              className="cursor-pointer bg-white text-black px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-2"
                             >
-                              <Upload className="h-4 w-4" /> Change Image
+                              <Upload className="h-3.5 w-3.5" /> Change
                             </Label>
                           </div>
                         </div>
                       ) : (
                         <Label
                           htmlFor="ad-image-upload"
-                          className="flex flex-col items-center gap-2 cursor-pointer w-full"
+                          className="flex flex-col items-center gap-2 cursor-pointer w-full py-4"
                         >
-                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <Upload className="h-5 w-5 text-primary" />
+                          <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Upload className="h-4 w-4 text-primary" />
                           </div>
-                          <span className="text-sm font-medium">
+                          <span className="text-xs font-medium text-center">
                             Click to upload ad image
-                          </span>
-                          <span className="text-xs text-muted-foreground underline decoration-dotted">
-                            The image is saved immediately
                           </span>
                         </Label>
                       )}
@@ -608,28 +654,38 @@ export default function ReviewSettings() {
                     </div>
                     {uploadingImage && (
                       <div className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg">
-                        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                        <Loader2 className="h-5 w-5 animate-spin text-primary" />
                       </div>
                     )}
                   </div>
                 </div>
               )}
-            </div>
-          </CardContent>
-          <CardFooter className="justify-end border-t pt-6 bg-muted/5">
-            <Button onClick={handleSaveAllSettings} disabled={loadingSettings} size="lg">
-              {loadingSettings ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
-                </>
-              ) : (
-                <>
-                  <Save className="mr-2 h-4 w-4" /> Save All Settings
-                </>
-              )}
-            </Button>
-          </CardFooter>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Global Save Button Section */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-primary/20 bg-primary/5">
+          <p className="text-sm text-muted-foreground italic">
+            * Changes made here will affect the review experience immediately.
+          </p>
+          <Button
+            onClick={handleSaveAllSettings}
+            disabled={loadingSettings}
+            size="lg"
+            className="w-full sm:w-auto shadow-sm"
+          >
+            {loadingSettings ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
+              </>
+            ) : (
+              <>
+                <Save className="mr-2 h-4 w-4" /> Save All Settings
+              </>
+            )}
+          </Button>
+        </div>
 
         {/* Preset Sentences Editor - Separate Card */}
         <Card className="border-muted/60">

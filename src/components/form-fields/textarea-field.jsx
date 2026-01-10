@@ -1,4 +1,5 @@
 import React from "react";
+import { Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -6,12 +7,11 @@ export function TextareaField({
   label,
   name,
   placeholder,
-  register,
+  control,
   errors,
-  validation = {},
+  rules = {},
   rows = 4,
   className,
-  ...props
 }) {
   const defaultPlaceholder =
     placeholder || `Enter ${label?.toLowerCase() || "text"}`;
@@ -20,17 +20,25 @@ export function TextareaField({
     <div className="mb-4">
       <Label className="mb-2" htmlFor={name}>
         {label}
-        {validation?.required && <span className="text-red-500 ml-1">*</span>}
+        {rules?.required && <span className="text-red-500 ml-1">*</span>}
       </Label>
-      <Textarea
-        id={name}
-        rows={rows}
-        placeholder={defaultPlaceholder}
-        className={className}
-        {...register(name, validation)}
-        {...props}
+
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ field }) => (
+          <Textarea
+            {...field}
+            id={name}
+            rows={rows}
+            placeholder={defaultPlaceholder}
+            className={className}
+          />
+        )}
       />
-      {errors[name] && (
+
+      {errors?.[name] && (
         <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>
       )}
     </div>
