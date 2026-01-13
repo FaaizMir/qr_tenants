@@ -12,6 +12,7 @@ export function TextareaField({
   rules = {},
   rows = 4,
   className,
+  ...rest
 }) {
   const defaultPlaceholder =
     placeholder || `Enter ${label?.toLowerCase() || "text"}`;
@@ -34,6 +35,12 @@ export function TextareaField({
             rows={rows}
             placeholder={defaultPlaceholder}
             className={className}
+            onChange={(e) => {
+              field.onChange(e);
+              if (typeof rest.onChange === "function") {
+                rest.onChange(e);
+              }
+            }}
           />
         )}
       />

@@ -2,13 +2,13 @@
 
 import React from "react";
 import {
+  Loader2,
   Star,
   ArrowLeft,
   Send,
   Sparkles,
   MessageSquare,
   CheckCircle2,
-  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -21,9 +21,10 @@ import { toast } from "sonner";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import {
   Dialog,
@@ -78,6 +79,11 @@ export const ReviewForm = ({
   const [showPlatformModal, setShowPlatformModal] = React.useState(false);
   const [recordedFeedbackId, setRecordedFeedbackId] = React.useState(null);
 
+  const triggerError = (title, message, details = null) => {
+    toast.error(`${title}: ${message}`);
+    if (details) console.error("Error details:", details);
+  };
+
   const queryParams = useSearchParams();
   const merchantId =
     queryParams.get("merchantId") || queryParams.get("mid") || "1";
@@ -88,7 +94,7 @@ export const ReviewForm = ({
   const urlBatchId = queryParams.get("batchId") || queryParams.get("bid");
   const effectiveBatchId = merchantConfig.luckyDrawEnabled
     ? null
-    : (merchantConfig.whatsappBatchId || urlBatchId || null);
+    : merchantConfig.whatsappBatchId || urlBatchId || null;
 
   React.useEffect(() => {
     const fetchPresets = async () => {
@@ -99,6 +105,10 @@ export const ReviewForm = ({
         setPresetReviews(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching presets:", error);
+        triggerError(
+          "System Notice",
+          "We couldn't load the pre-written reviews, but you can still write your own feedback below."
+        );
       } finally {
         setLoadingPresets(false);
       }
@@ -119,14 +129,18 @@ export const ReviewForm = ({
   const handleFormSubmit = () => {
     // Validate rating
     if (!formValues.rating || formValues.rating < 1) {
-      toast.error("Please provide a star rating (1-5 stars)");
+      triggerError(
+        "Rating Required",
+        "Please provide a star rating (1-5 stars) to share your experience."
+      );
       return;
     }
 
     // Validate review content (either preset or custom text)
     if (!formValues.text && !selectedPresetId) {
-      toast.error(
-        "Please share your feedback - select a quick expression or write your own"
+      triggerError(
+        "Feedback Required",
+        "Please share your feedback - select a quick expression or write your own."
       );
       return;
     }
@@ -137,27 +151,33 @@ export const ReviewForm = ({
       formValues.text &&
       formValues.text.trim().length < 3
     ) {
-      toast.error(
-        "Please provide more detailed feedback (at least 3 characters)"
+      triggerError(
+        "Feedback Too Short",
+        "Please provide more detailed feedback (at least 3 characters)."
       );
       return;
     }
 
     // Validate identity fields were filled (from previous step)
     if (!formValues.name || formValues.name.trim().length === 0) {
-      toast.error("Name is required. Please go back and fill in your details.");
+      triggerError(
+        "Missing Information",
+        "Your name is required. Please go back and fill in your details."
+      );
       return;
     }
 
     if (!formValues.email || formValues.email.trim().length === 0) {
-      toast.error(
+      triggerError(
+        "Missing Information",
         "Email is required. Please go back and fill in your details."
       );
       return;
     }
 
     if (!formValues.phone || formValues.phone.trim().length === 0) {
-      toast.error(
+      triggerError(
+        "Missing Information",
         "Phone number is required. Please go back and fill in your details."
       );
       return;
@@ -189,18 +209,25 @@ export const ReviewForm = ({
 
       // Validate merchantId is required
       if (isNaN(safeMerchantId)) {
-        toast.error("Invalid merchant. Please scan the QR code again.");
+        triggerError(
+          "Invalid Merchant",
+          "Invalid merchant profile. Please scan the QR code again or contact staff."
+        );
         return;
       }
 
       const payload = {
         merchantId: safeMerchantId,
         // Only include batch ID if lucky draw is disabled and batch ID is valid
-        ...(safeBatchId && !isNaN(safeBatchId) && safeBatchId > 0 && { coupon_batch_id: safeBatchId }),
+        ...(safeBatchId &&
+          !isNaN(safeBatchId) &&
+          safeBatchId > 0 && { coupon_batch_id: safeBatchId }),
         email: formValues.email?.trim() || null,
         name: formValues.name?.trim() || null,
         phoneNumber: formValues.phone?.trim() || null,
-        date_of_birth: formValues.dob || null,
+        date_of_birth: formValues.dob
+          ? formValues.dob.split("-").reverse().join("-")
+          : null,
         address: formValues.address?.trim() || null,
         gender: formValues.gender || null,
         rating: safeRating,
@@ -247,52 +274,28 @@ export const ReviewForm = ({
         toast.success("Feedback submitted successfully!");
         nextStep(response.data?.data || response.data);
       } else {
-        toast.error("Failed to save feedback. Please try again.");
+        triggerError(
+          "Submission Failed",
+          "We couldn't save your feedback. Please try again or check your internet connection."
+        );
       }
     } catch (error) {
       console.error("Platform Redirect Error:", error);
-      console.error("Error Response:", error.response?.data);
-
       const responseData = error.response?.data;
       const status = error.response?.status;
+      const errorCode = responseData?.statusCode || status;
+      const errorMsg =
+        responseData?.message ||
+        "An unexpected error occurred while processing your feedback.";
 
-      if (status === 500) {
-        // Log the full error for debugging
-        console.error(
-          "500 Error Details:",
-          JSON.stringify(responseData, null, 2)
-        );
-        toast.error(
-          "Server error: Unable to save your feedback. This might be due to a configuration issue. Please try again or contact support."
-        );
-      } else if (status === 400) {
-        // Bad request - likely validation error
-        const message =
-          responseData?.message || "Invalid request. Please check your inputs.";
-        toast.error(message);
-      } else if (responseData?.errors) {
-        // Handle validation errors (array or object format)
-        const errors = responseData.errors;
-        if (Array.isArray(errors)) {
-          errors.slice(0, 3).forEach((msg) => toast.error(msg));
-        } else if (typeof errors === "object") {
-          const errorMessages = Object.entries(errors).slice(0, 3);
-          errorMessages.forEach(([field, msgs]) => {
-            const fieldName = field
-              .replace(/_/g, " ")
-              .replace(/([A-Z])/g, " $1")
-              .trim();
-            const message = Array.isArray(msgs) ? msgs[0] : msgs;
-            toast.error(`${fieldName}: ${message}`);
-          });
-        }
-      } else if (responseData?.message) {
-        toast.error(responseData.message);
-      } else {
-        toast.error(
-          "An unexpected error occurred. Please check your internet connection and try again."
-        );
-      }
+      // Force close the platform modal to show error
+      setShowPlatformModal(false);
+
+      triggerError(
+        `Critical Configuration Error (${errorCode})`,
+        errorMsg,
+        responseData?.errors || responseData?.error || null
+      );
     } finally {
       setLoading(false);
     }
@@ -307,71 +310,68 @@ export const ReviewForm = ({
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto p-2 md:p-4 animate-in fade-in zoom-in-95 duration-700">
-      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-4xl">
-        {/* Merchant Branding Banner */}
-        <div className="relative h-32 md:h-44 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl scale-150"></div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl scale-150"></div>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
-            {merchantConfig?.logo && (
-              <div className="mb-3 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-2 overflow-hidden shadow-2xl">
-                <img
-                  src={merchantConfig.logo}
-                  alt="Merchant Logo"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
-            <h2 className="text-2xl md:text-3xl font-black tracking-tighter mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                ? merchantConfig.name
-                : "Share Your Feedback"}
-            </h2>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
+      <Card className="w-full border-none shadow-3xl overflow-hidden rounded-[2.5rem] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-l-[6px] border-l-primary relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Sparkles className="w-32 h-32 text-primary" />
         </div>
 
-        <CardHeader className="text-center pb-8 pt-12 relative px-6 md:px-10">
-          <div className="absolute top-4 left-6">
+        <CardHeader className="pb-8 pt-12 px-8 md:px-12 border-b border-zinc-100/50 dark:border-zinc-800/50">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner rotate-3">
+                <Star className="h-8 w-8" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
+                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                    ? merchantConfig.name
+                    : "Feedback"}
+                </CardTitle>
+                <CardDescription className="text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  We value your honest opinion.
+                </CardDescription>
+              </div>
+            </div>
+
             <Button
               variant="ghost"
               size="sm"
               onClick={prevStep}
-              className="h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95"
+              className="h-10 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-black text-[10px] uppercase tracking-[0.2em] px-6 gap-2 transition-all active:scale-95 border border-zinc-200/50 dark:border-zinc-700/50"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              Back
+              <ArrowLeft className="w-4 h-4" />
+              Edit Details
             </Button>
           </div>
-
-          <div className="absolute top-4 right-6">
-            <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest shadow-xs">
-              Phase 2: Review
-            </div>
-          </div>
-
-          <div className="mx-auto w-20 h-20 rounded-3xl bg-linear-to-br from-yellow-400/5 to-yellow-400/20 flex items-center justify-center mb-6 rotate-3 hover:rotate-0 transition-transform duration-500 shadow-inner">
-            <Sparkles className="w-10 h-10 text-yellow-500" />
-          </div>
-
-          <CardTitle className="text-3xl md:text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 italic">
-            SHARE YOUR EXPERIENCE
-          </CardTitle>
-          <CardDescription className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[280px] mx-auto mt-2 leading-tight">
-            Your honest feedback fuels our passion for excellence.
-          </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-8 pb-12 px-6 md:px-10">
+        <CardContent className="py-12 px-8 md:px-16 space-y-12">
           {/* Enhanced Star Rating */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-linear-to-r from-primary/10 to-purple-500/10 rounded-3xl blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative flex flex-col items-center justify-center py-8 rounded-3xl bg-zinc-50 dark:bg-zinc-800/40 border-2 border-dashed border-zinc-200 dark:border-zinc-700/50 transition-all hover:bg-white dark:hover:bg-zinc-800 hover:border-primary/30">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between px-1">
+              <Label className="text-xs font-black uppercase tracking-widest text-zinc-500">
                 Overall Rating
-              </p>
+              </Label>
+              <div
+                className={cn(
+                  "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-500",
+                  formValues.rating >= 4
+                    ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
+                    : formValues.rating >= 3
+                      ? "bg-amber-500/10 text-amber-600 border border-amber-500/20"
+                      : "bg-red-500/10 text-red-600 border border-red-500/20"
+                )}
+              >
+                {formValues.rating >= 4
+                  ? "Excellent!"
+                  : formValues.rating >= 3
+                    ? "Good"
+                    : "Could be better"}
+              </div>
+            </div>
+
+            <div className="flex justify-center py-8 bg-zinc-50/50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-inner">
               <StarRatingInput
                 label=""
                 name="rating"
@@ -380,134 +380,106 @@ export const ReviewForm = ({
                 value={formValues.rating}
                 size="xl"
               />
-              <div className="mt-4 px-4 py-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-[10px] font-black uppercase tracking-widest">
-                {formValues.rating >= 4
-                  ? "Excellent!"
-                  : formValues.rating >= 3
-                    ? "Good"
-                    : "Could be better"}
-              </div>
             </div>
           </div>
 
+          {/* Preset Reviews Section */}
           {merchantConfig.enablePresetReviews && (
-            <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-bottom-2 duration-500 delay-200">
-              <div className="flex items-center gap-2 px-1">
-                <div className="h-4 w-1 bg-primary rounded-full"></div>
-                <Label className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center">
+                <Label className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
                   Quick Expressions
                 </Label>
               </div>
 
-              <div className="flex flex-wrap gap-2.5 justify-center">
-                {loadingPresets ? (
-                  <div className="flex items-center gap-3 py-4">
-                    <div className="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                      Gathering insights...
-                    </span>
-                  </div>
-                ) : (
-                  presetReviews.map((review) => (
-                    <button
-                      key={review.id}
-                      type="button"
-                      onClick={() =>
-                        handlePresetClick(review.review_text, review.id)
-                      }
-                      className={cn(
-                        "px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 border shadow-xs active:scale-95",
-                        selectedPresetId === review.id
-                          ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-100 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.2)]"
-                          : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
-                      )}
-                    >
-                      {review.review_text}
-                    </button>
-                  ))
-                )}
+              <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+                {presetReviews.map((review) => (
+                  <button
+                    key={review.id}
+                    type="button"
+                    onClick={() =>
+                      handlePresetClick(review.review_text, review.id)
+                    }
+                    className={cn(
+                      "px-4 py-2 rounded-full border text-[11px] font-bold transition-all duration-300 relative",
+                      selectedPresetId === review.id
+                        ? "border-primary bg-primary text-white shadow-md scale-105"
+                        : "border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-500 hover:border-primary/50 hover:bg-zinc-50"
+                    )}
+                  >
+                    <span className="relative z-10">"{review.review_text}"</span>
+                  </button>
+                ))}
               </div>
             </div>
           )}
 
-          <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-bottom-2 duration-500 delay-300">
-            <div className="flex items-center gap-2 px-1">
-              <div className="h-4 w-1 bg-primary rounded-full"></div>
-              <Label className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
-                Detailed Remarks
-              </Label>
-            </div>
+          <div className="space-y-4 pt-2">
+            <Label className="text-xs font-black uppercase tracking-widest text-zinc-500 pl-1">
+              Detailed Remarks
+            </Label>
 
             <div className="relative group">
-              <div className="absolute top-4 left-4 pointer-events-none transition-transform group-focus-within:-translate-y-1">
-                <MessageSquare className="w-4 h-4 text-zinc-400 group-focus-within:text-primary transition-colors" />
+              <div className="absolute top-4 left-4 pointer-events-none transition-transform group-focus-within:-translate-y-1 text-zinc-400 group-focus-within:text-primary">
+                <MessageSquare className="w-4 h-4" />
               </div>
               <TextareaField
-                label=""
                 name="text"
                 placeholder="Share the details that made your visit special..."
                 control={control}
-                value={formValues.text}
                 onChange={onTextChange}
-                errors={{}}
-                rows={4}
-                className="pl-12 pt-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm font-medium resize-none shadow-inner"
+                className="pl-12 pt-4 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm font-medium resize-none shadow-inner min-h-[120px]"
               />
             </div>
           </div>
 
           <div className="pt-6">
             <Button
-              className="w-full h-15 rounded-2xl text-lg font-black uppercase tracking-widest shadow-[0_20px_40px_-12px_rgba(16,185,129,0.3)] hover:shadow-[0_24px_48px_-12px_rgba(16,185,129,0.4)] transition-all active:scale-[0.98] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 border-none group"
+              className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bg-primary hover:bg-primary/90 text-white group"
               onClick={handleFormSubmit}
               disabled={loading}
             >
               {loading ? (
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Processing...
-                </div>
+                </>
               ) : (
                 <>
                   Seal My Feedback
-                  <div className="ml-2 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                    <Send className="w-3.5 h-3.5 text-white" />
-                  </div>
+                  <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </>
               )}
             </Button>
           </div>
         </CardContent>
 
-        <div className="bg-zinc-50 dark:bg-zinc-800/20 py-5 text-center border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em]">
-              Powered by QR Tenants
-            </p>
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-          </div>
-        </div>
+        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+            Verified Secure Experience{" "}
+            <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered
+            by QR Tenants
+          </p>
+        </CardFooter>
       </Card>
 
       {/* Premium Platform Selection Modal */}
       <Dialog open={showPlatformModal} onOpenChange={setShowPlatformModal}>
-        <DialogContent className="sm:max-w-md border-none shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)] p-0 overflow-hidden rounded-[2.5rem] bg-white">
-          <div className="bg-linear-to-br from-zinc-900 to-zinc-800 p-10 text-center text-white relative">
-            <div className="absolute top-0 right-0 p-8 opacity-10">
-              <Sparkles className="w-24 h-24" />
+        <DialogContent className="sm:max-w-md border-none shadow-2xl p-0 overflow-hidden rounded-3xl bg-white dark:bg-zinc-950">
+          <div className="bg-zinc-900 p-8 text-center text-white relative">
+            <div className="absolute top-0 right-0 p-6 opacity-10">
+              <Sparkles className="w-20 h-20" />
             </div>
 
-            <div className="mx-auto w-20 h-20 rounded-3xl bg-emerald-500/20 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl animate-bounce-slow">
-              <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center mb-4 shadow-xl">
+              <CheckCircle2 className="w-8 h-8 text-primary" />
             </div>
 
-            <DialogTitle className="text-3xl font-black tracking-tighter mb-2 italic uppercase">
-              ALMOST THERE!
+            <DialogTitle className="text-2xl font-bold tracking-tight mb-2 uppercase italic">
+              Almost Done!
             </DialogTitle>
-            <DialogDescription className="text-zinc-400 text-sm font-medium leading-tight max-w-60 mx-auto">
-              Share your review on social media to unlock your exclusive
-              rewards.
+            <DialogDescription className="text-zinc-400 text-xs font-medium">
+              Select a platform to share your review and unlock your reward.
             </DialogDescription>
           </div>
 
@@ -518,47 +490,32 @@ export const ReviewForm = ({
                   <button
                     key={platform.id}
                     onClick={() => handlePlatformSelection(platform.id)}
-                    className="group relative flex flex-col items-center justify-center p-6 rounded-3xl border border-zinc-100 bg-zinc-50/50 hover:bg-white hover:border-primary hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.3)] transition-all duration-500"
+                    className="group relative flex flex-col items-center justify-center p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary hover:shadow-xl transition-all duration-300"
                   >
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl font-black mb-4 transition-all duration-500 shadow-lg group-hover:scale-110 group-hover:rotate-3"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-black mb-3 transition-transform group-hover:scale-110"
                       style={{
                         backgroundColor: platform.brandColor,
-                        boxShadow: `0 8px 16px -4px ${platform.brandColor}66`,
                       }}
                     >
                       {platform.icon}
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-primary transition-colors">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 group-hover:text-primary transition-colors">
                       {platform.name}
                     </span>
-
-                    <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="h-1 w-4 bg-primary rounded-full"></div>
-                    </div>
                   </button>
                 ))
               ) : (
-                <div className="col-span-2 py-8 text-center bg-zinc-50 rounded-2xl border-2 border-dashed border-zinc-200">
-                  <p className="text-sm font-bold text-zinc-400 italic">
-                    No social platforms configured.
+                <div className="col-span-2 py-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-800">
+                  <p className="text-xs font-bold text-zinc-400 italic">
+                    No platforms configured.
                   </p>
                 </div>
               )}
             </div>
 
-            <div className="relative py-4">
-              <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-100"></div>
-              <div className="relative flex justify-center">
-                <span className="bg-white px-4 text-[10px] font-black text-zinc-300 uppercase tracking-widest leading-none">
-                  Security Policy
-                </span>
-              </div>
-            </div>
-
-            <p className="text-[10px] text-center text-zinc-400 font-bold uppercase tracking-[0.15em] leading-relaxed">
-              * Redirection is secure and automated. <br /> Your data remains
-              private at all times.
+            <p className="text-[9px] text-center text-zinc-400 font-bold uppercase tracking-widest">
+              Action is secure & verified.
             </p>
           </div>
         </DialogContent>

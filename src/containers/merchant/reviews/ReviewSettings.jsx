@@ -23,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
@@ -227,6 +226,14 @@ export default function ReviewSettings() {
   };
 
   const handleSaveAllSettings = async () => {
+    // Validation: If Lucky Draw is disabled, a coupon batch must be selected
+    if (!config.luckyDrawEnabled && !config.selectedBatchId) {
+      toast.error("Please select a Coupon Batch to continue with Direct Rewards.");
+      // Scroll to the empty field or focus the dropdown if possible
+      setBatchDropdownOpen(true);
+      return;
+    }
+
     setLoadingSettings(true);
 
     try {
@@ -487,32 +494,24 @@ export default function ReviewSettings() {
 
                   <div className="relative">
                     <Label className="text-sm font-medium mb-2 block">
-                      Select Coupon Batch
+                      Select Coupon Batch <span className="text-red-500">*</span>
                     </Label>
                     <button
                       type="button"
                       onClick={() => setBatchDropdownOpen(!batchDropdownOpen)}
                       className={`w-full flex items-center justify-between rounded-lg border-2 px-4 py-2.5 text-left transition-all ${batchDropdownOpen
                         ? "border-primary ring-2 ring-primary/20"
-                        : "border-muted/60 hover:border-primary/40"
+                        : config.selectedBatchId
+                          ? "border-primary/40 bg-primary/5"
+                          : "border-muted/60 hover:border-primary/40"
                         } bg-background`}
                     >
-                      <span
-                        className={`text-sm ${config.selectedBatchId
-                          ? "text-foreground"
-                          : "text-muted-foreground"
-                          }`}
-                      >
+                      <span className={`text-sm ${config.selectedBatchId ? "text-foreground font-medium" : "text-muted-foreground"}`}>
                         {config.selectedBatchId
-                          ? couponBatches.find(
-                            (b) => b.id === config.selectedBatchId
-                          )?.batch_name || "Selected Batch"
+                          ? couponBatches.find((b) => b.id === config.selectedBatchId)?.batch_name || `Batch ID: ${config.selectedBatchId}`
                           : "Choose a coupon batch..."}
                       </span>
-                      <ChevronDown
-                        className={`h-4 w-4 text-muted-foreground transition-transform ${batchDropdownOpen ? "rotate-180" : ""
-                          }`}
-                      />
+                      <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${batchDropdownOpen ? "rotate-180" : ""}`} />
                     </button>
 
                     {batchDropdownOpen && (
@@ -531,35 +530,33 @@ export default function ReviewSettings() {
                               key={batch.id}
                               type="button"
                               onClick={() => {
-                                setConfig({
-                                  ...config,
-                                  selectedBatchId: batch.id,
-                                });
+                                setConfig({ ...config, selectedBatchId: batch.id });
                                 setBatchDropdownOpen(false);
                               }}
-                              className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors ${config.selectedBatchId === batch.id
-                                ? "bg-primary/5"
-                                : ""
-                                }`}
+                              className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors ${config.selectedBatchId === batch.id ? "bg-primary/5" : ""}`}
                             >
                               <div>
-                                <div className="font-medium text-sm">
-                                  {batch.batch_name}
-                                </div>
+                                <div className="font-medium text-sm">{batch.batch_name}</div>
                                 <div className="text-[10px] text-muted-foreground">
-                                  {batch.issued_quantity || 0} /{" "}
-                                  {batch.total_quantity || 0} issued
+                                  {batch.issued_quantity || 0} / {batch.total_quantity || 0} issued
                                 </div>
                               </div>
-                              {config.selectedBatchId === batch.id && (
-                                <Check className="h-4 w-4 text-primary" />
-                              )}
+                              {config.selectedBatchId === batch.id && <Check className="h-4 w-4 text-primary" />}
                             </button>
                           ))
                         )}
                       </div>
                     )}
                   </div>
+
+                  {!config.selectedBatchId && (
+                    <div className="text-sm text-red-600 bg-red-50 p-4 rounded-xl border border-red-200 animate-in fade-in slide-in-from-top-2 flex gap-3 items-start">
+                      <div className="mt-0.5">⚠️</div>
+                      <p className="font-medium leading-relaxed">
+                        <b>Batch ID Required:</b> You must select a coupon batch ID to enable Direct Rewards. Saving is disabled until a batch is selected.
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </CardContent>
