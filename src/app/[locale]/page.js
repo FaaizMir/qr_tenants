@@ -165,10 +165,8 @@ export default function LandingPage() {
   // -- Handlers --
   const handleGetCoupon = (merchant, batch) => {
     const merchantId = merchant.id;
-    const batchId = batch.id;
-    router.push(
-      `/${locale}/customer/review?merchantId=${merchantId}&batchId=${batchId}`
-    );
+    // const batchId = batch.id;
+    router.push(`/${locale}/customer/review?merchantId=${merchantId}`);
     sessionStorage.setItem(
       "couponReviewData",
       JSON.stringify({ merchant, batch })

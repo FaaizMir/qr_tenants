@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -15,13 +15,6 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
@@ -43,13 +36,9 @@ export default function MerchantCreateCouponContainer() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isActive, setIsActive] = useState(true);
-  const [whatsappEnabled, setWhatsappEnabled] = useState(true);
-  const [luckyDrawEnabled, setLuckyDrawEnabled] = useState(false);
-
   const [isHalal, setIsHalal] = useState(false);
   const [templateSelection, setTemplateSelection] = useState(null);
   const [visibility, setVisibility] = useState(false);
-  const [placement, setPlacement] = useState("top");
 
   const templateCardRef = useRef(null);
 
@@ -66,14 +55,10 @@ export default function MerchantCreateCouponContainer() {
     setStartDate("");
     setEndDate("");
     setIsActive(true);
-    setWhatsappEnabled(true);
-    setWhatsappEnabled(true);
-    setLuckyDrawEnabled(false);
     setIsHalal(false);
 
     setTemplateSelection(null);
     setVisibility(false);
-    setPlacement("top");
   };
 
   const handleSubmit = async (e) => {
@@ -97,12 +82,8 @@ export default function MerchantCreateCouponContainer() {
         start_date: startDate ? `${startDate}T00:00:00Z` : null,
         end_date: endDate ? `${endDate}T23:59:59Z` : null,
         is_active: Boolean(isActive),
-        whatsapp_enabled: Boolean(whatsappEnabled),
-        lucky_draw_enabled: Boolean(luckyDrawEnabled),
-
-        /*is_halal: Boolean(isHalal),*/
+        ishalal: Boolean(isHalal),
         visibility: Boolean(visibility),
-        /*   placement: placement,*/
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
@@ -133,14 +114,14 @@ export default function MerchantCreateCouponContainer() {
   };
 
   return (
-    <div className="space-y-6 max-w-9xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
       <div className="flex items-center gap-4">
         <Link href="/en/merchant/coupons">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <div>
+        <div className="flex-1">
           <h1 className="text-3xl font-bold">Create Coupon Batch</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-primary font-semibold">
@@ -164,12 +145,13 @@ export default function MerchantCreateCouponContainer() {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="md:col-span-2 space-y-2">
                     <Label htmlFor="name">Batch Name</Label>
                     <Input
                       id="name"
                       required
+                      placeholder="e.g. Summer Promo 2024"
                       value={batchName}
                       onChange={(e) => setBatchName(e.target.value)}
                     />
@@ -177,21 +159,23 @@ export default function MerchantCreateCouponContainer() {
 
                   <div className="space-y-2">
                     <Label htmlFor="quantity">Quantity</Label>
-                    <Input
-                      id="quantity"
-                      type="number"
-                      max={maxPerBatch}
-                      min={1}
-                      required
-                      value={totalQuantity}
-                      onChange={(e) => {
-                        const next = Math.max(
-                          1,
-                          Math.min(Number(e.target.value) || 0, maxPerBatch)
-                        );
-                        setTotalQuantity(next);
-                      }}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="quantity"
+                        type="number"
+                        max={maxPerBatch}
+                        min={1}
+                        required
+                        value={totalQuantity}
+                        onChange={(e) => {
+                          const next = Math.max(
+                            1,
+                            Math.min(Number(e.target.value) || 0, maxPerBatch)
+                          );
+                          setTotalQuantity(next);
+                        }}
+                      />
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Limit: {maxPerBatch} codes{" "}
                       {isAnnual ? "(Annual)" : "(Temporary)"}
@@ -199,7 +183,7 @@ export default function MerchantCreateCouponContainer() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="start">Start Date</Label>
                     <Input
@@ -222,41 +206,7 @@ export default function MerchantCreateCouponContainer() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <div className="space-y-0.5 flex-1">
-                      <Label className="text-base font-medium">Placement</Label>
-                      <p className="text-xs text-muted-foreground">
-                        Position where coupon appears
-                      </p>
-                    </div>
-                    <Select value={placement} onValueChange={setPlacement}>
-                      <SelectTrigger className="bg-background w-[120px]">
-                        <SelectValue placeholder="Select placement" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="top">Top</SelectItem>
-                        <SelectItem value="mid">Mid</SelectItem>
-                        <SelectItem value="bottom">Bottom</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
 
-                  <div className="flex items-center justify-between rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition">
-                    <div className="space-y-0.5">
-                      <Label className="text-base font-medium">
-                        Visibility
-                      </Label>
-                      <p className="text-xs text-muted-foreground">
-                        Show this batch publicly
-                      </p>
-                    </div>
-                    <Switch
-                      checked={visibility}
-                      onCheckedChange={setVisibility}
-                    />
-                  </div>
-                </div>
 
                 <div className="space-y-2">
                   <Label>Template</Label>
@@ -267,51 +217,54 @@ export default function MerchantCreateCouponContainer() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {[
                     {
-                      label: "Active",
+                      label: "Public Visibility",
+                      checked: visibility,
+                      onChange: setVisibility,
+                      desc: "Show on marketplace",
+                      isSwitch: true
+                    },
+                    {
+                      label: "Active Status",
                       checked: isActive,
                       onChange: setIsActive,
                       desc: "Enable for redemption",
                     },
                     {
-                      label: "WhatsApp",
-                      checked: whatsappEnabled,
-                      onChange: setWhatsappEnabled,
-                      desc: "Allow WhatsApp messages",
-                    },
-                    {
-                      label: "Lucky Draw",
-                      checked: luckyDrawEnabled,
-                      onChange: setLuckyDrawEnabled,
-                      desc: "Include in lucky draw",
-                    },
-                    {
                       label: "Halal Certified",
                       checked: isHalal,
                       onChange: setIsHalal,
-                      desc: "Halal compliant",
+                      desc: "Indicate compliance",
                     },
                   ].map((item) => (
                     <label
                       key={item.label}
-                      className="flex items-center gap-2.5 rounded-lg border border-muted/60 bg-muted/20 px-3 py-2.5 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer"
+                      className="flex items-center justify-between gap-4 rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer"
                     >
-                      <input
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-muted-foreground/50 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-0 cursor-pointer"
-                        checked={item.checked}
-                        onChange={(e) => item.onChange(e.target.checked)}
-                      />
-                      <div className="flex flex-col">
+                      <div className="flex flex-col flex-1">
                         <span className="text-sm font-medium leading-none">
                           {item.label}
                         </span>
-                        <p className="text-xs text-muted-foreground mt-0.5">
+                        <p className="text-xs text-muted-foreground mt-1">
                           {item.desc}
                         </p>
                       </div>
+                      {item.isSwitch ? (
+                        <Switch
+                          checked={item.checked}
+                          onCheckedChange={item.onChange}
+                          className="data-[state=checked]:bg-primary"
+                        />
+                      ) : (
+                        <input
+                          type="checkbox"
+                          className="h-5 w-5 rounded-lg border-zinc-200 text-primary focus:ring-primary/20 cursor-pointer transition-all"
+                          checked={item.checked}
+                          onChange={(e) => item.onChange(e.target.checked)}
+                        />
+                      )}
                     </label>
                   ))}
                 </div>
@@ -334,9 +287,7 @@ export default function MerchantCreateCouponContainer() {
               <p>• Use concise, campaign-specific batch names.</p>
               <p>• Set start/end dates to control redemption windows.</p>
               <p>• Annual: up to 1000 codes per batch. Temporary: up to 100.</p>
-              <p>
-                • Keep WhatsApp and Lucky Draw toggles aligned to your offer.
-              </p>
+              <p>• Keep the batch active to allow customers to redeem immediately.</p>
             </CardContent>
           </Card>
         </div>

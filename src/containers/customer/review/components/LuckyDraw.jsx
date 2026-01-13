@@ -9,14 +9,27 @@ import {
   ArrowLeft,
   RotateCw,
   CheckCircle2,
+  Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import axiosInstance from "@/lib/axios";
 import axios from "axios";
 import { toast } from "sonner";
-import { Card, CardContent } from "@/components/ui/card";
-
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export const LuckyDraw = ({
   merchantConfig,
@@ -31,6 +44,10 @@ export const LuckyDraw = ({
   const [hasSpun, setHasSpun] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState(null);
+  const triggerError = (title, message, details = null) => {
+    toast.error(`${title}: ${message}`);
+    if (details) console.error("Error details:", details);
+  };
 
   const handleSpin = async () => {
     toast.info("Spin initiated...");
@@ -41,11 +58,19 @@ export const LuckyDraw = ({
     const safeMerchantId = parseInt(merchantId);
     const safeCustomerId = parseInt(customerId);
 
-    console.log("DEBUG IDs:", { merchantId, customerId, safeMerchantId, safeCustomerId });
+    console.log("DEBUG IDs:", {
+      merchantId,
+      customerId,
+      safeMerchantId,
+      safeCustomerId,
+    });
 
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
       console.error("DEBUG: One or more IDs are NaN");
-      toast.error("Error: Missing session data. Please refresh.");
+      triggerError(
+        "Session Expired",
+        "One or more required IDs are missing. Please refresh the page and try again."
+      );
       return;
     }
 
@@ -63,8 +88,8 @@ export const LuckyDraw = ({
       };
 
       // Build URL safely
-      const apiBase = axiosInstance.defaults.baseURL || '';
-      const spinUrl = apiBase.endsWith('/')
+      const apiBase = axiosInstance.defaults.baseURL || "";
+      const spinUrl = apiBase.endsWith("/")
         ? `${apiBase}lucky-draw/spin`
         : `${apiBase}/lucky-draw/spin`;
 
@@ -72,13 +97,18 @@ export const LuckyDraw = ({
 
       // Use direct axios to bypass any next-auth interceptors that might be hanging
       const response = await axios({
-        method: 'post',
+        method: "post",
         url: spinUrl,
         data: payload,
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
       });
 
-      console.log("DEBUG: API Status:", response.status, "Data:", response.data);
+      console.log(
+        "DEBUG: API Status:",
+        response.status,
+        "Data:",
+        response.data
+      );
       const prizeData = response.data?.data;
 
       // Sync animation with result display
@@ -88,60 +118,68 @@ export const LuckyDraw = ({
         setHasSpun(true);
         setResult(prizeData);
         setReward(prizeData);
-        toast.success(`Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`);
+        toast.success(
+          `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`
+        );
       }, 3000);
     } catch (error) {
       console.error("Lucky Draw Error:", error);
       setIsSpinning(false);
 
+      const responseData = error.response?.data;
+      const status = error.response?.status;
+      const errorCode = responseData?.statusCode || status;
       const errorMsg =
-        error.response?.data?.message ||
-        "Failed to spin. Please contact staff.";
-      toast.error(errorMsg);
+        responseData?.message ||
+        "Failed to process your spin. Please contact merchant staff.";
 
-      // If they already spun or there's a limit issue, we might want to skip or show current status
-      if (
-        error.response?.status === 400 &&
-        errorMsg.toLowerCase().includes("already")
-      ) {
-        // If already spun, maybe the backend can provide the prize they won?
-        // For now just allow them to continue if they already have a reward
-      }
+      triggerError(
+        `Spin Failure (${errorCode})`,
+        errorMsg,
+        responseData?.errors || responseData?.error || null
+      );
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-2xl mx-auto p-2 md:p-4 animate-in fade-in zoom-in-95 duration-700">
-      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-4xl border-none">
-        {/* Decorative Header */}
-        <div className="relative h-40 md:h-48 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
-          <div className="absolute inset-x-6 top-4 z-40">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
+      <Card className="w-full border-none shadow-3xl overflow-hidden rounded-[2.5rem] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-l-[6px] border-l-primary relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Trophy className="w-32 h-32 text-primary" />
+        </div>
+
+        <CardHeader className="pb-8 pt-12 px-8 md:px-12 border-b border-zinc-100/50 dark:border-zinc-800/50">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner rotate-3">
+                <Trophy className="h-8 w-8" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
+                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                    ? merchantConfig.name
+                    : "Lucky Draw"}
+                </CardTitle>
+                <CardDescription className="text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  A gift for your valuable feedback.
+                </CardDescription>
+              </div>
+            </div>
+
             <Button
               variant="ghost"
               size="sm"
               onClick={prevStep}
               disabled={isSpinning || hasSpun}
-              className="h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95 disabled:opacity-0"
+              className="h-10 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-black text-[10px] uppercase tracking-[0.2em] px-6 gap-2 transition-all active:scale-95 disabled:opacity-0 border border-zinc-200/50 dark:border-zinc-700/50"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft className="w-4 h-4" />
               Back
             </Button>
           </div>
-          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white pt-8">
-            <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-4 shadow-2xl animate-bounce-slow">
-              <Trophy className="w-7 h-7 text-yellow-500" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] italic uppercase">
-              LUCKY DRAW
-            </h2>
-            <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-zinc-400">
-              Your Feedback Earned You A Spin
-            </p>
-          </div>
-        </div>
+        </CardHeader>
 
-        <CardContent className="pb-14 pt-10 flex flex-col items-center gap-12">
+        <CardContent className="py-12 px-8 md:px-20 flex flex-col items-center">
           {/* Enhanced Wheel Component */}
           <div className="relative group">
             {/* Outer Glow */}
@@ -182,8 +220,8 @@ export const LuckyDraw = ({
             </div>
 
             {/* Top Indicator / Needle */}
-            <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 z-30 flex items-center justify-center drop-shadow-xl">
-              <div className="w-0 h-0 border-l-15 border-l-transparent border-r-15 border-r-transparent border-t-25 border-t-zinc-900 dark:border-t-zinc-100 filter drop-shadow-lg"></div>
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 z-30 flex items-center justify-center drop-shadow-xl">
+              <div className="w-0 h-0 border-l-12 border-l-transparent border-r-12 border-r-transparent border-t-20 border-t-zinc-900 dark:border-t-zinc-100 drop-shadow-lg"></div>
             </div>
           </div>
 
@@ -246,22 +284,59 @@ export const LuckyDraw = ({
                   )}
                 </div>
 
-                <div className="flex flex-col items-center gap-1.5 mt-4">
-                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-                      Sent to WhatsApp
-                    </span>
-                  </div>
+                <div className="flex flex-col items-center gap-2 mt-4">
+                  {result?.whatsapp_status === "failed" ||
+                  result?.whatsapp_error ||
+                  result?.error === "whatsapp_credit_low" ? (
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20">
+                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                      <span className="text-[10px] font-black text-red-600 dark:text-red-400 uppercase tracking-widest leading-none">
+                        WhatsApp Error:{" "}
+                        {result?.whatsapp_error ||
+                          result?.error_message ||
+                          (result?.error === "whatsapp_credit_low"
+                            ? "Credit Exhausted"
+                            : "Delivery Failed")}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                      <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                        Sent to WhatsApp
+                      </span>
+                    </div>
+                  )}
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                    Code: {result?.coupon?.coupon_code || "Processing"}
+                    Code:{" "}
+                    {result?.coupon?.coupon_code ||
+                      result?.coupon_code ||
+                      "Processing"}
                   </p>
                 </div>
 
                 <div className="bg-zinc-50 dark:bg-zinc-800/20 p-5 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-700/50 max-w-sm mt-4">
-                  <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wide italic">
-                    "Reward sent to your WhatsApp with the number <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic">{formValues?.phone || "you provided"}</span> you entered while submitting the review form."
-                  </p>
+                  {result?.whatsapp_status === "failed" ||
+                  result?.whatsapp_error ||
+                  result?.error === "whatsapp_credit_low" ? (
+                    <p className="text-[11px] font-bold text-red-500 dark:text-red-400 leading-relaxed uppercase tracking-wide italic px-4">
+                      "We couldn't send the reward to your WhatsApp due to a
+                      technical error. <br />
+                      <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic mt-2 block">
+                        PLEASE TAKE A SCREENSHOT OF THIS SCREEN AND SHOW IT TO
+                        OUR STAFF TO CLAIM YOUR BENEFIT.
+                      </span>
+                      "
+                    </p>
+                  ) : (
+                    <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wide italic px-4">
+                      "Reward sent to your WhatsApp with the number{" "}
+                      <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic">
+                        {formValues?.phone || "you provided"}
+                      </span>{" "}
+                      you entered while submitting the review form."
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -276,11 +351,13 @@ export const LuckyDraw = ({
           )}
         </CardContent>
 
-        <div className="bg-zinc-50 dark:bg-zinc-800/10 py-6 text-center border-t border-zinc-100 dark:border-zinc-800/50">
-          <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.4em]">
-            Verified Secure • Powered by QR Tenants
+        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center mt-6">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+            Verified Secure Experience{" "}
+            <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered
+            by QR Tenants
           </p>
-        </div>
+        </CardFooter>
       </Card>
     </div>
   );

@@ -16,7 +16,7 @@ import { MoreHorizontal, FileText, Edit } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { User, MapPin, Tag } from "lucide-react";
 
-export const merchantsColumns = [
+export const getMerchantsColumns = (onDeleted) => [
     {
         accessorKey: "name",
         header: "Business & Account",
@@ -136,6 +136,7 @@ export const merchantsColumns = [
                             <DeleteMerchantAction
                                 merchantId={row.original.id}
                                 merchantName={row.original.name}
+                                onDeleted={onDeleted}
                             />
                         </DropdownMenuContent>
                     </DropdownMenu>

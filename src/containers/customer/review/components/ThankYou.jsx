@@ -9,81 +9,117 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 
-export const ThankYou = ({ resetFlow, merchantConfig, prevStep }) => {
+export const ThankYou = ({ resetFlow, merchantConfig, prevStep, reward, formValues }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto p-2 md:p-4 animate-in fade-in zoom-in-95 duration-700">
-      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-[2rem] text-center">
-        {/* Merchant Branding Banner */}
-        <div className="relative h-32 md:h-44 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl scale-150"></div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl scale-150"></div>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
-            {merchantConfig?.logo && (
-              <div className="mb-3 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-2 overflow-hidden shadow-2xl">
-                <img src={merchantConfig.logo} alt="Merchant Logo" className="w-full h-full object-contain" />
-              </div>
-            )}
-            <h2 className="text-2xl md:text-3xl font-black tracking-tighter mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..." ? merchantConfig.name : "Thank You"}
-            </h2>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
+      <Card className="w-full border-none shadow-3xl overflow-hidden rounded-[2.5rem] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-l-[6px] border-l-primary relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Heart className="w-32 h-32 text-red-500 fill-red-500" />
         </div>
 
-        <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
-          <div className="mx-auto w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 shadow-xs animate-in zoom-in-50 duration-700">
-            <Heart className="w-10 h-10 text-red-500 fill-red-500 animate-pulse" />
-          </div>
-
-          <CardTitle className="text-3xl md:text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 italic uppercase">
-            HEARTFELT THANKS!
-          </CardTitle>
-          <CardDescription className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[280px] mx-auto mt-2 leading-tight">
-            We truly value your support and can't wait to serve you again at {merchantConfig.name}.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="space-y-10 pb-12 px-6 md:px-10">
-          <div className="relative group p-1">
-            <div className="absolute -inset-1 bg-linear-to-r from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 rounded-[2rem] opacity-50 blur-sm"></div>
-            <div className="relative bg-zinc-50 dark:bg-zinc-800/40 p-8 rounded-[2rem] border border-zinc-100 dark:border-zinc-700/50 shadow-inner">
-              <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed italic">
-                "Your feedback is the cornerstone of our growth. Every word you share helps us craft a more perfect experience for you."
-              </p>
+        <CardHeader className="pb-8 pt-12 px-8 md:px-12 border-b border-zinc-100/50 dark:border-zinc-800/50">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/10 text-red-500 shadow-inner rotate-3">
+                <Heart className="h-8 w-8 fill-red-500" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
+                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                    ? merchantConfig.name
+                    : "Thank You"}
+                </CardTitle>
+                <CardDescription className="text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  We appreciate your feedback!
+                </CardDescription>
+              </div>
             </div>
           </div>
+        </CardHeader>
 
-          <div className="pt-4">
+        <CardContent className="py-12 px-8 md:px-20 space-y-12">
+          <div className="text-center space-y-4">
+            <h3 className="text-3xl md:text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase italic">
+              Heartfelt Thanks!
+            </h3>
+            <p className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[400px] mx-auto leading-relaxed">
+              Every word you share helps us craft a more perfect experience. We can't wait to serve you again at {merchantConfig.name}.
+            </p>
+          </div>
+
+          {reward && (
+            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              <div className="relative group max-w-lg mx-auto">
+                <div className="absolute -inset-1 bg-primary/20 rounded-3xl blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative bg-zinc-900 dark:bg-zinc-950 rounded-2xl p-8 shadow-2xl overflow-hidden border border-zinc-800/50">
+                  <div className="flex flex-col items-center">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4">
+                      Reward Confirmed
+                    </p>
+
+                    <h3 className="text-3xl font-black text-white tracking-widest mb-6 uppercase">
+                      {reward?.prize?.prize_name || reward?.name || "Special Discount"}
+                    </h3>
+
+                    <div className="flex flex-col items-center gap-4 w-full">
+                      <div className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center gap-1">
+                        <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest">Redemption Code</span>
+                        <span className="text-lg font-black text-white tracking-widest">
+                          {reward?.coupon?.coupon_code || reward?.coupon_code || "PROCESSING"}
+                        </span>
+                      </div>
+
+                      {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20">
+                          <span className="text-[9px] font-bold text-red-500 uppercase tracking-widest">
+                            WhatsApp Delivery Failed
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                          <span className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest">
+                            Sent to WhatsApp
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 text-center max-w-lg mx-auto">
+                {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+                  <p className="text-xs font-medium text-red-600 dark:text-red-400 italic">
+                    "Couldn't deliver via WhatsApp. Please screenshot this screen or note down the code above."
+                  </p>
+                ) : (
+                  <p className="text-xs font-medium text-zinc-500 italic leading-relaxed">
+                    "Reward confirmation sent to <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">{formValues?.phone || "your number"}</span>. Present this to our staff to redeem."
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="pt-6">
             <Button
               onClick={resetFlow}
-              className="w-full h-15 rounded-2xl text-lg font-black uppercase tracking-[0.1em] shadow-[0_20px_40px_-12px_rgba(16,185,129,0.3)] hover:shadow-[0_24px_48px_-12px_rgba(16,185,129,0.4)] transition-all active:scale-[0.98] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 border-none group"
+              className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 group"
             >
-              <RefreshCcw className="w-5 h-5 mr-3 group-hover:rotate-180 transition-transform duration-700" />
+              <RefreshCcw className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-700" />
               Submit Another Review
             </Button>
           </div>
-
-          <div className="flex flex-col items-center gap-1.5 opacity-40">
-            <p className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.4em]">
-              Official QR Tenants Platform
-            </p>
-            <div className="h-0.5 w-12 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
-          </div>
         </CardContent>
 
-        {/* Footer branding */}
-        <div className="bg-zinc-50 dark:bg-zinc-800/20 py-5 text-center border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em]">
-              Powered by QR Tenants
-            </p>
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-          </div>
-        </div>
+        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+            Verified Secure Experience <RefreshCcw className="w-3 h-3 text-primary animate-spin-slow" /> Powered by QR Tenants
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );

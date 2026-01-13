@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -54,100 +55,78 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
   }, [nextStep, statuses.length]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-2xl mx-auto p-2 md:p-4">
-      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-4xl text-center">
-        {/* Merchant Branding Banner */}
-        <div className="relative h-32 md:h-44 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl scale-150"></div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl scale-150"></div>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
-            {merchantConfig?.logo && (
-              <div className="mb-3 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-2 overflow-hidden shadow-2xl">
-                <img
-                  src={merchantConfig.logo}
-                  alt="Merchant Logo"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
-            <h2 className="text-2xl md:text-3xl font-black tracking-tighter mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                ? merchantConfig.name
-                : "System Sync"}
-            </h2>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
+      <Card className="w-full border-none shadow-3xl overflow-hidden rounded-[2.5rem] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-l-[6px] border-l-primary relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Loader2 className="w-32 h-32 text-primary animate-spin-slow" />
         </div>
 
-        <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
-          <div className="absolute top-4 left-6">
+        <CardHeader className="pb-8 pt-12 px-8 md:px-12 border-b border-zinc-100/50 dark:border-zinc-800/50">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner rotate-3">
+                <Zap className="h-8 w-8 animate-pulse" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
+                  {statuses[statusIndex].label}
+                </CardTitle>
+                <CardDescription className="text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  {statuses[statusIndex].sub}
+                </CardDescription>
+              </div>
+            </div>
+
             <Button
               variant="ghost"
               size="sm"
               onClick={prevStep}
-              className="h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider gap-1.5 transition-all active:scale-95"
+              className="h-10 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-black text-[10px] uppercase tracking-[0.2em] px-6 gap-2 transition-all active:scale-95 border border-zinc-200/50 dark:border-zinc-700/50"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft className="w-4 h-4" />
               Back
             </Button>
           </div>
-
-          <div className="mx-auto w-24 h-24 rounded-full bg-linear-to-br from-emerald-500/5 to-emerald-500/20 flex items-center justify-center mb-8 relative group">
-            <div className="absolute -inset-1 rounded-full border-2 border-dashed border-emerald-500/30 animate-spin-slow"></div>
-            <div className="absolute inset-0 rounded-full border-4 border-emerald-500/10 border-t-emerald-500 animate-spin group-hover:duration-500"></div>
-            <div className="relative z-10 transition-all duration-700 transform scale-125 group-hover:rotate-12">
-              {statusIndex === 0 && (
-                <Zap className="w-8 h-8 text-emerald-500" />
-              )}
-              {statusIndex === 1 && (
-                <ShieldCheck className="w-8 h-8 text-blue-500" />
-              )}
-              {statusIndex === 2 && (
-                <SquareCheck className="w-8 h-8 text-emerald-400 animate-bounce" />
-              )}
-            </div>
-          </div>
-
-          <CardTitle className="text-2xl md:text-3xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 italic uppercase">
-            {statuses[statusIndex].label}
-          </CardTitle>
-          <CardDescription className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[280px] mx-auto mt-2 leading-tight">
-            {statuses[statusIndex].sub}
-          </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-10 pb-12 px-6 md:px-10">
-          <div className="relative px-4">
-            <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-700 shadow-inner">
+        <CardContent className="py-16 px-8 md:px-20 flex flex-col items-center space-y-12">
+          <div className="relative">
+            <div className="w-32 h-32 rounded-full bg-primary/5 flex items-center justify-center relative">
+              <div className="absolute inset-0 rounded-full border-4 border-primary/10 border-t-primary animate-spin"></div>
+              <div className="text-primary scale-150 transform transition-all duration-700">
+                {statusIndex === 0 && <Zap className="w-8 h-8" />}
+                {statusIndex === 1 && <ShieldCheck className="w-8 h-8" />}
+                {statusIndex === 2 && <SquareCheck className="w-8 h-8 animate-bounce" />}
+              </div>
+            </div>
+            {/* Pulsing rings */}
+            <div className="absolute -inset-4 rounded-full border border-primary/20 animate-ping opacity-20"></div>
+          </div>
+
+          <div className="w-full max-w-sm space-y-4">
+            <div className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-linear-to-r from-emerald-600 via-emerald-400 to-emerald-600 transition-all duration-[4.5s] ease-linear rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)]"
+                className="h-full bg-primary transition-all duration-[4.5s] ease-linear rounded-full shadow-[0_0_10px_rgba(var(--primary),0.5)]"
                 style={{ width: "100%" }}
               ></div>
             </div>
+            <p className="text-center text-[10px] font-black text-zinc-400 uppercase tracking-widest animate-pulse">
+              System Encryption Active
+            </p>
           </div>
 
-          <div className="mx-4 p-6 rounded-3xl bg-zinc-950 dark:bg-zinc-900 border border-zinc-800 shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-150 transition-transform">
-              <ShieldCheck className="w-12 h-12 text-white" />
-            </div>
-            <p className="relative z-10 text-[11px] text-zinc-400 leading-relaxed font-black uppercase tracking-[0.2em] italic">
-              "System encryption active. Ensuring your reward token is generated
-              with 100% integrity."
+          <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 italic text-center max-w-sm">
+            <p className="text-xs text-zinc-500 leading-relaxed font-medium">
+              "We are finalizing your feedback and preparing your reward tokens. Please do not close this window."
             </p>
           </div>
         </CardContent>
 
-        {/* Footer branding */}
-        <div className="bg-zinc-50 dark:bg-zinc-800/20 py-5 text-center border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em]">
-              Powered by QR Tenants
-            </p>
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-          </div>
-        </div>
+        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+            Secure Redirection Active <ShieldCheck className="w-3 h-3 text-primary" /> Powered by QR Tenants
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );

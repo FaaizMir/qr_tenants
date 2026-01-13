@@ -57,7 +57,7 @@ axiosInstance.interceptors.response.use(
             "status:",
             error?.response?.status
           );
-        } catch (e) {}
+        } catch (e) { }
       }
     }
 

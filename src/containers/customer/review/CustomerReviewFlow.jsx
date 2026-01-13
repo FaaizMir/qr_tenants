@@ -12,6 +12,15 @@ import { RedirectWait } from "./components/RedirectWait";
 import { LuckyDraw } from "./components/LuckyDraw";
 import { RewardSuccess } from "./components/RewardSuccess";
 import { ThankYou } from "./components/ThankYou";
+import { Sparkles, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export function CustomerReviewFlow() {
   const [step, setStep] = useState(1); // 1: Identity, 2: Review, 3: Redirect, 4: Lucky/Reward or ThankYou
@@ -64,6 +73,21 @@ export function CustomerReviewFlow() {
 
   const [submissionData, setSubmissionData] = useState(null);
   const [initializing, setInitializing] = useState(true);
+  const [errorDialog, setErrorDialog] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    details: null,
+  });
+
+  const triggerError = (title, message, details = null) => {
+    setErrorDialog({
+      isOpen: true,
+      title,
+      message,
+      details,
+    });
+  };
   const searchParams = useSearchParams();
   const merchantId =
     searchParams.get("merchantId") || searchParams.get("mid") || "1";
@@ -105,7 +129,8 @@ export function CustomerReviewFlow() {
               luckyDrawEnabled:
                 merchant.settings?.luckydraw_enabled ?? prev.luckyDrawEnabled,
               whatsappBatchId:
-                merchant.settings?.whatsapp_enabled_for_batch_id ?? prev.whatsappBatchId,
+                merchant.settings?.whatsapp_enabled_for_batch_id ??
+                prev.whatsappBatchId,
             }));
 
             if (merchant.settings) {
@@ -120,9 +145,7 @@ export function CustomerReviewFlow() {
           axiosInstance
             .get(`/merchant-settings/merchant/${merchantId}`)
             .catch(() => null),
-          axiosInstance
-            .get(`/merchants/${merchantId}`)
-            .catch(() => null),
+          axiosInstance.get(`/merchants/${merchantId}`).catch(() => null),
         ]);
 
         const settings = settingsRes?.data?.data;
@@ -130,7 +153,10 @@ export function CustomerReviewFlow() {
 
         console.log("Merchant Settings:", settings);
         console.log("Lucky Draw Enabled:", settings?.luckydraw_enabled);
-        console.log("WhatsApp Batch ID:", settings?.whatsapp_enabled_for_batch_id);
+        console.log(
+          "WhatsApp Batch ID:",
+          settings?.whatsapp_enabled_for_batch_id
+        );
 
         if (settings || merchant) {
           setMerchantConfig((prev) => ({
@@ -161,6 +187,12 @@ export function CustomerReviewFlow() {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        const responseData = error.response?.data;
+        triggerError(
+          "Connection Error",
+          "We couldn't load the merchant configuration. Please check your internet connection or scan the QR code again.",
+          responseData || error.message
+        );
       } finally {
         setInitializing(false);
       }
@@ -182,8 +214,19 @@ export function CustomerReviewFlow() {
       // Go to Lucky Draw (step 4)
       setStep(4);
     } else {
-      // Skip Lucky Draw, go directly to Thank You (step 6)
-      setStep(6);
+      // Check if we have reward info from the submission response
+      const hasReward =
+        submissionData?.coupon ||
+        submissionData?.reward ||
+        submissionData?.coupon_code;
+      if (hasReward) {
+        // Use the whole submissionData so we keep whatsapp_status and other flags
+        setReward(submissionData);
+        setStep(5); // Go to RewardSuccess
+      } else {
+        // Skip Lucky Draw and Rewards, go directly to Thank You (step 6)
+        setStep(6);
+      }
     }
   };
 
@@ -229,7 +272,7 @@ export function CustomerReviewFlow() {
         <div className="absolute -bottom-[10%] left-[10%] w-[45%] h-[45%] bg-indigo-500/10 rounded-full blur-[130px] animate-bounce-slow"></div>
       </div>
 
-      <div className="w-full max-w-4xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700">
+      <div className="w-full max-w-6xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700">
         {step === 1 && (
           <IdentityForm
             register={register}
@@ -267,7 +310,11 @@ export function CustomerReviewFlow() {
             nextStep={nextStep}
             prevStep={prevStep}
             setReward={setReward}
-            customerId={submissionData?.customer_id || submissionData?.customer?.id || submissionData?.id}
+            customerId={
+              submissionData?.customer_id ||
+              submissionData?.customer?.id ||
+              submissionData?.id
+            }
             merchantId={merchantId}
             formValues={watch()}
           />
@@ -278,6 +325,7 @@ export function CustomerReviewFlow() {
             merchantConfig={merchantConfig}
             formValues={watch()}
             prevStep={prevStep}
+            nextStep={nextStep}
           />
         )}
         {step === 6 && (
@@ -285,10 +333,75 @@ export function CustomerReviewFlow() {
             resetFlow={resetFlow}
             merchantConfig={merchantConfig}
             prevStep={prevStep}
+            reward={reward}
+            formValues={watch()}
           />
         )}
       </div>
+
+      {/* Modern Error Handling Dialog */}
+      <Dialog
+        open={errorDialog.isOpen}
+        onOpenChange={(open) =>
+          setErrorDialog((prev) => ({ ...prev, isOpen: open }))
+        }
+      >
+        <DialogContent className="sm:max-w-md border-none shadow-[0_32px_128px_-16px_rgba(239,68,68,0.4)] p-0 overflow-hidden rounded-[2.5rem] bg-white">
+          <div className="bg-linear-to-br from-red-600 to-red-800 p-8 text-center text-white relative">
+            <div className="absolute top-0 right-0 p-6 opacity-10">
+              <Sparkles className="w-20 h-20" />
+            </div>
+
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 shadow-xl">
+              <Star className="w-8 h-8 text-white fill-white animate-pulse" />
+            </div>
+
+            <DialogTitle className="text-2xl font-black tracking-tighter mb-1 uppercase italic">
+              System Error
+            </DialogTitle>
+            <p className="text-red-100 text-[10px] font-bold uppercase tracking-widest">
+              Action Required
+            </p>
+          </div>
+
+          <div className="p-8 space-y-6">
+            <div className="space-y-4">
+              <div className="p-5 rounded-3xl bg-red-50 border border-red-100 dark:bg-red-500/5 dark:border-red-500/10">
+                <h4 className="text-red-600 font-black text-[11px] uppercase tracking-wider mb-2">
+                  Message from Server
+                </h4>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm font-semibold leading-relaxed italic">
+                  "{errorDialog.message}"
+                </p>
+              </div>
+
+              {errorDialog.details && (
+                <div className="space-y-2">
+                  <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1">
+                    Technical Details
+                  </p>
+                  <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-100 max-h-32 overflow-y-auto">
+                    <pre className="text-[10px] font-mono text-zinc-500 whitespace-pre-wrap">
+                      {typeof errorDialog.details === "object"
+                        ? JSON.stringify(errorDialog.details, null, 2)
+                        : errorDialog.details}
+                    </pre>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Button
+              onClick={() =>
+                setErrorDialog((prev) => ({ ...prev, isOpen: false }))
+              }
+              className="w-full h-14 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-black uppercase tracking-widest shadow-xl transition-all active:scale-95"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
-

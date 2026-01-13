@@ -35,7 +35,11 @@ import { cn } from "@/lib/utils";
  * @param {boolean} props.isEdit - Whether this is edit mode (default: false)
  * @param {string|number} props.merchantId - The ID of the merchant being edited (required for edit)
  */
-export function MerchantForm({ initialData = null, isEdit = false, merchantId = null }) {
+export function MerchantForm({
+  initialData = null,
+  isEdit = false,
+  merchantId = null,
+}) {
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
@@ -72,9 +76,12 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
         email: userData.email || initialData.email || "",
         password: "", // Don't pre-fill password for security
         role: initialData.role || "merchant",
-        business_name: initialData.business_name || initialData.businessName || "",
-        business_type: initialData.business_type || initialData.businessType || "",
-        merchant_type: initialData.merchant_type || initialData.merchantType || "annual",
+        business_name:
+          initialData.business_name || initialData.businessName || "",
+        business_type:
+          initialData.business_type || initialData.businessType || "",
+        merchant_type:
+          initialData.merchant_type || initialData.merchantType || "annual",
         address: initialData.address || "",
         city: initialData.city || "",
         country: initialData.country || "",
@@ -82,7 +89,11 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
         latitude: initialData.latitude || "",
         longitude: initialData.longitude || "",
         tax_id: initialData.tax_id || initialData.taxId || "",
-        is_active: initialData.is_active !== undefined ? initialData.is_active : (initialData.isActive ?? true),
+        is_active:
+          userData.is_active ??
+          initialData.is_active ??
+          initialData.isActive ??
+          true,
       });
     }
   }, [isEdit, initialData]);
@@ -97,7 +108,7 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
 
     try {
       const payload = {
-        admin_id: session?.user?.id || 1,
+        admin_id: session?.user?.adminId,
         name: formData.name,
         email: formData.email,
         role: "merchant",
@@ -131,9 +142,13 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
 
       router.push("/agent/merchants");
     } catch (error) {
-      console.error(`Error ${isEdit ? "updating" : "creating"} merchant:`, error);
+      console.error(
+        `Error ${isEdit ? "updating" : "creating"} merchant:`,
+        error
+      );
       toast.error(
-        error?.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} merchant`
+        error?.response?.data?.message ||
+        `Failed to ${isEdit ? "update" : "create"} merchant`
       );
     } finally {
       setLoading(false);
@@ -152,7 +167,9 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
             <CardTitle>Account Credentials</CardTitle>
           </div>
           <CardDescription>
-            {isEdit ? "Update merchant administrator details." : "Login details for the merchant administrator."}
+            {isEdit
+              ? "Update merchant administrator details."
+              : "Login details for the merchant administrator."}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
@@ -179,7 +196,9 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">
-              {isEdit ? "New Password (leave blank to keep current)" : "Initial Password"}
+              {isEdit
+                ? "New Password (leave blank to keep current)"
+                : "Initial Password"}
             </Label>
             <div className="relative">
               <Input
@@ -341,9 +360,7 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
             </div>
             <CardTitle>Merchant Type</CardTitle>
           </div>
-          <CardDescription>
-            Select the merchant type.
-          </CardDescription>
+          <CardDescription>Select the merchant type.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid md:grid-cols-1 gap-6">
@@ -372,15 +389,19 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
               </CardDescription>
             </div>
             <div className="flex items-center gap-3">
-              <span className={cn(
-                "text-sm font-medium",
-                formData.is_active ? "text-emerald-600" : "text-zinc-500"
-              )}>
+              <span
+                className={cn(
+                  "text-sm font-medium",
+                  formData.is_active ? "text-emerald-600" : "text-zinc-500"
+                )}
+              >
                 {formData.is_active ? "Active" : "Inactive"}
               </span>
               <Switch
                 checked={formData.is_active}
-                onCheckedChange={(checked) => handleChange("is_active", checked)}
+                onCheckedChange={(checked) =>
+                  handleChange("is_active", checked)
+                }
               />
             </div>
           </div>
@@ -392,9 +413,12 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
           <Button type="submit" disabled={loading} className="min-w-[140px]">
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading
-              ? (isEdit ? "Updating..." : "Creating...")
-              : (isEdit ? "Update Merchant" : "Create Merchant")
-            }
+              ? isEdit
+                ? "Updating..."
+                : "Creating..."
+              : isEdit
+                ? "Update Merchant"
+                : "Create Merchant"}
           </Button>
         </CardFooter>
       </Card>

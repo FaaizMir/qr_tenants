@@ -9,6 +9,7 @@ import {
   ArrowLeft,
   MapPin,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 
 export const RewardSuccess = ({
@@ -25,88 +27,111 @@ export const RewardSuccess = ({
   formValues,
   merchantConfig,
   prevStep,
+  nextStep,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto p-2 md:p-4 animate-in fade-in zoom-in-95 duration-700">
-      <Card className="w-full border-white/20 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden rounded-[2rem] text-center">
-        {/* Merchant Branding Banner */}
-        <div className="relative h-32 md:h-44 overflow-hidden bg-linear-to-br from-zinc-950 via-zinc-800 to-zinc-900">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.3),rgba(16,185,129,0))]"></div>
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl scale-150"></div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl scale-150"></div>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
-            {merchantConfig?.logo && (
-              <div className="mb-3 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-2 overflow-hidden shadow-2xl">
-                <img src={merchantConfig.logo} alt="Merchant Logo" className="w-full h-full object-contain" />
-              </div>
-            )}
-            <h2 className="text-2xl md:text-3xl font-black tracking-tighter mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..." ? merchantConfig.name : "Your Reward"}
-            </h2>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
+      <Card className="w-full border-none shadow-3xl overflow-hidden rounded-[2.5rem] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-l-[6px] border-l-primary relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Gift className="w-32 h-32 text-primary" />
         </div>
 
-        <CardHeader className="pb-8 pt-12 relative px-6 md:px-10">
-          <div className="mx-auto w-20 h-20 rounded-3xl bg-linear-to-br from-emerald-500/5 to-emerald-500/20 flex items-center justify-center mb-6 rotate-3 hover:rotate-0 transition-transform duration-500 shadow-inner">
-            <Gift className="w-10 h-10 text-emerald-500" />
+        <CardHeader className="pb-8 pt-12 px-8 md:px-12 border-b border-zinc-100/50 dark:border-zinc-800/50">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner rotate-3">
+                <CheckCircle2 className="h-8 w-8" />
+              </div>
+              <div>
+                <CardTitle className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
+                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                    ? merchantConfig.name
+                    : "Reward Unlocked"}
+                </CardTitle>
+                <CardDescription className="text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                  You've earned an exclusive gift.
+                </CardDescription>
+              </div>
+            </div>
           </div>
-
-          <CardTitle className="text-3xl md:text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 italic uppercase">
-            CONGRATULATIONS!
-          </CardTitle>
-          <CardDescription className="text-zinc-500 dark:text-zinc-400 font-medium max-w-[280px] mx-auto mt-2 leading-tight">
-            You've successfully unlocked an exclusive merchant reward.
-          </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-10 pb-12 px-6 md:px-10">
-          <div className="relative group max-w-sm mx-auto">
-            <div className="absolute -inset-4 bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-600 rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse"></div>
-            <div className="relative bg-zinc-950 dark:bg-zinc-900 dark:border dark:border-zinc-800 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden border-4 border-zinc-900">
-              <div className="absolute top-0 right-0 p-4 opacity-10">
-                <QrCode className="w-20 h-20 text-white" />
+        <CardContent className="py-12 px-8 md:px-20 space-y-12">
+          <div className="relative group max-w-lg mx-auto">
+            <div className="absolute -inset-1 bg-primary/20 rounded-3xl blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative bg-zinc-900 dark:bg-zinc-950 rounded-2xl p-8 md:p-12 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 p-6 opacity-10">
+                <QrCode className="w-24 h-24 text-white" />
               </div>
 
-              <div className="flex flex-col items-center">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6 italic">
-                  Voucher Code: <span className="text-white ml-2">{reward?.coupon?.coupon_code || "#REWARDV2"}</span>
-                </p>
+              <div className="flex flex-col items-center text-center">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-6">
+                  Official Merchant Reward
+                </span>
 
-                <h3 className="text-4xl md:text-5xl font-black text-white tracking-widest mb-4 italic uppercase">
-                  {reward?.prize?.prize_name || reward?.name || "SPECIAL DISCOUNT"}
+                <h3 className="text-4xl md:text-5xl font-black text-white tracking-widest mb-6 uppercase">
+                  {reward?.prize?.prize_name || reward?.name || "Special Discount"}
                 </h3>
 
-                <div className="h-1.5 w-12 bg-linear-to-r from-emerald-600 to-teal-500 rounded-full mb-8"></div>
+                <div className="flex flex-col items-center gap-4 w-full">
+                  <div className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center gap-1 backdrop-blur-sm">
+                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Redemption Code</span>
+                    <span className="text-2xl font-black text-white tracking-widest uppercase">
+                      {reward?.coupon?.coupon_code || reward?.coupon_code || "PROCESSING"}
+                    </span>
+                  </div>
 
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-zinc-300 uppercase tracking-widest backdrop-blur-md">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  Verified Reward
+                  {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20">
+                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                      <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest">
+                        WhatsApp Delivery Failed
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                      <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">
+                        Sent to WhatsApp
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mx-4 p-5 rounded-3xl bg-zinc-50 dark:bg-zinc-800/10 border border-zinc-100 dark:border-zinc-800 shadow-sm">
-            <p className="text-[11px] text-zinc-500 italic font-bold leading-relaxed px-4">
-              Present this screen to the staff or check your WhatsApp to redeem your benefit. <br />
-              <span className="text-emerald-600 dark:text-emerald-400 font-black not-italic uppercase tracking-widest text-[9px] mt-2 block">
-                Official confirmation sent to your WhatsApp at {formValues?.phone || "your registered number"}
-              </span>
-            </p>
+          <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 text-center max-w-lg mx-auto">
+            {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+              <p className="text-xs font-medium text-red-600 dark:text-red-400 leading-relaxed italic">
+                "We couldn't deliver the code via WhatsApp. Please screenshot this screen or note down the code above to show our staff."
+              </p>
+            ) : (
+              <p className="text-xs font-medium text-zinc-500 leading-relaxed italic">
+                "Confirmation sent to{" "}
+                <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">
+                  {formValues?.phone || "your provided number"}
+                </span>. Show this to our staff to claim your reward."
+              </p>
+            )}
+          </div>
+
+          <div className="pt-6">
+            <Button
+              onClick={nextStep}
+              className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bg-primary hover:bg-primary/90 text-white group"
+            >
+              Complete Experience
+              <CheckCircle2 className="ml-2 w-4 h-4 group-hover:scale-110 transition-transform" />
+            </Button>
           </div>
         </CardContent>
 
-        {/* Footer branding */}
-        <div className="bg-zinc-50 dark:bg-zinc-800/20 py-5 text-center border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-            <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em]">
-              Powered by QR Tenants
-            </p>
-            <div className="h-px w-8 bg-zinc-200 dark:bg-zinc-700"></div>
-          </div>
-        </div>
+        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+            Verified Secure Experience <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered by QR Tenants
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );
