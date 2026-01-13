@@ -242,19 +242,28 @@ export function CustomerReviewFlow() {
 
   if (initializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
-        <div className="flex flex-col items-center gap-6 relative">
-          <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full animate-pulse-slow font-sans tracking-tight"></div>
-          <div className="relative w-16 h-16">
-            <div className="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
-            <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#fdfdfd] dark:bg-zinc-950">
+        {/* Deep Ambient Glow */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow"></div>
+        </div>
+
+        <div className="flex flex-col items-center gap-12 relative z-10">
+          {/* Refined Minimalist Spinner */}
+          <div className="relative w-28 h-28">
+            <div className="absolute inset-0 border-[3px] border-primary/5 rounded-full shadow-inner"></div>
+            <div className="absolute inset-0 border-[3px] border-primary border-t-transparent border-l-transparent rounded-full animate-spin shadow-primary/20"></div>
           </div>
-          <div className="flex flex-col items-center gap-2 relative">
-            <p className="text-zinc-900 dark:text-zinc-100 font-black text-sm uppercase tracking-[0.3em]">
-              QR Tenants
-            </p>
-            <div className="h-0.5 w-12 bg-linear-to-r from-transparent via-primary to-transparent"></div>
-            <p className="text-zinc-400 font-medium text-[10px] uppercase tracking-widest animate-pulse">
+
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-2">
+              <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 uppercase tracking-[0.3em] ml-[0.3em]">
+                QR Tenants
+              </h1>
+              <div className="h-0.5 w-10 bg-primary/30 rounded-full"></div>
+            </div>
+
+            <p className="text-zinc-400 font-black text-[10px] uppercase tracking-[0.4em] ml-[0.4em] animate-pulse">
               Preparing your experience
             </p>
           </div>
@@ -272,7 +281,7 @@ export function CustomerReviewFlow() {
         <div className="absolute -bottom-[10%] left-[10%] w-[45%] h-[45%] bg-indigo-500/10 rounded-full blur-[130px] animate-bounce-slow"></div>
       </div>
 
-      <div className="w-full max-w-6xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700">
+      <div className="w-full max-w-6xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700 ">
         {step === 1 && (
           <IdentityForm
             register={register}

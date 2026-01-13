@@ -10,6 +10,7 @@ import {
   RotateCw,
   CheckCircle2,
   Star,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -143,35 +144,37 @@ export const LuckyDraw = ({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
-      <Card className="w-full">
-        <CardHeader>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 border border-primary/10 text-primary">
-                <Trophy className="h-6 w-6" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl font-bold">
-                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                    ? merchantConfig.name
-                    : "Lucky Draw"}
-                </CardTitle>
-                <CardDescription>
-                  A gift for your valuable feedback.
-                </CardDescription>
-              </div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={prevStep}
-              disabled={isSpinning || hasSpun}
-              className="h-9 rounded-md gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
+      <Card className="w-full border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] rounded-[20px] overflow-hidden bg-white ">
+        <CardHeader className="flex flex-col items-center text-center pb-8 border-b border-zinc-100/50 relative">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={prevStep}
+            disabled={isSpinning || hasSpun}
+            className="absolute left-6 top-8 h-8 rounded-full gap-2 text-zinc-400 hover:text-primary transition-colors disabled:opacity-0"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-bold uppercase tracking-widest hidden md:inline">
               Back
-            </Button>
+            </span>
+          </Button>
+
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 border border-primary/10 text-primary mb-4 shadow-sm">
+            <Trophy className="h-8 w-8" />
+          </div>
+          <div className="space-y-1.5 w-full max-w-lg">
+            <CardTitle className="text-3xl font-black tracking-tight">
+              {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                ? merchantConfig.name
+                : "Lucky Draw"}
+            </CardTitle>
+            <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5 text-primary" />
+              <span>{merchantConfig?.address || "Store Location"}</span>
+            </div>
+            <CardDescription className="text-base font-medium pt-1">
+              A gift for your valuable feedback.
+            </CardDescription>
           </div>
         </CardHeader>
 

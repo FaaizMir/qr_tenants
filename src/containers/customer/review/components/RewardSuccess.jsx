@@ -31,24 +31,24 @@ export const RewardSuccess = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
-      <Card className="w-full">
-        <CardHeader>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 border border-primary/10 text-primary">
-                <Gift className="h-6 w-6" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl font-bold">
-                  {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                    ? merchantConfig.name
-                    : "Reward Unlocked"}
-                </CardTitle>
-                <CardDescription>
-                  You've earned an exclusive gift.
-                </CardDescription>
-              </div>
+      <Card className="w-full border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] rounded-[20px] overflow-hidden bg-white ">
+        <CardHeader className="flex flex-col items-center text-center pb-8 border-b border-zinc-100/50">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 border border-primary/10 text-primary mb-4 shadow-sm">
+            <Gift className="h-8 w-8" />
+          </div>
+          <div className="space-y-1.5 w-full max-w-lg">
+            <CardTitle className="text-3xl font-black tracking-tight">
+              {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                ? merchantConfig.name
+                : "Reward Unlocked"}
+            </CardTitle>
+            <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5 text-primary" />
+              <span>{merchantConfig?.address || "Store Location"}</span>
             </div>
+            <CardDescription className="text-base font-medium pt-1">
+              You've earned an exclusive gift.
+            </CardDescription>
           </div>
         </CardHeader>
 
@@ -66,18 +66,26 @@ export const RewardSuccess = ({
                 </span>
 
                 <h3 className="text-4xl md:text-5xl font-black text-white tracking-widest mb-6 uppercase">
-                  {reward?.prize?.prize_name || reward?.name || "Special Discount"}
+                  {reward?.prize?.prize_name ||
+                    reward?.name ||
+                    "Special Discount"}
                 </h3>
 
                 <div className="flex flex-col items-center gap-4 w-full">
                   <div className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center gap-1 backdrop-blur-sm">
-                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Redemption Code</span>
+                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">
+                      Redemption Code
+                    </span>
                     <span className="text-2xl font-black text-white tracking-widest uppercase">
-                      {reward?.coupon?.coupon_code || reward?.coupon_code || "PROCESSING"}
+                      {reward?.coupon?.coupon_code ||
+                        reward?.coupon_code ||
+                        "PROCESSING"}
                     </span>
                   </div>
 
-                  {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+                  {reward?.whatsapp_status === "failed" ||
+                    reward?.whatsapp_error ||
+                    reward?.error === "whatsapp_credit_low" ? (
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20">
                       <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest">
@@ -98,16 +106,20 @@ export const RewardSuccess = ({
           </div>
 
           <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 text-center max-w-lg mx-auto">
-            {reward?.whatsapp_status === "failed" || reward?.whatsapp_error || reward?.error === "whatsapp_credit_low" ? (
+            {reward?.whatsapp_status === "failed" ||
+              reward?.whatsapp_error ||
+              reward?.error === "whatsapp_credit_low" ? (
               <p className="text-xs font-medium text-red-600 dark:text-red-400 leading-relaxed italic">
-                "We couldn't deliver the code via WhatsApp. Please screenshot this screen or note down the code above to show our staff."
+                "We couldn't deliver the code via WhatsApp. Please screenshot
+                this screen or note down the code above to show our staff."
               </p>
             ) : (
               <p className="text-xs font-medium text-zinc-500 leading-relaxed italic">
                 "Confirmation sent to{" "}
                 <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">
                   {formValues?.phone || "your provided number"}
-                </span>. Show this to our staff to claim your reward."
+                </span>
+                . Show this to our staff to claim your reward."
               </p>
             )}
           </div>
@@ -125,7 +137,9 @@ export const RewardSuccess = ({
 
         <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
           <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
-            Verified Secure Experience <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered by QR Tenants
+            Verified Secure Experience{" "}
+            <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered
+            by QR Tenants
           </p>
         </CardFooter>
       </Card>

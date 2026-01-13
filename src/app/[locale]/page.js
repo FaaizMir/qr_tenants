@@ -14,6 +14,7 @@ import {
   MapPin,
   Store,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,6 +43,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
+import { cn } from "@/lib/utils";
 
 export default function LandingPage() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -265,43 +267,53 @@ export default function LandingPage() {
           id="marketplace"
         >
           <div className="px-6 lg:px-10 max-w-7xl mx-auto space-y-8">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
-              <h2 className="text-3xl font-bold">Explore Local Deals</h2>
-              <p className="text-muted-foreground text-lg">
-                Discover coupons from top merchants in your area.
+            <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4 mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[11px] font-bold uppercase tracking-wider border border-primary/20">
+                <TrendingUp className="w-3.5 h-3.5" /> Live Marketplace
+              </div>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 pt-2">
+                Explore Local Deals
+              </h2>
+              <p className="text-slate-500 text-lg">
+                Discover exclusive coupons and instant rewards from premium
+                merchants in your neighborhood.
               </p>
             </div>
 
             {/* -- Search & Filters -- */}
-            <div className="bg-white p-4 rounded-xl shadow-sm border flex flex-col lg:flex-row gap-4 items-center">
-              <div className="flex-1 relative w-full">
-                <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+            <div className="bg-white p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0)] border border-slate-200 flex flex-col lg:flex-row gap-2 items-center ring-4 ring-slate-100/50">
+              <div className="flex-1 relative w-full group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-primary transition-all group-focus-within:scale-110" />
                 <Input
                   placeholder="Search businesses..."
-                  className="pl-10 h-11 text-base bg-slate-50 border-0 focus-visible:ring-1"
+                  className="pl-12 h-12 text-lg bg-white border-1 focus-visible:ring-0 rounded-xl placeholder:text-slate-400 font-medium"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <div className="flex gap-4 w-full lg:w-auto flex-col sm:flex-row">
+              <div className="flex gap-2 w-full lg:w-auto flex-col sm:flex-row pr-2">
                 <Select
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
-                  <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
-                    <SelectValue placeholder="Business Type" />
+                  <SelectTrigger className="w-full sm:w-[220px] h-14 bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-primary/20 rounded-xl  text-slate-700">
+                    <SelectValue placeholder="Industry" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Types</SelectItem>
-                    <SelectItem value="Food and Beverage">
-                      Food and Beverage
-                    </SelectItem>
-                    <SelectItem value="Retails">Retails</SelectItem>
-                    <SelectItem value="Services">Services</SelectItem>
-                    <SelectItem value="Health">Health</SelectItem>
-                    <SelectItem value="Technology">Technology</SelectItem>
-                    <SelectItem value="Education">Education</SelectItem>
-                    <SelectItem value="Hospitality">Hospitality</SelectItem>
+                  <SelectContent className="rounded-xl border-slate-200">
+                    <SelectItem value="all">All Industries</SelectItem>
+                    {[
+                      "Food and Beverage",
+                      "Retails",
+                      "Services",
+                      "Health",
+                      "Technology",
+                      "Education",
+                      "Hospitality",
+                    ].map((cat) => (
+                      <SelectItem key={cat} value={cat}>
+                        {cat}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
 
@@ -309,11 +321,14 @@ export default function LandingPage() {
                   value={selectedRegion}
                   onValueChange={setSelectedRegion}
                 >
-                  <SelectTrigger className="w-full sm:w-[180px] h-11 bg-slate-50 border-0 focus:ring-1">
-                    <SelectValue placeholder="Region (City)" />
+                  <SelectTrigger className="w-full sm:w-[200px] h-14 bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-primary/20 rounded-xl  text-slate-700">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-primary" />
+                      <SelectValue placeholder="Location" />
+                    </div>
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Regions</SelectItem>
+                  <SelectContent className="rounded-xl border-slate-200">
+                    <SelectItem value="all">Everywhere</SelectItem>
                     {cities.map((city) => (
                       <SelectItem key={city} value={city}>
                         {city}
@@ -327,22 +342,28 @@ export default function LandingPage() {
             {/* -- Master-Detail Layout -- */}
             <div className="flex flex-col lg:flex-row gap-8 min-h-[600px]">
               {/* Left Side: Merchant List */}
-              <div className="lg:w-1/3 flex flex-col gap-4 overflow-y-auto h-[600px] pr-2 scrollbar-thin scrollbar-thumb-slate-200">
+              <div className="lg:w-1/3 flex flex-col gap-3 overflow-y-auto h-[700px] pr-2 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
                 {loading ? (
-                  <div className="flex flex-col items-center justify-center py-20 space-y-4">
+                  <div className="flex flex-col items-center justify-center py-20 space-y-4 bg-white/50 rounded-2xl border border-dashed">
                     <Loader2 className="h-10 w-10 animate-spin text-primary" />
-                    <p className="text-sm text-muted-foreground">
-                      Loading merchants...
+                    <p className="text-sm font-medium text-slate-500">
+                      Finding great deals...
                     </p>
                   </div>
                 ) : error ? (
-                  <div className="flex flex-col items-center justify-center py-20 space-y-4 text-red-500">
-                    <p>{error}</p>
+                  <div className="flex flex-col items-center justify-center py-20 space-y-4 text-center px-4">
+                    <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    <p className="text-sm font-medium text-slate-600">
+                      {error}
+                    </p>
                     <Button
                       variant="outline"
-                      onClick={() => setSelectedCategory(selectedCategory)}
+                      size="sm"
+                      onClick={() => window.location.reload()}
                     >
-                      Retry
+                      Retry Connection
                     </Button>
                   </div>
                 ) : filteredMerchants.length > 0 ? (
@@ -350,169 +371,241 @@ export default function LandingPage() {
                     <div
                       key={merchant.id}
                       onClick={() => setSelectedMerchantId(merchant.id)}
-                      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 hover:shadow-md ${
+                      className={`group relative cursor-pointer rounded-2xl border p-5 transition-all duration-300 ${
                         selectedMerchantId === merchant.id
-                          ? "bg-white border-primary ring-1 ring-primary shadow-sm"
-                          : "bg-white border-slate-200 hover:border-slate-300"
+                          ? "bg-white border-primary shadow-xl ring-1 ring-primary/20 scale-[1.02] z-10"
+                          : "bg-white/70 border-slate-200 hover:border-slate-300 hover:bg-white hover:shadow-lg"
                       }`}
                     >
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
                           <h3
-                            className={`font-bold text-lg ${
+                            className={`font-bold text-lg leading-tight transition-colors ${
                               selectedMerchantId === merchant.id
                                 ? "text-primary"
-                                : "text-slate-900"
+                                : "text-slate-900 group-hover:text-primary"
                             }`}
                           >
                             {merchant.name}
                           </h3>
-                          <div className="flex items-center text-xs text-muted-foreground mt-1">
-                            <MapPin className="h-3 w-3 mr-1" />
-                            <span className="capitalize">
-                              {merchant.address}
+                          <div className="flex items-center text-[11px] text-slate-500 mt-2 font-medium">
+                            <MapPin className="h-3 w-3 mr-1 text-slate-400 shrink-0" />
+                            <span className="truncate">
+                              {merchant.city || "Local Business"}
                             </span>
                           </div>
                         </div>
-                        <Badge
-                          variant="secondary"
-                          className="text-[10px] bg-slate-100"
-                        >
-                          {merchant.category}
-                        </Badge>
+                        <div className="flex flex-col items-end gap-2">
+                          <Badge
+                            variant="secondary"
+                            className="text-[9px] px-2 py-0 h-5 bg-slate-100 text-slate-600 font-bold uppercase tracking-tighter"
+                          >
+                            {merchant.category}
+                          </Badge>
+                          <span className="text-[10px] font-bold text-primary bg-primary/5 px-2 py-0.5 rounded-full">
+                            {merchant.batches?.length || 0} Offers
+                          </span>
+                        </div>
                       </div>
-                      <p className="text-sm text-slate-600 line-clamp-2 mb-3">
-                        {merchant.address}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-slate-400 ml-auto">
-                          {merchant.batches?.length || 0} Batches
-                        </span>
-                      </div>
+
+                      {selectedMerchantId === merchant.id && (
+                        <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                          <span className="text-slate-400 font-medium">
+                            Currently Viewing
+                          </span>
+                          <ArrowRight className="w-3.5 h-3.5 text-primary animate-bounce-x" />
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
-                  <div className="py-12 text-center text-muted-foreground bg-white rounded-xl border">
-                    <Search className="h-10 w-10 mx-auto mb-3 opacity-20" />
-                    <p>No merchants found.</p>
+                  <div className="py-20 text-center px-10 bg-white/50 rounded-2xl border border-dashed border-slate-300">
+                    <Search className="h-12 w-12 mx-auto mb-4 text-slate-300" />
+                    <h4 className="font-bold text-slate-900">
+                      No results found
+                    </h4>
+                    <p className="text-sm text-slate-500 mt-1">
+                      Try adjusting your search or category filters.
+                    </p>
                   </div>
                 )}
               </div>
 
               {/* Right Side: Coupons Detail */}
-              <div className="lg:w-2/3 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8 h-[600px] overflow-y-auto relative">
+              <div className="lg:w-2/3 bg-white rounded-3xl border border-slate-200 shadow-2xl h-[700px] overflow-hidden relative flex flex-col">
                 {activeMerchant ? (
                   <>
-                    <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-r from-slate-100 to-slate-50 z-0">
-                      {/* Optional background or banner for merchant */}
-                      <div
-                        className={`w-full h-full opacity-10 ${
-                          activeMerchant.category === "Restaurant"
-                            ? "bg-orange-500"
-                            : activeMerchant.category === "Beauty"
-                            ? "bg-pink-500"
-                            : activeMerchant.category === "Retail"
-                            ? "bg-blue-500"
-                            : "bg-emerald-500"
-                        }`}
-                      />
-                    </div>
+                    <div className="relative h-44 shrink-0 overflow-hidden">
+                      <div className="absolute inset-0 bg-slate-900">
+                        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center" />
+                        <div
+                          className={cn(
+                            "absolute inset-0 bg-linear-to-b from-transparent to-black/80",
+                            activeMerchant.category === "Food and Beverage" &&
+                              "bg-orange-600/20",
+                            activeMerchant.category === "Retails" &&
+                              "bg-blue-600/20",
+                            activeMerchant.category === "Services" &&
+                              "bg-emerald-600/20"
+                          )}
+                        />
+                      </div>
 
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-4 mb-6 mt-4">
-                        <div className="h-20 w-20 bg-white rounded-xl shadow-lg border-2 border-white flex items-center justify-center text-slate-700">
-                          <Store className="h-10 w-10" />
+                      <div className="absolute -bottom-1 left-0 w-full h-16 bg-linear-to-t from-white to-transparent" />
+
+                      <div className="absolute bottom-4 left-8 right-8 flex items-end gap-6 z-10">
+                        <div className="h-24 w-24 bg-white rounded-2xl shadow-2xl border-4 border-white flex items-center justify-center text-slate-700 shrink-0 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                          <Store className="h-12 w-12 text-primary" />
                         </div>
-                        <div className="flex-1">
-                          <h2 className="text-2xl font-bold text-slate-900">
-                            {activeMerchant.name}
-                          </h2>
-                          <p className="text-slate-500 mt-1">
-                            {activeMerchant.tone || activeMerchant.highlight}
+                        <div className="mb-2 pb-1">
+                          <div className="flex items-center gap-3">
+                            <h2 className="text-3xl font-black text-white tracking-tight drop-shadow-md">
+                              {activeMerchant.name}
+                            </h2>
+                            <Badge className="bg-primary/90 text-white border-0 text-[10px] font-black uppercase tracking-widest px-3">
+                              Verified
+                            </Badge>
+                          </div>
+                          <p className="text-slate-200 text-sm font-medium mt-1 flex items-center gap-2">
+                            <MapPin className="w-3.5 h-3.5" />{" "}
+                            {activeMerchant.address}
                           </p>
                         </div>
                       </div>
+                    </div>
 
-                      <div className="flex items-center gap-2 mb-6 text-sm font-bold text-slate-400 uppercase tracking-widest">
-                        <Gift className="w-4 h-4" /> Batch Collection
+                    <div className="flex-1 overflow-y-auto px-8 pt-8 pb-12 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+                      <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                        <div className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-widest">
+                          <Gift className="w-4 h-4 text-primary" /> Active
+                          Voucher Collection
+                        </div>
+                        <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full border border-slate-100 italic">
+                          {activeMerchant.batches?.length || 0} Special Offers
+                          Available
+                        </span>
                       </div>
 
-                      <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="grid sm:grid-cols-2 gap-6 pb-4">
                         {activeMerchant.batches &&
                         activeMerchant.batches.length > 0 ? (
                           activeMerchant.batches.map((batch) => (
                             <div
                               key={batch.id}
-                              className="group relative overflow-hidden rounded-xl border border-slate-200 hover:border-primary/50 hover:shadow-lg transition-all"
+                              className="group relative flex flex-col bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-primary/30 hover:shadow-2xl hover:bg-white transition-all duration-500 overflow-hidden"
                             >
-                              {/* Render the batch HTML */}
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: batch.rendered_html,
-                                }}
-                                onClick={() =>
-                                  handleGetCoupon(activeMerchant, batch)
-                                }
-                                className="cursor-pointer"
-                              />
+                              <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                                  <Sparkles className="w-4 h-4" />
+                                </div>
+                              </div>
 
-                              {/* Batch metadata overlay */}
-                              <div className="p-4 bg-slate-50 border-t border-slate-200">
-                                <div className="flex items-center justify-between text-xs text-slate-600 mb-2">
-                                  <span className="font-semibold">
-                                    {batch.batch_name}
-                                  </span>
+                              <div className="p-1">
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html: batch.rendered_html,
+                                  }}
+                                  onClick={() =>
+                                    handleGetCoupon(activeMerchant, batch)
+                                  }
+                                  className="cursor-pointer overflow-hidden rounded-xl"
+                                />
+                              </div>
+
+                              <div className="p-5 space-y-4">
+                                <div className="flex items-start justify-between gap-2">
+                                  <div>
+                                    <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-1 capitalize">
+                                      {batch.batch_name}
+                                    </h4>
+                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">
+                                      Valid until{" "}
+                                      {new Date(
+                                        batch.end_date
+                                      ).toLocaleDateString()}
+                                    </p>
+                                  </div>
                                   <Badge
-                                    variant={
-                                      batch.is_active ? "default" : "secondary"
-                                    }
-                                    className="text-[10px]"
+                                    className={cn(
+                                      "text-[9px] font-bold uppercase tracking-tighter",
+                                      batch.is_active
+                                        ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
+                                        : "bg-slate-500/10 text-slate-600 border border-slate-500/20"
+                                    )}
                                   >
-                                    {batch.is_active ? "Active" : "Inactive"}
+                                    {batch.is_active ? "Live" : "Ended"}
                                   </Badge>
                                 </div>
-                                <div className="flex items-center justify-between text-xs text-slate-500">
-                                  <span>
-                                    {batch.issued_quantity}/
-                                    {batch.total_quantity} issued
-                                  </span>
-                                  <span>
-                                    {new Date(
-                                      batch.start_date
-                                    ).toLocaleDateString()}{" "}
-                                    -{" "}
-                                    {new Date(
-                                      batch.end_date
-                                    ).toLocaleDateString()}
-                                  </span>
+
+                                <div className="space-y-3">
+                                  <div className="h-1.5 w-full bg-slate-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                    <div
+                                      className="h-full bg-primary rounded-full transition-all duration-1000"
+                                      style={{
+                                        width: `${
+                                          (batch.issued_quantity /
+                                            batch.total_quantity) *
+                                          100
+                                        }%`,
+                                      }}
+                                    ></div>
+                                  </div>
+                                  <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium">
+                                    <span>{batch.issued_quantity} Issued</span>
+                                    <span>
+                                      {batch.total_quantity -
+                                        batch.issued_quantity}{" "}
+                                      Remaining
+                                    </span>
+                                  </div>
                                 </div>
+
                                 <Button
                                   size="sm"
                                   onClick={() =>
                                     handleGetCoupon(activeMerchant, batch)
                                   }
-                                  className="w-full mt-3 bg-slate-900 hover:bg-primary transition-colors"
+                                  className="w-full h-11 rounded-xl bg-slate-900 hover:bg-primary text-white font-bold uppercase tracking-wider text-[11px] shadow-lg group-hover:shadow-primary/20 transition-all active:scale-[0.98]"
                                 >
-                                  Get Coupon{" "}
-                                  <ArrowRight className="w-3 h-3 ml-1" />
+                                  Get Coupon
+                                  <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                               </div>
                             </div>
                           ))
                         ) : (
-                          <div className="col-span-full py-12 text-center text-muted-foreground border-2 border-dashed rounded-xl">
-                            <p>No batches available for this merchant.</p>
+                          <div className="col-span-full py-24 text-center text-muted-foreground border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
+                            <Gift className="w-12 h-12 mx-auto mb-4 opacity-10" />
+                            <p className="text-lg font-bold text-slate-400">
+                              No active offers currently
+                            </p>
+                            <p className="text-sm mt-1">
+                              Check back later for new deals from this merchant.
+                            </p>
                           </div>
                         )}
                       </div>
                     </div>
                   </>
                 ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-muted-foreground space-y-4">
-                    <Store className="h-16 w-16 opacity-10" />
-                    <p className="text-lg font-medium">
-                      Select a merchant to view offers
+                  <div className="h-full flex flex-col items-center justify-center text-center p-12 bg-slate-50/30">
+                    <div className="relative mb-8">
+                      <div className="absolute -inset-4 bg-primary/10 rounded-full blur-2xl animate-pulse" />
+                      <div className="relative h-24 w-24 bg-white rounded-3xl shadow-xl flex items-center justify-center text-primary/30 rotate-12 transition-transform hover:rotate-0 duration-500 border border-slate-100">
+                        <Store className="h-12 w-12" />
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">
+                      Ready to Shop?
+                    </h3>
+                    <p className="text-slate-500 max-w-sm mt-2 font-medium">
+                      Select a merchant from the list to discover exclusive
+                      local rewards and hidden gems.
                     </p>
+                    <div className="mt-8 flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">
+                      Secured <Shield className="w-3 h-3" /> Encrypted
+                      Marketplace
+                    </div>
                   </div>
                 )}
               </div>

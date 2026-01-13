@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Zap,
   SquareCheck,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,32 +57,36 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
-      <Card className="w-full">
-        <CardHeader>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 border border-primary/10 text-primary">
-                <Zap className="h-6 w-6 animate-pulse" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl font-bold">
-                  {statuses[statusIndex].label}
-                </CardTitle>
-                <CardDescription>
-                  {statuses[statusIndex].sub}
-                </CardDescription>
-              </div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={prevStep}
-              className="h-9 rounded-md gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
+      <Card className="w-full border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] rounded-[20px] overflow-hidden bg-white ">
+        <CardHeader className="flex flex-col items-center text-center pb-8 border-b border-zinc-100/50 relative">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={prevStep}
+            className="absolute left-6 top-8 h-8 rounded-full gap-2 text-zinc-400 hover:text-primary transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-bold uppercase tracking-widest hidden md:inline">
               Back
-            </Button>
+            </span>
+          </Button>
+
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 border border-primary/10 text-primary mb-4 shadow-sm">
+            <Zap className="h-8 w-8 animate-pulse" />
+          </div>
+          <div className="space-y-1.5 w-full max-w-lg">
+            <CardTitle className="text-3xl font-black tracking-tight">
+              {merchantConfig?.name && merchantConfig.name !== "Loading..."
+                ? merchantConfig.name
+                : "Processing..."}
+            </CardTitle>
+            <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5 text-primary" />
+              <span>{merchantConfig?.address || "Store Location"}</span>
+            </div>
+            <CardDescription className="text-base font-bold text-primary animate-pulse pt-2 uppercase tracking-tighter">
+              {statuses[statusIndex].label}
+            </CardDescription>
           </div>
         </CardHeader>
 
@@ -92,7 +97,9 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
               <div className="text-primary scale-150 transform transition-all duration-700">
                 {statusIndex === 0 && <Zap className="w-8 h-8" />}
                 {statusIndex === 1 && <ShieldCheck className="w-8 h-8" />}
-                {statusIndex === 2 && <SquareCheck className="w-8 h-8 animate-bounce" />}
+                {statusIndex === 2 && (
+                  <SquareCheck className="w-8 h-8 animate-bounce" />
+                )}
               </div>
             </div>
             {/* Pulsing rings */}
@@ -113,14 +120,17 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
 
           <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 italic text-center max-w-sm">
             <p className="text-xs text-zinc-500 leading-relaxed font-medium">
-              "We are finalizing your feedback and preparing your reward tokens. Please do not close this window."
+              "We are finalizing your feedback and preparing your reward tokens.
+              Please do not close this window."
             </p>
           </div>
         </CardContent>
 
         <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
           <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
-            Secure Redirection Active <ShieldCheck className="w-3 h-3 text-primary" /> Powered by QR Tenants
+            Secure Redirection Active{" "}
+            <ShieldCheck className="w-3 h-3 text-primary" /> Powered by QR
+            Tenants
           </p>
         </CardFooter>
       </Card>
