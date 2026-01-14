@@ -18,6 +18,12 @@
     "monthlyrevenue": "Monthly Revenue",
     "viewearningreports": "View Earning Reports"
   },
+  "masterAdminDashboard": {
+    "masteradmindashboard": "Master Admin Dashboard",
+    "descrption": "Welcome back! Here's your overview.",
+    "totalmerchants": "Total Merchants",
+    "monthlyrevenue": "Monthly Revenue"
+  },
   "agentEarnings": {
     "agentdashboard": "Agent Dashboard",
     "commissionbreakdown": "Commission Breakdown by Merchant",
@@ -93,5 +99,13 @@
     "QRScanner": "QR Scanner",
     "serialCodes": "Serial Codes",
     "wallet": "Wallet"
+  },
+  "masterAdminSidebar": {
+    "dashboard": "Dashboard",
+    "packages": "Packages",
+    "agents": "Agents",
+    "merchants": "Merchants",
+    "commission": "Commission",
+    "approvals": "Approvals"
   }
 }
