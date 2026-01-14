@@ -46,7 +46,8 @@ export const authOptions = {
 
           // 3. Determine Role
           let role = userObj?.role || data?.role;
-          if (!role && (userObj?.merchant_id || userObj?.merchant)) role = "merchant";
+          if (!role && (userObj?.merchant_id || userObj?.merchant))
+            role = "merchant";
           const normalizedRole = role?.toLowerCase() || "";
 
           // 4. Activity Check
@@ -57,7 +58,9 @@ export const authOptions = {
             true;
 
           if (isActive === false) {
-            console.warn(`Access denied: Account is inactive for role: ${normalizedRole}`);
+            console.warn(
+              `Access denied: Account is inactive for role: ${normalizedRole}`
+            );
             throw new Error("ACCOUNT_INACTIVE");
           }
 
@@ -71,14 +74,20 @@ export const authOptions = {
             subscriptionType: data?.merchant?.merchant_type || "temporary",
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
-            admin_id: data?.user?.adminId,
+            admin_id: data?.user?.adminId || null,
           };
         } catch (error) {
-          const apiError = error?.response?.data?.message || error?.response?.data;
+          const apiError =
+            error?.response?.data?.message || error?.response?.data;
 
-          if (error.message === "ACCOUNT_INACTIVE" ||
-            (typeof apiError === "string" && apiError.toUpperCase().includes("INACTIVE"))) {
-            throw new Error("Your account is inactive. Please contact your agent.");
+          if (
+            error.message === "ACCOUNT_INACTIVE" ||
+            (typeof apiError === "string" &&
+              apiError.toUpperCase().includes("INACTIVE"))
+          ) {
+            throw new Error(
+              "Your account is inactive. Please contact your agent."
+            );
           }
 
           console.error("Login authorize failed:", error.message);
