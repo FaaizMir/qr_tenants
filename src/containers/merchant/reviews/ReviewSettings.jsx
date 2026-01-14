@@ -33,6 +33,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
+import Link from "next/link";
 
 export default function ReviewSettings() {
   const [loadingPresets, setLoadingPresets] = useState(false);
@@ -60,7 +61,8 @@ export default function ReviewSettings() {
   const [couponBatches, setCouponBatches] = useState([]);
   const [loadingBatches, setLoadingBatches] = useState(false);
   const [batchDropdownOpen, setBatchDropdownOpen] = useState(false);
-  const [birthdayBatchDropdownOpen, setBirthdayBatchDropdownOpen] = useState(false);
+  const [birthdayBatchDropdownOpen, setBirthdayBatchDropdownOpen] =
+    useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const { data: session } = useSession();
@@ -181,12 +183,12 @@ export default function ReviewSettings() {
       const payload = {
         reviews: config.enablePresetReviews
           ? config.presets.map((text, index) => ({
-            id: index + 1,
-            merchant_id: merchantId,
-            reviewText: text.trim(),
-            isActive: true,
-            displayOrder: index + 1,
-          }))
+              id: index + 1,
+              merchant_id: merchantId,
+              reviewText: text.trim(),
+              isActive: true,
+              displayOrder: index + 1,
+            }))
           : [],
       };
 
@@ -244,14 +246,18 @@ export default function ReviewSettings() {
   const handleSaveAllSettings = async () => {
     // Validation: If Lucky Draw is disabled, a coupon batch must be selected
     if (!config.luckyDrawEnabled && !config.selectedBatchId) {
-      toast.error("Please select a Coupon Batch to continue with Direct Rewards.");
+      toast.error(
+        "Please select a Coupon Batch to continue with Direct Rewards."
+      );
       // Scroll to the empty field or focus the dropdown if possible
       setBatchDropdownOpen(true);
       return;
     }
 
     if (config.birthdayMessageEnabled && !config.birthdayCouponBatchId) {
-      toast.error("Please select a Birthday Coupon Batch to enable Birthday Rewards.");
+      toast.error(
+        "Please select a Birthday Coupon Batch to enable Birthday Rewards."
+      );
       setBirthdayBatchDropdownOpen(true);
       return;
     }
@@ -284,7 +290,9 @@ export default function ReviewSettings() {
         birthday_message_enabled: config.birthdayMessageEnabled,
         days_before_birthday: Number(config.daysBeforeBirthday),
         days_after_birthday: Number(config.daysAfterBirthday),
-        birthday_coupon_batch_id: config.birthdayMessageEnabled ? config.birthdayCouponBatchId : null,
+        birthday_coupon_batch_id: config.birthdayMessageEnabled
+          ? config.birthdayCouponBatchId
+          : null,
       };
 
       await axiosInstance.patch(
@@ -305,10 +313,7 @@ export default function ReviewSettings() {
     if (config.presets.length < 10) {
       setConfig((prev) => ({
         ...prev,
-        presets: [
-          ...prev.presets,
-          ...Array(10 - prev.presets.length).fill(""),
-        ],
+        presets: [...prev.presets, ...Array(10 - prev.presets.length).fill("")],
       }));
     }
   }, [config.presets.length]);
@@ -320,7 +325,8 @@ export default function ReviewSettings() {
           Review & Reward Settings
         </h2>
         <p className="text-muted-foreground text-base max-w-2xl">
-          Configure how customers interact with your business, manage review platforms, and set up automated rewards.
+          Configure how customers interact with your business, manage review
+          platforms, and set up automated rewards.
         </p>
       </div>
 
@@ -335,7 +341,9 @@ export default function ReviewSettings() {
                   <Share2 className="h-5 w-5" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-semibold">Review Platforms</CardTitle>
+                  <CardTitle className="text-lg font-semibold">
+                    Review Platforms
+                  </CardTitle>
                   <CardDescription>
                     Connect your social profiles to collect reviews
                   </CardDescription>
@@ -346,7 +354,11 @@ export default function ReviewSettings() {
               {/* Google */}
               <PlatformItem
                 icon={
-                  <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-5 h-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                       fill="#4285F4"
@@ -370,43 +382,67 @@ export default function ReviewSettings() {
                 enabled={config.enableGoogle}
                 onToggle={(c) => setConfig({ ...config, enableGoogle: c })}
                 link={config.googleReviewLink}
-                onLinkChange={(e) => setConfig({ ...config, googleReviewLink: e.target.value })}
+                onLinkChange={(e) =>
+                  setConfig({ ...config, googleReviewLink: e.target.value })
+                }
                 placeholder="https://g.page/r/..."
               />
 
               {/* Facebook */}
               <PlatformItem
-                icon={<img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="F" className="w-5 h-5" />}
+                icon={
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                    alt="F"
+                    className="w-5 h-5"
+                  />
+                }
                 label="Facebook Page"
                 color="hover:border-indigo-200 hover:bg-indigo-50/30"
                 enabled={config.enableFacebook}
                 onToggle={(c) => setConfig({ ...config, enableFacebook: c })}
                 link={config.facebookReviewLink}
-                onLinkChange={(e) => setConfig({ ...config, facebookReviewLink: e.target.value })}
+                onLinkChange={(e) =>
+                  setConfig({ ...config, facebookReviewLink: e.target.value })
+                }
                 placeholder="https://facebook.com/..."
               />
 
               {/* Instagram */}
               <PlatformItem
-                icon={<img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="I" className="w-5 h-5" />}
+                icon={
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
+                    alt="I"
+                    className="w-5 h-5"
+                  />
+                }
                 label="Instagram"
                 color="hover:border-pink-200 hover:bg-pink-50/30"
                 enabled={config.enableInstagram}
                 onToggle={(c) => setConfig({ ...config, enableInstagram: c })}
                 link={config.instagramReviewLink}
-                onLinkChange={(e) => setConfig({ ...config, instagramReviewLink: e.target.value })}
+                onLinkChange={(e) =>
+                  setConfig({ ...config, instagramReviewLink: e.target.value })
+                }
                 placeholder="https://instagram.com/..."
               />
 
               {/* RED (XiaoHongShu) */}
               <PlatformItem
-                icon={<span className="text-red-500 font-bold text-lg leading-none">Red</span>}
+                icon={
+                  <span className="text-red-500 font-bold text-lg leading-none">
+                    Red
+                  </span>
+                }
                 label="XiaoHongShu"
                 color="hover:border-red-200 hover:bg-red-50/30"
                 enabled={config.enableRed}
                 onToggle={(c) => setConfig({ ...config, enableRed: c })}
                 link={config.redReviewLink}
-                onLinkChange={(e) => setConfig({ ...config, redReviewLink: e.target.value })}
+                onLinkChange={(e) =>
+                  setConfig({ ...config, redReviewLink: e.target.value })
+                }
                 placeholder="https://xiaohongshu.com/..."
               />
             </CardContent>
@@ -420,7 +456,9 @@ export default function ReviewSettings() {
                   <Megaphone className="h-5 w-5" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-semibold">Promotional Ads</CardTitle>
+                  <CardTitle className="text-lg font-semibold">
+                    Promotional Ads
+                  </CardTitle>
                   <CardDescription>
                     Display a custom banner image to your customers
                   </CardDescription>
@@ -430,8 +468,12 @@ export default function ReviewSettings() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="space-y-1">
-                  <Label className="text-base font-medium">Enable Paid Ads</Label>
-                  <p className="text-sm text-muted-foreground">Show promotional content on the review page</p>
+                  <Label className="text-base font-medium">
+                    Enable Paid Ads
+                  </Label>
+                  <p className="text-sm text-muted-foreground">
+                    Show promotional content on the review page
+                  </p>
                 </div>
                 <Switch
                   checked={config.paid_ads}
@@ -477,7 +519,9 @@ export default function ReviewSettings() {
                           <Upload className="h-6 w-6 text-primary" />
                         </div>
                         <span className="font-medium">Upload Banner Image</span>
-                        <span className="text-xs text-muted-foreground mt-1">Recommended size: 1200x600px</span>
+                        <span className="text-xs text-muted-foreground mt-1">
+                          Recommended size: 1200x600px
+                        </span>
                       </Label>
                     )}
 
@@ -501,7 +545,9 @@ export default function ReviewSettings() {
                     <MessageSquareQuote className="h-5 w-5" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg font-semibold">Quick Review Options</CardTitle>
+                    <CardTitle className="text-lg font-semibold">
+                      Quick Review Options
+                    </CardTitle>
                     <CardDescription>
                       Pre-written reviews for customers to choose from
                     </CardDescription>
@@ -509,12 +555,20 @@ export default function ReviewSettings() {
                 </div>
                 <Switch
                   checked={config.enablePresetReviews}
-                  onCheckedChange={(c) => setConfig({ ...config, enablePresetReviews: c })}
+                  onCheckedChange={(c) =>
+                    setConfig({ ...config, enablePresetReviews: c })
+                  }
                 />
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-300 ${!config.enablePresetReviews ? 'opacity-50 pointer-events-none' : ''}`}>
+              <div
+                className={`grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-300 ${
+                  !config.enablePresetReviews
+                    ? "opacity-50 pointer-events-none"
+                    : ""
+                }`}
+              >
                 {config.presets.map((preset, idx) => (
                   <div key={idx} className="relative group">
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-md bg-muted text-xs font-medium text-muted-foreground">
@@ -537,7 +591,11 @@ export default function ReviewSettings() {
                   disabled={loadingPresets || !config.enablePresetReviews}
                   className="gap-2"
                 >
-                  {loadingPresets ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                  {loadingPresets ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Save className="h-4 w-4" />
+                  )}
                   Save Presets Only
                 </Button>
               </div>
@@ -555,7 +613,9 @@ export default function ReviewSettings() {
                   <Ribbon className="h-5 w-5" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-semibold">Reward Strategy</CardTitle>
+                  <CardTitle className="text-lg font-semibold">
+                    Reward Strategy
+                  </CardTitle>
                   <CardDescription>
                     Choose how to reward your customers
                   </CardDescription>
@@ -565,67 +625,120 @@ export default function ReviewSettings() {
             <CardContent className="p-6 space-y-4">
               {/* Lucky Draw Option */}
               <div
-                className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer ${config.luckyDrawEnabled ? 'border-primary bg-primary/5' : 'border-muted hover:border-primary/30'}`}
+                className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                  config.luckyDrawEnabled
+                    ? "border-primary bg-primary/5"
+                    : "border-muted hover:border-primary/30"
+                }`}
                 onClick={() => setConfig({ ...config, luckyDrawEnabled: true })}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${config.luckyDrawEnabled ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
+                    <div
+                      className={`p-2 rounded-lg ${
+                        config.luckyDrawEnabled
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
                       <Sparkles className="h-5 w-5" />
                     </div>
                     <div>
                       <p className="font-semibold text-sm">Lucky Draw</p>
-                      <p className="text-xs text-muted-foreground">Gamified chance to win</p>
+                      <p className="text-xs text-muted-foreground">
+                        Gamified chance to win
+                      </p>
                     </div>
                   </div>
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${config.luckyDrawEnabled ? 'border-primary' : 'border-muted'}`}>
-                    {config.luckyDrawEnabled && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      config.luckyDrawEnabled
+                        ? "border-primary"
+                        : "border-muted"
+                    }`}
+                  >
+                    {config.luckyDrawEnabled && (
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                    )}
                   </div>
                 </div>
                 {config.luckyDrawEnabled && (
-                  <div className="mt-3 text-xs text-orange-600 bg-orange-50 px-3 py-2 rounded-lg border border-orange-100 flex items-start gap-2">
-                    <span className="mt-0.5">💡</span> Configure prizes in the Lucky Draw tab.
+                  <div className="mt-3 text-xs text-orange-600 bg-orange-50 px-3 py-2 rounded-lg border border-orange-100 flex items-start gap-1">
+                    <span className="mt-0.5">💡</span> Configure prizes in the
+                    <Link
+                      href="/merchant/lucky-draw"
+                      className="font-semibold underline underline-offset-2 hover:text-orange-800 transition-colors"
+                    >
+                      Lucky Draw tab
+                    </Link>
+                    .
                   </div>
                 )}
               </div>
 
               {/* Direct Coupon Option */}
               <div
-                className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer ${!config.luckyDrawEnabled ? 'border-primary bg-primary/5' : 'border-muted hover:border-primary/30'}`}
-                onClick={() => setConfig({ ...config, luckyDrawEnabled: false })}
+                className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                  !config.luckyDrawEnabled
+                    ? "border-primary bg-primary/5"
+                    : "border-muted hover:border-primary/30"
+                }`}
+                onClick={() =>
+                  setConfig({ ...config, luckyDrawEnabled: false })
+                }
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${!config.luckyDrawEnabled ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
+                    <div
+                      className={`p-2 rounded-lg ${
+                        !config.luckyDrawEnabled
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
                       <Ticket className="h-5 w-5" />
                     </div>
                     <div>
                       <p className="font-semibold text-sm">Direct Coupon</p>
-                      <p className="text-xs text-muted-foreground">Guaranteed reward via WhatsApp</p>
+                      <p className="text-xs text-muted-foreground">
+                        Guaranteed reward via WhatsApp
+                      </p>
                     </div>
                   </div>
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${!config.luckyDrawEnabled ? 'border-primary' : 'border-muted'}`}>
-                    {!config.luckyDrawEnabled && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      !config.luckyDrawEnabled
+                        ? "border-primary"
+                        : "border-muted"
+                    }`}
+                  >
+                    {!config.luckyDrawEnabled && (
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                    )}
                   </div>
                 </div>
 
                 {!config.luckyDrawEnabled && (
                   <div className="mt-4 animate-in fade-in slide-in-from-top-2">
                     <Label className="text-xs font-medium mb-1.5 block">
-                      Select Coupon Batch <span className="text-red-500">*</span>
+                      Select Coupon Batch{" "}
+                      <span className="text-red-500">*</span>
                     </Label>
                     <BatchSelector
                       selectedId={config.selectedBatchId}
                       batches={couponBatches}
                       isOpen={batchDropdownOpen}
                       setIsOpen={setBatchDropdownOpen}
-                      onSelect={(id) => setConfig({ ...config, selectedBatchId: id })}
+                      onSelect={(id) =>
+                        setConfig({ ...config, selectedBatchId: id })
+                      }
                       loading={loadingBatches}
                       placeholder="Choose regular reward..."
                     />
                     {!config.selectedBatchId && (
                       <p className="text-[10px] text-red-500 mt-1.5 font-medium flex items-center gap-1">
-                        <span className="inline-block w-1 h-1 rounded-full bg-red-500" /> Required for Direct Coupon
+                        <span className="inline-block w-1 h-1 rounded-full bg-red-500" />{" "}
+                        Required for Direct Coupon
                       </p>
                     )}
                   </div>
@@ -643,7 +756,9 @@ export default function ReviewSettings() {
                     <Cake className="h-5 w-5" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg font-semibold">Birthday Club</CardTitle>
+                    <CardTitle className="text-lg font-semibold">
+                      Birthday Club
+                    </CardTitle>
                     <CardDescription>
                       Automated birthday surprises
                     </CardDescription>
@@ -651,43 +766,69 @@ export default function ReviewSettings() {
                 </div>
                 <Switch
                   checked={config.birthdayMessageEnabled}
-                  onCheckedChange={(c) => setConfig({ ...config, birthdayMessageEnabled: c })}
+                  onCheckedChange={(c) =>
+                    setConfig({ ...config, birthdayMessageEnabled: c })
+                  }
                 />
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <div className={`space-y-4 transition-all duration-300 ${!config.birthdayMessageEnabled ? 'opacity-50 pointer-events-none grayscale-[0.5]' : ''}`}>
+              <div
+                className={`space-y-4 transition-all duration-300 ${
+                  !config.birthdayMessageEnabled
+                    ? "opacity-50 pointer-events-none grayscale-[0.5]"
+                    : ""
+                }`}
+              >
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-medium text-muted-foreground">Days Before</Label>
+                    <Label className="text-xs font-medium text-muted-foreground">
+                      Days Before
+                    </Label>
                     <Input
                       type="number"
                       min="0"
                       className="bg-muted/30"
                       value={config.daysBeforeBirthday}
-                      onChange={(e) => setConfig({ ...config, daysBeforeBirthday: parseInt(e.target.value) || 0 })}
+                      onChange={(e) =>
+                        setConfig({
+                          ...config,
+                          daysBeforeBirthday: parseInt(e.target.value) || 0,
+                        })
+                      }
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-medium text-muted-foreground">Days After</Label>
+                    <Label className="text-xs font-medium text-muted-foreground">
+                      Days After
+                    </Label>
                     <Input
                       type="number"
                       min="0"
                       className="bg-muted/30"
                       value={config.daysAfterBirthday}
-                      onChange={(e) => setConfig({ ...config, daysAfterBirthday: parseInt(e.target.value) || 0 })}
+                      onChange={(e) =>
+                        setConfig({
+                          ...config,
+                          daysAfterBirthday: parseInt(e.target.value) || 0,
+                        })
+                      }
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-medium text-muted-foreground">Birthday Coupon Batch</Label>
+                  <Label className="text-xs font-medium text-muted-foreground">
+                    Birthday Coupon Batch
+                  </Label>
                   <BatchSelector
                     selectedId={config.birthdayCouponBatchId}
                     batches={couponBatches}
                     isOpen={birthdayBatchDropdownOpen}
                     setIsOpen={setBirthdayBatchDropdownOpen}
-                    onSelect={(id) => setConfig({ ...config, birthdayCouponBatchId: id })}
+                    onSelect={(id) =>
+                      setConfig({ ...config, birthdayCouponBatchId: id })
+                    }
                     loading={loadingBatches}
                     placeholder="Select birthday treat..."
                   />
@@ -723,7 +864,8 @@ export default function ReviewSettings() {
             >
               {loadingSettings ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving Changes...
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving
+                  Changes...
                 </>
               ) : (
                 <>
@@ -734,29 +876,53 @@ export default function ReviewSettings() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
 
 // Helper Components
 
-function PlatformItem({ icon, label, color, enabled, onToggle, link, onLinkChange, placeholder }) {
+function PlatformItem({
+  icon,
+  label,
+  color,
+  enabled,
+  onToggle,
+  link,
+  onLinkChange,
+  placeholder,
+}) {
   return (
-    <div className={`rounded-xl border transition-all duration-300 ${enabled ? `bg-white shadow-sm border-primary/20` : 'bg-muted/10 border-muted/40'}`}>
+    <div
+      className={`rounded-xl border transition-all duration-300 ${
+        enabled
+          ? `bg-white shadow-sm border-primary/20`
+          : "bg-muted/10 border-muted/40"
+      }`}
+    >
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 flex items-center justify-center shrink-0">
             {icon}
           </div>
-          <Label className={`text-sm font-semibold cursor-pointer ${enabled ? 'text-foreground' : 'text-muted-foreground'}`}>
+          <Label
+            className={`text-sm font-semibold cursor-pointer ${
+              enabled ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
             {label}
           </Label>
         </div>
         <Switch checked={enabled} onCheckedChange={onToggle} />
       </div>
 
-      <div className={`grid transition-all duration-300 ease-in-out ${enabled ? 'grid-rows-[1fr] opacity-100 pb-4 px-4' : 'grid-rows-[0fr] opacity-0 p-0'}`}>
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${
+          enabled
+            ? "grid-rows-[1fr] opacity-100 pb-4 px-4"
+            : "grid-rows-[0fr] opacity-0 p-0"
+        }`}
+      >
         <div className="overflow-hidden">
           <div className="relative">
             <Input
@@ -773,52 +939,90 @@ function PlatformItem({ icon, label, color, enabled, onToggle, link, onLinkChang
   );
 }
 
-function BatchSelector({ selectedId, batches, isOpen, setIsOpen, onSelect, loading, placeholder }) {
-  const selectedBatch = batches.find(b => b.id === selectedId);
+function BatchSelector({
+  selectedId,
+  batches,
+  isOpen,
+  setIsOpen,
+  onSelect,
+  loading,
+  placeholder,
+}) {
+  const selectedBatch = batches.find((b) => b.id === selectedId);
   return (
     <div className="relative">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between rounded-lg border px-3 py-2.5 text-left transition-all bg-background hover:bg-muted/20 ${isOpen ? 'ring-2 ring-primary/10 border-primary' : 'border-muted/60'}`}
+        className={`w-full flex items-center justify-between rounded-lg border px-3 py-2.5 text-left transition-all bg-background hover:bg-muted/20 ${
+          isOpen ? "ring-2 ring-primary/10 border-primary" : "border-muted/60"
+        }`}
       >
         <div className="flex flex-col items-start overflow-hidden">
-          <span className={`text-sm truncate w-full ${selectedId ? "font-medium text-foreground" : "text-muted-foreground"}`}>
-            {selectedId ? selectedBatch?.batch_name || `Batch #${selectedId}` : placeholder}
+          <span
+            className={`text-sm truncate w-full ${
+              selectedId
+                ? "font-medium text-foreground"
+                : "text-muted-foreground"
+            }`}
+          >
+            {selectedId
+              ? selectedBatch?.batch_name || `Batch #${selectedId}`
+              : placeholder}
           </span>
           {selectedBatch && (
             <span className="text-[10px] text-muted-foreground">
-              {selectedBatch.issued_quantity || 0}/{selectedBatch.total_quantity || 0} claimed
+              {selectedBatch.issued_quantity || 0}/
+              {selectedBatch.total_quantity || 0} claimed
             </span>
           )}
         </div>
-        <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`h-4 w-4 text-muted-foreground transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
       {isOpen && (
         <div className="absolute z-50 mt-1 w-full rounded-lg border border-muted/30 bg-background/95 backdrop-blur-sm shadow-xl max-h-56 overflow-auto animate-in fade-in zoom-in-95 duration-200">
           {loading ? (
-            <div className="flex items-center justify-center py-4"><Loader2 className="h-4 w-4 animate-spin text-muted-foreground" /></div>
+            <div className="flex items-center justify-center py-4">
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+            </div>
           ) : batches.length === 0 ? (
-            <div className="py-3 px-4 text-xs text-muted-foreground text-center">No batches found</div>
+            <div className="py-3 px-4 text-xs text-muted-foreground text-center">
+              No batches found
+            </div>
           ) : (
             batches.map((batch) => (
               <button
                 key={batch.id}
                 type="button"
-                onClick={() => { onSelect(batch.id); setIsOpen(false); }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 text-left hover:bg-primary/5 transition-colors ${selectedId === batch.id ? 'bg-primary/10' : ''}`}
+                onClick={() => {
+                  onSelect(batch.id);
+                  setIsOpen(false);
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 text-left hover:bg-primary/5 transition-colors ${
+                  selectedId === batch.id ? "bg-primary/10" : ""
+                }`}
               >
                 <div className="overflow-hidden">
-                  <div className="font-medium text-sm truncate">{batch.batch_name}</div>
-                  <div className="text-[10px] text-muted-foreground truncate">{batch.description || "No description"}</div>
+                  <div className="font-medium text-sm truncate">
+                    {batch.batch_name}
+                  </div>
+                  <div className="text-[10px] text-muted-foreground truncate">
+                    {batch.description || "No description"}
+                  </div>
                 </div>
-                {selectedId === batch.id && <Check className="h-3.5 w-3.5 text-primary shrink-0 ml-2" />}
+                {selectedId === batch.id && (
+                  <Check className="h-3.5 w-3.5 text-primary shrink-0 ml-2" />
+                )}
               </button>
             ))
           )}
         </div>
       )}
     </div>
-  )
+  );
 }
