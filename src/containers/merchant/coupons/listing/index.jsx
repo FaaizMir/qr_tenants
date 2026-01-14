@@ -62,6 +62,23 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
 
   const paginatedData = filteredData;
 
+  const handleDeleteCoupon = async (batch) => {
+    try {
+      await axiosInstance.delete(`/coupon-batches/${batch.id}`);
+
+      toast.success("Coupon batch deleted");
+
+      setCoupons((prev) => prev.filter((c) => c.id !== batch.id));
+      setTotal((prev) => prev - 1);
+    } catch (err) {
+      const msg =
+        err?.response?.data?.message ||
+        err.message ||
+        "Failed to delete coupon batch";
+      toast.error(msg);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {!embedded && (
@@ -92,7 +109,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
           />
           <DataTable
             data={paginatedData}
-            columns={couponsColumns}
+            columns={couponsColumns(handleDeleteCoupon)}
             page={page}
             pageSize={pageSize}
             total={total}

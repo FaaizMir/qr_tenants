@@ -2,6 +2,7 @@
 
 // ... existing imports ...
 import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
     Activity,
     CreditCard,
@@ -46,7 +47,18 @@ const MERCHANT_DATA = {
 };
 
 export default function MerchantDetailContainer({ params }) {
-    const [activeTab, setActiveTab] = useState("overview");
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    // Get tab from URL or default
+    const activeTab = searchParams.get("tab") || "overview";
+
+    const handleTabChange = (value) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("tab", value);
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    };
 
     return (
         <div className="space-y-6">
@@ -83,7 +95,7 @@ export default function MerchantDetailContainer({ params }) {
                 </div>
             </div>
 
-            <Tabs defaultValue="overview" className="w-full" onValueChange={setActiveTab}>
+            <Tabs value={activeTab} className="w-full" onValueChange={handleTabChange}>
                 {/* ... Tabs List ... */}
                 <TabsList className="grid w-full grid-cols-4 lg:w-[600px]">
                     <TabsTrigger value="overview">Overview</TabsTrigger>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   Megaphone,
   TrendingUp,
@@ -35,6 +36,18 @@ import { activeAds } from "./ads-data";
 import { adsColumns } from "./ads-columns";
 
 export default function MerchantAdsContainer() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Get tab from URL or default
+  const activeTab = searchParams.get("tab") || "campaigns";
+
+  const handleTabChange = (value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", value);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [search, setSearch] = useState("");
@@ -100,7 +113,7 @@ export default function MerchantAdsContainer() {
         </p>
       </div>
 
-      <Tabs defaultValue="campaigns" className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid w-full max-w-md grid-cols-2">
           <TabsTrigger value="campaigns">Ad Campaigns</TabsTrigger>
           <TabsTrigger value="marketplace">Marketplace Profile</TabsTrigger>

@@ -286,7 +286,7 @@ export default function LandingPage() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-primary transition-all group-focus-within:scale-110" />
                 <Input
                   placeholder="Search businesses..."
-                  className="pl-12 h-12 text-lg bg-white border-1 focus-visible:ring-0 rounded-xl placeholder:text-slate-400 font-medium"
+                  className="pl-12 h-12 text-lg bg-white border focus-visible:ring-0 rounded-xl placeholder:text-slate-400 font-medium"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />

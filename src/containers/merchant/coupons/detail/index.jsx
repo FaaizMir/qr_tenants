@@ -10,6 +10,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useParams, useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import {
   Select,
@@ -28,6 +29,7 @@ import { serialCodesColumns } from "./coupons-detail-columns";
 export default function MerchantCouponDetailContainer() {
   const id = useParams()?.id;
   const router = useRouter();
+  const locale = useLocale();
 
   const [batch, setBatch] = useState(null);
   const [coupons, setCoupons] = useState([]);
@@ -37,15 +39,6 @@ export default function MerchantCouponDetailContainer() {
   const [total, setTotal] = useState(0);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-
-  const copyToClipboard = async (text, label = "Text") => {
-    try {
-      await navigator.clipboard.writeText(text || "");
-      toast.success(`${label} copied to clipboard`);
-    } catch (e) {
-      toast.error(`Failed to copy ${label}`);
-    }
-  };
 
   const handleExportPdf = async () => {
     if (!id) {
@@ -148,11 +141,13 @@ export default function MerchantCouponDetailContainer() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/en/merchant/coupons">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.push(`/${locale}/merchant/dashboard?tab=coupons`)}
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Batch Details</h1>
             <p className="text-muted-foreground flex items-center gap-2 mt-1">
@@ -199,8 +194,8 @@ export default function MerchantCouponDetailContainer() {
               <p className="text-xs text-muted-foreground">
                 {batch.total_quantity > 0
                   ? Math.round(
-                      (batch.issued_quantity / batch.total_quantity) * 100
-                    )
+                    (batch.issued_quantity / batch.total_quantity) * 100
+                  )
                   : 0}
                 % Utilized
               </p>

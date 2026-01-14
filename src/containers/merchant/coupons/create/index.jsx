@@ -19,9 +19,11 @@ import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
 import { TemplateSelector } from "@/components/templates/TemplateSelector";
+import { useLocale } from "next-intl";
 
 export default function MerchantCreateCouponContainer() {
   const router = useRouter();
+  const locale = useLocale();
   const { data: session } = useSession();
   const user = session?.user;
   const subscriptionType = (user?.subscriptionType || "temporary").toString();
@@ -100,7 +102,7 @@ export default function MerchantCreateCouponContainer() {
       resetForm();
 
       // redirect to coupon list
-      router.push("/merchant/coupons");
+      router.push(`/${locale}/merchant/dashboard?tab=coupons`);
     } catch (err) {
       console.error(err);
       const msg =
@@ -116,7 +118,7 @@ export default function MerchantCreateCouponContainer() {
   return (
     <div className="space-y-8 max-w-7xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
       <div className="flex items-center gap-4">
-        <Link href="/en/merchant/coupons">
+        <Link href={`/${locale}/merchant/dashboard?tab=coupons`}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>

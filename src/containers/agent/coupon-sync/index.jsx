@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { RefreshCw, Monitor, Megaphone, CheckCircle2, AlertTriangle, ArrowUpRight, BarChart } from "lucide-react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -27,6 +28,18 @@ import { syncHistory, adRequests } from "./sync-data";
 import { syncColumns, adColumns } from "./sync-columns";
 
 export default function AgentCouponSyncContainer() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Get tab from URL or default
+  const activeTab = searchParams.get("tab") || "sync";
+
+  const handleTabChange = (value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", value);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -58,7 +71,7 @@ export default function AgentCouponSyncContainer() {
         </div>
       </div>
 
-      <Tabs defaultValue="sync" className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid w-full grid-cols-2 lg:w-[400px]">
           <TabsTrigger value="sync">Coupon Sync</TabsTrigger>
           <TabsTrigger value="ads">Ads & Promotions</TabsTrigger>
