@@ -120,6 +120,8 @@ export default function LoginPage({ params }) {
           router.push("/agent/dashboard"); // Redirect admin to agent dashboard
         } else if (role === "merchant") {
           router.push("/merchant/dashboard");
+        } else if (role === "super_admin") {
+          router.push("/master-admin/dashboard");
         } else {
           router.push("/login"); // Fallback
         }

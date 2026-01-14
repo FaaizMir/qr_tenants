@@ -97,7 +97,7 @@ export function MerchantForm({ initialData = null, isEdit = false, merchantId = 
 
     try {
       const payload = {
-        admin_id: session?.user?.id || 1,
+        admin_id: session?.user?.adminId,
         name: formData.name,
         email: formData.email,
         role: "merchant",
