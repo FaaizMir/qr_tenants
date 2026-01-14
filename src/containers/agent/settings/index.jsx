@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { BrandingForm } from "./branding-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +9,18 @@ import { Separator } from "@/components/ui/separator";
 
 export default function AgentSettingsContainer() {
     const t = useTranslations("agent.settings");
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    // Get tab from URL or default
+    const activeTab = searchParams.get("tab") || "branding";
+
+    const handleTabChange = (value) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("tab", value);
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    };
 
     return (
         <div className="space-y-6 p-1">
@@ -20,7 +33,7 @@ export default function AgentSettingsContainer() {
                 </p>
             </div>
 
-            <Tabs defaultValue="branding" className="w-full">
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
                     <TabsTrigger value="branding">Branding</TabsTrigger>
                     <TabsTrigger value="general">Details</TabsTrigger>
