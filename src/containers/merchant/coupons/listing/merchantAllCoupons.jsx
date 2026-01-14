@@ -11,6 +11,7 @@ import { Copy, Plus } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import useDebounce from "@/hooks/useDebounceRef";
 
 const columns = [
   {
@@ -87,6 +88,7 @@ export default function MerchantAllCoupons() {
   const [coupons, setCoupons] = useState([]);
   const [total, setTotal] = useState(0);
   const locale = useLocale();
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     const fetchCoupons = async () => {
@@ -96,7 +98,7 @@ export default function MerchantAllCoupons() {
           params: {
             page: page + 1,
             pageSize,
-            search: search || undefined,
+            search: debouncedSearch || undefined,
           },
         });
         const data = resp?.data?.data || resp?.data || resp || {};
@@ -115,7 +117,11 @@ export default function MerchantAllCoupons() {
     };
 
     fetchCoupons();
-  }, [page, pageSize, search]);
+  }, [page, pageSize, debouncedSearch]);
+
+  const filteredCoupons = coupons.filter((c) =>
+    c.coupon_code.toLowerCase().includes(debouncedSearch.toLowerCase())
+  );
 
   return (
     <div className="space-y-6">
@@ -141,7 +147,7 @@ export default function MerchantAllCoupons() {
             onSearchChange={setSearch}
           />
           <DataTable
-            data={coupons}
+            data={filteredCoupons}
             columns={columns}
             page={page}
             pageSize={pageSize}

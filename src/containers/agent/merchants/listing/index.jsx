@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { getMerchants } from "@/lib/services/helper";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function AgentMerchantsListingContainer() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,13 +23,18 @@ export default function AgentMerchantsListingContainer() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+  const debouncedSearch = useDebounce(search, 500);
 
   const fetchMerchants = useCallback(async () => {
     setLoading(true);
     try {
       // API expects 1-based page
-      const resp = await getMerchants({ page: page + 1, pageSize, search });
+      const resp = await getMerchants({
+        page: page + 1,
+        pageSize,
+        search: debouncedSearch,
+      });
       // resp expected shape: { data: [...], meta: { total, page, pageSize } }
       const items = resp?.data || resp || [];
 
@@ -38,10 +44,15 @@ export default function AgentMerchantsListingContainer() {
         name: m.business_name || m.user?.name || "-",
         email: m.user?.email || "",
         businessType: m.business_type || "-",
-        location: m.city && m.country ? `${m.city}, ${m.country}` : (m.city || m.country || "-"),
-        status: (m.user?.is_active ?? m.is_active) ? "active" : "inactive",
+        location:
+          m.city && m.country
+            ? `${m.city}, ${m.country}`
+            : m.city || m.country || "-",
+        status: m.user?.is_active ?? m.is_active ? "active" : "inactive",
         subscription: m.merchant_type || m.subscription || "-",
-        joinDate: m.created_at ? new Date(m.created_at).toLocaleDateString() : "-",
+        joinDate: m.created_at
+          ? new Date(m.created_at).toLocaleDateString()
+          : "-",
         raw: m,
       }));
 
@@ -55,7 +66,7 @@ export default function AgentMerchantsListingContainer() {
     } finally {
       setLoading(false);
     }
-  }, [page, pageSize, search]);
+  }, [page, pageSize, debouncedSearch]);
 
   useEffect(() => {
     fetchMerchants();

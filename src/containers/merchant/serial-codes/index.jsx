@@ -12,19 +12,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useDebounce from "@/hooks/useDebounceRef";
 
 import { serialCodes } from "./serial-codes-data";
 import { serialCodesColumns } from "./serial-codes-columns";
 
 export default function MerchantSerialCodesContainer() {
   const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm, 500);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
 
   const filteredCodes = serialCodes.filter(
     (item) =>
-      item.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.customer.toLowerCase().includes(searchTerm.toLowerCase())
+      item.code.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      item.customer.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const paginatedData = filteredCodes.slice(

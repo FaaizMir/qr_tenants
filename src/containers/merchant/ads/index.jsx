@@ -30,6 +30,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
+import useDebounce from "@/hooks/useDebounceRef";
 import { toast } from "sonner";
 
 import { activeAds } from "./ads-data";
@@ -51,6 +52,7 @@ export default function MerchantAdsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [selectedFormat, setSelectedFormat] = useState("homepage");
 
   // Marketplace Profile State
@@ -63,7 +65,7 @@ export default function MerchantAdsContainer() {
   });
 
   const filteredAds = activeAds.filter((item) =>
-    item.campaign.toLowerCase().includes(search.toLowerCase())
+    item.campaign.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const paginatedData = filteredAds.slice(

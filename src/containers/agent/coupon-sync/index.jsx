@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Slider } from "@/components/ui/slider";
+import useDebounce from "@/hooks/useDebounceRef";
 
 import { syncHistory, adRequests } from "./sync-data";
 import { syncColumns, adColumns } from "./sync-columns";
@@ -43,16 +44,17 @@ export default function AgentCouponSyncContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [requestOpen, setRequestOpen] = useState(false);
 
   // Tab 1: Sync Data
   const filteredHistory = syncHistory.filter((item) =>
-    item.merchant.toLowerCase().includes(search.toLowerCase())
+    item.merchant.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   // Tab 2: Ads Data
   const filteredAds = adRequests.filter((item) =>
-    item.merchant.toLowerCase().includes(search.toLowerCase())
+    item.merchant.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const handleSyncRequest = () => {

@@ -11,6 +11,7 @@ import { getWalletTabs } from "./wallet-tabs";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function AgentWalletContainer() {
   const { data: session } = useSession();
@@ -22,6 +23,7 @@ export default function AgentWalletContainer() {
   const [txPage, setTxPage] = useState(0);
   const [txSize, setTxSize] = useState(10);
   const [txSearch, setTxSearch] = useState("");
+  const debouncedTxSearch = useDebounce(txSearch, 500);
 
   /** Wallet stats */
   const [walletStats, setWalletStats] = useState({
@@ -105,11 +107,11 @@ export default function AgentWalletContainer() {
    * Search (client-side)
    * ---------------------------------- */
   const filteredTx = useMemo(() => {
-    if (!txSearch) return transactions;
+    if (!debouncedTxSearch) return transactions;
     return transactions.filter((t) =>
-      t.description?.toLowerCase().includes(txSearch.toLowerCase())
+      t.description?.toLowerCase().includes(debouncedTxSearch.toLowerCase())
     );
-  }, [transactions, txSearch]);
+  }, [transactions, debouncedTxSearch]);
 
   /* ----------------------------------
    * Tables
@@ -147,7 +149,7 @@ export default function AgentWalletContainer() {
       <CardContent>
         <TableToolbar
           placeholder={tAgentWallet("searchdeductions")}
-          onSearchChange={() => {}}
+          onSearchChange={() => { }}
         />
         <DataTable data={autoDeductions} columns={DeductionColumns} />
       </CardContent>

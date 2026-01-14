@@ -12,15 +12,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // Update imports to point to local data if needed, or define locally for now
 import { statements } from "./statements-data";
 import { statementsColumns } from "./statements-columns";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function AgentStatementsContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [year, setYear] = useState("2024");
 
   const filteredStatements = statements.filter((item) =>
-    item.month.toLowerCase().includes(search.toLowerCase())
+    item.month.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const paginatedData = filteredStatements.slice(

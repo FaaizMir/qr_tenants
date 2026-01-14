@@ -27,6 +27,7 @@ import axiosInstance from "@/lib/axios";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { PrizesColumns } from "./prizes-columns";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantLuckyDrawContainer() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function MerchantLuckyDrawContainer() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [prizeToDelete, setPrizeToDelete] = useState(null);
 
@@ -88,9 +90,9 @@ export default function MerchantLuckyDrawContainer() {
   // Filter prizes
   const filteredPrizes = prizes.filter(
     (prize) =>
-      prize.prize_name?.toLowerCase().includes(search.toLowerCase()) ||
-      prize.prize_description?.toLowerCase().includes(search.toLowerCase()) ||
-      prize.prize_type?.toLowerCase().includes(search.toLowerCase())
+      prize.prize_name?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      prize.prize_description?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      prize.prize_type?.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   // Pagination

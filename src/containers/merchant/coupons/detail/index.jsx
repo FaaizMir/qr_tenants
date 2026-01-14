@@ -25,12 +25,12 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 import { serialCodesColumns } from "./coupons-detail-columns";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantCouponDetailContainer() {
   const id = useParams()?.id;
   const router = useRouter();
   const locale = useLocale();
-
   const [batch, setBatch] = useState(null);
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,7 @@ export default function MerchantCouponDetailContainer() {
   const [total, setTotal] = useState(0);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const debouncedSearch = useDebounce(search, 500);
 
   const handleExportPdf = async () => {
     if (!id) {
@@ -125,9 +126,13 @@ export default function MerchantCouponDetailContainer() {
 
   const filteredCoupons = coupons.filter((c) => {
     const matchesSearch =
-      !search ||
-      (c.coupon_code || "").toLowerCase().includes(search.toLowerCase()) ||
-      (c.customer?.name || "").toLowerCase().includes(search.toLowerCase());
+      !debouncedSearch ||
+      (c.coupon_code || "")
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
+      (c.customer?.name || "")
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase());
 
     const matchesStatus =
       statusFilter === "all" ||
@@ -144,7 +149,9 @@ export default function MerchantCouponDetailContainer() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => router.push(`/${locale}/merchant/dashboard?tab=coupons`)}
+            onClick={() =>
+              router.push(`/${locale}/merchant/dashboard?tab=coupons`)
+            }
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
@@ -194,8 +201,8 @@ export default function MerchantCouponDetailContainer() {
               <p className="text-xs text-muted-foreground">
                 {batch.total_quantity > 0
                   ? Math.round(
-                    (batch.issued_quantity / batch.total_quantity) * 100
-                  )
+                      (batch.issued_quantity / batch.total_quantity) * 100
+                    )
                   : 0}
                 % Utilized
               </p>

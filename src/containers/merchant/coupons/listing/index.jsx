@@ -11,6 +11,7 @@ import Link from "next/link";
 import axiosInstance from "@/lib/axios";
 import { couponsColumns } from "./coupons-listing-columns";
 import { toast } from "sonner";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantCouponsListingContainer({ embedded = false }) {
   const [page, setPage] = useState(0);
@@ -19,7 +20,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
   const [loading, setLoading] = useState(false);
   const [coupons, setCoupons] = useState([]);
   const [total, setTotal] = useState(0);
-
+  const debouncedSearch = useDebounce(search, 500);
   useEffect(() => {
     const fetchCoupons = async () => {
       setLoading(true);
@@ -52,8 +53,8 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
   }, [page, pageSize]);
 
   const filteredData = coupons.filter((item) => {
-    if (!search) return true;
-    const q = search.toLowerCase();
+    if (!debouncedSearch) return true;
+    const q = debouncedSearch.toLowerCase();
     return (
       (item.batch_name || "").toLowerCase().includes(q) ||
       (item.batch_type || "").toLowerCase().includes(q)

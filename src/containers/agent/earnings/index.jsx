@@ -13,6 +13,7 @@ import TableToolbar from "@/components/common/table-toolbar";
 import { Download, PieChart, TrendingUp, DollarSign, Calendar, Lock, Loader2, Activity, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function AgentEarningsContainer() {
   const { data: session } = useSession();
@@ -22,6 +23,7 @@ export default function AgentEarningsContainer() {
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(0);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [loading, setLoading] = useState(true);
   const [earnings, setEarnings] = useState([]);
   const [stats, setStats] = useState({
@@ -123,8 +125,8 @@ export default function AgentEarningsContainer() {
   const EarningColumns = earningsColumns(tAgentEarnings);
 
   const filteredEarnings = earnings.filter((item) =>
-    item.merchant.toLowerCase().includes(search.toLowerCase()) ||
-    item.source?.toLowerCase().includes(search.toLowerCase())
+    item.merchant.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+    item.source?.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   return (

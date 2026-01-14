@@ -25,6 +25,7 @@ import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import WalletWarnings from "./wallet-warnings";
 import { Badge } from "@/components/ui/badge";
+import useDebounce from "@/hooks/useDebounceRef";
 
 const format = (num) => (typeof num === "number" ? num.toLocaleString() : "--");
 
@@ -49,24 +50,26 @@ export default function AnnualWalletView({
 
   // Batch-wise usage table state
   const [batchSearch, setBatchSearch] = useState("");
+  const debouncedBatchSearch = useDebounce(batchSearch, 500);
   const [batchPage, setBatchPage] = useState(0);
   const [batchPageSize, setBatchPageSize] = useState(10);
 
   // Transactions table state
   const [txSearch, setTxSearch] = useState("");
+  const debouncedTxSearch = useDebounce(txSearch, 500);
   const [txPage, setTxPage] = useState(0);
   const [txPageSize, setTxPageSize] = useState(10);
 
   const filteredBatchUsage = useMemo(() => {
-    if (!batchSearch) return batchUsage || [];
-    const term = batchSearch.toLowerCase();
+    if (!debouncedBatchSearch) return batchUsage || [];
+    const term = debouncedBatchSearch.toLowerCase();
     return (batchUsage || []).filter((b) => {
       return (
         b?.name?.toLowerCase?.().includes(term) ||
         b?.tier?.toLowerCase?.().includes(term)
       );
     });
-  }, [batchUsage, batchSearch]);
+  }, [batchUsage, debouncedBatchSearch]);
 
   const pagedBatchUsage = useMemo(() => {
     const start = batchPage * batchPageSize;
@@ -119,8 +122,8 @@ export default function AnnualWalletView({
   );
 
   const filteredTransactions = useMemo(() => {
-    if (!txSearch) return transactions || [];
-    const term = txSearch.toLowerCase();
+    if (!debouncedTxSearch) return transactions || [];
+    const term = debouncedTxSearch.toLowerCase();
     return (transactions || []).filter((t) => {
       return (
         t?.description?.toLowerCase?.().includes(term) ||
@@ -128,7 +131,7 @@ export default function AnnualWalletView({
         t?.type?.toLowerCase?.().includes(term)
       );
     });
-  }, [transactions, txSearch]);
+  }, [transactions, debouncedTxSearch]);
 
   const pagedTransactions = useMemo(() => {
     const start = txPage * txPageSize;

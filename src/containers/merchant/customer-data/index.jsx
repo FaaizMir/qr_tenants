@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
-
+import useDebounce from "@/hooks/useDebounceRef";
 import { customersColumns } from "./customers-columns";
 
 export default function MerchantCustomerDataContainer() {
@@ -31,6 +31,7 @@ export default function MerchantCustomerDataContainer() {
   const [page, setPage] = useState(0); // DataTable is 0-based
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
   // -----------------------------
   // Fetch Customers (API)
@@ -46,7 +47,7 @@ export default function MerchantCustomerDataContainer() {
           params: {
             page: page + 1, // backend is 1-based
             pageSize,
-            search,
+            search: debouncedSearch,
           },
         });
 
@@ -60,7 +61,7 @@ export default function MerchantCustomerDataContainer() {
     };
 
     fetchCustomers();
-  }, [page, pageSize, search, subscription]);
+  }, [page, pageSize, debouncedSearch, subscription]);
 
   if (loadingSession) return null;
 

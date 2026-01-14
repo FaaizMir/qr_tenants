@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import TableToolbar from "@/components/common/table-toolbar";
 import { DataTable } from "@/components/common/data-table";
 import { PackagesColumns } from "./packages-columns";
+import useDebounce from "@/hooks/useDebounceRef";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
@@ -36,6 +37,7 @@ export default function PackagesTable() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [packageToDelete, setPackageToDelete] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { data: session } = useSession();
@@ -72,8 +74,8 @@ export default function PackagesTable() {
   // Filter packages by name or credit type
   const filteredPackages = packages.filter(
     (pkg) =>
-      pkg.name.toLowerCase().includes(search.toLowerCase()) ||
-      pkg.credit_type.toLowerCase().includes(search.toLowerCase())
+      pkg.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      pkg.credit_type.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const handleEdit = (pkg) => {

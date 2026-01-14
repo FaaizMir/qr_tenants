@@ -8,15 +8,7 @@ function getNestedValue(obj, key) {
 }
 import { Controller } from "react-hook-form";
 import axiosInstance from "@/lib/axios";
-
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(handler);
-  }, [value, delay]);
-  return debouncedValue;
-}
+import useDebounce from "@/hooks/useDebounceRef";
 
 export default function UniversalComboBoxField({
   label = "",
@@ -197,7 +189,7 @@ function UniversalComboBoxInput({
             ]);
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, [value, open, options, apiEndpoint, valueKey, labelKey, dataToStore]);
 
@@ -283,9 +275,8 @@ function UniversalComboBoxInput({
     <div ref={containerRef} className="relative w-full">
       <button
         type="button"
-        className={`w-full border rounded-sm px-3 py-[5px] text-left bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between ${
-          disabled ? "bg-gray-100 cursor-not-allowed" : ""
-        }`}
+        className={`w-full border rounded-sm px-3 py-[5px] text-left bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between ${disabled ? "bg-gray-100 cursor-not-allowed" : ""
+          }`}
         onClick={() => !disabled && setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -335,32 +326,30 @@ function UniversalComboBoxInput({
                   key={option.value}
                   role="option"
                   aria-selected={value === option.value}
-                  className={`cursor-pointer px-3 py-2 flex items-center justify-between hover:bg-blue-100 ${
-                    idx === highlightedIdx ? "bg-blue-100" : ""
-                  } ${
-                    (multipleValues ? value && value[valueKey] : value) ===
-                    option.value
+                  className={`cursor-pointer px-3 py-2 flex items-center justify-between hover:bg-blue-100 ${idx === highlightedIdx ? "bg-blue-100" : ""
+                    } ${(multipleValues ? value && value[valueKey] : value) ===
+                      option.value
                       ? "font-semibold text-blue-700"
                       : ""
-                  }`}
+                    }`}
                   onMouseDown={() => selectOption(option)}
                   onMouseEnter={() => setHighlightedIdx(idx)}>
                   <span>{option.label}</span>
                   {(multipleValues ? value && value[valueKey] : value) ===
                     option.value && (
-                    <svg
-                      className="w-4 h-4 text-blue-500 ml-2"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
+                      <svg
+                        className="w-4 h-4 text-blue-500 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    )}
                 </li>
               ))
             )}
