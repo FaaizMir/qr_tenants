@@ -1,15 +1,15 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import PackageForm from "@/containers/agent/packages/packages-form";
+import PackageForm from "@/containers/master-admin/packages/packages-form";
 
 export default function AgentSupportPage() {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Packages", url: "/agent/packages/edit" },
+    { name: "Packages", url: "/master-admin/packages" },
+    { name: "Create Package", url: "/master-admin/packages/create" },
   ];
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <PackageForm isEdit={true} />
+      <PackageForm isEdit={false} />
     </>
   );
 }

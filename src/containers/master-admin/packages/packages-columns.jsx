@@ -43,7 +43,9 @@ const ActionCell = ({ row, onEdit, onDelete }) => {
         <DropdownMenuItem
           className="cursor-pointer"
           onClick={() =>
-            onEdit ? onEdit(pkg) : router.push(`/agent/packages/edit/${pkg.id}`)
+            onEdit
+              ? onEdit(pkg)
+              : router.push(`/master-admin/packages/edit/${pkg.id}`)
           }
         >
           <Pencil className="mr-2 h-4 w-4 text-blue-500" />
@@ -123,9 +125,10 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
           className={cn(
             "capitalize px-2 py-0.5 text-[10px] font-medium border-slate-200",
             type === "whatsapp message" &&
-            "bg-green-50 text-green-700 border-green-200",
+              "bg-green-50 text-green-700 border-green-200",
             type === "paid ads" && "bg-blue-50 text-blue-700 border-blue-200",
-            type === "coupon" && "bg-purple-50 text-purple-700 border-purple-200"
+            type === "coupon" &&
+              "bg-purple-50 text-purple-700 border-purple-200"
           )}
         >
           {row.original.credit_type}

@@ -1,11 +1,10 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import PackageForm from "@/containers/agent/packages/packages-form";
+import PackageForm from "@/containers/master-admin/packages/packages-form";
 
 export default function EditPackagePage({ params }) {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Packages", url: "/agent/packages" },
-    { name: "Edit Package", url: `/agent/packages/edit/${params.id}` },
+    { name: "Packages", url: "/master-admin/packages" },
+    { name: "Edit Package", url: `/master-admin/packages/edit/${params.id}` },
   ];
 
   return (

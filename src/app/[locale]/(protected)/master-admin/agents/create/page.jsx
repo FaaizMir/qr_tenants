@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 
 export default async function MasterAdminAgentsPage() {
   const breadcrumbData = [
-    { name: "Master Admin", url: "/master-admin/dashboard" },
     { name: "Agents", url: "/master-admin/agents" },
     { name: "Create Agent", url: "/master-admin/agents/create" },
   ];

@@ -79,7 +79,7 @@ export default function PackagesTable() {
   );
 
   const handleEdit = (pkg) => {
-    router.push(`/agent/packages/edit/${pkg.id}`);
+    router.push(`/master-admin/packages/edit/${pkg.id}`);
   };
 
   const handleDelete = (pkg) => {
@@ -133,74 +133,11 @@ export default function PackagesTable() {
             </p>
           </div>
         </div>
-        <Button
-          onClick={() => router.push("/agent/packages/create")}
-          size="lg"
-          className="shadow-xl shadow-primary/20 font-bold px-8 h-12 rounded-xl"
-        >
-          <Plus className="h-5 w-5 mr-2 stroke-[3px]" />
-          Create New Package
-        </Button>
-      </div>
-
-      {/* Quick Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-        <Card className="border-none bg-slate-50 shadow-sm relative overflow-hidden group">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between relative z-10">
-              <div>
-                <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1">
-                  Total Packages
-                </p>
-                <h3 className="text-4xl font-bold text-slate-900">
-                  {totalPackages}
-                </h3>
-              </div>
-              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:scale-110 transition-transform">
-                <LayoutGrid className="h-6 w-6" />
-              </div>
-            </div>
-            <div className="absolute right-0 bottom-0 opacity-5 translate-x-4 translate-y-4">
-              <Package className="h-32 w-32" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-none bg-emerald-50 shadow-sm relative overflow-hidden group">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between relative z-10">
-              <div>
-                <p className="text-sm font-bold text-emerald-600 uppercase tracking-widest mb-1">
-                  Active Packages
-                </p>
-                <h3 className="text-4xl font-bold text-emerald-700">
-                  {activePackagesCount}
-                </h3>
-              </div>
-              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
-                <ShieldCheck className="h-6 w-6" />
-              </div>
-            </div>
-            <div className="absolute right-0 bottom-0 opacity-5 translate-x-4 translate-y-4 text-emerald-900">
-              <Activity className="h-32 w-32" />
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Main Table Card */}
       <div className="px-4 pb-10">
         <Card className="border-muted/60 shadow-2xl rounded-3xl overflow-hidden bg-white">
-          <CardHeader className="bg-slate-50/50 flex flex-row items-center justify-between py-6 px-8 border-b border-slate-100">
-            <div>
-              <CardTitle className="text-xl font-bold flex items-center gap-2">
-                Inventory
-                <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">
-                  Real-time
-                </span>
-              </CardTitle>
-            </div>
-          </CardHeader>
           <CardContent className="p-8">
             <div className="mb-6">
               <TableToolbar
@@ -208,6 +145,16 @@ export default function PackagesTable() {
                 search={search}
                 onSearchChange={setSearch}
                 total={filteredPackages.length}
+                rightSlot={
+                  <Button
+                    onClick={() => router.push("/master-admin/packages/create")}
+                    size="lg"
+                    className="shadow-xl shadow-primary/20 font-bold px-8 h-12 rounded-xl"
+                  >
+                    <Plus className="h-5 w-5 mr-2 stroke-[3px]" />
+                    Create New Package
+                  </Button>
+                }
               />
             </div>
             <DataTable
