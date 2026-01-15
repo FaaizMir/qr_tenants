@@ -1,5 +1,5 @@
-import AgentLandingPage from "@/containers/landing-pages/agent";
-import MasterAdminLandingPage from "@/containers/landing-pages/master-admin";
+import AgentLandingPage from "@/app/[locale]/homepage/agent";
+import MasterAdminLandingPage from "@/app/[locale]/homepage/master-admin";
 export default function page() {
   return (
     <>
