@@ -18,10 +18,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { LoadingSpinner } from "@/helper/Loader";
 import StripeCheckout from "@/components/stripe/stripeCheckout";
 import { toast } from "sonner";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  CreditCard,
+  Sparkles,
+  Wallet,
+  Zap,
+} from "lucide-react";
+import { LoadingSpinner } from "@/helper/Loader";
+import { cn } from "@/lib/utils";
 
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
@@ -153,11 +161,14 @@ export default function MerchantPurchase() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Purchase Credits</h1>
-        <p className="text-muted-foreground">
-          Curated packages for your {merchantType} merchant plan.
+    <div className="space-y-10 animate-in fade-in duration-500">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-4xl font-extrabold tracking-tight bg-linear-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
+          Power Up Your Store
+        </h1>
+        <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          Choose a credit package for WhatsApp messages, coupon creation, and
+          paid ads.
         </p>
       </div>
 
@@ -166,177 +177,290 @@ export default function MerchantPurchase() {
           No credit packages found for your merchant type.
         </div>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {packages.map((pkg, idx) => {
-            const isPopular = idx === 0;
+            const isPopular = idx === 1; // Middle one usually
             const price = Number(pkg.price || 0);
             const currency = pkg.currency || "USD";
 
-            // Design configuration cycling based on index
             const styles = [
               {
-                gradient: "from-blue-600 to-indigo-600",
-                icon: "🚀",
-                shadow: "shadow-indigo-500/20",
+                color: "indigo",
+                icon: <Zap className="h-5 w-5" />,
+                bg: "bg-indigo-50",
+                border: "border-indigo-100",
+                text: "text-indigo-600",
+                gradient: "from-indigo-600 to-blue-600",
               },
               {
-                gradient: "from-emerald-500 to-teal-500",
-                icon: "💎",
-                shadow: "shadow-emerald-500/20",
+                color: "emerald",
+                icon: <Sparkles className="h-5 w-5" />,
+                bg: "bg-emerald-50",
+                border: "border-emerald-100",
+                text: "text-emerald-600",
+                gradient: "from-emerald-600 to-teal-600",
               },
               {
-                gradient: "from-orange-500 to-amber-500",
-                icon: "⚡",
-                shadow: "shadow-orange-500/20",
-              },
-              {
-                gradient: "from-rose-500 to-pink-600",
-                icon: "🛡️",
-                shadow: "shadow-rose-500/20",
-              },
-              {
+                color: "violet",
+                icon: <Wallet className="h-5 w-5" />,
+                bg: "bg-violet-50",
+                border: "border-violet-100",
+                text: "text-violet-600",
                 gradient: "from-violet-600 to-purple-600",
-                icon: "🔮",
-                shadow: "shadow-purple-500/20",
+              },
+              {
+                color: "orange",
+                icon: <CreditCard className="h-5 w-5" />,
+                bg: "bg-orange-50",
+                border: "border-orange-100",
+                text: "text-orange-600",
+                gradient: "from-orange-600 to-amber-600",
               },
             ];
             const style = styles[idx % styles.length];
 
             return (
-              <div
+              <Card
                 key={pkg.id}
-                className="group relative flex flex-col bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className={cn(
+                  "relative flex flex-col h-full border-muted/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group",
+                  isPopular &&
+                  "border-primary ring-1 ring-primary/20 bg-primary/5 shadow-xl shadow-primary/5"
+                )}
               >
-                {/* Image/Gradient Area */}
-                <div
-                  className={`h-32 relative bg-linear-to-br ${style.gradient} p-4 flex flex-col justify-between`}
-                >
-                  <div className="flex justify-between items-start w-full">
-                    <div className="flex gap-2">
-                      <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                        {pkg.credit_type || "Credits"}
-                      </span>
-                      {isPopular && (
-                        <span className="bg-amber-400 text-amber-900 border border-amber-500/20 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                          Recommended
-                        </span>
-                      )}
-                    </div>
-                    <div className="h-8 w-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-lg shadow-inner text-white transition-transform group-hover:scale-110">
+                {isPopular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                    <Badge className="bg-primary hover:bg-primary text-white border-0 py-1.5 px-4 rounded-full shadow-lg text-[10px] font-bold uppercase tracking-wider">
+                      Best Value
+                    </Badge>
+                  </div>
+                )}
+
+                <CardHeader className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className={cn("p-2.5 rounded-xl", style.bg, style.text)}
+                    >
                       {style.icon}
                     </div>
+                    <Badge
+                      variant="secondary"
+                      className="bg-muted capitalize text-[10px] px-2 py-0.5"
+                    >
+                      {pkg.credit_type || "Standard"}
+                    </Badge>
                   </div>
-                  <div className="relative z-10">
-                    <p className="text-white/80 text-[10px] font-medium uppercase tracking-wider mb-0.5">
-                      {pkg.credits} Total Credits
-                    </p>
-                    <h3 className="text-white text-xl font-bold leading-tight truncate">
-                      {pkg.name}
-                    </h3>
-                  </div>
+                  <CardTitle className="text-xl font-bold text-foreground">
+                    {pkg.name}
+                  </CardTitle>
+                  <CardDescription className="text-xs line-clamp-1">
+                    {pkg.description || "Enhanced features and capacity"}
+                  </CardDescription>
+                </CardHeader>
 
-                  {/* Decorative shine */}
-                  <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all duration-500"></div>
-                </div>
-
-                {/* Content */}
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="mb-4">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-slate-900">
+                <CardContent className="p-6 pt-0 flex-1 flex flex-col">
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-extrabold tracking-tight">
                         {currency} {price.toLocaleString()}
                       </span>
-                      <span className="text-xs font-medium text-slate-500">
-                        {currency} {pkg.price_per_credit || "0.00"} / credit
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-1.5 font-medium uppercase tracking-widest">
+                      {currency}{" "}
+                      {pkg.price_per_credit || (price / pkg.credits).toFixed(2)}{" "}
+                      per credit
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                      </div>
+                      <span className="font-medium text-foreground">
+                        {pkg.credits} Base Credits
                       </span>
                     </div>
-                  </div>
-
-                  {/* Details Grid */}
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="bg-slate-50 p-2 rounded-lg border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                        Credits
-                      </p>
-                      <p className="text-base font-bold text-slate-700 leading-none">
-                        {pkg.credits}
-                      </p>
-                    </div>
-                    <div className="bg-slate-50 p-2 rounded-lg border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                        Bonus
-                      </p>
-                      <p className="text-base font-bold text-slate-700 leading-none">
-                        {pkg.bonus_credits || 0}
-                      </p>
+                    {pkg.bonus_credits > 0 && (
+                      <div className="flex items-center gap-3 text-sm">
+                        <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                        </div>
+                        <span className="font-semibold text-emerald-600">
+                          +{pkg.bonus_credits} Bonus Credits
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <div className="h-5 w-5 rounded-full bg-muted flex items-center justify-center">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-muted-foreground" />
+                      </div>
+                      <span>Full API Access</span>
                     </div>
                   </div>
-
-                  <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-1 line-clamp-2">
-                    {pkg.description ||
-                      "Unlock more power for your campaigns with this credit package."}
-                  </p>
 
                   <Button
-                    className={`w-full h-10 rounded-lg text-sm font-semibold shadow-none transition-all duration-300 group-hover:shadow-lg ${purchasingId === pkg.id ? "opacity-75 cursor-wait" : ""
-                      }`}
+                    variant={isPopular ? "default" : "outline"}
+                    className={cn(
+                      "w-full h-11 rounded-xl font-semibold transition-all group-hover:scale-[1.02]",
+                      isPopular
+                        ? "shadow-lg shadow-primary/20"
+                        : "hover:bg-muted/50"
+                    )}
                     onClick={() => handleStartCheckout(pkg)}
-                    disabled={Boolean(purchasingId) && purchasingId === pkg.id}
                   >
-                    {purchasingId === pkg.id
-                      ? "Processing..."
-                      : "Purchase Package"}
-                    <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                    Get Started
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             );
           })}
         </div>
       )}
 
       <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Checkout with Stripe</DialogTitle>
-          </DialogHeader>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden border-none shadow-2xl rounded-3xl bg-white">
+          <div className="grid md:grid-cols-12">
+            {/* LEFT — Order Overview */}
+            <div className="md:col-span-5 bg-slate-50/80 p-7 flex flex-col justify-between border-r border-slate-100">
+              <div>
+                <DialogHeader className="mb-6">
+                  <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+                    Order Overview
+                  </DialogTitle>
+                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">Checkout details</p>
+                </DialogHeader>
 
-          {selectedPackage ? (
-            <div className="grid gap-4 md:grid-cols-5">
-              <div className="md:col-span-2 space-y-2 rounded-lg border bg-muted/40 p-4">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-lg font-semibold">
-                    {selectedPackage.name}
+                {selectedPackage && (
+                  <div className="space-y-4">
+                    {/* Selected Package Highlight */}
+                    <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm relative overflow-hidden group">
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110" />
+                      <div className="flex items-center gap-3 mb-2 relative z-10">
+                        <div className="p-2 bg-primary text-white rounded-xl shadow-lg shadow-primary/20">
+                          <Sparkles className="h-4 w-4" />
+                        </div>
+                        <p className="font-bold text-lg text-slate-900 truncate">
+                          {selectedPackage.name}
+                        </p>
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-2">
+                        {selectedPackage.description || "Premium credit package for your business growth."}
+                      </p>
+                    </div>
+
+                    {/* Breakdown */}
+                    <div className="space-y-3 px-1">
+                      <div className="flex justify-between items-center text-sm font-medium">
+                        <span className="text-slate-500">Credits Included</span>
+                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">{selectedPackage.credits}</span>
+                      </div>
+
+                      {selectedPackage.bonus_credits > 0 && (
+                        <div className="flex justify-between items-center text-sm font-medium">
+                          <span className="text-slate-500">Bonus Gift</span>
+                          <span className="text-emerald-600 font-bold bg-emerald-50 px-3 py-1 rounded-full">+{selectedPackage.bonus_credits}</span>
+                        </div>
+                      )}
+
+                      <div className="flex justify-between items-center text-sm font-medium">
+                        <span className="text-slate-500">Package Type</span>
+                        <Badge variant="outline" className="capitalize text-[10px] h-6 font-bold border-slate-200 bg-white">
+                          {selectedPackage.credit_type || "Standard"}
+                        </Badge>
+                      </div>
+
+                      <div className="pt-3 border-t border-slate-200">
+                        <div className="flex justify-between items-end">
+                          <div className="flex flex-col">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Amount</span>
+                            <span className="text-2xl font-black text-primary tracking-tighter">
+                              {selectedPackage.currency || "USD"}{" "}
+                              {Number(selectedPackage.price || 0).toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Secure Badge */}
+              <div className="mt-6 flex items-center gap-3 p-3 rounded-2xl bg-emerald-50 border border-emerald-100/50">
+                <div className="p-1.5 bg-emerald-500 text-white rounded-lg shadow-md shadow-emerald-500/10 shrink-0">
+                  <CheckCircle2 className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">Secure Payment</p>
+                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">SSL Encrypted Stripe Gateway</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — Payment Input */}
+            <div className="md:col-span-7 bg-white p-7 flex flex-col h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+              {selectedPackage ? (
+                <div className="h-full flex flex-col justify-center">
+                  {/* Payment Header */}
+                  <div className="mb-6">
+                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">Card Details</h3>
+                    <p className="text-sm text-slate-500 font-medium">Please enter your payment information below.</p>
+                  </div>
+
+                  {/* Payment Form Area */}
+                  <div className="space-y-6">
+                    <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-5 border border-slate-100 shadow-inner transition-all hover:bg-slate-50/80">
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Amount Payable</span>
+                        <span className="text-lg font-black text-slate-900">
+                          {selectedPackage.currency || "USD"}{" "}
+                          {Number(selectedPackage.price || 0).toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="h-px bg-slate-200/50 mb-6" />
+                      <StripeCheckout
+                        pkg={selectedPackage}
+                        onSuccess={() => handlePurchase(selectedPackage)}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Trusted Partners</p>
+                      <div className="flex gap-6 items-center opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 pointer-events-none">
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                          alt="Visa"
+                          className="h-3"
+                        />
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                          alt="Mastercard"
+                          className="h-5"
+                        />
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg"
+                          alt="Stripe"
+                          className="h-4"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full text-center py-20 px-10">
+                  <div className="p-6 bg-slate-50 rounded-full mb-6 border border-slate-100 shadow-inner">
+                    <Wallet className="h-10 w-10 text-slate-300 animate-pulse" />
+                  </div>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">No selection found</h4>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                    Please close this window and select a credit package to proceed with your upgrade.
                   </p>
-                  <Badge variant="outline" className="capitalize">
-                    {selectedPackage.merchant_type || merchantType}
-                  </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {selectedPackage.description}
-                </p>
-                <div className="text-2xl font-bold">
-                  {selectedPackage.currency || "USD"}{" "}
-                  {Number(selectedPackage.price || 0).toLocaleString()}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {selectedPackage.credits} credits •{" "}
-                  {selectedPackage.credit_type || "general"}
-                </div>
-              </div>
-
-              <div className="md:col-span-3 space-y-4">
-                <StripeCheckout
-                  pkg={selectedPackage}
-                  onSuccess={() => handlePurchase(selectedPackage)}
-                />
-              </div>
+              )}
             </div>
-          ) : (
-            <div className="text-sm text-muted-foreground">
-              No package selected.
-            </div>
-          )}
+          </div>
         </DialogContent>
       </Dialog>
     </div>
