@@ -70,8 +70,8 @@ export function AppSidebar({
             icon: Wallet,
         },
         {
-            title: "Packages",
-            url: "/agent/packages",
+            title: "Approvals",
+            url: "/agent/approvals",
             icon: Package,
         },
         // {
