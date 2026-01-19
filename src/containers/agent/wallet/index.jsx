@@ -33,6 +33,8 @@ export default function AgentWalletContainer() {
     total_spent: 0,
     currency: "USD",
     is_active: false,
+    subscription_type: null,
+    subscription_expires_at: null,
     admin: null,
   });
 
@@ -62,6 +64,8 @@ export default function AgentWalletContainer() {
           total_spent: Number(wallet.total_spent),
           currency: wallet.currency,
           is_active: wallet.is_active,
+          subscription_type: wallet.subscription_type,
+          subscription_expires_at: wallet.subscription_expires_at,
           admin: wallet.admin,
         });
       } catch (error) {

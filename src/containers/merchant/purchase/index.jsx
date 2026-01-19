@@ -400,7 +400,7 @@ export default function MerchantPurchase() {
             </div>
 
             {/* RIGHT — Payment Input */}
-            <div className="md:col-span-7 bg-white p-7 flex flex-col h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+            <div className="md:col-span-7 bg-white p-7 flex flex-col h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
               {selectedPackage ? (
                 <div className="h-full flex flex-col justify-center">
                   {/* Payment Header */}
