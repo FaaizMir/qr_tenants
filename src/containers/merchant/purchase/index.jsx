@@ -178,82 +178,89 @@ export default function MerchantPurchase() {
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {packages.map((pkg, idx) => {
-            const isPopular = idx === 1; // Middle one usually
+          {packages.map((pkg) => {
             const price = Number(pkg.price || 0);
             const currency = pkg.currency || "USD";
 
-            const styles = [
-              {
-                color: "indigo",
-                icon: <Zap className="h-5 w-5" />,
-                bg: "bg-indigo-50",
-                border: "border-indigo-100",
-                text: "text-indigo-600",
-                gradient: "from-indigo-600 to-blue-600",
-              },
-              {
-                color: "emerald",
-                icon: <Sparkles className="h-5 w-5" />,
-                bg: "bg-emerald-50",
-                border: "border-emerald-100",
-                text: "text-emerald-600",
-                gradient: "from-emerald-600 to-teal-600",
-              },
-              {
-                color: "violet",
-                icon: <Wallet className="h-5 w-5" />,
-                bg: "bg-violet-50",
-                border: "border-violet-100",
-                text: "text-violet-600",
-                gradient: "from-violet-600 to-purple-600",
-              },
-              {
-                color: "orange",
-                icon: <CreditCard className="h-5 w-5" />,
-                bg: "bg-orange-50",
-                border: "border-orange-100",
-                text: "text-orange-600",
-                gradient: "from-orange-600 to-amber-600",
-              },
-            ];
-            const style = styles[idx % styles.length];
+            const getCategoryTheme = (type) => {
+              const t = type?.toLowerCase() || "";
+              if (t.includes("coupon"))
+                return {
+                  label: "Coupon",
+                  icon: <CheckCircle2 className="h-4 w-4" />,
+                  bg: "bg-blue-50",
+                  text: "text-blue-600",
+                  badge: "bg-blue-100/80 text-blue-700 border-blue-200",
+                };
+              if (t.includes("whatsapp"))
+                return {
+                  label: "Whatsapp Message",
+                  icon: <Sparkles className="h-4 w-4" />,
+                  bg: "bg-emerald-50",
+                  text: "text-emerald-600",
+                  badge: "bg-emerald-100/80 text-emerald-700 border-emerald-200",
+                };
+              if (t.includes("ad"))
+                return {
+                  label: "Paid Ads",
+                  icon: <Wallet className="h-4 w-4" />,
+                  bg: "bg-violet-50",
+                  text: "text-violet-600",
+                  badge: "bg-violet-100/80 text-violet-700 border-violet-200",
+                };
+              return {
+                label: type || "Standard",
+                icon: <Zap className="h-4 w-4" />,
+                bg: "bg-slate-50",
+                text: "text-slate-600",
+                badge: "bg-slate-100 text-slate-700 border-slate-200",
+              };
+            };
+            const theme = getCategoryTheme(pkg.credit_type);
 
             return (
               <Card
                 key={pkg.id}
-                className={cn(
-                  "relative flex flex-col h-full border-muted/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group",
-                  isPopular &&
-                  "border-primary ring-1 ring-primary/20 bg-primary/5 shadow-xl shadow-primary/5"
-                )}
+                className="relative flex flex-col h-full border-muted/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group bg-white"
               >
-                {isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                    <Badge className="bg-primary hover:bg-primary text-white border-0 py-1.5 px-4 rounded-full shadow-lg text-[10px] font-bold uppercase tracking-wider">
-                      Best Value
-                    </Badge>
-                  </div>
-                )}
 
                 <CardHeader className="p-6">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3 mb-4">
                     <div
-                      className={cn("p-2.5 rounded-xl", style.bg, style.text)}
+                      className={cn(
+                        "p-2.5 rounded-xl transition-colors duration-300",
+                        theme.bg,
+                        theme.text
+                      )}
                     >
-                      {style.icon}
+                      {theme.icon}
                     </div>
                     <Badge
-                      variant="secondary"
-                      className="bg-muted capitalize text-[10px] px-2 py-0.5"
+                      variant="outline"
+                      className={cn(
+                        "rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border",
+                        theme.badge
+                      )}
                     >
-                      {pkg.credit_type || "Standard"}
+                      {theme.label}
                     </Badge>
                   </div>
-                  <CardTitle className="text-xl font-bold text-foreground">
-                    {pkg.name}
-                  </CardTitle>
-                  <CardDescription className="text-xs line-clamp-1">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-xl font-bold text-foreground">
+                      {pkg.name}
+                    </CardTitle>
+                    <Badge
+                      className={cn(
+                        "text-[9px] font-black uppercase px-2 py-0.5 rounded-md",
+                        pkg.merchant_type?.toLowerCase() === "annual"
+                          ? "bg-amber-100 text-amber-700"
+                          : "bg-slate-100 text-slate-600"
+                      )}
+                    >
+                      {pkg.merchant_type || "Standard"}
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-xs line-clamp-1 mt-1">
                     {pkg.description || "Enhanced features and capacity"}
                   </CardDescription>
                 </CardHeader>
@@ -291,22 +298,12 @@ export default function MerchantPurchase() {
                         </span>
                       </div>
                     )}
-                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <div className="h-5 w-5 rounded-full bg-muted flex items-center justify-center">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-muted-foreground" />
-                      </div>
-                      <span>Full API Access</span>
-                    </div>
+
                   </div>
 
                   <Button
-                    variant={isPopular ? "default" : "outline"}
-                    className={cn(
-                      "w-full h-11 rounded-xl font-semibold transition-all group-hover:scale-[1.02]",
-                      isPopular
-                        ? "shadow-lg shadow-primary/20"
-                        : "hover:bg-muted/50"
-                    )}
+                    variant="outline"
+                    className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
                     onClick={() => handleStartCheckout(pkg)}
                   >
                     Get Started

@@ -37,17 +37,15 @@ export default function MerchantCreateCouponContainer() {
   const [totalQuantity, setTotalQuantity] = useState(maxPerBatch);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [isActive, setIsActive] = useState(true);
   const [isHalal, setIsHalal] = useState(false);
   const [templateSelection, setTemplateSelection] = useState(null);
-  const [visibility, setVisibility] = useState(false);
 
   const templateCardRef = useRef(null);
 
   const limitLabel = useMemo(
     () =>
       isAnnual ? "Annual limit: 1000 coupons" : "Temporary limit: 100 coupons",
-    [isAnnual]
+    [isAnnual],
   );
 
   // ✅ Reset form function
@@ -56,11 +54,8 @@ export default function MerchantCreateCouponContainer() {
     setTotalQuantity(maxPerBatch);
     setStartDate("");
     setEndDate("");
-    setIsActive(true);
     setIsHalal(false);
-
     setTemplateSelection(null);
-    setVisibility(false);
   };
 
   const handleSubmit = async (e) => {
@@ -83,9 +78,7 @@ export default function MerchantCreateCouponContainer() {
         total_quantity: Math.min(Number(totalQuantity) || 0, maxPerBatch),
         start_date: startDate ? `${startDate}T00:00:00Z` : null,
         end_date: endDate ? `${endDate}T23:59:59Z` : null,
-        is_active: Boolean(isActive),
         ishalal: Boolean(isHalal),
-        visibility: Boolean(visibility),
         template_id: templateSelection?.templateId || null,
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
@@ -172,7 +165,7 @@ export default function MerchantCreateCouponContainer() {
                         onChange={(e) => {
                           const next = Math.max(
                             1,
-                            Math.min(Number(e.target.value) || 0, maxPerBatch)
+                            Math.min(Number(e.target.value) || 0, maxPerBatch),
                           );
                           setTotalQuantity(next);
                         }}
@@ -208,7 +201,23 @@ export default function MerchantCreateCouponContainer() {
                   </div>
                 </div>
 
-
+                <div className="w-full">
+                  <label className="flex items-center justify-between gap-4 rounded-xl border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer group">
+                    <div className="flex flex-col flex-1">
+                      <span className="text-sm font-semibold leading-none group-hover:text-primary transition-colors">
+                        Halal Certified
+                      </span>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Indicate compliance with Halal standards
+                      </p>
+                    </div>
+                    <Switch
+                      checked={isHalal}
+                      onCheckedChange={setIsHalal}
+                      className="data-[state=checked]:bg-primary"
+                    />
+                  </label>
+                </div>
 
                 <div className="space-y-2">
                   <Label>Template</Label>
@@ -217,58 +226,6 @@ export default function MerchantCreateCouponContainer() {
                     onChange={setTemplateSelection}
                     cardRef={templateCardRef} // pass ref
                   />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {[
-                    {
-                      label: "Public Visibility",
-                      checked: visibility,
-                      onChange: setVisibility,
-                      desc: "Show on marketplace",
-                      isSwitch: true
-                    },
-                    {
-                      label: "Active Status",
-                      checked: isActive,
-                      onChange: setIsActive,
-                      desc: "Enable for redemption",
-                    },
-                    {
-                      label: "Halal Certified",
-                      checked: isHalal,
-                      onChange: setIsHalal,
-                      desc: "Indicate compliance",
-                    },
-                  ].map((item) => (
-                    <label
-                      key={item.label}
-                      className="flex items-center justify-between gap-4 rounded-lg border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer"
-                    >
-                      <div className="flex flex-col flex-1">
-                        <span className="text-sm font-medium leading-none">
-                          {item.label}
-                        </span>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {item.desc}
-                        </p>
-                      </div>
-                      {item.isSwitch ? (
-                        <Switch
-                          checked={item.checked}
-                          onCheckedChange={item.onChange}
-                          className="data-[state=checked]:bg-primary"
-                        />
-                      ) : (
-                        <input
-                          type="checkbox"
-                          className="h-5 w-5 rounded-lg border-zinc-200 text-primary focus:ring-primary/20 cursor-pointer transition-all"
-                          checked={item.checked}
-                          onChange={(e) => item.onChange(e.target.checked)}
-                        />
-                      )}
-                    </label>
-                  ))}
                 </div>
 
                 <Button type="submit" className="w-full" disabled={loading}>
@@ -289,7 +246,7 @@ export default function MerchantCreateCouponContainer() {
               <p>• Use concise, campaign-specific batch names.</p>
               <p>• Set start/end dates to control redemption windows.</p>
               <p>• Annual: up to 1000 codes per batch. Temporary: up to 100.</p>
-              <p>• Keep the batch active to allow customers to redeem immediately.</p>
+              <p>• Preview your selected template before generating.</p>
             </CardContent>
           </Card>
         </div>

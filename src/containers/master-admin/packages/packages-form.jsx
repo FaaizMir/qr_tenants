@@ -19,11 +19,18 @@ import {
   Save,
   Package,
   StepBack,
-  ArrowLeft,
   Trash2,
   Tag,
   Layers,
+  ArrowRight,
+  CheckCircle2,
+  Sparkles,
+  Wallet,
+  Zap,
+  ArrowLeft,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -74,7 +81,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       currency: "USD",
       creditType: "general",
       customCreditType: "",
-      merchantType: "temporary",
+      merchantType: "annual",
       sortOrder: 1,
       isActive: "true",
     },
@@ -98,7 +105,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     const fetchPackage = async () => {
       try {
         const res = await axiosInstance.get(
-          `/wallets/credit-packages/${packageId}`
+          `/wallets/credit-packages/${packageId}`,
         );
         const data = res?.data?.data;
         if (!data) return;
@@ -110,12 +117,12 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           credits: data.credits,
           currency: data.currency,
           creditType: creditTypeOptions.some(
-            (opt) => opt.value === data.credit_type
+            (opt) => opt.value === data.credit_type,
           )
             ? data.credit_type
             : "custom",
           customCreditType: creditTypeOptions.some(
-            (opt) => opt.value === data.credit_type
+            (opt) => opt.value === data.credit_type,
           )
             ? ""
             : data.credit_type,
@@ -154,14 +161,16 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       if (isEdit && packageId) {
         await axiosInstance.patch(
           `/wallets/credit-packages/${packageId}`,
-          payload
+          payload,
         );
       } else {
         await axiosInstance.post("/wallets/credit-packages", payload);
       }
 
       toast.success(
-        isEdit ? "Package updated successfully" : "Package created successfully"
+        isEdit
+          ? "Package updated successfully"
+          : "Package created successfully",
       );
 
       onSuccess?.();
@@ -170,7 +179,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} package`
+          `Failed to ${isEdit ? "update" : "create"} package`,
       );
     } finally {
       setSubmitting(false);
@@ -193,13 +202,13 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
   };
 
   return (
-    <div className="max-w-full py-10 px-6">
+    <div className="max-w-full  px-6">
       <div className="flex flex-col md:flex-row gap-8 items-start">
         {/* Left Side: Form */}
         <div className="flex-1 w-full">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <Card className="border-muted/60 shadow-lg overflow-hidden">
-              <CardHeader className="bg-muted/30 border-b pb-6 px-8">
+              <CardHeader className="border-b pb-6 px-8">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-primary/20 shadow-lg">
@@ -349,8 +358,8 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                       control={control}
                       errors={errors}
                       options={[
-                        { value: "temporary", label: "Temporary / Basic" },
                         { value: "annual", label: "Annual / Premium" },
+                        { value: "temporary", label: "Temporary / Basic" },
                       ]}
                     />
 
@@ -462,122 +471,142 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
               Live Preview
             </h3>
           </div>
-          <div className="group relative flex flex-col bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden min-h-[450px]">
-            {/* Image/Gradient Area */}
-            <div className="h-32 relative bg-linear-to-br from-indigo-600 to-violet-700 p-5 flex flex-col justify-between">
-              <div className="flex justify-between items-start w-full">
-                <div className="flex gap-2">
-                  <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                    {formValues.creditType || "Credits"}
-                  </span>
-                  <span className="bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                    Recommended
-                  </span>
-                </div>
-                <div className="h-10 w-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-xl text-white shadow-inner">
-                  🚀
-                </div>
-              </div>
-              <div className="relative z-10">
-                <p className="text-white/80 text-[10px] font-medium uppercase tracking-wider mb-1">
-                  {formValues.credits || "0"} Total Credits
-                </p>
-                <h3 className="text-white text-xl font-bold leading-tight truncate">
-                  {formValues.name || "Package Title"}
-                </h3>
-              </div>
-            </div>
 
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-1">
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-slate-900">
-                    {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
-                    {Number(formValues.price || 0).toLocaleString()}
-                  </span>
-                  <span className="text-xs font-medium text-slate-500">
-                    {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
-                    {formValues.pricePerCredit || "0.00"} / credit
-                  </span>
-                </div>
-              </div>
+          {(() => {
+            const getCategoryTheme = (type) => {
+              const t = type?.toLowerCase() || "";
+              if (t.includes("coupon"))
+                return {
+                  label: "Coupon",
+                  icon: <CheckCircle2 className="h-4 w-4" />,
+                  bg: "bg-blue-50",
+                  text: "text-blue-600",
+                  badge: "bg-blue-100/80 text-blue-700 border-blue-200",
+                };
+              if (t.includes("whatsapp"))
+                return {
+                  label: "Whatsapp Message",
+                  icon: <Sparkles className="h-4 w-4" />,
+                  bg: "bg-emerald-50",
+                  text: "text-emerald-600",
+                  badge:
+                    "bg-emerald-100/80 text-emerald-700 border-emerald-200",
+                };
+              if (t.includes("ad"))
+                return {
+                  label: "Paid Ads",
+                  icon: <Wallet className="h-4 w-4" />,
+                  bg: "bg-violet-50",
+                  text: "text-violet-600",
+                  badge: "bg-violet-100/80 text-violet-700 border-violet-200",
+                };
+              return {
+                label: type || "Standard",
+                icon: <Zap className="h-4 w-4" />,
+                bg: "bg-slate-50",
+                text: "text-slate-600",
+                badge: "bg-slate-100 text-slate-700 border-slate-200",
+              };
+            };
+            const theme = getCategoryTheme(
+              formValues.creditType === "custom"
+                ? formValues.customCreditType
+                : formValues.creditType,
+            );
 
-              {/* Details Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="bg-slate-50 p-3 rounded-[20px] border border-slate-100 flex flex-col items-center">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                    Credits
+            return (
+              <div className="group relative flex flex-col bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                {/* Header Section from Purchase Index */}
+                <div className="p-6 pb-4">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className={cn(
+                        "p-2.5 rounded-xl transition-colors duration-300",
+                        theme.bg,
+                        theme.text,
+                      )}
+                    >
+                      {theme.icon}
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className={cn(
+                        "rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border",
+                        theme.badge,
+                      )}
+                    >
+                      {theme.label}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-slate-900 truncate">
+                      {formValues.name || "Package Title"}
+                    </h3>
+                    <Badge
+                      className={cn(
+                        "text-[9px] font-black uppercase px-2 py-0.5 rounded-md",
+                        formValues.merchantType?.toLowerCase() === "annual"
+                          ? "bg-amber-100 text-amber-700"
+                          : "bg-slate-100 text-slate-600",
+                      )}
+                    >
+                      {formValues.merchantType || "Standard"}
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-muted-foreground line-clamp-1 mt-1 font-medium">
+                    {formValues.description || "Enhanced features and capacity"}
                   </p>
-                  <p className="text-xl font-bold text-slate-700">
-                    {formValues.credits || "0"}
-                  </p>
                 </div>
-                <div className="bg-slate-50 p-3 rounded-[20px] border border-slate-100 flex flex-col items-center">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                    Type
-                  </p>
-                  <p className="text-xs font-bold text-slate-700 capitalize text-center leading-tight">
-                    {formValues.creditType === "custom"
-                      ? formValues.customCreditType
-                      : formValues.creditType}
-                  </p>
-                </div>
-              </div>
 
-              <div className="space-y-4 flex-1">
-                <p className="text-slate-500 text-sm leading-relaxed line-clamp-4 italic border-l-4 border-indigo-100 pl-4">
-                  "
-                  {formValues.description ||
-                    "The merchant will see your package description here. Make it compelling to increase sales!"}
-                  "
-                </p>
-              </div>
+                {/* Content Section from Purchase Index */}
+                <div className="p-6 pt-0 flex-1 flex flex-col">
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-extrabold tracking-tight text-slate-900">
+                        {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
+                        {Number(formValues.price || 0).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-1.5 font-bold uppercase tracking-widest">
+                      {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
+                      {formValues.pricePerCredit || "0.00"} per credit
+                    </p>
+                  </div>
 
-              <div className="mt-8">
-                <div className="w-full h-12 rounded-[20px] bg-slate-900 flex items-center justify-center text-white font-bold text-sm shadow-xl shadow-slate-200">
-                  Buy Package <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-                <p className="text-[10px] text-center text-muted-foreground mt-3 uppercase tracking-tighter">
-                  Availability:{" "}
-                  <span className="text-slate-900 font-bold">
-                    {formValues.merchantType} Plan
-                  </span>
-                </p>
-              </div>
-            </div>
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                      </div>
+                      <span className="font-medium text-slate-700">
+                        {formValues.credits || "0"} Base Credits
+                      </span>
+                    </div>
+                  </div>
 
-            {/* Secondary Badge for Status Inactive */}
-            {formValues.isActive === "false" && (
-              <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center rotate-[-10deg]">
-                <div className="bg-red-500 text-white px-8 py-2 font-bold text-xl shadow-2xl skew-x-[-15deg] border-4 border-white tracking-tight">
-                  HIDDEN / DRAFT
+                  <Button
+                    variant="outline"
+                    className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
+                    disabled
+                  >
+                    Get Started
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
                 </div>
+
+                {/* Status Overlay */}
+                {formValues.isActive === "false" && (
+                  <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center rotate-[-10deg]">
+                    <div className="bg-red-500 text-white px-8 py-2 font-bold text-xl shadow-2xl skew-x-[-15deg] border-4 border-white tracking-tight">
+                      HIDDEN / DRAFT
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })()}
         </div>
       </div>
     </div>
-  );
-}
-
-// Reuse the same ArrowRight icon since it's used in the preview
-function ArrowRight({ className }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
   );
 }
