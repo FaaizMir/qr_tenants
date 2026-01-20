@@ -73,7 +73,9 @@ export default function TemporaryWalletView({
           </CardHeader>
           <CardContent className="space-y-4 pt-2">
             <div className="flex flex-col gap-1">
-              <span className="text-xs text-muted-foreground">Main Balance</span>
+              <span className="text-xs text-muted-foreground">
+                Main Balance
+              </span>
               <div className="text-4xl font-bold tracking-tight text-amber-900">
                 {format(balance)}
               </div>
@@ -165,8 +167,11 @@ export default function TemporaryWalletView({
                 <span>Usage Efficiency</span>
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
-                    ? Math.round((creditDetails.used / creditDetails.purchased) * 100)
-                    : 0}%
+                    ? Math.round(
+                        (creditDetails.used / creditDetails.purchased) * 100,
+                      )
+                    : 0}
+                  %
                 </span>
               </div>
             </div>
@@ -198,12 +203,6 @@ export default function TemporaryWalletView({
           </CardContent>
         </Card> */}
       </div>
-
-      <WalletWarnings
-        isLowBalance={isLow}
-        expiresAt={expiresAt}
-        merchantType="TEMPORARY"
-      />
 
       <section className="space-y-3">
         <div className="flex items-center justify-between">

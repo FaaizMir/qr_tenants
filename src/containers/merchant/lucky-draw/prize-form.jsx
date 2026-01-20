@@ -75,7 +75,7 @@ export default function PrizeForm({ isEdit = false }) {
         // 👉 Fetch batch name using batch_id
         if (prize.batch_id) {
           const batchRes = await axiosInstance.get(
-            `/coupon-batches/${prize.batch_id}`
+            `/coupon-batches/${prize.batch_id}`,
           );
 
           const batch = batchRes?.data?.data;
@@ -142,7 +142,7 @@ export default function PrizeForm({ isEdit = false }) {
         // Update existing prize
         await axiosInstance.patch(
           `/lucky-draw/prizes/${prizeId}`,
-          Patchpayload
+          Patchpayload,
         );
         toast.success("Prize updated successfully!");
       } else {
@@ -205,12 +205,7 @@ export default function PrizeForm({ isEdit = false }) {
                     name="prize_type"
                     control={control}
                     errors={errors}
-                    options={[
-                      { value: "coupon", label: "Coupon" },
-                      { value: "discount", label: "Discount" },
-                      { value: "free_item", label: "Freebie" },
-                      { value: "no_prize", label: "Better Luck Next Time" },
-                    ]}
+                    options={[{ value: "coupon", label: "Coupon" }]}
                   />
                 </div>
 

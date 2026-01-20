@@ -88,7 +88,7 @@ export default function MerchantPurchase() {
       "Initiating purchase for package:",
       pkg,
       "with merchant_id:",
-      merchant_id
+      merchant_id,
     );
 
     if (!merchant_id) {
@@ -114,7 +114,7 @@ export default function MerchantPurchase() {
 
       await axiosInstance.post(
         `/wallets/merchant/${merchant_id}/add-credits`,
-        payload
+        payload,
       );
 
       toast.success("Package purchased successfully.");
@@ -125,7 +125,7 @@ export default function MerchantPurchase() {
         "Purchase error:",
         err?.response?.status,
         err?.response?.data,
-        err
+        err,
       );
       const msg =
         err?.response?.data?.message ||
@@ -166,7 +166,7 @@ export default function MerchantPurchase() {
         <h1 className="text-4xl font-extrabold tracking-tight bg-linear-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
           Power Up Your Store
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+        <p className="text-muted-foreground ">
           Choose a credit package for WhatsApp messages, coupon creation, and
           paid ads.
         </p>
@@ -198,7 +198,8 @@ export default function MerchantPurchase() {
                   icon: <Sparkles className="h-4 w-4" />,
                   bg: "bg-emerald-50",
                   text: "text-emerald-600",
-                  badge: "bg-emerald-100/80 text-emerald-700 border-emerald-200",
+                  badge:
+                    "bg-emerald-100/80 text-emerald-700 border-emerald-200",
                 };
               if (t.includes("ad"))
                 return {
@@ -223,14 +224,13 @@ export default function MerchantPurchase() {
                 key={pkg.id}
                 className="relative flex flex-col h-full border-muted/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group bg-white"
               >
-
                 <CardHeader className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div
                       className={cn(
                         "p-2.5 rounded-xl transition-colors duration-300",
                         theme.bg,
-                        theme.text
+                        theme.text,
                       )}
                     >
                       {theme.icon}
@@ -239,7 +239,7 @@ export default function MerchantPurchase() {
                       variant="outline"
                       className={cn(
                         "rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border",
-                        theme.badge
+                        theme.badge,
                       )}
                     >
                       {theme.label}
@@ -254,7 +254,7 @@ export default function MerchantPurchase() {
                         "text-[9px] font-black uppercase px-2 py-0.5 rounded-md",
                         pkg.merchant_type?.toLowerCase() === "annual"
                           ? "bg-amber-100 text-amber-700"
-                          : "bg-slate-100 text-slate-600"
+                          : "bg-slate-100 text-slate-600",
                       )}
                     >
                       {pkg.merchant_type || "Standard"}
@@ -298,7 +298,6 @@ export default function MerchantPurchase() {
                         </span>
                       </div>
                     )}
-
                   </div>
 
                   <Button
@@ -326,7 +325,9 @@ export default function MerchantPurchase() {
                   <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
                     Order Overview
                   </DialogTitle>
-                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">Checkout details</p>
+                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">
+                    Checkout details
+                  </p>
                 </DialogHeader>
 
                 {selectedPackage && (
@@ -343,7 +344,8 @@ export default function MerchantPurchase() {
                         </p>
                       </div>
                       <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-2">
-                        {selectedPackage.description || "Premium credit package for your business growth."}
+                        {selectedPackage.description ||
+                          "Premium credit package for your business growth."}
                       </p>
                     </div>
 
@@ -351,19 +353,26 @@ export default function MerchantPurchase() {
                     <div className="space-y-3 px-1">
                       <div className="flex justify-between items-center text-sm font-medium">
                         <span className="text-slate-500">Credits Included</span>
-                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">{selectedPackage.credits}</span>
+                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">
+                          {selectedPackage.credits}
+                        </span>
                       </div>
 
                       {selectedPackage.bonus_credits > 0 && (
                         <div className="flex justify-between items-center text-sm font-medium">
                           <span className="text-slate-500">Bonus Gift</span>
-                          <span className="text-emerald-600 font-bold bg-emerald-50 px-3 py-1 rounded-full">+{selectedPackage.bonus_credits}</span>
+                          <span className="text-emerald-600 font-bold bg-emerald-50 px-3 py-1 rounded-full">
+                            +{selectedPackage.bonus_credits}
+                          </span>
                         </div>
                       )}
 
                       <div className="flex justify-between items-center text-sm font-medium">
                         <span className="text-slate-500">Package Type</span>
-                        <Badge variant="outline" className="capitalize text-[10px] h-6 font-bold border-slate-200 bg-white">
+                        <Badge
+                          variant="outline"
+                          className="capitalize text-[10px] h-6 font-bold border-slate-200 bg-white"
+                        >
                           {selectedPackage.credit_type || "Standard"}
                         </Badge>
                       </div>
@@ -371,10 +380,14 @@ export default function MerchantPurchase() {
                       <div className="pt-3 border-t border-slate-200">
                         <div className="flex justify-between items-end">
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Amount</span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">
+                              Total Amount
+                            </span>
                             <span className="text-2xl font-black text-primary tracking-tighter">
                               {selectedPackage.currency || "USD"}{" "}
-                              {Number(selectedPackage.price || 0).toLocaleString()}
+                              {Number(
+                                selectedPackage.price || 0,
+                              ).toLocaleString()}
                             </span>
                           </div>
                         </div>
@@ -390,8 +403,12 @@ export default function MerchantPurchase() {
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">Secure Payment</p>
-                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">SSL Encrypted Stripe Gateway</p>
+                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">
+                    Secure Payment
+                  </p>
+                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">
+                    SSL Encrypted Stripe Gateway
+                  </p>
                 </div>
               </div>
             </div>
@@ -402,15 +419,21 @@ export default function MerchantPurchase() {
                 <div className="h-full flex flex-col justify-center">
                   {/* Payment Header */}
                   <div className="mb-6">
-                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">Card Details</h3>
-                    <p className="text-sm text-slate-500 font-medium">Please enter your payment information below.</p>
+                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">
+                      Card Details
+                    </h3>
+                    <p className="text-sm text-slate-500 font-medium">
+                      Please enter your payment information below.
+                    </p>
                   </div>
 
                   {/* Payment Form Area */}
                   <div className="space-y-6">
                     <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-5 border border-slate-100 shadow-inner transition-all hover:bg-slate-50/80">
                       <div className="flex justify-between items-center mb-4">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Amount Payable</span>
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                          Amount Payable
+                        </span>
                         <span className="text-lg font-black text-slate-900">
                           {selectedPackage.currency || "USD"}{" "}
                           {Number(selectedPackage.price || 0).toLocaleString()}
@@ -424,7 +447,9 @@ export default function MerchantPurchase() {
                     </div>
 
                     <div className="flex items-center justify-between pt-2">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Trusted Partners</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Trusted Partners
+                      </p>
                       <div className="flex gap-6 items-center opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 pointer-events-none">
                         <img
                           src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
@@ -450,9 +475,12 @@ export default function MerchantPurchase() {
                   <div className="p-6 bg-slate-50 rounded-full mb-6 border border-slate-100 shadow-inner">
                     <Wallet className="h-10 w-10 text-slate-300 animate-pulse" />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">No selection found</h4>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">
+                    No selection found
+                  </h4>
                   <p className="text-sm text-slate-500 font-medium leading-relaxed">
-                    Please close this window and select a credit package to proceed with your upgrade.
+                    Please close this window and select a credit package to
+                    proceed with your upgrade.
                   </p>
                 </div>
               )}

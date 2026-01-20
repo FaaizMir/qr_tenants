@@ -120,7 +120,6 @@ export default function AdminOverviewTab() {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-2 border-b">
                 <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-semibold">Admin Overview</h2>
                     {loading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
                 </div>
 

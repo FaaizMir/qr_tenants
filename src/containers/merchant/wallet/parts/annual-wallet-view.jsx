@@ -40,7 +40,7 @@ export default function AnnualWalletView({
   const tiers = wallet?.tiers || ["MARKETING", "UTILITY"];
   const transactions = useMemo(
     () => wallet?.transactions ?? [],
-    [wallet?.transactions]
+    [wallet?.transactions],
   );
   const batchUsage = useMemo(() => summary?.batches ?? [], [summary?.batches]);
   const creditDetails = wallet?.creditBreakdown || {};
@@ -118,7 +118,7 @@ export default function AnnualWalletView({
         ),
       },
     ],
-    []
+    [],
   );
 
   const filteredTransactions = useMemo(() => {
@@ -185,7 +185,7 @@ export default function AnnualWalletView({
         ),
       },
     ],
-    [wallet?.currency]
+    [wallet?.currency],
   );
 
   return (
@@ -216,7 +216,9 @@ export default function AnnualWalletView({
           </CardHeader>
           <CardContent className="space-y-4 pt-2">
             <div className="flex flex-col gap-1">
-              <span className="text-xs text-muted-foreground">Total Remaining Coupons</span>
+              <span className="text-xs text-muted-foreground">
+                Total Remaining Coupons
+              </span>
               <div className="text-4xl font-bold tracking-tight text-primary">
                 {format(balance)}
               </div>
@@ -302,8 +304,11 @@ export default function AnnualWalletView({
                 <span>Usage Efficiency</span>
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
-                    ? Math.round((creditDetails.used / creditDetails.purchased) * 100)
-                    : 0}%
+                    ? Math.round(
+                        (creditDetails.used / creditDetails.purchased) * 100,
+                      )
+                    : 0}
+                  %
                 </span>
               </div>
             </div>
@@ -333,12 +338,6 @@ export default function AnnualWalletView({
           </CardContent>
         </Card>
       </div>
-
-      <WalletWarnings
-        isLowBalance={isLow}
-        expiresAt={summary?.expiresAt}
-        merchantType="ANNUAL"
-      />
 
       {/* <section className="space-y-3">
         <div className="flex items-center justify-between">

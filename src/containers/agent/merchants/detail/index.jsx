@@ -478,7 +478,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Smartphone className="h-4 w-4 text-emerald-500" />
-                      <span className="text-sm">WhatsApp Bal</span>
+                      <span className="text-sm">WhatsApp Balance</span>
                     </div>
                     <span className="font-bold">
                       {wallet?.whatsapp_message_credits ?? 0}
@@ -487,7 +487,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Ticket className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm">Coupon Bal</span>
+                      <span className="text-sm">Coupon Balance</span>
                     </div>
                     <span className="font-bold">
                       {wallet?.coupon_credits ?? 0}
