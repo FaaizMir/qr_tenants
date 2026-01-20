@@ -1,5 +1,6 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import PackagesTable from "@/containers/master-admin/packages/packages-table";
+import AgentSubscriptionFee from "@/containers/master-admin/packages/agent-subscription-fee";
 
 export default function Packages() {
   const breadcrumbData = [
@@ -7,9 +8,12 @@ export default function Packages() {
     { name: "Packages", url: "/master-admin/packages" },
   ];
   return (
-    <>
+    <div className="space-y-6">
       <BreadcrumbComponent data={breadcrumbData} />
+      <div className="px-4">
+        <AgentSubscriptionFee />
+      </div>
       <PackagesTable />
-    </>
+    </div>
   );
 }
