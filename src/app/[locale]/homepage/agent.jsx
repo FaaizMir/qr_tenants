@@ -120,7 +120,7 @@ export default function AgentLandingPage() {
           setMerchants((prev) => {
             const existingIds = new Set(prev.map((m) => m.id));
             const newUnique = transformedMerchants.filter(
-              (m) => !existingIds.has(m.id)
+              (m) => !existingIds.has(m.id),
             );
             const combined = [...prev, ...newUnique];
             setHasMore(combined.length < total);
@@ -155,7 +155,7 @@ export default function AgentLandingPage() {
         setLoadingMore(false);
       }
     },
-    [agent_id, debouncedSearch, selectedCategory, selectedRegion]
+    [agent_id, debouncedSearch, selectedCategory, selectedRegion],
   );
 
   // Initial fetch and fetch on filter change
@@ -203,10 +203,10 @@ export default function AgentLandingPage() {
   const handleGetCoupon = (merchant, batch) => {
     const merchantId = merchant.id;
     // const batchId = batch.id;
-    router.push(`/${locale}/customer/review?merchantId=${merchantId}`);
+    router.push(`/${locale}/customer/review?mid=${merchantId}`);
     sessionStorage.setItem(
       "couponReviewData",
-      JSON.stringify({ merchant, batch })
+      JSON.stringify({ merchant, batch }),
     );
   };
 
@@ -492,7 +492,7 @@ export default function AgentLandingPage() {
                               styles.border,
                               isSelected
                                 ? "shadow-2xl ring-1 ring-white/10 z-10 scale-[1.02] -translate-y-1"
-                                : "hover:border-slate-700 hover:scale-[1.01]"
+                                : "hover:border-slate-700 hover:scale-[1.01]",
                             )}
                           >
                             {/* Selection Indicator Dot */}
@@ -515,7 +515,7 @@ export default function AgentLandingPage() {
                                     .includes("retail") && "bg-blue-950",
                                   merchant.category
                                     .toLowerCase()
-                                    .includes("service") && "bg-blue-950"
+                                    .includes("service") && "bg-blue-950",
                                 )}
                               />
                             )}
@@ -526,7 +526,7 @@ export default function AgentLandingPage() {
                                 className={cn(
                                   "font-semibold text-xl leading-tight truncate tracking-tight transition-colors duration-300",
                                   styles.text,
-                                  isSelected && styles.accent
+                                  isSelected && styles.accent,
                                 )}
                               >
                                 {merchant.name}
@@ -535,7 +535,7 @@ export default function AgentLandingPage() {
                                 variant="secondary"
                                 className={cn(
                                   "shrink-0 text-[10px] px-3 py-1 font-black uppercase tracking-widest border-0 transition-colors duration-300",
-                                  styles.badge
+                                  styles.badge,
                                 )}
                               >
                                 {merchant.category}
@@ -548,13 +548,13 @@ export default function AgentLandingPage() {
                                 <MapPin
                                   className={cn(
                                     "h-4 w-4 mr-2 shrink-0 transition-colors",
-                                    isSelected ? styles.accent : styles.icon
+                                    isSelected ? styles.accent : styles.icon,
                                   )}
                                 />
                                 <span
                                   className={cn(
                                     "truncate max-w-[150px]",
-                                    styles.subText
+                                    styles.subText,
                                   )}
                                 >
                                   {merchant.city || "Local Business"}
@@ -565,7 +565,7 @@ export default function AgentLandingPage() {
                                   "text-[11px] font-black px-4 py-1.5 rounded-full border transition-all duration-300",
                                   isSelected
                                     ? "bg-white text-slate-900 border-white shadow-lg"
-                                    : "bg-slate-800 text-slate-400 border-slate-700 group-hover:bg-slate-700 group-hover:text-white"
+                                    : "bg-slate-800 text-slate-400 border-slate-700 group-hover:bg-slate-700 group-hover:text-white",
                                 )}
                               >
                                 {merchant.batches?.length || 0} Offers
@@ -628,7 +628,7 @@ export default function AgentLandingPage() {
                             activeMerchant.category === "Retails" &&
                               "bg-blue-600/20",
                             activeMerchant.category === "Services" &&
-                              "bg-emerald-600/20"
+                              "bg-emerald-600/20",
                           )}
                         />
                       </div>
@@ -703,7 +703,7 @@ export default function AgentLandingPage() {
                                     <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-1">
                                       Valid until{" "}
                                       {new Date(
-                                        batch.end_date
+                                        batch.end_date,
                                       ).toLocaleDateString()}
                                     </p>
                                   </div>
@@ -712,7 +712,7 @@ export default function AgentLandingPage() {
                                       "text-[9px] font-bold uppercase tracking-tighter px-2 h-5 flex items-center shadow-sm",
                                       batch.is_active
                                         ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
-                                        : "bg-slate-50 text-slate-500 border border-slate-100"
+                                        : "bg-slate-50 text-slate-500 border border-slate-100",
                                     )}
                                   >
                                     {batch.is_active ? "Live" : "Ended"}

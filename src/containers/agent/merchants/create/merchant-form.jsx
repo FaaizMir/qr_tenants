@@ -144,11 +144,11 @@ export function MerchantForm({
     } catch (error) {
       console.error(
         `Error ${isEdit ? "updating" : "creating"} merchant:`,
-        error
+        error,
       );
       toast.error(
         error?.response?.data?.message ||
-        `Failed to ${isEdit ? "update" : "create"} merchant`
+          `Failed to ${isEdit ? "update" : "create"} merchant`,
       );
     } finally {
       setLoading(false);
@@ -395,7 +395,7 @@ export function MerchantForm({
               <span
                 className={cn(
                   "text-sm font-medium",
-                  formData.is_active ? "text-emerald-600" : "text-zinc-500"
+                  formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
                 {formData.is_active ? "Active" : "Inactive"}

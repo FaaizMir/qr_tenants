@@ -184,11 +184,7 @@ export function AppSidebar({
       url: "/master-admin/dashboard",
       icon: LayoutDashboard,
     },
-    {
-      title: tMasterAdmin("packages"),
-      url: "/master-admin/packages",
-      icon: Package,
-    },
+
     {
       title: tMasterAdmin("agents"),
       url: "/master-admin/agents",
@@ -198,6 +194,11 @@ export function AppSidebar({
       title: tMasterAdmin("merchants"),
       url: "/master-admin/merchants",
       icon: Users,
+    },
+    {
+      title: tMasterAdmin("packages"),
+      url: "/master-admin/packages",
+      icon: Package,
     },
     {
       title: tMasterAdmin("commission"),
@@ -220,8 +221,8 @@ export function AppSidebar({
     role === "super_admin"
       ? masterAdminNav
       : role === "agent" || role === "admin"
-      ? agentNav
-      : merchantNav;
+        ? agentNav
+        : merchantNav;
 
   // derive user display info from session when available
   const userData = {

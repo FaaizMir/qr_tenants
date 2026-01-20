@@ -2,6 +2,7 @@ import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { AgentForm } from "@/containers/master-admin/agents/create/agent-form";
 import MasterAdminAgentsContainer from "@/containers/master-admin/agents";
 import { getTranslations } from "next-intl/server";
+import CreateAgentContainer from "@/containers/master-admin/agents/create";
 
 export default async function MasterAdminAgentsPage() {
   const breadcrumbData = [
@@ -11,7 +12,7 @@ export default async function MasterAdminAgentsPage() {
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <AgentForm />
+      <CreateAgentContainer />
     </>
   );
 }

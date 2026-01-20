@@ -29,10 +29,40 @@ export async function getMerchants(params = {}) {
   return resp.data;
 }
 
+export async function getMerchantWallet(merchantId) {
+  const resp = await axiosInstance.get(`/wallets/merchant/${merchantId}`);
+  return resp.data;
+}
+
+export async function getMerchantTransactions(merchantId, params = {}) {
+  const resp = await axiosInstance.get(`/wallets/merchant/${merchantId}/transactions`, { params });
+  return resp.data;
+}
+
+export async function getCustomers(params = {}) {
+  const resp = await axiosInstance.get("/customers", { params });
+  return resp.data;
+}
+
+export async function getCouponBatches(params = {}) {
+  const resp = await axiosInstance.get("/coupon-batches", { params });
+  return resp.data;
+}
+
+export async function getCoupons(params = {}) {
+  const resp = await axiosInstance.get("/coupons", { params });
+  return resp.data;
+}
+
 export default {
   createMerchant,
   updateMerchant,
   deleteMerchant,
   getMerchantById,
   getMerchants,
+  getMerchantWallet,
+  getMerchantTransactions,
+  getCustomers,
+  getCouponBatches,
+  getCoupons,
 };
