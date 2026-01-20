@@ -13,6 +13,8 @@ import {
     AlertCircle,
     ArrowUpRight,
     ArrowDownRight,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,6 +71,14 @@ export default function MerchantDetailContainer({ params }) {
     const [coupons, setCoupons] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Pagination state
+    const [transactionPage, setTransactionPage] = useState(1);
+    const [customerPage, setCustomerPage] = useState(1);
+    const [batchPage, setBatchPage] = useState(1);
+    const [transactionMeta, setTransactionMeta] = useState(null);
+    const [customerMeta, setCustomerMeta] = useState(null);
+    const [batchMeta, setBatchMeta] = useState(null);
+
     // Get tab from URL or default
     const activeTab = searchParams.get("tab") || "overview";
 
@@ -85,9 +95,9 @@ export default function MerchantDetailContainer({ params }) {
             ] = await Promise.all([
                 getMerchantById(merchantId),
                 getMerchantWallet(merchantId),
-                getMerchantTransactions(merchantId, { page: 1, limit: 20 }),
-                getCustomers({ page: 1, pageSize: 20, isActive: true, merchantId }),
-                getCouponBatches({ page: 1, pageSize: 20, merchantId }),
+                getMerchantTransactions(merchantId, { page: transactionPage, limit: 20 }),
+                getCustomers({ page: customerPage, pageSize: 20, isActive: true, merchantId }),
+                getCouponBatches({ page: batchPage, pageSize: 20, merchantId }),
                 getCoupons({ page: 1, pageSize: 20, merchantId }),
             ]);
 
@@ -97,13 +107,18 @@ export default function MerchantDetailContainer({ params }) {
             setCustomers(customersData?.data || []);
             setBatches(batchesData?.data?.batches || []);
             setCoupons(couponsData?.data?.coupons || []);
+
+            // Set metadata
+            setTransactionMeta(transactionsData?.meta);
+            setCustomerMeta(customersData?.meta);
+            setBatchMeta(batchesData?.data?.meta || { total: batchesData?.data?.total, page: batchPage, pageSize: 20 });
         } catch (error) {
             console.error("Error fetching merchant details:", error);
             toast.error("Failed to load merchant details");
         } finally {
             setLoading(false);
         }
-    }, [merchantId]);
+    }, [merchantId, transactionPage, customerPage, batchPage]);
 
     useEffect(() => {
         if (merchantId) {
@@ -265,7 +280,7 @@ export default function MerchantDetailContainer({ params }) {
                                 <CardTitle>Recent Transactions</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ScrollArea className="h-[300px]">
+                                <ScrollArea className="h-[250px]">
                                     <div className="space-y-4 pr-4">
                                         {transactions.length > 0 ? (
                                             transactions.map((tx) => (
@@ -325,6 +340,31 @@ export default function MerchantDetailContainer({ params }) {
                                         )}
                                     </div>
                                 </ScrollArea>
+                                {transactionMeta && transactionMeta.totalPages > 1 && (
+                                    <div className="flex items-center justify-between pt-3 border-t mt-3">
+                                        <p className="text-xs text-muted-foreground">
+                                            Page {transactionMeta.page} of {transactionMeta.totalPages}
+                                        </p>
+                                        <div className="flex gap-1">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setTransactionPage(p => Math.max(1, p - 1))}
+                                                disabled={transactionPage === 1}
+                                            >
+                                                <ChevronLeft className="h-4 w-4" />
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setTransactionPage(p => Math.min(transactionMeta.totalPages, p + 1))}
+                                                disabled={transactionPage === transactionMeta.totalPages}
+                                            >
+                                                <ChevronRight className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
 
@@ -376,11 +416,11 @@ export default function MerchantDetailContainer({ params }) {
                     <div className="grid gap-4 md:grid-cols-2">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Customers ({customers.length})</CardTitle>
+                                <CardTitle>Customers ({customerMeta?.total || customers.length})</CardTitle>
                                 <CardDescription>Recently registered customers</CardDescription>
                             </CardHeader>
                             <CardContent className="p-0">
-                                <ScrollArea className="h-[400px]">
+                                <ScrollArea className="h-[350px]">
                                     <div className="divide-y pr-4">
                                         {customers.length > 0 ? (
                                             customers.map((c) => (
@@ -424,6 +464,31 @@ export default function MerchantDetailContainer({ params }) {
                                         )}
                                     </div>
                                 </ScrollArea>
+                                {customerMeta && customerMeta.totalPages > 1 && (
+                                    <div className="flex items-center justify-between px-6 py-3 border-t">
+                                        <p className="text-xs text-muted-foreground">
+                                            Page {customerMeta.page} of {customerMeta.totalPages}
+                                        </p>
+                                        <div className="flex gap-1">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setCustomerPage(p => Math.max(1, p - 1))}
+                                                disabled={customerPage === 1}
+                                            >
+                                                <ChevronLeft className="h-4 w-4" />
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setCustomerPage(p => Math.min(customerMeta.totalPages, p + 1))}
+                                                disabled={customerPage === customerMeta.totalPages}
+                                            >
+                                                <ChevronRight className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
 
@@ -508,6 +573,31 @@ export default function MerchantDetailContainer({ params }) {
                                         </TableBody>
                                     </Table>
                                 </ScrollArea>
+                                {transactionMeta && transactionMeta.totalPages > 1 && (
+                                    <div className="flex items-center justify-between px-6 py-3 border-t">
+                                        <p className="text-xs text-muted-foreground">
+                                            Page {transactionMeta.page} of {transactionMeta.totalPages}
+                                        </p>
+                                        <div className="flex gap-1">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setTransactionPage(p => Math.max(1, p - 1))}
+                                                disabled={transactionPage === 1}
+                                            >
+                                                <ChevronLeft className="h-4 w-4" />
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setTransactionPage(p => Math.min(transactionMeta.totalPages, p + 1))}
+                                                disabled={transactionPage === transactionMeta.totalPages}
+                                            >
+                                                <ChevronRight className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                     </div>
@@ -583,11 +673,11 @@ export default function MerchantDetailContainer({ params }) {
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>Coupon Batches ({batches.length})</CardTitle>
+                                <CardTitle>Coupon Batches ({batchMeta?.total || batches.length})</CardTitle>
                                 <CardDescription>Active campaigns</CardDescription>
                             </CardHeader>
                             <CardContent className="p-0">
-                                <ScrollArea className="h-[400px]">
+                                <ScrollArea className="h-[350px]">
                                     <div className="divide-y pr-4">
                                         {batches.length > 0 ? (
                                             batches.map((batch) => (
@@ -648,6 +738,31 @@ export default function MerchantDetailContainer({ params }) {
                                         )}
                                     </div>
                                 </ScrollArea>
+                                {batchMeta && batchMeta.total > 20 && (
+                                    <div className="flex items-center justify-between px-6 py-3 border-t">
+                                        <p className="text-xs text-muted-foreground">
+                                            Page {batchMeta.page} of {Math.ceil(batchMeta.total / 20)}
+                                        </p>
+                                        <div className="flex gap-1">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setBatchPage(p => Math.max(1, p - 1))}
+                                                disabled={batchPage === 1}
+                                            >
+                                                <ChevronLeft className="h-4 w-4" />
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setBatchPage(p => Math.min(Math.ceil(batchMeta.total / 20), p + 1))}
+                                                disabled={batchPage === Math.ceil(batchMeta.total / 20)}
+                                            >
+                                                <ChevronRight className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                     </div>
