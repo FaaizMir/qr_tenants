@@ -30,6 +30,7 @@ import {
   Megaphone,
   Trash2,
   Plus,
+  Minus,
   Check,
   Loader2,
   Image as ImageIcon,
@@ -488,7 +489,7 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
                     Drag to reposition and use the slider to zoom.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="relative w-full h-64 sm:h-80 bg-black rounded-lg overflow-hidden border border-muted">
+                <div className="relative w-full h-80 bg-slate-50 rounded-lg overflow-hidden border border-muted">
                   {imageSrc && (
                     <Cropper
                       image={imageSrc}
@@ -504,14 +505,32 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
                 <div className="space-y-4 py-2">
                   <div className="flex items-center gap-4">
                     <Label className="w-12">Zoom</Label>
-                    <Slider
-                      value={[zoom]}
-                      min={1}
-                      max={3}
-                      step={0.1}
-                      onValueChange={(value) => setZoom(value[0])}
-                      className="flex-1"
-                    />
+                    <div className="flex-1 flex items-center gap-3">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 rounded-full shrink-0"
+                        onClick={() => setZoom(Math.max(1, zoom - 0.1))}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <Slider
+                        value={[zoom]}
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        onValueChange={(value) => setZoom(value[0])}
+                        className="flex-1"
+                      />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 rounded-full shrink-0"
+                        onClick={() => setZoom(Math.min(3, zoom + 0.1))}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <DialogFooter>
@@ -533,30 +552,30 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
 
             {/* Preview Dialog */}
             <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
-              <DialogContent className="max-w-fit p-0 bg-transparent border-none shadow-none ring-0 [&>button]:hidden">
+              <DialogContent className="max-w-[400px] w-[90vw] p-0 bg-white rounded-2xl overflow-hidden border-none shadow-2xl [&>button]:hidden">
                 <DialogTitle className="sr-only">Ad Preview</DialogTitle>
                 <DialogDescription className="sr-only">
                   Full size preview of the promotional ad
                 </DialogDescription>
-                <div className="relative group">
+                <div className="relative flex items-center justify-center p-4">
                   {previewContent.type === "image" ? (
                     <img
                       src={previewContent.url}
                       alt="Preview"
-                      className="max-w-[95vw] lg:max-w-4xl max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                      className="max-w-full max-h-[80vh] object-contain rounded-xl"
                     />
                   ) : (
                     <video
                       src={previewContent.url}
                       controls
                       autoPlay
-                      className="max-w-[95vw] lg:max-w-4xl max-h-[85vh] rounded-lg shadow-2xl bg-black"
+                      className="max-w-full max-h-full rounded-xl shadow-md bg-black"
                     />
                   )}
                   <Button
                     variant="secondary"
                     size="icon"
-                    className="absolute -top-3 -right-3 h-8 w-8 rounded-full shadow-lg bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 border-none transition-transform hover:scale-110 z-50"
+                    className="absolute top-4 right-4 h-8 w-8 rounded-full shadow-lg bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 border-none transition-transform hover:scale-110 z-50"
                     onClick={() => setIsPreviewOpen(false)}
                   >
                     <Plus className="h-5 w-5 rotate-45" />
