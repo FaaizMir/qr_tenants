@@ -624,11 +624,11 @@ export default function AgentLandingPage() {
                           className={cn(
                             "absolute inset-0 bg-linear-to-b from-transparent to-black/80",
                             activeMerchant.category === "Food and Beverage" &&
-                              "bg-orange-600/20",
+                            "bg-orange-600/20",
                             activeMerchant.category === "Retails" &&
-                              "bg-blue-600/20",
+                            "bg-blue-600/20",
                             activeMerchant.category === "Services" &&
-                              "bg-emerald-600/20",
+                            "bg-emerald-600/20",
                           )}
                         />
                       </div>
@@ -670,7 +670,7 @@ export default function AgentLandingPage() {
 
                       <div className="grid sm:grid-cols-2 gap-6 pb-4 cursor-pointer">
                         {activeMerchant.batches &&
-                        activeMerchant.batches.length > 0 ? (
+                          activeMerchant.batches.length > 0 ? (
                           activeMerchant.batches.map((batch) => (
                             <div
                               key={batch.id}
@@ -724,11 +724,10 @@ export default function AgentLandingPage() {
                                     <div
                                       className="h-full bg-slate-900 rounded-full transition-all duration-1000"
                                       style={{
-                                        width: `${
-                                          (batch.issued_quantity /
-                                            batch.total_quantity) *
+                                        width: `${(batch.issued_quantity /
+                                          batch.total_quantity) *
                                           100
-                                        }%`,
+                                          }%`,
                                       }}
                                     ></div>
                                   </div>
