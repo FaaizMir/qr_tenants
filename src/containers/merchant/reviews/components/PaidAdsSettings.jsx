@@ -47,7 +47,6 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
   const [activeTab, setActiveTab] = useState(
     config.paid_ad_video_status ? "video" : "image",
   );
-  console.log("mcid", merchantId);
   // Cropper State
   const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
