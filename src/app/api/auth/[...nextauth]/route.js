@@ -75,6 +75,9 @@ export const authOptions = {
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
             admin_id: data?.user?.adminId || null,
+            is_subscription_expired: data.user.is_subscription_expired,
+            subscription_expires_at: data.user.subscription_expires_at,
+
           };
         } catch (error) {
           const apiError =
@@ -117,6 +120,8 @@ export const authOptions = {
           token.subscriptionType ||
           "temporary";
         token.adminId = user.admin_id ?? user.adminId ?? token.adminId;
+        token.isSubscriptionExpired = user.is_subscription_expired;
+        token.subscriptionExpiresAt = user.subscription_expires_at;
       }
       return token;
     },
@@ -134,6 +139,9 @@ export const authOptions = {
       if (token?.adminId) session.user.adminId = token.adminId;
       if (token?.accessToken) session.accessToken = token.accessToken;
       if (token?.adminId) session.adminId = token.adminId;
+
+      session.user.is_subscription_expired = token.isSubscriptionExpired;
+      session.user.subscription_expires_at = token.subscriptionExpiresAt;
 
       return session;
     },

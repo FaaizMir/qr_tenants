@@ -123,6 +123,8 @@ export function AppSidebar({
   //   icon: MessageSquare,
   // },
 
+
+
   // Merchant navigation
   const merchantNav = [
     {
@@ -163,12 +165,12 @@ export function AppSidebar({
     // Annual-only sections
     ...(subscriptionType === "annual"
       ? [
-          {
-            title: "Customer Data",
-            url: "/merchant/customer-data",
-            icon: Database,
-          },
-        ]
+        {
+          title: "Customer Data",
+          url: "/merchant/customer-data",
+          icon: Database,
+        },
+      ]
       : []),
     {
       title: tMerchant("logs"),

@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import AdminOverviewTab from "./overview-tab";
 
 export default function AgentDashboardContainer() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const tAgentDashboard = useTranslations("dashboard.agentDashboard");
 
   return (
@@ -15,7 +17,6 @@ export default function AgentDashboardContainer() {
         <p className="text-muted-foreground">{tAgentDashboard("descrption")}</p>
       </div>
 
-      <AdminOverviewTab />
     </div>
   );
 }

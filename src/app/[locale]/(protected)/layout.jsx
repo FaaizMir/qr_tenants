@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { SubscriptionExpiryPopup } from "@/components/common/subscription-expiry-popup";
 
 export default function ProtectedLayout({ children, params }) {
   const locale = use(params);
@@ -23,6 +24,20 @@ export default function ProtectedLayout({ children, params }) {
   const role = (user?.role || "").toLowerCase();
   const [mounted, setMounted] = useState(true);
   const pathnameHook = usePathname();
+
+  const [showExpiryPopup, setShowExpiryPopup] = useState(false);
+
+  useEffect(() => {
+    if (status === "loading") return;
+
+    const isAgent = role === "agent" || role === "admin";
+
+    if (isAgent && user?.is_subscription_expired && !pathnameHook?.includes("/wallet")) {
+      setShowExpiryPopup(true);
+    } else {
+      setShowExpiryPopup(false);
+    }
+  }, [user, status, pathnameHook, role]);
 
   useEffect(() => {
     if (status === "loading") return; // wait for session to resolve
@@ -121,6 +136,10 @@ export default function ProtectedLayout({ children, params }) {
         </div>
         <div className="flex flex-1 flex-col gap-6 p-6">{children}</div>
       </SidebarInset>
+      <SubscriptionExpiryPopup
+        isOpen={showExpiryPopup}
+        onClose={() => setShowExpiryPopup(false)}
+      />
     </SidebarProvider>
   );
 }

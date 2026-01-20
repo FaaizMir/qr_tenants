@@ -12,12 +12,34 @@ import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertTriangle, Plus, Sparkles, CheckCircle2, Wallet } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import StripeCheckout from "@/components/stripe/stripeCheckout";
+import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+
+const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
 export default function AgentWalletContainer() {
   const { data: session } = useSession();
   const adminId = session?.user?.adminId;
+  const isExpired = session?.user?.is_subscription_expired;
 
   const tAgentWallet = useTranslations("dashboard.agentWallet");
+
+  /** Credits Top-up */
+  const [packages, setPackages] = useState([]);
+  const [loadingPackages, setLoadingPackages] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
 
   /** Pagination + search */
   const [txPage, setTxPage] = useState(0);
@@ -108,6 +130,68 @@ export default function AgentWalletContainer() {
   }, [adminId, txPage, txSize]);
 
   /* ----------------------------------
+   * Fetch credit packages
+   * ---------------------------------- */
+  const staticPackages = [
+    {
+      id: "static-1",
+      name: "Basic Top-up",
+      description: "500 Credits for your operations",
+      credits: 500,
+      price: 50,
+      currency: "USD",
+    },
+    {
+      id: "static-2",
+      name: "Pro Top-up",
+      description: "1500 Credits for growing business",
+      credits: 1500,
+      price: 120,
+      currency: "USD",
+    },
+    {
+      id: "static-3",
+      name: "Enterprise Top-up",
+      description: "5000 Credits for large scale operations",
+      credits: 5000,
+      price: 350,
+      currency: "USD",
+    },
+  ];
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        setLoadingPackages(true);
+        const response = await axiosInstance.get(CREDIT_PACKAGES_API, {
+          params: { merchant_type: "annual" },
+        });
+        const data = response?.data?.data || response?.data || [];
+        if (Array.isArray(data) && data.length > 0) {
+          setPackages(data);
+          setSelectedPackage(data[0]);
+        } else {
+          setPackages(staticPackages);
+          setSelectedPackage(staticPackages[0]);
+        }
+      } catch (err) {
+        console.error("Failed to load packages:", err);
+        setPackages(staticPackages);
+        setSelectedPackage(staticPackages[0]);
+      } finally {
+        setLoadingPackages(false);
+      }
+    };
+
+    fetchPackages();
+  }, []);
+
+  const handleStartCheckout = (pkg) => {
+    setSelectedPackage(pkg);
+    setCheckoutOpen(true);
+  };
+
+  /* ----------------------------------
    * Search (client-side)
    * ---------------------------------- */
   const filteredTx = useMemo(() => {
@@ -171,12 +255,159 @@ export default function AgentWalletContainer() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">{tAgentWallet("agentwallet")}</h1>
-        <p className="text-muted-foreground">{tAgentWallet("description")}</p>
+      {isExpired && (
+        <Alert variant="destructive" className="border-2">
+          <AlertTriangle className="h-5 w-5" />
+          <AlertTitle className="font-bold text-lg">Subscription Expired</AlertTitle>
+          <AlertDescription className="text-base">
+            Your subscription has expired. Please top up your balance to continue using the platform.
+          </AlertDescription>
+        </Alert>
+      )}
+
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">{tAgentWallet("agentwallet")}</h1>
+          <p className="text-muted-foreground">{tAgentWallet("description")}</p>
+        </div>
+
+        <Button
+          onClick={() => {
+            if (packages.length > 0) {
+              setCheckoutOpen(true);
+            } else {
+              toast.error("No top-up packages available at the moment.");
+            }
+          }}
+          className="gap-2 bg-primary hover:bg-primary/90"
+        >
+          <Plus className="h-4 w-4" />
+          Top up Balance
+        </Button>
       </div>
 
       <PageTabs tabs={tabs} defaultTab="balance" />
+
+      <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden border-none shadow-2xl rounded-3xl bg-white">
+          <div className="grid md:grid-cols-12">
+            {/* LEFT — Order Overview */}
+            <div className="md:col-span-5 bg-slate-50/80 p-7 flex flex-col justify-between border-r border-slate-100">
+              <div>
+                <DialogHeader className="mb-6">
+                  <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+                    Order Overview
+                  </DialogTitle>
+                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">Checkout details</p>
+                </DialogHeader>
+
+                {selectedPackage && (
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm relative overflow-hidden group">
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110" />
+                      <div className="flex items-center gap-3 mb-2 relative z-10">
+                        <div className="p-2 bg-primary text-white rounded-xl shadow-lg shadow-primary/20">
+                          <Sparkles className="h-4 w-4" />
+                        </div>
+                        <p className="font-bold text-lg text-slate-900 truncate">
+                          {selectedPackage.name}
+                        </p>
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-2">
+                        {selectedPackage.description || "Premium credit package for your business growth."}
+                      </p>
+                    </div>
+
+                    <div className="space-y-3 px-1">
+                      <div className="flex justify-between items-center text-sm font-medium">
+                        <span className="text-slate-500">Credits Included</span>
+                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">{selectedPackage.credits}</span>
+                      </div>
+
+                      <div className="pt-3 border-t border-slate-200">
+                        <div className="flex justify-between items-end">
+                          <div className="flex flex-col">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Amount</span>
+                            <span className="text-2xl font-black text-primary tracking-tighter">
+                              {selectedPackage.currency || "USD"}{" "}
+                              {Number(selectedPackage.price || 0).toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6 flex items-center gap-3 p-3 rounded-2xl bg-emerald-50 border border-emerald-100/50">
+                <div className="p-1.5 bg-emerald-500 text-white rounded-lg shadow-md shadow-emerald-500/10 shrink-0">
+                  <CheckCircle2 className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">Secure Payment</p>
+                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">SSL Encrypted Stripe Gateway</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — Payment Input */}
+            <div className="md:col-span-7 bg-white p-7 flex flex-col h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
+              <div className="mb-6 flex overflow-x-auto gap-2 pb-2">
+                {packages.map((pkg) => (
+                  <Button
+                    key={pkg.id}
+                    variant={selectedPackage?.id === pkg.id ? "default" : "outline"}
+                    className="shrink-0"
+                    onClick={() => setSelectedPackage(pkg)}
+                  >
+                    {pkg.name}
+                  </Button>
+                ))}
+              </div>
+
+              {selectedPackage ? (
+                <div className="h-full flex flex-col justify-center">
+                  <div className="mb-6">
+                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">Card Details</h3>
+                    <p className="text-sm text-slate-500 font-medium">Please enter your payment information below.</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-5 border border-slate-100 shadow-inner transition-all hover:bg-slate-50/80">
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Amount Payable</span>
+                        <span className="text-lg font-black text-slate-900">
+                          {selectedPackage.currency || "USD"}{" "}
+                          {Number(selectedPackage.price || 0).toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="h-px bg-slate-200/50 mb-6" />
+                      <StripeCheckout
+                        pkg={selectedPackage}
+                        onSuccess={() => {
+                          toast.success("Wallet topped up successfully!");
+                          setCheckoutOpen(false);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full text-center py-20 px-10">
+                  <div className="p-6 bg-slate-50 rounded-full mb-6 border border-slate-100 shadow-inner">
+                    <Wallet className="h-10 w-10 text-slate-300 animate-pulse" />
+                  </div>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">No selection found</h4>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                    Please select a credit package to proceed.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
