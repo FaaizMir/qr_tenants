@@ -6,8 +6,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function AgentDashboardContainer() {
-  const { data: session } = useSession();
-  const router = useRouter();
   const tAgentDashboard = useTranslations("dashboard.agentDashboard");
 
   return (
