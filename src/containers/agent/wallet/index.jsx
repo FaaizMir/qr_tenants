@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
+import { useSubscription } from "@/context/SubscriptionContext";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, Plus, Sparkles, CheckCircle2, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,8 +31,9 @@ const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
 export default function AgentWalletContainer() {
   const { data: session } = useSession();
+  const { isSubscriptionExpired, refreshSubscription } = useSubscription();
   const adminId = session?.user?.adminId;
-  const isExpired = session?.user?.is_subscription_expired;
+  const isExpired = isSubscriptionExpired;
 
   const tAgentWallet = useTranslations("dashboard.agentWallet");
 
@@ -130,60 +132,45 @@ export default function AgentWalletContainer() {
   }, [adminId, txPage, txSize]);
 
   /* ----------------------------------
-   * Fetch credit packages
+   * Fetch subscription fee
    * ---------------------------------- */
-  const staticPackages = [
-    {
-      id: "static-1",
-      name: "Basic Top-up",
-      description: "500 Credits for your operations",
-      credits: 500,
-      price: 50,
-      currency: "USD",
-    },
-    {
-      id: "static-2",
-      name: "Pro Top-up",
-      description: "1500 Credits for growing business",
-      credits: 1500,
-      price: 120,
-      currency: "USD",
-    },
-    {
-      id: "static-3",
-      name: "Enterprise Top-up",
-      description: "5000 Credits for large scale operations",
-      credits: 5000,
-      price: 350,
-      currency: "USD",
-    },
-  ];
-
   useEffect(() => {
-    const fetchPackages = async () => {
+    const fetchSubscriptionFee = async () => {
       try {
         setLoadingPackages(true);
-        const response = await axiosInstance.get(CREDIT_PACKAGES_API, {
-          params: { merchant_type: "annual" },
-        });
-        const data = response?.data?.data || response?.data || [];
-        if (Array.isArray(data) && data.length > 0) {
-          setPackages(data);
-          setSelectedPackage(data[0]);
-        } else {
-          setPackages(staticPackages);
-          setSelectedPackage(staticPackages[0]);
+        // Try to fetch from the specific subscription fee endpoint
+        const res = await axiosInstance.get("/wallets/admin-subscription-fee");
+
+        // Handle both { data: { ... } } and directly { ... }
+        const rawData = res.data?.data || res.data;
+
+        // Final fallback to /wallets/super-admin if data seems missing
+        let finalData = rawData;
+        if (!finalData?.fee) {
+          const backupRes = await axiosInstance.get("/wallets/super-admin");
+          finalData = backupRes.data?.data || backupRes.data;
         }
+
+        const dynamicPackage = {
+          id: "subscription-renewal",
+          name: "Annual Subscription Renewal",
+          description: "Renew your agent account for another year of full access.",
+          credits: "Unlimited",
+          price: Number(finalData?.fee || 0),
+          currency: finalData?.currency || "USD",
+        };
+
+        setPackages([dynamicPackage]);
+        setSelectedPackage(dynamicPackage);
       } catch (err) {
-        console.error("Failed to load packages:", err);
-        setPackages(staticPackages);
-        setSelectedPackage(staticPackages[0]);
+        console.error("Failed to load subscription fee:", err);
+        // last ditch effort if endpoints fail completely
       } finally {
         setLoadingPackages(false);
       }
     };
 
-    fetchPackages();
+    fetchSubscriptionFee();
   }, []);
 
   const handleStartCheckout = (pkg) => {
@@ -258,10 +245,10 @@ export default function AgentWalletContainer() {
       {isExpired && (
         <Alert variant="destructive" className="border-2">
           <AlertTriangle className="h-5 w-5" />
-          <AlertTitle className="font-bold text-lg">Subscription Expired</AlertTitle>
+          <AlertTitle className="font-bold text-lg">Subscription Required
+          </AlertTitle>
           <AlertDescription className="text-base">
-            Your subscription has expired. Please top up your balance to continue using the platform.
-          </AlertDescription>
+            Choose a subscription plan to get full access to all features and start using the platform without limits.          </AlertDescription>
         </Alert>
       )}
 
@@ -282,7 +269,7 @@ export default function AgentWalletContainer() {
           className="gap-2 bg-primary hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" />
-          Top up Balance
+          Renew Subscription
         </Button>
       </div>
 
@@ -353,18 +340,20 @@ export default function AgentWalletContainer() {
 
             {/* RIGHT — Payment Input */}
             <div className="md:col-span-7 bg-white p-7 flex flex-col h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
-              <div className="mb-6 flex overflow-x-auto gap-2 pb-2">
-                {packages.map((pkg) => (
-                  <Button
-                    key={pkg.id}
-                    variant={selectedPackage?.id === pkg.id ? "default" : "outline"}
-                    className="shrink-0"
-                    onClick={() => setSelectedPackage(pkg)}
-                  >
-                    {pkg.name}
-                  </Button>
-                ))}
-              </div>
+              {packages.length > 1 && (
+                <div className="mb-6 flex overflow-x-auto gap-2 pb-2">
+                  {packages.map((pkg) => (
+                    <Button
+                      key={pkg.id}
+                      variant={selectedPackage?.id === pkg.id ? "default" : "outline"}
+                      className="shrink-0"
+                      onClick={() => setSelectedPackage(pkg)}
+                    >
+                      {pkg.name}
+                    </Button>
+                  ))}
+                </div>
+              )}
 
               {selectedPackage ? (
                 <div className="h-full flex flex-col justify-center">

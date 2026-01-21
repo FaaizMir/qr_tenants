@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/components/providers/session-provider";
+import { SubscriptionProvider } from "@/context/SubscriptionContext";
 import { Toaster } from "sonner";
 import "../globals.css";
 
@@ -41,10 +42,12 @@ export default async function LocaleLayout({ children, params }) {
         className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}
       >
         <AuthProvider>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-            <Toaster position="top-right" />
-          </NextIntlClientProvider>
+          <SubscriptionProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+              <Toaster position="top-right" />
+            </NextIntlClientProvider>
+          </SubscriptionProvider>
         </AuthProvider>
       </body>
     </html>
