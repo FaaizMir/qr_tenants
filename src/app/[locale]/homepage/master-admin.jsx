@@ -16,7 +16,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import TableToolbar from "@/components/common/table-toolbar";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
@@ -73,9 +73,9 @@ export default function MasterAdminLandingPage() {
           country: agent.country || "Unknown",
           status:
             agent.is_active === true ||
-            agent.is_active === 1 ||
-            agent.user?.is_active === true ||
-            agent.user?.is_active === 1
+              agent.is_active === 1 ||
+              agent.user?.is_active === true ||
+              agent.user?.is_active === 1
               ? "active"
               : "inactive",
           joined: new Date().toLocaleDateString(),
@@ -199,41 +199,39 @@ export default function MasterAdminLandingPage() {
               </div>
 
               {/* Filters & Controls */}
-              <div className="bg-white p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0)] border border-slate-200 flex flex-col lg:flex-row gap-2 items-center ring-4 ring-slate-100/50">
-                <div className="flex-1 relative border focus-within:border-primary rounded-2xl w-full">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <Input
-                    placeholder="Search agents by name or email..."
-                    className="pl-12 h-12 border-0 bg-transparent focus-visible:ring-0 text-base"
-                    value={searchQuery}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  />
-                </div>
-                <Select
-                  value={selectedCountry}
-                  onValueChange={(val) => {
-                    setSelectedCountry(val);
+              <div className="bg-white p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0)] border border-slate-200 ring-4 ring-slate-100/50">
+                <TableToolbar
+                  placeholder="Search agents by name or email..."
+                  onSearchChange={(val) => {
+                    setSearchQuery(val);
                     setCurrentPage(1);
                   }}
-                >
-                  <SelectTrigger className="w-full sm:w-[220px] h-14 bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-primary/20 rounded-xl  text-slate-700 m-auto">
-                    <div className="flex items-center gap-2 text-slate-600 ">
-                      <Globe className="h-4 w-4" />
-                      <SelectValue placeholder="All Countries" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Countries</SelectItem>
-                    {countries.map((c) => (
-                      <SelectItem key={c} value={c}>
-                        {c}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  rightSlot={
+                    <Select
+                      value={selectedCountry}
+                      onValueChange={(val) => {
+                        setSelectedCountry(val);
+                        setCurrentPage(1);
+                      }}
+                    >
+                      <SelectTrigger className="w-full sm:w-[220px] h-10 border-input focus:ring-0 focus:border-ring rounded-md text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Globe className="h-4 w-4" />
+                          <SelectValue placeholder="All Countries" />
+                        </div>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Countries</SelectItem>
+                        {countries.map((c) => (
+                          <SelectItem key={c} value={c}>
+                            {c}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  }
+                  className="shadow-none border-0 p-0"
+                />
               </div>
 
               {/* Agents Grid */}

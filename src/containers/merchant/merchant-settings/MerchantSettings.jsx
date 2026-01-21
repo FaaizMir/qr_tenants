@@ -13,7 +13,7 @@ import RewardStrategySettings from "./components/RewardStrategySettings";
 import BirthdayRewardsSettings from "./components/BirthdayRewardsSettings";
 import StickySaveBar from "./components/StickySaveBar";
 
-export default function ReviewSettings() {
+export default function MerchantSettings() {
   const [loadingPresets, setLoadingPresets] = useState(false);
   const [loadingSettings, setLoadingSettings] = useState(false);
   const [config, setConfig] = useState({

@@ -10,7 +10,7 @@ import MerchantCouponsListingContainer from "@/containers/merchant/coupons/listi
 import MerchantWalletContainer from "@/containers/merchant/wallet";
 import MerchantAnalyticsContainer from "@/containers/merchant/analytics";
 import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
-import ReviewSettings from "@/containers/merchant/reviews/ReviewSettings";
+import MerchantSettings from "@/containers/merchant/merchant-settings/MerchantSettings";
 import AutomationSettings from "@/containers/merchant/automation";
 import MerchantAdsContainer from "@/containers/merchant/ads";
 
@@ -31,7 +31,11 @@ export const getDashboardTabs = ({
       content: (
         <div className="space-y-6">
           {/* Stats Grid */}
-          <CreditsOverview data={creditStats} dashboardData={dashboardData} loading={loadingDashboard} />
+          <CreditsOverview
+            data={creditStats}
+            dashboardData={dashboardData}
+            loading={loadingDashboard}
+          />
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Placeholder for future: redemptions/automation */}
@@ -63,7 +67,7 @@ export const getDashboardTabs = ({
     {
       value: "reviews",
       label: "Settings",
-      content: <ReviewSettings />,
+      content: <MerchantSettings />,
     },
     // {
     //   value: "automation",

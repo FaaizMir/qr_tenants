@@ -123,11 +123,12 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
     setUploading(true);
     const formData = new FormData();
     formData.append("paidAdVideo", file);
+    /*formData.append("paid_ad_placement", config.placement || "top");*/
 
     try {
       // Using a specific endpoint for video or standard upload if backend supports it
       const response = await axiosInstance.post(
-        `/merchant-settings/merchant/${merchantId}/paid-ad-video`, // Assuming similar endpoint pattern
+        `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -176,6 +177,7 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
         croppedImage,
         currentFilename || "image.jpg",
       );
+      /*  formData.append("paid_ad_placement", config.placement || "top"); */
 
       formData.append(
         "paidAdPlacement",
@@ -280,9 +282,20 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
               <Label>Ad Placement</Label>
               <Select
                 value={config.placement || "top"}
-                onValueChange={(val) =>
-                  setConfig({ ...config, placement: val })
-                }
+                onValueChange={async (val) => {
+                  setConfig({ ...config, placement: val });
+                  try {
+                    await axiosInstance.patch(
+                      `/merchant-settings/merchant/${merchantId}`,
+                      {
+                        paid_ad_placement: val,
+                      },
+                    );
+                    toast.success("Ad placement updated");
+                  } catch (err) {
+                    console.error("Failed to update placement:", err);
+                  }
+                }}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select placement" />
