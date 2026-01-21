@@ -101,7 +101,17 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update" && session) {
+        // Handle session update
+        if (session.is_subscription_expired !== undefined) {
+          token.isSubscriptionExpired = session.is_subscription_expired;
+        }
+        if (session.subscription_expires_at !== undefined) {
+          token.subscriptionExpiresAt = session.subscription_expires_at;
+        }
+      }
+
       if (user) {
         token.id = user.id ?? token.id;
         token.email = user.email ?? token.email;

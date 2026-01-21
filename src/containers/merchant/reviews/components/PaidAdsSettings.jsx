@@ -177,6 +177,10 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
         currentFilename || "image.jpg",
       );
 
+      formData.append(
+        "paidAdPlacement",
+        config.placement || "top",
+      );
       const response = await axiosInstance.post(
         `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
         formData,
