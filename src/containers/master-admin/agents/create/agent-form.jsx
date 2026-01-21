@@ -182,7 +182,7 @@ export function AgentForm({
       console.error(`Error ${isEdit ? "updating" : "creating"} agent:`, error);
       toast.error(
         error?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} agent. Please try again.`
+        `Failed to ${isEdit ? "update" : "create"} agent. Please try again.`
       );
     } finally {
       setLoading(false);
@@ -258,7 +258,7 @@ export function AgentForm({
             <Label htmlFor="password">
               {isEdit
                 ? "New Password (leave blank to keep current)"
-                : "Initial Password"}{" "}
+                : "Password"}{" "}
               <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
@@ -401,8 +401,8 @@ export function AgentForm({
                 ? "Updating..."
                 : "Creating..."
               : isEdit
-              ? "Update Agent"
-              : "Create Agent"}
+                ? "Update Agent"
+                : "Create Agent"}
           </Button>
         </CardFooter>
       </Card>

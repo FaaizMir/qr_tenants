@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, ChevronRight } from "lucide-react";
+import { ExternalLink, ChevronRight, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 

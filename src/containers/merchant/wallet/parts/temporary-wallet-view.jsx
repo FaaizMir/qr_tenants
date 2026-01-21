@@ -63,7 +63,7 @@ export default function TemporaryWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Total Remaining Coupons
+                Total Remaining Credits
               </CardTitle>
               <CardDescription>Temporary credits</CardDescription>
             </div>
@@ -168,8 +168,8 @@ export default function TemporaryWalletView({
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
-                        (creditDetails.used / creditDetails.purchased) * 100,
-                      )
+                      (creditDetails.used / creditDetails.purchased) * 100,
+                    )
                     : 0}
                   %
                 </span>

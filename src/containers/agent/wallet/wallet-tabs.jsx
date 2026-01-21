@@ -73,7 +73,7 @@ export const getWalletTabs = ({
             </Card>
 
             {/* Total Spent */}
-            <Card className="shadow-sm border-muted/60 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
+            {/* <Card className="shadow-sm border-muted/60 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground/80">
                   Total Spent
@@ -90,10 +90,10 @@ export const getWalletTabs = ({
                   Funds utilized
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Pending Amount */}
-            <Card className="shadow-sm border-muted/60 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
+            {/* <Card className="shadow-sm border-muted/60 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground/80">
                   Pending Amount
@@ -110,7 +110,7 @@ export const getWalletTabs = ({
                   Awaiting settlement
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">

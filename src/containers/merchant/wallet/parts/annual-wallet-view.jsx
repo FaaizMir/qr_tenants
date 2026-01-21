@@ -217,7 +217,7 @@ export default function AnnualWalletView({
           <CardContent className="space-y-4 pt-2">
             <div className="flex flex-col gap-1">
               <span className="text-xs text-muted-foreground">
-                Total Remaining Coupons
+                Total Remaining Credits
               </span>
               <div className="text-4xl font-bold tracking-tight text-primary">
                 {format(balance)}
@@ -305,8 +305,8 @@ export default function AnnualWalletView({
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
-                        (creditDetails.used / creditDetails.purchased) * 100,
-                      )
+                      (creditDetails.used / creditDetails.purchased) * 100,
+                    )
                     : 0}
                   %
                 </span>

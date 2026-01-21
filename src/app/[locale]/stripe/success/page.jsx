@@ -34,17 +34,20 @@ export default function StripeSuccessPage() {
         if (pkg.id === "subscription-renewal") {
           // Agent Subscription Renewal
           if (adminId) {
+
+            console.log("Renewing subscription for admin", adminId);
             await axiosInstance.post(`/wallets/admin/${adminId}/subscribe`);
             await refreshSubscription();
             toast.success("Subscription renewed successfully!");
           }
+
         } else if (merchantId) {
           // Standard Merchant Credit Purchase
           const payload = {
             credits: Number(pkg.credits) || 0,
             credit_type: pkg.credit_type || "general",
             amount: Number(pkg.price) || 0,
-            admin_id: 1,
+            admin_id: session?.user?.adminId,
             description: `${pkg.name} purchase`,
             metadata: {
               package_id: pkg.id,

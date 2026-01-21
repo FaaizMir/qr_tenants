@@ -74,7 +74,7 @@ export const authOptions = {
             subscriptionType: data?.merchant?.merchant_type || "temporary",
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
-            admin_id: data?.user?.adminId || null,
+            admin_id: data?.merchant?.admin_id || data?.user?.adminId || null,
             is_subscription_expired: data.user.is_subscription_expired,
             subscription_expires_at: data.user.subscription_expires_at,
 
@@ -121,7 +121,6 @@ export const authOptions = {
         token.merchantId =
           user.merchant_id ?? user.merchantId ?? token.merchantId;
         token.merchantActive = user.merchant_active ?? token.merchantActive;
-        token.adminId = user.admin_id ?? user.adminId ?? token.adminId;
         token.subscriptionType =
           user.subscriptionType ||
           user.subscription_type ||

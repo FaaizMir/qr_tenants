@@ -202,16 +202,16 @@ export function AppSidebar({
       url: "/master-admin/packages",
       icon: Package,
     },
-    {
-      title: tMasterAdmin("commission"),
-      url: "/master-admin/commission",
-      icon: DollarSign,
-    },
-    {
-      title: tMasterAdmin("approvals"),
-      url: "/master-admin/approvals",
-      icon: CheckCircle,
-    },
+    // {
+    //   title: tMasterAdmin("commission"),
+    //   url: "/master-admin/commission",
+    //   icon: DollarSign,
+    // },
+    // {
+    //   title: tMasterAdmin("approvals"),
+    //   url: "/master-admin/approvals",
+    //   icon: CheckCircle,
+    // },
     {
       title: tMasterAdmin("logs"),
       url: "/master-admin/logs",

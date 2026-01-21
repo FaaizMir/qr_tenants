@@ -19,7 +19,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
   const metrics = [
     {
       label: "Total Coupons",
-      value: overview.totalCouponsIssued,
+      value: overview.totalCoupons,
       icon: Layers,
       color: "text-blue-600 dark:text-blue-400",
       bgClass: "from-blue-50 to-white dark:from-blue-950/50 dark:to-background border-blue-200 dark:border-blue-900",
