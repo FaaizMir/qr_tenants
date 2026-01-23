@@ -12,7 +12,8 @@ import MerchantAnalyticsContainer from "@/containers/merchant/analytics";
 import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
 import MerchantSettings from "@/containers/merchant/merchant-settings/MerchantSettings";
 import AutomationSettings from "@/containers/merchant/automation";
-import MerchantAdsContainer from "@/containers/merchant/ads";
+
+import PaidAdsTabContainer from "@/containers/merchant/paid-ads";
 
 export const getDashboardTabs = ({
   kpiData,
@@ -65,6 +66,11 @@ export const getDashboardTabs = ({
     //   ]
     //   : []),
     {
+      value: "paid-ads",
+      label: "Paid Ads",
+      content: <PaidAdsTabContainer />,
+    },
+    {
       value: "reviews",
       label: "Settings",
       content: <MerchantSettings />,
@@ -74,11 +80,7 @@ export const getDashboardTabs = ({
     //   label: "Automation",
     //   content: <AutomationSettings />,
     // },
-    // {
-    //   value: "ads",
-    //   label: "Ads & Marketplace",
-    //   content: <MerchantAdsContainer />,
-    // },
+
     /* {
       value: "feedback-form",
       label: "Feedback Form",

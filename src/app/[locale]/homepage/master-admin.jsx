@@ -59,9 +59,27 @@ export default function MasterAdminLandingPage() {
 
   // Mocked Platform Stats (since real endpoint might not exist yet)
   const stats = [
-    { label: "Active Agents", value: agents.length || 0, icon: Users, color: "text-blue-500", bg: "bg-blue-500/10" },
-    { label: "Total Merchants", value: agents.reduce((acc, curr) => acc + (curr.merchantsCount || 0), 0), icon: Store, color: "text-purple-500", bg: "bg-purple-500/10" },
-    { label: "Global Reach", value: countries.length, icon: Globe, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+    {
+      label: "Active Agents",
+      value: agents.length || 0,
+      icon: Users,
+      color: "text-blue-500",
+      bg: "bg-blue-500/10",
+    },
+    {
+      label: "Total Merchants",
+      value: agents.reduce((acc, curr) => acc + (curr.merchantsCount || 0), 0),
+      icon: Store,
+      color: "text-purple-500",
+      bg: "bg-purple-500/10",
+    },
+    {
+      label: "Global Reach",
+      value: countries.length,
+      icon: Globe,
+      color: "text-emerald-500",
+      bg: "bg-emerald-500/10",
+    },
   ];
 
   // Pagination
@@ -84,9 +102,9 @@ export default function MasterAdminLandingPage() {
           country: agent.country || "Unknown",
           status:
             agent.is_active === true ||
-              agent.is_active === 1 ||
-              agent.user?.is_active === true ||
-              agent.user?.is_active === 1
+            agent.is_active === 1 ||
+            agent.user?.is_active === true ||
+            agent.user?.is_active === 1
               ? "active"
               : "inactive",
           joined: new Date().toLocaleDateString(),
@@ -124,7 +142,7 @@ export default function MasterAdminLandingPage() {
   const totalPages = Math.ceil(filteredAgents.length / ITEMS_PER_PAGE);
   const paginatedAgents = filteredAgents.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   const handleAgentClick = (agent) => {
@@ -143,9 +161,24 @@ export default function MasterAdminLandingPage() {
         </div>
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-6 mr-4 text-sm font-medium text-slate-600">
-            <Link href="#platform-stats" className="hover:text-primary transition-colors">Overview</Link>
-            <Link href="#agent-directory" className="hover:text-primary transition-colors">Directory</Link>
-            <Link href="#features" className="hover:text-primary transition-colors">Features</Link>
+            <Link
+              href="#platform-stats"
+              className="hover:text-primary transition-colors"
+            >
+              Overview
+            </Link>
+            <Link
+              href="#agent-directory"
+              className="hover:text-primary transition-colors"
+            >
+              Directory
+            </Link>
+            <Link
+              href="#features"
+              className="hover:text-primary transition-colors"
+            >
+              Features
+            </Link>
           </div>
           <LanguageSwitcher />
           <Link
@@ -155,36 +188,57 @@ export default function MasterAdminLandingPage() {
             Sign In
           </Link>
           <Link href={`/${locale}/login`}>
-            <Button className="rounded-full px-6 font-bold shadow-lg shadow-primary/20">Get Started</Button>
+            <Button className="rounded-full px-6 font-bold shadow-lg shadow-primary/20">
+              Get Started
+            </Button>
           </Link>
         </div>
       </header>
 
       <main className="flex-1">
         {/* -- KPIS & HERO COMPACT -- */}
-        <section className="bg-white pt-12 pb-20 px-6 lg:px-10 border-b border-slate-100" id="platform-stats">
+        <section
+          className="bg-white pt-12 pb-20 px-6 lg:px-10 border-b border-slate-100"
+          id="platform-stats"
+        >
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row items-end justify-between gap-10 mb-16">
               <div className="max-w-2xl">
-                <Badge variant="outline" className="mb-4 bg-primary/5 text-primary border-primary/20">Master Admin Control</Badge>
+                <Badge
+                  variant="outline"
+                  className="mb-4 bg-primary/5 text-primary border-primary/20"
+                >
+                  Master Admin Control
+                </Badge>
                 <h1 className="text-4xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
                   Platform <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Intelligence Center</span>
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-600">
+                    Intelligence Center
+                  </span>
                 </h1>
                 <p className="mt-4 text-lg text-slate-500 max-w-lg">
-                  Monitor global agent performance, manage territory distribution, and oversee merchant network growth from a single dashboard.
+                  Monitor global agent performance, manage territory
+                  distribution, and oversee merchant network growth from a
+                  single dashboard.
                 </p>
               </div>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full lg:w-auto">
                 {stats.map((stat, idx) => (
-                  <div key={idx} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 min-w-[140px]">
+                  <div
+                    key={idx}
+                    className="bg-slate-50 p-5 rounded-2xl border border-slate-100 min-w-[140px]"
+                  >
                     <div className={`p-2 rounded-lg w-fit mb-3 ${stat.bg}`}>
                       <stat.icon className={`w-5 h-5 ${stat.color}`} />
                     </div>
-                    <div className="text-2xl font-black text-slate-900">{stat.value}</div>
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-2xl font-black text-slate-900">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -192,15 +246,10 @@ export default function MasterAdminLandingPage() {
           </div>
         </section>
 
-
         {/* -- Main Content Area (Agent Directory) -- */}
-        <section
-          className="bg-slate-50 py-20"
-          id="agent-directory"
-        >
+        <section className="bg-slate-50 py-20" id="agent-directory">
           <div className="px-6 lg:px-10 max-w-[1600px] mx-auto">
             <div className="space-y-10 animate-in fade-in duration-500">
-
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
                   <h2 className="text-3xl font-black tracking-tight text-slate-900">
@@ -252,7 +301,6 @@ export default function MasterAdminLandingPage() {
                 </div>
               </div>
 
-
               {/* Agents Grid */}
               {loading ? (
                 <div className="py-20 flex justify-center">
@@ -265,7 +313,14 @@ export default function MasterAdminLandingPage() {
                       <div
                         key={agent.id}
                         onClick={() => handleAgentClick(agent)}
-                        className="group bg-white rounded-3xl p-1 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col relative overflow-hidden hover:border-primary/20 hover:-translate-y-1"
+                        className="
+    group bg-white rounded-3xl p-1
+    shadow-sm hover:shadow-xl
+    transition-all duration-300
+    cursor-pointer flex flex-col relative
+    overflow-hidden
+    hover:-translate-y-1
+  "
                       >
                         <div className="relative p-6 flex flex-col h-full z-10">
                           {/* Header */}
@@ -283,7 +338,7 @@ export default function MasterAdminLandingPage() {
                                 "uppercase text-[10px] tracking-widest font-bold px-2 py-0.5 border shadow-none",
                                 agent.status === "active"
                                   ? "bg-emerald-50 text-emerald-600 border-emerald-100"
-                                  : "bg-slate-50 text-slate-400 border-slate-100"
+                                  : "bg-slate-50 text-slate-400 border-slate-100",
                               )}
                             >
                               {agent.status}
@@ -310,7 +365,9 @@ export default function MasterAdminLandingPage() {
 
                           {/* Footer Actions */}
                           <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between text-sm font-bold text-primary transition-colors duration-300">
-                            <span className="group-hover:translate-x-1 transition-transform duration-300">View Storefront</span>
+                            <span className="group-hover:translate-x-1 transition-transform duration-300">
+                              View Storefront
+                            </span>
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                           </div>
                         </div>
@@ -354,7 +411,9 @@ export default function MasterAdminLandingPage() {
                   <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
                     <Users className="h-8 w-8 text-slate-300" />
                   </div>
-                  <h3 className="font-bold text-slate-900 text-lg">No agents found</h3>
+                  <h3 className="font-bold text-slate-900 text-lg">
+                    No agents found
+                  </h3>
                   <p className="text-slate-500">Try adjusting your filters.</p>
                 </div>
               )}
@@ -363,10 +422,18 @@ export default function MasterAdminLandingPage() {
         </section>
 
         {/* -- Features -- */}
-        <section className="bg-white py-24 border-t border-slate-100" id="features">
+        <section
+          className="bg-white py-24 border-t border-slate-100"
+          id="features"
+        >
           <div className="px-6 lg:px-10 max-w-7xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <Badge variant="outline" className="mb-4 text-slate-400 border-slate-200">Platform Features</Badge>
+              <Badge
+                variant="outline"
+                className="mb-4 text-slate-400 border-slate-200"
+              >
+                Platform Features
+              </Badge>
               <h2 className="text-3xl font-black tracking-tight sm:text-4xl mb-4 text-slate-900">
                 {tFeatures("h1")}
               </h2>
@@ -407,8 +474,12 @@ export default function MasterAdminLandingPage() {
                   >
                     <fet.icon className="h-7 w-7" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-slate-900">{fet.h}</h3>
-                  <p className="text-slate-500 font-medium leading-relaxed">{fet.d}</p>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900">
+                    {fet.h}
+                  </h3>
+                  <p className="text-slate-500 font-medium leading-relaxed">
+                    {fet.d}
+                  </p>
                 </div>
               ))}
             </div>

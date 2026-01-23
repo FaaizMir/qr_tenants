@@ -355,7 +355,7 @@ export default function AgentLandingPage() {
           {/* Background & Content (Same as before) */}
           {/* ... (Keep existing hero content) ... */}
           <div className="absolute inset-0 bg-slate-900">
-            <img
+            <image
               src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1600&q=80"
               className="w-full h-full object-cover opacity-20 mix-blend-overlay"
               alt="hero bg"

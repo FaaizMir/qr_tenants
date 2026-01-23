@@ -7,7 +7,7 @@ import axiosInstance from "@/lib/axios";
 
 // Components
 import PlatformSettings from "./components/PlatformSettings";
-import PaidAdsSettings from "./components/PaidAdsSettings";
+
 import PresetReviewsSettings from "./components/PresetReviewsSettings";
 import RewardStrategySettings from "./components/RewardStrategySettings";
 import BirthdayRewardsSettings from "./components/BirthdayRewardsSettings";
@@ -100,7 +100,7 @@ export default function MerchantSettings() {
 
     try {
       const res = await axiosInstance.get(
-        `/merchant-settings/merchant/${merchantId}`
+        `/merchant-settings/merchant/${merchantId}`,
       );
 
       const data = res?.data?.data;
@@ -176,7 +176,7 @@ export default function MerchantSettings() {
     } catch (error) {
       console.error(error);
       toast.error(
-        error?.response?.data?.message || "Error updating preset reviews"
+        error?.response?.data?.message || "Error updating preset reviews",
       );
     } finally {
       setLoadingPresets(false);
@@ -187,14 +187,14 @@ export default function MerchantSettings() {
     // Validation
     if (!config.luckyDrawEnabled && !config.selectedBatchId) {
       toast.error(
-        "Please select a Coupon Batch to continue with Direct Rewards."
+        "Please select a Coupon Batch to continue with Direct Rewards.",
       );
       return;
     }
 
     if (config.birthdayMessageEnabled && !config.birthdayCouponBatchId) {
       toast.error(
-        "Please select a Birthday Coupon Batch to enable Birthday Rewards."
+        "Please select a Birthday Coupon Batch to enable Birthday Rewards.",
       );
       return;
     }
@@ -218,11 +218,11 @@ export default function MerchantSettings() {
           ? config.instagramReviewLink
           : null,
         xiaohongshu_url: config.enableRed ? config.redReviewLink : null,
-        paid_ads: config.paid_ads,
+      //  paid_ads: config.paid_ads,
         //  paid_ad_image: config.paid_ad_image,
         //  paid_ad_video: config.paid_ad_video,
         //  paid_ad_type: config.paid_ad_video_status ? "video" : "image",
-        paid_ad_placement: config.placement,
+      //  paid_ad_placement: config.placement,
         // Reward settings - Lucky Draw or Coupon Batch
         luckydraw_enabled: config.luckyDrawEnabled,
         whatsapp_enabled_for_batch_id: config.luckyDrawEnabled
@@ -238,7 +238,7 @@ export default function MerchantSettings() {
 
       await axiosInstance.patch(
         `/merchant-settings/merchant/${merchantId}`,
-        payload
+        payload,
       );
       toast.success("Settings saved successfully");
     } catch (error) {
@@ -275,12 +275,6 @@ export default function MerchantSettings() {
         {/* Left Column: Platforms & Ads */}
         <div className="xl:col-span-2 space-y-6">
           <PlatformSettings config={config} setConfig={setConfig} />
-
-          <PaidAdsSettings
-            config={config}
-            setConfig={setConfig}
-            merchantId={merchantId}
-          />
 
           <PresetReviewsSettings
             config={config}
