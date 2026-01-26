@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import axiosInstance from "@/lib/axios";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 import { useRouter, useParams } from "next/navigation";
 import { useSubscription } from "@/context/SubscriptionContext";

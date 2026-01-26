@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Eye, Copy, MoreHorizontal, FileText, Trash2 } from "lucide-react";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import {
   DropdownMenu,
   DropdownMenuContent,

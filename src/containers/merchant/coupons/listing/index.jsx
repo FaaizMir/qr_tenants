@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import axiosInstance from "@/lib/axios";
 import { couponsColumns } from "./coupons-listing-columns";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantCouponsListingContainer({ embedded = false }) {

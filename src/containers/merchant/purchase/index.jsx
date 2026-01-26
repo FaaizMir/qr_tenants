@@ -19,7 +19,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import StripeCheckout from "@/components/stripe/stripeCheckout";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
+import Image from "next/image";
 import {
   ArrowRight,
   CheckCircle2,
@@ -92,7 +93,10 @@ export default function MerchantPurchase() {
     );
 
     if (!merchant_id) {
-      toast.error("Unable to determine merchant id. Please contact support.");
+      toast.error("Unable to determine merchant id. Please contact support.", {
+        closeButton: true,
+        duration: false,
+      });
       return;
     }
 
@@ -117,7 +121,10 @@ export default function MerchantPurchase() {
         payload,
       );
 
-      toast.success("Package purchased successfully.");
+      toast.success("Package purchased successfully.", {
+        closeButton: true,
+        duration: false,
+      });
       setCheckoutOpen(false);
       setSelectedPackage(null);
     } catch (err) {
@@ -133,7 +140,7 @@ export default function MerchantPurchase() {
           ? `Request failed with status ${err.response.status}.`
           : err?.message) ||
         "Failed to purchase package. Please try again.";
-      toast.error(msg);
+      toast.error(msg, { closeButton: true, duration: false });
     } finally {
       setPurchasingId(null);
     }
@@ -451,20 +458,29 @@ export default function MerchantPurchase() {
                         Trusted Partners
                       </p>
                       <div className="flex gap-6 items-center opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 pointer-events-none">
-                        <img
+                        <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
                           alt="Visa"
+                          width={48}
+                          height={12}
                           className="h-3"
+                          unoptimized
                         />
-                        <img
+                        <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
                           alt="Mastercard"
+                          width={64}
+                          height={20}
                           className="h-5"
+                          unoptimized
                         />
-                        <img
+                        <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg"
                           alt="Stripe"
+                          width={56}
+                          height={16}
                           className="h-4"
+                          unoptimized
                         />
                       </div>
                     </div>

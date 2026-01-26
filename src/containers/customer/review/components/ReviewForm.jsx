@@ -18,7 +18,7 @@ import StarRatingInput from "@/components/form-fields/star-rating-input";
 import { TextareaField } from "@/components/form-fields/textarea-field";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import {
   Card,
   CardContent,

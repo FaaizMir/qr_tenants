@@ -45,7 +45,7 @@ export default async function LocaleLayout({ children, params }) {
           <SubscriptionProvider>
             <NextIntlClientProvider messages={messages}>
               {children}
-              <Toaster position="top-right" />
+              <Toaster position="top-right" closeButton={true} duration={3000} />
             </NextIntlClientProvider>
           </SubscriptionProvider>
         </AuthProvider>

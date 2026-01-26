@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { cn } from "@/lib/utils";
 

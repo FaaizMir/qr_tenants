@@ -1,10 +1,10 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import SupportContainer from "@/containers/support";
 
-export default function AgentSupportPage() {
+export default function MasterSupportPage() {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Support", url: "/agent/support" },
+    { name: "Master Admin Dashboard", url: "/master-admin/dashboard" },
+    { name: "Support", url: "/master-admin/support" },
   ];
   return (
     <>

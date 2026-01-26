@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader2, Store, User, CreditCard, Eye, EyeOff } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { createMerchant, updateMerchant } from "@/lib/services/helper";
 import AddressAutocomplete from "@/components/address-autocomplete";
 import { cn } from "@/lib/utils";

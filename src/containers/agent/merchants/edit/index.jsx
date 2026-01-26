@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { MerchantForm } from "../create/merchant-form";
 import { getMerchantById } from "@/lib/services/helper";
 import { LoadingSpinner } from "@/helper/Loader";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 export default function EditMerchantContainer({ merchantId }) {
     const t = useTranslations("agent.merchants");

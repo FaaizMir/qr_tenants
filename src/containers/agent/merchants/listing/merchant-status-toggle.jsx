@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { updateMerchant } from "@/lib/services/helper";
 
 export function MerchantStatusToggle({ initialStatus, merchantId }) {

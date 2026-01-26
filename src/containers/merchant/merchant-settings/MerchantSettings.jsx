@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 
@@ -71,7 +71,10 @@ export default function MerchantSettings() {
       }));
     } catch (error) {
       console.error(error);
-      toast.error("Failed to load preset reviews");
+      toast.error("Failed to load preset reviews", {
+        closeButton: true,
+        duration: false,
+      });
     } finally {
       setLoadingPresets(false);
     }
@@ -133,7 +136,10 @@ export default function MerchantSettings() {
       }));
     } catch (error) {
       console.error(error);
-      toast.error("Failed to load merchant settings");
+      toast.error("Failed to load merchant settings", {
+        closeButton: true,
+        duration: false,
+      });
     }
   }, [merchantId]);
 
@@ -172,11 +178,15 @@ export default function MerchantSettings() {
         throw new Error("Failed to save preset reviews");
       }
 
-      toast.success("Preset reviews updated successfully");
+      toast.success("Preset reviews updated successfully", {
+        closeButton: true,
+        duration: false,
+      });
     } catch (error) {
       console.error(error);
       toast.error(
         error?.response?.data?.message || "Error updating preset reviews",
+        { closeButton: true, duration: false },
       );
     } finally {
       setLoadingPresets(false);
@@ -188,6 +198,7 @@ export default function MerchantSettings() {
     if (!config.luckyDrawEnabled && !config.selectedBatchId) {
       toast.error(
         "Please select a Coupon Batch to continue with Direct Rewards.",
+        { closeButton: true, duration: false },
       );
       return;
     }
@@ -195,6 +206,7 @@ export default function MerchantSettings() {
     if (config.birthdayMessageEnabled && !config.birthdayCouponBatchId) {
       toast.error(
         "Please select a Birthday Coupon Batch to enable Birthday Rewards.",
+        { closeButton: true, duration: false },
       );
       return;
     }
@@ -218,11 +230,11 @@ export default function MerchantSettings() {
           ? config.instagramReviewLink
           : null,
         xiaohongshu_url: config.enableRed ? config.redReviewLink : null,
-      //  paid_ads: config.paid_ads,
+        //  paid_ads: config.paid_ads,
         //  paid_ad_image: config.paid_ad_image,
         //  paid_ad_video: config.paid_ad_video,
         //  paid_ad_type: config.paid_ad_video_status ? "video" : "image",
-      //  paid_ad_placement: config.placement,
+        //  paid_ad_placement: config.placement,
         // Reward settings - Lucky Draw or Coupon Batch
         luckydraw_enabled: config.luckyDrawEnabled,
         whatsapp_enabled_for_batch_id: config.luckyDrawEnabled
@@ -240,10 +252,16 @@ export default function MerchantSettings() {
         `/merchant-settings/merchant/${merchantId}`,
         payload,
       );
-      toast.success("Settings saved successfully");
+      toast.success("Settings saved successfully", {
+        closeButton: true,
+        duration: false,
+      });
     } catch (error) {
       console.error(error);
-      toast.error(error?.response?.data?.message || "Error saving settings");
+      toast.error(error?.response?.data?.message || "Error saving settings", {
+        closeButton: true,
+        duration: false,
+      });
     } finally {
       setLoadingSettings(false);
     }

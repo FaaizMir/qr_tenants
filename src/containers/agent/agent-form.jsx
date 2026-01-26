@@ -11,7 +11,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { LoadingSpinner } from "@/helper/Loader";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useRouter } from "@/i18n/routing";
 import { ShieldCheck, Globe, Save } from "lucide-react";
 import {

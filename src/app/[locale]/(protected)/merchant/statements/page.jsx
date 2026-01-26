@@ -3,8 +3,8 @@ import StatementsContainer from "@/containers/statements";
 
 export default function AgentStatementsPage() {
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Financial Statements", url: "/agent/statements" },
+    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
+    { name: "Financial Statements", url: "/merchant/statements" },
   ];
   return (
     <>

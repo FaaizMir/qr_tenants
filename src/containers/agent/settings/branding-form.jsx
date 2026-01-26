@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { UploadCloud, Palette, MessageCircle, FileText, Globe, Smartphone, Mail, CreditCard, LayoutTemplate } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { Switch } from "@/components/ui/switch";
 
 export function BrandingForm() {

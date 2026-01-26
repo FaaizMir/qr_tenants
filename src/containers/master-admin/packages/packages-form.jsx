@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { LoadingSpinner } from "@/helper/Loader";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import {
   Save,
   Package,
@@ -131,7 +131,10 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           isActive: data.is_active ? "true" : "false",
         });
       } catch {
-        toast.error("Failed to load package details");
+        toast.error("Failed to load package details", {
+          closeButton: true,
+          duration: false,
+        });
       }
     };
 
@@ -171,6 +174,10 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         isEdit
           ? "Package updated successfully"
           : "Package created successfully",
+        {
+          closeButton: true,
+          duration: false,
+        },
       );
 
       onSuccess?.();
@@ -180,6 +187,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       toast.error(
         err?.response?.data?.message ||
           `Failed to ${isEdit ? "update" : "create"} package`,
+        { closeButton: true, duration: false },
       );
     } finally {
       setSubmitting(false);
@@ -192,10 +200,16 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       await axiosInstance.delete(`/wallets/credit-packages/${packageId}`, {
         params: { admin_id: session?.user?.adminId },
       });
-      toast.success("Package deleted successfully");
+      toast.success("Package deleted successfully", {
+        closeButton: true,
+        duration: false,
+      });
       router.push("/master-admin/packages");
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Failed to delete package");
+      toast.error(err?.response?.data?.message || "Failed to delete package", {
+        closeButton: true,
+        duration: false,
+      });
     } finally {
       setSubmitting(false);
     }
@@ -435,7 +449,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => router.push("/agent/packages")}
+                    onClick={() => router.push("/master-admin/packages")}
                   >
                     Cancel
                   </Button>

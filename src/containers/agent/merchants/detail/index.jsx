@@ -49,7 +49,7 @@ import {
   getCouponBatches,
   getCoupons,
 } from "@/lib/services/helper";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { Loader2 } from "lucide-react";
 import {
   useRouter,
@@ -147,6 +147,9 @@ export default function MerchantDetailContainer({ params }) {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
+  const capitalizeFirst = (str = "") =>
+    str.charAt(0).toUpperCase() + str.slice(1);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
@@ -207,7 +210,7 @@ export default function MerchantDetailContainer({ params }) {
               variant="secondary"
               className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-100"
             >
-              {merchant.merchant_type} Subscription
+              {capitalizeFirst(merchant.merchant_type)} Subscription
             </Badge>
             <Badge
               variant="outline"
@@ -221,18 +224,6 @@ export default function MerchantDetailContainer({ params }) {
             <p className="text-sm text-muted-foreground mt-2">
               📍 {merchant.city}, {merchant.country}
             </p>
-          )}
-          {merchant.qr_code_url && (
-            <div className="mt-2">
-              <a
-                href={merchant.qr_code_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-blue-600 hover:underline flex items-center gap-1"
-              >
-                🔗 Review Page: {merchant.qr_code_url}
-              </a>
-            </div>
           )}
         </div>
         <div className="flex gap-2">

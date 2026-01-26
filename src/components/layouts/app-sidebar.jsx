@@ -75,31 +75,32 @@ export function AppSidebar({
       url: "/agent/approvals",
       icon: Package,
     },
-    {
-      title: tAgent("logs"),
-      url: "/agent/logs",
-      icon: Search,
-    },
+
     // {
     //   title: tAgent("earnings"),
     //   url: "/agent/earnings",
     //   icon: DollarSign,
     // },
-    // {
-    //   title: tAgent("statements"),
-    //   url: "/agent/statements",
-    //   icon: FileText,
-    // },
-    // {
-    //   title: tAgent("couponsync"),
-    //   url: "/agent/coupon-sync",
-    //   icon: RefreshCw,
-    // },
-    // {
-    //   title: tAgent("support"),
-    //   url: "/agent/support",
-    //   icon: MessageSquare,
-    // },
+    {
+      title: "Statements",
+      url: "/agent/statements",
+      icon: FileText,
+    },
+    {
+      title: tAgent("couponsync"),
+      url: "/agent/coupon-sync",
+      icon: RefreshCw,
+    },
+    {
+      title: tAgent("support"),
+      url: "/agent/support",
+      icon: MessageSquare,
+    },
+    {
+      title: tAgent("logs"),
+      url: "/agent/logs",
+      icon: Search,
+    },
   ];
 
   // {
@@ -122,8 +123,6 @@ export function AppSidebar({
   //   url: "/agent/support",
   //   icon: MessageSquare,
   // },
-
-
 
   // Merchant navigation
   const merchantNav = [
@@ -165,13 +164,24 @@ export function AppSidebar({
     // Annual-only sections
     ...(subscriptionType === "annual"
       ? [
-        {
-          title: "Customer Data",
-          url: "/merchant/customer-data",
-          icon: Database,
-        },
-      ]
+          {
+            title: "Customer Data",
+            url: "/merchant/customer-data",
+            icon: Database,
+          },
+        ]
       : []),
+
+    {
+      title: "Statements",
+      url: "/merchant/statements",
+      icon: FileText,
+    },
+    {
+      title: "Support",
+      url: "/merchant/support",
+      icon: MessageSquare,
+    },
     {
       title: tMerchant("logs"),
       url: "/merchant/logs",
@@ -191,37 +201,71 @@ export function AppSidebar({
       title: tMasterAdmin("agents"),
       url: "/master-admin/agents",
       icon: Users,
+      allowedStaff: ["super_admin"],
     },
     {
       title: tMasterAdmin("merchants"),
       url: "/master-admin/merchants",
       icon: Users,
+      allowedStaff: ["super_admin"],
     },
     {
       title: tMasterAdmin("packages"),
       url: "/master-admin/packages",
       icon: Package,
+      allowedStaff: ["super_admin"],
     },
-    // {
-    //   title: tMasterAdmin("commission"),
-    //   url: "/master-admin/commission",
-    //   icon: DollarSign,
-    // },
-    // {
-    //   title: tMasterAdmin("approvals"),
-    //   url: "/master-admin/approvals",
-    //   icon: CheckCircle,
-    // },
+    {
+      title: tMasterAdmin("commission"),
+      url: "/master-admin/commission",
+      icon: DollarSign,
+      allowedStaff: ["super_admin", "finance_viewer"],
+    },
+    {
+      title: tMasterAdmin("approvals"),
+      url: "/master-admin/approvals",
+      icon: CheckCircle,
+      allowedStaff: ["super_admin", "ad_approver"],
+    },
+    {
+      title: "Statements",
+      url: "/master-admin/statements",
+      icon: FileText,
+      allowedStaff: ["super_admin", "finance_viewer"],
+    },
+    {
+      title: "Support",
+      url: "/master-admin/support",
+      icon: MessageSquare,
+      allowedStaff: ["super_admin", "support_staff"],
+    },
     {
       title: tMasterAdmin("logs"),
       url: "/master-admin/logs",
       icon: Search,
+      allowedStaff: ["super_admin"],
     },
   ];
 
+  // Filter masterAdminNav based on staffRole if role is super_admin
+  // Normalize staffRole to token format used in routing/permissions (e.g., "support_staff")
+  // Prefer explicit staffRole, fall back to user.role when staffRole is not present
+  const staffRole = (user?.staffRole || user?.role || "super_admin")
+    .toString()
+    .toLowerCase();
+
+  const filteredMasterAdminNav = masterAdminNav.filter((item) => {
+    if (!item.allowedStaff) return true; // Common items like Dashboard
+    // Normalize allowedStaff entries to lowercase tokens for comparison
+    const allowed = item.allowedStaff.map((s) => s.toString().toLowerCase());
+    return allowed.includes(staffRole) || staffRole === "super_admin";
+  });
+
+  const masterStaffRoles = ["support_staff", "ad_approver", "finance_viewer"];
+
   const navItems =
-    role === "super_admin"
-      ? masterAdminNav
+    role === "super_admin" || masterStaffRoles.includes(role)
+      ? filteredMasterAdminNav
       : role === "agent" || role === "admin"
         ? agentNav
         : merchantNav;

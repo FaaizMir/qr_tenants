@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 
 export function AgentStatusToggle({ initialStatus, agentId }) {

@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { TemplateSelector } from "@/components/templates/TemplateSelector";
 import { useLocale } from "next-intl";
 

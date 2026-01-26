@@ -14,7 +14,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import UniversalComboBoxField from "@/components/form-fields/universal-combobox-field";
 import { TextField, NumberField, SelectField } from "@/components/form-fields";

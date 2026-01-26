@@ -17,7 +17,7 @@ import { DataTable } from "@/components/common/data-table";
 import { PackagesColumns } from "./packages-columns";
 import useDebounce from "@/hooks/useDebounceRef";
 import axiosInstance from "@/lib/axios";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useSession } from "next-auth/react";
 import {
   AlertDialog,

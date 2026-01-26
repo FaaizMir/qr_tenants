@@ -1,10 +1,17 @@
 "use client";
 
 import { use, useMemo, useState } from "react";
-import { ShieldCheck, QrCode, MessageSquare, Sparkles, Eye, EyeOff } from "lucide-react";
+import {
+  ShieldCheck,
+  QrCode,
+  MessageSquare,
+  Sparkles,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import { useRouter, Link } from "@/i18n/routing";
 import { signIn, getSession } from "next-auth/react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +32,7 @@ export default function LoginPage({ params }) {
 
   const isDisabled = useMemo(
     () => loading || !username.trim() || !password.trim(),
-    [loading, username, password]
+    [loading, username, password],
   );
 
   const highlights = [
@@ -99,13 +106,14 @@ export default function LoginPage({ params }) {
         let errorMessage = result.error;
 
         if (result.error === "CredentialsSignin") {
-          errorMessage = "Invalid email or password. Please check your credentials.";
+          errorMessage =
+            "Invalid email or password. Please check your credentials.";
         } else if (result.error.toLowerCase().includes("inactive")) {
           errorMessage = "Your account is inactive. Please contact your agent.";
         }
 
         setError(errorMessage);
-        toast.error(errorMessage);
+        toast.error(errorMessage, { closeButton: true, duration: false });
         setLoading(false);
         return;
       }
@@ -116,11 +124,12 @@ export default function LoginPage({ params }) {
       console.log("Logged in user:", user);
       if (user?.role) {
         const role = user.role.toLowerCase();
+        const staffRoles = ["finance_viewer", "ad_approver", "support_staff"];
         if (role === "admin") {
           router.push("/agent/dashboard"); // Redirect admin to agent dashboard
         } else if (role === "merchant") {
           router.push("/merchant/dashboard");
-        } else if (role === "super_admin") {
+        } else if (role === "super_admin" || staffRoles.includes(role)) {
           router.push("/master-admin/dashboard");
         } else {
           router.push("/login"); // Fallback

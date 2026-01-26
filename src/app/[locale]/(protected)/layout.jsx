@@ -13,7 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 export default function ProtectedLayout({ children, params }) {
   const locale = use(params);
@@ -23,7 +23,6 @@ export default function ProtectedLayout({ children, params }) {
   const role = (user?.role || "").toLowerCase();
   const [mounted, setMounted] = useState(true);
   const pathnameHook = usePathname();
-
 
   useEffect(() => {
     if (status === "loading") return; // wait for session to resolve
@@ -85,8 +84,39 @@ export default function ProtectedLayout({ children, params }) {
       (routeSegment.startsWith("agent") || routeSegment.startsWith("admin")) &&
       !(role === "agent" || role === "admin")
     ) {
-      router.push(`/${locale}/login`);
-      return;
+      if (!routeSegment.startsWith("master-admin")) {
+        router.push(`/${locale}/login`);
+        return;
+      }
+    }
+
+    // Master Admin & Staff Role Enforcement
+    if (routeSegment.startsWith("master-admin")) {
+      const staffRoles = ["finance_viewer", "ad_approver", "support_staff"];
+      const isAdmin = role === "super_admin" || staffRoles.includes(role);
+
+      if (!isAdmin) {
+        router.push(`/${locale}/login`);
+        return;
+      }
+
+      // If it's a staff role, enforce sub-path restrictions
+      if (role !== "super_admin") {
+        const subPath = parts[2] || ""; // /master-admin/[subPath]
+        const rolePermissions = {
+          support_staff: ["support", "dashboard"],
+          ad_approver: ["approvals", "dashboard"],
+          finance_viewer: ["statements", "commission", "dashboard"],
+        };
+
+        const allowedPaths = rolePermissions[role] || ["dashboard"];
+        if (subPath && !allowedPaths.includes(subPath)) {
+          console.warn(
+            `Staff role ${role} attempted unauthorized access to ${subPath}`,
+          );
+          router.push(`/${locale}/master-admin/dashboard`);
+        }
+      }
     }
   }, [user, role, status, router, locale, pathnameHook]);
 

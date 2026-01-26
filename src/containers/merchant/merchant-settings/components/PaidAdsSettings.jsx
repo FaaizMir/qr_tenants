@@ -39,7 +39,7 @@ import {
   Play,
 } from "lucide-react";
 import Cropper from "react-easy-crop";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { getCroppedImg, getImageUrl } from "../utils/imageUtils";
 
@@ -125,10 +125,16 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
         setPendingFile(null);
       }
 
-      toast.success("Settings and ad updated successfully");
+      toast.success("Settings and ad updated successfully", {
+        closeButton: true,
+        duration: false,
+      });
     } catch (error) {
       console.error(error);
-      toast.error(error?.response?.data?.message || "Error saving settings");
+      toast.error(error?.response?.data?.message || "Error saving settings", {
+        closeButton: true,
+        duration: false,
+      });
     } finally {
       setUploading(false);
     }
@@ -316,8 +322,11 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
               <TabsContent value="image" className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {pendingFile?.type === "image" && (
-                    <div className="relative aspect-video rounded-xl overflow-hidden border-2 border-primary/50 bg-background shadow-md group cursor-zoom-in"
-                      onClick={() => handlePreview("image", pendingFile.previewUrl)}
+                    <div
+                      className="relative aspect-video rounded-xl overflow-hidden border-2 border-primary/50 bg-background shadow-md group cursor-zoom-in"
+                      onClick={() =>
+                        handlePreview("image", pendingFile.previewUrl)
+                      }
                     >
                       <Image
                         src={pendingFile.previewUrl}
@@ -430,8 +439,11 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
               <TabsContent value="video" className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {pendingFile?.type === "video" && (
-                    <div className="relative aspect-video rounded-xl overflow-hidden border-2 border-primary/50 bg-background shadow-md group cursor-zoom-in"
-                      onClick={() => handlePreview("video", pendingFile.previewUrl)}
+                    <div
+                      className="relative aspect-video rounded-xl overflow-hidden border-2 border-primary/50 bg-background shadow-md group cursor-zoom-in"
+                      onClick={() =>
+                        handlePreview("video", pendingFile.previewUrl)
+                      }
                     >
                       <video
                         src={pendingFile.previewUrl}
@@ -608,7 +620,7 @@ export default function PaidAdsSettings({ config, setConfig, merchantId }) {
                     {uploading && (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     )}
-                    Upload & Save
+                    Save Image
                   </Button>
                 </DialogFooter>
               </DialogContent>

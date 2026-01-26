@@ -22,7 +22,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";

@@ -10,7 +10,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { LoadingSpinner } from "@/helper/Loader";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useRouter } from "@/i18n/routing";
 import { Store, Save } from "lucide-react";
 import { createMerchant, updateMerchant } from "@/lib/services/helper";
@@ -96,25 +96,27 @@ const MerchantForm = ({ merchantId, isEdit = false }) => {
         // debug payload
         try {
           console.debug("Creating merchant payload:", payload);
-        } catch (e) { }
+        } catch (e) {}
 
         resp = await createMerchant(payload);
         try {
           console.debug("Create merchant response:", resp);
-        } catch (e) { }
+        } catch (e) {}
       }
 
       toast.success(
         isEdit
           ? "Merchant updated successfully"
-          : "Merchant created successfully"
+          : "Merchant created successfully",
+        { closeButton: true, duration: false },
       );
       router.push("/agent/merchants");
     } catch (error) {
       console.error("Error saving merchant:", error);
       toast.error(
         error?.response?.data?.message ||
-        `Failed to ${isEdit ? "update" : "create"} merchant`
+          `Failed to ${isEdit ? "update" : "create"} merchant`,
+        { closeButton: true, duration: false },
       );
     } finally {
       setIsFormSubmitting(false);
