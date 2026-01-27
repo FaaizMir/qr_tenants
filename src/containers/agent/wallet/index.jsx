@@ -139,7 +139,7 @@ export default function AgentWalletContainer() {
       try {
         setLoadingPackages(true);
         // Try to fetch from the specific subscription fee endpoint
-        const res = await axiosInstance.get("/wallets/admin-subscription-fee");
+        const res = await axiosInstance.get("/super-admin-settings/admin-subscription-fee");
 
         // Handle both { data: { ... } } and directly { ... }
         const rawData = res.data?.data || res.data;
@@ -147,7 +147,7 @@ export default function AgentWalletContainer() {
         // Final fallback to /wallets/super-admin if data seems missing
         let finalData = rawData;
         if (!finalData?.fee) {
-          const backupRes = await axiosInstance.get("/wallets/super-admin");
+          const backupRes = await axiosInstance.get("/super-admin-settings/admin-subscription-fee");
           finalData = backupRes.data?.data || backupRes.data;
         }
 

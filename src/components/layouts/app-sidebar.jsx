@@ -240,6 +240,21 @@ export function AppSidebar({
       allowedStaff: ["super_admin", "support_staff"],
     },
     {
+      title: tMasterAdmin("settings"),
+      url: "/master-admin/superadmin_settings",
+      icon: Settings,
+    },
+    // {
+    //   title: tMasterAdmin("commission"),
+    //   url: "/master-admin/commission",
+    //   icon: DollarSign,
+    // },
+    // {
+    //   title: tMasterAdmin("approvals"),
+    //   url: "/master-admin/approvals",
+    //   icon: CheckCircle,
+    // },
+    {
       title: tMasterAdmin("logs"),
       url: "/master-admin/logs",
       icon: Search,

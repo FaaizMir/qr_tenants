@@ -37,9 +37,9 @@ export default function AgentSubscriptionFee() {
     const fetchFee = async () => {
         setLoading(true);
         try {
-            const res = await axiosInstance.get("/wallets/super-admin");
-            setData(res.data);
-            setNewFee(res.data.admin_subscription_fee);
+            const res = await axiosInstance.get("/super-admin-settings");
+            setData(res.data.data);
+            setNewFee(res.data.data.admin_annual_subscription_fee);
         } catch (err) {
             console.error(err);
             toast.error("Failed to fetch subscription fee");
@@ -61,8 +61,8 @@ export default function AgentSubscriptionFee() {
 
         setUpdating(true);
         try {
-            await axiosInstance.patch("/wallets/super-admin/subscription-fee", {
-                fee: Number(newFee),
+            await axiosInstance.patch("/super-admin-settings", {
+                admin_annual_subscription_fee: Number(newFee),
             });
             toast.success("Subscription fee updated successfully");
             setIsUpdateOpen(false);
@@ -109,7 +109,7 @@ export default function AgentSubscriptionFee() {
                     <div className="flex items-baseline gap-2 mb-6">
                         <span className="text-5xl font-extrabold tracking-tighter">
                             {data?.currency || "USD"}{" "}
-                            {Number(data?.admin_subscription_fee).toLocaleString()}
+                            {Number(data?.admin_annual_subscription_fee).toLocaleString()}
                         </span>
                         <span className="text-slate-400 font-bold uppercase tracking-widest text-xs">
                             / Fixed Per Year

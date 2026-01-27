@@ -109,6 +109,7 @@
     "merchants": "Merchants",
     "commission": "Commission",
     "approvals": "Approvals",
+    "settings": "Settings",
     "logs": "System Logs"
   }
 }
