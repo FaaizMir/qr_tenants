@@ -12,7 +12,7 @@ export function StaffStatusToggle({ staff }) {
     const handleToggle = async (checked) => {
         setLoading(true);
         try {
-            await axiosInstance.patch(`/admins/${staff.id}`, {
+            await axiosInstance.patch(`/superadmin-roles/${staff.id}`, {
                 is_active: checked,
             });
             setIsActive(checked);

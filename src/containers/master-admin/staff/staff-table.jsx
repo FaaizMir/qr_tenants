@@ -25,7 +25,7 @@ export function StaffTable({ data, isLoading, total, page, pageSize, setPage, se
         if (!staffToDelete) return;
         setDeleting(true);
         try {
-            await axiosInstance.delete(`/admins/${staffToDelete.id}`);
+            await axiosInstance.delete(`/superadmin-roles/${staffToDelete.id}`);
             toast.success("Staff member deleted successfully.");
             refresh?.();
         } catch (error) {
