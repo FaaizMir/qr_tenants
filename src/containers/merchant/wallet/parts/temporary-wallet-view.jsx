@@ -92,10 +92,10 @@ export default function TemporaryWalletView({
               </div>
               <div className="flex justify-between items-center bg-amber-500/5 p-2 rounded-lg border border-amber-500/10">
                 <span className="text-amber-800 text-xs font-medium">
-                  Whatsapp Credits
+                  Whatsapp UI Credits
                 </span>
                 <span className="font-bold text-sm text-amber-900">
-                  {format(creditDetails.message)}
+                  {format(creditDetails.whatsapp_ui ?? creditDetails.message)}
                 </span>
               </div>
               <div className="flex justify-between items-center bg-amber-500/5 p-2 rounded-lg border border-amber-500/10">
@@ -168,8 +168,8 @@ export default function TemporaryWalletView({
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
-                      (creditDetails.used / creditDetails.purchased) * 100,
-                    )
+                        (creditDetails.used / creditDetails.purchased) * 100,
+                      )
                     : 0}
                   %
                 </span>

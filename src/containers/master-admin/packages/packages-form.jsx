@@ -53,7 +53,8 @@ import {
 const creditTypeOptions = [
   { value: "coupon", label: "Coupon" },
   { value: "paid ads", label: "Paid Ads" },
-  { value: "whatsapp message", label: "WhatsApp Message" },
+  { value: "whatsapp ui message", label: "WhatsApp UI Message" },
+  { value: "whatsapp bi message", label: "WhatsApp BI Message" },
 ];
 
 export default function PackageForm({ isEdit = false, onSuccess }) {

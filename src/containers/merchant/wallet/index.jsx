@@ -37,11 +37,14 @@ export default function MerchantWalletContainer({ embedded = false }) {
   const [error, setError] = useState(null);
 
   const merchantId =
-    session?.user?.merchantId || user?.merchant_id || user?.merchant?.id || null;
+    session?.user?.merchantId ||
+    user?.merchant_id ||
+    user?.merchant?.id ||
+    null;
 
   const merchantType = useMemo(
     () => deriveType(wallet, sessionType),
-    [wallet, sessionType]
+    [wallet, sessionType],
   );
 
   useEffect(() => {
@@ -66,14 +69,22 @@ export default function MerchantWalletContainer({ embedded = false }) {
 
         const rawWallet = wRes?.data?.data || wRes?.data || {};
         console.log("Raw Wallet Response:", rawWallet);
-        console.log("walletResponse", walletResponse)
+        console.log("walletResponse", walletResponse);
 
         // Normalize backend wallet response into the shape expected by views
-        const messageCredits =
-          Number(walletResponse.data?.whatsapp_message_credits);
-        const marketingCredits =
-          Number(walletResponse.data?.coupon_credits);
-        const utilityCredits = Number(walletResponse.data?.paid_ad_credits);
+        // Support legacy `whatsapp_message_credits` and new granular fields
+        const uiCredits = Number(walletResponse.data?.whatsapp_ui_credits || 0);
+        const biCredits = Number(walletResponse.data?.whatsapp_bi_credits || 0);
+        const legacyMessageCredits = Number(
+          walletResponse.data?.whatsapp_message_credits || 0,
+        );
+        const messageCredits = legacyMessageCredits || uiCredits + biCredits;
+        const marketingCredits = Number(
+          walletResponse.data?.coupon_credits || 0,
+        );
+        const utilityCredits = Number(
+          walletResponse.data?.paid_ad_credits || 0,
+        );
         const totalPurchased =
           Number(rawWallet.total_credits_purchased) ||
           messageCredits + marketingCredits + utilityCredits;
@@ -86,27 +97,48 @@ export default function MerchantWalletContainer({ embedded = false }) {
 
         const normalizedTransactions = (rawTransactions || []).map((tx) => {
           let currency = rawWallet.currency || "USD";
+          let parsedMeta = {};
           try {
-            const meta =
+            parsedMeta =
               typeof tx.metadata === "string"
                 ? JSON.parse(tx.metadata)
                 : tx.metadata || {};
             currency =
-              meta?.package?.currency ||
-              meta?.currency ||
-              currency;
+              parsedMeta?.package?.currency || parsedMeta?.currency || currency;
           } catch {
             // ignore parse errors, keep fallback
+            parsedMeta = {};
           }
+
+          // Normalize credit_type for UI: coerce strings like
+          // "whatsapp bi message" or "whatsapp ui message" into
+          // canonical keys used elsewhere: `whatsapp_bi` / `whatsapp_ui`.
+          const pkgCreditType =
+            parsedMeta?.package?.credit_type || parsedMeta?.credit_type || "";
+          const pct = (pkgCreditType || "").toString().toLowerCase();
+          let normalizedCreditType = "";
+          if (pct.includes("whatsapp") && pct.includes("bi"))
+            normalizedCreditType = "whatsapp_bi";
+          else if (pct.includes("whatsapp") && pct.includes("ui"))
+            normalizedCreditType = "whatsapp_ui";
+          else if (pct.includes("whatsapp")) normalizedCreditType = "whatsapp";
+          else normalizedCreditType = pct || "";
 
           return {
             id: tx.id,
             date: tx.completed_at || tx.created_at,
-            description: tx.description,
+            description:
+              tx.description ||
+              parsedMeta?.package?.package_name ||
+              parsedMeta?.package?.name ||
+              "",
             amount: Number(tx.amount) || 0,
-            type: "debit", // purchases reduce merchant balance
+            type: "debit",
             status: tx.status,
             currency,
+            metadataParsed: parsedMeta,
+            credit_type: normalizedCreditType,
+            raw_credit_type: pkgCreditType,
           };
         });
 
@@ -123,7 +155,10 @@ export default function MerchantWalletContainer({ embedded = false }) {
           subscriptionType:
             rawWallet.subscription_type || rawWallet.subscriptionType,
           creditBreakdown: {
+            // aggregated and granular message credits
             message: messageCredits,
+            whatsapp_ui: uiCredits,
+            whatsapp_bi: biCredits,
             marketing: marketingCredits,
             utility: utilityCredits,
             purchased: totalPurchased,

@@ -10,6 +10,7 @@ import {
   X,
   ChevronRight,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { InlineAd } from "./PaidAdsDisplay";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -151,8 +152,8 @@ function getCategoryImage(category, id) {
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-      .split("")
-      .reduce((a, b) => a + b.charCodeAt(0), 0)
+        .split("")
+        .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -388,6 +389,8 @@ export function MerchantList({
 }
 
 export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
+  const router = useRouter();
+
   // Mobile/Tablet View handled via simple conditionally rendered sheet or similar if needed,
   // but for now keeping the "selected means highlighted" flow.
   // Actually, let's make it a nice Sticky Side Panel for desktop or a Dialog for mobile.
@@ -502,7 +505,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                     <Button
                       size="sm"
                       className="w-full text-xs font-bold rounded-lg h-8 shadow-sm"
-                      onClick={() => handleGetCoupon(activeMerchant, batch)}
+                      onClick={() => router.push("/customer/review")}
                     >
                       Get Coupon
                     </Button>

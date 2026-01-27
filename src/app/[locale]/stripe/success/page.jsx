@@ -76,7 +76,7 @@ export default function StripeSuccessPage() {
       // For now, if no session we can't do much.
       setProcessing(false);
     }
-  }, [session]);
+  }, [refreshSubscription, session]);
 
   const isAgentPayment = session?.user?.role === "agent" || session?.user?.role === "admin";
   const walletPath = isAgentPayment ? `/${locale}/agent/wallet` : `/${locale}/merchant/wallet`;
