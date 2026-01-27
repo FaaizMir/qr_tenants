@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function PasswordField({
   label,
@@ -11,6 +12,9 @@ export function PasswordField({
   register,
   errors,
   validation = {},
+  startIcon,
+  inputClassName,
+  className,
   ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +28,7 @@ export function PasswordField({
   };
 
   return (
-    <div className="mb-4">
+    <div className={cn("mb-4", className)}>
       <Label className="mb-2" htmlFor={name}>
         {label}
         {defaultValidation?.required && (
@@ -32,11 +36,17 @@ export function PasswordField({
         )}
       </Label>
       <div className="relative">
+        {startIcon && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground">
+            {React.cloneElement(startIcon, { className: cn("h-4 w-4", startIcon.props?.className) })}
+          </div>
+        )}
         <Input
           type={showPassword ? "text" : "password"}
           id={name}
           placeholder={placeholder}
           {...register(name, defaultValidation)}
+          className={cn(startIcon && "pl-10", "pr-10", inputClassName)}
           {...props}
         />
         <button

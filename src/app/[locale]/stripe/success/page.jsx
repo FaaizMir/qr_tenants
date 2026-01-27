@@ -20,7 +20,7 @@ export default function StripeSuccessPage() {
 
   useEffect(() => {
     const processPayment = async () => {
-      const pkg = JSON.parse(localStorage.getItem('stripe_package'));
+      const pkg = JSON.parse(localStorage.getItem("stripe_package"));
       const role = session?.user?.role;
       const adminId = session?.user?.adminId;
       const merchantId = session?.user?.merchantId;
@@ -34,13 +34,11 @@ export default function StripeSuccessPage() {
         if (pkg.id === "subscription-renewal") {
           // Agent Subscription Renewal
           if (adminId) {
-
             console.log("Renewing subscription for admin", adminId);
             await axiosInstance.post(`/wallets/admin/${adminId}/subscribe`);
             await refreshSubscription();
             toast.success("Subscription renewed successfully!");
           }
-
         } else if (merchantId) {
           // Standard Merchant Credit Purchase
           const payload = {
@@ -49,21 +47,22 @@ export default function StripeSuccessPage() {
             amount: Number(pkg.price) || 0,
             admin_id: session?.user?.adminId,
             description: `${pkg.name} purchase`,
-            metadata: {
-              package_id: pkg.id,
-              package_name: pkg.name,
-              package: pkg,
-            },
+            package_id: pkg.id,
           };
 
-          await axiosInstance.post(`/wallets/merchant/${merchantId}/add-credits`, payload);
+          await axiosInstance.post(
+            `/wallets/merchant/${merchantId}/add-credits`,
+            payload,
+          );
           toast.success("Credits added successfully!");
         }
 
-        localStorage.removeItem('stripe_package');
+        localStorage.removeItem("stripe_package");
       } catch (err) {
         console.error("Failed to process payment completion:", err);
-        toast.error("Payment successful, but failed to update your account. Please contact support.");
+        toast.error(
+          "Payment successful, but failed to update your account. Please contact support.",
+        );
       } finally {
         setProcessing(false);
       }
@@ -72,23 +71,29 @@ export default function StripeSuccessPage() {
     if (session) {
       processPayment();
     } else {
-      // If no session but we have local storage, maybe wait a bit? 
+      // If no session but we have local storage, maybe wait a bit?
       // For now, if no session we can't do much.
       setProcessing(false);
     }
   }, [refreshSubscription, session]);
 
-  const isAgentPayment = session?.user?.role === "agent" || session?.user?.role === "admin";
-  const walletPath = isAgentPayment ? `/${locale}/agent/wallet` : `/${locale}/merchant/wallet`;
-  const backPath = isAgentPayment ? `/${locale}/agent/dashboard` : `/${locale}/merchant/purchase`;
+  const isAgentPayment =
+    session?.user?.role === "agent" || session?.user?.role === "admin";
+  const walletPath = isAgentPayment
+    ? `/${locale}/agent/wallet`
+    : `/${locale}/merchant/wallet`;
+  const backPath = isAgentPayment
+    ? `/${locale}/agent/dashboard`
+    : `/${locale}/merchant/purchase`;
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center space-y-4">
-      <h1 className="text-3xl font-bold tracking-tight">
-        Payment successful
-      </h1>
+      <h1 className="text-3xl font-bold tracking-tight">Payment successful</h1>
       <p className="text-muted-foreground max-w-md">
-        Your payment was completed successfully. {processing ? "Adding credits to your wallet..." : "Credits will be reflected in your wallet shortly."}
+        Your payment was completed successfully.{" "}
+        {processing
+          ? "Adding credits to your wallet..."
+          : "Credits will be reflected in your wallet shortly."}
       </p>
       <div className="flex gap-3">
         <Button
@@ -114,5 +119,3 @@ export default function StripeSuccessPage() {
     </div>
   );
 }
-
-

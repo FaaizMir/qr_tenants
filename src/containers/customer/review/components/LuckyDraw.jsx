@@ -45,41 +45,58 @@ export const LuckyDraw = ({
   const [hasSpun, setHasSpun] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState(null);
+  const [prizes, setPrizes] = useState([]);
+  const [isLoadingPrizes, setIsLoadingPrizes] = useState(true);
+
   const triggerError = (title, message, details = null) => {
     toast.error(`${title}: ${message}`);
     if (details) console.error("Error details:", details);
   };
 
+  useEffect(() => {
+    const fetchPrizes = async () => {
+      if (!merchantId) return;
+      try {
+        const apiBase = axiosInstance.defaults.baseURL || "";
+        const prizesUrl = apiBase.endsWith("/")
+          ? `${apiBase}lucky-draw/prizes/merchant/${merchantId}`
+          : `${apiBase}/lucky-draw/prizes/merchant/${merchantId}`;
+
+        const response = await axios.get(prizesUrl);
+        const prizeData = response.data?.data || response.data || [];
+        setPrizes(Array.isArray(prizeData) ? prizeData : []);
+      } catch (error) {
+        console.error("Failed to fetch prizes:", error);
+      } finally {
+        setIsLoadingPrizes(false);
+      }
+    };
+
+    fetchPrizes();
+  }, [merchantId]);
+
   const handleSpin = async () => {
-    toast.info("Spin initiated...");
-    console.log("Spin button clicked. State:", { isSpinning, hasSpun });
     if (isSpinning || hasSpun) return;
 
     // Validate IDs
     const safeMerchantId = parseInt(merchantId);
     const safeCustomerId = parseInt(customerId);
 
-    console.log("DEBUG IDs:", {
-      merchantId,
-      customerId,
-      safeMerchantId,
-      safeCustomerId,
-    });
-
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
-      console.error("DEBUG: One or more IDs are NaN");
       triggerError(
         "Session Expired",
-        "One or more required IDs are missing. Please refresh the page and try again."
+        "Required IDs are missing. Please refresh and try again.",
       );
       return;
     }
 
     setIsSpinning(true);
 
-    // Smooth spin animation
+    // Smooth slower spin animation (increased rotations and duration)
+    // 6 seconds duration for better suspense
     const extraDegrees = Math.floor(Math.random() * 360);
-    const newRotation = rotation + 360 * 5 + extraDegrees;
+    // Use 10 full rotations for more "spin" time
+    const newRotation = rotation + 360 * 8 + extraDegrees;
     setRotation(newRotation);
 
     try {
@@ -88,15 +105,11 @@ export const LuckyDraw = ({
         merchant_id: safeMerchantId,
       };
 
-      // Build URL safely
       const apiBase = axiosInstance.defaults.baseURL || "";
       const spinUrl = apiBase.endsWith("/")
         ? `${apiBase}lucky-draw/spin`
         : `${apiBase}/lucky-draw/spin`;
 
-      console.log("DEBUG: Final Spin URL:", spinUrl);
-
-      // Use direct axios to bypass any next-auth interceptors that might be hanging
       const response = await axios({
         method: "post",
         url: spinUrl,
@@ -104,25 +117,19 @@ export const LuckyDraw = ({
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(
-        "DEBUG: API Status:",
-        response.status,
-        "Data:",
-        response.data
-      );
       const prizeData = response.data?.data;
 
       // Sync animation with result display
-      // The CSS transition is set to 3 seconds in the style
+      // Increased to 6000ms to match the new duration
       setTimeout(() => {
         setIsSpinning(false);
         setHasSpun(true);
         setResult(prizeData);
         setReward(prizeData);
         toast.success(
-          `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`
+          `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`,
         );
-      }, 3000);
+      }, 6000);
     } catch (error) {
       console.error("Lucky Draw Error:", error);
       setIsSpinning(false);
@@ -137,7 +144,7 @@ export const LuckyDraw = ({
       triggerError(
         `Spin Failure (${errorCode})`,
         errorMsg,
-        responseData?.errors || responseData?.error || null
+        responseData?.errors || responseData?.error || null,
       );
     }
   };
@@ -186,31 +193,56 @@ export const LuckyDraw = ({
 
             {/* The Wheel */}
             <div
-              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-10 border-zinc-900 dark:border-zinc-100 shadow-[0_0_50px_rgba(0,0,0,0.3)] transition-transform duration-3000 cubic-bezier(0.15, 0, 0.15, 1) flex items-center justify-center overflow-hidden bg-zinc-50 dark:bg-zinc-800/50"
+              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-10 border-zinc-900 dark:border-zinc-100 shadow-[0_0_50px_rgba(0,0,0,0.3)] transition-transform duration-6000 cubic-bezier(0.1, 0, 0.1, 1) flex items-center justify-center overflow-hidden bg-zinc-50 dark:bg-zinc-800/50"
               style={{ transform: `rotate(${rotation}deg)` }}
             >
               {/* Segments Visualization */}
-              {[...Array(12)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-full h-full"
-                  style={{ transform: `rotate(${i * 30}deg)` }}
-                >
+              {(prizes.length > 0 ? prizes : [...Array(10)]).map((prize, i) => {
+                const totalSegments = prizes.length > 0 ? prizes.length : 10;
+                const angle = 360 / totalSegments;
+                return (
                   <div
-                    className={cn(
-                      "absolute top-0 left-1/2 -ml-px w-0.5 h-1/2 origin-bottom opacity-20",
-                      i % 2 === 0 ? "bg-primary" : "bg-purple-500"
-                    )}
-                  ></div>
-                  <div className="absolute top-6 left-1/2 -translate-x-1/2 opacity-40">
-                    {i % 3 === 0 ? (
-                      <Gift className="w-5 h-5 text-primary" />
-                    ) : (
-                      <Sparkles className="w-4 h-4 text-zinc-400" />
-                    )}
+                    key={i}
+                    className="absolute w-full h-full"
+                    style={{ transform: `rotate(${i * angle}deg)` }}
+                  >
+                    {/* Segment Line */}
+                    <div
+                      className={cn(
+                        "absolute top-0 left-1/2 -ml-px w-0.5 h-1/2 origin-bottom opacity-20",
+                        i % 2 === 0 ? "bg-primary" : "bg-purple-500",
+                      )}
+                    ></div>
+
+                    {/* Prize Label - Positioned radially */}
+                    <div
+                      className="absolute top-4 left-1/2 -translate-x-1/2 h-1/2 flex flex-col items-center pt-4 md:pt-8"
+                      style={{
+                        transform: `rotate(${angle / 2}deg)`,
+                        transformOrigin: "center bottom",
+                      }}
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <span
+                          className="text-[8px] md:text-[10px] font-black uppercase tracking-tighter text-zinc-700 dark:text-zinc-200 text-center max-w-[60px] md:max-w-20 wrap-break-word line-clamp-2"
+                          style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+                        >
+                          {prizes.length > 0
+                            ? prize.prize_name
+                            : i % 2 === 0
+                              ? "Free Gift"
+                              : "Mystery Box"}
+                        </span>
+                        {i % 3 === 0 ? (
+                          <Gift className="w-4 h-4 text-primary/40" />
+                        ) : (
+                          <Sparkles className="w-3 h-3 text-zinc-400/40" />
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {/* Center Pivot */}
               <div className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-zinc-900 dark:bg-zinc-100 shadow-2xl z-20 flex items-center justify-center border-4 border-zinc-800 dark:border-zinc-200">
@@ -319,21 +351,21 @@ export const LuckyDraw = ({
                     result?.whatsapp_error ||
                     result?.error === "whatsapp_credit_low" ? (
                     <p className="text-[11px] font-bold text-red-500 dark:text-red-400 leading-relaxed uppercase tracking-wide italic px-4">
-                      "We couldn't send the reward to your WhatsApp due to a
-                      technical error. <br />
+                      &quot;We couldn&quot;t send the reward to your WhatsApp
+                      due to a technical error. <br />
                       <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic mt-2 block">
                         PLEASE TAKE A SCREENSHOT OF THIS SCREEN AND SHOW IT TO
                         OUR STAFF TO CLAIM YOUR BENEFIT.
                       </span>
-                      "
+                      &quot;
                     </p>
                   ) : (
                     <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wide italic px-4">
-                      "Reward sent to your WhatsApp with the number{" "}
+                      &quot;Reward sent to your WhatsApp with the number{" "}
                       <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic">
                         {formValues?.phone || "you provided"}
                       </span>{" "}
-                      you entered while submitting the review form."
+                      you entered while submitting the review form.&quot;
                     </p>
                   )}
                 </div>

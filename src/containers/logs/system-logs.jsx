@@ -39,7 +39,6 @@ const LOG_TYPES = {
     { label: "Merchant Activities", value: "merchant", category: "merchant" },
     { label: "Critical Errors", value: "critical", level: "critical" },
     { label: "Coupon Operations", value: "coupon", category: "coupon" },
-    { label: "WhatsApp Logs", value: "whatsapp", category: "whatsapp" },
     {
       label: "WhatsApp UI Feedback",
       value: "whatsapp_ui_feedback_ui",

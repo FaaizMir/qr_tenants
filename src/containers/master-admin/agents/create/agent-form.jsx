@@ -182,7 +182,7 @@ export function AgentForm({
       console.error(`Error ${isEdit ? "updating" : "creating"} agent:`, error);
       toast.error(
         error?.response?.data?.message ||
-        `Failed to ${isEdit ? "update" : "create"} agent. Please try again.`
+          `Failed to ${isEdit ? "update" : "create"} agent. Please try again.`,
       );
     } finally {
       setLoading(false);
@@ -361,7 +361,7 @@ export function AgentForm({
             <CardTitle>Account Status</CardTitle>
           </div>
           <CardDescription>
-            Control the agent's access to the system.
+            Control the agent&apos;s access to the system.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -376,7 +376,7 @@ export function AgentForm({
               <span
                 className={cn(
                   "text-sm font-medium",
-                  formData.is_active ? "text-emerald-600" : "text-zinc-500"
+                  formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
                 {formData.is_active ? "Active" : "Inactive"}

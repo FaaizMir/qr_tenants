@@ -110,6 +110,7 @@
     "commission": "Commission",
     "approvals": "Approvals",
     "settings": "Settings",
-    "logs": "System Logs"
+    "logs": "System Logs",
+    "staff": "Staff Management"
   }
 }

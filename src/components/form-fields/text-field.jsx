@@ -27,8 +27,8 @@ export function TextField({
       </Label>
       <div className="relative">
         {startIcon && (
-          <div className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground [&>svg]:h-5 [&>svg]:w-5">
-            {startIcon}
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground">
+            {React.cloneElement(startIcon, { className: cn("h-4 w-4", startIcon.props?.className) })}
           </div>
         )}
         <Input

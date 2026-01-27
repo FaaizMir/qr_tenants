@@ -50,7 +50,7 @@ import {
   TextareaField,
 } from "@/components/form-fields";
 
-const creditTypeOptions = [
+const BASE_CREDIT_TYPES = [
   { value: "coupon", label: "Coupon" },
   { value: "paid ads", label: "Paid Ads" },
   { value: "whatsapp ui message", label: "WhatsApp UI Message" },
@@ -93,6 +93,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
   const credits = watch("credits");
   const selectedCreditType = watch("creditType");
   const pricePerCredit = watch("pricePerCredit");
+  const selectedMerchantType = watch("merchantType");
 
   useEffect(() => {
     if (!price || !credits) return;
@@ -117,12 +118,12 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           price: data.price,
           credits: data.credits,
           currency: data.currency,
-          creditType: creditTypeOptions.some(
+          creditType: BASE_CREDIT_TYPES.some(
             (opt) => opt.value === data.credit_type,
           )
             ? data.credit_type
             : "custom",
-          customCreditType: creditTypeOptions.some(
+          customCreditType: BASE_CREDIT_TYPES.some(
             (opt) => opt.value === data.credit_type,
           )
             ? ""
@@ -187,7 +188,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} package`,
+        `Failed to ${isEdit ? "update" : "create"} package`,
         { closeButton: true, duration: false },
       );
     } finally {
@@ -216,6 +217,25 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     }
   };
 
+  const filteredCreditTypeOptions = BASE_CREDIT_TYPES.filter((opt) => {
+    if (selectedMerchantType === "temporary") {
+      return (
+        opt.value === "whatsapp ui message" ||
+        opt.value === "coupon" ||
+        opt.value === "paid ads"
+      );
+    }
+    return true; // annual → allow all
+  });
+  useEffect(() => {
+    if (
+      selectedMerchantType === "temporary" &&
+      watch("creditType") === "whatsapp bi message"
+    ) {
+      setValue("creditType", "whatsapp ui message");
+    }
+  }, [selectedMerchantType, setValue, watch]);
+
   return (
     <div className="max-w-full  px-6">
       <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -243,7 +263,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     variant="ghost"
                     size="sm"
                     className="hover:bg-muted"
-                    onClick={() => router.push("/agent/packages")}
+                    onClick={() => router.push("/master-admin/packages")}
                   >
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     Back to List
@@ -360,14 +380,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <SelectField
-                      label="Credit Type"
-                      name="creditType"
-                      control={control}
-                      errors={errors}
-                      options={creditTypeOptions}
-                    />
-
-                    <SelectField
                       label="Merchant Plan"
                       name="merchantType"
                       control={control}
@@ -376,6 +388,13 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                         { value: "annual", label: "Annual / Premium" },
                         { value: "temporary", label: "Temporary / Basic" },
                       ]}
+                    />
+                    <SelectField
+                      label="Credit Type"
+                      name="creditType"
+                      control={control}
+                      errors={errors}
+                      options={filteredCreditTypeOptions}
                     />
 
                     <SelectField

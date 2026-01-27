@@ -20,6 +20,7 @@ import {
   Package,
   CheckCircle,
   Search,
+  ShieldCheck,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
@@ -210,6 +211,12 @@ export function AppSidebar({
       allowedStaff: ["super_admin"],
     },
     {
+      title: tMasterAdmin("staff"),
+      url: "/master-admin/staff",
+      icon: ShieldCheck,
+      allowedStaff: ["super_admin"],
+    },
+    {
       title: tMasterAdmin("packages"),
       url: "/master-admin/packages",
       icon: Package,
@@ -243,17 +250,8 @@ export function AppSidebar({
       title: tMasterAdmin("settings"),
       url: "/master-admin/superadmin_settings",
       icon: Settings,
+      allowedStaff: ["super_admin"],
     },
-    // {
-    //   title: tMasterAdmin("commission"),
-    //   url: "/master-admin/commission",
-    //   icon: DollarSign,
-    // },
-    // {
-    //   title: tMasterAdmin("approvals"),
-    //   url: "/master-admin/approvals",
-    //   icon: CheckCircle,
-    // },
     {
       title: tMasterAdmin("logs"),
       url: "/master-admin/logs",
