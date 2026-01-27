@@ -159,6 +159,27 @@ export default function AnnualWalletView({
         ),
       },
       {
+        accessorKey: "credit_type",
+        header: "Credits",
+        cell: ({ row }) => {
+          const ct =
+            row.original.credit_type ||
+            row.original.metadataParsed?.package?.credit_type ||
+            row.original.raw_credit_type ||
+            "";
+          if (!ct) return <span className="text-sm">—</span>;
+          const label = (ct || "")
+            .toString()
+            .toLowerCase()
+            .includes("whatsapp_bi")
+            ? "Whatsapp BI"
+            : (ct || "").toString().toLowerCase().includes("whatsapp_ui")
+              ? "Whatsapp UI"
+              : (ct || "").toString();
+          return <span className="text-sm capitalize">{label}</span>;
+        },
+      },
+      {
         accessorKey: "amount",
         header: "Amount",
         cell: ({ row }) => {
@@ -235,10 +256,18 @@ export default function AnnualWalletView({
               </div>
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
                 <span className="text-muted-foreground text-xs font-medium">
-                  Whatsapp Credits
+                  Whatsapp UI Credits
                 </span>
                 <span className="font-bold text-sm">
-                  {format(creditDetails.message)}
+                  {format(creditDetails.whatsapp_ui ?? creditDetails.message)}
+                </span>
+              </div>
+              <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
+                <span className="text-muted-foreground text-xs font-medium">
+                  Whatsapp BI Credits
+                </span>
+                <span className="font-bold text-sm">
+                  {format(creditDetails.whatsapp_bi ?? 0)}
                 </span>
               </div>
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
@@ -305,8 +334,8 @@ export default function AnnualWalletView({
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
-                      (creditDetails.used / creditDetails.purchased) * 100,
-                    )
+                        (creditDetails.used / creditDetails.purchased) * 100,
+                      )
                     : 0}
                   %
                 </span>

@@ -82,6 +82,35 @@ export default function MerchantPurchase() {
     };
   }, [merchantType]);
 
+  // Client-side filter to ensure we only show the allowed packages
+  const visiblePackages = useMemo(() => {
+    if (!Array.isArray(packages)) return [];
+    const type = merchantType || "temporary";
+
+    return packages.filter((pkg) => {
+      const ct = (pkg?.credit_type || "").toString().toLowerCase();
+      const pkgMerchantType = (pkg?.merchant_type || "")
+        .toString()
+        .toLowerCase();
+
+      // For WhatsApp packages: use UI/BI filtering logic
+      if (ct.includes("whatsapp")) {
+        // Temporary merchants: only show whatsapp UI packages
+        if (type === "temporary") {
+          return ct.includes("ui");
+        }
+        // Annual merchants: show both whatsapp UI and whatsapp BI packages
+        if (type === "annual") {
+          return ct.includes("ui") || ct.includes("bi");
+        }
+      }
+
+      // For non-WhatsApp packages (coupon, paid ads, etc): filter by merchant_type
+      // Show packages that match the current user's merchant type
+      return pkgMerchantType === type;
+    });
+  }, [packages, merchantType]);
+
   const handlePurchase = async (pkg) => {
     const merchant_id = session?.user?.merchantId;
 
@@ -179,13 +208,13 @@ export default function MerchantPurchase() {
         </p>
       </div>
 
-      {packages.length === 0 ? (
+      {visiblePackages.length === 0 ? (
         <div className="rounded-xl border border-muted-foreground/20 bg-muted/10 p-6 text-muted-foreground">
           No credit packages found for your merchant type.
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {packages.map((pkg) => {
+          {visiblePackages.map((pkg) => {
             const price = Number(pkg.price || 0);
             const currency = pkg.currency || "USD";
 
@@ -199,7 +228,28 @@ export default function MerchantPurchase() {
                   text: "text-blue-600",
                   badge: "bg-blue-100/80 text-blue-700 border-blue-200",
                 };
-              if (t.includes("whatsapp"))
+              if (t.includes("whatsapp")) {
+                // Differentiate UI vs BI whatsapp package types
+                if (t.includes("ui")) {
+                  return {
+                    label: "Whatsapp UI Message",
+                    icon: <Sparkles className="h-4 w-4" />,
+                    bg: "bg-emerald-50",
+                    text: "text-emerald-600",
+                    badge:
+                      "bg-emerald-100/80 text-emerald-700 border-emerald-200",
+                  };
+                }
+                if (t.includes("bi")) {
+                  return {
+                    label: "Whatsapp BI Message",
+                    icon: <Sparkles className="h-4 w-4" />,
+                    bg: "bg-emerald-50",
+                    text: "text-emerald-600",
+                    badge:
+                      "bg-emerald-100/80 text-emerald-700 border-emerald-200",
+                  };
+                }
                 return {
                   label: "Whatsapp Message",
                   icon: <Sparkles className="h-4 w-4" />,
@@ -208,6 +258,7 @@ export default function MerchantPurchase() {
                   badge:
                     "bg-emerald-100/80 text-emerald-700 border-emerald-200",
                 };
+              }
               if (t.includes("ad"))
                 return {
                   label: "Paid Ads",

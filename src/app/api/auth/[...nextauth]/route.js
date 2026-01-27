@@ -31,7 +31,7 @@ export const authOptions = {
 
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
-            payload
+            payload,
           );
 
           const data = res?.data;
@@ -59,7 +59,7 @@ export const authOptions = {
 
           if (isActive === false) {
             console.warn(
-              `Access denied: Account is inactive for role: ${normalizedRole}`
+              `Access denied: Account is inactive for role: ${normalizedRole}`,
             );
             throw new Error("ACCOUNT_INACTIVE");
           }
@@ -71,13 +71,12 @@ export const authOptions = {
             name: userObj?.name || userObj?.business_name || "User",
             access_token: token,
             role: normalizedRole,
-            subscriptionType: data?.merchant?.merchant_type || "temporary",
+            subscriptionType: data?.merchant?.merchant_type || "annual",
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
             admin_id: data?.merchant?.admin_id || data?.user?.adminId || null,
             is_subscription_expired: data.user.is_subscription_expired,
             subscription_expires_at: data.user.subscription_expires_at,
-
           };
         } catch (error) {
           const apiError =
@@ -89,7 +88,7 @@ export const authOptions = {
               apiError.toUpperCase().includes("INACTIVE"))
           ) {
             throw new Error(
-              "Your account is inactive. Please contact your agent."
+              "Your account is inactive. Please contact your agent.",
             );
           }
 
