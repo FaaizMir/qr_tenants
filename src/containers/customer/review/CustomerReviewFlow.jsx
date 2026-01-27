@@ -56,7 +56,7 @@ export function CustomerReviewFlow() {
     logo: null,
     rewardType: "lucky_draw",
     address: "",
-    mapLink: "https://maps.google.com",
+    mapLink: "https://google.com",
     enablePresetReviews: true,
     enableGoogle: false,
     enableFacebook: false,
@@ -155,7 +155,7 @@ export function CustomerReviewFlow() {
         console.log("Lucky Draw Enabled:", settings?.luckydraw_enabled);
         console.log(
           "WhatsApp Batch ID:",
-          settings?.whatsapp_enabled_for_batch_id
+          settings?.whatsapp_enabled_for_batch_id,
         );
 
         if (settings || merchant) {
@@ -191,7 +191,7 @@ export function CustomerReviewFlow() {
         triggerError(
           "Connection Error",
           "We couldn't load the merchant configuration. Please check your internet connection or scan the QR code again.",
-          responseData || error.message
+          responseData || error.message,
         );
       } finally {
         setInitializing(false);
@@ -380,7 +380,7 @@ export function CustomerReviewFlow() {
                   Message from Server
                 </h4>
                 <p className="text-zinc-700 dark:text-zinc-300 text-sm font-semibold leading-relaxed italic">
-                  "{errorDialog.message}"
+                  &quot;{errorDialog.message}&quot;
                 </p>
               </div>
 

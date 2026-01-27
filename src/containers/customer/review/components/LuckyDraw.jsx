@@ -129,6 +129,13 @@ export const LuckyDraw = ({
         toast.success(
           `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`,
         );
+
+        const whatsappStatus = prizeData?.whatsapp_notification;
+        if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
+          toast.error(`Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`);
+        } else if (whatsappStatus?.sent && !whatsappStatus?.credits_insufficient) {
+          toast.success("Success: Reward details sent to your WhatsApp!");
+        }
       }, 6000);
     } catch (error) {
       console.error("Lucky Draw Error:", error);
@@ -318,12 +325,15 @@ export const LuckyDraw = ({
                 <div className="flex flex-col items-center gap-2 mt-4">
                   {result?.whatsapp_status === "failed" ||
                     result?.whatsapp_error ||
-                    result?.error === "whatsapp_credit_low" ? (
+                    result?.error === "whatsapp_credit_low" ||
+                    result?.whatsapp_notification?.credits_insufficient ? (
                     <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20">
                       <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
                       <span className="text-[10px] font-black text-red-600 dark:text-red-400 uppercase tracking-widest leading-none">
                         WhatsApp Error:{" "}
-                        {result?.whatsapp_error ||
+                        {result?.whatsapp_notification?.credits_insufficient
+                          ? `Credit Exhausted (Available: ${result?.whatsapp_notification?.available_credits ?? 0})`
+                          : result?.whatsapp_error ||
                           result?.error_message ||
                           (result?.error === "whatsapp_credit_low"
                             ? "Credit Exhausted"
@@ -349,7 +359,8 @@ export const LuckyDraw = ({
                 <div className="bg-zinc-50 dark:bg-zinc-800/20 p-5 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-700/50 max-w-sm mt-4">
                   {result?.whatsapp_status === "failed" ||
                     result?.whatsapp_error ||
-                    result?.error === "whatsapp_credit_low" ? (
+                    result?.error === "whatsapp_credit_low" ||
+                    result?.whatsapp_notification?.credits_insufficient ? (
                     <p className="text-[11px] font-bold text-red-500 dark:text-red-400 leading-relaxed uppercase tracking-wide italic px-4">
                       &quot;We couldn&quot;t send the reward to your WhatsApp
                       due to a technical error. <br />

@@ -101,14 +101,14 @@ export const ReviewForm = ({
     const fetchPresets = async () => {
       try {
         const response = await axiosInstance.get(
-          `/preset-reviews?merchantId=${merchantId}`
+          `/preset-reviews?merchantId=${merchantId}`,
         );
         setPresetReviews(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching presets:", error);
         triggerError(
           "System Notice",
-          "We couldn't load the pre-written reviews, but you can still write your own feedback below."
+          "We couldn't load the pre-written reviews, but you can still write your own feedback below.",
         );
       } finally {
         setLoadingPresets(false);
@@ -132,7 +132,7 @@ export const ReviewForm = ({
     if (!formValues.rating || formValues.rating < 1) {
       triggerError(
         "Rating Required",
-        "Please provide a star rating (1-5 stars) to share your experience."
+        "Please provide a star rating (1-5 stars) to share your experience.",
       );
       return;
     }
@@ -141,7 +141,7 @@ export const ReviewForm = ({
     if (!formValues.text && !selectedPresetId) {
       triggerError(
         "Feedback Required",
-        "Please share your feedback - select a quick expression or write your own."
+        "Please share your feedback - select a quick expression or write your own.",
       );
       return;
     }
@@ -154,7 +154,7 @@ export const ReviewForm = ({
     ) {
       triggerError(
         "Feedback Too Short",
-        "Please provide more detailed feedback (at least 3 characters)."
+        "Please provide more detailed feedback (at least 3 characters).",
       );
       return;
     }
@@ -163,7 +163,7 @@ export const ReviewForm = ({
     if (!formValues.name || formValues.name.trim().length === 0) {
       triggerError(
         "Missing Information",
-        "Your name is required. Please go back and fill in your details."
+        "Your name is required. Please go back and fill in your details.",
       );
       return;
     }
@@ -171,7 +171,7 @@ export const ReviewForm = ({
     if (!formValues.email || formValues.email.trim().length === 0) {
       triggerError(
         "Missing Information",
-        "Email is required. Please go back and fill in your details."
+        "Email is required. Please go back and fill in your details.",
       );
       return;
     }
@@ -179,7 +179,7 @@ export const ReviewForm = ({
     if (!formValues.phone || formValues.phone.trim().length === 0) {
       triggerError(
         "Missing Information",
-        "Phone number is required. Please go back and fill in your details."
+        "Phone number is required. Please go back and fill in your details.",
       );
       return;
     }
@@ -212,7 +212,7 @@ export const ReviewForm = ({
       if (isNaN(safeMerchantId)) {
         triggerError(
           "Invalid Merchant",
-          "Invalid merchant profile. Please scan the QR code again or contact staff."
+          "Invalid merchant profile. Please scan the QR code again or contact staff.",
         );
         return;
       }
@@ -273,11 +273,26 @@ export const ReviewForm = ({
 
         setShowPlatformModal(false);
         toast.success("Feedback submitted successfully!");
+
+        const whatsappStatus =
+          response.data?.data?.whatsapp_notification ||
+          response.data?.whatsapp_notification;
+        if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
+          toast.error(
+            `Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`,
+          );
+        } else if (
+          whatsappStatus?.sent &&
+          !whatsappStatus?.credits_insufficient
+        ) {
+          toast.success("Success: Reward details sent to your WhatsApp!");
+        }
+
         nextStep(response.data?.data || response.data);
       } else {
         triggerError(
           "Submission Failed",
-          "We couldn't save your feedback. Please try again or check your internet connection."
+          "We couldn't save your feedback. Please try again or check your internet connection.",
         );
       }
     } catch (error) {
@@ -354,7 +369,7 @@ export const ReviewForm = ({
                     ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
                     : formValues.rating >= 3
                       ? "bg-amber-500/10 text-amber-600 border border-amber-500/20"
-                      : "bg-red-500/10 text-red-600 border border-red-500/20"
+                      : "bg-red-500/10 text-red-600 border border-red-500/20",
                 )}
               >
                 {formValues.rating >= 4
@@ -398,11 +413,11 @@ export const ReviewForm = ({
                       "px-4 py-2 rounded-full border text-[11px] font-bold transition-all duration-300 relative",
                       selectedPresetId === review.id
                         ? "border-primary bg-primary text-white shadow-md scale-105"
-                        : "border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-500 hover:border-primary/50 hover:bg-zinc-50"
+                        : "border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-500 hover:border-primary/50 hover:bg-zinc-50",
                     )}
                   >
                     <span className="relative z-10">
-                      "{review.review_text}"
+                      &quot;{review.review_text}&quot;
                     </span>
                   </button>
                 ))}

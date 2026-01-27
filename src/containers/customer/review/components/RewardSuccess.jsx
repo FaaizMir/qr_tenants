@@ -85,11 +85,14 @@ export const RewardSuccess = ({
 
                   {reward?.whatsapp_status === "failed" ||
                     reward?.whatsapp_error ||
-                    reward?.error === "whatsapp_credit_low" ? (
+                    reward?.error === "whatsapp_credit_low" ||
+                    reward?.whatsapp_notification?.credits_insufficient ? (
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20">
                       <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest">
-                        WhatsApp Delivery Failed
+                        {reward?.whatsapp_notification?.credits_insufficient
+                          ? `WhatsApp Credit Exhausted (Available: ${reward?.whatsapp_notification?.available_credits ?? 0})`
+                          : "WhatsApp Delivery Failed"}
                       </span>
                     </div>
                   ) : (
@@ -108,7 +111,8 @@ export const RewardSuccess = ({
           <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 text-center max-w-lg mx-auto">
             {reward?.whatsapp_status === "failed" ||
               reward?.whatsapp_error ||
-              reward?.error === "whatsapp_credit_low" ? (
+              reward?.error === "whatsapp_credit_low" ||
+              reward?.whatsapp_notification?.credits_insufficient ? (
               <p className="text-xs font-medium text-red-600 dark:text-red-400 leading-relaxed italic">
                 "We couldn't deliver the code via WhatsApp. Please screenshot
                 this screen or note down the code above to show our staff."
