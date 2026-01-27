@@ -47,74 +47,19 @@ export default function StaffManagement() {
     const fetchStaff = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axiosInstance.get("/admins", {
+            const response = await axiosInstance.get("/superadmin-roles", {
                 params: {
                     page: page + 1,
-                    limit: pageSize,
+                    pageSize: pageSize,
                     search: debouncedSearch,
                 },
             });
 
             const result = response.data;
-            let staffList = result?.data || result || [];
+            const staffList = result?.data || result || [];
 
-            // Roles that define "Staff"
-            const staffRoles = [
-                "support_staff",
-                "ad_approver",
-                "finance_viewer",
-                "super_admin",
-            ];
-            let filteredStaff = staffList.filter(
-                (item) =>
-                    staffRoles.includes(item.admin_role) ||
-                    staffRoles.includes(item.role),
-            );
-
-            // If no staff found and not searching, show dummy data for demo
-            if (filteredStaff.length === 0 && !debouncedSearch) {
-                filteredStaff = [
-                    {
-                        id: "staff-1",
-                        name: "Alexander Pierce",
-                        email: "alex.p@must.services",
-                        phone: "+44 20 7123 4567",
-                        admin_role: "super_admin",
-                        is_active: true,
-                        created_at: "2024-01-10T10:00:00Z",
-                    },
-                    {
-                        id: "staff-2",
-                        name: "Sarah Jenkins",
-                        email: "s.jenkins@must.services",
-                        phone: "+44 20 7234 5678",
-                        admin_role: "ad_approver",
-                        is_active: true,
-                        created_at: "2024-02-15T09:30:00Z",
-                    },
-                    {
-                        id: "staff-3",
-                        name: "Robert Fox",
-                        email: "r.fox@must.services",
-                        phone: "+44 20 7345 6789",
-                        admin_role: "finance_viewer",
-                        is_active: false,
-                        created_at: "2024-05-20T14:45:00Z",
-                    },
-                    {
-                        id: "staff-4",
-                        name: "Emily Watson",
-                        email: "e.watson@must.services",
-                        phone: "+44 20 7456 7890",
-                        admin_role: "support_staff",
-                        is_active: true,
-                        created_at: "2024-08-11T11:15:00Z",
-                    },
-                ];
-            }
-
-            setData(Array.isArray(filteredStaff) ? filteredStaff : []);
-            setTotal(result?.meta?.total || filteredStaff.length);
+            setData(Array.isArray(staffList) ? staffList : []);
+            setTotal(result?.meta?.total || staffList.length);
         } catch (error) {
             console.error("Failed to fetch staff:", error);
             setData([]);
@@ -127,7 +72,7 @@ export default function StaffManagement() {
         if (!staffToDelete) return;
         setDeleting(true);
         try {
-            await axiosInstance.delete(`/admins/${staffToDelete.id}`);
+            await axiosInstance.delete(`/superadmin-roles/${staffToDelete.id}`);
             toast.success("Staff member deleted successfully.");
             fetchStaff();
         } catch (error) {

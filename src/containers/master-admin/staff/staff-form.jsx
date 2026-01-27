@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { useParams } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -43,11 +44,12 @@ const STAFF_ROLES = [
 export function StaffForm({
   initialData = null,
   isEdit = false,
-  staffId = null,
+  // staffId = null,
 }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
+  const { id: staffId } = useParams();
 
   const {
     register,
@@ -71,13 +73,41 @@ export function StaffForm({
   const isActiveValue = watch("is_active");
 
   useEffect(() => {
+    const fetchStaffData = async () => {
+      if (isEdit && staffId && !initialData) {
+        setLoading(true);
+        try {
+          const response = await axiosInstance.get(`/superadmin-roles/${staffId}`);
+          const staffDetail = response.data?.data || response.data;
+
+          reset({
+            name: staffDetail.name || "",
+            email: staffDetail.email || "",
+            phone: staffDetail.phone || staffDetail.phone_number || "",
+            password: "",
+            role: staffDetail.role || staffDetail.admin_role || "support_staff",
+            is_active: staffDetail.is_active ?? true,
+          });
+        } catch (error) {
+          console.error("Failed to fetch staff data:", error);
+          toast.error("Failed to load staff data.");
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchStaffData();
+  }, [isEdit, staffId, initialData, reset]);
+
+  useEffect(() => {
     if (isEdit && initialData) {
       reset({
         name: initialData.name || "",
         email: initialData.email || "",
         phone: initialData.phone || initialData.phone_number || "",
         password: "",
-        role: initialData.admin_role || initialData.role || "support_staff",
+        role: initialData.role || initialData.admin_role || "support_staff",
         is_active: initialData.is_active ?? true,
       });
     }
@@ -91,17 +121,17 @@ export function StaffForm({
         name: data.name,
         email: data.email,
         phone: data.phone,
-        admin_role: data.role,
+        role: data.role,
         is_active: data.is_active,
       };
 
       if (data.password) payload.password = data.password;
 
       if (isEdit && staffId) {
-        await axiosInstance.patch(`/admins/${staffId}`, payload);
+        await axiosInstance.patch(`/superadmin-roles/${staffId}`, payload);
         toast.success("Staff profile updated successfully.");
       } else {
-        await axiosInstance.post(`/admins`, payload);
+        await axiosInstance.post(`/superadmin-roles`, payload);
         toast.success("Staff account created successfully.");
       }
 
