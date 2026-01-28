@@ -1,6 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const authOptions = {
   providers: [
@@ -32,32 +32,23 @@ export const authOptions = {
           if (!response.ok) {
             // Extract error message from various possible response formats
             let errorMessage = "Invalid email or password";
-            
+
             if (data?.message) {
-              errorMessage = Array.isArray(data.message) 
-                ? data.message.join(", ") 
+              errorMessage = Array.isArray(data.message)
+                ? data.message.join(", ")
                 : data.message;
             } else if (data?.error) {
-              errorMessage = Array.isArray(data.error) 
-                ? data.error.join(", ") 
+              errorMessage = Array.isArray(data.error)
+                ? data.error.join(", ")
                 : data.error;
-            } else if (data?.errors) {
-              // Handle validation errors object
-              const errorKeys = Object.keys(data.errors);
-              if (errorKeys.length > 0) {
-                const firstError = data.errors[errorKeys[0]];
-                errorMessage = Array.isArray(firstError) 
-                  ? firstError[0] 
-                  : firstError;
-              }
             }
-            
+
             throw new Error(JSON.stringify({ message: errorMessage }));
           }
 
           const payload = data?.data ?? data ?? {};
-          const accessToken = payload?.access_token ?? payload?.accessToken;
-          const user = payload?.user;
+          const accessToken = payload?.access_token ?? payload?.accessToken ?? data?.token;
+          const user = payload?.user ?? payload;
 
           if (!accessToken || !user) {
             throw new Error("Invalid credentials");
@@ -65,14 +56,7 @@ export const authOptions = {
 
           return { ...user, accessToken };
         } catch (error) {
-          // Handle network errors
-          if (error.name === "TypeError" && error.message.includes("fetch")) {
-            throw new Error(JSON.stringify({ 
-              message: "Unable to connect to server. Please check your connection." 
-            }));
-          }
-          
-          // Handle other errors
+          console.error("Auth error:", error);
           const friendlyMessage = error?.message || "Unable to sign in right now.";
           throw new Error(JSON.stringify({ message: friendlyMessage }));
         }
@@ -86,11 +70,15 @@ export const authOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.accessToken = user.accessToken;
         token.user = user;
         token.provider = "credentials";
+      }
+      // Handle session updates if any
+      if (trigger === "update" && session) {
+        token.user = { ...token.user, ...session.user };
       }
       return token;
     },
@@ -100,9 +88,6 @@ export const authOptions = {
       }
       if (token?.accessToken) {
         session.accessToken = token.accessToken;
-      }
-      if (token?.provider) {
-        session.provider = token.provider;
       }
       return session;
     },
