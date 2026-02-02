@@ -53,18 +53,8 @@ export const getDashboardTabs = ({
       label: "Wallet",
       content: <MerchantWalletContainer embedded={true} />,
     },
-    // ...(isAnnual
-    //   ? [
-    //     {
-    //       value: "analytics",
-    //       label: "Analytics",
-    //       content: <MerchantAnalyticsContainer embedded={false} />,
-    //     },
-    //   ]
-    //   : []),
-
     {
-      value: "reviews",
+      value: "settings",
       label: "Settings",
       content: <MerchantSettings />,
     },

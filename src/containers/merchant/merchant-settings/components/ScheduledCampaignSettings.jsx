@@ -202,8 +202,8 @@ export default function ScheduledCampaignSettings() {
 
       <div
         className={`grid transition-all duration-500 ease-in-out ${enabled
-            ? "grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-50 grayscale"
+          ? "grid-rows-[1fr] opacity-100"
+          : "grid-rows-[0fr] opacity-50 grayscale"
           }`}
       >
         <div className="overflow-hidden">

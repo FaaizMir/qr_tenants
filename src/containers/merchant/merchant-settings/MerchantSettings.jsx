@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
 
 // Components
 import PlatformSettings from "./components/PlatformSettings";
@@ -9,21 +10,43 @@ import PresetReviewsSettings from "./components/PresetReviewsSettings";
 import RewardStrategySettings from "./components/RewardStrategySettings";
 import BirthdayRewardsSettings from "./components/BirthdayRewardsSettings";
 import InactiveRecallSettings from "./components/InactiveRecallSettings";
-import FestivalMessageSettings from "./components/FestivalMessageSettings";
-import ScheduledCampaignSettings from "./components/ScheduledCampaignSettings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Settings2, Rocket, Zap, Megaphone } from "lucide-react";
 
 import FeatureMasterControl from "./components/FeatureMasterControl";
 import PaidAdsSettings from "./components/PaidAdsSettings";
+import MerchantCampaigns from "./campaigns/campaign";
+import FestivalMessages from "./festival-messages/festival";
 
 export default function MerchantSettings() {
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
+  const router = useRouter();
+  const pathname = usePathname();
 
   const subscriptionType =
     session?.user?.subscriptionType?.toString?.().toLowerCase() || "temporary";
   const isAnnual = subscriptionType === "annual";
+
+  // State for active tab - initialize from URL if available
+  const getInitialTab = () => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const subtab = params.get("subtab");
+      return subtab || "settings";
+    }
+    return "settings";
+  };
+
+  const [activeTab, setActiveTab] = useState(getInitialTab);
+
+  // Handle tab change
+  const handleTabChange = (value) => {
+    setActiveTab(value);
+    // Get base path without query params
+    const basePath = pathname.split("?")[0];
+    router.push(`${basePath}?tab=settings&subtab=${value}`, { scroll: false });
+  };
 
   return (
     <div className="relative space-y-8 animate-in fade-in duration-1000 pb-20 overflow-x-hidden">
@@ -74,7 +97,11 @@ export default function MerchantSettings() {
 
       <FeatureMasterControl />
 
-      <Tabs defaultValue="settings" className="w-full space-y-8">
+      <Tabs
+        value={activeTab}
+        onValueChange={handleTabChange}
+        className="w-full space-y-8"
+      >
         <div className="flex items-center justify-items-start">
           <TabsList className="bg-gray-100/50 p-1.5 rounded-2xl h-auto border border-gray-200/50 backdrop-blur-sm shadow-inner">
             <TabsTrigger
@@ -98,6 +125,24 @@ export default function MerchantSettings() {
               >
                 <Rocket className="h-4 w-4" />
                 Automations
+              </TabsTrigger>
+            )}
+            {isAnnual && (
+              <TabsTrigger
+                value="campaigns"
+                className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
+              >
+                <Rocket className="h-4 w-4" />
+                Campaigns
+              </TabsTrigger>
+            )}
+            {isAnnual && (
+              <TabsTrigger
+                value="festival-messages"
+                className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
+              >
+                <Rocket className="h-4 w-4" />
+                Festival Messages
               </TabsTrigger>
             )}
           </TabsList>
@@ -155,31 +200,41 @@ export default function MerchantSettings() {
         </TabsContent>
 
         {/* Automations Tab */}
-        {isAnnual && (
-          <TabsContent
-            value="automations"
-            className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              <div className="space-y-8">
-                <div className="group transition-all duration-500">
-                  <BirthdayRewardsSettings />
-                </div>
-                <div className="group transition-all duration-500">
-                  <ScheduledCampaignSettings />
-                </div>
-              </div>
-              <div className="space-y-8">
-                <div className="group transition-all duration-500">
-                  <InactiveRecallSettings />
-                </div>
-                <div className="group transition-all duration-500">
-                  <FestivalMessageSettings />
-                </div>
+        <TabsContent
+          value="automations"
+          className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="space-y-8">
+              <div className="group transition-all duration-500">
+                <BirthdayRewardsSettings />
               </div>
             </div>
-          </TabsContent>
-        )}
+            <div className="space-y-8">
+              <div className="group transition-all duration-500">
+                <InactiveRecallSettings />
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+
+        <TabsContent
+          value="campaigns"
+          className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700 "
+        >
+          <div className="w-full">
+            <MerchantCampaigns />
+          </div>
+        </TabsContent>
+
+        <TabsContent
+          value="festival-messages"
+          className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700 "
+        >
+          <div className="w-full">
+            <FestivalMessages />
+          </div>
+        </TabsContent>
       </Tabs>
     </div>
   );
