@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Plus, Filter, AlertCircle, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axios from "@/lib/axios";
@@ -50,6 +50,7 @@ export default function FestivalMessages() {
 
   // Feature toggle state
   const [featureEnabled, setFeatureEnabled] = useState(true);
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
 
   // Listen for settings updates from FeatureMasterControl
   useEffect(() => {
@@ -59,79 +60,80 @@ export default function FestivalMessages() {
       }
     };
     window.addEventListener("MERCHANT_SETTINGS_UPDATED", handleSettingsUpdate);
-    return () => window.removeEventListener("MERCHANT_SETTINGS_UPDATED", handleSettingsUpdate);
+    return () =>
+      window.removeEventListener(
+        "MERCHANT_SETTINGS_UPDATED",
+        handleSettingsUpdate,
+      );
   }, []);
 
-  // Fetch Festival Messages
-  const fetchFestivals = useCallback(async () => {
-    if (!merchantId) return;
-
-    try {
-      setLoading(true);
-      const params = {
-        merchant_id: merchantId,
-        page: page + 1,
-        pageSize,
-      };
-
-      if (debouncedSearch) {
-        params.search = debouncedSearch;
-      }
-
-      if (statusFilter === "active") {
-        params.is_active = true;
-      } else if (statusFilter === "inactive") {
-        params.is_active = false;
-      }
-
-      const res = await axios.get("/festival-messages", { params });
-      const data = res?.data?.data || res?.data || [];
-      setFestivals(Array.isArray(data) ? data : []);
-      setTotal(res?.data?.meta?.total || data.length);
-    } catch (error) {
-      console.error("Failed to fetch festival messages", error);
-      toast.error("Failed to load festival messages");
-    } finally {
-      setLoading(false);
-    }
-  }, [merchantId, page, pageSize, debouncedSearch, statusFilter]);
-
-  // Initial load - fetch settings and festivals together
+  // Fetch settings once on mount
   useEffect(() => {
-    const initializeData = async () => {
+    const fetchSettings = async () => {
       if (!merchantId) return;
-      
-      setInitialLoading(true);
+
       try {
-        const [settingsRes, festivalsRes] = await Promise.all([
-          axios.get(`/merchant-settings/merchant/${merchantId}`),
-          axios.get("/festival-messages", {
-            params: { merchant_id: merchantId, page: 1, pageSize: 10 }
-          })
-        ]);
-        
-        const settings = settingsRes?.data?.data || {};
+        const res = await axios.get(
+          `/merchant-settings/merchant/${merchantId}`,
+        );
+        const settings = res?.data?.data || {};
         setFeatureEnabled(!!settings.festival_campaign_enabled);
-        
-        const data = festivalsRes?.data?.data || festivalsRes?.data || [];
-        setFestivals(Array.isArray(data) ? data : []);
-        setTotal(festivalsRes?.data?.meta?.total || data.length);
       } catch (error) {
-        console.error("Failed to initialize:", error);
-      } finally {
-        setInitialLoading(false);
+        console.error("Failed to fetch settings:", error);
       }
     };
-    
-    initializeData();
+
+    fetchSettings();
   }, [merchantId]);
 
-  // Refetch when filters change (after initial load)
+  // Fetch festivals when filters change
   useEffect(() => {
-    if (!initialLoading) {
-      fetchFestivals();
-    }
-  }, [page, pageSize, debouncedSearch, statusFilter, fetchFestivals, initialLoading]);
+    const fetchFestivals = async () => {
+      if (!merchantId) return;
+
+      try {
+        setLoading(true);
+        if (initialLoading) setInitialLoading(true);
+
+        const params = {
+          merchant_id: merchantId,
+          page: page + 1,
+          pageSize,
+        };
+
+        if (debouncedSearch) {
+          params.search = debouncedSearch;
+        }
+
+        if (statusFilter === "active") {
+          params.is_active = true;
+        } else if (statusFilter === "inactive") {
+          params.is_active = false;
+        }
+
+        const res = await axios.get("/festival-messages", { params });
+        const data = res?.data?.data || res?.data || [];
+        setFestivals(Array.isArray(data) ? data : []);
+        setTotal(res?.data?.meta?.total || data.length);
+      } catch (error) {
+        console.error("Failed to fetch festival messages", error);
+        toast.error("Failed to load festival messages");
+      } finally {
+        setLoading(false);
+        if (initialLoading) setInitialLoading(false);
+      }
+    };
+
+    fetchFestivals();
+  }, [
+    merchantId,
+    page,
+    pageSize,
+    debouncedSearch,
+    statusFilter,
+    initialLoading,
+    refetchTrigger,
+  ]);
 
   // Handle create
   const handleCreate = () => {
@@ -150,7 +152,7 @@ export default function FestivalMessages() {
     try {
       await axios.delete(`/festival-messages/${festivalId}`);
       toast.success("Festival message deleted successfully");
-      fetchFestivals();
+      setRefetchTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Failed to delete festival message:", error);
       toast.error("Failed to delete festival message");
@@ -161,14 +163,13 @@ export default function FestivalMessages() {
   const handleSuccess = () => {
     setDialogOpen(false);
     setEditingFestival(null);
-    fetchFestivals();
+    setRefetchTrigger((prev) => prev + 1);
   };
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
     () => getFestivalColumns(handleEdit, handleDelete),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   // Loading skeleton
@@ -226,7 +227,10 @@ export default function FestivalMessages() {
               </TooltipTrigger>
               {!featureEnabled && (
                 <TooltipContent side="bottom" className="max-w-xs">
-                  <p>Enable &quot;Festival Campaign&quot; in Feature Switchboard to create greetings</p>
+                  <p>
+                    Enable &quot;Festival Campaign&quot; in Feature Switchboard
+                    to create greetings
+                  </p>
                 </TooltipContent>
               )}
             </Tooltip>
@@ -238,7 +242,8 @@ export default function FestivalMessages() {
         <Alert className="border-amber-200 bg-amber-50 text-amber-800 rounded-xl">
           <AlertCircle className="h-4 w-4 text-amber-600" />
           <AlertDescription className="text-sm">
-            Festival messages are currently disabled. Enable the feature in the <strong>Feature Switchboard</strong> above to create new greetings.
+            Festival messages are currently disabled. Enable the feature in the{" "}
+            <strong>Feature Switchboard</strong> above to create new greetings.
           </AlertDescription>
         </Alert>
       )}
@@ -269,8 +274,8 @@ export default function FestivalMessages() {
           </Select>
         </div>
 
-        <CardContent className="p-0">
-          <div className="w-full">
+        <CardContent>
+          <div className="w-full px-0">
             <DataTable
               data={festivals}
               columns={columns}

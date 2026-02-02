@@ -72,14 +72,14 @@ export default function PresetReviewsSettings() {
         const payload = {
           reviews: enablePresetReviews
             ? presets
-              .map((text, index) => ({
-                id: index + 1,
-                merchant_id: merchantId,
-                reviewText: text.trim(),
-                isActive: true,
-                displayOrder: index + 1,
-              }))
-              .filter((p) => p.reviewText !== "")
+                .map((text, index) => ({
+                  id: index + 1,
+                  merchant_id: merchantId,
+                  reviewText: text.trim(),
+                  isActive: true,
+                  displayOrder: index + 1,
+                }))
+                .filter((p) => p.reviewText !== "")
             : [],
         };
         await axiosInstance.patch("/preset-reviews", payload);
@@ -110,7 +110,8 @@ export default function PresetReviewsSettings() {
       }
     };
     window.addEventListener("MERCHANT_SETTINGS_UPDATED", onSettingsUpdate);
-    return () => window.removeEventListener("MERCHANT_SETTINGS_UPDATED", onSettingsUpdate);
+    return () =>
+      window.removeEventListener("MERCHANT_SETTINGS_UPDATED", onSettingsUpdate);
   }, []);
 
   const handlePresetChange = (index, value) => {
@@ -127,26 +128,33 @@ export default function PresetReviewsSettings() {
             <MessageSquareQuote className="h-5 w-5" />
           </div>
           <div className="space-y-0.5">
-            <h3 className="font-semibold text-sm text-gray-900 leading-none">Quick Feedback</h3>
-            <p className="text-[11px] text-muted-foreground font-medium">Customer presets</p>
+            <h3 className="font-semibold text-sm text-gray-900 leading-none">
+              Quick Feedback
+            </h3>
+            <p className="text-[11px] text-muted-foreground font-medium">
+              Customer presets
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border ${enablePresetReviews ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-gray-50 text-gray-400 border-gray-100"}`}>
+          <span
+            className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border ${enablePresetReviews ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-gray-50 text-gray-400 border-gray-100"}`}
+          >
             {enablePresetReviews ? "Active" : "Off"}
           </span>
         </div>
       </div>
 
       <div
-        className={`grid transition-all duration-500 ease-in-out ${enablePresetReviews
-          ? "grid-rows-[1fr] opacity-100"
-          : "grid-rows-[0fr] opacity-50 grayscale"
-          }`}
+        className={`grid transition-all duration-500 ease-in-out ${
+          enablePresetReviews
+            ? "grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-50 grayscale"
+        }`}
       >
         <div className="overflow-hidden">
-          <CardContent className="px-4 space-y-4">
-            <div className="grid grid-cols-2 gap-2">
+          <CardContent className="p-4 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               {presets.map((preset, idx) => (
                 <div key={idx} className="relative group">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded-md bg-gray-100 text-[10px] font-bold text-gray-500 group-focus-within:bg-orange-500 group-focus-within:text-white transition-colors">
