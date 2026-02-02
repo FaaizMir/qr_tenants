@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Plus, Filter, Download, AlertCircle, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axios from "@/lib/axios";
@@ -56,6 +56,7 @@ export default function MerchantCampaigns() {
 
   // Feature toggle state
   const [featureEnabled, setFeatureEnabled] = useState(true);
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
 
   // Listen for settings updates from FeatureMasterControl
   useEffect(() => {
@@ -72,76 +73,66 @@ export default function MerchantCampaigns() {
       );
   }, []);
 
-  // Fetch Campaigns
-  const fetchCampaigns = useCallback(async () => {
-    if (!merchantId) return;
-
-    try {
-      setLoading(true);
-      const params = {
-        merchant_id: merchantId,
-        page: page + 1,
-        pageSize,
-        search: debouncedSearch,
-      };
-
-      if (statusFilter !== "all") {
-        params.status = statusFilter;
-      }
-
-      const res = await axios.get("/scheduled-campaigns", { params });
-      const data = res?.data?.data || res?.data || [];
-      setCampaigns(Array.isArray(data) ? data : []);
-      setTotal(res?.data?.meta?.total || data.length);
-    } catch (error) {
-      console.error("Failed to fetch campaigns", error);
-      toast.error("Failed to load campaigns");
-    } finally {
-      setLoading(false);
-    }
-  }, [merchantId, page, pageSize, debouncedSearch, statusFilter]);
-
-  // Initial load - fetch settings and campaigns together
+  // Fetch settings once on mount
   useEffect(() => {
-    const initializeData = async () => {
+    const fetchSettings = async () => {
       if (!merchantId) return;
 
-      setInitialLoading(true);
       try {
-        const [settingsRes, campaignsRes] = await Promise.all([
-          axios.get(`/merchant-settings/merchant/${merchantId}`),
-          axios.get("/scheduled-campaigns", {
-            params: { merchant_id: merchantId, page: 1, pageSize: 10 },
-          }),
-        ]);
-
-        const settings = settingsRes?.data?.data || {};
+        const res = await axios.get(
+          `/merchant-settings/merchant/${merchantId}`,
+        );
+        const settings = res?.data?.data || {};
         setFeatureEnabled(!!settings.scheduled_campaign_enabled);
-
-        const data = campaignsRes?.data?.data || campaignsRes?.data || [];
-        setCampaigns(Array.isArray(data) ? data : []);
-        setTotal(campaignsRes?.data?.meta?.total || data.length);
       } catch (error) {
-        console.error("Failed to initialize:", error);
-      } finally {
-        setInitialLoading(false);
+        console.error("Failed to fetch settings:", error);
       }
     };
 
-    initializeData();
+    fetchSettings();
   }, [merchantId]);
 
-  // Refetch when filters change (after initial load)
+  // Fetch campaigns when filters change
   useEffect(() => {
-    if (!initialLoading) {
-      fetchCampaigns();
-    }
+    const fetchCampaigns = async () => {
+      if (!merchantId) return;
+
+      try {
+        setLoading(true);
+        if (initialLoading) setInitialLoading(true);
+
+        const params = {
+          merchant_id: merchantId,
+          page: page + 1,
+          pageSize,
+          search: debouncedSearch,
+        };
+
+        if (statusFilter !== "all") {
+          params.status = statusFilter;
+        }
+
+        const res = await axios.get("/scheduled-campaigns", { params });
+        const data = res?.data?.data || res?.data || [];
+        setCampaigns(Array.isArray(data) ? data : []);
+        setTotal(res?.data?.meta?.total || data.length);
+      } catch (error) {
+        console.error("Failed to fetch campaigns", error);
+        toast.error("Failed to load campaigns");
+      } finally {
+        setLoading(false);
+        if (initialLoading) setInitialLoading(false);
+      }
+    };
+
+    fetchCampaigns();
   }, [
+    merchantId,
     page,
     pageSize,
     debouncedSearch,
     statusFilter,
-    fetchCampaigns,
+    refetchTrigger,
     initialLoading,
   ]);
 
@@ -162,7 +153,7 @@ export default function MerchantCampaigns() {
     try {
       await axios.delete(`/scheduled-campaigns/${campaignId}`);
       toast.success("Campaign deleted successfully");
-      fetchCampaigns();
+      setRefetchTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Failed to delete campaign:", error);
       toast.error("Failed to delete campaign");
@@ -173,13 +164,12 @@ export default function MerchantCampaigns() {
   const handleSuccess = () => {
     setDialogOpen(false);
     setEditingCampaign(null);
-    fetchCampaigns();
+    setRefetchTrigger((prev) => prev + 1);
   };
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
     () => getCampaignColumns(handleEdit, handleDelete),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
