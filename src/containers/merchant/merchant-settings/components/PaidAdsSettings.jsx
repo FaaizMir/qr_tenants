@@ -306,7 +306,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   };
 
   return (
-    <Card className="border-gray-100 shadow-2xl shadow-gray-200/50 overflow-hidden transition-all duration-700 hover:shadow-primary/5 bg-white rounded-[2.5rem] w-[1200px] ">
+    <Card className="border-gray-100 shadow-2xl shadow-gray-200/50 overflow-hidden transition-all duration-700 hover:shadow-primary/5 bg-white rounded-[2.5rem] w-[1300px] ">
       <CardHeader className="p-6 border-b border-gray-100 bg-linear-to-r from-purple-50/30 to-transparent relative overflow-hidden">
         <div className="absolute -top-10 -right-10 p-4 opacity-5 pointer-events-none">
           <Megaphone className="h-40 w-40 text-purple-400 rotate-12" />

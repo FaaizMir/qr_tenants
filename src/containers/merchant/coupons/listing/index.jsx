@@ -100,9 +100,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
       )}
 
       <Card>
-        <CardHeader>
-          <CardTitle>Coupons</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
             placeholder="Search batches..."
