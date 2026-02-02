@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/lib/toast";
+import { useSubscription } from "@/context/SubscriptionContext";
 
 export default function ProtectedLayout({ children, params }) {
   const locale = use(params);
@@ -23,6 +24,20 @@ export default function ProtectedLayout({ children, params }) {
   const role = (user?.role || "").toLowerCase();
   const [mounted, setMounted] = useState(true);
   const pathnameHook = usePathname();
+  const { isSubscriptionExpired } = useSubscription();
+  const [hasShownExpiryToast, setHasShownExpiryToast] = useState(false);
+
+  useEffect(() => {
+    if (role === "merchant" && isSubscriptionExpired && !hasShownExpiryToast) {
+      toast.warning(
+        "Your annual plan has ended. Pay now to regain annual merchant status and access all features for your business.",
+        {
+          duration: 10000,
+        },
+      );
+      setHasShownExpiryToast(true);
+    }
+  }, [role, isSubscriptionExpired, hasShownExpiryToast]);
 
   useEffect(() => {
     if (status === "loading") return; // wait for session to resolve

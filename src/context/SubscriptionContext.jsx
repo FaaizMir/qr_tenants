@@ -16,13 +16,15 @@ export function SubscriptionProvider({ children }) {
     const [isInitializing, setIsInitializing] = useState(true);
 
     const adminId = session?.user?.adminId;
+    const merchantId = session?.user?.merchantId;
 
     const refreshSubscription = useCallback(async () => {
-        if (!adminId) return;
+        if (!adminId && !merchantId) return;
 
         setLoading(true);
         try {
-            const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+            const endpoint = adminId ? `/wallets/admin/${adminId}` : `/wallets/merchant/${merchantId}`;
+            const res = await axiosInstance.get(endpoint);
             const data = res.data;
 
             setIsSubscriptionExpired(data.is_subscription_expired);
@@ -32,6 +34,7 @@ export function SubscriptionProvider({ children }) {
             await update({
                 is_subscription_expired: data.is_subscription_expired,
                 subscription_expires_at: data.subscription_expires_at,
+                subscription_type: data.subscription_type,
             });
 
             return data;
@@ -52,9 +55,10 @@ export function SubscriptionProvider({ children }) {
         }
 
         const isAgent = session?.user?.role === "agent" || session?.user?.role === "admin";
+        const isMerchant = session?.user?.role === "merchant";
 
         const checkStatus = async () => {
-            if (isAgent && adminId) {
+            if ((isAgent && adminId) || (isMerchant && merchantId)) {
                 hasFetchedOnMount.current = true;
                 await refreshSubscription();
             }
