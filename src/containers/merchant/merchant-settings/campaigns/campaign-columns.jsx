@@ -51,9 +51,14 @@ const getStatusBadge = (status) => {
       label: "Scheduled",
       class: "bg-blue-100 text-blue-800 hover:bg-blue-100",
     },
-    sent: {
+    processing: {
       variant: "secondary",
-      label: "Sent",
+      label: "Processing",
+      class: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
+    },
+    completed: {
+      variant: "secondary",
+      label: "Completed",
       class: "bg-green-100 text-green-800 hover:bg-green-100",
     },
     failed: {
@@ -76,8 +81,15 @@ const getStatusBadge = (status) => {
 };
 
 // Actions Cell Component
-const ActionsCell = ({ campaign, onEdit, onDelete }) => {
+const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
+
+  const canEdit =
+    campaign.status === "scheduled" || campaign.status === "cancelled";
+  const canCancel = campaign.status === "scheduled";
+  const canDelete =
+    campaign.status === "scheduled" || campaign.status === "cancelled";
 
   return (
     <>
@@ -106,22 +118,66 @@ const ActionsCell = ({ campaign, onEdit, onDelete }) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => onEdit(campaign)}
+            onClick={() => canEdit && onEdit(campaign)}
             className="flex items-center gap-2 cursor-pointer"
+            disabled={!canEdit}
           >
             <Edit2 className="h-4 w-4" />
             <span>Edit</span>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => setDeleteDialogOpen(true)}
-            className="flex items-center gap-2 cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
-          >
-            <Trash2 className="h-4 w-4" />
-            <span>Delete</span>
-          </DropdownMenuItem>
+          {canCancel && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => setCancelDialogOpen(true)}
+                className="flex items-center gap-2 cursor-pointer text-orange-600 focus:text-orange-600 focus:bg-orange-50"
+              >
+                <CalendarClock className="h-4 w-4" />
+                <span>Cancel</span>
+              </DropdownMenuItem>
+            </>
+          )}
+          {canDelete && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => setDeleteDialogOpen(true)}
+                className="flex items-center gap-2 cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
+              >
+                <Trash2 className="h-4 w-4" />
+                <span>Delete</span>
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <AlertDialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
+        <AlertDialogContent className="rounded-2xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <CalendarClock className="h-5 w-5 text-orange-500" />
+              Cancel Campaign
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to cancel &quot;{campaign.campaign_name}
+              &quot;? The campaign will not be sent.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                onCancel(campaign.id);
+                setCancelDialogOpen(false);
+              }}
+              className="bg-orange-600 hover:bg-orange-700 rounded-xl"
+            >
+              Cancel Campaign
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent className="rounded-2xl">
@@ -153,7 +209,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete }) => {
   );
 };
 
-export const getCampaignColumns = (onEdit, onDelete) => [
+export const getCampaignColumns = (onEdit, onDelete, onCancel) => [
   {
     accessorKey: "campaign_name",
     header: "Campaign",
@@ -228,6 +284,7 @@ export const getCampaignColumns = (onEdit, onDelete) => [
             campaign={campaign}
             onEdit={onEdit}
             onDelete={onDelete}
+            onCancel={onCancel}
           />
         </div>
       );

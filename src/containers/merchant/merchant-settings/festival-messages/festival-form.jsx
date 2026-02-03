@@ -80,10 +80,12 @@ export default function FestivalForm({
         festival_date: formData.festivalDate,
         is_active: formData.isActive,
         is_recurring: formData.isRecurring,
-        coupon_batch_id: formData.batchId
-          ? parseInt(formData.batchId, 10)
-          : null,
       };
+
+      // Only include coupon_batch_id if it's set
+      if (formData.batchId) {
+        payload.coupon_batch_id = parseInt(formData.batchId, 10);
+      }
 
       if (isEditMode) {
         await axiosInstance.patch(`/festival-messages/${festival.id}`, payload);
@@ -97,11 +99,12 @@ export default function FestivalForm({
       onSuccess();
     } catch (error) {
       console.error("Failed to save festival message:", error);
-      toast.error(
-        isEditMode
+      const errorMsg =
+        error?.response?.data?.message ||
+        (isEditMode
           ? "Failed to update festival message"
-          : "Failed to create festival message",
-      );
+          : "Failed to create festival message");
+      toast.error(errorMsg);
     } finally {
       setSaving(false);
     }

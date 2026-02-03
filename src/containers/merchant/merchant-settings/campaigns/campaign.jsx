@@ -105,17 +105,17 @@ export default function MerchantCampaigns() {
           merchant_id: merchantId,
           page: page + 1,
           pageSize,
-          search: debouncedSearch,
+          status: statusFilter, // 'all', 'scheduled', 'processing', 'completed', 'cancelled', 'failed'
         };
 
-        if (statusFilter !== "all") {
-          params.status = statusFilter;
+        if (debouncedSearch) {
+          params.search = debouncedSearch;
         }
 
         const res = await axios.get("/scheduled-campaigns", { params });
-        const data = res?.data?.data || res?.data || [];
+        const data = res?.data?.data || [];
         setCampaigns(Array.isArray(data) ? data : []);
-        setTotal(res?.data?.meta?.total || data.length);
+        setTotal(res?.data?.meta?.total || 0);
       } catch (error) {
         console.error("Failed to fetch campaigns", error);
         toast.error("Failed to load campaigns");
@@ -156,7 +156,23 @@ export default function MerchantCampaigns() {
       setRefetchTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Failed to delete campaign:", error);
-      toast.error("Failed to delete campaign");
+      const errorMsg =
+        error?.response?.data?.message || "Failed to delete campaign";
+      toast.error(errorMsg);
+    }
+  };
+
+  // Handle cancel
+  const handleCancel = async (campaignId) => {
+    try {
+      await axios.put(`/scheduled-campaigns/${campaignId}/cancel`);
+      toast.success("Campaign cancelled successfully");
+      setRefetchTrigger((prev) => prev + 1);
+    } catch (error) {
+      console.error("Failed to cancel campaign:", error);
+      const errorMsg =
+        error?.response?.data?.message || "Failed to cancel campaign";
+      toast.error(errorMsg);
     }
   };
 
@@ -169,7 +185,7 @@ export default function MerchantCampaigns() {
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
-    () => getCampaignColumns(handleEdit, handleDelete),
+    () => getCampaignColumns(handleEdit, handleDelete, handleCancel),
     [],
   );
 
@@ -271,7 +287,10 @@ export default function MerchantCampaigns() {
                     <SelectContent>
                       <SelectItem value="all">All Status</SelectItem>
                       <SelectItem value="scheduled">Scheduled</SelectItem>
+                      <SelectItem value="processing">Processing</SelectItem>
+                      <SelectItem value="completed">Completed</SelectItem>
                       <SelectItem value="cancelled">Cancelled</SelectItem>
+                      <SelectItem value="failed">Failed</SelectItem>
                     </SelectContent>
                   </Select>
                 }
