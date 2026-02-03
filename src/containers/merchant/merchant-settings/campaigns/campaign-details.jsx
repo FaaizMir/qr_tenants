@@ -49,6 +49,7 @@ export default function CampaignDetails() {
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
 
   // Fetch campaign details
@@ -61,7 +62,9 @@ export default function CampaignDetails() {
       setCampaign(res?.data?.data || res?.data);
     } catch (error) {
       console.error("Failed to fetch campaign details:", error);
-      toast.error("Failed to load campaign details");
+      const errorMsg =
+        error?.response?.data?.message || "Failed to load campaign details";
+      toast.error(errorMsg);
       router.push("/merchant/campaigns");
     } finally {
       setLoading(false);
@@ -82,9 +85,27 @@ export default function CampaignDetails() {
       router.push("/merchant/campaigns");
     } catch (error) {
       console.error("Failed to delete campaign:", error);
-      toast.error("Failed to delete campaign");
+      const errorMsg =
+        error?.response?.data?.message || "Failed to delete campaign";
+      toast.error(errorMsg);
       setDeleting(false);
-      router.back();
+    }
+  };
+
+  // Handle cancel
+  const handleCancel = async () => {
+    setCancelling(true);
+    try {
+      await axios.put(`/scheduled-campaigns/${campaignId}/cancel`);
+      toast.success("Campaign cancelled successfully");
+      fetchCampaign(); // Refresh to show updated status
+    } catch (error) {
+      console.error("Failed to cancel campaign:", error);
+      const errorMsg =
+        error?.response?.data?.message || "Failed to cancel campaign";
+      toast.error(errorMsg);
+    } finally {
+      setCancelling(false);
     }
   };
 
@@ -115,9 +136,14 @@ export default function CampaignDetails() {
         label: "Scheduled",
         class: "bg-blue-100 text-blue-800",
       },
-      sent: {
+      processing: {
         variant: "secondary",
-        label: "Sent",
+        label: "Processing",
+        class: "bg-yellow-100 text-yellow-800",
+      },
+      completed: {
+        variant: "secondary",
+        label: "Completed",
         class: "bg-green-100 text-green-800",
       },
       failed: {
@@ -174,41 +200,83 @@ export default function CampaignDetails() {
           </div>
 
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => setEditDialogOpen(true)}>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit
-            </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive">
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Delete Campaign</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Are you sure you want to delete &quot;
-                    {campaign.campaign_name}&quot;? This action cannot be
-                    undone.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={handleDelete}
-                    disabled={deleting}
-                    className="bg-red-600 hover:bg-red-700"
+            {campaign.status === "scheduled" && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="text-orange-600 border-orange-600 hover:bg-orange-50"
                   >
-                    {deleting && (
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    )}
+                    <CalendarClock className="mr-2 h-4 w-4" />
+                    Cancel Campaign
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Cancel Campaign</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Are you sure you want to cancel &quot;
+                      {campaign.campaign_name}&quot;? The campaign will not be
+                      sent.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleCancel}
+                      disabled={cancelling}
+                      className="bg-orange-600 hover:bg-orange-700"
+                    >
+                      {cancelling && (
+                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      )}
+                      Cancel Campaign
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+            {(campaign.status === "scheduled" ||
+              campaign.status === "cancelled") && (
+              <Button variant="outline" onClick={() => setEditDialogOpen(true)}>
+                <Edit className="mr-2 h-4 w-4" />
+                Edit
+              </Button>
+            )}
+            {(campaign.status === "scheduled" ||
+              campaign.status === "cancelled") && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="destructive">
+                    <Trash2 className="mr-2 h-4 w-4" />
                     Delete
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Delete Campaign</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Are you sure you want to delete &quot;
+                      {campaign.campaign_name}&quot;? This action cannot be
+                      undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleDelete}
+                      disabled={deleting}
+                      className="bg-red-600 hover:bg-red-700"
+                    >
+                      {deleting && (
+                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      )}
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
           </div>
         </div>
 

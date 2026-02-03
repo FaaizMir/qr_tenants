@@ -99,22 +99,17 @@ export default function FestivalMessages() {
           merchant_id: merchantId,
           page: page + 1,
           pageSize,
+          is_active: statusFilter, // 'all', 'active', or 'inactive'
         };
 
         if (debouncedSearch) {
           params.search = debouncedSearch;
         }
 
-        if (statusFilter === "active") {
-          params.is_active = true;
-        } else if (statusFilter === "inactive") {
-          params.is_active = false;
-        }
-
         const res = await axios.get("/festival-messages", { params });
-        const data = res?.data?.data || res?.data || [];
+        const data = res?.data?.data || [];
         setFestivals(Array.isArray(data) ? data : []);
-        setTotal(res?.data?.meta?.total || data.length);
+        setTotal(res?.data?.meta?.total || 0);
       } catch (error) {
         console.error("Failed to fetch festival messages", error);
         toast.error("Failed to load festival messages");
