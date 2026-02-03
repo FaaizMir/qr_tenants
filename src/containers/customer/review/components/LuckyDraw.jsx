@@ -190,13 +190,13 @@ export const LuckyDraw = ({
   }, [customerId]);
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-amber-50 via-white to-yellow-50 animate-in fade-in duration-700">
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-amber-200/50">
+    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-slate-200/50">
         {/* Left Panel - Brand Experience */}
-        <div className="hidden lg:flex flex-col items-center text-center justify-center bg-linear-to-br from-amber-500 via-yellow-500 to-amber-600 p-12 relative overflow-hidden min-h-[700px]">
+        <div className="hidden lg:flex flex-col items-center text-center justify-center bg-linear-to-br from-primary via-primary/95 to-primary/80 p-12 relative overflow-hidden h-full">
           {/* Animated Background Orbs */}
           <div className="absolute top-20 right-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-700/20 rounded-full blur-3xl animate-pulse-slower"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse-slower"></div>
 
           {/* Back Button - Desktop */}
           <Button
@@ -221,7 +221,7 @@ export const LuckyDraw = ({
               <h1 className="text-5xl font-bold text-white leading-tight tracking-tight">
                 Test Your
                 <br />
-                <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-yellow-100 to-white animate-shimmer bg-size-[200%_100%]">
+                <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
                   Luck
                 </span>
               </h1>

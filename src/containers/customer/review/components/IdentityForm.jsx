@@ -150,10 +150,10 @@ export const IdentityForm = ({
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-6">
+    <div className="h-screen w-full flex items-center justify-center p-4 md:p-6 bg-linear-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
       <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-0 items-center">
         {/* Left Panel - Branding */}
-        <div className="hidden lg:flex flex-col justify-center p-12 xl:p-16 bg-linear-to-br from-primary via-primary/95 to-primary/80 rounded-l-[2.5rem] min-h-[763px] relative overflow-hidden">
+        <div className="hidden lg:flex flex-col justify-center p-12 xl:p-16 bg-linear-to-br from-primary via-primary/95 to-primary/80 rounded-l-[2.5rem] h-full relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-white rounded-full blur-3xl"></div>
@@ -205,7 +205,7 @@ export const IdentityForm = ({
         </div>
 
         {/* Right Panel - Form */}
-        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-8 md:p-12 border border-slate-200/50 shadow-2xl min-h-[600px] flex flex-col justify-center">
+        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-8 md:p-12 border border-slate-200/50 shadow-2xl h-full flex flex-col justify-center overflow-y-auto">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
@@ -245,7 +245,7 @@ export const IdentityForm = ({
                           onChange(val);
                         }}
                         placeholder="+1 (555) 000-0000"
-                        className="flex items-center gap-2 pl-4 px-4 h-14 rounded-2xl bg-white border-2 border-slate-200 focus-within:border-primary focus-within:bg-primary/5 transition-all text-base font-medium shadow-sm hover:shadow-md [&_.PhoneInputCountry]:mr-2 [&_.PhoneInputCountryIcon]:w-6 [&_.PhoneInputCountryIcon]:h-auto"
+                        className="flex items-center gap-2 pl-4 px-4 h-12 rounded-xl bg-white border border-slate-200 focus-within:border-primary transition-all text-sm [&_.PhoneInputCountry]:mr-2 [&_.PhoneInputCountryIcon]:w-6 [&_.PhoneInputCountryIcon]:h-auto"
                         numberInputProps={{
                           className:
                             "bg-transparent border-none outline-none w-full h-full text-zinc-900 placeholder:text-zinc-400",
@@ -272,7 +272,7 @@ export const IdentityForm = ({
                     {...register("name", { required: "Name is required" })}
                     disabled={isAutoFilled}
                     placeholder="John Doe"
-                    className="pl-12 pr-4 h-14 rounded-2xl bg-white border-2 border-slate-200 focus:border-primary focus:bg-primary/5 transition-all text-base font-medium shadow-sm hover:shadow-md disabled:opacity-60"
+                    className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
                   />
                 </div>
                 {formErrors.name && (
@@ -301,7 +301,7 @@ export const IdentityForm = ({
                       })}
                       disabled={isAutoFilled}
                       placeholder="john@example.com"
-                      className="pl-12 pr-4 h-14 rounded-2xl bg-white border-2 border-slate-200 focus:border-primary focus:bg-primary/5 transition-all text-base font-medium shadow-sm hover:shadow-md disabled:opacity-60"
+                      className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
                     />
                   </div>
                   {formErrors.email && (
@@ -324,7 +324,7 @@ export const IdentityForm = ({
                         required: "Date of Birth is required",
                       })}
                       disabled={isAutoFilled}
-                      className="pl-12 pr-4 h-14 rounded-2xl bg-white border-2 border-slate-200 focus:border-primary focus:bg-primary/5 transition-all text-base font-medium shadow-sm hover:shadow-md disabled:opacity-60"
+                      className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
                     />
                   </div>
                   {formErrors.dob && (
@@ -348,7 +348,7 @@ export const IdentityForm = ({
                     })}
                     disabled={isAutoFilled}
                     placeholder="Street, City, Zip Code"
-                    className="pl-12 pr-4 h-14 rounded-2xl bg-white border-2 border-slate-200 focus:border-primary focus:bg-primary/5 transition-all text-base font-medium shadow-sm hover:shadow-md disabled:opacity-60"
+                    className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
                   />
                 </div>
                 {formErrors.address && (
@@ -375,10 +375,10 @@ export const IdentityForm = ({
                           setValue("gender", g, { shouldValidate: true });
                         }}
                         className={cn(
-                          "flex-1 relative h-14 rounded-2xl font-bold capitalize text-base transition-all duration-300",
+                          "flex-1 relative h-12 rounded-xl font-semibold capitalize text-sm transition-all",
                           isActive
-                            ? "bg-primary text-white shadow-lg shadow-primary/30 scale-105"
-                            : "bg-white border-2 border-slate-200 text-zinc-600 hover:border-primary hover:scale-105 hover:shadow-md",
+                            ? "bg-primary text-white shadow-md"
+                            : "bg-white border border-slate-200 text-zinc-600 hover:border-primary",
                           isAutoFilled && "cursor-not-allowed opacity-60",
                         )}
                       >
@@ -395,12 +395,11 @@ export const IdentityForm = ({
               <div className="pt-6">
                 <Button
                   type="submit"
-                  className="w-full h-16 rounded-2xl text-base font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden"
+                  className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-lg transition-all active:scale-95"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  <span className="relative flex items-center justify-center gap-3">
+                  <span className="flex items-center justify-center gap-2">
                     Continue to Review
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </Button>
               </div>
