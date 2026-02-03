@@ -13,6 +13,7 @@ import {
   Activity,
   AlertTriangle,
   ShieldOff,
+  Sparkles,
 } from "lucide-react";
 import {
   Card,
@@ -20,12 +21,19 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import WalletWarnings from "./wallet-warnings";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/lib/axios";
+import { toast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
 
-const format = (num) => (typeof num === "number" ? num.toLocaleString() : "--");
+const format = (num) => {
+  const n = Number(num);
+  return !isNaN(n) ? n.toLocaleString() : "--";
+};
 
 export default function TemporaryWalletView({
   wallet,
@@ -44,6 +52,66 @@ export default function TemporaryWalletView({
   const expiresAt = wallet?.expiresAt || summary?.expiresAt;
 
   const isLow = balance < 100;
+
+  const [feeData, setFeeData] = useState(null);
+  const [loadingFee, setLoadingFee] = useState(false);
+  const [upgrading, setUpgrading] = useState(false);
+
+  useEffect(() => {
+    const fetchFee = async () => {
+      try {
+        setLoadingFee(true);
+        const res = await axiosInstance.get("/merchant-settings/subscription-fee");
+        setFeeData(res.data?.data || res.data);
+      } catch (error) {
+        console.error("Failed to fetch subscription fee:", error);
+      } finally {
+        setLoadingFee(false);
+      }
+    };
+    fetchFee();
+  }, []);
+  console.log("feeData222", feeData)
+
+
+  const handleUpgrade = async () => {
+    if (!feeData || !wallet?.merchant?.admin_id) {
+      toast.error("Unable to proceed. Missing fee or admin information.");
+      return;
+    }
+
+    try {
+      setUpgrading(true);
+      const amount = Number(feeData.fee) * 100; // cents
+
+      // Save package info for success page
+      localStorage.setItem("stripe_package", JSON.stringify({
+        id: "merchant-annual-upgrade",
+        name: "Annual Merchant Subscription",
+        price: feeData.fee,
+        currency: feeData.currency,
+        admin_id: wallet.merchant.admin_id
+      }));
+
+      // Create checkout session
+      const res = await axiosInstance.post("/stripe/create-checkout-session", {
+        amount: amount,
+        currency: feeData.currency || "usd",
+        package_id: 0, // Dummy ID as we handle logic via localStorage/metadata
+      });
+
+      if (res.data?.sessionUrl) {
+        window.location.href = res.data.sessionUrl;
+      } else {
+        throw new Error("No session URL returned");
+      }
+
+    } catch (error) {
+      console.error("Upgrade failed:", error);
+      toast.error("Failed to initiate payment. Please try again.");
+      setUpgrading(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -168,8 +236,8 @@ export default function TemporaryWalletView({
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
-                        (creditDetails.used / creditDetails.purchased) * 100,
-                      )
+                      (creditDetails.used / creditDetails.purchased) * 100,
+                    )
                     : 0}
                   %
                 </span>
@@ -178,30 +246,47 @@ export default function TemporaryWalletView({
           </CardContent>
         </Card>
 
-        {/* Card 3: Subscription & Status */}
-        {/* <Card className="shadow-sm">
+        {/* Card 3: Annual Subscription Upgrade */}
+        <Card className="border-blue-200 bg-blue-50 shadow-sm relative overflow-hidden">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-blue-500/10 blur-3xl opacity-50" />
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
-              <CardTitle className="text-lg font-medium">
-                Subscription
+              <CardTitle className="text-lg font-bold text-blue-900">
+                Upgrade to Annual
               </CardTitle>
-              <CardDescription>
-                {status.currency || "USD"} Plan Status
+              <CardDescription className="text-blue-700/80">
+                Unlock full features
               </CardDescription>
             </div>
-            <div className="rounded-full bg-orange-500/10 p-2 text-orange-600">
-              <Activity className="h-5 w-5" />
+            <div className="rounded-full bg-blue-200 p-2 text-blue-700">
+              <Sparkles className="h-5 w-5" />
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between rounded-lg bg-muted/40 p-3">
-              <span className="text-sm font-medium">Plan Type</span>
-              <div className="font-bold capitalize text-primary">
-                {wallet?.subscription_type || "Temporary"}
-              </div>
+            <div className="text-3xl font-bold text-blue-900">
+              {loadingFee ? (
+                <span className="animate-pulse">...</span>
+              ) : feeData ? (
+                `${feeData.currency} ${format(feeData.fee)}`
+              ) : (
+                "--"
+              )}
+              <span className="text-sm font-normal text-blue-700 ml-1">/year</span>
             </div>
+            <p className="text-sm text-blue-800/80">
+              Get access to advanced analytics, priority support, and transaction history.
+            </p>
           </CardContent>
-        </Card> */}
+          <CardFooter>
+            <Button
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+              disabled={loadingFee || upgrading || !feeData}
+              onClick={handleUpgrade}
+            >
+              {upgrading ? "Processing..." : "Upgrade Now"}
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
 
       <section className="space-y-3">

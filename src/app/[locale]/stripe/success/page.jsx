@@ -8,15 +8,35 @@ import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 
 import { useRouter, useParams } from "next/navigation";
-import { useSubscription } from "@/context/SubscriptionContext";
 
 export default function StripeSuccessPage() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [processing, setProcessing] = useState(true);
-  const { refreshSubscription } = useSubscription();
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale || "en";
+
+  const refreshSubscription = async () => {
+    try {
+      // 1. Fetch latest merchant wallet/profile data
+      const res = await axiosInstance.get(`/auth/profile`); // Or wallet endpoint
+      const newData = res.data;
+
+      // 2. Update session with new data
+      // Note: we need to map the API response to the session structure expected by route.js
+      await update({
+        subscriptionType: newData.merchant?.merchant_type || "annual",
+        is_subscription_expired: false,
+        subscription_expires_at: newData.merchant?.subscription_expires_at // or calculated date
+      });
+
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to refresh session:", error);
+      // Fallback: force reload
+      window.location.href = `/${locale}/merchant/wallet`;
+    }
+  };
 
   useEffect(() => {
     const processPayment = async () => {
@@ -40,21 +60,36 @@ export default function StripeSuccessPage() {
             toast.success("Subscription renewed successfully!");
           }
         } else if (merchantId) {
-          // Standard Merchant Credit Purchase
-          const payload = {
-            credits: Number(pkg.credits) || 0,
-            credit_type: pkg.credit_type || "general",
-            amount: Number(pkg.price) || 0,
-            admin_id: session?.user?.adminId,
-            description: `${pkg.name} purchase`,
-            package_id: pkg.id,
-          };
+          if (pkg.id === "merchant-annual-upgrade") {
+            // Merchant Annual Subscription Upgrade
+            if (pkg.admin_id) {
+              await axiosInstance.post(
+                `/wallets/merchant/${merchantId}/upgrade-to-annual`,
+                { admin_id: pkg.admin_id }
+              );
+              toast.success("Upgraded to Annual Subscription successfully!");
+              await refreshSubscription();
+            } else {
+              console.error("Missing admin_id for upgrade");
+              toast.error("Upgrade failed: Missing admin information.");
+            }
+          } else {
+            // Standard Merchant Credit Purchase
+            const payload = {
+              credits: Number(pkg.credits) || 0,
+              credit_type: pkg.credit_type || "general",
+              amount: Number(pkg.price) || 0,
+              admin_id: session?.user?.adminId,
+              description: `${pkg.name} purchase`,
+              package_id: pkg.id,
+            };
 
-          await axiosInstance.post(
-            `/wallets/merchant/${merchantId}/add-credits`,
-            payload,
-          );
-          toast.success("Credits added successfully!");
+            await axiosInstance.post(
+              `/wallets/merchant/${merchantId}/add-credits`,
+              payload,
+            );
+            toast.success("Credits added successfully!");
+          }
         }
 
         localStorage.removeItem("stripe_package");

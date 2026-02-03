@@ -17,7 +17,7 @@ import { toast } from "@/lib/toast";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 export default function ProtectedLayout({ children, params }) {
-  const locale = use(params);
+  const { locale } = use(params);
   const router = useRouter();
   const { data: session, status } = useSession(); // Use NextAuth session
   const user = session?.user;
@@ -164,6 +164,22 @@ export default function ProtectedLayout({ children, params }) {
               <LogoutButton />
             </div>
           </header>
+          {role === "merchant" && (user.subscriptionType === "temporary" || user.merchant_type === "temporary" || isSubscriptionExpired) && (
+            <div className="bg-blue-600 text-white px-6 py-3 flex items-center justify-between shadow-md">
+              <div className="flex items-center gap-2">
+                <span role="img" aria-label="info">✨</span>
+                <p className="font-medium text-sm md:text-base">
+                  Get more services and unlock more features for your business
+                </p>
+              </div>
+              <button
+                onClick={() => router.push(`/${locale}/merchant/wallet`)}
+                className="bg-white text-blue-600 px-4 py-1.5 rounded-md text-sm font-bold hover:bg-blue-50 transition-colors shadow-sm whitespace-nowrap"
+              >
+                Upgrade Now
+              </button>
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-6 p-6">{children}</div>
       </SidebarInset>
