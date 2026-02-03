@@ -21,14 +21,15 @@ export default function StripeSuccessPage() {
       // 1. Fetch latest merchant wallet/profile data
       const res = await axiosInstance.get(`/auth/profile`); // Or wallet endpoint
       const newData = res.data;
-
+      console.log("newData", newData);
       // 2. Update session with new data
       // Note: we need to map the API response to the session structure expected by route.js
-      await update({
+      const updatedData = await update({
         subscriptionType: newData.merchant?.merchant_type || "annual",
         is_subscription_expired: false,
         subscription_expires_at: newData.merchant?.subscription_expires_at // or calculated date
       });
+      console.log("updatedData", updatedData);
 
       router.refresh();
     } catch (error) {

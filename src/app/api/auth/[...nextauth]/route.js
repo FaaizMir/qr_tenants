@@ -109,6 +109,7 @@ export const authOptions = {
         if (session.subscription_expires_at !== undefined) {
           token.subscriptionExpiresAt = session.subscription_expires_at;
         }
+
         if (session.subscriptionType !== undefined) {
           token.subscriptionType = session.subscriptionType;
         }
@@ -167,3 +168,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
