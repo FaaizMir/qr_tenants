@@ -288,27 +288,33 @@ export function CustomerReviewFlow() {
 
   if (initializing) {
     return (
-      <main className="min-h-screen relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-slate-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 p-4 pt-8 md:p-8 flex flex-col items-center justify-center font-sans">
-        <div className="w-full max-w-md">
-          <div className="flex flex-col items-center gap-8 animate-in fade-in duration-700">
-            {/* Spinner */}
-            <div className="relative w-20 h-20">
-              <div className="absolute inset-0 border-[3px] border-slate-200 dark:border-zinc-700 rounded-full"></div>
-              <div className="absolute inset-0 border-[3px] border-primary border-t-transparent border-r-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 via-white to-slate-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950">
+        {/* Deep Ambient Glow */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-br from-primary/5 to-blue-500/5 rounded-full blur-[140px] animate-pulse-slow"></div>
+        </div>
+
+        <div className="flex flex-col items-center gap-12 relative z-10">
+          {/* Refined Minimalist Spinner */}
+          <div className="relative w-28 h-28">
+            <div className="absolute inset-0 border-[3px] border-primary/5 rounded-full shadow-inner"></div>
+            <div className="absolute inset-0 border-[3px] border-primary border-t-transparent border-l-transparent rounded-full animate-spin shadow-primary/20"></div>
+          </div>
+
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-2">
+              <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 uppercase">
+                QR Tenants
+              </h1>
+              <div className="h-0.5 w-10 bg-primary/30 rounded-full"></div>
             </div>
 
-            {/* Content */}
-            <div className="flex flex-col items-center gap-4 text-center">
-              <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                Loading
-              </h1>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                Preparing your experience...
-              </p>
-            </div>
+            <p className="text-zinc-400 font-semibold text-[10px] uppercase animate-pulse">
+              Preparing your experience
+            </p>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 

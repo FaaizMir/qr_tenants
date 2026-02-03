@@ -366,10 +366,10 @@ export const ReviewForm = ({
   });
 
   return (
-    <div className="min-h-[75vh] w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-100 animate-in fade-in duration-700">
+    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
       <div className="w-full max-w-[95%] xl:max-w-[1400px] grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-slate-200/50">
         {/* Left Panel - Brand Experience */}
-        <div className="hidden lg:flex flex-col justify-center bg-linear-to-br from-amber-500 via-orange-500 to-amber-600 p-8 relative overflow-hidden min-h-[480px]">
+        <div className="hidden lg:flex flex-col justify-center bg-linear-to-br from-primary via-primary/95 to-primary/80 p-8 relative overflow-hidden h-full">
           {/* Animated Background Orbs */}
           <div className="absolute top-20 right-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-700/20 rounded-full blur-3xl animate-pulse-slower"></div>
@@ -425,7 +425,7 @@ export const ReviewForm = ({
         </div>
 
         {/* Right Panel - Review Form */}
-        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-5 md:p-6 border border-slate-200/50 shadow-2xl min-h-[480px] flex flex-col">
+        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-5 md:p-6 border border-slate-200/50 shadow-2xl h-full flex flex-col overflow-y-auto">
           {/* Mobile Header */}
           <div className="lg:hidden mb-5 text-center relative">
             <Button
@@ -459,12 +459,12 @@ export const ReviewForm = ({
                 </Label>
                 <div
                   className={cn(
-                    "px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-500 border-2",
+                    "px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide transition-all border",
                     formValues.rating >= 4
-                      ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
+                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                       : formValues.rating >= 3
-                        ? "bg-amber-500/10 text-amber-700 border-amber-500/30"
-                        : "bg-red-500/10 text-red-700 border-red-500/30",
+                        ? "bg-amber-50 text-amber-700 border-amber-200"
+                        : "bg-red-50 text-red-700 border-red-200",
                   )}
                 >
                   {formValues.rating >= 4
@@ -477,23 +477,22 @@ export const ReviewForm = ({
                 </div>
               </div>
 
-              <div className="flex justify-center py-4 bg-linear-to-br from-amber-50/50 to-white rounded-2xl border-2 border-amber-100/50 shadow-sm">
+              <div className="flex justify-center py-5 bg-slate-50 rounded-xl border border-slate-200">
                 <StarRatingInput
                   label=""
                   name="rating"
                   register={register}
                   setValue={setValue}
                   value={formValues.rating}
-                  size="xl"
+                  size="lg"
                 />
               </div>
             </div>
 
             {/* Preset Reviews Section */}
             {merchantConfig.enablePresetReviews && presetReviews.length > 0 && (
-              <div className="space-y-3 flex flex-col items-center justify-center pt-3">
-                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-500" />
+              <div className="space-y-3 pt-2">
+                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
                   Quick Expressions
                 </Label>
 
@@ -506,10 +505,10 @@ export const ReviewForm = ({
                         handlePresetClick(review.review_text, review.id)
                       }
                       className={cn(
-                        "px-4 py-2.5 rounded-2xl border-2 text-xs font-bold transition-all duration-300",
+                        "px-4 py-2 rounded-xl border text-sm font-medium transition-all",
                         selectedPresetId === review.id
-                          ? "border-amber-500 bg-amber-500 text-white shadow-lg shadow-amber-500/30 scale-105"
-                          : "border-slate-200 bg-white text-zinc-600 hover:border-amber-500/50 hover:scale-105 hover:shadow-md",
+                          ? "border-primary bg-primary text-white"
+                          : "border-slate-200 bg-white text-zinc-600 hover:border-primary/50",
                       )}
                     >
                       &quot;{review.review_text}&quot;
@@ -521,22 +520,17 @@ export const ReviewForm = ({
 
             {/* Custom Review Text */}
             <div className="space-y-3">
-              <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide flex items-center justify-center">
+              <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
                 Detailed Remarks
               </Label>
 
-              <div className="relative group">
-                <div className="absolute top-4 left-4 pointer-events-none transition-all group-focus-within:-translate-y-1 text-zinc-400 group-focus-within:text-amber-500">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-                <TextareaField
-                  name="text"
-                  placeholder="Share the details that made your visit special..."
-                  control={control}
-                  onChange={onTextChange}
-                  className="pl-14 pt-4 h-20 rounded-2xl bg-white border-2 border-slate-200 focus:border-amber-500 focus:bg-amber-50/30 focus:ring-4 focus:ring-amber-500/10 transition-all text-sm font-medium resize-none shadow-sm hover:shadow-md"
-                />
-              </div>
+              <TextareaField
+                name="text"
+                placeholder="Share the details that made your visit special..."
+                control={control}
+                onChange={onTextChange}
+                className="w-full h-24 px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-primary focus:outline-none transition-colors text-sm resize-none"
+              />
             </div>
 
             {/* Submit Button */}

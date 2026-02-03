@@ -90,7 +90,7 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
   const CurrentIcon = statuses[statusIndex].icon;
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-blue-50 via-white to-indigo-50 animate-in fade-in duration-700">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700">
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-12 animate-in slide-in-from-top duration-700">

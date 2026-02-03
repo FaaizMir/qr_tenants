@@ -26,7 +26,7 @@ export const RewardSuccess = ({
     reward?.whatsapp_notification?.credits_insufficient;
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-emerald-50 via-white to-teal-50 animate-in fade-in duration-700">
+    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
       <div className="w-full max-w-4xl">
         {/* Success Header */}
         <div className="text-center mb-8 animate-in slide-in-from-top duration-700">
