@@ -47,19 +47,43 @@ export default function StaffManagement() {
     const fetchStaff = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axiosInstance.get("/superadmin-roles", {
-                params: {
-                    page: page + 1,
-                    pageSize: pageSize,
-                    search: debouncedSearch,
-                },
-            });
+            // Fetch from all 3 endpoints concurrently
+            const [financeRes, adRes, supportRes] = await Promise.all([
+                axiosInstance.get("/finance-viewers", { params: { page: page + 1, pageSize, search: debouncedSearch } }),
+                axiosInstance.get("/ad-approvers", { params: { page: page + 1, pageSize, search: debouncedSearch } }),
+                axiosInstance.get("/support-staff", { params: { page: page + 1, pageSize, search: debouncedSearch } })
+            ]);
 
-            const result = response.data;
-            const staffList = result?.data || result || [];
+            const mapData = (res, role) => {
+                const list = res.data?.data || res.data || [];
+                return Array.isArray(list) ? list.map(item => ({
+                    ...item.user, // Flatten user details
+                    id: item.id, // Keep the entity ID (FinanceViewer, etc.)
+                    userId: item.user?.id,
+                    role: role,
+                    // Preserve entity specific fields if needed
+                    ...item
+                })) : [];
+            };
 
-            setData(Array.isArray(staffList) ? staffList : []);
-            setTotal(result?.meta?.total || staffList.length);
+            const financeStaff = mapData(financeRes, "finance_viewer");
+            const adStaff = mapData(adRes, "ad_approver");
+            const supportStaff = mapData(supportRes, "support_staff");
+
+            const combinedData = [...financeStaff, ...adStaff, ...supportStaff];
+
+            // Client-side pagination/sorting might be weird with combined server-side pagination.
+            // For now, we combine the current pages. Ideally, the backend should provide a unified endpoint, 
+            // but the user requested this frontend integration.
+            setData(combinedData);
+
+            // Total is sum of all (approximate, since we are fetching page 1 of each)
+            // This is imperfect for unified pagination but fits the request constraint.
+            const totalCount = (financeRes.data?.meta?.total || 0) +
+                (adRes.data?.meta?.total || 0) +
+                (supportRes.data?.meta?.total || 0);
+            setTotal(totalCount);
+
         } catch (error) {
             console.error("Failed to fetch staff:", error);
             setData([]);
@@ -72,7 +96,22 @@ export default function StaffManagement() {
         if (!staffToDelete) return;
         setDeleting(true);
         try {
-            await axiosInstance.delete(`/superadmin-roles/${staffToDelete.id}`);
+            let endpoint = "";
+            switch (staffToDelete.role) {
+                case "finance_viewer":
+                    endpoint = "/finance-viewers";
+                    break;
+                case "ad_approver":
+                    endpoint = "/ad-approvers";
+                    break;
+                case "support_staff":
+                    endpoint = "/support-staff";
+                    break;
+                default:
+                    throw new Error("Unknown role");
+            }
+
+            await axiosInstance.delete(`${endpoint}/${staffToDelete.id}`);
             toast.success("Staff member deleted successfully.");
             fetchStaff();
         } catch (error) {

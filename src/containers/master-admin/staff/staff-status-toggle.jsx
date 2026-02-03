@@ -12,7 +12,22 @@ export function StaffStatusToggle({ staff }) {
     const handleToggle = async (checked) => {
         setLoading(true);
         try {
-            await axiosInstance.patch(`/superadmin-roles/${staff.id}`, {
+            let endpoint = "";
+            switch (staff.role) {
+                case "finance_viewer":
+                    endpoint = "/finance-viewers";
+                    break;
+                case "ad_approver":
+                    endpoint = "/ad-approvers";
+                    break;
+                case "support_staff":
+                    endpoint = "/support-staff";
+                    break;
+                default:
+                    endpoint = "/superadmin-roles"; // Fallback for legacy/other roles
+            }
+
+            await axiosInstance.patch(`${endpoint}/${staff.id}`, {
                 is_active: checked,
             });
             setIsActive(checked);

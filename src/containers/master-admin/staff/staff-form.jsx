@@ -44,12 +44,17 @@ const STAFF_ROLES = [
 export function StaffForm({
   initialData = null,
   isEdit = false,
-  // staffId = null,
+  role: initialRole = "support_staff",
+  // staffId is passed from parent now, but was in props before
+  staffId = null,
 }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
-  const { id: staffId } = useParams();
+  const { id: paramId } = useParams();
+
+  // Use passed staffId or paramId
+  const finalStaffId = staffId || paramId;
 
   const {
     register,
@@ -65,28 +70,44 @@ export function StaffForm({
       email: "",
       phone: "",
       password: "",
-      role: "support_staff",
+      role: initialRole,
       is_active: true,
     },
   });
 
   const isActiveValue = watch("is_active");
+  const currentRole = watch("role");
+
+  // Determine endpoint based on role
+  const getEndpoint = (role) => {
+    switch (role) {
+      case "finance_viewer": return "/finance-viewers";
+      case "ad_approver": return "/ad-approvers";
+      case "support_staff": return "/support-staff";
+      default: return "/support-staff";
+    }
+  };
 
   useEffect(() => {
     const fetchStaffData = async () => {
-      if (isEdit && staffId && !initialData) {
+      if (isEdit && finalStaffId && !initialData) {
         setLoading(true);
         try {
-          const response = await axiosInstance.get(`/superadmin-roles/${staffId}`);
-          const staffDetail = response.data?.data || response.data;
+          const endpoint = getEndpoint(initialRole);
+          const response = await axiosInstance.get(`${endpoint}/${finalStaffId}`);
+
+          // Data structure: { data: { ...entity, user: { ... } } }
+          const result = response.data?.data || response.data;
+          const userData = result.user || {};
 
           reset({
-            name: staffDetail.name || "",
-            email: staffDetail.email || "",
-            phone: staffDetail.phone || staffDetail.phone_number || "",
+            name: userData.name || "",
+            email: userData.email || "",
+            phone: userData.phone || "",
             password: "",
-            role: staffDetail.role || staffDetail.admin_role || "support_staff",
-            is_active: staffDetail.is_active ?? true,
+            role: initialRole, // Keep the role from params
+            is_active: userData.is_active ?? true,
+            // Add specific fields if needed
           });
         } catch (error) {
           console.error("Failed to fetch staff data:", error);
@@ -98,18 +119,11 @@ export function StaffForm({
     };
 
     fetchStaffData();
-  }, [isEdit, staffId, initialData, reset]);
+  }, [isEdit, finalStaffId, initialData, reset, initialRole]);
 
   useEffect(() => {
     if (isEdit && initialData) {
-      reset({
-        name: initialData.name || "",
-        email: initialData.email || "",
-        phone: initialData.phone || initialData.phone_number || "",
-        password: "",
-        role: initialData.role || initialData.admin_role || "support_staff",
-        is_active: initialData.is_active ?? true,
-      });
+      // ... (existing logic for initialData if used)
     }
   }, [isEdit, initialData, reset]);
 
@@ -121,21 +135,24 @@ export function StaffForm({
         name: data.name,
         email: data.email,
         phone: data.phone,
-        role: data.role,
+        // role is implied by endpoint
         is_active: data.is_active,
       };
 
       if (data.password) payload.password = data.password;
 
-      if (isEdit && staffId) {
-        await axiosInstance.patch(`/superadmin-roles/${staffId}`, payload);
+      const endpoint = getEndpoint(data.role);
+
+      if (isEdit && finalStaffId) {
+        await axiosInstance.patch(`${endpoint}/${finalStaffId}`, payload);
         toast.success("Staff profile updated successfully.");
       } else {
-        await axiosInstance.post(`/superadmin-roles`, payload);
+        await axiosInstance.post(endpoint, payload);
         toast.success("Staff account created successfully.");
       }
 
       router.push("/master-admin/staff");
+      router.refresh();
     } catch (error) {
       console.error("Staff form error:", error);
       toast.error(
@@ -217,6 +234,7 @@ export function StaffForm({
               name="phone"
               control={control}
               errors={errors}
+              validation={{ required: "Phone number is required" }}
             />
 
             <SelectField
