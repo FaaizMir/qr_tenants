@@ -23,6 +23,8 @@ import {
 import { cn } from "@/lib/utils";
 
 
+import { Controller } from "react-hook-form";
+
 const DynamicPhoneInput = React.forwardRef(({
     className,
     onChange,
@@ -33,88 +35,106 @@ const DynamicPhoneInput = React.forwardRef(({
     disabled,
     placeholder = "Enter phone number",
     defaultCountry = "PK",
+    control,
+    name,
+    validation,
     ...props
 }, ref) => {
-    const [isValid, setIsValid] = React.useState(true);
-    const [formattedValue, setFormattedValue] = React.useState("");
+    // Inner component logic extracted for reuse
+    const PhoneInputInner = ({
+        value: innerValue,
+        onChange: innerOnChange,
+        error: innerError,
+        ...innerProps
+    }) => {
+        const [isValid, setIsValid] = React.useState(true);
+        const [formattedValue, setFormattedValue] = React.useState("");
 
+        const handleValueChange = (newValue) => {
+            setFormattedValue(newValue || "");
+            const isValidPhone = newValue ? RPNInput.isValidPhoneNumber(newValue) : false;
+            setIsValid(isValidPhone || !newValue);
+            innerOnChange?.(newValue || "");
+        };
 
-    const handleValueChange = (newValue) => {
-        setFormattedValue(newValue || "");
+        return (
+            <div className={cn("mb-4", className)}>
+                {label && (
+                    <Label className={cn("text-sm font-medium mb-1", innerError && "text-destructive")}>
+                        {label}
+                        {required && <span className="text-destructive ml-1">*</span>}
+                    </Label>
+                )}
 
+                <div className="relative">
+                    <RPNInput.default
+                        ref={ref}
+                        className={cn(
+                            "flex w-full",
+                            innerError && "border-destructive focus-within:ring-destructive",
+                            !isValid && innerValue && "border-orange-500 focus-within:ring-orange-500"
+                        )}
+                        flagComponent={FlagComponent}
+                        countrySelectComponent={CountrySelect}
+                        inputComponent={InputComponent}
+                        smartCaret={true}
+                        value={innerValue || undefined}
+                        onChange={handleValueChange}
+                        defaultCountry={defaultCountry}
+                        placeholder={placeholder}
+                        disabled={disabled}
+                        international={false}
+                        withCountryCallingCode={true}
+                        {...innerProps}
+                    />
+                    <Phone className={cn(
+                        "absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none",
+                        disabled && "opacity-50"
+                    )} />
+                </div>
 
-        const isValidPhone = newValue ? RPNInput.isValidPhoneNumber(newValue) : false;
-        setIsValid(isValidPhone || !newValue);
+                {innerError && (
+                    <p className="text-sm text-destructive flex items-center gap-1">
+                        {innerError}
+                    </p>
+                )}
 
-
-        onChange?.(newValue || "");
-    };
-
-
-    const getCountryFromValue = (phoneValue) => {
-        if (!phoneValue) return defaultCountry;
-        try {
-            return RPNInput.getCountryCallingCode && phoneValue
-                ? RPNInput.parsePhoneNumber(phoneValue)?.country || defaultCountry
-                : defaultCountry;
-        } catch {
-            return defaultCountry;
-        }
-    };
-
-    return (
-        <div className={cn("mb-4", className)}>
-            {label && (
-                <Label className={cn("text-sm font-medium mb-1", error && "text-destructive")}>
-                    {label}
-                    {required && <span className="text-destructive ml-1">*</span>}
-                </Label>
-            )}
-
-            <div className="relative">
-                <RPNInput.default
-                    ref={ref}
-                    className={cn(
-                        "flex w-full",
-                        error && "border-destructive focus-within:ring-destructive",
-                        !isValid && value && "border-orange-500 focus-within:ring-orange-500"
-                    )}
-                    flagComponent={FlagComponent}
-                    countrySelectComponent={CountrySelect}
-                    inputComponent={InputComponent}
-                    smartCaret={true}
-                    value={value || undefined}
-                    onChange={handleValueChange}
-                    defaultCountry={defaultCountry}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    international={false}
-                    withCountryCallingCode={true}
-                    {...props}
-                />
-
-                {/* Phone icon indicator */}
-                <Phone className={cn(
-                    "absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none",
-                    disabled && "opacity-50"
-                )} />
+                {!isValid && innerValue && !innerError && (
+                    <p className="text-sm text-orange-600 flex items-center gap-1">
+                        Please enter a valid phone number
+                    </p>
+                )}
             </div>
+        );
+    };
 
-            {/* Validation feedback */}
-            {error && (
-                <p className="text-sm text-destructive flex items-center gap-1">
-                    {error}
-                </p>
-            )}
+    // If control is provided, wrap in Controller
+    if (control && name) {
+        return (
+            <Controller
+                control={control}
+                name={name}
+                rules={validation}
+                render={({ field: { value, onChange }, fieldState: { error } }) => (
+                    <PhoneInputInner
+                        value={value}
+                        onChange={onChange}
+                        error={error?.message || props.error} // Prefer hook form error
+                        {...props}
+                    />
+                )}
+            />
+        );
+    }
 
-            {!isValid && value && !error && (
-                <p className="text-sm text-orange-600 flex items-center gap-1">
-                    Please enter a valid phone number
-                </p>
-            )}
-
-
-        </div>
+    // Direct usage without react-hook-form
+    return (
+        <PhoneInputInner
+            value={value}
+            onChange={onChange}
+            error={error}
+            {...props}
+        />
     );
 });
 DynamicPhoneInput.displayName = "DynamicPhoneInput";

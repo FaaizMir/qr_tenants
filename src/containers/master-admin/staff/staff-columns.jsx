@@ -146,7 +146,7 @@ export const getStaffColumns = (onDelete) => [
                             Staff Options
                         </DropdownMenuLabel>
                         <DropdownMenuItem asChild>
-                            <Link href={`/master-admin/staff/edit/${staff.id}`}>
+                            <Link href={`/master-admin/staff/edit/${staff.id}?role=${staff.role}`}>
                                 <Edit className="mr-2 h-4 w-4" />
                                 Edit
                             </Link>
