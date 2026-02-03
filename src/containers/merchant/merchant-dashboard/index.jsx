@@ -63,6 +63,19 @@ export default function MerchantDashboardContainer() {
     fetchDashboardData();
   }, [session?.user?.merchantId]);
 
+  const [feeData, setFeeData] = useState(null);
+  useEffect(() => {
+    const fetchFee = async () => {
+      try {
+        const res = await axiosInstance.get("/merchant-settings/subscription-fee");
+        setFeeData(res.data?.data || res.data);
+      } catch (error) {
+        console.error("Failed to fetch subscription fee:", error);
+      }
+    };
+    fetchFee();
+  }, []);
+
   const creditStats = useMemo(() => {
     const totalIssued = batches.reduce(
       (sum, b) => sum + (Number(b.total_quantity) || 0),
@@ -87,7 +100,9 @@ export default function MerchantDashboardContainer() {
     subscriptionType,
     creditStats,
     dashboardData,
-    loadingDashboard
+    loadingDashboard,
+    feeData,
+    adminId: session?.user?.adminId
   });
 
   return (
