@@ -38,6 +38,7 @@ import {
   MerchantList,
   MerchantDetail,
 } from "./components/MerchantMarketplace";
+import { SimpleCouponForm } from "./components/SimpleCouponForm";
 import { cn } from "@/lib/utils";
 
 export default function AgentLandingPage() {
@@ -67,6 +68,7 @@ export default function AgentLandingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
+  const [sortBy, setSortBy] = useState("newest"); // newest, popularity, expiring
 
   // Derived lists
   const [categories, setCategories] = useState([]);
@@ -75,6 +77,13 @@ export default function AgentLandingPage() {
   // Paid Ads
   const [paidAds, setPaidAds] = useState([]);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  // Coupon Dialog State
+  const [couponDialogOpen, setCouponDialogOpen] = useState(false);
+  const [selectedCouponData, setSelectedCouponData] = useState({
+    merchant: null,
+    batch: null,
+  });
 
   // Fetch Paid Ads
   const fetchPaidAds = useCallback(async () => {
@@ -238,7 +247,7 @@ export default function AgentLandingPage() {
 
   // Filtering Logic (now primarily handled by backend, but keeping for client-side refinement if needed)
   const filteredMerchants = useMemo(() => {
-    return merchants.filter((merchant) => {
+    let filtered = merchants.filter((merchant) => {
       const matchSearch =
         merchant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         merchant.category?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -249,7 +258,43 @@ export default function AgentLandingPage() {
 
       return matchSearch && matchCategory && matchRegion;
     });
-  }, [merchants, searchQuery, selectedCategory, selectedRegion]);
+
+    // Apply sorting
+    if (sortBy === "popularity") {
+      // Sort by number of issued coupons (popularity)
+      filtered.sort((a, b) => {
+        const aIssued = a.batches.reduce(
+          (sum, batch) => sum + (batch.issued_quantity || 0),
+          0,
+        );
+        const bIssued = b.batches.reduce(
+          (sum, batch) => sum + (batch.issued_quantity || 0),
+          0,
+        );
+        return bIssued - aIssued;
+      });
+    } else if (sortBy === "expiring") {
+      // Sort by earliest expiry date
+      filtered.sort((a, b) => {
+        const aExpiry = Math.min(
+          ...a.batches
+            .filter((batch) => batch.expiry_date)
+            .map((batch) => new Date(batch.expiry_date).getTime()),
+        );
+        const bExpiry = Math.min(
+          ...b.batches
+            .filter((batch) => batch.expiry_date)
+            .map((batch) => new Date(batch.expiry_date).getTime()),
+        );
+        return aExpiry - bExpiry;
+      });
+    } else {
+      // Default: newest first (by merchant ID descending)
+      filtered.sort((a, b) => b.id - a.id);
+    }
+
+    return filtered;
+  }, [merchants, searchQuery, selectedCategory, selectedRegion, sortBy]);
 
   const activeMerchant = useMemo(
     () => merchants.find((m) => m.id === selectedMerchantId) || null,
@@ -267,7 +312,8 @@ export default function AgentLandingPage() {
 
   // Handlers
   const handleGetCoupon = (merchant, batch) => {
-    router.push(`/customer/review?mid=${merchant.id}&batchId=${batch.id}`);
+    setSelectedCouponData({ merchant, batch });
+    setCouponDialogOpen(true);
   };
 
   const handleLoadMore = () => {
@@ -423,6 +469,8 @@ export default function AgentLandingPage() {
             setSelectedCategory={setSelectedCategory}
             selectedRegion={selectedRegion}
             setSelectedRegion={setSelectedRegion}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
             categories={categories}
             cities={cities}
           />
@@ -619,6 +667,14 @@ export default function AgentLandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Simple Coupon Form Dialog */}
+      <SimpleCouponForm
+        open={couponDialogOpen}
+        onOpenChange={setCouponDialogOpen}
+        merchant={selectedCouponData.merchant}
+        batch={selectedCouponData.batch}
+      />
     </div>
   );
 }

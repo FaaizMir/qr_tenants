@@ -67,6 +67,15 @@ export const LuckyDraw = ({
         setPrizes(Array.isArray(prizeData) ? prizeData : []);
       } catch (error) {
         console.error("Failed to fetch prizes:", error);
+        toast.error("Couldn't load prize list. Using defaults.");
+        // Set fallback prizes
+        setPrizes([
+          { id: 1, prize_name: "Gift" },
+          { id: 2, prize_name: "Prize" },
+          { id: 3, prize_name: "Reward" },
+          { id: 4, prize_name: "Bonus" },
+          { id: 5, prize_name: "Special" },
+        ]);
       } finally {
         setIsLoadingPrizes(false);
       }
@@ -83,20 +92,20 @@ export const LuckyDraw = ({
     const safeCustomerId = parseInt(customerId);
 
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
-      triggerError(
-        "Session Expired",
-        "Required IDs are missing. Please refresh and try again.",
+      toast.error(
+        "Session error: Missing required information. Please try skipping or go back.",
       );
+      console.error("Missing IDs:", { merchantId, customerId });
       return;
     }
 
     setIsSpinning(true);
 
     // Smooth slower spin animation (increased rotations and duration)
-    // 6 seconds duration for better suspense
+    // 8 seconds duration for better suspense and engagement
     const extraDegrees = Math.floor(Math.random() * 360);
     // Use 10 full rotations for more "spin" time
-    const newRotation = rotation + 360 * 8 + extraDegrees;
+    const newRotation = rotation + 360 * 10 + extraDegrees;
     setRotation(newRotation);
 
     try {
@@ -120,7 +129,7 @@ export const LuckyDraw = ({
       const prizeData = response.data?.data;
 
       // Sync animation with result display
-      // Increased to 6000ms to match the new duration
+      // Increased to 8000ms to match the new duration for better engagement
       setTimeout(() => {
         setIsSpinning(false);
         setHasSpun(true);
@@ -132,275 +141,382 @@ export const LuckyDraw = ({
 
         const whatsappStatus = prizeData?.whatsapp_notification;
         if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
-          toast.error(`Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`);
-        } else if (whatsappStatus?.sent && !whatsappStatus?.credits_insufficient) {
+          toast.error(
+            `Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`,
+          );
+        } else if (
+          whatsappStatus?.sent &&
+          !whatsappStatus?.credits_insufficient
+        ) {
           toast.success("Success: Reward details sent to your WhatsApp!");
         }
-      }, 6000);
+      }, 8000);
     } catch (error) {
       console.error("Lucky Draw Error:", error);
+
+      // Stop the wheel animation immediately
       setIsSpinning(false);
+      setRotation(rotation); // Reset to current position
 
       const responseData = error.response?.data;
       const status = error.response?.status;
       const errorCode = responseData?.statusCode || status;
       const errorMsg =
         responseData?.message ||
-        "Failed to process your spin. Please contact merchant staff.";
+        "Failed to process your spin. Please try again or contact merchant staff.";
 
-      triggerError(
-        `Spin Failure (${errorCode})`,
-        errorMsg,
-        responseData?.errors || responseData?.error || null,
-      );
+      // Show user-frienhidden lg:flex flex-col flex-col items-center text-center justify-center bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-600 p-12 relative overflow-hidden min-h-[700px]
+      toast.error(`Spin Error: ${errorMsg}`);
+
+      // Log detailed error for debugging
+      console.error("Spin error details:", {
+        code: errorCode,
+        message: errorMsg,
+        details: responseData?.errors || responseData?.error,
+      });
+
+      // Allow user to try spinning again
+      // Don't set hasSpun to true so they can retry
     }
   };
+  // Validate customer ID on mount - show warning if missing
+  useEffect(() => {
+    if (!customerId || isNaN(parseInt(customerId))) {
+      console.warn("Lucky Draw: Missing or invalid customer ID", customerId);
+      toast.warning("Session warning: You can skip lucky draw if needed.", {
+        duration: 5000,
+      });
+    }
+  }, [customerId]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
-      <Card className="w-full border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] rounded-[20px] overflow-hidden bg-white ">
-        <CardHeader className="flex flex-col items-center text-center pb-8 border-b border-zinc-100/50 relative">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-amber-50 via-white to-yellow-50 animate-in fade-in duration-700">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-amber-200/50">
+        {/* Left Panel - Brand Experience */}
+        <div className="hidden lg:flex flex-col items-center text-center justify-center bg-linear-to-br from-amber-500 via-yellow-500 to-amber-600 p-12 relative overflow-hidden min-h-[700px]">
+          {/* Animated Background Orbs */}
+          <div className="absolute top-20 right-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-700/20 rounded-full blur-3xl animate-pulse-slower"></div>
+
+          {/* Back Button - Desktop */}
           <Button
             variant="ghost"
             size="sm"
             onClick={prevStep}
             disabled={isSpinning || hasSpun}
-            className="absolute left-6 top-8 h-8 rounded-full gap-2 text-zinc-400 hover:text-primary transition-colors disabled:opacity-0"
+            className="absolute top-8 left-8 h-10 px-4 rounded-full gap-2 text-white/80 hover:text-white hover:bg-white/10 transition-all z-10 disabled:opacity-30"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="text-[10px] font-bold uppercase tracking-widest hidden md:inline">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-xs font-semibold uppercase tracking-wide">
               Back
             </span>
           </Button>
 
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 border border-primary/10 text-primary mb-4 shadow-sm">
-            <Trophy className="h-8 w-8" />
+          <div className="relative z-10 space-y-8 flex flex-col items-center text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 shadow-2xl mb-4">
+              <Trophy className="w-10 h-10 text-white" />
+            </div>
+
+            <div className="space-y-4">
+              <h1 className="text-5xl font-bold text-white leading-tight tracking-tight">
+                Test Your
+                <br />
+                <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-yellow-100 to-white animate-shimmer bg-size-[200%_100%]">
+                  Luck
+                </span>
+              </h1>
+              <p className="text-lg text-white/90 font-medium max-w-md leading-relaxed">
+                Every spin is a guaranteed win! Your feedback deserves a reward.
+              </p>
+
+              <div className="flex items-center justify-center gap-6 pt-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">
+                    {prizes.length || 10}+
+                  </div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Prizes
+                  </div>
+                </div>
+                <div className="w-px h-12 bg-white/20"></div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">100%</div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Win Rate
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="space-y-1.5 w-full max-w-lg">
-            <CardTitle className="text-3xl font-black tracking-tight">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                ? merchantConfig.name
-                : "Lucky Draw"}
-            </CardTitle>
-            <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground">
-              <MapPin className="w-3.5 h-3.5 text-primary" />
+        </div>
+
+        {/* Right Panel - Wheel */}
+        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-8 md:p-12 border border-amber-200/50 shadow-2xl min-h-[700px] flex flex-col">
+          {/* Mobile Header */}
+          <div className="lg:hidden mb-8 text-center relative">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={prevStep}
+              disabled={isSpinning || hasSpun}
+              className="absolute left-0 top-0 h-10 px-3 rounded-full text-zinc-400 hover:text-amber-600 disabled:opacity-30"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500/10 backdrop-blur-md border border-amber-500/20 mb-4">
+              <Trophy className="w-8 h-8 text-amber-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-zinc-900">
+              {merchantConfig?.name || "Lucky Draw"}
+            </h2>
+            <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 mt-2">
+              <MapPin className="w-4 h-4 text-amber-600" />
               <span>{merchantConfig?.address || "Store Location"}</span>
             </div>
-            <CardDescription className="text-base font-medium pt-1">
-              A gift for your valuable feedback.
-            </CardDescription>
           </div>
-        </CardHeader>
 
-        <CardContent className="py-12 px-8 md:px-20 flex flex-col items-center">
-          {/* Enhanced Wheel Component */}
-          <div className="relative group">
-            {/* Outer Glow */}
-            <div className="absolute -inset-8 bg-linear-to-r from-primary/30 via-purple-500/20 to-blue-500/30 rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity animate-pulse-slow"></div>
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col items-center justify-center space-y-8">
+            {/* Wheel Container */}
+            <div className="relative group">
+              {/* Outer Glow */}
+              <div className="absolute -inset-12 bg-linear-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/20 rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity animate-pulse-slow"></div>
 
-            {/* The Wheel */}
-            <div
-              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-10 border-zinc-900 dark:border-zinc-100 shadow-[0_0_50px_rgba(0,0,0,0.3)] transition-transform duration-6000 cubic-bezier(0.1, 0, 0.1, 1) flex items-center justify-center overflow-hidden bg-zinc-50 dark:bg-zinc-800/50"
-              style={{ transform: `rotate(${rotation}deg)` }}
-            >
-              {/* Segments Visualization */}
-              {(prizes.length > 0 ? prizes : [...Array(10)]).map((prize, i) => {
-                const totalSegments = prizes.length > 0 ? prizes.length : 10;
-                const angle = 360 / totalSegments;
-                return (
-                  <div
-                    key={i}
-                    className="absolute w-full h-full"
-                    style={{ transform: `rotate(${i * angle}deg)` }}
-                  >
-                    {/* Segment Line */}
-                    <div
-                      className={cn(
-                        "absolute top-0 left-1/2 -ml-px w-0.5 h-1/2 origin-bottom opacity-20",
-                        i % 2 === 0 ? "bg-primary" : "bg-purple-500",
-                      )}
-                    ></div>
+              {/* The Wheel */}
+              <div
+                className="relative w-72 h-72 md:w-96 md:h-96 rounded-full border-16 border-zinc-900 shadow-[0_0_80px_rgba(0,0,0,0.3)] transition-transform duration-8000 ease-[cubic-bezier(0.1,0,0.1,1)] flex items-center justify-center overflow-hidden bg-linear-to-br from-white via-amber-50 to-white"
+                style={{ transform: `rotate(${rotation}deg)` }}
+              >
+                {/* Segments */}
+                {(prizes.length > 0 ? prizes : [...Array(10)]).map(
+                  (prize, i) => {
+                    const totalSegments =
+                      prizes.length > 0 ? prizes.length : 10;
+                    const angle = 360 / totalSegments;
+                    const isEven = i % 2 === 0;
 
-                    {/* Prize Label - Positioned radially */}
-                    <div
-                      className="absolute top-4 left-1/2 -translate-x-1/2 h-1/2 flex flex-col items-center pt-4 md:pt-8"
-                      style={{
-                        transform: `rotate(${angle / 2}deg)`,
-                        transformOrigin: "center bottom",
-                      }}
-                    >
-                      <div className="flex flex-col items-center gap-2">
-                        <span
-                          className="text-[8px] md:text-[10px] font-black uppercase tracking-tighter text-zinc-700 dark:text-zinc-200 text-center max-w-[60px] md:max-w-20 wrap-break-word line-clamp-2"
-                          style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+                    return (
+                      <div
+                        key={i}
+                        className="absolute w-full h-full"
+                        style={{ transform: `rotate(${i * angle}deg)` }}
+                      >
+                        {/* Segment Background */}
+                        <div
+                          className={cn(
+                            "absolute top-0 left-1/2 -ml-px w-full h-1/2 origin-bottom",
+                            isEven ? "bg-amber-100/80" : "bg-yellow-100/80",
+                          )}
+                          style={{
+                            clipPath: `polygon(50% 100%, ${50 - 50 * Math.tan((angle * Math.PI) / 360)}% 0%, ${50 + 50 * Math.tan((angle * Math.PI) / 360)}% 0%)`,
+                          }}
+                        ></div>
+
+                        {/* Prize Label */}
+                        <div
+                          className="absolute top-6 left-1/2 -translate-x-1/2 h-1/2 flex flex-col items-center pt-4"
+                          style={{
+                            transform: `rotate(${angle / 2}deg)`,
+                            transformOrigin: "center bottom",
+                          }}
                         >
-                          {prizes.length > 0
-                            ? prize.prize_name
-                            : i % 2 === 0
-                              ? "Free Gift"
-                              : "Mystery Box"}
+                          <div className="flex flex-col items-center gap-1.5">
+                            {i % 3 === 0 ? (
+                              <Gift className="w-6 h-6 text-amber-700 drop-shadow-sm" />
+                            ) : (
+                              <Sparkles className="w-5 h-5 text-yellow-700 drop-shadow-sm" />
+                            )}
+                            <span className="text-[11px] md:text-[13px] font-bold uppercase tracking-tight text-zinc-900 text-center max-w-[60px] md:max-w-[70px] leading-tight line-clamp-2 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+                              {prizes.length > 0
+                                ? prize.prize_name
+                                : i % 2 === 0
+                                  ? "Gift"
+                                  : "Prize"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  },
+                )}
+
+                {/* Center Pivot */}
+                <div className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-zinc-900 shadow-2xl z-20 flex items-center justify-center border-4 border-amber-400">
+                  <div className="w-6 h-6 rounded-full bg-linear-to-br from-amber-500 to-yellow-500 shadow-[0_0_20px_rgba(251,191,36,0.8)] animate-pulse"></div>
+                </div>
+              </div>
+
+              {/* Top Indicator / Needle */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 z-30 flex items-center justify-center drop-shadow-2xl">
+                <div className="w-0 h-0 border-l-16 border-l-transparent border-r-16 border-r-transparent border-t-24 border-t-zinc-900 drop-shadow-lg"></div>
+              </div>
+            </div>
+
+            {/* Action Area */}
+            {!hasSpun ? (
+              <div className="text-center space-y-6 w-full max-w-md px-4">
+                <div className="space-y-3">
+                  <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
+                    Ready to Win?
+                  </h3>
+                  <p className="text-sm font-semibold text-zinc-600 leading-relaxed uppercase tracking-wide">
+                    Every spin is a guaranteed prize!
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <Button
+                    onClick={handleSpin}
+                    disabled={isSpinning}
+                    className="w-full h-16 rounded-2xl text-lg font-bold uppercase tracking-wide bg-linear-to-r from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 text-white shadow-xl shadow-zinc-900/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden disabled:opacity-50"
+                  >
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    {isSpinning ? (
+                      <span className="relative flex items-center justify-center gap-3">
+                        <RotateCw className="w-6 h-6 animate-spin" />
+                        Spinning...
+                      </span>
+                    ) : (
+                      <span className="relative flex items-center justify-center gap-3">
+                        Spin the Wheel
+                        <Sparkles className="w-6 h-6 text-yellow-400 group-hover:scale-125 group-hover:rotate-12 transition-transform" />
+                      </span>
+                    )}
+                  </Button>
+
+                  {/* Skip button for error fallback */}
+                  <button
+                    onClick={() => {
+                      toast.info(
+                        "Skipping lucky draw. Redirecting back to start...",
+                      );
+                      nextStep("skip");
+                    }}
+                    disabled={isSpinning}
+                    className="text-xs text-zinc-400 hover:text-zinc-600 font-semibold uppercase tracking-wide transition-colors disabled:opacity-30"
+                  >
+                    Skip Lucky Draw →
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center space-y-8 w-full max-w-md px-4 animate-in fade-in slide-in-from-bottom duration-1000">
+                {/* Success Icon */}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-20 h-20 rounded-3xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+                    <CheckCircle2 className="w-10 h-10 text-white" />
+                  </div>
+
+                  <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 uppercase tracking-tight">
+                    You Won!
+                  </h3>
+
+                  {/* Prize Card */}
+                  <div className="w-full py-8 px-6 rounded-3xl bg-linear-to-br from-zinc-900 to-zinc-800 text-white shadow-2xl relative overflow-hidden border border-zinc-800/50">
+                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+
+                    <div className="relative z-10 space-y-3">
+                      <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 inline-flex items-center gap-2 mx-auto">
+                        <Star className="w-3 h-3 text-emerald-400" />
+                        <span className="text-xs font-bold uppercase tracking-wide text-emerald-400">
+                          Official Prize
                         </span>
-                        {i % 3 === 0 ? (
-                          <Gift className="w-4 h-4 text-primary/40" />
-                        ) : (
-                          <Sparkles className="w-3 h-3 text-zinc-400/40" />
-                        )}
+                      </div>
+
+                      <p className="text-3xl md:text-4xl font-bold tracking-tight uppercase">
+                        {result?.prize?.prize_name || "Special Reward"}
+                      </p>
+
+                      {result?.prize?.prize_description && (
+                        <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wide">
+                          {result.prize.prize_description}
+                        </p>
+                      )}
+
+                      <div className="pt-4">
+                        <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <span className="text-xs font-bold text-zinc-500 uppercase tracking-wide block mb-1">
+                            Code
+                          </span>
+                          <span className="text-lg font-bold text-white tracking-widest uppercase">
+                            {result?.coupon?.coupon_code ||
+                              result?.coupon_code ||
+                              "Processing"}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                );
-              })}
 
-              {/* Center Pivot */}
-              <div className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-zinc-900 dark:bg-zinc-100 shadow-2xl z-20 flex items-center justify-center border-4 border-zinc-800 dark:border-zinc-200">
-                <div className="w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)] animate-pulse"></div>
-              </div>
-            </div>
-
-            {/* Top Indicator / Needle */}
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 z-30 flex items-center justify-center drop-shadow-xl">
-              <div className="w-0 h-0 border-l-12 border-l-transparent border-r-12 border-r-transparent border-t-20 border-t-zinc-900 dark:border-t-zinc-100 drop-shadow-lg"></div>
-            </div>
-          </div>
-
-          {!hasSpun ? (
-            <div className="text-center space-y-8 w-full max-w-sm px-4">
-              <div className="space-y-3">
-                <h3 className="text-2xl font-black italic tracking-tight text-zinc-900 dark:text-zinc-100 uppercase">
-                  UNLEASH YOUR LUCK
-                </h3>
-                <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wider">
-                  Tap below to spin. Every spin is a guaranteed win for our
-                  valued reviewers!
-                </p>
-              </div>
-
-              <Button
-                onClick={handleSpin}
-                disabled={isSpinning}
-                className="w-full h-16 rounded-2xl text-xl font-black uppercase tracking-widest shadow-[0_20px_40px_-12px_rgba(16,185,129,0.4)] hover:shadow-[0_24px_48px_-12px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border-none group relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-linear-to-r from-primary/0 via-white/10 to-primary/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                {isSpinning ? (
-                  <div className="flex items-center gap-3">
-                    <RotateCw className="w-6 h-6 animate-spin" />
-                    Calculating...
-                  </div>
-                ) : (
-                  <>
-                    Spin the Wheel
-                    <Sparkles className="ml-3 w-6 h-6 text-yellow-400 group-hover:scale-125 group-hover:rotate-12 transition-transform" />
-                  </>
-                )}
-              </Button>
-            </div>
-          ) : (
-            <div className="text-center animate-in fade-in slide-in-from-bottom-8 duration-1000 space-y-8 w-full px-4">
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-20 h-20 rounded-3xl bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 flex items-center justify-center mb-2 shadow-inner">
-                  <CheckCircle2 className="w-10 h-10 text-emerald-500" />
-                </div>
-
-                <h3 className="text-3xl font-black italic tracking-tighter text-zinc-900 dark:text-zinc-100 uppercase">
-                  MAGNIFICENT!
-                </h3>
-
-                <div className="w-full py-8 px-6 rounded-[2.5rem] bg-linear-to-br from-zinc-900 to-zinc-800 text-white shadow-2xl relative overflow-hidden border border-white/5">
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-                  <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
-
-                  <p className="text-[10px] font-black uppercase tracking-[0.5em] text-emerald-400 mb-2 italic">
-                    Official Prize
-                  </p>
-                  <p className="text-4xl md:text-5xl font-black tracking-tighter mb-2 italic uppercase">
-                    {result?.prize?.prize_name || "Special Reward"}
-                  </p>
-                  {result?.prize?.prize_description && (
-                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest max-w-[200px] mx-auto leading-relaxed">
-                      {result.prize.prize_description}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex flex-col items-center gap-2 mt-4">
+                  {/* WhatsApp Status */}
                   {result?.whatsapp_status === "failed" ||
-                    result?.whatsapp_error ||
-                    result?.error === "whatsapp_credit_low" ||
-                    result?.whatsapp_notification?.credits_insufficient ? (
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
-                      <span className="text-[10px] font-black text-red-600 dark:text-red-400 uppercase tracking-widest leading-none">
-                        WhatsApp Error:{" "}
+                  result?.whatsapp_error ||
+                  result?.error === "whatsapp_credit_low" ||
+                  result?.whatsapp_notification?.credits_insufficient ? (
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border-2 border-red-500/20">
+                      <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                      <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
                         {result?.whatsapp_notification?.credits_insufficient
-                          ? `Credit Exhausted (Available: ${result?.whatsapp_notification?.available_credits ?? 0})`
-                          : result?.whatsapp_error ||
-                          result?.error_message ||
-                          (result?.error === "whatsapp_credit_low"
-                            ? "Credit Exhausted"
-                            : "Delivery Failed")}
+                          ? `WhatsApp Error (${result?.whatsapp_notification?.available_credits ?? 0} credits left)`
+                          : "WhatsApp Delivery Failed"}
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                      <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20">
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                      <span className="text-xs font-bold text-emerald-600 uppercase tracking-wide">
                         Sent to WhatsApp
                       </span>
                     </div>
                   )}
-                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                    Code:{" "}
-                    {result?.coupon?.coupon_code ||
-                      result?.coupon_code ||
-                      "Processing"}
-                  </p>
-                </div>
 
-                <div className="bg-zinc-50 dark:bg-zinc-800/20 p-5 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-700/50 max-w-sm mt-4">
-                  {result?.whatsapp_status === "failed" ||
+                  {/* Instructions */}
+                  <div className="bg-white/80 backdrop-blur-md rounded-2xl p-5 border-2 border-slate-200/50">
+                    {result?.whatsapp_status === "failed" ||
                     result?.whatsapp_error ||
                     result?.error === "whatsapp_credit_low" ||
                     result?.whatsapp_notification?.credits_insufficient ? (
-                    <p className="text-[11px] font-bold text-red-500 dark:text-red-400 leading-relaxed uppercase tracking-wide italic px-4">
-                      &quot;We couldn&quot;t send the reward to your WhatsApp
-                      due to a technical error. <br />
-                      <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic mt-2 block">
-                        PLEASE TAKE A SCREENSHOT OF THIS SCREEN AND SHOW IT TO
-                        OUR STAFF TO CLAIM YOUR BENEFIT.
-                      </span>
-                      &quot;
-                    </p>
-                  ) : (
-                    <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed uppercase tracking-wide italic px-4">
-                      &quot;Reward sent to your WhatsApp with the number{" "}
-                      <span className="text-zinc-900 dark:text-zinc-100 font-black not-italic">
-                        {formValues?.phone || "you provided"}
-                      </span>{" "}
-                      you entered while submitting the review form.&quot;
-                    </p>
-                  )}
+                      <p className="text-xs font-bold text-red-600 italic leading-relaxed">
+                        We couldn&apos;t send to WhatsApp. Please screenshot
+                        this screen to claim your reward.
+                      </p>
+                    ) : (
+                      <p className="text-xs font-medium text-zinc-600 leading-relaxed">
+                        Reward sent to{" "}
+                        <span className="text-zinc-900 font-bold">
+                          {formValues?.phone || "your number"}
+                        </span>
+                      </p>
+                    )}
+                  </div>
                 </div>
+
+                {/* Next Button */}
+                <Button
+                  onClick={nextStep}
+                  className="w-full h-16 rounded-2xl text-lg font-bold uppercase tracking-wide bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  <span className="relative flex items-center justify-center gap-3">
+                    Claim My Reward
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  </span>
+                </Button>
               </div>
+            )}
+          </div>
 
-              <Button
-                onClick={nextStep}
-                className="w-full h-16 rounded-2xl text-xl font-black uppercase tracking-widest bg-emerald-500 hover:bg-emerald-600 text-white shadow-[0_20px_40px_-12px_rgba(16,185,129,0.3)] transition-all active:scale-[0.98] group"
-              >
-                Claim My Reward
-                <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
-              </Button>
-            </div>
-          )}
-        </CardContent>
-
-        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center mt-6">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
-            Verified Secure Experience{" "}
-            <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered
-            by QR Tenants
-          </p>
-        </CardFooter>
-      </Card>
+          {/* Footer */}
+          <div className="mt-8 pt-6 border-t border-slate-200/50 text-center">
+            <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
+              Secured by QR Tenants • All data encrypted
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

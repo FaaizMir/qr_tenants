@@ -165,6 +165,8 @@ export function MarketplaceFilters({
   setSelectedCategory,
   selectedRegion,
   setSelectedRegion,
+  sortBy,
+  setSortBy,
   categories,
   cities,
   handleGetCoupon,
@@ -213,6 +215,20 @@ export function MarketplaceFilters({
                   {city}
                 </SelectItem>
               ))}
+            </SelectContent>
+          </Select>
+
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full md:w-44 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-primary" />
+                <SelectValue placeholder="Sort" />
+              </div>
+            </SelectTrigger>
+            <SelectContent className="rounded-xl border-slate-100 shadow-xl">
+              <SelectItem value="newest">Newest First</SelectItem>
+              <SelectItem value="popularity">Most Popular</SelectItem>
+              <SelectItem value="expiring">Expiring Soon</SelectItem>
             </SelectContent>
           </Select>
         </div>
