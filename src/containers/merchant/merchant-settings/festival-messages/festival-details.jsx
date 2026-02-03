@@ -64,14 +64,14 @@ export default function FestivalDetails() {
       setError(null);
       const response = await axiosInstance.get(
         `/festival-messages/${festivalId}`,
-        {
-          params: { merchant_id: merchantId },
-        },
       );
       setFestival(response.data.data || response.data);
     } catch (err) {
       console.error("Failed to fetch festival message:", err);
-      setError("Failed to load festival message details");
+      const errorMsg =
+        err?.response?.data?.message ||
+        "Failed to load festival message details";
+      setError(errorMsg);
       toast.error("Failed to load festival message");
     } finally {
       setLoading(false);
@@ -88,18 +88,16 @@ export default function FestivalDetails() {
 
     setDeleting(true);
     try {
-      await axiosInstance.delete(`/festival-messages/${festivalId}`, {
-        params: { merchant_id: merchantId },
-      });
+      await axiosInstance.delete(`/festival-messages/${festivalId}`);
       toast.success("Festival message deleted successfully");
       router.push("/merchant/festival-messages");
     } catch (err) {
       console.error("Failed to delete festival message:", err);
-      toast.error("Failed to delete festival message");
-    } finally {
+      const errorMsg =
+        err?.response?.data?.message || "Failed to delete festival message";
+      toast.error(errorMsg);
       setDeleting(false);
       setDeleteDialogOpen(false);
-      router.back();
     }
   };
 

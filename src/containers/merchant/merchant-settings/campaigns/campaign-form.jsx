@@ -92,13 +92,15 @@ export default function CampaignFormDialog({
         scheduled_date: new Date(formData.date).toISOString(),
         target_audience: formData.audience,
         send_coupons: formData.sendCoupons,
-        coupon_batch_id:
-          formData.sendCoupons && formData.batchId
-            ? parseInt(formData.batchId, 10)
-            : null,
       };
 
+      // Only include coupon_batch_id if sending coupons and batch is selected
+      if (formData.sendCoupons && formData.batchId) {
+        payload.coupon_batch_id = parseInt(formData.batchId, 10);
+      }
+
       if (isEditMode) {
+        // Use PUT for updates as per API documentation
         await axiosInstance.put(`/scheduled-campaigns/${campaign.id}`, payload);
         toast.success("Campaign updated successfully");
       } else {
@@ -110,9 +112,12 @@ export default function CampaignFormDialog({
       onSuccess();
     } catch (error) {
       console.error("Failed to save campaign:", error);
-      toast.error(
-        isEditMode ? "Failed to update campaign" : "Failed to create campaign",
-      );
+      const errorMsg =
+        error?.response?.data?.message ||
+        (isEditMode
+          ? "Failed to update campaign"
+          : "Failed to create campaign");
+      toast.error(errorMsg);
     } finally {
       setSaving(false);
     }
