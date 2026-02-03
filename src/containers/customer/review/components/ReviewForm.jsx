@@ -10,6 +10,7 @@ import {
   MessageSquare,
   CheckCircle2,
   MapPin,
+  Trophy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -106,10 +107,11 @@ export const ReviewForm = ({
         setPresetReviews(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching presets:", error);
-        triggerError(
-          "System Notice",
-          "We couldn't load the pre-written reviews, but you can still write your own feedback below.",
+        toast.info(
+          "Quick expressions unavailable. You can write your own feedback.",
         );
+        // Continue with empty presets array - not a critical error
+        setPresetReviews([]);
       } finally {
         setLoadingPresets(false);
       }
@@ -251,11 +253,14 @@ export const ReviewForm = ({
       const feedbackId = response.data?.data?.id || response.data?.id;
 
       if (feedbackId) {
-        // 2. Mark redirect as complete
-        await axiosInstance
+        // 2. Mark redirect as complete (non-critical - don't block on errors)
+        axiosInstance
           .patch(`/feedbacks/${feedbackId}/complete-redirect`)
           .then((res) => console.log("Redirect status updated:", res.data))
-          .catch((err) => console.error("Error completing redirect:", err));
+          .catch((err) => {
+            console.warn("Non-critical error updating redirect status:", err);
+            // Don't show error to user - this is a background operation
+          });
 
         const platformMap = {
           google: merchantConfig.googleReviewLink,
@@ -266,9 +271,23 @@ export const ReviewForm = ({
 
         const redirectUrl = platformMap[platformId] || merchantConfig.mapLink;
 
-        // 3. Open the URL
+        // 3. Open the URL (with error handling for popup blockers)
         if (redirectUrl) {
-          window.open(redirectUrl, "_blank");
+          try {
+            const newWindow = window.open(redirectUrl, "_blank");
+            if (
+              !newWindow ||
+              newWindow.closed ||
+              typeof newWindow.closed === "undefined"
+            ) {
+              toast.warning("Please allow popups to open the review platform.");
+            }
+          } catch (err) {
+            console.warn("Popup blocked or error:", err);
+            toast.warning(
+              "Couldn't open review platform. You can review later.",
+            );
+          }
         }
 
         setShowPlatformModal(false);
@@ -298,15 +317,41 @@ export const ReviewForm = ({
     } catch (error) {
       console.error("Platform Redirect Error:", error);
       const responseData = error.response?.data;
+      const status = error.response?.status;
 
-      const errorMsg =
-        responseData?.message ||
+      let errorMsg =
         "An unexpected error occurred while processing your feedback.";
+
+      // Provide specific error messages based on status
+      if (status === 401 || status === 403) {
+        errorMsg = "Authentication error. Please scan the QR code again.";
+      } else if (status === 400) {
+        errorMsg =
+          responseData?.message ||
+          "Invalid feedback data. Please check your entries.";
+      } else if (status === 500) {
+        errorMsg =
+          "Server error. Your feedback may have been saved. Please contact support.";
+      } else if (status === 404) {
+        errorMsg = "Service not found. Please contact merchant support.";
+      } else if (!error.response) {
+        errorMsg = "Network error. Please check your internet connection.";
+      } else {
+        errorMsg = responseData?.message || errorMsg;
+      }
 
       // Force close the platform modal to show error
       setShowPlatformModal(false);
 
-      triggerError(errorMsg);
+      // Show toast with the error
+      toast.error(errorMsg);
+
+      // Log detailed error
+      console.error("Feedback submission error details:", {
+        status,
+        message: errorMsg,
+        response: responseData,
+      });
     } finally {
       setLoading(false);
     }
@@ -321,213 +366,312 @@ export const ReviewForm = ({
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-6xl mx-auto p-4 md:p-8 animate-in fade-in duration-700">
-      <Card className="w-full border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] rounded-[20px] overflow-hidden bg-white ">
-        <CardHeader className="flex flex-col items-center text-center pb-8 border-b border-zinc-100/50 relative">
+    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
+      <div className="w-full max-w-[95%] xl:max-w-[1400px] grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-slate-200/50">
+        {/* Left Panel - Brand Experience */}
+        <div className="hidden lg:flex flex-col justify-center bg-linear-to-br from-primary via-primary/95 to-primary/80 p-8 relative overflow-hidden h-full">
+          {/* Animated Background Orbs */}
+          <div className="absolute top-20 right-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-700/20 rounded-full blur-3xl animate-pulse-slower"></div>
+
+          {/* Back Button - Desktop */}
           <Button
             variant="ghost"
             size="sm"
             onClick={prevStep}
-            className="absolute left-6 top-8 h-8 rounded-full gap-2 text-zinc-400 hover:text-primary transition-colors"
+            className="absolute top-8 left-8 h-10 px-4 rounded-full gap-2 text-white/80 hover:text-white hover:bg-white/10 transition-all z-10"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="text-[10px] font-bold uppercase tracking-widest hidden md:inline">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-xs font-semibold uppercase tracking-wide">
               Back
             </span>
           </Button>
 
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 border border-primary/10 text-primary mb-4 shadow-sm">
-            <Star className="h-8 w-8" />
+          <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-6">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 shadow-2xl">
+              <Trophy className="w-10 h-10 text-white" />
+            </div>
+
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+                Share Your
+                <br />
+                <span className="text-5xl md:text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-amber-100 to-white animate-shimmer bg-size-[200%_100%]">
+                  Experience
+                </span>
+              </h1>
+              <p className="text-base text-white/90 font-medium max-w-sm leading-relaxed mx-auto">
+                Your feedback shapes our journey. Every review helps us serve
+                you better.
+              </p>
+
+              <div className="flex items-center justify-center gap-6 pt-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">4.9★</div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Rating
+                  </div>
+                </div>
+                <div className="w-px h-12 bg-white/20"></div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">10K+</div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Reviews
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="space-y-1.5 w-full max-w-lg">
-            <CardTitle className="text-3xl font-black tracking-tight">
-              {merchantConfig?.name && merchantConfig.name !== "Loading..."
-                ? merchantConfig.name
-                : "Feedback"}
-            </CardTitle>
-            <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground">
-              <MapPin className="w-3.5 h-3.5 text-primary" />
+        </div>
+
+        {/* Right Panel - Review Form */}
+        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-5 md:p-6 border border-slate-200/50 shadow-2xl h-full flex flex-col overflow-y-auto">
+          {/* Mobile Header */}
+          <div className="lg:hidden mb-5 text-center relative">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={prevStep}
+              className="absolute left-0 top-0 h-10 px-3 rounded-full text-zinc-400 hover:text-primary"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500/10 backdrop-blur-md border border-amber-500/20 mb-4">
+              <Star className="w-8 h-8 text-amber-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-zinc-900">
+              {merchantConfig?.name || "Your Feedback"}
+            </h2>
+            <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 mt-2">
+              <MapPin className="w-4 h-4 text-amber-600" />
               <span>{merchantConfig?.address || "Store Location"}</span>
             </div>
-            <CardDescription className="text-base font-medium pt-1">
-              We value your honest opinion.
-            </CardDescription>
           </div>
-        </CardHeader>
 
-        <CardContent className="py-12 px-8 md:px-16 space-y-12">
-          {/* Enhanced Star Rating */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between px-1">
-              <Label className="text-xs font-black uppercase tracking-widest text-zinc-500">
-                Overall Rating
-              </Label>
-              <div
-                className={cn(
-                  "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-500",
-                  formValues.rating >= 4
-                    ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20"
+          {/* Form Content */}
+          <div className="flex-1 space-y-3">
+            {/* Star Rating Section */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
+                  Overall Rating <span className="text-red-500">*</span>
+                </Label>
+                <div
+                  className={cn(
+                    "px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide transition-all border",
+                    formValues.rating >= 4
+                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                      : formValues.rating >= 3
+                        ? "bg-amber-50 text-amber-700 border-amber-200"
+                        : "bg-red-50 text-red-700 border-red-200",
+                  )}
+                >
+                  {formValues.rating >= 4
+                    ? "Excellent!"
                     : formValues.rating >= 3
-                      ? "bg-amber-500/10 text-amber-600 border border-amber-500/20"
-                      : "bg-red-500/10 text-red-600 border border-red-500/20",
-                )}
-              >
-                {formValues.rating >= 4
-                  ? "Excellent!"
-                  : formValues.rating >= 3
-                    ? "Good"
-                    : "Could be better"}
+                      ? "Good"
+                      : formValues.rating
+                        ? "Could be better"
+                        : "Rate Us"}
+                </div>
+              </div>
+
+              <div className="flex justify-center py-5 bg-slate-50 rounded-xl border border-slate-200">
+                <StarRatingInput
+                  label=""
+                  name="rating"
+                  register={register}
+                  setValue={setValue}
+                  value={formValues.rating}
+                  size="lg"
+                />
               </div>
             </div>
 
-            <div className="flex justify-center py-8 bg-zinc-50/50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-inner">
-              <StarRatingInput
-                label=""
-                name="rating"
-                register={register}
-                setValue={setValue}
-                value={formValues.rating}
-                size="xl"
-              />
-            </div>
-          </div>
-
-          {/* Preset Reviews Section */}
-          {merchantConfig.enablePresetReviews && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-center">
-                <Label className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">
+            {/* Preset Reviews Section */}
+            {merchantConfig.enablePresetReviews && presetReviews.length > 0 && (
+              <div className="space-y-3 pt-2">
+                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
                   Quick Expressions
                 </Label>
-              </div>
 
-              <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
-                {presetReviews.map((review) => (
-                  <button
-                    key={review.id}
-                    type="button"
-                    onClick={() =>
-                      handlePresetClick(review.review_text, review.id)
-                    }
-                    className={cn(
-                      "px-4 py-2 rounded-full border text-[11px] font-bold transition-all duration-300 relative",
-                      selectedPresetId === review.id
-                        ? "border-primary bg-primary text-white shadow-md scale-105"
-                        : "border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-500 hover:border-primary/50 hover:bg-zinc-50",
-                    )}
-                  >
-                    <span className="relative z-10">
+                <div className="flex flex-wrap gap-2 items-center justify-center">
+                  {presetReviews.map((review) => (
+                    <button
+                      key={review.id}
+                      type="button"
+                      onClick={() =>
+                        handlePresetClick(review.review_text, review.id)
+                      }
+                      className={cn(
+                        "px-4 py-2 rounded-xl border text-sm font-medium transition-all",
+                        selectedPresetId === review.id
+                          ? "border-primary bg-primary text-white"
+                          : "border-slate-200 bg-white text-zinc-600 hover:border-primary/50",
+                      )}
+                    >
                       &quot;{review.review_text}&quot;
-                    </span>
-                  </button>
-                ))}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="space-y-4 pt-2">
-            <Label className="text-xs font-black uppercase tracking-widest text-zinc-500 pl-1">
-              Detailed Remarks
-            </Label>
+            {/* Custom Review Text */}
+            <div className="space-y-3">
+              <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
+                Detailed Remarks
+              </Label>
 
-            <div className="relative group">
-              <div className="absolute top-4 left-4 pointer-events-none transition-transform group-focus-within:-translate-y-1 text-zinc-400 group-focus-within:text-primary">
-                <MessageSquare className="w-4 h-4" />
-              </div>
               <TextareaField
                 name="text"
                 placeholder="Share the details that made your visit special..."
                 control={control}
                 onChange={onTextChange}
-                className="pl-12 pt-4 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm font-medium resize-none shadow-inner min-h-[120px]"
+                className="w-full h-24 px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-primary focus:outline-none transition-colors text-sm resize-none"
               />
             </div>
+
+            {/* Submit Button */}
+            <div>
+              <Button
+                className="w-full h-14 rounded-2xl text-sm font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleFormSubmit}
+                disabled={loading}
+              >
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                {loading ? (
+                  <span className="relative flex items-center justify-center gap-3">
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Processing...
+                  </span>
+                ) : (
+                  <span className="relative flex items-center justify-center gap-3">
+                    Submit Feedback
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </span>
+                )}
+              </Button>
+            </div>
           </div>
 
-          <div className="pt-6">
-            <Button
-              className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all active:scale-[0.98] bg-primary hover:bg-primary/90 text-white group"
-              onClick={handleFormSubmit}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  Seal My Feedback
-                  <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </>
-              )}
-            </Button>
+          {/* Footer */}
+          <div className="mt-4 pt-4 border-t border-slate-200/50 text-center">
+            <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              Secured by QR Tenants • All data encrypted
+            </p>
           </div>
-        </CardContent>
+        </div>
+      </div>
 
-        <CardFooter className="bg-zinc-50 dark:bg-zinc-900/40 border-t border-zinc-100 dark:border-zinc-800 py-4 flex justify-center">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
-            Verified Secure Experience{" "}
-            <Sparkles className="w-3 h-3 text-primary animate-pulse" /> Powered
-            by QR Tenants
-          </p>
-        </CardFooter>
-      </Card>
-
-      {/* Premium Platform Selection Modal */}
+      {/* Platform Selection Modal - New Design */}
       <Dialog open={showPlatformModal} onOpenChange={setShowPlatformModal}>
         <DialogContent className="sm:max-w-md border-none shadow-2xl p-0 overflow-hidden rounded-3xl bg-white dark:bg-zinc-950">
-          <div className="bg-zinc-900 p-8 text-center text-white relative">
-            <div className="absolute top-0 right-0 p-6 opacity-10">
-              <Sparkles className="w-20 h-20" />
-            </div>
+          {/* Header with Progress */}
+          <div className="bg-linear-to-r from-amber-500 to-orange-500 p-6 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-10 -left-5 w-40 h-40 bg-orange-600/20 rounded-full blur-3xl"></div>
 
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/20 backdrop-blur-md flex items-center justify-center mb-4 shadow-xl">
-              <CheckCircle2 className="w-8 h-8 text-primary" />
-            </div>
+            <div className="relative z-10">
+              <div className="mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center">
+                    <span className="text-sm font-bold">3</span>
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wide">
+                    Step 3 of 3
+                  </span>
+                </div>
+              </div>
 
-            <DialogTitle className="text-2xl font-bold tracking-tight mb-2 uppercase italic">
-              Almost Done!
-            </DialogTitle>
-            <DialogDescription className="text-zinc-400 text-xs font-medium">
-              Select a platform to share your review and unlock your reward.
-            </DialogDescription>
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold">Share Your Review</h2>
+                <p className="text-white/90 text-sm">
+                  Choose a platform to post your feedback and unlock your reward
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="p-8 space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              {availablePlatforms.length > 0 ? (
-                availablePlatforms.map((platform) => (
-                  <button
-                    key={platform.id}
-                    onClick={() => handlePlatformSelection(platform.id)}
-                    className="group relative flex flex-col items-center justify-center p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary hover:shadow-xl transition-all duration-300"
+          {/* Platform Options */}
+          <div className="p-6 space-y-3">
+            {availablePlatforms.length > 0 ? (
+              availablePlatforms.map((platform, index) => (
+                <button
+                  key={platform.id}
+                  onClick={() => handlePlatformSelection(platform.id)}
+                  className="w-full group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-slate-200 dark:border-zinc-700 bg-linear-to-r from-white via-white to-slate-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800 hover:border-amber-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                >
+                  {/* Icon Container */}
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      backgroundColor: platform.brandColor,
+                    }}
                   >
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-black mb-3 transition-transform group-hover:scale-110"
-                      style={{
-                        backgroundColor: platform.brandColor,
-                      }}
-                    >
-                      {platform.icon}
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 group-hover:text-primary transition-colors">
-                      {platform.name}
-                    </span>
-                  </button>
-                ))
-              ) : (
-                <div className="col-span-2 py-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-800">
-                  <p className="text-xs font-bold text-zinc-400 italic">
-                    No platforms configured.
-                  </p>
-                </div>
-              )}
-            </div>
+                    {platform.icon}
+                  </div>
 
-            <p className="text-[9px] text-center text-zinc-400 font-bold uppercase tracking-widest">
-              Action is secure & verified.
-            </p>
+                  {/* Platform Info */}
+                  <div className="flex-1 text-left">
+                    <h3 className="font-bold text-zinc-900 dark:text-white text-base group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                      {platform.name}
+                    </h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                      Share and earn rewards
+                    </p>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="text-amber-500 group-hover:translate-x-1 transition-transform">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              ))
+            ) : (
+              <div className="py-12 text-center bg-slate-50 dark:bg-zinc-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-zinc-800">
+                <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+                  No review platforms configured
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Footer Info */}
+          <div className="px-6 py-4 bg-slate-50 dark:bg-zinc-900/50 border-t border-slate-200 dark:border-zinc-800">
+            <div className="flex items-start gap-3">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg
+                  className="w-3 h-3 text-emerald-600"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Your review is secure and encrypted. Your reward will be sent to
+                your WhatsApp immediately.
+              </p>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
