@@ -79,9 +79,7 @@ export default function AgentMerchantsListingContainer() {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>All Agents</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
             placeholder="Search agents..."

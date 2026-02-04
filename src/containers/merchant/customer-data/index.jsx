@@ -122,9 +122,7 @@ export default function MerchantCustomerDataContainer() {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Registered Customers</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
 
         <CardContent>
           <TableToolbar

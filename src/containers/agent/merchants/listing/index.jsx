@@ -51,7 +51,7 @@ export default function AgentMerchantsListingContainer({
           m.city && m.country
             ? `${m.city}, ${m.country}`
             : m.city || m.country || "-",
-        status: m.user?.is_active ?? m.is_active ? "active" : "inactive",
+        status: (m.user?.is_active ?? m.is_active) ? "active" : "inactive",
         subscription: m.merchant_type || m.subscription || "-",
         joinDate: m.created_at
           ? new Date(m.created_at).toLocaleDateString()
@@ -93,9 +93,7 @@ export default function AgentMerchantsListingContainer({
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle> {tMerchants("allmerchants")}</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
             placeholder={tMerchants("searchmerchants")}
@@ -124,4 +122,3 @@ export default function AgentMerchantsListingContainer({
     </div>
   );
 }
-

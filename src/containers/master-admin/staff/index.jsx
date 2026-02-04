@@ -3,11 +3,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-    CardDescription,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
 import { Plus, Users, RefreshCw, ShieldAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -17,261 +17,267 @@ import TableToolbar from "@/components/common/table-toolbar";
 import { DataTable } from "@/components/common/data-table";
 import { getStaffColumns } from "./staff-columns";
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 export default function StaffManagement() {
-    const router = useRouter();
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [total, setTotal] = useState(0);
-    const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(10);
-    const [search, setSearch] = useState("");
-    const debouncedSearch = useDebounce(search, 500);
+  const router = useRouter();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
-    // Deletion state
-    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-    const [staffToDelete, setStaffToDelete] = useState(null);
-    const [deleting, setDeleting] = useState(false);
+  // Deletion state
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [staffToDelete, setStaffToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
-    const fetchStaff = useCallback(async () => {
-        setLoading(true);
-        try {
-            // Fetch from all 3 endpoints concurrently
-            const [financeRes, adRes, supportRes] = await Promise.all([
-                axiosInstance.get("/finance-viewers", { params: { page: page + 1, pageSize, search: debouncedSearch } }),
-                axiosInstance.get("/ad-approvers", { params: { page: page + 1, pageSize, search: debouncedSearch } }),
-                axiosInstance.get("/support-staff", { params: { page: page + 1, pageSize, search: debouncedSearch } })
-            ]);
+  const fetchStaff = useCallback(async () => {
+    setLoading(true);
+    try {
+      // Fetch from all 3 endpoints concurrently
+      const [financeRes, adRes, supportRes] = await Promise.all([
+        axiosInstance.get("/finance-viewers", {
+          params: { page: page + 1, pageSize, search: debouncedSearch },
+        }),
+        axiosInstance.get("/ad-approvers", {
+          params: { page: page + 1, pageSize, search: debouncedSearch },
+        }),
+        axiosInstance.get("/support-staff", {
+          params: { page: page + 1, pageSize, search: debouncedSearch },
+        }),
+      ]);
 
-            const mapData = (res, role) => {
-                const list = res.data?.data || res.data || [];
-                return Array.isArray(list) ? list.map(item => ({
-                    ...item.user, // Flatten user details
-                    id: item.id, // Keep the entity ID (FinanceViewer, etc.)
-                    userId: item.user?.id,
-                    role: role,
-                    // Preserve entity specific fields if needed
-                    ...item
-                })) : [];
-            };
+      const mapData = (res, role) => {
+        const list = res.data?.data || res.data || [];
+        return Array.isArray(list)
+          ? list.map((item) => ({
+              ...item.user, // Flatten user details
+              id: item.id, // Keep the entity ID (FinanceViewer, etc.)
+              userId: item.user?.id,
+              role: role,
+              // Preserve entity specific fields if needed
+              ...item,
+            }))
+          : [];
+      };
 
-            const financeStaff = mapData(financeRes, "finance_viewer");
-            const adStaff = mapData(adRes, "ad_approver");
-            const supportStaff = mapData(supportRes, "support_staff");
+      const financeStaff = mapData(financeRes, "finance_viewer");
+      const adStaff = mapData(adRes, "ad_approver");
+      const supportStaff = mapData(supportRes, "support_staff");
 
-            const combinedData = [...financeStaff, ...adStaff, ...supportStaff];
+      const combinedData = [...financeStaff, ...adStaff, ...supportStaff];
 
-            // Client-side pagination/sorting might be weird with combined server-side pagination.
-            // For now, we combine the current pages. Ideally, the backend should provide a unified endpoint, 
-            // but the user requested this frontend integration.
-            setData(combinedData);
+      // Client-side pagination/sorting might be weird with combined server-side pagination.
+      // For now, we combine the current pages. Ideally, the backend should provide a unified endpoint,
+      // but the user requested this frontend integration.
+      setData(combinedData);
 
-            // Total is sum of all (approximate, since we are fetching page 1 of each)
-            // This is imperfect for unified pagination but fits the request constraint.
-            const totalCount = (financeRes.data?.meta?.total || 0) +
-                (adRes.data?.meta?.total || 0) +
-                (supportRes.data?.meta?.total || 0);
-            setTotal(totalCount);
+      // Total is sum of all (approximate, since we are fetching page 1 of each)
+      // This is imperfect for unified pagination but fits the request constraint.
+      const totalCount =
+        (financeRes.data?.meta?.total || 0) +
+        (adRes.data?.meta?.total || 0) +
+        (supportRes.data?.meta?.total || 0);
+      setTotal(totalCount);
+    } catch (error) {
+      console.error("Failed to fetch staff:", error);
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [page, pageSize, debouncedSearch]);
 
-        } catch (error) {
-            console.error("Failed to fetch staff:", error);
-            setData([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [page, pageSize, debouncedSearch]);
+  const handleDelete = async () => {
+    if (!staffToDelete) return;
+    setDeleting(true);
+    try {
+      let endpoint = "";
+      switch (staffToDelete.role) {
+        case "finance_viewer":
+          endpoint = "/finance-viewers";
+          break;
+        case "ad_approver":
+          endpoint = "/ad-approvers";
+          break;
+        case "support_staff":
+          endpoint = "/support-staff";
+          break;
+        default:
+          throw new Error("Unknown role");
+      }
 
-    const handleDelete = async () => {
-        if (!staffToDelete) return;
-        setDeleting(true);
-        try {
-            let endpoint = "";
-            switch (staffToDelete.role) {
-                case "finance_viewer":
-                    endpoint = "/finance-viewers";
-                    break;
-                case "ad_approver":
-                    endpoint = "/ad-approvers";
-                    break;
-                case "support_staff":
-                    endpoint = "/support-staff";
-                    break;
-                default:
-                    throw new Error("Unknown role");
-            }
+      await axiosInstance.delete(`${endpoint}/${staffToDelete.id}`);
+      toast.success("Staff member deleted successfully.");
+      fetchStaff();
+    } catch (error) {
+      console.error("Failed to delete staff:", error);
+      toast.error(
+        error?.response?.data?.message || "Failed to delete staff member.",
+      );
+    } finally {
+      setDeleting(false);
+      setDeleteConfirmOpen(false);
+      setStaffToDelete(null);
+    }
+  };
 
-            await axiosInstance.delete(`${endpoint}/${staffToDelete.id}`);
-            toast.success("Staff member deleted successfully.");
-            fetchStaff();
-        } catch (error) {
-            console.error("Failed to delete staff:", error);
-            toast.error(
-                error?.response?.data?.message || "Failed to delete staff member.",
-            );
-        } finally {
-            setDeleting(false);
-            setDeleteConfirmOpen(false);
-            setStaffToDelete(null);
-        }
-    };
+  useEffect(() => {
+    fetchStaff();
+  }, [fetchStaff]);
 
-    useEffect(() => {
-        fetchStaff();
-    }, [fetchStaff]);
+  const columns = getStaffColumns((staff) => {
+    setStaffToDelete(staff);
+    setDeleteConfirmOpen(true);
+  });
 
-    const columns = getStaffColumns((staff) => {
-        setStaffToDelete(staff);
-        setDeleteConfirmOpen(true);
-    });
-
-    return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <div>
-                    <h1 className="text-3xl font-bold">Staff Management</h1>
-                    <p className="text-muted-foreground">
-                        Manage platform administrative roles and permissions.
-                    </p>
-                </div>
-            </div>
-
-            <Card>
-                <CardHeader>
-                    <CardTitle>Staff Members</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <TableToolbar
-                        placeholder="Search staff members..."
-                        onSearchChange={setSearch}
-                        rightSlot={
-                            <div className="flex items-center gap-2">
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    onClick={() => fetchStaff()}
-                                    title="Refresh"
-                                >
-                                    <RefreshCw
-                                        className={cn("h-4 w-4", loading && "animate-spin")}
-                                    />
-                                </Button>
-                                <Button
-                                    onClick={() => router.push("/master-admin/staff/create")}
-                                >
-                                    <Plus className="mr-2 h-4 w-4" />
-                                    Add Staff
-                                </Button>
-                            </div>
-                        }
-                    />
-
-                    {data.length === 0 && !loading ? (
-                        <div className="flex flex-col items-center justify-center py-20 text-center border rounded-lg bg-muted/10">
-                            <ShieldAlert className="w-10 h-10 text-muted-foreground mb-4" />
-                            <h3 className="text-lg font-semibold">No staff found</h3>
-                            <p className="text-sm text-muted-foreground mt-1">
-                                Try adjusting your search or add a new staff member.
-                            </p>
-                            <Button
-                                variant="outline"
-                                className="mt-6"
-                                onClick={() => setSearch("")}
-                            >
-                                Clear Search
-                            </Button>
-                        </div>
-                    ) : (
-                        <DataTable
-                            columns={columns}
-                            data={data}
-                            isLoading={loading}
-                            total={total}
-                            page={page}
-                            pageSize={pageSize}
-                            setPage={setPage}
-                            setPageSize={setPageSize}
-                        />
-                    )}
-                </CardContent>
-            </Card>
-
-            {/* Role Legend */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                {[
-                    {
-                        role: "Support Staff",
-                        desc: "Tickets & Replies",
-                        color: "border-blue-100 bg-blue-50/50",
-                    },
-                    {
-                        role: "Ad Approver",
-                        desc: "Review ads",
-                        color: "border-purple-100 bg-purple-50/50",
-                    },
-                    {
-                        role: "Finance Viewer",
-                        desc: "Ledgers & Statements",
-                        color: "border-amber-100 bg-amber-50/50",
-                    },
-                    {
-                        role: "Super Admin",
-                        desc: "Full Access",
-                        color: "border-red-100 bg-red-50/50",
-                    },
-                ].map((item, i) => (
-                    <div
-                        key={i}
-                        className={cn(
-                            "p-4 rounded-lg border flex flex-col gap-1",
-                            item.color,
-                        )}
-                    >
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                            Role
-                        </span>
-                        <span className="font-semibold text-sm">{item.role}</span>
-                        <span className="text-xs text-muted-foreground">{item.desc}</span>
-                    </div>
-                ))}
-            </div>
-
-            {/* Deletion Dialog */}
-            <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Delete Staff Member?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            Are you sure you want to remove{" "}
-                            <strong>{staffToDelete?.name}</strong>? This action cannot be
-                            undone.
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleDelete();
-                            }}
-                            disabled={deleting}
-                            className="bg-red-600 hover:bg-red-700"
-                        >
-                            {deleting ? "Deleting..." : "Delete Permanently"}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Staff Management</h1>
+          <p className="text-muted-foreground">
+            Manage platform administrative roles and permissions.
+          </p>
         </div>
-    );
+      </div>
+
+      <Card>
+        <CardHeader></CardHeader>
+        <CardContent>
+          <TableToolbar
+            placeholder="Search staff members..."
+            onSearchChange={setSearch}
+            rightSlot={
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => fetchStaff()}
+                  title="Refresh"
+                >
+                  <RefreshCw
+                    className={cn("h-4 w-4", loading && "animate-spin")}
+                  />
+                </Button>
+                <Button
+                  onClick={() => router.push("/master-admin/staff/create")}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Staff
+                </Button>
+              </div>
+            }
+          />
+
+          {data.length === 0 && !loading ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center border rounded-lg bg-muted/10">
+              <ShieldAlert className="w-10 h-10 text-muted-foreground mb-4" />
+              <h3 className="text-lg font-semibold">No staff found</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Try adjusting your search or add a new staff member.
+              </p>
+              <Button
+                variant="outline"
+                className="mt-6"
+                onClick={() => setSearch("")}
+              >
+                Clear Search
+              </Button>
+            </div>
+          ) : (
+            <DataTable
+              columns={columns}
+              data={data}
+              isLoading={loading}
+              total={total}
+              page={page}
+              pageSize={pageSize}
+              setPage={setPage}
+              setPageSize={setPageSize}
+            />
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Role Legend */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {[
+          {
+            role: "Support Staff",
+            desc: "Tickets & Replies",
+            color: "border-blue-100 bg-blue-50/50",
+          },
+          {
+            role: "Ad Approver",
+            desc: "Review ads",
+            color: "border-purple-100 bg-purple-50/50",
+          },
+          {
+            role: "Finance Viewer",
+            desc: "Ledgers & Statements",
+            color: "border-amber-100 bg-amber-50/50",
+          },
+          {
+            role: "Super Admin",
+            desc: "Full Access",
+            color: "border-red-100 bg-red-50/50",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className={cn(
+              "p-4 rounded-lg border flex flex-col gap-1",
+              item.color,
+            )}
+          >
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+              Role
+            </span>
+            <span className="font-semibold text-sm">{item.role}</span>
+            <span className="text-xs text-muted-foreground">{item.desc}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Deletion Dialog */}
+      <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Staff Member?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to remove{" "}
+              <strong>{staffToDelete?.name}</strong>? This action cannot be
+              undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault();
+                handleDelete();
+              }}
+              disabled={deleting}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              {deleting ? "Deleting..." : "Delete Permanently"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  );
 }

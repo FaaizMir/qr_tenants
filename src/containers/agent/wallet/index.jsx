@@ -14,7 +14,13 @@ import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, Plus, Sparkles, CheckCircle2, Wallet } from "lucide-react";
+import {
+  AlertTriangle,
+  Plus,
+  Sparkles,
+  CheckCircle2,
+  Wallet,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -116,7 +122,7 @@ export default function AgentWalletContainer() {
               page: txPage + 1, // backend is 1-based
               limit: txSize,
             },
-          }
+          },
         );
 
         setTransactions(res.data.data || []);
@@ -139,7 +145,9 @@ export default function AgentWalletContainer() {
       try {
         setLoadingPackages(true);
         // Try to fetch from the specific subscription fee endpoint
-        const res = await axiosInstance.get("/super-admin-settings/admin-subscription-fee");
+        const res = await axiosInstance.get(
+          "/super-admin-settings/admin-subscription-fee",
+        );
 
         // Handle both { data: { ... } } and directly { ... }
         const rawData = res.data?.data || res.data;
@@ -147,14 +155,17 @@ export default function AgentWalletContainer() {
         // Final fallback to /wallets/super-admin if data seems missing
         let finalData = rawData;
         if (!finalData?.fee) {
-          const backupRes = await axiosInstance.get("/super-admin-settings/admin-subscription-fee");
+          const backupRes = await axiosInstance.get(
+            "/super-admin-settings/admin-subscription-fee",
+          );
           finalData = backupRes.data?.data || backupRes.data;
         }
 
         const dynamicPackage = {
           id: "subscription-renewal",
           name: "Annual Subscription Renewal",
-          description: "Renew your agent account for another year of full access.",
+          description:
+            "Renew your agent account for another year of full access.",
           credits: "Unlimited",
           price: Number(finalData?.fee || 0),
           currency: finalData?.currency || "USD",
@@ -184,7 +195,7 @@ export default function AgentWalletContainer() {
   const filteredTx = useMemo(() => {
     if (!debouncedTxSearch) return transactions;
     return transactions.filter((t) =>
-      t.description?.toLowerCase().includes(debouncedTxSearch.toLowerCase())
+      t.description?.toLowerCase().includes(debouncedTxSearch.toLowerCase()),
     );
   }, [transactions, debouncedTxSearch]);
 
@@ -193,9 +204,7 @@ export default function AgentWalletContainer() {
    * ---------------------------------- */
   const transactionTable = (
     <Card>
-      <CardHeader>
-        <CardTitle>{tAgentWallet("transactionhistory")}</CardTitle>
-      </CardHeader>
+      <CardHeader></CardHeader>
       <CardContent>
         <TableToolbar
           placeholder={tAgentWallet("searchtransactions")}
@@ -224,7 +233,7 @@ export default function AgentWalletContainer() {
       <CardContent>
         <TableToolbar
           placeholder={tAgentWallet("searchdeductions")}
-          onSearchChange={() => { }}
+          onSearchChange={() => {}}
         />
         <DataTable data={autoDeductions} columns={DeductionColumns} />
       </CardContent>
@@ -245,10 +254,13 @@ export default function AgentWalletContainer() {
       {isExpired && (
         <Alert variant="destructive" className="border-2">
           <AlertTriangle className="h-5 w-5" />
-          <AlertTitle className="font-bold text-lg">Subscription Required
+          <AlertTitle className="font-bold text-lg">
+            Subscription Required
           </AlertTitle>
           <AlertDescription className="text-base">
-            Choose a subscription plan to get full access to all features and start using the platform without limits.          </AlertDescription>
+            Choose a subscription plan to get full access to all features and
+            start using the platform without limits.{" "}
+          </AlertDescription>
         </Alert>
       )}
 
@@ -285,7 +297,9 @@ export default function AgentWalletContainer() {
                   <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
                     Order Overview
                   </DialogTitle>
-                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">Checkout details</p>
+                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">
+                    Checkout details
+                  </p>
                 </DialogHeader>
 
                 {selectedPackage && (
@@ -301,23 +315,30 @@ export default function AgentWalletContainer() {
                         </p>
                       </div>
                       <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-2">
-                        {selectedPackage.description || "Premium credit package for your business growth."}
+                        {selectedPackage.description ||
+                          "Premium credit package for your business growth."}
                       </p>
                     </div>
 
                     <div className="space-y-3 px-1">
                       <div className="flex justify-between items-center text-sm font-medium">
                         <span className="text-slate-500">Credits Included</span>
-                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">{selectedPackage.credits}</span>
+                        <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">
+                          {selectedPackage.credits}
+                        </span>
                       </div>
 
                       <div className="pt-3 border-t border-slate-200">
                         <div className="flex justify-between items-end">
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Amount</span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">
+                              Total Amount
+                            </span>
                             <span className="text-2xl font-black text-primary tracking-tighter">
                               {selectedPackage.currency || "USD"}{" "}
-                              {Number(selectedPackage.price || 0).toLocaleString()}
+                              {Number(
+                                selectedPackage.price || 0,
+                              ).toLocaleString()}
                             </span>
                           </div>
                         </div>
@@ -332,8 +353,12 @@ export default function AgentWalletContainer() {
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">Secure Payment</p>
-                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">SSL Encrypted Stripe Gateway</p>
+                  <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">
+                    Secure Payment
+                  </p>
+                  <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">
+                    SSL Encrypted Stripe Gateway
+                  </p>
                 </div>
               </div>
             </div>
@@ -345,7 +370,9 @@ export default function AgentWalletContainer() {
                   {packages.map((pkg) => (
                     <Button
                       key={pkg.id}
-                      variant={selectedPackage?.id === pkg.id ? "default" : "outline"}
+                      variant={
+                        selectedPackage?.id === pkg.id ? "default" : "outline"
+                      }
                       className="shrink-0"
                       onClick={() => setSelectedPackage(pkg)}
                     >
@@ -358,14 +385,20 @@ export default function AgentWalletContainer() {
               {selectedPackage ? (
                 <div className="h-full flex flex-col justify-center">
                   <div className="mb-6">
-                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">Card Details</h3>
-                    <p className="text-sm text-slate-500 font-medium">Please enter your payment information below.</p>
+                    <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">
+                      Card Details
+                    </h3>
+                    <p className="text-sm text-slate-500 font-medium">
+                      Please enter your payment information below.
+                    </p>
                   </div>
 
                   <div className="space-y-6">
                     <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-5 border border-slate-100 shadow-inner transition-all hover:bg-slate-50/80">
                       <div className="flex justify-between items-center mb-4">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Amount Payable</span>
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                          Amount Payable
+                        </span>
                         <span className="text-lg font-black text-slate-900">
                           {selectedPackage.currency || "USD"}{" "}
                           {Number(selectedPackage.price || 0).toLocaleString()}
@@ -387,7 +420,9 @@ export default function AgentWalletContainer() {
                   <div className="p-6 bg-slate-50 rounded-full mb-6 border border-slate-100 shadow-inner">
                     <Wallet className="h-10 w-10 text-slate-300 animate-pulse" />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">No selection found</h4>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">
+                    No selection found
+                  </h4>
                   <p className="text-sm text-slate-500 font-medium leading-relaxed">
                     Please select a credit package to proceed.
                   </p>
