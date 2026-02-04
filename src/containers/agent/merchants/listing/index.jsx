@@ -62,7 +62,6 @@ export default function AgentMerchantsListingContainer({
       setData(mapped);
       setTotal(resp?.meta?.total ?? mapped.length);
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error("Failed to load merchants", e);
       setData([]);
       setTotal(0);
