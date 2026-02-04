@@ -22,6 +22,13 @@ import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 
+const DEFAULT_URLS = {
+  google: "https://g.page/r/",
+  facebook: "https://facebook.com/",
+  instagram: "https://instagram.com/",
+  red: "https://www.xiaohongshu.com/",
+};
+
 export default function PlatformSettings() {
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
@@ -31,10 +38,10 @@ export default function PlatformSettings() {
     enableFacebook: false,
     enableInstagram: false,
     enableRed: false,
-    googleReviewLink: "",
-    facebookReviewLink: "",
-    instagramReviewLink: "",
-    redReviewLink: "",
+    googleReviewLink: DEFAULT_URLS.google,
+    facebookReviewLink: DEFAULT_URLS.facebook,
+    instagramReviewLink: DEFAULT_URLS.instagram,
+    redReviewLink: DEFAULT_URLS.red,
   });
   const [saving, setSaving] = useState(false);
 
@@ -51,10 +58,10 @@ export default function PlatformSettings() {
           enableFacebook: data.enable_facebook_reviews ?? false,
           enableInstagram: data.enable_instagram_reviews ?? false,
           enableRed: data.enable_xiaohongshu_reviews ?? false,
-          googleReviewLink: data.google_review_url || "",
-          facebookReviewLink: data.facebook_page_url || "",
-          instagramReviewLink: data.instagram_url || "",
-          redReviewLink: data.xiaohongshu_url || "",
+          googleReviewLink: data.google_review_url || DEFAULT_URLS.google,
+          facebookReviewLink: data.facebook_page_url || DEFAULT_URLS.facebook,
+          instagramReviewLink: data.instagram_url || DEFAULT_URLS.instagram,
+          redReviewLink: data.xiaohongshu_url || DEFAULT_URLS.red,
         });
       }
     } catch (error) {

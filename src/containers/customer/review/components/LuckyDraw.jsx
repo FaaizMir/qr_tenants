@@ -190,8 +190,8 @@ export const LuckyDraw = ({
   }, [customerId]);
 
   return (
-    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_32px_128px_-12px_rgba(0,0,0,0.15)] border border-slate-200/50">
+    <div className=" w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-0 overflow-hidden border border-slate-200/50">
         {/* Left Panel - Brand Experience */}
         <div className="hidden lg:flex flex-col items-center text-center justify-center bg-linear-to-br from-primary via-primary/95 to-primary/80 p-12 relative overflow-hidden h-full">
           {/* Animated Background Orbs */}
@@ -251,7 +251,7 @@ export const LuckyDraw = ({
         </div>
 
         {/* Right Panel - Wheel */}
-        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-8 md:p-12 border border-amber-200/50 shadow-2xl min-h-[700px] flex flex-col">
+        <div className="bg-white/80 backdrop-blur-2xl  p-8 md:p-12 border border-amber-200/50 shadow-2xl min-h-[700px] flex flex-col">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 text-center relative">
             <Button
@@ -277,7 +277,7 @@ export const LuckyDraw = ({
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 flex flex-col items-center justify-center space-y-8">
+          <div className="flex-1 flex flex-col items-center justify-center space-y-8 ">
             {/* Wheel Container */}
             <div className="relative group">
               {/* Outer Glow */}
@@ -401,109 +401,100 @@ export const LuckyDraw = ({
                 </div>
               </div>
             ) : (
-              <div className="text-center space-y-8 w-full max-w-md px-4 animate-in fade-in slide-in-from-bottom duration-1000">
+              <div className="text-center space-y-4 w-full max-w-md px-4">
                 {/* Success Icon */}
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-20 h-20 rounded-3xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
-                    <CheckCircle2 className="w-10 h-10 text-white" />
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 rounded-2xl bg-emerald-500 flex items-center justify-center shadow-lg">
+                    <CheckCircle2 className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 uppercase tracking-tight">
+                  <h3 className="text-2xl font-bold text-zinc-900 uppercase">
                     You Won!
                   </h3>
+                </div>
 
-                  {/* Prize Card */}
-                  <div className="w-full py-8 px-6 rounded-3xl bg-linear-to-br from-zinc-900 to-zinc-800 text-white shadow-2xl relative overflow-hidden border border-zinc-800/50">
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+                {/* Prize Card */}
+                <div className="w-full py-5 px-5 rounded-2xl bg-zinc-900 text-white shadow-lg">
+                  <div className="space-y-2.5">
+                    <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 inline-flex items-center gap-1.5">
+                      <Star className="w-3 h-3 text-emerald-400" />
+                      <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-400">
+                        Official Prize
+                      </span>
+                    </div>
 
-                    <div className="relative z-10 space-y-3">
-                      <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 inline-flex items-center gap-2 mx-auto">
-                        <Star className="w-3 h-3 text-emerald-400" />
-                        <span className="text-xs font-bold uppercase tracking-wide text-emerald-400">
-                          Official Prize
-                        </span>
-                      </div>
+                    <p className="text-2xl font-bold uppercase">
+                      {result?.prize?.prize_name || "Special Reward"}
+                    </p>
 
-                      <p className="text-3xl md:text-4xl font-bold tracking-tight uppercase">
-                        {result?.prize?.prize_name || "Special Reward"}
+                    {result?.prize?.prize_description && (
+                      <p className="text-xs font-semibold text-zinc-400 uppercase">
+                        {result.prize.prize_description}
                       </p>
+                    )}
 
-                      {result?.prize?.prize_description && (
-                        <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wide">
-                          {result.prize.prize_description}
-                        </p>
-                      )}
-
-                      <div className="pt-4">
-                        <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                          <span className="text-xs font-bold text-zinc-500 uppercase tracking-wide block mb-1">
-                            Code
-                          </span>
-                          <span className="text-lg font-bold text-white tracking-widest uppercase">
-                            {result?.coupon?.coupon_code ||
-                              result?.coupon_code ||
-                              "Processing"}
-                          </span>
-                        </div>
+                    <div className="pt-2">
+                      <div className="px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700">
+                        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide block mb-0.5">
+                          Code
+                        </span>
+                        <span className="text-base font-bold text-white tracking-widest uppercase">
+                          {result?.coupon?.coupon_code ||
+                            result?.coupon_code ||
+                            "Processing"}
+                        </span>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* WhatsApp Status */}
+                {/* WhatsApp Status */}
+                {result?.whatsapp_status === "failed" ||
+                result?.whatsapp_error ||
+                result?.error === "whatsapp_credit_low" ||
+                result?.whatsapp_notification?.credits_insufficient ? (
+                  <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200">
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                    <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
+                      {result?.whatsapp_notification?.credits_insufficient
+                        ? `WhatsApp Error (${result?.whatsapp_notification?.available_credits ?? 0} credits left)`
+                        : "WhatsApp Delivery Failed"}
+                    </span>
+                  </div>
+                ) : null}
+
+                {/* Instructions */}
+                <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
                   {result?.whatsapp_status === "failed" ||
                   result?.whatsapp_error ||
                   result?.error === "whatsapp_credit_low" ||
                   result?.whatsapp_notification?.credits_insufficient ? (
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border-2 border-red-500/20">
-                      <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                      <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
-                        {result?.whatsapp_notification?.credits_insufficient
-                          ? `WhatsApp Error (${result?.whatsapp_notification?.available_credits ?? 0} credits left)`
-                          : "WhatsApp Delivery Failed"}
-                      </span>
-                    </div>
+                    <p className="text-xs font-semibold text-red-600 leading-relaxed">
+                      We couldn&apos;t send to WhatsApp. Please screenshot this
+                      screen to claim your reward.
+                    </p>
                   ) : (
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20">
-                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                      <span className="text-xs font-bold text-emerald-600 uppercase tracking-wide">
-                        Sent to WhatsApp
+                    <p className="text-xs font-medium text-zinc-600 leading-relaxed">
+                      Reward sent to{" "}
+                      <span className="text-zinc-900 font-bold">
+                        {formValues?.phone || "your number"}
                       </span>
-                    </div>
+                    </p>
                   )}
-
-                  {/* Instructions */}
-                  <div className="bg-white/80 backdrop-blur-md rounded-2xl p-5 border-2 border-slate-200/50">
-                    {result?.whatsapp_status === "failed" ||
-                    result?.whatsapp_error ||
-                    result?.error === "whatsapp_credit_low" ||
-                    result?.whatsapp_notification?.credits_insufficient ? (
-                      <p className="text-xs font-bold text-red-600 italic leading-relaxed">
-                        We couldn&apos;t send to WhatsApp. Please screenshot
-                        this screen to claim your reward.
-                      </p>
-                    ) : (
-                      <p className="text-xs font-medium text-zinc-600 leading-relaxed">
-                        Reward sent to{" "}
-                        <span className="text-zinc-900 font-bold">
-                          {formValues?.phone || "your number"}
-                        </span>
-                      </p>
-                    )}
-                  </div>
                 </div>
 
                 {/* Next Button */}
-                <Button
-                  onClick={nextStep}
-                  className="w-full h-16 rounded-2xl text-lg font-bold uppercase tracking-wide bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  <span className="relative flex items-center justify-center gap-3">
-                    Claim My Reward
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                  </span>
-                </Button>
+                <div className="pt-2">
+                  <Button
+                    onClick={nextStep}
+                    className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wide bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg transition-all active:scale-95"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      Claim My Reward
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </Button>
+                </div>
               </div>
             )}
           </div>
