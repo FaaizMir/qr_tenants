@@ -11,10 +11,11 @@ import {
   Star,
   CheckCircle2,
   ArrowLeft,
+  Loader2,
+  Phone,
 } from "lucide-react";
 import { useWatch, Controller } from "react-hook-form";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import { PhoneInput } from "@/components/form-fields/phone-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -57,9 +58,7 @@ export const IdentityForm = ({
 
       try {
         const res = await axiosInstance.get(
-          `/feedbacks/check-customer-by-phone?phone=${encodeURIComponent(
-            phoneToQuery,
-          )}`,
+          `/customers/check-by-phone?phone=${encodeURIComponent(phoneToQuery)}`,
         );
 
         const data = res.data?.data;
@@ -222,138 +221,112 @@ export const IdentityForm = ({
             onSubmit={handleSubmit(onSubmit, onError)}
             className="space-y-6 w-full"
           >
-            <div className="space-y-5">
-              <div className="relative group">
-                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-2 block">
-                  Phone Number <span className="text-red-500">*</span>
-                </Label>
-                <div className="relative">
-                  <Controller
-                    name="phone"
-                    control={control}
-                    rules={{
-                      required: "Phone number is required",
-                      minLength: { value: 8, message: "Too short" },
-                      maxLength: { value: 15, message: "Too long" },
-                    }}
-                    render={({ field: { onChange, value } }) => (
-                      <PhoneInput
-                        international
-                        defaultCountry="US"
-                        value={value}
-                        onChange={(val) => {
-                          onChange(val);
-                        }}
-                        placeholder="+1 (555) 000-0000"
-                        className="flex items-center gap-2 pl-4 px-4 h-12 rounded-xl bg-white border border-slate-200 focus-within:border-primary transition-all text-sm [&_.PhoneInputCountry]:mr-2 [&_.PhoneInputCountryIcon]:w-6 [&_.PhoneInputCountryIcon]:h-auto"
-                        numberInputProps={{
-                          className:
-                            "bg-transparent border-none outline-none w-full h-full text-zinc-900 placeholder:text-zinc-400",
-                        }}
-                      />
-                    )}
-                  />
-                </div>
-                {formErrors.phone && (
-                  <p className="text-xs text-red-500 font-semibold mt-2 flex items-center gap-1">
-                    <span className="w-1 h-1 rounded-full bg-red-500"></span>
-                    {formErrors.phone.message}
-                  </p>
-                )}
-              </div>
+            <div className="space-y-4 w-full text-left">
+              <PhoneInput
+                name="phone"
+                control={control}
+                label={
+                  <span className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    Phone Number
+                  </span>
+                }
+                required
+                defaultCountry="US"
+                disabled={isAutoFilled}
+                placeholder="Enter phone number"
+                className="mb-0"
+                error={formErrors.phone?.message}
+                validation={{
+                  required: "Phone number is required",
+                }}
+              />
 
-              <div className="relative group">
-                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-2 block">
+              <div className="space-y-2 pt-4">
+                <Label htmlFor="name" className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
                   Full Name <span className="text-red-500">*</span>
                 </Label>
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
-                  <Input
-                    {...register("name", { required: "Name is required" })}
-                    disabled={isAutoFilled}
-                    placeholder="John Doe"
-                    className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
-                  />
-                </div>
+                <Input
+                  id="name"
+                  {...register("name", { required: "Name is required" })}
+                  disabled={isAutoFilled}
+                  placeholder="Enter your full name"
+                  className={formErrors.name ? "border-red-500" : ""}
+                />
                 {formErrors.name && (
-                  <p className="text-xs text-red-500 font-semibold mt-2 flex items-center gap-1">
-                    <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                  <p className="text-xs text-red-500">
                     {formErrors.name.message}
                   </p>
                 )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="relative group">
-                  <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-2 block">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="flex items-center gap-2">
+                    <Mail className="h-4 w-4" />
                     Email <span className="text-red-500">*</span>
                   </Label>
-                  <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
-                    <Input
-                      type="email"
-                      {...register("email", {
-                        required: "Email is required",
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: "Invalid email address",
-                        },
-                      })}
-                      disabled={isAutoFilled}
-                      placeholder="john@example.com"
-                      className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
-                    />
-                  </div>
+                  <Input
+                    id="email"
+                    type="email"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
+                    disabled={isAutoFilled}
+                    placeholder="john@example.com"
+                    className={formErrors.email ? "border-red-500" : ""}
+                  />
                   {formErrors.email && (
-                    <p className="text-xs text-red-500 font-semibold mt-2 flex items-center gap-1">
-                      <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                    <p className="text-xs text-red-500">
                       {formErrors.email.message}
                     </p>
                   )}
                 </div>
 
-                <div className="relative group">
-                  <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-2 block">
+                <div className="space-y-2">
+                  <Label htmlFor="dob" className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
                     Birthday <span className="text-red-500">*</span>
                   </Label>
-                  <div className="relative">
-                    <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
-                    <Input
-                      type="date"
-                      {...register("dob", {
-                        required: "Date of Birth is required",
-                      })}
-                      disabled={isAutoFilled}
-                      className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
-                    />
-                  </div>
+                  <Input
+                    id="dob"
+                    type="date"
+                    {...register("dob", {
+                      required: "Date of Birth is required",
+                    })}
+                    disabled={isAutoFilled}
+                    className={formErrors.dob ? "border-red-500" : ""}
+                    max={new Date().toISOString().split("T")[0]}
+                  />
                   {formErrors.dob && (
-                    <p className="text-xs text-red-500 font-semibold mt-2 flex items-center gap-1">
-                      <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                    <p className="text-xs text-red-500">
                       {formErrors.dob.message}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="relative group">
-                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-2 block">
+              <div className="space-y-2">
+                <Label htmlFor="address" className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
                   Address <span className="text-red-500">*</span>
                 </Label>
-                <div className="relative">
-                  <MapPin className="absolute left-4 top-4 w-5 h-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
-                  <Input
-                    {...register("address", {
-                      required: "Address is required",
-                    })}
-                    disabled={isAutoFilled}
-                    placeholder="Street, City, Zip Code"
-                    className="pl-12 pr-4 h-12 rounded-xl bg-white border border-slate-200 focus:border-primary transition-all text-sm disabled:opacity-60"
-                  />
-                </div>
+                <Input
+                  id="address"
+                  {...register("address", {
+                    required: "Address is required",
+                  })}
+                  disabled={isAutoFilled}
+                  placeholder="Street, City, Zip Code"
+                  className={formErrors.address ? "border-red-500" : ""}
+                />
                 {formErrors.address && (
-                  <p className="text-xs text-red-500 font-semibold mt-2 flex items-center gap-1">
-                    <span className="w-1 h-1 rounded-full bg-red-500"></span>
+                  <p className="text-xs text-red-500 whitespace-nowrap overflow-hidden text-ellipsis">
                     {formErrors.address.message}
                   </p>
                 )}
@@ -375,7 +348,7 @@ export const IdentityForm = ({
                           setValue("gender", g, { shouldValidate: true });
                         }}
                         className={cn(
-                          "flex-1 relative h-12 rounded-xl font-semibold capitalize text-sm transition-all",
+                          "flex-1 relative h-9 rounded-md font-semibold capitalize text-sm transition-all",
                           isActive
                             ? "bg-primary text-white shadow-md"
                             : "bg-white border border-slate-200 text-zinc-600 hover:border-primary",
@@ -395,7 +368,7 @@ export const IdentityForm = ({
               <div className="pt-6">
                 <Button
                   type="submit"
-                  className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-lg transition-all active:scale-95"
+                  className="w-full h-10 rounded-md text-sm font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-lg transition-all active:scale-95"
                 >
                   <span className="flex items-center justify-center gap-2">
                     Continue to Review

@@ -236,7 +236,7 @@ export function AppSidebar({
     },
     {
       title: "Statements",
-      url: "/master-admin/statements",
+      url: "/master-admin/super-admin-statements",
       icon: FileText,
       allowedStaff: ["super_admin", "finance_viewer"],
     },

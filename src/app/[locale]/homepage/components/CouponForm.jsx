@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  AlertCircle,
   CheckCircle2,
   Gift,
   Loader2,
@@ -21,15 +20,14 @@ import {
   Phone,
   Calendar,
 } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { PhoneInput } from "@/components/form-fields/phone-input";
 import axiosInstance from "@/lib/axios";
-import { useTranslations } from "next-intl";
+import { toast } from "@/lib/toast";
+import { cn } from "@/lib/utils";
 
-export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
-  const t = useTranslations("Homepage");
+export function CouponForm({ open, onOpenChange, merchant, batch }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -39,36 +37,44 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
   const [checkingPhone, setCheckingPhone] = useState(false);
   const debounceTimerRef = useRef(null);
 
-  // Debounced phone number check
+  const convertDateToInputFormat = (dateStr) => {
+    if (!dateStr) return "";
+    const parts = dateStr.split(/[-/.]/);
+    if (parts.length !== 3) return "";
+
+    const [first, second, third] = parts;
+    const year = third.length === 4 ? third : first;
+    const month = third.length === 4 ? second : second;
+    const day = third.length === 4 ? first : third;
+
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  };
+
   const checkCustomerByPhone = useCallback(async (phone) => {
     if (!phone || phone.length < 8) return;
 
     setCheckingPhone(true);
     try {
       const res = await axiosInstance.get(
-        `/feedbacks/check-customer-by-phone?phone=${encodeURIComponent(phone)}`,
+        `/customers/check-by-phone?phone=${encodeURIComponent(phone)}`,
       );
 
-      if (res.data?.success && res.data?.data) {
-        const customerData = res.data.data;
-        // Auto-fill name and birthday if available
+      const customerData = res.data?.data;
+      if (customerData?.name) {
         setFormData((prev) => ({
           ...prev,
-          name: customerData.name || prev.name,
-          birthday: customerData.birthday
-            ? new Date(customerData.birthday).toISOString().split("T")[0]
-            : prev.birthday,
+          phone,
+          name: customerData.name || "",
+          birthday: convertDateToInputFormat(customerData.date_of_birth) || "",
         }));
       }
     } catch (err) {
-      // Silently fail - customer might not exist, which is okay
-      console.log("Customer not found or error checking phone:", err);
+      console.log("Customer lookup failed:", err);
     } finally {
       setCheckingPhone(false);
     }
   }, []);
 
-  // Debounce phone input
   useEffect(() => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
@@ -77,37 +83,25 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
     if (formData.phone) {
       debounceTimerRef.current = setTimeout(() => {
         checkCustomerByPhone(formData.phone);
-      }, 500); // 500ms debounce
+      }, 500);
     }
 
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-    };
+    return () => clearTimeout(debounceTimerRef.current);
   }, [formData.phone, checkCustomerByPhone]);
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
+    if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^\+?[\d\s\-()]+$/.test(formData.phone)) {
       newErrors.phone = "Invalid phone number format";
     }
-
     if (!formData.birthday) {
       newErrors.birthday = "Birthday is required";
-    } else {
-      const birthDate = new Date(formData.birthday);
-      const today = new Date();
-      if (birthDate > today) {
-        newErrors.birthday = "Birthday cannot be in the future";
-      }
+    } else if (new Date(formData.birthday) > new Date()) {
+      newErrors.birthday = "Birthday cannot be in the future";
     }
 
     setErrors(newErrors);
@@ -116,39 +110,30 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setLoading(true);
-    setError(null);
-
     try {
-      // Issue coupon directly
-      const response = await axiosInstance.post("/feedbacks", {
+      const [year, month, day] = formData.birthday.split("-");
+      await axiosInstance.post("/customers/claim-coupon", {
         merchant_id: merchant.id,
-        batch_id: batch.id,
-        customer_name: formData.name,
-        customer_phone: formData.phone,
-        customer_birthday: formData.birthday,
+        coupon_batch_id: batch.id,
+        name: formData.name,
+        phone: formData.phone,
+        date_of_birth: `${day}-${month}-${year}`,
       });
 
-      if (response.data.success) {
-        setSuccess(true);
-        // Reset form after 2 seconds and close dialog
-        setTimeout(() => {
-          setFormData({ name: "", phone: "", birthday: "" });
-          setSuccess(false);
-          onOpenChange(false);
-        }, 2000);
-      }
+      toast.success("Coupon sent successfully! Check your WhatsApp.");
+      setSuccess(true);
     } catch (err) {
-      console.error("Failed to issue coupon:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to issue coupon. Please try again.",
-      );
+      const errorData = err.response?.data;
+      const errorMessage = errorData?.errors
+        ? Object.values(errorData.errors).flat().join(", ")
+        : errorData?.message ||
+          errorData?.error ||
+          "Failed to issue coupon. Please try again.";
+
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -156,7 +141,6 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error for this field when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
@@ -166,7 +150,6 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
     if (!loading) {
       setFormData({ name: "", phone: "", birthday: "" });
       setErrors({});
-      setError(null);
       setSuccess(false);
       onOpenChange(false);
     }
@@ -175,77 +158,68 @@ export function SimpleCouponForm({ open, onOpenChange, merchant, batch }) {
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-2xl">
-            <Gift className="h-6 w-6 text-primary" />
-            Get Your Coupon
-          </DialogTitle>
-          <DialogDescription asChild>
-            <div>
-              {batch?.batch_name && (
-                <div className="mt-2">
-                  <span className="font-semibold text-slate-900">
-                    {batch.batch_name}
-                  </span>
-                  {batch?.discount_percentage && (
-                    <span className="ml-2 text-primary font-bold">
-                      {batch.discount_percentage}% OFF
+        {!success && (
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-2xl">
+              <Gift className="h-6 w-6 text-primary" />
+              Get Your Coupon
+            </DialogTitle>
+            <DialogDescription asChild>
+              <div>
+                {batch?.batch_name && (
+                  <div className="mt-2">
+                    <span className="font-semibold text-slate-900">
+                      {batch.batch_name}
                     </span>
-                  )}
+                    {batch?.discount_percentage && (
+                      <span className="ml-2 text-primary font-bold">
+                        {batch.discount_percentage}% OFF
+                      </span>
+                    )}
+                  </div>
+                )}
+                <div className="mt-1 text-sm text-slate-600">
+                  From {merchant?.name || "Merchant"}
                 </div>
-              )}
-              <div className="mt-1 text-sm text-slate-600">
-                From {merchant?.name || "Merchant"}
               </div>
-            </div>
-          </DialogDescription>
-        </DialogHeader>
+            </DialogDescription>
+          </DialogHeader>
+        )}
 
         {success ? (
-          <div className="py-8 text-center">
+          <div className="py-12 text-center">
             <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-slate-900 mb-2">
               Coupon Issued Successfully!
             </h3>
-            <p className="text-slate-600">
+            <p className="text-slate-600 mb-6">
               Your coupon has been sent to your phone via WhatsApp.
             </p>
+            <Button onClick={handleClose} className="w-full">
+              Close
+            </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                Phone Number <span className="text-red-500">*</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+1234567890"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  className={errors.phone ? "border-red-500" : ""}
-                  disabled={loading}
-                />
-                {checkingPhone && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                  </div>
-                )}
-              </div>
-              {errors.phone && (
-                <p className="text-sm text-red-500">{errors.phone}</p>
-              )}
-            </div>
+            <PhoneInput
+              label={
+                <span className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  Phone Number
+                </span>
+              }
+              required
+              defaultCountry="US"
+              value={formData.phone || undefined}
+              onChange={(value) => handleChange("phone", value || "")}
+              disabled={loading}
+              isLoading={checkingPhone}
+              placeholder="Enter phone number"
+              className="mb-0"
+              error={errors.phone}
+            />
 
-            <div className="space-y-2">
+            <div className="space-y-2 pt-4">
               <Label htmlFor="name" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 Full Name <span className="text-red-500">*</span>

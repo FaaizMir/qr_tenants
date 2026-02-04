@@ -116,15 +116,21 @@ export function DataTable({
 
   return (
     <div className="w-full" style={style}>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between gap-4 py-2">
+        <div className="flex-1" />
         {columnsBtn && safeColumns.length > 0 && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
+              <Button
+                variant="outline"
+                size="sm"
+                className="ml-auto h-8 gap-2 border-border/50 bg-white dark:bg-zinc-900 hover:bg-muted transition-all shadow-xs"
+              >
+                <span className="text-xs font-semibold">Columns</span>
+                <ChevronDown className="h-3 w-3 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-48">
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
@@ -132,13 +138,13 @@ export function DataTable({
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
-                      className="capitalize"
+                      className="capitalize text-xs"
                       checked={column.getIsVisible()}
                       onCheckedChange={(value) =>
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {column.id}
+                      {column.id.replace(/_/g, " ")}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
@@ -165,9 +171,9 @@ export function DataTable({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     );
                   })}

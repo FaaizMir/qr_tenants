@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -188,7 +189,10 @@ export function MarketplaceFilters({
 
         <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-hide">
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors">
+            <SelectTrigger
+              className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              suppressHydrationWarning
+            >
               <SelectValue placeholder="Industry" />
             </SelectTrigger>
             <SelectContent className="rounded-xl border-slate-100 shadow-xl">
@@ -202,7 +206,10 @@ export function MarketplaceFilters({
           </Select>
 
           <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-            <SelectTrigger className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors">
+            <SelectTrigger
+              className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              suppressHydrationWarning
+            >
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary" />
                 <SelectValue placeholder="City" />
@@ -219,7 +226,10 @@ export function MarketplaceFilters({
           </Select>
 
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full md:w-44 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors">
+            <SelectTrigger
+              className="w-full md:w-44 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              suppressHydrationWarning
+            >
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-primary" />
                 <SelectValue placeholder="Sort" />

@@ -158,7 +158,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         price_per_credit: Number(data.price) / Number(data.credits),
         currency: data.currency,
         merchant_type: data.merchantType,
-        admin_id: session?.user?.adminId,
         is_active: data.isActive === "true",
         sort_order: Number(data.sortOrder),
       };
@@ -188,7 +187,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-        `Failed to ${isEdit ? "update" : "create"} package`,
+          `Failed to ${isEdit ? "update" : "create"} package`,
         { closeButton: true, duration: false },
       );
     } finally {

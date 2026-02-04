@@ -1,9 +1,9 @@
 "use client";
 
-import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/routing';
-import { getLocaleDisplayName, routing } from '@/i18n/routing';
-import { useSearchParams } from 'next/navigation';
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { getLocaleDisplayName, routing } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,16 +21,20 @@ export function LanguageSwitcher() {
 
   const handleLocaleChange = (newLocale) => {
     const params = searchParams.toString();
-    router.replace(
-      params ? `${pathname}?${params}` : pathname,
-      { locale: newLocale }
-    );
+    router.replace(params ? `${pathname}?${params}` : pathname, {
+      locale: newLocale,
+    });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
+      <DropdownMenuTrigger asChild suppressHydrationWarning>
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2"
+          suppressHydrationWarning
+        >
           <Globe className="h-4 w-4" />
           <span>{getLocaleDisplayName(locale)}</span>
         </Button>
@@ -40,7 +44,7 @@ export function LanguageSwitcher() {
           <DropdownMenuItem
             key={loc}
             onClick={() => handleLocaleChange(loc)}
-            className={locale === loc ? 'bg-accent' : ''}
+            className={locale === loc ? "bg-accent" : ""}
           >
             {getLocaleDisplayName(loc)}
           </DropdownMenuItem>
@@ -49,4 +53,3 @@ export function LanguageSwitcher() {
     </DropdownMenu>
   );
 }
-

@@ -74,7 +74,11 @@ export const authOptions = {
             subscriptionType: data?.merchant?.merchant_type || "annual",
             merchant_id: data?.merchant?.id || userObj?.merchant_id || null,
             merchant_active: isActive,
-            admin_id: data?.merchant?.admin_id || data?.user?.adminId || null,
+            admin_id:
+              data?.merchant?.admin_id ||
+              data?.user?.adminId ||
+              data?.user?.superAdminId ||
+              null,
             is_subscription_expired: data.user.is_subscription_expired,
             subscription_expires_at: data.user.subscription_expires_at,
           };
@@ -168,4 +172,3 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-
