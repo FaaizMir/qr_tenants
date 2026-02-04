@@ -45,44 +45,25 @@ export const LuckyDraw = ({
   const [hasSpun, setHasSpun] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState(null);
-  const [prizes, setPrizes] = useState([]);
-  const [isLoadingPrizes, setIsLoadingPrizes] = useState(true);
+
+  // Generic prize segments for wheel display
+  const prizes = [
+    { id: 1, prize_name: "Gift" },
+    { id: 2, prize_name: "Prize" },
+    { id: 3, prize_name: "Reward" },
+    { id: 4, prize_name: "Bonus" },
+    { id: 5, prize_name: "Special" },
+    { id: 6, prize_name: "Gift" },
+    { id: 7, prize_name: "Prize" },
+    { id: 8, prize_name: "Reward" },
+    { id: 9, prize_name: "Bonus" },
+    { id: 10, prize_name: "Special" },
+  ];
 
   const triggerError = (title, message, details = null) => {
     toast.error(`${title}: ${message}`);
     if (details) console.error("Error details:", details);
   };
-
-  useEffect(() => {
-    const fetchPrizes = async () => {
-      if (!merchantId) return;
-      try {
-        const apiBase = axiosInstance.defaults.baseURL || "";
-        const prizesUrl = apiBase.endsWith("/")
-          ? `${apiBase}lucky-draw/prizes/merchant/${merchantId}`
-          : `${apiBase}/lucky-draw/prizes/merchant/${merchantId}`;
-
-        const response = await axios.get(prizesUrl);
-        const prizeData = response.data?.data || response.data || [];
-        setPrizes(Array.isArray(prizeData) ? prizeData : []);
-      } catch (error) {
-        console.error("Failed to fetch prizes:", error);
-        toast.error("Couldn't load prize list. Using defaults.");
-        // Set fallback prizes
-        setPrizes([
-          { id: 1, prize_name: "Gift" },
-          { id: 2, prize_name: "Prize" },
-          { id: 3, prize_name: "Reward" },
-          { id: 4, prize_name: "Bonus" },
-          { id: 5, prize_name: "Special" },
-        ]);
-      } finally {
-        setIsLoadingPrizes(false);
-      }
-    };
-
-    fetchPrizes();
-  }, [merchantId]);
 
   const handleSpin = async () => {
     if (isSpinning || hasSpun) return;
@@ -428,22 +409,15 @@ export const LuckyDraw = ({
                     </p>
 
                     {result?.prize?.prize_description && (
-                      <p className="text-xs font-semibold text-zinc-400 uppercase">
+                      <p className="text-sm font-semibold text-zinc-300 leading-relaxed mt-2">
                         {result.prize.prize_description}
                       </p>
                     )}
 
-                    <div className="pt-2">
-                      <div className="px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700">
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide block mb-0.5">
-                          Code
-                        </span>
-                        <span className="text-base font-bold text-white tracking-widest uppercase">
-                          {result?.coupon?.coupon_code ||
-                            result?.coupon_code ||
-                            "Processing"}
-                        </span>
-                      </div>
+                    <div className="pt-3">
+                      <p className="text-xs text-zinc-400">
+                        Your reward details have been sent to your WhatsApp
+                      </p>
                     </div>
                   </div>
                 </div>

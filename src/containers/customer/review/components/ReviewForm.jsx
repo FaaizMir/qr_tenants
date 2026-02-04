@@ -28,13 +28,6 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 import { useSearchParams } from "next/navigation";
 
 const PLATFORMS = [
@@ -78,7 +71,7 @@ export const ReviewForm = ({
   const [presetReviews, setPresetReviews] = React.useState([]);
   const [loadingPresets, setLoadingPresets] = React.useState(true);
   const [selectedPresetId, setSelectedPresetId] = React.useState(null);
-  const [showPlatformModal, setShowPlatformModal] = React.useState(false);
+  const [selectedPlatform, setSelectedPlatform] = React.useState(null);
   const [recordedFeedbackId, setRecordedFeedbackId] = React.useState(null);
 
   const triggerError = (title, message, details = null) => {
@@ -186,8 +179,17 @@ export const ReviewForm = ({
       return;
     }
 
-    // Show modal to pick platform before system submission since backend requires it
-    setShowPlatformModal(true);
+    // Validate platform selection
+    if (!selectedPlatform) {
+      triggerError(
+        "Platform Required",
+        "Please select a review platform to continue.",
+      );
+      return;
+    }
+
+    // Submit with selected platform
+    handlePlatformSelection(selectedPlatform);
   };
 
   const handlePlatformSelection = async (platformId) => {
@@ -290,7 +292,6 @@ export const ReviewForm = ({
           }
         }
 
-        setShowPlatformModal(false);
         toast.success("Feedback submitted successfully!");
 
         const whatsappStatus =
@@ -339,9 +340,6 @@ export const ReviewForm = ({
       } else {
         errorMsg = responseData?.message || errorMsg;
       }
-
-      // Force close the platform modal to show error
-      setShowPlatformModal(false);
 
       // Show toast with the error
       toast.error(errorMsg);
@@ -532,11 +530,66 @@ export const ReviewForm = ({
                 placeholder="Share the details that made your visit special..."
                 control={control}
                 onChange={onTextChange}
-                className="w-full h-24 px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-primary focus:outline-none transition-all text-sm resize-none placeholder:text-zinc-400"
+                className=" pl-10
+  min-h-20
+  px-8
+  py-3
+  rounded-xl
+  bg-white
+  border
+  border-slate-200
+  text-sm
+  leading-relaxed
+  text-slate-800
+  placeholder:text-slate-400
+  resize-none
+  transition-all
+  duration-200
+  hover:border-slate-300
+  focus:border-primary
+  focus:ring-2
+  focus:ring-primary/15
+  focus:outline-none
+"
               />
             </div>
           </div>
+          {/* Platform Selection */}
+          <div className="space-y-3">
+            <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
+              Select Review Platform
+            </Label>
 
+            <div className="flex items-center gap-2.5 flex-wrap pb-4">
+              {availablePlatforms.length > 0 ? (
+                availablePlatforms.map((platform) => (
+                  <button
+                    key={platform.id}
+                    type="button"
+                    onClick={() => setSelectedPlatform(platform.id)}
+                    className={cn(
+                      "w-10 h-10 rounded-full flex items-center justify-center text-white text-base font-semibold transition-colors duration-200",
+                      selectedPlatform === platform.id
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "opacity-70 hover:opacity-100",
+                    )}
+                    style={{
+                      backgroundColor: platform.brandColor,
+                    }}
+                    title={platform.name}
+                  >
+                    {platform.icon}
+                  </button>
+                ))
+              ) : (
+                <div className="py-6 text-center bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 w-full">
+                  <p className="text-sm font-semibold text-zinc-500">
+                    No review platforms configured
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
           {/* Submit Button & Footer */}
           <div className="pt-6 mt-auto space-y-6 bg-white/50 backdrop-blur-sm z-10 border-t border-slate-200/50 -mx-8 px-8 md:-mx-12 md:px-12 lg:-mx-14 lg:px-14 -mb-8 pb-8 md:-mb-12 md:pb-12 lg:-mb-14 lg:pb-14">
             <Button
@@ -566,118 +619,6 @@ export const ReviewForm = ({
           </div>
         </div>
       </div>
-
-      {/* Platform Selection Modal - New Design */}
-      <Dialog open={showPlatformModal} onOpenChange={setShowPlatformModal}>
-        <DialogContent className="sm:max-w-md border-none shadow-2xl p-0 overflow-hidden rounded-3xl bg-white dark:bg-zinc-950">
-          {/* Header with Progress */}
-          <DialogHeader className="bg-linear-to-r from-primary to-primary/80 p-6 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="absolute -bottom-10 -left-5 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10">
-              <div className="mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center">
-                    <span className="text-sm font-bold">3</span>
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wide">
-                    Step 3 of 3
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <DialogTitle className="text-2xl font-bold">
-                  Share Your Review
-                </DialogTitle>
-                <DialogDescription className="text-white/90 text-sm">
-                  Choose a platform to post your feedback and unlock your reward
-                </DialogDescription>
-              </div>
-            </div>
-          </DialogHeader>
-
-          {/* Platform Options */}
-          <div className="p-6 space-y-3">
-            {availablePlatforms.length > 0 ? (
-              availablePlatforms.map((platform, index) => (
-                <button
-                  key={platform.id}
-                  onClick={() => handlePlatformSelection(platform.id)}
-                  className="w-full group relative flex items-center gap-4 p-4 rounded-2xl border-2 border-slate-200 dark:border-zinc-700 bg-white dark:from-zinc-900 dark:to-zinc-800 hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-                >
-                  {/* Icon Container */}
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300"
-                    style={{
-                      backgroundColor: platform.brandColor,
-                    }}
-                  >
-                    {platform.icon}
-                  </div>
-
-                  {/* Platform Info */}
-                  <div className="flex-1 text-left">
-                    <h3 className="font-bold text-zinc-900 dark:text-white text-base group-hover:text-primary transition-colors">
-                      {platform.name}
-                    </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                      Share and earn rewards
-                    </p>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="text-primary group-hover:translate-x-1 transition-transform">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </button>
-              ))
-            ) : (
-              <div className="py-12 text-center bg-slate-50 dark:bg-zinc-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-zinc-800">
-                <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
-                  No review platforms configured
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Footer Info */}
-          <div className="px-6 py-4 bg-slate-50 dark:bg-zinc-900/50 border-t border-slate-200 dark:border-zinc-800">
-            <div className="flex items-start gap-3">
-              <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                <svg
-                  className="w-3 h-3 text-emerald-600"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Your review is secure and encrypted. Your reward will be sent to
-                your WhatsApp immediately.
-              </p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

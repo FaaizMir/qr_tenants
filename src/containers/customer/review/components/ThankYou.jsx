@@ -87,17 +87,17 @@ export const ThankYou = ({
                     </h3>
                   </div>
 
-                  {/* Coupon Code */}
-                  <div className="bg-white/5 border-2 border-white/10 rounded-2xl p-5 backdrop-blur-md">
-                    <span className="text-xs font-bold text-zinc-500 uppercase tracking-wide block mb-2">
-                      Redemption Code
-                    </span>
-                    <span className="text-2xl font-bold text-white tracking-widest uppercase">
-                      {reward?.coupon?.coupon_code ||
-                        reward?.coupon_code ||
-                        "PROCESSING"}
-                    </span>
-                  </div>
+                  {/* Prize Details */}
+                  {reward?.prize?.prize_description && (
+                    <div className="bg-white/5 border-2 border-white/10 rounded-2xl p-5 backdrop-blur-md">
+                      <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide block mb-2">
+                        Prize Details
+                      </span>
+                      <p className="text-base text-white leading-relaxed">
+                        {reward.prize.prize_description}
+                      </p>
+                    </div>
+                  )}
 
                   {/* WhatsApp Status */}
                   {hasWhatsAppError ? (
