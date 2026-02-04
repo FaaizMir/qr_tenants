@@ -38,7 +38,7 @@ import {
   MerchantList,
   MerchantDetail,
 } from "./components/MerchantMarketplace";
-import { SimpleCouponForm } from "./components/SimpleCouponForm";
+import { CouponForm } from "./components/CouponForm";
 import { cn } from "@/lib/utils";
 
 export default function AgentLandingPage() {
@@ -368,8 +368,13 @@ export default function AgentLandingPage() {
             </Button>
             {/* Mobile Menu Trigger */}
             <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
+              <SheetTrigger asChild suppressHydrationWarning>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden"
+                  suppressHydrationWarning
+                >
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
@@ -669,7 +674,7 @@ export default function AgentLandingPage() {
       </footer>
 
       {/* Simple Coupon Form Dialog */}
-      <SimpleCouponForm
+      <CouponForm
         open={couponDialogOpen}
         onOpenChange={setCouponDialogOpen}
         merchant={selectedCouponData.merchant}

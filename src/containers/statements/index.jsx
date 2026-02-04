@@ -14,7 +14,9 @@ import {
   Globe,
   DollarSign,
   AlertCircle,
+  ArrowLeft,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -45,6 +47,7 @@ export default function StatementsContainer() {
   const { data: session } = useSession();
   const user = session?.user;
   const role = user?.role?.toLowerCase() || "agent";
+  const router = useRouter();
 
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -73,26 +76,37 @@ export default function StatementsContainer() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <Building2 className="h-5 w-5 text-primary" />
-            <p className="text-sm font-semibold text-muted-foreground">
-              {companyName}
+      {/* Header Section */}
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between bg-white dark:bg-zinc-900 p-6 rounded-xl border border-border shadow-sm">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.back()}
+            className="rounded-full h-10 w-10 hover:bg-muted"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Building2 className="h-4 w-4 text-primary" />
+              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+                {companyName}
+              </p>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
+              {role === "super_admin" ? "Master " : role === "merchant" ? "Merchant " : "Agent "}
+              Financial Statements
+            </h1>
+            <p className="text-sm text-muted-foreground max-w-2xl">
+              Monthly auto-generated PDF reports (Day 1 of each month).
+              {role === "merchant" && " Includes coupon stats, WhatsApp usage, and ad spend."}
+              {role === "agent" && " Includes earnings, fees, package income, costs, and wallet ledger."}
+              {role === "super_admin" && " Includes platform revenue, global metrics, and full ledger overview."}
             </p>
           </div>
-          <h1 className="text-3xl font-bold">
-            {role === "super_admin" ? "Master " : role === "merchant" ? "Merchant " : "Agent "}
-            Financial Statements
-          </h1>
-          <p className="text-muted-foreground">
-            Monthly auto-generated PDF reports (Day 1 of each month).
-            {role === "merchant" && " Includes coupon stats, WhatsApp usage, and ad spend."}
-            {role === "agent" && " Includes earnings, fees, package income, costs, and wallet ledger."}
-            {role === "super_admin" && " Includes platform revenue, global metrics, and full ledger overview."}
-          </p>
         </div>
-        <Button variant="outline" className="gap-2">
+        <Button variant="outline" className="gap-2 shrink-0 border-primary/20 hover:bg-primary/5 transition-colors">
           <Download className="h-4 w-4" /> Generate PDF
         </Button>
       </div>
@@ -273,8 +287,8 @@ export default function StatementsContainer() {
       </div>
 
       {/* Statements Table */}
-      <Card>
-        <CardHeader>
+      <Card className="border-border/50 shadow-xs">
+        <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-muted-foreground" />
@@ -282,7 +296,7 @@ export default function StatementsContainer() {
             </CardTitle>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           <TableToolbar
             placeholder="Search by month..."
             onSearchChange={setSearch}
