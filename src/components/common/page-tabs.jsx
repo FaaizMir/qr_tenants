@@ -1,32 +1,24 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export function PageTabs({ tabs, defaultTab, paramName = "tab" }) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Initialize tab from URL or use default
-  const getInitialTab = () => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const urlTab = params.get(paramName);
-      // Check if the URL tab exists in our tabs array
-      const tabExists = tabs.some((tab) => tab.value === urlTab);
-      if (urlTab && tabExists) {
-        return urlTab;
-      }
-    }
-    return defaultTab || tabs[0]?.value;
+  // Derive active tab from URL - no separate state needed
+  const getActiveTab = () => {
+    const urlTab = searchParams.get(paramName);
+    const tabExists = tabs.some((tab) => tab.value === urlTab);
+    return urlTab && tabExists ? urlTab : defaultTab || tabs[0]?.value;
   };
 
-  const [activeTab, setActiveTab] = useState(getInitialTab);
+  const activeTab = getActiveTab();
 
   const handleTabChange = (value) => {
-    setActiveTab(value);
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
     params.set(paramName, value);
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };

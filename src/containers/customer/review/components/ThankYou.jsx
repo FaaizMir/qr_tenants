@@ -18,7 +18,7 @@ export const ThankYou = ({
     reward?.whatsapp_notification?.credits_insufficient;
 
   return (
-    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
+    <div className=" w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
       <div className="w-full max-w-4xl">
         {/* Heart Animation Header */}
         <div className="text-center mb-8 animate-in slide-in-from-top duration-700">
@@ -87,17 +87,17 @@ export const ThankYou = ({
                     </h3>
                   </div>
 
-                  {/* Coupon Code */}
-                  <div className="bg-white/5 border-2 border-white/10 rounded-2xl p-5 backdrop-blur-md">
-                    <span className="text-xs font-bold text-zinc-500 uppercase tracking-wide block mb-2">
-                      Redemption Code
-                    </span>
-                    <span className="text-2xl font-bold text-white tracking-widest uppercase">
-                      {reward?.coupon?.coupon_code ||
-                        reward?.coupon_code ||
-                        "PROCESSING"}
-                    </span>
-                  </div>
+                  {/* Prize Details */}
+                  {reward?.prize?.prize_description && (
+                    <div className="bg-white/5 border-2 border-white/10 rounded-2xl p-5 backdrop-blur-md">
+                      <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide block mb-2">
+                        Prize Details
+                      </span>
+                      <p className="text-base text-white leading-relaxed">
+                        {reward.prize.prize_description}
+                      </p>
+                    </div>
+                  )}
 
                   {/* WhatsApp Status */}
                   {hasWhatsAppError ? (

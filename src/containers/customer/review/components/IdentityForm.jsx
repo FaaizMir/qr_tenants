@@ -150,10 +150,10 @@ export const IdentityForm = ({
   };
 
   return (
-    <div className="h-screen w-full flex items-center justify-center p-4 md:p-6 bg-linear-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
+    <div className=" w-full flex items-center justify-center p-4 md:p-6 bg-linear-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
       <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-0 items-center">
         {/* Left Panel - Branding */}
-        <div className="hidden lg:flex flex-col justify-center p-12 xl:p-16 bg-linear-to-br from-primary via-primary/95 to-primary/80 rounded-l-[2.5rem] h-full relative overflow-hidden">
+        <div className="hidden lg:flex flex-col justify-center p-12 xl:p-16 bg-linear-to-br from-primary via-primary/95 to-primary/80  h-full relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-white rounded-full blur-3xl"></div>
@@ -205,7 +205,7 @@ export const IdentityForm = ({
         </div>
 
         {/* Right Panel - Form */}
-        <div className="bg-white/80 backdrop-blur-2xl lg:rounded-r-[2.5rem] rounded-3xl lg:rounded-l-none p-8 md:p-12 border border-slate-200/50 shadow-2xl h-full flex flex-col justify-center overflow-y-auto">
+        <div className="bg-white/80 backdrop-blur-2xl  p-8 md:p-12 border border-slate-200/50 shadow-2xl h-full flex flex-col justify-center overflow-y-auto">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">

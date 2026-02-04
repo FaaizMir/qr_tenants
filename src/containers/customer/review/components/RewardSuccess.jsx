@@ -26,7 +26,7 @@ export const RewardSuccess = ({
     reward?.whatsapp_notification?.credits_insufficient;
 
   return (
-    <div className="h-screen w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
+    <div className=" w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
       <div className="w-full max-w-4xl">
         {/* Success Header */}
         <div className="text-center mb-8 animate-in slide-in-from-top duration-700">
@@ -93,18 +93,17 @@ export const RewardSuccess = ({
                 )}
               </div>
 
-              {/* Coupon Code */}
+              {/* Reward Status */}
               <div className="flex flex-col items-center gap-4">
                 <div className="w-full max-w-md bg-white/5 border-2 border-white/10 rounded-2xl p-6 backdrop-blur-md">
                   <div className="text-center space-y-2">
-                    <span className="text-xs font-bold text-zinc-500 uppercase tracking-wide block">
-                      Redemption Code
-                    </span>
-                    <span className="text-3xl md:text-4xl font-bold text-white tracking-widest uppercase block">
-                      {reward?.coupon?.coupon_code ||
-                        reward?.coupon_code ||
-                        "PROCESSING"}
-                    </span>
+                    <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-2" />
+                    <p className="text-base text-white font-semibold">
+                      Your reward is confirmed!
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Details have been sent to your WhatsApp
+                    </p>
                   </div>
                 </div>
 
