@@ -442,7 +442,7 @@ export default function AgentLandingPage() {
                   <div className="text-xs text-slate-900 uppercase font-bold tracking-wider">
                     Merchants
                   </div>
-                  <div className="font-black text-lg">
+                  <div className="font-bold text-lg">
                     {merchants.length > 0
                       ? `${merchants.length}+`
                       : "Loading..."}
@@ -455,7 +455,7 @@ export default function AgentLandingPage() {
                   <div className="text-xs text-slate-900 uppercase font-bold tracking-wider">
                     Verified
                   </div>
-                  <div className="font-black text-lg">100%</div>
+                  <div className="font-bold text-lg">100%</div>
                 </div>
               </div>
             </div>
@@ -464,7 +464,7 @@ export default function AgentLandingPage() {
 
         {/* --- Filter Bar --- */}
         <section
-          className="px-6 lg:px-10 max-w-[1600px] mx-auto mb-8 relative z-20"
+          className="px-6 lg:px-10 max-w-7xl mx-auto mb-8 relative z-20"
           id="marketplace"
         >
           <MarketplaceFilters
@@ -481,9 +481,8 @@ export default function AgentLandingPage() {
           />
         </section>
 
-        {/* --- Marketplace Content (3 Columns) --- */}
-        <section className="px-6 lg:px-10 max-w-[1700px] mx-auto pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <section className="px-6 lg:px-10 max-w-7xl mx-auto pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start justify-center">
             {/* Left Sidebar (Ads Only) */}
             {leftAd && (
               <div className="hidden xl:block lg:col-span-2 sticky top-28 space-y-8 pt-16">
@@ -503,8 +502,8 @@ export default function AgentLandingPage() {
             {/* Middle Column: Merchant Grid (Main Content) */}
             <div
               className={cn(
-                "col-span-1 lg:col-span-8 w-full min-w-0",
-                leftAd ? "xl:col-span-7" : "xl:col-span-9",
+                "col-span-1 lg:col-span-7 w-full min-w-0 transition-all duration-700",
+                leftAd ? "xl:col-span-6" : "xl:col-span-8",
               )}
             >
               <MerchantList
@@ -521,7 +520,10 @@ export default function AgentLandingPage() {
             </div>
 
             {/* Right Column: Merchant Detail + Right Sidebar Ad */}
-            <div className="col-span-1 lg:col-span-4 xl:col-span-3 lg:block min-w-0">
+            <div className={cn(
+              "col-span-1 lg:col-span-5 xl:col-span-4 lg:block min-w-0 transition-all duration-700",
+              leftAd && "lg:col-span-4"
+            )}>
               <div className="sticky top-24 space-y-8">
                 {/* Detail Panel */}
                 <MerchantDetail
