@@ -146,10 +146,51 @@ export function MerchantForm({
         `Error ${isEdit ? "updating" : "creating"} merchant:`,
         error,
       );
-      toast.error(
-        error?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} merchant`,
-      );
+
+      // Extract error details from response
+      const errorData = error?.response?.data;
+
+      // Handle validation errors (field-specific errors)
+      if (errorData?.errors && typeof errorData.errors === "object") {
+        const errorMessages = Object.entries(errorData.errors).map(
+          ([field, messages]) => {
+            const fieldName = field
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, (c) => c.toUpperCase());
+            const errorList = Array.isArray(messages) ? messages : [messages];
+            return `${fieldName}: ${errorList.join(", ")}`;
+          },
+        );
+
+        // Display first error with details
+        toast.error(errorMessages[0], {
+          description: errorMessages.slice(1, 3).join("\n") || undefined,
+        });
+
+        // Log all errors for debugging
+        console.error("Validation errors:", errorMessages);
+      }
+      // Handle error array
+      else if (Array.isArray(errorData?.errors)) {
+        const firstError = errorData.errors[0];
+        toast.error(firstError?.message || firstError || "Validation failed", {
+          description:
+            errorData.errors
+              .slice(1, 2)
+              .map((e) => e?.message || e)
+              .join("\n") || undefined,
+        });
+      }
+      // Handle single error message
+      else if (errorData?.message || errorData?.error) {
+        toast.error(errorData.message || errorData.error);
+      }
+      // Fallback error
+      else {
+        toast.error(`Failed to ${isEdit ? "update" : "create"} merchant`, {
+          description: "Please check your input and try again.",
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -388,7 +429,7 @@ export function MerchantForm({
             <div className="space-y-0.5">
               <Label className="text-base">Account Status</Label>
               <CardDescription>
-                Enable or disable this merchant's access to the platform.
+                Enable or disable this merchant&apos;s access to the platform.
               </CardDescription>
             </div>
             <div className="flex items-center gap-3">
