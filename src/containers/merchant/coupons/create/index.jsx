@@ -83,7 +83,14 @@ export default function MerchantCreateCouponContainer() {
         header: templateSelection?.content?.header || "",
         title: templateSelection?.content?.title || "",
         description: templateSelection?.content?.description || "",
+        brand_image: templateSelection?.content?.brand_image || "",
       };
+
+      if (!payload.brand_image) {
+        toast.error("Please upload a brand image in the template editor.");
+        setLoading(false);
+        return;
+      }
 
       console.log("Payload:", payload);
 

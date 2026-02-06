@@ -12,9 +12,10 @@ const defaultContent = {
   header: "",
   title: "",
   description: "",
+  brand_image: "",
 };
 
-export function TemplateSelector({ isAnnual, onChange, cardRef }) {
+export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(null);
@@ -153,6 +154,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef }) {
           onOpenChange={setEditorOpen}
           value={content}
           onChange={setContent}
+          batchId={batchId}
         />
       )}
 

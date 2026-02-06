@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Download, Copy, Tag, Calendar, Users } from "lucide-react";
+import { ArrowLeft, Download, Copy, Tag, Calendar, Users, Edit } from "lucide-react";
+import { TemplateEditorModal } from "@/components/templates/TemplateEditorModal";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +42,26 @@ export default function MerchantCouponDetailContainer() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const debouncedSearch = useDebounce(search, 500);
+
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [content, setContent] = useState({
+    header: "",
+    title: "",
+    description: "",
+    brand_image: "",
+  });
+
+  useEffect(() => {
+    if (batch) {
+      setContent({
+        header: batch.header || "",
+        title: batch.title || "",
+        description: batch.description || "",
+        brand_image: batch.brand_image || "",
+      });
+    }
+  }, [batch]);
+
 
   const handleExportPdf = async () => {
     if (!id) {
@@ -171,9 +193,26 @@ export default function MerchantCouponDetailContainer() {
             <Badge variant="outline" className="capitalize">
               {batch.batch_type}
             </Badge>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setEditorOpen(true)}
+              className="flex items-center gap-2"
+            >
+              <Edit className="h-4 w-4" />
+              Edit Content
+            </Button>
           </div>
         )}
       </div>
+
+      <TemplateEditorModal
+        open={editorOpen}
+        onOpenChange={setEditorOpen}
+        value={content}
+        onChange={setContent}
+        batchId={id}
+      />
 
       {/* Batch Stats Cards */}
       {batch && (
@@ -201,8 +240,8 @@ export default function MerchantCouponDetailContainer() {
               <p className="text-xs text-muted-foreground">
                 {batch.total_quantity > 0
                   ? Math.round(
-                      (batch.issued_quantity / batch.total_quantity) * 100
-                    )
+                    (batch.issued_quantity / batch.total_quantity) * 100
+                  )
                   : 0}
                 % Utilized
               </p>
