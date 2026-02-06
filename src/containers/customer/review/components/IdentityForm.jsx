@@ -5,14 +5,10 @@ import {
   User,
   ArrowRight,
   Calendar,
-  Mail,
-  MapPin,
   Sparkles,
-  Star,
   CheckCircle2,
-  ArrowLeft,
-  Loader2,
   Phone,
+  MapPin,
 } from "lucide-react";
 import { useWatch, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/form-fields/phone-input";
@@ -41,13 +37,8 @@ export const IdentityForm = ({
   errors: formErrors,
   merchantConfig,
 }) => {
-  const currentGender = useWatch({
-    control,
-    name: "gender",
-  });
-
   const phone = useWatch({ control, name: "phone" });
-  const debouncedPhone = useDebounce(phone, 500);
+  const debouncedPhone = useDebounce(phone, 800);
   const [isAutoFilled, setIsAutoFilled] = React.useState(false);
   const lastFoundPhone = React.useRef("");
 
@@ -71,9 +62,7 @@ export const IdentityForm = ({
 
         // Auto-fill fields
         if (data.name) setValue("name", data.name);
-        if (data.email) setValue("email", data.email);
-        if (data.address) setValue("address", data.address);
-        if (data.gender) setValue("gender", data.gender.toLowerCase());
+
         if (data.date_of_birth) {
           // Handle various separators: / or - or .
           const dateStr = data.date_of_birth.split(/[T ]/)[0];
@@ -121,7 +110,7 @@ export const IdentityForm = ({
   );
 
   React.useEffect(() => {
-    if (debouncedPhone && debouncedPhone.length >= 10) {
+    if (debouncedPhone && debouncedPhone.length >= 8) {
       lookupCustomerByPhone(debouncedPhone);
     }
   }, [debouncedPhone, lookupCustomerByPhone]);
@@ -131,13 +120,6 @@ export const IdentityForm = ({
   };
 
   const onSubmit = (data) => {
-    if (!data.gender) {
-      triggerError(
-        "Selection Required",
-        "Please select your gender to continue.",
-      );
-      return;
-    }
     nextStep();
   };
 
@@ -221,7 +203,7 @@ export const IdentityForm = ({
             onSubmit={handleSubmit(onSubmit, onError)}
             className="space-y-6 w-full"
           >
-            <div className="space-y-4 w-full text-left">
+            <div className="space-y-6 w-full text-left">
               <PhoneInput
                 name="phone"
                 control={control}
@@ -242,7 +224,7 @@ export const IdentityForm = ({
                 }}
               />
 
-              <div className="space-y-2 pt-4">
+              <div className="space-y-2 ">
                 <Label htmlFor="name" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
                   Full Name <span className="text-red-500">*</span>
@@ -261,108 +243,26 @@ export const IdentityForm = ({
                 )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
-                    Email <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
-                      },
-                    })}
-                    disabled={isAutoFilled}
-                    placeholder="john@example.com"
-                    className={formErrors.email ? "border-red-500" : ""}
-                  />
-                  {formErrors.email && (
-                    <p className="text-xs text-red-500">
-                      {formErrors.email.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="dob" className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    Birthday <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="dob"
-                    type="date"
-                    {...register("dob", {
-                      required: "Date of Birth is required",
-                    })}
-                    disabled={isAutoFilled}
-                    className={formErrors.dob ? "border-red-500" : ""}
-                    max={new Date().toISOString().split("T")[0]}
-                  />
-                  {formErrors.dob && (
-                    <p className="text-xs text-red-500">
-                      {formErrors.dob.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
               <div className="space-y-2">
-                <Label htmlFor="address" className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  Address <span className="text-red-500">*</span>
+                <Label htmlFor="dob" className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  Birthday <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="address"
-                  {...register("address", {
-                    required: "Address is required",
+                  id="dob"
+                  type="date"
+                  {...register("dob", {
+                    required: "Date of Birth is required",
                   })}
                   disabled={isAutoFilled}
-                  placeholder="Street, City, Zip Code"
-                  className={formErrors.address ? "border-red-500" : ""}
+                  className={formErrors.dob ? "border-red-500" : ""}
+                  max={new Date().toISOString().split("T")[0]}
                 />
-                {formErrors.address && (
-                  <p className="text-xs text-red-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                    {formErrors.address.message}
+                {formErrors.dob && (
+                  <p className="text-xs text-red-500">
+                    {formErrors.dob.message}
                   </p>
                 )}
-              </div>
-
-              <div className="space-y-4">
-                <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide mb-3 block">
-                  Gender <span className="text-red-500">*</span>
-                </Label>
-                <div className="flex gap-3">
-                  {["male", "female", "other"].map((g) => {
-                    const isActive = currentGender === g;
-                    return (
-                      <button
-                        key={g}
-                        type="button"
-                        onClick={() => {
-                          if (isAutoFilled) return;
-                          setValue("gender", g, { shouldValidate: true });
-                        }}
-                        className={cn(
-                          "flex-1 relative h-9 rounded-md font-semibold capitalize text-sm transition-all",
-                          isActive
-                            ? "bg-primary text-white shadow-md"
-                            : "bg-white border border-slate-200 text-zinc-600 hover:border-primary",
-                          isAutoFilled && "cursor-not-allowed opacity-60",
-                        )}
-                      >
-                        {isActive && (
-                          <CheckCircle2 className="absolute top-2 right-2 w-4 h-4" />
-                        )}
-                        {g}
-                      </button>
-                    );
-                  })}
-                </div>
               </div>
 
               <div className="pt-6">
