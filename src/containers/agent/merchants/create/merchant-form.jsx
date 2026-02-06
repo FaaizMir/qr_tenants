@@ -147,7 +147,7 @@ export function MerchantForm({
         error,
       );
 
-      // Extract error details from response
+     
       const errorData = error?.response?.data;
 
       // Handle validation errors (field-specific errors)
