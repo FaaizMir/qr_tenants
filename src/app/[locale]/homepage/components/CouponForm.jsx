@@ -83,7 +83,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
     if (formData.phone) {
       debounceTimerRef.current = setTimeout(() => {
         checkCustomerByPhone(formData.phone);
-      }, 500);
+      }, 800);
     }
 
     return () => clearTimeout(debounceTimerRef.current);
@@ -130,8 +130,8 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
       const errorMessage = errorData?.errors
         ? Object.values(errorData.errors).flat().join(", ")
         : errorData?.message ||
-          errorData?.error ||
-          "Failed to issue coupon. Please try again.";
+        errorData?.error ||
+        "Failed to issue coupon. Please try again.";
 
       toast.error(errorMessage);
     } finally {
@@ -200,7 +200,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <PhoneInput
               label={
                 <span className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
               error={errors.phone}
             />
 
-            <div className="space-y-2 pt-4">
+            <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 Full Name <span className="text-red-500">*</span>

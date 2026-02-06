@@ -175,27 +175,43 @@ export function MarketplaceFilters({
   return (
     <div className="sticky top-20 z-40 mb-8">
       <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-4xl mx-auto transition-all">
+        {/* Search */}
         <div className="flex-1 relative w-full group">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400 group-focus-within:bg-primary/10 group-focus-within:text-primary transition-colors">
             <Search className="h-4 w-4" />
           </div>
+
           <Input
             placeholder="Search merchants, categories..."
-            className="pl-12 h-12 rounded-full border-0 bg-slate-50 focus-visible:ring-2 focus-visible:ring-primary/20 text-base font-medium placeholder:text-slate-400 transition-all hover:bg-slate-100/50"
+            className="pl-12 h-12 rounded-full border bg-slate-50 text-base font-medium placeholder:text-slate-400 hover:bg-slate-100/50 focus:outline-none focus-visible:ring-0 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
-        <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scrollbar-hide">
+        {/* Filters */}
+        <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          {/* Industry */}
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
             <SelectTrigger
-              className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              className="
+            w-full md:w-40 h-11
+            rounded-full
+            bg-slate-50
+            px-4
+            text-sm font-medium text-slate-700
+            hover:bg-slate-100
+            focus:outline-none
+            focus:ring-0
+            focus-visible:ring-0
+            transition-colors
+          "
               suppressHydrationWarning
             >
               <SelectValue placeholder="Industry" />
             </SelectTrigger>
-            <SelectContent className="rounded-xl border-slate-100 shadow-xl">
+
+            <SelectContent className="rounded-xl shadow-md border-slate-200">
               <SelectItem value="all">All Industries</SelectItem>
               {categories.map((cat) => (
                 <SelectItem key={cat} value={cat}>
@@ -205,17 +221,30 @@ export function MarketplaceFilters({
             </SelectContent>
           </Select>
 
+          {/* City */}
           <Select value={selectedRegion} onValueChange={setSelectedRegion}>
             <SelectTrigger
-              className="w-full md:w-40 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              className="
+            w-full md:w-40 h-11
+            rounded-full
+            bg-slate-50
+            px-4
+            text-sm font-medium text-slate-700
+            hover:bg-slate-100
+            focus:outline-none
+            focus:ring-0
+            focus-visible:ring-0
+            transition-colors
+          "
               suppressHydrationWarning
             >
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-primary" />
+              <div className="flex items-center gap-2 truncate">
+                <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
                 <SelectValue placeholder="City" />
               </div>
             </SelectTrigger>
-            <SelectContent className="rounded-xl border-slate-100 shadow-xl">
+
+            <SelectContent className="rounded-xl shadow-md border-slate-200">
               <SelectItem value="all">Everywhere</SelectItem>
               {cities.map((city) => (
                 <SelectItem key={city} value={city}>
@@ -225,17 +254,30 @@ export function MarketplaceFilters({
             </SelectContent>
           </Select>
 
+          {/* Sort */}
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger
-              className="w-full md:w-44 h-12 rounded-full bg-slate-50 border-0 focus:ring-2 focus:ring-primary/20 text-slate-700 font-bold hover:bg-slate-100 transition-colors"
+              className="
+            w-full md:w-44 h-11
+            rounded-full
+            bg-slate-50
+            px-4
+            text-sm font-medium text-slate-700
+            hover:bg-slate-100
+            focus:outline-none
+            focus:ring-0
+            focus-visible:ring-0
+            transition-colors
+          "
               suppressHydrationWarning
             >
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
+              <div className="flex items-center gap-2 truncate">
+                <TrendingUp className="w-4 h-4 text-slate-500 shrink-0" />
                 <SelectValue placeholder="Sort" />
               </div>
             </SelectTrigger>
-            <SelectContent className="rounded-xl border-slate-100 shadow-xl">
+
+            <SelectContent className="rounded-xl shadow-md border-slate-200">
               <SelectItem value="newest">Newest First</SelectItem>
               <SelectItem value="popularity">Most Popular</SelectItem>
               <SelectItem value="expiring">Expiring Soon</SelectItem>
