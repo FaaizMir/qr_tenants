@@ -125,18 +125,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
             <Edit2 className="h-4 w-4" />
             <span>Edit</span>
           </DropdownMenuItem>
-          {canCancel && (
-            <>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => setCancelDialogOpen(true)}
-                className="flex items-center gap-2 cursor-pointer text-orange-600 focus:text-orange-600 focus:bg-orange-50"
-              >
-                <CalendarClock className="h-4 w-4" />
-                <span>Cancel</span>
-              </DropdownMenuItem>
-            </>
-          )}
+
           {canDelete && (
             <>
               <DropdownMenuSeparator />

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import PhoneInputLib, {
   getCountryCallingCode,
   isValidPhoneNumber,
@@ -241,11 +242,13 @@ function Flag({ country }) {
   if (!country) return null;
 
   return (
-    <img
+    <Image
       src={`https://flagcdn.com/w20/${country.toLowerCase()}.png`}
-      srcSet={`https://flagcdn.com/w40/${country.toLowerCase()}.png 2x`}
       alt={country}
+      width={24}
+      height={16}
       className="h-4 w-6 rounded-sm object-cover"
+      unoptimized
     />
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Users, Ticket, Loader2, Save } from "lucide-react";
+import { Users, Ticket, Loader2, Save, CalendarClock } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -158,15 +159,18 @@ export default function CampaignFormDialog({
               <Label className="text-sm font-semibold">
                 Launch Date & Time <span className="text-red-500">*</span>
               </Label>
-              <Input
-                type="datetime-local"
-                value={formData.date}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, date: e.target.value }))
-                }
-                className="h-10 text-sm"
-                required
-              />
+              <div className="relative group">
+                <Input
+                  type="datetime-local"
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, date: e.target.value }))
+                  }
+                  className="h-10 text-sm pl-10"
+                  required
+                />
+                <CalendarClock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              </div>
             </div>
 
             <div className="space-y-2">

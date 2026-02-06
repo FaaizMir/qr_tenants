@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardHeader,
@@ -28,11 +29,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverClose,
+} from "@/components/ui/popover";
 import BatchSelector from "./BatchSelector";
 import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
 
 export default function ScheduledCampaignSettings() {
   const { data: session } = useSession();
@@ -227,15 +235,43 @@ export default function ScheduledCampaignSettings() {
                 <Label className="text-xs font-semibold text-gray-700 ml-1">
                   Launch Date
                 </Label>
-                <div className="relative">
-                  <Input
-                    type="datetime-local"
-                    value={state.date}
-                    onChange={(e) =>
-                      setState((p) => ({ ...p, date: e.target.value }))
-                    }
-                    className="h-9 bg-gray-50/50 border-gray-200 focus:bg-white focus:border-orange-500/50 text-[11px] px-2 font-medium"
-                  />
+                <div className="relative group cursor-pointer">
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <div className="relative group cursor-pointer">
+                        <Input
+                          readOnly
+                          className="h-9 bg-gray-50/50 border-gray-200 group-hover:bg-white group-hover:border-orange-500/50 transition-all text-[11px] px-2 pl-8 font-medium cursor-pointer"
+                          value={
+                            state.date
+                              ? new Date(state.date).toLocaleString([], {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })
+                              : "Select date & time"
+                          }
+                        />
+                        <CalendarClock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-orange-500/50 group-hover:text-orange-500 transition-colors" />
+                      </div>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <DateTimePicker
+                        value={state.date}
+                        onChange={(val) =>
+                          setState((p) => ({ ...p, date: val }))
+                        }
+                      />
+                      <div className="p-4 pt-0 border-t border-border/50 bg-gray-50/50">
+                        <PopoverClose asChild>
+                          <Button size="sm" className="w-full h-8 text-xs bg-orange-500 text-white hover:bg-orange-600 border-0">
+                            Done
+                          </Button>
+                        </PopoverClose>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               <div className="space-y-1.5">

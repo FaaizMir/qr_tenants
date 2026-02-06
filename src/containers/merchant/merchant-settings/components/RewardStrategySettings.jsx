@@ -120,19 +120,18 @@ export default function RewardStrategySettings() {
 
       <div className="overflow-hidden">
         <CardContent className="px-4 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
-            {/* Lucky Draw Option */}
+          <div className="grid grid-cols-2 gap-3 opacity-90">
+            {/* Lucky Draw Option - Now Read Only */}
             <div
-              onClick={() => setLuckyDrawEnabled(true)}
-              className={`relative p-3 rounded-xl border-2 transition-all cursor-pointer flex flex-col items-center text-center gap-2 hover:bg-emerald-50/10 ${luckyDrawEnabled
-                  ? "border-emerald-500 bg-emerald-50/20 shadow-xs"
-                  : "border-gray-100 grayscale-[0.8] hover:grayscale-0 hover:border-emerald-200"
+              className={`relative p-3 rounded-xl border-2 transition-all cursor-default flex flex-col items-center text-center gap-2 ${luckyDrawEnabled
+                ? "border-emerald-500 bg-emerald-50/20 shadow-xs"
+                : "border-gray-100 grayscale-[0.8]"
                 }`}
             >
               <div
                 className={`p-2 rounded-lg transition-all duration-300 ${luckyDrawEnabled
-                    ? "bg-emerald-600 text-white shadow-sm"
-                    : "bg-gray-100 text-gray-500"
+                  ? "bg-emerald-600 text-white shadow-sm"
+                  : "bg-gray-100 text-gray-500"
                   }`}
               >
                 <Sparkles className="h-4 w-4" />
@@ -150,18 +149,17 @@ export default function RewardStrategySettings() {
               )}
             </div>
 
-            {/* Direct Coupon Option */}
+            {/* Direct Coupon Option - Now Read Only */}
             <div
-              onClick={() => setLuckyDrawEnabled(false)}
-              className={`relative p-3 rounded-xl border-2 transition-all cursor-pointer flex flex-col items-center text-center gap-2 hover:bg-emerald-50/10 ${!luckyDrawEnabled
-                  ? "border-emerald-500 bg-emerald-50/20 shadow-xs"
-                  : "border-gray-100 grayscale-[0.8] hover:grayscale-0 hover:border-emerald-200"
+              className={`relative p-3 rounded-xl border-2 transition-all cursor-default flex flex-col items-center text-center gap-2 ${!luckyDrawEnabled
+                ? "border-emerald-500 bg-emerald-50/20 shadow-xs"
+                : "border-gray-100 grayscale-[0.8]"
                 }`}
             >
               <div
                 className={`p-2 rounded-lg transition-all duration-300 ${!luckyDrawEnabled
-                    ? "bg-emerald-600 text-white shadow-sm"
-                    : "bg-gray-100 text-gray-500"
+                  ? "bg-emerald-600 text-white shadow-sm"
+                  : "bg-gray-100 text-gray-500"
                   }`}
               >
                 <Ticket className="h-4 w-4" />
@@ -178,6 +176,11 @@ export default function RewardStrategySettings() {
                 <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               )}
             </div>
+          </div>
+
+          <div className="px-1 text-[9px] text-muted-foreground font-medium flex items-center gap-1.5 opacity-80 bg-gray-50/50 p-2 rounded-lg border border-dashed border-gray-200">
+            <span className="text-xs">⚙️</span>
+            <span>Selection is managed via <strong>Feature Switchboard</strong></span>
           </div>
 
           {!luckyDrawEnabled ? (

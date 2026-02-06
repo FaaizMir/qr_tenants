@@ -162,20 +162,6 @@ export default function MerchantCampaigns() {
     }
   };
 
-  // Handle cancel
-  const handleCancel = async (campaignId) => {
-    try {
-      await axios.put(`/scheduled-campaigns/${campaignId}/cancel`);
-      toast.success("Campaign cancelled successfully");
-      setRefetchTrigger((prev) => prev + 1);
-    } catch (error) {
-      console.error("Failed to cancel campaign:", error);
-      const errorMsg =
-        error?.response?.data?.message || "Failed to cancel campaign";
-      toast.error(errorMsg);
-    }
-  };
-
   // Handle success
   const handleSuccess = () => {
     setDialogOpen(false);
@@ -185,7 +171,7 @@ export default function MerchantCampaigns() {
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
-    () => getCampaignColumns(handleEdit, handleDelete, handleCancel),
+    () => getCampaignColumns(handleEdit, handleDelete),
     [],
   );
 
