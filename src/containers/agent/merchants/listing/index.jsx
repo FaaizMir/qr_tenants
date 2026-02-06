@@ -17,6 +17,7 @@ import useDebounce from "@/hooks/useDebounceRef";
 export default function AgentMerchantsListingContainer({
   showCreate = true,
   showEdit = true,
+  isMasterAdmin = false,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
@@ -78,7 +79,7 @@ export default function AgentMerchantsListingContainer({
     fetchMerchants();
   };
 
-  const columns = getMerchantsColumns(handleDeleted, showEdit);
+  const columns = getMerchantsColumns(handleDeleted, showEdit, isMasterAdmin);
 
   return (
     <div className="space-y-6">

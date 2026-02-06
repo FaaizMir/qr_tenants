@@ -16,7 +16,11 @@ import { MoreHorizontal, FileText, Edit } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { User, MapPin, Tag } from "lucide-react";
 
-export const getMerchantsColumns = (onDeleted, showEdit = true) => [
+export const getMerchantsColumns = (
+  onDeleted,
+  showEdit = true,
+  isMasterAdmin = false,
+) => [
   {
     accessorKey: "name",
     header: "Business & Account",
@@ -130,30 +134,43 @@ export const getMerchantsColumns = (onDeleted, showEdit = true) => [
                 Merchant Options
               </DropdownMenuLabel>
 
-              {showEdit && (
+              {isMasterAdmin ? (
+                // Master Admin: Show only Financial Statements
                 <DropdownMenuItem asChild>
-                  <Link href={`/agent/merchants/edit/${row.original.id}`}>
-                    <Edit className="mr-2 h-4 w-4" />
-                    Edit
+                  <Link
+                    href={`/master-admin/statements/merchants/${row.original.id}`}
+                  >
+                    <FileText className="mr-2 h-4 w-4" />
+                    Financial Statements
                   </Link>
                 </DropdownMenuItem>
-              )}
-              <DropdownMenuItem asChild>
-                <Link
-                  href={`/master-admin/statements/merchants/${row.original.id}`}
-                >
-                  <FileText className="mr-2 h-4 w-4" />
-                  Financial Statements
-                </Link>
-              </DropdownMenuItem>
-              {showEdit && (
+              ) : (
+                // Other users: Show Edit, Details, and Delete
                 <>
-                  <DropdownMenuSeparator />
-                  <DeleteMerchantAction
-                    merchantId={row.original.id}
-                    merchantName={row.original.name}
-                    onDeleted={onDeleted}
-                  />
+                  {showEdit && (
+                    <DropdownMenuItem asChild>
+                      <Link href={`/agent/merchants/edit/${row.original.id}`}>
+                        <Edit className="mr-2 h-4 w-4" />
+                        Edit
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem asChild>
+                    <Link href={`/agent/merchants/${row.original.id}`}>
+                      <FileText className="mr-2 h-4 w-4" />
+                      Details
+                    </Link>
+                  </DropdownMenuItem>
+                  {showEdit && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DeleteMerchantAction
+                        merchantId={row.original.id}
+                        merchantName={row.original.name}
+                        onDeleted={onDeleted}
+                      />
+                    </>
+                  )}
                 </>
               )}
             </DropdownMenuContent>

@@ -10,7 +10,11 @@ export default async function AgentMerchantsPage() {
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <AgentMerchantsListingContainer showCreate={false} showEdit={false} />
+      <AgentMerchantsListingContainer
+        showCreate={false}
+        showEdit={false}
+        isMasterAdmin={true}
+      />
     </>
   );
 }
