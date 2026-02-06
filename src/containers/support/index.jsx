@@ -60,13 +60,45 @@ export default function SupportContainer() {
   const [activeTab, setActiveTab] = useState(
     isSuperAdmin ? "agents" : "merchants"
   );
+  const [conversationTypeFilter, setConversationTypeFilter] = useState("chat"); // chat, support
 
   // Fetch conversations and participants
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
-      const convRes = await axiosInstance.get("/chat/conversations");
-      setConversations(convRes.data || []);
+      
+      // Fetch both regular conversations and support tickets
+      const [regularConvRes, supportConvRes] = await Promise.all([
+        axiosInstance.get("/chat/conversations").catch(() => ({ data: [] })),
+        axiosInstance.get("/chat/support/inbox").catch(() => ({ data: [] }))
+      ]);
+      
+      // Merge both types with category indicator
+      // Filter to avoid duplicates and ensure correct categorization
+      const regularConversations = (regularConvRes.data || [])
+        .filter(conv => !conv.category || conv.category === 'chat') // Only include chat conversations
+        .map(conv => ({
+          ...conv,
+          category: 'chat'
+        }));
+      
+      const supportConversations = (supportConvRes.data || [])
+        .filter(conv => conv.category === 'support') // Only include support conversations
+        .map(conv => ({
+          ...conv,
+          category: 'support'
+        }));
+      
+      // Merge and remove duplicates based on ID
+      const conversationsMap = new Map();
+      [...regularConversations, ...supportConversations].forEach(conv => {
+        conversationsMap.set(conv.id, conv);
+      });
+      
+      const allConversations = Array.from(conversationsMap.values())
+        .sort((a, b) => new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at));
+      
+      setConversations(allConversations);
 
       if (isSuperAdmin) {
         if (activeTab === "agents") {
@@ -109,13 +141,22 @@ export default function SupportContainer() {
 
   useEffect(() => {
     fetchData();
+    
+    // Note: Don't force chat mode here - agents need to see all conversations including tickets from merchants
   }, [fetchData]);
 
   useEffect(() => {
     if (loading) return;
 
     if (isMerchant) {
-      const merchantConv = conversations.find(c => c.type === 'AGENT_MERCHANT');
+      // Filter merchant conversations by type
+      let merchantConv;
+      if (conversationTypeFilter === 'chat') {
+        merchantConv = conversations.find(c => c.type === 'AGENT_MERCHANT' && c.category === 'chat');
+      } else if (conversationTypeFilter === 'support') {
+        merchantConv = conversations.find(c => c.type === 'AGENT_MERCHANT' && c.category === 'support');
+      }
+      
       if (merchantConv) {
         setSelectedConversation(merchantConv);
         setSelectedParticipant(null);
@@ -124,7 +165,14 @@ export default function SupportContainer() {
         setSelectedConversation(null);
       }
     } else if (isAgent && activeTab === 'agents') {
-      const agentConv = conversations.find(c => c.type === 'SUPERADMIN_AGENT');
+      // Filter agent conversations by type
+      let agentConv;
+      if (conversationTypeFilter === 'chat') {
+        agentConv = conversations.find(c => c.type === 'SUPERADMIN_AGENT' && c.category === 'chat');
+      } else if (conversationTypeFilter === 'support') {
+        agentConv = conversations.find(c => c.type === 'SUPERADMIN_AGENT' && c.category === 'support');
+      }
+      
       if (agentConv) {
         setSelectedConversation(agentConv);
         setSelectedParticipant(null);
@@ -133,7 +181,7 @@ export default function SupportContainer() {
         setSelectedConversation(null);
       }
     }
-  }, [conversations, isMerchant, isAgent, activeTab, loading, participants]);
+  }, [conversations, isMerchant, isAgent, activeTab, loading, participants, conversationTypeFilter]);
 
   const handleNewMessage = useCallback((message) => {
     const selectedId = selectedConversation?.id;
@@ -158,6 +206,7 @@ export default function SupportContainer() {
           return conv;
         }).sort((a, b) => new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at));
       } else {
+        // New conversation created - fetch fresh data to get proper categorization
         fetchData();
         return prev;
       }
@@ -175,37 +224,64 @@ export default function SupportContainer() {
     }
   }, [messages]);
 
-  useEffect(() => {
-    if (selectedConversation) {
-      const fetchMessages = async () => {
-        try {
-          setMessagesLoading(true);
-          const res = await axiosInstance.get(`/chat/conversations/${selectedConversation.id}/messages`, {
-            params: { page: 1, limit: 100 }
-          });
-          setMessages(res.data.data || res.data || []);
-          emit('joinConversation', { conversationId: selectedConversation.id });
-        } catch (error) {
-          console.error("Failed to fetch messages:", error);
-          toast.error("Failed to load message history");
-        } finally {
-          setMessagesLoading(false);
-        }
-      };
-      fetchMessages();
-    } else {
+  // Extract fetchMessages as a callback so it can be reused
+  const fetchMessages = useCallback(async () => {
+    if (!selectedConversation) {
       setMessages([]);
+      return;
+    }
+    
+    try {
+      setMessagesLoading(true);
+      
+      // Use appropriate endpoint based on conversation category
+      const isSupport = selectedConversation.category === 'support';
+      const endpoint = isSupport 
+        ? `/chat/support/conversations/${selectedConversation.id}/messages`
+        : `/chat/conversations/${selectedConversation.id}/messages`;
+      
+      const res = await axiosInstance.get(endpoint, 
+        isSupport ? {} : { params: { page: 1, limit: 100 } }
+      );
+      
+      // Handle response format (support returns { conversation, messages }, regular returns direct array)
+      const messagesData = res.data.messages || res.data.data || res.data || [];
+      setMessages(messagesData);
+      emit('joinConversation', { conversationId: selectedConversation.id });
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
+      toast.error("Failed to load message history");
+    } finally {
+      setMessagesLoading(false);
     }
   }, [selectedConversation, emit]);
 
+  useEffect(() => {
+    fetchMessages();
+  }, [fetchMessages]);
+
   const { activeChats, availableContacts } = useMemo(() => {
-    const currentConvs = conversations.filter(c => {
+    // Filter by role type
+    let currentConvs = conversations.filter(c => {
       if (isSuperAdmin) return c.type === 'SUPERADMIN_AGENT';
       if (isAgent) {
         return activeTab === "merchants" ? c.type === 'AGENT_MERCHANT' : c.type === 'SUPERADMIN_AGENT';
       }
       return c.type === 'AGENT_MERCHANT';
     });
+    
+    // Filter by conversation type (chat, support)
+    // Note: For agents on merchants tab, show ALL conversations (chat + tickets from merchants)
+    // but the "Chat Only" filter prevents CREATING new tickets
+    if (!(isAgent && activeTab === 'merchants')) {
+      // Apply filter for non-agent/merchant scenarios
+      if (conversationTypeFilter === 'chat') {
+        currentConvs = currentConvs.filter(c => c.category === 'chat');
+      } else if (conversationTypeFilter === 'support') {
+        currentConvs = currentConvs.filter(c => c.category === 'support');
+      }
+    }
+    // For agents with merchants: show both types (no filtering) but creation is restricted
 
     const activeIds = currentConvs.map(c =>
       isSuperAdmin ? c.agent_id :
@@ -219,7 +295,7 @@ export default function SupportContainer() {
       activeChats: currentConvs.map(c => ({ ...c, isConversation: true })),
       availableContacts: avContacts.map(p => ({ ...p, isParticipant: true }))
     };
-  }, [conversations, participants, isSuperAdmin, isAgent, isMerchant, activeTab]);
+  }, [conversations, participants, isSuperAdmin, isAgent, isMerchant, activeTab, conversationTypeFilter]);
 
   const filteredItems = useMemo(() => {
     const q = searchQuery.toLowerCase();
@@ -231,24 +307,62 @@ export default function SupportContainer() {
     });
   }, [activeChats, availableContacts, searchQuery]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!replyText.trim()) return;
 
-    if (selectedConversation) {
-      emit('sendMessage', {
-        conversationId: selectedConversation.id,
-        content: replyText
-      });
-    } else if (selectedParticipant) {
-      const participantId = selectedParticipant.id;
-      emit('sendMessage', {
-        receiverId: participantId,
-        type: activeTab === 'agents' ? 'SUPERADMIN_AGENT' : 'AGENT_MERCHANT',
-        content: replyText
-      });
+    try {
+      if (selectedConversation) {
+        const isSupport = selectedConversation.category === 'support';
+        
+        if (isSupport) {
+          // Send message to existing support ticket (HTTP only - backend broadcasts via socket)
+          await axiosInstance.post(`/chat/support/conversations/${selectedConversation.id}/messages`, {
+            message: replyText
+          });
+          // Refetch messages to show the sent message immediately
+          await fetchMessages();
+        } else {
+          // Emit via socket for regular chat messages only
+          emit('sendMessage', {
+            conversationId: selectedConversation.id,
+            content: replyText
+          });
+        }
+      } else if (selectedParticipant) {
+        // Create new conversation/ticket based on filter
+        // Special rule: Agent cannot create tickets to merchants
+        const createAsTicket = conversationTypeFilter === 'support' && !(isAgent && activeTab === 'merchants');
+        
+        if (createAsTicket) {
+          // Create new support ticket
+          const response = await axiosInstance.post('/chat/support/conversations', {
+            message: replyText
+          });
+          await fetchData();
+          if (response.data) {
+            setSelectedConversation({ ...response.data, category: 'support' });
+            setSelectedParticipant(null);
+          }
+        } else {
+          // Create regular conversation via socket
+          const participantId = selectedParticipant.id;
+          emit('sendMessage', {
+            receiverId: participantId,
+            type: activeTab === 'agents' ? 'SUPERADMIN_AGENT' : 'AGENT_MERCHANT',
+            content: replyText
+          });
+          
+          // Wait a bit for the conversation to be created, then refresh
+          setTimeout(() => {
+            fetchData();
+          }, 500);
+        }
+      }
+      setReplyText("");
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      toast.error("Failed to send message. Please try again.");
     }
-
-    setReplyText("");
   };
 
   const getParticipantName = (item) => {
@@ -281,14 +395,14 @@ export default function SupportContainer() {
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <MessageSquare className="h-6 w-6 text-primary" />
-            Support Inbox
+            Support & Messages
             {!isConnected && <Badge variant="destructive" className="ml-2 text-[10px]">Disconnected</Badge>}
           </h1>
           <p className="text-sm text-muted-foreground">
-            {isSuperAdmin && "Initiate chats with agents or oversee merchant support."}
-            {isAgent && activeTab === 'merchants' && "Chat with your merchants."}
-            {isAgent && activeTab === 'agents' && "Dedicated line to platform administrator."}
-            {isMerchant && "Direct support from your assigned agent."}
+            {isSuperAdmin && "Manage conversations and support tickets with agents."}
+            {isAgent && activeTab === 'merchants' && "Communicate with your merchants via messages and tickets."}
+            {isAgent && activeTab === 'agents' && "Contact platform support team."}
+            {isMerchant && "Chat with your support agent or create tickets."}
           </p>
         </div>
 
@@ -319,14 +433,52 @@ export default function SupportContainer() {
                 </TabsList>
               </Tabs>
 
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search..."
-                  className="pl-9 h-9 text-sm bg-muted/30 border-none focus-visible:ring-1"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+              <div className="space-y-3">
+                {/* Show filters conditionally based on role and tab */}
+                {(isSuperAdmin || isMerchant || (isAgent && activeTab === 'agents')) ? (
+                  <div className="flex gap-1.5 p-1 bg-muted/30 rounded-lg">
+                    <button
+                      onClick={() => setConversationTypeFilter('chat')}
+                      className={`flex-1 px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center justify-center gap-1 ${
+                        conversationTypeFilter === 'chat'
+                          ? 'bg-background shadow-sm text-foreground'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <MessageSquare className="h-3 w-3" />
+                      Chat
+                    </button>
+                    <button
+                      onClick={() => setConversationTypeFilter('support')}
+                      className={`flex-1 px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center justify-center gap-1 ${
+                        conversationTypeFilter === 'support'
+                          ? 'bg-background shadow-sm text-foreground'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <HelpCircle className="h-3 w-3" />
+                      Tickets
+                    </button>
+                  </div>
+                ) : (
+                  // Agent with merchants: Only chat creation allowed but can view all conversation types
+                  <div className="flex gap-1.5 p-1 bg-muted/30 rounded-lg">
+                    <div className="flex-1 px-2 py-1.5 text-[10px] font-medium rounded bg-background shadow-sm text-foreground flex items-center justify-center gap-1">
+                      <MessageSquare className="h-3 w-3" />
+                      View All • Create Chat Only
+                    </div>
+                  </div>
+                )}
+                
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search..."
+                    className="pl-9 h-9 text-sm bg-muted/30 border-none focus-visible:ring-1"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
               </div>
             </CardHeader>
 
@@ -371,10 +523,28 @@ export default function SupportContainer() {
                           <Badge variant="outline" className={`text-[9px] uppercase tracking-wider h-4 px-1`}>
                             {getRoleBadge(item)}
                           </Badge>
-                          {!item.isConversation && <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW CHAT</Badge>}
+                          {item.isConversation && item.category === 'support' && (
+                            <Badge variant="default" className="text-[9px] h-4 px-1 bg-blue-500">
+                              <HelpCircle className="h-2.5 w-2.5 mr-0.5" />
+                              Ticket
+                            </Badge>
+                          )}
+                          {item.isConversation && item.category === 'chat' && (
+                            <Badge variant="default" className="text-[9px] h-4 px-1 bg-green-500">
+                              <MessageSquare className="h-2.5 w-2.5 mr-0.5" />
+                              Chat
+                            </Badge>
+                          )}
+                          {!item.isConversation && conversationTypeFilter === 'support' && (
+                            <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW TICKET</Badge>
+                          )}
+                          {!item.isConversation && conversationTypeFilter !== 'support' && (
+                            <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW CHAT</Badge>
+                          )}
                         </div>
                         <p className="text-xs truncate text-muted-foreground">
-                          {item.isConversation ? (item.messages?.[item.messages.length - 1]?.content || "No messages") : "Start a new conversation"}
+                          {item.isConversation ? (item.messages?.[item.messages.length - 1]?.content || "No messages") : 
+                            (conversationTypeFilter === 'support' ? "Create a new support ticket" : "Start a new conversation")}
                         </p>
                       </button>
                     ))
@@ -385,7 +555,7 @@ export default function SupportContainer() {
           </Card>
         )}
 
-        <Card className={`${showSidebar ? "md:col-span-8 lg:col-span-8" : "md:col-span-12"} flex flex-col overflow-hidden border border-border shadow-sm ${!selectedConversation && isMerchant ? "md:flex" : ""}`}>
+        <Card className={`${showSidebar ? "md:col-span-8 lg:col-span-8" : "md:col-span-12"} flex flex-col overflow-hidden border border-border shadow-sm relative ${!selectedConversation && isMerchant ? "md:flex" : ""}`}>
           {(selectedConversation || selectedParticipant) ? (
             <>
               <CardHeader className="p-4 border-b flex flex-row items-center justify-between bg-muted/5">
@@ -401,12 +571,66 @@ export default function SupportContainer() {
                     </CardTitle>
                     <CardDescription className="flex items-center gap-2 text-[11px]">
                       <Clock className="h-3 w-3" />
-                      {selectedConversation ? "Existing Thread" : "New Conversation"}
+                      {selectedConversation ? (
+                        <>
+                          {selectedConversation.category === 'support' ? (
+                            <Badge variant="default" className="text-[9px] h-4 px-1 bg-blue-500">
+                              <HelpCircle className="h-2.5 w-2.5 mr-0.5" />
+                              Ticket
+                            </Badge>
+                          ) : (
+                            <Badge variant="default" className="text-[9px] h-4 px-1 bg-green-500">
+                              <MessageSquare className="h-2.5 w-2.5 mr-0.5" />
+                              Chat
+                            </Badge>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {conversationTypeFilter === 'support' ? (
+                            <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW TICKET</Badge>
+                          ) : conversationTypeFilter === 'chat' ? (
+                            <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW CHAT</Badge>
+                          ) : (
+                            <Badge variant="secondary" className="text-[9px] h-4 px-1">NEW MESSAGE</Badge>
+                          )}
+                        </>
+                      )}
                       <span>•</span>
                       <span className="text-primary font-medium">{getRoleBadge(selectedConversation || selectedParticipant)}</span>
                     </CardDescription>
                   </div>
                 </div>
+                
+                {/* Show filter when sidebar is hidden (for merchant or agent on support admin tab) */}
+                {!showSidebar && (
+                  // Only show filters for merchant or agent on support admin tab (both can use chat/tickets)
+                  // Agent on merchants tab won't have sidebar hidden so this won't show for them
+                  <div className="flex gap-1.5 p-1 bg-muted/30 rounded-lg">
+                    <button
+                      onClick={() => setConversationTypeFilter('chat')}
+                      className={`px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center gap-1 ${
+                        conversationTypeFilter === 'chat'
+                          ? 'bg-background shadow-sm text-foreground'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <MessageSquare className="h-3 w-3" />
+                      Chat
+                    </button>
+                    <button
+                      onClick={() => setConversationTypeFilter('support')}
+                      className={`px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center gap-1 ${
+                        conversationTypeFilter === 'support'
+                          ? 'bg-background shadow-sm text-foreground'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <HelpCircle className="h-3 w-3" />
+                      Tickets
+                    </button>
+                  </div>
+                )}
               </CardHeader>
 
               <CardContent className="flex-1 p-0 flex flex-col overflow-hidden">
@@ -426,7 +650,17 @@ export default function SupportContainer() {
                   ) : (
                     <div className="space-y-6 max-w-4xl mx-auto flex flex-col">
                       {messages.map((msg, i) => {
-                        const isMe = (msg.sender_id || msg.senderId) === user?.id;
+                        // Determine if the message is from current user
+                        // Check both user.id (for chat) and role-specific IDs (for tickets)
+                        const senderId = msg.sender_id || msg.senderId;
+                        let isMe = false;
+                        if (isSuperAdmin) {
+                          isMe = senderId === user?.id || senderId === user?.superAdminId;
+                        } else if (isAgent) {
+                          isMe = senderId === user?.id || senderId === user?.adminId;
+                        } else if (isMerchant) {
+                          isMe = senderId === user?.id || senderId === user?.merchantId;
+                        }
                         return (
                           <div
                             key={msg.id || i}
@@ -506,13 +740,50 @@ export default function SupportContainer() {
             </>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-muted/5 space-y-8">
+              {/* Show filter when sidebar is hidden */}
+              {!showSidebar && (
+                <div className="absolute top-4 right-4 flex gap-1.5 p-1 bg-muted/30 rounded-lg">
+                  <button
+                    onClick={() => setConversationTypeFilter('chat')}
+                    className={`px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center gap-1 ${
+                      conversationTypeFilter === 'chat'
+                        ? 'bg-background shadow-sm text-foreground'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <MessageSquare className="h-3 w-3" />
+                    Chat
+                  </button>
+                  <button
+                    onClick={() => setConversationTypeFilter('support')}
+                    className={`px-2 py-1.5 text-[10px] font-medium rounded transition-colors flex items-center gap-1 ${
+                      conversationTypeFilter === 'support'
+                        ? 'bg-background shadow-sm text-foreground'
+                        : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                  >
+                    <HelpCircle className="h-3 w-3" />
+                    Tickets
+                  </button>
+                </div>
+              )}
+              
               <div className="max-w-md w-full text-center space-y-6">
                 <div className="h-20 w-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto ring-8 ring-primary/5">
                   <MessageSquare className="h-10 w-10 text-primary" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">Support Center</h2>
-                  <p className="text-muted-foreground mt-2">Pick a participant from the list to start or resume a conversation.</p>
+                  <p className="text-muted-foreground mt-2">
+                    {conversationTypeFilter === 'support' ? "Create a new support ticket or view existing tickets." : "Start a conversation or continue chatting."}
+                  </p>
+                  {!showSidebar && (
+                    <div className="mt-4 p-4 bg-muted/30 rounded-lg text-left text-xs space-y-2">
+                      <p className="font-medium text-foreground">💡 Choose your message type:</p>
+                      <p><span className="text-green-600 font-medium">Chat:</span> Quick casual messages</p>
+                      <p><span className="text-blue-600 font-medium">Tickets:</span> Formal support requests</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
