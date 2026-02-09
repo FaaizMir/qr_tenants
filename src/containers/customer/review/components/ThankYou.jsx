@@ -60,13 +60,13 @@ export const ThankYou = ({
         {hasGeneralError && !hasWhatsAppError && (
           <div className="relative mb-8">
             {/* Background Gradient Orbs */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-red-100/50 via-red-50/50 to-red-100/50 rounded-[2.5rem] blur-2xl -z-10"></div>
+            <div className="absolute -inset-4 bg-linear-to-r from-red-100/50 via-red-50/50 to-red-100/50 rounded-[2.5rem] blur-2xl -z-10"></div>
 
-            <div className="bg-gradient-to-br from-red-50/90 via-white to-red-50/90 backdrop-blur-xl rounded-3xl p-8 md:p-12 border-2 border-red-200/60 shadow-2xl">
+            <div className="bg-linear-to-br from-red-50/90 via-white to-red-50/90 backdrop-blur-xl rounded-3xl p-8 md:p-12 border-2 border-red-200/60 shadow-2xl">
               <div className="text-center space-y-6">
                 {/* Error Icon with Animation */}
                 <div className="relative inline-flex">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center shadow-2xl shadow-red-500/40 animate-pulse">
+                  <div className="w-20 h-20 rounded-3xl bg-linear-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center shadow-2xl shadow-red-500/40 animate-pulse">
                     <svg
                       className="w-10 h-10 text-white"
                       fill="none"
@@ -91,16 +91,16 @@ export const ThankYou = ({
                     Lucky Draw Error
                   </h3>
                   <div className="flex items-center justify-center gap-2">
-                    <div className="h-0.5 w-8 bg-gradient-to-r from-transparent to-red-500/50 rounded-full"></div>
+                    <div className="h-0.5 w-8 bg-linear-to-r from-transparent to-red-500/50 rounded-full"></div>
                     <div className="h-1 w-1 rounded-full bg-red-500"></div>
-                    <div className="h-0.5 w-8 bg-gradient-to-l from-transparent to-red-500/50 rounded-full"></div>
+                    <div className="h-0.5 w-8 bg-linear-to-l from-transparent to-red-500/50 rounded-full"></div>
                   </div>
                 </div>
 
                 {/* Error Message */}
                 <div className="bg-white rounded-2xl p-6 md:p-8 border-2 border-red-200/70 max-w-xl mx-auto shadow-lg">
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
                       <svg
                         className="w-3.5 h-3.5 text-red-600"
                         fill="currentColor"
@@ -141,13 +141,13 @@ export const ThankYou = ({
         {hasWhatsAppError && reward && (
           <div className="relative mb-8">
             {/* Background Gradient Orbs */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-orange-100/50 via-red-50/50 to-orange-100/50 rounded-[2.5rem] blur-2xl -z-10"></div>
+            <div className="absolute -inset-4 bg-linear-to-r from-orange-100/50 via-red-50/50 to-orange-100/50 rounded-[2.5rem] blur-2xl -z-10"></div>
 
-            <div className="bg-gradient-to-br from-orange-50/90 via-white to-red-50/90 backdrop-blur-xl rounded-3xl p-8 md:p-12 border-2 border-orange-200/60 shadow-2xl">
+            <div className="bg-linear-to-br from-orange-50/90 via-white to-red-50/90 backdrop-blur-xl rounded-3xl p-8 md:p-12 border-2 border-orange-200/60 shadow-2xl">
               <div className="text-center space-y-6">
                 {/* Error Icon with Animation */}
                 <div className="relative inline-flex">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-red-600 flex items-center justify-center shadow-2xl shadow-orange-500/40 animate-pulse">
+                  <div className="w-20 h-20 rounded-3xl bg-linear-to-br from-orange-500 via-red-500 to-red-600 flex items-center justify-center shadow-2xl shadow-orange-500/40 animate-pulse">
                     <svg
                       className="w-10 h-10 text-white"
                       fill="none"
@@ -172,16 +172,16 @@ export const ThankYou = ({
                     Reward Delivery Failed
                   </h3>
                   <div className="flex items-center justify-center gap-2">
-                    <div className="h-0.5 w-8 bg-gradient-to-r from-transparent to-orange-500/50 rounded-full"></div>
+                    <div className="h-0.5 w-8 bg-linear-to-r from-transparent to-orange-500/50 rounded-full"></div>
                     <div className="h-1 w-1 rounded-full bg-orange-500"></div>
-                    <div className="h-0.5 w-8 bg-gradient-to-l from-transparent to-orange-500/50 rounded-full"></div>
+                    <div className="h-0.5 w-8 bg-linear-to-l from-transparent to-orange-500/50 rounded-full"></div>
                   </div>
                 </div>
 
                 {/* Error Message */}
                 <div className="bg-white rounded-2xl p-6 md:p-8 border-2 border-orange-200/70 max-w-xl mx-auto shadow-lg">
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center shrink-0 mt-0.5">
                       <svg
                         className="w-3.5 h-3.5 text-orange-600"
                         fill="currentColor"
