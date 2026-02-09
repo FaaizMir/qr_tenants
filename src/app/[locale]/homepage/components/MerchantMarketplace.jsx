@@ -155,8 +155,8 @@ function getCategoryImage(category, id) {
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-      .split("")
-      .reduce((a, b) => a + b.charCodeAt(0), 0)
+        .split("")
+        .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -325,8 +325,6 @@ export function MerchantList({
             for you...
           </p>
         </div>
-
-
       </div>
     );
   }

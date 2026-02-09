@@ -242,6 +242,7 @@ export function CustomerReviewFlow() {
         if (!customerId) {
           console.error("Missing customer ID for lucky draw");
           toast.error("Session error. Redirecting to thank you page.");
+          setReward(null); // Clear any reward data
           setStep(6);
           return;
         }
@@ -249,22 +250,40 @@ export function CustomerReviewFlow() {
         setStep(4);
       } else {
         // Check if we have reward info from the submission response
+        const hasWhatsAppError =
+          submissionData?.whatsapp_status === "failed" ||
+          submissionData?.whatsapp_error ||
+          submissionData?.error === "whatsapp_credit_low" ||
+          submissionData?.whatsapp_notification?.credits_insufficient;
+
         const hasReward =
           submissionData?.coupon ||
           submissionData?.reward ||
           submissionData?.coupon_code;
-        if (hasReward) {
+
+        // Rollback: Don't set reward if there was a WhatsApp error
+        if (hasReward && !hasWhatsAppError) {
           // Use the whole submissionData so we keep whatsapp_status and other flags
           setReward(submissionData);
           setStep(5); // Go to RewardSuccess
+        } else if (hasWhatsAppError) {
+          // Error occurred, rollback - go to thank you with error data
+          console.warn(
+            "WhatsApp delivery failed, proceeding without reward display",
+          );
+          // Pass submissionData to ThankYou so it can display error details
+          setReward(submissionData);
+          setStep(6);
         } else {
           // Skip Lucky Draw and Rewards, go directly to Thank You (step 6)
+          setReward(null);
           setStep(6);
         }
       }
     } catch (error) {
       console.error("Post-review navigation error:", error);
       toast.error("Navigation error occurred. Proceeding to completion.");
+      setReward(null); // Clear reward on error
       setStep(6); // Fallback to thank you page
     }
   };
@@ -272,17 +291,35 @@ export function CustomerReviewFlow() {
   const nextStep = (flag) => {
     if (flag === "skip") {
       setStep(1);
+      setLoading(false);
+      setSubmissionData(null);
+      setReward(null);
       toast.info("Returning to start. You can submit another review.");
+      return;
+    }
+    if (flag === "error") {
+      // Skip RewardSuccess, go directly to ThankYou with error
+      setStep(6);
       return;
     }
     setStep((s) => s + 1);
   };
-  const prevStep = () => setStep((s) => s - 1);
+
+  const prevStep = () => {
+    // Always go back to IdentityForm (step 1) and reset state
+    setStep(1);
+    setLoading(false);
+    setSubmissionData(null);
+    setReward(null);
+    toast.info("Starting over. Please fill in your details again.");
+  };
+
   const resetFlow = () => {
     setValue("text", "");
     setValue("rating", 5);
     setReward(null);
     setSubmissionData(null);
+    setLoading(false);
     setStep(1);
   };
 
@@ -401,42 +438,91 @@ export function CustomerReviewFlow() {
           setErrorDialog((prev) => ({ ...prev, isOpen: open }))
         }
       >
-        <DialogContent className="sm:max-w-md border-none shadow-[0_32px_128px_-16px_rgba(239,68,68,0.4)] p-0 overflow-hidden rounded-[2.5rem] bg-white">
-          <div className="bg-linear-to-br from-red-600 to-red-800 p-8 text-center text-white relative">
-            <div className="absolute top-0 right-0 p-6 opacity-10">
-              <Sparkles className="w-20 h-20" />
+        <DialogContent className="sm:max-w-md border-none shadow-[0_32px_128px_-16px_rgba(239,68,68,0.5)] p-0 overflow-hidden rounded-[2.5rem] bg-white">
+          {/* Header with Gradient */}
+          <div className="bg-linear-to-br from-red-600 via-red-700 to-red-800 p-8 text-center text-white relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-3xl"></div>
             </div>
 
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 shadow-xl">
-              <Star className="w-8 h-8 text-white fill-white animate-pulse" />
+            {/* Icon */}
+            <div className="relative mx-auto w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 shadow-2xl animate-pulse">
+              <svg
+                className="w-10 h-10 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
             </div>
 
-            <DialogTitle className="text-2xl font-bold tracking-tight mb-1 uppercase">
+            <DialogTitle className="relative text-3xl font-bold tracking-tight mb-2">
               System Error
             </DialogTitle>
-            <p className="text-red-100 text-[10px] font-semibold uppercase">
-              Action Required
-            </p>
+            <div className="flex items-center justify-center gap-2 relative">
+              <div className="h-0.5 w-6 bg-white/40 rounded-full"></div>
+              <p className="text-red-100 text-xs font-semibold uppercase tracking-widest">
+                Action Required
+              </p>
+              <div className="h-0.5 w-6 bg-white/40 rounded-full"></div>
+            </div>
           </div>
 
           <div className="p-8 space-y-6">
             <div className="space-y-4">
-              <div className="p-5 rounded-3xl bg-red-50 border border-red-100 dark:bg-red-500/5 dark:border-red-500/10">
-                <h4 className="text-red-600 font-bold text-[11px] uppercase tracking-wide mb-2">
-                  Message from Server
-                </h4>
-                <p className="text-zinc-700 dark:text-zinc-300 text-sm font-semibold leading-relaxed">
-                  &quot;{errorDialog.message}&quot;
-                </p>
+              {/* Error Message */}
+              <div className="p-6 rounded-2xl bg-linear-to-br from-red-50 via-white to-red-50 border-2 border-red-200/60 shadow-lg">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg
+                      className="w-3.5 h-3.5 text-red-600"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-red-700 font-bold text-xs uppercase tracking-wide mb-2">
+                      Error Message
+                    </h4>
+                    <p className="text-zinc-800 text-sm font-semibold leading-relaxed">
+                      {errorDialog.message}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {errorDialog.details && (
                 <div className="space-y-2">
-                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-wide pl-1">
+                  <p className="text-xs font-bold text-zinc-500 uppercase tracking-wide px-1 flex items-center gap-2">
+                    <svg
+                      className="w-3 h-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                     Technical Details
                   </p>
-                  <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-100 max-h-32 overflow-y-auto">
-                    <pre className="text-[10px] font-mono text-zinc-500 whitespace-pre-wrap">
+                  <div className="p-4 rounded-2xl bg-zinc-50 border-2 border-zinc-200/60 max-h-32 overflow-y-auto">
+                    <pre className="text-xs font-mono text-zinc-600 whitespace-pre-wrap">
                       {typeof errorDialog.details === "object"
                         ? JSON.stringify(errorDialog.details, null, 2)
                         : errorDialog.details}
@@ -450,7 +536,7 @@ export function CustomerReviewFlow() {
               onClick={() =>
                 setErrorDialog((prev) => ({ ...prev, isOpen: false }))
               }
-              className="w-full h-14 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold uppercase tracking-wide shadow-xl transition-all active:scale-95"
+              className="w-full h-14 rounded-2xl bg-linear-to-r from-zinc-900 via-zinc-800 to-zinc-900 hover:from-zinc-800 hover:via-zinc-700 hover:to-zinc-800 text-white font-bold uppercase tracking-wide shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95"
             >
               Close
             </Button>
