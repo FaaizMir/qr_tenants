@@ -25,18 +25,44 @@ export const RewardSuccess = ({
     reward?.error === "whatsapp_credit_low" ||
     reward?.whatsapp_notification?.credits_insufficient;
 
+  // Check if it's a lucky draw prize or direct coupon
+  const isLuckyDrawPrize = reward?.prize?.prize_name;
+  const isDirectCoupon = reward?.coupon || reward?.coupon_code;
+  const hasValidReward = isLuckyDrawPrize || isDirectCoupon;
+
+  // If there's an error or no valid reward, redirect to ThankYou
+  React.useEffect(() => {
+    if (!reward || !hasValidReward || hasWhatsAppError) {
+      // Auto-redirect to ThankYou to display appropriate message
+      nextStep();
+    }
+  }, [reward, hasValidReward, hasWhatsAppError, nextStep]);
+
+  // If still rendering (during redirect), show nothing or loading state
+  if (!reward || !hasValidReward || hasWhatsAppError) {
+    return null;
+  }
+
+  // Get display name from either prize or coupon
+  const rewardName = isLuckyDrawPrize
+    ? reward.prize.prize_name
+    : reward.coupon?.name || reward.name || "Special Discount";
+
+  const rewardDescription = isLuckyDrawPrize
+    ? reward.prize.prize_description
+    : reward.coupon?.description;
+
   return (
-    <div className=" w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-y-auto">
+    <div className="w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 overflow-y-auto">
       <div className="w-full max-w-4xl">
         {/* Success Header */}
-        <div className="text-center mb-8 animate-in slide-in-from-top duration-700">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-linear-to-br from-emerald-500 to-teal-600 mb-6 shadow-2xl shadow-emerald-500/30 relative">
-            <div className="absolute inset-0 rounded-3xl bg-white/20 animate-pulse"></div>
-            <Gift className="w-12 h-12 text-white relative z-10" />
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-linear-to-br from-emerald-500 to-teal-600 mb-6 shadow-2xl shadow-emerald-500/30">
+            <Gift className="w-12 h-12 text-white" />
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold text-zinc-900 mb-4 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600 animate-shimmer bg-size[length:200%_100%]">
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600">
               Congratulations!
             </span>
           </h1>
@@ -55,10 +81,7 @@ export const RewardSuccess = ({
         </div>
 
         {/* Reward Card */}
-        <div className="relative group mb-8 animate-in slide-in-from-bottom duration-700 delay-200">
-          {/* Glow Effect */}
-          <div className="absolute -inset-2 bg-linear-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-
+        <div className="relative mb-8">
           {/* Main Card */}
           <div className="relative bg-linear-to-br from-zinc-900 via-zinc-800 to-zinc-900 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden border border-zinc-800/50">
             {/* Background Pattern */}
@@ -74,7 +97,9 @@ export const RewardSuccess = ({
                 <div className="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md inline-flex items-center gap-2">
                   <Star className="w-3.5 h-3.5 text-emerald-400" />
                   <span className="text-xs font-bold uppercase tracking-wide text-emerald-400">
-                    Official Merchant Reward
+                    {isLuckyDrawPrize
+                      ? "Official Prize Confirmed"
+                      : "Coupon Issued"}
                   </span>
                 </div>
               </div>
@@ -82,13 +107,11 @@ export const RewardSuccess = ({
               {/* Prize Name */}
               <div className="text-center">
                 <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase mb-2">
-                  {reward?.prize?.prize_name ||
-                    reward?.name ||
-                    "Special Discount"}
+                  {rewardName}
                 </h2>
-                {reward?.prize?.prize_description && (
+                {rewardDescription && (
                   <p className="text-sm text-zinc-400 font-medium">
-                    {reward.prize.prize_description}
+                    {rewardDescription}
                   </p>
                 )}
               </div>
@@ -110,7 +133,7 @@ export const RewardSuccess = ({
                 {/* WhatsApp Status */}
                 {hasWhatsAppError ? (
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border-2 border-red-500/20">
-                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                    <div className="w-2 h-2 rounded-full bg-red-500"></div>
                     <span className="text-xs font-bold text-red-400 uppercase tracking-wide">
                       {reward?.whatsapp_notification?.credits_insufficient
                         ? `WhatsApp Credit Exhausted (${reward?.whatsapp_notification?.available_credits ?? 0} left)`
@@ -119,7 +142,7 @@ export const RewardSuccess = ({
                   </div>
                 ) : (
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                     <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">
                       Sent to WhatsApp
                     </span>
@@ -131,10 +154,10 @@ export const RewardSuccess = ({
         </div>
 
         {/* Instructions */}
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 border-2 border-slate-200/50 shadow-lg mb-8 animate-in slide-in-from-bottom duration-700 delay-300">
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 border-2 border-slate-200/50 shadow-lg mb-8">
           {hasWhatsAppError ? (
             <div className="text-center space-y-2">
-              <p className="text-sm font-bold text-red-600 italic leading-relaxed">
+              <p className="text-sm font-semibold text-red-600 italic leading-relaxed">
                 We couldn&apos;t deliver the code via WhatsApp. Please
                 screenshot this screen or note down the code above to show our
                 staff.
@@ -156,15 +179,14 @@ export const RewardSuccess = ({
         </div>
 
         {/* Action Button */}
-        <div className="animate-in slide-in-from-bottom duration-700 delay-400">
+        <div>
           <Button
             onClick={nextStep}
-            className="w-full h-16 rounded-2xl text-base font-bold uppercase tracking-wide bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 group relative overflow-hidden"
+            className="w-full h-16 rounded-2xl text-base font-bold uppercase tracking-wide bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-2xl transition-all"
           >
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            <span className="relative flex items-center justify-center gap-3">
+            <span className="flex items-center justify-center gap-3">
               Complete Experience
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="w-5 h-5" />
             </span>
           </Button>
         </div>
@@ -172,7 +194,7 @@ export const RewardSuccess = ({
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
             Secured by QR Tenants • All data encrypted
           </p>
         </div>
