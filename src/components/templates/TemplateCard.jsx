@@ -21,7 +21,7 @@ function injectContent(html, content) {
   const logoUrl = content.brand_image
     ? (content.brand_image.startsWith("http") || content.brand_image.startsWith("blob:")
       ? content.brand_image
-      : `${baseUrl}${content.brand_image}`)
+      : `${baseUrl}/api${content.brand_image}`)
     : "/placeholder-logo.png";
 
   return cleanedHtml

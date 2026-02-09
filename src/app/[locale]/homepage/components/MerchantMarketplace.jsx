@@ -383,6 +383,7 @@ export function MerchantList({
           }
 
           const merchant = item.data;
+          console.log("merchantdata", merchant);
           const isSelected = selectedMerchantId === merchant.id;
 
           return (
