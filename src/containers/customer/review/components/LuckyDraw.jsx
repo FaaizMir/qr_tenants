@@ -45,8 +45,6 @@ export const LuckyDraw = ({
   const [hasSpun, setHasSpun] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState(null);
-  const [hasError, setHasError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   // Generic prize segments for wheel display
   const prizes = [
@@ -62,11 +60,6 @@ export const LuckyDraw = ({
     { id: 10, prize_name: "Special" },
   ];
 
-  const triggerError = (title, message, details = null) => {
-    toast.error(`${title}: ${message}`);
-    if (details) console.error("Error details:", details);
-  };
-
   const handleSpin = async () => {
     if (isSpinning || hasSpun) return;
 
@@ -78,13 +71,10 @@ export const LuckyDraw = ({
       toast.error(
         "Session error: Missing required information. Please try skipping or go back.",
       );
-      console.error("Missing IDs:", { merchantId, customerId });
       return;
     }
 
     setIsSpinning(true);
-    setHasError(false);
-    setErrorMessage("");
 
     // Smooth slower spin animation (increased rotations and duration)
     // 8 seconds duration for better suspense and engagement
@@ -118,64 +108,42 @@ export const LuckyDraw = ({
       setTimeout(() => {
         setIsSpinning(false);
         setHasSpun(true);
+        setResult(prizeData);
+        setReward(prizeData);
+        toast.success(
+          `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`,
+        );
 
-        // Check for WhatsApp errors - treat as failure
         const whatsappStatus = prizeData?.whatsapp_notification;
-        const hasWhatsAppError =
-          prizeData?.whatsapp_status === "failed" ||
-          prizeData?.whatsapp_error ||
-          prizeData?.error === "whatsapp_credit_low" ||
-          whatsappStatus?.credits_insufficient;
-
-        if (hasWhatsAppError) {
-          setHasError(true);
-          setErrorMessage(
-            whatsappStatus?.credits_insufficient
-              ? `WhatsApp delivery failed: Only ${whatsappStatus?.available_credits ?? 0} credits remaining`
-              : "Failed to send reward notification via WhatsApp",
+        if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
+          toast.error(
+            `Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`,
           );
-          toast.error("Reward delivery failed. Please contact staff.");
-        } else {
-          setResult(prizeData);
-          setReward(prizeData);
-          toast.success(
-            `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`,
-          );
+        } else if (
+          whatsappStatus?.sent &&
+          !whatsappStatus?.credits_insufficient
+        ) {
           toast.success("Success: Reward details sent to your WhatsApp!");
         }
       }, 8000);
     } catch (error) {
-      console.error("Lucky Draw Error:", error);
+      // Stop the wheel animation immediately
+      setIsSpinning(false);
+      setRotation(rotation); // Reset to current position
 
-      // Stop the wheel animation after 8 seconds
-      setTimeout(() => {
-        setIsSpinning(false);
-        setHasSpun(true);
-        setHasError(true);
+      const responseData = error.response?.data;
+      const status = error.response?.status;
+      const errorMsg =
+        responseData?.message ||
+        responseData?.error ||
+        "Failed to process your spin. Please try again or contact merchant staff.";
 
-        const responseData = error.response?.data;
-        const status = error.response?.status;
-        const errorCode = responseData?.statusCode || status;
-        const errorMsg =
-          responseData?.message ||
-          "Failed to process your spin. Please try again or contact merchant staff.";
-
-        setErrorMessage(errorMsg);
-        toast.error(`Spin Error: ${errorMsg}`);
-
-        // Log detailed error for debugging
-        console.error("Spin error details:", {
-          code: errorCode,
-          message: errorMsg,
-          details: responseData?.errors || responseData?.error,
-        });
-      }, 8000);
+      toast.error(errorMsg);
     }
   };
   // Validate customer ID on mount - show warning if missing
   useEffect(() => {
     if (!customerId || isNaN(parseInt(customerId))) {
-      console.warn("Lucky Draw: Missing or invalid customer ID", customerId);
       toast.warning("Session warning: You can skip lucky draw if needed.", {
         duration: 5000,
       });
@@ -212,55 +180,39 @@ export const LuckyDraw = ({
 
             <div className="space-y-4">
               <h1 className="text-5xl font-bold text-white leading-tight tracking-tight">
-                {hasError ? (
-                  <>
-                    <span className="text-4xl">Oops!</span>
-                    <br />
-                    <span className="text-5xl bg-clip-text text-transparent bg-linear-to-r from-white via-red-200 to-white animate-shimmer bg-size-[200%_100%]">
-                      Something Went Wrong
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Test Your
-                    <br />
-                    <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
-                      Luck
-                    </span>
-                  </>
-                )}
+                Test Your
+                <br />
+                <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
+                  Luck
+                </span>
               </h1>
               <p className="text-lg text-white/90 font-medium max-w-md leading-relaxed">
-                {hasError
-                  ? "Don't worry! You can try again or continue without the lucky draw."
-                  : "Every spin is a guaranteed win! Your feedback deserves a reward."}
+                Every spin is a guaranteed win! Your feedback deserves a reward.
               </p>
 
-              {!hasError && (
-                <div className="flex items-center justify-center gap-6 pt-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">
-                      {prizes.length || 10}+
-                    </div>
-                    <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
-                      Prizes
-                    </div>
+              <div className="flex items-center justify-center gap-6 pt-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">
+                    {prizes.length || 10}+
                   </div>
-                  <div className="w-px h-12 bg-white/20"></div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">100%</div>
-                    <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
-                      Win Rate
-                    </div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Prizes
                   </div>
                 </div>
-              )}
+                <div className="w-px h-12 bg-white/20"></div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white">100%</div>
+                  <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
+                    Win Rate
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Panel - Wheel */}
-        <div className="bg-white/80 backdrop-blur-2xl  p-8 md:p-12 border border-amber-200/50 shadow-2xl min-h-[700px] flex flex-col">
+        <div className="bg-white/95 backdrop-blur-3xl  p-8 md:p-12 lg:p-14 border border-slate-200/50 shadow-2xl h-full flex flex-col relative overflow-hidden">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 text-center relative">
             <Button
@@ -363,146 +315,7 @@ export const LuckyDraw = ({
             </div>
 
             {/* Action Area */}
-            {hasError ? (
-              <div className="text-center space-y-6 w-full max-w-md px-4">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="relative">
-                    {/* Error Icon with Gradient Background */}
-                    <div className="w-20 h-20 rounded-3xl bg-linear-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center shadow-2xl shadow-red-500/40 animate-pulse">
-                      <svg
-                        className="w-10 h-10 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2.5}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                        />
-                      </svg>
-                    </div>
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 rounded-3xl bg-red-500/20 blur-xl -z-10 animate-pulse"></div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight">
-                      Draw Failed
-                    </h3>
-                    <p className="text-xs uppercase tracking-widest text-red-600 font-bold">
-                      Please Try Again
-                    </p>
-                  </div>
-                </div>
-
-                {/* Error Message Card */}
-                <div className="relative">
-                  <div className="w-full py-6 px-6 rounded-2xl bg-linear-to-br from-red-50 via-white to-red-50 border-2 border-red-200/60 shadow-lg">
-                    <div className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <svg
-                          className="w-3 h-3 text-red-600"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-sm font-semibold text-red-700 leading-relaxed flex-1">
-                        {errorMessage ||
-                          "Unable to complete lucky draw. Please try again or skip."}
-                      </p>
-                    </div>
-                  </div>
-                  {/* Bottom accent line */}
-                  <div className="h-1 w-full bg-linear-to-r from-transparent via-red-500/50 to-transparent rounded-full mt-2"></div>
-                </div>
-
-                <div className="space-y-3 pt-4">
-                  <Button
-                    onClick={() => {
-                      setHasSpun(false);
-                      setHasError(false);
-                      setErrorMessage("");
-                      setResult(null);
-                    }}
-                    className="w-full h-14 rounded-2xl text-sm font-bold uppercase tracking-wide bg-linear-to-r from-zinc-900 via-zinc-800 to-zinc-900 hover:from-zinc-800 hover:via-zinc-700 hover:to-zinc-800 text-white shadow-xl shadow-zinc-900/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      Try Again
-                    </span>
-                  </Button>
-
-                  <Button
-                    onClick={() => {
-                      // Pass actual error data to ThankYou, skip RewardSuccess
-                      // Only mark as WhatsApp error if result actually has WhatsApp error
-                      const hasActualWhatsAppError =
-                        result?.whatsapp_status === "failed" ||
-                        result?.whatsapp_error ||
-                        result?.error === "whatsapp_credit_low" ||
-                        result?.whatsapp_notification?.credits_insufficient;
-
-                      const errorData = {
-                        general_error: !hasActualWhatsAppError,
-                        error_message: errorMessage,
-                        // Only include WhatsApp flags if it's actually a WhatsApp error
-                        ...(hasActualWhatsAppError && {
-                          whatsapp_error: true,
-                          error: "whatsapp_credit_low",
-                          whatsapp_status: "failed",
-                          whatsapp_notification:
-                            result?.whatsapp_notification || {
-                              credits_insufficient: true,
-                              available_credits: 0,
-                            },
-                        }),
-                      };
-                      setReward(errorData);
-                      nextStep("error");
-                    }}
-                    variant="outline"
-                    className="w-full h-14 rounded-2xl text-sm font-bold uppercase tracking-wide border-2 border-zinc-300 hover:border-zinc-400 hover:bg-zinc-50 transition-all active:scale-95"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 7l5 5m0 0l-5 5m5-5H6"
-                        />
-                      </svg>
-                      Skip & Continue
-                    </span>
-                  </Button>
-                </div>
-              </div>
-            ) : !hasSpun ? (
+            {!hasSpun ? (
               <div className="text-center space-y-6 w-full max-w-md px-4">
                 <div className="space-y-3">
                   <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
@@ -536,9 +349,6 @@ export const LuckyDraw = ({
                   {/* Skip button for error fallback */}
                   <button
                     onClick={() => {
-                      toast.info(
-                        "Skipping lucky draw. Redirecting back to start...",
-                      );
                       nextStep("skip");
                     }}
                     disabled={isSpinning}
@@ -589,37 +399,45 @@ export const LuckyDraw = ({
                   </div>
                 </div>
 
-                {/* WhatsApp Status - Success Only */}
-                <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">
-                    Sent to WhatsApp
-                  </span>
-                </div>
+                {/* WhatsApp Status */}
+                {result?.whatsapp_status === "failed" ||
+                  result?.whatsapp_error ||
+                  result?.error === "whatsapp_credit_low" ||
+                  result?.whatsapp_notification?.credits_insufficient ? (
+                  <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200">
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                    <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
+                      {result?.whatsapp_notification?.credits_insufficient
+                        ? `WhatsApp Error (${result?.whatsapp_notification?.available_credits ?? 0} credits left)`
+                        : "WhatsApp Delivery Failed"}
+                    </span>
+                  </div>
+                ) : null}
 
                 {/* Instructions */}
                 <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
-                  <p className="text-xs font-medium text-zinc-600 leading-relaxed">
-                    Reward sent to{" "}
-                    <span className="text-zinc-900 font-bold">
-                      {formValues?.phone || "your number"}
-                    </span>
-                  </p>
+                  {result?.whatsapp_status === "failed" ||
+                    result?.whatsapp_error ||
+                    result?.error === "whatsapp_credit_low" ||
+                    result?.whatsapp_notification?.credits_insufficient ? (
+                    <p className="text-xs font-semibold text-red-600 leading-relaxed">
+                      We couldn&apos;t send to WhatsApp. Please screenshot this
+                      screen to claim your reward.
+                    </p>
+                  ) : (
+                    <p className="text-xs font-medium text-zinc-600 leading-relaxed">
+                      Reward sent to{" "}
+                      <span className="text-zinc-900 font-bold">
+                        {formValues?.phone || "your number"}
+                      </span>
+                    </p>
+                  )}
                 </div>
 
                 {/* Next Button */}
                 <div className="pt-2">
                   <Button
-                    onClick={() => {
-                      // Only proceed if we have valid reward data
-                      if (result && !hasError) {
-                        nextStep();
-                      } else {
-                        toast.error(
-                          "Cannot proceed without valid reward. Please try again.",
-                        );
-                      }
-                    }}
+                    onClick={nextStep}
                     className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wide bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg transition-all active:scale-95"
                   >
                     <span className="flex items-center justify-center gap-2">

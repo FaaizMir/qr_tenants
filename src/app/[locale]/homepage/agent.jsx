@@ -68,7 +68,7 @@ export default function AgentLandingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
-  const [sortBy, setSortBy] = useState("newest"); 
+  const [sortBy, setSortBy] = useState("newest");
 
   // Derived lists
   const [categories, setCategories] = useState([]);
@@ -520,10 +520,12 @@ export default function AgentLandingPage() {
             </div>
 
             {/* Right Column: Merchant Detail + Right Sidebar Ad */}
-            <div className={cn(
-              "col-span-1 lg:col-span-5 xl:col-span-4 lg:block min-w-0 transition-all duration-700",
-              leftAd && "lg:col-span-4"
-            )}>
+            <div
+              className={cn(
+                "col-span-1 lg:col-span-5 xl:col-span-4 lg:block min-w-0 transition-all duration-700",
+                leftAd && "lg:col-span-4",
+              )}
+            >
               <div className="sticky top-24 space-y-8">
                 {/* Detail Panel */}
                 <MerchantDetail
