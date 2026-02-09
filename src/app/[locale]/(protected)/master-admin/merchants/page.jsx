@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function AgentMerchantsPage() {
   const breadcrumbData = [
-    { name: "Master Admin", url: "/master-admin/dashboard" },
+    { name: "Master Admin Dashboard", url: "/master-admin/dashboard" },
     { name: "Merchant Management", url: "/master-admin/merchants" },
   ];
   return (
