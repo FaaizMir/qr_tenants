@@ -23,7 +23,7 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
   // Sync internal preview with incoming value
   useEffect(() => {
     if (value?.brand_image) {
-      setPreviewUrl(`${process.env.NEXT_PUBLIC_BACKEND_URL}${value.brand_image}`);
+      setPreviewUrl(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api${value.brand_image}`);
     } else {
       setPreviewUrl(null);
     }
@@ -121,7 +121,7 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
                     <button
                       onClick={() => {
                         setSelectedFile(null);
-                        setPreviewUrl(value?.brand_image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${value.brand_image}` : null);
+                        setPreviewUrl(value?.brand_image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api${value.brand_image}` : null);
                         if (fileInputRef.current) fileInputRef.current.value = "";
                       }}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
