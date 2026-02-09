@@ -68,7 +68,7 @@ export default function AgentLandingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
-  const [sortBy, setSortBy] = useState("newest"); // newest, popularity, expiring
+  const [sortBy, setSortBy] = useState("newest"); 
 
   // Derived lists
   const [categories, setCategories] = useState([]);

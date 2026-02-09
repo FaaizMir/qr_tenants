@@ -74,11 +74,6 @@ export const ReviewForm = ({
   const [selectedPlatform, setSelectedPlatform] = React.useState(null);
   const [recordedFeedbackId, setRecordedFeedbackId] = React.useState(null);
 
-  const triggerError = (title, message, details = null) => {
-    toast.error(`${title}: ${message}`);
-    if (details) console.error("Error details:", details);
-  };
-
   const queryParams = useSearchParams();
   const merchantId =
     queryParams.get("merchantId") || queryParams.get("mid") || "1";
@@ -99,12 +94,7 @@ export const ReviewForm = ({
         );
         setPresetReviews(response.data?.data || []);
       } catch (error) {
-        console.error("Error fetching presets:", error);
-        toast.info(
-          "Quick expressions unavailable. You can write your own feedback.",
-        );
-        // Continue with empty presets array - not a critical error
-        setPresetReviews([]);
+        // Silent fail for presets
       } finally {
         setLoadingPresets(false);
       }
@@ -125,8 +115,7 @@ export const ReviewForm = ({
   const handleFormSubmit = () => {
     // Validate rating
     if (!formValues.rating || formValues.rating < 1) {
-      triggerError(
-        "Rating Required",
+      toast.error(
         "Please provide a star rating (1-5 stars) to share your experience.",
       );
       return;
@@ -134,8 +123,7 @@ export const ReviewForm = ({
 
     // Validate review content (either preset or custom text)
     if (!formValues.text && !selectedPresetId) {
-      triggerError(
-        "Feedback Required",
+      toast.error(
         "Please share your feedback - select a quick expression or write your own.",
       );
       return;
@@ -147,8 +135,7 @@ export const ReviewForm = ({
       formValues.text &&
       formValues.text.trim().length < 3
     ) {
-      triggerError(
-        "Feedback Too Short",
+      toast.error(
         "Please provide more detailed feedback (at least 3 characters).",
       );
       return;
@@ -156,24 +143,21 @@ export const ReviewForm = ({
 
     // Validate identity fields were filled (from previous step)
     if (!formValues.name || formValues.name.trim().length === 0) {
-      triggerError(
-        "Missing Information",
+      toast.error(
         "Your name is required. Please go back and fill in your details.",
       );
       return;
     }
 
     if (!formValues.email || formValues.email.trim().length === 0) {
-      triggerError(
-        "Missing Information",
+      toast.error(
         "Email is required. Please go back and fill in your details.",
       );
       return;
     }
 
     if (!formValues.phone || formValues.phone.trim().length === 0) {
-      triggerError(
-        "Missing Information",
+      toast.error(
         "Phone number is required. Please go back and fill in your details.",
       );
       return;
@@ -181,10 +165,7 @@ export const ReviewForm = ({
 
     // Validate platform selection
     if (!selectedPlatform) {
-      triggerError(
-        "Platform Required",
-        "Please select a review platform to continue.",
-      );
+      toast.error("Please select a review platform to continue.");
       return;
     }
 
@@ -208,14 +189,9 @@ export const ReviewForm = ({
       const safeRating = parseInt(formValues.rating) || 5;
       const safePresetId = isPresetReview ? parseInt(selectedPresetId) : null;
 
-      console.log("Lucky Draw Enabled:", merchantConfig.luckyDrawEnabled);
-      console.log("Effective Batch ID:", effectiveBatchId);
-      console.log("Safe Batch ID:", safeBatchId);
-
       // Validate merchantId is required
       if (isNaN(safeMerchantId)) {
-        triggerError(
-          "Invalid Merchant",
+        toast.error(
           "Invalid merchant profile. Please scan the QR code again or contact staff.",
         );
         return;
@@ -247,109 +223,151 @@ export const ReviewForm = ({
         redirectCompleted: false,
       };
 
-      console.log("Submitting feedback payload:", payload);
-
       // 1. Submit feedback to system
       const response = await axiosInstance.post("/feedbacks", payload);
-      console.log("[ReviewForm] Feedback Response:", response.data);
       const feedbackId = response.data?.data?.id || response.data?.id;
 
-      if (feedbackId) {
-        // 2. Mark redirect as complete (non-critical - don't block on errors)
-        axiosInstance
-          .patch(`/feedbacks/${feedbackId}/complete-redirect`)
-          .then((res) => console.log("Redirect status updated:", res.data))
-          .catch((err) => {
-            console.warn("Non-critical error updating redirect status:", err);
-            // Don't show error to user - this is a background operation
-          });
+      if (!feedbackId) {
+        // Feedback submission failed - show error and stay on form
+        console.error("No feedback ID returned:", response.data);
+        toast.error("Failed to save your feedback. Please try again.");
+        return;
+      }
 
-        const platformMap = {
-          google: merchantConfig.googleReviewLink,
-          facebook: merchantConfig.facebookReviewLink,
-          instagram: merchantConfig.instagramReviewLink,
-          red: merchantConfig.redReviewLink,
-        };
+      // Feedback saved successfully
+      const feedbackData = response.data?.data || response.data;
 
-        const redirectUrl = platformMap[platformId] || merchantConfig.mapLink;
+      // 2. Mark redirect as complete (non-critical - silent background)
+      axiosInstance
+        .patch(`/feedbacks/${feedbackId}/complete-redirect`)
+        .catch(() => {});
 
-        // 3. Open the URL (with error handling for popup blockers)
-        if (redirectUrl) {
-          try {
-            const newWindow = window.open(redirectUrl, "_blank");
-            if (
-              !newWindow ||
-              newWindow.closed ||
-              typeof newWindow.closed === "undefined"
-            ) {
-              toast.warning("Please allow popups to open the review platform.");
-            }
-          } catch (err) {
-            console.warn("Popup blocked or error:", err);
-            toast.warning(
-              "Couldn't open review platform. You can review later.",
-            );
+      const platformMap = {
+        google: merchantConfig.googleReviewLink,
+        facebook: merchantConfig.facebookReviewLink,
+        instagram: merchantConfig.instagramReviewLink,
+        red: merchantConfig.redReviewLink,
+      };
+
+      const redirectUrl = platformMap[platformId] || merchantConfig.mapLink;
+
+      // 3. Open the URL (with error handling for popup blockers)
+      if (redirectUrl) {
+        try {
+          const newWindow = window.open(redirectUrl, "_blank");
+          if (
+            !newWindow ||
+            newWindow.closed ||
+            typeof newWindow.closed === "undefined"
+          ) {
+            toast.warning("Please allow popups to open the review platform.");
           }
+        } catch (err) {
+          toast.warning("Couldn't open review platform. You can review later.");
         }
+      }
 
-        toast.success("Feedback submitted successfully!");
+      toast.success("Feedback submitted successfully!");
 
-        const whatsappStatus =
-          response.data?.data?.whatsapp_notification ||
-          response.data?.whatsapp_notification;
-        if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
-          toast.error(
-            `Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`,
-          );
-        } else if (
-          whatsappStatus?.sent &&
-          !whatsappStatus?.credits_insufficient
-        ) {
-          toast.success("Success: Reward details sent to your WhatsApp!");
+      // 4. Check for coupon/reward and WhatsApp delivery status
+      const whatsappStatus =
+        feedbackData?.whatsapp_notification ||
+        response.data?.whatsapp_notification;
+
+      // Check for WhatsApp errors
+      const hasWhatsAppError =
+        whatsappStatus?.credits_insufficient ||
+        feedbackData?.whatsapp_status === "failed" ||
+        feedbackData?.whatsapp_error ||
+        feedbackData?.error === "whatsapp_credit_low";
+
+      // Check if reward/coupon was issued
+      const hasCoupon =
+        feedbackData?.coupon ||
+        feedbackData?.reward ||
+        feedbackData?.coupon_code;
+
+      if (hasWhatsAppError) {
+        // Rollback: WhatsApp delivery failed
+        const errorDetails = whatsappStatus?.credits_insufficient
+          ? `Only ${whatsappStatus?.available_credits ?? 0} credits remaining.`
+          : "Unable to send reward notification.";
+
+        console.warn("WhatsApp delivery error:", {
+          whatsappStatus,
+          feedbackData,
+          errorDetails,
+        });
+
+        // Pass data without reward to trigger rollback in parent
+        const responseDataWithoutReward = {
+          ...feedbackData,
+          coupon: null,
+          reward: null,
+          coupon_code: null,
+          whatsapp_error: true,
+          error: "whatsapp_credit_low",
+          // Keep customer/feedback info for thank you page
+          customer_id: feedbackData?.customer_id,
+          customer: feedbackData?.customer,
+          id: feedbackData?.id || feedbackId,
+        };
+        nextStep(responseDataWithoutReward);
+      } else if (hasCoupon) {
+        // Success: Coupon issued and WhatsApp sent
+        if (whatsappStatus?.sent) {
+          toast.success("Reward details sent to your WhatsApp!");
         }
-
-        nextStep(response.data?.data || response.data);
+        nextStep(feedbackData);
       } else {
-        triggerError(
-          "Submission Failed",
-          "We couldn't save your feedback. Please try again or check your internet connection.",
-        );
+        // No coupon configured - just proceed to thank you
+        nextStep({
+          ...feedbackData,
+          customer_id: feedbackData?.customer_id,
+          customer: feedbackData?.customer,
+          id: feedbackData?.id || feedbackId,
+        });
       }
     } catch (error) {
-      console.error("Platform Redirect Error:", error);
+      console.error("Feedback submission error:", error);
+
       const responseData = error.response?.data;
       const status = error.response?.status;
 
-      let errorMsg =
-        "An unexpected error occurred while processing your feedback.";
+      // Detailed error handling
+      let errorMsg = "An unexpected error occurred. Please try again.";
 
-      // Provide specific error messages based on status
       if (status === 401 || status === 403) {
         errorMsg = "Authentication error. Please scan the QR code again.";
-      } else if (status === 400) {
-        errorMsg =
-          responseData?.message ||
-          "Invalid feedback data. Please check your entries.";
-      } else if (status === 500) {
-        errorMsg =
-          "Server error. Your feedback may have been saved. Please contact support.";
+      } else if (status === 422) {
+        // Validation error
+        const validationErrors = responseData?.errors;
+        if (validationErrors) {
+          const firstError = Object.values(validationErrors).flat()[0];
+          errorMsg = firstError || responseData?.message || errorMsg;
+        } else {
+          errorMsg = responseData?.message || responseData?.error || errorMsg;
+        }
       } else if (status === 404) {
-        errorMsg = "Service not found. Please contact merchant support.";
+        errorMsg = "Merchant or batch not found. Please contact staff.";
+      } else if (status === 500) {
+        errorMsg = "Server error occurred. Please try again later.";
       } else if (!error.response) {
         errorMsg = "Network error. Please check your internet connection.";
       } else {
-        errorMsg = responseData?.message || errorMsg;
+        errorMsg = responseData?.message || responseData?.error || errorMsg;
       }
 
-      // Show toast with the error
       toast.error(errorMsg);
 
-      // Log detailed error
-      console.error("Feedback submission error details:", {
+      // Log for debugging
+      console.error("Error details:", {
         status,
         message: errorMsg,
-        response: responseData,
+        responseData,
       });
+
+      // Stay on ReviewForm - user can retry
     } finally {
       setLoading(false);
     }
@@ -424,7 +442,7 @@ export const ReviewForm = ({
         </div>
 
         {/* Right Panel - Review Form */}
-        <div className="bg-white/95 backdrop-blur-3xl  p-8 md:p-12 lg:p-14 border border-slate-200/50 shadow-2xl h-full flex flex-col relative overflow-hidden">
+        <div className="bg-white/95 backdrop-blur-3xl  p-8 md:p-12 lg:p-14 border border-slate-200/50 h-full flex flex-col relative overflow-hidden">
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] bg-size-[24px_24px]"></div>
 

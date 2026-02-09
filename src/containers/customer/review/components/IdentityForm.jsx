@@ -9,12 +9,21 @@ import {
   CheckCircle2,
   Phone,
   MapPin,
+  Mail,
+  Users,
 } from "lucide-react";
 import { useWatch, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/form-fields/phone-input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import {
@@ -62,6 +71,9 @@ export const IdentityForm = ({
 
         // Auto-fill fields
         if (data.name) setValue("name", data.name);
+        if (data.email) setValue("email", data.email);
+        if (data.gender) setValue("gender", data.gender);
+        if (data.address) setValue("address", data.address);
 
         if (data.date_of_birth) {
           // Handle various separators: / or - or .
@@ -101,8 +113,9 @@ export const IdentityForm = ({
 
         // Only log errors that aren't 404
         if (err.response?.status !== 404) {
-          console.warn("Customer lookup error:", err.message);
-          // Don't show toast - this is not critical, user can still fill manually
+          const responseData = err.response?.data;
+          const errorMsg = responseData?.message || responseData?.error;
+          if (errorMsg) toast.error(errorMsg);
         }
       }
     },
@@ -115,19 +128,8 @@ export const IdentityForm = ({
     }
   }, [debouncedPhone, lookupCustomerByPhone]);
 
-  const triggerError = (title, message) => {
-    toast.error(`${title}: ${message}`);
-  };
-
   const onSubmit = (data) => {
     nextStep();
-  };
-
-  const onError = (errors) => {
-    const errorMessages = Object.values(errors).map((err) => err.message);
-    if (errorMessages.length > 0) {
-      triggerError("Form Incomplete", errorMessages[0]);
-    }
   };
 
   return (
@@ -186,7 +188,7 @@ export const IdentityForm = ({
         </div>
 
         {/* Right Panel - Form */}
-        <div className="bg-white/80 backdrop-blur-2xl  p-8 md:p-12 border border-slate-200/50 shadow-2xl h-full flex flex-col justify-center overflow-y-auto">
+        <div className="bg-white/95 backdrop-blur-3xl  p-8 md:p-12 lg:p-14 border border-slate-200/50 h-full flex flex-col relative overflow-hidden">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
@@ -199,11 +201,8 @@ export const IdentityForm = ({
               {merchantConfig?.address || "Store Location"}
             </p>
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            className="space-y-6 w-full"
-          >
-            <div className="space-y-6 w-full text-left">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
+            <div className="space-y-5 w-full text-left">
               <PhoneInput
                 name="phone"
                 control={control}
@@ -215,7 +214,6 @@ export const IdentityForm = ({
                 }
                 required
                 defaultCountry="US"
-                disabled={isAutoFilled}
                 placeholder="Enter phone number"
                 className="mb-0"
                 error={formErrors.phone?.message}
@@ -224,7 +222,7 @@ export const IdentityForm = ({
                 }}
               />
 
-              <div className="space-y-2 ">
+              <div className="space-y-2">
                 <Label htmlFor="name" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
                   Full Name <span className="text-red-500">*</span>
@@ -232,37 +230,184 @@ export const IdentityForm = ({
                 <Input
                   id="name"
                   {...register("name", { required: "Name is required" })}
-                  disabled={isAutoFilled}
                   placeholder="Enter your full name"
                   className={formErrors.name ? "border-red-500" : ""}
                 />
                 {formErrors.name && (
-                  <p className="text-xs text-red-500">
-                    {formErrors.name.message}
-                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <svg
+                      className="w-4 h-4 text-red-500 shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="text-sm font-semibold text-red-600">
+                      {formErrors.name.message}
+                    </p>
+                  </div>
                 )}
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="dob" className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  Birthday <span className="text-red-500">*</span>
+                <Label htmlFor="email" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="dob"
-                  type="date"
-                  {...register("dob", {
-                    required: "Date of Birth is required",
+                  id="email"
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
                   })}
-                  disabled={isAutoFilled}
-                  className={formErrors.dob ? "border-red-500" : ""}
-                  max={new Date().toISOString().split("T")[0]}
+                  placeholder="your.email@example.com"
+                  className={formErrors.email ? "border-red-500" : ""}
                 />
-                {formErrors.dob && (
-                  <p className="text-xs text-red-500">
-                    {formErrors.dob.message}
-                  </p>
+                {formErrors.email && (
+                  <div className="flex items-center gap-2 mt-1">
+                    <svg
+                      className="w-4 h-4 text-red-500 shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="text-sm font-semibold text-red-600">
+                      {formErrors.email.message}
+                    </p>
+                  </div>
                 )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="address" className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  Address <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="address"
+                  {...register("address", {
+                    required: "Address is required",
+                  })}
+                  placeholder="Enter your address"
+                  className={formErrors.address ? "border-red-500" : ""}
+                />
+                {formErrors.address && (
+                  <div className="flex items-center gap-2 mt-1">
+                    <svg
+                      className="w-4 h-4 text-red-500 shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="text-sm font-semibold text-red-600">
+                      {formErrors.address.message}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="dob" className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    Birthday <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="dob"
+                    type="date"
+                    {...register("dob", {
+                      required: "Date of Birth is required",
+                    })}
+                    className={formErrors.dob ? "border-red-500" : ""}
+                    max={new Date().toISOString().split("T")[0]}
+                  />
+                  {formErrors.dob && (
+                    <div className="flex items-center gap-2 mt-1">
+                      <svg
+                        className="w-4 h-4 text-red-500 shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <p className="text-sm font-semibold text-red-600">
+                        {formErrors.dob.message}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-2 ">
+                  <Label htmlFor="gender" className="flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    Gender <span className="text-red-500">*</span>
+                  </Label>
+                  <Controller
+                    name="gender"
+                    control={control}
+                    rules={{ required: "Gender is required" }}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger
+                          className={`w-full ${formErrors.gender ? "border-red-500" : ""}`}
+                        >
+                          <SelectValue placeholder="Select gender" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="prefer_not_to_say">
+                            Prefer not to say
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {formErrors.gender && (
+                    <div className="flex items-center gap-2 mt-1">
+                      <svg
+                        className="w-4 h-4 text-red-500 shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <p className="text-sm font-semibold text-red-600">
+                        {formErrors.gender.message}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="pt-6">
