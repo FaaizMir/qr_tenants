@@ -121,12 +121,10 @@ export default function SystemLogsContainer({
     "";
   const isAdminOrSuper = userRole === "admin" || userRole === "super_admin";
 
-  // Compute available log types; if merchant user is temporary, hide BI whatsapp entries
-  // If admin/super_admin in master-admin scope, show all whatsapp_ui and whatsapp_bi options
+ 
   const availableLogTypes = useMemo(() => {
     let base = Array.isArray(LOG_TYPES[scope]) ? LOG_TYPES[scope] : [];
 
-    // For admin/super_admin in master-admin scope, add expanded whatsapp options
     if (isAdminOrSuper && scope === "master-admin") {
       const expandedOptions = [
         {
@@ -146,7 +144,6 @@ export default function SystemLogsContainer({
           category: "wallet",
         },
       ];
-      // Insert expanded options after the base WhatsApp Logs entry
       const insertIdx = base.findIndex((t) => t.category === "whatsapp");
       if (insertIdx >= 0) {
         base = [
@@ -215,7 +212,47 @@ export default function SystemLogsContainer({
       const logsData = res.data?.data;
       const meta = res.data?.meta;
 
-      setLogs(Array.isArray(logsData) ? logsData : []);
+      // Filter out logs created by admin roles for merchants and agents
+      let filteredLogs = Array.isArray(logsData) ? logsData : [];
+
+      if (scope === "merchant" || scope === "agent") {
+        const excludedUserTypes = [
+          "super_admin",
+          "admin",
+          "finance_viewer",
+          "support_staff",
+          "ad_approver",
+        ];
+
+        filteredLogs = filteredLogs.filter((log) => {
+          // Check user_type field
+          const logUserType = log.user_type?.toLowerCase();
+          if (logUserType && excludedUserTypes.includes(logUserType)) {
+            return false;
+          }
+
+          // Check metadata.user_type
+          const metadataUserType = log.metadata?.user_type?.toLowerCase();
+          if (
+            metadataUserType &&
+            excludedUserTypes.includes(metadataUserType)
+          ) {
+            return false;
+          }
+
+          // Check if log has associated user data
+          if (log.user?.role) {
+            const userRole = log.user.role.toLowerCase();
+            if (excludedUserTypes.includes(userRole)) {
+              return false;
+            }
+          }
+
+          return true;
+        });
+      }
+
+      setLogs(filteredLogs);
       setTotal(meta?.total || 0);
     } catch (error) {
       console.error("Error fetching logs:", error);

@@ -30,7 +30,7 @@ export default function MerchantCreateCouponContainer() {
   const isAnnual = subscriptionType.toLowerCase() === "annual";
   const maxPerBatch = isAnnual ? 1000 : 100;
   const [loading, setLoading] = useState(false);
-
+  const today = new Date().toISOString().split("T")[0];
   // form state
   const [batchName, setBatchName] = useState("");
   const batchType = isAnnual ? "annual" : "temporary";
@@ -191,6 +191,7 @@ export default function MerchantCreateCouponContainer() {
                     <Input
                       id="start"
                       type="date"
+                      min={today}
                       required
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
@@ -201,6 +202,7 @@ export default function MerchantCreateCouponContainer() {
                     <Input
                       id="end"
                       type="date"
+                      min={startDate || today}
                       required
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}

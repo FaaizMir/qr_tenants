@@ -7,7 +7,7 @@ export default async function AgentLogsPage() {
   const session = await getServerSession(authOptions);
   const agentId = session?.user?.adminId;
   const breadcrumbData = [
-    { name: tAgentEarnings("agentdashboard"), url: "/agent/dashboard" },
+    { name: "Agent Dashboard", url: "/agent/dashboard" },
     { name: "System Logs", url: "/agent/logs" },
   ];
   return (
