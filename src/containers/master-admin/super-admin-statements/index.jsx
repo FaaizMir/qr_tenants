@@ -83,9 +83,10 @@ export default function SuperAdminStatementsContainer() {
 
       const responseData = response.data.data || response.data;
       const statementsArray = Array.isArray(responseData) ? responseData : [];
+      const metadata = response.data.meta || response.data.metadata || {};
 
       setStatements(statementsArray);
-      setTotal(statementsArray.length);
+      setTotal(metadata.total || metadata.totalCount || statementsArray.length);
     } catch (error) {
       console.error("Failed to fetch statements:", error);
       toast.error("Failed to load statements. Please try again.");

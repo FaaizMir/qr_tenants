@@ -17,7 +17,15 @@ function injectContent(html, content) {
     ""
   );
 
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+  const logoUrl = content.brand_image
+    ? (content.brand_image.startsWith("http") || content.brand_image.startsWith("blob:")
+      ? content.brand_image
+      : `${baseUrl}${content.brand_image}`)
+    : "/placeholder-logo.png";
+
   return cleanedHtml
+    .replace(/{{logo}}/g, logoUrl)
     .replace(/{{header}}/g, content.header || "Header")
     .replace(/{{title}}/g, content.title || "Title")
     .replace(/{{description}}/g, content.description || "Description");

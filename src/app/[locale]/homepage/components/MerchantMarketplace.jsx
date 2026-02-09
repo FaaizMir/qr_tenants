@@ -39,10 +39,10 @@ import Image from "next/image";
 // --- HELPERS ---
 const CATEGORY_IMAGES = {
   retail: [
-    "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80", // Store
-    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80", // Shop front
-    "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=800&q=80", // Clothing
-    "https://images.unsplash.com/photo-1472851294608-41551b4183d2?auto=format&fit=crop&w=800&q=80", // Shopping bags
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop", // Shop
+    "https://images.unsplash.com/photo-1472851294608-41551b4183d2?q=80&w=1000&auto=format&fit=crop", // Marketplace
+    "https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?q=80&w=1000&auto=format&fit=crop", // Boutique
+    "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=1000&auto=format&fit=crop", // Department Store
   ],
   food: [
     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80", // Restaurant
@@ -96,7 +96,9 @@ function getCategoryImage(category, id) {
     normalizedCat.includes("fashion") ||
     normalizedCat.includes("clothing") ||
     normalizedCat.includes("boutique") ||
-    normalizedCat.includes("store")
+    normalizedCat.includes("store") ||
+    normalizedCat.includes("industry") ||
+    normalizedCat.includes("industory")
   )
     key = "retail";
   else if (
@@ -147,14 +149,14 @@ function getCategoryImage(category, id) {
   )
     key = "services";
 
-  const images = CATEGORY_IMAGES[key];
+  const images = CATEGORY_IMAGES[key] || CATEGORY_IMAGES.default;
 
   // Deterministic selection based on ID
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-        .split("")
-        .reduce((a, b) => a + b.charCodeAt(0), 0)
+      .split("")
+      .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -302,13 +304,29 @@ export function MerchantList({
 }) {
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div
-            key={i}
-            className="h-[300px] w-full bg-slate-100 rounded-3xl animate-pulse"
-          />
-        ))}
+      <div className="flex flex-col items-center justify-center py-40 min-h-[400px] w-full animate-in fade-in duration-700">
+        <div className="relative mb-8">
+          {/* Outer Ring */}
+          <div className="w-24 h-24 rounded-full border-[3px] border-slate-100 border-t-primary border-r-primary/30 animate-spin" />
+          {/* Inner Pulsing Icon */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center animate-pulse shadow-inner border border-slate-100">
+              <Store className="w-8 h-8 text-primary/60" />
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center space-y-2">
+          <h3 className="font-bold text-slate-900 text-xl tracking-tight">
+            Loading Marketplace
+          </h3>
+          <p className="text-slate-400 text-sm font-medium max-w-60 mx-auto leading-relaxed">
+            We&apos;re curating the best verified merchants and exclusive deals
+            for you...
+          </p>
+        </div>
+
+
       </div>
     );
   }
@@ -337,28 +355,31 @@ export function MerchantList({
   const combinedItems = [];
   let adIndex = 0;
 
-  // Inject an ad every 6 merchants (responsive grid friendly)
-  const AD_INTERVAL = 6;
-
   merchants.forEach((merchant, index) => {
     combinedItems.push({ type: "merchant", data: merchant });
 
     // Inject ad after specific intervals if available
-    if ((index + 1) % AD_INTERVAL === 0 && ads.length > 0) {
+    const AD_INTERVAL = merchants.length < 4 ? 2 : 6;
+
+    if ((index + 1) % AD_INTERVAL === 0 && ads.length > adIndex) {
       combinedItems.push({
         type: "ad",
-        data: ads[adIndex % ads.length],
+        data: ads[adIndex],
       });
       adIndex++;
     }
   });
 
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="space-y-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10">
         {combinedItems.map((item, idx) => {
           if (item.type === "ad") {
-            return <InlineAd key={`ad-${idx}`} ad={item.data} />;
+            return (
+              <div key={`ad-${idx}`} className="h-full">
+                <InlineAd ad={item.data} />
+              </div>
+            );
           }
 
           const merchant = item.data;
@@ -369,48 +390,66 @@ export function MerchantList({
               key={merchant.id}
               onClick={() => setSelectedMerchantId(merchant.id)}
               className={cn(
-                "group relative bg-white rounded-3xl overflow-hidden transition-all duration-300 cursor-pointer flex flex-col h-full min-h-[300px] shadow-xl",
+                "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col h-full min-h-[380px] transition-all duration-500",
+                "shadow-md shadow-slate-200/60 ",
                 isSelected
-                  ? "shadow-xl z-10"
-                  : "hover:shadow-xl hover:-translate-y-1",
+                  ? "shadow-xl shadow-slate-300/70"
+                  : "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2",
               )}
             >
               {/* Cover Image Area */}
-              <div className="h-32 bg-slate-100 relative overflow-hidden">
+              <div className="h-44 bg-slate-200 relative overflow-hidden">
                 <Image
                   src={getCategoryImage(merchant.category, merchant.id)}
                   alt="cover"
-                  className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                   fill
                   unoptimized
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
-                <Badge className="absolute top-3 right-3 bg-white/90 text-slate-800 backdrop-blur-sm hover:bg-white border-none shadow-sm font-bold">
-                  {merchant.category}
-                </Badge>
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
+
+                {/* Featured Badge or Tag */}
+                <div className="absolute top-4 left-4 flex gap-2">
+                  <Badge className="bg-white/20 backdrop-blur-md text-white border-white/20 hover:bg-white/30 border-none shadow-sm font-semibold text-[10px] uppercase tracking-wider px-3">
+                    {merchant.category}
+                  </Badge>
+                </div>
+
+                <div className="absolute bottom-4 right-4 flex items-center justify-between pointer-events-none">
+                  <div className="flex items-center gap-1.5 px-3 py-1 bg-black/20 backdrop-blur-md rounded-full text-white/90 text-[10px] font-semibold uppercase tracking-wider">
+                    <MapPin className="w-3 h-3 text-emerald-400" />
+                    {merchant.city}
+                  </div>
+                </div>
               </div>
 
               {/* Content */}
-              <div className="p-5 pt-12 flex-1 flex flex-col relative">
-                {/* Logo/Icon */}
-                <div className="absolute -top-8 left-5 h-16 w-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-slate-50 group-hover:scale-110 transition-transform">
-                  <Store className="h-8 w-8 text-primary" />
+              <div className="p-6 pt-6 flex-1 flex flex-col relative bg-white border-x border-b border-slate-50 rounded-b-[2.5rem]">
+                <div className="space-y-2 mb-6 text-left ">
+                  <h3 className="font-bold text-xl text-slate-900 leading-tight group-hover:text-primary transition-colors">
+                    {merchant.name}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-0.5">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <div
+                          key={i}
+                          className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">
+                      Verified Merchant
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="font-bold text-lg text-slate-900 mb-1 leading-tight group-hover:text-primary transition-colors">
-                  {merchant.name}
-                </h3>
-                <p className="text-sm text-slate-500 mb-4 flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                  {merchant.city}
-                </p>
-
-                <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] uppercase text-slate-400 font-bold tracking-wider">
-                      Active Deals
+                <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                  <div className="flex flex-col text-left">
+                    <span className="text-[9px] uppercase text-slate-400 font-bold tracking-wider">
+                      Available Deals
                     </span>
-                    <span className="text-sm font-bold text-slate-900">
+                    <span className="text-base font-bold text-slate-900">
                       {merchant.batches?.length || 0} Offers
                     </span>
                   </div>
@@ -418,13 +457,13 @@ export function MerchantList({
                     size="sm"
                     variant={isSelected ? "default" : "secondary"}
                     className={cn(
-                      "rounded-xl font-bold transition-all",
+                      "rounded-2xl font-bold text-[11px] uppercase tracking-wide transition-all h-10 px-6",
                       isSelected
-                        ? "bg-primary text-white"
-                        : "bg-slate-100 text-slate-600",
+                        ? "bg-primary text-white shadow-lg shadow-primary/30"
+                        : "bg-slate-50 text-slate-600 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20",
                     )}
                   >
-                    View <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                    Details <ChevronRight className="w-4 h-4 ml-1" />
                   </Button>
                 </div>
               </div>
@@ -468,17 +507,27 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
   if (!activeMerchant) {
     return (
-      <div className="hidden lg:flex sticky top-28 h-[600px] w-full flex-col items-center justify-center text-center p-8 border border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
-        <div className="h-20 w-20 bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-300">
-          <Store className="h-10 w-10" />
+      <div className="hidden lg:flex sticky top-28 h-[600px] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
+        <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col items-center">
+          <h3 className="font-bold text-slate-900 text-2xl mb-4 tracking-tight">
+            Ready to Explore?
+          </h3>
+          <p className="text-slate-400 max-w-60 text-sm font-medium leading-relaxed">
+            Click on a merchant profile on the left to unlock their{" "}
+            <span className="text-primary font-semibold">
+              exclusive coupons
+            </span>{" "}
+            and limited-time offers.
+          </p>
+
+          <div className="mt-10 flex items-center gap-2 opacity-30">
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+          </div>
         </div>
-        <h3 className="font-bold text-slate-900 text-lg mb-2">
-          Select a Merchant
-        </h3>
-        <p className="text-slate-500 max-w-xs text-sm">
-          Click on any merchant card to view their exclusive coupons and active
-          offers here.
-        </p>
       </div>
     );
   }
@@ -502,11 +551,8 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
         </div>
 
         <div className="absolute bottom-6 left-6 right-6 flex items-end gap-5">
-          <div className="h-24 w-24 bg-white rounded-2xl shadow-xl flex items-center justify-center shrink-0 border-4 border-slate-900">
-            <Store className="h-10 w-10 text-primary" />
-          </div>
-          <div className="pb-1 text-white">
-            <h2 className="text-2xl md:text-3xl font-black leading-none mb-2">
+          <div className="pb-1 text-white   ">
+            <h2 className="text-2xl md:text-3xl font-bold leading-none mb-2">
               {activeMerchant.name}
             </h2>
             <p className="text-slate-400 text-sm font-medium flex items-center gap-1.5">
@@ -533,7 +579,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
             activeMerchant.batches.map((batch) => (
               <div
                 key={batch.id}
-                className="group bg-white rounded-2xl border border-slate-100 hover:border-primary/30 shadow-sm hover:shadow-md transition-all relative overflow-hidden flex flex-col"
+                className="group bg-white rounded-2xl shadow-sm shadow-slate-200/70 hover:shadow-lg hover:scale-[0.99] hover:shadow-slate-300/40 hover:-translate-y-0.5 transition-all duration-300 ease-out relative overflow-hidden flex flex-col"
               >
                 <div className="absolute top-2 right-2 z-10">
                   <Badge
@@ -584,7 +630,6 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
             ))
           ) : (
             <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-              <Store className="h-8 w-8 text-slate-300 mx-auto mb-3" />
               <p className="text-sm text-slate-500 font-medium">
                 No active coupons at the moment.
               </p>
