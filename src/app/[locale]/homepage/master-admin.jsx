@@ -18,11 +18,12 @@ import {
   ShieldCheck,
   CreditCard,
 } from "lucide-react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import {
   Select,
   SelectContent,
@@ -46,15 +47,24 @@ export default function MasterAdminLandingPage() {
 
   const [selectedAgent, setSelectedAgent] = useState(null);
 
+  // Refs
+  const agentListRef = useRef(null);
+
   // Data State
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
 
   // Filter State
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("all");
   const [countries, setCountries] = useState([]);
+
+  // Pagination State
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [totalAgents, setTotalAgents] = useState(0);
 
   // Mocked Platform Stats (since real endpoint might not exist yet)
   const stats = [
@@ -81,68 +91,91 @@ export default function MasterAdminLandingPage() {
     },
   ];
 
-  // Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 8;
+  const fetchAgents = useCallback(
+    async (pageNum = 1, reset = false) => {
+      if (reset) {
+        setLoading(true);
+        setPage(1);
+      } else {
+        setLoadingMore(true);
+      }
 
-  useEffect(() => {
-    const fetchAgents = async () => {
-      setLoading(true);
       try {
-        const response = await axiosInstance.get("/coupons/super-admin-feed");
-        // Check structure
+        const response = await axiosInstance.get("/coupons/super-admin-feed", {
+          params: {
+            page: pageNum,
+            pageSize: 6, // Fetch 6 agents per page
+            search: searchQuery,
+            country: selectedCountry === "all" ? undefined : selectedCountry,
+          },
+        });
+
         const agentsData = response.data?.data?.admins || [];
 
-        const transformed = agentsData.map((agent) => ({
-          id: agent.id,
-          name: agent.name || agent.user?.name || "Unknown Agent",
-          email: agent.email || agent.user?.email,
-          location: agent.city || agent.country || agent.address || "Global",
-          country: agent.country || "Unknown",
-          status:
-            agent.is_active === true ||
+        const transformed = agentsData
+          .filter((agent) => agent && agent.id)
+          .slice(0, 6) // Ensure max 6 agents per page
+          .map((agent) => ({
+            id: agent.id,
+            name: agent.name || agent.user?.name || "Unknown Agent",
+            email: agent.email || agent.user?.email,
+            location: agent.city || agent.country || agent.address || "Global",
+            country: agent.country || "Unknown",
+            status:
+              agent.is_active === true ||
               agent.is_active === 1 ||
               agent.user?.is_active === true ||
               agent.user?.is_active === 1
-              ? "active"
-              : "inactive",
-          joined: new Date().toLocaleDateString(),
-          merchantsCount: agent.merchants?.length || 0,
-        }));
-        setAgents(transformed);
+                ? "active"
+                : "inactive",
+            joined: new Date().toLocaleDateString(),
+            merchantsCount: agent.merchants?.length || 0,
+          }));
 
-        const uniqueCountries = [...new Set(transformed.map((a) => a.country))]
-          .filter(Boolean)
-          .sort();
-        setCountries(uniqueCountries);
+        if (reset) {
+          setAgents(transformed);
+          // Extract filter options from first page
+          const uniqueCountries = [
+            ...new Set(transformed.map((a) => a.country)),
+          ]
+            .filter(Boolean)
+            .sort();
+          setCountries(uniqueCountries);
+        } else {
+          setAgents((prev) => [...prev, ...transformed]);
+        }
+
+        // Update pagination state
+        setHasMore(transformed.length === 6);
+        setTotalAgents(response.data?.pagination?.total || transformed.length);
+        setPage(pageNum);
       } catch (err) {
         console.error(err);
         setError("Failed to load agents.");
       } finally {
         setLoading(false);
+        setLoadingMore(false);
       }
-    };
-    fetchAgents();
-  }, []);
-
-  // Use Memo for filtering to avoid re-calc
-  const filteredAgents = useMemo(() => {
-    return agents.filter((agent) => {
-      const matchSearch =
-        agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        agent.email?.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchCountry =
-        selectedCountry === "all" || agent.country === selectedCountry;
-      return matchSearch && matchCountry;
-    });
-  }, [agents, searchQuery, selectedCountry]);
-
-  // Pagination Logic
-  const totalPages = Math.ceil(filteredAgents.length / ITEMS_PER_PAGE);
-  const paginatedAgents = filteredAgents.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE,
+    },
+    [searchQuery, selectedCountry],
   );
+
+  useEffect(() => {
+    fetchAgents(1, true);
+  }, [fetchAgents]);
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      fetchAgents(page + 1, false);
+      // Scroll to agent list after a short delay
+      setTimeout(() => {
+        agentListRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
+    }
+  };
 
   const handleAgentClick = (agent) => {
     router.push(`/homepage/agent?agentId=${agent.id}`);
@@ -277,10 +310,7 @@ export default function MasterAdminLandingPage() {
 
                   <Select
                     value={selectedCountry}
-                    onValueChange={(val) => {
-                      setSelectedCountry(val);
-                      setCurrentPage(1);
-                    }}
+                    onValueChange={(val) => setSelectedCountry(val)}
                   >
                     <SelectTrigger className="w-full sm:w-[180px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-lg text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">
@@ -305,26 +335,33 @@ export default function MasterAdminLandingPage() {
                 <div className="py-20 flex justify-center">
                   <Loader2 className="h-10 w-10 animate-spin text-primary" />
                 </div>
-              ) : filteredAgents.length > 0 ? (
+              ) : agents.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {paginatedAgents.map((agent) => (
-                      <div
-                        key={agent.id}
-                        onClick={() => handleAgentClick(agent)}
-                        className="
-    group bg-white rounded-3xl p-1
-    shadow-sm hover:shadow-xl
-    transition-all duration-300
-    cursor-pointer flex flex-col relative
-    overflow-hidden
-    hover:-translate-y-1
-  "
-                      >
-                        <div className="relative p-6 flex flex-col h-full z-10">
+                  {/* Scrollable Container - Fixed height for 6 agents */}
+                  <div
+                    ref={agentListRef}
+                    className={cn(
+                      "overflow-y-auto scroll-smooth h-[800px] pr-2",
+                      // Custom scrollbar styles
+                      "[&::-webkit-scrollbar]:w-2",
+                      "[&::-webkit-scrollbar-track]:bg-slate-100",
+                      "[&::-webkit-scrollbar-track]:rounded-full",
+                      "[&::-webkit-scrollbar-thumb]:bg-slate-300",
+                      "[&::-webkit-scrollbar-thumb]:rounded-full",
+                      "[&::-webkit-scrollbar-thumb]:hover:bg-slate-400",
+                    )}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                      {agents.map((agent) => (
+                        <div
+                          key={agent.id}
+                          onClick={() => handleAgentClick(agent)}
+                          className="group bg-white rounded-3xl p-6 border border-slate-200 shadow-md 
+  hover:shadow-xl  transition-all duration-300 ease-out cursor-pointer flex flex-col relative mb-2"
+                        >
                           {/* Header */}
                           <div className="flex items-start justify-between mb-6">
-                            <div className="h-14 w-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-xl font-black text-slate-700 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-xl font-black text-primary transition-all duration-300">
                               {agent.name.charAt(0)}
                             </div>
                             <Badge
@@ -334,10 +371,10 @@ export default function MasterAdminLandingPage() {
                                   : "secondary"
                               }
                               className={cn(
-                                "uppercase text-[10px] tracking-widest font-bold px-2 py-0.5 border shadow-none",
+                                "uppercase text-[10px] tracking-widest font-bold px-2.5 py-1 border-0",
                                 agent.status === "active"
-                                  ? "bg-emerald-50 text-emerald-600 border-emerald-100"
-                                  : "bg-slate-50 text-slate-400 border-slate-100",
+                                  ? "bg-emerald-100 text-emerald-700"
+                                  : "bg-slate-100 text-slate-500",
                               )}
                             >
                               {agent.status}
@@ -346,61 +383,52 @@ export default function MasterAdminLandingPage() {
 
                           {/* Content */}
                           <div className="mb-6 flex-1 space-y-3">
-                            <h3 className="font-bold text-xl text-slate-900 group-hover:text-primary transition-colors line-clamp-1 tracking-tight">
+                            <h3 className="font-bold text-lg text-slate-900 line-clamp-1 tracking-tight">
                               {agent.name}
                             </h3>
 
-                            <div className="space-y-2">
-                              <div className="flex items-center text-xs font-bold text-slate-500">
-                                <MapPin className="h-4 w-4 mr-2 text-slate-300" />
+                            <div className="space-y-2.5">
+                              <div className="flex items-center text-xs font-medium text-slate-500">
+                                <MapPin className="h-3.5 w-3.5 mr-2 text-slate-400" />
                                 {agent.location}
                               </div>
-                              <div className="flex items-center text-xs font-bold text-slate-500">
-                                <Store className="h-4 w-4 mr-2 text-slate-300" />
+                              <div className="flex items-center text-xs font-medium text-slate-500">
+                                <Store className="h-3.5 w-3.5 mr-2 text-slate-400" />
                                 {agent.merchantsCount} Active Merchants
                               </div>
                             </div>
                           </div>
 
                           {/* Footer Actions */}
-                          <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between text-sm font-bold text-primary transition-colors duration-300">
+                          <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-primary transition-colors duration-300">
                             <span className="group-hover:translate-x-1 transition-transform duration-300">
                               View Storefront
                             </span>
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <div className="flex justify-center items-center gap-4 pt-10">
+                  {/* Load More Button */}
+                  {hasMore && (
+                    <div className="flex justify-center pt-8">
                       <Button
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full hover:bg-slate-200"
-                        onClick={() =>
-                          setCurrentPage((p) => Math.max(1, p - 1))
-                        }
-                        disabled={currentPage === 1}
+                        variant="outline"
+                        size="lg"
+                        className="rounded-full px-8 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-bold"
+                        onClick={handleLoadMore}
+                        disabled={loadingMore}
                       >
-                        <ChevronLeft className="h-5 w-5" />
-                      </Button>
-                      <span className="text-sm font-bold text-slate-500 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
-                        Page {currentPage} of {totalPages}
-                      </span>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full hover:bg-slate-200"
-                        onClick={() =>
-                          setCurrentPage((p) => Math.min(totalPages, p + 1))
-                        }
-                        disabled={currentPage === totalPages}
-                      >
-                        <ChevronRight className="h-5 w-5" />
+                        {loadingMore ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Loading...
+                          </>
+                        ) : (
+                          "Load More Agents"
+                        )}
                       </Button>
                     </div>
                   )}

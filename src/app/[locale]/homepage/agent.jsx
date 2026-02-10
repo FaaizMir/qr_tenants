@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
@@ -50,6 +50,9 @@ export default function AgentLandingPage() {
   const searchParams = useSearchParams();
   const locale = useLocale();
   const agentId = searchParams.get("agentId");
+
+  // Refs
+  const merchantListRef = useRef(null);
 
   // State
   const [agent, setAgent] = useState(null);
@@ -134,7 +137,7 @@ export default function AgentLandingPage() {
           params: {
             adminId: agentId,
             page: pageNum,
-            limit: 20, // Fetch 20 merchants per page
+            pageSize: 6, // Fetch 6 merchants per page
             search: searchQuery,
             category: selectedCategory === "all" ? undefined : selectedCategory,
             city: selectedRegion === "all" ? undefined : selectedRegion,
@@ -147,6 +150,7 @@ export default function AgentLandingPage() {
 
         const normalizedMerchants = rawData
           .filter((item) => item && item.id)
+          .slice(0, 6) // Ensure max 6 merchants per page
           .map((item) => ({
             id: item.id,
             name: item.business_name || "Unknown",
@@ -187,7 +191,7 @@ export default function AgentLandingPage() {
         }
 
         // Update pagination state
-        setHasMore(normalizedMerchants.length === 20);
+        setHasMore(normalizedMerchants.length === 6);
         setTotalMerchants(
           response.data?.pagination?.total || normalizedMerchants.length,
         );
@@ -245,19 +249,9 @@ export default function AgentLandingPage() {
     fetchMerchants,
   ]);
 
-  // Filtering Logic (now primarily handled by backend, but keeping for client-side refinement if needed)
+  // Sorting logic only (filtering is handled by backend)
   const filteredMerchants = useMemo(() => {
-    let filtered = merchants.filter((merchant) => {
-      const matchSearch =
-        merchant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        merchant.category?.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchCategory =
-        selectedCategory === "all" || merchant.category === selectedCategory;
-      const matchRegion =
-        selectedRegion === "all" || merchant.city === selectedRegion;
-
-      return matchSearch && matchCategory && matchRegion;
-    });
+    let filtered = [...merchants];
 
     // Apply sorting
     if (sortBy === "popularity") {
@@ -294,7 +288,7 @@ export default function AgentLandingPage() {
     }
 
     return filtered;
-  }, [merchants, searchQuery, selectedCategory, selectedRegion, sortBy]);
+  }, [merchants, sortBy]);
 
   const activeMerchant = useMemo(
     () => merchants.find((m) => m.id === selectedMerchantId) || null,
@@ -319,6 +313,13 @@ export default function AgentLandingPage() {
   const handleLoadMore = () => {
     if (!loadingMore && hasMore) {
       fetchMerchants(page + 1, false);
+      // Scroll to merchant list after a short delay to allow new content to load
+      setTimeout(() => {
+        merchantListRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
     }
   };
 
@@ -464,7 +465,7 @@ export default function AgentLandingPage() {
 
         {/* --- Filter Bar --- */}
         <section
-          className="px-6 lg:px-10 max-w-7xl mx-auto mb-8 relative z-20"
+          className="px-6 lg:px-10 max-w-[1600px] mx-auto mb-8 relative z-20"
           id="marketplace"
         >
           <MarketplaceFilters
@@ -481,7 +482,7 @@ export default function AgentLandingPage() {
           />
         </section>
 
-        <section className="px-6 lg:px-10 max-w-7xl mx-auto pb-24">
+        <section className="px-6 lg:px-10 max-w-[1600px] mx-auto pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start justify-center">
             {/* Left Sidebar (Ads Only) */}
             {leftAd && (
@@ -501,9 +502,10 @@ export default function AgentLandingPage() {
 
             {/* Middle Column: Merchant Grid (Main Content) */}
             <div
+              ref={merchantListRef}
               className={cn(
                 "col-span-1 lg:col-span-7 w-full min-w-0 transition-all duration-700",
-                leftAd ? "xl:col-span-6" : "xl:col-span-8",
+                leftAd ? "xl:col-span-7" : "xl:col-span-9",
               )}
             >
               <MerchantList
@@ -522,8 +524,8 @@ export default function AgentLandingPage() {
             {/* Right Column: Merchant Detail + Right Sidebar Ad */}
             <div
               className={cn(
-                "col-span-1 lg:col-span-5 xl:col-span-4 lg:block min-w-0 transition-all duration-700",
-                leftAd && "lg:col-span-4",
+                "col-span-1 lg:col-span-5 xl:col-span-3 lg:block min-w-0 transition-all duration-700",
+                leftAd && "lg:col-span-3",
               )}
             >
               <div className="sticky top-24 space-y-8">
@@ -576,7 +578,7 @@ export default function AgentLandingPage() {
           className="bg-white py-24 border-t border-slate-100"
           id="features"
         >
-          <div className="px-6 lg:px-10 max-w-7xl mx-auto">
+          <div className="px-6 lg:px-10 max-w-[1600px] mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge
                 variant="outline"
