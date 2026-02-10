@@ -228,7 +228,7 @@ export default function AllStatementsContainer() {
               </div>
               <div>
                 <p className="text-2xl font-bold">{counts.super_admin}</p>
-                <p className="text-xs text-muted-foreground">Admin</p>
+                <p className="text-xs text-muted-foreground">Super Admin</p>
               </div>
             </CardContent>
           </Card>
@@ -330,7 +330,7 @@ export default function AllStatementsContainer() {
               </TabsTrigger>
               <TabsTrigger value="agents">Agents ({counts.agents})</TabsTrigger>
               <TabsTrigger value="super_admin">
-                Admin ({counts.super_admin})
+                Super Admin ({counts.super_admin})
               </TabsTrigger>
             </TabsList>
 
