@@ -13,8 +13,16 @@ import { Loader2, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/utils/imageUtils";
 
-export function TemplateEditorModal({ open, onOpenChange, value, onChange, batchId }) {
+export function TemplateEditorModal({
+  open,
+  onOpenChange,
+  value,
+  onChange,
+  batchId,
+}) {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -23,7 +31,7 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
   // Sync internal preview with incoming value
   useEffect(() => {
     if (value?.brand_image) {
-      setPreviewUrl(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api${value.brand_image}`);
+      setPreviewUrl(getImageUrl(value.brand_image));
     } else {
       setPreviewUrl(null);
     }
@@ -59,9 +67,13 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
         const formData = new FormData();
         formData.append("brandImage", selectedFile);
 
-        const uploadRes = await axiosInstance.post("/coupon-batches/upload-brand-image", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        const uploadRes = await axiosInstance.post(
+          "/coupon-batches/upload-brand-image",
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          },
+        );
 
         currentBrandImage = uploadRes.data?.url;
         if (!currentBrandImage) {
@@ -102,18 +114,23 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
         <DialogHeader>
           <DialogTitle>Edit Template Content</DialogTitle>
           <DialogDescription>
-            Update brand image, header, title, and description. Changes preview live.
+            Update brand image, header, title, and description. Changes preview
+            live.
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Brand Image <span className="text-red-500">*</span></label>
+            <label className="text-sm font-medium">
+              Brand Image <span className="text-red-500">*</span>
+            </label>
             <div className="flex items-center gap-4">
               {previewUrl && (
                 <div className="relative group">
-                  <img
+                  <Image
                     src={previewUrl}
+                    width={"80"}
+                    height={"80"}
                     alt="Brand Preview"
                     className="h-20 w-20 rounded-md object-contain bg-muted p-1 border"
                   />
@@ -121,8 +138,13 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
                     <button
                       onClick={() => {
                         setSelectedFile(null);
-                        setPreviewUrl(value?.brand_image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api${value.brand_image}` : null);
-                        if (fileInputRef.current) fileInputRef.current.value = "";
+                        setPreviewUrl(
+                          value?.brand_image
+                            ? getImageUrl(value.brand_image)
+                            : null,
+                        );
+                        if (fileInputRef.current)
+                          fileInputRef.current.value = "";
                       }}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
                     >
@@ -155,7 +177,9 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
                 </Button>
               </div>
             </div>
-            <p className="text-[10px] text-muted-foreground">Required for all templates</p>
+            <p className="text-[10px] text-muted-foreground">
+              Required for all templates
+            </p>
           </div>
 
           <div className="space-y-2">
@@ -196,11 +220,7 @@ export function TemplateEditorModal({ open, onOpenChange, value, onChange, batch
           >
             Cancel
           </Button>
-          <Button
-            type="button"
-            onClick={handleDone}
-            disabled={uploading}
-          >
+          <Button type="button" onClick={handleDone} disabled={uploading}>
             {uploading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
             Done
           </Button>
