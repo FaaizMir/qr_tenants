@@ -44,8 +44,12 @@ export default function SupportContainer() {
   // Role normalization
   const role = user?.role?.toUpperCase() || "MERCHANT";
   const isSuperAdmin = role === "SUPER_ADMIN" || role === "MASTER_ADMIN";
+  const isSupportStaff = role === "SUPPORT_STAFF";
   const isAgent = role === "AGENT" || role === "ADMIN";
   const isMerchant = role === "MERCHANT";
+  
+  // Support staff has same access as super admin
+  const hasAdminAccess = isSuperAdmin || isSupportStaff;
 
   // State
   const [conversations, setConversations] = useState([]);
@@ -58,7 +62,7 @@ export default function SupportContainer() {
   const [replyText, setReplyText] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState(
-    isSuperAdmin ? "agents" : "merchants"
+    hasAdminAccess ? "agents" : "merchants"
   );
   const [conversationTypeFilter, setConversationTypeFilter] = useState("chat"); // chat, support
 
@@ -100,7 +104,7 @@ export default function SupportContainer() {
       
       setConversations(allConversations);
 
-      if (isSuperAdmin) {
+      if (hasAdminAccess) {
         if (activeTab === "agents") {
           const res = await axiosInstance.get("/admins");
           setParticipants(res.data.data || []);
@@ -137,7 +141,7 @@ export default function SupportContainer() {
     } finally {
       setLoading(false);
     }
-  }, [isSuperAdmin, isAgent, isMerchant, activeTab, user?.merchantId]);
+  }, [hasAdminAccess, isAgent, isMerchant, activeTab, user?.merchantId]);
 
   useEffect(() => {
     fetchData();
@@ -263,7 +267,7 @@ export default function SupportContainer() {
   const { activeChats, availableContacts } = useMemo(() => {
     // Filter by role type
     let currentConvs = conversations.filter(c => {
-      if (isSuperAdmin) return c.type === 'SUPERADMIN_AGENT';
+      if (hasAdminAccess) return c.type === 'SUPERADMIN_AGENT';
       if (isAgent) {
         return activeTab === "merchants" ? c.type === 'AGENT_MERCHANT' : c.type === 'SUPERADMIN_AGENT';
       }
@@ -284,7 +288,7 @@ export default function SupportContainer() {
     // For agents with merchants: show both types (no filtering) but creation is restricted
 
     const activeIds = currentConvs.map(c =>
-      isSuperAdmin ? c.agent_id :
+      hasAdminAccess ? c.agent_id :
         isAgent ? (activeTab === 'merchants' ? c.merchant_id : c.super_admin_id) :
           c.agent_id
     );
@@ -295,7 +299,7 @@ export default function SupportContainer() {
       activeChats: currentConvs.map(c => ({ ...c, isConversation: true })),
       availableContacts: avContacts.map(p => ({ ...p, isParticipant: true }))
     };
-  }, [conversations, participants, isSuperAdmin, isAgent, isMerchant, activeTab, conversationTypeFilter]);
+  }, [conversations, participants, hasAdminAccess, isAgent, isMerchant, activeTab, conversationTypeFilter]);
 
   const filteredItems = useMemo(() => {
     const q = searchQuery.toLowerCase();
@@ -373,7 +377,7 @@ export default function SupportContainer() {
         if (activeTab === 'merchants') return item.merchant?.user?.name || item.merchant?.business_name || "Merchant";
         return item.super_admin?.user?.name || item.superAdmin?.user?.name || "Super Admin";
       }
-      if (isSuperAdmin) {
+      if (hasAdminAccess) {
         if (activeTab === 'agents') return item.agent?.user?.name || "Agent";
         return item.merchant?.user?.name || item.merchant?.business_name || "Merchant";
       }
@@ -384,7 +388,7 @@ export default function SupportContainer() {
   const getRoleBadge = (item) => {
     if (!item) return "";
     if (item.isConversation) return item.type.replace('_', ' ');
-    return isSuperAdmin ? "Agent" : "Merchant";
+    return hasAdminAccess ? "Agent" : "Merchant";
   };
 
   const showSidebar = !isMerchant && !(isAgent && activeTab === 'agents');
@@ -399,17 +403,17 @@ export default function SupportContainer() {
             {!isConnected && <Badge variant="destructive" className="ml-2 text-[10px]">Disconnected</Badge>}
           </h1>
           <p className="text-sm text-muted-foreground">
-            {isSuperAdmin && "Manage conversations and support tickets with agents."}
+            {hasAdminAccess && "Manage conversations and support tickets with agents."}
             {isAgent && activeTab === 'merchants' && "Communicate with your merchants via messages and tickets."}
             {isAgent && activeTab === 'agents' && "Contact platform support team."}
             {isMerchant && "Chat with your support agent or create tickets."}
           </p>
         </div>
 
-        {isSuperAdmin && (
+        {hasAdminAccess && (
           <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-lg border text-xs font-medium">
             <Shield className="h-3.5 w-3.5 text-primary" />
-            <span>Staff Role: {user?.staffRole || "Super Admin"}</span>
+            <span>Staff Role: {isSupportStaff ? "Support Staff" : (user?.staffRole || "Super Admin")}</span>
           </div>
         )}
       </div>
@@ -420,7 +424,7 @@ export default function SupportContainer() {
             <CardHeader className="p-4 space-y-4 pb-0">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="grid grid-cols-2 w-full h-9">
-                  {isSuperAdmin ? (
+                  {hasAdminAccess ? (
                     <div className="flex items-center px-4 w-full text-xs font-bold text-muted-foreground uppercase tracking-widest bg-muted/30 rounded-md">
                       Agents
                     </div>
@@ -435,7 +439,7 @@ export default function SupportContainer() {
 
               <div className="space-y-3">
                 {/* Show filters conditionally based on role and tab */}
-                {(isSuperAdmin || isMerchant || (isAgent && activeTab === 'agents')) ? (
+                {(hasAdminAccess || isMerchant || (isAgent && activeTab === 'agents')) ? (
                   <div className="flex gap-1.5 p-1 bg-muted/30 rounded-lg">
                     <button
                       onClick={() => setConversationTypeFilter('chat')}
@@ -651,32 +655,46 @@ export default function SupportContainer() {
                     <div className="space-y-6 max-w-4xl mx-auto flex flex-col">
                       {messages.map((msg, i) => {
                         // Determine if the message is from current user
-                        // Check both user.id (for chat) and role-specific IDs (for tickets)
+                        // Primary: compare sender_id to logged-in user.id (same as main chat)
                         const senderId = msg.sender_id || msg.senderId;
+                        const senderRole = (msg.sender_role || msg.senderRole || "").toLowerCase();
+
                         let isMe = false;
-                        if (isSuperAdmin) {
-                          isMe = senderId === user?.id || senderId === user?.superAdminId;
-                        } else if (isAgent) {
-                          isMe = senderId === user?.id || senderId === user?.adminId;
-                        } else if (isMerchant) {
-                          isMe = senderId === user?.id || senderId === user?.merchantId;
+                        if (senderId != null && user?.id != null) {
+                          isMe = Number(senderId) === Number(user.id);
                         }
+
+                        // Fallback: role-based match for ticket messages that might not include sender_id
+                        if (!isMe) {
+                          if (isSuperAdmin && (senderRole === "super_admin" || senderRole === "support_staff")) {
+                            // Super admin sees both their own messages and support staff messages as "ME"
+                            isMe = true;
+                          } else if (isSupportStaff && (senderRole === "support_staff" || senderRole === "super_admin")) {
+                            // Support staff sees both their own messages and super admin messages as "ME"
+                            isMe = true;
+                          } else if (isAgent && (senderRole === "agent" || senderRole === "admin")) {
+                            isMe = true;
+                          } else if (isMerchant && senderRole === "merchant") {
+                            isMe = true;
+                          }
+                        }
+
                         return (
                           <div
                             key={msg.id || i}
-                            className={`flex ${isMe ? "justify-start" : "justify-end"} gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                            className={`flex ${isMe ? "justify-end" : "justify-start"} gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300`}
                           >
-                            {/* Sent (ME) on LEFT - Blue | Received (THEM) on RIGHT - White */}
+                            {/* Match chat section: Sent (ME) on RIGHT - Blue | Received (THEM) on LEFT - White */}
                             {isMe ? (
-                              <div className="flex gap-3 max-w-[85%] sm:max-w-[70%]">
+                              <div className="flex flex-row-reverse gap-3 max-w-[85%] sm:max-w-[70%] text-right">
                                 <Avatar className="h-8 w-8 mt-auto mb-1 shrink-0">
                                   <AvatarFallback className="bg-primary text-white text-[10px] font-bold">ME</AvatarFallback>
                                 </Avatar>
                                 <div className="group relative">
-                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-primary text-white rounded-tl-none">
+                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-primary text-white rounded-br-none text-left">
                                     {msg.content}
                                   </div>
-                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-start">
+                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-end">
                                     <span className="text-[10px] text-muted-foreground/70 font-medium">
                                       {(() => {
                                         const d = msg.created_at || msg.createdAt;
@@ -688,17 +706,17 @@ export default function SupportContainer() {
                                 </div>
                               </div>
                             ) : (
-                              <div className="flex flex-row-reverse gap-3 max-w-[85%] sm:max-w-[70%] text-right">
+                              <div className="flex gap-3 max-w-[85%] sm:max-w-[70%]">
                                 <Avatar className="h-8 w-8 mt-auto mb-1 shrink-0">
                                   <AvatarFallback className="bg-muted text-[10px] font-bold">
                                     {getParticipantName(selectedConversation || selectedParticipant).charAt(0)}
                                   </AvatarFallback>
                                 </Avatar>
                                 <div className="group relative">
-                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-white border border-border text-foreground rounded-tr-none text-left">
+                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-white border border-border text-foreground rounded-bl-none text-left">
                                     {msg.content}
                                   </div>
-                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-end">
+                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-start">
                                     <span className="text-[10px] text-muted-foreground/70 font-medium">
                                       {(() => {
                                         const d = msg.created_at || msg.createdAt;
