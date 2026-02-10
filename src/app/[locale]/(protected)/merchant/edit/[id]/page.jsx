@@ -1,3 +1,4 @@
+/*
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import MerchantForm from "@/containers/merchant/merchant-form";
 import { getTranslations } from "next-intl/server";
@@ -21,3 +22,4 @@ export default async function EditMerchantPage({ params }) {
   );
 }
 
+*/
