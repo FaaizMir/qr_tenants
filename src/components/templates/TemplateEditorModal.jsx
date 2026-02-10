@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { getImageUrl } from "@/lib/utils/imageUtils";
+import { getImageUrl, compressImage } from "@/lib/utils/imageUtils";
 
 export function TemplateEditorModal({
   open,
@@ -64,8 +64,11 @@ export function TemplateEditorModal({
     try {
       // 1. Upload new image if selected
       if (selectedFile) {
+        // Compress image before upload
+        const compressedFile = await compressImage(selectedFile, 1200, 0.85);
+
         const formData = new FormData();
-        formData.append("brandImage", selectedFile);
+        formData.append("brandImage", compressedFile);
 
         const uploadRes = await axiosInstance.post(
           "/coupon-batches/upload-brand-image",
