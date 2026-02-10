@@ -651,32 +651,42 @@ export default function SupportContainer() {
                     <div className="space-y-6 max-w-4xl mx-auto flex flex-col">
                       {messages.map((msg, i) => {
                         // Determine if the message is from current user
-                        // Check both user.id (for chat) and role-specific IDs (for tickets)
+                        // Primary: compare sender_id to logged-in user.id (same as main chat)
                         const senderId = msg.sender_id || msg.senderId;
+                        const senderRole = (msg.sender_role || msg.senderRole || "").toLowerCase();
+
                         let isMe = false;
-                        if (isSuperAdmin) {
-                          isMe = senderId === user?.id || senderId === user?.superAdminId;
-                        } else if (isAgent) {
-                          isMe = senderId === user?.id || senderId === user?.adminId;
-                        } else if (isMerchant) {
-                          isMe = senderId === user?.id || senderId === user?.merchantId;
+                        if (senderId != null && user?.id != null) {
+                          isMe = Number(senderId) === Number(user.id);
                         }
+
+                        // Fallback: role-based match for ticket messages that might not include sender_id
+                        if (!isMe) {
+                          if (isSuperAdmin && senderRole === "super_admin") {
+                            isMe = true;
+                          } else if (isAgent && (senderRole === "agent" || senderRole === "admin")) {
+                            isMe = true;
+                          } else if (isMerchant && senderRole === "merchant") {
+                            isMe = true;
+                          }
+                        }
+
                         return (
                           <div
                             key={msg.id || i}
-                            className={`flex ${isMe ? "justify-start" : "justify-end"} gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                            className={`flex ${isMe ? "justify-end" : "justify-start"} gap-3 animate-in fade-in slide-in-from-bottom-2 duration-300`}
                           >
-                            {/* Sent (ME) on LEFT - Blue | Received (THEM) on RIGHT - White */}
+                            {/* Match chat section: Sent (ME) on RIGHT - Blue | Received (THEM) on LEFT - White */}
                             {isMe ? (
-                              <div className="flex gap-3 max-w-[85%] sm:max-w-[70%]">
+                              <div className="flex flex-row-reverse gap-3 max-w-[85%] sm:max-w-[70%] text-right">
                                 <Avatar className="h-8 w-8 mt-auto mb-1 shrink-0">
                                   <AvatarFallback className="bg-primary text-white text-[10px] font-bold">ME</AvatarFallback>
                                 </Avatar>
                                 <div className="group relative">
-                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-primary text-white rounded-tl-none">
+                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-primary text-white rounded-br-none text-left">
                                     {msg.content}
                                   </div>
-                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-start">
+                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-end">
                                     <span className="text-[10px] text-muted-foreground/70 font-medium">
                                       {(() => {
                                         const d = msg.created_at || msg.createdAt;
@@ -688,17 +698,17 @@ export default function SupportContainer() {
                                 </div>
                               </div>
                             ) : (
-                              <div className="flex flex-row-reverse gap-3 max-w-[85%] sm:max-w-[70%] text-right">
+                              <div className="flex gap-3 max-w-[85%] sm:max-w-[70%]">
                                 <Avatar className="h-8 w-8 mt-auto mb-1 shrink-0">
                                   <AvatarFallback className="bg-muted text-[10px] font-bold">
                                     {getParticipantName(selectedConversation || selectedParticipant).charAt(0)}
                                   </AvatarFallback>
                                 </Avatar>
                                 <div className="group relative">
-                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-white border border-border text-foreground rounded-tr-none text-left">
+                                  <div className="p-3.5 rounded-2xl shadow-sm text-sm leading-relaxed bg-white border border-border text-foreground rounded-bl-none text-left">
                                     {msg.content}
                                   </div>
-                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-end">
+                                  <div className="flex items-center gap-1.5 mt-1 px-1 justify-start">
                                     <span className="text-[10px] text-muted-foreground/70 font-medium">
                                       {(() => {
                                         const d = msg.created_at || msg.createdAt;
