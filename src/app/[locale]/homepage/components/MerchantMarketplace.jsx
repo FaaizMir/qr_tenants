@@ -9,6 +9,7 @@ import {
   Filter,
   X,
   ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { InlineAd } from "./PaidAdsDisplay";
@@ -69,9 +70,10 @@ const CATEGORY_IMAGES = {
     "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=800&q=80", // Hotel outdoors
   ],
   technology: [
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", // Circuits/Tech
-    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", // Computer
-    "https://images.unsplash.com/photo-1531297422935-40e6e91a002d?auto=format&fit=crop&w=800&q=80", // Electronics
+    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=80", // Tech workspace
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80", // Blue tech/data
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80", // Circuits
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1000&q=80", // Laptop and code
   ],
   services: [
     "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80", // Office Meeting
@@ -136,9 +138,13 @@ function getCategoryImage(category, id) {
     key = "hospitality";
   else if (
     normalizedCat.includes("tech") ||
+    normalizedCat.includes("software") ||
+    normalizedCat.includes("digital") ||
     normalizedCat.includes("computer") ||
     normalizedCat.includes("electronics") ||
-    normalizedCat.includes("it")
+    normalizedCat.includes(" it") ||
+    normalizedCat.includes("it ") ||
+    normalizedCat === "it"
   )
     key = "technology";
   else if (
@@ -168,15 +174,13 @@ export function MarketplaceFilters({
   setSelectedCategory,
   selectedRegion,
   setSelectedRegion,
-  sortBy,
-  setSortBy,
   categories,
   cities,
   handleGetCoupon,
 }) {
   return (
     <div className="sticky top-20 z-40 mb-8">
-      <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-4xl mx-auto transition-all">
+      <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-6xl mx-auto transition-all">
         {/* Search */}
         <div className="flex-1 relative w-full group">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400 group-focus-within:bg-primary/10 group-focus-within:text-primary transition-colors">
@@ -255,36 +259,6 @@ export function MarketplaceFilters({
               ))}
             </SelectContent>
           </Select>
-
-          {/* Sort */}
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger
-              className="
-            w-full md:w-44 h-11
-            rounded-full
-            bg-slate-50
-            px-4
-            text-sm font-medium text-slate-700
-            hover:bg-slate-100
-            focus:outline-none
-            focus:ring-0
-            focus-visible:ring-0
-            transition-colors
-          "
-              suppressHydrationWarning
-            >
-              <div className="flex items-center gap-2 truncate">
-                <TrendingUp className="w-4 h-4 text-slate-500 shrink-0" />
-                <SelectValue placeholder="Sort" />
-              </div>
-            </SelectTrigger>
-
-            <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="newest">Newest First</SelectItem>
-              <SelectItem value="popularity">Most Popular</SelectItem>
-              <SelectItem value="expiring">Expiring Soon</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
       </div>
     </div>
@@ -297,9 +271,10 @@ export function MerchantList({
   setSelectedMerchantId,
   loading,
   error,
+  page,
+  totalItems,
   hasMore,
-  handleLoadMore,
-  loadingMore,
+  onPageChange,
   ads = [],
 }) {
   if (loading) {
@@ -368,12 +343,93 @@ export function MerchantList({
     }
   });
 
+  if (merchants.length === 0) {
+    return (
+      <div className="space-y-8">
+        <div className="text-center py-24 bg-white rounded-[2.5rem] border border-dashed border-slate-200">
+          <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <Store className="h-8 w-8 text-slate-300" />
+          </div>
+          <h3 className="font-bold text-slate-900 text-lg">No merchants found</h3>
+          <p className="text-slate-500">Try adjusting your filters or search.</p>
+        </div>
+
+        {/* Pagination for empty results when not on page 1 */}
+        {page > 1 && (
+          <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                onClick={() => onPageChange(page - 1)}
+                disabled={page === 1}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+
+              <div className="flex items-center gap-1.5 px-2">
+                {Array.from({ length: page }).map((_, i) => {
+                  const pageNum = i + 1;
+                  if (
+                    pageNum === 1 ||
+                    pageNum === page ||
+                    (pageNum >= page - 1 && pageNum <= page + 1)
+                  ) {
+                    return (
+                      <Button
+                        key={pageNum}
+                        variant={page === pageNum ? "default" : "outline"}
+                        size="icon"
+                        className={cn(
+                          "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                          page === pageNum
+                            ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                            : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                        )}
+                        onClick={() => onPageChange(pageNum)}
+                      >
+                        {pageNum}
+                      </Button>
+                    );
+                  } else if (pageNum === 2 && page > 3) {
+                    return (
+                      <span key={pageNum} className="px-1 text-slate-400 font-bold">
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                onClick={() => onPageChange(page + 1)}
+                disabled={true}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+              Page {page} - No Results
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
       {/* Scrollable Container for Merchants */}
       <div
         className={cn(
-          "overflow-y-auto scroll-smooth h-[900px] pr-2",
+          "scroll-smooth max-h-[900px]",
+          merchants.length > 1 ? "overflow-y-auto pr-2" : "overflow-visible",
           // Custom scrollbar styles
           "[&::-webkit-scrollbar]:w-2",
           "[&::-webkit-scrollbar-track]:bg-slate-100",
@@ -381,11 +437,19 @@ export function MerchantList({
           "[&::-webkit-scrollbar-thumb]:bg-slate-300",
           "[&::-webkit-scrollbar-thumb]:rounded-full",
           "[&::-webkit-scrollbar-thumb]:hover:bg-slate-400",
-          "pb-8",
-        )
-        }
+          "px-8 py-10",
+        )}
       >
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-x-8 gap-y-10">
+        <div
+          className={cn(
+            "grid gap-y-10 transition-all",
+            merchants.length === 1
+              ? "grid-cols-1"
+              : merchants.length === 2
+                ? "grid-cols-2 gap-x-6"
+                : "grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-x-8",
+          )}
+        >
           {combinedItems.map((item, idx) => {
             if (item.type === "ad") {
               return (
@@ -396,7 +460,6 @@ export function MerchantList({
             }
 
             const merchant = item.data;
-            console.log("merchantdata", merchant);
             const isSelected = selectedMerchantId === merchant.id;
 
             return (
@@ -404,11 +467,11 @@ export function MerchantList({
                 key={merchant.id}
                 onClick={() => setSelectedMerchantId(merchant.id)}
                 className={cn(
-                  "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col h-full min-h-[380px] transition-all duration-500",
-                  "shadow-md shadow-slate-200/60 ",
+                  "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col transition-all duration-500",
+                  "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
                   isSelected
-                    ? "shadow-xl shadow-slate-300/70"
-                    : "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2",
+                    ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] scale-[1.02]"
+                    : "hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2",
                 )}
               >
                 {/* Cover Image Area */}
@@ -438,8 +501,8 @@ export function MerchantList({
                 </div>
 
                 {/* Content */}
-                <div className="p-6 pt-6 flex-1 flex flex-col relative bg-white border-x border-b border-slate-50 rounded-b-[2.5rem]">
-                  <div className="space-y-2 mb-6 text-left ">
+                <div className="p-7 py-8 flex flex-col relative bg-white rounded-b-[2.5rem]">
+                  <div className="space-y-1 mb-6 text-left">
                     <h3 className="font-bold text-xl text-slate-900 leading-tight group-hover:text-primary transition-colors">
                       {merchant.name}
                     </h3>
@@ -458,7 +521,7 @@ export function MerchantList({
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                  <div className="mt-auto pt-6 flex items-center justify-between">
                     <div className="flex flex-col text-left">
                       <span className="text-[9px] uppercase text-slate-400 font-bold tracking-wider">
                         Available Deals
@@ -487,24 +550,86 @@ export function MerchantList({
         </div>
       </div>
 
-      {hasMore && (
-        <div className="flex justify-center pt-8 ">
-          <Button
-            variant="outline"
-            size="lg"
-            className="rounded-full px-8 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-bold"
-            onClick={handleLoadMore}
-            disabled={loadingMore}
-          >
-            {loadingMore ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              "Load More Merchants"
-            )}
-          </Button>
+      {/* Pagination */}
+      {(totalItems > 6 || hasMore || page > 1) && !loading && (
+        <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+              onClick={() => onPageChange(page - 1)}
+              disabled={page === 1}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+
+            <div className="flex items-center gap-1.5 px-2">
+              {Array.from({
+                length: hasMore && totalItems <= page * 6
+                  ? page + 1
+                  : Math.ceil(totalItems / 6)
+              }).map((_, i) => {
+                const pageNum = i + 1;
+                const totalPages = hasMore && totalItems <= page * 6
+                  ? page + 1
+                  : Math.ceil(totalItems / 6);
+
+                // Only show current, 1st, last, and neighbors
+                if (
+                  pageNum === 1 ||
+                  pageNum === totalPages ||
+                  (pageNum >= page - 1 && pageNum <= page + 1)
+                ) {
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={page === pageNum ? "default" : "outline"}
+                      size="icon"
+                      className={cn(
+                        "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                        page === pageNum
+                          ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                          : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                      )}
+                      onClick={() => onPageChange(pageNum)}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                } else if (
+                  (pageNum === 2 && page > 3) ||
+                  (pageNum === totalPages - 1 && page < totalPages - 2)
+                ) {
+                  return (
+                    <span key={pageNum} className="px-1 text-slate-400 font-bold">
+                      ...
+                    </span>
+                  );
+                }
+                return null;
+              })}
+            </div>
+
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+              onClick={() => onPageChange(page + 1)}
+              disabled={!hasMore}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {totalItems > 0 && (
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+              {totalItems <= page * 6 && hasMore
+                ? `Showing Page ${page}`
+                : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalItems)} of ${totalItems} Merchants`
+              }
+            </p>
+          )}
         </div>
       )}
     </div>
@@ -522,7 +647,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
   if (!activeMerchant) {
     return (
-      <div className="hidden lg:flex sticky top-28 h-[600px] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
+      <div className="hidden lg:flex sticky top-28 h-[calc(100vh-140px)] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
         <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center">
@@ -548,7 +673,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   }
 
   return (
-    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden sticky top-28 animate-in slide-in-from-right-10 duration-500 ease-out max-h-[calc(100vh-140px)] flex flex-col">
+    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky top-28 animate-in slide-in-from-right-10 duration-500 ease-out h-[calc(100vh-140px)] min-h-[600px] flex flex-col">
       {/* Header */}
       <div className="relative h-48 bg-slate-900 shrink-0">
         <Image
@@ -593,12 +718,12 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
         {/* Scrollable Coupons Section */}
         <div className="px-6 md:px-8 pb-6 md:pb-8 overflow-y-auto flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
-          <div className="space-y-4">
+          <div className="space-y-4 h-full">
             {activeMerchant.batches?.length > 0 ? (
               activeMerchant.batches.map((batch) => (
                 <div
                   key={batch.id}
-                  className="group bg-white rounded-2xl shadow-sm shadow-slate-200/70 hover:shadow-lg hover:scale-[0.99] hover:shadow-slate-300/40 hover:-translate-y-0.5 transition-all duration-300 ease-out relative overflow-hidden flex flex-col"
+                  className="group bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:scale-[0.99] transition-all duration-300 ease-out relative overflow-hidden flex flex-col"
                 >
                   <div className="absolute top-2 right-2 z-10">
                     <Badge
@@ -648,9 +773,15 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-                <p className="text-sm text-slate-500 font-medium">
+              <div className="h-full flex flex-col items-center justify-center text-center py-12 bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
+                <div className="bg-white p-4 rounded-2xl shadow-sm mb-4">
+                  <TrendingUp className="w-8 h-8 text-slate-300" />
+                </div>
+                <p className="text-sm text-slate-500 font-bold">
                   No active coupons at the moment.
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  Check back later for exclusive deals!
                 </p>
               </div>
             )}
