@@ -21,10 +21,16 @@ import {
   TrendingUp,
   Globe,
   Shield,
+  ChevronLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,7 +55,101 @@ export default function AgentLandingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const locale = useLocale();
-  const agentId = searchParams.get("agentId");
+
+  /**
+   * Security measures for localStorage:
+   * 1. Data validation - Check agent object structure
+   * 2. Timestamp validation - Data expires after 1 hour
+   * 3. Session tracking - Random session ID for basic tracking
+   * 4. Error handling - Graceful failure with cleanup
+   * 5. Navigation cleanup - Clear data when leaving page
+   * 6. Visibility monitoring - Revalidate on page focus
+   */
+
+  // Get agent from localStorage with validation
+  const [agentId, setAgentId] = useState(null);
+
+  useEffect(() => {
+    try {
+      const storedAgent = localStorage.getItem("selectedAgent");
+      if (storedAgent) {
+        const parsedAgent = JSON.parse(storedAgent);
+
+        // Validate agent data structure
+        if (parsedAgent && typeof parsedAgent === "object" && parsedAgent.id) {
+          // Check if data is fresh (within 1 hour)
+          const ONE_HOUR = 60 * 60 * 1000;
+          const now = Date.now();
+          const timestamp = parsedAgent._timestamp || 0;
+
+          if (now - timestamp < ONE_HOUR) {
+            // Valid and fresh data
+            setAgentId(parsedAgent.id);
+            setAgent(parsedAgent);
+          } else {
+            // Data expired, clear localStorage
+            console.warn("Agent data expired, clearing localStorage...");
+            localStorage.removeItem("selectedAgent");
+          }
+        } else {
+          // Invalid agent data, clear localStorage
+          console.warn("Invalid agent data in localStorage, clearing...");
+          localStorage.removeItem("selectedAgent");
+        }
+      }
+    } catch (error) {
+      // Handle JSON parse errors or other exceptions
+      console.error("Error loading agent from localStorage:", error);
+      localStorage.removeItem("selectedAgent");
+    }
+
+    // Cleanup function - clear localStorage when component unmounts
+    return () => {
+      // Optional: Uncomment if you want to clear on unmount
+      // localStorage.removeItem("selectedAgent");
+    };
+  }, []);
+
+  // Handle browser back button and page visibility
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Page is hidden, optionally keep data
+      } else {
+        // Page is visible again, validate data is still fresh
+        const storedAgent = localStorage.getItem("selectedAgent");
+        if (storedAgent) {
+          try {
+            const parsedAgent = JSON.parse(storedAgent);
+            const ONE_HOUR = 60 * 60 * 1000;
+            const now = Date.now();
+            const timestamp = parsedAgent._timestamp || 0;
+
+            if (now - timestamp >= ONE_HOUR) {
+              localStorage.removeItem("selectedAgent");
+              window.location.reload(); // Refresh if data expired
+            }
+          } catch (e) {
+            localStorage.removeItem("selectedAgent");
+          }
+        }
+      }
+    };
+
+    const handleBeforeUnload = () => {
+      // Optionally clean up before page unloads
+      // Uncomment if needed:
+      // localStorage.removeItem("selectedAgent");
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   // Refs
   const merchantListRef = useRef(null);
@@ -71,7 +171,6 @@ export default function AgentLandingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
-  const [sortBy, setSortBy] = useState("newest");
 
   // Derived lists
   const [categories, setCategories] = useState([]);
@@ -139,7 +238,8 @@ export default function AgentLandingPage() {
             page: pageNum,
             pageSize: 6, // Fetch 6 merchants per page
             search: searchQuery,
-            category: selectedCategory === "all" ? undefined : selectedCategory,
+            businessType:
+              selectedCategory === "all" ? undefined : selectedCategory,
             city: selectedRegion === "all" ? undefined : selectedRegion,
           },
         });
@@ -175,25 +275,34 @@ export default function AgentLandingPage() {
 
         if (reset) {
           setMerchants(normalizedMerchants);
-          // Extract filter options from first page
-          const cats = [
-            ...new Set(
-              normalizedMerchants.map((m) => m.category).filter(Boolean),
-            ),
-          ].sort();
-          const locs = [
-            ...new Set(normalizedMerchants.map((m) => m.city).filter(Boolean)),
-          ].sort();
-          setCategories(cats);
-          setCities(locs);
+          // Extract filter options ONLY from initial unfiltered load
+          // Don't update filter lists when filters are already applied
+          if (
+            selectedCategory === "all" &&
+            selectedRegion === "all" &&
+            !searchQuery
+          ) {
+            const cats = [
+              ...new Set(
+                normalizedMerchants.map((m) => m.category).filter(Boolean),
+              ),
+            ].sort();
+            const locs = [
+              ...new Set(
+                normalizedMerchants.map((m) => m.city).filter(Boolean),
+              ),
+            ].sort();
+            setCategories(cats);
+            setCities(locs);
+          }
         } else {
-          setMerchants((prev) => [...prev, ...normalizedMerchants]);
+          setMerchants(normalizedMerchants);
         }
 
         // Update pagination state
         setHasMore(normalizedMerchants.length === 6);
         setTotalMerchants(
-          response.data?.pagination?.total || normalizedMerchants.length,
+          response.data?.pagination?.total || (pageNum === 1 ? normalizedMerchants.length : totalMerchants)
         );
         setPage(pageNum);
       } catch (err) {
@@ -204,7 +313,7 @@ export default function AgentLandingPage() {
         setLoadingMore(false);
       }
     },
-    [agentId, searchQuery, selectedCategory, selectedRegion],
+    [agentId, searchQuery, selectedCategory, selectedRegion, totalMerchants],
   );
 
   // Fetch Main Data
@@ -217,14 +326,8 @@ export default function AgentLandingPage() {
 
       setLoading(true);
       try {
-        // 1. Fetch Agent (Mock if waiting for endpoint)
-        setAgent({ name: "Partner Network" }); // Default
-        /* 
-        try {
-           const res = await axiosInstance.get(`/agents/${agentId}`);
-           if(res.data) setAgent(res.data);
-        } catch(e) {}
-        */
+        // 1. Agent is already loaded from localStorage
+        // No need to fetch or override it
 
         // 2. Fetch Merchants with Pagination
         await fetchMerchants(1, true); // Initial load
@@ -249,51 +352,12 @@ export default function AgentLandingPage() {
     fetchMerchants,
   ]);
 
-  // Sorting logic only (filtering is handled by backend)
-  const filteredMerchants = useMemo(() => {
-    let filtered = [...merchants];
-
-    // Apply sorting
-    if (sortBy === "popularity") {
-      // Sort by number of issued coupons (popularity)
-      filtered.sort((a, b) => {
-        const aIssued = a.batches.reduce(
-          (sum, batch) => sum + (batch.issued_quantity || 0),
-          0,
-        );
-        const bIssued = b.batches.reduce(
-          (sum, batch) => sum + (batch.issued_quantity || 0),
-          0,
-        );
-        return bIssued - aIssued;
-      });
-    } else if (sortBy === "expiring") {
-      // Sort by earliest expiry date
-      filtered.sort((a, b) => {
-        const aExpiry = Math.min(
-          ...a.batches
-            .filter((batch) => batch.expiry_date)
-            .map((batch) => new Date(batch.expiry_date).getTime()),
-        );
-        const bExpiry = Math.min(
-          ...b.batches
-            .filter((batch) => batch.expiry_date)
-            .map((batch) => new Date(batch.expiry_date).getTime()),
-        );
-        return aExpiry - bExpiry;
-      });
-    } else {
-      // Default: newest first (by merchant ID descending)
-      filtered.sort((a, b) => b.id - a.id);
-    }
-
-    return filtered;
-  }, [merchants, sortBy]);
-
   const activeMerchant = useMemo(
     () => merchants.find((m) => m.id === selectedMerchantId) || null,
     [merchants, selectedMerchantId],
   );
+
+  const isFewMerchants = merchants.length > 0 && merchants.length <= 2;
 
   // Derived Ads
   const topAd = paidAds.find((a) => a.placement === "top") || null;
@@ -310,17 +374,17 @@ export default function AgentLandingPage() {
     setCouponDialogOpen(true);
   };
 
-  const handleLoadMore = () => {
-    if (!loadingMore && hasMore) {
-      fetchMerchants(page + 1, false);
-      // Scroll to merchant list after a short delay to allow new content to load
-      setTimeout(() => {
-        merchantListRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 300);
-    }
+
+
+  const handleNavigateHome = () => {
+    // Clear agent data from localStorage when navigating away
+    localStorage.removeItem("selectedAgent");
+    router.push("/");
+  };
+
+  const handleNavigateLogin = () => {
+    // Optionally keep agent data for login flow
+    router.push("/login");
   };
 
   return (
@@ -328,44 +392,43 @@ export default function AgentLandingPage() {
       {/* --- Navigation --- */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200 transition-all">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
+          <div
+            onClick={handleNavigateHome}
+            className="flex items-center gap-2 group cursor-pointer"
+          >
             <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
               <QrCode className="w-5 h-5" />
             </div>
             <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-primary transition-colors">
               QR Rev
             </span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-6">
-            <nav className="flex gap-6 text-sm font-bold text-slate-500">
-              <Link
-                href="#marketplace"
-                className="hover:text-primary transition-colors"
-              >
-                Marketplace
-              </Link>
-              <Link
-                href="#features"
-                className="hover:text-primary transition-colors"
-              >
-                Features
-              </Link>
-              {agent?.name && <span className="text-slate-300">|</span>}
-              {agent?.name && (
-                <span className="text-slate-900">Partner: {agent.name}</span>
-              )}
-            </nav>
           </div>
+
+          <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-[14px] font-bold tracking-tight">
+            <Link
+              href="#marketplace"
+              className="text-slate-500 hover:text-primary transition-colors"
+            >
+              Marketplace
+            </Link>
+            <Link
+              href="#features"
+              className="text-slate-500 hover:text-primary transition-colors"
+            >
+              Features
+            </Link>
+
+
+          </nav>
 
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <Button
               size="sm"
               className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
-              onClick={() => router.push(`/login`)}
+              onClick={handleNavigateLogin}
             >
-              Login
+              Sign In
             </Button>
             {/* Mobile Menu Trigger */}
             <Sheet>
@@ -380,14 +443,38 @@ export default function AgentLandingPage() {
                 </Button>
               </SheetTrigger>
               <SheetContent>
+                <SheetTitle className="text-xl font-bold text-slate-900 mb-4">
+                  Menu
+                </SheetTitle>
                 <div className="flex flex-col gap-4 mt-8">
-                  <Link href="/" className="text-lg font-bold">
+                  {agent?.name && (
+                    <div className="mb-4 pb-4 border-b border-slate-200">
+                      <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider">
+                        Partner
+                      </p>
+                      <p className="text-lg font-bold text-slate-900">
+                        {agent.name}
+                      </p>
+                      {agent.location && (
+                        <p className="text-sm text-slate-600 flex items-center gap-1 mt-1">
+                          <MapPin className="w-3 h-3" />
+                          {agent.location}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  <div
+                    onClick={handleNavigateHome}
+                    className="text-lg font-bold cursor-pointer hover:text-primary transition-colors"
+                  >
                     Home
-                  </Link>
+                  </div>
                   <Link href="#marketplace" className="text-lg font-bold">
                     Marketplace
                   </Link>
-                  <Button className="w-full">Login</Button>
+                  <Button onClick={handleNavigateLogin} className="w-full">
+                    Sign In
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
@@ -421,7 +508,9 @@ export default function AgentLandingPage() {
               variant="outline"
               className="border-white/20 bg-white/5 text-white backdrop-blur-sm px-4 py-1.5 uppercase tracking-widest text-xs font-bold shadow-xl"
             >
-              Official Partner Network
+              {agent?.name
+                ? `${agent.name}'s Partner Network`
+                : "Official Partner Network"}
             </Badge>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-2xl">
               <span className="text-white">Exclusive Deals</span>
@@ -431,8 +520,9 @@ export default function AgentLandingPage() {
               </span>
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
-              Browse verified merchants, unlock instant coupons, and save on
-              premium services in your area.
+              {agent?.name
+                ? `Discover verified merchants handpicked by ${agent.name}. Unlock instant coupons and save on premium services.`
+                : "Browse verified merchants, unlock instant coupons, and save on premium services in your area."}
             </p>
 
             {/* Stats Row */}
@@ -470,20 +560,32 @@ export default function AgentLandingPage() {
         >
           <MarketplaceFilters
             searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
+            setSearchQuery={(value) => {
+              setSearchQuery(value);
+              setPage(1);
+            }}
             selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
+            setSelectedCategory={(value) => {
+              setSelectedCategory(value);
+              setPage(1);
+            }}
             selectedRegion={selectedRegion}
-            setSelectedRegion={setSelectedRegion}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
+            setSelectedRegion={(value) => {
+              setSelectedRegion(value);
+              setPage(1);
+            }}
             categories={categories}
             cities={cities}
           />
         </section>
 
-        <section className="px-6 lg:px-10 max-w-[1600px] mx-auto pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start justify-center">
+        <section className="px-6 lg:px-10 max-w-[1700px] mx-auto pb-24">
+          <div
+            className={cn(
+              "grid grid-cols-1 lg:grid-cols-12 items-start transition-all duration-700",
+              isFewMerchants ? "gap-8 max-w-7xl mx-auto" : "gap-8",
+            )}
+          >
             {/* Left Sidebar (Ads Only) */}
             {leftAd && (
               <div className="hidden xl:block lg:col-span-2 sticky top-28 space-y-8 pt-16">
@@ -500,35 +602,46 @@ export default function AgentLandingPage() {
               </div>
             )}
 
-            {/* Middle Column: Merchant Grid (Main Content) */}
             <div
               ref={merchantListRef}
               className={cn(
-                "col-span-1 lg:col-span-7 w-full min-w-0 transition-all duration-700",
-                leftAd ? "xl:col-span-7" : "xl:col-span-9",
+                "col-span-1 w-full min-w-0 transition-all duration-700",
+                merchants.length === 1
+                  ? "lg:col-span-4 lg:col-start-3"
+                  : isFewMerchants
+                    ? "lg:col-span-7"
+                    : leftAd
+                      ? "lg:col-span-7 xl:col-span-7"
+                      : "lg:col-span-7 xl:col-span-9",
               )}
             >
               <MerchantList
-                merchants={filteredMerchants}
+                merchants={merchants}
                 selectedMerchantId={selectedMerchantId}
                 setSelectedMerchantId={setSelectedMerchantId}
                 loading={loading}
                 error={error}
+                page={page}
+                totalItems={totalMerchants}
                 hasMore={hasMore}
-                handleLoadMore={handleLoadMore}
-                loadingMore={loadingMore}
+                onPageChange={(pageNum) => fetchMerchants(pageNum)}
                 ads={inlineAds}
               />
             </div>
 
-            {/* Right Column: Merchant Detail + Right Sidebar Ad */}
             <div
               className={cn(
-                "col-span-1 lg:col-span-5 xl:col-span-3 lg:block min-w-0 transition-all duration-700",
-                leftAd && "lg:col-span-3",
+                "col-span-1 lg:block min-w-0 transition-all duration-700",
+                merchants.length === 1
+                  ? "lg:col-span-4"
+                  : isFewMerchants
+                    ? "lg:col-span-5"
+                    : leftAd
+                      ? "lg:col-span-5 xl:col-span-3"
+                      : "lg:col-span-5 xl:col-span-3",
               )}
             >
-              <div className="sticky top-24 space-y-8">
+              <div className={cn("sticky top-24 space-y-8")}>
                 {/* Detail Panel */}
                 <MerchantDetail
                   activeMerchant={activeMerchant}
@@ -562,6 +675,7 @@ export default function AgentLandingPage() {
                 side="bottom"
                 className="h-[85vh] p-0 rounded-t-3xl border-0"
               >
+                <SheetTitle className="sr-only">Merchant Details</SheetTitle>
                 <div className="overflow-y-auto h-full">
                   <MerchantDetail
                     activeMerchant={activeMerchant}
@@ -619,7 +733,7 @@ export default function AgentLandingPage() {
               ].map((fet, i) => (
                 <div
                   key={i}
-                  className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  className="bg-white p-8 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500"
                 >
                   <div
                     className={`h-14 w-14 rounded-2xl ${fet.bg} ${fet.color} flex items-center justify-center mb-6`}

@@ -50,30 +50,35 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   };
 
-  const checkCustomerByPhone = useCallback(async (phone) => {
-    if (!phone || phone.length < 8) return;
+  const checkCustomerByPhone = useCallback(
+    async (phone) => {
+      if (!phone || phone.length < 8) return;
+      if (!merchant?.id) return;
 
-    setCheckingPhone(true);
-    try {
-      const res = await axiosInstance.get(
-        `/customers/check-by-phone?phone=${encodeURIComponent(phone)}`,
-      );
+      setCheckingPhone(true);
+      try {
+        const res = await axiosInstance.get(
+          `/customers/check-by-phone?phone=${encodeURIComponent(phone)}&merchant_id=${merchant.id}`,
+        );
 
-      const customerData = res.data?.data;
-      if (customerData?.name) {
-        setFormData((prev) => ({
-          ...prev,
-          phone,
-          name: customerData.name || "",
-          birthday: convertDateToInputFormat(customerData.date_of_birth) || "",
-        }));
+        const customerData = res.data?.data;
+        if (customerData?.name) {
+          setFormData((prev) => ({
+            ...prev,
+            phone,
+            name: customerData.name || "",
+            birthday:
+              convertDateToInputFormat(customerData.date_of_birth) || "",
+          }));
+        }
+      } catch (err) {
+        console.log("Customer lookup failed:", err);
+      } finally {
+        setCheckingPhone(false);
       }
-    } catch (err) {
-      console.log("Customer lookup failed:", err);
-    } finally {
-      setCheckingPhone(false);
-    }
-  }, []);
+    },
+    [merchant],
+  );
 
   useEffect(() => {
     if (debounceTimerRef.current) {
@@ -130,8 +135,8 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
       const errorMessage = errorData?.errors
         ? Object.values(errorData.errors).flat().join(", ")
         : errorData?.message ||
-        errorData?.error ||
-        "Failed to issue coupon. Please try again.";
+          errorData?.error ||
+          "Failed to issue coupon. Please try again.";
 
       toast.error(errorMessage);
     } finally {

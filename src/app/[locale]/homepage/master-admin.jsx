@@ -123,9 +123,9 @@ export default function MasterAdminLandingPage() {
             country: agent.country || "Unknown",
             status:
               agent.is_active === true ||
-              agent.is_active === 1 ||
-              agent.user?.is_active === true ||
-              agent.user?.is_active === 1
+                agent.is_active === 1 ||
+                agent.user?.is_active === true ||
+                agent.user?.is_active === 1
                 ? "active"
                 : "inactive",
             joined: new Date().toLocaleDateString(),
@@ -134,20 +134,26 @@ export default function MasterAdminLandingPage() {
 
         if (reset) {
           setAgents(transformed);
-          // Extract filter options from first page
-          const uniqueCountries = [
-            ...new Set(transformed.map((a) => a.country)),
-          ]
-            .filter(Boolean)
-            .sort();
-          setCountries(uniqueCountries);
+          // Extract filter options ONLY from initial unfiltered load
+          // Don't update filter lists when filters are already applied
+          if (selectedCountry === "all" && !searchQuery) {
+            const uniqueCountries = [
+              ...new Set(transformed.map((a) => a.country)),
+            ]
+              .filter(Boolean)
+              .sort();
+            setCountries(uniqueCountries);
+          }
         } else {
-          setAgents((prev) => [...prev, ...transformed]);
+          setAgents(transformed);
         }
 
         // Update pagination state
         setHasMore(transformed.length === 6);
-        setTotalAgents(response.data?.pagination?.total || transformed.length);
+        setTotalAgents(
+          response.data?.pagination?.total ||
+          (pageNum === 1 ? transformed.length : totalAgents),
+        );
         setPage(pageNum);
       } catch (err) {
         console.error(err);
@@ -157,28 +163,22 @@ export default function MasterAdminLandingPage() {
         setLoadingMore(false);
       }
     },
-    [searchQuery, selectedCountry],
+    [searchQuery, selectedCountry, totalAgents],
   );
 
   useEffect(() => {
     fetchAgents(1, true);
   }, [fetchAgents]);
 
-  const handleLoadMore = () => {
-    if (!loadingMore && hasMore) {
-      fetchAgents(page + 1, false);
-      // Scroll to agent list after a short delay
-      setTimeout(() => {
-        agentListRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 300);
-    }
-  };
-
   const handleAgentClick = (agent) => {
-    router.push(`/homepage/agent?agentId=${agent.id}`);
+    // Store agent data with timestamp for security validation
+    const agentData = {
+      ...agent,
+      _timestamp: Date.now(),
+      _sessionId: Math.random().toString(36).substring(7), // Simple session tracking
+    };
+    localStorage.setItem("selectedAgent", JSON.stringify(agentData));
+    router.push(`/homepage/agent`);
   };
 
   return (
@@ -191,39 +191,37 @@ export default function MasterAdminLandingPage() {
           </div>
           <span className="tracking-tight">QR Rev</span>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-6 mr-4 text-sm font-medium text-slate-600">
-            <Link
-              href="#platform-stats"
-              className="hover:text-primary transition-colors"
-            >
-              Overview
-            </Link>
-            <Link
-              href="#agent-directory"
-              className="hover:text-primary transition-colors"
-            >
-              Directory
-            </Link>
-            <Link
-              href="#features"
-              className="hover:text-primary transition-colors"
-            >
-              Features
-            </Link>
-          </div>
-          <LanguageSwitcher />
+
+        <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-[14px] font-bold tracking-tight">
           <Link
-            href={`/login`}
-            className="text-sm font-bold hover:text-primary transition-colors hidden sm:block"
+            href="#platform-stats"
+            className="text-slate-500 hover:text-primary transition-colors"
+          >
+            Overview
+          </Link>
+          <Link
+            href="#agent-directory"
+            className="text-slate-500 hover:text-primary transition-colors"
+          >
+            Directory
+          </Link>
+          <Link
+            href="#features"
+            className="text-slate-500 hover:text-primary transition-colors"
+          >
+            Features
+          </Link>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher />
+          <Button
+            size="sm"
+            className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
+            onClick={() => router.push("/login")}
           >
             Sign In
-          </Link>
-          <Link href={`/login`}>
-            <Button className="rounded-full px-6 font-bold shadow-lg shadow-primary/20">
-              Get Started
-            </Button>
-          </Link>
+          </Button>
         </div>
       </header>
 
@@ -260,7 +258,7 @@ export default function MasterAdminLandingPage() {
                 {stats.map((stat, idx) => (
                   <div
                     key={idx}
-                    className="bg-slate-50 p-5 rounded-2xl border border-slate-100 min-w-[140px]"
+                    className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] min-w-[140px] transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
                   >
                     <div className={`p-2 rounded-lg w-fit mb-3 ${stat.bg}`}>
                       <stat.icon className={`w-5 h-5 ${stat.color}`} />
@@ -302,7 +300,7 @@ export default function MasterAdminLandingPage() {
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
-                        setCurrentPage(1);
+                        setPage(1);
                       }}
                       className="pl-10 h-10 w-full sm:w-[250px] rounded-lg border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/50 outline-none transition-all placeholder:text-slate-400"
                     />
@@ -310,7 +308,10 @@ export default function MasterAdminLandingPage() {
 
                   <Select
                     value={selectedCountry}
-                    onValueChange={(val) => setSelectedCountry(val)}
+                    onValueChange={(val) => {
+                      setSelectedCountry(val);
+                      setPage(1);
+                    }}
                   >
                     <SelectTrigger className="w-full sm:w-[180px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-lg text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">
@@ -341,7 +342,7 @@ export default function MasterAdminLandingPage() {
                   <div
                     ref={agentListRef}
                     className={cn(
-                      "overflow-y-auto scroll-smooth h-[800px] pr-2",
+                      "overflow-y-auto scroll-smooth max-h-[800px] pr-2",
                       // Custom scrollbar styles
                       "[&::-webkit-scrollbar]:w-2",
                       "[&::-webkit-scrollbar-track]:bg-slate-100",
@@ -356,8 +357,8 @@ export default function MasterAdminLandingPage() {
                         <div
                           key={agent.id}
                           onClick={() => handleAgentClick(agent)}
-                          className="group bg-white rounded-3xl p-6 border border-slate-200 shadow-md 
-  hover:shadow-xl  transition-all duration-300 ease-out cursor-pointer flex flex-col relative mb-2"
+                          className="group bg-white rounded-4xl p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] 
+  hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 ease-out cursor-pointer flex flex-col relative mb-4 hover:-translate-y-1"
                         >
                           {/* Header */}
                           <div className="flex items-start justify-between mb-6">
@@ -400,7 +401,7 @@ export default function MasterAdminLandingPage() {
                           </div>
 
                           {/* Footer Actions */}
-                          <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-primary transition-colors duration-300">
+                          <div className="mt-auto pt-5 flex items-center justify-between text-sm font-bold text-primary transition-colors duration-300">
                             <span className="group-hover:translate-x-1 transition-transform duration-300">
                               View Storefront
                             </span>
@@ -411,38 +412,170 @@ export default function MasterAdminLandingPage() {
                     </div>
                   </div>
 
-                  {/* Load More Button */}
-                  {hasMore && (
-                    <div className="flex justify-center pt-8">
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="rounded-full px-8 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-bold"
-                        onClick={handleLoadMore}
-                        disabled={loadingMore}
-                      >
-                        {loadingMore ? (
-                          <>
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Loading...
-                          </>
-                        ) : (
-                          "Load More Agents"
-                        )}
-                      </Button>
+                  {/* Pagination */}
+                  {(totalAgents > 6 || hasMore || page > 1) && (
+                    <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                          onClick={() => fetchAgents(page - 1)}
+                          disabled={page === 1 || loading}
+                        >
+                          <ChevronLeft className="w-5 h-5" />
+                        </Button>
+
+                        <div className="flex items-center gap-1.5 px-2">
+                          {Array.from({
+                            length:
+                              hasMore && totalAgents <= page * 6
+                                ? page + 1
+                                : Math.ceil(totalAgents / 6),
+                          }).map((_, i) => {
+                            const pageNum = i + 1;
+                            const totalPages =
+                              hasMore && totalAgents <= page * 6
+                                ? page + 1
+                                : Math.ceil(totalAgents / 6);
+
+                            // Only show current, 1st, last, and neighbors
+                            if (
+                              pageNum === 1 ||
+                              pageNum === totalPages ||
+                              (pageNum >= page - 1 && pageNum <= page + 1)
+                            ) {
+                              return (
+                                <Button
+                                  key={pageNum}
+                                  variant={
+                                    page === pageNum ? "default" : "outline"
+                                  }
+                                  size="icon"
+                                  className={cn(
+                                    "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                                    page === pageNum
+                                      ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                                  )}
+                                  onClick={() => fetchAgents(pageNum)}
+                                  disabled={loading}
+                                >
+                                  {pageNum}
+                                </Button>
+                              );
+                            } else if (
+                              (pageNum === 2 && page > 3) ||
+                              (pageNum === totalPages - 1 &&
+                                page < totalPages - 2)
+                            ) {
+                              return (
+                                <span
+                                  key={pageNum}
+                                  className="px-1 text-slate-400 font-bold"
+                                >
+                                  ...
+                                </span>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                          onClick={() => fetchAgents(page + 1)}
+                          disabled={!hasMore || loading}
+                        >
+                          <ChevronRight className="w-5 h-5" />
+                        </Button>
+                      </div>
+
+                      {totalAgents > 0 && (
+                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+                          {totalAgents <= page * 6 && hasMore
+                            ? `Showing Page ${page}`
+                            : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalAgents)} of ${totalAgents} Agents`}
+                        </p>
+                      )}
                     </div>
                   )}
                 </>
               ) : (
-                <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-slate-200">
-                  <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-                    <Users className="h-8 w-8 text-slate-300" />
+                <>
+                  <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-slate-200">
+                    <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                      <Users className="h-8 w-8 text-slate-300" />
+                    </div>
+                    <h3 className="font-bold text-slate-900 text-lg">
+                      No agents found
+                    </h3>
+                    <p className="text-slate-500">
+                      Try adjusting your filters.
+                    </p>
                   </div>
-                  <h3 className="font-bold text-slate-900 text-lg">
-                    No agents found
-                  </h3>
-                  <p className="text-slate-500">Try adjusting your filters.</p>
-                </div>
+
+                  {/* Pagination for empty results when not on page 1 */}
+                  {page > 1 && (
+                    <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                          onClick={() => fetchAgents(page - 1)}
+                          disabled={page === 1 || loading}
+                        >
+                          <ChevronLeft className="w-5 h-5" />
+                        </Button>
+
+                        <div className="flex items-center gap-1.5 px-2">
+                          {Array.from({ length: page }).map((_, i) => {
+                            const pageNum = i + 1;
+                            if (pageNum === 1 || pageNum === page || (pageNum >= page - 1 && pageNum <= page + 1)) {
+                              return (
+                                <Button
+                                  key={pageNum}
+                                  variant={page === pageNum ? "default" : "outline"}
+                                  size="icon"
+                                  className={cn(
+                                    "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                                    page === pageNum
+                                      ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm"
+                                  )}
+                                  onClick={() => fetchAgents(pageNum)}
+                                  disabled={loading}
+                                >
+                                  {pageNum}
+                                </Button>
+                              );
+                            } else if ((pageNum === 2 && page > 3)) {
+                              return <span key={pageNum} className="px-1 text-slate-400 font-bold">...</span>;
+                            }
+                            return null;
+                          })}
+                        </div>
+
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                          onClick={() => fetchAgents(page + 1)}
+                          disabled={true}
+                        >
+                          <ChevronRight className="w-5 h-5" />
+                        </Button>
+                      </div>
+
+                      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+                        Page {page} - No Results
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -494,7 +627,7 @@ export default function MasterAdminLandingPage() {
               ].map((fet, i) => (
                 <div
                   key={i}
-                  className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl hover:border-slate-200 hover:-translate-y-1 transition-all duration-300"
+                  className="bg-white p-8 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500"
                 >
                   <div
                     className={`h-14 w-14 rounded-2xl ${fet.bg} ${fet.color} flex items-center justify-center mb-6`}

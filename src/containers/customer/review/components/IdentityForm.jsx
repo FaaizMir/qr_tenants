@@ -55,10 +55,11 @@ export const IdentityForm = ({
     async (phoneToQuery) => {
       if (!phoneToQuery || phoneToQuery.length < 8) return;
       if (lastFoundPhone.current === phoneToQuery) return;
+      if (!merchantConfig?.id) return;
 
       try {
         const res = await axiosInstance.get(
-          `/customers/check-by-phone?phone=${encodeURIComponent(phoneToQuery)}`,
+          `/customers/check-by-phone?phone=${encodeURIComponent(phoneToQuery)}&merchant_id=${merchantConfig.id}`,
         );
 
         const data = res.data?.data;
@@ -119,7 +120,7 @@ export const IdentityForm = ({
         }
       }
     },
-    [setValue],
+    [merchantConfig, setValue],
   );
 
   React.useEffect(() => {
