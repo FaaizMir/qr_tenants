@@ -428,16 +428,20 @@ export default function MasterAdminLandingPage() {
 
                         <div className="flex items-center gap-1.5 px-2">
                           {Array.from({
-                            length:
+                            length: Math.max(
+                              page,
                               hasMore && totalAgents <= page * 6
                                 ? page + 1
-                                : Math.ceil(totalAgents / 6),
+                                : Math.ceil(totalAgents / 6)
+                            ),
                           }).map((_, i) => {
                             const pageNum = i + 1;
-                            const totalPages =
+                            const totalPages = Math.max(
+                              page,
                               hasMore && totalAgents <= page * 6
                                 ? page + 1
-                                : Math.ceil(totalAgents / 6);
+                                : Math.ceil(totalAgents / 6)
+                            );
 
                             // Only show current, 1st, last, and neighbors
                             if (

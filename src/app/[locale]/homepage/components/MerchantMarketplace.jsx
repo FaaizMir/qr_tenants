@@ -161,8 +161,8 @@ function getCategoryImage(category, id) {
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-      .split("")
-      .reduce((a, b) => a + b.charCodeAt(0), 0)
+        .split("")
+        .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -271,12 +271,15 @@ export function MerchantList({
   setSelectedMerchantId,
   loading,
   error,
-  page,
-  totalItems,
+  page: rawPage,
+  totalItems: rawTotalItems,
   hasMore,
   onPageChange,
   ads = [],
 }) {
+  const page = Number(rawPage || 1);
+  const totalItems = Number(rawTotalItems || 0);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-40 min-h-[400px] w-full animate-in fade-in duration-700">
@@ -346,12 +349,16 @@ export function MerchantList({
   if (merchants.length === 0) {
     return (
       <div className="space-y-8">
-        <div className="text-center py-24 bg-white rounded-[2.5rem] border border-dashed border-slate-200">
+        <div className="text-center py-24 bg-white rounded-4xl border border-dashed border-slate-200">
           <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
             <Store className="h-8 w-8 text-slate-300" />
           </div>
-          <h3 className="font-bold text-slate-900 text-lg">No merchants found</h3>
-          <p className="text-slate-500">Try adjusting your filters or search.</p>
+          <h3 className="font-bold text-slate-900 text-lg">
+            No merchants found
+          </h3>
+          <p className="text-slate-500">
+            Try adjusting your filters or search.
+          </p>
         </div>
 
         {/* Pagination for empty results when not on page 1 */}
@@ -394,7 +401,10 @@ export function MerchantList({
                     );
                   } else if (pageNum === 2 && page > 3) {
                     return (
-                      <span key={pageNum} className="px-1 text-slate-400 font-bold">
+                      <span
+                        key={pageNum}
+                        className="px-1 text-slate-400 font-bold"
+                      >
                         ...
                       </span>
                     );
@@ -566,14 +576,20 @@ export function MerchantList({
 
             <div className="flex items-center gap-1.5 px-2">
               {Array.from({
-                length: hasMore && totalItems <= page * 6
-                  ? page + 1
-                  : Math.ceil(totalItems / 6)
+                length: Math.max(
+                  page,
+                  hasMore && totalItems <= page * 6
+                    ? page + 1
+                    : Math.ceil(totalItems / 6),
+                ),
               }).map((_, i) => {
                 const pageNum = i + 1;
-                const totalPages = hasMore && totalItems <= page * 6
-                  ? page + 1
-                  : Math.ceil(totalItems / 6);
+                const totalPages = Math.max(
+                  page,
+                  hasMore && totalItems <= page * 6
+                    ? page + 1
+                    : Math.ceil(totalItems / 6),
+                );
 
                 // Only show current, 1st, last, and neighbors
                 if (
@@ -602,7 +618,10 @@ export function MerchantList({
                   (pageNum === totalPages - 1 && page < totalPages - 2)
                 ) {
                   return (
-                    <span key={pageNum} className="px-1 text-slate-400 font-bold">
+                    <span
+                      key={pageNum}
+                      className="px-1 text-slate-400 font-bold"
+                    >
                       ...
                     </span>
                   );
@@ -624,10 +643,10 @@ export function MerchantList({
 
           {totalItems > 0 && (
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
-              {totalItems <= page * 6 && hasMore
+              {(page - 1) * 6 >= totalItems ||
+              (totalItems <= page * 6 && hasMore)
                 ? `Showing Page ${page}`
-                : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalItems)} of ${totalItems} Merchants`
-              }
+                : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalItems)} of ${totalItems}`}
             </p>
           )}
         </div>
