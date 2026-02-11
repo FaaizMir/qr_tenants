@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import AllStatementsContainer from "@/containers/master-admin/all-statements";
+import StatementsContainer from "@/containers/master-admin/statements";
 
 export default function AllStatementsPage() {
   const breadcrumbData = [
@@ -10,7 +10,7 @@ export default function AllStatementsPage() {
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <AllStatementsContainer />
+      <StatementsContainer />
     </>
   );
 }

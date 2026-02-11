@@ -129,48 +129,39 @@ export const getMerchantsColumns = (
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuLabel className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                 Merchant Options
               </DropdownMenuLabel>
 
-              {isMasterAdmin ? (
-                // Master Admin: Show only Financial Statements
+              {/* Edit */}
+              {showEdit && (
                 <DropdownMenuItem asChild>
-                  <Link
-                    href={`/master-admin/statements/merchants/${row.original.id}`}
-                  >
-                    <FileText className="mr-2 h-4 w-4" />
-                    Financial Statements
+                  <Link href={`/agent/merchants/edit/${row.original.id}`}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit
                   </Link>
                 </DropdownMenuItem>
-              ) : (
-                // Other users: Show Edit, Details, and Delete
+              )}
+
+              {/* Details */}
+              {/*<DropdownMenuItem asChild>
+                <Link href={`/agent/merchants/${row.original.id}`}>
+                  <FileText className="mr-2 h-4 w-4" />
+                  Details
+                </Link>
+              </DropdownMenuItem>*/}
+
+              {/* Delete */}
+              {showEdit && (
                 <>
-                  {showEdit && (
-                    <DropdownMenuItem asChild>
-                      <Link href={`/agent/merchants/edit/${row.original.id}`}>
-                        <Edit className="mr-2 h-4 w-4" />
-                        Edit
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem asChild>
-                    <Link href={`/agent/merchants/${row.original.id}`}>
-                      <FileText className="mr-2 h-4 w-4" />
-                      Details
-                    </Link>
-                  </DropdownMenuItem>
-                  {showEdit && (
-                    <>
-                      <DropdownMenuSeparator />
-                      <DeleteMerchantAction
-                        merchantId={row.original.id}
-                        merchantName={row.original.name}
-                        onDeleted={onDeleted}
-                      />
-                    </>
-                  )}
+                  <DropdownMenuSeparator />
+                  <DeleteMerchantAction
+                    merchantId={row.original.id}
+                    merchantName={row.original.name}
+                    onDeleted={onDeleted}
+                  />
                 </>
               )}
             </DropdownMenuContent>

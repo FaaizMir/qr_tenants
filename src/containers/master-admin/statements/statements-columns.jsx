@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 
-export const getAllStatementsColumns = (onDownload) => [
+export const getStatementsColumns = (onDownload) => [
   {
     id: "owner",
     header: "Owner",

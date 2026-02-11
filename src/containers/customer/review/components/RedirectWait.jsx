@@ -196,6 +196,6 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };

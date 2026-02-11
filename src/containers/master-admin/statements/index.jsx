@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import {
   Calendar,
   Download,
   FileText,
   Building2,
   Loader2,
+  Users,
+  Store,
   Shield,
   ArrowLeft,
   RefreshCw,
@@ -21,8 +22,8 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/common/data-table";
-import TableToolbar from "@/components/common/table-toolbar";
 import {
   Select,
   SelectContent,
@@ -32,77 +33,77 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
-import { getSuperAdminStatementsColumns } from "./super-admin-statements-columns";
-import useDebounce from "@/hooks/useDebounceRef";
+import { getStatementsColumns } from "./statements-columns";
 
-export default function SuperAdminStatementsContainer() {
-  const { data: session } = useSession();
-  const user = session?.user;
+export default function StatementsContainer() {
   const router = useRouter();
 
-  const [statements, setStatements] = useState([]);
+  const [statements, setStatements] = useState({
+    merchants: [],
+    agents: [],
+    super_admin: [],
+    all_statements: [],
+  });
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("all");
 
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
-  const [total, setTotal] = useState(0);
-  const [search, setSearch] = useState("");
-  const debouncedSearch = useDebounce(search, 500);
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
   const [year, setYear] = useState(currentYear.toString());
-  const [month, setMonth] = useState("all");
+  const [month, setMonth] = useState(currentMonth.toString());
+
+  const [counts, setCounts] = useState({
+    merchants: 0,
+    agents: 0,
+    super_admin: 0,
+  });
 
   // Fetch statements
   const fetchStatements = useCallback(async () => {
-    if (!user?.adminId) return;
-
     setLoading(true);
     try {
-      const params = {
-        owner_type: "super_admin",
-        year: year,
-        page: page + 1,
-        limit: pageSize,
-      };
-
-      // Add owner_id if user has an id
-      if (user?.adminId) {
-        params.owner_id = user.adminId;
-      }
-
-      if (month && month !== "all") {
-        params.month = month;
-      }
-
-      const response = await axiosInstance.get("/monthly-statements", {
-        params,
+      const response = await axiosInstance.get("/monthly-statements/pdfs/all", {
+        params: {
+          year: year,
+          month: month,
+        },
       });
 
-      const responseData = response.data.data || response.data;
-      const statementsArray = Array.isArray(responseData) ? responseData : [];
-      const metadata = response.data.meta || response.data.metadata || {};
+      const data = response.data.data;
 
-      setStatements(statementsArray);
-      setTotal(metadata.total || metadata.totalCount || statementsArray.length);
+      setStatements({
+        merchants: data.statements?.merchants || [],
+        agents: data.statements?.agents || [],
+        super_admin: data.statements?.super_admin || [],
+        all_statements: data.all_statements || [],
+      });
+
+      setCounts(data.counts || { merchants: 0, agents: 0, super_admin: 0 });
     } catch (error) {
       console.error("Failed to fetch statements:", error);
       toast.error("Failed to load statements. Please try again.");
-      setStatements([]);
-      setTotal(0);
+      setStatements({
+        merchants: [],
+        agents: [],
+        super_admin: [],
+        all_statements: [],
+      });
+      setCounts({ merchants: 0, agents: 0, super_admin: 0 });
     } finally {
       setLoading(false);
     }
-  }, [user?.adminId, year, month, page, pageSize]);
+  }, [year, month]);
 
   useEffect(() => {
     fetchStatements();
   }, [fetchStatements]);
 
   // Download statement PDF
-  const handleDownloadPdf = async (statementId) => {
+  const handleDownloadPdf = async (statementId, ownerName, ownerType) => {
     try {
       const response = await axiosInstance.get(
         `/monthly-statements/${statementId}/download`,
@@ -118,7 +119,7 @@ export default function SuperAdminStatementsContainer() {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `super-admin-statement-${statementId}.pdf`;
+      link.download = `statement_${ownerType}_${ownerName}_${year}_${month}.pdf`;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -131,9 +132,8 @@ export default function SuperAdminStatementsContainer() {
     }
   };
 
-  const columns = getSuperAdminStatementsColumns(handleDownloadPdf);
+  const columns = getStatementsColumns(handleDownloadPdf);
 
-  // Generate available years (current year and 2 previous years)
   const availableYears = Array.from({ length: 3 }, (_, i) => currentYear - i);
 
   const months = [
@@ -151,6 +151,26 @@ export default function SuperAdminStatementsContainer() {
     { value: "12", label: "December" },
   ];
 
+  // Get current tab data
+  const getCurrentTabData = () => {
+    switch (activeTab) {
+      case "merchants":
+        return statements.merchants;
+      case "agents":
+        return statements.agents;
+      case "super_admin":
+        return statements.super_admin;
+      default:
+        return statements.all_statements;
+    }
+  };
+
+  const currentData = getCurrentTabData();
+  const paginatedData = currentData.slice(
+    page * pageSize,
+    (page + 1) * pageSize,
+  );
+
   return (
     <div className="space-y-6">
       {/* Header Section */}
@@ -159,20 +179,59 @@ export default function SuperAdminStatementsContainer() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => router.back()}
+            onClick={() => router.push("/master-admin/dashboard")}
             className="rounded-full h-10 w-10 hover:bg-muted"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
-              Master Admin Financial Statements
+              All Financial Statements
             </h1>
             <p className="text-sm text-muted-foreground max-w-2xl">
-              Monthly auto-generated PDF reports including platform revenue,
-              global metrics, and full ledger overview.
+              View and download monthly statements for merchants, agents, and
+              platform admin.
             </p>
           </div>
+        </div>
+
+        {/* Summary Cards */}
+        <div className="grid grid-cols-3 gap-3">
+          <Card className="border-border/50 shadow-xs">
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10">
+                <Store className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{counts.merchants}</p>
+                <p className="text-xs text-muted-foreground">Merchants</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 shadow-xs">
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-500/10">
+                <Users className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{counts.agents}</p>
+                <p className="text-xs text-muted-foreground">Agents</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 shadow-xs">
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10">
+                <Shield className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{counts.super_admin}</p>
+                <p className="text-xs text-muted-foreground">Super Admin</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
@@ -213,10 +272,9 @@ export default function SuperAdminStatementsContainer() {
               </label>
               <Select value={month} onValueChange={setMonth}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Current month" />
+                  <SelectValue placeholder="Select month" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Current Month</SelectItem>
                   {months.map((m) => (
                     <SelectItem key={m.value} value={m.value}>
                       {m.label}
@@ -253,53 +311,60 @@ export default function SuperAdminStatementsContainer() {
         </CardContent>
       </Card>
 
-      {/* Statements Table */}
+      {/* Statements Table with Tabs */}
       <Card className="border-border/50 shadow-xs">
-        <CardHeader className="pb-0">
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-base font-semibold flex items-center gap-2">
-                <FileText className="h-4 w-4 text-primary" />
-                Statement History
-              </CardTitle>
-              <CardDescription className="mt-0.5 text-xs">
-                {total} statement{total !== 1 ? "s" : ""} found
-              </CardDescription>
-            </div>
-          </div>
+        <CardHeader className="pb-4">
+          <CardTitle className="text-base font-semibold flex items-center gap-2">
+            <FileText className="h-4 w-4 text-primary" />
+            Statement History
+          </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
-          {loading ? (
-            <div className="flex flex-col items-center justify-center py-12">
-              <Loader2 className="h-10 w-10 animate-spin text-primary mb-3" />
-              <p className="text-sm text-muted-foreground">
-                Loading statements...
-              </p>
-            </div>
-          ) : statements.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="rounded-full bg-muted p-3 mb-4">
-                <FileText className="h-8 w-8 text-muted-foreground" />
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="all">
+                All ({statements.all_statements.length})
+              </TabsTrigger>
+              <TabsTrigger value="merchants">
+                Merchants ({counts.merchants})
+              </TabsTrigger>
+              <TabsTrigger value="agents">Agents ({counts.agents})</TabsTrigger>
+              <TabsTrigger value="super_admin">
+                Super Admin ({counts.super_admin})
+              </TabsTrigger>
+            </TabsList>
+
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="h-10 w-10 animate-spin text-primary mb-3" />
+                <p className="text-sm text-muted-foreground">
+                  Loading statements...
+                </p>
               </div>
-              <h3 className="text-lg font-semibold mb-2">
-                No Statements Found
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                No statements available for the selected period. Generate a new
-                statement to get started.
-              </p>
-            </div>
-          ) : (
-            <DataTable
-              data={statements}
-              columns={columns}
-              page={page}
-              pageSize={pageSize}
-              total={total}
-              setPage={setPage}
-              setPageSize={setPageSize}
-            />
-          )}
+            ) : currentData.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="rounded-full bg-muted p-3 mb-4">
+                  <FileText className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">
+                  No Statements Found
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 max-w-sm">
+                  No statements available for the selected period.
+                </p>
+              </div>
+            ) : (
+              <DataTable
+                data={paginatedData}
+                columns={columns}
+                page={page}
+                pageSize={pageSize}
+                total={currentData.length}
+                setPage={setPage}
+                setPageSize={setPageSize}
+              />
+            )}
+          </Tabs>
         </CardContent>
       </Card>
     </div>

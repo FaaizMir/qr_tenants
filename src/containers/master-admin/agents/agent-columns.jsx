@@ -109,12 +109,7 @@ export const getAgentsColumns = (onDeleted) => [
               Edit
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href={`/master-admin/statements/agents/${row.original.id}`}>
-              <FileText className="mr-2 h-4 w-4" />
-              Financial Statements
-            </Link>
-          </DropdownMenuItem>
+
           <DropdownMenuSeparator />
 
           <DeleteAgentAction
