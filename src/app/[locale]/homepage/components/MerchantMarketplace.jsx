@@ -35,6 +35,7 @@ import {
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // --- HELPERS ---
 // --- HELPERS ---
@@ -178,6 +179,8 @@ export function MarketplaceFilters({
   cities,
   handleGetCoupon,
 }) {
+  const t = useTranslations("homepage.agent.marketplace");
+  
   return (
     <div className="sticky top-20 z-40 mb-8">
       <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-6xl mx-auto transition-all">
@@ -188,7 +191,7 @@ export function MarketplaceFilters({
           </div>
 
           <Input
-            placeholder="Search merchants, categories..."
+            placeholder={t("searchPlaceholder")}
             className="pl-12 h-12 rounded-full border bg-slate-50 text-base font-medium placeholder:text-slate-400 hover:bg-slate-100/50 focus:outline-none focus-visible:ring-0 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -214,11 +217,11 @@ export function MarketplaceFilters({
           "
               suppressHydrationWarning
             >
-              <SelectValue placeholder="Industry" />
+              <SelectValue placeholder={t("industry")} />
             </SelectTrigger>
 
             <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="all">All Industries</SelectItem>
+              <SelectItem value="all">{t("allIndustries")}</SelectItem>
               {categories.map((cat) => (
                 <SelectItem key={cat} value={cat}>
                   {cat}
@@ -246,12 +249,12 @@ export function MarketplaceFilters({
             >
               <div className="flex items-center gap-2 truncate">
                 <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
-                <SelectValue placeholder="City" />
+                <SelectValue placeholder={t("city")} />
               </div>
             </SelectTrigger>
 
             <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="all">Everywhere</SelectItem>
+              <SelectItem value="all">{t("everywhere")}</SelectItem>
               {cities.map((city) => (
                 <SelectItem key={city} value={city}>
                   {city}
@@ -277,6 +280,8 @@ export function MerchantList({
   onPageChange,
   ads = [],
 }) {
+  const t = useTranslations("homepage.agent.marketplace");
+  const tDetail = useTranslations("homepage.agent.merchantDetail");
   const page = Number(rawPage || 1);
   const totalItems = Number(rawTotalItems || 0);
 
@@ -296,11 +301,10 @@ export function MerchantList({
 
         <div className="text-center space-y-2">
           <h3 className="font-bold text-slate-900 text-xl tracking-tight">
-            Loading Marketplace
+            {t("loadingMarketplace")}
           </h3>
           <p className="text-slate-400 text-sm font-medium max-w-60 mx-auto leading-relaxed">
-            We&apos;re curating the best verified merchants and exclusive deals
-            for you...
+            {t("curatingMessage")}
           </p>
         </div>
       </div>
@@ -312,7 +316,7 @@ export function MerchantList({
       <div className="flex flex-col items-center justify-center py-20 text-center px-4 bg-red-50 rounded-3xl border border-red-100">
         <Shield className="w-12 h-12 text-red-500 mb-4" />
         <h3 className="text-red-900 font-bold text-lg">
-          Unable to load merchants
+          {t("unableToLoad")}
         </h3>
         <p className="text-sm font-medium text-red-600/80 mb-6">{error}</p>
         <Button
@@ -320,7 +324,7 @@ export function MerchantList({
           onClick={() => window.location.reload()}
           className="bg-white border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800"
         >
-          Retry Connection
+          {t("retryConnection")}
         </Button>
       </div>
     );
@@ -354,10 +358,10 @@ export function MerchantList({
             <Store className="h-8 w-8 text-slate-300" />
           </div>
           <h3 className="font-bold text-slate-900 text-lg">
-            No merchants found
+            {t("noMerchantsFound")}
           </h3>
           <p className="text-slate-500">
-            Try adjusting your filters or search.
+            {t("tryAdjustingFilters")}
           </p>
         </div>
 
@@ -425,7 +429,7 @@ export function MerchantList({
             </div>
 
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
-              Page {page} - No Results
+              {t("pageNoResults", { page })}
             </p>
           </div>
         )}
@@ -526,7 +530,7 @@ export function MerchantList({
                         ))}
                       </div>
                       <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">
-                        Verified Merchant
+                        {tDetail("verifiedMerchant")}
                       </span>
                     </div>
                   </div>
@@ -534,10 +538,10 @@ export function MerchantList({
                   <div className="mt-auto pt-6 flex items-center justify-between">
                     <div className="flex flex-col text-left">
                       <span className="text-[9px] uppercase text-slate-400 font-bold tracking-wider">
-                        Available Deals
+                        {tDetail("availableDeals")}
                       </span>
                       <span className="text-base font-bold text-slate-900">
-                        {merchant.batches?.length || 0} Offers
+                        {tDetail("offers", { count: merchant.batches?.length || 0 })}
                       </span>
                     </div>
                     <Button
@@ -550,7 +554,7 @@ export function MerchantList({
                           : "bg-slate-50 text-slate-600 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20",
                       )}
                     >
-                      Details <ChevronRight className="w-4 h-4 ml-1" />
+                      {tDetail("details")} <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
                 </div>
@@ -645,8 +649,8 @@ export function MerchantList({
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
               {(page - 1) * 6 >= totalItems ||
               (totalItems <= page * 6 && hasMore)
-                ? `Showing Page ${page}`
-                : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalItems)} of ${totalItems}`}
+                ? t("showingPage", { page })
+                : t("showing", { start: (page - 1) * 6 + 1, end: Math.min(page * 6, totalItems), total: totalItems })}
             </p>
           )}
         </div>
@@ -657,6 +661,7 @@ export function MerchantList({
 
 export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   const router = useRouter();
+  const tDetail = useTranslations("homepage.agent.merchantDetail");
 
   // Mobile/Tablet View handled via simple conditionally rendered sheet or similar if needed,
   // but for now keeping the "selected means highlighted" flow.
@@ -671,14 +676,14 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
         <div className="relative z-10 flex flex-col items-center">
           <h3 className="font-bold text-slate-900 text-2xl mb-4 tracking-tight">
-            Ready to Explore?
+            {tDetail("readyToExplore")}
           </h3>
           <p className="text-slate-400 max-w-60 text-sm font-medium leading-relaxed">
-            Click on a merchant profile on the left to unlock their{" "}
+            {tDetail("clickMerchantPrompt")}{" "}
             <span className="text-primary font-semibold">
-              exclusive coupons
+              {tDetail("exclusiveCoupons")}
             </span>{" "}
-            and limited-time offers.
+            {tDetail("limitedTimeOffers")}
           </p>
 
           <div className="mt-10 flex items-center gap-2 opacity-30">
@@ -727,10 +732,10 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-emerald-500" />
-              Available Coupons
+              {tDetail("availableCoupons")}
             </h3>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              {activeMerchant.batches?.length || 0} Deals Found
+              {tDetail("dealsFound", { count: activeMerchant.batches?.length || 0 })}
             </span>
           </div>
         </div>
@@ -754,7 +759,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                           : "bg-slate-100 text-slate-500",
                       )}
                     >
-                      {batch.is_active ? "LIVE" : "EXPIRED"}
+                      {batch.is_active ? tDetail("live") : tDetail("expired")}
                     </Badge>
                   </div>
 
@@ -775,7 +780,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-                        {batch.total_quantity - batch.issued_quantity} left
+                        {tDetail("left", { count: batch.total_quantity - batch.issued_quantity })}
                       </span>
                     </div>
 
@@ -785,7 +790,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                         className="w-full text-xs font-bold rounded-lg h-8 shadow-sm"
                         onClick={() => handleGetCoupon(activeMerchant, batch)}
                       >
-                        Get Coupon
+                        {tDetail("getCoupon")}
                       </Button>
                     </div>
                   </div>
@@ -797,10 +802,10 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                   <TrendingUp className="w-8 h-8 text-slate-300" />
                 </div>
                 <p className="text-sm text-slate-500 font-bold">
-                  No active coupons at the moment.
+                  {tDetail("noActiveCoupons")}
                 </p>
                 <p className="text-xs text-slate-400 mt-1">
-                  Check back later for exclusive deals!
+                  {tDetail("checkBackLater")}
                 </p>
               </div>
             )}

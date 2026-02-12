@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "고객은 QR 코드를 스캔하여 몇 초 만에 리뷰를 남깁니다. 부정적인 피드백이 구글에 노출되기 전에 비공식적으로 수집하세요.",
-    "card1Heading": "즉각적인 피드백",
-    "card2Description": "고유하고 추적 가능한 일련 번호를 발급합니다. 안전한 검증 및 사용 제한으로 사기를 방지합니다.",
-    "card2Heading": "스마트 쿠폰",
-    "card3Description": "생일 축하 메시지, 리뷰 요청 및 \"당신이 그리워요\" 제안을 WhatsApp을 통해 자동으로 전송하세요.",
-    "card3Heading": "WhatsApp 자동화",
-    "description": "고객을 이해하고 다시 돌아오게 하는 데 도움이 되는 강력한 도구들.",
-    "h1": "성장하는 데 필요한 모든 것"
+  "agent": {
+    "ads": {
+      "ad": "광고",
+      "availableIn": "{city}에서 이용 가능",
+      "exclusiveIn": "{city}에서 독점",
+      "experienceNow": "지금 체험하기",
+      "featuredPartner": "추천 파트너",
+      "limitedTime": "한정 시간",
+      "partner": "파트너",
+      "premiumLabel": "프리미엄",
+      "sponsored": "후원",
+      "sponsoredDeal": "후원 거래",
+      "viewOffer": "제안 보기",
+      "visitBusiness": "{city}, {country}에 있는 {businessName}를 방문하세요.",
+      "visitExclusivePartner": "프리미엄 제공을 위한 독점 파트너를 방문하세요."
+    },
+    "errors": {
+      "agentDataExpired": "에이전트 데이터가 만료되었습니다. localStorage를 지우고 있습니다...",
+      "errorLoadingAgent": "localStorage에서 에이전트를 로드하는 중 오류 발생:",
+      "failedToFetchMerchants": "상인을 가져오는 데 실패했습니다:",
+      "failedToLoadData": "데이터를 로드하지 못했습니다:",
+      "failedToLoadPaidAds": "유료 광고를 로드하지 못했습니다",
+      "invalidAgentData": "로컬 스토리지의 잘못된 에이전트 데이터, 지우는 중...",
+      "unableToLoadMerchants": "상인을 로드할 수 없습니다. 다시 시도해 주세요.",
+      "unableToLoadPage": "페이지를 로드할 수 없습니다. 다시 시도해 주세요."
+    },
+    "fallback": {
+      "general": "일반",
+      "unknown": "알 수 없음"
+    },
+    "features": {
+      "badge": "왜 우리를 선택해야 할까요",
+      "description": "고객을 이해하고 다시 돌아오게 하는 데 도움이 되는 강력한 도구입니다.",
+      "globalReach": {
+        "description": "우리의 포괄적인 도구와 통찰력을 통해 비즈니스를 국제적으로 확장하세요.",
+        "title": "글로벌 도달 범위"
+      },
+      "instantFeedback": {
+        "description": "고객이 QR 코드를 스캔하여 몇 초 만에 리뷰를 남깁니다. 부정적인 피드백을 Google에 노출되기 전에 비공식적으로 수집하세요.",
+        "title": "즉각적인 피드백"
+      },
+      "smartCoupons": {
+        "description": "고유하고 추적 가능한 일련 번호 코드를 발급합니다. 안전한 검증 및 사용 한도로 사기를 방지합니다.",
+        "title": "스마트 쿠폰"
+      },
+      "title": "성장에 필요한 모든 것"
+    },
+    "footer": {
+      "agentLogin": "에이전트 로그인",
+      "copyright": "© {year} QR Rev. 모든 권리 보유.",
+      "globalMerchantNetwork": "글로벌 상인 네트워크",
+      "privacyPolicy": "개인정보 처리방침",
+      "termsOfService": "서비스 약관"
+    },
+    "hero": {
+      "curatedForYou": "당신을 위해 선별됨",
+      "descriptionDefault": "검증된 상인을 탐색하고, 즉시 쿠폰을 잠금 해제하며, 귀하의 지역에서 프리미엄 서비스에 대한 비용을 절약하세요.",
+      "descriptionWithAgent": "{agentName}이(가) 엄선한 검증된 상인들을 발견하세요. 즉시 쿠폰을 잠금 해제하고 프리미엄 서비스에서 절약하세요.",
+      "exclusiveDeals": "독점 거래",
+      "officialPartnerNetwork": "공식 파트너 네트워크",
+      "partnerNetwork": "{agentName}의 파트너 네트워크"
+    },
+    "marketplace": {
+      "allIndustries": "모든 산업",
+      "city": "도시",
+      "curatingMessage": "우리는 당신을 위해 최고의 검증된 상인과 독점 거래를 선별하고 있습니다...",
+      "everywhere": "모든 곳",
+      "industry": "산업",
+      "loadingMarketplace": "마켓플레이스 로딩 중",
+      "noMerchantsFound": "상인을 찾을 수 없습니다",
+      "pageNoResults": "페이지 {page} - 결과 없음",
+      "retryConnection": "연결 재시도",
+      "searchPlaceholder": "상인, 카테고리 검색...",
+      "showing": "{total} 중 {start} - {end} 표시",
+      "showingPage": "페이지 {page} 표시 중",
+      "tryAdjustingFilters": "필터를 조정하거나 검색해 보세요.",
+      "unableToLoad": "상인을 불러올 수 없습니다"
+    },
+    "merchantDetail": {
+      "availableCoupons": "사용 가능한 쿠폰",
+      "availableDeals": "이용 가능한 거래",
+      "checkBackLater": "독점 거래를 위해 나중에 다시 확인하세요!",
+      "clickMerchantPrompt": "왼쪽에서 상인 프로필을 클릭하여 잠금을 해제하세요",
+      "dealsFound": "{count}개의 거래가 발견되었습니다",
+      "details": "세부정보",
+      "exclusiveCoupons": "독점 쿠폰",
+      "expired": "만료됨",
+      "getCoupon": "쿠폰 받기",
+      "left": "{count} 남음",
+      "limitedTimeOffers": "및 한정 시간 제공.",
+      "live": "실시간",
+      "merchantDetails": "상인 세부정보",
+      "noActiveCoupons": "현재 활성 쿠폰이 없습니다.",
+      "offers": "{count} 제안",
+      "readyToExplore": "탐색할 준비가 되셨나요?",
+      "verifiedMerchant": "인증된 상인"
+    },
+    "navigation": {
+      "features": "기능",
+      "home": "홈",
+      "marketplace": "마켓플레이스",
+      "menu": "메뉴",
+      "partner": "파트너",
+      "signIn": "로그인"
+    },
+    "security": {
+      "dataExpiredClearing": "에이전트 데이터가 만료되었습니다. localStorage를 지우는 중...",
+      "invalidDataClearing": "localStorage에 유효하지 않은 에이전트 데이터가 있습니다. 지우고 있습니다..."
+    },
+    "stats": {
+      "loading": "로딩 중...",
+      "merchants": "상인",
+      "verified": "검증됨"
+    }
   },
-  "footer": {
-    "Contact": "연락처",
-    "Privacy": "개인정보 보호",
-    "Terms": "약관",
-    "text": "© 2024 QR Rev Inc. 모든 권리 보유."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "고객을 전환하다",
-    "2": "충성스러운 팬들",
-    "3": "스마트 QR 코드와 함께",
-    "description": "리뷰를 수집하고, 쿠폰을 배포하며, 고객 유지를 자동화하는 올인원 플랫폼. 코딩이 필요 없습니다.",
-    "freeTrial": "무료 체험 시작",
-    "para": "이제 WhatsApp 통합 기능이 추가되었습니다.",
-    "viewDemo": "데모 보기"
+  "couponForm": {
+    "birthday": "생일",
+    "birthdayFuture": "생일은 미래일 수 없습니다",
+    "birthdayRequired": "생일은 필수입니다",
+    "cancel": "취소",
+    "close": "닫기",
+    "discount": "{percentage}% 할인",
+    "errorDefault": "쿠폰 발급에 실패했습니다. 다시 시도해 주세요.",
+    "from": "{merchantName}에서",
+    "fullName": "전체 이름",
+    "getCoupon": "쿠폰 받기",
+    "issuing": "발급 중...",
+    "namePlaceholder": "전체 이름을 입력하세요",
+    "nameRequired": "이름은 필수입니다",
+    "phoneInvalid": "잘못된 전화번호 형식",
+    "phoneNumber": "전화번호",
+    "phonePlaceholder": "전화번호 입력",
+    "phoneRequired": "전화번호는 필수입니다",
+    "successMessage": "쿠폰이 WhatsApp을 통해 귀하의 전화로 전송되었습니다.",
+    "successTitle": "쿠폰이 성공적으로 발급되었습니다!",
+    "successToast": "쿠폰이 성공적으로 전송되었습니다! WhatsApp을 확인하세요.",
+    "title": "쿠폰 받기"
   },
-  "howitworks": {
-    "descp1": "브랜드 색상과 로고로 맞춤 설정하세요.",
-    "descp2": "테이블, 카운터 또는 영수증 위에 놓으세요.",
-    "descp3": "리뷰를 수집하고 고객 데이터베이스를 자동으로 구축하세요.",
-    "h1": "간단한 3단계 프로세스",
-    "h3": "당신의 비즈니스가 성장하는 모습을 지켜보세요",
-    "heading1": "QR 코드를 생성하세요",
-    "heading2": "상점에 표시하기"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "활성 상인",
+      "agents": "에이전트",
+      "allCountries": "모든 국가",
+      "description": "전 세계 임대 에이전트 네트워크를 관리하세요.",
+      "noAgentsFound": "에이전트를 찾을 수 없습니다",
+      "of": "의",
+      "pageNoResults": "페이지 - 결과 없음",
+      "searchPlaceholder": "에이전트 검색...",
+      "showing": "표시 중",
+      "showingPage": "페이지 표시",
+      "title": "에이전트 디렉토리",
+      "tryAdjustingFilters": "필터를 조정해 보세요.",
+      "viewStorefront": "스토어프론트 보기"
+    },
+    "errors": {
+      "failedToLoadAgents": "에이전트를 로드하지 못했습니다."
+    },
+    "fallback": {
+      "global": "글로벌",
+      "unknown": "알 수 없음",
+      "unknownAgent": "알 수 없는 에이전트"
+    },
+    "features": {
+      "badge": "플랫폼 기능",
+      "description": "고객을 이해하고 다시 돌아오게 하는 강력한 도구.",
+      "instantFeedback": {
+        "description": "고객은 QR 코드를 스캔하여 몇 초 만에 리뷰를 남깁니다. 부정적인 피드백을 Google에 노출되기 전에 비공식적으로 캡처하세요.",
+        "title": "즉각적인 피드백"
+      },
+      "smartCoupons": {
+        "description": "고유하고 추적 가능한 일련 번호 코드를 발급합니다. 안전한 검증 및 사용 한도로 사기를 방지합니다.",
+        "title": "스마트 쿠폰"
+      },
+      "title": "성장에 필요한 모든 것",
+      "whatsappAutomation": {
+        "description": "생일 축하 메시지, 리뷰 요청 및 \"보고 싶어요\" 제안을 WhatsApp을 통해 자동으로 전송합니다.",
+        "title": "WhatsApp 자동화"
+      }
+    },
+    "footer": {
+      "contact": "연락처",
+      "copyright": "© 2024 QR Rev Inc. 모든 권리 보유.",
+      "privacy": "개인정보",
+      "terms": "약관"
+    },
+    "hero": {
+      "badge": "마스터 관리자 제어",
+      "description": "전 세계 에이전트 성과를 모니터링하고, 지역 분배를 관리하며, 단일 대시보드에서 상인 네트워크 성장을 감독합니다.",
+      "title": "플랫폼",
+      "titleHighlight": "정보 센터"
+    },
+    "navigation": {
+      "directory": "디렉토리",
+      "features": "기능",
+      "overview": "개요",
+      "signIn": "로그인"
+    },
+    "Overview": "개요",
+    "stats": {
+      "activeAgents": "활성 에이전트",
+      "globalReach": "글로벌 도달 범위",
+      "totalMerchants": "총 상인 수"
+    },
+    "status": {
+      "active": "활성",
+      "inactive": "비활성"
+    }
   }
 }

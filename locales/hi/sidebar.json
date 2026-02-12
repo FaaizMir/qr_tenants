@@ -1,22 +1,53 @@
 {
-  "allMerchants": "सभी व्यापारी",
-  "addMerchant": "व्यापारी जोड़ें",
-  "merchantReports": "व्यापारी रिपोर्ट",
-  "allSubscriptions": "सभी सदस्यताएं",
-  "activePlans": "सक्रिय योजनाएं",
-  "paymentHistory": "भुगतान इतिहास",
-  "allAgents": "सभी एजेंट",
-  "agentPoints": "एजेंट अंक",
-  "agentReports": "एजेंट रिपोर्ट",
-  "allFeedbacks": "सभी प्रतिक्रियाएं",
-  "pendingReview": "लंबित समीक्षा",
-  "feedbackAnalytics": "प्रतिक्रिया विश्लेषण",
-  "allCoupons": "सभी कूपन",
-  "redeemedCoupons": "मोचित कूपन",
-  "couponAnalytics": "कूपन विश्लेषण",
-  "revenueAnalytics": "राजस्व विश्लेषण",
-  "userAnalytics": "उपयोगकर्ता विश्लेषण",
-  "generalSettings": "सामान्य सेटिंग्स",
-  "paymentSettings": "भुगतान सेटिंग्स",
-  "systemSettings": "सिस्टम सेटिंग्स"
+  "agent": {
+    "approvals": "अनुमोदन",
+    "couponsync": "कूपन समन्वय",
+    "dashboard": "डैशबोर्ड",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "एजेंट प्रशासन",
+    "earnings": "आय",
+    "logs": "लॉग",
+    "merchants": "व्यापारी",
+    "statements": "बयान",
+    "support": "समर्थन",
+    "wallet": "वॉलेट"
+  },
+  "brand": {
+    "name": "क्यूआर स्कैनर"
+  },
+  "common": {
+    "account": "खाता",
+    "home": "होम",
+    "logout": "लॉग आउट",
+    "platform": "प्लेटफ़ॉर्म",
+    "toggleSidebar": "साइडबार टॉगल करें"
+  },
+  "masterAdmin": {
+    "agents": "एजेंट",
+    "approvals": "अनुमोदन",
+    "commission": "आयोग",
+    "dashboard": "डैशबोर्ड",
+    "logs": "लॉग",
+    "merchants": "व्यापारी",
+    "packages": "पैकेज",
+    "settings": "सेटिंग्स",
+    "staff": "स्टाफ",
+    "statements": "बयान",
+    "support": "समर्थन"
+  },
+  "merchant": {
+    "campaigns": "अभियान",
+    "coupons": "कूपन",
+    "customerData": "ग्राहक डेटा",
+    "dashboard": "डैशबोर्ड",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "व्यापारी उपयोगकर्ता",
+    "logs": "सिस्टम लॉग",
+    "luckyDraw": "लकी ड्रा",
+    "purchase": "खरीद",
+    "serialCodes": "क्रमांकित कोड",
+    "statements": "बयान",
+    "support": "समर्थन",
+    "wallet": "वॉलेट"
+  }
 }

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 // --- HELPERS ---
 let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
@@ -25,10 +26,12 @@ const getAdImage = (path) => {
  * Modern "Sponsored" Label - Subtle & Clean
  */
 function AdLabel({ className }) {
+  const t = useTranslations("homepage.agent.ads");
+  
   return (
     <div className={cn("flex items-center gap-1.5 opacity-70 mb-2", className)}>
       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-50 px-2 py-0.5 rounded-sm">
-        Sponsored
+        {t("sponsored")}
       </span>
     </div>
   );
@@ -37,6 +40,8 @@ function AdLabel({ className }) {
 // --- PREMIUM AD COMPONENTS ---
 
 export function TopBannerAd({ ad }) {
+  const t = useTranslations("homepage.agent.ads");
+  
   if (!ad) return null;
 
   return (
@@ -63,13 +68,13 @@ export function TopBannerAd({ ad }) {
         <div className="absolute inset-0 p-8 md:p-14 flex flex-col justify-end items-start">
           <div className="absolute top-8 right-8">
             <span className="px-4 py-1.5 bg-white/10 backdrop-blur-xl text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full shadow-2xl">
-              {ad.businessType || "Featured Partner"}
+              {ad.businessType || t("featuredPartner")}
             </span>
           </div>
 
           <div className="max-w-2xl space-y-6 animate-in slide-in-from-bottom-5 duration-700">
             <div className="flex items-center gap-3">
-              <BadgeLabel text="Sponsored" />
+              <BadgeLabel text={t("sponsored")} />
               <div className="h-px w-8 bg-white/30" />
             </div>
 
@@ -83,14 +88,14 @@ export function TopBannerAd({ ad }) {
 
             <div className="pt-4 flex flex-wrap items-center gap-6">
               <div className="flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full font-bold text-sm shadow-xl shadow-primary/30 group/btn transition-all hover:scale-105 active:scale-95">
-                {ad.cta || "Experience Now"}
+                {ad.cta || t("experienceNow")}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
               </div>
 
               {ad.city && (
                 <span className="text-white/60 text-sm font-semibold flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
-                  Available in {ad.city}
+                  {t("availableIn", { city: ad.city })}
                 </span>
               )}
             </div>
@@ -102,6 +107,8 @@ export function TopBannerAd({ ad }) {
 }
 
 export function SidebarAd({ ad, placement }) {
+  const t = useTranslations("homepage.agent.ads");
+  
   if (!ad) return null;
 
   return (
@@ -109,7 +116,7 @@ export function SidebarAd({ ad, placement }) {
       <div className="block bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-500">
         <div className="relative aspect-4/5 overflow-hidden">
           <span className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-wider rounded">
-            Ad
+            {t("ad")}
           </span>
           <Image
             src={getAdImage(ad.image)}
@@ -131,6 +138,8 @@ export function SidebarAd({ ad, placement }) {
 }
 
 export function InlineAd({ ad }) {
+  const t = useTranslations("homepage.agent.ads");
+  
   if (!ad) return null;
 
   return (
@@ -139,7 +148,7 @@ export function InlineAd({ ad }) {
         <div className="relative h-48 overflow-hidden">
           <div className="absolute top-3 right-3 z-10">
             <span className="px-2.5 py-0.5 bg-white/90 backdrop-blur text-slate-500 text-[9px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
-              Sponsored
+              {t("sponsored")}
             </span>
           </div>
           <Image
@@ -173,6 +182,8 @@ export function InlineAd({ ad }) {
 }
 
 export function BottomBannerAd({ ad }) {
+  const t = useTranslations("homepage.agent.ads");
+  
   if (!ad) return null;
 
   return (
@@ -180,7 +191,7 @@ export function BottomBannerAd({ ad }) {
       {/* Top Label */}
       <div className="flex items-center gap-2 mb-3 opacity-60">
         <span className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">
-          Sponsored
+          {t("sponsored")}
         </span>
         <span className="h-px w-8 bg-slate-300"></span>
       </div>
@@ -194,7 +205,7 @@ export function BottomBannerAd({ ad }) {
           <div className="shrink-0 w-full md:w-60 lg:w-[280px] self-stretch relative overflow-hidden">
             <div className="absolute top-2 left-2 z-10">
               <span className="px-2 py-0.5 bg-black/60 backdrop-blur-md text-white text-[8px] font-bold uppercase tracking-wider rounded">
-                Ad
+                {t("ad")}
               </span>
             </div>
             <Image
@@ -211,7 +222,7 @@ export function BottomBannerAd({ ad }) {
             <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
               <span className="w-1 h-1 rounded-full bg-amber-500 animate-pulse" />
               <span className="text-amber-500 text-[8px] font-bold uppercase tracking-[0.2em] opacity-90">
-                Premium
+                {t("premiumLabel")}
               </span>
             </div>
 
@@ -221,7 +232,7 @@ export function BottomBannerAd({ ad }) {
               </h3>
               <p className="text-slate-400 text-xs font-medium leading-tight line-clamp-1">
                 {ad.description ||
-                  "Visit our exclusive partner for premium offers."}
+                  t("visitExclusivePartner")}
               </p>
             </div>
           </div>

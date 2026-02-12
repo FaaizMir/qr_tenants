@@ -2,15 +2,16 @@ import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
 export const namespaces = [
-  "common",
-  "dashboard",
-  "sidebar",
-  "landing",
+  "homepage",
   "signin",
-  "placeholders",
-  "validations",
-  "Homepage",
-  "agent",
+  "merchantDashboard",
+  "sidebar",
+  "merchantCoupons",
+  "merchantWallet",
+  "merchantSettings",
+  "merchantCampaigns",
+  "merchantFestival",
+  "systemLogs",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

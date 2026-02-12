@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "Pelanggan mengimbas kod QR untuk meninggalkan ulasan dalam beberapa saat. Tangkap maklum balas negatif secara peribadi sebelum ia sampai ke Google.",
-    "card1Heading": "Maklum Balas Segera",
-    "card2Description": "Masalah kod siri yang unik dan boleh dijejaki. Mencegah penipuan dengan pengesahan yang selamat dan had penggunaan.",
-    "card2Heading": "Kupon Pintar",
-    "card3Description": "Hantar ucapan selamat hari jadi, permintaan ulasan, dan tawaran \"kami merindui anda\" secara automatik melalui WhatsApp.",
-    "card3Heading": "Automasi WhatsApp",
-    "description": "Alat yang berkuasa untuk membantu anda memahami pelanggan anda dan memastikan mereka kembali.",
-    "h1": "Segala yang anda perlukan untuk berkembang"
+  "agent": {
+    "ads": {
+      "ad": "Iklan",
+      "availableIn": "Tersedia di {city}",
+      "exclusiveIn": "EKSKLUSIF DI {city}",
+      "experienceNow": "Alami Sekarang",
+      "featuredPartner": "Rakan Kongsi Terpilih",
+      "limitedTime": "MASA TERHAD",
+      "partner": "Rakan Kongsi",
+      "premiumLabel": "Premium",
+      "sponsored": "Ditaja",
+      "sponsoredDeal": "Tawaran Ditaja",
+      "viewOffer": "LIHAT TAWARAN",
+      "visitBusiness": "Lawati {businessName} di {city}, {country}.",
+      "visitExclusivePartner": "Lawati rakan kongsi eksklusif kami untuk tawaran premium."
+    },
+    "errors": {
+      "agentDataExpired": "Data ejen telah tamat tempoh, membersihkan localStorage...",
+      "errorLoadingAgent": "Ralat memuatkan ejen dari localStorage:",
+      "failedToFetchMerchants": "Gagal untuk mendapatkan pedagang:",
+      "failedToLoadData": "Gagal memuatkan data:",
+      "failedToLoadPaidAds": "Gagal memuat iklan berbayar",
+      "invalidAgentData": "Data ejen tidak sah dalam localStorage, membersihkan...",
+      "unableToLoadMerchants": "Tidak dapat memuatkan pedagang. Sila cuba lagi.",
+      "unableToLoadPage": "Tidak dapat memuatkan halaman. Sila cuba lagi."
+    },
+    "fallback": {
+      "general": "Umum",
+      "unknown": "Tidak Dikenali"
+    },
+    "features": {
+      "badge": "Mengapa Pilih Kami",
+      "description": "Alat yang berkuasa untuk membantu anda memahami pelanggan anda dan memastikan mereka kembali.",
+      "globalReach": {
+        "description": "Kembangkan perniagaan anda secara antarabangsa dengan alat dan wawasan komprehensif kami.",
+        "title": "Jangkauan Global"
+      },
+      "instantFeedback": {
+        "description": "Pelanggan mengimbas kod QR untuk meninggalkan ulasan dalam beberapa saat. Tangkap maklum balas negatif secara peribadi sebelum ia sampai ke Google.",
+        "title": "Maklum Balas Segera"
+      },
+      "smartCoupons": {
+        "description": "Keluarkan kod siri unik yang boleh dijejaki. Cegah penipuan dengan pengesahan dan had penggunaan yang selamat.",
+        "title": "Kupon Pintar"
+      },
+      "title": "Segala yang anda perlukan untuk berkembang"
+    },
+    "footer": {
+      "agentLogin": "Log Masuk Ejen",
+      "copyright": "© {year} QR Rev. Semua hak terpelihara.",
+      "globalMerchantNetwork": "Rangkaian Pedagang Global",
+      "privacyPolicy": "Dasar Privasi",
+      "termsOfService": "Terma Perkhidmatan"
+    },
+    "hero": {
+      "curatedForYou": "Dikurasi Untuk Anda",
+      "descriptionDefault": "Lihat peniaga yang disahkan, buka kupon segera, dan jimat pada perkhidmatan premium di kawasan anda.",
+      "descriptionWithAgent": "Temui peniaga yang disahkan yang dipilih oleh {agentName}. Buka kupon segera dan jimat pada perkhidmatan premium.",
+      "exclusiveDeals": "Tawaran Eksklusif",
+      "officialPartnerNetwork": "Rangkaian Rakan Rasmi",
+      "partnerNetwork": "Rangkaian Rakan {agentName}"
+    },
+    "marketplace": {
+      "allIndustries": "Semua Industri",
+      "city": "Bandar",
+      "curatingMessage": "Kami sedang mengumpulkan peniaga yang disahkan terbaik dan tawaran eksklusif untuk anda...",
+      "everywhere": "Di mana-mana",
+      "industry": "Industri",
+      "loadingMarketplace": "Memuatkan Pasaran",
+      "noMerchantsFound": "Tiada peniaga ditemui",
+      "pageNoResults": "Halaman {page} - Tiada Hasil",
+      "retryConnection": "Cuba Sambung Semula",
+      "searchPlaceholder": "Cari peniaga, kategori...",
+      "showing": "Menunjukkan {start} - {end} daripada {total}",
+      "showingPage": "Menunjukkan Halaman {page}",
+      "tryAdjustingFilters": "Cuba sesuaikan penapis anda atau cari.",
+      "unableToLoad": "Tidak dapat memuatkan peniaga"
+    },
+    "merchantDetail": {
+      "availableCoupons": "Kupon Tersedia",
+      "availableDeals": "Tawaran Tersedia",
+      "checkBackLater": "Semak kembali kemudian untuk tawaran eksklusif!",
+      "clickMerchantPrompt": "Klik pada profil peniaga di sebelah kiri untuk membuka kuncinya",
+      "dealsFound": "{count} Tawaran Ditemui",
+      "details": "Butiran",
+      "exclusiveCoupons": "kupon eksklusif",
+      "expired": "TAMAT",
+      "getCoupon": "Dapatkan Kupon",
+      "left": "{count} tinggal",
+      "limitedTimeOffers": "dan tawaran terhad.",
+      "live": "LIVE",
+      "merchantDetails": "Butiran Pedagang",
+      "noActiveCoupons": "Tiada kupon aktif buat masa ini.",
+      "offers": "{count} Tawaran",
+      "readyToExplore": "Sedia untuk Menjelajah?",
+      "verifiedMerchant": "Peniaga Disahkan"
+    },
+    "navigation": {
+      "features": "Ciri-ciri",
+      "home": "Rumah",
+      "marketplace": "Pasaran",
+      "menu": "Menu",
+      "partner": "Rakan Kongsi",
+      "signIn": "Log Masuk"
+    },
+    "security": {
+      "dataExpiredClearing": "Data ejen telah tamat tempoh, membersihkan localStorage...",
+      "invalidDataClearing": "Data ejen tidak sah dalam localStorage, membersihkan..."
+    },
+    "stats": {
+      "loading": "Memuatkan...",
+      "merchants": "Peniaga",
+      "verified": "Disahkan"
+    }
   },
-  "footer": {
-    "Contact": "Hubungi",
-    "Privacy": "Privasi",
-    "Terms": "Terma",
-    "text": "© 2024 QR Rev Inc. Semua hak terpelihara."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "Tukar Pelanggan menjadi",
-    "2": "Peminat Setia",
-    "3": "dengan Kod QR Pintar",
-    "description": "Platform serba boleh untuk mengumpul ulasan, mengedarkan kupon, dan mengautomasikan pengekalan pelanggan. Tiada pengkodan diperlukan.",
-    "freeTrial": "Mula Percubaan Percuma",
-    "para": "Kini dengan Integrasi WhatsApp",
-    "viewDemo": "Lihat Demo"
+  "couponForm": {
+    "birthday": "Hari Jadi",
+    "birthdayFuture": "Hari jadi tidak boleh berada di masa depan",
+    "birthdayRequired": "Tarikh lahir diperlukan",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "discount": "{percentage}% DISKAUN",
+    "errorDefault": "Gagal mengeluarkan kupon. Sila cuba lagi.",
+    "from": "Dari {merchantName}",
+    "fullName": "Nama Penuh",
+    "getCoupon": "Dapatkan Kupon",
+    "issuing": "Mengeluarkan...",
+    "namePlaceholder": "Masukkan nama penuh anda",
+    "nameRequired": "Nama diperlukan",
+    "phoneInvalid": "Format nombor telefon tidak sah",
+    "phoneNumber": "Nombor Telefon",
+    "phonePlaceholder": "Masukkan nombor telefon",
+    "phoneRequired": "Nombor telefon diperlukan",
+    "successMessage": "Kupon anda telah dihantar ke telefon anda melalui WhatsApp.",
+    "successTitle": "Kupon Dikeluarkan Dengan Jayanya!",
+    "successToast": "Kupon dihantar dengan jayanya! Semak WhatsApp anda.",
+    "title": "Dapatkan Kupon Anda"
   },
-  "howitworks": {
-    "descp1": "Sesuaikan dengan warna dan logo jenama anda.",
-    "descp2": "Letakkan di atas meja, kaunter, atau resit.",
-    "descp3": "Kumpul ulasan dan bina pangkalan data pelanggan secara automatik.",
-    "h1": "Proses 3 langkah yang mudah",
-    "h3": "Tonton perniagaan anda berkembang",
-    "heading1": "Hasilkan Kod QR anda",
-    "heading2": "Paparkan di kedai anda"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "Peniaga Aktif",
+      "agents": "Ejen",
+      "allCountries": "Semua Negara",
+      "description": "Urus rangkaian ejen penyewa global anda.",
+      "noAgentsFound": "Tiada ejen ditemui",
+      "of": "daripada",
+      "pageNoResults": "Halaman - Tiada Hasil",
+      "searchPlaceholder": "Cari ejen...",
+      "showing": "Menunjukkan",
+      "showingPage": "Menunjukkan Halaman",
+      "title": "Direktori Ejen",
+      "tryAdjustingFilters": "Cuba sesuaikan penapis anda.",
+      "viewStorefront": "Lihat Kedai"
+    },
+    "errors": {
+      "failedToLoadAgents": "Gagal memuatkan ejen."
+    },
+    "fallback": {
+      "global": "Global",
+      "unknown": "Tidak Dikenali",
+      "unknownAgent": "Ejen Tidak Dikenali"
+    },
+    "features": {
+      "badge": "Ciri-ciri Platform",
+      "description": "Alat yang kuat untuk membantu anda memahami pelanggan anda dan memastikan mereka kembali.",
+      "instantFeedback": {
+        "description": "Pelanggan mengimbas kod QR untuk meninggalkan ulasan dalam beberapa saat. Tangkap maklum balas negatif secara peribadi sebelum ia sampai ke Google.",
+        "title": "Maklum Balas Segera"
+      },
+      "smartCoupons": {
+        "description": "Keluarkan kod siri unik yang boleh dijejaki. Cegah penipuan dengan pengesahan dan had penggunaan yang selamat.",
+        "title": "Kupon Pintar"
+      },
+      "title": "Segala yang anda perlukan untuk berkembang",
+      "whatsappAutomation": {
+        "description": "Secara automatik menghantar ucapan selamat hari jadi, permintaan ulasan, dan tawaran \"kami merindui anda\" melalui WhatsApp.",
+        "title": "Automasi WhatsApp"
+      }
+    },
+    "footer": {
+      "contact": "Hubungi",
+      "copyright": "© 2024 QR Rev Inc. Semua hak terpelihara.",
+      "privacy": "Privasi",
+      "terms": "Terma"
+    },
+    "hero": {
+      "badge": "Kawalan Pentadbir Utama",
+      "description": "Pantau prestasi ejen global, urus pengagihan wilayah, dan awasi pertumbuhan rangkaian peniaga dari satu papan pemuka.",
+      "title": "Platform",
+      "titleHighlight": "Pusat Kecerdasan"
+    },
+    "navigation": {
+      "directory": "Direktori",
+      "features": "Ciri-ciri",
+      "overview": "Gambaran Keseluruhan",
+      "signIn": "Log Masuk"
+    },
+    "Overview": "gambaran keseluruhan",
+    "stats": {
+      "activeAgents": "Ejen Aktif",
+      "globalReach": "Jangkauan Global",
+      "totalMerchants": "Jumlah Peniaga"
+    },
+    "status": {
+      "active": "aktif",
+      "inactive": "tidak aktif"
+    }
   }
 }

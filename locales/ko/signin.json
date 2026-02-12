@@ -1,15 +1,30 @@
 {
-  "description": "에이전트와 상인을 위한 안전한 다중 임대 작업 공간.\n대시보드를 보고, 쿠폰을 발행하고, 한 곳에서 고객 피드백을 추적하세요.",
-  "description2": "계속하려면 에이전트 또는 상인 자격 증명을 사용하세요.",
-  "forgotPassword": "비밀번호를 잊으셨나요?",
-  "heading1": "QR 피드백, 쿠폰 및 WhatsApp 알림을 시작하려면 로그인하세요.",
-  "label1": "QR 피드백을 몇 초 안에",
-  "label2": "WhatsApp 후속 조치 준비 완료",
-  "label3": "세입자 격리 및 보안",
-  "label4": "사용자 이름",
-  "label5": "비밀번호",
-  "qrReview": "QR 리뷰 SaaS",
-  "registerAgent": "에이전트로 등록하기",
+  "qrReview": "QR REVIEW SAAS",
+  "heading1": "로그인하여 QR 피드백, 쿠폰 및 WhatsApp 넛지를 시작하세요.",
+  "description": "에이전트와 판매자를 위한 안전한 멀티 테넌트 작업 공간. 한 곳에서 대시보드를 보고, 쿠폰을 발행하고, 고객 피드백을 추적하세요.",
+  "label1": "QR 피드백",
+  "label2": "WhatsApp 자동화",
+  "label3": "안전하고 검증됨",
+  "welcome": "다시 오신 것을 환영합니다",
   "signin": "로그인",
-  "welcome": "다시 오신 것을 환영합니다"
+  "description2": "대시보드에 액세스하려면 자격 증명을 입력하세요",
+  "label4": "사용자 이름 또는 이메일",
+  "label5": "비밀번호",
+  "forgotPassword": "비밀번호를 잊으셨나요?",
+  "noAccount": "계정이 없으신가요?",
+  "signupLink": "여기서 가입하세요",
+  "placeholders": {
+    "username": "사용자 이름 또는 이메일을 입력하세요",
+    "password": "비밀번호를 입력하세요",
+    "loadingText": "로그인 중...",
+    "submitLoading": "로그인"
+  },
+  "validations": {
+    "error1": "잘못된 사용자 이름 또는 비밀번호",
+    "error2": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "invalidCredentials": "잘못된 이메일 또는 비밀번호입니다. 자격 증명을 확인하세요.",
+    "accountInactive": "계정이 비활성화되었습니다. 에이전트에게 문의하세요.",
+    "unableToDetermineRole": "사용자 역할을 확인할 수 없습니다",
+    "credentialsSignin": "잘못된 이메일 또는 비밀번호입니다. 자격 증명을 확인하세요."
+  }
 }

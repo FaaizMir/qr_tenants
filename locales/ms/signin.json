@@ -1,15 +1,30 @@
 {
-  "description": "Ruang kerja selamat dan pelbagai penyewa untuk ejen dan peniaga.\nLihat papan pemuka, keluarkan kupon, dan jejak maklum balas pelanggan dari satu tempat.",
-  "description2": "Gunakan kelayakan ejen atau peniaga anda untuk meneruskan.",
-  "forgotPassword": "Lupa kata laluan?",
+  "qrReview": "QR REVIEW SAAS",
   "heading1": "Log masuk untuk melancarkan maklum balas QR, kupon, dan dorongan WhatsApp.",
-  "label1": "Maklum balas QR dalam beberapa saat",
-  "label2": "Susulan WhatsApp sedia",
-  "label3": "Penyewa terasing & selamat",
-  "label4": "Nama Pengguna",
+  "description": "Ruang kerja berbilang penyewa yang selamat untuk ejen dan pedagang. Lihat papan pemuka, keluarkan kupon, dan jejaki maklum balas pelanggan dari satu tempat.",
+  "label1": "Maklum Balas QR",
+  "label2": "Automasi WhatsApp",
+  "label3": "Selamat & Disahkan",
+  "welcome": "Selamat Kembali",
+  "signin": "Log Masuk",
+  "description2": "Masukkan kelayakan anda untuk mengakses papan pemuka anda",
+  "label4": "Nama Pengguna atau E-mel",
   "label5": "Kata Laluan",
-  "qrReview": "Ulasan QR SaaS",
-  "registerAgent": "Daftar sebagai ejen",
-  "signin": "Log masuk",
-  "welcome": "Selamat kembali"
+  "forgotPassword": "Lupa Kata Laluan?",
+  "noAccount": "Tidak mempunyai akaun?",
+  "signupLink": "Daftar di sini",
+  "placeholders": {
+    "username": "Masukkan nama pengguna atau e-mel anda",
+    "password": "Masukkan kata laluan anda",
+    "loadingText": "Sedang log masuk...",
+    "submitLoading": "Log Masuk"
+  },
+  "validations": {
+    "error1": "Nama pengguna atau kata laluan tidak sah",
+    "error2": "Sesuatu tidak kena. Sila cuba lagi.",
+    "invalidCredentials": "E-mel atau kata laluan tidak sah. Sila semak kelayakan anda.",
+    "accountInactive": "Akaun anda tidak aktif. Sila hubungi ejen anda.",
+    "unableToDetermineRole": "Tidak dapat menentukan peranan pengguna",
+    "credentialsSignin": "E-mel atau kata laluan tidak sah. Sila semak kelayakan anda."
+  }
 }

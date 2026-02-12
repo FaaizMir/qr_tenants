@@ -1,0 +1,125 @@
+{
+  "common": {
+    "credits": "Credits"
+  },
+  "couponStatus": {
+    "description": "Redemption Distribution",
+    "noCouponsYet": "No coupons issued yet",
+    "redeemed": "Redeemed",
+    "title": "Coupon Status",
+    "unredeemed": "Unredeemed"
+  },
+  "errors": {
+    "failedToFetchBatches": "Failed to fetch batches",
+    "failedToFetchDashboard": "Failed to fetch dashboard analytics",
+    "failedToFetchFee": "Failed to fetch subscription fee:",
+    "failedToFetchWallet": "Failed to fetch wallet"
+  },
+  "feedbacks": {
+    "description": "Platform Distribution",
+    "noDataYet": "No feedback data yet",
+    "title": "Feedbacks"
+  },
+  "games": {
+    "luckyDrawSpins": "Lucky Draw Spins",
+    "title": "Games"
+  },
+  "header": {
+    "createNewBatch": "Create New Batch",
+    "title": "Merchant Dashboard"
+  },
+  "kpi": {
+    "averageRating": "Average Rating",
+    "remainingCredits": "Remaining Credits",
+    "totalCouponsIssued": "Total Coupons Issued",
+    "totalRedeemed": "Total Redeemed",
+    "trendDown": "down",
+    "trendUp": "up"
+  },
+  "metrics": {
+    "creditsUsed": "Credits Used",
+    "issued": "Issued",
+    "messagesSent": "Messages Sent",
+    "redeemed": "Redeemed",
+    "totalCoupons": "Total Coupons",
+    "totalCustomers": "Total Customers"
+  },
+  "page": {
+    "breadcrumb": "Merchant Dashboard",
+    "title": "Merchant Dashboard"
+  },
+  "placeholders": {
+    "comingSoon": "Settings content coming soon...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "Amount",
+    "code": "Code",
+    "customer": "Customer",
+    "hourAgo": "{hours} hour ago",
+    "hoursAgo": "{hours} hours ago",
+    "minsAgo": "{mins} mins ago",
+    "time": "Time",
+    "title": "Recent Redemptions"
+  },
+  "retention": {
+    "returningThisMonth": "Returning this month",
+    "title": "Retention"
+  },
+  "status": {
+    "active": "Active",
+    "annual": "Annual",
+    "completed": "Completed",
+    "exhausted": "Exhausted",
+    "expired": "Expired",
+    "failed": "Failed",
+    "inactive": "Inactive",
+    "inProgress": "In Progress",
+    "open": "Open",
+    "paid": "Paid",
+    "pending": "Pending",
+    "resolved": "Resolved",
+    "temporary": "Temporary",
+    "unused": "Unused",
+    "used": "Used"
+  },
+  "tabs": {
+    "automation": "Automation",
+    "coupons": "Coupon Batches",
+    "feedbackForm": "Feedback Form",
+    "overview": "Overview",
+    "settings": "Settings",
+    "wallet": "Wallet"
+  },
+  "topCustomers": {
+    "description": "Most active users",
+    "noDataYet": "No customer data yet",
+    "redeemed": "Redeemed",
+    "title": "Top Customers",
+    "visits": "visits"
+  },
+  "upgrade": {
+    "description": "Unlock all features including analytics, bi-directional messaging, and more.",
+    "errorMissingInfo": "Unable to proceed. Missing fee or admin information.",
+    "errorNoSessionUrl": "No session URL returned",
+    "errorPaymentFailed": "Failed to initiate payment. Please try again.",
+    "pricePerYear": "/year",
+    "processing": "Processing...",
+    "title": "Upgrade to Annual",
+    "upgradeNow": "Upgrade Now"
+  },
+  "whatsapp": {
+    "biMessages": "BI Messages (Business-Initiated)",
+    "birthdayCampaigns": "Birthday Campaigns",
+    "description": "UI & BI Breakdown",
+    "feedbackCoupons": "Feedback Coupons",
+    "festivalCampaigns": "Festival Campaigns",
+    "homepageCoupons": "Homepage Coupons",
+    "inactiveRecalls": "Inactive Recalls",
+    "luckyDrawWins": "Lucky Draw Wins",
+    "noBiCampaigns": "No BI campaigns yet",
+    "noUiActivity": "No UI activity yet",
+    "title": "WhatsApp",
+    "uiMessages": "UI Messages (User-Initiated)"
+  }
+}

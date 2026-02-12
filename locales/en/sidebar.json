@@ -1,23 +1,53 @@
 {
-  "allMerchants": "All Merchants",
-  "addMerchant": "Add Merchant",
-  "merchantReports": "Merchant Reports",
-  "allSubscriptions": "All Subscriptions",
-  "activePlans": "Active Plans",
-  "paymentHistory": "Payment History",
-  "allAgents": "All Agents",
-  "agentPoints": "Agent Points",
-  "agentReports": "Agent Reports",
-  "allFeedbacks": "All Feedbacks",
-  "pendingReview": "Pending Review",
-  "feedbackAnalytics": "Feedback Analytics",
-  "allCoupons": "All Coupons",
-  "redeemedCoupons": "Redeemed Coupons",
-  "couponAnalytics": "Coupon Analytics",
-  "revenueAnalytics": "Revenue Analytics",
-  "userAnalytics": "User Analytics",
-  "generalSettings": "General Settings",
-  "paymentSettings": "Payment Settings",
-  "systemSettings": "System Settings"
+  "agent": {
+    "approvals": "Approvals",
+    "couponsync": "Coupon Sync",
+    "dashboard": "Dashboard",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "Agent Admin",
+    "earnings": "Earnings",
+    "logs": "Logs",
+    "merchants": "Merchants",
+    "statements": "Statements",
+    "support": "Support",
+    "wallet": "Wallet"
+  },
+  "brand": {
+    "name": "QR Scanner"
+  },
+  "common": {
+    "account": "Account",
+    "home": "Home",
+    "logout": "Log out",
+    "platform": "Platform",
+    "toggleSidebar": "Toggle Sidebar"
+  },
+  "masterAdmin": {
+    "agents": "Agents",
+    "approvals": "Approvals",
+    "commission": "Commission",
+    "dashboard": "Dashboard",
+    "logs": "Logs",
+    "merchants": "Merchants",
+    "packages": "Packages",
+    "settings": "Settings",
+    "staff": "Staff",
+    "statements": "Statements",
+    "support": "Support"
+  },
+  "merchant": {
+    "campaigns": "Campaigns",
+    "coupons": "Coupons",
+    "customerData": "Customer Data",
+    "dashboard": "Dashboard",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "Merchant User",
+    "logs": "System logs",
+    "luckyDraw": "Lucky Draw",
+    "purchase": "Purchase",
+    "serialCodes": "Serial Codes",
+    "statements": "Statements",
+    "support": "Support",
+    "wallet": "Wallet"
+  }
 }
-
