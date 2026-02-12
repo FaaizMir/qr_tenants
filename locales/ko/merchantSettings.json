@@ -1,204 +1,255 @@
 {
-  "main": {
-    "title": "Merchant Hub",
-    "version": "Version 2.0",
-    "subtitle": "Strategy Control",
-    "tabs": {
-      "paidAds": "Paid Ads",
-      "settings": "Settings",
-      "automations": "Automations",
-      "festivalMessages": "Festival Messages",
-      "campaigns": "Campaigns"
-    },
-    "proTip": "Pro Tip",
-    "proTipMessage": "Enable features in the switchboard, then configure them below"
-  },
-  "featureMasterControl": {
-    "title": "Feature Switchboard",
-    "subtitle": "Real-time capability control",
-    "live": "Live",
-    "features": {
-      "paidAds": {
-        "label": "Paid Ads",
-        "description": "Display image/video banners to users"
-      },
-      "googleReviews": {
-        "label": "Google Reviews",
-        "description": "Review link to Google Business profile"
-      },
-      "facebookReviews": {
-        "label": "Facebook Reviews",
-        "description": "Direct link to Facebook Page reviews"
-      },
-      "instagramReviews": {
-        "label": "Instagram Reviews",
-        "description": "Integration with Instagram Business"
-      },
-      "xiaohongshuReviews": {
-        "label": "XiaoHongShu Reviews",
-        "description": "Connect with the Red community"
-      },
-      "presetReviews": {
-        "label": "Preset Reviews",
-        "description": "Preset feedback options for customers"
-      },
-      "luckyDraw": {
-        "label": "Lucky Draw",
-        "description": "Gamified reward distribution system"
-      },
-      "birthdayMessage": {
-        "label": "Birthday Message",
-        "description": "Automated rewards on customer birthdays"
-      },
-      "inactiveRecall": {
-        "label": "Inactive Recall",
-        "description": "Automatically recall inactive customers"
-      },
-      "festivalCampaign": {
-        "label": "Festival Campaign",
-        "description": "Broadcasts for special holiday events"
-      },
-      "scheduledCampaign": {
-        "label": "Scheduled Campaign",
-        "description": "Scheduled marketing message campaigns"
-      }
-    },
-    "active": "Active",
-    "paused": "Paused",
-    "success": "{feature} {status}",
-    "successDescription": "Successfully updated your {feature} status.",
-    "error": "Process Failed",
-    "errorDescription": "Could not synchronize setting. Please check your connection."
+  "batchSelector": {
+    "loading": "로딩 중...",
+    "noBatchesDescription": "먼저 쿠폰 배치를 생성하세요",
+    "noBatchesTitle": "사용 가능한 배치가 없습니다",
+    "of": "의",
+    "used": "사용됨"
   },
   "birthdayRewards": {
-    "title": "Birthday Club",
-    "subtitle": "Automatic customer treats",
-    "daysBefore": "Days Before",
-    "daysAfter": "Days After",
-    "days": "Days",
-    "birthdayReward": "Birthday Reward",
-    "selected": "Selected",
-    "selectRewardBatch": "Select a reward batch...",
-    "description": "Customers will receive a message with this reward on their special day.",
-    "saveButton": "Save Birthday Settings",
-    "enableMessage": "Enable Birthday Club to automate your rewards",
-    "actionRequired": "Action Required: Birthday Club",
-    "actionRequiredDescription": "Please select a coupon batch to reward your customers on their birthday.",
-    "updateSuccess": "Birthday Club Updated",
-    "updateSuccessDescription": "Your birthday automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update birthday settings. Please try again."
+    "actionRequired": "조치 필요: 생일 클럽",
+    "actionRequiredDescription": "고객의 생일에 보상할 쿠폰 배치를 선택해 주세요.",
+    "birthdayReward": "생일 보상",
+    "days": "일수",
+    "daysAfter": "일 후",
+    "daysBefore": "일수 전",
+    "description": "고객은 특별한 날에 이 보상에 대한 메시지를 받게 됩니다.",
+    "enableMessage": "보상 자동화를 위해 생일 클럽을 활성화하세요",
+    "saveButton": "생일 설정 저장",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "생일 설정을 업데이트할 수 없습니다. 다시 시도해 주세요.",
+    "selected": "선택됨",
+    "selectRewardBatch": "보상 배치 선택...",
+    "subtitle": "자동 고객 혜택",
+    "title": "생일 클럽",
+    "updateSuccess": "생일 클럽 업데이트됨",
+    "updateSuccessDescription": "귀하의 생일 자동화 설정이 저장되었습니다."
+  },
+  "featureMasterControl": {
+    "active": "활성",
+    "error": "처리 실패",
+    "errorDescription": "설정을 동기화할 수 없습니다. 연결을 확인하세요.",
+    "features": {
+      "birthdayMessage": {
+        "description": "고객 생일에 대한 자동 보상",
+        "label": "생일 메시지"
+      },
+      "facebookReviews": {
+        "description": "페이스북 페이지 리뷰에 대한 직접 링크",
+        "label": "페이스북 리뷰"
+      },
+      "festivalCampaign": {
+        "description": "특별 휴일 이벤트를 위한 방송",
+        "label": "축제 캠페인"
+      },
+      "googleReviews": {
+        "description": "Google 비즈니스 프로필에 대한 리뷰 링크",
+        "label": "구글 리뷰"
+      },
+      "inactiveRecall": {
+        "description": "비활성 고객 자동 재호출",
+        "label": "비활성 리콜"
+      },
+      "instagramReviews": {
+        "description": "인스타그램 비즈니스와의 통합",
+        "label": "인스타그램 리뷰"
+      },
+      "luckyDraw": {
+        "description": "게임화된 보상 분배 시스템",
+        "label": "행운의 추첨"
+      },
+      "paidAds": {
+        "description": "사용자에게 이미지/비디오 배너 표시",
+        "label": "유료 광고"
+      },
+      "presetReviews": {
+        "description": "고객을 위한 피드백 옵션 미리 설정",
+        "label": "미리 설정된 리뷰"
+      },
+      "scheduledCampaign": {
+        "description": "예약된 마케팅 메시지 캠페인",
+        "label": "예약된 캠페인"
+      },
+      "xiaohongshuReviews": {
+        "description": "레드 커뮤니티와 연결",
+        "label": "샤오홍슈 리뷰"
+      }
+    },
+    "live": "라이브",
+    "paused": "일시 중지됨",
+    "subtitle": "실시간 기능 제어",
+    "success": "{feature} {status}",
+    "successDescription": "{feature} 상태가 성공적으로 업데이트되었습니다.",
+    "title": "기능 스위치보드"
   },
   "inactiveRecall": {
-    "title": "Win-Back Club",
-    "subtitle": "Reactivate sleeping customers",
-    "recallAfter": "Recall After",
-    "daysOfInactivity": "Days of inactivity",
-    "incentiveReward": "Incentive Reward",
-    "selected": "Selected",
-    "chooseRecallReward": "Choose recall reward...",
-    "description": "Customers who haven't visited in a while will get this treat.",
-    "saveButton": "Save Win-Back Settings",
-    "enableMessage": "Enable Win-Back Club to reactivate lapsed customers",
-    "actionRequired": "Action Required: Inactive Recall",
-    "actionRequiredDescription": "Please select an incentive coupon to win back inactive customers.",
-    "updateSuccess": "Inactive Recall Updated",
-    "updateSuccessDescription": "Your win-back automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update recall settings. Please try again."
+    "actionRequired": "조치 필요: 비활성 리콜",
+    "actionRequiredDescription": "비활성 고객을 되찾기 위해 인센티브 쿠폰을 선택해 주세요.",
+    "chooseRecallReward": "재호출 보상 선택...",
+    "daysOfInactivity": "비활동 일수",
+    "description": "오랫동안 방문하지 않은 고객에게 이 혜택이 제공됩니다.",
+    "enableMessage": "휴면 고객을 재활성화하기 위해 Win-Back Club을 활성화하세요",
+    "incentiveReward": "인센티브 보상",
+    "recallAfter": "재호출 후",
+    "saveButton": "재참여 설정 저장",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "회수 설정을 업데이트할 수 없습니다. 다시 시도하세요.",
+    "selected": "선택됨",
+    "subtitle": "잠자는 고객 재활성화",
+    "title": "재유치 클럽",
+    "updateSuccess": "비활성 재호출 업데이트됨",
+    "updateSuccessDescription": "귀하의 재유치 자동화 설정이 저장되었습니다."
+  },
+  "main": {
+    "description": "단일 고성능 대시보드에서 글로벌 참여, 보상 메커니즘 및 프로모션 콘텐츠를 관리하세요.",
+    "merchantActive": "상인 활성화",
+    "proTip": "전문 팁",
+    "proTipMessage": "강력한 프리셋과 직접 보상을 병합하면 지역 SEO를 급증시키는 높은 전환 피드백 루프가 생성됩니다.",
+    "status": "상태",
+    "subtitle": "전략",
+    "subtitleHighlight": "제어",
+    "tabs": {
+      "automations": "자동화",
+      "campaigns": "캠페인",
+      "festivalMessages": "축제 메시지",
+      "paidAds": "유료 광고",
+      "settings": "설정"
+    },
+    "title": "상인 허브",
+    "version": "버전 2.0"
   },
   "paidAds": {
-    "title": "Promotional Banners",
-    "subtitle": "Visual marketing content",
-    "active": "Active",
-    "off": "OFF",
-    "adPlacement": "Ad Placement",
-    "selectPlacement": "Select placement",
-    "top": "Top",
-    "left": "Left",
-    "right": "Right",
-    "bottom": "Bottom",
-    "duration": "Duration",
-    "selectDuration": "Select duration",
-    "7days": "7 Days",
-    "14days": "14 Days",
-    "30days": "30 Days",
-    "imageAds": "Image Ads",
-    "videoAds": "Video Ads",
-    "addImage": "Add Image",
-    "addVideo": "Add Video",
-    "imageRecommendation": "1200x600px recommended",
-    "videoRecommendation": "MP4, WebM (Max 50MB)",
-    "pending": "Pending",
-    "adjustImage": "Adjust Image",
-    "adjustImageDescription": "Drag to reposition and use the slider to zoom.",
-    "zoom": "Zoom",
-    "cancel": "Cancel",
-    "saveImage": "Save Image",
-    "uploadAndSave": "Upload & Save",
-    "uploading": "Uploading...",
-    "adPreview": "Ad Preview",
-    "adPreviewDescription": "Full size preview of the promotional ad",
-    "settingsUpdated": "Settings and ad updated successfully",
-    "errorSaving": "Error saving settings",
-    "imageDeleted": "Image deleted successfully",
-    "videoDeleted": "Video deleted successfully",
-    "failedToDelete": "Failed to delete",
-    "videoTooLarge": "Video file is too large. Max size is 50MB.",
-    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
-    "imageSelected": "Image selected. Click Upload & Save to apply changes.",
-    "errorCropping": "Error cropping image"
+    "14days": "14일",
+    "30days": "30일",
+    "7days": "7일",
+    "active": "활성",
+    "addImage": "이미지 추가",
+    "addVideo": "비디오 추가",
+    "adjustImage": "이미지 조정",
+    "adjustImageDescription": "드래그하여 재배치하고 슬라이더를 사용하여 확대합니다.",
+    "adPlacement": "광고 배치",
+    "adPreview": "광고 미리보기",
+    "adPreviewDescription": "프로모션 광고의 전체 크기 미리보기",
+    "bottom": "하단",
+    "cancel": "취소",
+    "duration": "기간",
+    "errorCropping": "이미지 자르기 오류",
+    "errorSaving": "설정 저장 오류",
+    "failedToDelete": "삭제 실패",
+    "imageAds": "이미지 광고",
+    "imageDeleted": "이미지가 성공적으로 삭제되었습니다",
+    "imageRecommendation": "1200x600px 권장",
+    "imageSelected": "이미지가 선택되었습니다. 변경 사항을 적용하려면 업로드 및 저장을 클릭하세요.",
+    "left": "왼쪽",
+    "off": "꺼짐",
+    "pending": "대기 중",
+    "right": "오른쪽",
+    "saveImage": "이미지 저장",
+    "selectDuration": "기간 선택",
+    "selectPlacement": "위치 선택",
+    "settingsUpdated": "설정 및 광고가 성공적으로 업데이트되었습니다",
+    "subtitle": "비주얼 마케팅 콘텐츠",
+    "title": "프로모션 배너",
+    "top": "상단",
+    "uploadAndSave": "업로드 및 저장",
+    "uploading": "업로드 중...",
+    "videoAds": "비디오 광고",
+    "videoDeleted": "비디오가 성공적으로 삭제되었습니다.",
+    "videoRecommendation": "MP4, WebM (최대 50MB)",
+    "videoSelected": "비디오가 선택되었습니다. '업로드 및 저장'을 클릭하여 완료하세요.",
+    "videoTooLarge": "비디오 파일이 너무 큽니다. 최대 크기는 50MB입니다.",
+    "zoom": "줌"
   },
   "platformSettings": {
-    "title": "Social Connect",
-    "subtitle": "Review channels",
-    "googleReviews": "Google Reviews",
-    "facebookPage": "Facebook Page",
-    "instagram": "Instagram",
-    "xiaohongshu": "XiaoHongShu",
-    "active": "ACTIVE",
-    "off": "OFF",
-    "googlePlaceholder": "https://g.page/r/...",
+    "active": "활성화",
+    "facebookPage": "페이스북 페이지",
     "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "구글 리뷰",
+    "instagram": "인스타그램",
     "instagramPlaceholder": "https://instagram.com/...",
-    "redPlaceholder": "RED Profile URL",
-    "savePlatforms": "Save Platforms",
-    "updateSuccess": "Platforms Updated",
-    "updateSuccessDescription": "Your social review links have been updated.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update platforms. Please try again."
+    "off": "꺼짐",
+    "redPlaceholder": "RED 프로필 URL",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "플랫폼을 업데이트할 수 없습니다. 다시 시도하세요.",
+    "savePlatforms": "플랫폼 저장",
+    "subtitle": "리뷰 채널",
+    "title": "소셜 연결",
+    "updateSuccess": "플랫폼 업데이트됨",
+    "updateSuccessDescription": "소셜 리뷰 링크가 업데이트되었습니다.",
+    "xiaohongshu": "샤오홍슈"
   },
   "presetReviews": {
-    "title": "Quick Feedback",
-    "subtitle": "Customer presets",
-    "active": "Active",
-    "off": "Off",
-    "placeholder": "Positive feedback option...",
-    "savePresets": "Save Presets",
-    "updateSuccess": "Presets Updated",
-    "updateSuccessDescription": "Your quick review options have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update presets. Please try again."
+    "active": "활성",
+    "off": "꺼짐",
+    "placeholder": "긍정적인 피드백 옵션...",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "프리셋을 업데이트할 수 없습니다. 다시 시도해 주세요.",
+    "savePresets": "프리셋 저장",
+    "subtitle": "고객 프리셋",
+    "title": "빠른 피드백",
+    "updateSuccess": "프리셋 업데이트됨",
+    "updateSuccessDescription": "귀하의 빠른 리뷰 옵션이 저장되었습니다."
   },
   "rewardStrategy": {
-    "title": "Incentive Engine",
-    "subtitle": "Primary reward",
-    "luckyDraw": "Lucky Draw",
-    "luckyDrawDescription": "Gamified Prizes",
-    "directCoupon": "Direct Coupon",
-    "directCouponDescription": "Instant Access",
-    "managedVia": "Selection is managed via",
-    "featureSwitchboard": "Feature Switchboard",
-    "selectReward": "Select Reward",
-    "chooseRegularReward": "Choose regular reward...",
-    "luckyDrawTip": "Configure prizes in the",
-    "luckyDrawTab": "Lucky Draw",
-    "tab": "tab",
-    "saveStrategy": "Save Strategy",
-    "selectCouponBatch": "Please select a Coupon Batch for Direct Rewards.",
-    "updateSuccess": "Reward Strategy Updated",
-    "updateSuccessDescription": "Your primary reward configuration has been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update reward strategy. Please try again."
+    "chooseRegularReward": "정기 보상을 선택하세요...",
+    "directCoupon": "직접 쿠폰",
+    "directCouponDescription": "즉시 접근",
+    "featureSwitchboard": "기능 스위치보드",
+    "luckyDraw": "행운의 추첨",
+    "luckyDrawDescription": "게임화된 상품",
+    "luckyDrawTab": "행운의 추첨",
+    "luckyDrawTip": "에 있는 상품을 구성하세요",
+    "managedVia": "선택은 다음을 통해 관리됩니다",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "보상 전략을 업데이트할 수 없습니다. 다시 시도해 주세요.",
+    "saveStrategy": "전략 저장",
+    "selectCouponBatch": "직접 보상을 위한 쿠폰 배치를 선택하세요.",
+    "selectReward": "보상 선택",
+    "subtitle": "주요 보상",
+    "tab": "탭",
+    "title": "인센티브 엔진",
+    "updateSuccess": "보상 전략 업데이트됨",
+    "updateSuccessDescription": "기본 보상 구성이 저장되었습니다."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "조치 필요: 예약된 캠페인",
+    "actionRequiredDescription": "발송에 포함할 쿠폰 배치를 선택하세요.",
+    "active": "활성",
+    "attachCoupon": "쿠폰 첨부",
+    "audience": "청중",
+    "audienceOptions": {
+      "active": "활성",
+      "all": "모든 사용자",
+      "firstTime": "첫 번째",
+      "inactive": "비활성",
+      "returning": "돌아가기"
+    },
+    "campaignName": "캠페인 이름",
+    "campaignNamePlaceholder": "예: 할로윈 세일",
+    "campaignScheduled": "캠페인 예약됨",
+    "campaignScheduledDescription": "귀하의 마케팅 블라스트가 배달을 위해 대기 중입니다.",
+    "done": "완료",
+    "incompleteCampaign": "불완전한 캠페인 세부정보",
+    "incompleteCampaignDescription": "방송을 위한 이름, 메시지 및 날짜를 제공해 주세요.",
+    "launchDate": "출시일",
+    "message": "메시지",
+    "messagePlaceholder": "안녕하세요 {name}, ...",
+    "off": "꺼짐",
+    "saveFailed": "저장 실패",
+    "saveFailedDescription": "캠페인을 예약할 수 없습니다. 다시 시도해 주세요.",
+    "scheduleCampaign": "캠페인 일정",
+    "selectAudience": "선택",
+    "selectCampaignReward": "캠페인 보상 선택...",
+    "selectDateTime": "날짜 및 시간 선택",
+    "subtitle": "발송 일정",
+    "title": "캠페인"
+  },
+  "stickySaveBar": {
+    "discardChanges": "변경 사항 버리기",
+    "saveAllSettings": "모든 설정 저장",
+    "statusDescription": "모든 플랫폼 보상 및 참여 설정을 동기화하세요",
+    "statusReady": "보상 전략 준비 완료",
+    "synchronizing": "동기화 중..."
   }
 }

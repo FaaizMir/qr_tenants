@@ -1,70 +1,232 @@
 {
-  "listing": {
-    "title": "Create Coupon Batch",
-    "breadcrumb": "Coupons",
-    "searchPlaceholder": "Search code...",
-    "allStatus": "All Status",
-    "issued": "Issued",
-    "redeemed": "Redeemed",
-    "exportPdf": "Export PDF"
+  "allCoupons": {
+    "columns": {
+      "batchName": "ชื่อชุด",
+      "couponCode": "รหัสคูปอง",
+      "expiryDate": "วันที่หมดอายุ",
+      "issuedAt": "ออกเมื่อ",
+      "redeemedAt": "แลกแล้วที่",
+      "startDate": "วันที่เริ่มต้น",
+      "status": "สถานะ"
+    },
+    "copiedToClipboard": "คัดลอกไปยังคลิปบอร์ด",
+    "createCoupon": "สร้างคูปอง",
+    "notRedeemed": "ยังไม่ถูกแลก",
+    "searchPlaceholder": "ค้นหาคูปอง...",
+    "subtitle": "ดูและจัดการคูปองที่สร้างขึ้นทั้งหมด",
+    "title": "คูปองทั้งหมด"
+  },
+  "breadcrumbs": {
+    "couponBatches": "ชุดคูปอง",
+    "coupons": "คูปอง",
+    "createCouponBatch": "สร้างชุดคูปอง",
+    "detail": "รายละเอียด",
+    "merchantDashboard": "แดชบอร์ดผู้ค้า"
   },
   "create": {
-    "title": "Batch Details",
-    "guidance": "Guidance",
-    "batchName": "Batch Name",
-    "batchNamePlaceholder": "e.g., Summer Sale 2024",
-    "batchType": "Batch Type",
-    "selectBatchType": "Select batch type",
-    "annual": "Annual",
-    "temporary": "Temporary",
-    "quantity": "Quantity",
-    "quantityPlaceholder": "Number of coupons",
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "isActive": "Active",
-    "createButton": "Create Batch",
-    "updateButton": "Update Batch",
-    "cancelButton": "Cancel"
+    "annual": "ประจำปี",
+    "batchName": "ชื่อชุด",
+    "batchNamePlaceholder": "เช่น, ขายฤดูร้อน 2024",
+    "batchType": "ประเภทชุด",
+    "cancelButton": "ยกเลิก",
+    "createButton": "สร้างชุด",
+    "endDate": "วันที่สิ้นสุด",
+    "form": {
+      "batchName": "ชื่อชุด",
+      "batchNamePlaceholder": "เช่น โปรโมชั่นฤดูร้อน 2024",
+      "description": "กำหนดพารามิเตอร์คูปองของคุณ (มีการใช้ขีดจำกัดโดยอัตโนมัติ)",
+      "endDate": "วันที่สิ้นสุด",
+      "generateBatch": "สร้างชุด",
+      "generatingCodes": "กำลังสร้างรหัส...",
+      "halalCertified": "ได้รับการรับรองฮาลาล",
+      "halalDescription": "ระบุการปฏิบัติตามมาตรฐานฮาลาล",
+      "quantity": "จำนวน",
+      "startDate": "วันที่เริ่มต้น",
+      "template": "แม่แบบ",
+      "title": "รายละเอียดชุด"
+    },
+    "guidance": "คำแนะนำ",
+    "isActive": "ใช้งาน",
+    "limits": {
+      "annual": "ขีดจำกัดประจำปี: 1000 คูปอง",
+      "quantityLimit": "จำกัด: {max} รหัส",
+      "quantityLimitAnnual": "จำกัด: {max} รหัส (ประจำปี)",
+      "quantityLimitTemporary": "จำกัด: {max} รหัส (ชั่วคราว)",
+      "temporary": "ขีดจำกัดชั่วคราว: 100 คูปอง"
+    },
+    "merchantType": {
+      "annual": "ผู้ค้ารายปี",
+      "temporary": "ผู้ค้าแบบชั่วคราว"
+    },
+    "quantity": "จำนวน",
+    "quantityPlaceholder": "จำนวนคูปอง",
+    "selectBatchType": "เลือกประเภทชุด",
+    "startDate": "วันที่เริ่มต้น",
+    "temporary": "ชั่วคราว",
+    "title": "สร้างชุดคูปอง",
+    "updateButton": "อัปเดตชุด"
   },
   "detail": {
-    "title": "Batch Details",
-    "loadingBatch": "Loading batch info...",
-    "active": "Active",
-    "inactive": "Inactive",
-    "editContent": "Edit Content",
-    "totalQuantity": "Total Quantity",
-    "issuedQuantity": "Issued Quantity",
-    "utilized": "Utilized",
-    "validity": "Validity",
-    "start": "Start:",
-    "end": "End:",
-    "couponsInBatch": "Coupons in Batch",
-    "searchCode": "Search code...",
-    "code": "Code",
-    "status": "Status",
-    "issuedAt": "Issued At",
-    "redemptionDate": "Redemption Date",
-    "notRedeemed": "Not redeemed",
-    "copiedToClipboard": "Copied to clipboard",
-    "batchIdNotAvailable": "Batch ID not available",
-    "fetchingPdf": "Fetching PDF...",
-    "noPdfData": "No PDF data received",
-    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
-    "failedToDownloadPdf": "Failed to download PDF",
-    "failedToLoadCoupons": "Failed to load coupons"
+    "active": "ใช้งาน",
+    "batchIdNotAvailable": "รหัสชุดไม่พร้อมใช้งาน",
+    "code": "รหัส",
+    "columns": {
+      "code": "รหัส",
+      "issuedAt": "ออกเมื่อ",
+      "redemptionDate": "วันที่แลก",
+      "status": "สถานะ"
+    },
+    "copiedToClipboard": "คัดลอกไปยังคลิปบอร์ด",
+    "couponsInBatch": "คูปองในชุด",
+    "downloadPdf": "ดาวน์โหลด PDF",
+    "editContent": "แก้ไขเนื้อหา",
+    "end": "สิ้นสุด:",
+    "exportPdf": "ส่งออก PDF",
+    "failedToDownloadPdf": "ไม่สามารถดาวน์โหลด PDF ได้",
+    "failedToLoadCoupons": "ไม่สามารถโหลดคูปองได้",
+    "fetchingPdf": "กำลังดึง PDF...",
+    "filters": {
+      "allStatus": "สถานะทั้งหมด",
+      "issued": "ออกให้",
+      "redeemed": "ถูกแลก"
+    },
+    "inactive": "ไม่ใช้งาน",
+    "issuedAt": "ออกเมื่อ",
+    "issuedQuantity": "จำนวนที่ออก",
+    "loadingBatch": "กำลังโหลดข้อมูลชุด...",
+    "noPdfData": "ไม่มีข้อมูล PDF ที่ได้รับ",
+    "notRedeemed": "ยังไม่ได้ใช้",
+    "pdfDownloadedSuccessfully": "ดาวน์โหลด PDF สำเร็จ",
+    "redemptionDate": "วันที่แลก",
+    "searchCode": "ค้นหารหัส...",
+    "searchPlaceholder": "ค้นหารหัส...",
+    "start": "เริ่มต้น:",
+    "stats": {
+      "end": "สิ้นสุด:",
+      "issuedQuantity": "จำนวนที่ออก",
+      "start": "เริ่ม:",
+      "totalQuantity": "จำนวนรวม",
+      "utilized": "% ที่ใช้แล้ว",
+      "validity": "ความถูกต้อง"
+    },
+    "status": "สถานะ",
+    "title": "รายละเอียดชุด",
+    "totalQuantity": "จำนวนรวม",
+    "utilized": "ใช้แล้ว",
+    "validity": "ความถูกต้อง"
   },
   "errors": {
-    "batchNameRequired": "Batch name is required",
-    "quantityRequired": "Quantity is required",
-    "quantityMustBePositive": "Quantity must be a positive number",
-    "startDateRequired": "Start date is required",
-    "endDateRequired": "End date is required",
-    "endDateMustBeAfterStart": "End date must be after start date",
-    "failedToCreateBatch": "Failed to create coupon batch",
-    "failedToUpdateBatch": "Failed to update coupon batch"
+    "batchNameRequired": "ต้องระบุชื่อชุด",
+    "endDateMustBeAfterStart": "วันที่สิ้นสุดต้องอยู่หลังวันที่เริ่มต้น",
+    "endDateRequired": "จำเป็นต้องระบุวันที่สิ้นสุด",
+    "failedToCreateBatch": "ไม่สามารถสร้างชุดคูปองได้",
+    "failedToCreateCouponBatch": "ไม่สามารถสร้างชุดคูปองได้.",
+    "failedToDeleteCouponBatch": "ลบชุดคูปองไม่สำเร็จ",
+    "failedToDownloadPdf": "ไม่สามารถดาวน์โหลด PDF ได้",
+    "failedToLoadCoupons": "ไม่สามารถโหลดคูปองได้",
+    "failedToLoadCouponsBatches": "ไม่สามารถโหลดชุดคูปองได้",
+    "failedToUpdateBatch": "ไม่สามารถอัปเดตชุดคูปองได้",
+    "quantityMustBePositive": "จำนวนต้องเป็นตัวเลขที่เป็นบวก",
+    "quantityRequired": "จำเป็นต้องระบุจำนวน",
+    "startDateRequired": "ต้องระบุวันที่เริ่มต้น"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "ตัวเลือกคูปอง",
+      "delete": "ลบ",
+      "details": "รายละเอียด"
+    },
+    "allStatus": "สถานะทั้งหมด",
+    "breadcrumb": "คูปอง",
+    "columnNames": {
+      "actions": "การดำเนินการ",
+      "batchName": "ชื่อชุด",
+      "batchType": "ประเภทชุด",
+      "isActive": "เปิดใช้งาน",
+      "status": "สถานะ",
+      "type": "ประเภท",
+      "usage": "การใช้งาน",
+      "validity": "ความถูกต้อง"
+    },
+    "columns": {
+      "actions": "การดำเนินการ",
+      "batchName": "ชื่อชุด",
+      "status": "สถานะ",
+      "type": "ประเภท",
+      "usage": "การใช้งาน",
+      "validity": "ความถูกต้อง"
+    },
+    "createBatch": "สร้างชุด",
+    "deleteDialog": {
+      "cancel": "ยกเลิก",
+      "confirm": "ลบ",
+      "description": "การกระทำนี้ไม่สามารถย้อนกลับได้ จะลบอย่างถาวร",
+      "title": "ลบชุดคูปอง?"
+    },
+    "exportPdf": "ส่งออก PDF",
+    "issued": "ออกแล้ว",
+    "redeemed": "ถูกใช้แล้ว",
+    "searchPlaceholder": "ค้นหาชุด...",
+    "status": {
+      "active": "ใช้งาน",
+      "inactive": "ไม่ใช้งาน"
+    },
+    "subtitle": "จัดการคูปองส่วนลดของคุณ",
+    "title": "ชุดคูปอง",
+    "usage": {
+      "issued": "{count} ที่ออก",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "จาก:",
+      "to": "ถึง:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "สร้างชุดคูปองเรียบร้อยแล้ว!",
+    "batchDeleted": "ลบชุดคูปองแล้ว",
+    "batchIdNotAvailable": "หมายเลขชุดไม่พร้อมใช้งาน",
+    "copiedToClipboard": "คัดลอกไปยังคลิปบอร์ด",
+    "fetchingPdf": "กำลังดึง PDF...",
+    "noPdfData": "ไม่มีข้อมูล PDF ที่ได้รับ",
+    "pdfDownloadedSuccessfully": "ดาวน์โหลด PDF สำเร็จแล้ว",
+    "unableToDetermineMerchantId": "ไม่สามารถระบุรหัสผู้ค้าได้ กรุณาติดต่อฝ่ายสนับสนุน",
+    "uploadBrandImage": "กรุณาอัปโหลดภาพแบรนด์ในตัวแก้ไขเทมเพลต."
   },
   "success": {
-    "batchCreated": "Coupon batch created successfully",
-    "batchUpdated": "Coupon batch updated successfully"
+    "batchCreated": "สร้างชุดคูปองสำเร็จ",
+    "batchUpdated": "อัปเดตชุดคูปองสำเร็จ"
+  },
+  "template": {
+    "chooseTemplate": "เลือกเทมเพลต",
+    "editContent": "แก้ไขเนื้อหา",
+    "editor": {
+      "brandImage": "ภาพแบรนด์",
+      "brandImageMandatory": "ภาพแบรนด์เป็นสิ่งจำเป็น",
+      "cancel": "ยกเลิก",
+      "changeImage": "เปลี่ยนภาพ",
+      "contentUpdatedSuccessfully": "เนื้อหาอัปเดตสำเร็จ",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "อธิบายรายละเอียดข้อเสนอ...",
+      "done": "เสร็จสิ้น",
+      "failedToSaveContent": "ไม่สามารถบันทึกเนื้อหาได้",
+      "header": "หัวข้อ",
+      "headerPlaceholder": "เช่น ข้อเสนอพิเศษ",
+      "requiredForAllTemplates": "จำเป็นสำหรับเทมเพลตทั้งหมด",
+      "title": "แก้ไขเนื้อหาเทมเพลต",
+      "titleField": "ชื่อเรื่อง",
+      "titlePlaceholder": "เช่น ส่วนลด 50%",
+      "updateDescription": "อัปเดตภาพแบรนด์, หัวข้อ, ชื่อเรื่อง, และคำอธิบาย การเปลี่ยนแปลงจะแสดงสด",
+      "uploadBrandImage": "อัปโหลดภาพแบรนด์"
+    },
+    "hoverToPreview": "ชี้เพื่อดูตัวอย่างหรือคลิกเพื่อเปิด",
+    "loadingTemplates": "กำลังโหลดเทมเพลต…",
+    "preview": "ดูตัวอย่าง",
+    "previewModal": {
+      "readOnlyPreview": "ตัวอย่างแบบอ่านอย่างเดียว",
+      "title": "ตัวอย่างเทมเพลต"
+    },
+    "selected": "ที่เลือก",
+    "templateLocked": "เทมเพลตถูกล็อคสำหรับแผนชั่วคราว"
   }
 }

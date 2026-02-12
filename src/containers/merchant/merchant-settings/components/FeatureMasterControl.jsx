@@ -25,12 +25,13 @@ import {
 import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
 const FEATURE_CONFIG = [
   {
     key: "paid_ads",
-    label: "Paid Ads",
-    description: "Display image/video banners to users",
+    labelKey: "paidAds.label",
+    descriptionKey: "paidAds.description",
     icon: Megaphone,
     color: "text-purple-500",
     bg: "bg-purple-50",
@@ -38,40 +39,40 @@ const FEATURE_CONFIG = [
 
   {
     key: "enable_google_reviews",
-    label: "Google Reviews",
-    description: "Review link to Google Business profile",
+    labelKey: "googleReviews.label",
+    descriptionKey: "googleReviews.description",
     icon: Globe,
     color: "text-emerald-500",
     bg: "bg-emerald-50",
   },
   {
     key: "enable_facebook_reviews",
-    label: "Facebook Reviews",
-    description: "Direct link to Facebook Page reviews",
+    labelKey: "facebookReviews.label",
+    descriptionKey: "facebookReviews.description",
     icon: Facebook,
     color: "text-blue-600",
     bg: "bg-blue-50/50",
   },
   {
     key: "enable_instagram_reviews",
-    label: "Instagram Reviews",
-    description: "Integration with Instagram Business",
+    labelKey: "instagramReviews.label",
+    descriptionKey: "instagramReviews.description",
     icon: Instagram,
     color: "text-pink-600",
     bg: "bg-pink-50/50",
   },
   {
     key: "enable_xiaohongshu_reviews",
-    label: "XiaoHongShu Reviews",
-    description: "Connect with the Red community",
+    labelKey: "xiaohongshuReviews.label",
+    descriptionKey: "xiaohongshuReviews.description",
     icon: MessageCircle,
     color: "text-red-500",
     bg: "bg-red-50/50",
   },
   {
     key: "enable_preset_reviews",
-    label: "Preset Reviews",
-    description: "Preset feedback options for customers",
+    labelKey: "presetReviews.label",
+    descriptionKey: "presetReviews.description",
     icon: MessageSquareText,
     color: "text-blue-500",
     bg: "bg-blue-50",
@@ -79,40 +80,40 @@ const FEATURE_CONFIG = [
 
   {
     key: "luckydraw_enabled",
-    label: "Lucky Draw",
-    description: "Gamified reward distribution system",
+    labelKey: "luckyDraw.label",
+    descriptionKey: "luckyDraw.description",
     icon: Ticket,
     color: "text-amber-500",
     bg: "bg-amber-50",
   },
   {
     key: "birthday_message_enabled",
-    label: "Birthday Message",
-    description: "Automated rewards on customer birthdays",
+    labelKey: "birthdayMessage.label",
+    descriptionKey: "birthdayMessage.description",
     icon: Cake,
     color: "text-pink-500",
     bg: "bg-pink-50",
   },
   {
     key: "inactive_recall_enabled",
-    label: "Inactive Recall",
-    description: "Automatically recall inactive customers",
+    labelKey: "inactiveRecall.label",
+    descriptionKey: "inactiveRecall.description",
     icon: RotateCw,
     color: "text-indigo-500",
     bg: "bg-indigo-50",
   },
   {
     key: "festival_campaign_enabled",
-    label: "Festival Campaign",
-    description: "Broadcasts for special holiday events",
+    labelKey: "festivalCampaign.label",
+    descriptionKey: "festivalCampaign.description",
     icon: PartyPopper,
     color: "text-rose-500",
     bg: "bg-rose-50",
   },
   {
     key: "scheduled_campaign_enabled",
-    label: "Scheduled Campaign",
-    description: "Scheduled marketing message campaigns",
+    labelKey: "scheduledCampaign.label",
+    descriptionKey: "scheduledCampaign.description",
     icon: Megaphone,
     color: "text-orange-500",
     bg: "bg-orange-50",
@@ -120,6 +121,7 @@ const FEATURE_CONFIG = [
 ];
 
 export default function FeatureMasterControl() {
+  const t = useTranslations("merchantSettings.featureMasterControl");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
   const subscriptionType =
@@ -161,10 +163,12 @@ export default function FeatureMasterControl() {
       setSettings((prev) => ({ ...prev, [key]: value }));
 
       const feature = FEATURE_CONFIG.find((f) => f.key === key);
+      const featureLabel = t(`features.${feature?.labelKey || "feature"}`);
+      const status = value ? t("active") : t("paused");
       toast.success(
-        `${feature?.label || "Feature"} ${value ? "Active" : "Paused"}`,
+        t("success", { feature: featureLabel, status }),
         {
-          description: `Successfully updated your ${feature?.label.toLowerCase()} status.`,
+          description: t("successDescription", { feature: featureLabel.toLowerCase() }),
         },
       );
 
@@ -175,10 +179,10 @@ export default function FeatureMasterControl() {
       );
     } catch (error) {
       console.error(`Failed to update ${key}:`, error);
-      toast.error("Process Failed", {
+      toast.error(t("error"), {
         description:
           error?.response?.data?.message ||
-          "Could not synchronize setting. Please check your connection.",
+          t("errorDescription"),
       });
     } finally {
       setUpdatingKey(null);
@@ -223,14 +227,14 @@ export default function FeatureMasterControl() {
             <div>
               <div className="flex items-center gap-2">
                 <CardTitle className="text-lg font-bold text-gray-900 tracking-tight">
-                  Feature Switchboard
+                  {t("title")}
                 </CardTitle>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-[10px] font-bold text-emerald-600 border border-emerald-100 uppercase tracking-wider">
-                  Live
+                  {t("live")}
                 </span>
               </div>
               <CardDescription className="text-xs font-medium text-muted-foreground">
-                Real-time capability control
+                {t("subtitle")}
               </CardDescription>
             </div>
           </div>
@@ -258,10 +262,10 @@ export default function FeatureMasterControl() {
                     <Label
                       className={`text-sm font-semibold tracking-tight transition-colors cursor-pointer ${isEnabled ? "text-gray-900" : "text-gray-500"}`}
                     >
-                      {feature.label}
+                      {t(`features.${feature.labelKey}`)}
                     </Label>
                     <p className="text-[11px] text-muted-foreground font-medium leading-none">
-                      {feature.description}
+                      {t(`features.${feature.descriptionKey}`)}
                     </p>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   CreditCard,
   Clock3,
@@ -36,6 +37,7 @@ export default function AnnualWalletView({
   validating,
   embedded = false,
 }) {
+  const t = useTranslations("merchantWallet");
   const balance = wallet?.balance ?? 0;
   const tiers = wallet?.tiers || ["MARKETING", "UTILITY"];
   const transactions = useMemo(
@@ -80,14 +82,14 @@ export default function AnnualWalletView({
     () => [
       {
         accessorKey: "name",
-        header: "Batch",
+        header: t("batchUsage.columns.batch"),
         cell: ({ row }) => (
           <span className="font-medium">{row.original.name || "—"}</span>
         ),
       },
       {
         accessorKey: "tier",
-        header: "Tier",
+        header: t("batchUsage.columns.tier"),
         cell: ({ row }) => (
           <span className="text-xs uppercase text-muted-foreground">
             {row.original.tier || "—"}
@@ -96,7 +98,7 @@ export default function AnnualWalletView({
       },
       {
         accessorKey: "used",
-        header: "Used / Total",
+        header: t("batchUsage.columns.usedTotal"),
         cell: ({ row }) => {
           const used = row.original.used ?? 0;
           const total = row.original.total ?? 0;
@@ -109,16 +111,16 @@ export default function AnnualWalletView({
       },
       {
         accessorKey: "lastUsed",
-        header: "Last activity",
+        header: t("batchUsage.columns.lastActivity"),
         cell: ({ row }) => (
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Clock3 className="h-3.5 w-3.5" />
-            <span>{row.original.lastUsed || "N/A"}</span>
+            <span>{row.original.lastUsed || t("batchUsage.notAvailable")}</span>
           </div>
         ),
       },
     ],
-    [],
+    [t],
   );
 
   const filteredTransactions = useMemo(() => {
@@ -142,7 +144,7 @@ export default function AnnualWalletView({
     () => [
       {
         accessorKey: "date",
-        header: "Date",
+        header: t("transactions.columns.date"),
         cell: ({ row }) => (
           <span className="text-sm">
             {row.original.date
@@ -153,14 +155,14 @@ export default function AnnualWalletView({
       },
       {
         accessorKey: "description",
-        header: "Description",
+        header: t("transactions.columns.description"),
         cell: ({ row }) => (
           <span className="text-sm">{row.original.description || "—"}</span>
         ),
       },
       {
         accessorKey: "credit_type",
-        header: "Credits",
+        header: t("transactions.columns.credits"),
         cell: ({ row }) => {
           const ct =
             row.original.credit_type ||
@@ -172,16 +174,16 @@ export default function AnnualWalletView({
             .toString()
             .toLowerCase()
             .includes("whatsapp_bi")
-            ? "Whatsapp BI"
+            ? t("transactions.creditTypes.whatsappBi")
             : (ct || "").toString().toLowerCase().includes("whatsapp_ui")
-              ? "Whatsapp UI"
+              ? t("transactions.creditTypes.whatsappUi")
               : (ct || "").toString();
           return <span className="text-sm capitalize">{label}</span>;
         },
       },
       {
         accessorKey: "amount",
-        header: "Amount",
+        header: t("transactions.columns.amount"),
         cell: ({ row }) => {
           const type = row.original.type || "debit";
           const amount = Number(row.original.amount) || 0;
@@ -198,24 +200,24 @@ export default function AnnualWalletView({
       },
       {
         accessorKey: "status",
-        header: "Status",
+        header: t("transactions.columns.status"),
         cell: ({ row }) => (
           <span className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs capitalize">
-            {row.original.status || "unknown"}
+            {row.original.status || t("transactions.statusUnknown")}
           </span>
         ),
       },
     ],
-    [wallet?.currency],
+    [wallet?.currency, t],
   );
 
   return (
     <div className="space-y-6">
       {!embedded && (
         <header>
-          <h1 className="text-3xl font-bold">Wallet & Credits</h1>
+          <h1 className="text-3xl font-bold">{t("header.title")}</h1>
           <p className="text-muted-foreground">
-            Annual merchants see Marketing + Utility tiers and full history.
+            {t("header.annualSubtitle")}
           </p>
         </header>
       )}
@@ -227,9 +229,9 @@ export default function AnnualWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Available Balance
+                {t("availableBalance.title")}
               </CardTitle>
-              <CardDescription>Ready to use credits</CardDescription>
+              <CardDescription>{t("availableBalance.subtitle")}</CardDescription>
             </div>
             <div className="rounded-full bg-primary/10 p-2 text-primary">
               <CreditCard className="h-5 w-5" />
@@ -238,7 +240,7 @@ export default function AnnualWalletView({
           <CardContent className="space-y-4 pt-2">
             <div className="flex flex-col gap-1">
               <span className="text-xs text-muted-foreground">
-                Total Remaining Credits
+                {t("availableBalance.totalRemaining")}
               </span>
               <div className="text-4xl font-bold tracking-tight text-primary">
                 {format(balance)}
@@ -248,7 +250,7 @@ export default function AnnualWalletView({
             <div className="grid gap-3 pt-2">
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
                 <span className="text-muted-foreground text-xs font-medium">
-                  Coupon Credits
+                  {t("availableBalance.couponCredits")}
                 </span>
                 <span className="font-bold text-sm">
                   {format(creditDetails.marketing)}
@@ -256,7 +258,7 @@ export default function AnnualWalletView({
               </div>
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
                 <span className="text-muted-foreground text-xs font-medium">
-                  Whatsapp UI Credits
+                  {t("availableBalance.whatsappUiCredits")}
                 </span>
                 <span className="font-bold text-sm">
                   {format(creditDetails.whatsapp_ui ?? creditDetails.message)}
@@ -264,7 +266,7 @@ export default function AnnualWalletView({
               </div>
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
                 <span className="text-muted-foreground text-xs font-medium">
-                  Whatsapp BI Credits
+                  {t("availableBalance.whatsappBiCredits")}
                 </span>
                 <span className="font-bold text-sm">
                   {format(creditDetails.whatsapp_bi ?? 0)}
@@ -272,7 +274,7 @@ export default function AnnualWalletView({
               </div>
               <div className="flex justify-between items-center bg-muted/30 p-2 rounded-lg">
                 <span className="text-muted-foreground text-xs font-medium">
-                  Paid Ad Credits
+                  {t("availableBalance.paidAdCredits")}
                 </span>
                 <span className="font-bold text-sm">
                   {format(creditDetails.utility)}
@@ -297,9 +299,9 @@ export default function AnnualWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Credit Breakdown
+                {t("creditBreakdown.title")}
               </CardTitle>
-              <CardDescription>Detailed allocation</CardDescription>
+              <CardDescription>{t("creditBreakdown.subtitle")}</CardDescription>
             </div>
             <div className="rounded-full bg-blue-500/10 p-2 text-blue-600">
               <Coins className="h-5 w-5" />
@@ -310,7 +312,7 @@ export default function AnnualWalletView({
               <div className="space-y-2 p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 dark:bg-emerald-500/5 dark:border-emerald-500/10">
                 <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Purchased
+                  {t("creditBreakdown.purchased")}
                 </span>
                 <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">
                   {format(creditDetails.purchased)}
@@ -320,7 +322,7 @@ export default function AnnualWalletView({
               <div className="space-y-2 p-3 rounded-xl bg-rose-50/50 border border-rose-100 dark:bg-rose-500/5 dark:border-rose-500/10">
                 <span className="text-xs font-medium text-rose-600 dark:text-rose-400 flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                  Used
+                  {t("creditBreakdown.used")}
                 </span>
                 <div className="text-2xl font-bold text-rose-700 dark:text-rose-300">
                   {format(creditDetails.used)}
@@ -330,7 +332,7 @@ export default function AnnualWalletView({
 
             <div className="pt-2">
               <div className="flex items-center justify-between text-xs text-muted-foreground p-2 bg-muted/50 rounded-lg">
-                <span>Usage Efficiency</span>
+                <span>{t("creditBreakdown.usageEfficiency")}</span>
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
@@ -349,9 +351,9 @@ export default function AnnualWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Subscription
+                {t("subscription.title")}
               </CardTitle>
-              <CardDescription>{status.currency} Plan Status</CardDescription>
+              <CardDescription>{t("subscription.subtitle", { currency: status.currency })}</CardDescription>
             </div>
             <div className="rounded-full bg-orange-500/10 p-2 text-orange-600">
               <Activity className="h-5 w-5" />
@@ -359,9 +361,13 @@ export default function AnnualWalletView({
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between rounded-lg bg-muted/40 p-3">
-              <span className="text-sm font-medium">Plan Type</span>
+              <span className="text-sm font-medium">{t("subscription.planType")}</span>
               <div className="font-bold capitalize text-primary">
-                {wallet?.subscription_type || "Annual"}
+                {wallet?.subscription_type?.toLowerCase() === "annual" 
+                  ? t("subscription.annual") 
+                  : wallet?.subscription_type?.toLowerCase() === "temporary"
+                  ? t("subscription.temporary")
+                  : wallet?.subscription_type || t("subscription.annual")}
               </div>
             </div>
           </CardContent>
@@ -407,14 +413,14 @@ export default function AnnualWalletView({
 
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Recent transactions</h2>
+          <h2 className="text-xl font-semibold">{t("transactions.title")}</h2>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Check className="h-4 w-4 text-emerald-500" />
-            Annual merchants see history by tier.
+            {t("transactions.subtitle")}
           </div>
         </div>
         <TableToolbar
-          placeholder="Search transactions..."
+          placeholder={t("transactions.searchPlaceholder")}
           total={transactions.length}
           onSearchChange={(val) => {
             setTxSearch(val);

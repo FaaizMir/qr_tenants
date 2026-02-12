@@ -32,17 +32,19 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useTranslations } from "next-intl";
 
-const formatDate = (dateString) => {
-  if (!dateString) return "N/A";
+const formatDate = (dateString, t) => {
+  if (!dateString) return t("details.na");
   try {
     return format(new Date(dateString), "MMMM dd, yyyy");
   } catch (error) {
-    return "Invalid Date";
+    return t("details.invalidDate");
   }
 };
 
 export default function FestivalDetails() {
+  const t = useTranslations("merchantFestival");
   const params = useParams();
   const router = useRouter();
   const { data: session } = useSession();
@@ -70,9 +72,9 @@ export default function FestivalDetails() {
       console.error("Failed to fetch festival message:", err);
       const errorMsg =
         err?.response?.data?.message ||
-        "Failed to load festival message details";
+        t("errors.failedToLoadDetails");
       setError(errorMsg);
-      toast.error("Failed to load festival message");
+      toast.error(t("errors.failedToLoad"));
     } finally {
       setLoading(false);
     }
@@ -89,12 +91,12 @@ export default function FestivalDetails() {
     setDeleting(true);
     try {
       await axiosInstance.delete(`/festival-messages/${festivalId}`);
-      toast.success("Festival message deleted successfully");
+      toast.success(t("success.deleted"));
       router.push("/merchant/festival-messages");
     } catch (err) {
       console.error("Failed to delete festival message:", err);
       const errorMsg =
-        err?.response?.data?.message || "Failed to delete festival message";
+        err?.response?.data?.message || t("errors.failedToDelete");
       toast.error(errorMsg);
       setDeleting(false);
       setDeleteDialogOpen(false);
@@ -119,12 +121,12 @@ export default function FestivalDetails() {
       <div className="space-y-4">
         <Button variant="ghost" onClick={() => router.back()} className="mb-4">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Festival Messages
+          {t("details.backToList")}
         </Button>
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            {error || "Festival message not found"}
+            {error || t("details.notFound")}
           </AlertDescription>
         </Alert>
       </div>
@@ -141,7 +143,7 @@ export default function FestivalDetails() {
             className="mb-2 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            {t("details.back")}
           </Button>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold">{festival.festival_name}</h1>
@@ -152,21 +154,21 @@ export default function FestivalDetails() {
                   : "bg-gray-500 hover:bg-gray-600 text-white"
               }
             >
-              {festival.is_active ? "Active" : "Inactive"}
+              {festival.is_active ? t("active") : t("inactive")}
             </Badge>
           </div>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => setDialogOpen(true)}>
             <Edit className="h-4 w-4 mr-2" />
-            Edit
+            {t("details.edit")}
           </Button>
           <Button
             variant="destructive"
             onClick={() => setDeleteDialogOpen(true)}
           >
             <Trash2 className="h-4 w-4 mr-2" />
-            Delete
+            {t("details.delete")}
           </Button>
         </div>
       </div>
@@ -176,20 +178,20 @@ export default function FestivalDetails() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
-              Message Details
+              {t("details.messageDetails")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">
-                Festival Message
+                {t("details.festivalMessage")}
               </p>
               <p className="text-sm whitespace-pre-wrap">{festival.message}</p>
             </div>
             <Separator />
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">
-                Recurring Yearly
+                {t("details.recurringYearly")}
               </p>
               <Badge
                 variant="secondary"
@@ -199,14 +201,14 @@ export default function FestivalDetails() {
                     : "bg-gray-100 text-gray-600"
                 }
               >
-                {festival.is_recurring ? "Yes" : "No"}
+                {festival.is_recurring ? t("columns.yes") : t("columns.no")}
               </Badge>
             </div>
             {festival.coupon_batch_id && (
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
                   <Ticket className="h-4 w-4 inline mr-1" />
-                  Coupon Batch ID
+                  {t("details.couponBatchId")}
                 </p>
                 <p className="text-sm font-mono">#{festival.coupon_batch_id}</p>
               </div>
@@ -218,20 +220,20 @@ export default function FestivalDetails() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              Schedule & Info
+              {t("details.scheduleInfo")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">
-                Festival Date
+                {t("details.festivalDate")}
               </p>
-              <p className="text-sm">{formatDate(festival.festival_date)}</p>
+              <p className="text-sm">{formatDate(festival.festival_date, t)}</p>
             </div>
             <Separator />
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">
-                Status
+                {t("details.status")}
               </p>
               <Badge
                 className={
@@ -240,22 +242,22 @@ export default function FestivalDetails() {
                     : "bg-gray-500 hover:bg-gray-600 text-white"
                 }
               >
-                {festival.is_active ? "Active" : "Inactive"}
+                {festival.is_active ? t("active") : t("inactive")}
               </Badge>
             </div>
             <Separator />
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">
-                Created At
+                {t("details.createdAt")}
               </p>
-              <p className="text-sm">{formatDate(festival.created_at)}</p>
+              <p className="text-sm">{formatDate(festival.created_at, t)}</p>
             </div>
             {festival.updated_at && (
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">
-                  Last Updated
+                  {t("details.lastUpdated")}
                 </p>
-                <p className="text-sm">{formatDate(festival.updated_at)}</p>
+                <p className="text-sm">{formatDate(festival.updated_at, t)}</p>
               </div>
             )}
           </CardContent>
@@ -273,15 +275,13 @@ export default function FestivalDetails() {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.confirmTitle")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              festival message &quot;{festival.festival_name}&quot; and remove
-              it from the server.
+              {t("deleteDialog.confirmDescription", { festivalName: festival.festival_name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={deleting}>{t("deleteDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               disabled={deleting}
@@ -290,10 +290,10 @@ export default function FestivalDetails() {
               {deleting ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Deleting...
+                  {t("deleteDialog.deleting")}
                 </>
               ) : (
-                "Delete"
+                t("deleteDialog.delete")
               )}
             </AlertDialogAction>
           </AlertDialogFooter>

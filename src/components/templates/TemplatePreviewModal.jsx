@@ -8,6 +8,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { TemplateCard } from "./TemplateCard";
+import { useTranslations } from "next-intl";
 
 export function TemplatePreviewModal({
   open,
@@ -15,12 +16,14 @@ export function TemplatePreviewModal({
   template,
   content,
 }) {
+  const t = useTranslations("merchantCoupons.template.previewModal");
+  
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Template Preview</DialogTitle>
-          <DialogDescription>Read-only preview</DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("readOnlyPreview")}</DialogDescription>
         </DialogHeader>
 
         <TemplateCard

@@ -34,8 +34,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslations } from "next-intl";
 
 export default function MerchantCampaigns() {
+  const t = useTranslations("merchantCampaigns");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -118,7 +120,7 @@ export default function MerchantCampaigns() {
         setTotal(res?.data?.meta?.total || 0);
       } catch (error) {
         console.error("Failed to fetch campaigns", error);
-        toast.error("Failed to load campaigns");
+        toast.error(t("errors.failedToLoad"));
       } finally {
         setLoading(false);
         if (initialLoading) setInitialLoading(false);
@@ -152,12 +154,26 @@ export default function MerchantCampaigns() {
   const handleDelete = async (campaignId) => {
     try {
       await axios.delete(`/scheduled-campaigns/${campaignId}`);
-      toast.success("Campaign deleted successfully");
+      toast.success(t("success.deleted"));
       setRefetchTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Failed to delete campaign:", error);
       const errorMsg =
-        error?.response?.data?.message || "Failed to delete campaign";
+        error?.response?.data?.message || t("errors.failedToDelete");
+      toast.error(errorMsg);
+    }
+  };
+
+  // Handle cancel
+  const handleCancel = async (campaignId) => {
+    try {
+      await axios.put(`/scheduled-campaigns/${campaignId}/cancel`);
+      toast.success(t("success.cancelled"));
+      setRefetchTrigger((prev) => prev + 1);
+    } catch (error) {
+      console.error("Failed to cancel campaign:", error);
+      const errorMsg =
+        error?.response?.data?.message || t("errors.failedToCancel");
       toast.error(errorMsg);
     }
   };
@@ -171,8 +187,8 @@ export default function MerchantCampaigns() {
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
-    () => getCampaignColumns(handleEdit, handleDelete),
-    [],
+    () => getCampaignColumns(handleEdit, handleDelete, handleCancel, t),
+    [t],
   );
 
   // Loading skeleton
@@ -207,9 +223,9 @@ export default function MerchantCampaigns() {
     <div className="w-full  ">
       <div className="flex items-center justify-between">
         <div className="pb-4">
-          <h1 className="text-3xl font-bold">Campaign Manager</h1>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
           <p className="text-muted-foreground">
-            Create and manage your scheduled campaigns
+            {t("subtitle")}
           </p>
         </div>
 
@@ -226,15 +242,14 @@ export default function MerchantCampaigns() {
                     }
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    New Campaign
+                    {t("newCampaign")}
                   </Button>
                 </span>
               </TooltipTrigger>
               {!featureEnabled && (
                 <TooltipContent side="bottom" className="max-w-xs">
                   <p>
-                    Enable &quot;Scheduled Campaign&quot; in Feature Switchboard
-                    to create campaigns
+                    {t("enableTooltip")}
                   </p>
                 </TooltipContent>
               )}
@@ -247,9 +262,7 @@ export default function MerchantCampaigns() {
         <Alert className="border-amber-200 bg-amber-50 text-amber-800 mb-6">
           <AlertCircle className="h-4 w-4 text-amber-600" />
           <AlertDescription className="text-sm">
-            Scheduled campaigns are currently disabled. Enable the feature in
-            the <strong>Feature Switchboard</strong> above to create new
-            campaigns.
+            {t("featureDisabled")} <strong>{t("featureSwitchboard")}</strong> {t("featureDisabledSuffix")}
           </AlertDescription>
         </Alert>
       )}
@@ -259,7 +272,7 @@ export default function MerchantCampaigns() {
           <div className="flex gap-3 px-6 pt-2">
             <div className="flex-1">
               <TableToolbar
-                placeholder="Search campaigns..."
+                placeholder={t("searchPlaceholder")}
                 onSearchChange={(value) => {
                   setPage(0);
                   setSearch(value);
@@ -271,12 +284,12 @@ export default function MerchantCampaigns() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="scheduled">Scheduled</SelectItem>
-                      <SelectItem value="processing">Processing</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
-                      <SelectItem value="cancelled">Cancelled</SelectItem>
-                      <SelectItem value="failed">Failed</SelectItem>
+                      <SelectItem value="all">{t("allStatus")}</SelectItem>
+                      <SelectItem value="scheduled">{t("scheduled")}</SelectItem>
+                      <SelectItem value="processing">{t("processing")}</SelectItem>
+                      <SelectItem value="completed">{t("completed")}</SelectItem>
+                      <SelectItem value="cancelled">{t("cancelled")}</SelectItem>
+                      <SelectItem value="failed">{t("failed")}</SelectItem>
                     </SelectContent>
                   </Select>
                 }
@@ -294,6 +307,14 @@ export default function MerchantCampaigns() {
               setPage={setPage}
               setPageSize={setPageSize}
               loading={loading}
+              columnNameTranslations={{
+                campaign_name: t("columns.campaign"),
+                scheduled_date: t("columns.scheduledDate"),
+                target_audience: t("columns.audience"),
+                send_coupons: t("columns.coupon"),
+                status: t("columns.status"),
+                actions: t("columns.actions"),
+              }}
             />
           </div>
         </CardContent>

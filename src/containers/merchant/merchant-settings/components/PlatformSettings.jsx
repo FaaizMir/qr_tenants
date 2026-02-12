@@ -21,6 +21,7 @@ import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 const DEFAULT_URLS = {
   google: "https://g.page/r/",
@@ -30,6 +31,7 @@ const DEFAULT_URLS = {
 };
 
 export default function PlatformSettings() {
+  const t = useTranslations("merchantSettings.platformSettings");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -98,15 +100,15 @@ export default function PlatformSettings() {
           payload,
         );
         if (!isGlobal) {
-          toast.success("Platforms Updated", {
-            description: "Your social review links have been updated.",
+          toast.success(t("updateSuccess"), {
+            description: t("updateSuccessDescription"),
           });
         }
       } catch (error) {
         console.error("Failed to save platform settings:", error);
         if (!isGlobal) {
-          toast.error("Save Failed", {
-            description: "Could not update platforms. Please try again.",
+          toast.error(t("saveFailed"), {
+            description: t("saveFailedDescription"),
           });
         }
         throw error;
@@ -147,10 +149,10 @@ export default function PlatformSettings() {
           </div>
           <div className="space-y-0.5">
             <h3 className="font-semibold text-sm text-gray-900 leading-none">
-              Social Connect
+              {t("title")}
             </h3>
             <p className="text-[11px] text-muted-foreground font-medium">
-              Review channels
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -163,47 +165,47 @@ export default function PlatformSettings() {
               {[
                 {
                   id: "google",
-                  label: "Google Reviews",
+                  label: t("googleReviews"),
                   icon: Globe,
                   color: "text-blue-600",
                   enabled: state.enableGoogle,
                   value: state.googleReviewLink,
                   onChange: (v) =>
                     setState((p) => ({ ...p, googleReviewLink: v })),
-                  placeholder: "https://g.page/r/...",
+                  placeholder: t("googlePlaceholder"),
                 },
                 {
                   id: "facebook",
-                  label: "Facebook Page",
+                  label: t("facebookPage"),
                   icon: Facebook,
                   color: "text-blue-700",
                   enabled: state.enableFacebook,
                   value: state.facebookReviewLink,
                   onChange: (v) =>
                     setState((p) => ({ ...p, facebookReviewLink: v })),
-                  placeholder: "https://facebook.com/...",
+                  placeholder: t("facebookPlaceholder"),
                 },
                 {
                   id: "instagram",
-                  label: "Instagram",
+                  label: t("instagram"),
                   icon: Instagram,
                   color: "text-pink-600",
                   enabled: state.enableInstagram,
                   value: state.instagramReviewLink,
                   onChange: (v) =>
                     setState((p) => ({ ...p, instagramReviewLink: v })),
-                  placeholder: "https://instagram.com/...",
+                  placeholder: t("instagramPlaceholder"),
                 },
                 {
                   id: "red",
-                  label: "XiaoHongShu",
+                  label: t("xiaohongshu"),
                   icon: MessageCircle,
                   color: "text-red-600",
                   enabled: state.enableRed,
                   value: state.redReviewLink,
                   onChange: (v) =>
                     setState((p) => ({ ...p, redReviewLink: v })),
-                  placeholder: "RED Profile URL",
+                  placeholder: t("redPlaceholder"),
                 },
               ].map((item) => (
                 <div
@@ -221,7 +223,7 @@ export default function PlatformSettings() {
                       <span
                         className={`text-[9px] font-bold px-1.5 py-0.5 rounded-md border ${item.enabled ? "bg-green-50 text-green-600 border-green-100" : "bg-gray-100 text-gray-400 border-gray-200"}`}
                       >
-                        {item.enabled ? "ACTIVE" : "OFF"}
+                        {item.enabled ? t("active") : t("off")}
                       </span>
                     </div>
                     <input
@@ -248,7 +250,7 @@ export default function PlatformSettings() {
                 ) : (
                   <Save className="h-3 w-3 mr-2" />
                 )}
-                Save Platforms
+                {t("savePlatforms")}
               </Button>
             </div>
           </CardContent>

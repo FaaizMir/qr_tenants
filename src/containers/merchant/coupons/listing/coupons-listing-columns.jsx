@@ -23,10 +23,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export const couponsColumns = (onDelete) => [
+export const couponsColumns = (onDelete, t) => [
   {
     accessorKey: "batch_name",
-    header: "Batch Name",
+    header: t("listing.columns.batchName"),
     cell: ({ row }) => (
       <div className="flex flex-col">
         <span className="font-medium text-primary">
@@ -37,14 +37,14 @@ export const couponsColumns = (onDelete) => [
   },
   {
     accessorKey: "batch_type",
-    header: "Type",
+    header: t("listing.columns.type"),
     cell: ({ row }) => (
       <div className="capitalize">{row.original.batch_type}</div>
     ),
   },
   {
     id: "usage",
-    header: "Usage",
+    header: t("listing.columns.usage"),
     cell: ({ row }) => {
       const issued = row.original.issued_quantity ?? 0;
       const total = row.original.total_quantity ?? 0;
@@ -52,8 +52,8 @@ export const couponsColumns = (onDelete) => [
       return (
         <div className="flex flex-col gap-1 w-[90px]">
           <div className="flex justify-between items-center text-xs">
-            <span>{issued} issued</span>
-            <span className="text-muted-foreground">/ {total}</span>
+            <span>{t("listing.usage.issued", { count: issued })}</span>
+            <span className="text-muted-foreground">{t("listing.usage.total", { count: total })}</span>
           </div>
         </div>
       );
@@ -61,17 +61,17 @@ export const couponsColumns = (onDelete) => [
   },
   {
     id: "validity",
-    header: "Validity",
+    header: t("listing.columns.validity"),
     cell: ({ row }) => {
       const start = row.original.start_date;
       const end = row.original.end_date;
       if (!start && !end) return "-";
       return (
         <div className="flex flex-col text-xs space-y-0.5">
-          {start && <span>From: {new Date(start).toLocaleDateString()}</span>}
+          {start && <span>{t("listing.validity.from")} {new Date(start).toLocaleDateString()}</span>}
           {end && (
             <span>
-              To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {t("listing.validity.to")} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {new Date(end).toLocaleDateString()}
             </span>
           )}
@@ -81,7 +81,7 @@ export const couponsColumns = (onDelete) => [
   },
   {
     accessorKey: "is_active",
-    header: "Status",
+    header: t("listing.columns.status"),
     cell: ({ row }) => {
       const isActive = row.original.is_active;
       return (
@@ -92,14 +92,14 @@ export const couponsColumns = (onDelete) => [
               : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
           }`}
         >
-          {isActive ? "Active" : "Inactive"}
+          {isActive ? t("listing.status.active") : t("listing.status.inactive")}
         </span>
       );
     },
   },
   {
     id: "actions",
-    header: "Actions",
+    header: t("listing.columns.actions"),
     cell: ({ row }) => {
       const batch = row.original;
 
@@ -117,14 +117,14 @@ export const couponsColumns = (onDelete) => [
 
             <DropdownMenuContent align="end" className="w-44">
               <DropdownMenuLabel className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground px-2 py-1.5">
-                Coupon Options
+                {t("listing.actions.couponOptions")}
               </DropdownMenuLabel>
 
               {/* View */}
               <DropdownMenuItem asChild>
                 <Link href={`/en/merchant/coupons/${batch.id}`}>
                   <FileText className="mr-2 h-4 w-4" />
-                  <span className="font-medium">Details</span>
+                  <span className="font-medium">{t("listing.actions.details")}</span>
                 </Link>
               </DropdownMenuItem>
 
@@ -138,26 +138,26 @@ export const couponsColumns = (onDelete) => [
                     className="text-red-600 focus:text-red-600 cursor-pointer"
                   >
                     <Trash2 className="mr-2 h-4 w-4" />
-                    <span className="font-medium">Delete</span>
+                    <span className="font-medium">{t("listing.actions.delete")}</span>
                   </DropdownMenuItem>
                 </AlertDialogTrigger>
 
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Delete coupon batch?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("listing.deleteDialog.title")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete{" "}
+                      {t("listing.deleteDialog.description")}{" "}
                       <b>{batch.batch_name}</b>.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
 
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>{t("listing.deleteDialog.cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                       className="bg-red-600 hover:bg-red-700"
                       onClick={() => onDelete(batch)}
                     >
-                      Delete
+                      {t("listing.deleteDialog.confirm")}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>

@@ -1,70 +1,232 @@
 {
-  "listing": {
-    "title": "Create Coupon Batch",
-    "breadcrumb": "Coupons",
-    "searchPlaceholder": "Search code...",
-    "allStatus": "All Status",
-    "issued": "Issued",
-    "redeemed": "Redeemed",
-    "exportPdf": "Export PDF"
+  "allCoupons": {
+    "columns": {
+      "batchName": "バッチ名",
+      "couponCode": "クーポンコード",
+      "expiryDate": "有効期限",
+      "issuedAt": "発行日",
+      "redeemedAt": "引換日",
+      "startDate": "開始日",
+      "status": "ステータス"
+    },
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "createCoupon": "クーポンを作成",
+    "notRedeemed": "未引換",
+    "searchPlaceholder": "クーポンを検索...",
+    "subtitle": "生成されたすべてのクーポンを表示および管理",
+    "title": "すべてのクーポン"
+  },
+  "breadcrumbs": {
+    "couponBatches": "クーポンバッチ",
+    "coupons": "クーポン",
+    "createCouponBatch": "クーポンバッチを作成",
+    "detail": "詳細",
+    "merchantDashboard": "マーチャントダッシュボード"
   },
   "create": {
-    "title": "Batch Details",
-    "guidance": "Guidance",
-    "batchName": "Batch Name",
-    "batchNamePlaceholder": "e.g., Summer Sale 2024",
-    "batchType": "Batch Type",
-    "selectBatchType": "Select batch type",
-    "annual": "Annual",
-    "temporary": "Temporary",
-    "quantity": "Quantity",
-    "quantityPlaceholder": "Number of coupons",
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "isActive": "Active",
-    "createButton": "Create Batch",
-    "updateButton": "Update Batch",
-    "cancelButton": "Cancel"
+    "annual": "年次",
+    "batchName": "バッチ名",
+    "batchNamePlaceholder": "例：2024年夏のセール",
+    "batchType": "バッチタイプ",
+    "cancelButton": "キャンセル",
+    "createButton": "バッチを作成",
+    "endDate": "終了日",
+    "form": {
+      "batchName": "バッチ名",
+      "batchNamePlaceholder": "例：2024年夏のプロモーション",
+      "description": "クーポンパラメータを設定してください（制限は自動的に適用されます）",
+      "endDate": "終了日",
+      "generateBatch": "バッチを生成",
+      "generatingCodes": "コードを生成中...",
+      "halalCertified": "ハラール認証済み",
+      "halalDescription": "ハラール基準への準拠を示す",
+      "quantity": "数量",
+      "startDate": "開始日",
+      "template": "テンプレート",
+      "title": "バッチの詳細"
+    },
+    "guidance": "ガイダンス",
+    "isActive": "アクティブ",
+    "limits": {
+      "annual": "年間制限: 1000 クーポン",
+      "quantityLimit": "制限: {max} コード",
+      "quantityLimitAnnual": "制限: {max} コード (年間)",
+      "quantityLimitTemporary": "制限: {max} コード (一時的)",
+      "temporary": "一時的な制限: 100 クーポン"
+    },
+    "merchantType": {
+      "annual": "年間商人",
+      "temporary": "一時的なマーチャント"
+    },
+    "quantity": "数量",
+    "quantityPlaceholder": "クーポンの数",
+    "selectBatchType": "バッチタイプを選択",
+    "startDate": "開始日",
+    "temporary": "一時的",
+    "title": "クーポンバッチを作成",
+    "updateButton": "バッチを更新"
   },
   "detail": {
-    "title": "Batch Details",
-    "loadingBatch": "Loading batch info...",
-    "active": "Active",
-    "inactive": "Inactive",
-    "editContent": "Edit Content",
-    "totalQuantity": "Total Quantity",
-    "issuedQuantity": "Issued Quantity",
-    "utilized": "Utilized",
-    "validity": "Validity",
-    "start": "Start:",
-    "end": "End:",
-    "couponsInBatch": "Coupons in Batch",
-    "searchCode": "Search code...",
-    "code": "Code",
-    "status": "Status",
-    "issuedAt": "Issued At",
-    "redemptionDate": "Redemption Date",
-    "notRedeemed": "Not redeemed",
-    "copiedToClipboard": "Copied to clipboard",
-    "batchIdNotAvailable": "Batch ID not available",
-    "fetchingPdf": "Fetching PDF...",
-    "noPdfData": "No PDF data received",
-    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
-    "failedToDownloadPdf": "Failed to download PDF",
-    "failedToLoadCoupons": "Failed to load coupons"
+    "active": "アクティブ",
+    "batchIdNotAvailable": "バッチIDは利用できません",
+    "code": "コード",
+    "columns": {
+      "code": "コード",
+      "issuedAt": "発行日",
+      "redemptionDate": "引き換え日",
+      "status": "ステータス"
+    },
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "couponsInBatch": "バッチ内のクーポン",
+    "downloadPdf": "PDFをダウンロード",
+    "editContent": "コンテンツを編集",
+    "end": "終了:",
+    "exportPdf": "PDFをエクスポート",
+    "failedToDownloadPdf": "PDFのダウンロードに失敗しました",
+    "failedToLoadCoupons": "クーポンの読み込みに失敗しました",
+    "fetchingPdf": "PDFを取得中...",
+    "filters": {
+      "allStatus": "すべてのステータス",
+      "issued": "発行済み",
+      "redeemed": "引き換え済み"
+    },
+    "inactive": "非アクティブ",
+    "issuedAt": "発行日",
+    "issuedQuantity": "発行数量",
+    "loadingBatch": "バッチ情報を読み込み中...",
+    "noPdfData": "PDFデータが受信されませんでした",
+    "notRedeemed": "未利用",
+    "pdfDownloadedSuccessfully": "PDFが正常にダウンロードされました",
+    "redemptionDate": "引換日",
+    "searchCode": "コードを検索...",
+    "searchPlaceholder": "コードを検索...",
+    "start": "開始:",
+    "stats": {
+      "end": "終了:",
+      "issuedQuantity": "発行数量",
+      "start": "開始：",
+      "totalQuantity": "合計数量",
+      "utilized": "% 利用済み",
+      "validity": "有効性"
+    },
+    "status": "ステータス",
+    "title": "バッチの詳細",
+    "totalQuantity": "合計数量",
+    "utilized": "利用済み",
+    "validity": "有効性"
   },
   "errors": {
-    "batchNameRequired": "Batch name is required",
-    "quantityRequired": "Quantity is required",
-    "quantityMustBePositive": "Quantity must be a positive number",
-    "startDateRequired": "Start date is required",
-    "endDateRequired": "End date is required",
-    "endDateMustBeAfterStart": "End date must be after start date",
-    "failedToCreateBatch": "Failed to create coupon batch",
-    "failedToUpdateBatch": "Failed to update coupon batch"
+    "batchNameRequired": "バッチ名は必須です",
+    "endDateMustBeAfterStart": "終了日は開始日以降でなければなりません",
+    "endDateRequired": "終了日は必須です",
+    "failedToCreateBatch": "クーポンバッチの作成に失敗しました",
+    "failedToCreateCouponBatch": "クーポンバッチの作成に失敗しました。",
+    "failedToDeleteCouponBatch": "クーポンバッチの削除に失敗しました",
+    "failedToDownloadPdf": "PDFのダウンロードに失敗しました",
+    "failedToLoadCoupons": "クーポンの読み込みに失敗しました",
+    "failedToLoadCouponsBatches": "クーポンバッチの読み込みに失敗しました",
+    "failedToUpdateBatch": "クーポンバッチの更新に失敗しました",
+    "quantityMustBePositive": "数量は正の数でなければなりません",
+    "quantityRequired": "数量は必須です",
+    "startDateRequired": "開始日は必須です"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "クーポンオプション",
+      "delete": "削除",
+      "details": "詳細"
+    },
+    "allStatus": "すべてのステータス",
+    "breadcrumb": "クーポン",
+    "columnNames": {
+      "actions": "アクション",
+      "batchName": "バッチ名",
+      "batchType": "バッチタイプ",
+      "isActive": "アクティブですか",
+      "status": "ステータス",
+      "type": "タイプ",
+      "usage": "使用状況",
+      "validity": "有効期限"
+    },
+    "columns": {
+      "actions": "アクション",
+      "batchName": "バッチ名",
+      "status": "ステータス",
+      "type": "タイプ",
+      "usage": "使用状況",
+      "validity": "有効性"
+    },
+    "createBatch": "バッチを作成",
+    "deleteDialog": {
+      "cancel": "キャンセル",
+      "confirm": "削除",
+      "description": "この操作は元に戻せません。これにより、永続的に削除されます",
+      "title": "クーポンバッチを削除しますか？"
+    },
+    "exportPdf": "PDFをエクスポート",
+    "issued": "発行済み",
+    "redeemed": "引き換え済み",
+    "searchPlaceholder": "バッチを検索...",
+    "status": {
+      "active": "アクティブ",
+      "inactive": "非アクティブ"
+    },
+    "subtitle": "割引クーポンを管理する",
+    "title": "クーポンバッチ",
+    "usage": {
+      "issued": "{count} 発行済み",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "から:",
+      "to": "宛先:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "クーポンバッチが正常に作成されました！",
+    "batchDeleted": "クーポンバッチが削除されました",
+    "batchIdNotAvailable": "バッチIDが利用できません",
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "fetchingPdf": "PDFを取得中...",
+    "noPdfData": "PDFデータが受信されませんでした",
+    "pdfDownloadedSuccessfully": "PDFが正常にダウンロードされました",
+    "unableToDetermineMerchantId": "マーチャントIDを特定できません。サポートにお問い合わせください。",
+    "uploadBrandImage": "テンプレートエディタにブランド画像をアップロードしてください。"
   },
   "success": {
-    "batchCreated": "Coupon batch created successfully",
-    "batchUpdated": "Coupon batch updated successfully"
+    "batchCreated": "クーポンバッチが正常に作成されました",
+    "batchUpdated": "クーポンバッチが正常に更新されました"
+  },
+  "template": {
+    "chooseTemplate": "テンプレートを選択",
+    "editContent": "コンテンツを編集",
+    "editor": {
+      "brandImage": "ブランド画像",
+      "brandImageMandatory": "ブランド画像は必須です",
+      "cancel": "キャンセル",
+      "changeImage": "画像を変更",
+      "contentUpdatedSuccessfully": "コンテンツが正常に更新されました",
+      "description": "説明",
+      "descriptionPlaceholder": "オファーの詳細を説明してください...",
+      "done": "完了",
+      "failedToSaveContent": "コンテンツの保存に失敗しました",
+      "header": "ヘッダー",
+      "headerPlaceholder": "例：特別オファー",
+      "requiredForAllTemplates": "すべてのテンプレートに必要",
+      "title": "テンプレートコンテンツを編集",
+      "titleField": "タイトル",
+      "titlePlaceholder": "例：50%割引",
+      "updateDescription": "ブランド画像、ヘッダー、タイトル、説明を更新します。変更はライブでプレビューされます。",
+      "uploadBrandImage": "ブランド画像をアップロード"
+    },
+    "hoverToPreview": "プレビューするにはホバーするか、開くにはクリックしてください",
+    "loadingTemplates": "テンプレートを読み込んでいます…",
+    "preview": "プレビュー",
+    "previewModal": {
+      "readOnlyPreview": "読み取り専用プレビュー",
+      "title": "テンプレートプレビュー"
+    },
+    "selected": "選択済み",
+    "templateLocked": "一時プランのためテンプレートがロックされています"
   }
 }

@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Plus, Filter, AlertCircle, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axios from "@/lib/axios";
+import { useTranslations } from "next-intl";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ import {
 } from "@/components/ui/tooltip";
 
 export default function FestivalMessages() {
+  const t = useTranslations("merchantFestival");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -112,7 +114,7 @@ export default function FestivalMessages() {
         setTotal(res?.data?.meta?.total || 0);
       } catch (error) {
         console.error("Failed to fetch festival messages", error);
-        toast.error("Failed to load festival messages");
+        toast.error(t("errors.failedToLoad"));
       } finally {
         setLoading(false);
         if (initialLoading) setInitialLoading(false);
@@ -146,11 +148,11 @@ export default function FestivalMessages() {
   const handleDelete = async (festivalId) => {
     try {
       await axios.delete(`/festival-messages/${festivalId}`);
-      toast.success("Festival message deleted successfully");
+      toast.success(t("success.deleted"));
       setRefetchTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Failed to delete festival message:", error);
-      toast.error("Failed to delete festival message");
+      toast.error(t("errors.failedToDelete"));
     }
   };
 
@@ -163,8 +165,8 @@ export default function FestivalMessages() {
 
   // Memoize columns to prevent re-creation on every render
   const columns = useMemo(
-    () => getFestivalColumns(handleEdit, handleDelete),
-    [],
+    () => getFestivalColumns(handleEdit, handleDelete, t),
+    [t],
   );
 
   // Loading skeleton
@@ -198,10 +200,10 @@ export default function FestivalMessages() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Festival Messages
+            {t("title")}
           </h1>
           <p className="text-sm text-muted-foreground font-medium">
-            Schedule personalized greetings for holiday celebrations
+            {t("subtitle")}
           </p>
         </div>
 
@@ -216,16 +218,13 @@ export default function FestivalMessages() {
                     className={`bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-100 transition-all rounded-xl h-11 px-6 font-semibold ${!featureEnabled ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     <Plus className="mr-2 h-4 w-4 stroke-[3px]" />
-                    New Greeting
+                    {t("newGreeting")}
                   </Button>
                 </span>
               </TooltipTrigger>
               {!featureEnabled && (
                 <TooltipContent side="bottom" className="max-w-xs">
-                  <p>
-                    Enable &quot;Festival Campaign&quot; in Feature Switchboard
-                    to create greetings
-                  </p>
+                  <p>{t("enableTooltip")}</p>
                 </TooltipContent>
               )}
             </Tooltip>
@@ -237,8 +236,7 @@ export default function FestivalMessages() {
         <Alert className="border-amber-200 bg-amber-50 text-amber-800 rounded-xl">
           <AlertCircle className="h-4 w-4 text-amber-600" />
           <AlertDescription className="text-sm">
-            Festival messages are currently disabled. Enable the feature in the{" "}
-            <strong>Feature Switchboard</strong> above to create new greetings.
+            {t("featureDisabled")} <strong>{t("featureSwitchboard")}</strong> {t("featureDisabledSuffix")}
           </AlertDescription>
         </Alert>
       )}
@@ -247,7 +245,7 @@ export default function FestivalMessages() {
         <div className="p-4 border-b border-border/40 bg-linear-to-b from-gray-50/50 to-white flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1 max-w-md">
             <TableToolbar
-              placeholder="Search by festival name..."
+              placeholder={t("searchPlaceholder")}
               onSearchChange={(value) => {
                 setPage(0);
                 setSearch(value);
@@ -262,9 +260,9 @@ export default function FestivalMessages() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="inactive">Inactive</SelectItem>
+              <SelectItem value="all">{t("allStatus")}</SelectItem>
+              <SelectItem value="active">{t("active")}</SelectItem>
+              <SelectItem value="inactive">{t("inactive")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -281,6 +279,15 @@ export default function FestivalMessages() {
               setPageSize={setPageSize}
               loading={loading}
               className="border-none"
+              columnNameTranslations={{
+                festival_name: t("columns.festivalName"),
+                message: t("columns.message"),
+                festival_date: t("columns.festivalDate"),
+                is_recurring: t("columns.recurring"),
+                is_active: t("columns.status"),
+                coupon_batch_id: t("columns.coupon"),
+                actions: t("columns.actions"),
+              }}
             />
           </div>
         </CardContent>

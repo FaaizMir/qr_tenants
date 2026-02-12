@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import { LoadingSpinner } from "@/helper/Loader";
 import AnnualWalletView from "./parts/annual-wallet-view";
@@ -25,6 +26,7 @@ const deriveType = (wallet, sessionType) => {
 };
 
 export default function MerchantWalletContainer({ embedded = false }) {
+  const t = useTranslations("merchantWallet");
   const { data: session } = useSession();
   const user = session?.user;
   const sessionType =
@@ -51,7 +53,7 @@ export default function MerchantWalletContainer({ embedded = false }) {
     let mounted = true;
 
     if (!merchantId) {
-      setError("Unable to determine merchant wallet. Please contact support.");
+      setError(t("errors.unableToDetermineMerchant"));
       setLoading(false);
       return;
     }
@@ -187,7 +189,7 @@ export default function MerchantWalletContainer({ embedded = false }) {
       } catch (err) {
         if (!mounted) return;
         console.error("Failed to load merchant wallet:", err);
-        setError("Unable to load wallet. Please retry.");
+        setError(t("errors.unableToLoad"));
       } finally {
         if (mounted) setLoading(false);
       }
@@ -203,11 +205,11 @@ export default function MerchantWalletContainer({ embedded = false }) {
     try {
       setValidating(true);
       const res = await fetch(VALIDATE_API, { method: "POST" });
-      if (!res.ok) throw new Error("Validation failed");
+      if (!res.ok) throw new Error(t("errors.validationFailed"));
       const json = await res.json();
       return json;
     } catch (err) {
-      setError("Insufficient credits or expired. Please check your wallet.");
+      setError(t("errors.insufficientCredits"));
       return null;
     } finally {
       setValidating(false);

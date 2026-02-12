@@ -1,0 +1,22 @@
+{
+  "guidance": {
+    "tip1": "식별이 용이한 설명적인 배치 이름을 선택하세요",
+    "tip2": "캠페인에 대한 현실적인 유효 기간을 설정하세요",
+    "tip3": "브랜드에 맞는 적절한 템플릿을 선택하세요",
+    "tip4": "배치를 생성하기 전에 모든 세부 정보를 검토하세요",
+    "title": "안내"
+  },
+  "table": {
+    "columns": "열",
+    "goToFirstPage": "첫 페이지로 가기",
+    "goToLastPage": "마지막 페이지로 가기",
+    "goToNextPage": "다음 페이지로 가기",
+    "goToPreviousPage": "이전 페이지로 가기",
+    "loadingData": "데이터 로딩 중...",
+    "noResults": "결과가 없습니다.",
+    "page": "현재 페이지 {current} / 총 {total} 페이지",
+    "rowsPerPage": "페이지당 행 수",
+    "rowsSelected": "선택된 행 {selected} / 총 {total} 행.",
+    "searchPlaceholder": "검색..."
+  }
+}

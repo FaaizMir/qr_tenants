@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "المبلغ",
+  "annualWallet": "محفظة سنوية",
+  "availableBalance": {
+    "couponCredits": "رصيد القسائم",
+    "creditsExhausted": "الرصيد مستنفد",
+    "mainBalance": "الرصيد الرئيسي",
+    "paidAdCredits": "رصيد إعلانات مدفوعة",
+    "subtitle": "رصيد جاهز للاستخدام",
+    "temporaryCredits": "رصيد مؤقت",
+    "title": "الرصيد المتاح",
+    "totalRemaining": "إجمالي الرصيد المتبقي",
+    "validateBalance": "تحقق من الرصيد",
+    "validating": "جارٍ التحقق...",
+    "whatsappBiCredits": "اعتمادات واتساب BI",
+    "whatsappUiCredits": "رصيد واجهة واتساب"
   },
+  "balance": "الرصيد",
+  "batchUsage": {
+    "columns": {
+      "batch": "دفعة",
+      "lastActivity": "آخر نشاط",
+      "tier": "فئة",
+      "usedTotal": "المستخدم / الإجمالي"
+    },
+    "lastUsed": "آخر نشاط: {date}",
+    "noData": "لا يوجد استخدام للدفعة متاح بعد.",
+    "notAvailable": "غير متوفر",
+    "searchPlaceholder": "البحث عن الدفعات...",
+    "standard": "قياسي",
+    "subtitle": "تفاصيل الخصم لكل دفعة.",
+    "temporarySubtitle": "الاعتمادات المستهلكة لكل دفعة.",
+    "title": "استخدام حسب الدفعة",
+    "used": "المستخدم: {used} / {total}"
+  },
+  "breadcrumb": "محفظة",
+  "creditBreakdown": {
+    "purchased": "تم الشراء",
+    "subtitle": "تخصيص مفصل",
+    "title": "تفصيل الرصيد",
+    "usageEfficiency": "كفاءة الاستخدام",
+    "usageOverview": "نظرة عامة على الاستخدام",
+    "used": "مستخدم"
+  },
+  "credits": "الرصيد",
+  "date": "التاريخ",
+  "description": "الوصف",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "فشل في تحميل تاريخ المعاملات",
+    "failedToLoadWallet": "فشل في تحميل معلومات المحفظة",
+    "fetchFeeFailed": "فشل في جلب رسوم الاشتراك",
+    "insufficientCredits": "رصيد غير كافٍ أو منتهي الصلاحية. يرجى التحقق من محفظتك.",
+    "missingFeeInfo": "غير قادر على المتابعة. معلومات الرسوم أو الإدارة مفقودة.",
+    "noSessionUrl": "لم يتم إرجاع عنوان URL للجلسة",
+    "unableToDetermineMerchant": "غير قادر على تحديد محفظة التاجر. يرجى الاتصال بالدعم.",
+    "unableToLoad": "غير قادر على تحميل المحفظة. يرجى المحاولة مرة أخرى.",
+    "upgradeFailed": "فشل في بدء الدفع. يرجى المحاولة مرة أخرى.",
+    "validationFailed": "فشل التحقق"
+  },
+  "expiresOn": "تنتهي في",
+  "header": {
+    "annualSubtitle": "يرى التجار السنويون فئات التسويق + المرافق والتاريخ الكامل.",
+    "temporarySubtitle": "يرى التجار المؤقتون الفئة المؤقتة فقط. لا توجد معاملات للعرض.",
+    "title": "المحفظة والرصيد"
+  },
+  "loading": {
+    "fee": "جارٍ تحميل الرسوم...",
+    "wallet": "جارٍ تحميل المحفظة..."
+  },
+  "loadMore": "تحميل المزيد",
+  "noTransactions": "لم يتم العثور على معاملات",
+  "remainingCredits": "الرصيد المتبقي",
+  "subscription": {
+    "annual": "سنوي",
+    "planType": "نوع الخطة",
+    "subtitle": "حالة خطة {currency}",
+    "temporary": "مؤقت",
+    "title": "الاشتراك"
+  },
+  "summary": {
+    "creditsRemaining": "الرصيد المتبقي",
+    "creditsUsed": "الرصيد المستخدم",
+    "expiresAt": "تنتهي في",
+    "marketingUtility": "التسويق • المرافق (للقراءة فقط)",
+    "notProvided": "لم يتم توفيرها",
+    "subtitle": "طبقات الأسعار للقراءة فقط. تتطلب الإجراءات رصيدًا كافيًا.",
+    "temporaryReadOnly": "مؤقت (للقراءة فقط)",
+    "tiersVisible": "الطبقات مرئية",
+    "tierVisible": "الطبقة مرئية",
+    "title": "ملخص الاستخدام"
+  },
+  "temporaryWallet": "محفظة مؤقتة",
+  "title": "محفظة",
+  "totalCredits": "إجمالي الرصيد",
+  "transactionHistory": "تاريخ المعاملات",
+  "transactions": {
+    "columns": {
+      "amount": "المبلغ",
+      "credits": "رصيد",
+      "date": "تاريخ",
+      "description": "الوصف",
+      "status": "الحالة"
+    },
+    "creditTypes": {
+      "coupon": "قسيمة",
+      "paidAd": "إعلان مدفوع",
+      "whatsappBi": "واتساب BI",
+      "whatsappUi": "واجهة واتساب"
+    },
+    "noTransactions": "لا توجد معاملات متاحة.",
+    "searchPlaceholder": "البحث عن المعاملات...",
+    "statusUnknown": "غير معروف",
+    "subtitle": "التجار السنويون يرون التاريخ حسب الفئة.",
+    "title": "المعاملات الأخيرة"
+  },
+  "type": "النوع",
+  "upgradeButton": "ترقية الآن",
+  "upgrade": {
+    "description": "احصل على الوصول إلى تحليلات متقدمة، دعم أولوية، وتاريخ المعاملات.",
+    "loadingFee": "...",
+    "perYear": "/سنة",
+    "processing": "جارٍ المعالجة...",
+    "subtitle": "فتح الميزات الكاملة",
+    "title": "ترقية إلى سنوي",
+    "unavailable": "--",
+    "upgradeNow": "ترقية الآن"
+  },
+  "upgradeDescription": "احصل على رصيد غير محدود وميزات إضافية",
+  "upgradePrompt": "ترقية إلى سنوي",
+  "usedCredits": "الرصيد المستخدم",
+  "warnings": {
+    "day": "يوم",
+    "days": "أيام",
+    "expiringSoon": "تنتهي في {days} يوم{plural} — استخدم الخطة قبل انتهاء الصلاحية.",
+    "lowBalance": "الرصيد منخفض. قد يتم حظر الإجراءات بعد التحقق (خاصةً للتجار المؤقتين).",
+    "title": "تحذير المحفظة",
+    "unavailableForTemporary": "سجل المعاملات وطبقات التسويق/المرافق غير متاحة للتجار المؤقتين."
   }
 }

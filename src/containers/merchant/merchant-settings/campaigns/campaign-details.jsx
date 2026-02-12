@@ -38,8 +38,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import CampaignFormDialog from "./campaign-form";
+import { useTranslations } from "next-intl";
 
 export default function CampaignDetails() {
+  const t = useTranslations("merchantCampaigns");
   const params = useParams();
   const router = useRouter();
   const { data: session } = useSession();
@@ -63,7 +65,7 @@ export default function CampaignDetails() {
     } catch (error) {
       console.error("Failed to fetch campaign details:", error);
       const errorMsg =
-        error?.response?.data?.message || "Failed to load campaign details";
+        error?.response?.data?.message || t("errors.failedToLoadDetails");
       toast.error(errorMsg);
       router.push("/merchant/campaigns");
     } finally {
@@ -81,12 +83,12 @@ export default function CampaignDetails() {
     setDeleting(true);
     try {
       await axios.delete(`/scheduled-campaigns/${campaignId}`);
-      toast.success("Campaign deleted successfully");
+      toast.success(t("success.deleted"));
       router.push("/merchant/campaigns");
     } catch (error) {
       console.error("Failed to delete campaign:", error);
       const errorMsg =
-        error?.response?.data?.message || "Failed to delete campaign";
+        error?.response?.data?.message || t("errors.failedToDelete");
       toast.error(errorMsg);
       setDeleting(false);
     }
@@ -97,12 +99,12 @@ export default function CampaignDetails() {
     setCancelling(true);
     try {
       await axios.put(`/scheduled-campaigns/${campaignId}/cancel`);
-      toast.success("Campaign cancelled successfully");
+      toast.success(t("success.cancelled"));
       fetchCampaign(); // Refresh to show updated status
     } catch (error) {
       console.error("Failed to cancel campaign:", error);
       const errorMsg =
-        error?.response?.data?.message || "Failed to cancel campaign";
+        error?.response?.data?.message || t("errors.failedToCancel");
       toast.error(errorMsg);
     } finally {
       setCancelling(false);
@@ -133,27 +135,27 @@ export default function CampaignDetails() {
     const statusConfig = {
       scheduled: {
         variant: "default",
-        label: "Scheduled",
+        label: t("scheduled"),
         class: "bg-blue-100 text-blue-800",
       },
       processing: {
         variant: "secondary",
-        label: "Processing",
+        label: t("processing"),
         class: "bg-yellow-100 text-yellow-800",
       },
       completed: {
         variant: "secondary",
-        label: "Completed",
+        label: t("completed"),
         class: "bg-green-100 text-green-800",
       },
       failed: {
         variant: "destructive",
-        label: "Failed",
+        label: t("failed"),
         class: "bg-red-100 text-red-800",
       },
       cancelled: {
         variant: "outline",
-        label: "Cancelled",
+        label: t("cancelled"),
         class: "bg-gray-100 text-gray-800",
       },
     };
@@ -179,7 +181,7 @@ export default function CampaignDetails() {
   if (!campaign) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">Campaign not found</p>
+        <p className="text-muted-foreground">{t("details.notFound")}</p>
       </div>
     );
   }
@@ -195,7 +197,7 @@ export default function CampaignDetails() {
             </Button>
             <div>
               <h1 className="text-3xl font-bold">{campaign.campaign_name}</h1>
-              <p className="text-muted-foreground">Campaign Details</p>
+              <p className="text-muted-foreground">{t("details.campaignDetails")}</p>
             </div>
           </div>
 
@@ -208,20 +210,18 @@ export default function CampaignDetails() {
                     className="text-orange-600 border-orange-600 hover:bg-orange-50"
                   >
                     <CalendarClock className="mr-2 h-4 w-4" />
-                    Cancel Campaign
+                    {t("details.cancelCampaign")}
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Cancel Campaign</AlertDialogTitle>
+                    <AlertDialogTitle>{t("cancelDialog.title")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Are you sure you want to cancel &quot;
-                      {campaign.campaign_name}&quot;? The campaign will not be
-                      sent.
+                      {t("cancelDialog.description", { campaignName: campaign.campaign_name })}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>{t("cancelDialog.cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                       onClick={handleCancel}
                       disabled={cancelling}
@@ -230,7 +230,7 @@ export default function CampaignDetails() {
                       {cancelling && (
                         <Loader2 className="h-4 w-4 animate-spin mr-2" />
                       )}
-                      Cancel Campaign
+                      {t("cancelDialog.confirm")}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -240,7 +240,7 @@ export default function CampaignDetails() {
               campaign.status === "cancelled") && (
               <Button variant="outline" onClick={() => setEditDialogOpen(true)}>
                 <Edit className="mr-2 h-4 w-4" />
-                Edit
+                {t("details.edit")}
               </Button>
             )}
             {(campaign.status === "scheduled" ||
@@ -249,20 +249,18 @@ export default function CampaignDetails() {
                 <AlertDialogTrigger asChild>
                   <Button variant="destructive">
                     <Trash2 className="mr-2 h-4 w-4" />
-                    Delete
+                    {t("details.delete")}
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Delete Campaign</AlertDialogTitle>
+                    <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Are you sure you want to delete &quot;
-                      {campaign.campaign_name}&quot;? This action cannot be
-                      undone.
+                      {t("deleteDialog.description", { campaignName: campaign.campaign_name })}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>{t("deleteDialog.cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                       onClick={handleDelete}
                       disabled={deleting}
@@ -271,7 +269,7 @@ export default function CampaignDetails() {
                       {deleting && (
                         <Loader2 className="h-4 w-4 animate-spin mr-2" />
                       )}
-                      Delete
+                      {t("deleteDialog.delete")}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -287,7 +285,7 @@ export default function CampaignDetails() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Total Customers
+                    {t("details.totalCustomers")}
                   </p>
                   <p className="text-2xl font-bold">
                     {campaign.total_customers || 0}
@@ -305,7 +303,7 @@ export default function CampaignDetails() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Messages Sent
+                    {t("details.messagesSent")}
                   </p>
                   <p className="text-2xl font-bold text-green-600">
                     {campaign.messages_sent || 0}
@@ -323,7 +321,7 @@ export default function CampaignDetails() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Messages Failed
+                    {t("details.messagesFailed")}
                   </p>
                   <p className="text-2xl font-bold text-red-600">
                     {campaign.messages_failed || 0}
@@ -344,7 +342,7 @@ export default function CampaignDetails() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Campaign Information</CardTitle>
+                  <CardTitle>{t("details.campaignInformation")}</CardTitle>
                   {getStatusBadge(campaign.status)}
                 </div>
               </CardHeader>
@@ -353,7 +351,7 @@ export default function CampaignDetails() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <MessageSquare className="h-4 w-4" />
-                    <span className="font-medium">Message</span>
+                    <span className="font-medium">{t("details.message")}</span>
                   </div>
                   <div className="bg-muted/50 rounded-lg p-4">
                     <p className="text-sm whitespace-pre-wrap">
@@ -369,7 +367,7 @@ export default function CampaignDetails() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CalendarClock className="h-4 w-4" />
-                      <span className="font-medium">Scheduled For</span>
+                      <span className="font-medium">{t("details.scheduledFor")}</span>
                     </div>
                     <p className="text-sm font-medium">
                       {formatDate(campaign.scheduled_date)}
@@ -379,11 +377,11 @@ export default function CampaignDetails() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Users className="h-4 w-4" />
-                      <span className="font-medium">Target Audience</span>
+                      <span className="font-medium">{t("details.targetAudience")}</span>
                     </div>
                     <p className="text-sm font-medium capitalize">
                       {campaign.target_audience?.replace(/_/g, " ") ||
-                        "All Users"}
+                        t("details.allUsers")}
                     </p>
                   </div>
                 </div>
@@ -396,14 +394,14 @@ export default function CampaignDetails() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Ticket className="h-5 w-5 text-orange-600" />
-                    Attached Coupon Batch
+                    {t("details.attachedCouponBatch")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Batch Name
+                        {t("details.batchName")}
                       </p>
                       <p className="text-sm font-semibold">
                         {campaign.coupon_batch.batch_name}
@@ -411,7 +409,7 @@ export default function CampaignDetails() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Batch Type
+                        {t("details.batchType")}
                       </p>
                       <p className="text-sm font-medium capitalize">
                         {campaign.coupon_batch.batch_type}
@@ -424,14 +422,14 @@ export default function CampaignDetails() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Total Coupons
+                        {t("details.totalCoupons")}
                       </p>
                       <p className="text-sm font-medium">
                         {campaign.coupon_batch.total_quantity}
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Issued</p>
+                      <p className="text-xs text-muted-foreground">{t("details.issued")}</p>
                       <p className="text-sm font-medium">
                         {campaign.coupon_batch.issued_quantity}
                       </p>
@@ -443,7 +441,7 @@ export default function CampaignDetails() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Valid From
+                        {t("details.validFrom")}
                       </p>
                       <p className="text-sm font-medium">
                         {new Date(
@@ -453,7 +451,7 @@ export default function CampaignDetails() {
                     </div>
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Valid Until
+                        {t("details.validUntil")}
                       </p>
                       <p className="text-sm font-medium">
                         {new Date(
@@ -471,23 +469,23 @@ export default function CampaignDetails() {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Campaign Metadata</CardTitle>
+                <CardTitle className="text-sm">{t("details.campaignMetadata")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Campaign ID</span>
+                  <span className="text-muted-foreground">{t("details.campaignId")}</span>
                   <span className="font-mono">#{campaign.id}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Created</span>
+                  <span className="text-muted-foreground">{t("details.created")}</span>
                   <span>
                     {new Date(campaign.created_at).toLocaleDateString()}
                   </span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Last Updated</span>
+                  <span className="text-muted-foreground">{t("details.lastUpdated")}</span>
                   <span>
                     {new Date(campaign.updated_at).toLocaleDateString()}
                   </span>
@@ -496,7 +494,7 @@ export default function CampaignDetails() {
                   <>
                     <Separator />
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Started At</span>
+                      <span className="text-muted-foreground">{t("details.startedAt")}</span>
                       <span>
                         {new Date(campaign.started_at).toLocaleString()}
                       </span>
@@ -508,7 +506,7 @@ export default function CampaignDetails() {
                     <Separator />
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">
-                        Completed At
+                        {t("details.completedAt")}
                       </span>
                       <span>
                         {new Date(campaign.completed_at).toLocaleString()}

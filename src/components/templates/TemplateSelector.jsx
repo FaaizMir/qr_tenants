@@ -7,6 +7,7 @@ import { TemplateEditorModal } from "./TemplateEditorModal";
 import { TemplatePreviewModal } from "./TemplatePreviewModal";
 import { TemplateSafelist } from "./TemplateSafelist";
 import axiosInstance from "@/lib/axios";
+import { useTranslations } from "next-intl";
 
 const defaultContent = {
   header: "",
@@ -16,6 +17,7 @@ const defaultContent = {
 };
 
 export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
+  const t = useTranslations("merchantCoupons.template");
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(null);
@@ -87,7 +89,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
   };
 
   if (loading) {
-    return <p className="text-sm text-muted-foreground">Loading templates…</p>;
+    return <p className="text-sm text-muted-foreground">{t("loadingTemplates")}</p>;
   }
 
   return (
@@ -97,11 +99,11 @@ export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
         <div>
           <p className="text-sm font-semibold">
             {isAnnual
-              ? "Choose a template"
-              : "Template locked for temporary plan"}
+              ? t("chooseTemplate")
+              : t("templateLocked")}
           </p>
           <p className="text-xs text-muted-foreground">
-            Hover to preview or click to open
+            {t("hoverToPreview")}
           </p>
         </div>
 
@@ -113,7 +115,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
             onClick={() => setEditorOpen(true)}
             disabled={!selectedTemplate}
           >
-            Edit Content
+            {t("editContent")}
           </Button>
 
           <Button
@@ -123,7 +125,7 @@ export function TemplateSelector({ isAnnual, onChange, cardRef, batchId }) {
             onClick={() => setPreviewOpen(true)}
             disabled={!selectedTemplate}
           >
-            Preview
+            {t("preview")}
           </Button>
         </div>
       </div>

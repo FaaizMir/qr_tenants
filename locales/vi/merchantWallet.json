@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "Số tiền",
+  "annualWallet": "Ví hàng năm",
+  "availableBalance": {
+    "couponCredits": "Tín dụng phiếu giảm giá",
+    "creditsExhausted": "Tín dụng đã hết",
+    "mainBalance": "Số dư chính",
+    "paidAdCredits": "Tín dụng quảng cáo đã trả",
+    "subtitle": "Tín dụng sẵn sàng sử dụng",
+    "temporaryCredits": "Tín dụng tạm thời",
+    "title": "Số dư khả dụng",
+    "totalRemaining": "Tổng số tín dụng còn lại",
+    "validateBalance": "Xác thực số dư",
+    "validating": "Đang xác thực...",
+    "whatsappBiCredits": "Tín dụng Whatsapp BI",
+    "whatsappUiCredits": "Tín dụng UI Whatsapp"
   },
+  "balance": "Cân bằng",
+  "batchUsage": {
+    "columns": {
+      "batch": "Lô",
+      "lastActivity": "Hoạt động cuối",
+      "tier": "Cấp độ",
+      "usedTotal": "Đã sử dụng / Tổng cộng"
+    },
+    "lastUsed": "Hoạt động cuối: {date}",
+    "noData": "Chưa có sử dụng lô nào khả dụng.",
+    "notAvailable": "Không có",
+    "searchPlaceholder": "Tìm kiếm các lô...",
+    "standard": "Tiêu chuẩn",
+    "subtitle": "Chi tiết khấu trừ theo lô.",
+    "temporarySubtitle": "Tín dụng tiêu thụ mỗi lô.",
+    "title": "Sử dụng theo lô",
+    "used": "Đã sử dụng: {used} / {total}"
+  },
+  "breadcrumb": "Ví",
+  "creditBreakdown": {
+    "purchased": "Đã mua",
+    "subtitle": "Phân bổ chi tiết",
+    "title": "Phân tích tín dụng",
+    "usageEfficiency": "Hiệu suất sử dụng",
+    "usageOverview": "Tổng quan sử dụng",
+    "used": "Đã sử dụng"
+  },
+  "credits": "Tín dụng",
+  "date": "Ngày",
+  "description": "Mô tả",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "Không thể tải lịch sử giao dịch",
+    "failedToLoadWallet": "Không thể tải thông tin ví",
+    "fetchFeeFailed": "Không thể lấy phí đăng ký",
+    "insufficientCredits": "Tín dụng không đủ hoặc đã hết hạn. Vui lòng kiểm tra ví của bạn.",
+    "missingFeeInfo": "Không thể tiếp tục. Thiếu thông tin phí hoặc quản trị.",
+    "noSessionUrl": "Không có URL phiên nào được trả về",
+    "unableToDetermineMerchant": "Không thể xác định ví của thương nhân. Vui lòng liên hệ với bộ phận hỗ trợ.",
+    "unableToLoad": "Không thể tải ví. Vui lòng thử lại.",
+    "upgradeFailed": "Khởi tạo thanh toán không thành công. Vui lòng thử lại.",
+    "validationFailed": "Xác thực không thành công"
+  },
+  "expiresOn": "Hết hạn vào",
+  "header": {
+    "annualSubtitle": "Các thương nhân hàng năm thấy các cấp độ Marketing + Utility và toàn bộ lịch sử.",
+    "temporarySubtitle": "Các thương nhân tạm thời chỉ thấy cấp độ tạm thời. Không có giao dịch nào được xem.",
+    "title": "Ví & Tín dụng"
+  },
+  "loading": {
+    "fee": "Đang tải phí...",
+    "wallet": "Đang tải ví..."
+  },
+  "loadMore": "Tải thêm",
+  "noTransactions": "Không tìm thấy giao dịch nào",
+  "remainingCredits": "Tín dụng còn lại",
+  "subscription": {
+    "annual": "Hàng năm",
+    "planType": "Loại kế hoạch",
+    "subtitle": "Trạng thái kế hoạch {currency}",
+    "temporary": "Tạm thời",
+    "title": "Đăng ký"
+  },
+  "summary": {
+    "creditsRemaining": "Số dư tín dụng còn lại",
+    "creditsUsed": "Tín dụng đã sử dụng",
+    "expiresAt": "Hết hạn vào",
+    "marketingUtility": "Tiếp thị • Tiện ích (chỉ đọc)",
+    "notProvided": "Không cung cấp",
+    "subtitle": "Các cấp độ giá chỉ đọc. Hành động yêu cầu số dư đủ.",
+    "temporaryReadOnly": "Tạm thời (chỉ đọc)",
+    "tiersVisible": "Các cấp độ hiển thị",
+    "tierVisible": "Cấp độ hiển thị",
+    "title": "Tóm tắt sử dụng"
+  },
+  "temporaryWallet": "Ví tạm thời",
+  "title": "Ví",
+  "totalCredits": "Tổng tín dụng",
+  "transactionHistory": "Lịch sử giao dịch",
+  "transactions": {
+    "columns": {
+      "amount": "Số tiền",
+      "credits": "Tín dụng",
+      "date": "Ngày",
+      "description": "Mô tả",
+      "status": "Trạng thái"
+    },
+    "creditTypes": {
+      "coupon": "Phiếu giảm giá",
+      "paidAd": "Quảng cáo đã trả",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "Giao diện Whatsapp"
+    },
+    "noTransactions": "Không có giao dịch nào khả dụng.",
+    "searchPlaceholder": "Tìm kiếm giao dịch...",
+    "statusUnknown": "không xác định",
+    "subtitle": "Các thương nhân hàng năm xem lịch sử theo cấp độ.",
+    "title": "Giao dịch gần đây"
+  },
+  "type": "Loại",
+  "upgradeButton": "Nâng cấp ngay",
+  "upgrade": {
+    "description": "Truy cập vào phân tích nâng cao, hỗ trợ ưu tiên và lịch sử giao dịch.",
+    "loadingFee": "...",
+    "perYear": "/năm",
+    "processing": "Đang xử lý...",
+    "subtitle": "Mở khóa đầy đủ tính năng",
+    "title": "Nâng cấp lên hàng năm",
+    "unavailable": "--",
+    "upgradeNow": "Nâng cấp ngay"
+  },
+  "upgradeDescription": "Nhận tín dụng không giới hạn và nhiều tính năng hơn",
+  "upgradePrompt": "Nâng cấp lên hàng năm",
+  "usedCredits": "Tín dụng đã sử dụng",
+  "warnings": {
+    "day": "ngày",
+    "days": "ngày",
+    "expiringSoon": "Hết hạn trong {days} ngày — hãy lên kế hoạch sử dụng trước khi hết hạn.",
+    "lowBalance": "Tín dụng đang thấp. Các hành động có thể bị chặn sau khi xác thực (đặc biệt đối với các thương nhân tạm thời).",
+    "title": "Cảnh báo ví",
+    "unavailableForTemporary": "Lịch sử giao dịch và các cấp độ Tiếp thị/Tiện ích không khả dụng cho các thương nhân tạm thời."
   }
 }
