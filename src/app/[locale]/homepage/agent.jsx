@@ -21,7 +21,7 @@ import {
   TrendingUp,
   Globe,
   Shield,
-  ChevronLeft
+  ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,9 +48,8 @@ import { CouponForm } from "./components/CouponForm";
 import { cn } from "@/lib/utils";
 
 export default function AgentLandingPage() {
-  const tHeroSection = useTranslations("Homepage.heroSection");
-  const tFeatures = useTranslations("Homepage.fetaures");
-  const tFooter = useTranslations("Homepage.footer");
+  const t = useTranslations("homepage.agent");
+  const tCommon = useTranslations("homepage.common");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -88,18 +87,18 @@ export default function AgentLandingPage() {
             setAgent(parsedAgent);
           } else {
             // Data expired, clear localStorage
-            console.warn("Agent data expired, clearing localStorage...");
+            console.warn(t("errors.agentDataExpired"));
             localStorage.removeItem("selectedAgent");
           }
         } else {
           // Invalid agent data, clear localStorage
-          console.warn("Invalid agent data in localStorage, clearing...");
+          console.warn(t("errors.invalidAgentData"));
           localStorage.removeItem("selectedAgent");
         }
       }
     } catch (error) {
       // Handle JSON parse errors or other exceptions
-      console.error("Error loading agent from localStorage:", error);
+      console.error(t("errors.errorLoadingAgent"), error);
       localStorage.removeItem("selectedAgent");
     }
 
@@ -108,7 +107,7 @@ export default function AgentLandingPage() {
       // Optional: Uncomment if you want to clear on unmount
       // localStorage.removeItem("selectedAgent");
     };
-  }, []);
+  }, [t]);
 
   // Handle browser back button and page visibility
   useEffect(() => {
@@ -205,21 +204,25 @@ export default function AgentLandingPage() {
           image: item.paid_ad_image,
           placement:
             item.paid_ad_placement || item.settings?.paid_ad_placement || "top",
-          title: item.business_name || "Sponsored Deal",
-          description: `Visit ${item.business_name} in ${item.city}, ${item.country}.`,
+          title: item.business_name || t("ads.sponsoredDeal"),
+          description: t("ads.visitBusiness", { 
+            businessName: item.business_name, 
+            city: item.city, 
+            country: item.country 
+          }),
           redirectUrl: `/customer/review?mid=${item.id}`,
-          cta: "VIEW OFFER",
+          cta: t("ads.viewOffer"),
           tagline: item.city
-            ? `EXCLUSIVE IN ${item.city.toUpperCase()}`
-            : "LIMITED TIME",
+            ? t("ads.exclusiveIn", { city: item.city.toUpperCase() })
+            : t("ads.limitedTime"),
           city: item.city,
           businessType: item.business_type,
         }));
       setPaidAds(transformedAds);
     } catch (err) {
-      console.warn("Failed to load paid ads", err);
+      console.warn(t("errors.failedToLoadPaidAds"), err);
     }
-  }, [agentId]);
+  }, [agentId, t]);
 
   // Fetch Merchants with Pagination
   const fetchMerchants = useCallback(
@@ -253,9 +256,9 @@ export default function AgentLandingPage() {
           .slice(0, 6) // Ensure max 6 merchants per page
           .map((item) => ({
             id: item.id,
-            name: item.business_name || "Unknown",
-            category: item.business_type || "General",
-            city: item.city || "Unknown",
+            name: item.business_name || t("fallback.unknown"),
+            category: item.business_type || t("fallback.general"),
+            city: item.city || t("fallback.unknown"),
             country: item.country || "",
             address: item.address || "",
             logo: null,
@@ -302,18 +305,19 @@ export default function AgentLandingPage() {
         // Update pagination state
         setHasMore(normalizedMerchants.length === 6);
         setTotalMerchants(
-          response.data?.pagination?.total || (pageNum === 1 ? normalizedMerchants.length : totalMerchants)
+          response.data?.pagination?.total ||
+            (pageNum === 1 ? normalizedMerchants.length : totalMerchants),
         );
         setPage(pageNum);
       } catch (err) {
-        console.error("Failed to fetch merchants:", err);
-        setError("Unable to load merchants. Please try again.");
+        console.error(t("errors.failedToFetchMerchants"), err);
+        setError(t("errors.unableToLoadMerchants"));
       } finally {
         setLoading(false);
         setLoadingMore(false);
       }
     },
-    [agentId, searchQuery, selectedCategory, selectedRegion, totalMerchants],
+    [agentId, searchQuery, selectedCategory, selectedRegion, t, totalMerchants],
   );
 
   // Fetch Main Data
@@ -335,22 +339,15 @@ export default function AgentLandingPage() {
         // 3. Fetch Ads
         await fetchPaidAds();
       } catch (err) {
-        console.error("Failed to load data:", err);
-        setError("Unable to load page. Please try again.");
+        console.error(t("errors.failedToLoadData"), err);
+        setError(t("errors.unableToLoadPage"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [
-    agentId,
-    searchQuery,
-    selectedCategory,
-    selectedRegion,
-    fetchPaidAds,
-    fetchMerchants,
-  ]);
+  }, [agentId, searchQuery, selectedCategory, selectedRegion, fetchPaidAds, fetchMerchants, t]);
 
   const activeMerchant = useMemo(
     () => merchants.find((m) => m.id === selectedMerchantId) || null,
@@ -373,8 +370,6 @@ export default function AgentLandingPage() {
     setSelectedCouponData({ merchant, batch });
     setCouponDialogOpen(true);
   };
-
-
 
   const handleNavigateHome = () => {
     // Clear agent data from localStorage when navigating away
@@ -400,7 +395,7 @@ export default function AgentLandingPage() {
               <QrCode className="w-5 h-5" />
             </div>
             <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-primary transition-colors">
-              QR Rev
+              {tCommon("brandName")}
             </span>
           </div>
 
@@ -409,16 +404,14 @@ export default function AgentLandingPage() {
               href="#marketplace"
               className="text-slate-500 hover:text-primary transition-colors"
             >
-              Marketplace
+              {t("navigation.marketplace")}
             </Link>
             <Link
               href="#features"
               className="text-slate-500 hover:text-primary transition-colors"
             >
-              Features
+              {t("navigation.features")}
             </Link>
-
-
           </nav>
 
           <div className="flex items-center gap-3">
@@ -428,7 +421,7 @@ export default function AgentLandingPage() {
               className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
               onClick={handleNavigateLogin}
             >
-              Sign In
+              {t("navigation.signIn")}
             </Button>
             {/* Mobile Menu Trigger */}
             <Sheet>
@@ -444,13 +437,13 @@ export default function AgentLandingPage() {
               </SheetTrigger>
               <SheetContent>
                 <SheetTitle className="text-xl font-bold text-slate-900 mb-4">
-                  Menu
+                  {t("navigation.menu")}
                 </SheetTitle>
                 <div className="flex flex-col gap-4 mt-8">
                   {agent?.name && (
                     <div className="mb-4 pb-4 border-b border-slate-200">
                       <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider">
-                        Partner
+                        {t("navigation.partner")}
                       </p>
                       <p className="text-lg font-bold text-slate-900">
                         {agent.name}
@@ -467,13 +460,13 @@ export default function AgentLandingPage() {
                     onClick={handleNavigateHome}
                     className="text-lg font-bold cursor-pointer hover:text-primary transition-colors"
                   >
-                    Home
+                    {t("navigation.home")}
                   </div>
                   <Link href="#marketplace" className="text-lg font-bold">
-                    Marketplace
+                    {t("navigation.marketplace")}
                   </Link>
                   <Button onClick={handleNavigateLogin} className="w-full">
-                    Sign In
+                    {t("navigation.signIn")}
                   </Button>
                 </div>
               </SheetContent>
@@ -509,20 +502,20 @@ export default function AgentLandingPage() {
               className="border-white/20 bg-white/5 text-white backdrop-blur-sm px-4 py-1.5 uppercase tracking-widest text-xs font-bold shadow-xl"
             >
               {agent?.name
-                ? `${agent.name}'s Partner Network`
-                : "Official Partner Network"}
+                ? t("hero.partnerNetwork", { agentName: agent.name })
+                : t("hero.officialPartnerNetwork")}
             </Badge>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-2xl">
-              <span className="text-white">Exclusive Deals</span>
+              <span className="text-white">{t("hero.exclusiveDeals")}</span>
               <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-amber-400 to-amber-600">
-                Curated For You
+                {t("hero.curatedForYou")}
               </span>
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
               {agent?.name
-                ? `Discover verified merchants handpicked by ${agent.name}. Unlock instant coupons and save on premium services.`
-                : "Browse verified merchants, unlock instant coupons, and save on premium services in your area."}
+                ? t("hero.descriptionWithAgent", { agentName: agent.name })
+                : t("hero.descriptionDefault")}
             </p>
 
             {/* Stats Row */}
@@ -531,12 +524,12 @@ export default function AgentLandingPage() {
                 <Store className="text-amber-400 w-5 h-5" />
                 <div className="text-left">
                   <div className="text-xs text-slate-900 uppercase font-bold tracking-wider">
-                    Merchants
+                    {t("stats.merchants")}
                   </div>
                   <div className="font-bold text-lg">
                     {merchants.length > 0
                       ? `${merchants.length}+`
-                      : "Loading..."}
+                      : t("stats.loading")}
                   </div>
                 </div>
               </div>
@@ -544,7 +537,7 @@ export default function AgentLandingPage() {
                 <Shield className="text-emerald-400 w-5 h-5" />
                 <div className="text-left">
                   <div className="text-xs text-slate-900 uppercase font-bold tracking-wider">
-                    Verified
+                    {t("stats.verified")}
                   </div>
                   <div className="font-bold text-lg">100%</div>
                 </div>
@@ -593,7 +586,7 @@ export default function AgentLandingPage() {
                   <div className="flex items-center gap-2 mb-2 opacity-50 px-2">
                     <span className="h-px flex-1 bg-slate-300"></span>
                     <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
-                      Partner
+                      {t("ads.partner")}
                     </span>
                     <span className="h-px flex-1 bg-slate-300"></span>
                   </div>
@@ -654,7 +647,7 @@ export default function AgentLandingPage() {
                     <div className="flex items-center gap-2 mb-4 opacity-50 px-2">
                       <span className="h-px flex-1 bg-slate-300"></span>
                       <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
-                        Sponsored
+                        {t("ads.sponsored")}
                       </span>
                       <span className="h-px flex-1 bg-slate-300"></span>
                     </div>
@@ -675,7 +668,7 @@ export default function AgentLandingPage() {
                 side="bottom"
                 className="h-[85vh] p-0 rounded-t-3xl border-0"
               >
-                <SheetTitle className="sr-only">Merchant Details</SheetTitle>
+                <SheetTitle className="sr-only">{t("merchantDetail.merchantDetails")}</SheetTitle>
                 <div className="overflow-y-auto h-full">
                   <MerchantDetail
                     activeMerchant={activeMerchant}
@@ -698,13 +691,13 @@ export default function AgentLandingPage() {
                 variant="outline"
                 className="mb-4 text-slate-400 border-slate-200"
               >
-                Why Choose Us
+                {t("features.badge")}
               </Badge>
               <h2 className="text-3xl font-black tracking-tight sm:text-4xl mb-4 text-slate-900">
-                {tFeatures("h1")}
+                {t("features.title")}
               </h2>
               <p className="text-slate-500 text-lg">
-                {tFeatures("description")}
+                {t("features.description")}
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
@@ -713,22 +706,22 @@ export default function AgentLandingPage() {
                   icon: Smartphone,
                   color: "text-blue-600",
                   bg: "bg-blue-50",
-                  h: tFeatures("card1Heading"),
-                  d: tFeatures("card1Description"),
+                  h: t("features.instantFeedback.title"),
+                  d: t("features.instantFeedback.description"),
                 },
                 {
                   icon: TrendingUp,
                   color: "text-orange-600",
                   bg: "bg-orange-50",
-                  h: tFeatures("card2Heading"),
-                  d: tFeatures("card2Description"),
+                  h: t("features.smartCoupons.title"),
+                  d: t("features.smartCoupons.description"),
                 },
                 {
                   icon: Globe,
                   color: "text-green-600",
                   bg: "bg-green-50",
-                  h: tFeatures("card3Heading"),
-                  d: tFeatures("card3Description"),
+                  h: t("features.globalReach.title"),
+                  d: t("features.globalReach.description"),
                 },
               ].map((fet, i) => (
                 <div
@@ -767,28 +760,28 @@ export default function AgentLandingPage() {
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-white text-lg tracking-tight">
-                QR Rev
+                {tCommon("brandName")}
               </span>
               <span className="text-xs text-slate-500">
-                Global Merchant Network
+                {t("footer.globalMerchantNetwork")}
               </span>
             </div>
           </div>
 
           <div className="flex gap-8 text-sm font-bold">
             <Link href="#" className="hover:text-white transition">
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </Link>
             <Link href="#" className="hover:text-white transition">
-              Terms of Service
+              {t("footer.termsOfService")}
             </Link>
             <Link href="#" className="hover:text-white transition">
-              Agent Login
+              {t("footer.agentLogin")}
             </Link>
           </div>
 
           <div className="text-xs text-slate-600 font-medium">
-            &copy; {new Date().getFullYear()} QR Rev. All rights reserved.
+            {t("footer.copyright", { year: new Date().getFullYear() })}
           </div>
         </div>
       </footer>

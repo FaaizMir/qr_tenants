@@ -9,7 +9,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { useRouter, Link } from "@/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 import { signIn, getSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 
@@ -19,16 +19,16 @@ import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 
 export default function LoginPage({ params }) {
-  const { locale } = use(params);
+  use(params);
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const tSignin = useTranslations("signin");
-  const tPlaceholders = useTranslations("placeholders.signin");
-  const tValidation = useTranslations("validations.signin");
+  const t = useTranslations("signin");
+  const tPlaceholder = useTranslations("signin.placeholders");
+  const tValidation = useTranslations("signin.validations");
 
   const isDisabled = useMemo(
     () => loading || !username.trim() || !password.trim(),
@@ -36,9 +36,9 @@ export default function LoginPage({ params }) {
   );
 
   const highlights = [
-    { icon: QrCode, label: tSignin("label1") },
-    { icon: MessageSquare, label: tSignin("label2") },
-    { icon: ShieldCheck, label: tSignin("label3") },
+    { icon: QrCode, label: t("label1") },
+    { icon: MessageSquare, label: t("label2") },
+    { icon: ShieldCheck, label: t("label3") },
   ];
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -106,10 +106,9 @@ export default function LoginPage({ params }) {
         let errorMessage = result.error;
 
         if (result.error === "CredentialsSignin") {
-          errorMessage =
-            "Invalid email or password. Please check your credentials.";
+          errorMessage = tValidation("credentialsSignin");
         } else if (result.error.toLowerCase().includes("inactive")) {
-          errorMessage = "Your account is inactive. Please contact your agent.";
+          errorMessage = tValidation("accountInactive");
         }
 
         setError(errorMessage);
@@ -135,10 +134,10 @@ export default function LoginPage({ params }) {
           router.push("/login"); // Fallback
         }
       } else {
-        setError("Unable to determine user role");
+        setError(tValidation("unableToDetermineRole"));
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError(tValidation("error2"));
     } finally {
       setLoading(false);
     }
@@ -153,13 +152,13 @@ export default function LoginPage({ params }) {
         <div className="flex-1 space-y-6 text-left">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
             <Sparkles className="h-4 w-4" />
-            {tSignin("qrReview")}
+            {t("qrReview")}
           </div>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
-            {tSignin("heading1")}
+            {t("heading1")}
           </h1>
           <p className="max-w-xl text-base text-muted-foreground">
-            {tSignin("description")}
+            {t("description")}
           </p>
           <div className="grid gap-3 sm:grid-cols-3">
             {highlights.map(({ icon: Icon, label }) => (
@@ -183,24 +182,24 @@ export default function LoginPage({ params }) {
           <div className="relative rounded-2xl border border-border bg-card/90 p-8 shadow-2xl shadow-primary/10 backdrop-blur">
             <div className="mb-6 space-y-2 text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                {tSignin("welcome")}
+                {t("welcome")}
               </p>
               <h2 className="text-2xl font-bold text-foreground">
-                {tSignin("signin")}
+                {t("signin")}
               </h2>
               <p className="text-sm text-muted-foreground">
-                {tSignin("description2")}{" "}
+                {t("description2")}{" "}
               </p>
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  {tSignin("label4")}
+                  {t("label4")}
                 </label>
                 <Input
                   type="text"
-                  placeholder={tPlaceholders("username")}
+                  placeholder={tPlaceholder("username")}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
@@ -210,12 +209,12 @@ export default function LoginPage({ params }) {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  {tSignin("label5")}
+                  {t("label5")}
                 </label>
                 <div className="relative">
                   <Input
                     type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    placeholder={tPlaceholder("password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -244,8 +243,8 @@ export default function LoginPage({ params }) {
 
               <Button type="submit" className="w-full" disabled={isDisabled}>
                 {loading
-                  ? tPlaceholders("loadingText")
-                  : tPlaceholders("submitLoading")}
+                  ? tPlaceholder("loadingText")
+                  : tPlaceholder("submitLoading")}
               </Button>
             </form>
           </div>

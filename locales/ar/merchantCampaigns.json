@@ -1,0 +1,57 @@
+{
+  "title": "Campaign Manager",
+  "subtitle": "Create and manage your scheduled campaigns",
+  "newCampaign": "New Campaign",
+  "searchPlaceholder": "Search campaigns...",
+  "allStatus": "All Status",
+  "scheduled": "Scheduled",
+  "processing": "Processing",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "failed": "Failed",
+  "featureDisabled": "Scheduled campaigns are currently disabled. Enable the feature in the",
+  "featureSwitchboard": "Feature Switchboard",
+  "featureDisabledSuffix": "above to create new campaigns.",
+  "enableTooltip": "Enable \"Scheduled Campaign\" in Feature Switchboard to create campaigns",
+  "form": {
+    "createTitle": "Create New Campaign",
+    "editTitle": "Edit Campaign",
+    "createDescription": "Fill in the details to schedule a new campaign",
+    "editDescription": "Update your campaign details below",
+    "campaignName": "Campaign Name",
+    "campaignNamePlaceholder": "Ex: Halloween Sale, Summer Promo",
+    "launchDateTime": "Launch Date & Time",
+    "targetAudience": "Target Audience",
+    "allUsers": "All Users",
+    "activeUsers": "Active Users",
+    "inactiveUsers": "Inactive Users",
+    "firstTimeUsers": "First-time Users",
+    "returningUsers": "Returning Users",
+    "campaignMessage": "Campaign Message",
+    "campaignMessagePlaceholder": "Hi {name}, we have a special offer just for you...",
+    "personalizationHint": "Use {name} to personalize the message",
+    "attachCoupon": "Attach Coupon to Campaign",
+    "selectCouponBatch": "Select Coupon Batch",
+    "chooseCouponBatch": "Choose a coupon batch...",
+    "required": "*",
+    "cancel": "Cancel",
+    "createButton": "Create Campaign",
+    "updateButton": "Update Campaign",
+    "saving": "Saving..."
+  },
+  "validation": {
+    "allFieldsRequired": "All fields are required",
+    "selectCouponBatch": "Please select a coupon batch"
+  },
+  "success": {
+    "created": "Campaign created successfully",
+    "updated": "Campaign updated successfully",
+    "deleted": "Campaign deleted successfully"
+  },
+  "errors": {
+    "failedToLoad": "Failed to load campaigns",
+    "failedToCreate": "Failed to create campaign",
+    "failedToUpdate": "Failed to update campaign",
+    "failedToDelete": "Failed to delete campaign"
+  }
+}

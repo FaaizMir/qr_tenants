@@ -1,0 +1,70 @@
+{
+  "listing": {
+    "title": "Create Coupon Batch",
+    "breadcrumb": "Coupons",
+    "searchPlaceholder": "Search code...",
+    "allStatus": "All Status",
+    "issued": "Issued",
+    "redeemed": "Redeemed",
+    "exportPdf": "Export PDF"
+  },
+  "create": {
+    "title": "Batch Details",
+    "guidance": "Guidance",
+    "batchName": "Batch Name",
+    "batchNamePlaceholder": "e.g., Summer Sale 2024",
+    "batchType": "Batch Type",
+    "selectBatchType": "Select batch type",
+    "annual": "Annual",
+    "temporary": "Temporary",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "Number of coupons",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "isActive": "Active",
+    "createButton": "Create Batch",
+    "updateButton": "Update Batch",
+    "cancelButton": "Cancel"
+  },
+  "detail": {
+    "title": "Batch Details",
+    "loadingBatch": "Loading batch info...",
+    "active": "Active",
+    "inactive": "Inactive",
+    "editContent": "Edit Content",
+    "totalQuantity": "Total Quantity",
+    "issuedQuantity": "Issued Quantity",
+    "utilized": "Utilized",
+    "validity": "Validity",
+    "start": "Start:",
+    "end": "End:",
+    "couponsInBatch": "Coupons in Batch",
+    "searchCode": "Search code...",
+    "code": "Code",
+    "status": "Status",
+    "issuedAt": "Issued At",
+    "redemptionDate": "Redemption Date",
+    "notRedeemed": "Not redeemed",
+    "copiedToClipboard": "Copied to clipboard",
+    "batchIdNotAvailable": "Batch ID not available",
+    "fetchingPdf": "Fetching PDF...",
+    "noPdfData": "No PDF data received",
+    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
+    "failedToDownloadPdf": "Failed to download PDF",
+    "failedToLoadCoupons": "Failed to load coupons"
+  },
+  "errors": {
+    "batchNameRequired": "Batch name is required",
+    "quantityRequired": "Quantity is required",
+    "quantityMustBePositive": "Quantity must be a positive number",
+    "startDateRequired": "Start date is required",
+    "endDateRequired": "End date is required",
+    "endDateMustBeAfterStart": "End date must be after start date",
+    "failedToCreateBatch": "Failed to create coupon batch",
+    "failedToUpdateBatch": "Failed to update coupon batch"
+  },
+  "success": {
+    "batchCreated": "Coupon batch created successfully",
+    "batchUpdated": "Coupon batch updated successfully"
+  }
+}

@@ -1,22 +1,53 @@
 {
-  "allMerchants": "すべての加盟店",
-  "addMerchant": "加盟店を追加",
-  "merchantReports": "加盟店レポート",
-  "allSubscriptions": "すべてのサブスクリプション",
-  "activePlans": "アクティブなプラン",
-  "paymentHistory": "支払い履歴",
-  "allAgents": "すべての代理店",
-  "agentPoints": "代理店ポイント",
-  "agentReports": "代理店レポート",
-  "allFeedbacks": "すべてのフィードバック",
-  "pendingReview": "レビュー待ち",
-  "feedbackAnalytics": "フィードバック分析",
-  "allCoupons": "すべてのクーポン",
-  "redeemedCoupons": "交換済みクーポン",
-  "couponAnalytics": "クーポン分析",
-  "revenueAnalytics": "収益分析",
-  "userAnalytics": "ユーザー分析",
-  "generalSettings": "一般設定",
-  "paymentSettings": "支払い設定",
-  "systemSettings": "システム設定"
+  "agent": {
+    "approvals": "承認",
+    "couponsync": "クーポン同期",
+    "dashboard": "ダッシュボード",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "エージェント管理者",
+    "earnings": "収益",
+    "logs": "ログ",
+    "merchants": "マーチャント",
+    "statements": "ステートメント",
+    "support": "サポート",
+    "wallet": "ウォレット"
+  },
+  "brand": {
+    "name": "QRスキャナー"
+  },
+  "common": {
+    "account": "アカウント",
+    "home": "ホーム",
+    "logout": "ログアウト",
+    "platform": "プラットフォーム",
+    "toggleSidebar": "サイドバーを切り替える"
+  },
+  "masterAdmin": {
+    "agents": "エージェント",
+    "approvals": "承認",
+    "commission": "コミッション",
+    "dashboard": "ダッシュボード",
+    "logs": "ログ",
+    "merchants": "マーチャント",
+    "packages": "パッケージ",
+    "settings": "設定",
+    "staff": "スタッフ",
+    "statements": "ステートメント",
+    "support": "サポート"
+  },
+  "merchant": {
+    "campaigns": "キャンペーン",
+    "coupons": "クーポン",
+    "customerData": "顧客データ",
+    "dashboard": "ダッシュボード",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "マーチャントユーザー",
+    "logs": "システムログ",
+    "luckyDraw": "ラッキードロー",
+    "purchase": "購入",
+    "serialCodes": "シリアルコード",
+    "statements": "ステートメント",
+    "support": "サポート",
+    "wallet": "ウォレット"
+  }
 }

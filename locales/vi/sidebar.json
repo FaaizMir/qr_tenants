@@ -1,22 +1,53 @@
 {
-  "allMerchants": "Tất cả Thương nhân",
-  "addMerchant": "Thêm Thương nhân",
-  "merchantReports": "Báo cáo Thương nhân",
-  "allSubscriptions": "Tất cả Gói đăng ký",
-  "activePlans": "Gói đang hoạt động",
-  "paymentHistory": "Lịch sử Thanh toán",
-  "allAgents": "Tất cả Đại lý",
-  "agentPoints": "Điểm Đại lý",
-  "agentReports": "Báo cáo Đại lý",
-  "allFeedbacks": "Tất cả Phản hồi",
-  "pendingReview": "Đang chờ Xem xét",
-  "feedbackAnalytics": "Phân tích Phản hồi",
-  "allCoupons": "Tất cả Phiếu giảm giá",
-  "redeemedCoupons": "Phiếu giảm giá đã sử dụng",
-  "couponAnalytics": "Phân tích Phiếu giảm giá",
-  "revenueAnalytics": "Phân tích Doanh thu",
-  "userAnalytics": "Phân tích Người dùng",
-  "generalSettings": "Cài đặt Chung",
-  "paymentSettings": "Cài đặt Thanh toán",
-  "systemSettings": "Cài đặt Hệ thống"
+  "agent": {
+    "approvals": "Phê duyệt",
+    "couponsync": "Đồng bộ phiếu giảm giá",
+    "dashboard": "Bảng điều khiển",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "Quản trị viên đại lý",
+    "earnings": "Thu nhập",
+    "logs": "Nhật ký",
+    "merchants": "Thương nhân",
+    "statements": "Tuyên bố",
+    "support": "Hỗ trợ",
+    "wallet": "Ví"
+  },
+  "brand": {
+    "name": "Máy quét QR"
+  },
+  "common": {
+    "account": "Tài khoản",
+    "home": "Trang chủ",
+    "logout": "Đăng xuất",
+    "platform": "Nền tảng",
+    "toggleSidebar": "Chuyển đổi thanh bên"
+  },
+  "masterAdmin": {
+    "agents": "Đại lý",
+    "approvals": "Phê duyệt",
+    "commission": "Hoa hồng",
+    "dashboard": "Bảng điều khiển",
+    "logs": "Nhật ký",
+    "merchants": "Nhà cung cấp",
+    "packages": "Gói",
+    "settings": "Cài đặt",
+    "staff": "Nhân viên",
+    "statements": "Tuyên bố",
+    "support": "Hỗ trợ"
+  },
+  "merchant": {
+    "campaigns": "Chiến dịch",
+    "coupons": "Phiếu giảm giá",
+    "customerData": "Dữ liệu khách hàng",
+    "dashboard": "Bảng điều khiển",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "Người dùng thương nhân",
+    "logs": "Nhật ký hệ thống",
+    "luckyDraw": "Rút thăm may mắn",
+    "purchase": "Mua hàng",
+    "serialCodes": "Mã số sê-ri",
+    "statements": "Tuyên bố",
+    "support": "Hỗ trợ",
+    "wallet": "Ví"
+  }
 }

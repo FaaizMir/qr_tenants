@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "Customers scan a QR code to leave reviews in seconds. Capture negative feedback privately before it hits Google.",
-    "card1Heading": "Instant Feedback",
-    "card2Description": "Issue unique, trackable serial codes. Prevent fraud with secure validation and usage limits.",
-    "card2Heading": "Smart Coupons",
-    "card3Description": "Automatically send birthday wishes, review requests, and \"we miss you\" offers via WhatsApp.",
-    "card3Heading": "WhatsApp Automation",
-    "description": "Powerful tools to help you understand your customers and keep them coming back.",
-    "h1": "Everything you need to grow"
+  "agent": {
+    "ads": {
+      "ad": "Ad",
+      "availableIn": "Available in {city}",
+      "exclusiveIn": "EXCLUSIVE IN {city}",
+      "experienceNow": "Experience Now",
+      "featuredPartner": "Featured Partner",
+      "limitedTime": "LIMITED TIME",
+      "partner": "Partner",
+      "premiumLabel": "Premium",
+      "sponsored": "Sponsored",
+      "sponsoredDeal": "Sponsored Deal",
+      "viewOffer": "VIEW OFFER",
+      "visitBusiness": "Visit {businessName} in {city}, {country}.",
+      "visitExclusivePartner": "Visit our exclusive partner for premium offers."
+    },
+    "errors": {
+      "agentDataExpired": "Agent data expired, clearing localStorage...",
+      "errorLoadingAgent": "Error loading agent from localStorage:",
+      "failedToFetchMerchants": "Failed to fetch merchants:",
+      "failedToLoadData": "Failed to load data:",
+      "failedToLoadPaidAds": "Failed to load paid ads",
+      "invalidAgentData": "Invalid agent data in localStorage, clearing...",
+      "unableToLoadMerchants": "Unable to load merchants. Please try again.",
+      "unableToLoadPage": "Unable to load page. Please try again."
+    },
+    "fallback": {
+      "general": "General",
+      "unknown": "Unknown"
+    },
+    "features": {
+      "badge": "Why Choose Us",
+      "description": "Powerful tools to help you understand your customers and keep them coming back.",
+      "globalReach": {
+        "description": "Expand your business internationally with our comprehensive tools and insights.",
+        "title": "Global Reach"
+      },
+      "instantFeedback": {
+        "description": "Customers scan a QR code to leave reviews in seconds. Capture negative feedback privately before it hits Google.",
+        "title": "Instant Feedback"
+      },
+      "smartCoupons": {
+        "description": "Issue unique, trackable serial codes. Prevent fraud with secure validation and usage limits.",
+        "title": "Smart Coupons"
+      },
+      "title": "Everything you need to grow"
+    },
+    "footer": {
+      "agentLogin": "Agent Login",
+      "copyright": "© {year} QR Rev. All rights reserved.",
+      "globalMerchantNetwork": "Global Merchant Network",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service"
+    },
+    "hero": {
+      "curatedForYou": "Curated For You",
+      "descriptionDefault": "Browse verified merchants, unlock instant coupons, and save on premium services in your area.",
+      "descriptionWithAgent": "Discover verified merchants handpicked by {agentName}. Unlock instant coupons and save on premium services.",
+      "exclusiveDeals": "Exclusive Deals",
+      "officialPartnerNetwork": "Official Partner Network",
+      "partnerNetwork": "{agentName}'s Partner Network"
+    },
+    "marketplace": {
+      "allIndustries": "All Industries",
+      "city": "City",
+      "curatingMessage": "We're curating the best verified merchants and exclusive deals for you...",
+      "everywhere": "Everywhere",
+      "industry": "Industry",
+      "loadingMarketplace": "Loading Marketplace",
+      "noMerchantsFound": "No merchants found",
+      "pageNoResults": "Page {page} - No Results",
+      "retryConnection": "Retry Connection",
+      "searchPlaceholder": "Search merchants, categories...",
+      "showing": "Showing {start} - {end} of {total}",
+      "showingPage": "Showing Page {page}",
+      "tryAdjustingFilters": "Try adjusting your filters or search.",
+      "unableToLoad": "Unable to load merchants"
+    },
+    "merchantDetail": {
+      "availableCoupons": "Available Coupons",
+      "availableDeals": "Available Deals",
+      "checkBackLater": "Check back later for exclusive deals!",
+      "clickMerchantPrompt": "Click on a merchant profile on the left to unlock their",
+      "dealsFound": "{count} Deals Found",
+      "details": "Details",
+      "exclusiveCoupons": "exclusive coupons",
+      "expired": "EXPIRED",
+      "getCoupon": "Get Coupon",
+      "left": "{count} left",
+      "limitedTimeOffers": "and limited-time offers.",
+      "live": "LIVE",
+      "merchantDetails": "Merchant Details",
+      "noActiveCoupons": "No active coupons at the moment.",
+      "offers": "{count} Offers",
+      "readyToExplore": "Ready to Explore?",
+      "verifiedMerchant": "Verified Merchant"
+    },
+    "navigation": {
+      "features": "Features",
+      "home": "Home",
+      "marketplace": "Marketplace",
+      "menu": "Menu",
+      "partner": "Partner",
+      "signIn": "Sign In"
+    },
+    "security": {
+      "dataExpiredClearing": "Agent data expired, clearing localStorage...",
+      "invalidDataClearing": "Invalid agent data in localStorage, clearing..."
+    },
+    "stats": {
+      "loading": "Loading...",
+      "merchants": "Merchants",
+      "verified": "Verified"
+    }
   },
-  "footer": {
-    "Contact": "Contact",
-    "Privacy": "Privacy",
-    "Terms": "Terms",
-    "text": "© 2024 QR Rev Inc. All rights reserved."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "Turn Customers into",
-    "2": "Loyal Fans",
-    "3": "with Smart QR Codes",
-    "description": "The all-in-one platform to collect reviews, distribute coupons, and automate customer retention. No coding required.",
-    "freeTrial": "Start Free Trial",
-    "para": "Now with WhatsApp Integration",
-    "viewDemo": "View Demo"
+  "couponForm": {
+    "birthday": "Birthday",
+    "birthdayFuture": "Birthday cannot be in the future",
+    "birthdayRequired": "Birthday is required",
+    "cancel": "Cancel",
+    "close": "Close",
+    "discount": "{percentage}% OFF",
+    "errorDefault": "Failed to issue coupon. Please try again.",
+    "from": "From {merchantName}",
+    "fullName": "Full Name",
+    "getCoupon": "Get Coupon",
+    "issuing": "Issuing...",
+    "namePlaceholder": "Enter your full name",
+    "nameRequired": "Name is required",
+    "phoneInvalid": "Invalid phone number format",
+    "phoneNumber": "Phone Number",
+    "phonePlaceholder": "Enter phone number",
+    "phoneRequired": "Phone number is required",
+    "successMessage": "Your coupon has been sent to your phone via WhatsApp.",
+    "successTitle": "Coupon Issued Successfully!",
+    "successToast": "Coupon sent successfully! Check your WhatsApp.",
+    "title": "Get Your Coupon"
   },
-  "howitworks": {
-    "descp1": "Customise it with your brand colors and logo.",
-    "descp2": "Place it on tables, counters, or receipts.",
-    "descp3": "Collect reviews and build a customer database automatically.",
-    "h1": "Simple 3-step process",
-    "h3": "Watch your business grow",
-    "heading1": "Generate your QR Code",
-    "heading2": "Display it in your store"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "Active Merchants",
+      "agents": "Agents",
+      "allCountries": "All Countries",
+      "description": "Manage your global network of tenant agents.",
+      "noAgentsFound": "No agents found",
+      "of": "of",
+      "pageNoResults": "Page - No Results",
+      "searchPlaceholder": "Search agents...",
+      "showing": "Showing",
+      "showingPage": "Showing Page",
+      "title": "Agent Directory",
+      "tryAdjustingFilters": "Try adjusting your filters.",
+      "viewStorefront": "View Storefront"
+    },
+    "errors": {
+      "failedToLoadAgents": "Failed to load agents."
+    },
+    "fallback": {
+      "global": "Global",
+      "unknown": "Unknown",
+      "unknownAgent": "Unknown Agent"
+    },
+    "features": {
+      "badge": "Platform Features",
+      "description": "Powerful tools to help you understand your customers and keep them coming back.",
+      "instantFeedback": {
+        "description": "Customers scan a QR code to leave reviews in seconds. Capture negative feedback privately before it hits Google.",
+        "title": "Instant Feedback"
+      },
+      "smartCoupons": {
+        "description": "Issue unique, trackable serial codes. Prevent fraud with secure validation and usage limits.",
+        "title": "Smart Coupons"
+      },
+      "title": "Everything you need to grow",
+      "whatsappAutomation": {
+        "description": "Automatically send birthday wishes, review requests, and \"we miss you\" offers via WhatsApp.",
+        "title": "WhatsApp Automation"
+      }
+    },
+    "footer": {
+      "contact": "Contact",
+      "copyright": "© 2024 QR Rev Inc. All rights reserved.",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "hero": {
+      "badge": "Master Admin Control",
+      "description": "Monitor global agent performance, manage territory distribution, and oversee merchant network growth from a single dashboard.",
+      "title": "Platform",
+      "titleHighlight": "Intelligence Center"
+    },
+    "navigation": {
+      "directory": "Directory",
+      "features": "Features",
+      "overview": "Overview",
+      "signIn": "Sign In"
+    },
+    "Overview": "overview",
+    "stats": {
+      "activeAgents": "Active Agents",
+      "globalReach": "Global Reach",
+      "totalMerchants": "Total Merchants"
+    },
+    "status": {
+      "active": "active",
+      "inactive": "inactive"
+    }
   }
 }

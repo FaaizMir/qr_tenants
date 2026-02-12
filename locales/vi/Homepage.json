@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "Khách hàng quét mã QR để để lại đánh giá trong vài giây. Nắm bắt phản hồi tiêu cực một cách riêng tư trước khi nó xuất hiện trên Google.",
-    "card1Heading": "Phản hồi ngay lập tức",
-    "card2Description": "Cấp mã serial duy nhất, có thể theo dõi. Ngăn chặn gian lận với xác thực an toàn và giới hạn sử dụng.",
-    "card2Heading": "Phiếu giảm giá thông minh",
-    "card3Description": "Tự động gửi lời chúc sinh nhật, yêu cầu đánh giá và các ưu đãi \"chúng tôi nhớ bạn\" qua WhatsApp.",
-    "card3Heading": "Tự động hóa WhatsApp",
-    "description": "Công cụ mạnh mẽ giúp bạn hiểu khách hàng của mình và giữ họ quay lại.",
-    "h1": "Mọi thứ bạn cần để phát triển"
+  "agent": {
+    "ads": {
+      "ad": "Quảng cáo",
+      "availableIn": "Có sẵn tại {city}",
+      "exclusiveIn": "ĐỘC QUYỀN TẠI {city}",
+      "experienceNow": "Trải nghiệm ngay",
+      "featuredPartner": "Đối tác nổi bật",
+      "limitedTime": "THỜI GIAN CÓ HẠN",
+      "partner": "Đối tác",
+      "premiumLabel": "Cao cấp",
+      "sponsored": "Được tài trợ",
+      "sponsoredDeal": "Giao dịch tài trợ",
+      "viewOffer": "XEM CUNG CẤP",
+      "visitBusiness": "Thăm {businessName} tại {city}, {country}.",
+      "visitExclusivePartner": "Truy cập đối tác độc quyền của chúng tôi để nhận ưu đãi cao cấp."
+    },
+    "errors": {
+      "agentDataExpired": "Dữ liệu đại lý đã hết hạn, đang xóa localStorage...",
+      "errorLoadingAgent": "Lỗi khi tải đại lý từ localStorage:",
+      "failedToFetchMerchants": "Không thể lấy thông tin thương nhân:",
+      "failedToLoadData": "Không thể tải dữ liệu:",
+      "failedToLoadPaidAds": "Không thể tải quảng cáo trả phí",
+      "invalidAgentData": "Dữ liệu đại lý không hợp lệ trong localStorage, đang xóa...",
+      "unableToLoadMerchants": "Không thể tải thương nhân. Vui lòng thử lại.",
+      "unableToLoadPage": "Không thể tải trang. Vui lòng thử lại."
+    },
+    "fallback": {
+      "general": "Chung",
+      "unknown": "Không xác định"
+    },
+    "features": {
+      "badge": "Tại sao chọn chúng tôi",
+      "description": "Công cụ mạnh mẽ giúp bạn hiểu khách hàng và giữ họ quay lại.",
+      "globalReach": {
+        "description": "Mở rộng doanh nghiệp của bạn ra quốc tế với các công cụ và thông tin toàn diện của chúng tôi.",
+        "title": "Phạm vi toàn cầu"
+      },
+      "instantFeedback": {
+        "description": "Khách hàng quét mã QR để để lại đánh giá trong vài giây. Nắm bắt phản hồi tiêu cực một cách riêng tư trước khi nó xuất hiện trên Google.",
+        "title": "Phản hồi ngay lập tức"
+      },
+      "smartCoupons": {
+        "description": "Phát hành mã serial duy nhất, có thể theo dõi. Ngăn chặn gian lận với xác thực an toàn và giới hạn sử dụng.",
+        "title": "Phiếu giảm giá thông minh"
+      },
+      "title": "Tất cả những gì bạn cần để phát triển"
+    },
+    "footer": {
+      "agentLogin": "Đăng nhập đại lý",
+      "copyright": "© {year} QR Rev. Bảo lưu mọi quyền.",
+      "globalMerchantNetwork": "Mạng lưới thương nhân toàn cầu",
+      "privacyPolicy": "Chính sách bảo mật",
+      "termsOfService": "Điều khoản dịch vụ"
+    },
+    "hero": {
+      "curatedForYou": "Được chọn cho bạn",
+      "descriptionDefault": "Duyệt qua các thương nhân đã được xác minh, mở khóa phiếu giảm giá ngay lập tức và tiết kiệm cho các dịch vụ cao cấp trong khu vực của bạn.",
+      "descriptionWithAgent": "Khám phá các thương nhân đã được xác minh được chọn lọc bởi {agentName}. Mở khóa phiếu giảm giá ngay lập tức và tiết kiệm cho các dịch vụ cao cấp.",
+      "exclusiveDeals": "Ưu đãi độc quyền",
+      "officialPartnerNetwork": "Mạng lưới đối tác chính thức",
+      "partnerNetwork": "Mạng lưới đối tác của {agentName}"
+    },
+    "marketplace": {
+      "allIndustries": "Tất cả các ngành",
+      "city": "Thành phố",
+      "curatingMessage": "Chúng tôi đang chọn lọc những thương gia được xác minh tốt nhất và các ưu đãi độc quyền cho bạn...",
+      "everywhere": "Mọi nơi",
+      "industry": "Ngành",
+      "loadingMarketplace": "Đang tải Thị trường",
+      "noMerchantsFound": "Không tìm thấy người bán nào",
+      "pageNoResults": "Trang {page} - Không có kết quả",
+      "retryConnection": "Thử lại kết nối",
+      "searchPlaceholder": "Tìm kiếm thương nhân, danh mục...",
+      "showing": "Hiển thị {start} - {end} của {total}",
+      "showingPage": "Đang hiển thị Trang {page}",
+      "tryAdjustingFilters": "Hãy thử điều chỉnh bộ lọc của bạn hoặc tìm kiếm.",
+      "unableToLoad": "Không thể tải thương gia"
+    },
+    "merchantDetail": {
+      "availableCoupons": "Phiếu giảm giá có sẵn",
+      "availableDeals": "Ưu đãi có sẵn",
+      "checkBackLater": "Hãy quay lại sau để nhận các ưu đãi độc quyền!",
+      "clickMerchantPrompt": "Nhấp vào hồ sơ người bán ở bên trái để mở khóa",
+      "dealsFound": "Tìm thấy {count} ưu đãi",
+      "details": "Chi tiết",
+      "exclusiveCoupons": "phiếu giảm giá độc quyền",
+      "expired": "HẾT HẠN",
+      "getCoupon": "Nhận phiếu giảm giá",
+      "left": "{count} còn lại",
+      "limitedTimeOffers": "và các ưu đãi có thời hạn.",
+      "live": "TRỰC TIẾP",
+      "merchantDetails": "Chi tiết thương nhân",
+      "noActiveCoupons": "Hiện tại không có phiếu giảm giá nào.",
+      "offers": "{count} Ưu đãi",
+      "readyToExplore": "Sẵn sàng khám phá?",
+      "verifiedMerchant": "Người bán đã được xác minh"
+    },
+    "navigation": {
+      "features": "Tính năng",
+      "home": "Trang chủ",
+      "marketplace": "Thị trường",
+      "menu": "Thực đơn",
+      "partner": "Đối tác",
+      "signIn": "Đăng nhập"
+    },
+    "security": {
+      "dataExpiredClearing": "Dữ liệu đại lý đã hết hạn, đang xóa localStorage...",
+      "invalidDataClearing": "Dữ liệu đại lý không hợp lệ trong localStorage, đang xóa..."
+    },
+    "stats": {
+      "loading": "Đang tải...",
+      "merchants": "Thương nhân",
+      "verified": "Đã được xác minh"
+    }
   },
-  "footer": {
-    "Contact": "Liên hệ",
-    "Privacy": "Quyền riêng tư",
-    "Terms": "Điều khoản",
-    "text": "© 2024 QR Rev Inc. Tất cả các quyền được bảo lưu."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "Biến Khách Hàng thành",
-    "2": "Người hâm mộ trung thành",
-    "3": "với Mã QR Thông minh",
-    "description": "Nền tảng tất cả trong một để thu thập đánh giá, phân phối phiếu giảm giá và tự động hóa việc giữ chân khách hàng. Không cần lập trình.",
-    "freeTrial": "Bắt đầu dùng thử miễn phí",
-    "para": "Bây giờ có tích hợp WhatsApp",
-    "viewDemo": "Xem bản demo"
+  "couponForm": {
+    "birthday": "Sinh nhật",
+    "birthdayFuture": "Sinh nhật không thể ở tương lai",
+    "birthdayRequired": "Ngày sinh là bắt buộc",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "discount": "{percentage}% GIẢM",
+    "errorDefault": "Không thể phát hành phiếu giảm giá. Vui lòng thử lại.",
+    "from": "Từ {merchantName}",
+    "fullName": "Họ và tên",
+    "getCoupon": "Nhận phiếu giảm giá",
+    "issuing": "Đang phát hành...",
+    "namePlaceholder": "Nhập họ và tên đầy đủ của bạn",
+    "nameRequired": "Tên là bắt buộc",
+    "phoneInvalid": "Định dạng số điện thoại không hợp lệ",
+    "phoneNumber": "Số điện thoại",
+    "phonePlaceholder": "Nhập số điện thoại",
+    "phoneRequired": "Số điện thoại là bắt buộc",
+    "successMessage": "Phiếu giảm giá của bạn đã được gửi đến điện thoại của bạn qua WhatsApp.",
+    "successTitle": "Phiếu giảm giá đã được phát hành thành công!",
+    "successToast": "Phiếu giảm giá đã được gửi thành công! Kiểm tra WhatsApp của bạn.",
+    "title": "Nhận phiếu giảm giá của bạn"
   },
-  "howitworks": {
-    "descp1": "Tùy chỉnh nó với màu sắc và logo thương hiệu của bạn.",
-    "descp2": "Đặt nó trên bàn, quầy, hoặc biên lai.",
-    "descp3": "Thu thập đánh giá và tự động xây dựng cơ sở dữ liệu khách hàng.",
-    "h1": "Quy trình 3 bước đơn giản",
-    "h3": "Theo dõi sự phát triển của doanh nghiệp bạn",
-    "heading1": "Tạo mã QR của bạn",
-    "heading2": "Hiển thị nó trong cửa hàng của bạn"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "Thương nhân hoạt động",
+      "agents": "Đại lý",
+      "allCountries": "Tất cả các quốc gia",
+      "description": "Quản lý mạng lưới đại lý toàn cầu của bạn.",
+      "noAgentsFound": "Không tìm thấy đại lý nào",
+      "of": "của",
+      "pageNoResults": "Trang - Không có kết quả",
+      "searchPlaceholder": "Tìm kiếm đại lý...",
+      "showing": "Đang hiển thị",
+      "showingPage": "Đang hiển thị trang",
+      "title": "Danh bạ đại lý",
+      "tryAdjustingFilters": "Hãy thử điều chỉnh các bộ lọc của bạn.",
+      "viewStorefront": "Xem Cửa hàng"
+    },
+    "errors": {
+      "failedToLoadAgents": "Không thể tải các đại lý."
+    },
+    "fallback": {
+      "global": "Toàn cầu",
+      "unknown": "Không xác định",
+      "unknownAgent": "Đại lý không xác định"
+    },
+    "features": {
+      "badge": "Tính năng Nền tảng",
+      "description": "Công cụ mạnh mẽ giúp bạn hiểu khách hàng và giữ họ quay lại.",
+      "instantFeedback": {
+        "description": "Khách hàng quét mã QR để để lại đánh giá trong vài giây. Nắm bắt phản hồi tiêu cực một cách riêng tư trước khi nó xuất hiện trên Google.",
+        "title": "Phản hồi ngay lập tức"
+      },
+      "smartCoupons": {
+        "description": "Phát hành mã serial duy nhất, có thể theo dõi. Ngăn chặn gian lận với xác thực an toàn và giới hạn sử dụng.",
+        "title": "Phiếu giảm giá thông minh"
+      },
+      "title": "Tất cả những gì bạn cần để phát triển",
+      "whatsappAutomation": {
+        "description": "Tự động gửi lời chúc sinh nhật, yêu cầu đánh giá và các ưu đãi \"chúng tôi nhớ bạn\" qua WhatsApp.",
+        "title": "Tự động hóa WhatsApp"
+      }
+    },
+    "footer": {
+      "contact": "Liên hệ",
+      "copyright": "© 2024 QR Rev Inc. Tất cả các quyền được bảo lưu.",
+      "privacy": "Quyền riêng tư",
+      "terms": "Điều khoản"
+    },
+    "hero": {
+      "badge": "Kiểm soát Quản trị viên Chính",
+      "description": "Giám sát hiệu suất đại lý toàn cầu, quản lý phân phối lãnh thổ và giám sát sự phát triển của mạng lưới thương nhân từ một bảng điều khiển duy nhất.",
+      "title": "Nền tảng",
+      "titleHighlight": "Trung tâm thông minh"
+    },
+    "navigation": {
+      "directory": "Danh bạ",
+      "features": "Tính năng",
+      "overview": "Tổng quan",
+      "signIn": "Đăng nhập"
+    },
+    "Overview": "tổng quan",
+    "stats": {
+      "activeAgents": "Đại lý hoạt động",
+      "globalReach": "Phạm vi toàn cầu",
+      "totalMerchants": "Tổng số thương nhân"
+    },
+    "status": {
+      "active": "hoạt động",
+      "inactive": "không hoạt động"
+    }
   }
 }

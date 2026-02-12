@@ -1,0 +1,52 @@
+{
+  "title": "Festival Messages",
+  "subtitle": "Schedule personalized greetings for holiday celebrations",
+  "newGreeting": "New Greeting",
+  "searchPlaceholder": "Search by festival name...",
+  "allStatus": "All Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "featureDisabled": "Festival messages are currently disabled. Enable the feature in the",
+  "featureSwitchboard": "Feature Switchboard",
+  "featureDisabledSuffix": "above to create new greetings.",
+  "enableTooltip": "Enable \"Festival Campaign\" in Feature Switchboard to create greetings",
+  "form": {
+    "createTitle": "Create New Festival Message",
+    "editTitle": "Edit Festival Message",
+    "createDescription": "Fill in the details to schedule a new festival message",
+    "editDescription": "Update your festival message details below",
+    "festivalName": "Festival Name",
+    "festivalNamePlaceholder": "Ex: Diwali, Christmas, New Year",
+    "festivalDate": "Festival Date",
+    "couponBatch": "Coupon Batch (Optional)",
+    "selectCouponBatch": "Select coupon batch...",
+    "festivalMessage": "Festival Message",
+    "festivalMessagePlaceholder": "Hi {name}, wishing you a joyful festival season from {business_name}...",
+    "personalizationHint": "Use {name} and {business_name} to personalize the message",
+    "activeStatus": "Active Status",
+    "messageActive": "Message is active",
+    "messageInactive": "Message is inactive",
+    "recurringYearly": "Recurring Yearly",
+    "repeatsEveryYear": "Repeats every year",
+    "oneTimeMessage": "One-time message",
+    "required": "*",
+    "cancel": "Cancel",
+    "createButton": "Create Festival Message",
+    "updateButton": "Update Festival Message",
+    "saving": "Saving..."
+  },
+  "validation": {
+    "allFieldsRequired": "Festival name, message, and date are required"
+  },
+  "success": {
+    "created": "Festival message created successfully",
+    "updated": "Festival message updated successfully",
+    "deleted": "Festival message deleted successfully"
+  },
+  "errors": {
+    "failedToLoad": "Failed to load festival messages",
+    "failedToCreate": "Failed to create festival message",
+    "failedToUpdate": "Failed to update festival message",
+    "failedToDelete": "Failed to delete festival message"
+  }
+}

@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-export const getLogColumns = () => [
+export const getLogColumns = (t) => [
   {
     accessorKey: "created_at",
-    header: "Date & Time",
+    header: t("columns.dateTime"),
     cell: ({ row }) => {
       const date = row.getValue("created_at");
       return (
@@ -21,7 +21,7 @@ export const getLogColumns = () => [
   },
   {
     accessorKey: "category",
-    header: "Category",
+    header: t("columns.category"),
     cell: ({ row }) => {
       const category = row.getValue("category") || "system";
       return (
@@ -33,19 +33,19 @@ export const getLogColumns = () => [
   },
   {
     accessorKey: "action",
-    header: "Action",
+    header: t("columns.action"),
     cell: ({ row }) => {
       const action = row.getValue("action");
       return (
         <span className="text-sm font-medium capitalize">
-          {action?.replace(/_/g, " ") || "system activity"}
+          {action?.replace(/_/g, " ") || t("columns.systemActivity")}
         </span>
       );
     },
   },
   {
     accessorKey: "message",
-    header: "Description",
+    header: t("columns.description"),
     cell: ({ row }) => (
       <div className="text-sm text-foreground py-1">
         {row.getValue("message")}
@@ -54,13 +54,13 @@ export const getLogColumns = () => [
   },
   {
     id: "details",
-    header: "Details",
+    header: t("columns.details"),
     cell: ({ row }) => {
       const metadata = row.original.metadata;
       if (!metadata)
         return (
           <span className="text-muted-foreground text-xs italic">
-            No details
+            {t("columns.noDetails")}
           </span>
         );
 
@@ -71,17 +71,21 @@ export const getLogColumns = () => [
           <div className="flex flex-col gap-1 py-1">
             {metadata.coupons_generated && (
               <div className="text-sm font-medium">
-                {metadata.coupons_generated} coupons generated
+                {t("details.coupon.couponsGenerated", {
+                  count: metadata.coupons_generated,
+                })}
               </div>
             )}
             {metadata.total_quantity && (
               <div className="text-sm text-muted-foreground">
-                Quantity: {metadata.total_quantity}
+                {t("details.coupon.quantity", {
+                  value: metadata.total_quantity,
+                })}
               </div>
             )}
             {metadata.batch_type && (
               <div className="text-sm text-muted-foreground">
-                Type: {metadata.batch_type}
+                {t("details.coupon.type", { value: metadata.batch_type })}
               </div>
             )}
           </div>
@@ -94,19 +98,9 @@ export const getLogColumns = () => [
             {metadata.phone_number && (
               <div className="text-sm font-medium">{metadata.phone_number}</div>
             )}
-            {metadata.message_type && (
-              <div className="text-sm text-muted-foreground">
-                Type: {metadata.message_type}
-              </div>
-            )}
             {metadata.campaign_type && (
-              <div className="text-sm text-muted-foreground">
-                Campaign: {metadata.campaign_type}
-              </div>
-            )}
-            {metadata.whatsapp_message_id && (
-              <div className="text-xs text-muted-foreground font-mono">
-                ID: {metadata.whatsapp_message_id}
+              <div className="text-sm text-muted-foreground capitalize">
+                {metadata.campaign_type.replace(/_/g, " ")}
               </div>
             )}
           </div>
@@ -116,16 +110,16 @@ export const getLogColumns = () => [
       if (category === "wallet") {
         const creditType = metadata.credit_type || metadata.creditType || "";
         const amount = metadata.amount || metadata.credits || 0;
-        const currency = metadata.currency || "Credits";
+        const currency = metadata.currency || t("details.wallet.credits");
 
         const friendlyType = creditType.toLowerCase().includes("whatsapp ui")
-          ? "WhatsApp UI"
+          ? t("details.wallet.whatsappUI")
           : creditType.toLowerCase().includes("whatsapp bi")
-            ? "WhatsApp BI"
+            ? t("details.wallet.whatsappBI")
             : creditType.toLowerCase().includes("coupon")
-              ? "Coupon"
+              ? t("details.wallet.coupon")
               : creditType.toLowerCase().includes("paid ad")
-                ? "Paid Ad"
+                ? t("details.wallet.paidAd")
                 : creditType.replace(/_/g, " ");
 
         return (
@@ -142,12 +136,16 @@ export const getLogColumns = () => [
             <div className="text-sm text-muted-foreground">{friendlyType}</div>
             {metadata.commission_rate && (
               <div className="text-sm text-muted-foreground">
-                {metadata.commission_rate}% Platform Commission
+                {t("details.wallet.platformCommission", {
+                  rate: metadata.commission_rate,
+                })}
               </div>
             )}
             {metadata.cost_per_unit && (
               <div className="text-sm text-muted-foreground">
-                Unit Price: {metadata.cost_per_unit}
+                {t("details.wallet.unitPrice", {
+                  value: metadata.cost_per_unit,
+                })}
               </div>
             )}
           </div>
@@ -162,12 +160,12 @@ export const getLogColumns = () => [
             )}
             {metadata.method && (
               <div className="text-sm text-muted-foreground">
-                Method: {metadata.method}
+                {t("details.auth.method", { value: metadata.method })}
               </div>
             )}
             {row.original.user_type && (
               <div className="text-sm text-muted-foreground">
-                User: {row.original.user_type}
+                {t("details.auth.user", { value: row.original.user_type })}
               </div>
             )}
           </div>
@@ -182,14 +180,9 @@ export const getLogColumns = () => [
                 {metadata.business_name}
               </div>
             )}
-            {metadata.merchant_id && (
-              <div className="text-sm text-muted-foreground">
-                ID: {metadata.merchant_id}
-              </div>
-            )}
             {metadata.merchant_type && (
-              <div className="text-sm text-muted-foreground">
-                Type: {metadata.merchant_type}
+              <div className="text-sm text-muted-foreground capitalize">
+                {metadata.merchant_type.replace(/_/g, " ")}
               </div>
             )}
           </div>
@@ -204,12 +197,14 @@ export const getLogColumns = () => [
             )}
             {metadata.selected_platform && (
               <div className="text-sm text-muted-foreground">
-                Platform: {metadata.selected_platform}
+                {t("details.customer.platform", {
+                  value: metadata.selected_platform,
+                })}
               </div>
             )}
             {metadata.review_type && (
               <div className="text-sm text-muted-foreground">
-                Review: {metadata.review_type}
+                {t("details.customer.review", { value: metadata.review_type })}
               </div>
             )}
           </div>
@@ -225,25 +220,24 @@ export const getLogColumns = () => [
               </div>
             )}
             {metadata.status && (
-              <div className="text-sm text-muted-foreground">
-                Status: {metadata.status}
-              </div>
-            )}
-            {metadata.campaign_id && (
-              <div className="text-sm text-muted-foreground">
-                ID: {metadata.campaign_id}
+              <div className="text-sm text-muted-foreground capitalize">
+                {metadata.status.replace(/_/g, " ")}
               </div>
             )}
           </div>
         );
       }
 
-      // Default metadata display
+      // Default metadata display - filter out IDs and technical fields
       const displayKeys = Object.keys(metadata).filter(
         (k) =>
           !k.startsWith("_") &&
+          !k.endsWith("_id") &&
+          !k.includes("id") &&
+          !k.includes("wamid") &&
           metadata[k] !== null &&
-          metadata[k] !== undefined,
+          metadata[k] !== undefined &&
+          String(metadata[k]).length < 100, // Exclude very long values
       );
 
       if (displayKeys.length === 0)
@@ -251,9 +245,9 @@ export const getLogColumns = () => [
 
       return (
         <div className="flex flex-col gap-1 py-1">
-          {displayKeys.map((key) => (
+          {displayKeys.slice(0, 3).map((key) => (
             <div key={key} className="text-sm">
-              <span className="font-medium text-muted-foreground">
+              <span className="font-medium text-muted-foreground capitalize">
                 {key.replace(/_/g, " ")}:{" "}
               </span>
               <span className="text-foreground">{String(metadata[key])}</span>
@@ -265,7 +259,7 @@ export const getLogColumns = () => [
   },
   {
     accessorKey: "level",
-    header: "Severity",
+    header: t("columns.severity"),
     cell: ({ row }) => {
       const level = row.getValue("level")?.toLowerCase() || "info";
       return (
@@ -279,7 +273,7 @@ export const getLogColumns = () => [
             level === "info" && "text-blue-600",
           )}
         >
-          {level}
+          {t(`severity.${level}`)}
         </span>
       );
     },

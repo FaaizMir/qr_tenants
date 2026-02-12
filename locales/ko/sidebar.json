@@ -1,22 +1,53 @@
 {
-  "allMerchants": "모든 가맹점",
-  "addMerchant": "가맹점 추가",
-  "merchantReports": "가맹점 보고서",
-  "allSubscriptions": "모든 구독",
-  "activePlans": "활성 플랜",
-  "paymentHistory": "결제 내역",
-  "allAgents": "모든 에이전트",
-  "agentPoints": "에이전트 포인트",
-  "agentReports": "에이전트 보고서",
-  "allFeedbacks": "모든 피드백",
-  "pendingReview": "검토 대기 중",
-  "feedbackAnalytics": "피드백 분석",
-  "allCoupons": "모든 쿠폰",
-  "redeemedCoupons": "사용된 쿠폰",
-  "couponAnalytics": "쿠폰 분석",
-  "revenueAnalytics": "수익 분석",
-  "userAnalytics": "사용자 분석",
-  "generalSettings": "일반 설정",
-  "paymentSettings": "결제 설정",
-  "systemSettings": "시스템 설정"
+  "agent": {
+    "approvals": "승인",
+    "couponsync": "쿠폰 동기화",
+    "dashboard": "대시보드",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "에이전트 관리자",
+    "earnings": "수익",
+    "logs": "로그",
+    "merchants": "상인",
+    "statements": "진술",
+    "support": "지원",
+    "wallet": "지갑"
+  },
+  "brand": {
+    "name": "QR 스캐너"
+  },
+  "common": {
+    "account": "계정",
+    "home": "홈",
+    "logout": "로그아웃",
+    "platform": "플랫폼",
+    "toggleSidebar": "사이드바 전환"
+  },
+  "masterAdmin": {
+    "agents": "에이전트",
+    "approvals": "승인",
+    "commission": "수수료",
+    "dashboard": "대시보드",
+    "logs": "로그",
+    "merchants": "상인",
+    "packages": "패키지",
+    "settings": "설정",
+    "staff": "직원",
+    "statements": "진술",
+    "support": "지원"
+  },
+  "merchant": {
+    "campaigns": "캠페인",
+    "coupons": "쿠폰",
+    "customerData": "고객 데이터",
+    "dashboard": "대시보드",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "상인 사용자",
+    "logs": "시스템 로그",
+    "luckyDraw": "행운의 추첨",
+    "purchase": "구매",
+    "serialCodes": "일련 번호",
+    "statements": "진술",
+    "support": "지원",
+    "wallet": "지갑"
+  }
 }

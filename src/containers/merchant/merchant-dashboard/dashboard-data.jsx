@@ -1,29 +1,29 @@
 import { Ticket, Users, Star, CreditCard } from "lucide-react";
 
-export const getKpiData = (credits) => [
+export const getKpiData = (credits, t) => [
     {
-        title: "Total Coupons Issued",
+        title: t("kpi.totalCouponsIssued"),
         value: "1,250",
         icon: Ticket,
-        trend: "up",
+        trend: t("kpi.trendUp"),
         trendValue: "+8.5%",
     },
     {
-        title: "Total Redeemed",
+        title: t("kpi.totalRedeemed"),
         value: "856",
         icon: Users,
-        trend: "up",
+        trend: t("kpi.trendUp"),
         trendValue: "+12%",
     },
     {
-        title: "Average Rating",
+        title: t("kpi.averageRating"),
         value: "4.8",
         icon: Star,
-        trend: "up",
+        trend: t("kpi.trendUp"),
         trendValue: "+0.2",
     },
     {
-        title: "Remaining Credits",
+        title: t("kpi.remainingCredits"),
         value: credits.toLocaleString(),
         icon: CreditCard,
     },

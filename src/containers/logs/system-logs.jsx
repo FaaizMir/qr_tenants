@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { DataTable } from "@/components/common/data-table";
 import { getLogColumns } from "./logs-columns";
 import {
@@ -31,77 +32,12 @@ import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
-const LOG_TYPES = {
-  "master-admin": [
-    { label: "All Platform Activity", value: "all" },
-    { label: "Authentication Events", value: "auth", category: "auth" },
-    { label: "Agent Activities", value: "agent", category: "agent" },
-    { label: "Merchant Activities", value: "merchant", category: "merchant" },
-    { label: "Critical Errors", value: "critical", level: "critical" },
-    { label: "Coupon Operations", value: "coupon", category: "coupon" },
-    {
-      label: "WhatsApp UI Feedback",
-      value: "whatsapp_ui_feedback_ui",
-      category: "whatsapp_ui",
-      action: "ui_feedback_sent",
-    },
-    {
-      label: "WhatsApp BI Feedback",
-      value: "whatsapp_bi_feedback_bi",
-      category: "whatsapp_ui",
-      action: "bi_feedback_sent",
-    },
-    { label: "Wallet & Transactions", value: "wallet", category: "wallet" },
-    { label: "Campaign Logs", value: "campaign", category: "campaign" },
-    { label: "Customer Actions", value: "customer", category: "customer" },
-  ],
-  agent: [
-    { label: "My Merchants Activity", value: "all" },
-    { label: "Merchant Scoped Logs", value: "merchant", category: "merchant" },
-    { label: "Coupon Logs", value: "coupon", category: "coupon" },
-    { label: "Campaign Logs", value: "campaign", category: "campaign" },
-    { label: "Wallet & Earnings", value: "wallet", category: "wallet" },
-    { label: "Customer Logs", value: "customer", category: "customer" },
-    {
-      label: "WhatsApp UI Feedback",
-      value: "whatsapp_ui_feedback_ui",
-      category: "whatsapp_ui",
-      action: "ui_feedback_sent",
-    },
-    {
-      label: "WhatsApp BI Feedback",
-      value: "whatsapp_bi_feedback_bi",
-      category: "whatsapp_bi",
-      action: "bi_feedback_sent",
-    },
-  ],
-  merchant: [
-    { label: "Store Activity", value: "all" },
-    { label: "Coupon Usage", value: "coupon", category: "coupon" },
-    { label: "Campaign Logs", value: "campaign", category: "campaign" },
-    { label: "Wallet Transactions", value: "wallet", category: "wallet" },
-    { label: "Customer Actions", value: "customer", category: "customer" },
-    { label: "Security & Auth", value: "auth", category: "auth" },
-    {
-      label: "WhatsApp UI Feedback",
-      value: "whatsapp_ui_feedback_ui",
-      category: "whatsapp_ui",
-      action: "ui_feedback_sent",
-    },
-    {
-      label: "WhatsApp BI Feedback",
-      value: "whatsapp_bi_feedback_bi",
-      category: "whatsapp_ui",
-      action: "bi_feedback_sent",
-    },
-  ],
-};
-
 export default function SystemLogsContainer({
   scope = "master-admin",
   merchantId,
   agentId,
 }) {
+  const t = useTranslations("systemLogs");
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -121,25 +57,90 @@ export default function SystemLogsContainer({
     "";
   const isAdminOrSuper = userRole === "admin" || userRole === "super_admin";
 
- 
+  const LOG_TYPES = useMemo(() => ({
+    "master-admin": [
+      { label: t("logTypes.masterAdmin.allPlatformActivity"), value: "all" },
+      { label: t("logTypes.masterAdmin.authenticationEvents"), value: "auth", category: "auth" },
+      { label: t("logTypes.masterAdmin.agentActivities"), value: "agent", category: "agent" },
+      { label: t("logTypes.masterAdmin.merchantActivities"), value: "merchant", category: "merchant" },
+      { label: t("logTypes.masterAdmin.criticalErrors"), value: "critical", level: "critical" },
+      { label: t("logTypes.masterAdmin.couponOperations"), value: "coupon", category: "coupon" },
+      {
+        label: t("logTypes.masterAdmin.whatsappUIFeedback"),
+        value: "whatsapp_ui_feedback_ui",
+        category: "whatsapp_ui",
+        action: "ui_feedback_sent",
+      },
+      {
+        label: t("logTypes.masterAdmin.whatsappBIFeedback"),
+        value: "whatsapp_bi_feedback_bi",
+        category: "whatsapp_ui",
+        action: "bi_feedback_sent",
+      },
+      { label: t("logTypes.masterAdmin.walletTransactions"), value: "wallet", category: "wallet" },
+      { label: t("logTypes.masterAdmin.campaignLogs"), value: "campaign", category: "campaign" },
+      { label: t("logTypes.masterAdmin.customerActions"), value: "customer", category: "customer" },
+    ],
+    agent: [
+      { label: t("logTypes.agent.myMerchantsActivity"), value: "all" },
+      { label: t("logTypes.agent.merchantScopedLogs"), value: "merchant", category: "merchant" },
+      { label: t("logTypes.agent.couponLogs"), value: "coupon", category: "coupon" },
+      { label: t("logTypes.agent.campaignLogs"), value: "campaign", category: "campaign" },
+      { label: t("logTypes.agent.walletEarnings"), value: "wallet", category: "wallet" },
+      { label: t("logTypes.agent.customerLogs"), value: "customer", category: "customer" },
+      {
+        label: t("logTypes.agent.whatsappUIFeedback"),
+        value: "whatsapp_ui_feedback_ui",
+        category: "whatsapp_ui",
+        action: "ui_feedback_sent",
+      },
+      {
+        label: t("logTypes.agent.whatsappBIFeedback"),
+        value: "whatsapp_bi_feedback_bi",
+        category: "whatsapp_bi",
+        action: "bi_feedback_sent",
+      },
+    ],
+    merchant: [
+      { label: t("logTypes.merchant.storeActivity"), value: "all" },
+      { label: t("logTypes.merchant.couponUsage"), value: "coupon", category: "coupon" },
+      { label: t("logTypes.merchant.campaignLogs"), value: "campaign", category: "campaign" },
+      { label: t("logTypes.merchant.walletTransactions"), value: "wallet", category: "wallet" },
+      { label: t("logTypes.merchant.customerActions"), value: "customer", category: "customer" },
+      { label: t("logTypes.merchant.securityAuth"), value: "auth", category: "auth" },
+      {
+        label: t("logTypes.merchant.whatsappUIFeedback"),
+        value: "whatsapp_ui_feedback_ui",
+        category: "whatsapp_ui",
+        action: "ui_feedback_sent",
+      },
+      {
+        label: t("logTypes.merchant.whatsappBIFeedback"),
+        value: "whatsapp_bi_feedback_bi",
+        category: "whatsapp_ui",
+        action: "bi_feedback_sent",
+      },
+    ],
+  }), [t]);
+
   const availableLogTypes = useMemo(() => {
     let base = Array.isArray(LOG_TYPES[scope]) ? LOG_TYPES[scope] : [];
 
     if (isAdminOrSuper && scope === "master-admin") {
       const expandedOptions = [
         {
-          label: "WhatsApp UI Messages (Detailed)",
+          label: t("logTypes.masterAdmin.whatsappUIDetailed"),
           value: "whatsapp_ui_detailed",
           category: "whatsapp_ui",
         },
         {
-          label: "WhatsApp BI Messages (Detailed)",
+          label: t("logTypes.masterAdmin.whatsappBIDetailed"),
           value: "whatsapp_bi_detailed",
           category: "whatsapp_ui",
           action: "bi_feedback_sent",
         },
         {
-          label: "WhatsApp Credit Wallet",
+          label: t("logTypes.masterAdmin.whatsappCreditWallet"),
           value: "whatsapp_credits_wallet",
           category: "wallet",
         },
@@ -163,7 +164,7 @@ export default function SystemLogsContainer({
       );
     }
     return base;
-  }, [scope, merchantSubscriptionType, isAdminOrSuper]);
+  }, [scope, merchantSubscriptionType, isAdminOrSuper, LOG_TYPES, t]);
 
   useEffect(() => {
     if (!logType && availableLogTypes.length)
@@ -256,7 +257,7 @@ export default function SystemLogsContainer({
       setTotal(meta?.total || 0);
     } catch (error) {
       console.error("Error fetching logs:", error);
-      toast.error("Failed to load system logs");
+      toast.error(t("errors.failedToLoad"));
       setLogs([]);
       setTotal(0);
     } finally {
@@ -271,13 +272,14 @@ export default function SystemLogsContainer({
     merchantId,
     agentId,
     availableLogTypes,
+    t,
   ]);
 
   useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
 
-  const columns = getLogColumns();
+  const columns = getLogColumns(t);
 
   return (
     <Card className="w-full shadow-sm border-muted/40 ">
@@ -286,23 +288,23 @@ export default function SystemLogsContainer({
           <div>
             <CardTitle className="text-xl font-bold">
               {scope === "master-admin"
-                ? "Global Audit Trail"
+                ? t("titles.masterAdmin")
                 : scope === "agent"
-                  ? "Agent Activity Stream"
-                  : "Store Operations Log"}
+                  ? t("titles.agent")
+                  : t("titles.merchant")}
             </CardTitle>
             <CardDescription>
               {scope === "master-admin"
-                ? "Monitoring platform-wide events and system health"
+                ? t("descriptions.masterAdmin")
                 : scope === "agent"
-                  ? "Tracking sub-merchant activities and wallet transactions"
-                  : "Detailed record of your store coupons and customer interactions"}
+                  ? t("descriptions.agent")
+                  : t("descriptions.merchant")}
             </CardDescription>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Select value={logType} onValueChange={setLogType}>
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Log Category" />
+                <SelectValue placeholder={t("filters.logCategory")} />
               </SelectTrigger>
               <SelectContent>
                 {availableLogTypes.map((type) => (
@@ -334,7 +336,7 @@ export default function SystemLogsContainer({
                       format(date.from, "LLL dd, y")
                     )
                   ) : (
-                    <span>Pick a date range</span>
+                    <span>{t("filters.pickDateRange")}</span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -354,7 +356,7 @@ export default function SystemLogsContainer({
               variant="outline"
               size="icon"
               onClick={() => fetchLogs()}
-              title="Refresh"
+              title={t("filters.refresh")}
             >
               <RefreshCcw
                 className={cn("h-4 w-4", loading && "animate-spin")}

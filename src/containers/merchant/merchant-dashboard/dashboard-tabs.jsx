@@ -2,11 +2,19 @@ import Link from "next/link";
 import { Ticket, MessageSquare, Sparkles } from "lucide-react";
 import { KpiCard } from "@/components/common/kpi-card";
 import { CreditsOverview } from "@/containers/merchant/merchant-dashboard/credits-overview";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
 const format = (num) => {
   const n = Number(num);
@@ -14,11 +22,12 @@ const format = (num) => {
 };
 
 const UpgradeCard = ({ feeData, adminId }) => {
+  const t = useTranslations("merchantDashboard.upgrade");
   const [upgrading, setUpgrading] = useState(false);
 
   const handleUpgrade = async () => {
     if (!feeData || !adminId) {
-      toast.error("Unable to proceed. Missing fee or admin information.");
+      toast.error(t("errorMissingInfo"));
       return;
     }
 
@@ -27,13 +36,16 @@ const UpgradeCard = ({ feeData, adminId }) => {
       const amount = Number(feeData.fee) * 100; // cents
 
       // Save package info for success page
-      localStorage.setItem("stripe_package", JSON.stringify({
-        id: "merchant-annual-upgrade",
-        name: "Annual Merchant Subscription",
-        price: feeData.fee,
-        currency: feeData.currency,
-        admin_id: adminId
-      }));
+      localStorage.setItem(
+        "stripe_package",
+        JSON.stringify({
+          id: "merchant-annual-upgrade",
+          name: "Annual Merchant Subscription",
+          price: feeData.fee,
+          currency: feeData.currency,
+          admin_id: adminId,
+        }),
+      );
 
       // Create checkout session
       const res = await axiosInstance.post("/stripe/create-checkout-session", {
@@ -45,12 +57,11 @@ const UpgradeCard = ({ feeData, adminId }) => {
       if (res.data?.sessionUrl) {
         window.location.href = res.data.sessionUrl;
       } else {
-        throw new Error("No session URL returned");
+        throw new Error(t("errorNoSessionUrl"));
       }
-
     } catch (error) {
       console.error("Upgrade failed:", error);
-      toast.error("Failed to initiate payment. Please try again.");
+      toast.error(t("errorPaymentFailed"));
       setUpgrading(false);
     }
   };
@@ -61,10 +72,10 @@ const UpgradeCard = ({ feeData, adminId }) => {
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <div className="space-y-1">
           <CardTitle className="text-lg font-bold text-blue-900">
-            Upgrade to Annual
+            {t("title")}
           </CardTitle>
           <CardDescription className="text-blue-700/80">
-            Unlock all features including analytics, bi-directional messaging, and more.
+            {t("description")}
           </CardDescription>
         </div>
         <div className="rounded-full bg-blue-200 p-2 text-blue-700">
@@ -73,12 +84,12 @@ const UpgradeCard = ({ feeData, adminId }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="text-3xl font-bold text-blue-900">
-          {feeData ? (
-            `${feeData.currency || "USD"} ${format(feeData.fee)}`
-          ) : (
-            "--"
-          )}
-          <span className="text-sm font-normal text-blue-700 ml-1">/year</span>
+          {feeData
+            ? `${feeData.currency || "USD"} ${format(feeData.fee)}`
+            : "--"}
+          <span className="text-sm font-normal text-blue-700 ml-1">
+            {t("pricePerYear")}
+          </span>
         </div>
       </CardContent>
       <CardFooter>
@@ -87,7 +98,7 @@ const UpgradeCard = ({ feeData, adminId }) => {
           disabled={!feeData || upgrading}
           onClick={handleUpgrade}
         >
-          {upgrading ? "Processing..." : "Upgrade Now"}
+          {upgrading ? t("processing") : t("upgradeNow")}
         </Button>
       </CardFooter>
     </Card>
@@ -101,7 +112,7 @@ import MerchantAnalyticsContainer from "@/containers/merchant/analytics";
 import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
 import MerchantSettings from "@/containers/merchant/merchant-settings/MerchantSettings";
 
-export const getDashboardTabs = ({
+export const useDashboardTabs = ({
   kpiData,
   recentRedemptions,
   subscriptionType = "temporary",
@@ -111,17 +122,16 @@ export const getDashboardTabs = ({
   feeData,
   adminId,
 }) => {
+  const t = useTranslations("merchantDashboard.tabs");
   const isAnnual = subscriptionType === "annual";
 
   return [
     {
       value: "overview",
-      label: "Overview",
+      label: t("overview"),
       content: (
         <div className="space-y-6">
-          {!isAnnual && (
-            <UpgradeCard feeData={feeData} adminId={adminId} />
-          )}
+          {!isAnnual && <UpgradeCard feeData={feeData} adminId={adminId} />}
           {/* Stats Grid */}
           <CreditsOverview
             data={creditStats}
@@ -139,35 +149,35 @@ export const getDashboardTabs = ({
     },
     {
       value: "coupons",
-      label: "Coupon Batches",
+      label: t("coupons"),
       content: <MerchantCouponsListingContainer embedded={true} />,
     },
     {
       value: "wallet",
-      label: "Wallet",
+      label: t("wallet"),
       content: <MerchantWalletContainer embedded={true} />,
     },
     {
       value: "settings",
-      label: "Settings",
+      label: t("settings"),
       content: <MerchantSettings />,
     },
     // {
     //   value: "automation",
-    //   label: "Automation",
+    //   label: t("automation"),
     //   content: <AutomationSettings />,
     // },
 
     /* {
       value: "feedback-form",
-      label: "Feedback Form",
+      label: t("feedbackForm"),
       content: (
         <MerchantFeedbackFormContainer />
       ),
     }, */
     /*{
       value: "settings",
-      label: "Settings",
+      label: t("settings"),
       content: (
         <Card>
           <CardHeader>

@@ -21,7 +21,7 @@ export const BreadcrumbComponent = ({ data }) => {
   const direction = getTextDirection(locale);
   const isRTL = direction === "rtl";
   const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
-  const t = useTranslations("common");
+  const t = useTranslations("sidebar.common");
   const router = useRouter();
   const { data: session } = useSession();
   const role = (session?.user?.role || "").toLowerCase();

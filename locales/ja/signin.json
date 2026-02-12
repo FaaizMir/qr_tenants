@@ -1,15 +1,30 @@
 {
-  "description": "エージェントと商人のための安全なマルチテナントワークスペース。\nダッシュボードを表示し、クーポンを発行し、1つの場所から顧客のフィードバックを追跡します。",
-  "description2": "エージェントまたはマーチャントの資格情報を使用して続行してください。",
-  "forgotPassword": "パスワードをお忘れですか？",
-  "heading1": "QRフィードバック、クーポン、WhatsAppの通知を起動するにはサインインしてください。",
-  "label1": "数秒でQRフィードバック",
-  "label2": "WhatsAppのフォローアップが準備完了",
-  "label3": "テナントは隔離され、安全です",
-  "label4": "ユーザー名",
-  "label5": "パスワード",
-  "qrReview": "QRレビューSaaS",
-  "registerAgent": "エージェントとして登録",
+  "qrReview": "QR REVIEW SAAS",
+  "heading1": "サインインしてQRフィードバック、クーポン、WhatsAppナッジを起動します。",
+  "description": "エージェントとマーチャント向けの安全なマルチテナントワークスペース。1か所からダッシュボードを表示し、クーポンを発行し、顧客フィードバックを追跡します。",
+  "label1": "QRフィードバック",
+  "label2": "WhatsApp自動化",
+  "label3": "安全で検証済み",
+  "welcome": "おかえりなさい",
   "signin": "サインイン",
-  "welcome": "お帰りなさい"
+  "description2": "ダッシュボードにアクセスするには、認証情報を入力してください",
+  "label4": "ユーザー名またはメール",
+  "label5": "パスワード",
+  "forgotPassword": "パスワードをお忘れですか？",
+  "noAccount": "アカウントをお持ちでないですか？",
+  "signupLink": "こちらでサインアップ",
+  "placeholders": {
+    "username": "ユーザー名またはメールアドレスを入力してください",
+    "password": "パスワードを入力してください",
+    "loadingText": "サインイン中...",
+    "submitLoading": "サインイン"
+  },
+  "validations": {
+    "error1": "無効なユーザー名またはパスワード",
+    "error2": "問題が発生しました。もう一度お試しください。",
+    "invalidCredentials": "無効なメールまたはパスワード。認証情報を確認してください。",
+    "accountInactive": "アカウントが無効です。エージェントにお問い合わせください。",
+    "unableToDetermineRole": "ユーザーの役割を判断できません",
+    "credentialsSignin": "無効なメールまたはパスワード。認証情報を確認してください。"
+  }
 }

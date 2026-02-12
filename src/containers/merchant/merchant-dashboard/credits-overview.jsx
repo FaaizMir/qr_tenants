@@ -8,6 +8,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import {
   Layers,
   CheckCircle,
@@ -24,7 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 
 // SVG Pie Chart moved outside component to avoid recreating component during render
-function CouponPieChart({ couponStats }) {
+function CouponPieChart({ couponStats, t }) {
   // Handle multiple possible data structures from API response
   const byStatus = couponStats?.byStatus || {};
   const issued =
@@ -39,12 +40,12 @@ function CouponPieChart({ couponStats }) {
 
   const data = [
     {
-      label: "Redeemed",
+      label: t("couponStatus.redeemed"),
       value: redeemed,
       color: "#10b981",
     }, // green
     {
-      label: "Unredeemed",
+      label: t("couponStatus.unredeemed"),
       value: unredeemed,
       color: "#f59e0b",
     }, // amber
@@ -55,7 +56,7 @@ function CouponPieChart({ couponStats }) {
   if (total === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
-        <p className="text-sm">No coupons issued yet</p>
+        <p className="text-sm">{t("couponStatus.noCouponsYet")}</p>
       </div>
     );
   }
@@ -140,13 +141,13 @@ const platformColors = {
   xiaohongshu: "bg-red-500",
 };
 
-function FeedbackBreakdown({ stats }) {
+function FeedbackBreakdown({ stats, t }) {
   const byPlatform = stats?.byPlatform || {};
   const total = stats?.totalReviews || 0;
 
   if (total === 0)
     return (
-      <p className="text-xs text-muted-foreground">No feedback data yet</p>
+      <p className="text-xs text-muted-foreground">{t("feedbacks.noDataYet")}</p>
     );
 
   return (
@@ -179,10 +180,10 @@ function FeedbackBreakdown({ stats }) {
   );
 }
 
-function TopCustomersList({ customers }) {
+function TopCustomersList({ customers, t }) {
   if (!customers || customers.length === 0) {
     return (
-      <p className="text-xs text-muted-foreground">No customer data yet</p>
+      <p className="text-xs text-muted-foreground">{t("topCustomers.noDataYet")}</p>
     );
   }
 
@@ -202,7 +203,7 @@ function TopCustomersList({ customers }) {
                 {customer.customerName}
               </p>
               <p className="text-[10px] text-muted-foreground mt-1">
-                {customer.totalVisits} visits
+                {customer.totalVisits} {t("topCustomers.visits")}
               </p>
             </div>
           </div>
@@ -211,7 +212,7 @@ function TopCustomersList({ customers }) {
               {customer.totalCouponsRedeemed || 0}
             </p>
             <p className="text-[8px] text-muted-foreground uppercase">
-              Redeemed
+              {t("topCustomers.redeemed")}
             </p>
           </div>
         </div>
@@ -220,20 +221,20 @@ function TopCustomersList({ customers }) {
   );
 }
 
-function WhatsAppBreakdown({ stats }) {
+function WhatsAppBreakdown({ stats, t }) {
   const ui = stats?.uiMessages || {};
   const bi = stats?.biMessages || {};
 
   const uiItems = [
-    { label: "Feedback Coupons", value: ui.feedbackCoupons ?? 0 },
-    { label: "Lucky Draw Wins", value: ui.luckyDrawWins ?? 0 },
-    { label: "Homepage Coupons", value: ui.homepageCoupons ?? 0 },
+    { label: t("whatsapp.feedbackCoupons"), value: ui.feedbackCoupons ?? 0 },
+    { label: t("whatsapp.luckyDrawWins"), value: ui.luckyDrawWins ?? 0 },
+    { label: t("whatsapp.homepageCoupons"), value: ui.homepageCoupons ?? 0 },
   ].filter((i) => i.value > 0);
 
   const biItems = [
-    { label: "Birthday Campaigns", value: bi.birthdayCampaigns ?? 0 },
-    { label: "Inactive Recalls", value: bi.inactiveRecalls ?? 0 },
-    { label: "Festival Campaigns", value: bi.festivalCampaigns ?? 0 },
+    { label: t("whatsapp.birthdayCampaigns"), value: bi.birthdayCampaigns ?? 0 },
+    { label: t("whatsapp.inactiveRecalls"), value: bi.inactiveRecalls ?? 0 },
+    { label: t("whatsapp.festivalCampaigns"), value: bi.festivalCampaigns ?? 0 },
   ].filter((i) => i.value > 0);
 
   return (
@@ -242,7 +243,7 @@ function WhatsAppBreakdown({ stats }) {
       <div>
         <div className="flex justify-between items-center mb-1">
           <span className="text-[10px] font-bold uppercase text-violet-600">
-            UI Messages (User-Initiated)
+            {t("whatsapp.uiMessages")}
           </span>
           <span className="text-xs font-bold">{ui.total ?? 0}</span>
         </div>
@@ -256,7 +257,7 @@ function WhatsAppBreakdown({ stats }) {
             ))
           ) : (
             <p className="text-[10px] text-muted-foreground italic">
-              No UI activity yet
+              {t("whatsapp.noUiActivity")}
             </p>
           )}
         </div>
@@ -266,7 +267,7 @@ function WhatsAppBreakdown({ stats }) {
       <div className="pt-2 border-t border-muted">
         <div className="flex justify-between items-center mb-1">
           <span className="text-[10px] font-bold uppercase text-amber-600">
-            BI Messages (Business-Initiated)
+            {t("whatsapp.biMessages")}
           </span>
           <span className="text-xs font-bold">{bi.total ?? 0}</span>
         </div>
@@ -280,7 +281,7 @@ function WhatsAppBreakdown({ stats }) {
             ))
           ) : (
             <p className="text-[10px] text-muted-foreground italic">
-              No BI campaigns yet
+              {t("whatsapp.noBiCampaigns")}
             </p>
           )}
         </div>
@@ -291,6 +292,7 @@ function WhatsAppBreakdown({ stats }) {
 
 export function CreditsOverview({ data, dashboardData, loading }) {
   const { data: session } = useSession();
+  const t = useTranslations("merchantDashboard");
 
   if (loading || !dashboardData) {
     return (
@@ -330,28 +332,28 @@ export function CreditsOverview({ data, dashboardData, loading }) {
 
   const metrics = [
     {
-      label: "Total Coupons",
+      label: t("metrics.totalCoupons"),
       value: overview.totalCoupons ?? 0,
       icon: Layers,
       color: "text-blue-600",
       iconBg: "bg-blue-100/50",
     },
     {
-      label: "Issued",
+      label: t("metrics.issued"),
       value: overview.totalCouponsIssued ?? 0,
       icon: Ticket,
       color: "text-amber-600",
       iconBg: "bg-amber-100/50",
     },
     {
-      label: "Redeemed",
+      label: t("metrics.redeemed"),
       value: overview.totalCouponsRedeemed ?? 0,
       icon: CheckCircle,
       color: "text-green-600",
       iconBg: "bg-green-100/50",
     },
     {
-      label: "Messages Sent",
+      label: t("metrics.messagesSent"),
       value:
         whatsappStats.totalMessagesSent ?? overview.whatsappMessagesSent ?? 0,
       icon: MessageCircle,
@@ -359,14 +361,14 @@ export function CreditsOverview({ data, dashboardData, loading }) {
       iconBg: "bg-purple-100/50",
     },
     {
-      label: "Credits Used",
+      label: t("metrics.creditsUsed"),
       value: whatsappStats.creditsUsed ?? 0,
       icon: MessageSquare,
       color: "text-violet-600",
       iconBg: "bg-violet-100/50",
     },
     {
-      label: "Total Customers",
+      label: t("metrics.totalCustomers"),
       value: overview.totalCustomers ?? 0,
       icon: Users,
       color: "text-orange-600",
@@ -414,11 +416,11 @@ export function CreditsOverview({ data, dashboardData, loading }) {
         {/* Coupon Status Chart */}
         <Card className="xl:col-span-1 overflow-hidden rounded-xl shadow-lg bg-white border-none transition-all hover:scale-[1.02]">
           <CardHeader>
-            <CardTitle className="text-lg">Coupon Status</CardTitle>
-            <CardDescription>Redemption Distribution</CardDescription>
+            <CardTitle className="text-lg">{t("couponStatus.title")}</CardTitle>
+            <CardDescription>{t("couponStatus.description")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <CouponPieChart couponStats={couponStats} />
+            <CouponPieChart couponStats={couponStats} t={t} />
           </CardContent>
         </Card>
 
@@ -427,8 +429,8 @@ export function CreditsOverview({ data, dashboardData, loading }) {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-lg">WhatsApp</CardTitle>
-                <CardDescription>UI & BI Breakdown</CardDescription>
+                <CardTitle className="text-lg">{t("whatsapp.title")}</CardTitle>
+                <CardDescription>{t("whatsapp.description")}</CardDescription>
               </div>
               <MessageCircle className="w-5 h-5 text-purple-500" />
             </div>
@@ -437,7 +439,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
             <div className="text-3xl font-extrabold">
               {whatsappStats.totalMessagesSent ?? 0}
             </div>
-            <WhatsAppBreakdown stats={whatsappStats} />
+            <WhatsAppBreakdown stats={whatsappStats} t={t} />
           </CardContent>
         </Card>
 
@@ -446,8 +448,8 @@ export function CreditsOverview({ data, dashboardData, loading }) {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-lg">Feedbacks</CardTitle>
-                <CardDescription>Platform Distribution</CardDescription>
+                <CardTitle className="text-lg">{t("feedbacks.title")}</CardTitle>
+                <CardDescription>{t("feedbacks.description")}</CardDescription>
               </div>
               <MessageSquare className="w-5 h-5 text-blue-500" />
             </div>
@@ -456,7 +458,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
             <div className="text-3xl font-extrabold">
               {overview.totalFeedbacks ?? 0}
             </div>
-            <FeedbackBreakdown stats={feedbackStats} />
+            <FeedbackBreakdown stats={feedbackStats} t={t} />
           </CardContent>
         </Card>
 
@@ -465,14 +467,14 @@ export function CreditsOverview({ data, dashboardData, loading }) {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-lg">Top Customers</CardTitle>
-                <CardDescription>Most active users</CardDescription>
+                <CardTitle className="text-lg">{t("topCustomers.title")}</CardTitle>
+                <CardDescription>{t("topCustomers.description")}</CardDescription>
               </div>
               <Users className="w-5 h-5 text-orange-500" />
             </div>
           </CardHeader>
           <CardContent>
-            <TopCustomersList customers={customerStats.topCustomers} />
+            <TopCustomersList customers={customerStats.topCustomers} t={t} />
           </CardContent>
         </Card>
 
@@ -481,7 +483,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
           <Card className="xl:col-span-1 overflow-hidden rounded-xl shadow-lg bg-white border-none transition-all hover:scale-[1.02]">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <UserPlus className="w-4 h-4 text-purple-500" /> Retention
+                <UserPlus className="w-4 h-4 text-purple-500" /> {t("retention.title")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -489,7 +491,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
                 {customerStats.returningCustomersThisMonth ?? 0}
               </div>
               <p className="text-[10px] text-muted-foreground mt-1 uppercase font-semibold">
-                Returning this month
+                {t("retention.returningThisMonth")}
               </p>
             </CardContent>
           </Card>
@@ -497,7 +499,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
           <Card className="overflow-hidden rounded-xl shadow-lg bg-white border-none transition-all hover:scale-[1.02]">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-yellow-500" /> Games
+                <Trophy className="w-4 h-4 text-yellow-500" /> {t("games.title")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -505,7 +507,7 @@ export function CreditsOverview({ data, dashboardData, loading }) {
                 {overview.luckyDrawParticipation ?? 0}
               </div>
               <p className="text-[10px] text-muted-foreground mt-1 uppercase font-semibold">
-                Lucky Draw Spins
+                {t("games.luckyDrawSpins")}
               </p>
             </CardContent>
           </Card>

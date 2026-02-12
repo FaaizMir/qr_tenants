@@ -1,22 +1,53 @@
 {
-  "allMerchants": "Semua Pedagang",
-  "addMerchant": "Tambah Pedagang",
-  "merchantReports": "Laporan Pedagang",
-  "allSubscriptions": "Semua Langganan",
-  "activePlans": "Paket Aktif",
-  "paymentHistory": "Riwayat Pembayaran",
-  "allAgents": "Semua Agen",
-  "agentPoints": "Poin Agen",
-  "agentReports": "Laporan Agen",
-  "allFeedbacks": "Semua Umpan Balik",
-  "pendingReview": "Menunggu Tinjauan",
-  "feedbackAnalytics": "Analitik Umpan Balik",
-  "allCoupons": "Semua Kupon",
-  "redeemedCoupons": "Kupon yang Ditukar",
-  "couponAnalytics": "Analitik Kupon",
-  "revenueAnalytics": "Analitik Pendapatan",
-  "userAnalytics": "Analitik Pengguna",
-  "generalSettings": "Pengaturan Umum",
-  "paymentSettings": "Pengaturan Pembayaran",
-  "systemSettings": "Pengaturan Sistem"
+  "agent": {
+    "approvals": "Persetujuan",
+    "couponsync": "Sinkronisasi Kupon",
+    "dashboard": "Dasbor",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "Agen Admin",
+    "earnings": "Pendapatan",
+    "logs": "Log",
+    "merchants": "Merchant",
+    "statements": "Pernyataan",
+    "support": "Dukungan",
+    "wallet": "Dompet"
+  },
+  "brand": {
+    "name": "Pemindai QR"
+  },
+  "common": {
+    "account": "Akun",
+    "home": "Beranda",
+    "logout": "Keluar",
+    "platform": "Platform",
+    "toggleSidebar": "Alihkan Sidebar"
+  },
+  "masterAdmin": {
+    "agents": "Agen",
+    "approvals": "Persetujuan",
+    "commission": "Komisi",
+    "dashboard": "Dasbor",
+    "logs": "Log",
+    "merchants": "Pedagang",
+    "packages": "Paket",
+    "settings": "Pengaturan",
+    "staff": "Staf",
+    "statements": "Pernyataan",
+    "support": "Dukungan"
+  },
+  "merchant": {
+    "campaigns": "Kampanye",
+    "coupons": "Kupon",
+    "customerData": "Data Pelanggan",
+    "dashboard": "Dasbor",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "Pengguna Merchant",
+    "logs": "Log sistem",
+    "luckyDraw": "Undian Beruntung",
+    "purchase": "Pembelian",
+    "serialCodes": "Kode Serial",
+    "statements": "Pernyataan",
+    "support": "Dukungan",
+    "wallet": "Dompet"
+  }
 }

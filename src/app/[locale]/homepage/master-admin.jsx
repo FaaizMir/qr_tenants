@@ -39,9 +39,8 @@ import { TopBannerAd } from "./components/PaidAdsDisplay";
 
 // --- Main Page Component ---
 export default function MasterAdminLandingPage() {
-  const tHeroSection = useTranslations("Homepage.heroSection");
-  const tFeatures = useTranslations("Homepage.fetaures");
-  const tFooter = useTranslations("Homepage.footer");
+  const t = useTranslations("homepage.masterAdmin");
+  const tCommon = useTranslations("homepage.common");
   const locale = useLocale();
   const router = useRouter();
 
@@ -69,21 +68,21 @@ export default function MasterAdminLandingPage() {
   // Mocked Platform Stats (since real endpoint might not exist yet)
   const stats = [
     {
-      label: "Active Agents",
+      label: t("stats.activeAgents"),
       value: agents.length || 0,
       icon: Users,
       color: "text-blue-500",
       bg: "bg-blue-500/10",
     },
     {
-      label: "Total Merchants",
+      label: t("stats.totalMerchants"),
       value: agents.reduce((acc, curr) => acc + (curr.merchantsCount || 0), 0),
       icon: Store,
       color: "text-purple-500",
       bg: "bg-purple-500/10",
     },
     {
-      label: "Global Reach",
+      label: t("stats.globalReach"),
       value: countries.length,
       icon: Globe,
       color: "text-emerald-500",
@@ -117,17 +116,17 @@ export default function MasterAdminLandingPage() {
           .slice(0, 6) // Ensure max 6 agents per page
           .map((agent) => ({
             id: agent.id,
-            name: agent.name || agent.user?.name || "Unknown Agent",
+            name: agent.name || agent.user?.name || t("fallback.unknownAgent"),
             email: agent.email || agent.user?.email,
-            location: agent.city || agent.country || agent.address || "Global",
-            country: agent.country || "Unknown",
+            location: agent.city || agent.country || agent.address || t("fallback.global"),
+            country: agent.country || t("fallback.unknown"),
             status:
               agent.is_active === true ||
-                agent.is_active === 1 ||
-                agent.user?.is_active === true ||
-                agent.user?.is_active === 1
-                ? "active"
-                : "inactive",
+              agent.is_active === 1 ||
+              agent.user?.is_active === true ||
+              agent.user?.is_active === 1
+                ? t("status.active")
+                : t("status.inactive"),
             joined: new Date().toLocaleDateString(),
             merchantsCount: agent.merchants?.length || 0,
           }));
@@ -152,18 +151,18 @@ export default function MasterAdminLandingPage() {
         setHasMore(transformed.length === 6);
         setTotalAgents(
           response.data?.pagination?.total ||
-          (pageNum === 1 ? transformed.length : totalAgents),
+            (pageNum === 1 ? transformed.length : totalAgents),
         );
         setPage(pageNum);
       } catch (err) {
         console.error(err);
-        setError("Failed to load agents.");
+        setError(t("errors.failedToLoadAgents"));
       } finally {
         setLoading(false);
         setLoadingMore(false);
       }
     },
-    [searchQuery, selectedCountry, totalAgents],
+    [searchQuery, selectedCountry, t, totalAgents],
   );
 
   useEffect(() => {
@@ -189,7 +188,7 @@ export default function MasterAdminLandingPage() {
           <div className="h-9 w-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20">
             <QrCode className="h-5 w-5" />
           </div>
-          <span className="tracking-tight">QR Rev</span>
+          <span className="tracking-tight">{tCommon("brandName")}</span>
         </div>
 
         <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-[14px] font-bold tracking-tight">
@@ -197,19 +196,19 @@ export default function MasterAdminLandingPage() {
             href="#platform-stats"
             className="text-slate-500 hover:text-primary transition-colors"
           >
-            Overview
+            {t("navigation.overview")}
           </Link>
           <Link
             href="#agent-directory"
             className="text-slate-500 hover:text-primary transition-colors"
           >
-            Directory
+            {t("navigation.directory")}
           </Link>
           <Link
             href="#features"
             className="text-slate-500 hover:text-primary transition-colors"
           >
-            Features
+            {t("navigation.features")}
           </Link>
         </nav>
 
@@ -220,7 +219,7 @@ export default function MasterAdminLandingPage() {
             className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
             onClick={() => router.push("/login")}
           >
-            Sign In
+            {t("navigation.signIn")}
           </Button>
         </div>
       </header>
@@ -238,18 +237,16 @@ export default function MasterAdminLandingPage() {
                   variant="outline"
                   className="mb-4 bg-primary/5 text-primary border-primary/20"
                 >
-                  Master Admin Control
+                  {t("hero.badge")}
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
-                  Platform <br />
+                  {t("hero.title")} <br />
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-600">
-                    Intelligence Center
+                    {t("hero.titleHighlight")}
                   </span>
                 </h1>
                 <p className="mt-4 text-lg text-slate-500 max-w-lg">
-                  Monitor global agent performance, manage territory
-                  distribution, and oversee merchant network growth from a
-                  single dashboard.
+                  {t("hero.description")}
                 </p>
               </div>
 
@@ -283,10 +280,10 @@ export default function MasterAdminLandingPage() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
                   <h2 className="text-3xl font-black tracking-tight text-slate-900">
-                    Agent Directory
+                    {t("agentDirectory.title")}
                   </h2>
                   <p className="text-slate-500 font-medium mt-1">
-                    Manage your global network of tenant agents.
+                    {t("agentDirectory.description")}
                   </p>
                 </div>
 
@@ -296,7 +293,7 @@ export default function MasterAdminLandingPage() {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-primary transition-colors" />
                     <input
                       type="text"
-                      placeholder="Search agents..."
+                      placeholder={t("agentDirectory.searchPlaceholder")}
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
@@ -316,11 +313,11 @@ export default function MasterAdminLandingPage() {
                     <SelectTrigger className="w-full sm:w-[180px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-lg text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">
                         <Globe className="h-3.5 w-3.5" />
-                        <SelectValue placeholder="All Countries" />
+                        <SelectValue placeholder={t("agentDirectory.allCountries")} />
                       </div>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Countries</SelectItem>
+                      <SelectItem value="all">{t("agentDirectory.allCountries")}</SelectItem>
                       {countries.map((c) => (
                         <SelectItem key={c} value={c}>
                           {c}
@@ -395,7 +392,7 @@ export default function MasterAdminLandingPage() {
                               </div>
                               <div className="flex items-center text-xs font-medium text-slate-500">
                                 <Store className="h-3.5 w-3.5 mr-2 text-slate-400" />
-                                {agent.merchantsCount} Active Merchants
+                                {agent.merchantsCount} {t("agentDirectory.activeMerchants")}
                               </div>
                             </div>
                           </div>
@@ -403,7 +400,7 @@ export default function MasterAdminLandingPage() {
                           {/* Footer Actions */}
                           <div className="mt-auto pt-5 flex items-center justify-between text-sm font-bold text-primary transition-colors duration-300">
                             <span className="group-hover:translate-x-1 transition-transform duration-300">
-                              View Storefront
+                              {t("agentDirectory.viewStorefront")}
                             </span>
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                           </div>
@@ -432,7 +429,7 @@ export default function MasterAdminLandingPage() {
                               page,
                               hasMore && totalAgents <= page * 6
                                 ? page + 1
-                                : Math.ceil(totalAgents / 6)
+                                : Math.ceil(totalAgents / 6),
                             ),
                           }).map((_, i) => {
                             const pageNum = i + 1;
@@ -440,7 +437,7 @@ export default function MasterAdminLandingPage() {
                               page,
                               hasMore && totalAgents <= page * 6
                                 ? page + 1
-                                : Math.ceil(totalAgents / 6)
+                                : Math.ceil(totalAgents / 6),
                             );
 
                             // Only show current, 1st, last, and neighbors
@@ -500,8 +497,8 @@ export default function MasterAdminLandingPage() {
                       {totalAgents > 0 && (
                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
                           {totalAgents <= page * 6 && hasMore
-                            ? `Showing Page ${page}`
-                            : `Showing ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalAgents)} of ${totalAgents} Agents`}
+                            ? `${t("agentDirectory.showingPage")} ${page}`
+                            : `${t("agentDirectory.showing")} ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalAgents)} ${t("agentDirectory.of")} ${totalAgents} ${t("agentDirectory.agents")}`}
                         </p>
                       )}
                     </div>
@@ -514,10 +511,10 @@ export default function MasterAdminLandingPage() {
                       <Users className="h-8 w-8 text-slate-300" />
                     </div>
                     <h3 className="font-bold text-slate-900 text-lg">
-                      No agents found
+                      {t("agentDirectory.noAgentsFound")}
                     </h3>
                     <p className="text-slate-500">
-                      Try adjusting your filters.
+                      {t("agentDirectory.tryAdjustingFilters")}
                     </p>
                   </div>
 
@@ -538,17 +535,23 @@ export default function MasterAdminLandingPage() {
                         <div className="flex items-center gap-1.5 px-2">
                           {Array.from({ length: page }).map((_, i) => {
                             const pageNum = i + 1;
-                            if (pageNum === 1 || pageNum === page || (pageNum >= page - 1 && pageNum <= page + 1)) {
+                            if (
+                              pageNum === 1 ||
+                              pageNum === page ||
+                              (pageNum >= page - 1 && pageNum <= page + 1)
+                            ) {
                               return (
                                 <Button
                                   key={pageNum}
-                                  variant={page === pageNum ? "default" : "outline"}
+                                  variant={
+                                    page === pageNum ? "default" : "outline"
+                                  }
                                   size="icon"
                                   className={cn(
                                     "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
                                     page === pageNum
                                       ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
-                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm"
+                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
                                   )}
                                   onClick={() => fetchAgents(pageNum)}
                                   disabled={loading}
@@ -556,8 +559,15 @@ export default function MasterAdminLandingPage() {
                                   {pageNum}
                                 </Button>
                               );
-                            } else if ((pageNum === 2 && page > 3)) {
-                              return <span key={pageNum} className="px-1 text-slate-400 font-bold">...</span>;
+                            } else if (pageNum === 2 && page > 3) {
+                              return (
+                                <span
+                                  key={pageNum}
+                                  className="px-1 text-slate-400 font-bold"
+                                >
+                                  ...
+                                </span>
+                              );
                             }
                             return null;
                           })}
@@ -575,7 +585,7 @@ export default function MasterAdminLandingPage() {
                       </div>
 
                       <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
-                        Page {page} - No Results
+                        {t("agentDirectory.pageNoResults")} {page}
                       </p>
                     </div>
                   )}
@@ -596,13 +606,13 @@ export default function MasterAdminLandingPage() {
                 variant="outline"
                 className="mb-4 text-slate-400 border-slate-200"
               >
-                Platform Features
+                {t("features.badge")}
               </Badge>
               <h2 className="text-3xl font-black tracking-tight sm:text-4xl mb-4 text-slate-900">
-                {tFeatures("h1")}
+                {t("features.title")}
               </h2>
               <p className="text-slate-500 text-lg">
-                {tFeatures("description")}
+                {t("features.description")}
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
@@ -611,22 +621,22 @@ export default function MasterAdminLandingPage() {
                   icon: Smartphone,
                   color: "text-blue-600",
                   bg: "bg-blue-50",
-                  h: tFeatures("card1Heading"),
-                  d: tFeatures("card1Description"),
+                  h: t("features.instantFeedback.title"),
+                  d: t("features.instantFeedback.description"),
                 },
                 {
                   icon: TrendingUp,
                   color: "text-orange-600",
                   bg: "bg-orange-50",
-                  h: tFeatures("card2Heading"),
-                  d: tFeatures("card2Description"),
+                  h: t("features.smartCoupons.title"),
+                  d: t("features.smartCoupons.description"),
                 },
                 {
                   icon: Globe,
                   color: "text-green-600",
                   bg: "bg-green-50",
-                  h: tFeatures("card3Heading"),
-                  d: tFeatures("card3Description"),
+                  h: t("features.whatsappAutomation.title"),
+                  d: t("features.whatsappAutomation.description"),
                 },
               ].map((fet, i) => (
                 <div
@@ -658,18 +668,20 @@ export default function MasterAdminLandingPage() {
             <div className="h-8 w-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
               <QrCode className="h-4 w-4" />
             </div>
-            QR Rev
+            {tCommon("brandName")}
           </div>
-          <div className="text-sm font-medium">{tFooter("text")}</div>
+          <div className="text-sm font-medium">
+            {t("footer.copyright")}
+          </div>
           <div className="flex gap-8 text-sm font-bold">
             <Link href="#" className="hover:text-white transition">
-              Privacy
+              {t("footer.privacy")}
             </Link>
             <Link href="#" className="hover:text-white transition">
-              Terms
+              {t("footer.terms")}
             </Link>
             <Link href="#" className="hover:text-white transition">
-              Contact
+              {t("footer.contact")}
             </Link>
           </div>
         </div>

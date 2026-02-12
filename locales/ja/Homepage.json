@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "顧客はQRコードをスキャンして数秒でレビューを残します。ネガティブなフィードバックをGoogleに届く前にプライベートにキャッチします。",
-    "card1Heading": "即時フィードバック",
-    "card2Description": "ユニークで追跡可能なシリアルコードを発行します。安全な検証と使用制限で詐欺を防ぎます。",
-    "card2Heading": "スマートクーポン",
-    "card3Description": "誕生日の祝福、レビューリクエスト、そして「あなたがいなくて寂しい」というオファーをWhatsAppを通じて自動的に送信します。",
-    "card3Heading": "WhatsApp自動化",
-    "description": "顧客を理解し、再度訪問してもらうための強力なツール。",
-    "h1": "成長するために必要なすべて"
+  "agent": {
+    "ads": {
+      "ad": "広告",
+      "availableIn": "{city}で利用可能",
+      "exclusiveIn": "{city}での独占",
+      "experienceNow": "今すぐ体験",
+      "featuredPartner": "特集パートナー",
+      "limitedTime": "期間限定",
+      "partner": "パートナー",
+      "premiumLabel": "プレミアム",
+      "sponsored": "スポンサー付き",
+      "sponsoredDeal": "スポンサー付き取引",
+      "viewOffer": "オファーを見る",
+      "visitBusiness": "{city}の{country}にある{businessName}を訪問してください。",
+      "visitExclusivePartner": "プレミアムオファーのために私たちの独占パートナーを訪問してください。"
+    },
+    "errors": {
+      "agentDataExpired": "エージェントデータが期限切れです。localStorageをクリアしています...",
+      "errorLoadingAgent": "localStorageからエージェントの読み込み中にエラーが発生しました：",
+      "failedToFetchMerchants": "マーチャントの取得に失敗しました:",
+      "failedToLoadData": "データの読み込みに失敗しました:",
+      "failedToLoadPaidAds": "有料広告の読み込みに失敗しました",
+      "invalidAgentData": "localStorageに無効なエージェントデータがあります。クリア中...",
+      "unableToLoadMerchants": "マーチャントを読み込めませんでした。もう一度お試しください。",
+      "unableToLoadPage": "ページを読み込めませんでした。もう一度お試しください。"
+    },
+    "fallback": {
+      "general": "一般",
+      "unknown": "不明"
+    },
+    "features": {
+      "badge": "私たちを選ぶ理由",
+      "description": "顧客を理解し、再来店を促すための強力なツール。",
+      "globalReach": {
+        "description": "包括的なツールと洞察を使って、ビジネスを国際的に拡大しましょう。",
+        "title": "グローバルリーチ"
+      },
+      "instantFeedback": {
+        "description": "顧客はQRコードをスキャンして数秒でレビューを残します。ネガティブなフィードバックをGoogleに届く前にプライベートにキャッチします。",
+        "title": "インスタントフィードバック"
+      },
+      "smartCoupons": {
+        "description": "ユニークで追跡可能なシリアルコードを発行します。安全な検証と使用制限で詐欺を防ぎます。",
+        "title": "スマートクーポン"
+      },
+      "title": "成長に必要なすべて"
+    },
+    "footer": {
+      "agentLogin": "エージェントログイン",
+      "copyright": "© {year} QR Rev. All rights reserved.",
+      "globalMerchantNetwork": "グローバルマーチャントネットワーク",
+      "privacyPolicy": "プライバシーポリシー",
+      "termsOfService": "利用規約"
+    },
+    "hero": {
+      "curatedForYou": "あなたのためにキュレーションされた",
+      "descriptionDefault": "認証されたマーチャントを閲覧し、即時クーポンをアンロックし、地域のプレミアムサービスで節約します。",
+      "descriptionWithAgent": "{agentName}が厳選した認定された商人を発見してください。即時クーポンをアンロックし、高級サービスで節約しましょう。",
+      "exclusiveDeals": "独占的な取引",
+      "officialPartnerNetwork": "公式パートナーネットワーク",
+      "partnerNetwork": "{agentName}のパートナーネットワーク"
+    },
+    "marketplace": {
+      "allIndustries": "すべての業界",
+      "city": "都市",
+      "curatingMessage": "私たちはあなたのために最高の認証された商人と独占的な取引をキュレーションしています...",
+      "everywhere": "どこでも",
+      "industry": "業界",
+      "loadingMarketplace": "マーケットプレイスを読み込んでいます",
+      "noMerchantsFound": "マーチャントが見つかりませんでした",
+      "pageNoResults": "ページ {page} - 結果がありません",
+      "retryConnection": "接続を再試行",
+      "searchPlaceholder": "マーチャント、カテゴリを検索...",
+      "showing": "{start} - {end} / {total} を表示中",
+      "showingPage": "ページ {page} を表示中",
+      "tryAdjustingFilters": "フィルターや検索を調整してみてください。",
+      "unableToLoad": "商人を読み込めません"
+    },
+    "merchantDetail": {
+      "availableCoupons": "利用可能なクーポン",
+      "availableDeals": "利用可能な取引",
+      "checkBackLater": "後で独占的な取引をチェックしてください！",
+      "clickMerchantPrompt": "左側のマーチャントプロフィールをクリックして彼らをアンロックしてください",
+      "dealsFound": "{count} 件の取引が見つかりました",
+      "details": "詳細",
+      "exclusiveCoupons": "独占クーポン",
+      "expired": "期限切れ",
+      "getCoupon": "クーポンを取得",
+      "left": "残り {count}",
+      "limitedTimeOffers": "および期間限定オファー。",
+      "live": "ライブ",
+      "merchantDetails": "マーチャントの詳細",
+      "noActiveCoupons": "現在アクティブなクーポンはありません。",
+      "offers": "{count} オファー",
+      "readyToExplore": "探検する準備はできましたか？",
+      "verifiedMerchant": "認証済みマーチャント"
+    },
+    "navigation": {
+      "features": "機能",
+      "home": "ホーム",
+      "marketplace": "マーケットプレイス",
+      "menu": "メニュー",
+      "partner": "パートナー",
+      "signIn": "サインイン"
+    },
+    "security": {
+      "dataExpiredClearing": "エージェントデータの有効期限が切れました。localStorageをクリアしています...",
+      "invalidDataClearing": "localStorageに無効なエージェントデータがあります。クリアしています..."
+    },
+    "stats": {
+      "loading": "読み込み中...",
+      "merchants": "商人",
+      "verified": "認定済み"
+    }
   },
-  "footer": {
-    "Contact": "連絡先",
-    "Privacy": "プライバシー",
-    "Terms": "利用規約",
-    "text": "© 2024 QR Rev Inc. 全著作権所有。"
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "顧客を変える",
-    "2": "忠実なファン",
-    "3": "スマートQRコードを使用して",
-    "description": "レビューを収集し、クーポンを配布し、顧客維持を自動化するためのオールインワンプラットフォーム。コーディングは不要です。",
-    "freeTrial": "無料トライアルを開始",
-    "para": "WhatsApp統合が追加されました",
-    "viewDemo": "デモを見る"
+  "couponForm": {
+    "birthday": "誕生日",
+    "birthdayFuture": "誕生日は未来の日付に設定できません",
+    "birthdayRequired": "誕生日は必須です",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "discount": "{percentage}% OFF",
+    "errorDefault": "クーポンの発行に失敗しました。もう一度お試しください。",
+    "from": "{merchantName}から",
+    "fullName": "フルネーム",
+    "getCoupon": "クーポンを取得",
+    "issuing": "発行中...",
+    "namePlaceholder": "フルネームを入力してください",
+    "nameRequired": "名前は必須です",
+    "phoneInvalid": "無効な電話番号形式",
+    "phoneNumber": "電話番号",
+    "phonePlaceholder": "電話番号を入力してください",
+    "phoneRequired": "電話番号は必須です",
+    "successMessage": "あなたのクーポンはWhatsAppを通じてあなたの電話に送信されました。",
+    "successTitle": "クーポンが正常に発行されました！",
+    "successToast": "クーポンが正常に送信されました！WhatsAppを確認してください。",
+    "title": "クーポンを取得する"
   },
-  "howitworks": {
-    "descp1": "ブランドの色とロゴでカスタマイズしてください。",
-    "descp2": "テーブル、カウンター、またはレシートの上に置いてください。",
-    "descp3": "レビューを収集し、顧客データベースを自動的に構築します。",
-    "h1": "シンプルな3ステッププロセス",
-    "h3": "ビジネスの成長を見守りましょう",
-    "heading1": "QRコードを生成する",
-    "heading2": "ストアに表示する"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "アクティブ商人",
+      "agents": "エージェント",
+      "allCountries": "すべての国",
+      "description": "グローバルなテナントエージェントネットワークを管理します。",
+      "noAgentsFound": "エージェントが見つかりません",
+      "of": "の",
+      "pageNoResults": "ページ - 結果がありません",
+      "searchPlaceholder": "エージェントを検索...",
+      "showing": "表示中",
+      "showingPage": "ページを表示中",
+      "title": "エージェントディレクトリ",
+      "tryAdjustingFilters": "フィルターを調整してみてください。",
+      "viewStorefront": "ストアフロントを見る"
+    },
+    "errors": {
+      "failedToLoadAgents": "エージェントの読み込みに失敗しました。"
+    },
+    "fallback": {
+      "global": "グローバル",
+      "unknown": "不明",
+      "unknownAgent": "不明なエージェント"
+    },
+    "features": {
+      "badge": "プラットフォーム機能",
+      "description": "顧客を理解し、再来を促すための強力なツール。",
+      "instantFeedback": {
+        "description": "顧客はQRコードをスキャンして数秒でレビューを残します。ネガティブなフィードバックをGoogleに届く前にプライベートにキャッチします。",
+        "title": "インスタントフィードバック"
+      },
+      "smartCoupons": {
+        "description": "ユニークで追跡可能なシリアルコードを発行します。安全な検証と使用制限で詐欺を防ぎます。",
+        "title": "スマートクーポン"
+      },
+      "title": "成長に必要なすべて",
+      "whatsappAutomation": {
+        "description": "WhatsAppを通じて誕生日のメッセージ、レビューリクエスト、\"お会いできなくて寂しい\"オファーを自動的に送信します。",
+        "title": "WhatsApp自動化"
+      }
+    },
+    "footer": {
+      "contact": "お問い合わせ",
+      "copyright": "© 2024 QR Rev Inc. 無断転載を禁じます。",
+      "privacy": "プライバシー",
+      "terms": "利用規約"
+    },
+    "hero": {
+      "badge": "マスター管理者コントロール",
+      "description": "グローバルエージェントのパフォーマンスを監視し、テリトリーの配分を管理し、単一のダッシュボードからマーチャントネットワークの成長を監督します。",
+      "title": "プラットフォーム",
+      "titleHighlight": "インテリジェンスセンター"
+    },
+    "navigation": {
+      "directory": "ディレクトリ",
+      "features": "機能",
+      "overview": "概要",
+      "signIn": "サインイン"
+    },
+    "Overview": "概要",
+    "stats": {
+      "activeAgents": "アクティブエージェント",
+      "globalReach": "グローバルリーチ",
+      "totalMerchants": "総マーチャント数"
+    },
+    "status": {
+      "active": "アクティブ",
+      "inactive": "非アクティブ"
+    }
   }
 }

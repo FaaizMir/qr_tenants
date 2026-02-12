@@ -1,0 +1,34 @@
+{
+  "title": "Wallet",
+  "breadcrumb": "Wallet",
+  "balance": "Balance",
+  "credits": "Credits",
+  "annualWallet": "Annual Wallet",
+  "temporaryWallet": "Temporary Wallet",
+  "totalCredits": "Total Credits",
+  "usedCredits": "Used Credits",
+  "remainingCredits": "Remaining Credits",
+  "expiresOn": "Expires On",
+  "transactionHistory": "Transaction History",
+  "date": "Date",
+  "type": "Type",
+  "amount": "Amount",
+  "description": "Description",
+  "noTransactions": "No transactions found",
+  "loadMore": "Load More",
+  "upgradePrompt": "Upgrade to Annual",
+  "upgradeDescription": "Get unlimited credits and more features",
+  "upgradeButton": "Upgrade Now",
+  "warnings": {
+    "title": "Wallet warning",
+    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
+    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
+    "day": "day",
+    "days": "days"
+  },
+  "errors": {
+    "failedToLoadWallet": "Failed to load wallet information",
+    "failedToLoadTransactions": "Failed to load transaction history",
+    "insufficientCredits": "Insufficient credits"
+  }
+}
