@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
   "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "annualWallet": "Annual Wallet",
+  "availableBalance": {
+    "couponCredits": "Coupon Credits",
+    "creditsExhausted": "Credits exhausted",
+    "mainBalance": "Main Balance",
+    "paidAdCredits": "Paid Ad Credits",
+    "subtitle": "Ready to use credits",
+    "temporaryCredits": "Temporary credits",
+    "title": "Available Balance",
+    "totalRemaining": "Total Remaining Credits",
+    "validateBalance": "Validate Balance",
+    "validating": "Validating...",
+    "whatsappBiCredits": "Whatsapp BI Credits",
+    "whatsappUiCredits": "Whatsapp UI Credits"
   },
+  "balance": "Balance",
+  "batchUsage": {
+    "columns": {
+      "batch": "Batch",
+      "lastActivity": "Last activity",
+      "tier": "Tier",
+      "usedTotal": "Used / Total"
+    },
+    "lastUsed": "Last activity: {date}",
+    "noData": "No batch usage available yet.",
+    "notAvailable": "N/A",
+    "searchPlaceholder": "Search batches...",
+    "standard": "Standard",
+    "subtitle": "Deduction details per batch.",
+    "temporarySubtitle": "Credits consumed per batch.",
+    "title": "Batch-wise usage",
+    "used": "Used: {used} / {total}"
+  },
+  "breadcrumb": "Wallet",
+  "creditBreakdown": {
+    "purchased": "Purchased",
+    "subtitle": "Detailed allocation",
+    "title": "Credit Breakdown",
+    "usageEfficiency": "Usage Efficiency",
+    "usageOverview": "Usage overview",
+    "used": "Used"
+  },
+  "credits": "Credits",
+  "date": "Date",
+  "description": "Description",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
     "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadWallet": "Failed to load wallet information",
+    "fetchFeeFailed": "Failed to fetch subscription fee",
+    "insufficientCredits": "Insufficient credits or expired. Please check your wallet.",
+    "missingFeeInfo": "Unable to proceed. Missing fee or admin information.",
+    "noSessionUrl": "No session URL returned",
+    "unableToDetermineMerchant": "Unable to determine merchant wallet. Please contact support.",
+    "unableToLoad": "Unable to load wallet. Please retry.",
+    "upgradeFailed": "Failed to initiate payment. Please try again.",
+    "validationFailed": "Validation failed"
+  },
+  "expiresOn": "Expires On",
+  "header": {
+    "annualSubtitle": "Annual merchants see Marketing + Utility tiers and full history.",
+    "temporarySubtitle": "Temporary merchants see temporary tier only. No transactions view.",
+    "title": "Wallet & Credits"
+  },
+  "loading": {
+    "fee": "Loading fee...",
+    "wallet": "Loading wallet..."
+  },
+  "loadMore": "Load More",
+  "noTransactions": "No transactions found",
+  "remainingCredits": "Remaining Credits",
+  "subscription": {
+    "annual": "Annual",
+    "planType": "Plan Type",
+    "subtitle": "{currency} Plan Status",
+    "temporary": "Temporary",
+    "title": "Subscription"
+  },
+  "summary": {
+    "creditsRemaining": "Credits remaining",
+    "creditsUsed": "Credits used",
+    "expiresAt": "Expires at",
+    "marketingUtility": "Marketing • Utility (read-only)",
+    "notProvided": "Not provided",
+    "subtitle": "Read-only pricing tiers. Actions require sufficient balance.",
+    "temporaryReadOnly": "Temporary (read-only)",
+    "tiersVisible": "Tiers visible",
+    "tierVisible": "Tier visible",
+    "title": "Usage summary"
+  },
+  "temporaryWallet": "Temporary Wallet",
+  "title": "Wallet",
+  "totalCredits": "Total Credits",
+  "transactionHistory": "Transaction History",
+  "transactions": {
+    "columns": {
+      "amount": "Amount",
+      "credits": "Credits",
+      "date": "Date",
+      "description": "Description",
+      "status": "Status"
+    },
+    "creditTypes": {
+      "coupon": "Coupon",
+      "paidAd": "Paid Ad",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "Whatsapp UI"
+    },
+    "noTransactions": "No transactions available.",
+    "searchPlaceholder": "Search transactions...",
+    "statusUnknown": "unknown",
+    "subtitle": "Annual merchants see history by tier.",
+    "title": "Recent transactions"
+  },
+  "type": "Type",
+  "upgradeButton": "Upgrade Now",
+  "upgrade": {
+    "description": "Get access to advanced analytics, priority support, and transaction history.",
+    "loadingFee": "...",
+    "perYear": "/year",
+    "processing": "Processing...",
+    "subtitle": "Unlock full features",
+    "title": "Upgrade to Annual",
+    "unavailable": "--",
+    "upgradeNow": "Upgrade Now"
+  },
+  "upgradeDescription": "Get unlimited credits and more features",
+  "upgradePrompt": "Upgrade to Annual",
+  "usedCredits": "Used Credits",
+  "warnings": {
+    "day": "day",
+    "days": "days",
+    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
+    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
+    "title": "Wallet warning",
+    "unavailableForTemporary": "Transaction history and Marketing/Utility tiers are unavailable for temporary merchants."
   }
 }

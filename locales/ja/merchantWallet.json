@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "金額",
+  "annualWallet": "年間ウォレット",
+  "availableBalance": {
+    "couponCredits": "クーポンクレジット",
+    "creditsExhausted": "クレジットが使い切れました",
+    "mainBalance": "メイン残高",
+    "paidAdCredits": "有料広告クレジット",
+    "subtitle": "使用可能なクレジット",
+    "temporaryCredits": "一時的なクレジット",
+    "title": "利用可能残高",
+    "totalRemaining": "残りの合計クレジット",
+    "validateBalance": "残高を確認",
+    "validating": "検証中...",
+    "whatsappBiCredits": "Whatsapp BIクレジット",
+    "whatsappUiCredits": "Whatsapp UI クレジット"
   },
+  "balance": "残高",
+  "batchUsage": {
+    "columns": {
+      "batch": "バッチ",
+      "lastActivity": "最終活動",
+      "tier": "ティア",
+      "usedTotal": "使用済み / 合計"
+    },
+    "lastUsed": "最終活動: {date}",
+    "noData": "まだバッチの使用はありません。",
+    "notAvailable": "該当なし",
+    "searchPlaceholder": "バッチを検索...",
+    "standard": "標準",
+    "subtitle": "バッチごとの控除詳細。",
+    "temporarySubtitle": "バッチごとに消費されたクレジット。",
+    "title": "バッチごとの使用",
+    "used": "使用済み: {used} / {total}"
+  },
+  "breadcrumb": "ウォレット",
+  "creditBreakdown": {
+    "purchased": "購入済み",
+    "subtitle": "詳細な配分",
+    "title": "クレジット内訳",
+    "usageEfficiency": "使用効率",
+    "usageOverview": "使用状況の概要",
+    "used": "使用済み"
+  },
+  "credits": "クレジット",
+  "date": "日付",
+  "description": "説明",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "取引履歴の読み込みに失敗しました",
+    "failedToLoadWallet": "ウォレット情報の読み込みに失敗しました",
+    "fetchFeeFailed": "サブスクリプション料金の取得に失敗しました",
+    "insufficientCredits": "クレジットが不足しているか、期限が切れています。ウォレットを確認してください。",
+    "missingFeeInfo": "進行できません。手数料または管理情報が不足しています。",
+    "noSessionUrl": "セッションURLが返されませんでした",
+    "unableToDetermineMerchant": "マーチャントウォレットを特定できません。サポートにお問い合わせください。",
+    "unableToLoad": "ウォレットを読み込めません。再試行してください。",
+    "upgradeFailed": "支払いの開始に失敗しました。もう一度お試しください。",
+    "validationFailed": "検証に失敗しました"
+  },
+  "expiresOn": "期限",
+  "header": {
+    "annualSubtitle": "年間マーチャントはマーケティング + ユーティリティティアと完全な履歴を表示します。",
+    "temporarySubtitle": "一時的なマーチャントは一時的なティアのみを表示します。取引の表示はありません。",
+    "title": "ウォレットとクレジット"
+  },
+  "loading": {
+    "fee": "手数料を読み込み中...",
+    "wallet": "ウォレットを読み込んでいます..."
+  },
+  "loadMore": "もっと読み込む",
+  "noTransactions": "取引が見つかりません",
+  "remainingCredits": "残りのクレジット",
+  "subscription": {
+    "annual": "年間",
+    "planType": "プランタイプ",
+    "subtitle": "{currency} プランのステータス",
+    "temporary": "一時的",
+    "title": "サブスクリプション"
+  },
+  "summary": {
+    "creditsRemaining": "残りのクレジット",
+    "creditsUsed": "使用したクレジット",
+    "expiresAt": "有効期限",
+    "marketingUtility": "マーケティング • ユーティリティ（読み取り専用）",
+    "notProvided": "提供されていません",
+    "subtitle": "読み取り専用の価格ティア。アクションには十分な残高が必要です。",
+    "temporaryReadOnly": "一時的（読み取り専用）",
+    "tiersVisible": "ティアが表示される",
+    "tierVisible": "階層が表示される",
+    "title": "使用状況の要約"
+  },
+  "temporaryWallet": "一時的なウォレット",
+  "title": "ウォレット",
+  "totalCredits": "合計クレジット",
+  "transactionHistory": "取引履歴",
+  "transactions": {
+    "columns": {
+      "amount": "金額",
+      "credits": "クレジット",
+      "date": "日付",
+      "description": "説明",
+      "status": "ステータス"
+    },
+    "creditTypes": {
+      "coupon": "クーポン",
+      "paidAd": "有料広告",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "Whatsapp UI"
+    },
+    "noTransactions": "利用可能な取引はありません。",
+    "searchPlaceholder": "取引を検索...",
+    "statusUnknown": "不明",
+    "subtitle": "年間の加盟店はティア別に履歴を確認できます。",
+    "title": "最近の取引"
+  },
+  "type": "タイプ",
+  "upgradeButton": "今すぐアップグレード",
+  "upgrade": {
+    "description": "高度な分析、優先サポート、取引履歴にアクセスします。",
+    "loadingFee": "...",
+    "perYear": "/年",
+    "processing": "処理中...",
+    "subtitle": "すべての機能を解除",
+    "title": "年間プランにアップグレード",
+    "unavailable": "--",
+    "upgradeNow": "今すぐアップグレード"
+  },
+  "upgradeDescription": "無制限のクレジットとその他の機能を取得",
+  "upgradePrompt": "年間プランにアップグレード",
+  "usedCredits": "使用済みクレジット",
+  "warnings": {
+    "day": "日",
+    "days": "日",
+    "expiringSoon": "{days}日{plural}で期限切れ — 期限切れ前にプランの使用を計画してください。",
+    "lowBalance": "クレジットが不足しています。検証後にアクションがブロックされる可能性があります（特に一時的な商人の場合）。",
+    "title": "ウォレット警告",
+    "unavailableForTemporary": "取引履歴とマーケティング/ユーティリティ階層は一時的な商人には利用できません。"
   }
 }

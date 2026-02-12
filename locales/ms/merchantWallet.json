@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "Jumlah",
+  "annualWallet": "Dompet Tahunan",
+  "availableBalance": {
+    "couponCredits": "Kredit Kupon",
+    "creditsExhausted": "Kredit habis",
+    "mainBalance": "Baki Utama",
+    "paidAdCredits": "Kredit Iklan Berbayar",
+    "subtitle": "Kredit sedia untuk digunakan",
+    "temporaryCredits": "Kredit sementara",
+    "title": "Baki Tersedia",
+    "totalRemaining": "Jumlah Kredit Tersisa",
+    "validateBalance": "Sahkan Baki",
+    "validating": "Mengesahkan...",
+    "whatsappBiCredits": "Kredit BI Whatsapp",
+    "whatsappUiCredits": "Kredit UI Whatsapp"
   },
+  "balance": "Baki",
+  "batchUsage": {
+    "columns": {
+      "batch": "Batch",
+      "lastActivity": "Aktiviti terakhir",
+      "tier": "Tahap",
+      "usedTotal": "Digunakan / Jumlah"
+    },
+    "lastUsed": "Aktiviti terakhir: {date}",
+    "noData": "Tiada penggunaan batch tersedia lagi.",
+    "notAvailable": "N/A",
+    "searchPlaceholder": "Cari batch...",
+    "standard": "Standard",
+    "subtitle": "Butiran pemotongan setiap kumpulan.",
+    "temporarySubtitle": "Kredit yang digunakan setiap batch.",
+    "title": "Penggunaan mengikut batch",
+    "used": "Digunakan: {used} / {total}"
+  },
+  "breadcrumb": "Dompet",
+  "creditBreakdown": {
+    "purchased": "Dibeli",
+    "subtitle": "Peruntukan terperinci",
+    "title": "Pecahan Kredit",
+    "usageEfficiency": "Kecekapan Penggunaan",
+    "usageOverview": "Tinjauan penggunaan",
+    "used": "Digunakan"
+  },
+  "credits": "Kredit",
+  "date": "Tarikh",
+  "description": "Penerangan",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "Gagal memuatkan sejarah transaksi",
+    "failedToLoadWallet": "Gagal memuatkan maklumat dompet",
+    "fetchFeeFailed": "Gagal untuk mendapatkan yuran langganan",
+    "insufficientCredits": "Kredit tidak mencukupi atau telah tamat. Sila semak dompet anda.",
+    "missingFeeInfo": "Tidak dapat meneruskan. Maklumat yuran atau pentadbir hilang.",
+    "noSessionUrl": "Tiada URL sesi yang dikembalikan",
+    "unableToDetermineMerchant": "Tidak dapat menentukan dompet peniaga. Sila hubungi sokongan.",
+    "unableToLoad": "Tidak dapat memuatkan dompet. Sila cuba lagi.",
+    "upgradeFailed": "Gagal untuk memulakan pembayaran. Sila cuba lagi.",
+    "validationFailed": "Pengesahan gagal"
+  },
+  "expiresOn": "Tamat Pada",
+  "header": {
+    "annualSubtitle": "Peniaga tahunan melihat tahap Pemasaran + Utiliti dan sejarah penuh.",
+    "temporarySubtitle": "Peniaga sementara hanya melihat tahap sementara. Tiada paparan transaksi.",
+    "title": "Dompet & Kredit"
+  },
+  "loading": {
+    "fee": "Memuatkan yuran...",
+    "wallet": "Memuatkan dompet..."
+  },
+  "loadMore": "Muat Lebih Banyak",
+  "noTransactions": "Tiada transaksi ditemui",
+  "remainingCredits": "Kredit yang tinggal",
+  "subscription": {
+    "annual": "Tahunan",
+    "planType": "Jenis Pelan",
+    "subtitle": "Status Pelan {currency}",
+    "temporary": "Sementara",
+    "title": "Langganan"
+  },
+  "summary": {
+    "creditsRemaining": "Kredit yang tinggal",
+    "creditsUsed": "Kredit digunakan",
+    "expiresAt": "Tamat pada",
+    "marketingUtility": "Pemasaran • Utiliti (hanya baca)",
+    "notProvided": "Tidak disediakan",
+    "subtitle": "Tiers harga hanya untuk bacaan. Tindakan memerlukan baki yang mencukupi.",
+    "temporaryReadOnly": "Sementara (hanya baca)",
+    "tiersVisible": "Tiers boleh dilihat",
+    "tierVisible": "Tahap boleh dilihat",
+    "title": "Ringkasan penggunaan"
+  },
+  "temporaryWallet": "Dompet Sementara",
+  "title": "Dompet",
+  "totalCredits": "Jumlah Kredit",
+  "transactionHistory": "Sejarah Transaksi",
+  "transactions": {
+    "columns": {
+      "amount": "Jumlah",
+      "credits": "Kredit",
+      "date": "Tarikh",
+      "description": "Penerangan",
+      "status": "Status"
+    },
+    "creditTypes": {
+      "coupon": "Kupon",
+      "paidAd": "Iklan Berbayar",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "Antaramuka Whatsapp"
+    },
+    "noTransactions": "Tiada transaksi tersedia.",
+    "searchPlaceholder": "Cari transaksi...",
+    "statusUnknown": "tidak diketahui",
+    "subtitle": "Peniaga tahunan melihat sejarah mengikut tahap.",
+    "title": "Transaksi terkini"
+  },
+  "type": "Jenis",
+  "upgradeButton": "Tingkatkan Sekarang",
+  "upgrade": {
+    "description": "Dapatkan akses kepada analitik lanjutan, sokongan keutamaan, dan sejarah transaksi.",
+    "loadingFee": "...",
+    "perYear": "/tahun",
+    "processing": "Memproses...",
+    "subtitle": "Buka semua ciri",
+    "title": "Tingkatkan ke Tahunan",
+    "unavailable": "--",
+    "upgradeNow": "Tingkatkan Sekarang"
+  },
+  "upgradeDescription": "Dapatkan kredit tanpa had dan lebih banyak ciri",
+  "upgradePrompt": "Tingkatkan ke Tahunan",
+  "usedCredits": "Kredit yang digunakan",
+  "warnings": {
+    "day": "hari",
+    "days": "hari",
+    "expiringSoon": "Tamat dalam {days} hari{plural} — gunakan pelan sebelum tamat.",
+    "lowBalance": "Kredit rendah. Tindakan mungkin disekat selepas pengesahan (terutamanya untuk peniaga sementara).",
+    "title": "Amaran dompet",
+    "unavailableForTemporary": "Sejarah transaksi dan tahap Pemasaran/Utiliti tidak tersedia untuk peniaga sementara."
   }
 }

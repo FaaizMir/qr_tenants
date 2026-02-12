@@ -3,12 +3,12 @@ import MerchantCreateCouponContainer from "@/containers/merchant/coupons/create"
 import { getTranslations } from "next-intl/server";
 
 export default async function CreateCouponPage({ params }) {
-  const tCommon = await getTranslations("common");
+  const t = await getTranslations("merchantCoupons.breadcrumbs");
 
   const breadcrumbData = [
-    { name: tCommon("dashboard"), url: "/merchant/dashboard" },
-    { name: "Coupons", url: "/merchant/coupons" },
-    { name: "Create Coupon Batch", url: "/merchant/coupons/create" },
+    { name: t("merchantDashboard"), url: "/merchant/dashboard" },
+    { name: t("coupons"), url: "/merchant/coupons" },
+    { name: t("createCouponBatch"), url: "/merchant/coupons/create" },
   ];
 
   return (

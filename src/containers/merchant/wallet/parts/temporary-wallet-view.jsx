@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   CreditCard,
   Clock3,
@@ -25,7 +27,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import WalletWarnings from "./wallet-warnings";
-import { useEffect, useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
@@ -42,6 +43,7 @@ export default function TemporaryWalletView({
   validating,
   embedded = false,
 }) {
+  const t = useTranslations("merchantWallet");
   const balance = wallet?.balance ?? 0;
   // Fallback to "Temporay" if tiers not present, though index assigns [MARKETING, UTILITY] to all currently
   // We'll stick to displaying "TEMPORARY" for strict logic or whatever tiers are passed
@@ -76,7 +78,7 @@ export default function TemporaryWalletView({
 
   const handleUpgrade = async () => {
     if (!feeData || !wallet?.merchant?.admin_id) {
-      toast.error("Unable to proceed. Missing fee or admin information.");
+      toast.error(t("errors.missingFeeInfo"));
       return;
     }
 
@@ -103,12 +105,12 @@ export default function TemporaryWalletView({
       if (res.data?.sessionUrl) {
         window.location.href = res.data.sessionUrl;
       } else {
-        throw new Error("No session URL returned");
+        throw new Error(t("errors.noSessionUrl"));
       }
 
     } catch (error) {
       console.error("Upgrade failed:", error);
-      toast.error("Failed to initiate payment. Please try again.");
+      toast.error(t("errors.upgradeFailed"));
       setUpgrading(false);
     }
   };
@@ -117,9 +119,9 @@ export default function TemporaryWalletView({
     <div className="space-y-6">
       {!embedded && (
         <header>
-          <h1 className="text-3xl font-bold">Wallet & Credits</h1>
+          <h1 className="text-3xl font-bold">{t("header.title")}</h1>
           <p className="text-muted-foreground">
-            Temporary merchants see temporary tier only. No transactions view.
+            {t("header.temporarySubtitle")}
           </p>
         </header>
       )}
@@ -131,9 +133,9 @@ export default function TemporaryWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Total Remaining Credits
+                {t("availableBalance.totalRemaining")}
               </CardTitle>
-              <CardDescription>Temporary credits</CardDescription>
+              <CardDescription>{t("availableBalance.temporaryCredits")}</CardDescription>
             </div>
             <div className="rounded-full bg-amber-500/10 p-2 text-amber-600">
               <CreditCard className="h-5 w-5" />
@@ -142,7 +144,7 @@ export default function TemporaryWalletView({
           <CardContent className="space-y-4 pt-2">
             <div className="flex flex-col gap-1">
               <span className="text-xs text-muted-foreground">
-                Main Balance
+                {t("availableBalance.mainBalance")}
               </span>
               <div className="text-4xl font-bold tracking-tight text-amber-900">
                 {format(balance)}
@@ -152,7 +154,7 @@ export default function TemporaryWalletView({
             <div className="grid gap-3 pt-2">
               <div className="flex justify-between items-center bg-amber-500/5 p-2 rounded-lg border border-amber-500/10">
                 <span className="text-amber-800 text-xs font-medium">
-                  Coupon Credits
+                  {t("availableBalance.couponCredits")}
                 </span>
                 <span className="font-bold text-sm text-amber-900">
                   {format(creditDetails.marketing)}
@@ -160,7 +162,7 @@ export default function TemporaryWalletView({
               </div>
               <div className="flex justify-between items-center bg-amber-500/5 p-2 rounded-lg border border-amber-500/10">
                 <span className="text-amber-800 text-xs font-medium">
-                  Whatsapp UI Credits
+                  {t("availableBalance.whatsappUiCredits")}
                 </span>
                 <span className="font-bold text-sm text-amber-900">
                   {format(creditDetails.whatsapp_ui ?? creditDetails.message)}
@@ -168,7 +170,7 @@ export default function TemporaryWalletView({
               </div>
               <div className="flex justify-between items-center bg-amber-500/5 p-2 rounded-lg border border-amber-500/10">
                 <span className="text-amber-800 text-xs font-medium">
-                  Paid Ad Credits
+                  {t("availableBalance.paidAdCredits")}
                 </span>
                 <span className="font-bold text-sm text-amber-900">
                   {format(creditDetails.utility)}
@@ -188,7 +190,7 @@ export default function TemporaryWalletView({
             {balance <= 0 && (
               <div className="mt-3 flex items-center gap-2 text-xs text-red-600">
                 <ShieldOff className="h-3.5 w-3.5" />
-                Credits exhausted
+                {t("availableBalance.creditsExhausted")}
               </div>
             )}
           </CardContent>
@@ -199,9 +201,9 @@ export default function TemporaryWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-medium">
-                Credit Breakdown
+                {t("creditBreakdown.title")}
               </CardTitle>
-              <CardDescription>Usage overview</CardDescription>
+              <CardDescription>{t("creditBreakdown.usageOverview")}</CardDescription>
             </div>
             <div className="rounded-full bg-blue-500/10 p-2 text-blue-600">
               <Coins className="h-5 w-5" />
@@ -212,7 +214,7 @@ export default function TemporaryWalletView({
               <div className="space-y-2 p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 dark:bg-emerald-500/5 dark:border-emerald-500/10">
                 <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Purchased
+                  {t("creditBreakdown.purchased")}
                 </span>
                 <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">
                   {format(creditDetails.purchased)}
@@ -222,7 +224,7 @@ export default function TemporaryWalletView({
               <div className="space-y-2 p-3 rounded-xl bg-rose-50/50 border border-rose-100 dark:bg-rose-500/5 dark:border-rose-500/10">
                 <span className="text-xs font-medium text-rose-600 dark:text-rose-400 flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                  Used
+                  {t("creditBreakdown.used")}
                 </span>
                 <div className="text-2xl font-bold text-rose-700 dark:text-rose-300">
                   {format(creditDetails.used)}
@@ -232,7 +234,7 @@ export default function TemporaryWalletView({
 
             <div className="pt-2">
               <div className="flex items-center justify-between text-xs text-muted-foreground p-2 bg-muted/50 rounded-lg">
-                <span>Usage Efficiency</span>
+                <span>{t("creditBreakdown.usageEfficiency")}</span>
                 <span className="font-medium text-foreground">
                   {creditDetails.purchased > 0
                     ? Math.round(
@@ -252,10 +254,10 @@ export default function TemporaryWalletView({
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div className="space-y-1">
               <CardTitle className="text-lg font-bold text-blue-900">
-                Upgrade to Annual
+                {t("upgrade.title")}
               </CardTitle>
               <CardDescription className="text-blue-700/80">
-                Unlock full features
+                {t("upgrade.subtitle")}
               </CardDescription>
             </div>
             <div className="rounded-full bg-blue-200 p-2 text-blue-700">
@@ -265,16 +267,16 @@ export default function TemporaryWalletView({
           <CardContent className="space-y-4">
             <div className="text-3xl font-bold text-blue-900">
               {loadingFee ? (
-                <span className="animate-pulse">...</span>
+                <span className="animate-pulse">{t("upgrade.loadingFee")}</span>
               ) : feeData ? (
                 `${feeData.currency} ${format(feeData.fee)}`
               ) : (
-                "--"
+                t("upgrade.unavailable")
               )}
-              <span className="text-sm font-normal text-blue-700 ml-1">/year</span>
+              <span className="text-sm font-normal text-blue-700 ml-1">{t("upgrade.perYear")}</span>
             </div>
             <p className="text-sm text-blue-800/80">
-              Get access to advanced analytics, priority support, and transaction history.
+              {t("upgrade.description")}
             </p>
           </CardContent>
           <CardFooter>
@@ -283,7 +285,7 @@ export default function TemporaryWalletView({
               disabled={loadingFee || upgrading || !feeData}
               onClick={handleUpgrade}
             >
-              {upgrading ? "Processing..." : "Upgrade Now"}
+              {upgrading ? t("upgrade.processing") : t("upgrade.upgradeNow")}
             </Button>
           </CardFooter>
         </Card>
@@ -292,9 +294,9 @@ export default function TemporaryWalletView({
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-semibold">Batch-wise usage</h2>
+            <h2 className="text-xl font-semibold">{t("batchUsage.title")}</h2>
             <p className="text-sm text-muted-foreground">
-              Credits consumed per batch.
+              {t("batchUsage.temporarySubtitle")}
             </p>
           </div>
         </div>
@@ -306,15 +308,15 @@ export default function TemporaryWalletView({
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-semibold">{batch.name}</span>
                     <span className="text-muted-foreground">
-                      {batch.tier || "Standard"}
+                      {batch.tier || t("batchUsage.standard")}
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    Used: {format(batch.used)} / {format(batch.total || 0)}
+                    {t("batchUsage.used", { used: format(batch.used), total: format(batch.total || 0) })}
                   </p>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Clock3 className="h-3.5 w-3.5" />
-                    Last activity: {batch.lastUsed || "N/A"}
+                    {t("batchUsage.lastUsed", { date: batch.lastUsed || t("batchUsage.notAvailable") })}
                   </div>
                 </CardContent>
               </Card>
@@ -322,7 +324,7 @@ export default function TemporaryWalletView({
           ) : (
             <Card>
               <CardContent className="pt-4 text-sm text-muted-foreground">
-                No batch usage available yet.
+                {t("batchUsage.noData")}
               </CardContent>
             </Card>
           )}
@@ -333,8 +335,7 @@ export default function TemporaryWalletView({
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4" />
           <span>
-            Transaction history and Marketing/Utility tiers are unavailable for
-            temporary merchants.
+            {t("warnings.unavailableForTemporary")}
           </span>
         </div>
       </section>

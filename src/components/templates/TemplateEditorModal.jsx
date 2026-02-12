@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { getImageUrl, compressImage } from "@/lib/utils/imageUtils";
+import { useTranslations } from "next-intl";
 
 export function TemplateEditorModal({
   open,
@@ -23,6 +24,7 @@ export function TemplateEditorModal({
   onChange,
   batchId,
 }) {
+  const t = useTranslations("merchantCoupons.template.editor");
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -54,7 +56,7 @@ export function TemplateEditorModal({
   const handleDone = async () => {
     // Validation
     if (!selectedFile && !value?.brand_image) {
-      toast.error("Brand image is mandatory");
+      toast.error(t("brandImageMandatory"));
       return;
     }
 
@@ -99,13 +101,13 @@ export function TemplateEditorModal({
           description: updatedValue.description,
           brand_image: updatedValue.brand_image,
         });
-        toast.success("Content updated successfully");
+        toast.success(t("contentUpdatedSuccessfully"));
       }
 
       onOpenChange(false);
     } catch (err) {
       console.error("Save failed", err);
-      toast.error(err?.response?.data?.message || "Failed to save content");
+      toast.error(err?.response?.data?.message || t("failedToSaveContent"));
     } finally {
       setUploading(false);
     }
@@ -115,17 +117,16 @@ export function TemplateEditorModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>Edit Template Content</DialogTitle>
+          <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>
-            Update brand image, header, title, and description. Changes preview
-            live.
+            {t("updateDescription")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">
-              Brand Image <span className="text-red-500">*</span>
+              {t("brandImage")} <span className="text-red-500">*</span>
             </label>
             <div className="flex items-center gap-4">
               {previewUrl && (
@@ -176,40 +177,40 @@ export function TemplateEditorModal({
                   ) : (
                     <Upload className="h-4 w-4 mr-2" />
                   )}
-                  {previewUrl ? "Change Image" : "Upload Brand Image"}
+                  {previewUrl ? t("changeImage") : t("uploadBrandImage")}
                 </Button>
               </div>
             </div>
             <p className="text-[10px] text-muted-foreground">
-              Required for all templates
+              {t("requiredForAllTemplates")}
             </p>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Header</label>
+            <label className="text-sm font-medium">{t("header")}</label>
             <Input
               value={value?.header || ""}
               onChange={handleField("header")}
-              placeholder="e.g. SPECIAL OFFER"
+              placeholder={t("headerPlaceholder")}
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Title</label>
+            <label className="text-sm font-medium">{t("titleField")}</label>
             <Input
               value={value?.title || ""}
               onChange={handleField("title")}
-              placeholder="e.g. 50% Discount"
+              placeholder={t("titlePlaceholder")}
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Description</label>
+            <label className="text-sm font-medium">{t("description")}</label>
             <Textarea
               value={value?.description || ""}
               onChange={handleField("description")}
               rows={4}
-              placeholder="Describe the offer details..."
+              placeholder={t("descriptionPlaceholder")}
             />
           </div>
         </div>
@@ -221,11 +222,11 @@ export function TemplateEditorModal({
             onClick={() => onOpenChange(false)}
             disabled={uploading}
           >
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="button" onClick={handleDone} disabled={uploading}>
             {uploading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
-            Done
+            {t("done")}
           </Button>
         </DialogFooter>
       </DialogContent>

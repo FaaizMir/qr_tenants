@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,8 +42,10 @@ export function DataTable({
   pagination = true,
   columnsBtn = true,
   isLoading = false,
-  loadingText = "Loading data...",
+  loadingText,
+  columnNameTranslations,
 }) {
+  const t = useTranslations("common.table");
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -126,7 +129,7 @@ export function DataTable({
                 size="sm"
                 className="ml-auto h-8 gap-2 border-border/50 bg-white dark:bg-zinc-900 hover:bg-muted transition-all shadow-xs"
               >
-                <span className="text-xs font-semibold">Columns</span>
+                <span className="text-xs font-semibold">{t("columns")}</span>
                 <ChevronDown className="h-3 w-3 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
@@ -135,6 +138,7 @@ export function DataTable({
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
                 .map((column) => {
+                  const columnName = columnNameTranslations?.[column.id] || column.id.replace(/_/g, " ");
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
@@ -144,7 +148,7 @@ export function DataTable({
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {column.id.replace(/_/g, " ")}
+                      {columnName}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
@@ -157,7 +161,7 @@ export function DataTable({
           <div className="min-h-[44vh] flex flex-col items-center justify-start space-y-3 pt-14">
             <LoadingSpinner className="w-8 h-8 text-gray-500 animate-spin" />
             <p className="text-sm text-gray-500">
-              {loadingText || "Loading data..."}
+              {loadingText || t("loadingData")}
             </p>
           </div>
         ) : (
@@ -203,7 +207,7 @@ export function DataTable({
                     colSpan={safeColumns.length || 1}
                     className="h-24 text-center"
                   >
-                    No results.
+                    {t("noResults")}
                   </TableCell>
                 </TableRow>
               )}

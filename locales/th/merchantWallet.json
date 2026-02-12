@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "จำนวนเงิน",
+  "annualWallet": "กระเป๋าเงินรายปี",
+  "availableBalance": {
+    "couponCredits": "เครดิตคูปอง",
+    "creditsExhausted": "เครดิตหมด",
+    "mainBalance": "ยอดเงินหลัก",
+    "paidAdCredits": "เครดิตโฆษณาที่ชำระเงิน",
+    "subtitle": "เครดิตที่พร้อมใช้งาน",
+    "temporaryCredits": "เครดิตชั่วคราว",
+    "title": "ยอดคงเหลือที่มีอยู่",
+    "totalRemaining": "เครดิตที่เหลือทั้งหมด",
+    "validateBalance": "ตรวจสอบยอดเงิน",
+    "validating": "กำลังตรวจสอบ...",
+    "whatsappBiCredits": "เครดิต Whatsapp BI",
+    "whatsappUiCredits": "เครดิต UI ของ Whatsapp"
   },
+  "balance": "ยอดคงเหลือ",
+  "batchUsage": {
+    "columns": {
+      "batch": "ชุด",
+      "lastActivity": "กิจกรรมล่าสุด",
+      "tier": "ระดับ",
+      "usedTotal": "ที่ใช้แล้ว / รวม"
+    },
+    "lastUsed": "กิจกรรมล่าสุด: {date}",
+    "noData": "ยังไม่มีการใช้งานชุด.",
+    "notAvailable": "ไม่สามารถใช้ได้",
+    "searchPlaceholder": "ค้นหาชุด...",
+    "standard": "มาตรฐาน",
+    "subtitle": "รายละเอียดการหักต่อชุด",
+    "temporarySubtitle": "เครดิตที่ใช้ต่อชุด.",
+    "title": "การใช้งานตามชุด",
+    "used": "ใช้แล้ว: {used} / {total}"
+  },
+  "breadcrumb": "กระเป๋าเงิน",
+  "creditBreakdown": {
+    "purchased": "ซื้อแล้ว",
+    "subtitle": "การจัดสรรรายละเอียด",
+    "title": "การแยกเครดิต",
+    "usageEfficiency": "ประสิทธิภาพการใช้งาน",
+    "usageOverview": "ภาพรวมการใช้งาน",
+    "used": "ที่ใช้ไป"
+  },
+  "credits": "เครดิต",
+  "date": "วันที่",
+  "description": "คำอธิบาย",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "ไม่สามารถโหลดประวัติธุรกรรมได้",
+    "failedToLoadWallet": "ไม่สามารถโหลดข้อมูลกระเป๋าเงินได้",
+    "fetchFeeFailed": "ไม่สามารถดึงค่าธรรมเนียมการสมัครสมาชิกได้",
+    "insufficientCredits": "เครดิตไม่เพียงพอหรือหมดอายุ กรุณาตรวจสอบกระเป๋าเงินของคุณ.",
+    "missingFeeInfo": "ไม่สามารถดำเนินการต่อได้ ข้อมูลค่าธรรมเนียมหรือข้อมูลผู้ดูแลระบบหายไป.",
+    "noSessionUrl": "ไม่มี URL เซสชันที่ส่งกลับมา",
+    "unableToDetermineMerchant": "ไม่สามารถระบุกระเป๋าเงินของผู้ค้าได้ กรุณาติดต่อฝ่ายสนับสนุน",
+    "unableToLoad": "ไม่สามารถโหลดกระเป๋าเงินได้ กรุณาลองใหม่อีกครั้ง",
+    "upgradeFailed": "ไม่สามารถเริ่มการชำระเงินได้ กรุณาลองอีกครั้ง.",
+    "validationFailed": "การตรวจสอบล้มเหลว"
+  },
+  "expiresOn": "หมดอายุในวันที่",
+  "header": {
+    "annualSubtitle": "ผู้ค้าแบบประจำปีเห็นระดับการตลาด + ยูทิลิตี้และประวัติทั้งหมด",
+    "temporarySubtitle": "ผู้ค้าแบบชั่วคราวเห็นเฉพาะระดับชั่วคราวเท่านั้น ไม่มีการดูธุรกรรม",
+    "title": "กระเป๋าเงินและเครดิต"
+  },
+  "loading": {
+    "fee": "กำลังโหลดค่าธรรมเนียม...",
+    "wallet": "กำลังโหลดกระเป๋าเงิน..."
+  },
+  "loadMore": "โหลดเพิ่มเติม",
+  "noTransactions": "ไม่พบธุรกรรม",
+  "remainingCredits": "เครดิตที่เหลือ",
+  "subscription": {
+    "annual": "ประจำปี",
+    "planType": "ประเภทแผน",
+    "subtitle": "สถานะแผน {currency}",
+    "temporary": "ชั่วคราว",
+    "title": "การสมัครสมาชิก"
+  },
+  "summary": {
+    "creditsRemaining": "เครดิตที่เหลือ",
+    "creditsUsed": "เครดิตที่ใช้ไป",
+    "expiresAt": "หมดอายุที่",
+    "marketingUtility": "การตลาด • ยูทิลิตี้ (อ่านอย่างเดียว)",
+    "notProvided": "ไม่ได้ระบุ",
+    "subtitle": "ระดับราคาที่อ่านได้เท่านั้น การดำเนินการต้องการยอดคงเหลือที่เพียงพอ",
+    "temporaryReadOnly": "ชั่วคราว (อ่านอย่างเดียว)",
+    "tiersVisible": "ระดับที่มองเห็น",
+    "tierVisible": "ระดับที่มองเห็นได้",
+    "title": "สรุปการใช้งาน"
+  },
+  "temporaryWallet": "กระเป๋าเงินชั่วคราว",
+  "title": "กระเป๋าเงิน",
+  "totalCredits": "เครดิตรวม",
+  "transactionHistory": "ประวัติธุรกรรม",
+  "transactions": {
+    "columns": {
+      "amount": "จำนวน",
+      "credits": "เครดิต",
+      "date": "วันที่",
+      "description": "คำอธิบาย",
+      "status": "สถานะ"
+    },
+    "creditTypes": {
+      "coupon": "คูปอง",
+      "paidAd": "โฆษณาที่ชำระเงิน",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "UI ของ Whatsapp"
+    },
+    "noTransactions": "ไม่มีธุรกรรมที่มีอยู่.",
+    "searchPlaceholder": "ค้นหาธุรกรรม...",
+    "statusUnknown": "ไม่ทราบ",
+    "subtitle": "ผู้ค้าประจำปีสามารถดูประวัติได้ตามระดับ",
+    "title": "ธุรกรรมล่าสุด"
+  },
+  "type": "ประเภท",
+  "upgradeButton": "อัปเกรดตอนนี้",
+  "upgrade": {
+    "description": "เข้าถึงการวิเคราะห์ขั้นสูง การสนับสนุนลำดับความสำคัญ และประวัติการทำธุรกรรม",
+    "loadingFee": "...",
+    "perYear": "/ปี",
+    "processing": "กำลังประมวลผล...",
+    "subtitle": "ปลดล็อกฟีเจอร์ทั้งหมด",
+    "title": "อัปเกรดเป็นประจำปี",
+    "unavailable": "--",
+    "upgradeNow": "อัปเกรดตอนนี้"
+  },
+  "upgradeDescription": "รับเครดิตไม่จำกัดและฟีเจอร์เพิ่มเติม",
+  "upgradePrompt": "อัปเกรดเป็นรายปี",
+  "usedCredits": "เครดิตที่ใช้แล้ว",
+  "warnings": {
+    "day": "วัน",
+    "days": "วัน",
+    "expiringSoon": "หมดอายุใน {days} วัน{plural} — ใช้แผนก่อนหมดอายุ.",
+    "lowBalance": "เครดิตต่ำ การดำเนินการอาจถูกบล็อกหลังจากการตรวจสอบ (โดยเฉพาะสำหรับผู้ค้าแบบชั่วคราว)",
+    "title": "คำเตือนกระเป๋าเงิน",
+    "unavailableForTemporary": "ประวัติการทำธุรกรรมและระดับการตลาด/ยูทิลิตี้ไม่สามารถใช้งานได้สำหรับผู้ค้าแบบชั่วคราว."
   }
 }

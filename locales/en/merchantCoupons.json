@@ -1,70 +1,232 @@
 {
-  "listing": {
-    "title": "Create Coupon Batch",
-    "breadcrumb": "Coupons",
-    "searchPlaceholder": "Search code...",
-    "allStatus": "All Status",
-    "issued": "Issued",
-    "redeemed": "Redeemed",
-    "exportPdf": "Export PDF"
+  "allCoupons": {
+    "columns": {
+      "batchName": "Batch Name",
+      "couponCode": "Coupon Code",
+      "expiryDate": "Expiry Date",
+      "issuedAt": "Issued At",
+      "redeemedAt": "Redeemed At",
+      "startDate": "Start Date",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Copied to clipboard",
+    "createCoupon": "Create Coupon",
+    "notRedeemed": "Not redeemed",
+    "searchPlaceholder": "Search coupons...",
+    "subtitle": "View and manage all generated coupons",
+    "title": "All Coupons"
+  },
+  "breadcrumbs": {
+    "couponBatches": "Coupon Batches",
+    "coupons": "Coupons",
+    "createCouponBatch": "Create Coupon Batch",
+    "detail": "Detail",
+    "merchantDashboard": "Merchant Dashboard"
   },
   "create": {
-    "title": "Batch Details",
-    "guidance": "Guidance",
+    "annual": "Annual",
     "batchName": "Batch Name",
     "batchNamePlaceholder": "e.g., Summer Sale 2024",
     "batchType": "Batch Type",
-    "selectBatchType": "Select batch type",
-    "annual": "Annual",
-    "temporary": "Temporary",
+    "cancelButton": "Cancel",
+    "createButton": "Create Batch",
+    "endDate": "End Date",
+    "form": {
+      "batchName": "Batch Name",
+      "batchNamePlaceholder": "e.g. Summer Promo 2024",
+      "description": "Configure your coupon parameters (limits are applied automatically)",
+      "endDate": "End Date",
+      "generateBatch": "Generate Batch",
+      "generatingCodes": "Generating Codes...",
+      "halalCertified": "Halal Certified",
+      "halalDescription": "Indicate compliance with Halal standards",
+      "quantity": "Quantity",
+      "startDate": "Start Date",
+      "template": "Template",
+      "title": "Batch Details"
+    },
+    "guidance": "Guidance",
+    "isActive": "Active",
+    "limits": {
+      "annual": "Annual limit: 1000 coupons",
+      "quantityLimit": "Limit: {max} codes",
+      "quantityLimitAnnual": "Limit: {max} codes (Annual)",
+      "quantityLimitTemporary": "Limit: {max} codes (Temporary)",
+      "temporary": "Temporary limit: 100 coupons"
+    },
+    "merchantType": {
+      "annual": "Annual Merchant",
+      "temporary": "Temporary Merchant"
+    },
     "quantity": "Quantity",
     "quantityPlaceholder": "Number of coupons",
+    "selectBatchType": "Select batch type",
     "startDate": "Start Date",
-    "endDate": "End Date",
-    "isActive": "Active",
-    "createButton": "Create Batch",
-    "updateButton": "Update Batch",
-    "cancelButton": "Cancel"
+    "temporary": "Temporary",
+    "title": "Create Coupon Batch",
+    "updateButton": "Update Batch"
   },
   "detail": {
-    "title": "Batch Details",
-    "loadingBatch": "Loading batch info...",
     "active": "Active",
-    "inactive": "Inactive",
-    "editContent": "Edit Content",
-    "totalQuantity": "Total Quantity",
-    "issuedQuantity": "Issued Quantity",
-    "utilized": "Utilized",
-    "validity": "Validity",
-    "start": "Start:",
-    "end": "End:",
-    "couponsInBatch": "Coupons in Batch",
-    "searchCode": "Search code...",
-    "code": "Code",
-    "status": "Status",
-    "issuedAt": "Issued At",
-    "redemptionDate": "Redemption Date",
-    "notRedeemed": "Not redeemed",
-    "copiedToClipboard": "Copied to clipboard",
     "batchIdNotAvailable": "Batch ID not available",
-    "fetchingPdf": "Fetching PDF...",
-    "noPdfData": "No PDF data received",
-    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
+    "code": "Code",
+    "columns": {
+      "code": "Code",
+      "issuedAt": "Issued At",
+      "redemptionDate": "Redemption Date",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Copied to clipboard",
+    "couponsInBatch": "Coupons in Batch",
+    "downloadPdf": "Download PDF",
+    "editContent": "Edit Content",
+    "end": "End:",
+    "exportPdf": "Export PDF",
     "failedToDownloadPdf": "Failed to download PDF",
-    "failedToLoadCoupons": "Failed to load coupons"
+    "failedToLoadCoupons": "Failed to load coupons",
+    "fetchingPdf": "Fetching PDF...",
+    "filters": {
+      "allStatus": "All Status",
+      "issued": "Issued",
+      "redeemed": "Redeemed"
+    },
+    "inactive": "Inactive",
+    "issuedAt": "Issued At",
+    "issuedQuantity": "Issued Quantity",
+    "loadingBatch": "Loading batch info...",
+    "noPdfData": "No PDF data received",
+    "notRedeemed": "Not redeemed",
+    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
+    "redemptionDate": "Redemption Date",
+    "searchCode": "Search code...",
+    "searchPlaceholder": "Search code...",
+    "start": "Start:",
+    "stats": {
+      "end": "End:",
+      "issuedQuantity": "Issued Quantity",
+      "start": "Start:",
+      "totalQuantity": "Total Quantity",
+      "utilized": "% Utilized",
+      "validity": "Validity"
+    },
+    "status": "Status",
+    "title": "Batch Details",
+    "totalQuantity": "Total Quantity",
+    "utilized": "Utilized",
+    "validity": "Validity"
   },
   "errors": {
     "batchNameRequired": "Batch name is required",
-    "quantityRequired": "Quantity is required",
-    "quantityMustBePositive": "Quantity must be a positive number",
-    "startDateRequired": "Start date is required",
-    "endDateRequired": "End date is required",
     "endDateMustBeAfterStart": "End date must be after start date",
+    "endDateRequired": "End date is required",
     "failedToCreateBatch": "Failed to create coupon batch",
-    "failedToUpdateBatch": "Failed to update coupon batch"
+    "failedToCreateCouponBatch": "Failed to create coupon batch.",
+    "failedToDeleteCouponBatch": "Failed to delete coupon batch",
+    "failedToDownloadPdf": "Failed to download PDF",
+    "failedToLoadCoupons": "Failed to load coupons",
+    "failedToLoadCouponsBatches": "Failed to load coupons batches",
+    "failedToUpdateBatch": "Failed to update coupon batch",
+    "quantityMustBePositive": "Quantity must be a positive number",
+    "quantityRequired": "Quantity is required",
+    "startDateRequired": "Start date is required"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "Coupon Options",
+      "delete": "Delete",
+      "details": "Details"
+    },
+    "allStatus": "All Status",
+    "breadcrumb": "Coupons",
+    "columnNames": {
+      "actions": "Actions",
+      "batchName": "Batch Name",
+      "batchType": "Batch Type",
+      "isActive": "Is Active",
+      "status": "Status",
+      "type": "Type",
+      "usage": "Usage",
+      "validity": "Validity"
+    },
+    "columns": {
+      "actions": "Actions",
+      "batchName": "Batch Name",
+      "status": "Status",
+      "type": "Type",
+      "usage": "Usage",
+      "validity": "Validity"
+    },
+    "createBatch": "Create Batch",
+    "deleteDialog": {
+      "cancel": "Cancel",
+      "confirm": "Delete",
+      "description": "This action cannot be undone. This will permanently delete",
+      "title": "Delete coupon batch?"
+    },
+    "exportPdf": "Export PDF",
+    "issued": "Issued",
+    "redeemed": "Redeemed",
+    "searchPlaceholder": "Search batches...",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "subtitle": "Manage your discount coupons",
+    "title": "Coupon Batches",
+    "usage": {
+      "issued": "{count} issued",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "From:",
+      "to": "To:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "Coupon batch created successfully!",
+    "batchDeleted": "Coupon batch deleted",
+    "batchIdNotAvailable": "Batch ID not available",
+    "copiedToClipboard": "Copied to clipboard",
+    "fetchingPdf": "Fetching PDF...",
+    "noPdfData": "No PDF data received",
+    "pdfDownloadedSuccessfully": "PDF downloaded successfully",
+    "unableToDetermineMerchantId": "Unable to determine merchant id. Please contact support.",
+    "uploadBrandImage": "Please upload a brand image in the template editor."
   },
   "success": {
     "batchCreated": "Coupon batch created successfully",
     "batchUpdated": "Coupon batch updated successfully"
+  },
+  "template": {
+    "chooseTemplate": "Choose a template",
+    "editContent": "Edit Content",
+    "editor": {
+      "brandImage": "Brand Image",
+      "brandImageMandatory": "Brand image is mandatory",
+      "cancel": "Cancel",
+      "changeImage": "Change Image",
+      "contentUpdatedSuccessfully": "Content updated successfully",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the offer details...",
+      "done": "Done",
+      "failedToSaveContent": "Failed to save content",
+      "header": "Header",
+      "headerPlaceholder": "e.g. SPECIAL OFFER",
+      "requiredForAllTemplates": "Required for all templates",
+      "title": "Edit Template Content",
+      "titleField": "Title",
+      "titlePlaceholder": "e.g. 50% Discount",
+      "updateDescription": "Update brand image, header, title, and description. Changes preview live.",
+      "uploadBrandImage": "Upload Brand Image"
+    },
+    "hoverToPreview": "Hover to preview or click to open",
+    "loadingTemplates": "Loading templates…",
+    "preview": "Preview",
+    "previewModal": {
+      "readOnlyPreview": "Read-only preview",
+      "title": "Template Preview"
+    },
+    "selected": "Selected",
+    "templateLocked": "Template locked for temporary plan"
   }
 }

@@ -15,8 +15,10 @@ import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function RewardStrategySettings() {
+  const t = useTranslations("merchantSettings.rewardStrategy");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -51,7 +53,7 @@ export default function RewardStrategySettings() {
 
       if (!luckyDrawEnabled && !selectedBatchId) {
         if (!isGlobal) {
-          toast.error("Please select a Coupon Batch for Direct Rewards.");
+          toast.error(t("selectCouponBatch"));
         }
         return;
       }
@@ -70,15 +72,15 @@ export default function RewardStrategySettings() {
           payload,
         );
         if (!isGlobal) {
-          toast.success("Reward Strategy Updated", {
-            description: "Your primary reward configuration has been saved.",
+          toast.success(t("updateSuccess"), {
+            description: t("updateSuccessDescription"),
           });
         }
       } catch (error) {
         console.error("Failed to save reward strategy:", error);
         if (!isGlobal) {
-          toast.error("Save Failed", {
-            description: "Could not update reward strategy. Please try again.",
+          toast.error(t("saveFailed"), {
+            description: t("saveFailedDescription"),
           });
         }
         throw error;
@@ -109,10 +111,10 @@ export default function RewardStrategySettings() {
           </div>
           <div className="space-y-0.5">
             <h3 className="font-semibold text-sm text-gray-900 leading-none">
-              Incentive Engine
+              {t("title")}
             </h3>
             <p className="text-[11px] text-muted-foreground font-medium">
-              Primary reward
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -138,10 +140,10 @@ export default function RewardStrategySettings() {
               </div>
               <div>
                 <p className="font-semibold text-xs leading-tight">
-                  Lucky Draw
+                  {t("luckyDraw")}
                 </p>
                 <p className="text-[9px] text-muted-foreground mt-0.5">
-                  Gamified Prizes
+                  {t("luckyDrawDescription")}
                 </p>
               </div>
               {luckyDrawEnabled && (
@@ -166,10 +168,10 @@ export default function RewardStrategySettings() {
               </div>
               <div>
                 <p className="font-semibold text-xs leading-tight">
-                  Direct Coupon
+                  {t("directCoupon")}
                 </p>
                 <p className="text-[9px] text-muted-foreground mt-0.5">
-                  Instant Access
+                  {t("directCouponDescription")}
                 </p>
               </div>
               {!luckyDrawEnabled && (
@@ -180,13 +182,13 @@ export default function RewardStrategySettings() {
 
           <div className="px-1 text-[9px] text-muted-foreground font-medium flex items-center gap-1.5 opacity-80 bg-gray-50/50 p-2 rounded-lg border border-dashed border-gray-200">
             <span className="text-xs">⚙️</span>
-            <span>Selection is managed via <strong>Feature Switchboard</strong></span>
+            <span>{t("managedVia")} <strong>{t("featureSwitchboard")}</strong></span>
           </div>
 
           {!luckyDrawEnabled ? (
             <div className="animate-in fade-in slide-in-from-top-2 space-y-1.5">
               <Label className="text-xs font-semibold text-gray-700 ml-1">
-                Select Reward
+                {t("selectReward")}
               </Label>
               <BatchSelector
                 selectedId={selectedBatchId}
@@ -194,7 +196,7 @@ export default function RewardStrategySettings() {
                 isOpen={batchDropdownOpen}
                 setIsOpen={setBatchDropdownOpen}
                 onSelect={(id) => setSelectedBatchId(id)}
-                placeholder="Choose regular reward..."
+                placeholder={t("chooseRegularReward")}
                 className="h-9 text-sm"
               />
             </div>
@@ -203,14 +205,14 @@ export default function RewardStrategySettings() {
               <div className="text-[10px] text-emerald-800 bg-emerald-50/80 px-3 py-2 rounded-lg border border-emerald-100 flex items-center gap-2">
                 <span className="text-xs">💡</span>
                 <span>
-                  Configure prizes in the{" "}
+                  {t("luckyDrawTip")}{" "}
                   <Link
                     href="/merchant/lucky-draw"
                     className="font-bold underline hover:text-emerald-950"
                   >
-                    Lucky Draw
+                    {t("luckyDrawTab")}
                   </Link>{" "}
-                  tab
+                  {t("tab")}
                 </span>
               </div>
             </div>
@@ -228,7 +230,7 @@ export default function RewardStrategySettings() {
               ) : (
                 <Save className="h-3 w-3 mr-2" />
               )}
-              Save Strategy
+              {t("saveStrategy")}
             </Button>
           </div>
         </CardContent>

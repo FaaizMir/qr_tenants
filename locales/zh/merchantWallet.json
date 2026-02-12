@@ -1,34 +1,139 @@
 {
-  "title": "Wallet",
-  "breadcrumb": "Wallet",
-  "balance": "Balance",
-  "credits": "Credits",
-  "annualWallet": "Annual Wallet",
-  "temporaryWallet": "Temporary Wallet",
-  "totalCredits": "Total Credits",
-  "usedCredits": "Used Credits",
-  "remainingCredits": "Remaining Credits",
-  "expiresOn": "Expires On",
-  "transactionHistory": "Transaction History",
-  "date": "Date",
-  "type": "Type",
-  "amount": "Amount",
-  "description": "Description",
-  "noTransactions": "No transactions found",
-  "loadMore": "Load More",
-  "upgradePrompt": "Upgrade to Annual",
-  "upgradeDescription": "Get unlimited credits and more features",
-  "upgradeButton": "Upgrade Now",
-  "warnings": {
-    "title": "Wallet warning",
-    "lowBalance": "Credits are low. Actions may be blocked after validation (especially for temporary merchants).",
-    "expiringSoon": "Expires in {days} day{plural} — plan usage before expiry.",
-    "day": "day",
-    "days": "days"
+  "amount": "金额",
+  "annualWallet": "年度钱包",
+  "availableBalance": {
+    "couponCredits": "优惠券积分",
+    "creditsExhausted": "积分耗尽",
+    "mainBalance": "主余额",
+    "paidAdCredits": "付费广告信用",
+    "subtitle": "可用积分",
+    "temporaryCredits": "临时信用",
+    "title": "可用余额",
+    "totalRemaining": "剩余总积分",
+    "validateBalance": "验证余额",
+    "validating": "验证中...",
+    "whatsappBiCredits": "Whatsapp BI 积分",
+    "whatsappUiCredits": "Whatsapp UI 积分"
   },
+  "balance": "余额",
+  "batchUsage": {
+    "columns": {
+      "batch": "批次",
+      "lastActivity": "最后活动",
+      "tier": "等级",
+      "usedTotal": "已用 / 总计"
+    },
+    "lastUsed": "最后活动：{date}",
+    "noData": "尚无批次使用。",
+    "notAvailable": "不适用",
+    "searchPlaceholder": "搜索批次...",
+    "standard": "标准",
+    "subtitle": "每批次的扣除详情。",
+    "temporarySubtitle": "每批次消耗的积分。",
+    "title": "按批次使用",
+    "used": "已使用：{used} / {total}"
+  },
+  "breadcrumb": "钱包",
+  "creditBreakdown": {
+    "purchased": "已购买",
+    "subtitle": "详细分配",
+    "title": "积分明细",
+    "usageEfficiency": "使用效率",
+    "usageOverview": "使用概述",
+    "used": "已使用"
+  },
+  "credits": "信用",
+  "date": "日期",
+  "description": "描述",
   "errors": {
-    "failedToLoadWallet": "Failed to load wallet information",
-    "failedToLoadTransactions": "Failed to load transaction history",
-    "insufficientCredits": "Insufficient credits"
+    "failedToLoadTransactions": "加载交易历史失败",
+    "failedToLoadWallet": "加载钱包信息失败",
+    "fetchFeeFailed": "获取订阅费用失败",
+    "insufficientCredits": "余额不足或已过期。请检查您的钱包。",
+    "missingFeeInfo": "无法继续。缺少费用或管理员信息。",
+    "noSessionUrl": "未返回会话 URL",
+    "unableToDetermineMerchant": "无法确定商户钱包。请联系支持。",
+    "unableToLoad": "无法加载钱包。请重试。",
+    "upgradeFailed": "支付初始化失败。请再试一次。",
+    "validationFailed": "验证失败"
+  },
+  "expiresOn": "到期日",
+  "header": {
+    "annualSubtitle": "年度商户查看市场营销 + 实用等级和完整历史记录。",
+    "temporarySubtitle": "临时商户仅查看临时等级。无交易视图。",
+    "title": "钱包和积分"
+  },
+  "loading": {
+    "fee": "加载费用...",
+    "wallet": "加载钱包..."
+  },
+  "loadMore": "加载更多",
+  "noTransactions": "未找到交易",
+  "remainingCredits": "剩余信用",
+  "subscription": {
+    "annual": "年度",
+    "planType": "计划类型",
+    "subtitle": "{currency} 计划状态",
+    "temporary": "临时",
+    "title": "订阅"
+  },
+  "summary": {
+    "creditsRemaining": "剩余积分",
+    "creditsUsed": "已使用积分",
+    "expiresAt": "到期时间",
+    "marketingUtility": "营销 • 实用（只读）",
+    "notProvided": "未提供",
+    "subtitle": "只读定价层级。操作需要足够的余额。",
+    "temporaryReadOnly": "临时（只读）",
+    "tiersVisible": "可见的层级",
+    "tierVisible": "层级可见",
+    "title": "使用摘要"
+  },
+  "temporaryWallet": "临时钱包",
+  "title": "钱包",
+  "totalCredits": "总积分",
+  "transactionHistory": "交易历史",
+  "transactions": {
+    "columns": {
+      "amount": "金额",
+      "credits": "积分",
+      "date": "日期",
+      "description": "描述",
+      "status": "状态"
+    },
+    "creditTypes": {
+      "coupon": "优惠券",
+      "paidAd": "付费广告",
+      "whatsappBi": "Whatsapp BI",
+      "whatsappUi": "Whatsapp 界面"
+    },
+    "noTransactions": "没有可用的交易。",
+    "searchPlaceholder": "搜索交易...",
+    "statusUnknown": "未知",
+    "subtitle": "年度商户按等级查看历史。",
+    "title": "最近交易"
+  },
+  "type": "类型",
+  "upgradeButton": "立即升级",
+  "upgrade": {
+    "description": "获取高级分析、优先支持和交易历史记录。",
+    "loadingFee": "...",
+    "perYear": "/年",
+    "processing": "处理中...",
+    "subtitle": "解锁全部功能",
+    "title": "升级到年度",
+    "unavailable": "--",
+    "upgradeNow": "立即升级"
+  },
+  "upgradeDescription": "获取无限积分和更多功能",
+  "upgradePrompt": "升级到年度",
+  "usedCredits": "已使用信用",
+  "warnings": {
+    "day": "天",
+    "days": "天",
+    "expiringSoon": "在 {days} 天内到期 — 在到期前计划使用。",
+    "lowBalance": "信用不足。验证后可能会阻止操作（特别是对于临时商户）。",
+    "title": "钱包警告",
+    "unavailableForTemporary": "交易历史和营销/实用层级对临时商户不可用。"
   }
 }

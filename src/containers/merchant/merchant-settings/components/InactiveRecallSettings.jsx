@@ -25,8 +25,10 @@ import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function InactiveRecallSettings() {
+  const t = useTranslations("merchantSettings.inactiveRecall");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -66,9 +68,8 @@ export default function InactiveRecallSettings() {
       if (!merchantId) return;
       if (state.enabled && !state.batchId) {
         if (!isGlobal) {
-          toast.error("Action Required: Inactive Recall", {
-            description:
-              "Please select an incentive coupon to win back inactive customers.",
+          toast.error(t("actionRequired"), {
+            description: t("actionRequiredDescription"),
           });
         }
         return;
@@ -86,15 +87,15 @@ export default function InactiveRecallSettings() {
           payload,
         );
         if (!isGlobal) {
-          toast.success("Inactive Recall Updated", {
-            description: "Your win-back automation settings have been saved.",
+          toast.success(t("updateSuccess"), {
+            description: t("updateSuccessDescription"),
           });
         }
       } catch (error) {
         console.error("Failed to save inactive recall settings:", error);
         if (!isGlobal) {
-          toast.error("Save Failed", {
-            description: "Could not update recall settings. Please try again.",
+          toast.error(t("saveFailed"), {
+            description: t("saveFailedDescription"),
           });
         }
         throw error;
@@ -125,12 +126,12 @@ export default function InactiveRecallSettings() {
           </div>
           <div className="space-y-0.5">
             <h3 className="font-semibold text-base text-gray-900 tracking-tight">
-              Win-Back Club
+              {t("title")}
             </h3>
             <div className="flex items-center gap-1.5">
               <UserCheck className="h-3 w-3 text-blue-500 animate-pulse" />
               <p className="text-[11px] text-muted-foreground font-medium">
-                Reactivate sleeping customers
+                {t("subtitle")}
               </p>
             </div>
           </div>
@@ -148,7 +149,7 @@ export default function InactiveRecallSettings() {
           <CardContent className="p-6 space-y-6">
             <div className="space-y-2.5">
               <Label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider ml-1">
-                Recall After
+                {t("recallAfter")}
               </Label>
               <div className="relative group/input">
                 <Input
@@ -165,7 +166,7 @@ export default function InactiveRecallSettings() {
                 />
                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-500/40 transition-colors group-focus-within/input:text-blue-600" />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-medium pointer-events-none uppercase">
-                  Days of inactivity
+                  {t("daysOfInactivity")}
                 </span>
               </div>
             </div>
@@ -173,11 +174,11 @@ export default function InactiveRecallSettings() {
             <div className="space-y-2.5">
               <div className="flex items-center justify-between ml-1">
                 <Label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">
-                  Incentive Reward
+                  {t("incentiveReward")}
                 </Label>
                 {state.batchId && (
                   <span className="text-[10px] text-blue-600 font-semibold bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 flex items-center gap-1">
-                    <Gift className="h-2.5 w-2.5" /> Selected
+                    <Gift className="h-2.5 w-2.5" /> {t("selected")}
                   </span>
                 )}
               </div>
@@ -187,12 +188,11 @@ export default function InactiveRecallSettings() {
                 isOpen={dropdownOpen}
                 setIsOpen={setDropdownOpen}
                 onSelect={(id) => setState((p) => ({ ...p, batchId: id }))}
-                placeholder="Choose recall reward..."
+                placeholder={t("chooseRecallReward")}
                 className="h-12 rounded-xl"
               />
               <p className="text-[10px] text-muted-foreground text-center mt-2 italic px-4">
-                Customers who haven&apos;t visited in a while will get this
-                treat.
+                {t("description")}
               </p>
             </div>
 
@@ -207,7 +207,7 @@ export default function InactiveRecallSettings() {
                 ) : (
                   <>
                     <Save className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
-                    <span>Save Win-Back Settings</span>
+                    <span>{t("saveButton")}</span>
                   </>
                 )}
               </Button>
@@ -218,7 +218,7 @@ export default function InactiveRecallSettings() {
       {!state.enabled && (
         <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-center">
           <p className="text-[11px] text-gray-400 font-medium italic">
-            Enable Win-Back Club to reactivate lapsed customers
+            {t("enableMessage")}
           </p>
         </div>
       )}

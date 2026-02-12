@@ -19,9 +19,11 @@ import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { TemplateSelector } from "@/components/templates/TemplateSelector";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function MerchantCreateCouponContainer() {
+  const t = useTranslations("merchantCoupons");
+  const tGuidance = useTranslations("common.guidance");
   const router = useRouter();
   const locale = useLocale();
   const { data: session } = useSession();
@@ -44,8 +46,8 @@ export default function MerchantCreateCouponContainer() {
 
   const limitLabel = useMemo(
     () =>
-      isAnnual ? "Annual limit: 1000 coupons" : "Temporary limit: 100 coupons",
-    [isAnnual],
+      isAnnual ? t("create.limits.annual") : t("create.limits.temporary"),
+    [isAnnual, t],
   );
 
   // ✅ Reset form function
@@ -66,7 +68,7 @@ export default function MerchantCreateCouponContainer() {
       const merchant_id = session?.user?.merchantId;
 
       if (!merchant_id) {
-        toast.error("Unable to determine merchant id. Please contact support.");
+        toast.error(t("messages.unableToDetermineMerchantId"));
         setLoading(false);
         return;
       }
@@ -87,7 +89,7 @@ export default function MerchantCreateCouponContainer() {
       };
 
       if (!payload.brand_image) {
-        toast.error("Please upload a brand image in the template editor.");
+        toast.error(t("messages.uploadBrandImage"));
         setLoading(false);
         return;
       }
@@ -96,7 +98,7 @@ export default function MerchantCreateCouponContainer() {
 
       const { data } = await axiosInstance.post("/coupon-batches", payload);
 
-      toast.success("Coupon batch created successfully!");
+      toast.success(t("messages.batchCreatedSuccessfully"));
 
       // ✅ Reset form after success
       resetForm();
@@ -108,7 +110,7 @@ export default function MerchantCreateCouponContainer() {
       const msg =
         err?.response?.data?.message ||
         err?.message ||
-        "Failed to create coupon batch.";
+        t("errors.failedToCreateCouponBatch");
       toast.error(msg);
     } finally {
       setLoading(false);
@@ -124,10 +126,10 @@ export default function MerchantCreateCouponContainer() {
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-3xl font-bold">Create Coupon Batch</h1>
+          <h1 className="text-3xl font-bold">{t("create.title")}</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-primary font-semibold">
-              {isAnnual ? "Annual Merchant" : "Temporary Merchant"}
+              {isAnnual ? t("create.merchantType.annual") : t("create.merchantType.temporary")}
             </span>
             <span>{limitLabel}</span>
           </div>
@@ -139,28 +141,27 @@ export default function MerchantCreateCouponContainer() {
         <div className="md:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Batch Details</CardTitle>
+              <CardTitle>{t("create.form.title")}</CardTitle>
               <CardDescription>
-                Configure your coupon parameters (limits are applied
-                automatically)
+                {t("create.form.description")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="md:col-span-2 space-y-2">
-                    <Label htmlFor="name">Batch Name</Label>
+                    <Label htmlFor="name">{t("create.form.batchName")}</Label>
                     <Input
                       id="name"
                       required
-                      placeholder="e.g. Summer Promo 2024"
+                      placeholder={t("create.form.batchNamePlaceholder")}
                       value={batchName}
                       onChange={(e) => setBatchName(e.target.value)}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="quantity">Quantity</Label>
+                    <Label htmlFor="quantity">{t("create.form.quantity")}</Label>
                     <div className="relative">
                       <Input
                         id="quantity"
@@ -179,15 +180,17 @@ export default function MerchantCreateCouponContainer() {
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Limit: {maxPerBatch} codes{" "}
-                      {isAnnual ? "(Annual)" : "(Temporary)"}
+                      {isAnnual 
+                        ? t("create.limits.quantityLimitAnnual", { max: maxPerBatch })
+                        : t("create.limits.quantityLimitTemporary", { max: maxPerBatch })
+                      }
                     </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="start">Start Date</Label>
+                    <Label htmlFor="start">{t("create.form.startDate")}</Label>
                     <Input
                       id="start"
                       type="date"
@@ -198,7 +201,7 @@ export default function MerchantCreateCouponContainer() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="end">End Date</Label>
+                    <Label htmlFor="end">{t("create.form.endDate")}</Label>
                     <Input
                       id="end"
                       type="date"
@@ -214,10 +217,10 @@ export default function MerchantCreateCouponContainer() {
                   <label className="flex items-center justify-between gap-4 rounded-xl border border-muted/60 bg-muted/20 p-4 hover:border-primary/40 hover:bg-primary/5 transition cursor-pointer group">
                     <div className="flex flex-col flex-1">
                       <span className="text-sm font-semibold leading-none group-hover:text-primary transition-colors">
-                        Halal Certified
+                        {t("create.form.halalCertified")}
                       </span>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Indicate compliance with Halal standards
+                        {t("create.form.halalDescription")}
                       </p>
                     </div>
                     <Switch
@@ -229,7 +232,7 @@ export default function MerchantCreateCouponContainer() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Template</Label>
+                  <Label>{t("create.form.template")}</Label>
                   <TemplateSelector
                     isAnnual={isAnnual}
                     onChange={setTemplateSelection}
@@ -238,7 +241,7 @@ export default function MerchantCreateCouponContainer() {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Generating Codes..." : "Generate Batch"}
+                  {loading ? t("create.form.generatingCodes") : t("create.form.generateBatch")}
                 </Button>
               </form>
             </CardContent>
@@ -249,13 +252,13 @@ export default function MerchantCreateCouponContainer() {
         <div className="space-y-6">
           <Card className="bg-linear-to-br from-primary/5 to-background border-primary/10">
             <CardHeader>
-              <CardTitle className="text-lg">Guidance</CardTitle>
+              <CardTitle className="text-lg">{tGuidance("title")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>• Use concise, campaign-specific batch names.</p>
-              <p>• Set start/end dates to control redemption windows.</p>
-              <p>• Annual: up to 1000 codes per batch. Temporary: up to 100.</p>
-              <p>• Preview your selected template before generating.</p>
+              <p>{tGuidance("tip1")}</p>
+              <p>{tGuidance("tip2")}</p>
+              <p>{tGuidance("tip3")}</p>
+              <p>{tGuidance("tip4")}</p>
             </CardContent>
           </Card>
         </div>

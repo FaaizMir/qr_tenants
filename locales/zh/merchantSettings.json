@@ -1,204 +1,255 @@
 {
-  "main": {
-    "title": "Merchant Hub",
-    "version": "Version 2.0",
-    "subtitle": "Strategy Control",
-    "tabs": {
-      "paidAds": "Paid Ads",
-      "settings": "Settings",
-      "automations": "Automations",
-      "festivalMessages": "Festival Messages",
-      "campaigns": "Campaigns"
-    },
-    "proTip": "Pro Tip",
-    "proTipMessage": "Enable features in the switchboard, then configure them below"
-  },
-  "featureMasterControl": {
-    "title": "Feature Switchboard",
-    "subtitle": "Real-time capability control",
-    "live": "Live",
-    "features": {
-      "paidAds": {
-        "label": "Paid Ads",
-        "description": "Display image/video banners to users"
-      },
-      "googleReviews": {
-        "label": "Google Reviews",
-        "description": "Review link to Google Business profile"
-      },
-      "facebookReviews": {
-        "label": "Facebook Reviews",
-        "description": "Direct link to Facebook Page reviews"
-      },
-      "instagramReviews": {
-        "label": "Instagram Reviews",
-        "description": "Integration with Instagram Business"
-      },
-      "xiaohongshuReviews": {
-        "label": "XiaoHongShu Reviews",
-        "description": "Connect with the Red community"
-      },
-      "presetReviews": {
-        "label": "Preset Reviews",
-        "description": "Preset feedback options for customers"
-      },
-      "luckyDraw": {
-        "label": "Lucky Draw",
-        "description": "Gamified reward distribution system"
-      },
-      "birthdayMessage": {
-        "label": "Birthday Message",
-        "description": "Automated rewards on customer birthdays"
-      },
-      "inactiveRecall": {
-        "label": "Inactive Recall",
-        "description": "Automatically recall inactive customers"
-      },
-      "festivalCampaign": {
-        "label": "Festival Campaign",
-        "description": "Broadcasts for special holiday events"
-      },
-      "scheduledCampaign": {
-        "label": "Scheduled Campaign",
-        "description": "Scheduled marketing message campaigns"
-      }
-    },
-    "active": "Active",
-    "paused": "Paused",
-    "success": "{feature} {status}",
-    "successDescription": "Successfully updated your {feature} status.",
-    "error": "Process Failed",
-    "errorDescription": "Could not synchronize setting. Please check your connection."
+  "batchSelector": {
+    "loading": "加载中...",
+    "noBatchesDescription": "请先创建一个优惠券批次",
+    "noBatchesTitle": "没有可用的批次",
+    "of": "的",
+    "used": "已使用"
   },
   "birthdayRewards": {
-    "title": "Birthday Club",
-    "subtitle": "Automatic customer treats",
-    "daysBefore": "Days Before",
-    "daysAfter": "Days After",
-    "days": "Days",
-    "birthdayReward": "Birthday Reward",
-    "selected": "Selected",
-    "selectRewardBatch": "Select a reward batch...",
-    "description": "Customers will receive a message with this reward on their special day.",
-    "saveButton": "Save Birthday Settings",
-    "enableMessage": "Enable Birthday Club to automate your rewards",
-    "actionRequired": "Action Required: Birthday Club",
-    "actionRequiredDescription": "Please select a coupon batch to reward your customers on their birthday.",
-    "updateSuccess": "Birthday Club Updated",
-    "updateSuccessDescription": "Your birthday automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update birthday settings. Please try again."
+    "actionRequired": "需要操作：生日俱乐部",
+    "actionRequiredDescription": "请选择一个优惠券批次以在客户生日时奖励他们。",
+    "birthdayReward": "生日奖励",
+    "days": "天数",
+    "daysAfter": "天数后",
+    "daysBefore": "天数之前",
+    "description": "客户将在他们的特殊日子收到一条带有此奖励的信息。",
+    "enableMessage": "启用生日俱乐部以自动化您的奖励",
+    "saveButton": "保存生日设置",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法更新生日设置。请再试一次。",
+    "selected": "已选择",
+    "selectRewardBatch": "选择奖励批次...",
+    "subtitle": "自动客户优惠",
+    "title": "生日俱乐部",
+    "updateSuccess": "生日俱乐部已更新",
+    "updateSuccessDescription": "您的生日自动化设置已保存。"
+  },
+  "featureMasterControl": {
+    "active": "活跃",
+    "error": "处理失败",
+    "errorDescription": "无法同步设置。请检查您的连接。",
+    "features": {
+      "birthdayMessage": {
+        "description": "客户生日的自动奖励",
+        "label": "生日信息"
+      },
+      "facebookReviews": {
+        "description": "直接链接到Facebook页面评论",
+        "label": "Facebook 评论"
+      },
+      "festivalCampaign": {
+        "description": "特殊节日活动的广播",
+        "label": "节日活动"
+      },
+      "googleReviews": {
+        "description": "评论链接到Google商业资料",
+        "label": "谷歌评论"
+      },
+      "inactiveRecall": {
+        "description": "自动召回非活动客户",
+        "label": "非活跃回忆"
+      },
+      "instagramReviews": {
+        "description": "与Instagram商业版的集成",
+        "label": "Instagram 评论"
+      },
+      "luckyDraw": {
+        "description": "游戏化奖励分配系统",
+        "label": "抽奖"
+      },
+      "paidAds": {
+        "description": "向用户展示图片/视频横幅",
+        "label": "付费广告"
+      },
+      "presetReviews": {
+        "description": "为客户预设反馈选项",
+        "label": "预设评论"
+      },
+      "scheduledCampaign": {
+        "description": "计划中的营销信息活动",
+        "label": "计划活动"
+      },
+      "xiaohongshuReviews": {
+        "description": "与红色社区连接",
+        "label": "小红书评论"
+      }
+    },
+    "live": "直播",
+    "paused": "已暂停",
+    "subtitle": "实时能力控制",
+    "success": "{feature} {status}",
+    "successDescription": "成功更新您的 {feature} 状态。",
+    "title": "功能开关"
   },
   "inactiveRecall": {
-    "title": "Win-Back Club",
-    "subtitle": "Reactivate sleeping customers",
-    "recallAfter": "Recall After",
-    "daysOfInactivity": "Days of inactivity",
-    "incentiveReward": "Incentive Reward",
-    "selected": "Selected",
-    "chooseRecallReward": "Choose recall reward...",
-    "description": "Customers who haven't visited in a while will get this treat.",
-    "saveButton": "Save Win-Back Settings",
-    "enableMessage": "Enable Win-Back Club to reactivate lapsed customers",
-    "actionRequired": "Action Required: Inactive Recall",
-    "actionRequiredDescription": "Please select an incentive coupon to win back inactive customers.",
-    "updateSuccess": "Inactive Recall Updated",
-    "updateSuccessDescription": "Your win-back automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update recall settings. Please try again."
+    "actionRequired": "需要采取行动：未激活召回",
+    "actionRequiredDescription": "请选择一个激励优惠券以挽回不活跃的客户。",
+    "chooseRecallReward": "选择召回奖励...",
+    "daysOfInactivity": "不活跃天数",
+    "description": "一段时间没有访问的客户将获得此优惠。",
+    "enableMessage": "启用重新激活俱乐部以重新激活流失客户",
+    "incentiveReward": "激励奖励",
+    "recallAfter": "回忆后",
+    "saveButton": "保存挽回设置",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法更新召回设置。请再试一次。",
+    "selected": "已选择",
+    "subtitle": "重新激活沉睡客户",
+    "title": "挽回俱乐部",
+    "updateSuccess": "非活动回忆已更新",
+    "updateSuccessDescription": "您的挽回自动化设置已保存。"
+  },
+  "main": {
+    "description": "从单一高性能仪表板管理您的全球参与、奖励机制和促销内容。",
+    "merchantActive": "商家活跃",
+    "proTip": "专业提示",
+    "proTipMessage": "将直接奖励与强大的预设合并，创建一个高转化率的反馈循环，提升您的本地SEO。",
+    "status": "状态",
+    "subtitle": "策略",
+    "subtitleHighlight": "控制",
+    "tabs": {
+      "automations": "自动化",
+      "campaigns": "活动",
+      "festivalMessages": "节日消息",
+      "paidAds": "付费广告",
+      "settings": "设置"
+    },
+    "title": "商户中心",
+    "version": "版本 2.0"
   },
   "paidAds": {
-    "title": "Promotional Banners",
-    "subtitle": "Visual marketing content",
-    "active": "Active",
-    "off": "OFF",
-    "adPlacement": "Ad Placement",
-    "selectPlacement": "Select placement",
-    "top": "Top",
-    "left": "Left",
-    "right": "Right",
-    "bottom": "Bottom",
-    "duration": "Duration",
-    "selectDuration": "Select duration",
-    "7days": "7 Days",
-    "14days": "14 Days",
-    "30days": "30 Days",
-    "imageAds": "Image Ads",
-    "videoAds": "Video Ads",
-    "addImage": "Add Image",
-    "addVideo": "Add Video",
-    "imageRecommendation": "1200x600px recommended",
-    "videoRecommendation": "MP4, WebM (Max 50MB)",
-    "pending": "Pending",
-    "adjustImage": "Adjust Image",
-    "adjustImageDescription": "Drag to reposition and use the slider to zoom.",
-    "zoom": "Zoom",
-    "cancel": "Cancel",
-    "saveImage": "Save Image",
-    "uploadAndSave": "Upload & Save",
-    "uploading": "Uploading...",
-    "adPreview": "Ad Preview",
-    "adPreviewDescription": "Full size preview of the promotional ad",
-    "settingsUpdated": "Settings and ad updated successfully",
-    "errorSaving": "Error saving settings",
-    "imageDeleted": "Image deleted successfully",
-    "videoDeleted": "Video deleted successfully",
-    "failedToDelete": "Failed to delete",
-    "videoTooLarge": "Video file is too large. Max size is 50MB.",
-    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
-    "imageSelected": "Image selected. Click Upload & Save to apply changes.",
-    "errorCropping": "Error cropping image"
+    "14days": "14天",
+    "30days": "30 天",
+    "7days": "7天",
+    "active": "活跃",
+    "addImage": "添加图片",
+    "addVideo": "添加视频",
+    "adjustImage": "调整图像",
+    "adjustImageDescription": "拖动以重新定位并使用滑块缩放。",
+    "adPlacement": "广告投放",
+    "adPreview": "广告预览",
+    "adPreviewDescription": "促销广告的完整预览",
+    "bottom": "底部",
+    "cancel": "取消",
+    "duration": "持续时间",
+    "errorCropping": "裁剪图像时出错",
+    "errorSaving": "保存设置时出错",
+    "failedToDelete": "删除失败",
+    "imageAds": "图片广告",
+    "imageDeleted": "图片删除成功",
+    "imageRecommendation": "推荐1200x600px",
+    "imageSelected": "已选择图像。点击上传并保存以应用更改。",
+    "left": "左侧",
+    "off": "关闭",
+    "pending": "待处理",
+    "right": "右侧",
+    "saveImage": "保存图片",
+    "selectDuration": "选择持续时间",
+    "selectPlacement": "选择位置",
+    "settingsUpdated": "设置和广告已成功更新",
+    "subtitle": "视觉营销内容",
+    "title": "促销横幅",
+    "top": "顶部",
+    "uploadAndSave": "上传并保存",
+    "uploading": "上传中...",
+    "videoAds": "视频广告",
+    "videoDeleted": "视频删除成功",
+    "videoRecommendation": "MP4, WebM（最大50MB）",
+    "videoSelected": "视频已选择。点击 '上传并保存' 完成。",
+    "videoTooLarge": "视频文件太大。最大大小为50MB。",
+    "zoom": "缩放"
   },
   "platformSettings": {
-    "title": "Social Connect",
-    "subtitle": "Review channels",
-    "googleReviews": "Google Reviews",
-    "facebookPage": "Facebook Page",
-    "instagram": "Instagram",
-    "xiaohongshu": "XiaoHongShu",
-    "active": "ACTIVE",
-    "off": "OFF",
-    "googlePlaceholder": "https://g.page/r/...",
+    "active": "活跃",
+    "facebookPage": "Facebook页面",
     "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "Google评论",
+    "instagram": "Instagram",
     "instagramPlaceholder": "https://instagram.com/...",
-    "redPlaceholder": "RED Profile URL",
-    "savePlatforms": "Save Platforms",
-    "updateSuccess": "Platforms Updated",
-    "updateSuccessDescription": "Your social review links have been updated.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update platforms. Please try again."
+    "off": "关闭",
+    "redPlaceholder": "RED 个人资料 URL",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法更新平台。请再试一次。",
+    "savePlatforms": "保存平台",
+    "subtitle": "审核渠道",
+    "title": "社交连接",
+    "updateSuccess": "平台已更新",
+    "updateSuccessDescription": "您的社交审核链接已更新。",
+    "xiaohongshu": "小红书"
   },
   "presetReviews": {
-    "title": "Quick Feedback",
-    "subtitle": "Customer presets",
-    "active": "Active",
-    "off": "Off",
-    "placeholder": "Positive feedback option...",
-    "savePresets": "Save Presets",
-    "updateSuccess": "Presets Updated",
-    "updateSuccessDescription": "Your quick review options have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update presets. Please try again."
+    "active": "活跃",
+    "off": "关闭",
+    "placeholder": "正面反馈选项...",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法更新预设。请再试一次。",
+    "savePresets": "保存预设",
+    "subtitle": "客户预设",
+    "title": "快速反馈",
+    "updateSuccess": "预设已更新",
+    "updateSuccessDescription": "您的快速审核选项已保存。"
   },
   "rewardStrategy": {
-    "title": "Incentive Engine",
-    "subtitle": "Primary reward",
-    "luckyDraw": "Lucky Draw",
-    "luckyDrawDescription": "Gamified Prizes",
-    "directCoupon": "Direct Coupon",
-    "directCouponDescription": "Instant Access",
-    "managedVia": "Selection is managed via",
-    "featureSwitchboard": "Feature Switchboard",
-    "selectReward": "Select Reward",
-    "chooseRegularReward": "Choose regular reward...",
-    "luckyDrawTip": "Configure prizes in the",
-    "luckyDrawTab": "Lucky Draw",
-    "tab": "tab",
-    "saveStrategy": "Save Strategy",
-    "selectCouponBatch": "Please select a Coupon Batch for Direct Rewards.",
-    "updateSuccess": "Reward Strategy Updated",
-    "updateSuccessDescription": "Your primary reward configuration has been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update reward strategy. Please try again."
+    "chooseRegularReward": "选择常规奖励...",
+    "directCoupon": "直接优惠券",
+    "directCouponDescription": "即时访问",
+    "featureSwitchboard": "功能开关板",
+    "luckyDraw": "抽奖",
+    "luckyDrawDescription": "游戏化奖品",
+    "luckyDrawTab": "抽奖",
+    "luckyDrawTip": "在中配置奖品",
+    "managedVia": "选择通过以下方式管理",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法更新奖励策略。请再试一次。",
+    "saveStrategy": "保存策略",
+    "selectCouponBatch": "请选择直接奖励的优惠券批次。",
+    "selectReward": "选择奖励",
+    "subtitle": "主要奖励",
+    "tab": "标签",
+    "title": "激励引擎",
+    "updateSuccess": "奖励策略已更新",
+    "updateSuccessDescription": "您的主要奖励配置已保存。"
+  },
+  "scheduledCampaign": {
+    "actionRequired": "需要采取行动：计划活动",
+    "actionRequiredDescription": "请选择要包含在您的推广中的优惠券批次。",
+    "active": "活跃",
+    "attachCoupon": "附加优惠券",
+    "audience": "受众",
+    "audienceOptions": {
+      "active": "活跃",
+      "all": "所有用户",
+      "firstTime": "首次",
+      "inactive": "未激活",
+      "returning": "返回中"
+    },
+    "campaignName": "活动名称",
+    "campaignNamePlaceholder": "例如：万圣节促销",
+    "campaignScheduled": "活动已安排",
+    "campaignScheduledDescription": "您的营销推广已排队等待发送。",
+    "done": "完成",
+    "incompleteCampaign": "不完整的活动详情",
+    "incompleteCampaignDescription": "请提供您的广播名称、消息和日期。",
+    "launchDate": "发布日期",
+    "message": "消息",
+    "messagePlaceholder": "嗨 {name}, ...",
+    "off": "关闭",
+    "saveFailed": "保存失败",
+    "saveFailedDescription": "无法安排活动。请再试一次。",
+    "scheduleCampaign": "安排活动",
+    "selectAudience": "选择",
+    "selectCampaignReward": "选择活动奖励...",
+    "selectDateTime": "选择日期和时间",
+    "subtitle": "安排爆炸",
+    "title": "活动"
+  },
+  "stickySaveBar": {
+    "discardChanges": "放弃更改",
+    "saveAllSettings": "保存所有设置",
+    "statusDescription": "同步您所有平台的奖励和参与设置",
+    "statusReady": "奖励策略已准备好",
+    "synchronizing": "正在同步..."
   }
 }

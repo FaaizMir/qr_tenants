@@ -1,0 +1,22 @@
+{
+  "guidance": {
+    "tip1": "为便于识别选择一个描述性的批次名称",
+    "tip2": "为您的活动设置现实的有效日期",
+    "tip3": "选择一个适合您品牌的模板",
+    "tip4": "在生成批次之前审核所有细节",
+    "title": "指导"
+  },
+  "table": {
+    "columns": "列",
+    "goToFirstPage": "转到第一页",
+    "goToLastPage": "转到最后一页",
+    "goToNextPage": "转到下一页",
+    "goToPreviousPage": "转到上一页",
+    "loadingData": "正在加载数据...",
+    "noResults": "没有结果。",
+    "page": "第 {current} 页，共 {total} 页",
+    "rowsPerPage": "每页行数",
+    "rowsSelected": "已选择 {selected} 行，共 {total} 行。",
+    "searchPlaceholder": "搜索..."
+  }
+}

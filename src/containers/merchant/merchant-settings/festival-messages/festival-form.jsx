@@ -16,6 +16,7 @@ import BatchSelector from "../components/BatchSelector";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function FestivalForm({
   open,
@@ -24,6 +25,7 @@ export default function FestivalForm({
   merchantId,
   onSuccess,
 }) {
+  const t = useTranslations("merchantFestival");
   const isEditMode = !!festival;
 
   const [formData, setFormData] = useState({
@@ -68,7 +70,7 @@ export default function FestivalForm({
 
     // Validation
     if (!formData.festivalName || !formData.message || !formData.festivalDate) {
-      toast.error("Festival name, message, and date are required");
+      toast.error(t("validation.allFieldsRequired"));
       return;
     }
 
@@ -89,11 +91,11 @@ export default function FestivalForm({
 
       if (isEditMode) {
         await axiosInstance.patch(`/festival-messages/${festival.id}`, payload);
-        toast.success("Festival message updated successfully");
+        toast.success(t("success.updated"));
       } else {
         payload.merchant_id = merchantId;
         await axiosInstance.post("/festival-messages", payload);
-        toast.success("Festival message created successfully");
+        toast.success(t("success.created"));
       }
 
       onSuccess();
@@ -102,8 +104,8 @@ export default function FestivalForm({
       const errorMsg =
         error?.response?.data?.message ||
         (isEditMode
-          ? "Failed to update festival message"
-          : "Failed to create festival message");
+          ? t("errors.failedToUpdate")
+          : t("errors.failedToCreate"));
       toast.error(errorMsg);
     } finally {
       setSaving(false);
@@ -116,23 +118,23 @@ export default function FestivalForm({
         <DialogHeader>
           <DialogTitle>
             {isEditMode
-              ? "Edit Festival Message"
-              : "Create New Festival Message"}
+              ? t("form.editTitle")
+              : t("form.createTitle")}
           </DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Update your festival message details below"
-              : "Fill in the details to schedule a new festival message"}
+              ? t("form.editDescription")
+              : t("form.createDescription")}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-5 py-4">
           <div className="space-y-2">
             <Label className="text-sm font-semibold">
-              Festival Name <span className="text-red-500">*</span>
+              {t("form.festivalName")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
-              placeholder="Ex: Diwali, Christmas, New Year"
+              placeholder={t("form.festivalNamePlaceholder")}
               value={formData.festivalName}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -148,7 +150,7 @@ export default function FestivalForm({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm font-semibold">
-                Festival Date <span className="text-red-500">*</span>
+                {t("form.festivalDate")} <span className="text-red-500">{t("form.required")}</span>
               </Label>
               <Input
                 type="date"
@@ -166,7 +168,7 @@ export default function FestivalForm({
 
             <div className="space-y-2">
               <Label className="text-sm font-semibold">
-                Coupon Batch (Optional)
+                {t("form.couponBatch")}
               </Label>
               <BatchSelector
                 selectedId={formData.batchId}
@@ -174,7 +176,7 @@ export default function FestivalForm({
                 onSelect={(id) =>
                   setFormData((prev) => ({ ...prev, batchId: id }))
                 }
-                placeholder="Select coupon batch..."
+                placeholder={t("form.selectCouponBatch")}
                 className="h-10"
               />
             </div>
@@ -182,10 +184,10 @@ export default function FestivalForm({
 
           <div className="space-y-2">
             <Label className="text-sm font-semibold">
-              Festival Message <span className="text-red-500">*</span>
+              {t("form.festivalMessage")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Textarea
-              placeholder="Hi {name}, wishing you a joyful festival season from {business_name}..."
+              placeholder={t("form.festivalMessagePlaceholder")}
               value={formData.message}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, message: e.target.value }))
@@ -194,7 +196,7 @@ export default function FestivalForm({
               required
             />
             <p className="text-xs text-muted-foreground">
-              Use {"{name}"} and {"{business_name}"} to personalize the message
+              {t("form.personalizationHint")}
             </p>
           </div>
 
@@ -202,7 +204,7 @@ export default function FestivalForm({
             <div className="space-y-3 rounded-lg border p-4 bg-muted/30">
               <div className="flex items-center justify-between">
                 <Label className="text-sm font-semibold cursor-pointer">
-                  Active Status
+                  {t("form.activeStatus")}
                 </Label>
                 <Switch
                   checked={formData.isActive}
@@ -213,8 +215,8 @@ export default function FestivalForm({
               </div>
               <p className="text-xs text-muted-foreground">
                 {formData.isActive
-                  ? "Message is active"
-                  : "Message is inactive"}
+                  ? t("form.messageActive")
+                  : t("form.messageInactive")}
               </p>
             </div>
 
@@ -223,7 +225,7 @@ export default function FestivalForm({
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-blue-500" />
                   <Label className="text-sm font-semibold cursor-pointer">
-                    Recurring Yearly
+                    {t("form.recurringYearly")}
                   </Label>
                 </div>
                 <Switch
@@ -235,8 +237,8 @@ export default function FestivalForm({
               </div>
               <p className="text-xs text-muted-foreground">
                 {formData.isRecurring
-                  ? "Repeats every year"
-                  : "One-time message"}
+                  ? t("form.repeatsEveryYear")
+                  : t("form.oneTimeMessage")}
               </p>
             </div>
           </div>
@@ -249,20 +251,20 @@ export default function FestivalForm({
             onClick={() => onOpenChange(false)}
             disabled={saving}
           >
-            Cancel
+            {t("form.cancel")}
           </Button>
           <Button onClick={handleSubmit} disabled={saving}>
             {saving ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                Saving...
+                {t("form.saving")}
               </>
             ) : (
               <>
                 <Save className="h-4 w-4 mr-2" />
                 {isEditMode
-                  ? "Update Festival Message"
-                  : "Create Festival Message"}
+                  ? t("form.updateButton")
+                  : t("form.createButton")}
               </>
             )}
           </Button>

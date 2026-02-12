@@ -1,204 +1,255 @@
 {
-  "main": {
-    "title": "Merchant Hub",
-    "version": "Version 2.0",
-    "subtitle": "Strategy Control",
-    "tabs": {
-      "paidAds": "Paid Ads",
-      "settings": "Settings",
-      "automations": "Automations",
-      "festivalMessages": "Festival Messages",
-      "campaigns": "Campaigns"
-    },
-    "proTip": "Pro Tip",
-    "proTipMessage": "Enable features in the switchboard, then configure them below"
-  },
-  "featureMasterControl": {
-    "title": "Feature Switchboard",
-    "subtitle": "Real-time capability control",
-    "live": "Live",
-    "features": {
-      "paidAds": {
-        "label": "Paid Ads",
-        "description": "Display image/video banners to users"
-      },
-      "googleReviews": {
-        "label": "Google Reviews",
-        "description": "Review link to Google Business profile"
-      },
-      "facebookReviews": {
-        "label": "Facebook Reviews",
-        "description": "Direct link to Facebook Page reviews"
-      },
-      "instagramReviews": {
-        "label": "Instagram Reviews",
-        "description": "Integration with Instagram Business"
-      },
-      "xiaohongshuReviews": {
-        "label": "XiaoHongShu Reviews",
-        "description": "Connect with the Red community"
-      },
-      "presetReviews": {
-        "label": "Preset Reviews",
-        "description": "Preset feedback options for customers"
-      },
-      "luckyDraw": {
-        "label": "Lucky Draw",
-        "description": "Gamified reward distribution system"
-      },
-      "birthdayMessage": {
-        "label": "Birthday Message",
-        "description": "Automated rewards on customer birthdays"
-      },
-      "inactiveRecall": {
-        "label": "Inactive Recall",
-        "description": "Automatically recall inactive customers"
-      },
-      "festivalCampaign": {
-        "label": "Festival Campaign",
-        "description": "Broadcasts for special holiday events"
-      },
-      "scheduledCampaign": {
-        "label": "Scheduled Campaign",
-        "description": "Scheduled marketing message campaigns"
-      }
-    },
-    "active": "Active",
-    "paused": "Paused",
-    "success": "{feature} {status}",
-    "successDescription": "Successfully updated your {feature} status.",
-    "error": "Process Failed",
-    "errorDescription": "Could not synchronize setting. Please check your connection."
+  "batchSelector": {
+    "loading": "लोड हो रहा है...",
+    "noBatchesDescription": "पहले एक कूपन बैच बनाएं",
+    "noBatchesTitle": "कोई बैच उपलब्ध नहीं है",
+    "of": "का",
+    "used": "उपयोग किया गया"
   },
   "birthdayRewards": {
-    "title": "Birthday Club",
-    "subtitle": "Automatic customer treats",
-    "daysBefore": "Days Before",
-    "daysAfter": "Days After",
-    "days": "Days",
-    "birthdayReward": "Birthday Reward",
-    "selected": "Selected",
-    "selectRewardBatch": "Select a reward batch...",
-    "description": "Customers will receive a message with this reward on their special day.",
-    "saveButton": "Save Birthday Settings",
-    "enableMessage": "Enable Birthday Club to automate your rewards",
-    "actionRequired": "Action Required: Birthday Club",
-    "actionRequiredDescription": "Please select a coupon batch to reward your customers on their birthday.",
-    "updateSuccess": "Birthday Club Updated",
-    "updateSuccessDescription": "Your birthday automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update birthday settings. Please try again."
+    "actionRequired": "कार्य आवश्यक: जन्मदिन क्लब",
+    "actionRequiredDescription": "कृपया अपने ग्राहकों को उनके जन्मदिन पर इनाम देने के लिए एक कूपन बैच चुनें।",
+    "birthdayReward": "जन्मदिन का पुरस्कार",
+    "days": "दिन",
+    "daysAfter": "दिन बाद",
+    "daysBefore": "दिन पहले",
+    "description": "ग्राहकों को उनके विशेष दिन पर इस पुरस्कार के साथ एक संदेश प्राप्त होगा।",
+    "enableMessage": "अपने पुरस्कारों को स्वचालित करने के लिए जन्मदिन क्लब सक्षम करें",
+    "saveButton": "जन्मदिन की सेटिंग्स सहेजें",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "जन्मदिन सेटिंग्स अपडेट नहीं कर सका। कृपया पुनः प्रयास करें।",
+    "selected": "चयनित",
+    "selectRewardBatch": "एक पुरस्कार बैच चुनें...",
+    "subtitle": "स्वचालित ग्राहक उपहार",
+    "title": "जन्मदिन क्लब",
+    "updateSuccess": "जन्मदिन क्लब अपडेट किया गया",
+    "updateSuccessDescription": "आपकी जन्मदिन स्वचालन सेटिंग्स सहेजी गई हैं।"
+  },
+  "featureMasterControl": {
+    "active": "सक्रिय",
+    "error": "प्रक्रिया विफल",
+    "errorDescription": "सेटिंग समन्वयित नहीं कर सका। कृपया अपने कनेक्शन की जांच करें।",
+    "features": {
+      "birthdayMessage": {
+        "description": "ग्राहक जन्मदिन पर स्वचालित पुरस्कार",
+        "label": "जन्मदिन का संदेश"
+      },
+      "facebookReviews": {
+        "description": "फेसबुक पृष्ठ समीक्षाओं के लिए सीधा लिंक",
+        "label": "फेसबुक समीक्षाएँ"
+      },
+      "festivalCampaign": {
+        "description": "विशेष छुट्टी कार्यक्रमों के लिए प्रसारण",
+        "label": "त्योहार अभियान"
+      },
+      "googleReviews": {
+        "description": "गूगल बिजनेस प्रोफाइल के लिए समीक्षा लिंक",
+        "label": "गूगल समीक्षाएँ"
+      },
+      "inactiveRecall": {
+        "description": "स्वचालित रूप से निष्क्रिय ग्राहकों को याद करें",
+        "label": "निष्क्रिय पुनःस्मरण"
+      },
+      "instagramReviews": {
+        "description": "इंस्टाग्राम बिजनेस के साथ एकीकरण",
+        "label": "इंस्टाग्राम समीक्षाएँ"
+      },
+      "luckyDraw": {
+        "description": "गेमिफाइड पुरस्कार वितरण प्रणाली",
+        "label": "लकी ड्रा"
+      },
+      "paidAds": {
+        "description": "उपयोगकर्ताओं को छवि/वीडियो बैनर दिखाएँ",
+        "label": "भुगतान किए गए विज्ञापन"
+      },
+      "presetReviews": {
+        "description": "ग्राहकों के लिए पूर्व निर्धारित फीडबैक विकल्प",
+        "label": "पूर्व निर्धारित समीक्षाएँ"
+      },
+      "scheduledCampaign": {
+        "description": "निर्धारित विपणन संदेश अभियान",
+        "label": "निर्धारित अभियान"
+      },
+      "xiaohongshuReviews": {
+        "description": "रेड समुदाय से जुड़ें",
+        "label": "शियाओहोंगशु समीक्षाएँ"
+      }
+    },
+    "live": "लाइव",
+    "paused": "रुका हुआ",
+    "subtitle": "वास्तविक समय क्षमता नियंत्रण",
+    "success": "{feature} {status}",
+    "successDescription": "आपकी {feature} स्थिति सफलतापूर्वक अपडेट की गई।",
+    "title": "फीचर स्विचबोर्ड"
   },
   "inactiveRecall": {
-    "title": "Win-Back Club",
-    "subtitle": "Reactivate sleeping customers",
-    "recallAfter": "Recall After",
-    "daysOfInactivity": "Days of inactivity",
-    "incentiveReward": "Incentive Reward",
-    "selected": "Selected",
-    "chooseRecallReward": "Choose recall reward...",
-    "description": "Customers who haven't visited in a while will get this treat.",
-    "saveButton": "Save Win-Back Settings",
-    "enableMessage": "Enable Win-Back Club to reactivate lapsed customers",
-    "actionRequired": "Action Required: Inactive Recall",
-    "actionRequiredDescription": "Please select an incentive coupon to win back inactive customers.",
-    "updateSuccess": "Inactive Recall Updated",
-    "updateSuccessDescription": "Your win-back automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update recall settings. Please try again."
+    "actionRequired": "कार्य आवश्यक: निष्क्रिय पुनःकाल",
+    "actionRequiredDescription": "कृपया निष्क्रिय ग्राहकों को वापस जीतने के लिए एक प्रोत्साहन कूपन चुनें।",
+    "chooseRecallReward": "याददाश्त पुरस्कार चुनें...",
+    "daysOfInactivity": "निष्क्रियता के दिन",
+    "description": "जो ग्राहक कुछ समय से नहीं आए हैं, उन्हें यह उपहार मिलेगा।",
+    "enableMessage": "लंबित ग्राहकों को पुनः सक्रिय करने के लिए विन-बैक क्लब सक्षम करें",
+    "incentiveReward": "प्रोत्साहन पुरस्कार",
+    "recallAfter": "याद करें बाद में",
+    "saveButton": "विन-बैक सेटिंग्स सहेजें",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "याद रखने की सेटिंग्स अपडेट नहीं कर सके। कृपया फिर से प्रयास करें।",
+    "selected": "चुना हुआ",
+    "subtitle": "सोते हुए ग्राहकों को फिर से सक्रिय करें",
+    "title": "विन-बैक क्लब",
+    "updateSuccess": "निष्क्रिय याददाश्त अपडेट की गई",
+    "updateSuccessDescription": "आपकी जीतने की स्वचालन सेटिंग्स सहेज ली गई हैं।"
+  },
+  "main": {
+    "description": "अपने वैश्विक जुड़ाव, पुरस्कार तंत्र, और प्रचार सामग्री को एक ही उच्च-प्रदर्शन डैशबोर्ड से प्रबंधित करें।",
+    "merchantActive": "व्यापारी सक्रिय",
+    "proTip": "प्रो टिप",
+    "proTipMessage": "प्रत्यक्ष पुरस्कारों को शक्तिशाली प्रीसेट्स के साथ मिलाना एक उच्च-परिवर्तन प्रतिक्रिया लूप बनाता है जो आपके स्थानीय SEO को आसमान छूता है।",
+    "status": "स्थिति",
+    "subtitle": "रणनीति",
+    "subtitleHighlight": "नियंत्रण",
+    "tabs": {
+      "automations": "स्वचालन",
+      "campaigns": "अभियान",
+      "festivalMessages": "त्योहार संदेश",
+      "paidAds": "भुगतान किए गए विज्ञापन",
+      "settings": "सेटिंग्स"
+    },
+    "title": "व्यापारी हब",
+    "version": "संस्करण 2.0"
   },
   "paidAds": {
-    "title": "Promotional Banners",
-    "subtitle": "Visual marketing content",
-    "active": "Active",
-    "off": "OFF",
-    "adPlacement": "Ad Placement",
-    "selectPlacement": "Select placement",
-    "top": "Top",
-    "left": "Left",
-    "right": "Right",
-    "bottom": "Bottom",
-    "duration": "Duration",
-    "selectDuration": "Select duration",
-    "7days": "7 Days",
-    "14days": "14 Days",
-    "30days": "30 Days",
-    "imageAds": "Image Ads",
-    "videoAds": "Video Ads",
-    "addImage": "Add Image",
-    "addVideo": "Add Video",
-    "imageRecommendation": "1200x600px recommended",
-    "videoRecommendation": "MP4, WebM (Max 50MB)",
-    "pending": "Pending",
-    "adjustImage": "Adjust Image",
-    "adjustImageDescription": "Drag to reposition and use the slider to zoom.",
-    "zoom": "Zoom",
-    "cancel": "Cancel",
-    "saveImage": "Save Image",
-    "uploadAndSave": "Upload & Save",
-    "uploading": "Uploading...",
-    "adPreview": "Ad Preview",
-    "adPreviewDescription": "Full size preview of the promotional ad",
-    "settingsUpdated": "Settings and ad updated successfully",
-    "errorSaving": "Error saving settings",
-    "imageDeleted": "Image deleted successfully",
-    "videoDeleted": "Video deleted successfully",
-    "failedToDelete": "Failed to delete",
-    "videoTooLarge": "Video file is too large. Max size is 50MB.",
-    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
-    "imageSelected": "Image selected. Click Upload & Save to apply changes.",
-    "errorCropping": "Error cropping image"
+    "14days": "14 दिन",
+    "30days": "30 दिन",
+    "7days": "7 दिन",
+    "active": "सक्रिय",
+    "addImage": "छवि जोड़ें",
+    "addVideo": "वीडियो जोड़ें",
+    "adjustImage": "छवि समायोजित करें",
+    "adjustImageDescription": "पुनः स्थिति के लिए खींचें और ज़ूम करने के लिए स्लाइडर का उपयोग करें।",
+    "adPlacement": "विज्ञापन स्थान",
+    "adPreview": "विज्ञापन पूर्वावलोकन",
+    "adPreviewDescription": "प्रमोशनल विज्ञापन का पूर्ण आकार पूर्वावलोकन",
+    "bottom": "नीचे",
+    "cancel": "रद्द करें",
+    "duration": "अवधि",
+    "errorCropping": "छवि क्रॉप करने में त्रुटि",
+    "errorSaving": "सेटिंग्स सहेजने में त्रुटि",
+    "failedToDelete": "हटाने में विफल",
+    "imageAds": "छवि विज्ञापन",
+    "imageDeleted": "छवि सफलतापूर्वक हटाई गई",
+    "imageRecommendation": "1200x600px की सिफारिश की गई",
+    "imageSelected": "छवि चयनित। परिवर्तन लागू करने के लिए अपलोड & सहेजें पर क्लिक करें।",
+    "left": "बाएं",
+    "off": "बंद",
+    "pending": "लंबित",
+    "right": "सही",
+    "saveImage": "छवि सहेजें",
+    "selectDuration": "अवधि चुनें",
+    "selectPlacement": "प्लेसमेंट चुनें",
+    "settingsUpdated": "सेटिंग्स और विज्ञापन सफलतापूर्वक अपडेट किए गए",
+    "subtitle": "दृश्य विपणन सामग्री",
+    "title": "प्रचार बैनर",
+    "top": "शीर्ष",
+    "uploadAndSave": "अपलोड & सहेजें",
+    "uploading": "अपलोड हो रहा है...",
+    "videoAds": "वीडियो विज्ञापन",
+    "videoDeleted": "वीडियो सफलतापूर्वक हटाया गया",
+    "videoRecommendation": "MP4, WebM (अधिकतम 50MB)",
+    "videoSelected": "वीडियो चयनित। 'अपलोड & सहेजें' पर क्लिक करें समाप्त करने के लिए।",
+    "videoTooLarge": "वीडियो फ़ाइल बहुत बड़ी है। अधिकतम आकार 50MB है।",
+    "zoom": "ज़ूम"
   },
   "platformSettings": {
-    "title": "Social Connect",
-    "subtitle": "Review channels",
-    "googleReviews": "Google Reviews",
-    "facebookPage": "Facebook Page",
-    "instagram": "Instagram",
-    "xiaohongshu": "XiaoHongShu",
-    "active": "ACTIVE",
-    "off": "OFF",
-    "googlePlaceholder": "https://g.page/r/...",
+    "active": "सक्रिय",
+    "facebookPage": "फेसबुक पृष्ठ",
     "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "गूगल समीक्षाएँ",
+    "instagram": "इंस्टाग्राम",
     "instagramPlaceholder": "https://instagram.com/...",
-    "redPlaceholder": "RED Profile URL",
-    "savePlatforms": "Save Platforms",
-    "updateSuccess": "Platforms Updated",
-    "updateSuccessDescription": "Your social review links have been updated.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update platforms. Please try again."
+    "off": "बंद",
+    "redPlaceholder": "RED प्रोफ़ाइल URL",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "प्लेटफ़ॉर्म अपडेट नहीं कर सके। कृपया फिर से प्रयास करें।",
+    "savePlatforms": "प्लेटफ़ॉर्म सहेजें",
+    "subtitle": "समीक्षा चैनल",
+    "title": "सामाजिक कनेक्ट",
+    "updateSuccess": "प्लेटफ़ॉर्म अपडेट किए गए",
+    "updateSuccessDescription": "आपके सामाजिक समीक्षा लिंक अपडेट कर दिए गए हैं।",
+    "xiaohongshu": "शियाओहोंगशु"
   },
   "presetReviews": {
-    "title": "Quick Feedback",
-    "subtitle": "Customer presets",
-    "active": "Active",
-    "off": "Off",
-    "placeholder": "Positive feedback option...",
-    "savePresets": "Save Presets",
-    "updateSuccess": "Presets Updated",
-    "updateSuccessDescription": "Your quick review options have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update presets. Please try again."
+    "active": "सक्रिय",
+    "off": "बंद",
+    "placeholder": "सकारात्मक फीडबैक विकल्प...",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "प्रीसेट्स को अपडेट नहीं किया जा सका। कृपया फिर से प्रयास करें।",
+    "savePresets": "प्रीसेट्स सहेजें",
+    "subtitle": "ग्राहक प्रीसेट",
+    "title": "त्वरित फीडबैक",
+    "updateSuccess": "प्रीसेट अपडेट किए गए",
+    "updateSuccessDescription": "आपके त्वरित समीक्षा विकल्प सहेजे गए हैं।"
   },
   "rewardStrategy": {
-    "title": "Incentive Engine",
-    "subtitle": "Primary reward",
-    "luckyDraw": "Lucky Draw",
-    "luckyDrawDescription": "Gamified Prizes",
-    "directCoupon": "Direct Coupon",
-    "directCouponDescription": "Instant Access",
-    "managedVia": "Selection is managed via",
-    "featureSwitchboard": "Feature Switchboard",
-    "selectReward": "Select Reward",
-    "chooseRegularReward": "Choose regular reward...",
-    "luckyDrawTip": "Configure prizes in the",
-    "luckyDrawTab": "Lucky Draw",
-    "tab": "tab",
-    "saveStrategy": "Save Strategy",
-    "selectCouponBatch": "Please select a Coupon Batch for Direct Rewards.",
-    "updateSuccess": "Reward Strategy Updated",
-    "updateSuccessDescription": "Your primary reward configuration has been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update reward strategy. Please try again."
+    "chooseRegularReward": "नियमित पुरस्कार चुनें...",
+    "directCoupon": "प्रत्यक्ष कूपन",
+    "directCouponDescription": "तत्काल पहुंच",
+    "featureSwitchboard": "विशेषता स्विचबोर्ड",
+    "luckyDraw": "लकी ड्रा",
+    "luckyDrawDescription": "गेमिफाइड पुरस्कार",
+    "luckyDrawTab": "लकी ड्रा",
+    "luckyDrawTip": "पुरस्कारों को कॉन्फ़िगर करें",
+    "managedVia": "चयन प्रबंधित किया जाता है",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "पुरस्कार रणनीति को अपडेट नहीं किया जा सका। कृपया फिर से प्रयास करें।",
+    "saveStrategy": "रणनीति सहेजें",
+    "selectCouponBatch": "कृपया सीधे पुरस्कारों के लिए एक कूपन बैच चुनें।",
+    "selectReward": "पुरस्कार चुनें",
+    "subtitle": "प्राथमिक पुरस्कार",
+    "tab": "टैब",
+    "title": "प्रोत्साहन इंजन",
+    "updateSuccess": "पुरस्कार रणनीति अपडेट की गई",
+    "updateSuccessDescription": "आपकी प्राथमिक पुरस्कार कॉन्फ़िगरेशन सहेजी गई है।"
+  },
+  "scheduledCampaign": {
+    "actionRequired": "कार्य आवश्यक: निर्धारित अभियान",
+    "actionRequiredDescription": "कृपया अपने ब्लास्ट में शामिल करने के लिए एक कूपन बैच चुनें।",
+    "active": "सक्रिय",
+    "attachCoupon": "कूपन संलग्न करें",
+    "audience": "दर्शक",
+    "audienceOptions": {
+      "active": "सक्रिय",
+      "all": "सभी उपयोगकर्ता",
+      "firstTime": "पहली बार",
+      "inactive": "निष्क्रिय",
+      "returning": "वापस आ रहा है"
+    },
+    "campaignName": "अभियान का नाम",
+    "campaignNamePlaceholder": "उदाहरण: हैलोवीन बिक्री",
+    "campaignScheduled": "अभियान निर्धारित",
+    "campaignScheduledDescription": "आपका मार्केटिंग ब्लास्ट वितरण के लिए कतार में है।",
+    "done": "पूर्ण",
+    "incompleteCampaign": "अपूर्ण अभियान विवरण",
+    "incompleteCampaignDescription": "कृपया अपने प्रसारण के लिए एक नाम, संदेश और तारीख प्रदान करें।",
+    "launchDate": "लॉन्च तिथि",
+    "message": "संदेश",
+    "messagePlaceholder": "नमस्ते {name}, ...",
+    "off": "बंद",
+    "saveFailed": "सहेजना विफल",
+    "saveFailedDescription": "अभियान निर्धारित नहीं किया जा सका। कृपया पुनः प्रयास करें।",
+    "scheduleCampaign": "अभियान शेड्यूल करें",
+    "selectAudience": "चुनें",
+    "selectCampaignReward": "अभियान पुरस्कार चुनें...",
+    "selectDateTime": "तारीख और समय चुनें",
+    "subtitle": "ब्लास्ट शेड्यूल करें",
+    "title": "अभियान"
+  },
+  "stickySaveBar": {
+    "discardChanges": "परिवर्तन अस्वीकार करें",
+    "saveAllSettings": "सभी सेटिंग्स सहेजें",
+    "statusDescription": "अपने सभी प्लेटफ़ॉर्म पुरस्कार और जुड़ाव सेटिंग्स को समन्वयित करें",
+    "statusReady": "पुरस्कार रणनीति तैयार",
+    "synchronizing": "सिंक्रनाइज़ हो रहा है..."
   }
 }

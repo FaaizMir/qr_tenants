@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // Components
 import PlatformSettings from "./components/PlatformSettings";
@@ -19,6 +20,7 @@ import MerchantCampaigns from "./campaigns/campaign";
 import FestivalMessages from "./festival-messages/festival";
 
 export default function MerchantSettings() {
+  const t = useTranslations("merchantSettings");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
   const router = useRouter();
@@ -57,19 +59,18 @@ export default function MerchantSettings() {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <div className="px-3 py-1 bg-gray-900 rounded-full text-[10px] font-semibold text-white shadow-lg">
-              Merchant Hub
+              {t("main.title")}
             </div>
             <div className="h-px w-10 bg-gray-200" />
             <span className="text-[10px] font-semibold text-muted-foreground">
-              Version 2.0
+              {t("main.version")}
             </span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 leading-none">
-            Strategy <span className="text-primary">Control</span>
+            {t("main.subtitle")} <span className="text-primary">{t("main.subtitleHighlight")}</span>
           </h1>
           <p className="text-base text-muted-foreground font-medium max-w-xl leading-relaxed">
-            Manage your global engagement, reward mechanisms, and promotional
-            content from a single high-performance dashboard.
+            {t("main.description")}
           </p>
         </div>
 
@@ -86,10 +87,10 @@ export default function MerchantSettings() {
           </div>
           <div className="pr-4">
             <p className="text-[10px] font-semibold text-gray-400 leading-none">
-              Status
+              {t("main.status")}
             </p>
             <p className="text-sm font-semibold text-gray-900">
-              Merchant Active
+              {t("main.merchantActive")}
             </p>
           </div>
         </div>
@@ -109,14 +110,14 @@ export default function MerchantSettings() {
               className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
             >
               <Megaphone className="h-4 w-4" />
-              Paid Ads
+              {t("main.tabs.paidAds")}
             </TabsTrigger>
             <TabsTrigger
               value="settings"
               className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
             >
               <Settings2 className="h-4 w-4" />
-              Settings
+              {t("main.tabs.settings")}
             </TabsTrigger>
             {isAnnual && (
               <TabsTrigger
@@ -124,7 +125,7 @@ export default function MerchantSettings() {
                 className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
               >
                 <Rocket className="h-4 w-4" />
-                Automations
+                {t("main.tabs.automations")}
               </TabsTrigger>
             )}
             {isAnnual && (
@@ -133,7 +134,7 @@ export default function MerchantSettings() {
                 className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
               >
                 <Rocket className="h-4 w-4" />
-                Festival Messages
+                {t("main.tabs.festivalMessages")}
               </TabsTrigger>
             )}
             {isAnnual && (
@@ -142,7 +143,7 @@ export default function MerchantSettings() {
                 className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
               >
                 <Rocket className="h-4 w-4" />
-                Campaigns
+                {t("main.tabs.campaigns")}
               </TabsTrigger>
             )}
           </TabsList>
@@ -181,13 +182,11 @@ export default function MerchantSettings() {
                       <Zap className="h-6 w-6 text-emerald-300 fill-emerald-300" />
                     </div>
                     <h4 className="font-bold text-xl tracking-tight uppercase italic underline decoration-emerald-400 decoration-4">
-                      Pro Tip
+                      {t("main.proTip")}
                     </h4>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed font-medium">
-                    &quot;Merging <strong>Direct Rewards</strong> with powerful{" "}
-                    <strong>Presets</strong> creates a high-conversion feedback
-                    loop that skyrockets your local SEO.&quot;
+                    &quot;{t("main.proTipMessage")}&quot;
                   </p>
                   <div className="flex gap-2">
                     <div className="h-1.5 w-16 bg-emerald-500 rounded-full" />

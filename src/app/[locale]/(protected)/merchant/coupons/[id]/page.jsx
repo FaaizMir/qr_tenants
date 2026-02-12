@@ -1,11 +1,14 @@
 import MerchantCouponDetailContainer from "@/containers/merchant/coupons/detail";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
+import { getTranslations } from "next-intl/server";
 
-export default function CouponBatchDetailPage() {
+export default async function CouponBatchDetailPage() {
+  const t = await getTranslations("merchantCoupons.breadcrumbs");
+  
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
-    { name: "Coupon Batches", url: "/merchant/coupons" },
-    { name: "Detail", url: "#" }, // Name will be dynamic in container, but for breadcrumb in page we can use static or pass it
+    { name: t("merchantDashboard"), url: "/merchant/dashboard" },
+    { name: t("couponBatches"), url: "/merchant/coupons" },
+    { name: t("detail"), url: "#" }, // Name will be dynamic in container, but for breadcrumb in page we can use static or pass it
   ];
 
   return (

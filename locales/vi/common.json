@@ -1,0 +1,22 @@
+{
+  "guidance": {
+    "tip1": "Chọn một tên lô mô tả để dễ dàng nhận diện",
+    "tip2": "Đặt ngày hết hạn thực tế cho chiến dịch của bạn",
+    "tip3": "Chọn một mẫu phù hợp với thương hiệu của bạn",
+    "tip4": "Xem lại tất cả chi tiết trước khi tạo lô",
+    "title": "Hướng dẫn"
+  },
+  "table": {
+    "columns": "Cột",
+    "goToFirstPage": "Đi đến trang đầu tiên",
+    "goToLastPage": "Đi đến trang cuối",
+    "goToNextPage": "Đi đến trang tiếp theo",
+    "goToPreviousPage": "Đi đến trang trước",
+    "loadingData": "Đang tải dữ liệu...",
+    "noResults": "Không có kết quả.",
+    "page": "Trang {current} trong số {total}",
+    "rowsPerPage": "Số hàng trên mỗi trang",
+    "rowsSelected": "{selected} trong số {total} hàng được chọn.",
+    "searchPlaceholder": "Tìm kiếm..."
+  }
+}

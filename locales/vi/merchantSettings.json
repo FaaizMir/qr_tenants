@@ -1,204 +1,255 @@
 {
-  "main": {
-    "title": "Merchant Hub",
-    "version": "Version 2.0",
-    "subtitle": "Strategy Control",
-    "tabs": {
-      "paidAds": "Paid Ads",
-      "settings": "Settings",
-      "automations": "Automations",
-      "festivalMessages": "Festival Messages",
-      "campaigns": "Campaigns"
-    },
-    "proTip": "Pro Tip",
-    "proTipMessage": "Enable features in the switchboard, then configure them below"
-  },
-  "featureMasterControl": {
-    "title": "Feature Switchboard",
-    "subtitle": "Real-time capability control",
-    "live": "Live",
-    "features": {
-      "paidAds": {
-        "label": "Paid Ads",
-        "description": "Display image/video banners to users"
-      },
-      "googleReviews": {
-        "label": "Google Reviews",
-        "description": "Review link to Google Business profile"
-      },
-      "facebookReviews": {
-        "label": "Facebook Reviews",
-        "description": "Direct link to Facebook Page reviews"
-      },
-      "instagramReviews": {
-        "label": "Instagram Reviews",
-        "description": "Integration with Instagram Business"
-      },
-      "xiaohongshuReviews": {
-        "label": "XiaoHongShu Reviews",
-        "description": "Connect with the Red community"
-      },
-      "presetReviews": {
-        "label": "Preset Reviews",
-        "description": "Preset feedback options for customers"
-      },
-      "luckyDraw": {
-        "label": "Lucky Draw",
-        "description": "Gamified reward distribution system"
-      },
-      "birthdayMessage": {
-        "label": "Birthday Message",
-        "description": "Automated rewards on customer birthdays"
-      },
-      "inactiveRecall": {
-        "label": "Inactive Recall",
-        "description": "Automatically recall inactive customers"
-      },
-      "festivalCampaign": {
-        "label": "Festival Campaign",
-        "description": "Broadcasts for special holiday events"
-      },
-      "scheduledCampaign": {
-        "label": "Scheduled Campaign",
-        "description": "Scheduled marketing message campaigns"
-      }
-    },
-    "active": "Active",
-    "paused": "Paused",
-    "success": "{feature} {status}",
-    "successDescription": "Successfully updated your {feature} status.",
-    "error": "Process Failed",
-    "errorDescription": "Could not synchronize setting. Please check your connection."
+  "batchSelector": {
+    "loading": "Đang tải...",
+    "noBatchesDescription": "Tạo một lô phiếu trước",
+    "noBatchesTitle": "Không có lô nào khả dụng",
+    "of": "của",
+    "used": "đã sử dụng"
   },
   "birthdayRewards": {
-    "title": "Birthday Club",
-    "subtitle": "Automatic customer treats",
-    "daysBefore": "Days Before",
-    "daysAfter": "Days After",
-    "days": "Days",
-    "birthdayReward": "Birthday Reward",
-    "selected": "Selected",
-    "selectRewardBatch": "Select a reward batch...",
-    "description": "Customers will receive a message with this reward on their special day.",
-    "saveButton": "Save Birthday Settings",
-    "enableMessage": "Enable Birthday Club to automate your rewards",
-    "actionRequired": "Action Required: Birthday Club",
-    "actionRequiredDescription": "Please select a coupon batch to reward your customers on their birthday.",
-    "updateSuccess": "Birthday Club Updated",
-    "updateSuccessDescription": "Your birthday automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update birthday settings. Please try again."
+    "actionRequired": "Hành động cần thiết: Câu lạc bộ Sinh nhật",
+    "actionRequiredDescription": "Vui lòng chọn một lô phiếu để thưởng cho khách hàng của bạn vào ngày sinh nhật của họ.",
+    "birthdayReward": "Phần thưởng sinh nhật",
+    "days": "Số ngày",
+    "daysAfter": "Số ngày sau",
+    "daysBefore": "Số ngày trước",
+    "description": "Khách hàng sẽ nhận được một tin nhắn với phần thưởng này vào ngày đặc biệt của họ.",
+    "enableMessage": "Bật Câu lạc bộ Sinh nhật để tự động hóa phần thưởng của bạn",
+    "saveButton": "Lưu cài đặt sinh nhật",
+    "saveFailed": "Lưu không thành công",
+    "saveFailedDescription": "Không thể cập nhật cài đặt sinh nhật. Vui lòng thử lại.",
+    "selected": "Đã chọn",
+    "selectRewardBatch": "Chọn một lô phần thưởng...",
+    "subtitle": "Phần thưởng tự động cho khách hàng",
+    "title": "Câu lạc bộ sinh nhật",
+    "updateSuccess": "Câu lạc bộ sinh nhật đã được cập nhật",
+    "updateSuccessDescription": "Cài đặt tự động sinh nhật của bạn đã được lưu."
+  },
+  "featureMasterControl": {
+    "active": "Kích hoạt",
+    "error": "Quá trình thất bại",
+    "errorDescription": "Không thể đồng bộ hóa cài đặt. Vui lòng kiểm tra kết nối của bạn.",
+    "features": {
+      "birthdayMessage": {
+        "description": "Phần thưởng tự động vào ngày sinh nhật của khách hàng",
+        "label": "Tin nhắn sinh nhật"
+      },
+      "facebookReviews": {
+        "description": "Liên kết trực tiếp đến đánh giá trang Facebook",
+        "label": "Đánh giá trên Facebook"
+      },
+      "festivalCampaign": {
+        "description": "Phát sóng cho các sự kiện lễ hội đặc biệt",
+        "label": "Chiến dịch lễ hội"
+      },
+      "googleReviews": {
+        "description": "Liên kết đánh giá đến hồ sơ Google Doanh nghiệp",
+        "label": "Đánh giá của Google"
+      },
+      "inactiveRecall": {
+        "description": "Tự động nhắc lại khách hàng không hoạt động",
+        "label": "Nhắc nhở không hoạt động"
+      },
+      "instagramReviews": {
+        "description": "Tích hợp với Instagram Business",
+        "label": "Đánh giá trên Instagram"
+      },
+      "luckyDraw": {
+        "description": "Hệ thống phân phối phần thưởng gamified",
+        "label": "Rút thăm may mắn"
+      },
+      "paidAds": {
+        "description": "Hiển thị hình ảnh/video banner cho người dùng",
+        "label": "Quảng cáo trả phí"
+      },
+      "presetReviews": {
+        "description": "Tùy chọn phản hồi đã được thiết lập cho khách hàng",
+        "label": "Đánh giá đã được thiết lập"
+      },
+      "scheduledCampaign": {
+        "description": "Các chiến dịch tin nhắn tiếp thị đã lên lịch",
+        "label": "Chiến dịch đã lên lịch"
+      },
+      "xiaohongshuReviews": {
+        "description": "Kết nối với cộng đồng Red",
+        "label": "Đánh giá XiaoHongShu"
+      }
+    },
+    "live": "Trực tiếp",
+    "paused": "Tạm dừng",
+    "subtitle": "Kiểm soát khả năng theo thời gian thực",
+    "success": "{feature} {status}",
+    "successDescription": "Cập nhật trạng thái {feature} của bạn thành công.",
+    "title": "Bảng điều khiển tính năng"
   },
   "inactiveRecall": {
-    "title": "Win-Back Club",
-    "subtitle": "Reactivate sleeping customers",
-    "recallAfter": "Recall After",
-    "daysOfInactivity": "Days of inactivity",
-    "incentiveReward": "Incentive Reward",
-    "selected": "Selected",
-    "chooseRecallReward": "Choose recall reward...",
-    "description": "Customers who haven't visited in a while will get this treat.",
-    "saveButton": "Save Win-Back Settings",
-    "enableMessage": "Enable Win-Back Club to reactivate lapsed customers",
-    "actionRequired": "Action Required: Inactive Recall",
-    "actionRequiredDescription": "Please select an incentive coupon to win back inactive customers.",
-    "updateSuccess": "Inactive Recall Updated",
-    "updateSuccessDescription": "Your win-back automation settings have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update recall settings. Please try again."
+    "actionRequired": "Hành động cần thiết: Gọi lại không hoạt động",
+    "actionRequiredDescription": "Vui lòng chọn một phiếu giảm giá khuyến khích để thu hút lại khách hàng không hoạt động.",
+    "chooseRecallReward": "Chọn phần thưởng nhắc lại...",
+    "daysOfInactivity": "Số ngày không hoạt động",
+    "description": "Khách hàng chưa ghé thăm trong một thời gian sẽ nhận được phần thưởng này.",
+    "enableMessage": "Kích hoạt Câu lạc bộ Win-Back để tái kích hoạt khách hàng đã ngừng mua hàng",
+    "incentiveReward": "Phần thưởng khuyến khích",
+    "recallAfter": "Nhắc lại sau",
+    "saveButton": "Lưu cài đặt Win-Back",
+    "saveFailed": "Lưu không thành công",
+    "saveFailedDescription": "Không thể cập nhật cài đặt nhớ. Vui lòng thử lại.",
+    "selected": "Đã chọn",
+    "subtitle": "Kích hoạt lại khách hàng đang ngủ",
+    "title": "Câu lạc bộ Khôi phục",
+    "updateSuccess": "Nhắc lại không hoạt động đã được cập nhật",
+    "updateSuccessDescription": "Cài đặt tự động khôi phục của bạn đã được lưu."
+  },
+  "main": {
+    "description": "Quản lý sự tương tác toàn cầu, cơ chế thưởng và nội dung khuyến mãi của bạn từ một bảng điều khiển hiệu suất cao duy nhất.",
+    "merchantActive": "Người bán đang hoạt động",
+    "proTip": "Mẹo chuyên nghiệp",
+    "proTipMessage": "Việc kết hợp phần thưởng trực tiếp với các cài đặt mạnh mẽ tạo ra một vòng phản hồi có tỷ lệ chuyển đổi cao, giúp tăng cường SEO địa phương của bạn.",
+    "status": "Trạng thái",
+    "subtitle": "Chiến lược",
+    "subtitleHighlight": "Điều khiển",
+    "tabs": {
+      "automations": "Tự động hóa",
+      "campaigns": "Chiến dịch",
+      "festivalMessages": "Tin nhắn lễ hội",
+      "paidAds": "Quảng cáo trả phí",
+      "settings": "Cài đặt"
+    },
+    "title": "Trung tâm thương nhân",
+    "version": "Phiên bản 2.0"
   },
   "paidAds": {
-    "title": "Promotional Banners",
-    "subtitle": "Visual marketing content",
-    "active": "Active",
-    "off": "OFF",
-    "adPlacement": "Ad Placement",
-    "selectPlacement": "Select placement",
-    "top": "Top",
-    "left": "Left",
-    "right": "Right",
-    "bottom": "Bottom",
-    "duration": "Duration",
-    "selectDuration": "Select duration",
-    "7days": "7 Days",
-    "14days": "14 Days",
-    "30days": "30 Days",
-    "imageAds": "Image Ads",
-    "videoAds": "Video Ads",
-    "addImage": "Add Image",
-    "addVideo": "Add Video",
-    "imageRecommendation": "1200x600px recommended",
-    "videoRecommendation": "MP4, WebM (Max 50MB)",
-    "pending": "Pending",
-    "adjustImage": "Adjust Image",
-    "adjustImageDescription": "Drag to reposition and use the slider to zoom.",
-    "zoom": "Zoom",
-    "cancel": "Cancel",
-    "saveImage": "Save Image",
-    "uploadAndSave": "Upload & Save",
-    "uploading": "Uploading...",
-    "adPreview": "Ad Preview",
-    "adPreviewDescription": "Full size preview of the promotional ad",
-    "settingsUpdated": "Settings and ad updated successfully",
-    "errorSaving": "Error saving settings",
-    "imageDeleted": "Image deleted successfully",
-    "videoDeleted": "Video deleted successfully",
-    "failedToDelete": "Failed to delete",
-    "videoTooLarge": "Video file is too large. Max size is 50MB.",
-    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
-    "imageSelected": "Image selected. Click Upload & Save to apply changes.",
-    "errorCropping": "Error cropping image"
+    "14days": "14 Ngày",
+    "30days": "30 Ngày",
+    "7days": "7 Ngày",
+    "active": "Hoạt động",
+    "addImage": "Thêm hình ảnh",
+    "addVideo": "Thêm video",
+    "adjustImage": "Điều chỉnh hình ảnh",
+    "adjustImageDescription": "Kéo để định vị lại và sử dụng thanh trượt để phóng to.",
+    "adPlacement": "Vị trí quảng cáo",
+    "adPreview": "Xem trước quảng cáo",
+    "adPreviewDescription": "Xem trước kích thước đầy đủ của quảng cáo khuyến mãi",
+    "bottom": "Dưới cùng",
+    "cancel": "Hủy",
+    "duration": "Thời gian",
+    "errorCropping": "Lỗi cắt ảnh",
+    "errorSaving": "Lỗi khi lưu cài đặt",
+    "failedToDelete": "Xóa không thành công",
+    "imageAds": "Quảng cáo hình ảnh",
+    "imageDeleted": "Hình ảnh đã xóa thành công",
+    "imageRecommendation": "Khuyến nghị 1200x600px",
+    "imageSelected": "Hình ảnh đã được chọn. Nhấn Tải lên & Lưu để áp dụng thay đổi.",
+    "left": "Trái",
+    "off": "TẮT",
+    "pending": "Đang chờ xử lý",
+    "right": "Phải",
+    "saveImage": "Lưu hình ảnh",
+    "selectDuration": "Chọn thời gian",
+    "selectPlacement": "Chọn vị trí",
+    "settingsUpdated": "Cài đặt và quảng cáo đã được cập nhật thành công",
+    "subtitle": "Nội dung tiếp thị hình ảnh",
+    "title": "Biểu ngữ quảng cáo",
+    "top": "Hàng đầu",
+    "uploadAndSave": "Tải lên & Lưu",
+    "uploading": "Đang tải...",
+    "videoAds": "Quảng cáo Video",
+    "videoDeleted": "Video đã xóa thành công",
+    "videoRecommendation": "MP4, WebM (Tối đa 50MB)",
+    "videoSelected": "Video đã được chọn. Nhấn 'Tải lên & Lưu' để hoàn tất.",
+    "videoTooLarge": "Tệp video quá lớn. Kích thước tối đa là 50MB.",
+    "zoom": "Phóng to"
   },
   "platformSettings": {
-    "title": "Social Connect",
-    "subtitle": "Review channels",
-    "googleReviews": "Google Reviews",
-    "facebookPage": "Facebook Page",
-    "instagram": "Instagram",
-    "xiaohongshu": "XiaoHongShu",
-    "active": "ACTIVE",
-    "off": "OFF",
-    "googlePlaceholder": "https://g.page/r/...",
+    "active": "KÍCH HOẠT",
+    "facebookPage": "Trang Facebook",
     "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "Đánh giá Google",
+    "instagram": "Instagram",
     "instagramPlaceholder": "https://instagram.com/...",
-    "redPlaceholder": "RED Profile URL",
-    "savePlatforms": "Save Platforms",
-    "updateSuccess": "Platforms Updated",
-    "updateSuccessDescription": "Your social review links have been updated.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update platforms. Please try again."
+    "off": "TẮT",
+    "redPlaceholder": "URL hồ sơ RED",
+    "saveFailed": "Lưu thất bại",
+    "saveFailedDescription": "Không thể cập nhật các nền tảng. Vui lòng thử lại.",
+    "savePlatforms": "Lưu nền tảng",
+    "subtitle": "Xem xét các kênh",
+    "title": "Kết nối xã hội",
+    "updateSuccess": "Nền tảng đã được cập nhật",
+    "updateSuccessDescription": "Liên kết đánh giá xã hội của bạn đã được cập nhật.",
+    "xiaohongshu": "XiaoHongShu"
   },
   "presetReviews": {
-    "title": "Quick Feedback",
-    "subtitle": "Customer presets",
-    "active": "Active",
-    "off": "Off",
-    "placeholder": "Positive feedback option...",
-    "savePresets": "Save Presets",
-    "updateSuccess": "Presets Updated",
-    "updateSuccessDescription": "Your quick review options have been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update presets. Please try again."
+    "active": "Đang hoạt động",
+    "off": "Tắt",
+    "placeholder": "Tùy chọn phản hồi tích cực...",
+    "saveFailed": "Lưu không thành công",
+    "saveFailedDescription": "Không thể cập nhật cài đặt trước. Vui lòng thử lại.",
+    "savePresets": "Lưu Cài đặt trước",
+    "subtitle": "Cài đặt trước của khách hàng",
+    "title": "Phản hồi nhanh",
+    "updateSuccess": "Cài đặt trước đã được cập nhật",
+    "updateSuccessDescription": "Các tùy chọn đánh giá nhanh của bạn đã được lưu."
   },
   "rewardStrategy": {
-    "title": "Incentive Engine",
-    "subtitle": "Primary reward",
-    "luckyDraw": "Lucky Draw",
-    "luckyDrawDescription": "Gamified Prizes",
-    "directCoupon": "Direct Coupon",
-    "directCouponDescription": "Instant Access",
-    "managedVia": "Selection is managed via",
-    "featureSwitchboard": "Feature Switchboard",
-    "selectReward": "Select Reward",
-    "chooseRegularReward": "Choose regular reward...",
-    "luckyDrawTip": "Configure prizes in the",
-    "luckyDrawTab": "Lucky Draw",
+    "chooseRegularReward": "Chọn phần thưởng thông thường...",
+    "directCoupon": "Phiếu giảm giá trực tiếp",
+    "directCouponDescription": "Truy cập ngay lập tức",
+    "featureSwitchboard": "Bảng điều khiển tính năng",
+    "luckyDraw": "Rút thăm may mắn",
+    "luckyDrawDescription": "Giải thưởng trò chơi",
+    "luckyDrawTab": "Rút thăm may mắn",
+    "luckyDrawTip": "Cấu hình giải thưởng trong",
+    "managedVia": "Lựa chọn được quản lý qua",
+    "saveFailed": "Lưu không thành công",
+    "saveFailedDescription": "Không thể cập nhật chiến lược phần thưởng. Vui lòng thử lại.",
+    "saveStrategy": "Lưu chiến lược",
+    "selectCouponBatch": "Vui lòng chọn một Lô Phiếu giảm giá cho Phần thưởng Trực tiếp.",
+    "selectReward": "Chọn phần thưởng",
+    "subtitle": "Phần thưởng chính",
     "tab": "tab",
-    "saveStrategy": "Save Strategy",
-    "selectCouponBatch": "Please select a Coupon Batch for Direct Rewards.",
-    "updateSuccess": "Reward Strategy Updated",
-    "updateSuccessDescription": "Your primary reward configuration has been saved.",
-    "saveFailed": "Save Failed",
-    "saveFailedDescription": "Could not update reward strategy. Please try again."
+    "title": "Công cụ khuyến khích",
+    "updateSuccess": "Chiến lược phần thưởng đã được cập nhật",
+    "updateSuccessDescription": "Cấu hình phần thưởng chính của bạn đã được lưu."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "Hành động cần thiết: Chiến dịch đã lên lịch",
+    "actionRequiredDescription": "Vui lòng chọn một lô phiếu giảm giá để bao gồm trong chiến dịch của bạn.",
+    "active": "Kích hoạt",
+    "attachCoupon": "Đính kèm phiếu giảm giá",
+    "audience": "Đối tượng",
+    "audienceOptions": {
+      "active": "Đang hoạt động",
+      "all": "Tất cả người dùng",
+      "firstTime": "Lần đầu tiên",
+      "inactive": "Không hoạt động",
+      "returning": "Quay lại"
+    },
+    "campaignName": "Tên chiến dịch",
+    "campaignNamePlaceholder": "Ví dụ: Giảm giá Halloween",
+    "campaignScheduled": "Chiến dịch đã được lên lịch",
+    "campaignScheduledDescription": "Chiến dịch tiếp thị của bạn đã được xếp hàng để giao hàng.",
+    "done": "Xong",
+    "incompleteCampaign": "Chi tiết chiến dịch chưa hoàn chỉnh",
+    "incompleteCampaignDescription": "Vui lòng cung cấp tên, tin nhắn và ngày cho buổi phát sóng của bạn.",
+    "launchDate": "Ngày phát hành",
+    "message": "Tin nhắn",
+    "messagePlaceholder": "Chào {name}, ...",
+    "off": "Tắt",
+    "saveFailed": "Lưu không thành công",
+    "saveFailedDescription": "Không thể lên lịch chiến dịch. Vui lòng thử lại.",
+    "scheduleCampaign": "Lên lịch chiến dịch",
+    "selectAudience": "Chọn",
+    "selectCampaignReward": "Chọn phần thưởng chiến dịch...",
+    "selectDateTime": "Chọn ngày và giờ",
+    "subtitle": "Lên lịch gửi",
+    "title": "Chiến dịch"
+  },
+  "stickySaveBar": {
+    "discardChanges": "Hủy bỏ thay đổi",
+    "saveAllSettings": "Lưu tất cả cài đặt",
+    "statusDescription": "Đồng bộ tất cả phần thưởng và cài đặt tương tác của bạn trên nền tảng",
+    "statusReady": "Chiến lược phần thưởng đã sẵn sàng",
+    "synchronizing": "Đang đồng bộ hóa..."
   }
 }
