@@ -48,8 +48,8 @@ import { CouponForm } from "./components/CouponForm";
 import { cn } from "@/lib/utils";
 
 export default function AgentLandingPage() {
-  const t = useTranslations("homepage.agent");
-  const tCommon = useTranslations("homepage.common");
+  const t = useTranslations("Homepage.agent");
+  const tCommon = useTranslations("Homepage.common");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -199,18 +199,27 @@ export default function AgentLandingPage() {
 
       const transformedAds = rawData
         .filter((item) => item && item.id)
+        .filter((item) => {
+          // Check both top-level and settings for media
+          const hasImage = item.paid_ad_image || item.settings?.paid_ad_image;
+          const hasVideo = item.paid_ad_video || item.settings?.paid_ad_video;
+          return hasImage || hasVideo;
+        })
         .map((item) => ({
           id: item.id,
-          image: item.paid_ad_image,
-          video: item.paid_ad_video,
-          isVideo: item.paid_ad_video_status || false,
+          image: item.paid_ad_image || item.settings?.paid_ad_image || null,
+          video: item.paid_ad_video || item.settings?.paid_ad_video || null,
+          isVideo:
+            item.settings?.paid_ad_video_status ||
+            item.paid_ad_video_status ||
+            false,
           placement:
             item.paid_ad_placement || item.settings?.paid_ad_placement || "top",
           title: item.business_name || t("ads.sponsoredDeal"),
-          description: t("ads.visitBusiness", { 
-            businessName: item.business_name, 
-            city: item.city, 
-            country: item.country 
+          description: t("ads.visitBusiness", {
+            businessName: item.business_name,
+            city: item.city,
+            country: item.country,
           }),
           redirectUrl: `/customer/review?mid=${item.id}`,
           cta: t("ads.viewOffer"),
@@ -349,7 +358,15 @@ export default function AgentLandingPage() {
     };
 
     fetchData();
-  }, [agentId, searchQuery, selectedCategory, selectedRegion, fetchPaidAds, fetchMerchants, t]);
+  }, [
+    agentId,
+    searchQuery,
+    selectedCategory,
+    selectedRegion,
+    fetchPaidAds,
+    fetchMerchants,
+    t,
+  ]);
 
   const activeMerchant = useMemo(
     () => merchants.find((m) => m.id === selectedMerchantId) || null,
@@ -670,7 +687,9 @@ export default function AgentLandingPage() {
                 side="bottom"
                 className="h-[85vh] p-0 rounded-t-3xl border-0"
               >
-                <SheetTitle className="sr-only">{t("merchantDetail.merchantDetails")}</SheetTitle>
+                <SheetTitle className="sr-only">
+                  {t("merchantDetail.merchantDetails")}
+                </SheetTitle>
                 <div className="overflow-y-auto h-full">
                   <MerchantDetail
                     activeMerchant={activeMerchant}

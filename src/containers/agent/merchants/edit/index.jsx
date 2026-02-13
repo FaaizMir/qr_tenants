@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
 import { MerchantForm } from "../create/merchant-form";
 import { getMerchantById } from "@/lib/services/helper";
 import { LoadingSpinner } from "@/helper/Loader";
 import { toast } from "@/lib/toast";
 
 export default function EditMerchantContainer({ merchantId }) {
-  const t = useTranslations("agent.merchants");
   const [merchantData, setMerchantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

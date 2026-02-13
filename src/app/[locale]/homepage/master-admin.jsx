@@ -39,8 +39,8 @@ import { TopBannerAd } from "./components/PaidAdsDisplay";
 
 // --- Main Page Component ---
 export default function MasterAdminLandingPage() {
-  const t = useTranslations("homepage.masterAdmin");
-  const tCommon = useTranslations("homepage.common");
+  const t = useTranslations("Homepage.masterAdmin");
+  const tCommon = useTranslations("Homepage.common");
   const locale = useLocale();
   const router = useRouter();
 

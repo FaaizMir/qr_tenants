@@ -2,7 +2,7 @@ import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
 export const namespaces = [
-  "homepage",
+  "Homepage",
   "signin",
   "merchantDashboard",
   "sidebar",

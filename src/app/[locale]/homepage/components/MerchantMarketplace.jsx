@@ -179,7 +179,7 @@ export function MarketplaceFilters({
   cities,
   handleGetCoupon,
 }) {
-  const t = useTranslations("homepage.agent.marketplace");
+  const t = useTranslations("Homepage.agent.marketplace");
   
   return (
     <div className="sticky top-20 z-40 mb-8">
@@ -280,8 +280,8 @@ export function MerchantList({
   onPageChange,
   ads = [],
 }) {
-  const t = useTranslations("homepage.agent.marketplace");
-  const tDetail = useTranslations("homepage.agent.merchantDetail");
+  const t = useTranslations("Homepage.agent.marketplace");
+  const tDetail = useTranslations("Homepage.agent.merchantDetail");
   const page = Number(rawPage || 1);
   const totalItems = Number(rawTotalItems || 0);
 
@@ -661,7 +661,7 @@ export function MerchantList({
 
 export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   const router = useRouter();
-  const tDetail = useTranslations("homepage.agent.merchantDetail");
+  const tDetail = useTranslations("Homepage.agent.merchantDetail");
 
   // Mobile/Tablet View handled via simple conditionally rendered sheet or similar if needed,
   // but for now keeping the "selected means highlighted" flow.
