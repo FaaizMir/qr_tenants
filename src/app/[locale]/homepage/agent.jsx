@@ -203,6 +203,8 @@ export default function AgentLandingPage() {
         .map((item) => ({
           id: item.id,
           image: item.paid_ad_image,
+          video: item.paid_ad_video,
+          isVideo: item.paid_ad_video_status || false,
           placement:
             item.paid_ad_placement || item.settings?.paid_ad_placement || "top",
           title: item.business_name || "Sponsored Deal",
