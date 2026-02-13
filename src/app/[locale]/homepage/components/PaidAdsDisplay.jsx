@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, ChevronRight, Info, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ChevronRight, Info, ArrowUpRight, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -9,7 +9,8 @@ import { useTranslations } from "next-intl";
 
 // --- HELPERS ---
 let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-baseUrl = baseUrl.replace(/\/v1\/?$/, "");
+// Remove trailing '/api/v1' or '/v1' if present
+baseUrl = baseUrl.replace(/\/(api\/)?v1\/?$/, "");
 
 const getAdImage = (path) => {
   if (!path)
@@ -19,7 +20,56 @@ const getAdImage = (path) => {
 
   const cleanBase = baseUrl.replace(/\/+$/, "");
   const cleanPath = path.toString().replace(/^\/+/, "");
-  return `${cleanBase}/${cleanPath}`;
+  const finalUrl = `${cleanBase}/${cleanPath}`;
+  console.log("Ad Media URL:", finalUrl);
+  return finalUrl;
+};
+
+const AdMedia = ({ ad, className, showPlayIcon = false }) => {
+  const mediaUrl = ad.isVideo ? getAdImage(ad.video) : getAdImage(ad.image);
+  
+  if (ad.isVideo && ad.video) {
+    console.log("Rendering video ad:", mediaUrl);
+    return (
+      <div className="relative w-full h-full">
+        <video
+          key={mediaUrl}
+          className={cn("w-full h-full object-cover", className)}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={(e) => {
+            console.error("Video load error:", e);
+            console.error("Video URL that failed:", mediaUrl);
+          }}
+          onLoadStart={() => console.log("Video loading started:", mediaUrl)}
+          onCanPlay={() => console.log("Video can play now")}
+        >
+          <source src={mediaUrl} type="video/mp4" />
+          <source src={mediaUrl} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+        {showPlayIcon && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
+              <Play className="w-6 h-6 text-white fill-white" />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
+  return (
+    <Image
+      src={mediaUrl}
+      className={cn("object-cover", className)}
+      alt={ad.title}
+      fill
+      unoptimized
+    />
+  );
 };
 
 /**
@@ -51,15 +101,11 @@ export function TopBannerAd({ ad }) {
         target={ad.redirectUrl?.startsWith("http") ? "_blank" : undefined}
         className="block relative w-full h-[350px] md:h-[450px] rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
       >
-        {/* Background Image with Scale Effect */}
+        {/* Background Image/Video with Scale Effect */}
         <div className="absolute inset-0 bg-slate-100">
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover transition-transform duration-1000 group-hover:scale-110"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
+          <div className="relative w-full h-full transition-transform duration-1000 group-hover:scale-110">
+            <AdMedia ad={ad} />
+          </div>
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-linear-to-r from-black/70 to-transparent" />
         </div>
@@ -118,13 +164,7 @@ export function SidebarAd({ ad, placement }) {
           <span className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-wider rounded">
             {t("ad")}
           </span>
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
+          <AdMedia ad={ad} />
           <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-80" />
 
           <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
@@ -151,13 +191,7 @@ export function InlineAd({ ad }) {
               {t("sponsored")}
             </span>
           </div>
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
+          <AdMedia ad={ad} showPlayIcon={ad.isVideo} />
         </div>
         <div className="p-5 flex-1 flex flex-col">
           <div className="flex items-start justify-between mb-2">
@@ -208,13 +242,7 @@ export function BottomBannerAd({ ad }) {
                 {t("ad")}
               </span>
             </div>
-            <Image
-              src={getAdImage(ad.image)}
-              className="object-cover"
-              alt={ad.title}
-              fill
-              unoptimized
-            />
+            <AdMedia ad={ad} />
             <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#0B1120]/30 md:to-[#0B1120]" />
           </div>
 

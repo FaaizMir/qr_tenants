@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { User, MapPin, ImageIcon } from "lucide-react";
+import { User, MapPin, ImageIcon, Play } from "lucide-react";
 import { ApprovalStatusToggle } from "./approval-status-toggle";
 
 
@@ -29,21 +29,35 @@ export const getApprovalColumns = (handleStatusUpdate) => [
     },
     {
         accessorKey: "adImage",
-        header: "Ad Image",
+        header: "Ad Content",
         cell: ({ row }) => {
-            const img = row.original.adImage;
+            const url = row.original.adImage;
+            const isVideo = row.original.adType === 'video';
             return (
                 <div className="flex items-center justify-start">
-                    {img ? (
+                    {url ? (
                         <button
-                            className="rounded-md border p-0.5 bg-white shadow-sm hover:shadow-md transition-all active:scale-95 overflow-hidden group"
+                            className="rounded-md border p-0.5 bg-white shadow-sm hover:shadow-md transition-all active:scale-95 overflow-hidden group relative"
                             onClick={() => row.original.onPreview(row.original.adType, row.original.adImage)}
                         >
-                            <img
-                                src={img}
-                                alt="Ad"
-                                className="w-10 h-10 object-cover rounded shadow-inner group-hover:opacity-80 transition-opacity"
-                            />
+                            {isVideo ? (
+                                <div className="relative w-10 h-10 bg-slate-900 rounded flex items-center justify-center">
+                                    <video
+                                        src={url}
+                                        className="w-full h-full object-cover rounded opacity-80"
+                                        muted
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <Play className="w-4 h-4 text-white fill-white" />
+                                    </div>
+                                </div>
+                            ) : (
+                                <img
+                                    src={url}
+                                    alt="Ad"
+                                    className="w-10 h-10 object-cover rounded shadow-inner group-hover:opacity-80 transition-opacity"
+                                />
+                            )}
                         </button>
                     ) : (
                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground italic px-2">

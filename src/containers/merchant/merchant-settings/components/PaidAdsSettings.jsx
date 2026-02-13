@@ -131,6 +131,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             pendingFile.filename || "image.jpg",
           );
           formData.append("paidAdPlacement", state.placement || "top");
+          formData.append("paidAdDuration", String(state.paid_ad_duration || "7"));
 
           const response = await axiosInstance.post(
             `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
@@ -150,6 +151,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           }
         } else if (pendingFile.type === "video") {
           formData.append("paidAdVideo", pendingFile.file);
+          formData.append("paidAdPlacement", state.placement || "top");
+          formData.append("paidAdDuration", String(state.paid_ad_duration || "7"));
 
           const response = await axiosInstance.post(
             `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
@@ -199,6 +202,15 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const handleFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+      
+      // Validate file size (2MB max)
+      const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+      if (file.size > maxSize) {
+        toast.error("Image size must be less than 2MB");
+        e.target.value = null; // Clear the input
+        return;
+      }
+      
       setCurrentFilename(file.name);
       let imageDataUrl = await readFile(file);
       setImageSrc(imageDataUrl);
@@ -212,13 +224,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     const file = e.target.files[0];
     if (!file || !merchantId) return;
 
-    // Size limit check (e.g., 50MB)
-    if (file.size > 50 * 1024 * 1024) {
-      toast.error("Video file is too large. Max size is 50MB.");
+    // Size limit check (25MB)
+    const maxSize = 25 * 1024 * 1024; // 25MB in bytes
+    if (file.size > maxSize) {
+      toast.error("Video file is too large. Max size is 25MB.");
+      e.target.value = null; // Clear the input
       return;
     }
-
-    // setUploading(true); // Defer upload
 
     // Create local object URL for preview
     const objectUrl = URL.createObjectURL(file);
@@ -599,7 +611,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                             Add Video
                           </span>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
-                            MP4, WebM (Max 50MB)
+                            MP4, WebM (Max 25MB)
+                          </p>
+                          <p className="text-[10px] text-muted-foreground">
+                            Recommended: 1200x600px
                           </p>
                         </div>
                       </Label>
@@ -623,7 +638,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         image={imageSrc}
                         crop={crop}
                         zoom={zoom}
-                        aspect={1}
+                        aspect={16 / 9}
                         onCropChange={setCrop}
                         onCropComplete={onCropComplete}
                         onZoomChange={setZoom}

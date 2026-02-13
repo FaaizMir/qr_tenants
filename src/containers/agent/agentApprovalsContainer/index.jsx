@@ -28,6 +28,7 @@ export default function AgentApprovalsContainer() {
   });
 
   const handlePreview = (type, url) => {
+    console.log("Opening preview - Type:", type, "URL:", url);
     setPreviewContent({ type, url });
     setIsPreviewOpen(true);
   };
@@ -50,7 +51,8 @@ export default function AgentApprovalsContainer() {
         // Map API response to table shape
         const mappedData = items.map((item) => {
           const settings = item.merchant?.settings || {};
-          const isVideo = settings.paid_ad_video_status;
+          // Use ad_type from approval record to determine content type
+          const isVideo = item.ad_type === 'video';
           const relativePath = isVideo
             ? settings.paid_ad_video
             : settings.paid_ad_image;
@@ -65,16 +67,20 @@ export default function AgentApprovalsContainer() {
               fullImageUrl = relativePath;
             } else {
               let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-              // Remove trailing '/v1' if present
-              baseUrl = baseUrl.replace(/\/v1\/?$/, "");
+              // Remove trailing '/api/v1' or '/v1' if present
+              baseUrl = baseUrl.replace(/\/(api\/)?v1\/?$/, "");
               // Ensure no double slashes
               const cleanBase = baseUrl.replace(/\/+$/, "");
               const cleanPath = relativePath.replace(/^\/+/, "");
               fullImageUrl = `${cleanBase}/${cleanPath}`;
+              
+              console.log("Base URL:", cleanBase);
+              console.log("Clean path:", cleanPath);
+              console.log("Final URL:", fullImageUrl);
             }
           }
 
-          console.log("Ad Preview URL:", fullImageUrl);
+          console.log("Ad Preview URL:", fullImageUrl, "Type:", isVideo ? 'video' : 'image');
           return {
             id: item.id,
             name: item.merchant?.business_name || "N/A",
@@ -171,11 +177,22 @@ export default function AgentApprovalsContainer() {
               />
             ) : (
               <video
-                src={previewContent.url}
+                key={previewContent.url}
                 controls
                 autoPlay
-                className="max-w-full max-h-full rounded-xl shadow-md bg-black"
-              />
+                className="max-w-full max-h-[80vh] rounded-xl shadow-md bg-black"
+                style={{ minHeight: '300px' }}
+                onError={(e) => {
+                  console.error("Video load error:", e);
+                  console.error("Video URL that failed:", previewContent.url);
+                }}
+                onLoadStart={() => console.log("Video loading started...")}
+                onCanPlay={() => console.log("Video can play now")}
+              >
+                <source src={previewContent.url} type="video/mp4" />
+                <source src={previewContent.url} type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
             )}
             <Button
               variant="secondary"
