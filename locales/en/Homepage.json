@@ -74,6 +74,7 @@
       "searchPlaceholder": "Search merchants, categories...",
       "showing": "Showing {start} - {end} of {total}",
       "showingPage": "Showing Page {page}",
+      "showingRange": "Showing {start} - {end} of {total} merchants",
       "tryAdjustingFilters": "Try adjusting your filters or search.",
       "unableToLoad": "Unable to load merchants"
     },

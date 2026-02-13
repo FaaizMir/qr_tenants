@@ -122,9 +122,9 @@ export default function MasterAdminLandingPage() {
             country: agent.country || t("fallback.unknown"),
             status:
               agent.is_active === true ||
-              agent.is_active === 1 ||
-              agent.user?.is_active === true ||
-              agent.user?.is_active === 1
+                agent.is_active === 1 ||
+                agent.user?.is_active === true ||
+                agent.user?.is_active === 1
                 ? t("status.active")
                 : t("status.inactive"),
             joined: new Date().toLocaleDateString(),
@@ -151,7 +151,7 @@ export default function MasterAdminLandingPage() {
         setHasMore(transformed.length === 6);
         setTotalAgents(
           response.data?.pagination?.total ||
-            (pageNum === 1 ? transformed.length : totalAgents),
+          (pageNum === 1 ? transformed.length : totalAgents),
         );
         setPage(pageNum);
       } catch (err) {

@@ -373,8 +373,6 @@ export default function AgentLandingPage() {
     [merchants, selectedMerchantId],
   );
 
-  const isFewMerchants = merchants.length > 0 && merchants.length <= 2;
-
   // Derived Ads
   const topAd = paidAds.find((a) => a.placement === "top") || null;
   const leftAd = paidAds.find((a) => a.placement === "left") || null;
@@ -499,7 +497,6 @@ export default function AgentLandingPage() {
         <section className="pt-10 px-6 lg:px-10 max-w-[1600px] mx-auto">
           {topAd && <TopBannerAd ad={topAd} />}
         </section>
-
         {/* --- Highlight / Hero Section --- */}
         <section className="relative w-full overflow-hidden mb-12">
           {/* Background & Content (Same as before) */}
@@ -564,7 +561,6 @@ export default function AgentLandingPage() {
             </div>
           </div>
         </section>
-
         {/* --- Filter Bar --- */}
         <section
           className="px-6 lg:px-10 max-w-[1600px] mx-auto mb-8 relative z-20"
@@ -591,14 +587,9 @@ export default function AgentLandingPage() {
           />
         </section>
 
-        <section className="px-6 lg:px-10 max-w-[1700px] mx-auto pb-24">
-          <div
-            className={cn(
-              "grid grid-cols-1 lg:grid-cols-12 items-start transition-all duration-700",
-              isFewMerchants ? "gap-8 max-w-7xl mx-auto" : "gap-8",
-            )}
-          >
-            {/* Left Sidebar (Ads Only) */}
+        <section className="px-6 lg:px-10 max-w-[1600px] mx-auto pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-8 transition-all duration-700">
+            {/* Left Sidebar (Ads Only) - Always show if leftAd exists */}
             {leftAd && (
               <div className="hidden xl:block lg:col-span-2 sticky top-28 space-y-8 pt-16">
                 <div className="space-y-4">
@@ -614,17 +605,14 @@ export default function AgentLandingPage() {
               </div>
             )}
 
+            {/* Merchant List - Dynamic width based on leftAd presence */}
             <div
               ref={merchantListRef}
               className={cn(
-                "col-span-1 w-full min-w-0 transition-all duration-700",
-                merchants.length === 1
-                  ? "lg:col-span-4 lg:col-start-3"
-                  : isFewMerchants
-                    ? "lg:col-span-7"
-                    : leftAd
-                      ? "lg:col-span-7 xl:col-span-7"
-                      : "lg:col-span-7 xl:col-span-9",
+                "col-span-1 w-full min-w-0",
+                leftAd
+                  ? "lg:col-span-7 xl:col-span-7"
+                  : "lg:col-span-8 xl:col-span-9",
               )}
             >
               <MerchantList
@@ -638,22 +626,20 @@ export default function AgentLandingPage() {
                 hasMore={hasMore}
                 onPageChange={(pageNum) => fetchMerchants(pageNum)}
                 ads={inlineAds}
+                isScrollable={false}
               />
             </div>
 
+            {/* Right Detail Panel - Always show */}
             <div
               className={cn(
-                "col-span-1 lg:block min-w-0 transition-all duration-700",
-                merchants.length === 1
-                  ? "lg:col-span-4"
-                  : isFewMerchants
-                    ? "lg:col-span-5"
-                    : leftAd
-                      ? "lg:col-span-5 xl:col-span-3"
-                      : "lg:col-span-5 xl:col-span-3",
+                "col-span-1 lg:block min-w-0",
+                leftAd
+                  ? "lg:col-span-5 xl:col-span-3"
+                  : "lg:col-span-4 xl:col-span-3",
               )}
             >
-              <div className={cn("sticky top-24 space-y-8")}>
+              <div className="sticky top-24 space-y-4">
                 {/* Detail Panel */}
                 <MerchantDetail
                   activeMerchant={activeMerchant}
@@ -662,7 +648,7 @@ export default function AgentLandingPage() {
 
                 {/* Right Sidebar Ad */}
                 {rightAd && (
-                  <div className="pt-4">
+                  <div className="pt-2">
                     <div className="flex items-center gap-2 mb-4 opacity-50 px-2">
                       <span className="h-px flex-1 bg-slate-300"></span>
                       <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
@@ -700,7 +686,6 @@ export default function AgentLandingPage() {
             </Sheet>
           )}
         </section>
-
         {/* -- Features Section -- */}
         <section
           className="bg-white py-24 border-t border-slate-100"
@@ -765,7 +750,6 @@ export default function AgentLandingPage() {
             </div>
           </div>
         </section>
-
         {/* --- Bottom Ad Banner --- */}
         <section className="pt-10 pb-0">
           {bottomAd && <BottomBannerAd ad={bottomAd} />}
