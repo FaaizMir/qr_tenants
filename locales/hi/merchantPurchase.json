@@ -1,0 +1,59 @@
+{
+  "title": "अपने स्टोर को पावर अप करें",
+  "subtitle": "व्हाट्सएप संदेश, कूपन निर्माण और भुगतान विज्ञापनों के लिए एक क्रेडिट पैकेज चुनें।",
+  "loading": "पैकेज लोड हो रहे हैं...",
+  "errors": {
+    "loadPackages": "क्रेडिट पैकेज लोड करने में असमर्थ। कृपया पुनः प्रयास करें।",
+    "noMerchantId": "व्यापारी आईडी निर्धारित करने में असमर्थ। कृपया सहायता से संपर्क करें।",
+    "purchaseFailed": "पैकेज खरीदने में विफल। कृपया पुनः प्रयास करें।",
+    "requestFailed": "अनुरोध स्थिति {status} के साथ विफल रहा।"
+  },
+  "emptyState": {
+    "noPackages": "आपके व्यापारी प्रकार के लिए कोई क्रेडिट पैकेज नहीं मिला।"
+  },
+  "packageTypes": {
+    "coupon": "कूपन",
+    "whatsappUI": "व्हाट्सएप UI संदेश",
+    "whatsappBI": "व्हाट्सएप BI संदेश",
+    "whatsapp": "व्हाट्सएप संदेश",
+    "paidAds": "भुगतान विज्ञापन",
+    "standard": "मानक"
+  },
+  "merchantTypes": {
+    "annual": "वार्षिक",
+    "temporary": "अस्थायी",
+    "standard": "मानक"
+  },
+  "packageCard": {
+    "perCredit": "प्रति क्रेडिट",
+    "baseCredits": "{credits} बेस क्रेडिट",
+    "bonusCredits": "+{bonusCredits} बोनस क्रेडिट",
+    "enhancedFeatures": "उन्नत सुविधाएँ और क्षमता",
+    "getStarted": "शुरू करें"
+  },
+  "checkout": {
+    "title": "ऑर्डर अवलोकन",
+    "subtitle": "चेकआउट विवरण",
+    "selectedPackage": "चयनित पैकेज",
+    "premiumDescription": "आपके व्यवसाय की वृद्धि के लिए प्रीमियम क्रेडिट पैकेज।",
+    "creditsIncluded": "शामिल क्रेडिट",
+    "bonusGift": "बोनस उपहार",
+    "packageType": "पैकेज प्रकार",
+    "totalAmount": "कुल राशि",
+    "securePayment": "सुरक्षित भुगतान",
+    "sslEncrypted": "SSL एन्क्रिप्टेड स्ट्राइप गेटवे",
+    "cardDetails": "कार्ड विवरण",
+    "paymentInfo": "कृपया नीचे अपनी भुगतान जानकारी दर्ज करें।",
+    "amountPayable": "देय राशि",
+    "trustedPartners": "विश्वसनीय भागीदार",
+    "noSelection": "कोई चयन नहीं मिला",
+    "noSelectionMessage": "कृपया इस विंडो को बंद करें और अपने अपग्रेड के साथ आगे बढ़ने के लिए एक क्रेडिट पैकेज चुनें।"
+  },
+  "success": {
+    "purchaseComplete": "पैकेज सफलतापूर्वक खरीदा गया।"
+  },
+  "toast": {
+    "purchaseSuccess": "पैकेज सफलतापूर्वक खरीदा गया।",
+    "purchaseError": "पैकेज खरीदने में विफल। कृपया पुनः प्रयास करें।"
+  }
+}

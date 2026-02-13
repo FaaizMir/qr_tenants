@@ -13,6 +13,7 @@ export const namespaces = [
   "merchantFestival",
   "systemLogs",
   "common",
+  "merchantPurchase"
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

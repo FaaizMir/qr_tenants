@@ -1,0 +1,59 @@
+{
+  "title": "ストアをパワーアップ",
+  "subtitle": "WhatsAppメッセージ、クーポン作成、有料広告のクレジットパッケージを選択してください。",
+  "loading": "パッケージを読み込んでいます...",
+  "errors": {
+    "loadPackages": "クレジットパッケージを読み込めません。もう一度お試しください。",
+    "noMerchantId": "マーチャントIDを特定できません。サポートにお問い合わせください。",
+    "purchaseFailed": "パッケージの購入に失敗しました。もう一度お試しください。",
+    "requestFailed": "リクエストがステータス{status}で失敗しました。"
+  },
+  "emptyState": {
+    "noPackages": "お客様のマーチャントタイプのクレジットパッケージが見つかりません。"
+  },
+  "packageTypes": {
+    "coupon": "クーポン",
+    "whatsappUI": "WhatsApp UIメッセージ",
+    "whatsappBI": "WhatsApp BIメッセージ",
+    "whatsapp": "WhatsAppメッセージ",
+    "paidAds": "有料広告",
+    "standard": "スタンダード"
+  },
+  "merchantTypes": {
+    "annual": "年間",
+    "temporary": "一時的",
+    "standard": "スタンダード"
+  },
+  "packageCard": {
+    "perCredit": "クレジットあたり",
+    "baseCredits": "{credits}ベースクレジット",
+    "bonusCredits": "+{bonusCredits}ボーナスクレジット",
+    "enhancedFeatures": "強化された機能と容量",
+    "getStarted": "始める"
+  },
+  "checkout": {
+    "title": "注文概要",
+    "subtitle": "チェックアウト詳細",
+    "selectedPackage": "選択されたパッケージ",
+    "premiumDescription": "ビジネスの成長のためのプレミアムクレジットパッケージ。",
+    "creditsIncluded": "含まれるクレジット",
+    "bonusGift": "ボーナスギフト",
+    "packageType": "パッケージタイプ",
+    "totalAmount": "合計金額",
+    "securePayment": "安全な支払い",
+    "sslEncrypted": "SSL暗号化Stripeゲートウェイ",
+    "cardDetails": "カード詳細",
+    "paymentInfo": "以下に支払い情報を入力してください。",
+    "amountPayable": "支払額",
+    "trustedPartners": "信頼できるパートナー",
+    "noSelection": "選択が見つかりません",
+    "noSelectionMessage": "このウィンドウを閉じて、アップグレードを続行するためにクレジットパッケージを選択してください。"
+  },
+  "success": {
+    "purchaseComplete": "パッケージが正常に購入されました。"
+  },
+  "toast": {
+    "purchaseSuccess": "パッケージが正常に購入されました。",
+    "purchaseError": "パッケージの購入に失敗しました。もう一度お試しください。"
+  }
+}

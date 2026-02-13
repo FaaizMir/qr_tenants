@@ -1,0 +1,59 @@
+{
+  "title": "قم بتعزيز متجرك",
+  "subtitle": "اختر حزمة رصيد لرسائل واتساب وإنشاء القسائم والإعلانات المدفوعة.",
+  "loading": "جارٍ تحميل الحزم...",
+  "errors": {
+    "loadPackages": "تعذر تحميل حزم الرصيد. يرجى المحاولة مرة أخرى.",
+    "noMerchantId": "تعذر تحديد معرف التاجر. يرجى الاتصال بالدعم.",
+    "purchaseFailed": "فشل شراء الحزمة. يرجى المحاولة مرة أخرى.",
+    "requestFailed": "فشل الطلب بالحالة {status}."
+  },
+  "emptyState": {
+    "noPackages": "لم يتم العثور على حزم رصيد لنوع التاجر الخاص بك."
+  },
+  "packageTypes": {
+    "coupon": "قسيمة",
+    "whatsappUI": "رسالة واتساب UI",
+    "whatsappBI": "رسالة واتساب BI",
+    "whatsapp": "رسالة واتساب",
+    "paidAds": "إعلانات مدفوعة",
+    "standard": "قياسي"
+  },
+  "merchantTypes": {
+    "annual": "سنوي",
+    "temporary": "مؤقت",
+    "standard": "قياسي"
+  },
+  "packageCard": {
+    "perCredit": "لكل رصيد",
+    "baseCredits": "{credits} رصيد أساسي",
+    "bonusCredits": "+{bonusCredits} رصيد إضافي",
+    "enhancedFeatures": "ميزات وسعة محسّنة",
+    "getStarted": "ابدأ الآن"
+  },
+  "checkout": {
+    "title": "نظرة عامة على الطلب",
+    "subtitle": "تفاصيل الدفع",
+    "selectedPackage": "الحزمة المحددة",
+    "premiumDescription": "حزمة رصيد متميزة لنمو عملك.",
+    "creditsIncluded": "الرصيد المتضمن",
+    "bonusGift": "هدية إضافية",
+    "packageType": "نوع الحزمة",
+    "totalAmount": "المبلغ الإجمالي",
+    "securePayment": "دفع آمن",
+    "sslEncrypted": "بوابة Stripe مشفرة بـ SSL",
+    "cardDetails": "تفاصيل البطاقة",
+    "paymentInfo": "يرجى إدخال معلومات الدفع الخاصة بك أدناه.",
+    "amountPayable": "المبلغ المستحق",
+    "trustedPartners": "شركاء موثوقون",
+    "noSelection": "لم يتم العثور على تحديد",
+    "noSelectionMessage": "يرجى إغلاق هذه النافذة واختيار حزمة رصيد للمتابعة مع الترقية."
+  },
+  "success": {
+    "purchaseComplete": "تم شراء الحزمة بنجاح."
+  },
+  "toast": {
+    "purchaseSuccess": "تم شراء الحزمة بنجاح.",
+    "purchaseError": "فشل شراء الحزمة. يرجى المحاولة مرة أخرى."
+  }
+}
