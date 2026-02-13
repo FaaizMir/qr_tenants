@@ -136,6 +136,7 @@ export default function MerchantCampaigns() {
     statusFilter,
     refetchTrigger,
     initialLoading,
+    t,
   ]);
 
   // Handle create
@@ -224,9 +225,7 @@ export default function MerchantCampaigns() {
       <div className="flex items-center justify-between">
         <div className="pb-4">
           <h1 className="text-3xl font-bold">{t("title")}</h1>
-          <p className="text-muted-foreground">
-            {t("subtitle")}
-          </p>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <div className="flex gap-2">
@@ -248,9 +247,7 @@ export default function MerchantCampaigns() {
               </TooltipTrigger>
               {!featureEnabled && (
                 <TooltipContent side="bottom" className="max-w-xs">
-                  <p>
-                    {t("enableTooltip")}
-                  </p>
+                  <p>{t("enableTooltip")}</p>
                 </TooltipContent>
               )}
             </Tooltip>
@@ -262,7 +259,8 @@ export default function MerchantCampaigns() {
         <Alert className="border-amber-200 bg-amber-50 text-amber-800 mb-6">
           <AlertCircle className="h-4 w-4 text-amber-600" />
           <AlertDescription className="text-sm">
-            {t("featureDisabled")} <strong>{t("featureSwitchboard")}</strong> {t("featureDisabledSuffix")}
+            {t("featureDisabled")} <strong>{t("featureSwitchboard")}</strong>{" "}
+            {t("featureDisabledSuffix")}
           </AlertDescription>
         </Alert>
       )}
@@ -285,10 +283,18 @@ export default function MerchantCampaigns() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">{t("allStatus")}</SelectItem>
-                      <SelectItem value="scheduled">{t("scheduled")}</SelectItem>
-                      <SelectItem value="processing">{t("processing")}</SelectItem>
-                      <SelectItem value="completed">{t("completed")}</SelectItem>
-                      <SelectItem value="cancelled">{t("cancelled")}</SelectItem>
+                      <SelectItem value="scheduled">
+                        {t("scheduled")}
+                      </SelectItem>
+                      <SelectItem value="processing">
+                        {t("processing")}
+                      </SelectItem>
+                      <SelectItem value="completed">
+                        {t("completed")}
+                      </SelectItem>
+                      <SelectItem value="cancelled">
+                        {t("cancelled")}
+                      </SelectItem>
                       <SelectItem value="failed">{t("failed")}</SelectItem>
                     </SelectContent>
                   </Select>
