@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { getImageUrl } from "@/lib/utils/imageUtils";
+import Image from "next/image";
 
 export default function AgentApprovalsContainer() {
   const { data: session } = useSession();
@@ -52,7 +54,7 @@ export default function AgentApprovalsContainer() {
         const mappedData = items.map((item) => {
           const settings = item.merchant?.settings || {};
           // Use ad_type from approval record to determine content type
-          const isVideo = item.ad_type === 'video';
+          const isVideo = item.ad_type === "video";
           const relativePath = isVideo
             ? settings.paid_ad_video
             : settings.paid_ad_image;
@@ -66,21 +68,16 @@ export default function AgentApprovalsContainer() {
             ) {
               fullImageUrl = relativePath;
             } else {
-              let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-              // Remove trailing '/api/v1' or '/v1' if present
-              baseUrl = baseUrl.replace(/\/(api\/)?v1\/?$/, "");
-              // Ensure no double slashes
-              const cleanBase = baseUrl.replace(/\/+$/, "");
-              const cleanPath = relativePath.replace(/^\/+/, "");
-              fullImageUrl = `${cleanBase}/${cleanPath}`;
-              
-              console.log("Base URL:", cleanBase);
-              console.log("Clean path:", cleanPath);
-              console.log("Final URL:", fullImageUrl);
+              fullImageUrl = getImageUrl(relativePath);
             }
           }
 
-          console.log("Ad Preview URL:", fullImageUrl, "Type:", isVideo ? 'video' : 'image');
+          console.log(
+            "Ad Preview URL:",
+            fullImageUrl,
+            "Type:",
+            isVideo ? "video" : "image",
+          );
           return {
             id: item.id,
             name: item.merchant?.business_name || "N/A",
@@ -170,7 +167,7 @@ export default function AgentApprovalsContainer() {
           </DialogDescription>
           <div className="relative flex items-center justify-center p-4">
             {previewContent.type === "image" ? (
-              <img
+              <Image
                 src={previewContent.url}
                 alt="Ad Preview"
                 className="max-w-full max-h-[80vh] object-contain rounded-xl"
@@ -181,7 +178,7 @@ export default function AgentApprovalsContainer() {
                 controls
                 autoPlay
                 className="max-w-full max-h-[80vh] rounded-xl shadow-md bg-black"
-                style={{ minHeight: '300px' }}
+                style={{ minHeight: "300px" }}
                 onError={(e) => {
                   console.error("Video load error:", e);
                   console.error("Video URL that failed:", previewContent.url);
