@@ -27,7 +27,7 @@ import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 export function CouponForm({ open, onOpenChange, merchant, batch }) {
-  const t = useTranslations("homepage.couponForm");
+  const t = useTranslations("Homepage.couponForm");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({

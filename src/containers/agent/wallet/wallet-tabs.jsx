@@ -23,11 +23,10 @@ export const getWalletTabs = ({
   deductions,
   transactionTable,
   deductionTable,
-  tAgentWallet,
 }) => [
     {
       value: "balance",
-      label: tAgentWallet("balance"),
+      label: "Balance",
       content: (
         <div className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -36,7 +35,7 @@ export const getWalletTabs = ({
               <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-primary/5 blur-3xl opacity-50" />
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground/80">
-                  {tAgentWallet("currentbalance")}
+                  Current Balance
                 </CardTitle>
                 <div className="rounded-xl bg-primary/10 p-2.5 text-primary ring-1 ring-primary/20 transition-transform duration-300 group-hover:scale-110">
                   <Wallet className="h-5 w-5" />
@@ -172,7 +171,7 @@ export const getWalletTabs = ({
     },
     {
       value: "transactions",
-      label: tAgentWallet("transactions"),
+      label: "Transactions",
       content: transactionTable,
     },
     {

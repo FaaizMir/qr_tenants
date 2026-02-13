@@ -32,8 +32,6 @@ export default function AgentEarningsContainer() {
     topMerchant: "—",
   });
 
-  const tAgentEarnings = useTranslations("dashboard.agentEarnings");
-
   useEffect(() => {
     if (!adminId) return;
 
@@ -141,7 +139,7 @@ export default function AgentEarningsContainer() {
         {/* Main Breakdown Table - Now Full Width */}
         <Card className="shadow-sm">
           <CardHeader className="pb-4">
-            <CardTitle>{tAgentEarnings("commissionbreakdown")}</CardTitle>
+            <CardTitle>Commission Breakdown</CardTitle>
             <CardDescription className="text-xs">Consolidated commissions per merchant.</CardDescription>
           </CardHeader>
           <CardContent>
