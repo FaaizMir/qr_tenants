@@ -33,6 +33,8 @@ import { toast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { walletTopUpPackages } from "./wallet-topup-packages";
+import { InitialSubscriptionPayment } from "./initial-subscription-payment";
+import { CustomWalletTopup } from "./custom-wallet-topup";
 
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
@@ -51,6 +53,8 @@ export default function AgentWalletContainer() {
   const [packages, setPackages] = useState([]);
   const [loadingPackages, setLoadingPackages] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [customTopupOpen, setCustomTopupOpen] = useState(false);
+  const [initialSubscriptionOpen, setInitialSubscriptionOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
 
   /** Pagination + search */
@@ -219,15 +223,25 @@ export default function AgentWalletContainer() {
 
   return (
     <div className="space-y-6">
-      {isExpired && (
+      {!walletStats.is_active && (
+        <Alert variant="destructive" className="border-2 bg-red-50">
+          <AlertTriangle className="h-5 w-5" />
+          <AlertTitle className="font-bold text-lg">
+            Subscription Activation Required
+          </AlertTitle>
+          <AlertDescription className="text-base">
+            Your account is not yet activated. Click "Activate Subscription" to pay your annual subscription fee and start using the platform. You can also add prepaid wallet balance during activation.
+          </AlertDescription>
+        </Alert>
+      )}
+      {walletStats.is_active && isExpired && (
         <Alert variant="destructive" className="border-2">
           <AlertTriangle className="h-5 w-5" />
           <AlertTitle className="font-bold text-lg">
-            Subscription Required
+            Subscription Expired
           </AlertTitle>
           <AlertDescription className="text-base">
-            Choose a subscription plan to get full access to all features and
-            start using the platform without limits.{" "}
+            Your subscription has expired. Renew your subscription to continue accessing all platform features.
           </AlertDescription>
         </Alert>
       )}
@@ -240,26 +254,30 @@ export default function AgentWalletContainer() {
 
         <Button
           onClick={() => {
-            if (topUpPackages.length > 0) {
-              setCheckoutOpen(true);
+            // Check if agent has active subscription
+            if (!walletStats.is_active) {
+              // Show initial subscription payment dialog
+              setInitialSubscriptionOpen(true);
             } else {
-              toast.error("No top-up packages available at the moment.");
+              // Show custom wallet topup for active subscriptions
+              setCustomTopupOpen(true);
             }
           }}
           className="gap-2 bg-primary hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" />
-          Top Up Wallet
+          {walletStats.is_active ? "Top Up Wallet" : "Activate Subscription"}
         </Button>
       </div>
 
       <PageTabs tabs={tabs} defaultTab="balance" />
 
       <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
-        <DialogContent className="max-w-5xl p-0 overflow-hidden border-none shadow-2xl rounded-3xl bg-white">
-          <div className="grid md:grid-cols-12">
+        <DialogContent className="max-w-5xl max-h-[90vh] p-0 gap-0 border-none shadow-2xl rounded-3xl bg-white overflow-hidden block">
+          <div className="grid grid-cols-1 md:grid-cols-12 h-full max-h-[90vh]">
             {/* LEFT — Top-Up Packages Selection */}
-            <div className="md:col-span-7 p-7 bg-slate-50/50">
+            <div className="md:col-span-7 p-6 md:p-7 bg-slate-50/50 overflow-y-auto"
+                 style={{ maxHeight: '90vh' }}>
               <DialogHeader className="mb-6">
                 <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
                   Choose Top-Up Amount
@@ -349,7 +367,8 @@ export default function AgentWalletContainer() {
             </div>
 
             {/* RIGHT — Payment Details */}
-            <div className="md:col-span-5 bg-white p-7 flex flex-col border-l border-slate-100">
+            <div className="md:col-span-5 bg-white p-6 md:p-7 flex flex-col border-t md:border-t-0 md:border-l border-slate-100 overflow-y-auto"
+                 style={{ maxHeight: '90vh' }}>
               {selectedPackage ? (
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
@@ -485,6 +504,87 @@ export default function AgentWalletContainer() {
               )}
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Custom Wallet Top-Up Dialog */}
+      <Dialog open={customTopupOpen} onOpenChange={setCustomTopupOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">
+              Top Up Your Wallet
+            </DialogTitle>
+            <p className="text-muted-foreground text-sm mt-2">
+              Add prepaid balance to your wallet for platform operations
+            </p>
+          </DialogHeader>
+          <CustomWalletTopup
+            adminId={adminId}
+            currency={walletStats.currency}
+            onClose={() => setCustomTopupOpen(false)}
+            onSuccess={async () => {
+              // Refresh wallet data after successful payment
+              try {
+                const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+                const wallet = res.data;
+                setWalletStats({
+                  balance: Number(wallet.balance),
+                  pending_amount: Number(wallet.pending_amount),
+                  total_earnings: Number(wallet.total_earnings),
+                  total_spent: Number(wallet.total_spent),
+                  currency: wallet.currency,
+                  is_active: wallet.is_active,
+                  subscription_type: wallet.subscription_type,
+                  subscription_expires_at: wallet.subscription_expires_at,
+                  admin: wallet.admin,
+                });
+                setCustomTopupOpen(false);
+                toast.success("Wallet topped up successfully!");
+              } catch (error) {
+                console.error("Failed to refresh wallet:", error);
+              }
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/* Initial Subscription Payment Dialog */}
+      <Dialog open={initialSubscriptionOpen} onOpenChange={setInitialSubscriptionOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">
+              Activate Your Account
+            </DialogTitle>
+            <p className="text-muted-foreground text-sm mt-2">
+              Pay your annual subscription and optionally add prepaid wallet balance
+            </p>
+          </DialogHeader>
+          <InitialSubscriptionPayment
+            adminId={adminId}
+            onClose={() => setInitialSubscriptionOpen(false)}
+            onSuccess={async () => {
+              // Refresh wallet data after successful payment
+              try {
+                const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+                const wallet = res.data;
+                setWalletStats({
+                  balance: Number(wallet.balance),
+                  pending_amount: Number(wallet.pending_amount),
+                  total_earnings: Number(wallet.total_earnings),
+                  total_spent: Number(wallet.total_spent),
+                  currency: wallet.currency,
+                  is_active: wallet.is_active,
+                  subscription_type: wallet.subscription_type,
+                  subscription_expires_at: wallet.subscription_expires_at,
+                  admin: wallet.admin,
+                });
+                setInitialSubscriptionOpen(false);
+                toast.success("Subscription activated successfully!");
+              } catch (error) {
+                console.error("Failed to refresh wallet:", error);
+              }
+            }}
+          />
         </DialogContent>
       </Dialog>
     </div>
