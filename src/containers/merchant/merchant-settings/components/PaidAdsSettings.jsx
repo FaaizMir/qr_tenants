@@ -59,6 +59,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
   );
+  const [availablePlacements, setAvailablePlacements] = useState(["top", "bottom", "left", "right"]);
+  const [loadingPlacements, setLoadingPlacements] = useState(true);
   // Cropper State
   const [imageSrc, setImageSrc] = useState(null);
 
@@ -87,6 +89,38 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       }
     };
     fetchSettings();
+  }, [merchantId]);
+
+  // Fetch available placements
+  useEffect(() => {
+    if (!merchantId) return;
+    
+    const fetchAvailablePlacements = async () => {
+      setLoadingPlacements(true);
+      try {
+        // Fetch available placements for this merchant's admin (per-admin basis)
+        const response = await axiosInstance.get(
+          `/approvals/available-placements/merchant/${merchantId}`,
+        );
+        
+        if (response.data && Array.isArray(response.data)) {
+          setAvailablePlacements(response.data);
+          
+          // If current placement is not available, set to first available
+          if (response.data.length > 0 && !response.data.includes(state.placement)) {
+            setState(prev => ({ ...prev, placement: response.data[0] }));
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch available placements:", error);
+        // Fallback to all placements if API fails
+        setAvailablePlacements(["top", "bottom", "left", "right"]);
+      } finally {
+        setLoadingPlacements(false);
+      }
+    };
+    
+    fetchAvailablePlacements();
   }, [merchantId]);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -420,22 +454,53 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Ad Placement</Label>
-                  <Select
-                    value={state.placement || "top"}
-                    onValueChange={(val) => {
-                      setState({ ...state, placement: val });
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select placement" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="top">Top</SelectItem>
-                      <SelectItem value="left">Left</SelectItem>
-                      <SelectItem value="right">Right</SelectItem>
-                      <SelectItem value="bottom">Bottom</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  {loadingPlacements ? (
+                    <div className="h-10 rounded-md border bg-muted animate-pulse flex items-center px-3 text-sm text-muted-foreground">
+                      Loading placements...
+                    </div>
+                  ) : availablePlacements.length === 0 ? (
+                    <div className="space-y-2">
+                      <div className="h-10 rounded-md border bg-rose-50 border-rose-200 flex items-center px-3 text-sm text-rose-700 font-semibold">
+                        No slots available
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        All ad placement slots are currently occupied. Please try again later.
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <Select
+                        value={state.placement || availablePlacements[0]}
+                        onValueChange={(val) => {
+                          setState({ ...state, placement: val });
+                        }}
+                        disabled={availablePlacements.length === 0}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select placement" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {availablePlacements.includes("top") && (
+                            <SelectItem value="top">Top</SelectItem>
+                          )}
+                          {availablePlacements.includes("left") && (
+                            <SelectItem value="left">Left</SelectItem>
+                          )}
+                          {availablePlacements.includes("right") && (
+                            <SelectItem value="right">Right</SelectItem>
+                          )}
+                          {availablePlacements.includes("bottom") && (
+                            <SelectItem value="bottom">Bottom</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
+                      {availablePlacements.length < 4 && (
+                        <p className="text-xs text-amber-600 font-medium">
+                          {4 - availablePlacements.length} slot(s) occupied. Only {availablePlacements.length} placement(s) available.
+                        </p>
+                      )}
+                    </>
+                  )}
                 </div>
 
                 <div className="space-y-2">

@@ -130,6 +130,12 @@ export default function AgentApprovalsContainer() {
       return true;
     } catch (error) {
       console.error(`Error ${action}ing approval:`, error);
+      
+      // Check if it's a slot limit error
+      if (error.response?.status === 400 && error.response?.data?.message?.includes('not enough slots')) {
+        throw new Error(error.response.data.message);
+      }
+      
       throw error; // Re-throw so the UI can handle it
     }
   };
