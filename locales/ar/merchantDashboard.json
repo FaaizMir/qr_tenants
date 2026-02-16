@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "الأرصدة المستخدمة",
+    "expired": "منتهية الصلاحية",
     "issued": "المصدرة",
     "messagesSent": "الرسائل المرسلة",
     "redeemed": "المستردة",

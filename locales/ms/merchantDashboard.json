@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "Kredit Digunakan",
+    "expired": "Tamat Tempoh",
     "issued": "Dikeluarkan",
     "messagesSent": "Mesej Dihantar",
     "redeemed": "Tebus",

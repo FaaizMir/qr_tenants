@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "เครดิตที่ใช้",
+    "expired": "หมดอายุ",
     "issued": "ออกแล้ว",
     "messagesSent": "ข้อความที่ส่ง",
     "redeemed": "แลกแล้ว",

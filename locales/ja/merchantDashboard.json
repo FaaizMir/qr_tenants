@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "使用されたクレジット",
+    "expired": "期限切れ",
     "issued": "発行済み",
     "messagesSent": "送信されたメッセージ",
     "redeemed": "引き換え済み",

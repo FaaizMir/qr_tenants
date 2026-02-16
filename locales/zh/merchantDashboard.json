@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "已使用积分",
+    "expired": "已过期",
     "issued": "已发放",
     "messagesSent": "消息已发送",
     "redeemed": "已兑换",
