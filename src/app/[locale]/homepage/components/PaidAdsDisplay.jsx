@@ -123,7 +123,7 @@ const AD_DIMENSIONS = {
 };
 
 // Unified Ad Slot Component with TechCrunch-style layout
-function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", className = "" }) {
+function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", className = "", onClick }) {
   const t = useTranslations("Homepage.agent.ads");
 
   if (!ad || (!ad.image && !ad.video)) return null;
@@ -131,12 +131,20 @@ function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", cl
   const isHorizontal = orientation === "horizontal";
   const dimensions = isHorizontal ? AD_DIMENSIONS.horizontal : AD_DIMENSIONS.vertical;
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Ad clicked in TechCrunchAdSlot", { ad, onClick: !!onClick });
+    if (onClick) {
+      onClick(ad);
+    }
+  };
+
   return (
-    <Link
-      href={ad.redirectUrl || "#"}
-      target={ad.redirectUrl?.startsWith("http") ? "_blank" : undefined}
+    <div
+      onClick={handleClick}
       className={cn(
-        "block relative overflow-hidden group bg-slate-900",
+        "block relative overflow-hidden group bg-slate-900 cursor-pointer",
         "transition-all duration-300 hover:shadow-2xl",
         isHorizontal ? "w-full" : "w-full",
         className,
@@ -200,53 +208,53 @@ function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", cl
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
 // --- PREMIUM AD COMPONENTS (TechCrunch Layout) ---
 
-export function TopBannerAd({ ad }) {
+export function TopBannerAd({ ad, onClick }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mb-8 flex justify-center">
       <div className="w-full max-w-[970px]">
-        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="top" />
+        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="top" onClick={onClick} />
       </div>
     </div>
   );
 }
 
-export function SidebarAd({ ad, placement }) {
+export function SidebarAd({ ad, placement, onClick }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mb-6 flex justify-center">
       <div className="w-full max-w-[300px]">
-        <TechCrunchAdSlot ad={ad} orientation="vertical" position={placement} />
+        <TechCrunchAdSlot ad={ad} orientation="vertical" position={placement} onClick={onClick} />
       </div>
     </div>
   );
 }
 
-export function InlineAd({ ad }) {
+export function InlineAd({ ad, onClick }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="col-span-1 flex justify-center">
-      <TechCrunchAdSlot ad={ad} orientation="vertical" position="inline" />
+      <TechCrunchAdSlot ad={ad} orientation="vertical" position="inline" onClick={onClick} />
     </div>
   );
 }
 
-export function BottomBannerAd({ ad }) {
+export function BottomBannerAd({ ad, onClick }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mt-6 mb-8 flex justify-center px-4">
       <div className="w-full max-w-[970px]">
-        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="bottom" />
+        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="bottom" onClick={onClick} />
       </div>
     </div>
   );

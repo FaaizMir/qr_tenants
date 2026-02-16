@@ -181,50 +181,54 @@ export default function MasterAdminLandingPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col font-sans text-slate-900 bg-slate-50/50">
+    <div className="min-h-screen bg-white font-sans text-slate-900">
       {/* -- Navigation -- */}
-      <header className="px-6 lg:px-10 py-4 flex items-center justify-between border-b bg-white/80 backdrop-blur-xl sticky top-0 z-50 transition-all">
-        <div className="flex items-center gap-2 font-bold text-xl cursor-pointer">
-          <div className="h-9 w-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20">
-            <QrCode className="h-5 w-5" />
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200 transition-all">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+              <QrCode className="w-5 h-5" />
+            </div>
+            <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-primary transition-colors">
+              {tCommon("brandName")}
+            </span>
           </div>
-          <span className="tracking-tight">{tCommon("brandName")}</span>
-        </div>
 
-        <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-[14px] font-bold tracking-tight">
-          <Link
-            href="#platform-stats"
-            className="text-slate-500 hover:text-primary transition-colors"
-          >
-            {t("navigation.overview")}
-          </Link>
-          <Link
-            href="#agent-directory"
-            className="text-slate-500 hover:text-primary transition-colors"
-          >
-            {t("navigation.directory")}
-          </Link>
-          <Link
-            href="#features"
-            className="text-slate-500 hover:text-primary transition-colors"
-          >
-            {t("navigation.features")}
-          </Link>
-        </nav>
+          <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-[14px] font-bold tracking-tight">
+            <Link
+              href="#platform-stats"
+              className="text-slate-500 hover:text-primary transition-colors"
+            >
+              {t("navigation.overview")}
+            </Link>
+            <Link
+              href="#agent-directory"
+              className="text-slate-500 hover:text-primary transition-colors"
+            >
+              {t("navigation.directory")}
+            </Link>
+            <Link
+              href="#features"
+              className="text-slate-500 hover:text-primary transition-colors"
+            >
+              {t("navigation.features")}
+            </Link>
+          </nav>
 
-        <div className="flex items-center gap-4">
-          <LanguageSwitcher />
-          <Button
-            size="sm"
-            className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
-            onClick={() => router.push("/login")}
-          >
-            {t("navigation.signIn")}
-          </Button>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <Button
+              size="sm"
+              className="hidden sm:flex rounded-full font-bold shadow-md shadow-primary/20"
+              onClick={() => router.push("/login")}
+            >
+              {t("navigation.signIn")}
+            </Button>
+          </div>
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="relative z-10 -mt-4 bg-white rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] overflow-hidden">
         {/* -- KPIS & HERO COMPACT -- */}
         <section
           className="bg-white pt-12 pb-20 px-6 lg:px-10 border-b border-slate-100"
@@ -662,17 +666,22 @@ export default function MasterAdminLandingPage() {
       </main>
 
       {/* -- Footer -- */}
-      <footer className="bg-slate-950 text-slate-400 py-16 px-6 lg:px-10">
+      <footer className="bg-slate-950 text-slate-400 pt-12 pb-16 px-6 lg:px-10 border-t border-slate-900">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3 font-bold text-xl text-white">
-            <div className="h-8 w-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
-              <QrCode className="h-4 w-4" />
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center text-white">
+              <QrCode className="w-5 h-5" />
             </div>
-            {tCommon("brandName")}
+            <div className="flex flex-col">
+              <span className="font-bold text-white text-lg tracking-tight">
+                {tCommon("brandName")}
+              </span>
+              <span className="text-xs text-slate-500">
+                {t("footer.globalMerchantNetwork")}
+              </span>
+            </div>
           </div>
-          <div className="text-sm font-medium">
-            {t("footer.copyright")}
-          </div>
+
           <div className="flex gap-8 text-sm font-bold">
             <Link href="#" className="hover:text-white transition">
               {t("footer.privacy")}
@@ -683,6 +692,10 @@ export default function MasterAdminLandingPage() {
             <Link href="#" className="hover:text-white transition">
               {t("footer.contact")}
             </Link>
+          </div>
+
+          <div className="text-xs text-slate-600 font-medium">
+            {t("footer.copyright")}
           </div>
         </div>
       </footer>
