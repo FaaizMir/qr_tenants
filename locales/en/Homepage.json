@@ -5,6 +5,7 @@
       "availableIn": "Available in {city}",
       "exclusiveIn": "EXCLUSIVE IN {city}",
       "experienceNow": "Experience Now",
+      "featured": "Featured",
       "featuredPartner": "Featured Partner",
       "limitedTime": "LIMITED TIME",
       "partner": "Partner",
@@ -186,6 +187,7 @@
     "footer": {
       "contact": "Contact",
       "copyright": "© 2024 QR Rev Inc. All rights reserved.",
+      "globalMerchantNetwork": "Global Agent Network",
       "privacy": "Privacy",
       "terms": "Terms"
     },

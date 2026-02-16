@@ -279,6 +279,7 @@ export function MerchantList({
   hasMore,
   onPageChange,
   ads = [],
+  onAdClick,
 }) {
   const t = useTranslations("Homepage.agent.marketplace");
   const tDetail = useTranslations("Homepage.agent.merchantDetail");
@@ -451,7 +452,7 @@ export function MerchantList({
             if (item.type === "ad") {
               return (
                 <div key={`ad-${idx}`} className="h-full">
-                  <InlineAd ad={item.data} />
+                  <InlineAd ad={item.data} onClick={onAdClick} />
                 </div>
               );
             }

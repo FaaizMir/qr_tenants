@@ -46,6 +46,7 @@ import {
 } from "./components/MerchantMarketplace";
 import { CouponForm } from "./components/CouponForm";
 import { cn } from "@/lib/utils";
+import { toast } from "@/lib/toast";
 
 export default function AgentLandingPage() {
   const t = useTranslations("Homepage.agent");
@@ -388,6 +389,88 @@ export default function AgentLandingPage() {
     setCouponDialogOpen(true);
   };
 
+  const handleAdClick = async (ad) => {
+    console.log("Ad clicked:", ad);
+    
+    // Extract merchant ID from the ad
+    const merchantId = ad.id;
+    
+    if (!merchantId) {
+      console.error("No merchant ID found in ad");
+      return;
+    }
+
+    // Find the merchant in the current merchants list
+    let merchant = merchants.find((m) => m.id === merchantId);
+    
+    console.log("Merchant found in list:", merchant);
+
+    // If merchant not found in current list, try to fetch it
+    if (!merchant) {
+      try {
+        console.log("Fetching merchant data for ID:", merchantId);
+        const response = await axiosInstance.get(`/coupons/public-feed`, {
+          params: {
+            adminId: agentId,
+            merchantId: merchantId,
+          },
+        });
+
+        const rawData = response.data?.data?.merchants || [];
+        console.log("Fetched merchant data:", rawData);
+        
+        if (rawData.length > 0) {
+          const item = rawData[0];
+          merchant = {
+            id: item.id,
+            name: item.business_name || t("fallback.unknown"),
+            category: item.business_type || t("fallback.general"),
+            city: item.city || t("fallback.unknown"),
+            country: item.country || "",
+            address: item.address || "",
+            logo: null,
+            coverImage: null,
+            batches:
+              item.batches?.map((b) => ({
+                id: b.id,
+                batch_name: b.batch_name,
+                discount_percentage: b.discount_percentage,
+                expiry_date: b.expiry_date,
+                is_active: b.is_active,
+                rendered_html: b.rendered_html,
+                total_quantity: b.total_quantity,
+                issued_quantity: b.issued_quantity,
+              })) || [],
+          };
+        }
+      } catch (err) {
+        console.error("Failed to fetch merchant for ad:", err);
+        toast.error("Failed to load merchant details");
+        return;
+      }
+    }
+
+    console.log("Final merchant object:", merchant);
+    console.log("Merchant batches:", merchant?.batches);
+
+    // If we have a merchant and it has active batches, open the coupon form
+    if (merchant && merchant.batches && merchant.batches.length > 0) {
+      const activeBatch = merchant.batches.find((b) => b.is_active);
+      console.log("Active batch found:", activeBatch);
+      
+      if (activeBatch) {
+        handleGetCoupon(merchant, activeBatch);
+      } else {
+        // If no active batch, use the first batch
+        console.log("No active batch, using first batch:", merchant.batches[0]);
+        handleGetCoupon(merchant, merchant.batches[0]);
+      }
+    } else {
+      console.error("No merchant or no batches available");
+      toast.error("No coupons available for this merchant");
+    }
+  };
+
   const handleNavigateHome = () => {
     // Clear agent data from localStorage when navigating away
     localStorage.removeItem("selectedAgent");
@@ -492,15 +575,10 @@ export default function AgentLandingPage() {
         </div>
       </header>
 
-      <main className="relative z-10 -mt-4 bg-white rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] overflow-hidden">
-        {/* --- Top Ad Banner --- */}
-        <section className="pt-10 px-6 lg:px-10 max-w-[1600px] mx-auto">
-          {topAd && <TopBannerAd ad={topAd} />}
-        </section>
+      <main className="relative z-10 -mt-4 bg-white  shadow-[0_-10px_40px_rgba(0,0,0,0.1)] overflow-hidden">
         {/* --- Highlight / Hero Section --- */}
         <section className="relative w-full overflow-hidden mb-12">
-          {/* Background & Content (Same as before) */}
-          {/* ... (Keep existing hero content) ... */}
+          {/* Background & Content */}
           <div className="absolute inset-0 bg-slate-900">
             <Image
               src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1600&q=80"
@@ -512,7 +590,7 @@ export default function AgentLandingPage() {
           </div>
           <div className="absolute inset-0 bg-linear-to-b from-slate-900/50 via-slate-900/80 to-slate-50" />
 
-          <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8 animate-in fade-in zoom-in duration-700 pt-16 pb-20">
+          <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8 animate-in fade-in zoom-in duration-700 pt-16 pb-8">
             <Badge
               variant="outline"
               className="border-white/20 bg-white/5 text-white backdrop-blur-sm px-4 py-1.5 uppercase tracking-widest text-xs font-bold shadow-xl"
@@ -560,6 +638,25 @@ export default function AgentLandingPage() {
               </div>
             </div>
           </div>
+
+          {/* Top Ad Banner - Bottom of Hero */}
+          {topAd && (
+            <div className="relative z-10  px-6 lg:px-10 max-w-[1600px] mx-auto">
+              <div className="flex items-center gap-2 mb-6 opacity-80 justify-center">
+                <span className="h-px w-24 bg-slate-400"></span>
+                <span className="text-[11px] uppercase font-bold text-slate-300 tracking-[0.2em]">
+                  {t("ads.sponsored")}
+                </span>
+                <span className="h-px w-24 bg-slate-400"></span>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-linear-to-b from-amber-500/30 via-amber-400/20 to-transparent rounded-3xl blur-3xl"></div>
+                <div className="relative">
+                  <TopBannerAd ad={topAd} onClick={handleAdClick} />
+                </div>
+              </div>
+            </div>
+          )}
         </section>
         {/* --- Filter Bar --- */}
         <section
@@ -600,7 +697,7 @@ export default function AgentLandingPage() {
                     </span>
                     <span className="h-px flex-1 bg-slate-300"></span>
                   </div>
-                  <SidebarAd ad={leftAd} />
+                  <SidebarAd ad={leftAd} onClick={handleAdClick} />
                 </div>
               </div>
             )}
@@ -627,6 +724,7 @@ export default function AgentLandingPage() {
                 onPageChange={(pageNum) => fetchMerchants(pageNum)}
                 ads={inlineAds}
                 isScrollable={false}
+                onAdClick={handleAdClick}
               />
             </div>
 
@@ -645,20 +743,6 @@ export default function AgentLandingPage() {
                   activeMerchant={activeMerchant}
                   handleGetCoupon={handleGetCoupon}
                 />
-
-                {/* Right Sidebar Ad */}
-                {rightAd && (
-                  <div className="pt-2">
-                    <div className="flex items-center gap-2 mb-4 opacity-50 px-2">
-                      <span className="h-px flex-1 bg-slate-300"></span>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
-                        {t("ads.sponsored")}
-                      </span>
-                      <span className="h-px flex-1 bg-slate-300"></span>
-                    </div>
-                    <SidebarAd ad={rightAd} />
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -688,10 +772,24 @@ export default function AgentLandingPage() {
         </section>
         {/* -- Features Section -- */}
         <section
-          className="bg-white py-24 border-t border-slate-100"
+          className="bg-white py-24 border-t border-slate-100 relative mb-30"
           id="features"
         >
           <div className="px-6 lg:px-10 max-w-[1600px] mx-auto">
+            {/* Right Sidebar Ad - Positioned at top right */}
+            {rightAd && (
+              <div className="hidden lg:block absolute top-8 right-10 w-[300px]">
+                <div className="flex items-center gap-2 mb-4 opacity-50 px-2">
+                  <span className="h-px flex-1 bg-slate-300"></span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+                    {t("ads.sponsored")}
+                  </span>
+                  <span className="h-px flex-1 bg-slate-300"></span>
+                </div>
+                <SidebarAd ad={rightAd} onClick={handleAdClick} />
+              </div>
+            )}
+
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge
                 variant="outline"
@@ -706,7 +804,9 @@ export default function AgentLandingPage() {
                 {t("features.description")}
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
+
+            {/* Features Grid - Centered */}
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   icon: Smartphone,
@@ -750,14 +850,29 @@ export default function AgentLandingPage() {
             </div>
           </div>
         </section>
-        {/* --- Bottom Ad Banner --- */}
-        <section className="pt-10 pb-0">
-          {bottomAd && <BottomBannerAd ad={bottomAd} />}
-        </section>
       </main>
 
       {/* --- Footer --- */}
-      <footer className="bg-slate-950 text-slate-400 py-16 px-6 lg:px-10 border-t border-slate-900">
+      <footer className="bg-slate-950 text-slate-400 pt-10 pb-7 px-6 lg:px-10 border-t border-slate-900">
+        {/* Bottom Ad Banner - Prominent in Footer */}
+        {bottomAd && (
+          <div className="max-w-[1600px] mx-auto mb-12">
+            <div className="flex items-center gap-2 mb-4 opacity-60 justify-center">
+              <span className="h-px w-24 bg-slate-700"></span>
+              <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.2em]">
+                {t("ads.sponsored")}
+              </span>
+              <span className="h-px w-24 bg-slate-700"></span>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-linear-to-b from-slate-900/50 to-transparent rounded-3xl blur-2xl"></div>
+              <div className="relative">
+                <BottomBannerAd ad={bottomAd} onClick={handleAdClick} />
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center text-white">
