@@ -180,7 +180,7 @@ export function MarketplaceFilters({
   handleGetCoupon,
 }) {
   const t = useTranslations("Homepage.agent.marketplace");
-  
+
   return (
     <div className="sticky top-20 z-40 mb-8">
       <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-6xl mx-auto transition-all">
@@ -279,6 +279,7 @@ export function MerchantList({
   hasMore,
   onPageChange,
   ads = [],
+  onAdClick,
 }) {
   const t = useTranslations("Homepage.agent.marketplace");
   const tDetail = useTranslations("Homepage.agent.merchantDetail");
@@ -315,9 +316,7 @@ export function MerchantList({
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center px-4 bg-red-50 rounded-3xl border border-red-100">
         <Shield className="w-12 h-12 text-red-500 mb-4" />
-        <h3 className="text-red-900 font-bold text-lg">
-          {t("unableToLoad")}
-        </h3>
+        <h3 className="text-red-900 font-bold text-lg">{t("unableToLoad")}</h3>
         <p className="text-sm font-medium text-red-600/80 mb-6">{error}</p>
         <Button
           variant="outline"
@@ -360,9 +359,7 @@ export function MerchantList({
           <h3 className="font-bold text-slate-900 text-lg">
             {t("noMerchantsFound")}
           </h3>
-          <p className="text-slate-500">
-            {t("tryAdjustingFilters")}
-          </p>
+          <p className="text-slate-500">{t("tryAdjustingFilters")}</p>
         </div>
 
         {/* Pagination for empty results when not on page 1 */}
@@ -439,36 +436,23 @@ export function MerchantList({
 
   return (
     <div className="space-y-8">
-      {/* Scrollable Container for Merchants */}
-      <div
-        className={cn(
-          "scroll-smooth max-h-[900px]",
-          merchants.length > 1 ? "overflow-y-auto pr-2" : "overflow-visible",
-          // Custom scrollbar styles
-          "[&::-webkit-scrollbar]:w-2",
-          "[&::-webkit-scrollbar-track]:bg-slate-100",
-          "[&::-webkit-scrollbar-track]:rounded-full",
-          "[&::-webkit-scrollbar-thumb]:bg-slate-300",
-          "[&::-webkit-scrollbar-thumb]:rounded-full",
-          "[&::-webkit-scrollbar-thumb]:hover:bg-slate-400",
-          "px-8 py-10",
-        )}
-      >
+      {/* Container for Merchants - No Scrolling */}
+      <div className="px-1 py-4">
         <div
           className={cn(
-            "grid gap-y-10 transition-all",
+            "grid gap-x-4 gap-y-10",
             merchants.length === 1
-              ? "grid-cols-1"
+              ? "grid-cols-1 w-full"
               : merchants.length === 2
-                ? "grid-cols-2 gap-x-6"
-                : "grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-x-8",
+                ? "grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full",
           )}
         >
           {combinedItems.map((item, idx) => {
             if (item.type === "ad") {
               return (
                 <div key={`ad-${idx}`} className="h-full">
-                  <InlineAd ad={item.data} />
+                  <InlineAd ad={item.data} onClick={onAdClick} />
                 </div>
               );
             }
@@ -483,18 +467,21 @@ export function MerchantList({
                 className={cn(
                   "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col transition-all duration-500",
                   "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+                  "w-full",
                   isSelected
                     ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] scale-[1.02]"
                     : "hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2",
                 )}
               >
                 {/* Cover Image Area */}
-                <div className="h-44 bg-slate-200 relative overflow-hidden">
+                <div className="relative overflow-hidden bg-slate-200 h-44">
                   <Image
                     src={getCategoryImage(merchant.category, merchant.id)}
-                    alt="cover"
+                    alt={`${merchant.name} cover`}
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={false}
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
@@ -541,7 +528,9 @@ export function MerchantList({
                         {tDetail("availableDeals")}
                       </span>
                       <span className="text-base font-bold text-slate-900">
-                        {tDetail("offers", { count: merchant.batches?.length || 0 })}
+                        {tDetail("offers", {
+                          count: merchant.batches?.length || 0,
+                        })}
                       </span>
                     </div>
                     <Button
@@ -554,7 +543,8 @@ export function MerchantList({
                           : "bg-slate-50 text-slate-600 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20",
                       )}
                     >
-                      {tDetail("details")} <ChevronRight className="w-4 h-4 ml-1" />
+                      {tDetail("details")}{" "}
+                      <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
                 </div>
@@ -650,7 +640,11 @@ export function MerchantList({
               {(page - 1) * 6 >= totalItems ||
               (totalItems <= page * 6 && hasMore)
                 ? t("showingPage", { page })
-                : t("showing", { start: (page - 1) * 6 + 1, end: Math.min(page * 6, totalItems), total: totalItems })}
+                : t("showing", {
+                    start: (page - 1) * 6 + 1,
+                    end: Math.min(page * 6, totalItems),
+                    total: totalItems,
+                  })}
             </p>
           )}
         </div>
@@ -671,7 +665,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
   if (!activeMerchant) {
     return (
-      <div className="hidden lg:flex sticky top-28 h-[calc(100vh-140px)] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
+      <div className="hidden lg:flex sticky mt-5 h-[776px] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
         <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center">
@@ -697,7 +691,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   }
 
   return (
-    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky top-28 animate-in slide-in-from-right-10 duration-500 ease-out h-[calc(100vh-140px)] min-h-[600px] flex flex-col">
+    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out h-[777px] flex flex-col">
       {/* Header */}
       <div className="relative h-48 bg-slate-900 shrink-0">
         <Image
@@ -735,25 +729,28 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
               {tDetail("availableCoupons")}
             </h3>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              {tDetail("dealsFound", { count: activeMerchant.batches?.length || 0 })}
+              {tDetail("dealsFound", {
+                count: activeMerchant.batches?.length || 0,
+              })}
             </span>
           </div>
         </div>
 
         {/* Scrollable Coupons Section */}
         <div className="px-6 md:px-8 pb-6 md:pb-8 overflow-y-auto flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
-          <div className="space-y-4 h-full">
+          <div className="space-y-6 h-full">
             {activeMerchant.batches?.length > 0 ? (
               activeMerchant.batches.map((batch) => (
                 <div
                   key={batch.id}
-                  className="group bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:scale-[0.99] transition-all duration-300 ease-out relative overflow-hidden flex flex-col"
+                  className="group bg-white rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out relative overflow-hidden"
                 >
-                  <div className="absolute top-2 right-2 z-10">
+                  {/* Status Badge */}
+                  <div className="absolute top-4 right-4 z-10">
                     <Badge
                       variant={batch.is_active ? "neutral" : "secondary"}
                       className={cn(
-                        "font-bold text-[10px] shadow-sm",
+                        "font-bold text-[10px] shadow-lg",
                         batch.is_active
                           ? "bg-emerald-100 text-emerald-700"
                           : "bg-slate-100 text-slate-500",
@@ -763,36 +760,33 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
                     </Badge>
                   </div>
 
-                  {/* HTML Preview Thumbnail - Full Width Top */}
+                  {/* HTML Preview - Full Display */}
                   <div
-                    className="w-full cursor-pointer hover:opacity-90 transition overflow-hidden bg-slate-50/50"
+                    className="w-full cursor-pointer hover:opacity-95 transition-opacity"
                     onClick={() => handleGetCoupon(activeMerchant, batch)}
                     dangerouslySetInnerHTML={{ __html: batch.rendered_html }}
                   />
 
-                  {/* Content - Bottom */}
-                  <div className="p-3 space-y-2 border-t border-slate-50">
-                    <div className="flex justify-between items-start gap-2">
-                      <h4 className="font-bold text-slate-900 text-sm leading-tight line-clamp-2">
+                  {/* Bottom Section - Info & Action */}
+                  <div className="p-5 space-y-3 border-t border-slate-100 bg-slate-50/30">
+                    <div className="flex justify-between items-start gap-3">
+                      <h4 className="font-bold text-slate-900 text-base leading-tight line-clamp-2 flex-1">
                         {batch.batch_name}
                       </h4>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-                        {tDetail("left", { count: batch.total_quantity - batch.issued_quantity })}
+                      <span className="text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200 whitespace-nowrap">
+                        {tDetail("left", {
+                          count: batch.total_quantity - batch.issued_quantity,
+                        })}
                       </span>
                     </div>
 
-                    <div className="pt-1">
-                      <Button
-                        size="sm"
-                        className="w-full text-xs font-bold rounded-lg h-8 shadow-sm"
-                        onClick={() => handleGetCoupon(activeMerchant, batch)}
-                      >
-                        {tDetail("getCoupon")}
-                      </Button>
-                    </div>
+                    <Button
+                      size="default"
+                      className="w-full text-sm font-bold rounded-xl h-11 shadow-md hover:shadow-lg transition-all"
+                      onClick={() => handleGetCoupon(activeMerchant, batch)}
+                    >
+                      {tDetail("getCoupon")}
+                    </Button>
                   </div>
                 </div>
               ))

@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "사용된 크레딧",
+    "expired": "만료됨",
     "issued": "발행됨",
     "messagesSent": "전송된 메시지",
     "redeemed": "교환됨",

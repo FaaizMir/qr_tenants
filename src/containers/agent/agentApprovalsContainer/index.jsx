@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { getImageUrl } from "@/lib/utils/imageUtils";
+import Image from "next/image";
 
 export default function AgentApprovalsContainer() {
   const { data: session } = useSession();
@@ -51,14 +53,12 @@ export default function AgentApprovalsContainer() {
         // Map API response to table shape
         const mappedData = items.map((item) => {
           const settings = item.merchant?.settings || {};
-          // Use ad_type from approval record to determine content type
-          const isVideo = item.ad_type === 'video';
+          const isVideo = item.ad_type === "video";
           const relativePath = isVideo
             ? settings.paid_ad_video
             : settings.paid_ad_image;
 
           let fullImageUrl = null;
-
           if (relativePath) {
             if (
               relativePath.startsWith("http") ||
@@ -66,26 +66,15 @@ export default function AgentApprovalsContainer() {
             ) {
               fullImageUrl = relativePath;
             } else {
-              let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-              // Remove trailing '/api/v1' or '/v1' if present
-              baseUrl = baseUrl.replace(/\/(api\/)?v1\/?$/, "");
-              // Ensure no double slashes
-              const cleanBase = baseUrl.replace(/\/+$/, "");
-              const cleanPath = relativePath.replace(/^\/+/, "");
-              fullImageUrl = `${cleanBase}/${cleanPath}`;
-              
-              console.log("Base URL:", cleanBase);
-              console.log("Clean path:", cleanPath);
-              console.log("Final URL:", fullImageUrl);
+              fullImageUrl = getImageUrl(relativePath);
             }
           }
 
-          console.log("Ad Preview URL:", fullImageUrl, "Type:", isVideo ? 'video' : 'image');
           return {
             id: item.id,
             name: item.merchant?.business_name || "N/A",
             email: item.merchant?.user?.email || null,
-            adImage: fullImageUrl, // keeping key name for compatibility or renaming to adUrl
+            adImage: fullImageUrl,
             adType: isVideo ? "video" : "image",
             approvalType: item.approval_type,
             location:
@@ -97,10 +86,12 @@ export default function AgentApprovalsContainer() {
               ? new Date(item.created_at).toLocaleDateString()
               : "N/A",
             onPreview: handlePreview,
+            merchant_type: item.merchant?.merchant_type ?? "—",
+            paid_ad_placement:
+              item.merchant?.settings?.paid_ad_placement ?? "—",
             raw: item,
           };
         });
-
         setData(mappedData);
       } catch (error) {
         console.error("Error fetching approvals:", error);
@@ -139,8 +130,34 @@ export default function AgentApprovalsContainer() {
       throw error; // Re-throw so the UI can handle it
     }
   };
+  const handleStatusUpdate =
+    (async (id, newStatus) => {
+      const action = newStatus ? "approve" : "reject";
+      try {
+        await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
+          id: id,
+          approval_status: newStatus,
+        });
 
-  const columns = useMemo(() => getApprovalColumns(handleStatusUpdate), []);
+        // Update local state to reflect change immediately
+        setData((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, status: newStatus } : item,
+          ),
+        );
+
+        return true;
+      } catch (error) {
+        console.error(`Error ${action}ing approval:`, error);
+        throw error; // Re-throw so the UI can handle it
+      }
+    },
+    [adminId]);
+
+  const columns = useMemo(
+    () => getApprovalColumns(handleStatusUpdate),
+    [handleStatusUpdate],
+  );
 
   return (
     <div className="space-y-6">
@@ -150,9 +167,7 @@ export default function AgentApprovalsContainer() {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>All Approvals</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
         <CardContent>
           <DataTable
             data={data}
@@ -176,7 +191,7 @@ export default function AgentApprovalsContainer() {
           </DialogDescription>
           <div className="relative flex items-center justify-center p-4">
             {previewContent.type === "image" ? (
-              <img
+              <Image
                 src={previewContent.url}
                 alt="Ad Preview"
                 className="max-w-full max-h-[80vh] object-contain rounded-xl"
@@ -187,7 +202,7 @@ export default function AgentApprovalsContainer() {
                 controls
                 autoPlay
                 className="max-w-full max-h-[80vh] rounded-xl shadow-md bg-black"
-                style={{ minHeight: '300px' }}
+                style={{ minHeight: "300px" }}
                 onError={(e) => {
                   console.error("Video load error:", e);
                   console.error("Video URL that failed:", previewContent.url);

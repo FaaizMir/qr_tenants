@@ -5,6 +5,7 @@
       "availableIn": "Available in {city}",
       "exclusiveIn": "EXCLUSIVE IN {city}",
       "experienceNow": "Experience Now",
+      "featured": "Featured",
       "featuredPartner": "Featured Partner",
       "limitedTime": "LIMITED TIME",
       "partner": "Partner",
@@ -74,6 +75,7 @@
       "searchPlaceholder": "Search merchants, categories...",
       "showing": "Showing {start} - {end} of {total}",
       "showingPage": "Showing Page {page}",
+      "showingRange": "Showing {start} - {end} of {total} merchants",
       "tryAdjustingFilters": "Try adjusting your filters or search.",
       "unableToLoad": "Unable to load merchants"
     },
@@ -185,6 +187,7 @@
     "footer": {
       "contact": "Contact",
       "copyright": "© 2024 QR Rev Inc. All rights reserved.",
+      "globalMerchantNetwork": "Global Agent Network",
       "privacy": "Privacy",
       "terms": "Terms"
     },

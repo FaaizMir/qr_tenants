@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "Tín dụng đã sử dụng",
+    "expired": "Đã hết hạn",
     "issued": "Đã phát hành",
     "messagesSent": "Tin nhắn đã gửi",
     "redeemed": "Đã đổi",
