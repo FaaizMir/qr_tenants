@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { BrandingForm } from "./branding-form";
+import { StripeConfigForm } from "./stripe-config-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
@@ -34,14 +35,19 @@ export default function AgentSettingsContainer() {
             </div>
 
             <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-                <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
+                <TabsList className="grid w-full grid-cols-4 lg:w-[500px]">
                     <TabsTrigger value="branding">Branding</TabsTrigger>
+                    <TabsTrigger value="stripe">Stripe API</TabsTrigger>
                     <TabsTrigger value="general">Details</TabsTrigger>
                     <TabsTrigger value="domains">Domain</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="branding" className="mt-6 space-y-6">
                     <BrandingForm />
+                </TabsContent>
+
+                <TabsContent value="stripe" className="mt-6 space-y-6">
+                    <StripeConfigForm />
                 </TabsContent>
 
                 <TabsContent value="general">

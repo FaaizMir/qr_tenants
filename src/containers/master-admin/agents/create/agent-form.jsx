@@ -52,12 +52,14 @@ export function AgentForm({
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showStripeKey, setShowStripeKey] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     password: "",
+    stripe_secret_key: "",
     address: "",
     city: "",
     country: "",
@@ -92,6 +94,7 @@ export function AgentForm({
             email: user.email || agent.email || "",
             phone: user.phone || agent.phone || agent.phone_number || "",
             password: "",
+            stripe_secret_key: "", // Don't pre-fill for security
             address: agent.address || "",
             city: agent.city || "",
             country: agent.country || "",
@@ -129,6 +132,7 @@ export function AgentForm({
         email: userData.email || initialData.email || "",
         phone: userData.phone || initialData.phone || "",
         password: "", // Don't pre-fill password for security
+        stripe_secret_key: "", // Don't pre-fill Stripe key for security
         address: initialData.address || "",
         city: initialData.city || "",
         country: initialData.country || "",
@@ -165,6 +169,11 @@ export function AgentForm({
       // Only include password if it's provided (for create or password change)
       if (formData.password) {
         payload.password = formData.password;
+      }
+
+      // Only include Stripe key if it's provided (optional configuration)
+      if (formData.stripe_secret_key) {
+        payload.stripe_secret_key = formData.stripe_secret_key;
       }
 
       if (isEdit && agentId) {
@@ -330,6 +339,40 @@ export function AgentForm({
                 Min. 8 characters, alphanumeric.
               </p>
             )}
+          </div>
+
+          {/* Stripe Secret Key */}
+          <div className="space-y-2">
+            <Label htmlFor="stripe_key">
+              Stripe Secret Key (Optional)
+            </Label>
+            <div className="relative">
+              <Input
+                id="stripe_key"
+                type={showStripeKey ? "text" : "password"}
+                value={formData.stripe_secret_key}
+                onChange={(e) => handleChange("stripe_secret_key", e.target.value)}
+                placeholder={isEdit ? "sk_••••••••••••• (leave blank to keep current)" : "sk_test_... or sk_live_..."}
+                className="pr-10 font-mono text-sm"
+              />
+              <button
+                type="button"
+                onClick={() => setShowStripeKey(!showStripeKey)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                title={showStripeKey ? "Hide key" : "Show key"}
+              >
+                {showStripeKey ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {isEdit 
+                ? "Update agent's Stripe API key. Leave blank to keep existing configuration." 
+                : "Configure Stripe API key for receiving merchant payments. Can be set later in agent settings."}
+            </p>
           </div>
         </CardContent>
       </Card>
