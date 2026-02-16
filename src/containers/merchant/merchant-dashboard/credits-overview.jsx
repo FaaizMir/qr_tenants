@@ -353,19 +353,19 @@ export function CreditsOverview({ data, dashboardData, loading }) {
       iconBg: "bg-green-100/50",
     },
     {
+      label: t("metrics.expired"),
+      value: overview.totalCouponsExpired ?? 0,
+      icon: Gift,
+      color: "text-red-600",
+      iconBg: "bg-red-100/50",
+    },
+    {
       label: t("metrics.messagesSent"),
       value:
         whatsappStats.totalMessagesSent ?? overview.whatsappMessagesSent ?? 0,
       icon: MessageCircle,
       color: "text-purple-600",
       iconBg: "bg-purple-100/50",
-    },
-    {
-      label: t("metrics.creditsUsed"),
-      value: whatsappStats.creditsUsed ?? 0,
-      icon: MessageSquare,
-      color: "text-violet-600",
-      iconBg: "bg-violet-100/50",
     },
     {
       label: t("metrics.totalCustomers"),

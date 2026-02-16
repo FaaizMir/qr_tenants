@@ -38,6 +38,7 @@
   },
   "metrics": {
     "creditsUsed": "Credits Used",
+    "expired": "Expired",
     "issued": "Issued",
     "messagesSent": "Messages Sent",
     "redeemed": "Redeemed",
