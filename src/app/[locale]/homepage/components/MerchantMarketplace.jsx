@@ -695,7 +695,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   return (
     <div
       className={cn(
-        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all duration-500",
+        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all",
         couponsCount >= 2 ? "h-[777px]" : "h-fit max-h-[777px]"
       )}
     >
