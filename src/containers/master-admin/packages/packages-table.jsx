@@ -56,9 +56,10 @@ export default function PackagesTable() {
         },
       });
 
-      // Handle different response structures
+      // Handle different response structures and filter out paid ads (agent-only)
       const data = Array.isArray(res?.data) ? res.data : res?.data?.data || [];
-      setPackages(data);
+      const superAdminPackages = data.filter(pkg => pkg.credit_type !== 'paid ads');
+      setPackages(superAdminPackages);
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch packages");
