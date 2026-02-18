@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "يقوم العملاء بمسح رمز الاستجابة السريعة لترك تقييماتهم في ثوانٍ. قم بالتقاط التعليقات السلبية بشكل خاص قبل أن تصل إلى جوجل.",
-    "card1Heading": "تعليقات فورية",
-    "card2Description": "إصدار رموز تسلسلية فريدة وقابلة للتتبع. منع الاحتيال من خلال التحقق الآمن وحدود الاستخدام.",
-    "card2Heading": "كوبونات ذكية",
-    "card3Description": "أرسل تهاني عيد الميلاد، وطلبات المراجعة، وعروض \"نفتقدك\" تلقائيًا عبر واتساب.",
-    "card3Heading": "أتمتة واتساب",
-    "description": "أدوات قوية لمساعدتك على فهم عملائك وجعلهم يعودون مرة أخرى.",
-    "h1": "كل ما تحتاجه للنمو"
+  "agent": {
+    "ads": {
+      "ad": "إعلان",
+      "availableIn": "متوفر في {city}",
+      "exclusiveIn": "حصري في {city}",
+      "experienceNow": "جرب الآن",
+      "featuredPartner": "شريك مميز",
+      "limitedTime": "لفترة محدودة",
+      "partner": "شريك",
+      "premiumLabel": "مميز",
+      "sponsored": "برعاية",
+      "sponsoredDeal": "صفقة برعاية",
+      "viewOffer": "عرض العرض",
+      "visitBusiness": "قم بزيارة {businessName} في {city}, {country}.",
+      "visitExclusivePartner": "قم بزيارة شريكنا الحصري للحصول على عروض مميزة."
+    },
+    "errors": {
+      "agentDataExpired": "انتهت صلاحية بيانات الوكيل، جاري مسح التخزين المحلي...",
+      "errorLoadingAgent": "خطأ في تحميل الوكيل من التخزين المحلي:",
+      "failedToFetchMerchants": "فشل في جلب التجار:",
+      "failedToLoadData": "فشل في تحميل البيانات:",
+      "failedToLoadPaidAds": "فشل في تحميل الإعلانات المدفوعة",
+      "invalidAgentData": "بيانات وكيل غير صالحة في localStorage، جارٍ المسح...",
+      "unableToLoadMerchants": "غير قادر على تحميل التجار. يرجى المحاولة مرة أخرى.",
+      "unableToLoadPage": "غير قادر على تحميل الصفحة. يرجى المحاولة مرة أخرى."
+    },
+    "fallback": {
+      "general": "عام",
+      "unknown": "غير معروف"
+    },
+    "features": {
+      "badge": "لماذا تختارنا",
+      "description": "أدوات قوية لمساعدتك على فهم عملائك وإبقائهم يعودون.",
+      "globalReach": {
+        "description": "وسع عملك دوليًا مع أدواتنا الشاملة ورؤانا.",
+        "title": "الوصول العالمي"
+      },
+      "instantFeedback": {
+        "description": "يقوم العملاء بمسح رمز الاستجابة السريعة لترك تقييمات في ثوانٍ. التقاط التعليقات السلبية بشكل خاص قبل أن تصل إلى جوجل.",
+        "title": "تعليقات فورية"
+      },
+      "smartCoupons": {
+        "description": "إصدار رموز تسلسلية فريدة وقابلة للتتبع. منع الاحتيال من خلال التحقق الآمن وحدود الاستخدام.",
+        "title": "قسائم ذكية"
+      },
+      "title": "كل ما تحتاجه للنمو"
+    },
+    "footer": {
+      "agentLogin": "تسجيل دخول الوكيل",
+      "copyright": "© {year} QR Rev. جميع الحقوق محفوظة.",
+      "globalMerchantNetwork": "شبكة التجار العالمية",
+      "privacyPolicy": "سياسة الخصوصية",
+      "termsOfService": "شروط الخدمة"
+    },
+    "hero": {
+      "curatedForYou": "مُنسق لك",
+      "descriptionDefault": "تصفح التجار المعتمدين، احصل على قسائم فورية، ووفّر على الخدمات المميزة في منطقتك.",
+      "descriptionWithAgent": "اكتشف التجار المعتمدين الذين اختارهم {agentName}. افتح قسائم فورية ووفّر على الخدمات المتميزة.",
+      "exclusiveDeals": "عروض حصرية",
+      "officialPartnerNetwork": "شبكة الشركاء الرسميين",
+      "partnerNetwork": "شبكة الشركاء لـ {agentName}"
+    },
+    "marketplace": {
+      "allIndustries": "جميع الصناعات",
+      "city": "مدينة",
+      "curatingMessage": "نحن نجمع أفضل التجار المعتمدين والعروض الحصرية لك...",
+      "everywhere": "في كل مكان",
+      "industry": "صناعة",
+      "loadingMarketplace": "جارٍ تحميل السوق",
+      "noMerchantsFound": "لم يتم العثور على تجار",
+      "pageNoResults": "الصفحة {page} - لا توجد نتائج",
+      "retryConnection": "إعادة محاولة الاتصال",
+      "searchPlaceholder": "ابحث عن التجار، الفئات...",
+      "showing": "عرض {start} - {end} من {total}",
+      "showingPage": "عرض الصفحة {page}",
+      "tryAdjustingFilters": "حاول ضبط الفلاتر أو البحث.",
+      "unableToLoad": "غير قادر على تحميل التجار"
+    },
+    "merchantDetail": {
+      "availableCoupons": "القسائم المتاحة",
+      "availableDeals": "العروض المتاحة",
+      "checkBackLater": "تحقق مرة أخرى لاحقًا للحصول على صفقات حصرية!",
+      "clickMerchantPrompt": "انقر على ملف تعريف التاجر على اليسار لفتح ملفه",
+      "dealsFound": "تم العثور على {count} صفقة",
+      "details": "تفاصيل",
+      "exclusiveCoupons": "قسائم حصرية",
+      "expired": "منتهية الصلاحية",
+      "getCoupon": "احصل على القسيمة",
+      "left": "{count} متبقية",
+      "limitedTimeOffers": "وعروض محدودة الوقت.",
+      "live": "مباشر",
+      "merchantDetails": "تفاصيل التاجر",
+      "noActiveCoupons": "لا توجد قسائم نشطة في الوقت الحالي.",
+      "offers": "{count} عروض",
+      "readyToExplore": "هل أنت مستعد للاستكشاف؟",
+      "verifiedMerchant": "تاجر موثوق"
+    },
+    "navigation": {
+      "features": "الميزات",
+      "home": "الرئيسية",
+      "marketplace": "السوق",
+      "menu": "قائمة",
+      "partner": "شريك",
+      "signIn": "تسجيل الدخول"
+    },
+    "security": {
+      "dataExpiredClearing": "انتهت صلاحية بيانات الوكيل، جاري مسح التخزين المحلي...",
+      "invalidDataClearing": "بيانات الوكيل غير صالحة في التخزين المحلي، جاري المسح..."
+    },
+    "stats": {
+      "loading": "جار التحميل...",
+      "merchants": "التجار",
+      "verified": "معتمد"
+    }
   },
-  "footer": {
-    "Contact": "اتصل",
-    "Privacy": "خصوصية",
-    "Terms": "الشروط",
-    "text": "© 2024 QR Rev Inc. جميع الحقوق محفوظة."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "تحويل العملاء إلى",
-    "2": "المشجعون المخلصون",
-    "3": "مع رموز QR الذكية",
-    "description": "المنصة الشاملة لجمع المراجعات، توزيع القسائم، وأتمتة الاحتفاظ بالعملاء. لا حاجة للبرمجة.",
-    "freeTrial": "ابدأ تجربة مجانية",
-    "para": "الآن مع تكامل واتساب",
-    "viewDemo": "عرض العرض التوضيحي"
+  "couponForm": {
+    "birthday": "عيد الميلاد",
+    "birthdayFuture": "لا يمكن أن يكون تاريخ الميلاد في المستقبل",
+    "birthdayRequired": "تاريخ الميلاد مطلوب",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "discount": "خصم {percentage}%",
+    "errorDefault": "فشل في إصدار القسيمة. يرجى المحاولة مرة أخرى.",
+    "from": "من {merchantName}",
+    "fullName": "الاسم الكامل",
+    "getCoupon": "احصل على القسيمة",
+    "issuing": "يتم الإصدار...",
+    "namePlaceholder": "أدخل اسمك الكامل",
+    "nameRequired": "الاسم مطلوب",
+    "phoneInvalid": "تنسيق رقم الهاتف غير صالح",
+    "phoneNumber": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم الهاتف",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "successMessage": "تم إرسال قسيمتك إلى هاتفك عبر واتساب.",
+    "successTitle": "تم إصدار القسيمة بنجاح!",
+    "successToast": "تم إرسال القسيمة بنجاح! تحقق من واتساب الخاص بك.",
+    "title": "احصل على قسيمتك"
   },
-  "howitworks": {
-    "descp1": "خصصه بألوان علامتك التجارية وشعارك.",
-    "descp2": "ضعه على الطاولات أو الأسطح أو الإيصالات.",
-    "descp3": "جمع المراجعات وبناء قاعدة بيانات العملاء تلقائيًا.",
-    "h1": "عملية بسيطة من 3 خطوات",
-    "h3": "راقب عملك ينمو",
-    "heading1": "قم بإنشاء رمز الاستجابة السريعة الخاص بك",
-    "heading2": "عرضه في متجرك"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "التجار النشطون",
+      "agents": "الوكلاء",
+      "allCountries": "جميع البلدان",
+      "description": "إدارة شبكة وكلاء المستأجرين العالمية الخاصة بك.",
+      "noAgentsFound": "لم يتم العثور على وكلاء",
+      "of": "من",
+      "pageNoResults": "الصفحة - لا توجد نتائج",
+      "searchPlaceholder": "البحث عن الوكلاء...",
+      "showing": "عرض",
+      "showingPage": "عرض الصفحة",
+      "title": "دليل الوكلاء",
+      "tryAdjustingFilters": "حاول ضبط الفلاتر الخاصة بك.",
+      "viewStorefront": "عرض واجهة المتجر"
+    },
+    "errors": {
+      "failedToLoadAgents": "فشل في تحميل الوكلاء."
+    },
+    "fallback": {
+      "global": "عالمي",
+      "unknown": "غير معروف",
+      "unknownAgent": "وكيل غير معروف"
+    },
+    "features": {
+      "badge": "ميزات المنصة",
+      "description": "أدوات قوية لمساعدتك في فهم عملائك وإبقائهم يعودون.",
+      "instantFeedback": {
+        "description": "يقوم العملاء بمسح رمز الاستجابة السريعة لترك تقييمات في ثوانٍ. التقط التعليقات السلبية بشكل خاص قبل أن تصل إلى جوجل.",
+        "title": "تعليقات فورية"
+      },
+      "smartCoupons": {
+        "description": "إصدار رموز تسلسلية فريدة وقابلة للتتبع. منع الاحتيال من خلال التحقق الآمن وحدود الاستخدام.",
+        "title": "قسائم ذكية"
+      },
+      "title": "كل ما تحتاجه للنمو",
+      "whatsappAutomation": {
+        "description": "إرسال تهاني عيد الميلاد، طلبات المراجعة، وعروض \"نحن نشتاق إليك\" عبر واتساب تلقائيًا.",
+        "title": "أتمتة واتساب"
+      }
+    },
+    "footer": {
+      "contact": "اتصل",
+      "copyright": "© 2024 QR Rev Inc. جميع الحقوق محفوظة.",
+      "privacy": "الخصوصية",
+      "terms": "الشروط"
+    },
+    "hero": {
+      "badge": "تحكم المسؤول الرئيسي",
+      "description": "راقب أداء الوكلاء العالميين، إدارة توزيع المناطق، والإشراف على نمو شبكة التجار من لوحة تحكم واحدة.",
+      "title": "المنصة",
+      "titleHighlight": "مركز الذكاء"
+    },
+    "navigation": {
+      "directory": "الدليل",
+      "features": "الميزات",
+      "overview": "نظرة عامة",
+      "signIn": "تسجيل الدخول"
+    },
+    "Overview": "نظرة عامة",
+    "stats": {
+      "activeAgents": "الوكلاء النشطون",
+      "globalReach": "الوصول العالمي",
+      "totalMerchants": "إجمالي التجار"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    }
   }
 }

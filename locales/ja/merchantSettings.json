@@ -1,0 +1,255 @@
+{
+  "batchSelector": {
+    "loading": "読み込み中...",
+    "noBatchesDescription": "最初にクーポンバッチを作成してください",
+    "noBatchesTitle": "利用可能なバッチはありません",
+    "of": "の",
+    "used": "使用済み"
+  },
+  "birthdayRewards": {
+    "actionRequired": "アクションが必要です: 誕生日クラブ",
+    "actionRequiredDescription": "顧客の誕生日に報酬を与えるクーポンバッチを選択してください。",
+    "birthdayReward": "誕生日報酬",
+    "days": "日数",
+    "daysAfter": "日数後",
+    "daysBefore": "日前",
+    "description": "顧客は特別な日にこの報酬のメッセージを受け取ります。",
+    "enableMessage": "報酬を自動化するために誕生日クラブを有効にしてください",
+    "saveButton": "誕生日設定を保存",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "誕生日設定を更新できませんでした。もう一度お試しください。",
+    "selected": "選択済み",
+    "selectRewardBatch": "報酬バッチを選択...",
+    "subtitle": "自動顧客特典",
+    "title": "バースデークラブ",
+    "updateSuccess": "バースデークラブが更新されました",
+    "updateSuccessDescription": "あなたの誕生日自動化設定が保存されました。"
+  },
+  "featureMasterControl": {
+    "active": "アクティブ",
+    "error": "処理に失敗しました",
+    "errorDescription": "設定を同期できませんでした。接続を確認してください。",
+    "features": {
+      "birthdayMessage": {
+        "description": "顧客の誕生日に自動的に報酬",
+        "label": "誕生日メッセージ"
+      },
+      "facebookReviews": {
+        "description": "Facebookページのレビューへの直接リンク",
+        "label": "Facebookレビュー"
+      },
+      "festivalCampaign": {
+        "description": "特別な休日イベントのための放送",
+        "label": "フェスティバルキャンペーン"
+      },
+      "googleReviews": {
+        "description": "Googleビジネスプロフィールへのレビューリンク",
+        "label": "Googleレビュー"
+      },
+      "inactiveRecall": {
+        "description": "非アクティブな顧客を自動的にリコール",
+        "label": "非アクティブリコール"
+      },
+      "instagramReviews": {
+        "description": "Instagramビジネスとの統合",
+        "label": "Instagramレビュー"
+      },
+      "luckyDraw": {
+        "description": "ゲーミフィケーション報酬配布システム",
+        "label": "ラッキードロー"
+      },
+      "paidAds": {
+        "description": "ユーザーに画像/ビデオバナーを表示する",
+        "label": "有料広告"
+      },
+      "presetReviews": {
+        "description": "顧客のためのプリセットフィードバックオプション",
+        "label": "プリセットレビュー"
+      },
+      "scheduledCampaign": {
+        "description": "スケジュールされたマーケティングメッセージキャンペーン",
+        "label": "スケジュールされたキャンペーン"
+      },
+      "xiaohongshuReviews": {
+        "description": "Redコミュニティと接続する",
+        "label": "小紅書レビュー"
+      }
+    },
+    "live": "ライブ",
+    "paused": "一時停止",
+    "subtitle": "リアルタイム機能制御",
+    "success": "{feature} {status}",
+    "successDescription": "{feature}のステータスが正常に更新されました。",
+    "title": "機能スイッチボード"
+  },
+  "inactiveRecall": {
+    "actionRequired": "アクションが必要です：非アクティブリコール",
+    "actionRequiredDescription": "非アクティブな顧客を取り戻すためにインセンティブクーポンを選択してください。",
+    "chooseRecallReward": "リコール報酬を選択...",
+    "daysOfInactivity": "非アクティブの日数",
+    "description": "しばらく訪れていない顧客にはこの特典が提供されます。",
+    "enableMessage": "Win-Back Clubを有効にして、休眠顧客を再活性化します。",
+    "incentiveReward": "インセンティブ報酬",
+    "recallAfter": "リコール後",
+    "saveButton": "ウィンバック設定を保存",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "リコール設定を更新できませんでした。もう一度お試しください。",
+    "selected": "選択済み",
+    "subtitle": "休眠中の顧客を再活性化する",
+    "title": "ウィンバッククラブ",
+    "updateSuccess": "非アクティブリコール更新済み",
+    "updateSuccessDescription": "ウィンバックオートメーション設定が保存されました。"
+  },
+  "main": {
+    "description": "グローバルなエンゲージメント、報酬メカニズム、プロモーションコンテンツを単一の高性能ダッシュボードから管理します。",
+    "merchantActive": "マーチャントアクティブ",
+    "proTip": "プロのヒント",
+    "proTipMessage": "直接報酬を強力なプリセットと統合することで、高いコンバージョン率のフィードバックループが生まれ、ローカルSEOが急上昇します。",
+    "status": "ステータス",
+    "subtitle": "戦略",
+    "subtitleHighlight": "コントロール",
+    "tabs": {
+      "automations": "オートメーション",
+      "campaigns": "キャンペーン",
+      "festivalMessages": "フェスティバルメッセージ",
+      "paidAds": "有料広告",
+      "settings": "設定"
+    },
+    "title": "マーチャントハブ",
+    "version": "バージョン 2.0"
+  },
+  "paidAds": {
+    "14days": "14日間",
+    "30days": "30日",
+    "7days": "7日間",
+    "active": "アクティブ",
+    "addImage": "画像を追加",
+    "addVideo": "動画を追加",
+    "adjustImage": "画像を調整",
+    "adjustImageDescription": "ドラッグして再配置し、スライダーを使ってズームします。",
+    "adPlacement": "広告配置",
+    "adPreview": "広告プレビュー",
+    "adPreviewDescription": "プロモーション広告のフルサイズプレビュー",
+    "bottom": "下",
+    "cancel": "キャンセル",
+    "duration": "期間",
+    "errorCropping": "画像のトリミング中にエラーが発生しました",
+    "errorSaving": "設定の保存中にエラーが発生しました",
+    "failedToDelete": "削除に失敗しました",
+    "imageAds": "画像広告",
+    "imageDeleted": "画像が正常に削除されました",
+    "imageRecommendation": "1200x600px推奨",
+    "imageSelected": "画像が選択されました。変更を適用するにはアップロード & 保存をクリックしてください。",
+    "left": "左",
+    "off": "オフ",
+    "pending": "保留中",
+    "right": "右",
+    "saveImage": "画像を保存",
+    "selectDuration": "期間を選択",
+    "selectPlacement": "配置を選択",
+    "settingsUpdated": "設定と広告が正常に更新されました",
+    "subtitle": "ビジュアルマーケティングコンテンツ",
+    "title": "プロモーションバナー",
+    "top": "トップ",
+    "uploadAndSave": "アップロード＆保存",
+    "uploading": "アップロード中...",
+    "videoAds": "動画広告",
+    "videoDeleted": "動画が正常に削除されました",
+    "videoRecommendation": "MP4、WebM（最大50MB）",
+    "videoSelected": "ビデオが選択されました。'アップロード＆保存'をクリックして完了します。",
+    "videoTooLarge": "ビデオファイルが大きすぎます。最大サイズは50MBです。",
+    "zoom": "ズーム"
+  },
+  "platformSettings": {
+    "active": "アクティブ",
+    "facebookPage": "Facebookページ",
+    "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "Googleレビュー",
+    "instagram": "インスタグラム",
+    "instagramPlaceholder": "https://instagram.com/...",
+    "off": "オフ",
+    "redPlaceholder": "REDプロファイルURL",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "プラットフォームを更新できませんでした。再試行してください。",
+    "savePlatforms": "プラットフォームを保存",
+    "subtitle": "レビュー チャンネル",
+    "title": "ソーシャル接続",
+    "updateSuccess": "プラットフォームが更新されました",
+    "updateSuccessDescription": "あなたのソーシャルレビューリンクが更新されました。",
+    "xiaohongshu": "XiaoHongShu"
+  },
+  "presetReviews": {
+    "active": "アクティブ",
+    "off": "オフ",
+    "placeholder": "ポジティブフィードバックオプション...",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "プリセットを更新できませんでした。もう一度お試しください。",
+    "savePresets": "プリセットを保存",
+    "subtitle": "顧客プリセット",
+    "title": "クイックフィードバック",
+    "updateSuccess": "プリセットが更新されました",
+    "updateSuccessDescription": "あなたのクイックレビューオプションが保存されました。"
+  },
+  "rewardStrategy": {
+    "chooseRegularReward": "通常の報酬を選択...",
+    "directCoupon": "直接クーポン",
+    "directCouponDescription": "即時アクセス",
+    "featureSwitchboard": "機能スイッチボード",
+    "luckyDraw": "ラッキードロー",
+    "luckyDrawDescription": "ゲーミフィケーションされた賞品",
+    "luckyDrawTab": "ラッキードロー",
+    "luckyDrawTip": "の賞品を設定する",
+    "managedVia": "選択は以下を通じて管理されます",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "報酬戦略を更新できませんでした。もう一度お試しください。",
+    "saveStrategy": "戦略を保存",
+    "selectCouponBatch": "直接報酬のためのクーポンバッチを選択してください。",
+    "selectReward": "報酬を選択",
+    "subtitle": "主要な報酬",
+    "tab": "タブ",
+    "title": "インセンティブエンジン",
+    "updateSuccess": "報酬戦略が更新されました",
+    "updateSuccessDescription": "あなたの主要な報酬設定が保存されました。"
+  },
+  "scheduledCampaign": {
+    "actionRequired": "アクションが必要: スケジュールされたキャンペーン",
+    "actionRequiredDescription": "バーストに含めるクーポンバッチを選択してください。",
+    "active": "アクティブ",
+    "attachCoupon": "クーポンを添付",
+    "audience": "オーディエンス",
+    "audienceOptions": {
+      "active": "アクティブ",
+      "all": "すべてのユーザー",
+      "firstTime": "初めて",
+      "inactive": "非アクティブ",
+      "returning": "戻る"
+    },
+    "campaignName": "キャンペーン名",
+    "campaignNamePlaceholder": "例: ハロウィンセール",
+    "campaignScheduled": "キャンペーンがスケジュールされました",
+    "campaignScheduledDescription": "あなたのマーケティングブラストは配信のためにキューに入れられました。",
+    "done": "完了",
+    "incompleteCampaign": "キャンペーン詳細が不完全です",
+    "incompleteCampaignDescription": "放送のために名前、メッセージ、日付を提供してください。",
+    "launchDate": "発売日",
+    "message": "メッセージ",
+    "messagePlaceholder": "こんにちは {name}、...",
+    "off": "オフ",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedDescription": "キャンペーンをスケジュールできませんでした。もう一度お試しください。",
+    "scheduleCampaign": "キャンペーンをスケジュールする",
+    "selectAudience": "選択",
+    "selectCampaignReward": "キャンペーン報酬を選択...",
+    "selectDateTime": "日付と時間を選択",
+    "subtitle": "ブラスをスケジュールする",
+    "title": "キャンペーン"
+  },
+  "stickySaveBar": {
+    "discardChanges": "変更を破棄",
+    "saveAllSettings": "すべての設定を保存",
+    "statusDescription": "すべてのプラットフォームの報酬とエンゲージメント設定を同期します",
+    "statusReady": "報酬戦略が準備完了",
+    "synchronizing": "同期中..."
+  }
+}

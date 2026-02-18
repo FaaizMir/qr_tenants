@@ -7,6 +7,7 @@ import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import axiosInstance from "@/lib/axios";
 import { couponsColumns } from "./coupons-listing-columns";
@@ -14,6 +15,7 @@ import { toast } from "@/lib/toast";
 import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantCouponsListingContainer({ embedded = false }) {
+  const t = useTranslations("merchantCoupons");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -42,7 +44,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
         const msg =
           err?.response?.data?.message ||
           err.message ||
-          "Failed to load coupons batches";
+          t("errors.failedToLoadCouponsBatches");
         toast.error(msg);
       } finally {
         setLoading(false);
@@ -50,7 +52,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
     };
 
     fetchCoupons();
-  }, [page, pageSize]);
+  }, [page, pageSize, t]);
 
   const filteredData = coupons.filter((item) => {
     if (!debouncedSearch) return true;
@@ -67,7 +69,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
     try {
       await axiosInstance.delete(`/coupon-batches/${batch.id}`);
 
-      toast.success("Coupon batch deleted");
+      toast.success(t("messages.batchDeleted"));
 
       setCoupons((prev) => prev.filter((c) => c.id !== batch.id));
       setTotal((prev) => prev - 1);
@@ -75,7 +77,7 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
       const msg =
         err?.response?.data?.message ||
         err.message ||
-        "Failed to delete coupon batch";
+        t("errors.failedToDeleteCouponBatch");
       toast.error(msg);
     }
   };
@@ -85,15 +87,15 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
       {!embedded && (
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Coupon Batches</h1>
+            <h1 className="text-3xl font-bold">{t("listing.title")}</h1>
             <p className="text-muted-foreground">
-              Manage your discount coupons
+              {t("listing.subtitle")}
             </p>
           </div>
           <Link href="/en/merchant/coupons/create">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              Create Batch
+              {t("listing.createBatch")}
             </Button>
           </Link>
         </div>
@@ -103,12 +105,12 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
         <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search batches..."
+            placeholder={t("listing.searchPlaceholder")}
             onSearchChange={setSearch}
           />
           <DataTable
             data={paginatedData}
-            columns={couponsColumns(handleDeleteCoupon)}
+            columns={couponsColumns(handleDeleteCoupon, t)}
             page={page}
             pageSize={pageSize}
             total={total}
@@ -116,6 +118,19 @@ export default function MerchantCouponsListingContainer({ embedded = false }) {
             setPageSize={setPageSize}
             loading={loading}
             pagination={true}
+            columnNameTranslations={{
+              batchName: t("listing.columnNames.batchName"),
+              batch_name: t("listing.columnNames.batchName"),
+              batchType: t("listing.columnNames.batchType"),
+              batch_type: t("listing.columnNames.batchType"),
+              type: t("listing.columnNames.type"),
+              usage: t("listing.columnNames.usage"),
+              validity: t("listing.columnNames.validity"),
+              status: t("listing.columnNames.status"),
+              isActive: t("listing.columnNames.isActive"),
+              is_active: t("listing.columnNames.isActive"),
+              actions: t("listing.columnNames.actions"),
+            }}
           />
         </CardContent>
       </Card>

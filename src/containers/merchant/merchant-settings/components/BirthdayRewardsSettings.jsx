@@ -23,8 +23,10 @@ import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
-export default function BirthdayRewardsSettings() {
+function BirthdayRewardsSettings() {
+  const t = useTranslations("merchantSettings.birthdayRewards");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -66,9 +68,8 @@ export default function BirthdayRewardsSettings() {
       if (!merchantId) return;
       if (state.enabled && !state.batchId) {
         if (!isGlobal) {
-          toast.error("Action Required: Birthday Club", {
-            description:
-              "Please select a coupon batch to reward your customers on their birthday.",
+          toast.error(t("actionRequired"), {
+            description: t("actionRequiredDescription"),
           });
         }
         return;
@@ -87,16 +88,15 @@ export default function BirthdayRewardsSettings() {
           payload,
         );
         if (!isGlobal) {
-          toast.success("Birthday Club Updated", {
-            description: "Your birthday automation settings have been saved.",
+          toast.success(t("updateSuccess"), {
+            description: t("updateSuccessDescription"),
           });
         }
       } catch (error) {
         console.error("Failed to save birthday settings:", error);
         if (!isGlobal) {
-          toast.error("Save Failed", {
-            description:
-              "Could not update birthday settings. Please try again.",
+          toast.error(t("saveFailed"), {
+            description: t("saveFailedDescription"),
           });
         }
         throw error;
@@ -104,7 +104,7 @@ export default function BirthdayRewardsSettings() {
         if (!isGlobal) setSaving(false);
       }
     },
-    [merchantId, state],
+    [merchantId, state, t],
   );
 
   useEffect(() => {
@@ -127,12 +127,12 @@ export default function BirthdayRewardsSettings() {
           </div>
           <div className="space-y-0.5">
             <h3 className="font-semibold text-base text-gray-900 tracking-tight">
-              Birthday Club
+              {t("title")}
             </h3>
             <div className="flex items-center gap-1.5">
               <Sparkles className="h-3 w-3 text-pink-500 animate-pulse" />
               <p className="text-[11px] text-muted-foreground font-medium">
-                Automatic customer treats
+                {t("subtitle")}
               </p>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function BirthdayRewardsSettings() {
             <div className="grid grid-cols-2 gap-5">
               <div className="space-y-2">
                 <Label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider ml-1">
-                  Days Before
+                  {t("daysBefore")}
                 </Label>
                 <div className="relative group/input">
                   <Input
@@ -169,13 +169,13 @@ export default function BirthdayRewardsSettings() {
                   />
                   <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pink-400 opacity-50 transition-opacity group-focus-within/input:opacity-100" />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-medium pointer-events-none uppercase">
-                    Days
+                    {t("days")}
                   </span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider ml-1">
-                  Days After
+                  {t("daysAfter")}
                 </Label>
                 <div className="relative group/input">
                   <Input
@@ -193,7 +193,7 @@ export default function BirthdayRewardsSettings() {
                   />
                   <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pink-400 opacity-50 transition-opacity group-focus-within/input:opacity-100" />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-medium pointer-events-none uppercase">
-                    Days
+                    {t("days")}
                   </span>
                 </div>
               </div>
@@ -202,11 +202,11 @@ export default function BirthdayRewardsSettings() {
             <div className="space-y-2.5">
               <div className="flex items-center justify-between ml-1">
                 <Label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">
-                  Birthday Reward
+                  {t("birthdayReward")}
                 </Label>
                 {state.batchId && (
                   <span className="text-[10px] text-pink-600 font-semibold bg-pink-50 px-2 py-0.5 rounded-full border border-pink-100 flex items-center gap-1">
-                    <Gift className="h-2.5 w-2.5" /> Selected
+                    <Gift className="h-2.5 w-2.5" /> {t("selected")}
                   </span>
                 )}
               </div>
@@ -216,12 +216,11 @@ export default function BirthdayRewardsSettings() {
                 isOpen={dropdownOpen}
                 setIsOpen={setDropdownOpen}
                 onSelect={(id) => setState((p) => ({ ...p, batchId: id }))}
-                placeholder="Select a reward batch..."
+                placeholder={t("selectRewardBatch")}
                 className="h-12 rounded-xl"
               />
               <p className="text-[10px] text-muted-foreground text-center mt-2 italic px-4">
-                Customers will receive a message with this reward on their
-                special day.
+                {t("description")}
               </p>
             </div>
 
@@ -236,7 +235,7 @@ export default function BirthdayRewardsSettings() {
                 ) : (
                   <>
                     <Save className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
-                    <span>Save Birthday Settings</span>
+                    <span>{t("saveButton")}</span>
                   </>
                 )}
               </Button>
@@ -247,10 +246,13 @@ export default function BirthdayRewardsSettings() {
       {!state.enabled && (
         <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-center">
           <p className="text-[11px] text-gray-400 font-medium italic">
-            Enable Birthday Club to automate your rewards
+            {t("enableMessage")}
           </p>
         </div>
       )}
     </Card>
   );
 }
+
+
+export default BirthdayRewardsSettings;

@@ -1,265 +1,348 @@
 "use client";
 
-import { ExternalLink, ChevronRight, Info } from "lucide-react";
+import {
+  ArrowUpRight,
+  Play,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import { getImageUrl } from "@/lib/utils/imageUtils";
+import axiosInstance from "@/lib/axios";
 
-// --- HELPERS ---
-let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-baseUrl = baseUrl.replace(/\/v1\/?$/, "");
+/**
+ * Hook to track ad impressions
+ * Tracks when an ad is visible for more than 2 seconds
+ */
+const useAdImpression = (ad, agentId, onImpression) => {
+  const elementRef = useRef(null);
+  const timerRef = useRef(null);
+  const hasTrackedRef = useRef(false);
 
-const getAdImage = (path) => {
-  if (!path)
-    return "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1000&q=80";
-  if (path.startsWith("http")) return path;
-  if (path.startsWith("data:")) return path;
+  useEffect(() => {
+    if (!ad || !agentId || hasTrackedRef.current) return;
 
-  const cleanBase = baseUrl.replace(/\/+$/, "");
-  const cleanPath = path.toString().replace(/^\/+/, "");
-  return `${cleanBase}/${cleanPath}`;
+    const element = elementRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Start timer when ad becomes visible
+            timerRef.current = setTimeout(() => {
+              if (!hasTrackedRef.current) {
+                hasTrackedRef.current = true;
+                if (onImpression) {
+                  onImpression(ad);
+                }
+              }
+            }, 2000); // 2 seconds
+          } else {
+            // Clear timer if ad is no longer visible
+            if (timerRef.current) {
+              clearTimeout(timerRef.current);
+              timerRef.current = null;
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.5, // At least 50% of the ad must be visible
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [ad, agentId, onImpression]);
+
+  return elementRef;
+};
+
+const AdMedia = ({ ad, className, showPlayIcon = false, priority = false }) => {
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Validate ad has media
+  if (!ad || (!ad.video && !ad.image)) {
+    return (
+      <div className="relative w-full h-full bg-slate-200 flex items-center justify-center">
+        <div className="text-slate-400 text-sm">No media available</div>
+      </div>
+    );
+  }
+
+  // Construct media URL using getImageUrl utility
+  const mediaUrl = ad.video
+    ? getImageUrl(ad.video)
+    : ad.image
+      ? getImageUrl(ad.image)
+      : "";
+
+  const actualIsVideo = !!ad.video; // Determine video status from actual video path
+
+  // Check if mediaUrl is valid (not empty, not just the fallback)
+  if (!mediaUrl || mediaUrl === "") {
+    return (
+      <div className="relative w-full h-full bg-slate-200 flex items-center justify-center">
+        <div className="text-slate-400 text-sm">No media available</div>
+      </div>
+    );
+  }
+
+  if (actualIsVideo && ad.video && !hasError) {
+    return (
+      <div className="relative w-full h-full bg-slate-900">
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+            <div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin" />
+          </div>
+        )}
+        <video
+          key={mediaUrl}
+          className={cn("w-full h-full object-cover", className)}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onError={() => {
+            console.error("Video load error:", mediaUrl);
+            setHasError(true);
+            setIsLoading(false);
+          }}
+          onLoadStart={() => setIsLoading(true)}
+          onCanPlay={() => setIsLoading(false)}
+          onLoadedData={() => setIsLoading(false)}
+        >
+          <source src={mediaUrl} type="video/mp4" />
+          <source src={mediaUrl} type="video/webm" />
+        </video>
+        {showPlayIcon && !isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
+              <Play className="w-6 h-6 text-white fill-white" />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Fallback to image
+  return (
+    <div className="relative w-full h-full bg-slate-100">
+      <Image
+        src={mediaUrl}
+        className={cn("object-cover", className)}
+        alt={ad.title || "Sponsored Ad"}
+        fill
+        unoptimized
+        priority={priority}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        quality={85}
+        loading={priority ? "eager" : "lazy"}
+        onError={() => setHasError(true)}
+        onLoad={() => setIsLoading(false)}
+      />
+    </div>
+  );
 };
 
 /**
  * Modern "Sponsored" Label - Subtle & Clean
  */
-function AdLabel({ className }) {
-  return (
-    <div className={cn("flex items-center gap-1.5 opacity-70 mb-2", className)}>
-      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-1.5 py-0.5 rounded-sm border border-slate-200/50">
-        Sponsored
-      </span>
-    </div>
-  );
-}
+// Note: AdLabel is kept for potential future use but currently unused
 
-// --- PREMIUM AD COMPONENTS ---
+// --- AD SLOT CONFIGURATION (TechCrunch-inspired) ---
+const AD_DIMENSIONS = {
+  // Horizontal Ads (Top & Bottom Banners)
+  horizontal: {
+    desktop: { width: 970, height: 250, aspectRatio: "970/250" }, // Leaderboard
+    tablet: { width: 728, height: 90, aspectRatio: "728/90" },    // Leaderboard
+    mobile: { width: 320, height: 100, aspectRatio: "320/100" },  // Mobile Banner
+  },
+  // Vertical Ads (Left & Right Sidebars) - Same dimensions for both
+  vertical: {
+    desktop: { width: 300, height: 600, aspectRatio: "300/600" }, // Half Page - Same for left and right
+    tablet: { width: 300, height: 600, aspectRatio: "300/600" },  // Half Page - Same for left and right
+    mobile: { width: 300, height: 600, aspectRatio: "300/600" },  // Half Page - Same for left and right
+  },
+};
 
-export function TopBannerAd({ ad }) {
-  if (!ad) return null;
+// Unified Ad Slot Component with TechCrunch-style layout
+function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", className = "", onClick, agentId, onImpression }) {
+  const t = useTranslations("Homepage.agent.ads");
+  const adRef = useAdImpression(ad, agentId, onImpression);
 
-  return (
-    <div className="w-full mb-8 lg:mb-12 group cursor-pointer">
-      <Link
-        href={ad.redirectUrl || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative w-full h-80 md:h-[400px] rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50 ring-1 ring-black/5"
-      >
-        {/* Background Image with Scale Effect */}
-        <div className="absolute inset-0 bg-slate-100">
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-          <div className="absolute inset-0 bg-linear-to-r from-black/60 to-transparent" />
-        </div>
+  if (!ad || (!ad.image && !ad.video)) return null;
 
-        {/* Content Overlay */}
-        <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end items-start md:justify-end">
-          <div className="absolute top-6 right-6">
-            <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/10 shadow-sm">
-              {ad.businessType || "Featured Partner"}
-            </span>
-          </div>
+  const isHorizontal = orientation === "horizontal";
+  const dimensions = isHorizontal ? AD_DIMENSIONS.horizontal : AD_DIMENSIONS.vertical;
 
-          <div className="max-w-2xl space-y-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-            <BadgeLabel text="Sponsored" />
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-sm">
-              {ad.title}
-            </h2>
-            <p className="text-white/90 text-lg font-medium leading-relaxed max-w-xl">
-              {ad.description || ad.tagline}
-            </p>
-
-            <div className="pt-4 flex items-center gap-4">
-              <span className="h-12 px-8 bg-white text-slate-900 rounded-full flex items-center justify-center text-sm font-bold tracking-wide hover:bg-slate-100 transition-colors shadow-lg shadow-black/20">
-                {ad.cta || "Learn More"}
-              </span>
-              {ad.city && (
-                <span className="text-white/70 text-sm font-medium flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Available in {ad.city}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
-export function SidebarAd({ ad, placement }) {
-  if (!ad) return null;
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Ad clicked in TechCrunchAdSlot", { ad, onClick: !!onClick });
+    if (onClick) {
+      onClick(ad);
+    }
+  };
 
   return (
-    <div className={cn("w-full mb-8 relative group")}>
-      <Link
-        href={ad.redirectUrl || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 ring-1 ring-slate-100 border border-slate-100"
-      >
-        <div className="relative aspect-4/5 overflow-hidden">
-          <span className="absolute top-3 left-3 z-10 px-2 py-1 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-wider rounded border border-white/10">
-            Ad
-          </span>
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-80" />
-
-          <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-            <h4 className="text-lg font-bold leading-snug mb-1">{ad.title}</h4>
-            <p className="text-white/80 text-xs line-clamp-2 mb-3">
-              {ad.tagline}
-            </p>
-            <div className="flex items-center text-xs font-bold text-white/90 gap-1 group-hover:gap-2 transition-all">
-              {ad.cta || "View Offer"} <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
+    <div
+      ref={adRef}
+      onClick={handleClick}
+      className={cn(
+        "block relative overflow-hidden group bg-slate-900 cursor-pointer",
+        "transition-all duration-300 hover:shadow-2xl",
+        isHorizontal ? "w-full" : "w-full",
+        className,
+      )}
+      style={{
+        aspectRatio: dimensions.desktop.aspectRatio,
+      }}
+    >
+      {/* Media Background */}
+      <div className="absolute inset-0">
+        <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-105">
+          <AdMedia ad={ad} priority={position === "top"} />
         </div>
-      </Link>
-    </div>
-  );
-}
-
-export function InlineAd({ ad }) {
-  if (!ad) return null;
-
-  return (
-    <div className="col-span-1 md:col-span-2 lg:col-span-1 h-full min-h-[300px]">
-      <Link
-        href={ad.redirectUrl || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="h-full flex flex-col bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden hover:border-primary/20 hover:ring-2 hover:ring-primary/5 transition-all group relative"
-      >
-        <div className="relative h-48 overflow-hidden">
-          <div className="absolute top-3 right-3 z-10">
-            <span className="px-2 py-0.5 bg-white/90 backdrop-blur text-slate-500 text-[9px] font-bold uppercase tracking-wider rounded-sm shadow-sm border border-slate-100">
-              Sponsored
-            </span>
-          </div>
-          <Image
-            src={getAdImage(ad.image)}
-            className="object-cover grayscale-20 group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
-            alt={ad.title}
-            fill
-            unoptimized
-          />
-        </div>
-        <div className="p-5 flex-1 flex flex-col">
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="font-bold text-slate-900 leading-tight group-hover:text-primary transition-colors">
-              {ad.title}
-            </h3>
-          </div>
-          <p className="text-sm text-slate-500 mb-4 line-clamp-3 leading-relaxed flex-1">
-            {ad.tagline || ad.description}
-          </p>
-          <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-700">
-              {ad.businessType}
-            </span>
-            <span className="text-xs font-bold text-primary flex items-center gap-1 group-hover:underline">
-              Open <ExternalLink className="w-3 h-3" />
-            </span>
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
-export function BottomBannerAd({ ad }) {
-  if (!ad) return null;
-
-  return (
-    <div className="w-full mt-8 mb-12 px-6 lg:px-10 max-w-[1600px] mx-auto">
-      {/* Top Label */}
-      <div className="flex items-center gap-2 mb-3 opacity-60">
-        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">
-          Sponsored
-        </span>
-        <span className="h-px w-8 bg-slate-300"></span>
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
       </div>
 
-      <Link
-        href={ad.redirectUrl || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full relative overflow-hidden rounded-4xl group shadow-2xl transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
-      >
-        <div className="absolute inset-0 bg-[#0B1120]" />
+      {/* Sponsored Label - TechCrunch Style */}
+      <div className="absolute top-2 right-2 z-10">
+        <span className="px-2 py-0.5 bg-slate-800/90 backdrop-blur-sm text-slate-300 text-[10px] font-semibold uppercase tracking-wider border border-slate-700/50">
+          {t("sponsored")}
+        </span>
+      </div>
 
-        {/* Ultra Compact Slim Layout */}
-        <div className="relative flex flex-col md:flex-row items-center h-full">
-          {/* Image Section - Much smaller */}
-          <div className="shrink-0 w-full md:w-60 lg:w-[280px] self-stretch relative overflow-hidden">
-            <div className="absolute top-2 left-2 z-10">
-              <span className="px-1.5 py-px bg-black/60 backdrop-blur-md text-white text-[8px] font-bold uppercase tracking-wider rounded border border-white/10">
-                Ad
+      {/* Content Overlay */}
+      <div className={cn(
+        "absolute inset-0 flex flex-col justify-end",
+        isHorizontal ? "p-4 md:p-6" : "p-4"
+      )}>
+        <div className="space-y-2">
+          {ad.businessType && (
+            <span className="inline-block px-2 py-0.5 bg-primary text-white text-[10px] font-bold uppercase tracking-wide">
+              {ad.businessType}
+            </span>
+          )}
+
+          <h3 className={cn(
+            "font-bold text-white leading-tight line-clamp-2",
+            isHorizontal ? "text-lg md:text-xl" : "text-base"
+          )}>
+            {ad.title}
+          </h3>
+
+          {isHorizontal && (
+            <p className="text-white/80 text-sm leading-relaxed line-clamp-2 hidden md:block">
+              {ad.tagline || ad.description}
+            </p>
+          )}
+
+          <div className="flex items-center gap-2 pt-1">
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-white text-slate-900 text-xs font-bold hover:bg-slate-100 transition-colors">
+              {ad.cta || t("viewOffer")}
+              <ArrowUpRight className="w-3 h-3" />
+            </div>
+
+            {ad.city && (
+              <span className="text-white/70 text-[10px] font-semibold flex items-center gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                {ad.city}
               </span>
-            </div>
-            <Image
-              src={getAdImage(ad.image)}
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              alt={ad.title}
-              fill
-              unoptimized
-            />
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#0B1120]/30 md:to-[#0B1120]" />
-          </div>
-
-          <div className="flex-1 px-4 py-3 md:px-6 md:py-2 text-center md:text-left flex flex-col justify-center min-h-[100px]">
-            <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-              <span className="w-1 h-1 rounded-full bg-amber-500 animate-pulse" />
-              <span className="text-amber-500 text-[8px] font-bold uppercase tracking-[0.2em] opacity-90">
-                Premium
-              </span>
-            </div>
-
-            <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-              <div className="space-y-1 flex-1">
-                <h3 className="text-lg md:text-xl font-black text-white tracking-tight leading-none">
-                  {ad.title}
-                </h3>
-                <p className="text-slate-400 text-xs font-medium leading-tight line-clamp-1">
-                  {ad.description ||
-                    "Visit our exclusive partner for premium offers."}
-                </p>
-              </div>
-
-              <div className="shrink-0 pt-2 md:pt-0">
-                <div className="h-7 px-4 bg-white hover:bg-slate-50 text-slate-900 rounded-lg inline-flex items-center justify-center font-bold text-[10px] tracking-wide gap-1.5 transition-all shadow-sm hover:-translate-y-px">
-                  {ad.cta || "Open"}{" "}
-                  <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
 
-function BadgeLabel({ text }) {
+// --- PREMIUM AD COMPONENTS (TechCrunch Layout) ---
+
+export function TopBannerAd({ ad, onClick, agentId, onImpression }) {
+  if (!ad || (!ad.image && !ad.video)) return null;
+
   return (
-    <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white mb-2 border border-white/10">
-      {text}
-    </span>
+    <div className="w-full mb-8 flex justify-center">
+      <div className="w-full max-w-[970px]">
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="horizontal" 
+          position="top" 
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function SidebarAd({ ad, placement, onClick, agentId, onImpression }) {
+  if (!ad || (!ad.image && !ad.video)) return null;
+
+  return (
+    <div className="w-full mb-6 flex justify-center">
+      <div className="w-full max-w-[300px]">
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="vertical" 
+          position={placement}
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function InlineAd({ ad, onClick, agentId, onImpression }) {
+  if (!ad || (!ad.image && !ad.video)) return null;
+
+  return (
+    <div className="col-span-1 flex justify-center">
+      <TechCrunchAdSlot 
+        ad={ad} 
+        orientation="vertical" 
+        position="inline"
+        onClick={onClick}
+        agentId={agentId}
+        onImpression={onImpression}
+      />
+    </div>
+  );
+}
+
+export function BottomBannerAd({ ad, onClick, agentId, onImpression }) {
+  if (!ad || (!ad.image && !ad.video)) return null;
+
+  return (
+    <div className="w-full mt-6 mb-8 flex justify-center px-4">
+      <div className="w-full max-w-[970px]">
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="horizontal" 
+          position="bottom"
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
+      </div>
+    </div>
   );
 }
 

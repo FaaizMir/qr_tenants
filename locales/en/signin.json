@@ -1,15 +1,30 @@
 {
-  "description": "Secure, multi-tenant workspace for agents and merchants.\nView dashboards, issue coupons, and track customer feedback from one place.",
-  "description2": "Use your agent or merchant credentials to continue.",
-  "forgotPassword": "Forgot password?",
+  "qrReview": "QR REVIEW SAAS",
   "heading1": "Sign in to launch QR feedback, coupons, and WhatsApp nudges.",
-  "label1": "QR feedback in seconds",
-  "label2": "WhatsApp follow-up ready",
-  "label3": "Tenant isolated & secure",
-  "label4": "Username",
+  "description": "Secure, multi-tenant workspace for agents and merchants. View dashboards, issue coupons, and track customer feedback from one place.",
+  "label1": "QR Feedback",
+  "label2": "WhatsApp Automation",
+  "label3": "Secure & Verified",
+  "welcome": "Welcome Back",
+  "signin": "Sign In",
+  "description2": "Enter your credentials to access your dashboard",
+  "label4": "Username or Email",
   "label5": "Password",
-  "qrReview": "QR Review SaaS",
-  "registerAgent": "Register as agent",
-  "signin": "Sign in",
-  "welcome": "Welcome back"
+  "forgotPassword": "Forgot Password?",
+  "noAccount": "Don't have an account?",
+  "signupLink": "Sign up here",
+  "placeholders": {
+    "username": "Enter your username or email",
+    "password": "Enter your password",
+    "loadingText": "Signing in...",
+    "submitLoading": "Sign In"
+  },
+  "validations": {
+    "error1": "Invalid username or password",
+    "error2": "Something went wrong. Please try again.",
+    "invalidCredentials": "Invalid email or password. Please check your credentials.",
+    "accountInactive": "Your account is inactive. Please contact your agent.",
+    "unableToDetermineRole": "Unable to determine user role",
+    "credentialsSignin": "Invalid email or password. Please check your credentials."
+  }
 }

@@ -81,8 +81,8 @@ export default function AgentWalletContainer() {
   const [txTotal, setTxTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const TransactionColumns = transactionColumns(tAgentWallet);
-  const DeductionColumns = deductionColumns(tAgentWallet);
+  const TransactionColumns = transactionColumns();
+  const DeductionColumns = deductionColumns();
 
   /* ----------------------------------
    * Fetch wallet stats
@@ -179,7 +179,7 @@ export default function AgentWalletContainer() {
       <CardHeader></CardHeader>
       <CardContent>
         <TableToolbar
-          placeholder={tAgentWallet("searchtransactions")}
+          placeholder="Search transactions..."
           onSearchChange={setTxSearch}
         />
 
@@ -200,11 +200,11 @@ export default function AgentWalletContainer() {
   const deductionTable = (
     <Card>
       <CardHeader>
-        <CardTitle>{tAgentWallet("autodeductionslog")}</CardTitle>
+        <CardTitle>Auto Deductions Log</CardTitle>
       </CardHeader>
       <CardContent>
         <TableToolbar
-          placeholder={tAgentWallet("searchdeductions")}
+          placeholder="Search deductions..."
           onSearchChange={() => {}}
         />
         <DataTable data={autoDeductions} columns={DeductionColumns} />
@@ -218,7 +218,6 @@ export default function AgentWalletContainer() {
     deductions: autoDeductions,
     transactionTable,
     deductionTable,
-    tAgentWallet,
   });
 
   return (
@@ -248,8 +247,8 @@ export default function AgentWalletContainer() {
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">{tAgentWallet("agentwallet")}</h1>
-          <p className="text-muted-foreground">{tAgentWallet("description")}</p>
+          <h1 className="text-3xl font-bold">Agent Wallet</h1>
+          <p className="text-muted-foreground">Manage your wallet balance and transactions</p>
         </div>
 
         <Button

@@ -1,0 +1,59 @@
+{
+  "title": "Nâng Cấp Cửa Hàng Của Bạn",
+  "subtitle": "Chọn gói tín dụng cho tin nhắn WhatsApp, tạo phiếu giảm giá và quảng cáo trả phí.",
+  "loading": "Đang tải gói...",
+  "errors": {
+    "loadPackages": "Không thể tải gói tín dụng. Vui lòng thử lại.",
+    "noMerchantId": "Không thể xác định ID người bán. Vui lòng liên hệ hỗ trợ.",
+    "purchaseFailed": "Mua gói thất bại. Vui lòng thử lại.",
+    "requestFailed": "Yêu cầu thất bại với trạng thái {status}."
+  },
+  "emptyState": {
+    "noPackages": "Không tìm thấy gói tín dụng cho loại người bán của bạn."
+  },
+  "packageTypes": {
+    "coupon": "Phiếu giảm giá",
+    "whatsappUI": "Tin nhắn WhatsApp UI",
+    "whatsappBI": "Tin nhắn WhatsApp BI",
+    "whatsapp": "Tin nhắn WhatsApp",
+    "paidAds": "Quảng cáo trả phí",
+    "standard": "Tiêu chuẩn"
+  },
+  "merchantTypes": {
+    "annual": "Hàng năm",
+    "temporary": "Tạm thời",
+    "standard": "Tiêu chuẩn"
+  },
+  "packageCard": {
+    "perCredit": "mỗi tín dụng",
+    "baseCredits": "{credits} Tín dụng cơ bản",
+    "bonusCredits": "+{bonusCredits} Tín dụng thưởng",
+    "enhancedFeatures": "Tính năng và dung lượng nâng cao",
+    "getStarted": "Bắt đầu"
+  },
+  "checkout": {
+    "title": "Tổng quan đơn hàng",
+    "subtitle": "Chi tiết thanh toán",
+    "selectedPackage": "Gói đã chọn",
+    "premiumDescription": "Gói tín dụng cao cấp cho sự phát triển kinh doanh của bạn.",
+    "creditsIncluded": "Tín dụng bao gồm",
+    "bonusGift": "Quà tặng thưởng",
+    "packageType": "Loại gói",
+    "totalAmount": "Tổng số tiền",
+    "securePayment": "Thanh toán an toàn",
+    "sslEncrypted": "Cổng Stripe mã hóa SSL",
+    "cardDetails": "Chi tiết thẻ",
+    "paymentInfo": "Vui lòng nhập thông tin thanh toán của bạn bên dưới.",
+    "amountPayable": "Số tiền phải trả",
+    "trustedPartners": "Đối tác đáng tin cậy",
+    "noSelection": "Không tìm thấy lựa chọn",
+    "noSelectionMessage": "Vui lòng đóng cửa sổ này và chọn gói tín dụng để tiếp tục nâng cấp của bạn."
+  },
+  "success": {
+    "purchaseComplete": "Gói đã được mua thành công."
+  },
+  "toast": {
+    "purchaseSuccess": "Gói đã được mua thành công.",
+    "purchaseError": "Mua gói thất bại. Vui lòng thử lại."
+  }
+}

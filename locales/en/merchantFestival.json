@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "Actions",
+    "delete": "Delete",
+    "edit": "Edit",
+    "openMenu": "Open menu",
+    "viewDetails": "View Details"
+  },
+  "active": "Active",
+  "allStatus": "All Status",
+  "columns": {
+    "actions": "Actions",
+    "coupon": "Coupon",
+    "festivalDate": "Festival Date",
+    "festivalName": "Festival Name",
+    "message": "Message",
+    "no": "No",
+    "noMessage": "No message",
+    "none": "None",
+    "recurring": "Recurring",
+    "status": "Status",
+    "yes": "Yes"
+  },
+  "deleteDialog": {
+    "cancel": "Cancel",
+    "confirmDescription": "This action cannot be undone. This will permanently delete the festival message \"{festivalName}\" and remove it from the server.",
+    "confirmTitle": "Are you absolutely sure?",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "description": "Are you sure you want to delete \"{festivalName}\"? This action cannot be undone.",
+    "title": "Delete Festival Message"
+  },
+  "details": {
+    "back": "Back",
+    "backToList": "Back to Festival Messages",
+    "couponBatchId": "Coupon Batch ID",
+    "createdAt": "Created At",
+    "delete": "Delete",
+    "edit": "Edit",
+    "festivalDate": "Festival Date",
+    "festivalMessage": "Festival Message",
+    "invalidDate": "Invalid Date",
+    "lastUpdated": "Last Updated",
+    "messageDetails": "Message Details",
+    "na": "N/A",
+    "notFound": "Festival message not found",
+    "recurringYearly": "Recurring Yearly",
+    "scheduleInfo": "Schedule & Info",
+    "status": "Status"
+  },
+  "enableTooltip": "Enable \"Festival Campaign\" in Feature Switchboard to create greetings",
+  "errors": {
+    "failedToCreate": "Failed to create festival message",
+    "failedToDelete": "Failed to delete festival message",
+    "failedToLoad": "Failed to load festival messages",
+    "failedToLoadDetails": "Failed to load festival message details",
+    "failedToUpdate": "Failed to update festival message"
+  },
+  "featureDisabled": "Festival messages are currently disabled. Enable the feature in the",
+  "featureDisabledSuffix": "above to create new greetings.",
+  "featureSwitchboard": "Feature Switchboard",
+  "form": {
+    "activeStatus": "Active Status",
+    "cancel": "Cancel",
+    "couponBatch": "Coupon Batch (Optional)",
+    "createButton": "Create Festival Message",
+    "createDescription": "Fill in the details to schedule a new festival message",
+    "createTitle": "Create New Festival Message",
+    "editDescription": "Update your festival message details below",
+    "editTitle": "Edit Festival Message",
+    "festivalDate": "Festival Date",
+    "festivalMessage": "Festival Message",
+    "festivalMessagePlaceholder": "Hi '{name}', wishing you a joyful festival season from '{business_name}'...",
+    "festivalName": "Festival Name",
+    "festivalNamePlaceholder": "Ex: Diwali, Christmas, New Year",
+    "messageActive": "Message is active",
+    "messageInactive": "Message is inactive",
+    "oneTimeMessage": "One-time message",
+    "personalizationHint": "Use '{name}' and '{business_name}' to personalize the message",
+    "recurringYearly": "Recurring Yearly",
+    "repeatsEveryYear": "Repeats every year",
+    "required": "*",
+    "save": "Save",
+    "saving": "Saving...",
+    "selectCouponBatch": "Select coupon batch...",
+    "updateButton": "Update Festival Message"
+  },
+  "inactive": "Inactive",
+  "newGreeting": "New Greeting",
+  "searchPlaceholder": "Search by festival name...",
+  "subtitle": "Schedule personalized greetings for holiday celebrations",
+  "success": {
+    "created": "Festival message created successfully",
+    "deleted": "Festival message deleted successfully",
+    "updated": "Festival message updated successfully"
+  },
+  "title": "Festival Messages",
+  "validation": {
+    "allFieldsRequired": "Festival name, message, and date are required"
+  }
+}

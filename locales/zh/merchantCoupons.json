@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "批次名称",
+      "couponCode": "优惠券代码",
+      "expiryDate": "到期日期",
+      "issuedAt": "发行时间",
+      "redeemedAt": "兑换时间",
+      "startDate": "开始日期",
+      "status": "状态"
+    },
+    "copiedToClipboard": "已复制到剪贴板",
+    "createCoupon": "创建优惠券",
+    "notRedeemed": "未兑换",
+    "searchPlaceholder": "搜索优惠券...",
+    "subtitle": "查看和管理所有生成的优惠券",
+    "title": "所有优惠券"
+  },
+  "breadcrumbs": {
+    "couponBatches": "优惠券批次",
+    "coupons": "优惠券",
+    "createCouponBatch": "创建优惠券批次",
+    "detail": "详情",
+    "merchantDashboard": "商户仪表板"
+  },
+  "create": {
+    "annual": "年度",
+    "batchName": "批次名称",
+    "batchNamePlaceholder": "例如：2024年夏季促销",
+    "batchType": "批次类型",
+    "cancelButton": "取消",
+    "createButton": "创建批次",
+    "endDate": "结束日期",
+    "form": {
+      "batchName": "批次名称",
+      "batchNamePlaceholder": "例如：2024年夏季促销",
+      "description": "配置您的优惠券参数（限制会自动应用）",
+      "endDate": "结束日期",
+      "generateBatch": "生成批次",
+      "generatingCodes": "正在生成代码...",
+      "halalCertified": "清真认证",
+      "halalDescription": "表明符合清真标准",
+      "quantity": "数量",
+      "startDate": "开始日期",
+      "template": "模板",
+      "title": "批次详情"
+    },
+    "guidance": "指导",
+    "isActive": "活跃",
+    "limits": {
+      "annual": "年度限制：1000 张优惠券",
+      "quantityLimit": "限制：{max} 个代码",
+      "quantityLimitAnnual": "限制：{max} 个代码（年度）",
+      "quantityLimitTemporary": "限制：{max} 个代码（临时）",
+      "temporary": "临时限制：100 张优惠券"
+    },
+    "merchantType": {
+      "annual": "年度商户",
+      "temporary": "临时商户"
+    },
+    "quantity": "数量",
+    "quantityPlaceholder": "优惠券数量",
+    "selectBatchType": "选择批次类型",
+    "startDate": "开始日期",
+    "temporary": "临时",
+    "title": "创建优惠券批次",
+    "updateButton": "更新批次"
+  },
+  "detail": {
+    "active": "已激活",
+    "batchIdNotAvailable": "批次ID不可用",
+    "code": "代码",
+    "columns": {
+      "code": "代码",
+      "issuedAt": "发放时间",
+      "redemptionDate": "兑换日期",
+      "status": "状态"
+    },
+    "copiedToClipboard": "已复制到剪贴板",
+    "couponsInBatch": "批次中的优惠券",
+    "downloadPdf": "下载PDF",
+    "editContent": "编辑内容",
+    "end": "结束：",
+    "exportPdf": "导出PDF",
+    "failedToDownloadPdf": "下载PDF失败",
+    "failedToLoadCoupons": "加载优惠券失败",
+    "fetchingPdf": "正在获取PDF...",
+    "filters": {
+      "allStatus": "所有状态",
+      "issued": "已发行",
+      "redeemed": "已兑换"
+    },
+    "inactive": "未激活",
+    "issuedAt": "发行时间",
+    "issuedQuantity": "已发放数量",
+    "loadingBatch": "正在加载批次信息...",
+    "noPdfData": "未收到PDF数据",
+    "notRedeemed": "未兑换",
+    "pdfDownloadedSuccessfully": "PDF下载成功",
+    "redemptionDate": "兑换日期",
+    "searchCode": "搜索代码...",
+    "searchPlaceholder": "搜索代码...",
+    "start": "开始：",
+    "stats": {
+      "end": "结束：",
+      "issuedQuantity": "已发放数量",
+      "start": "开始：",
+      "totalQuantity": "总数量",
+      "utilized": "% 已使用",
+      "validity": "有效性"
+    },
+    "status": "状态",
+    "title": "批次详情",
+    "totalQuantity": "总数量",
+    "utilized": "已使用",
+    "validity": "有效性"
+  },
+  "errors": {
+    "batchNameRequired": "批次名称是必需的",
+    "endDateMustBeAfterStart": "结束日期必须在开始日期之后",
+    "endDateRequired": "结束日期是必需的",
+    "failedToCreateBatch": "创建优惠券批次失败",
+    "failedToCreateCouponBatch": "创建优惠券批次失败。",
+    "failedToDeleteCouponBatch": "删除优惠券批次失败",
+    "failedToDownloadPdf": "下载PDF失败",
+    "failedToLoadCoupons": "加载优惠券失败",
+    "failedToLoadCouponsBatches": "加载优惠券批次失败",
+    "failedToUpdateBatch": "更新优惠券批次失败",
+    "quantityMustBePositive": "数量必须是正数",
+    "quantityRequired": "数量是必需的",
+    "startDateRequired": "开始日期是必需的"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "优惠券选项",
+      "delete": "删除",
+      "details": "详情"
+    },
+    "allStatus": "所有状态",
+    "breadcrumb": "优惠券",
+    "columnNames": {
+      "actions": "操作",
+      "batchName": "批次名称",
+      "batchType": "批次类型",
+      "isActive": "处于活动状态",
+      "status": "状态",
+      "type": "类型",
+      "usage": "使用情况",
+      "validity": "有效性"
+    },
+    "columns": {
+      "actions": "操作",
+      "batchName": "批次名称",
+      "status": "状态",
+      "type": "类型",
+      "usage": "使用情况",
+      "validity": "有效性"
+    },
+    "createBatch": "创建批次",
+    "deleteDialog": {
+      "cancel": "取消",
+      "confirm": "删除",
+      "description": "此操作无法撤销。这将永久删除",
+      "title": "删除优惠券批次？"
+    },
+    "exportPdf": "导出PDF",
+    "issued": "已发放",
+    "redeemed": "已兑换",
+    "searchPlaceholder": "搜索批次...",
+    "status": {
+      "active": "活跃",
+      "inactive": "非活跃"
+    },
+    "subtitle": "管理您的折扣券",
+    "title": "优惠券批次",
+    "usage": {
+      "issued": "{count} 已发放",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "来自：",
+      "to": "至："
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "优惠券批次创建成功！",
+    "batchDeleted": "优惠券批次已删除",
+    "batchIdNotAvailable": "批次 ID 不可用",
+    "copiedToClipboard": "已复制到剪贴板",
+    "fetchingPdf": "正在获取 PDF...",
+    "noPdfData": "未收到 PDF 数据",
+    "pdfDownloadedSuccessfully": "PDF下载成功",
+    "unableToDetermineMerchantId": "无法确定商户 ID。请联系支持。",
+    "uploadBrandImage": "请在模板编辑器中上传品牌图片。"
+  },
+  "success": {
+    "batchCreated": "优惠券批次创建成功",
+    "batchUpdated": "优惠券批次更新成功"
+  },
+  "template": {
+    "chooseTemplate": "选择模板",
+    "editContent": "编辑内容",
+    "editor": {
+      "brandImage": "品牌图像",
+      "brandImageMandatory": "品牌图像为必填项",
+      "cancel": "取消",
+      "changeImage": "更改图像",
+      "contentUpdatedSuccessfully": "内容更新成功",
+      "description": "描述",
+      "descriptionPlaceholder": "描述优惠详情...",
+      "done": "完成",
+      "failedToSaveContent": "内容保存失败",
+      "header": "标题",
+      "headerPlaceholder": "例如：特别优惠",
+      "requiredForAllTemplates": "所有模板均需填写",
+      "title": "编辑模板内容",
+      "titleField": "标题",
+      "titlePlaceholder": "例如：50%折扣",
+      "updateDescription": "更新品牌图像、标题、标题和描述。更改实时预览。",
+      "uploadBrandImage": "上传品牌图像"
+    },
+    "hoverToPreview": "悬停以预览或点击打开",
+    "loadingTemplates": "加载模板…",
+    "preview": "预览",
+    "previewModal": {
+      "readOnlyPreview": "只读预览",
+      "title": "模板预览"
+    },
+    "selected": "已选择",
+    "templateLocked": "模板已锁定以供临时计划使用"
+  }
+}

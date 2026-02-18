@@ -1,14 +1,22 @@
 {
-  "home": "الرئيسية",
-  "dashboard": "لوحة التحكم",
-  "merchants": "التجار",
-  "subscriptions": "الاشتراكات",
-  "whiteLabelAgents": "وكلاء العلامة البيضاء",
-  "feedbacks": "التعليقات",
-  "coupons": "الكوبونات",
-  "analytics": "التحليلات",
-  "settings": "الإعدادات",
-  "logout": "تسجيل الخروج",
-  "viewAll": "عرض الكل",
-  "goToDashboard": "الانتقال إلى لوحة التحكم"
+  "guidance": {
+    "tip1": "اختر اسم دفعة وصفي لتسهيل التعرف عليها",
+    "tip2": "حدد تواريخ صلاحية واقعية لحملتك",
+    "tip3": "اختر قالبًا مناسبًا يتناسب مع علامتك التجارية",
+    "tip4": "راجع جميع التفاصيل قبل إنشاء الدفعة",
+    "title": "إرشادات"
+  },
+  "table": {
+    "columns": "الأعمدة",
+    "goToFirstPage": "اذهب إلى الصفحة الأولى",
+    "goToLastPage": "اذهب إلى الصفحة الأخيرة",
+    "goToNextPage": "اذهب إلى الصفحة التالية",
+    "goToPreviousPage": "اذهب إلى الصفحة السابقة",
+    "loadingData": "جاري تحميل البيانات...",
+    "noResults": "لا توجد نتائج.",
+    "page": "الصفحة {current} من {total}",
+    "rowsPerPage": "الصفوف لكل صفحة",
+    "rowsSelected": "{selected} من {total} صف(وف) محدد(ة).",
+    "searchPlaceholder": "بحث..."
+  }
 }

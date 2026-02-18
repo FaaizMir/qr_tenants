@@ -1,0 +1,126 @@
+{
+  "common": {
+    "credits": "クレジット"
+  },
+  "couponStatus": {
+    "description": "引換配布",
+    "noCouponsYet": "まだクーポンは発行されていません",
+    "redeemed": "引き換え済み",
+    "title": "クーポンの状態",
+    "unredeemed": "未引き換え"
+  },
+  "errors": {
+    "failedToFetchBatches": "バッチの取得に失敗しました",
+    "failedToFetchDashboard": "ダッシュボード分析の取得に失敗しました",
+    "failedToFetchFee": "サブスクリプション料金の取得に失敗しました：",
+    "failedToFetchWallet": "ウォレットの取得に失敗しました"
+  },
+  "feedbacks": {
+    "description": "プラットフォーム分布",
+    "noDataYet": "まだフィードバックデータはありません",
+    "title": "フィードバック"
+  },
+  "games": {
+    "luckyDrawSpins": "ラッキードローのスピン",
+    "title": "ゲーム"
+  },
+  "header": {
+    "createNewBatch": "新しいバッチを作成",
+    "title": "マーチャントダッシュボード"
+  },
+  "kpi": {
+    "averageRating": "平均評価",
+    "remainingCredits": "残りのクレジット",
+    "totalCouponsIssued": "発行されたクーポンの合計",
+    "totalRedeemed": "引き換え済み合計",
+    "trendDown": "下",
+    "trendUp": "上"
+  },
+  "metrics": {
+    "creditsUsed": "使用されたクレジット",
+    "expired": "期限切れ",
+    "issued": "発行済み",
+    "messagesSent": "送信されたメッセージ",
+    "redeemed": "引き換え済み",
+    "totalCoupons": "総クーポン数",
+    "totalCustomers": "総顧客数"
+  },
+  "page": {
+    "breadcrumb": "マーチャントダッシュボード",
+    "title": "マーチャントダッシュボード"
+  },
+  "placeholders": {
+    "comingSoon": "設定内容は近日公開予定です...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "金額",
+    "code": "コード",
+    "customer": "顧客",
+    "hourAgo": "{hours} 時間前",
+    "hoursAgo": "{hours} 時間前",
+    "minsAgo": "{mins} 分前",
+    "time": "時間",
+    "title": "最近の引き換え"
+  },
+  "retention": {
+    "returningThisMonth": "今月のリピーター",
+    "title": "リテンション"
+  },
+  "status": {
+    "active": "アクティブ",
+    "annual": "年次",
+    "completed": "完了",
+    "exhausted": "使い果たした",
+    "expired": "期限切れ",
+    "failed": "失敗",
+    "inactive": "非アクティブ",
+    "inProgress": "進行中",
+    "open": "オープン",
+    "paid": "支払い済み",
+    "pending": "保留中",
+    "resolved": "解決済み",
+    "temporary": "一時的",
+    "unused": "未使用",
+    "used": "使用済み"
+  },
+  "tabs": {
+    "automation": "自動化",
+    "coupons": "クーポンバッチ",
+    "feedbackForm": "フィードバックフォーム",
+    "overview": "概要",
+    "settings": "設定",
+    "wallet": "ウォレット"
+  },
+  "topCustomers": {
+    "description": "最もアクティブなユーザー",
+    "noDataYet": "まだ顧客データはありません",
+    "redeemed": "引き換え済み",
+    "title": "トップ顧客",
+    "visits": "訪問"
+  },
+  "upgrade": {
+    "description": "すべての機能をアンロックします。分析、双方向メッセージングなどが含まれます。",
+    "errorMissingInfo": "進行できません。料金または管理者情報が不足しています。",
+    "errorNoSessionUrl": "セッションURLが返されませんでした",
+    "errorPaymentFailed": "支払いの開始に失敗しました。もう一度お試しください。",
+    "pricePerYear": "/年",
+    "processing": "処理中...",
+    "title": "年間プランにアップグレード",
+    "upgradeNow": "今すぐアップグレード"
+  },
+  "whatsapp": {
+    "biMessages": "BI メッセージ (ビジネス主導)",
+    "birthdayCampaigns": "誕生日キャンペーン",
+    "description": "UI ＆ BI 内訳",
+    "feedbackCoupons": "フィードバッククーポン",
+    "festivalCampaigns": "フェスティバルキャンペーン",
+    "homepageCoupons": "ホームページクーポン",
+    "inactiveRecalls": "非アクティブなリコール",
+    "luckyDrawWins": "ラッキードローの勝利",
+    "noBiCampaigns": "まだBIキャンペーンはありません",
+    "noUiActivity": "まだUIアクティビティはありません",
+    "title": "WhatsApp",
+    "uiMessages": "UI メッセージ (ユーザー主導)"
+  }
+}

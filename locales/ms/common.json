@@ -1,14 +1,22 @@
 {
-  "home": "Beranda",
-  "dashboard": "Papan Pemuka",
-  "merchants": "Peniaga",
-  "subscriptions": "Langganan",
-  "whiteLabelAgents": "Ejen Label Putih",
-  "feedbacks": "Maklum Balas",
-  "coupons": "Kupon",
-  "analytics": "Analitik",
-  "settings": "Tetapan",
-  "logout": "Log Keluar",
-  "viewAll": "Lihat Semua",
-  "goToDashboard": "Pergi ke Papan Pemuka"
+  "guidance": {
+    "tip1": "Pilih nama kumpulan yang deskriptif untuk pengenalan yang mudah",
+    "tip2": "Tetapkan tarikh sah yang realistik untuk kempen anda",
+    "tip3": "Pilih templat yang sesuai yang sepadan dengan jenama anda",
+    "tip4": "Semak semua butiran sebelum menjana kumpulan",
+    "title": "Panduan"
+  },
+  "table": {
+    "columns": "Lajur",
+    "goToFirstPage": "Pergi ke halaman pertama",
+    "goToLastPage": "Pergi ke halaman terakhir",
+    "goToNextPage": "Pergi ke halaman seterusnya",
+    "goToPreviousPage": "Pergi ke halaman sebelumnya",
+    "loadingData": "Memuatkan data...",
+    "noResults": "Tiada hasil.",
+    "page": "Halaman {current} daripada {total}",
+    "rowsPerPage": "Baris setiap halaman",
+    "rowsSelected": "{selected} daripada {total} baris yang dipilih.",
+    "searchPlaceholder": "Cari..."
+  }
 }

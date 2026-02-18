@@ -1,140 +1,287 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { TrendingUp, Star, Calendar, Download, Filter } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { TrendingUp, MousePointerClick, Eye, BarChart3, Calendar } from "lucide-react";
 import { ChartWrapper } from "@/components/common/chart-wrapper";
 import LineChart from "@/components/common/charts/line-chart";
 import BarChart from "@/components/common/charts/bar-chart";
-import HorizontalBarChart from "@/components/common/charts/horizontal-bar-chart";
 import { KpiCard } from "@/components/common/kpi-card";
-import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
+import axiosInstance from "@/lib/axios";
+import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
-import { metrics, redemptionTrend } from "./analytics-data";
+const format = (num) => {
+  const n = Number(num);
+  return !isNaN(n) ? n.toLocaleString() : "0";
+};
 
 export default function MerchantAnalyticsContainer({ embedded = false }) {
-  const searchParams = useSearchParams();
-  const batchId = searchParams.get("batch");
+  const { data: session } = useSession();
+  const t = useTranslations("merchantDashboard.analytics");
+  const [analytics, setAnalytics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    totalImpressions: 0,
+    totalClicks: 0,
+    ctr: 0,
+    totalAds: 0,
+  });
+
+  useEffect(() => {
+    if (session?.user?.merchantId) {
+      fetchAnalytics();
+    }
+  }, [session]);
+
+  const fetchAnalytics = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(
+        `/analytics/merchant/${session.user.merchantId}`
+      );
+
+      if (response.data?.success && response.data?.data) {
+        const data = response.data.data;
+        setAnalytics(data);
+
+        // Calculate stats
+        const totalImpressions = data.reduce((sum, item) => sum + (item.impressions || 0), 0);
+        const totalClicks = data.reduce((sum, item) => sum + (item.clicks || 0), 0);
+        const ctr = totalImpressions > 0 ? ((totalClicks / totalImpressions) * 100).toFixed(2) : 0;
+
+        setStats({
+          totalImpressions,
+          totalClicks,
+          ctr,
+          totalAds: data.length,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch analytics:", error);
+      toast.error(t("errorFetchFailed") || "Failed to load analytics");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Prepare chart data for impressions and clicks over time
+  const prepareChartData = () => {
+    if (!analytics.length) return { impressions: [], clicks: [], labels: [] };
+
+    const sortedData = [...analytics].sort((a, b) =>
+      new Date(a.created_at) - new Date(b.created_at)
+    );
+
+    return {
+      impressions: sortedData.map(item => item.impressions),
+      clicks: sortedData.map(item => item.clicks),
+      labels: sortedData.map((item, idx) => `Ad ${idx + 1}`),
+    };
+  };
+
+  const chartData = prepareChartData();
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[...Array(4)].map((_, i) => (
+            <Card key={i} className="border-0 shadow-md">
+              <CardHeader className="pb-2">
+                <Skeleton className="h-4 w-24" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-16" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <Skeleton className="h-[400px] w-full" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        {!embedded ? (
+      {!embedded && (
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              {t("title") || "Paid Ads Analytics"}
+            </h1>
             <p className="text-muted-foreground mt-1">
-              {batchId
-                ? `Performance metrics for Batch #${batchId}`
-                : "Detailed insights into your store performance"}
+              {t("description") || "Track impressions and clicks for your paid advertisements"}
             </p>
           </div>
-        ) : (
-          <div>
-            {/* Empty div to maintain justify-between layout if embedded needs controls on right */}
-          </div>
-        )}
-
-        {/* Controls */}
-        <div className="flex items-center gap-2">
-          <Select defaultValue="30d">
-            <SelectTrigger className="w-[170px]">
-              <Calendar className="mr-2 h-4 w-4" />
-              <SelectValue placeholder="Select range" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="7d">Last 7 days</SelectItem>
-              <SelectItem value="30d">Last 30 days</SelectItem>
-              <SelectItem value="90d">Last 3 months</SelectItem>
-              <SelectItem value="1y">Last year</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
-      </div>
+      )}
 
       {/* KPI Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {metrics.map((metric, index) => (
-          <KpiCard
-            key={index}
-            {...metric}
-          // Using default premium styling from component
-          />
-        ))}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <KpiCard
+          title={t("totalImpressions") || "Total Impressions"}
+          value={format(stats.totalImpressions)}
+          icon={Eye}
+          compact={true}
+          description={t("impressionsDesc") || "Total ad views across all campaigns"}
+        />
+        <KpiCard
+          title={t("totalClicks") || "Total Clicks"}
+          value={format(stats.totalClicks)}
+          icon={MousePointerClick}
+          compact={true}
+          description={t("clicksDesc") || "Total ad clicks from viewers"}
+        />
+        <KpiCard
+          title={t("clickThroughRate") || "Click-Through Rate"}
+          value={`${stats.ctr}%`}
+          icon={TrendingUp}
+          trend={stats.ctr > 2 ? "up" : "neutral"}
+          trendValue={stats.ctr > 2 ? "Good" : "Average"}
+          compact={true}
+          description={t("ctrDesc") || "Percentage of impressions that converted to clicks"}
+        />
+        <KpiCard
+          title={t("totalAds") || "Active Ads"}
+          value={format(stats.totalAds)}
+          icon={BarChart3}
+          compact={true}
+          description={t("adsDesc") || "Total number of tracked advertisements"}
+        />
       </div>
 
-      {/* Main Charts Area */}
-      <div className="grid gap-6 md:grid-cols-7">
-        {/* Main Trend Chart - Takes up more space */}
-        <div className="md:col-span-4 lg:col-span-5">
-          <ChartWrapper
-            title="Redemption Trends"
-            actions={
-              <div className="flex gap-2">
-                <span className="flex items-center text-xs font-medium text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">
-                  <TrendingUp className="w-3 h-3 mr-1" />
-                  +12.5% vs last period
-                </span>
-              </div>
-            }
-          >
-            <div className="h-[350px] w-full pt-4">
-              <LineChart data={redemptionTrend} color="#06b6d4" height={350} />
-            </div>
-          </ChartWrapper>
-        </div>
-
-        {/* Distribution Chart - Side Panel */}
-        <div className="md:col-span-3 lg:col-span-2 space-y-6">
-          <ChartWrapper title="Rating Distribution">
-            <div className="h-[250px] p-2 flex items-center justify-center">
+      {/* Charts */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <ChartWrapper
+          title={t("impressionsChart") || "Impressions by Ad"}
+          actions={
+            <span className="flex items-center text-[10px] font-bold text-blue-600 bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-0.5 rounded-full">
+              <Eye className="w-3 h-3 mr-1" />
+              {format(stats.totalImpressions)} {t("total") || "total"}
+            </span>
+          }
+        >
+          <div className="h-[150px] w-full pt-2">
+            {chartData.impressions.length > 0 ? (
               <BarChart
-                data={[70, 20, 5, 2, 3]}
-                labels={["5★", "4★", "3★", "2★", "1★"]}
-                colors={["#16a34a", "#059669", "#f97316", "#f43f5e", "#6b21a8"]}
-                horizontal={false}
+                data={chartData.impressions}
+                labels={chartData.labels}
+                colors={["#3b82f6"]}
+                height="130px"
               />
-            </div>
-          </ChartWrapper>
-        </div>
-      </div>
-
-      {/* Secondary Metrics */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <ChartWrapper title="Top Performing Campaigns">
-          <div className="p-4 h-[300px]">
-            <HorizontalBarChart
-              items={[
-                { label: "Summer Sale 2024", value: 85, color: "#3b82f6" },
-                { label: "New User Welcome", value: 60, color: "#8b5cf6" },
-                { label: "Holiday Special", value: 48, color: "#f43f5e" },
-                { label: "Flash Deal", value: 32, color: "#f59e0b" },
-              ]}
-            />
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-muted-foreground bg-gray-50/50 rounded-xl border border-dashed border-gray-100">
+                <Eye className="h-5 w-5 mb-1.5 opacity-20" />
+                <span className="text-[10px] font-bold">{t("noData") || "No data available"}</span>
+              </div>
+            )}
           </div>
         </ChartWrapper>
 
-        {/* Additional Insights or Placeholder */}
-        <ChartWrapper title="Traffic Source">
-          <div className="h-[300px] flex items-center justify-center flex-col gap-4 text-center p-6">
-            <div className="relative w-40 h-40 rounded-full border-12 border-slate-100 dark:border-slate-800 flex items-center justify-center">
-              <span className="text-2xl font-bold">85%</span>
+        <ChartWrapper
+          title={t("clicksChart") || "Clicks by Ad"}
+          actions={
+            <span className="flex items-center text-[10px] font-bold text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">
+              <MousePointerClick className="w-3 h-3 mr-1" />
+              {format(stats.totalClicks)} {t("total") || "total"}
+            </span>
+          }
+        >
+          <div className="h-[150px] w-full pt-2">
+            {chartData.clicks.length > 0 ? (
+              <BarChart
+                data={chartData.clicks}
+                labels={chartData.labels}
+                colors={["#10b981"]}
+                height="130px"
+              />
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-muted-foreground bg-gray-50/50 rounded-xl border border-dashed border-gray-100">
+                <MousePointerClick className="h-5 w-5 mb-1.5 opacity-20" />
+                <span className="text-[10px] font-bold">{t("noData") || "No data available"}</span>
+              </div>
+            )}
+          </div>
+        </ChartWrapper>
+      </div>
+
+      {/* Detailed Table */}
+      <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
+        <CardHeader>
+          <CardTitle>{t("detailedAnalytics") || "Detailed Analytics"}</CardTitle>
+          <CardDescription>
+            {t("detailedDesc") || "Performance breakdown for each advertisement"}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {analytics.length > 0 ? (
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("adId") || "Ad ID"}</TableHead>
+                    <TableHead>{t("agentId") || "Agent ID"}</TableHead>
+                    <TableHead className="text-right">{t("impressions") || "Impressions"}</TableHead>
+                    <TableHead className="text-right">{t("clicks") || "Clicks"}</TableHead>
+                    <TableHead className="text-right">{t("ctr") || "CTR"}</TableHead>
+                    <TableHead>{t("createdAt") || "Created"}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {analytics.map((item, index) => {
+                    const ctr = item.impressions > 0
+                      ? ((item.clicks / item.impressions) * 100).toFixed(2)
+                      : 0;
+                    return (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">#{item.paid_ad_id}</TableCell>
+                        <TableCell>#{item.admin_id}</TableCell>
+                        <TableCell className="text-right">{format(item.impressions)}</TableCell>
+                        <TableCell className="text-right">{format(item.clicks)}</TableCell>
+                        <TableCell className="text-right">
+                          <span className={`font-medium ${ctr > 2 ? 'text-green-600' : ctr > 1 ? 'text-yellow-600' : 'text-gray-600'
+                            }`}>
+                            {ctr}%
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {new Date(item.created_at).toLocaleDateString()}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
             </div>
-            <div>
-              <p className="font-medium text-sm">Direct QR Scans</p>
-              <p className="text-xs text-muted-foreground">
-                Most users find you via physical QR codes
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <p className="text-lg font-medium">{t("noAdsYet") || "No ads tracked yet"}</p>
+              <p className="text-sm mt-2">
+                {t("noAdsDesc") || "Your paid ad analytics will appear here once tracking begins"}
               </p>
             </div>
-          </div>
-        </ChartWrapper>
-      </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

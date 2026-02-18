@@ -1,14 +1,22 @@
 {
-  "home": "ホーム",
-  "dashboard": "ダッシュボード",
-  "merchants": "加盟店",
-  "subscriptions": "サブスクリプション",
-  "whiteLabelAgents": "ホワイトラベル代理店",
-  "feedbacks": "フィードバック",
-  "coupons": "クーポン",
-  "analytics": "分析",
-  "settings": "設定",
-  "logout": "ログアウト",
-  "viewAll": "すべて表示",
-  "goToDashboard": "ダッシュボードへ移動"
+  "guidance": {
+    "tip1": "識別しやすい説明的なバッチ名を選択してください",
+    "tip2": "キャンペーンの現実的な有効期限を設定してください",
+    "tip3": "ブランドに合った適切なテンプレートを選択してください",
+    "tip4": "バッチを生成する前にすべての詳細を確認してください",
+    "title": "ガイダンス"
+  },
+  "table": {
+    "columns": "列",
+    "goToFirstPage": "最初のページへ",
+    "goToLastPage": "最後のページへ",
+    "goToNextPage": "次のページへ進む",
+    "goToPreviousPage": "前のページへ",
+    "loadingData": "データを読み込み中...",
+    "noResults": "結果はありません。",
+    "page": "ページ {current} / {total}",
+    "rowsPerPage": "ページあたりの行数",
+    "rowsSelected": "選択された行数: {selected} / {total}",
+    "searchPlaceholder": "検索..."
+  }
 }

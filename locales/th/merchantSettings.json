@@ -1,0 +1,255 @@
+{
+  "batchSelector": {
+    "loading": "กำลังโหลด...",
+    "noBatchesDescription": "สร้างชุดคูปองก่อน",
+    "noBatchesTitle": "ไม่มีชุดที่พร้อมใช้งาน",
+    "of": "ของ",
+    "used": "ใช้แล้ว"
+  },
+  "birthdayRewards": {
+    "actionRequired": "ต้องการการดำเนินการ: คลับวันเกิด",
+    "actionRequiredDescription": "กรุณาเลือกชุดคูปองเพื่อมอบให้ลูกค้าในวันเกิดของพวกเขา",
+    "birthdayReward": "รางวัลวันเกิด",
+    "days": "วัน",
+    "daysAfter": "วันหลังจาก",
+    "daysBefore": "วันก่อนหน้า",
+    "description": "ลูกค้าจะได้รับข้อความพร้อมรางวัลนี้ในวันพิเศษของพวกเขา",
+    "enableMessage": "เปิดใช้งานคลับวันเกิดเพื่อทำให้รางวัลของคุณเป็นอัตโนมัติ",
+    "saveButton": "บันทึกการตั้งค่าวันเกิด",
+    "saveFailed": "บันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถอัปเดตการตั้งค่าวันเกิดได้ กรุณาลองอีกครั้ง",
+    "selected": "ที่เลือก",
+    "selectRewardBatch": "เลือกชุดรางวัล...",
+    "subtitle": "สิทธิพิเศษอัตโนมัติสำหรับลูกค้า",
+    "title": "คลับวันเกิด",
+    "updateSuccess": "อัปเดตคลับวันเกิด",
+    "updateSuccessDescription": "การตั้งค่าอัตโนมัติวันเกิดของคุณได้ถูกบันทึกไว้แล้ว"
+  },
+  "featureMasterControl": {
+    "active": "เปิดใช้งาน",
+    "error": "กระบวนการล้มเหลว",
+    "errorDescription": "ไม่สามารถซิงโครไนซ์การตั้งค่าได้ กรุณาตรวจสอบการเชื่อมต่อของคุณ.",
+    "features": {
+      "birthdayMessage": {
+        "description": "รางวัลอัตโนมัติในวันเกิดของลูกค้า",
+        "label": "ข้อความวันเกิด"
+      },
+      "facebookReviews": {
+        "description": "ลิงก์ตรงไปยังรีวิวหน้า Facebook",
+        "label": "รีวิวจาก Facebook"
+      },
+      "festivalCampaign": {
+        "description": "การถ่ายทอดสดสำหรับกิจกรรมวันหยุดพิเศษ",
+        "label": "แคมเปญเทศกาล"
+      },
+      "googleReviews": {
+        "description": "ลิงก์รีวิวไปยังโปรไฟล์ธุรกิจของ Google",
+        "label": "รีวิวจาก Google"
+      },
+      "inactiveRecall": {
+        "description": "เรียกคืนลูกค้าที่ไม่ใช้งานโดยอัตโนมัติ",
+        "label": "การเรียกคืนที่ไม่ใช้งาน"
+      },
+      "instagramReviews": {
+        "description": "การรวมเข้ากับ Instagram Business",
+        "label": "รีวิวจาก Instagram"
+      },
+      "luckyDraw": {
+        "description": "ระบบแจกจ่ายรางวัลแบบเกม",
+        "label": "จับฉลาก"
+      },
+      "paidAds": {
+        "description": "แสดงแบนเนอร์ภาพ/วิดีโอให้กับผู้ใช้",
+        "label": "โฆษณาที่ต้องชำระเงิน"
+      },
+      "presetReviews": {
+        "description": "ตั้งค่าตัวเลือกการตอบกลับสำหรับลูกค้า",
+        "label": "ตั้งค่าการรีวิว"
+      },
+      "scheduledCampaign": {
+        "description": "แคมเปญข้อความการตลาดที่กำหนดเวลา",
+        "label": "แคมเปญที่กำหนดเวลา"
+      },
+      "xiaohongshuReviews": {
+        "description": "เชื่อมต่อกับชุมชน Red",
+        "label": "รีวิว XiaoHongShu"
+      }
+    },
+    "live": "ถ่ายทอดสด",
+    "paused": "หยุดชั่วคราว",
+    "subtitle": "การควบคุมความสามารถแบบเรียลไทม์",
+    "success": "{feature} {status}",
+    "successDescription": "อัปเดตสถานะ {feature} ของคุณเรียบร้อยแล้ว",
+    "title": "สวิตช์ฟีเจอร์"
+  },
+  "inactiveRecall": {
+    "actionRequired": "ต้องดำเนินการ: การเรียกคืนที่ไม่ใช้งาน",
+    "actionRequiredDescription": "กรุณาเลือกคูปองจูงใจเพื่อดึงดูดลูกค้าที่ไม่ใช้งานกลับมา.",
+    "chooseRecallReward": "เลือกของรางวัลเรียกคืน...",
+    "daysOfInactivity": "วันแห่งการไม่มีการใช้งาน",
+    "description": "ลูกค้าที่ไม่ได้เข้ามาเยี่ยมชมในระยะเวลาหนึ่งจะได้รับสิทธิพิเศษนี้.",
+    "enableMessage": "เปิดใช้งาน Win-Back Club เพื่อเปิดใช้งานลูกค้าที่หยุดใช้งาน",
+    "incentiveReward": "รางวัลจูงใจ",
+    "recallAfter": "เรียกคืนหลังจาก",
+    "saveButton": "บันทึกการตั้งค่าการกลับมาอีกครั้ง",
+    "saveFailed": "บันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถอัปเดตการตั้งค่าการเรียกคืนได้ กรุณาลองอีกครั้ง",
+    "selected": "ที่เลือก",
+    "subtitle": "เปิดใช้งานลูกค้าที่หลับใหลอีกครั้ง",
+    "title": "คลับดึงลูกค้ากลับ",
+    "updateSuccess": "อัปเดตการเรียกคืนที่ไม่ใช้งาน",
+    "updateSuccessDescription": "การตั้งค่าอัตโนมัติในการดึงลูกค้ากลับของคุณถูกบันทึกแล้ว"
+  },
+  "main": {
+    "description": "จัดการการมีส่วนร่วมระดับโลก กลไกการให้รางวัล และเนื้อหาส่งเสริมการขายจากแดชบอร์ดประสิทธิภาพสูงเดียว",
+    "merchantActive": "ผู้ค้าใช้งาน",
+    "proTip": "เคล็ดลับจากผู้เชี่ยวชาญ",
+    "proTipMessage": "การรวมรางวัลโดยตรงกับการตั้งค่าที่ทรงพลังสร้างวงจรการตอบรับที่มีอัตราการแปลงสูงซึ่งช่วยเพิ่ม SEO ท้องถิ่นของคุณ.",
+    "status": "สถานะ",
+    "subtitle": "กลยุทธ์",
+    "subtitleHighlight": "ควบคุม",
+    "tabs": {
+      "automations": "การทำงานอัตโนมัติ",
+      "campaigns": "แคมเปญ",
+      "festivalMessages": "ข้อความเทศกาล",
+      "paidAds": "โฆษณาที่ชำระเงิน",
+      "settings": "การตั้งค่า"
+    },
+    "title": "ศูนย์การค้า",
+    "version": "รุ่น 2.0"
+  },
+  "paidAds": {
+    "14days": "14 วัน",
+    "30days": "30 วัน",
+    "7days": "7 วัน",
+    "active": "เปิดใช้งาน",
+    "addImage": "เพิ่มภาพ",
+    "addVideo": "เพิ่มวิดีโอ",
+    "adjustImage": "ปรับภาพ",
+    "adjustImageDescription": "ลากเพื่อเปลี่ยนตำแหน่งและใช้สไลเดอร์เพื่อซูม.",
+    "adPlacement": "การวางโฆษณา",
+    "adPreview": "ตัวอย่างโฆษณา",
+    "adPreviewDescription": "ตัวอย่างขนาดเต็มของโฆษณาโปรโมชั่น",
+    "bottom": "ด้านล่าง",
+    "cancel": "ยกเลิก",
+    "duration": "ระยะเวลา",
+    "errorCropping": "เกิดข้อผิดพลาดในการตัดภาพ",
+    "errorSaving": "เกิดข้อผิดพลาดในการบันทึกการตั้งค่า",
+    "failedToDelete": "ลบไม่สำเร็จ",
+    "imageAds": "โฆษณาภาพ",
+    "imageDeleted": "ลบภาพเรียบร้อยแล้ว",
+    "imageRecommendation": "แนะนำขนาด 1200x600px",
+    "imageSelected": "เลือกภาพแล้ว คลิกอัปโหลด & บันทึกเพื่อใช้การเปลี่ยนแปลง",
+    "left": "ซ้าย",
+    "off": "ปิด",
+    "pending": "รอดำเนินการ",
+    "right": "ขวา",
+    "saveImage": "บันทึกภาพ",
+    "selectDuration": "เลือกระยะเวลา",
+    "selectPlacement": "เลือกตำแหน่ง",
+    "settingsUpdated": "การตั้งค่าและโฆษณาอัปเดตเรียบร้อยแล้ว",
+    "subtitle": "เนื้อหาการตลาดเชิงภาพ",
+    "title": "แบนเนอร์ส่งเสริมการขาย",
+    "top": "สูงสุด",
+    "uploadAndSave": "อัปโหลด & บันทึก",
+    "uploading": "กำลังอัปโหลด...",
+    "videoAds": "โฆษณาวิดีโอ",
+    "videoDeleted": "ลบวิดีโอเรียบร้อยแล้ว",
+    "videoRecommendation": "MP4, WebM (สูงสุด 50MB)",
+    "videoSelected": "วิดีโอที่เลือก คลิก 'อัปโหลด & บันทึก' เพื่อเสร็จสิ้น.",
+    "videoTooLarge": "ไฟล์วิดีโอใหญ่เกินไป ขนาดสูงสุดคือ 50MB.",
+    "zoom": "ซูม"
+  },
+  "platformSettings": {
+    "active": "เปิดใช้งาน",
+    "facebookPage": "หน้า Facebook",
+    "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "รีวิวจาก Google",
+    "instagram": "อินสตาแกรม",
+    "instagramPlaceholder": "https://instagram.com/...",
+    "off": "ปิด",
+    "redPlaceholder": "URL โปรไฟล์ RED",
+    "saveFailed": "บันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถอัปเดตแพลตฟอร์มได้ กรุณาลองอีกครั้ง.",
+    "savePlatforms": "บันทึกแพลตฟอร์ม",
+    "subtitle": "ตรวจสอบช่องทาง",
+    "title": "เชื่อมต่อสังคม",
+    "updateSuccess": "แพลตฟอร์มที่อัปเดต",
+    "updateSuccessDescription": "ลิงก์การตรวจสอบโซเชียลของคุณได้รับการอัปเดตแล้ว",
+    "xiaohongshu": "XiaoHongShu"
+  },
+  "presetReviews": {
+    "active": "เปิดใช้งาน",
+    "off": "ปิด",
+    "placeholder": "ตัวเลือกข้อเสนอแนะเชิงบวก...",
+    "saveFailed": "บันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถอัปเดตการตั้งค่าล่วงหน้าได้ กรุณาลองอีกครั้ง",
+    "savePresets": "บันทึกการตั้งค่า",
+    "subtitle": "การตั้งค่าลูกค้า",
+    "title": "ตอบกลับอย่างรวดเร็ว",
+    "updateSuccess": "อัปเดตการตั้งค่า",
+    "updateSuccessDescription": "ตัวเลือกการตรวจสอบอย่างรวดเร็วของคุณได้ถูกบันทึกไว้แล้ว"
+  },
+  "rewardStrategy": {
+    "chooseRegularReward": "เลือกของรางวัลปกติ...",
+    "directCoupon": "คูปองตรง",
+    "directCouponDescription": "เข้าถึงทันที",
+    "featureSwitchboard": "สวิตช์ฟีเจอร์",
+    "luckyDraw": "จับฉลาก",
+    "luckyDrawDescription": "รางวัลที่มีเกม",
+    "luckyDrawTab": "จับฉลาก",
+    "luckyDrawTip": "กำหนดรางวัลใน",
+    "managedVia": "การเลือกจัดการผ่าน",
+    "saveFailed": "การบันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถอัปเดตกลยุทธ์รางวัลได้ กรุณาลองอีกครั้ง",
+    "saveStrategy": "บันทึกกลยุทธ์",
+    "selectCouponBatch": "กรุณาเลือกชุดคูปองสำหรับรางวัลตรง.",
+    "selectReward": "เลือกของรางวัล",
+    "subtitle": "รางวัลหลัก",
+    "tab": "แท็บ",
+    "title": "เครื่องยนต์จูงใจ",
+    "updateSuccess": "อัปเดตรางวัลกลยุทธ์",
+    "updateSuccessDescription": "การตั้งค่ารางวัลหลักของคุณได้ถูกบันทึกแล้ว."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "ต้องการการดำเนินการ: แคมเปญที่กำหนดเวลา",
+    "actionRequiredDescription": "กรุณาเลือกชุดคูปองที่จะรวมในแคมเปญของคุณ.",
+    "active": "เปิดใช้งาน",
+    "attachCoupon": "แนบคูปอง",
+    "audience": "กลุ่มเป้าหมาย",
+    "audienceOptions": {
+      "active": "ใช้งาน",
+      "all": "ผู้ใช้ทั้งหมด",
+      "firstTime": "ครั้งแรก",
+      "inactive": "ไม่ใช้งาน",
+      "returning": "กลับมา"
+    },
+    "campaignName": "ชื่อแคมเปญ",
+    "campaignNamePlaceholder": "เช่น: ขายวันฮาโลวีน",
+    "campaignScheduled": "แคมเปญที่กำหนดเวลา",
+    "campaignScheduledDescription": "การตลาดของคุณได้ถูกจัดคิวสำหรับการจัดส่งแล้ว",
+    "done": "เสร็จสิ้น",
+    "incompleteCampaign": "รายละเอียดแคมเปญไม่สมบูรณ์",
+    "incompleteCampaignDescription": "กรุณาให้ชื่อ ข้อความ และวันที่สำหรับการถ่ายทอดสดของคุณ.",
+    "launchDate": "วันที่เปิดตัว",
+    "message": "ข้อความ",
+    "messagePlaceholder": "สวัสดี {name}, ...",
+    "off": "ปิด",
+    "saveFailed": "การบันทึกล้มเหลว",
+    "saveFailedDescription": "ไม่สามารถกำหนดเวลาแคมเปญได้ กรุณาลองอีกครั้ง",
+    "scheduleCampaign": "กำหนดการแคมเปญ",
+    "selectAudience": "เลือก",
+    "selectCampaignReward": "เลือกผลตอบแทนแคมเปญ...",
+    "selectDateTime": "เลือกวันที่ & เวลา",
+    "subtitle": "กำหนดการส่งข้อความ",
+    "title": "แคมเปญ"
+  },
+  "stickySaveBar": {
+    "discardChanges": "ยกเลิกการเปลี่ยนแปลง",
+    "saveAllSettings": "บันทึกการตั้งค่าทั้งหมด",
+    "statusDescription": "ซิงโครไนซ์รางวัลและการตั้งค่าการมีส่วนร่วมของคุณทั้งหมด",
+    "statusReady": "กลยุทธ์รางวัลพร้อม",
+    "synchronizing": "กำลังซิงโครไนซ์..."
+  }
+}

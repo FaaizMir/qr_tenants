@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "Nama Batch",
+      "couponCode": "Kode Kupon",
+      "expiryDate": "Tanggal Kedaluwarsa",
+      "issuedAt": "Diterbitkan Pada",
+      "redeemedAt": "Ditebus Di",
+      "startDate": "Tanggal Mulai",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Disalin ke clipboard",
+    "createCoupon": "Buat Kupon",
+    "notRedeemed": "Belum ditebus",
+    "searchPlaceholder": "Cari kupon...",
+    "subtitle": "Lihat dan kelola semua kupon yang dihasilkan",
+    "title": "Semua Kupon"
+  },
+  "breadcrumbs": {
+    "couponBatches": "Batch Kupon",
+    "coupons": "Kupon",
+    "createCouponBatch": "Buat Batch Kupon",
+    "detail": "Detail",
+    "merchantDashboard": "Dasbor Merchant"
+  },
+  "create": {
+    "annual": "Tahunan",
+    "batchName": "Nama Batch",
+    "batchNamePlaceholder": "misalnya, Penjualan Musim Panas 2024",
+    "batchType": "Jenis Batch",
+    "cancelButton": "Batal",
+    "createButton": "Buat Batch",
+    "endDate": "Tanggal Akhir",
+    "form": {
+      "batchName": "Nama Batch",
+      "batchNamePlaceholder": "mis. Promo Musim Panas 2024",
+      "description": "Konfigurasikan parameter kupon Anda (batas diterapkan secara otomatis)",
+      "endDate": "Tanggal Akhir",
+      "generateBatch": "Buat Batch",
+      "generatingCodes": "Menghasilkan Kode...",
+      "halalCertified": "Bersertifikat Halal",
+      "halalDescription": "Tunjukkan kepatuhan terhadap standar Halal",
+      "quantity": "Kuantitas",
+      "startDate": "Tanggal Mulai",
+      "template": "Template",
+      "title": "Detail Batch"
+    },
+    "guidance": "Panduan",
+    "isActive": "Aktif",
+    "limits": {
+      "annual": "Batas tahunan: 1000 kupon",
+      "quantityLimit": "Batas: {max} kode",
+      "quantityLimitAnnual": "Batas: {max} kode (Tahunan)",
+      "quantityLimitTemporary": "Batas: {max} kode (Sementara)",
+      "temporary": "Batas sementara: 100 kupon"
+    },
+    "merchantType": {
+      "annual": "Pedagang Tahunan",
+      "temporary": "Pedagang Sementara"
+    },
+    "quantity": "Jumlah",
+    "quantityPlaceholder": "Jumlah kupon",
+    "selectBatchType": "Pilih jenis batch",
+    "startDate": "Tanggal Mulai",
+    "temporary": "Sementara",
+    "title": "Buat Batch Kupon",
+    "updateButton": "Perbarui Batch"
+  },
+  "detail": {
+    "active": "Aktif",
+    "batchIdNotAvailable": "ID Batch tidak tersedia",
+    "code": "Kode",
+    "columns": {
+      "code": "Kode",
+      "issuedAt": "Diterbitkan Pada",
+      "redemptionDate": "Tanggal Penukaran",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Disalin ke papan klip",
+    "couponsInBatch": "Kupon dalam Batch",
+    "downloadPdf": "Unduh PDF",
+    "editContent": "Edit Konten",
+    "end": "Akhir:",
+    "exportPdf": "Ekspor PDF",
+    "failedToDownloadPdf": "Gagal mengunduh PDF",
+    "failedToLoadCoupons": "Gagal memuat kupon",
+    "fetchingPdf": "Mengambil PDF...",
+    "filters": {
+      "allStatus": "Semua Status",
+      "issued": "Diterbitkan",
+      "redeemed": "Ditukarkan"
+    },
+    "inactive": "Tidak aktif",
+    "issuedAt": "Diterbitkan Pada",
+    "issuedQuantity": "Jumlah yang Diterbitkan",
+    "loadingBatch": "Memuat info batch...",
+    "noPdfData": "Tidak ada data PDF yang diterima",
+    "notRedeemed": "Belum ditebus",
+    "pdfDownloadedSuccessfully": "PDF berhasil diunduh",
+    "redemptionDate": "Tanggal Penukaran",
+    "searchCode": "Cari kode...",
+    "searchPlaceholder": "Cari kode...",
+    "start": "Mulai:",
+    "stats": {
+      "end": "Akhir:",
+      "issuedQuantity": "Jumlah Diterbitkan",
+      "start": "Mulai:",
+      "totalQuantity": "Jumlah Total",
+      "utilized": "% Digunakan",
+      "validity": "Keabsahan"
+    },
+    "status": "Status",
+    "title": "Detail Batch",
+    "totalQuantity": "Jumlah Total",
+    "utilized": "Digunakan",
+    "validity": "Keabsahan"
+  },
+  "errors": {
+    "batchNameRequired": "Nama batch diperlukan",
+    "endDateMustBeAfterStart": "Tanggal akhir harus setelah tanggal mulai",
+    "endDateRequired": "Tanggal akhir diperlukan",
+    "failedToCreateBatch": "Gagal membuat batch kupon",
+    "failedToCreateCouponBatch": "Gagal membuat batch kupon.",
+    "failedToDeleteCouponBatch": "Gagal menghapus batch kupon",
+    "failedToDownloadPdf": "Gagal mengunduh PDF",
+    "failedToLoadCoupons": "Gagal memuat kupon",
+    "failedToLoadCouponsBatches": "Gagal memuat batch kupon",
+    "failedToUpdateBatch": "Gagal memperbarui batch kupon",
+    "quantityMustBePositive": "Kuantitas harus berupa angka positif",
+    "quantityRequired": "Kuantitas diperlukan",
+    "startDateRequired": "Tanggal mulai diperlukan"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "Opsi Kupon",
+      "delete": "Hapus",
+      "details": "Detail"
+    },
+    "allStatus": "Semua Status",
+    "breadcrumb": "Kupon",
+    "columnNames": {
+      "actions": "Tindakan",
+      "batchName": "Nama Batch",
+      "batchType": "Tipe Batch",
+      "isActive": "Aktif",
+      "status": "Status",
+      "type": "Tipe",
+      "usage": "Penggunaan",
+      "validity": "Masa berlaku"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "batchName": "Nama Batch",
+      "status": "Status",
+      "type": "Tipe",
+      "usage": "Penggunaan",
+      "validity": "Keberlakuan"
+    },
+    "createBatch": "Buat Batch",
+    "deleteDialog": {
+      "cancel": "Batal",
+      "confirm": "Hapus",
+      "description": "Tindakan ini tidak dapat dibatalkan. Ini akan menghapus secara permanen",
+      "title": "Hapus batch kupon?"
+    },
+    "exportPdf": "Ekspor PDF",
+    "issued": "Diterbitkan",
+    "redeemed": "Ditukarkan",
+    "searchPlaceholder": "Cari batch...",
+    "status": {
+      "active": "Aktif",
+      "inactive": "Tidak Aktif"
+    },
+    "subtitle": "Kelola kupon diskon Anda",
+    "title": "Batch Kupon",
+    "usage": {
+      "issued": "{count} diterbitkan",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "Dari:",
+      "to": "Ke:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "Batch kupon berhasil dibuat!",
+    "batchDeleted": "Batch kupon dihapus",
+    "batchIdNotAvailable": "ID Batch tidak tersedia",
+    "copiedToClipboard": "Disalin ke clipboard",
+    "fetchingPdf": "Mengambil PDF...",
+    "noPdfData": "Tidak ada data PDF yang diterima",
+    "pdfDownloadedSuccessfully": "PDF berhasil diunduh",
+    "unableToDetermineMerchantId": "Tidak dapat menentukan id pedagang. Silakan hubungi dukungan.",
+    "uploadBrandImage": "Silakan unggah gambar merek di editor template."
+  },
+  "success": {
+    "batchCreated": "Batch kupon berhasil dibuat",
+    "batchUpdated": "Batch kupon berhasil diperbarui"
+  },
+  "template": {
+    "chooseTemplate": "Pilih template",
+    "editContent": "Edit Konten",
+    "editor": {
+      "brandImage": "Gambar Merek",
+      "brandImageMandatory": "Gambar merek adalah wajib",
+      "cancel": "Batal",
+      "changeImage": "Ubah Gambar",
+      "contentUpdatedSuccessfully": "Konten berhasil diperbarui",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Jelaskan rincian penawaran...",
+      "done": "Selesai",
+      "failedToSaveContent": "Gagal menyimpan konten",
+      "header": "Header",
+      "headerPlaceholder": "mis. PENAWARAN KHUSUS",
+      "requiredForAllTemplates": "Diperlukan untuk semua template",
+      "title": "Edit Konten Template",
+      "titleField": "Judul",
+      "titlePlaceholder": "mis. Diskon 50%",
+      "updateDescription": "Perbarui gambar merek, header, judul, dan deskripsi. Perubahan ditampilkan secara langsung.",
+      "uploadBrandImage": "Unggah Gambar Merek"
+    },
+    "hoverToPreview": "Arahkan untuk pratinjau atau klik untuk membuka",
+    "loadingTemplates": "Memuat template…",
+    "preview": "Pratinjau",
+    "previewModal": {
+      "readOnlyPreview": "Prabaca hanya-baca",
+      "title": "Prabaca Template"
+    },
+    "selected": "Terpilih",
+    "templateLocked": "Template terkunci untuk rencana sementara"
+  }
+}

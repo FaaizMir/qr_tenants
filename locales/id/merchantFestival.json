@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "Tindakan",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "openMenu": "Buka menu",
+    "viewDetails": "Lihat Rincian"
+  },
+  "active": "Aktif",
+  "allStatus": "Semua Status",
+  "columns": {
+    "actions": "Tindakan",
+    "coupon": "Kupon",
+    "festivalDate": "Tanggal Festival",
+    "festivalName": "Nama Festival",
+    "message": "Pesan",
+    "no": "Tidak",
+    "noMessage": "Tidak ada pesan",
+    "none": "Tidak ada",
+    "recurring": "Berulang",
+    "status": "Status",
+    "yes": "Ya"
+  },
+  "deleteDialog": {
+    "cancel": "Batal",
+    "confirmDescription": "Tindakan ini tidak dapat dibatalkan. Ini akan menghapus pesan festival \"{festivalName}\" secara permanen dan menghapusnya dari server.",
+    "confirmTitle": "Apakah Anda benar-benar yakin?",
+    "delete": "Hapus",
+    "deleting": "Menghapus...",
+    "description": "Apakah Anda yakin ingin menghapus \"{festivalName}\"? Tindakan ini tidak dapat dibatalkan.",
+    "title": "Hapus Pesan Festival"
+  },
+  "details": {
+    "back": "Kembali",
+    "backToList": "Kembali ke Pesan Festival",
+    "couponBatchId": "ID Batch Kupon",
+    "createdAt": "Dibuat Pada",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "festivalDate": "Tanggal Festival",
+    "festivalMessage": "Pesan Festival",
+    "invalidDate": "Tanggal Tidak Valid",
+    "lastUpdated": "Terakhir Diperbarui",
+    "messageDetails": "Detail Pesan",
+    "na": "N/A",
+    "notFound": "Pesan festival tidak ditemukan",
+    "recurringYearly": "Tahun Berulang",
+    "scheduleInfo": "Jadwal & Info",
+    "status": "Status"
+  },
+  "enableTooltip": "Aktifkan \"Kampanye Festival\" di Papan Fitur untuk membuat salam",
+  "errors": {
+    "failedToCreate": "Gagal membuat pesan festival",
+    "failedToDelete": "Gagal menghapus pesan festival",
+    "failedToLoad": "Gagal memuat pesan festival",
+    "failedToLoadDetails": "Gagal memuat rincian pesan festival",
+    "failedToUpdate": "Gagal memperbarui pesan festival"
+  },
+  "featureDisabled": "Pesan festival saat ini dinonaktifkan. Aktifkan fitur di",
+  "featureDisabledSuffix": "di atas untuk membuat salam baru.",
+  "featureSwitchboard": "Papan Fitur",
+  "form": {
+    "activeStatus": "Status Aktif",
+    "cancel": "Batal",
+    "couponBatch": "Batch Kupon (Opsional)",
+    "createButton": "Buat Pesan Festival",
+    "createDescription": "Isi detail untuk menjadwalkan pesan festival baru",
+    "createTitle": "Buat Pesan Festival Baru",
+    "editDescription": "Perbarui rincian pesan festival Anda di bawah ini",
+    "editTitle": "Edit Pesan Festival",
+    "festivalDate": "Tanggal Festival",
+    "festivalMessage": "Pesan Festival",
+    "festivalMessagePlaceholder": "Hai '{name}', semoga Anda memiliki musim festival yang menyenangkan dari '{business_name}'...",
+    "festivalName": "Nama Festival",
+    "festivalNamePlaceholder": "Contoh: Diwali, Natal, Tahun Baru",
+    "messageActive": "Pesan aktif",
+    "messageInactive": "Pesan tidak aktif",
+    "oneTimeMessage": "Pesan sekali saja",
+    "personalizationHint": "Gunakan '{name}' dan '{business_name}' untuk mempersonalisasi pesan",
+    "recurringYearly": "Tahun Berulang",
+    "repeatsEveryYear": "Diulang setiap tahun",
+    "required": "*",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "selectCouponBatch": "Pilih batch kupon...",
+    "updateButton": "Perbarui Pesan Festival"
+  },
+  "inactive": "Tidak Aktif",
+  "newGreeting": "Salam Baru",
+  "searchPlaceholder": "Cari berdasarkan nama festival...",
+  "subtitle": "Jadwalkan ucapan selamat yang dipersonalisasi untuk perayaan liburan",
+  "success": {
+    "created": "Pesan festival berhasil dibuat",
+    "deleted": "Pesan festival berhasil dihapus",
+    "updated": "Pesan festival berhasil diperbarui"
+  },
+  "title": "Pesan Festival",
+  "validation": {
+    "allFieldsRequired": "Nama festival, pesan, dan tanggal diperlukan"
+  }
+}

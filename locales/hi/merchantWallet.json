@@ -1,0 +1,139 @@
+{
+  "amount": "राशि",
+  "annualWallet": "वार्षिक वॉलेट",
+  "availableBalance": {
+    "couponCredits": "कूपन क्रेडिट",
+    "creditsExhausted": "क्रेडिट समाप्त",
+    "mainBalance": "मुख्य बैलेंस",
+    "paidAdCredits": "भुगतान किए गए विज्ञापन क्रेडिट",
+    "subtitle": "उपयोग के लिए तैयार क्रेडिट",
+    "temporaryCredits": "अस्थायी क्रेडिट",
+    "title": "उपलब्ध शेष राशि",
+    "totalRemaining": "कुल शेष क्रेडिट",
+    "validateBalance": "शेष राशि मान्य करें",
+    "validating": "मान्यकरण कर रहा है...",
+    "whatsappBiCredits": "व्हाट्सएप बीआई क्रेडिट",
+    "whatsappUiCredits": "व्हाट्सएप यूआई क्रेडिट"
+  },
+  "balance": "बैलेंस",
+  "batchUsage": {
+    "columns": {
+      "batch": "बैच",
+      "lastActivity": "अंतिम गतिविधि",
+      "tier": "स्तर",
+      "usedTotal": "उपयोग किया गया / कुल"
+    },
+    "lastUsed": "अंतिम गतिविधि: {date}",
+    "noData": "अभी तक कोई बैच उपयोग उपलब्ध नहीं है।",
+    "notAvailable": "N/A",
+    "searchPlaceholder": "बैच खोजें...",
+    "standard": "मानक",
+    "subtitle": "प्रत्येक बैच के लिए कटौती विवरण।",
+    "temporarySubtitle": "प्रति बैच उपभोग किए गए क्रेडिट।",
+    "title": "बैच-वार उपयोग",
+    "used": "उपयोग किया गया: {used} / {total}"
+  },
+  "breadcrumb": "वॉलेट",
+  "creditBreakdown": {
+    "purchased": "खरीदा गया",
+    "subtitle": "विस्तृत आवंटन",
+    "title": "क्रेडिट का विवरण",
+    "usageEfficiency": "उपयोग दक्षता",
+    "usageOverview": "उपयोग का अवलोकन",
+    "used": "उपयोग किया गया"
+  },
+  "credits": "क्रेडिट",
+  "date": "तारीख",
+  "description": "विवरण",
+  "errors": {
+    "failedToLoadTransactions": "लेनदेन इतिहास लोड करने में विफल",
+    "failedToLoadWallet": "वॉलेट जानकारी लोड करने में विफल",
+    "fetchFeeFailed": "सदस्यता शुल्क प्राप्त करने में विफल",
+    "insufficientCredits": "क्रेडिट अपर्याप्त हैं या समाप्त हो गए हैं। कृपया अपने वॉलेट की जांच करें।",
+    "missingFeeInfo": "आगे बढ़ने में असमर्थ। शुल्क या प्रशासनिक जानकारी गायब है।",
+    "noSessionUrl": "कोई सत्र यूआरएल वापस नहीं आया",
+    "unableToDetermineMerchant": "व्यापारी वॉलेट निर्धारित करने में असमर्थ। कृपया समर्थन से संपर्क करें।",
+    "unableToLoad": "वॉलेट लोड करने में असमर्थ। कृपया पुनः प्रयास करें।",
+    "upgradeFailed": "भुगतान शुरू करने में विफल। कृपया फिर से प्रयास करें।",
+    "validationFailed": "मान्यता विफल"
+  },
+  "expiresOn": "समाप्ति तिथि",
+  "header": {
+    "annualSubtitle": "वार्षिक व्यापारी मार्केटिंग + उपयोगिता स्तर और पूर्ण इतिहास देखते हैं।",
+    "temporarySubtitle": "अस्थायी व्यापारी केवल अस्थायी स्तर देखते हैं। कोई लेनदेन दृश्य नहीं।",
+    "title": "वॉलेट और क्रेडिट"
+  },
+  "loading": {
+    "fee": "लोडिंग शुल्क...",
+    "wallet": "वॉलेट लोड हो रहा है..."
+  },
+  "loadMore": "और लोड करें",
+  "noTransactions": "कोई लेनदेन नहीं मिला",
+  "remainingCredits": "शेष क्रेडिट",
+  "subscription": {
+    "annual": "वार्षिक",
+    "planType": "योजना प्रकार",
+    "subtitle": "{currency} योजना स्थिति",
+    "temporary": "अस्थायी",
+    "title": "सदस्यता"
+  },
+  "summary": {
+    "creditsRemaining": "बचे हुए क्रेडिट",
+    "creditsUsed": "उपयोग किए गए क्रेडिट",
+    "expiresAt": "समाप्त होता है",
+    "marketingUtility": "मार्केटिंग • यूटिलिटी (केवल पढ़ने के लिए)",
+    "notProvided": "प्रदान नहीं किया गया",
+    "subtitle": "पढ़ने के लिए केवल मूल्य निर्धारण स्तर। क्रियाएँ पर्याप्त बैलेंस की आवश्यकता होती हैं।",
+    "temporaryReadOnly": "अस्थायी (केवल पढ़ने के लिए)",
+    "tiersVisible": "स्तर दिखाई दे रहे हैं",
+    "tierVisible": "स्तर दृश्य",
+    "title": "उपयोग का सारांश"
+  },
+  "temporaryWallet": "अस्थायी वॉलेट",
+  "title": "वॉलेट",
+  "totalCredits": "कुल क्रेडिट",
+  "transactionHistory": "लेनदेन इतिहास",
+  "transactions": {
+    "columns": {
+      "amount": "राशि",
+      "credits": "क्रेडिट",
+      "date": "तारीख",
+      "description": "विवरण",
+      "status": "स्थिति"
+    },
+    "creditTypes": {
+      "coupon": "कूपन",
+      "paidAd": "भुगतान किए गए विज्ञापन",
+      "whatsappBi": "व्हाट्सएप बीआई",
+      "whatsappUi": "व्हाट्सएप यूआई"
+    },
+    "noTransactions": "कोई लेन-देन उपलब्ध नहीं है।",
+    "searchPlaceholder": "लेनदेन खोजें...",
+    "statusUnknown": "अज्ञात",
+    "subtitle": "वार्षिक व्यापारी स्तर के अनुसार इतिहास देखते हैं।",
+    "title": "हाल के लेनदेन"
+  },
+  "type": "प्रकार",
+  "upgradeButton": "अब अपग्रेड करें",
+  "upgrade": {
+    "description": "उन्नत विश्लेषण, प्राथमिकता समर्थन, और लेनदेन इतिहास तक पहुँच प्राप्त करें।",
+    "loadingFee": "...",
+    "perYear": "/वर्ष",
+    "processing": "प्रसंस्करण...",
+    "subtitle": "पूर्ण सुविधाएँ अनलॉक करें",
+    "title": "वार्षिक में अपग्रेड करें",
+    "unavailable": "--",
+    "upgradeNow": "अभी अपग्रेड करें"
+  },
+  "upgradeDescription": "असीमित क्रेडिट और अधिक सुविधाएँ प्राप्त करें",
+  "upgradePrompt": "वार्षिक में अपग्रेड करें",
+  "usedCredits": "उपयोग किए गए क्रेडिट",
+  "warnings": {
+    "day": "दिन",
+    "days": "दिन",
+    "expiringSoon": "{days} दिन{plural} में समाप्त होता है — समाप्ति से पहले योजना का उपयोग करें।",
+    "lowBalance": "क्रेडिट कम हैं। सत्यापन के बाद क्रियाएँ अवरुद्ध हो सकती हैं (विशेष रूप से अस्थायी व्यापारियों के लिए)।",
+    "title": "वॉलेट चेतावनी",
+    "unavailableForTemporary": "लेन-देन का इतिहास और मार्केटिंग/यूटिलिटी स्तर अस्थायी व्यापारियों के लिए उपलब्ध नहीं हैं।"
+  }
+}

@@ -1,7 +1,7 @@
-export const transactionColumns = (tAgentWallet) => [
+export const transactionColumns = () => [
   {
     accessorKey: "completed_at",
-    header: tAgentWallet("date"),
+    header: "Date",
     cell: ({ row }) => {
       const date = row.original.completed_at;
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -10,7 +10,7 @@ export const transactionColumns = (tAgentWallet) => [
 
   {
     accessorKey: "description",
-    header: tAgentWallet("descriptioncolumn"),
+    header: "Description",
     cell: ({ row }) => row.original.description || "-",
   },
 
@@ -22,7 +22,7 @@ export const transactionColumns = (tAgentWallet) => [
 
   {
     accessorKey: "amount",
-    header: tAgentWallet("amount"),
+    header: "Amount",
     cell: ({ row }) => {
       const amount = Number(row.original.amount || 0);
 
@@ -42,7 +42,7 @@ export const transactionColumns = (tAgentWallet) => [
 
   {
     accessorKey: "status",
-    header: tAgentWallet("status"),
+    header: "Status",
     cell: ({ row }) => (
       <span
         className={`capitalize px-2 py-1 rounded text-xs font-medium ${
@@ -57,15 +57,15 @@ export const transactionColumns = (tAgentWallet) => [
   },
 ];
 
-export const deductionColumns = (tAgentWallet) => [
-  { accessorKey: "date", header: tAgentWallet("date") },
-  { accessorKey: "description", header: tAgentWallet("descriptioncolumn") },
+export const deductionColumns = () => [
+  { accessorKey: "date", header: "Date" },
+  { accessorKey: "description", header: "Description" },
   {
     accessorKey: "amount",
-    header: tAgentWallet("amount"),
+    header: "Amount",
     cell: ({ row }) => (
       <span className="text-red-600">-${row.original.amount}</span>
     ),
   },
-  { accessorKey: "frequency", header: tAgentWallet("frequency") },
+  { accessorKey: "frequency", header: "Frequency" },
 ];

@@ -2,15 +2,18 @@ import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
 export const namespaces = [
-  "common",
-  "dashboard",
-  "sidebar",
-  "landing",
-  "signin",
-  "placeholders",
-  "validations",
   "Homepage",
-  "agent",
+  "signin",
+  "merchantDashboard",
+  "sidebar",
+  "merchantCoupons",
+  "merchantWallet",
+  "merchantSettings",
+  "merchantCampaigns",
+  "merchantFestival",
+  "systemLogs",
+  "common",
+  "merchantPurchase",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {
@@ -23,7 +26,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const namespacePromises = namespaces.map((ns) =>
     import(`../../locales/${locale}/${ns}.json`)
       .then((m) => m.default)
-      .catch(() => ({}))
+      .catch(() => ({})),
   );
 
   const namespaceModules = await Promise.all(namespacePromises);

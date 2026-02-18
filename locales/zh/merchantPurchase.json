@@ -1,0 +1,59 @@
+{
+  "title": "为您的商店充电",
+  "subtitle": "选择用于WhatsApp消息、优惠券创建和付费广告的积分套餐。",
+  "loading": "正在加载套餐...",
+  "errors": {
+    "loadPackages": "无法加载积分套餐。请重试。",
+    "noMerchantId": "无法确定商户ID。请联系支持。",
+    "purchaseFailed": "购买套餐失败。请重试。",
+    "requestFailed": "请求失败，状态为{status}。"
+  },
+  "emptyState": {
+    "noPackages": "未找到适合您商户类型的积分套餐。"
+  },
+  "packageTypes": {
+    "coupon": "优惠券",
+    "whatsappUI": "WhatsApp UI消息",
+    "whatsappBI": "WhatsApp BI消息",
+    "whatsapp": "WhatsApp消息",
+    "paidAds": "付费广告",
+    "standard": "标准"
+  },
+  "merchantTypes": {
+    "annual": "年度",
+    "temporary": "临时",
+    "standard": "标准"
+  },
+  "packageCard": {
+    "perCredit": "每积分",
+    "baseCredits": "{credits}基础积分",
+    "bonusCredits": "+{bonusCredits}奖励积分",
+    "enhancedFeatures": "增强的功能和容量",
+    "getStarted": "开始使用"
+  },
+  "checkout": {
+    "title": "订单概览",
+    "subtitle": "结账详情",
+    "selectedPackage": "已选套餐",
+    "premiumDescription": "为您的业务增长提供的高级积分套餐。",
+    "creditsIncluded": "包含积分",
+    "bonusGift": "奖励礼物",
+    "packageType": "套餐类型",
+    "totalAmount": "总金额",
+    "securePayment": "安全支付",
+    "sslEncrypted": "SSL加密Stripe网关",
+    "cardDetails": "卡片详情",
+    "paymentInfo": "请在下方输入您的支付信息。",
+    "amountPayable": "应付金额",
+    "trustedPartners": "可信赖的合作伙伴",
+    "noSelection": "未找到选择",
+    "noSelectionMessage": "请关闭此窗口并选择积分套餐以继续您的升级。"
+  },
+  "success": {
+    "purchaseComplete": "套餐购买成功。"
+  },
+  "toast": {
+    "purchaseSuccess": "套餐购买成功。",
+    "purchaseError": "购买套餐失败。请重试。"
+  }
+}

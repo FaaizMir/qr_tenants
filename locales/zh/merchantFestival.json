@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "操作",
+    "delete": "删除",
+    "edit": "编辑",
+    "openMenu": "打开菜单",
+    "viewDetails": "查看详情"
+  },
+  "active": "活动",
+  "allStatus": "所有状态",
+  "columns": {
+    "actions": "操作",
+    "coupon": "优惠券",
+    "festivalDate": "节日日期",
+    "festivalName": "节日名称",
+    "message": "消息",
+    "no": "否",
+    "noMessage": "没有消息",
+    "none": "无",
+    "recurring": "重复",
+    "status": "状态",
+    "yes": "是"
+  },
+  "deleteDialog": {
+    "cancel": "取消",
+    "confirmDescription": "此操作无法撤销。这将永久删除节日消息 \"{festivalName}\" 并将其从服务器中移除。",
+    "confirmTitle": "您确定吗？",
+    "delete": "删除",
+    "deleting": "正在删除...",
+    "description": "您确定要删除 \"{festivalName}\" 吗？此操作无法撤销。",
+    "title": "删除节日消息"
+  },
+  "details": {
+    "back": "返回",
+    "backToList": "返回节日消息",
+    "couponBatchId": "优惠券批次ID",
+    "createdAt": "创建于",
+    "delete": "删除",
+    "edit": "编辑",
+    "festivalDate": "节日日期",
+    "festivalMessage": "节日信息",
+    "invalidDate": "无效日期",
+    "lastUpdated": "最后更新",
+    "messageDetails": "消息详情",
+    "na": "不适用",
+    "notFound": "未找到节日信息",
+    "recurringYearly": "每年重复",
+    "scheduleInfo": "安排和信息",
+    "status": "状态"
+  },
+  "enableTooltip": "在功能开关板中启用 \"节日活动\" 以创建问候语",
+  "errors": {
+    "failedToCreate": "创建节日信息失败",
+    "failedToDelete": "删除节日信息失败",
+    "failedToLoad": "加载节日消息失败",
+    "failedToLoadDetails": "加载节日消息详细信息失败",
+    "failedToUpdate": "更新节日消息失败"
+  },
+  "featureDisabled": "节日信息当前已禁用。请在中启用该功能",
+  "featureDisabledSuffix": "以上以创建新的问候语。",
+  "featureSwitchboard": "功能开关板",
+  "form": {
+    "activeStatus": "活动状态",
+    "cancel": "取消",
+    "couponBatch": "优惠券批次（可选）",
+    "createButton": "创建节日信息",
+    "createDescription": "填写详细信息以安排新的节日消息",
+    "createTitle": "创建新的节日消息",
+    "editDescription": "在下面更新您的节日消息详细信息",
+    "editTitle": "编辑节日消息",
+    "festivalDate": "节日日期",
+    "festivalMessage": "节日信息",
+    "festivalMessagePlaceholder": "嗨 '{name}'，祝您节日快乐，来自 '{business_name}'...",
+    "festivalName": "节日名称",
+    "festivalNamePlaceholder": "例如：排灯节，圣诞节，新年",
+    "messageActive": "信息处于活动状态",
+    "messageInactive": "消息未激活",
+    "oneTimeMessage": "一次性消息",
+    "personalizationHint": "使用 '{name}' 和 '{business_name}' 来个性化消息",
+    "recurringYearly": "每年重复",
+    "repeatsEveryYear": "每年重复",
+    "required": "*",
+    "save": "保存",
+    "saving": "保存中...",
+    "selectCouponBatch": "选择优惠券批次...",
+    "updateButton": "更新节日消息"
+  },
+  "inactive": "未激活",
+  "newGreeting": "新问候语",
+  "searchPlaceholder": "按节日名称搜索...",
+  "subtitle": "为节日庆祝活动安排个性化问候",
+  "success": {
+    "created": "节日信息创建成功",
+    "deleted": "节日信息删除成功",
+    "updated": "节日消息更新成功"
+  },
+  "title": "节日消息",
+  "validation": {
+    "allFieldsRequired": "节日名称、信息和日期是必需的"
+  }
+}

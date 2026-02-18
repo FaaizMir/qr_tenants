@@ -1,0 +1,126 @@
+{
+  "common": {
+    "credits": "เครดิต"
+  },
+  "couponStatus": {
+    "description": "การแจกจ่ายการแลก",
+    "noCouponsYet": "ยังไม่มีคูปองที่ออก",
+    "redeemed": "แลกแล้ว",
+    "title": "สถานะคูปอง",
+    "unredeemed": "ยังไม่ได้แลก"
+  },
+  "errors": {
+    "failedToFetchBatches": "ไม่สามารถดึงชุดข้อมูลได้",
+    "failedToFetchDashboard": "ไม่สามารถดึงข้อมูลการวิเคราะห์แดชบอร์ดได้",
+    "failedToFetchFee": "ไม่สามารถดึงค่าธรรมเนียมการสมัครสมาชิก:",
+    "failedToFetchWallet": "ไม่สามารถดึงกระเป๋าเงิน"
+  },
+  "feedbacks": {
+    "description": "การกระจายแพลตฟอร์ม",
+    "noDataYet": "ยังไม่มีข้อมูลข้อเสนอแนะ",
+    "title": "ข้อเสนอแนะ"
+  },
+  "games": {
+    "luckyDrawSpins": "การหมุนการจับฉลาก",
+    "title": "เกม"
+  },
+  "header": {
+    "createNewBatch": "สร้างชุดใหม่",
+    "title": "แดชบอร์ดผู้ค้า"
+  },
+  "kpi": {
+    "averageRating": "คะแนนเฉลี่ย",
+    "remainingCredits": "เครดิตที่เหลือ",
+    "totalCouponsIssued": "จำนวนคูปองทั้งหมดที่ออก",
+    "totalRedeemed": "จำนวนที่แลกใช้",
+    "trendDown": "ลง",
+    "trendUp": "ขึ้น"
+  },
+  "metrics": {
+    "creditsUsed": "เครดิตที่ใช้",
+    "expired": "หมดอายุ",
+    "issued": "ออกแล้ว",
+    "messagesSent": "ข้อความที่ส่ง",
+    "redeemed": "แลกแล้ว",
+    "totalCoupons": "คูปองทั้งหมด",
+    "totalCustomers": "ลูกค้าทั้งหมด"
+  },
+  "page": {
+    "breadcrumb": "แดชบอร์ดผู้ค้า",
+    "title": "แดชบอร์ดผู้ค้า"
+  },
+  "placeholders": {
+    "comingSoon": "เนื้อหาการตั้งค่ากำลังมาเร็ว ๆ นี้...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "จำนวนเงิน",
+    "code": "รหัส",
+    "customer": "ลูกค้า",
+    "hourAgo": "{hours} ชั่วโมงที่แล้ว",
+    "hoursAgo": "{hours} ชั่วโมงที่แล้ว",
+    "minsAgo": "{mins} นาทีที่แล้ว",
+    "time": "เวลา",
+    "title": "การแลกใช้ล่าสุด"
+  },
+  "retention": {
+    "returningThisMonth": "กลับมาในเดือนนี้",
+    "title": "การรักษาลูกค้า"
+  },
+  "status": {
+    "active": "ใช้งาน",
+    "annual": "ประจำปี",
+    "completed": "เสร็จสิ้น",
+    "exhausted": "หมดแรง",
+    "expired": "หมดอายุ",
+    "failed": "ล้มเหลว",
+    "inactive": "ไม่ใช้งาน",
+    "inProgress": "กำลังดำเนินการ",
+    "open": "เปิด",
+    "paid": "ชำระเงินแล้ว",
+    "pending": "รอดำเนินการ",
+    "resolved": "แก้ไขแล้ว",
+    "temporary": "ชั่วคราว",
+    "unused": "ยังไม่ใช้",
+    "used": "ใช้แล้ว"
+  },
+  "tabs": {
+    "automation": "การทำงานอัตโนมัติ",
+    "coupons": "ชุดคูปอง",
+    "feedbackForm": "แบบฟอร์มข้อเสนอแนะ",
+    "overview": "ภาพรวม",
+    "settings": "การตั้งค่า",
+    "wallet": "กระเป๋าเงิน"
+  },
+  "topCustomers": {
+    "description": "ผู้ใช้ที่ใช้งานมากที่สุด",
+    "noDataYet": "ยังไม่มีข้อมูลลูกค้า",
+    "redeemed": "แลกแล้ว",
+    "title": "ลูกค้าชั้นนำ",
+    "visits": "การเยี่ยมชม"
+  },
+  "upgrade": {
+    "description": "ปลดล็อกฟีเจอร์ทั้งหมดรวมถึงการวิเคราะห์, การส่งข้อความสองทาง, และอื่น ๆ.",
+    "errorMissingInfo": "ไม่สามารถดำเนินการต่อได้ ข้อมูลค่าธรรมเนียมหรือข้อมูลผู้ดูแลระบบขาดหายไป.",
+    "errorNoSessionUrl": "ไม่มี URL เซสชันที่ส่งกลับ",
+    "errorPaymentFailed": "ไม่สามารถเริ่มต้นการชำระเงินได้ กรุณาลองอีกครั้ง.",
+    "pricePerYear": "/ปี",
+    "processing": "กำลังประมวลผล...",
+    "title": "อัปเกรดเป็นรายปี",
+    "upgradeNow": "อัปเกรดตอนนี้"
+  },
+  "whatsapp": {
+    "biMessages": "ข้อความ BI (ที่ธุรกิจเริ่มต้น)",
+    "birthdayCampaigns": "แคมเปญวันเกิด",
+    "description": "การวิเคราะห์ UI & BI",
+    "feedbackCoupons": "คูปองข้อเสนอแนะ",
+    "festivalCampaigns": "แคมเปญเทศกาล",
+    "homepageCoupons": "คูปองหน้าแรก",
+    "inactiveRecalls": "การเรียกคืนที่ไม่ใช้งาน",
+    "luckyDrawWins": "การชนะการจับฉลาก",
+    "noBiCampaigns": "ยังไม่มีแคมเปญ BI",
+    "noUiActivity": "ยังไม่มีการทำกิจกรรม UI",
+    "title": "WhatsApp",
+    "uiMessages": "ข้อความ UI (ที่ผู้ใช้เริ่มต้น)"
+  }
+}

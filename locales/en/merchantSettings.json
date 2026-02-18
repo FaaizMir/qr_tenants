@@ -1,0 +1,255 @@
+{
+  "batchSelector": {
+    "loading": "Loading...",
+    "noBatchesDescription": "Create a coupon batch first",
+    "noBatchesTitle": "No batches available",
+    "of": "of",
+    "used": "used"
+  },
+  "birthdayRewards": {
+    "actionRequired": "Action Required: Birthday Club",
+    "actionRequiredDescription": "Please select a coupon batch to reward your customers on their birthday.",
+    "birthdayReward": "Birthday Reward",
+    "days": "Days",
+    "daysAfter": "Days After",
+    "daysBefore": "Days Before",
+    "description": "Customers will receive a message with this reward on their special day.",
+    "enableMessage": "Enable Birthday Club to automate your rewards",
+    "saveButton": "Save Birthday Settings",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not update birthday settings. Please try again.",
+    "selected": "Selected",
+    "selectRewardBatch": "Select a reward batch...",
+    "subtitle": "Automatic customer treats",
+    "title": "Birthday Club",
+    "updateSuccess": "Birthday Club Updated",
+    "updateSuccessDescription": "Your birthday automation settings have been saved."
+  },
+  "featureMasterControl": {
+    "active": "Active",
+    "error": "Process Failed",
+    "errorDescription": "Could not synchronize setting. Please check your connection.",
+    "features": {
+      "birthdayMessage": {
+        "description": "Automated rewards on customer birthdays",
+        "label": "Birthday Message"
+      },
+      "facebookReviews": {
+        "description": "Direct link to Facebook Page reviews",
+        "label": "Facebook Reviews"
+      },
+      "festivalCampaign": {
+        "description": "Broadcasts for special holiday events",
+        "label": "Festival Campaign"
+      },
+      "googleReviews": {
+        "description": "Review link to Google Business profile",
+        "label": "Google Reviews"
+      },
+      "inactiveRecall": {
+        "description": "Automatically recall inactive customers",
+        "label": "Inactive Recall"
+      },
+      "instagramReviews": {
+        "description": "Integration with Instagram Business",
+        "label": "Instagram Reviews"
+      },
+      "luckyDraw": {
+        "description": "Gamified reward distribution system",
+        "label": "Lucky Draw"
+      },
+      "paidAds": {
+        "description": "Display image/video banners to users",
+        "label": "Paid Ads"
+      },
+      "presetReviews": {
+        "description": "Preset feedback options for customers",
+        "label": "Preset Reviews"
+      },
+      "scheduledCampaign": {
+        "description": "Scheduled marketing message campaigns",
+        "label": "Scheduled Campaign"
+      },
+      "xiaohongshuReviews": {
+        "description": "Connect with the Red community",
+        "label": "XiaoHongShu Reviews"
+      }
+    },
+    "live": "Live",
+    "paused": "Paused",
+    "subtitle": "Real-time capability control",
+    "success": "{feature} {status}",
+    "successDescription": "Successfully updated your {feature} status.",
+    "title": "Feature Switchboard"
+  },
+  "inactiveRecall": {
+    "actionRequired": "Action Required: Inactive Recall",
+    "actionRequiredDescription": "Please select an incentive coupon to win back inactive customers.",
+    "chooseRecallReward": "Choose recall reward...",
+    "daysOfInactivity": "Days of inactivity",
+    "description": "Customers who haven't visited in a while will get this treat.",
+    "enableMessage": "Enable Win-Back Club to reactivate lapsed customers",
+    "incentiveReward": "Incentive Reward",
+    "recallAfter": "Recall After",
+    "saveButton": "Save Win-Back Settings",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not update recall settings. Please try again.",
+    "selected": "Selected",
+    "subtitle": "Reactivate sleeping customers",
+    "title": "Win-Back Club",
+    "updateSuccess": "Inactive Recall Updated",
+    "updateSuccessDescription": "Your win-back automation settings have been saved."
+  },
+  "main": {
+    "description": "Manage your global engagement, reward mechanisms, and promotional content from a single high-performance dashboard.",
+    "merchantActive": "Merchant Active",
+    "proTip": "Pro Tip",
+    "proTipMessage": "Merging Direct Rewards with powerful Presets creates a high-conversion feedback loop that skyrockets your local SEO.",
+    "status": "Status",
+    "subtitle": "Strategy",
+    "subtitleHighlight": "Control",
+    "tabs": {
+      "automations": "Automations",
+      "campaigns": "Campaigns",
+      "festivalMessages": "Festival Messages",
+      "paidAds": "Paid Ads",
+      "settings": "Settings"
+    },
+    "title": "Merchant Hub",
+    "version": "Version 2.0"
+  },
+  "paidAds": {
+    "14days": "14 Days",
+    "30days": "30 Days",
+    "7days": "7 Days",
+    "active": "Active",
+    "addImage": "Add Image",
+    "addVideo": "Add Video",
+    "adjustImage": "Adjust Image",
+    "adjustImageDescription": "Drag to reposition and use the slider to zoom.",
+    "adPlacement": "Ad Placement",
+    "adPreview": "Ad Preview",
+    "adPreviewDescription": "Full size preview of the promotional ad",
+    "bottom": "Bottom",
+    "cancel": "Cancel",
+    "duration": "Duration",
+    "errorCropping": "Error cropping image",
+    "errorSaving": "Error saving settings",
+    "failedToDelete": "Failed to delete",
+    "imageAds": "Image Ads",
+    "imageDeleted": "Image deleted successfully",
+    "imageRecommendation": "1200x600px recommended",
+    "imageSelected": "Image selected. Click Upload & Save to apply changes.",
+    "left": "Left",
+    "off": "OFF",
+    "pending": "Pending",
+    "right": "Right",
+    "saveImage": "Save Image",
+    "selectDuration": "Select duration",
+    "selectPlacement": "Select placement",
+    "settingsUpdated": "Settings and ad updated successfully",
+    "subtitle": "Visual marketing content",
+    "title": "Promotional Banners",
+    "top": "Top",
+    "uploadAndSave": "Upload & Save",
+    "uploading": "Uploading...",
+    "videoAds": "Video Ads",
+    "videoDeleted": "Video deleted successfully",
+    "videoRecommendation": "MP4, WebM (Max 50MB)",
+    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
+    "videoTooLarge": "Video file is too large. Max size is 50MB.",
+    "zoom": "Zoom"
+  },
+  "platformSettings": {
+    "active": "ACTIVE",
+    "facebookPage": "Facebook Page",
+    "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "Google Reviews",
+    "instagram": "Instagram",
+    "instagramPlaceholder": "https://instagram.com/...",
+    "off": "OFF",
+    "redPlaceholder": "RED Profile URL",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not update platforms. Please try again.",
+    "savePlatforms": "Save Platforms",
+    "subtitle": "Review channels",
+    "title": "Social Connect",
+    "updateSuccess": "Platforms Updated",
+    "updateSuccessDescription": "Your social review links have been updated.",
+    "xiaohongshu": "XiaoHongShu"
+  },
+  "presetReviews": {
+    "active": "Active",
+    "off": "Off",
+    "placeholder": "Positive feedback option...",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not update presets. Please try again.",
+    "savePresets": "Save Presets",
+    "subtitle": "Customer presets",
+    "title": "Quick Feedback",
+    "updateSuccess": "Presets Updated",
+    "updateSuccessDescription": "Your quick review options have been saved."
+  },
+  "rewardStrategy": {
+    "chooseRegularReward": "Choose regular reward...",
+    "directCoupon": "Direct Coupon",
+    "directCouponDescription": "Instant Access",
+    "featureSwitchboard": "Feature Switchboard",
+    "luckyDraw": "Lucky Draw",
+    "luckyDrawDescription": "Gamified Prizes",
+    "luckyDrawTab": "Lucky Draw",
+    "luckyDrawTip": "Configure prizes in the",
+    "managedVia": "Selection is managed via",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not update reward strategy. Please try again.",
+    "saveStrategy": "Save Strategy",
+    "selectCouponBatch": "Please select a Coupon Batch for Direct Rewards.",
+    "selectReward": "Select Reward",
+    "subtitle": "Primary reward",
+    "tab": "tab",
+    "title": "Incentive Engine",
+    "updateSuccess": "Reward Strategy Updated",
+    "updateSuccessDescription": "Your primary reward configuration has been saved."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "Action Required: Scheduled Campaign",
+    "actionRequiredDescription": "Please select a coupon batch to include in your blast.",
+    "active": "Active",
+    "attachCoupon": "Attach Coupon",
+    "audience": "Audience",
+    "audienceOptions": {
+      "active": "Active",
+      "all": "All Users",
+      "firstTime": "First-time",
+      "inactive": "Inactive",
+      "returning": "Returning"
+    },
+    "campaignName": "Campaign Name",
+    "campaignNamePlaceholder": "Ex: Halloween Sale",
+    "campaignScheduled": "Campaign Scheduled",
+    "campaignScheduledDescription": "Your marketing blast has been queued for delivery.",
+    "done": "Done",
+    "incompleteCampaign": "Incomplete Campaign Details",
+    "incompleteCampaignDescription": "Please provide a name, message, and date for your broadcast.",
+    "launchDate": "Launch Date",
+    "message": "Message",
+    "messagePlaceholder": "Hi {name}, ...",
+    "off": "Off",
+    "saveFailed": "Save Failed",
+    "saveFailedDescription": "Could not schedule campaign. Please try again.",
+    "scheduleCampaign": "Schedule Campaign",
+    "selectAudience": "Select",
+    "selectCampaignReward": "Select campaign reward...",
+    "selectDateTime": "Select date & time",
+    "subtitle": "Schedule blasts",
+    "title": "Campaigns"
+  },
+  "stickySaveBar": {
+    "discardChanges": "Discard Changes",
+    "saveAllSettings": "Save All settings",
+    "statusDescription": "Synchronize all your platform rewards and engagement settings",
+    "statusReady": "Reward Strategy Ready",
+    "synchronizing": "Synchronizing..."
+  }
+}

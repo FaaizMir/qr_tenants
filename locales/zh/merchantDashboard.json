@@ -1,0 +1,127 @@
+{
+  "common": {
+    "credits": "积分"
+  },
+  "couponStatus": {
+    "description": "兑换分布",
+    "noCouponsYet": "尚未发放优惠券",
+    "redeemed": "已兑换",
+    "title": "优惠券状态",
+    "unredeemed": "未兑换"
+  },
+  "errors": {
+    "failedToFetchBatches": "无法获取批次",
+    "failedToFetchDashboard": "无法获取仪表板分析",
+    "failedToFetchFee": "获取订阅费用失败：",
+    "failedToFetchWallet": "获取钱包失败"
+  },
+  "feedbacks": {
+    "description": "平台分布",
+    "noDataYet": "尚无反馈数据",
+    "title": "反馈"
+  },
+  "games": {
+    "luckyDrawSpins": "抽奖旋转",
+    "title": "游戏"
+  },
+  "header": {
+    "createNewBatch": "创建新批次",
+    "title": "商户仪表板"
+  },
+  "kpi": {
+    "averageRating": "平均评分",
+    "remainingCredits": "剩余积分",
+    "totalCouponsIssued": "发放的优惠券总数",
+    "totalRedeemed": "已兑换总数",
+    "trendDown": "下",
+    "trendUp": "上"
+  },
+  "metrics": {
+    "creditsUsed": "已使用积分",
+    "expired": "已过期",
+    "issued": "已发放",
+    "messagesSent": "消息已发送",
+    "redeemed": "已兑换",
+    "totalCoupons": "总优惠券",
+    "totalCustomers": "总客户数"
+  },
+  "page": {
+    "breadcrumb": "商户仪表板",
+    "title": "商户仪表板"
+  },
+  "placeholders": {
+    "comingSoon": "设置内容即将推出...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "金额",
+    "code": "代码",
+    "customer": "客户",
+    "hourAgo": "{hours}小时前",
+    "hoursAgo": "{hours}小时前",
+    "minsAgo": "{mins}分钟前",
+    "time": "时间",
+    "title": "最近的兑换"
+  },
+  "retention": {
+    "returningThisMonth": "本月回归",
+    "title": "留存率"
+  },
+  "status": {
+    "active": "活跃",
+    "annual": "年度",
+    "completed": "已完成",
+    "exhausted": "耗尽",
+    "expired": "已过期",
+    "failed": "失败",
+    "inactive": "非活跃",
+    "inProgress": "进行中",
+    "open": "开放",
+    "paid": "已支付",
+    "pending": "待处理",
+    "resolved": "已解决",
+    "temporary": "临时",
+    "unused": "未使用",
+    "used": "已使用"
+  },
+  "tabs": {
+    "analytics": "广告表现",
+    "automation": "自动化",
+    "coupons": "优惠券批次",
+    "feedbackForm": "反馈表单",
+    "overview": "概述",
+    "settings": "设置",
+    "wallet": "钱包"
+  },
+  "topCustomers": {
+    "description": "最活跃用户",
+    "noDataYet": "尚无客户数据",
+    "redeemed": "已兑换",
+    "title": "顶级客户",
+    "visits": "访问"
+  },
+  "upgrade": {
+    "description": "解锁所有功能，包括分析、双向消息传递等。",
+    "errorMissingInfo": "无法继续。缺少费用或管理员信息。",
+    "errorNoSessionUrl": "未返回会话 URL",
+    "errorPaymentFailed": "无法启动支付。请再试一次。",
+    "pricePerYear": "/年",
+    "processing": "处理中...",
+    "title": "升级到年度",
+    "upgradeNow": "立即升级"
+  },
+  "whatsapp": {
+    "biMessages": "商业发起的商业智能消息",
+    "birthdayCampaigns": "生日活动",
+    "description": "用户界面和商业智能分析",
+    "feedbackCoupons": "反馈优惠券",
+    "festivalCampaigns": "节日活动",
+    "homepageCoupons": "首页优惠券",
+    "inactiveRecalls": "未激活召回",
+    "luckyDrawWins": "抽奖获胜",
+    "noBiCampaigns": "尚无BI活动",
+    "noUiActivity": "尚无用户界面活动",
+    "title": "WhatsApp",
+    "uiMessages": "用户发起的用户界面消息"
+  }
+}

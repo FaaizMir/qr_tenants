@@ -2,14 +2,16 @@
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function TableToolbar({
-  placeholder = "Search...",
+  placeholder,
   total = 0,
   onSearchChange,
   className,
   rightSlot,
 }) {
+  const t = useTranslations("common.table");
   return (
     <div
       className={cn(
@@ -21,7 +23,7 @@ export default function TableToolbar({
       <div className="relative flex-1 max-w-md group">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary transition-colors duration-200 group-focus-within:text-secondary" />
         <Input
-          placeholder={placeholder}
+          placeholder={placeholder || t("searchPlaceholder")}
           onChange={(e) => onSearchChange?.(e.target.value)}
           className={cn(
             "pl-10",

@@ -1,0 +1,59 @@
+{
+  "title": "스토어를 강화하세요",
+  "subtitle": "WhatsApp 메시지, 쿠폰 생성 및 유료 광고를 위한 크레딧 패키지를 선택하세요.",
+  "loading": "패키지를 로드하는 중...",
+  "errors": {
+    "loadPackages": "크레딧 패키지를 로드할 수 없습니다. 다시 시도해 주세요.",
+    "noMerchantId": "판매자 ID를 확인할 수 없습니다. 지원팀에 문의하세요.",
+    "purchaseFailed": "패키지 구매에 실패했습니다. 다시 시도해 주세요.",
+    "requestFailed": "요청이 상태 {status}로 실패했습니다."
+  },
+  "emptyState": {
+    "noPackages": "귀하의 판매자 유형에 대한 크레딧 패키지를 찾을 수 없습니다."
+  },
+  "packageTypes": {
+    "coupon": "쿠폰",
+    "whatsappUI": "WhatsApp UI 메시지",
+    "whatsappBI": "WhatsApp BI 메시지",
+    "whatsapp": "WhatsApp 메시지",
+    "paidAds": "유료 광고",
+    "standard": "표준"
+  },
+  "merchantTypes": {
+    "annual": "연간",
+    "temporary": "임시",
+    "standard": "표준"
+  },
+  "packageCard": {
+    "perCredit": "크레딧당",
+    "baseCredits": "{credits} 기본 크레딧",
+    "bonusCredits": "+{bonusCredits} 보너스 크레딧",
+    "enhancedFeatures": "향상된 기능 및 용량",
+    "getStarted": "시작하기"
+  },
+  "checkout": {
+    "title": "주문 개요",
+    "subtitle": "결제 세부정보",
+    "selectedPackage": "선택된 패키지",
+    "premiumDescription": "비즈니스 성장을 위한 프리미엄 크레딧 패키지.",
+    "creditsIncluded": "포함된 크레딧",
+    "bonusGift": "보너스 선물",
+    "packageType": "패키지 유형",
+    "totalAmount": "총액",
+    "securePayment": "안전한 결제",
+    "sslEncrypted": "SSL 암호화 Stripe 게이트웨이",
+    "cardDetails": "카드 세부정보",
+    "paymentInfo": "아래에 결제 정보를 입력하세요.",
+    "amountPayable": "지불 금액",
+    "trustedPartners": "신뢰할 수 있는 파트너",
+    "noSelection": "선택 항목을 찾을 수 없음",
+    "noSelectionMessage": "이 창을 닫고 업그레이드를 진행하려면 크레딧 패키지를 선택하세요."
+  },
+  "success": {
+    "purchaseComplete": "패키지가 성공적으로 구매되었습니다."
+  },
+  "toast": {
+    "purchaseSuccess": "패키지가 성공적으로 구매되었습니다.",
+    "purchaseError": "패키지 구매에 실패했습니다. 다시 시도해 주세요."
+  }
+}

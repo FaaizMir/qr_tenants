@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -26,6 +27,7 @@ import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 export function CouponForm({ open, onOpenChange, merchant, batch }) {
+  const t = useTranslations("Homepage.couponForm");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,30 +52,35 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   };
 
-  const checkCustomerByPhone = useCallback(async (phone) => {
-    if (!phone || phone.length < 8) return;
+  const checkCustomerByPhone = useCallback(
+    async (phone) => {
+      if (!phone || phone.length < 8) return;
+      if (!merchant?.id) return;
 
-    setCheckingPhone(true);
-    try {
-      const res = await axiosInstance.get(
-        `/customers/check-by-phone?phone=${encodeURIComponent(phone)}`,
-      );
+      setCheckingPhone(true);
+      try {
+        const res = await axiosInstance.get(
+          `/customers/check-by-phone?phone=${encodeURIComponent(phone)}&merchant_id=${merchant.id}`,
+        );
 
-      const customerData = res.data?.data;
-      if (customerData?.name) {
-        setFormData((prev) => ({
-          ...prev,
-          phone,
-          name: customerData.name || "",
-          birthday: convertDateToInputFormat(customerData.date_of_birth) || "",
-        }));
+        const customerData = res.data?.data;
+        if (customerData?.name) {
+          setFormData((prev) => ({
+            ...prev,
+            phone,
+            name: customerData.name || "",
+            birthday:
+              convertDateToInputFormat(customerData.date_of_birth) || "",
+          }));
+        }
+      } catch (err) {
+        console.log("Customer lookup failed:", err);
+      } finally {
+        setCheckingPhone(false);
       }
-    } catch (err) {
-      console.log("Customer lookup failed:", err);
-    } finally {
-      setCheckingPhone(false);
-    }
-  }, []);
+    },
+    [merchant],
+  );
 
   useEffect(() => {
     if (debounceTimerRef.current) {
@@ -92,16 +99,16 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.name.trim()) newErrors.name = t("nameRequired");
     if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required";
+      newErrors.phone = t("phoneRequired");
     } else if (!/^\+?[\d\s\-()]+$/.test(formData.phone)) {
-      newErrors.phone = "Invalid phone number format";
+      newErrors.phone = t("phoneInvalid");
     }
     if (!formData.birthday) {
-      newErrors.birthday = "Birthday is required";
+      newErrors.birthday = t("birthdayRequired");
     } else if (new Date(formData.birthday) > new Date()) {
-      newErrors.birthday = "Birthday cannot be in the future";
+      newErrors.birthday = t("birthdayFuture");
     }
 
     setErrors(newErrors);
@@ -123,15 +130,15 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
         date_of_birth: `${day}-${month}-${year}`,
       });
 
-      toast.success("Coupon sent successfully! Check your WhatsApp.");
+      toast.success(t("successToast"));
       setSuccess(true);
     } catch (err) {
       const errorData = err.response?.data;
       const errorMessage = errorData?.errors
         ? Object.values(errorData.errors).flat().join(", ")
         : errorData?.message ||
-        errorData?.error ||
-        "Failed to issue coupon. Please try again.";
+          errorData?.error ||
+          t("errorDefault");
 
       toast.error(errorMessage);
     } finally {
@@ -162,7 +169,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
               <Gift className="h-6 w-6 text-primary" />
-              Get Your Coupon
+              {t("title")}
             </DialogTitle>
             <DialogDescription asChild>
               <div>
@@ -173,13 +180,13 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
                     </span>
                     {batch?.discount_percentage && (
                       <span className="ml-2 text-primary font-bold">
-                        {batch.discount_percentage}% OFF
+                        {t("discount", { percentage: batch.discount_percentage })}
                       </span>
                     )}
                   </div>
                 )}
                 <div className="mt-1 text-sm text-slate-600">
-                  From {merchant?.name || "Merchant"}
+                  {t("from", { merchantName: merchant?.name || "Merchant" })}
                 </div>
               </div>
             </DialogDescription>
@@ -190,13 +197,13 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
           <div className="py-12 text-center">
             <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-slate-900 mb-2">
-              Coupon Issued Successfully!
+              {t("successTitle")}
             </h3>
             <p className="text-slate-600 mb-6">
-              Your coupon has been sent to your phone via WhatsApp.
+              {t("successMessage")}
             </p>
             <Button onClick={handleClose} className="w-full">
-              Close
+              {t("close")}
             </Button>
           </div>
         ) : (
@@ -205,7 +212,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
               label={
                 <span className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  Phone Number
+                  {t("phoneNumber")}
                 </span>
               }
               required
@@ -214,7 +221,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
               onChange={(value) => handleChange("phone", value || "")}
               disabled={loading}
               isLoading={checkingPhone}
-              placeholder="Enter phone number"
+              placeholder={t("phonePlaceholder")}
               className="mb-0"
               error={errors.phone}
             />
@@ -222,11 +229,11 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
             <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Full Name <span className="text-red-500">*</span>
+                {t("fullName")} <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="name"
-                placeholder="Enter your full name"
+                placeholder={t("namePlaceholder")}
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
                 className={errors.name ? "border-red-500" : ""}
@@ -240,7 +247,7 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
             <div className="space-y-2">
               <Label htmlFor="birthday" className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                Birthday <span className="text-red-500">*</span>
+                {t("birthday")} <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="birthday"
@@ -263,11 +270,11 @@ export function CouponForm({ open, onOpenChange, merchant, batch }) {
                 onClick={handleClose}
                 disabled={loading}
               >
-                Cancel
+                {t("cancel")}
               </Button>
               <Button type="submit" disabled={loading} className="gap-2">
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                {loading ? "Issuing..." : "Get Coupon"}
+                {loading ? t("issuing") : t("getCoupon")}
               </Button>
             </DialogFooter>
           </form>

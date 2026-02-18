@@ -1,15 +1,30 @@
 {
-  "description": "安全的多租户工作区，供代理和商户使用。\n从一个地方查看仪表板、发放优惠券并跟踪客户反馈。",
-  "description2": "使用您的代理或商户凭据继续。",
-  "forgotPassword": "忘记密码？",
-  "heading1": "登录以启动二维码反馈、优惠券和WhatsApp提醒。",
-  "label1": "二维码反馈在几秒钟内",
-  "label2": "WhatsApp 跟进准备好了",
-  "label3": "租户隔离与安全",
-  "label4": "用户名",
-  "label5": "密码",
-  "qrReview": "二维码审核SaaS",
-  "registerAgent": "注册为代理人",
+  "qrReview": "QR REVIEW SAAS",
+  "heading1": "登录以启动 QR 反馈、优惠券和 WhatsApp 提醒。",
+  "description": "为代理和商家提供安全的多租户工作空间。从一个地方查看仪表板、发放优惠券并跟踪客户反馈。",
+  "label1": "QR 反馈",
+  "label2": "WhatsApp 自动化",
+  "label3": "安全且已验证",
+  "welcome": "欢迎回来",
   "signin": "登录",
-  "welcome": "欢迎回来"
+  "description2": "输入您的凭据以访问您的仪表板",
+  "label4": "用户名或电子邮件",
+  "label5": "密码",
+  "forgotPassword": "忘记密码？",
+  "noAccount": "没有账户？",
+  "signupLink": "在此注册",
+  "placeholders": {
+    "username": "输入您的用户名或电子邮件",
+    "password": "输入您的密码",
+    "loadingText": "登录中...",
+    "submitLoading": "登录"
+  },
+  "validations": {
+    "error1": "无效的用户名或密码",
+    "error2": "出了点问题。请重试。",
+    "invalidCredentials": "无效的电子邮件或密码。请检查您的凭据。",
+    "accountInactive": "您的账户未激活。请联系您的代理。",
+    "unableToDetermineRole": "无法确定用户角色",
+    "credentialsSignin": "无效的电子邮件或密码。请检查您的凭据。"
+  }
 }

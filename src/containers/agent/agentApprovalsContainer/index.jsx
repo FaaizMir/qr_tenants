@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { getImageUrl } from "@/lib/utils/imageUtils";
+import Image from "next/image";
 
 export default function AgentApprovalsContainer() {
   const { data: session } = useSession();
@@ -28,6 +30,7 @@ export default function AgentApprovalsContainer() {
   });
 
   const handlePreview = (type, url) => {
+    console.log("Opening preview - Type:", type, "URL:", url);
     setPreviewContent({ type, url });
     setIsPreviewOpen(true);
   };
@@ -50,13 +53,12 @@ export default function AgentApprovalsContainer() {
         // Map API response to table shape
         const mappedData = items.map((item) => {
           const settings = item.merchant?.settings || {};
-          const isVideo = settings.paid_ad_video_status;
+          const isVideo = item.ad_type === "video";
           const relativePath = isVideo
             ? settings.paid_ad_video
             : settings.paid_ad_image;
 
           let fullImageUrl = null;
-
           if (relativePath) {
             if (
               relativePath.startsWith("http") ||
@@ -64,22 +66,15 @@ export default function AgentApprovalsContainer() {
             ) {
               fullImageUrl = relativePath;
             } else {
-              let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-              // Remove trailing '/v1' if present
-              baseUrl = baseUrl.replace(/\/v1\/?$/, "");
-              // Ensure no double slashes
-              const cleanBase = baseUrl.replace(/\/+$/, "");
-              const cleanPath = relativePath.replace(/^\/+/, "");
-              fullImageUrl = `${cleanBase}/${cleanPath}`;
+              fullImageUrl = getImageUrl(relativePath);
             }
           }
 
-          console.log("Ad Preview URL:", fullImageUrl);
           return {
             id: item.id,
             name: item.merchant?.business_name || "N/A",
             email: item.merchant?.user?.email || null,
-            adImage: fullImageUrl, // keeping key name for compatibility or renaming to adUrl
+            adImage: fullImageUrl,
             adType: isVideo ? "video" : "image",
             approvalType: item.approval_type,
             location:
@@ -91,10 +86,12 @@ export default function AgentApprovalsContainer() {
               ? new Date(item.created_at).toLocaleDateString()
               : "N/A",
             onPreview: handlePreview,
+            merchant_type: item.merchant?.merchant_type ?? "—",
+            paid_ad_placement:
+              item.merchant?.settings?.paid_ad_placement ?? "—",
             raw: item,
           };
         });
-
         setData(mappedData);
       } catch (error) {
         console.error("Error fetching approvals:", error);
@@ -106,29 +103,34 @@ export default function AgentApprovalsContainer() {
     fetchApprovals();
   }, [adminId]);
 
-  const handleStatusUpdate = async (id, newStatus) => {
-    const action = newStatus ? "approve" : "reject";
-    try {
-      await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
-        id: id,
-        approval_status: newStatus,
-      });
+  const handleStatusUpdate =
+    (async (id, newStatus) => {
+      const action = newStatus ? "approve" : "reject";
+      try {
+        await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
+          id: id,
+          approval_status: newStatus,
+        });
 
-      // Update local state to reflect change immediately
-      setData((prevData) =>
-        prevData.map((item) =>
-          item.id === id ? { ...item, status: newStatus } : item,
-        ),
-      );
+        // Update local state to reflect change immediately
+        setData((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, status: newStatus } : item,
+          ),
+        );
 
-      return true;
-    } catch (error) {
-      console.error(`Error ${action}ing approval:`, error);
-      throw error; // Re-throw so the UI can handle it
-    }
-  };
+        return true;
+      } catch (error) {
+        console.error(`Error ${action}ing approval:`, error);
+        throw error; // Re-throw so the UI can handle it
+      }
+    },
+    [adminId]);
 
-  const columns = useMemo(() => getApprovalColumns(handleStatusUpdate), []);
+  const columns = useMemo(
+    () => getApprovalColumns(handleStatusUpdate),
+    [handleStatusUpdate],
+  );
 
   return (
     <div className="space-y-6">
@@ -138,9 +140,7 @@ export default function AgentApprovalsContainer() {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>All Approvals</CardTitle>
-        </CardHeader>
+        <CardHeader></CardHeader>
         <CardContent>
           <DataTable
             data={data}
@@ -164,18 +164,29 @@ export default function AgentApprovalsContainer() {
           </DialogDescription>
           <div className="relative flex items-center justify-center p-4">
             {previewContent.type === "image" ? (
-              <img
+              <Image
                 src={previewContent.url}
                 alt="Ad Preview"
                 className="max-w-full max-h-[80vh] object-contain rounded-xl"
               />
             ) : (
               <video
-                src={previewContent.url}
+                key={previewContent.url}
                 controls
                 autoPlay
-                className="max-w-full max-h-full rounded-xl shadow-md bg-black"
-              />
+                className="max-w-full max-h-[80vh] rounded-xl shadow-md bg-black"
+                style={{ minHeight: "300px" }}
+                onError={(e) => {
+                  console.error("Video load error:", e);
+                  console.error("Video URL that failed:", previewContent.url);
+                }}
+                onLoadStart={() => console.log("Video loading started...")}
+                onCanPlay={() => console.log("Video can play now")}
+              >
+                <source src={previewContent.url} type="video/mp4" />
+                <source src={previewContent.url} type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
             )}
             <Button
               variant="secondary"

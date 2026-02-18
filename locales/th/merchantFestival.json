@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "การดำเนินการ",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "openMenu": "เปิดเมนู",
+    "viewDetails": "ดูรายละเอียด"
+  },
+  "active": "ใช้งาน",
+  "allStatus": "สถานะทั้งหมด",
+  "columns": {
+    "actions": "การกระทำ",
+    "coupon": "คูปอง",
+    "festivalDate": "วันที่เทศกาล",
+    "festivalName": "ชื่อเทศกาล",
+    "message": "ข้อความ",
+    "no": "ไม่",
+    "noMessage": "ไม่มีข้อความ",
+    "none": "ไม่มี",
+    "recurring": "เกิดซ้ำ",
+    "status": "สถานะ",
+    "yes": "ใช่"
+  },
+  "deleteDialog": {
+    "cancel": "ยกเลิก",
+    "confirmDescription": "การกระทำนี้ไม่สามารถย้อนกลับได้ จะลบข้อความเทศกาล \"{festivalName}\" อย่างถาวรและลบออกจากเซิร์ฟเวอร์",
+    "confirmTitle": "คุณแน่ใจหรือไม่?",
+    "delete": "ลบ",
+    "deleting": "กำลังลบ...",
+    "description": "คุณแน่ใจหรือว่าต้องการลบ \"{festivalName}\"? การกระทำนี้ไม่สามารถย้อนกลับได้",
+    "title": "ลบข้อความเทศกาล"
+  },
+  "details": {
+    "back": "กลับ",
+    "backToList": "กลับไปที่ข้อความเทศกาล",
+    "couponBatchId": "รหัสชุดคูปอง",
+    "createdAt": "สร้างเมื่อ",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "festivalDate": "วันที่เทศกาล",
+    "festivalMessage": "ข้อความเทศกาล",
+    "invalidDate": "วันที่ไม่ถูกต้อง",
+    "lastUpdated": "อัปเดตล่าสุด",
+    "messageDetails": "รายละเอียดข้อความ",
+    "na": "ไม่มีข้อมูล",
+    "notFound": "ไม่พบข้อความเทศกาล",
+    "recurringYearly": "เกิดขึ้นทุกปี",
+    "scheduleInfo": "กำหนดเวลา & ข้อมูล",
+    "status": "สถานะ"
+  },
+  "enableTooltip": "เปิดใช้งาน \"แคมเปญเทศกาล\" ในสวิตช์ฟีเจอร์เพื่อสร้างคำทักทาย",
+  "errors": {
+    "failedToCreate": "สร้างข้อความเทศกาลไม่สำเร็จ",
+    "failedToDelete": "ลบข้อความเทศกาลไม่สำเร็จ",
+    "failedToLoad": "ไม่สามารถโหลดข้อความเทศกาลได้",
+    "failedToLoadDetails": "ไม่สามารถโหลดรายละเอียดข้อความเทศกาลได้",
+    "failedToUpdate": "ไม่สามารถอัปเดตข้อความเทศกาลได้"
+  },
+  "featureDisabled": "ข้อความเทศกาลถูกปิดใช้งานในขณะนี้ เปิดใช้งานฟีเจอร์ใน",
+  "featureDisabledSuffix": "ด้านบนเพื่อสร้างคำทักทายใหม่",
+  "featureSwitchboard": "สวิตช์ฟีเจอร์",
+  "form": {
+    "activeStatus": "สถานะที่ใช้งาน",
+    "cancel": "ยกเลิก",
+    "couponBatch": "ชุดคูปอง (ไม่บังคับ)",
+    "createButton": "สร้างข้อความเทศกาล",
+    "createDescription": "กรอกข้อมูลเพื่อกำหนดเวลาข้อความเทศกาลใหม่",
+    "createTitle": "สร้างข้อความเทศกาลใหม่",
+    "editDescription": "อัปเดตรายละเอียดข้อความเทศกาลของคุณด้านล่าง",
+    "editTitle": "แก้ไขข้อความเทศกาล",
+    "festivalDate": "วันที่เทศกาล",
+    "festivalMessage": "ข้อความเทศกาล",
+    "festivalMessagePlaceholder": "สวัสดี '{name}' ขอให้คุณมีเทศกาลที่มีความสุขจาก '{business_name}'...",
+    "festivalName": "ชื่อเทศกาล",
+    "festivalNamePlaceholder": "เช่น: ดิว่ารี, คริสต์มาส, ปีใหม่",
+    "messageActive": "ข้อความใช้งานอยู่",
+    "messageInactive": "ข้อความไม่ทำงาน",
+    "oneTimeMessage": "ข้อความครั้งเดียว",
+    "personalizationHint": "ใช้ '{name}' และ '{business_name}' เพื่อปรับแต่งข้อความ",
+    "recurringYearly": "เกิดขึ้นปีละครั้ง",
+    "repeatsEveryYear": "เกิดซ้ำทุกปี",
+    "required": "*",
+    "save": "บันทึก",
+    "saving": "กำลังบันทึก...",
+    "selectCouponBatch": "เลือกชุดคูปอง...",
+    "updateButton": "อัปเดตข้อความเทศกาล"
+  },
+  "inactive": "ไม่ทำงาน",
+  "newGreeting": "คำทักทายใหม่",
+  "searchPlaceholder": "ค้นหาตามชื่อเทศกาล...",
+  "subtitle": "กำหนดเวลาคำทักทายส่วนบุคคลสำหรับการเฉลิมฉลองวันหยุด",
+  "success": {
+    "created": "สร้างข้อความเทศกาลเรียบร้อยแล้ว",
+    "deleted": "ลบข้อความเทศกาลเรียบร้อยแล้ว",
+    "updated": "อัปเดตข้อความเทศกาลเรียบร้อยแล้ว"
+  },
+  "title": "ข้อความเทศกาล",
+  "validation": {
+    "allFieldsRequired": "ชื่อเทศกาล ข้อความ และวันที่จำเป็นต้องระบุ"
+  }
+}

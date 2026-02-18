@@ -1,22 +1,53 @@
 {
-  "allMerchants": "所有商家",
-  "addMerchant": "添加商家",
-  "merchantReports": "商家报告",
-  "allSubscriptions": "所有订阅",
-  "activePlans": "活跃计划",
-  "paymentHistory": "支付历史",
-  "allAgents": "所有代理",
-  "agentPoints": "代理积分",
-  "agentReports": "代理报告",
-  "allFeedbacks": "所有反馈",
-  "pendingReview": "待审核",
-  "feedbackAnalytics": "反馈分析",
-  "allCoupons": "所有优惠券",
-  "redeemedCoupons": "已兑换优惠券",
-  "couponAnalytics": "优惠券分析",
-  "revenueAnalytics": "收入分析",
-  "userAnalytics": "用户分析",
-  "generalSettings": "常规设置",
-  "paymentSettings": "支付设置",
-  "systemSettings": "系统设置"
+  "agent": {
+    "approvals": "审批",
+    "couponsync": "优惠券同步",
+    "dashboard": "仪表板",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "代理管理员",
+    "earnings": "收益",
+    "logs": "日志",
+    "merchants": "商户",
+    "statements": "声明",
+    "support": "支持",
+    "wallet": "钱包"
+  },
+  "brand": {
+    "name": "二维码扫描仪"
+  },
+  "common": {
+    "account": "账户",
+    "home": "首页",
+    "logout": "登出",
+    "platform": "平台",
+    "toggleSidebar": "切换侧边栏"
+  },
+  "masterAdmin": {
+    "agents": "代理",
+    "approvals": "审批",
+    "commission": "佣金",
+    "dashboard": "仪表板",
+    "logs": "日志",
+    "merchants": "商家",
+    "packages": "套餐",
+    "settings": "设置",
+    "staff": "员工",
+    "statements": "声明",
+    "support": "支持"
+  },
+  "merchant": {
+    "campaigns": "活动",
+    "coupons": "优惠券",
+    "customerData": "客户数据",
+    "dashboard": "仪表板",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "商户用户",
+    "logs": "系统日志",
+    "luckyDraw": "幸运抽奖",
+    "purchase": "购买",
+    "serialCodes": "序列码",
+    "statements": "声明",
+    "support": "支持",
+    "wallet": "钱包"
+  }
 }

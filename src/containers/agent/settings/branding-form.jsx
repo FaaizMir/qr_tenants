@@ -8,12 +8,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { UploadCloud, Palette, MessageCircle, FileText, Globe, Smartphone, Mail, CreditCard, LayoutTemplate } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { toast } from "@/lib/toast";
 import { Switch } from "@/components/ui/switch";
 
 export function BrandingForm() {
-    const t = useTranslations("agent.settings");
     const [loading, setLoading] = useState(false);
 
     // Default / Mock State

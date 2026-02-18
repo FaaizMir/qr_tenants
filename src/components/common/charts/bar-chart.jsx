@@ -2,20 +2,33 @@
 
 import React from "react";
 
-export default function BarChart({ data = [], labels = [], color = "#06b6d4", colors = [] }) {
+export default function BarChart({
+    data = [],
+    labels = [],
+    color = "#06b6d4",
+    colors = [],
+    showValue = true,
+    valuePrefix = "",
+    valueSuffix = "",
+    height = "220px"
+}) {
     if (!data || data.length === 0) return <div className="text-muted-foreground">No data</div>;
 
     const max = Math.max(...data);
 
     return (
-        <div className="w-full h-[220px] flex items-end gap-3 px-2">
+        <div className="w-full flex items-end gap-3 px-2" style={{ height }}>
             {data.map((d, i) => {
                 const heightPct = Math.max(6, Math.round((d / (max || 1)) * 100));
                 const barColor = colors?.[i] || color;
                 const darker = shadeColor(barColor, -12);
                 return (
                     <div key={i} className="flex-1 flex flex-col items-center">
-                        <div className="text-sm font-medium text-muted-foreground mb-2">{d}%</div>
+                        {showValue && (
+                            <div className="text-[10px] font-bold text-muted-foreground mb-1.5">
+                                {valuePrefix}{d.toLocaleString()}{valueSuffix}
+                            </div>
+                        )}
                         <div className="w-full bg-slate-100 rounded-md overflow-hidden h-full flex items-end" style={{ height: `${heightPct}%` }}>
                             <div
                                 className="w-full rounded-md shadow-inner"

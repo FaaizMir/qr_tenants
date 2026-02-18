@@ -1,0 +1,59 @@
+{
+  "title": "Kuasakan Kedai Anda",
+  "subtitle": "Pilih pakej kredit untuk mesej WhatsApp, penciptaan kupon, dan iklan berbayar.",
+  "loading": "Memuatkan pakej...",
+  "errors": {
+    "loadPackages": "Tidak dapat memuatkan pakej kredit. Sila cuba lagi.",
+    "noMerchantId": "Tidak dapat menentukan ID pedagang. Sila hubungi sokongan.",
+    "purchaseFailed": "Gagal membeli pakej. Sila cuba lagi.",
+    "requestFailed": "Permintaan gagal dengan status {status}."
+  },
+  "emptyState": {
+    "noPackages": "Tiada pakej kredit ditemui untuk jenis pedagang anda."
+  },
+  "packageTypes": {
+    "coupon": "Kupon",
+    "whatsappUI": "Mesej WhatsApp UI",
+    "whatsappBI": "Mesej WhatsApp BI",
+    "whatsapp": "Mesej WhatsApp",
+    "paidAds": "Iklan Berbayar",
+    "standard": "Standard"
+  },
+  "merchantTypes": {
+    "annual": "Tahunan",
+    "temporary": "Sementara",
+    "standard": "Standard"
+  },
+  "packageCard": {
+    "perCredit": "setiap kredit",
+    "baseCredits": "{credits} Kredit Asas",
+    "bonusCredits": "+{bonusCredits} Kredit Bonus",
+    "enhancedFeatures": "Ciri dan kapasiti yang dipertingkatkan",
+    "getStarted": "Mulakan"
+  },
+  "checkout": {
+    "title": "Ringkasan Pesanan",
+    "subtitle": "Butiran pembayaran",
+    "selectedPackage": "Pakej Terpilih",
+    "premiumDescription": "Pakej kredit premium untuk pertumbuhan perniagaan anda.",
+    "creditsIncluded": "Kredit Termasuk",
+    "bonusGift": "Hadiah Bonus",
+    "packageType": "Jenis Pakej",
+    "totalAmount": "Jumlah Keseluruhan",
+    "securePayment": "Pembayaran Selamat",
+    "sslEncrypted": "Gerbang Stripe Disulitkan SSL",
+    "cardDetails": "Butiran Kad",
+    "paymentInfo": "Sila masukkan maklumat pembayaran anda di bawah.",
+    "amountPayable": "Jumlah Yang Perlu Dibayar",
+    "trustedPartners": "Rakan Kongsi Dipercayai",
+    "noSelection": "Tiada pilihan ditemui",
+    "noSelectionMessage": "Sila tutup tetingkap ini dan pilih pakej kredit untuk meneruskan peningkatan anda."
+  },
+  "success": {
+    "purchaseComplete": "Pakej berjaya dibeli."
+  },
+  "toast": {
+    "purchaseSuccess": "Pakej berjaya dibeli.",
+    "purchaseError": "Gagal membeli pakej. Sila cuba lagi."
+  }
+}

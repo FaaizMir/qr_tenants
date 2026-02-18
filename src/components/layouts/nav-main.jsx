@@ -49,10 +49,10 @@ export function NavMain({ items }) {
   const rotateClass = isRTL
     ? "group-data-[state=open]/collapsible:rotate-[-90deg]"
     : "group-data-[state=open]/collapsible:rotate-90";
-  const tMerchant = useTranslations("dashboard.merchantSidebar");
+  const t = useTranslations("sidebar.common");
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{tMerchant("platform")}</SidebarGroupLabel>
+      <SidebarGroupLabel>{t("platform")}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           if (item.items && item.items.length > 0) {

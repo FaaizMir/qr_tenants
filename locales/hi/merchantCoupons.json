@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "बैच का नाम",
+      "couponCode": "कूपन कोड",
+      "expiryDate": "समाप्ति तिथि",
+      "issuedAt": "जारी किया गया",
+      "redeemedAt": "भुनाया गया",
+      "startDate": "शुरुआत की तारीख",
+      "status": "स्थिति"
+    },
+    "copiedToClipboard": "क्लिपबोर्ड पर कॉपी किया गया",
+    "createCoupon": "कूपन बनाएं",
+    "notRedeemed": "नहीं भुनाया गया",
+    "searchPlaceholder": "कूपन खोजें...",
+    "subtitle": "सभी उत्पन्न कूपनों को देखें और प्रबंधित करें",
+    "title": "सभी कूपन"
+  },
+  "breadcrumbs": {
+    "couponBatches": "कूपन बैच",
+    "coupons": "कूपन",
+    "createCouponBatch": "कूपन बैच बनाएं",
+    "detail": "विवरण",
+    "merchantDashboard": "व्यापारी डैशबोर्ड"
+  },
+  "create": {
+    "annual": "वार्षिक",
+    "batchName": "बैच का नाम",
+    "batchNamePlaceholder": "जैसे, समर सेल 2024",
+    "batchType": "बैच प्रकार",
+    "cancelButton": "रद्द करें",
+    "createButton": "बैच बनाएं",
+    "endDate": "समाप्ति तिथि",
+    "form": {
+      "batchName": "बैच का नाम",
+      "batchNamePlaceholder": "जैसे: समर प्रमो 2024",
+      "description": "अपने कूपन पैरामीटर कॉन्फ़िगर करें (सीमाएँ स्वचालित रूप से लागू होती हैं)",
+      "endDate": "समाप्ति तिथि",
+      "generateBatch": "बैच उत्पन्न करें",
+      "generatingCodes": "कोड उत्पन्न कर रहा है...",
+      "halalCertified": "हलाल प्रमाणित",
+      "halalDescription": "हलाल मानकों के अनुपालन को इंगित करें",
+      "quantity": "मात्रा",
+      "startDate": "आरंभ तिथि",
+      "template": "टेम्पलेट",
+      "title": "बैच विवरण"
+    },
+    "guidance": "मार्गदर्शन",
+    "isActive": "सक्रिय",
+    "limits": {
+      "annual": "वार्षिक सीमा: 1000 कूपन",
+      "quantityLimit": "सीमा: {max} कोड",
+      "quantityLimitAnnual": "सीमित: {max} कोड (वार्षिक)",
+      "quantityLimitTemporary": "सीमित: {max} कोड (अस्थायी)",
+      "temporary": "अस्थायी सीमा: 100 कूपन"
+    },
+    "merchantType": {
+      "annual": "वार्षिक व्यापारी",
+      "temporary": "अस्थायी व्यापारी"
+    },
+    "quantity": "मात्रा",
+    "quantityPlaceholder": "कूपनों की संख्या",
+    "selectBatchType": "बैच प्रकार चुनें",
+    "startDate": "शुरू तिथि",
+    "temporary": "अस्थायी",
+    "title": "कूपन बैच बनाएं",
+    "updateButton": "बैच अपडेट करें"
+  },
+  "detail": {
+    "active": "सक्रिय",
+    "batchIdNotAvailable": "बैच आईडी उपलब्ध नहीं है",
+    "code": "कोड",
+    "columns": {
+      "code": "कोड",
+      "issuedAt": "जारी किया गया",
+      "redemptionDate": "भुनाने की तिथि",
+      "status": "स्थिति"
+    },
+    "copiedToClipboard": "क्लिपबोर्ड पर कॉपी किया गया",
+    "couponsInBatch": "बैच में कूपन",
+    "downloadPdf": "पीडीएफ डाउनलोड करें",
+    "editContent": "सामग्री संपादित करें",
+    "end": "समाप्त:",
+    "exportPdf": "पीडीएफ निर्यात करें",
+    "failedToDownloadPdf": "पीडीएफ डाउनलोड करने में विफल",
+    "failedToLoadCoupons": "कूपन लोड करने में विफल",
+    "fetchingPdf": "PDF प्राप्त कर रहा है...",
+    "filters": {
+      "allStatus": "सभी स्थिति",
+      "issued": "जारी किया गया",
+      "redeemed": "भुनाया गया"
+    },
+    "inactive": "निष्क्रिय",
+    "issuedAt": "जारी किया गया",
+    "issuedQuantity": "जारी की गई मात्रा",
+    "loadingBatch": "बैच जानकारी लोड हो रही है...",
+    "noPdfData": "कोई पीडीएफ डेटा प्राप्त नहीं हुआ",
+    "notRedeemed": "नहीं भुनाया गया",
+    "pdfDownloadedSuccessfully": "पीडीएफ सफलतापूर्वक डाउनलोड किया गया",
+    "redemptionDate": "रिडेम्प्शन तिथि",
+    "searchCode": "कोड खोजें...",
+    "searchPlaceholder": "कोड खोजें...",
+    "start": "शुरू:",
+    "stats": {
+      "end": "समाप्त:",
+      "issuedQuantity": "जारी की गई मात्रा",
+      "start": "शुरू:",
+      "totalQuantity": "कुल मात्रा",
+      "utilized": "% उपयोग किया गया",
+      "validity": "वैधता"
+    },
+    "status": "स्थिति",
+    "title": "बैच विवरण",
+    "totalQuantity": "कुल मात्रा",
+    "utilized": "उपयोग किया गया",
+    "validity": "वैधता"
+  },
+  "errors": {
+    "batchNameRequired": "बैच नाम आवश्यक है",
+    "endDateMustBeAfterStart": "समाप्ति तिथि शुरू तिथि के बाद होनी चाहिए",
+    "endDateRequired": "समाप्ति तिथि आवश्यक है",
+    "failedToCreateBatch": "कूपन बैच बनाने में विफल",
+    "failedToCreateCouponBatch": "कूपन बैच बनाने में विफल।",
+    "failedToDeleteCouponBatch": "कूपन बैच हटाने में विफल",
+    "failedToDownloadPdf": "पीडीएफ डाउनलोड करने में विफल",
+    "failedToLoadCoupons": "कूपन लोड करने में विफल",
+    "failedToLoadCouponsBatches": "कूपन बैच लोड करने में विफल",
+    "failedToUpdateBatch": "कूपन बैच अपडेट करने में विफल",
+    "quantityMustBePositive": "मात्रा एक सकारात्मक संख्या होनी चाहिए",
+    "quantityRequired": "मात्रा आवश्यक है",
+    "startDateRequired": "शुरू तिथि आवश्यक है"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "कूपन विकल्प",
+      "delete": "हटाएँ",
+      "details": "विवरण"
+    },
+    "allStatus": "सभी स्थिति",
+    "breadcrumb": "कूपन",
+    "columnNames": {
+      "actions": "क्रियाएँ",
+      "batchName": "बैच नाम",
+      "batchType": "बैच प्रकार",
+      "isActive": "सक्रिय है",
+      "status": "स्थिति",
+      "type": "प्रकार",
+      "usage": "उपयोग",
+      "validity": "वैधता"
+    },
+    "columns": {
+      "actions": "क्रियाएँ",
+      "batchName": "बैच नाम",
+      "status": "स्थिति",
+      "type": "प्रकार",
+      "usage": "उपयोग",
+      "validity": "वैधता"
+    },
+    "createBatch": "बैच बनाएं",
+    "deleteDialog": {
+      "cancel": "रद्द करें",
+      "confirm": "हटाएँ",
+      "description": "यह क्रिया पूर्ववत नहीं की जा सकती। यह स्थायी रूप से हटा देगा",
+      "title": "क्या कूपन बैच हटाएं?"
+    },
+    "exportPdf": "PDF निर्यात करें",
+    "issued": "जारी किया गया",
+    "redeemed": "रिडीम किया गया",
+    "searchPlaceholder": "बैच खोजें...",
+    "status": {
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय"
+    },
+    "subtitle": "अपने छूट कूपनों का प्रबंधन करें",
+    "title": "कूपन बैच",
+    "usage": {
+      "issued": "{count} जारी किए गए",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "से:",
+      "to": "से:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "कूपन बैच सफलतापूर्वक बनाया गया!",
+    "batchDeleted": "कूपन बैच हटा दिया गया",
+    "batchIdNotAvailable": "बैच आईडी उपलब्ध नहीं है",
+    "copiedToClipboard": "क्लिपबोर्ड में कॉपी किया गया",
+    "fetchingPdf": "पीडीएफ प्राप्त कर रहा है...",
+    "noPdfData": "कोई पीडीएफ डेटा प्राप्त नहीं हुआ",
+    "pdfDownloadedSuccessfully": "PDF सफलतापूर्वक डाउनलोड किया गया",
+    "unableToDetermineMerchantId": "व्यापारी आईडी निर्धारित करने में असमर्थ। कृपया सहायता से संपर्क करें।",
+    "uploadBrandImage": "कृपया टेम्पलेट संपादक में एक ब्रांड छवि अपलोड करें।"
+  },
+  "success": {
+    "batchCreated": "कूपन बैच सफलतापूर्वक बनाया गया",
+    "batchUpdated": "कूपन बैच सफलतापूर्वक अपडेट किया गया"
+  },
+  "template": {
+    "chooseTemplate": "एक टेम्पलेट चुनें",
+    "editContent": "सामग्री संपादित करें",
+    "editor": {
+      "brandImage": "ब्रांड छवि",
+      "brandImageMandatory": "ब्रांड छवि अनिवार्य है",
+      "cancel": "रद्द करें",
+      "changeImage": "छवि बदलें",
+      "contentUpdatedSuccessfully": "सामग्री सफलतापूर्वक अपडेट की गई",
+      "description": "विवरण",
+      "descriptionPlaceholder": "प्रस्ताव विवरण का वर्णन करें...",
+      "done": "हो गया",
+      "failedToSaveContent": "सामग्री को सहेजने में विफल",
+      "header": "शीर्षक",
+      "headerPlaceholder": "जैसे विशेष प्रस्ताव",
+      "requiredForAllTemplates": "सभी टेम्पलेट्स के लिए आवश्यक",
+      "title": "टेम्पलेट सामग्री संपादित करें",
+      "titleField": "शीर्षक",
+      "titlePlaceholder": "जैसे 50% छूट",
+      "updateDescription": "ब्रांड छवि, शीर्षक, शीर्षक और विवरण अपडेट करें। परिवर्तन लाइव पूर्वावलोकन करें।",
+      "uploadBrandImage": "ब्रांड छवि अपलोड करें"
+    },
+    "hoverToPreview": "पूर्वावलोकन के लिए होवर करें या खोलने के लिए क्लिक करें",
+    "loadingTemplates": "टेम्पलेट लोड हो रहे हैं…",
+    "preview": "पूर्वावलोकन",
+    "previewModal": {
+      "readOnlyPreview": "केवल पढ़ने के लिए पूर्वावलोकन",
+      "title": "टेम्पलेट पूर्वावलोकन"
+    },
+    "selected": "चुना हुआ",
+    "templateLocked": "अस्थायी योजना के लिए टेम्पलेट लॉक किया गया"
+  }
+}

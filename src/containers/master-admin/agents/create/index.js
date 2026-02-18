@@ -1,11 +1,8 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { AgentForm } from "./agent-form";
 
 export default function CreateAgentContainer() {
-  const t = useTranslations("agent.merchants");
-
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6 lg:p-4">
       <div className="flex flex-col gap-2">

@@ -1,0 +1,126 @@
+{
+  "common": {
+    "credits": "क्रेडिट"
+  },
+  "couponStatus": {
+    "description": "रिडेम्पशन वितरण",
+    "noCouponsYet": "अभी तक कोई कूपन जारी नहीं किए गए",
+    "redeemed": "भुनाए गए",
+    "title": "कूपन स्थिति",
+    "unredeemed": "अरिडीम्ड"
+  },
+  "errors": {
+    "failedToFetchBatches": "बैच लाने में विफल",
+    "failedToFetchDashboard": "डैशबोर्ड एनालिटिक्स लाने में विफल",
+    "failedToFetchFee": "सदस्यता शुल्क प्राप्त करने में विफल:",
+    "failedToFetchWallet": "वॉलेट प्राप्त करने में विफल"
+  },
+  "feedbacks": {
+    "description": "प्लेटफ़ॉर्म वितरण",
+    "noDataYet": "अभी तक कोई फीडबैक डेटा नहीं",
+    "title": "प्रतिक्रियाएँ"
+  },
+  "games": {
+    "luckyDrawSpins": "लकी ड्रा स्पिन",
+    "title": "खेल"
+  },
+  "header": {
+    "createNewBatch": "नया बैच बनाएं",
+    "title": "व्यापारी डैशबोर्ड"
+  },
+  "kpi": {
+    "averageRating": "औसत रेटिंग",
+    "remainingCredits": "शेष क्रेडिट",
+    "totalCouponsIssued": "कुल कूपन जारी किए गए",
+    "totalRedeemed": "कुल रिडीम किए गए",
+    "trendDown": "नीचे",
+    "trendUp": "ऊपर"
+  },
+  "metrics": {
+    "creditsUsed": "उपयोग किए गए क्रेडिट",
+    "expired": "समाप्त हो गया",
+    "issued": "जारी किए गए",
+    "messagesSent": "संदेश भेजे गए",
+    "redeemed": "भुनाए गए",
+    "totalCoupons": "कुल कूपन",
+    "totalCustomers": "कुल ग्राहक"
+  },
+  "page": {
+    "breadcrumb": "व्यापारी डैशबोर्ड",
+    "title": "व्यापारी डैशबोर्ड"
+  },
+  "placeholders": {
+    "comingSoon": "सेटिंग्स की सामग्री जल्द ही आ रही है...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "राशि",
+    "code": "कोड",
+    "customer": "ग्राहक",
+    "hourAgo": "{hours} घंटे पहले",
+    "hoursAgo": "{hours} घंटे पहले",
+    "minsAgo": "{mins} मिनट पहले",
+    "time": "समय",
+    "title": "हाल की रिडेम्प्शन"
+  },
+  "retention": {
+    "returningThisMonth": "इस महीने लौटने वाले",
+    "title": "रिटेंशन"
+  },
+  "status": {
+    "active": "सक्रिय",
+    "annual": "वार्षिक",
+    "completed": "पूर्ण",
+    "exhausted": "खत्म",
+    "expired": "समाप्त",
+    "failed": "विफल",
+    "inactive": "निष्क्रिय",
+    "inProgress": "प्रगति में",
+    "open": "खुला",
+    "paid": "भुगतान किया गया",
+    "pending": "लंबित",
+    "resolved": "हल किया गया",
+    "temporary": "अस्थायी",
+    "unused": "अप्रयुक्त",
+    "used": "उपयोग किया गया"
+  },
+  "tabs": {
+    "automation": "स्वचालन",
+    "coupons": "कूपन बैच",
+    "feedbackForm": "फीडबैक फॉर्म",
+    "overview": "सारांश",
+    "settings": "सेटिंग्स",
+    "wallet": "वॉलेट"
+  },
+  "topCustomers": {
+    "description": "सबसे सक्रिय उपयोगकर्ता",
+    "noDataYet": "अभी तक कोई ग्राहक डेटा नहीं",
+    "redeemed": "रिडीम किया गया",
+    "title": "शीर्ष ग्राहक",
+    "visits": "दौरे"
+  },
+  "upgrade": {
+    "description": "सभी सुविधाएँ अनलॉक करें, जिसमें विश्लेषण, द्वि-मार्गीय संदेश और अधिक शामिल हैं।",
+    "errorMissingInfo": "आगे बढ़ने में असमर्थ। शुल्क या प्रशासनिक जानकारी गायब है।",
+    "errorNoSessionUrl": "कोई सत्र URL वापस नहीं आया",
+    "errorPaymentFailed": "भुगतान आरंभ करने में विफल। कृपया पुनः प्रयास करें।",
+    "pricePerYear": "/वर्ष",
+    "processing": "प्रसंस्करण...",
+    "title": "वार्षिक में अपग्रेड करें",
+    "upgradeNow": "अभी अपग्रेड करें"
+  },
+  "whatsapp": {
+    "biMessages": "बीआई संदेश (व्यापार-प्रेरित)",
+    "birthdayCampaigns": "जन्मदिन अभियान",
+    "description": "यूआई और बीआई ब्रेकडाउन",
+    "feedbackCoupons": "फीडबैक कूपन",
+    "festivalCampaigns": "त्योहार अभियान",
+    "homepageCoupons": "होमपेज कूपन",
+    "inactiveRecalls": "निष्क्रिय पुनः कॉल",
+    "luckyDrawWins": "लकी ड्रा जीत",
+    "noBiCampaigns": "अभी तक कोई BI अभियान नहीं",
+    "noUiActivity": "अभी तक कोई यूआई गतिविधि नहीं",
+    "title": "व्हाट्सएप",
+    "uiMessages": "यूआई संदेश (उपयोगकर्ता-प्रेरित)"
+  }
+}

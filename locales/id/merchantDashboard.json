@@ -1,0 +1,126 @@
+{
+  "common": {
+    "credits": "Kredit"
+  },
+  "couponStatus": {
+    "description": "Distribusi Penukaran",
+    "noCouponsYet": "Belum ada kupon yang diterbitkan",
+    "redeemed": "Ditukarkan",
+    "title": "Status Kupon",
+    "unredeemed": "Belum Ditukarkan"
+  },
+  "errors": {
+    "failedToFetchBatches": "Gagal mengambil batch",
+    "failedToFetchDashboard": "Gagal mengambil analitik dasbor",
+    "failedToFetchFee": "Gagal mengambil biaya langganan:",
+    "failedToFetchWallet": "Gagal mengambil dompet"
+  },
+  "feedbacks": {
+    "description": "Distribusi Platform",
+    "noDataYet": "Belum ada data umpan balik",
+    "title": "Umpan Balik"
+  },
+  "games": {
+    "luckyDrawSpins": "Putaran Undian Beruntung",
+    "title": "Permainan"
+  },
+  "header": {
+    "createNewBatch": "Buat Batch Baru",
+    "title": "Dasbor Merchant"
+  },
+  "kpi": {
+    "averageRating": "Rating Rata-rata",
+    "remainingCredits": "Kredit Tersisa",
+    "totalCouponsIssued": "Total Kupon Diterbitkan",
+    "totalRedeemed": "Total Ditebus",
+    "trendDown": "bawah",
+    "trendUp": "atas"
+  },
+  "metrics": {
+    "creditsUsed": "Kredit Digunakan",
+    "expired": "Kedaluwarsa",
+    "issued": "Diterbitkan",
+    "messagesSent": "Pesan Terkirim",
+    "redeemed": "Ditukarkan",
+    "totalCoupons": "Total Kupon",
+    "totalCustomers": "Total Pelanggan"
+  },
+  "page": {
+    "breadcrumb": "Dasbor Merchant",
+    "title": "Dasbor Merchant"
+  },
+  "placeholders": {
+    "comingSoon": "Konten pengaturan akan segera hadir...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "Jumlah",
+    "code": "Kode",
+    "customer": "Pelanggan",
+    "hourAgo": "{hours} jam yang lalu",
+    "hoursAgo": "{hours} jam yang lalu",
+    "minsAgo": "{mins} menit yang lalu",
+    "time": "Waktu",
+    "title": "Tebusan Terbaru"
+  },
+  "retention": {
+    "returningThisMonth": "Kembali bulan ini",
+    "title": "Retensi"
+  },
+  "status": {
+    "active": "Aktif",
+    "annual": "Tahunan",
+    "completed": "Selesai",
+    "exhausted": "Habis",
+    "expired": "Kedaluwarsa",
+    "failed": "Gagal",
+    "inactive": "Tidak Aktif",
+    "inProgress": "Dalam Proses",
+    "open": "Buka",
+    "paid": "Dibayar",
+    "pending": "Tertunda",
+    "resolved": "Terselesaikan",
+    "temporary": "Sementara",
+    "unused": "Belum Digunakan",
+    "used": "Digunakan"
+  },
+  "tabs": {
+    "automation": "Otomatisasi",
+    "coupons": "Batch Kupon",
+    "feedbackForm": "Formulir Umpan Balik",
+    "overview": "Ikhtisar",
+    "settings": "Pengaturan",
+    "wallet": "Dompet"
+  },
+  "topCustomers": {
+    "description": "Pengguna paling aktif",
+    "noDataYet": "Belum ada data pelanggan",
+    "redeemed": "Ditukarkan",
+    "title": "Pelanggan Teratas",
+    "visits": "kunjungan"
+  },
+  "upgrade": {
+    "description": "Buka semua fitur termasuk analitik, pesan dua arah, dan lainnya.",
+    "errorMissingInfo": "Tidak dapat melanjutkan. Informasi biaya atau admin hilang.",
+    "errorNoSessionUrl": "Tidak ada URL sesi yang dikembalikan",
+    "errorPaymentFailed": "Gagal memulai pembayaran. Silakan coba lagi.",
+    "pricePerYear": "/tahun",
+    "processing": "Memproses...",
+    "title": "Tingkatkan ke Tahunan",
+    "upgradeNow": "Tingkatkan Sekarang"
+  },
+  "whatsapp": {
+    "biMessages": "Pesan BI (Diinisiasi Bisnis)",
+    "birthdayCampaigns": "Kampanye Ulang Tahun",
+    "description": "Rincian UI & BI",
+    "feedbackCoupons": "Kupon Umpan Balik",
+    "festivalCampaigns": "Kampanye Festival",
+    "homepageCoupons": "Kupon Beranda",
+    "inactiveRecalls": "Panggilan Tidak Aktif",
+    "luckyDrawWins": "Kemenangan Undian Beruntung",
+    "noBiCampaigns": "Belum ada kampanye BI",
+    "noUiActivity": "Belum ada aktivitas UI",
+    "title": "WhatsApp",
+    "uiMessages": "Pesan UI (Diinisiasi Pengguna)"
+  }
+}

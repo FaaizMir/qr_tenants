@@ -1,22 +1,53 @@
 {
-  "allMerchants": "ผู้ประกอบการทั้งหมด",
-  "addMerchant": "เพิ่มผู้ประกอบการ",
-  "merchantReports": "รายงานผู้ประกอบการ",
-  "allSubscriptions": "การสมัครใช้บริการทั้งหมด",
-  "activePlans": "แผนงานที่ใช้งานอยู่",
-  "paymentHistory": "ประวัติการชำระเงิน",
-  "allAgents": "ตัวแทนทั้งหมด",
-  "agentPoints": "คะแนนของตัวแทน",
-  "agentReports": "รายงานตัวแทน",
-  "allFeedbacks": "ความคิดเห็นทั้งหมด",
-  "pendingReview": "รอตรวจสอบ",
-  "feedbackAnalytics": "การวิเคราะห์ความคิดเห็น",
-  "allCoupons": "คูปองทั้งหมด",
-  "redeemedCoupons": "คูปองที่ใช้แล้ว",
-  "couponAnalytics": "การวิเคราะห์คูปอง",
-  "revenueAnalytics": "การวิเคราะห์รายได้",
-  "userAnalytics": "การวิเคราะห์ผู้ใช้",
-  "generalSettings": "การตั้งค่าทั่วไป",
-  "paymentSettings": "การตั้งค่าการชำระเงิน",
-  "systemSettings": "การตั้งค่าระบบ"
+  "agent": {
+    "approvals": "การอนุมัติ",
+    "couponsync": "การซิงค์คูปอง",
+    "dashboard": "แดชบอร์ด",
+    "defaultEmail": "agent@qrscanner.com",
+    "defaultName": "ผู้ดูแลระบบ",
+    "earnings": "รายได้",
+    "logs": "บันทึก",
+    "merchants": "พาณิชย์",
+    "statements": "คำชี้แจง",
+    "support": "การสนับสนุน",
+    "wallet": "กระเป๋าเงิน"
+  },
+  "brand": {
+    "name": "สแกน QR"
+  },
+  "common": {
+    "account": "บัญชี",
+    "home": "หน้าแรก",
+    "logout": "ออกจากระบบ",
+    "platform": "แพลตฟอร์ม",
+    "toggleSidebar": "สลับแถบด้านข้าง"
+  },
+  "masterAdmin": {
+    "agents": "ตัวแทน",
+    "approvals": "การอนุมัติ",
+    "commission": "ค่าคอมมิชชั่น",
+    "dashboard": "แดชบอร์ด",
+    "logs": "บันทึก",
+    "merchants": "พ่อค้า",
+    "packages": "แพ็คเกจ",
+    "settings": "การตั้งค่า",
+    "staff": "พนักงาน",
+    "statements": "คำชี้แจง",
+    "support": "สนับสนุน"
+  },
+  "merchant": {
+    "campaigns": "แคมเปญ",
+    "coupons": "คูปอง",
+    "customerData": "ข้อมูลลูกค้า",
+    "dashboard": "แดชบอร์ด",
+    "defaultEmail": "merchant@qrscanner.com",
+    "defaultName": "ผู้ใช้พาณิชย์",
+    "logs": "บันทึกระบบ",
+    "luckyDraw": "การจับฉลาก",
+    "purchase": "การซื้อ",
+    "serialCodes": "รหัสประจำเครื่อง",
+    "statements": "คำชี้แจง",
+    "support": "สนับสนุน",
+    "wallet": "กระเป๋าเงิน"
+  }
 }

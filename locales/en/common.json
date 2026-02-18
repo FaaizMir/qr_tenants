@@ -1,15 +1,22 @@
 {
-  "home": "Home",
-  "dashboard": "Dashboard",
-  "merchants": "Merchants",
-  "subscriptions": "Subscriptions",
-  "whiteLabelAgents": "White Label Agents",
-  "feedbacks": "Feedbacks",
-  "coupons": "Coupons",
-  "analytics": "Analytics",
-  "settings": "Settings",
-  "logout": "Logout",
-  "viewAll": "View all",
-  "goToDashboard": "Go to Dashboard"
+  "guidance": {
+    "tip1": "Choose a descriptive batch name for easy identification",
+    "tip2": "Set realistic validity dates for your campaign",
+    "tip3": "Select an appropriate template that matches your brand",
+    "tip4": "Review all details before generating the batch",
+    "title": "Guidance"
+  },
+  "table": {
+    "columns": "Columns",
+    "goToFirstPage": "Go to first page",
+    "goToLastPage": "Go to last page",
+    "goToNextPage": "Go to next page",
+    "goToPreviousPage": "Go to previous page",
+    "loadingData": "Loading data...",
+    "noResults": "No results.",
+    "page": "Page {current} of {total}",
+    "rowsPerPage": "Rows per page",
+    "rowsSelected": "{selected} of {total} row(s) selected.",
+    "searchPlaceholder": "Search..."
+  }
 }
-

@@ -33,17 +33,17 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Link } from "@/i18n/routing";
 
-const formatDate = (dateString) => {
-  if (!dateString) return "N/A";
+const formatDate = (dateString, t) => {
+  if (!dateString) return t("details.na");
   try {
     return format(new Date(dateString), "MMM dd, yyyy");
   } catch (error) {
-    return "Invalid Date";
+    return t("details.invalidDate");
   }
 };
 
 // Actions Cell Component
-const ActionsCell = ({ festival, onEdit, onDelete }) => {
+const ActionsCell = ({ festival, onEdit, onDelete, t }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   return (
@@ -51,12 +51,12 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{t("actions.openMenu")}</span>
             <MoreHorizontal className="h-4 w-4" />{" "}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>{t("actions.actions")}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <Link
@@ -64,7 +64,7 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
               className="flex items-center cursor-pointer"
             >
               <Eye className="mr-2 h-4 w-4" />
-              View Details
+              {t("actions.viewDetails")}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -72,7 +72,7 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
             className="cursor-pointer"
           >
             <Edit className="mr-2 h-4 w-4" />
-            Edit
+            {t("actions.edit")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
@@ -80,7 +80,7 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
             className="cursor-pointer text-red-600 focus:text-red-600"
           >
             <Trash2 className="mr-2 h-4 w-4" />
-            Delete
+            {t("actions.delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -90,15 +90,14 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <Trash2 className="h-5 w-5 text-red-500" />
-              Delete Festival Message
+              {t("deleteDialog.title")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete &quot;{festival.festival_name}
-              &quot;? This action cannot be undone.
+              {t("deleteDialog.description", { festivalName: festival.festival_name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("deleteDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
                 onDelete(festival.id);
@@ -106,7 +105,7 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
               }}
               className="bg-red-600 hover:bg-red-700"
             >
-              Delete
+              {t("deleteDialog.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -115,10 +114,10 @@ const ActionsCell = ({ festival, onEdit, onDelete }) => {
   );
 };
 
-export const getFestivalColumns = (onEdit, onDelete, onView) => [
+export const getFestivalColumns = (onEdit, onDelete, t) => [
   {
     accessorKey: "festival_name",
-    header: "Festival Name",
+    header: t("columns.festivalName"),
     cell: ({ row }) => {
       const festivalName = row.getValue("festival_name");
       return (
@@ -131,13 +130,13 @@ export const getFestivalColumns = (onEdit, onDelete, onView) => [
   },
   {
     accessorKey: "message",
-    header: "Message",
+    header: t("columns.message"),
     cell: ({ row }) => {
       const message = row.getValue("message");
       return (
         <div className="max-w-xs">
           <p className="truncate text-sm text-muted-foreground">
-            {message || "No message"}
+            {message || t("columns.noMessage")}
           </p>
         </div>
       );
@@ -145,52 +144,52 @@ export const getFestivalColumns = (onEdit, onDelete, onView) => [
   },
   {
     accessorKey: "festival_date",
-    header: "Festival Date",
+    header: t("columns.festivalDate"),
     cell: ({ row }) => {
       const date = row.getValue("festival_date");
       return (
         <div className="flex items-center gap-2">
           <Calendar className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm">{formatDate(date)}</span>
+          <span className="text-sm">{formatDate(date, t)}</span>
         </div>
       );
     },
   },
   {
     accessorKey: "is_recurring",
-    header: "Recurring",
+    header: t("columns.recurring"),
     cell: ({ row }) => {
       const isRecurring = row.getValue("is_recurring");
       return isRecurring ? (
         <Badge variant="secondary" className="bg-purple-100 text-purple-700">
-          Yes
+          {t("columns.yes")}
         </Badge>
       ) : (
         <Badge variant="secondary" className="bg-gray-100 text-gray-600">
-          No
+          {t("columns.no")}
         </Badge>
       );
     },
   },
   {
     accessorKey: "is_active",
-    header: "Status",
+    header: t("columns.status"),
     cell: ({ row }) => {
       const isActive = row.getValue("is_active");
       return isActive ? (
         <Badge className="bg-green-500 hover:bg-green-600 text-white">
-          Active
+          {t("active")}
         </Badge>
       ) : (
         <Badge className="bg-gray-500 hover:bg-gray-600 text-white">
-          Inactive
+          {t("inactive")}
         </Badge>
       );
     },
   },
   {
     accessorKey: "coupon_batch_id",
-    header: "Coupon",
+    header: t("columns.coupon"),
     cell: ({ row }) => {
       const couponBatchId = row.getValue("coupon_batch_id");
       return couponBatchId ? (
@@ -199,19 +198,20 @@ export const getFestivalColumns = (onEdit, onDelete, onView) => [
         </Badge>
       ) : (
         <Badge variant="secondary" className="bg-gray-100 text-gray-600">
-          None
+          {t("columns.none")}
         </Badge>
       );
     },
   },
   {
     id: "actions",
-    header: "Actions",
+    header: t("columns.actions"),
     cell: ({ row }) => (
       <ActionsCell
         festival={row.original}
         onEdit={onEdit}
         onDelete={onDelete}
+        t={t}
       />
     ),
   },

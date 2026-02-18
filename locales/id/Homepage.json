@@ -1,36 +1,214 @@
 {
-  "fetaures": {
-    "card1Description": "Pelanggan memindai kode QR untuk meninggalkan ulasan dalam hitungan detik. Tangkap umpan balik negatif secara pribadi sebelum muncul di Google.",
-    "card1Heading": "Umpan Balik Instan",
-    "card2Description": "Masalah kode serial unik yang dapat dilacak. Cegah penipuan dengan validasi yang aman dan batas penggunaan.",
-    "card2Heading": "Kupon Cerdas",
-    "card3Description": "Secara otomatis mengirimkan ucapan selamat ulang tahun, permintaan ulasan, dan tawaran \"kami merindukan Anda\" melalui WhatsApp.",
-    "card3Heading": "Automasi WhatsApp",
-    "description": "Alat yang kuat untuk membantu Anda memahami pelanggan Anda dan membuat mereka kembali.",
-    "h1": "Segala yang Anda butuhkan untuk tumbuh"
+  "agent": {
+    "ads": {
+      "ad": "Iklan",
+      "availableIn": "Tersedia di {city}",
+      "exclusiveIn": "EKSKLUSIF DI {city}",
+      "experienceNow": "Rasakan Sekarang",
+      "featuredPartner": "Mitra Unggulan",
+      "limitedTime": "WAKTU TERBATAS",
+      "partner": "Mitra",
+      "premiumLabel": "Premium",
+      "sponsored": "Disponsori",
+      "sponsoredDeal": "Penawaran Bersponsor",
+      "viewOffer": "LIHAT PENAWARAN",
+      "visitBusiness": "Kunjungi {businessName} di {city}, {country}.",
+      "visitExclusivePartner": "Kunjungi mitra eksklusif kami untuk penawaran premium."
+    },
+    "errors": {
+      "agentDataExpired": "Data agen telah kedaluwarsa, menghapus localStorage...",
+      "errorLoadingAgent": "Kesalahan memuat agen dari localStorage:",
+      "failedToFetchMerchants": "Gagal mengambil pedagang:",
+      "failedToLoadData": "Gagal memuat data:",
+      "failedToLoadPaidAds": "Gagal memuat iklan berbayar",
+      "invalidAgentData": "Data agen tidak valid di localStorage, menghapus...",
+      "unableToLoadMerchants": "Tidak dapat memuat merchant. Silakan coba lagi.",
+      "unableToLoadPage": "Tidak dapat memuat halaman. Silakan coba lagi."
+    },
+    "fallback": {
+      "general": "Umum",
+      "unknown": "Tidak diketahui"
+    },
+    "features": {
+      "badge": "Mengapa Memilih Kami",
+      "description": "Alat yang kuat untuk membantu Anda memahami pelanggan Anda dan membuat mereka kembali.",
+      "globalReach": {
+        "description": "Perluas bisnis Anda secara internasional dengan alat dan wawasan komprehensif kami.",
+        "title": "Jangkauan Global"
+      },
+      "instantFeedback": {
+        "description": "Pelanggan memindai kode QR untuk meninggalkan ulasan dalam hitungan detik. Tangkap umpan balik negatif secara pribadi sebelum muncul di Google.",
+        "title": "Umpan Balik Instan"
+      },
+      "smartCoupons": {
+        "description": "Terapkan kode serial unik yang dapat dilacak. Cegah penipuan dengan validasi dan batas penggunaan yang aman.",
+        "title": "Kupon Pintar"
+      },
+      "title": "Semua yang Anda butuhkan untuk tumbuh"
+    },
+    "footer": {
+      "agentLogin": "Masuk Agen",
+      "copyright": "© {year} QR Rev. Semua hak dilindungi.",
+      "globalMerchantNetwork": "Jaringan Pedagang Global",
+      "privacyPolicy": "Kebijakan Privasi",
+      "termsOfService": "Syarat Layanan"
+    },
+    "hero": {
+      "curatedForYou": "Dikurasi Untuk Anda",
+      "descriptionDefault": "Jelajahi pedagang terverifikasi, buka kupon instan, dan hemat pada layanan premium di area Anda.",
+      "descriptionWithAgent": "Temukan pedagang terverifikasi yang dipilih oleh {agentName}. Dapatkan kupon instan dan hemat pada layanan premium.",
+      "exclusiveDeals": "Penawaran Eksklusif",
+      "officialPartnerNetwork": "Jaringan Mitra Resmi",
+      "partnerNetwork": "Jaringan Mitra {agentName}"
+    },
+    "marketplace": {
+      "allIndustries": "Semua Industri",
+      "city": "Kota",
+      "curatingMessage": "Kami sedang mengkurasi pedagang terverifikasi terbaik dan penawaran eksklusif untuk Anda...",
+      "everywhere": "Di mana-mana",
+      "industry": "Industri",
+      "loadingMarketplace": "Memuat Marketplace",
+      "noMerchantsFound": "Tidak ada pedagang yang ditemukan",
+      "pageNoResults": "Halaman {page} - Tidak Ada Hasil",
+      "retryConnection": "Coba Koneksi Lagi",
+      "searchPlaceholder": "Cari pedagang, kategori...",
+      "showing": "Menampilkan {start} - {end} dari {total}",
+      "showingPage": "Menampilkan Halaman {page}",
+      "tryAdjustingFilters": "Coba sesuaikan filter Anda atau cari.",
+      "unableToLoad": "Tidak dapat memuat pedagang"
+    },
+    "merchantDetail": {
+      "availableCoupons": "Kupon Tersedia",
+      "availableDeals": "Penawaran Tersedia",
+      "checkBackLater": "Periksa kembali nanti untuk penawaran eksklusif!",
+      "clickMerchantPrompt": "Klik pada profil pedagang di sebelah kiri untuk membuka kunci mereka",
+      "dealsFound": "{count} Penawaran Ditemukan",
+      "details": "Detail",
+      "exclusiveCoupons": "kupon eksklusif",
+      "expired": "KADALUARSA",
+      "getCoupon": "Dapatkan Kupon",
+      "left": "{count} tersisa",
+      "limitedTimeOffers": "dan penawaran terbatas waktu.",
+      "live": "HIDUP",
+      "merchantDetails": "Detail Merchant",
+      "noActiveCoupons": "Tidak ada kupon aktif saat ini.",
+      "offers": "{count} Tawaran",
+      "readyToExplore": "Siap untuk Menjelajah?",
+      "verifiedMerchant": "Pedagang Terverifikasi"
+    },
+    "navigation": {
+      "features": "Fitur",
+      "home": "Beranda",
+      "marketplace": "Pasar",
+      "menu": "Menu",
+      "partner": "Mitra",
+      "signIn": "Masuk"
+    },
+    "security": {
+      "dataExpiredClearing": "Data agen telah kedaluwarsa, menghapus localStorage...",
+      "invalidDataClearing": "Data agen tidak valid di localStorage, menghapus..."
+    },
+    "stats": {
+      "loading": "Memuat...",
+      "merchants": "Pedagang",
+      "verified": "Terverifikasi"
+    }
   },
-  "footer": {
-    "Contact": "Kontak",
-    "Privacy": "Privasi",
-    "Terms": "Syarat",
-    "text": "© 2024 QR Rev Inc. Semua hak dilindungi."
+  "common": {
+    "brandName": "QR Rev",
+    "percentage": "{value}%"
   },
-  "heroSection": {
-    "1": "Ubah Pelanggan menjadi",
-    "2": "Penggemar Setia",
-    "3": "dengan Kode QR Cerdas",
-    "description": "Platform all-in-one untuk mengumpulkan ulasan, mendistribusikan kupon, dan mengotomatiskan retensi pelanggan. Tanpa memerlukan pengkodean.",
-    "freeTrial": "Mulai Uji Coba Gratis",
-    "para": "Sekarang dengan Integrasi WhatsApp",
-    "viewDemo": "Lihat Demo"
+  "couponForm": {
+    "birthday": "Ulang Tahun",
+    "birthdayFuture": "Ulang tahun tidak boleh di masa depan",
+    "birthdayRequired": "Tanggal lahir diperlukan",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "discount": "{percentage}% OFF",
+    "errorDefault": "Gagal menerbitkan kupon. Silakan coba lagi.",
+    "from": "Dari {merchantName}",
+    "fullName": "Nama Lengkap",
+    "getCoupon": "Dapatkan Kupon",
+    "issuing": "Mengeluarkan...",
+    "namePlaceholder": "Masukkan nama lengkap Anda",
+    "nameRequired": "Nama diperlukan",
+    "phoneInvalid": "Format nomor telepon tidak valid",
+    "phoneNumber": "Nomor Telepon",
+    "phonePlaceholder": "Masukkan nomor telepon",
+    "phoneRequired": "Nomor telepon diperlukan",
+    "successMessage": "Kupon Anda telah dikirim ke ponsel Anda melalui WhatsApp.",
+    "successTitle": "Kupon Berhasil Diterbitkan!",
+    "successToast": "Kupon berhasil dikirim! Periksa WhatsApp Anda.",
+    "title": "Dapatkan Kupon Anda"
   },
-  "howitworks": {
-    "descp1": "Sesuaikan dengan warna dan logo merek Anda.",
-    "descp2": "Tempatkan di atas meja, counter, atau struk.",
-    "descp3": "Kumpulkan ulasan dan bangun basis data pelanggan secara otomatis.",
-    "h1": "Proses sederhana 3 langkah",
-    "h3": "Saksikan bisnis Anda tumbuh",
-    "heading1": "Hasilkan Kode QR Anda",
-    "heading2": "Tampilkan di toko Anda"
+  "masterAdmin": {
+    "agentDirectory": {
+      "activeMerchants": "Pedagang Aktif",
+      "agents": "Agen",
+      "allCountries": "Semua Negara",
+      "description": "Kelola jaringan agen penyewa global Anda.",
+      "noAgentsFound": "Tidak ada agen yang ditemukan",
+      "of": "dari",
+      "pageNoResults": "Halaman - Tidak Ada Hasil",
+      "searchPlaceholder": "Cari agen...",
+      "showing": "Menampilkan",
+      "showingPage": "Menampilkan Halaman",
+      "title": "Direktori Agen",
+      "tryAdjustingFilters": "Coba sesuaikan filter Anda.",
+      "viewStorefront": "Lihat Etalase"
+    },
+    "errors": {
+      "failedToLoadAgents": "Gagal memuat agen."
+    },
+    "fallback": {
+      "global": "Global",
+      "unknown": "Tidak Dikenal",
+      "unknownAgent": "Agen Tidak Dikenal"
+    },
+    "features": {
+      "badge": "Fitur Platform",
+      "description": "Alat yang kuat untuk membantu Anda memahami pelanggan Anda dan membuat mereka kembali.",
+      "instantFeedback": {
+        "description": "Pelanggan memindai kode QR untuk meninggalkan ulasan dalam hitungan detik. Tangkap umpan balik negatif secara pribadi sebelum muncul di Google.",
+        "title": "Umpan Balik Instan"
+      },
+      "smartCoupons": {
+        "description": "Terapkan kode serial unik yang dapat dilacak. Cegah penipuan dengan validasi dan batas penggunaan yang aman.",
+        "title": "Kupon Pintar"
+      },
+      "title": "Segala yang Anda butuhkan untuk tumbuh",
+      "whatsappAutomation": {
+        "description": "Secara otomatis kirim ucapan selamat ulang tahun, permintaan ulasan, dan tawaran \"kami merindukan Anda\" melalui WhatsApp.",
+        "title": "Automasi WhatsApp"
+      }
+    },
+    "footer": {
+      "contact": "Kontak",
+      "copyright": "© 2024 QR Rev Inc. Semua hak dilindungi.",
+      "privacy": "Privasi",
+      "terms": "Syarat"
+    },
+    "hero": {
+      "badge": "Kontrol Admin Utama",
+      "description": "Pantau kinerja agen global, kelola distribusi wilayah, dan awasi pertumbuhan jaringan pedagang dari satu dasbor.",
+      "title": "Platform",
+      "titleHighlight": "Pusat Intelijen"
+    },
+    "navigation": {
+      "directory": "Direktori",
+      "features": "Fitur",
+      "overview": "Ikhtisar",
+      "signIn": "Masuk"
+    },
+    "Overview": "ikhtisar",
+    "stats": {
+      "activeAgents": "Agen Aktif",
+      "globalReach": "Jangkauan Global",
+      "totalMerchants": "Total Pedagang"
+    },
+    "status": {
+      "active": "aktif",
+      "inactive": "tidak aktif"
+    }
   }
 }

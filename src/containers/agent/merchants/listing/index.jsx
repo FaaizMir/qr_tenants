@@ -23,7 +23,6 @@ export default function AgentMerchantsListingContainer({
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
-  const tMerchants = useTranslations("dashboard.agentMerchantManagement");
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -86,9 +85,9 @@ export default function AgentMerchantsListingContainer({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">
-            {tMerchants("merchantmanagement")}
+            Merchant Management
           </h1>
-          <p className="text-muted-foreground">{tMerchants("description")}</p>
+          <p className="text-muted-foreground">Manage and monitor your merchants</p>
         </div>
       </div>
 
@@ -96,13 +95,13 @@ export default function AgentMerchantsListingContainer({
         <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder={tMerchants("searchmerchants")}
+            placeholder="Search merchants..."
             onSearchChange={setSearch}
             rightSlot={
               showCreate && (
                 <Button onClick={() => router.push("/agent/merchants/create")}>
                   <Plus className="mr-2 h-4 w-4" />
-                  {tMerchants("addmerchant")}
+                  Add Merchant
                 </Button>
               )
             }

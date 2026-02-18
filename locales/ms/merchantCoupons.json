@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "Nama Batch",
+      "couponCode": "Kod Kupon",
+      "expiryDate": "Tarikh Tamat",
+      "issuedAt": "Dikeluarkan Pada",
+      "redeemedAt": "Ditebus Pada",
+      "startDate": "Tarikh Mula",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Disalin ke papan klip",
+    "createCoupon": "Buat Kupon",
+    "notRedeemed": "Tidak ditebus",
+    "searchPlaceholder": "Cari kupon...",
+    "subtitle": "Lihat dan urus semua kupon yang dihasilkan",
+    "title": "Semua Kupon"
+  },
+  "breadcrumbs": {
+    "couponBatches": "Batch Kupon",
+    "coupons": "Kupon",
+    "createCouponBatch": "Cipta Batch Kupon",
+    "detail": "Butiran",
+    "merchantDashboard": "Papan Pemuka Pedagang"
+  },
+  "create": {
+    "annual": "Tahun",
+    "batchName": "Nama Kumpulan",
+    "batchNamePlaceholder": "cth., Jualan Musim Panas 2024",
+    "batchType": "Jenis Batch",
+    "cancelButton": "Batal",
+    "createButton": "Cipta Kumpulan",
+    "endDate": "Tarikh Tamat",
+    "form": {
+      "batchName": "Nama Batch",
+      "batchNamePlaceholder": "cth. Promosi Musim Panas 2024",
+      "description": "Konfigurasikan parameter kupon anda (had akan dikenakan secara automatik)",
+      "endDate": "Tarikh Tamat",
+      "generateBatch": "Hasilkan Batch",
+      "generatingCodes": "Menghasilkan Kod...",
+      "halalCertified": "Disahkan Halal",
+      "halalDescription": "Tunjukkan pematuhan dengan piawaian Halal",
+      "quantity": "Kuantiti",
+      "startDate": "Tarikh Mula",
+      "template": "Templat",
+      "title": "Butiran Batch"
+    },
+    "guidance": "Panduan",
+    "isActive": "Aktif",
+    "limits": {
+      "annual": "Had tahunan: 1000 kupon",
+      "quantityLimit": "Had: {max} kod",
+      "quantityLimitAnnual": "Had: {max} kod (Tahun)",
+      "quantityLimitTemporary": "Had: {max} kod (Sementara)",
+      "temporary": "Had sementara: 100 kupon"
+    },
+    "merchantType": {
+      "annual": "Peniaga Tahunan",
+      "temporary": "Peniaga Sementara"
+    },
+    "quantity": "Kuantiti",
+    "quantityPlaceholder": "Bilangan kupon",
+    "selectBatchType": "Pilih jenis batch",
+    "startDate": "Tarikh Mula",
+    "temporary": "Sementara",
+    "title": "Buat Batch Kupon",
+    "updateButton": "Kemas kini Batch"
+  },
+  "detail": {
+    "active": "Aktif",
+    "batchIdNotAvailable": "ID Kumpulan tidak tersedia",
+    "code": "Kod",
+    "columns": {
+      "code": "Kod",
+      "issuedAt": "Dikeluarkan Pada",
+      "redemptionDate": "Tarikh Tebusan",
+      "status": "Status"
+    },
+    "copiedToClipboard": "Disalin ke papan klip",
+    "couponsInBatch": "Kupon dalam Kumpulan",
+    "downloadPdf": "Muat Turun PDF",
+    "editContent": "Edit Kandungan",
+    "end": "Tamat:",
+    "exportPdf": "Eksport PDF",
+    "failedToDownloadPdf": "Gagal untuk memuat turun PDF",
+    "failedToLoadCoupons": "Gagal untuk memuatkan kupon",
+    "fetchingPdf": "Mengambil PDF...",
+    "filters": {
+      "allStatus": "Semua Status",
+      "issued": "Dikeluarkan",
+      "redeemed": "Tebus"
+    },
+    "inactive": "Tidak aktif",
+    "issuedAt": "Dikeluarkan Pada",
+    "issuedQuantity": "Kuantiti Dikeluarkan",
+    "loadingBatch": "Memuatkan maklumat batch...",
+    "noPdfData": "Tiada data PDF diterima",
+    "notRedeemed": "Tidak ditebus",
+    "pdfDownloadedSuccessfully": "PDF dimuat turun dengan jayanya",
+    "redemptionDate": "Tarikh Tebus",
+    "searchCode": "Cari kod...",
+    "searchPlaceholder": "Cari kod...",
+    "start": "Mula:",
+    "stats": {
+      "end": "Tamat:",
+      "issuedQuantity": "Kuantiti Dikeluarkan",
+      "start": "Mula:",
+      "totalQuantity": "Jumlah Keseluruhan",
+      "utilized": "% Digunakan",
+      "validity": "Kesahan"
+    },
+    "status": "Status",
+    "title": "Butiran Batch",
+    "totalQuantity": "Jumlah Keseluruhan",
+    "utilized": "Digunakan",
+    "validity": "Kesahan"
+  },
+  "errors": {
+    "batchNameRequired": "Nama batch diperlukan",
+    "endDateMustBeAfterStart": "Tarikh tamat mesti selepas tarikh mula",
+    "endDateRequired": "Tarikh tamat diperlukan",
+    "failedToCreateBatch": "Gagal untuk mencipta kumpulan kupon",
+    "failedToCreateCouponBatch": "Gagal untuk mencipta batch kupon.",
+    "failedToDeleteCouponBatch": "Gagal untuk memadam kumpulan kupon",
+    "failedToDownloadPdf": "Gagal memuat turun PDF",
+    "failedToLoadCoupons": "Gagal memuatkan kupon",
+    "failedToLoadCouponsBatches": "Gagal untuk memuatkan batch kupon",
+    "failedToUpdateBatch": "Gagal untuk mengemas kini batch kupon",
+    "quantityMustBePositive": "Kuantiti mesti nombor positif",
+    "quantityRequired": "Kuantiti diperlukan",
+    "startDateRequired": "Tarikh mula diperlukan"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "Pilihan Kupon",
+      "delete": "Padam",
+      "details": "Butiran"
+    },
+    "allStatus": "Semua Status",
+    "breadcrumb": "Kupon",
+    "columnNames": {
+      "actions": "Tindakan",
+      "batchName": "Nama Batch",
+      "batchType": "Jenis Batch",
+      "isActive": "Aktif",
+      "status": "Status",
+      "type": "Jenis",
+      "usage": "Penggunaan",
+      "validity": "Kesahan"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "batchName": "Nama Kumpulan",
+      "status": "Status",
+      "type": "Jenis",
+      "usage": "Penggunaan",
+      "validity": "Kesahan"
+    },
+    "createBatch": "Cipta Kumpulan",
+    "deleteDialog": {
+      "cancel": "Batal",
+      "confirm": "Padam",
+      "description": "Tindakan ini tidak boleh dibatalkan. Ini akan memadamkan secara kekal",
+      "title": "Padam kumpulan kupon?"
+    },
+    "exportPdf": "Eksport PDF",
+    "issued": "Dikeluarkan",
+    "redeemed": "Tebus",
+    "searchPlaceholder": "Cari kumpulan...",
+    "status": {
+      "active": "Aktif",
+      "inactive": "Tidak Aktif"
+    },
+    "subtitle": "Urus kupon diskaun anda",
+    "title": "Kumpulan Kupon",
+    "usage": {
+      "issued": "{count} dikeluarkan",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "Dari:",
+      "to": "Kepada:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "Batch kupon berjaya dibuat!",
+    "batchDeleted": "Kumpulan kupon dipadam",
+    "batchIdNotAvailable": "ID Batch tidak tersedia",
+    "copiedToClipboard": "Disalin ke papan klip",
+    "fetchingPdf": "Mengambil PDF...",
+    "noPdfData": "Tiada data PDF diterima",
+    "pdfDownloadedSuccessfully": "PDF dimuat turun dengan jayanya",
+    "unableToDetermineMerchantId": "Tidak dapat menentukan id peniaga. Sila hubungi sokongan.",
+    "uploadBrandImage": "Sila muat naik imej jenama dalam editor templat."
+  },
+  "success": {
+    "batchCreated": "Batch kupon telah dicipta dengan jayanya",
+    "batchUpdated": "Batch kupon telah dikemas kini dengan jayanya"
+  },
+  "template": {
+    "chooseTemplate": "Pilih templat",
+    "editContent": "Edit Kandungan",
+    "editor": {
+      "brandImage": "Imej Jenama",
+      "brandImageMandatory": "Imej jenama adalah wajib",
+      "cancel": "Batal",
+      "changeImage": "Tukar Imej",
+      "contentUpdatedSuccessfully": "Kandungan berjaya dikemas kini",
+      "description": "Penerangan",
+      "descriptionPlaceholder": "Huraikan butiran tawaran...",
+      "done": "Selesai",
+      "failedToSaveContent": "Gagal menyimpan kandungan",
+      "header": "Tajuk",
+      "headerPlaceholder": "cth. TAWARAN KHAS",
+      "requiredForAllTemplates": "Diperlukan untuk semua templat",
+      "title": "Edit Kandungan Templat",
+      "titleField": "Tajuk",
+      "titlePlaceholder": "cth. Diskaun 50%",
+      "updateDescription": "Kemas kini imej jenama, tajuk, dan penerangan. Perubahan dipratonton secara langsung.",
+      "uploadBrandImage": "Muat Naik Imej Jenama"
+    },
+    "hoverToPreview": "Arahkan untuk pratonton atau klik untuk membuka",
+    "loadingTemplates": "Memuatkan templat…",
+    "preview": "Pratonton",
+    "previewModal": {
+      "readOnlyPreview": "pratonton hanya baca",
+      "title": "Pratonton Templat"
+    },
+    "selected": "Dipilih",
+    "templateLocked": "Templat dikunci untuk pelan sementara"
+  }
+}

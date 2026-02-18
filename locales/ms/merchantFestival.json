@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "Tindakan",
+    "delete": "Padam",
+    "edit": "Sunting",
+    "openMenu": "Buka menu",
+    "viewDetails": "Lihat Butiran"
+  },
+  "active": "Aktif",
+  "allStatus": "Semua Status",
+  "columns": {
+    "actions": "Tindakan",
+    "coupon": "Kupon",
+    "festivalDate": "Tarikh Festival",
+    "festivalName": "Nama Festival",
+    "message": "Mesej",
+    "no": "Tidak",
+    "noMessage": "Tiada mesej",
+    "none": "Tiada",
+    "recurring": "Berulang",
+    "status": "Status",
+    "yes": "Ya"
+  },
+  "deleteDialog": {
+    "cancel": "Batal",
+    "confirmDescription": "Tindakan ini tidak boleh dibatalkan. Ini akan memadamkan mesej festival \"{festivalName}\" secara kekal dan mengeluarkannya dari pelayan.",
+    "confirmTitle": "Adakah anda benar-benar pasti?",
+    "delete": "Padam",
+    "deleting": "Sedang memadam...",
+    "description": "Adakah anda pasti ingin memadam \"{festivalName}\"? Tindakan ini tidak boleh dibatalkan.",
+    "title": "Padam Mesej Festival"
+  },
+  "details": {
+    "back": "Kembali",
+    "backToList": "Kembali ke Mesej Festival",
+    "couponBatchId": "ID Batch Kupon",
+    "createdAt": "Dicipta Pada",
+    "delete": "Padam",
+    "edit": "Sunting",
+    "festivalDate": "Tarikh Festival",
+    "festivalMessage": "Mesej Festival",
+    "invalidDate": "Tarikh Tidak Sah",
+    "lastUpdated": "Terakhir Dikemas Kini",
+    "messageDetails": "Butiran Mesej",
+    "na": "N/A",
+    "notFound": "Mesej festival tidak ditemui",
+    "recurringYearly": "Berulang Setiap Tahun",
+    "scheduleInfo": "Jadual & Info",
+    "status": "Status"
+  },
+  "enableTooltip": "Aktifkan \"Kempen Festival\" dalam Papan Ciri untuk membuat salam",
+  "errors": {
+    "failedToCreate": "Gagal untuk membuat mesej festival",
+    "failedToDelete": "Gagal untuk memadam mesej festival",
+    "failedToLoad": "Gagal memuatkan mesej festival",
+    "failedToLoadDetails": "Gagal memuatkan butiran mesej festival",
+    "failedToUpdate": "Gagal mengemas kini mesej festival"
+  },
+  "featureDisabled": "Mesej festival kini dinyahdayakan. Aktifkan ciri dalam",
+  "featureDisabledSuffix": "di atas untuk membuat salam baru.",
+  "featureSwitchboard": "Papan Pemuka Ciri",
+  "form": {
+    "activeStatus": "Status Aktif",
+    "cancel": "Batal",
+    "couponBatch": "Kumpulan Kupon (Pilihan)",
+    "createButton": "Buat Mesej Festival",
+    "createDescription": "Isi butiran untuk menjadualkan mesej festival baru",
+    "createTitle": "Cipta Mesej Festival Baharu",
+    "editDescription": "Kemas kini butiran mesej festival anda di bawah",
+    "editTitle": "Edit Mesej Festival",
+    "festivalDate": "Tarikh Festival",
+    "festivalMessage": "Mesej Festival",
+    "festivalMessagePlaceholder": "Hai '{name}', mengucapkan anda musim perayaan yang gembira dari '{business_name}'...",
+    "festivalName": "Nama Festival",
+    "festivalNamePlaceholder": "Contoh: Diwali, Krismas, Tahun Baru",
+    "messageActive": "Mesej aktif",
+    "messageInactive": "Mesej tidak aktif",
+    "oneTimeMessage": "Mesej sekali sahaja",
+    "personalizationHint": "Gunakan '{name}' dan '{business_name}' untuk mempersonalisasi mesej",
+    "recurringYearly": "Berulang Tahunan",
+    "repeatsEveryYear": "Ulang setiap tahun",
+    "required": "*",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "selectCouponBatch": "Pilih batch kupon...",
+    "updateButton": "Kemas Kini Mesej Festival"
+  },
+  "inactive": "Tidak Aktif",
+  "newGreeting": "Salam Baru",
+  "searchPlaceholder": "Cari mengikut nama festival...",
+  "subtitle": "Jadual ucapan peribadi untuk sambutan perayaan",
+  "success": {
+    "created": "Mesej festival berjaya dibuat",
+    "deleted": "Mesej festival berjaya dipadam",
+    "updated": "Mesej festival berjaya dikemas kini"
+  },
+  "title": "Mesej Festival",
+  "validation": {
+    "allFieldsRequired": "Nama festival, mesej, dan tarikh diperlukan"
+  }
+}

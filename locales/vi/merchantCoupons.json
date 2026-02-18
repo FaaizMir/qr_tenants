@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "Tên lô",
+      "couponCode": "Mã Giảm Giá",
+      "expiryDate": "Ngày hết hạn",
+      "issuedAt": "Phát Hành Vào",
+      "redeemedAt": "Đã đổi tại",
+      "startDate": "Ngày bắt đầu",
+      "status": "Trạng thái"
+    },
+    "copiedToClipboard": "Đã sao chép vào clipboard",
+    "createCoupon": "Tạo Mã Giảm Giá",
+    "notRedeemed": "Chưa được đổi",
+    "searchPlaceholder": "Tìm kiếm phiếu giảm giá...",
+    "subtitle": "Xem và quản lý tất cả các phiếu giảm giá đã tạo",
+    "title": "Tất cả phiếu giảm giá"
+  },
+  "breadcrumbs": {
+    "couponBatches": "Lô phiếu giảm giá",
+    "coupons": "Phiếu giảm giá",
+    "createCouponBatch": "Tạo lô phiếu giảm giá",
+    "detail": "Chi tiết",
+    "merchantDashboard": "Bảng điều khiển thương nhân"
+  },
+  "create": {
+    "annual": "Hàng năm",
+    "batchName": "Tên lô",
+    "batchNamePlaceholder": "ví dụ: Khuyến mãi Mùa hè 2024",
+    "batchType": "Loại lô",
+    "cancelButton": "Hủy",
+    "createButton": "Tạo lô",
+    "endDate": "Ngày kết thúc",
+    "form": {
+      "batchName": "Tên lô",
+      "batchNamePlaceholder": "vd. Khuyến mãi Mùa hè 2024",
+      "description": "Cấu hình các tham số phiếu giảm giá của bạn (các giới hạn sẽ được áp dụng tự động)",
+      "endDate": "Ngày Kết Thúc",
+      "generateBatch": "Tạo lô",
+      "generatingCodes": "Đang tạo mã...",
+      "halalCertified": "Chứng nhận Halal",
+      "halalDescription": "Chỉ ra sự tuân thủ các tiêu chuẩn Halal",
+      "quantity": "Số Lượng",
+      "startDate": "Ngày bắt đầu",
+      "template": "Mẫu",
+      "title": "Chi tiết lô"
+    },
+    "guidance": "Hướng dẫn",
+    "isActive": "Hoạt động",
+    "limits": {
+      "annual": "Giới hạn hàng năm: 1000 phiếu giảm giá",
+      "quantityLimit": "Giới hạn: {max} mã",
+      "quantityLimitAnnual": "Giới hạn: {max} mã (Hàng năm)",
+      "quantityLimitTemporary": "Giới hạn: {max} mã (Tạm thời)",
+      "temporary": "Giới hạn tạm thời: 100 phiếu giảm giá"
+    },
+    "merchantType": {
+      "annual": "Thương Nhân Hàng Năm",
+      "temporary": "Thương nhân tạm thời"
+    },
+    "quantity": "Số lượng",
+    "quantityPlaceholder": "Số lượng phiếu giảm giá",
+    "selectBatchType": "Chọn loại lô hàng",
+    "startDate": "Ngày bắt đầu",
+    "temporary": "Tạm thời",
+    "title": "Tạo lô phiếu giảm giá",
+    "updateButton": "Cập nhật lô"
+  },
+  "detail": {
+    "active": "Đang hoạt động",
+    "batchIdNotAvailable": "ID lô không có sẵn",
+    "code": "Mã",
+    "columns": {
+      "code": "Mã",
+      "issuedAt": "Phát hành vào",
+      "redemptionDate": "Ngày đổi",
+      "status": "Trạng thái"
+    },
+    "copiedToClipboard": "Đã sao chép vào clipboard",
+    "couponsInBatch": "Phiếu giảm giá trong lô",
+    "downloadPdf": "Tải PDF",
+    "editContent": "Chỉnh sửa nội dung",
+    "end": "Kết thúc:",
+    "exportPdf": "Xuất PDF",
+    "failedToDownloadPdf": "Tải PDF không thành công",
+    "failedToLoadCoupons": "Tải phiếu giảm giá không thành công",
+    "fetchingPdf": "Đang lấy PDF...",
+    "filters": {
+      "allStatus": "Tất cả trạng thái",
+      "issued": "Đã phát hành",
+      "redeemed": "Đã đổi"
+    },
+    "inactive": "Không hoạt động",
+    "issuedAt": "Phát hành vào",
+    "issuedQuantity": "Số lượng đã phát hành",
+    "loadingBatch": "Đang tải thông tin lô hàng...",
+    "noPdfData": "Không nhận được dữ liệu PDF",
+    "notRedeemed": "Chưa được đổi",
+    "pdfDownloadedSuccessfully": "PDF đã tải xuống thành công",
+    "redemptionDate": "Ngày đổi",
+    "searchCode": "Tìm kiếm mã...",
+    "searchPlaceholder": "Tìm kiếm mã...",
+    "start": "Bắt đầu:",
+    "stats": {
+      "end": "Kết thúc:",
+      "issuedQuantity": "Số lượng phát hành",
+      "start": "Bắt đầu:",
+      "totalQuantity": "Tổng số lượng",
+      "utilized": "% Đã Sử Dụng",
+      "validity": "Thời hạn"
+    },
+    "status": "Trạng thái",
+    "title": "Chi tiết lô hàng",
+    "totalQuantity": "Tổng số lượng",
+    "utilized": "Đã sử dụng",
+    "validity": "Giá trị"
+  },
+  "errors": {
+    "batchNameRequired": "Tên lô là bắt buộc",
+    "endDateMustBeAfterStart": "Ngày kết thúc phải sau ngày bắt đầu",
+    "endDateRequired": "Ngày kết thúc là bắt buộc",
+    "failedToCreateBatch": "Tạo lô phiếu giảm giá không thành công",
+    "failedToCreateCouponBatch": "Không thể tạo lô phiếu giảm giá.",
+    "failedToDeleteCouponBatch": "Xóa lô phiếu giảm giá không thành công",
+    "failedToDownloadPdf": "Không thể tải PDF",
+    "failedToLoadCoupons": "Không thể tải mã giảm giá",
+    "failedToLoadCouponsBatches": "Không thể tải lô phiếu giảm giá",
+    "failedToUpdateBatch": "Cập nhật lô phiếu giảm giá thất bại",
+    "quantityMustBePositive": "Số lượng phải là một số dương",
+    "quantityRequired": "Số lượng là bắt buộc",
+    "startDateRequired": "Ngày bắt đầu là bắt buộc"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "Tùy chọn phiếu giảm giá",
+      "delete": "Xóa",
+      "details": "Chi tiết"
+    },
+    "allStatus": "Tất cả trạng thái",
+    "breadcrumb": "Mã giảm giá",
+    "columnNames": {
+      "actions": "Hành động",
+      "batchName": "Tên lô",
+      "batchType": "Loại lô",
+      "isActive": "Đang hoạt động",
+      "status": "Trạng thái",
+      "type": "Loại",
+      "usage": "Sử dụng",
+      "validity": "Thời hạn"
+    },
+    "columns": {
+      "actions": "Hành động",
+      "batchName": "Tên lô",
+      "status": "Trạng thái",
+      "type": "Loại",
+      "usage": "Sử dụng",
+      "validity": "Thời hạn"
+    },
+    "createBatch": "Tạo lô",
+    "deleteDialog": {
+      "cancel": "Hủy",
+      "confirm": "Xóa",
+      "description": "Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn",
+      "title": "Xóa lô phiếu giảm giá?"
+    },
+    "exportPdf": "Xuất PDF",
+    "issued": "Đã phát hành",
+    "redeemed": "Đã đổi",
+    "searchPlaceholder": "Tìm kiếm lô hàng...",
+    "status": {
+      "active": "Đang hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "subtitle": "Quản lý phiếu giảm giá của bạn",
+    "title": "Lô phiếu giảm giá",
+    "usage": {
+      "issued": "{count} đã phát hành",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "Từ:",
+      "to": "Đến:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "Lô phiếu giảm giá đã được tạo thành công!",
+    "batchDeleted": "Lô phiếu giảm giá đã bị xóa",
+    "batchIdNotAvailable": "ID lô không có sẵn",
+    "copiedToClipboard": "Đã sao chép vào clipboard",
+    "fetchingPdf": "Đang lấy PDF...",
+    "noPdfData": "Không nhận được dữ liệu PDF",
+    "pdfDownloadedSuccessfully": "Tệp PDF đã tải xuống thành công",
+    "unableToDetermineMerchantId": "Không thể xác định id thương nhân. Vui lòng liên hệ với bộ phận hỗ trợ.",
+    "uploadBrandImage": "Vui lòng tải lên hình ảnh thương hiệu trong trình chỉnh sửa mẫu."
+  },
+  "success": {
+    "batchCreated": "Lô phiếu giảm giá đã được tạo thành công",
+    "batchUpdated": "Lô phiếu giảm giá đã được cập nhật thành công"
+  },
+  "template": {
+    "chooseTemplate": "Chọn một mẫu",
+    "editContent": "Chỉnh sửa nội dung",
+    "editor": {
+      "brandImage": "Hình ảnh thương hiệu",
+      "brandImageMandatory": "Hình ảnh thương hiệu là bắt buộc",
+      "cancel": "Hủy",
+      "changeImage": "Thay đổi hình ảnh",
+      "contentUpdatedSuccessfully": "Nội dung đã được cập nhật thành công",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Mô tả chi tiết về ưu đãi...",
+      "done": "Xong",
+      "failedToSaveContent": "Lưu nội dung không thành công",
+      "header": "Tiêu đề",
+      "headerPlaceholder": "ví dụ: CUNG CẤP ĐẶC BIỆT",
+      "requiredForAllTemplates": "Bắt buộc cho tất cả các mẫu",
+      "title": "Chỉnh sửa nội dung mẫu",
+      "titleField": "Tiêu đề",
+      "titlePlaceholder": "ví dụ: Giảm giá 50%",
+      "updateDescription": "Cập nhật hình ảnh thương hiệu, tiêu đề, và mô tả. Thay đổi được xem trước trực tiếp.",
+      "uploadBrandImage": "Tải lên hình ảnh thương hiệu"
+    },
+    "hoverToPreview": "Di chuột để xem trước hoặc nhấp để mở",
+    "loadingTemplates": "Đang tải mẫu…",
+    "preview": "Xem trước",
+    "previewModal": {
+      "readOnlyPreview": "Xem trước chỉ đọc",
+      "title": "Xem trước mẫu"
+    },
+    "selected": "Đã chọn",
+    "templateLocked": "Mẫu bị khóa cho kế hoạch tạm thời"
+  }
+}

@@ -14,8 +14,10 @@ import { MessageSquareQuote, Save, Loader2, Sparkles } from "lucide-react";
 import axiosInstance from "@/lib/axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
 export default function PresetReviewsSettings() {
+  const t = useTranslations("merchantSettings.presetReviews");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
 
@@ -84,15 +86,15 @@ export default function PresetReviewsSettings() {
         };
         await axiosInstance.patch("/preset-reviews", payload);
         if (!isGlobal) {
-          toast.success("Presets Updated", {
-            description: "Your quick review options have been saved.",
+          toast.success(t("updateSuccess"), {
+            description: t("updateSuccessDescription"),
           });
         }
       } catch (error) {
         console.error("Failed to save preset reviews:", error);
         if (!isGlobal) {
-          toast.error("Save Failed", {
-            description: "Could not update presets. Please try again.",
+          toast.error(t("saveFailed"), {
+            description: t("saveFailedDescription"),
           });
         }
         throw error;
@@ -129,10 +131,10 @@ export default function PresetReviewsSettings() {
           </div>
           <div className="space-y-0.5">
             <h3 className="font-semibold text-sm text-gray-900 leading-none">
-              Quick Feedback
+              {t("title")}
             </h3>
             <p className="text-[11px] text-muted-foreground font-medium">
-              Customer presets
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -140,7 +142,7 @@ export default function PresetReviewsSettings() {
           <span
             className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border ${enablePresetReviews ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-gray-50 text-gray-400 border-gray-100"}`}
           >
-            {enablePresetReviews ? "Active" : "Off"}
+            {enablePresetReviews ? t("active") : t("off")}
           </span>
         </div>
       </div>
@@ -164,7 +166,7 @@ export default function PresetReviewsSettings() {
                     value={preset}
                     onChange={(e) => handlePresetChange(idx, e.target.value)}
                     className="pl-10 h-8 bg-gray-50/50 border-gray-200 focus:bg-white focus:border-orange-500/50 text-xs font-medium"
-                    placeholder="Positive feedback option..."
+                    placeholder={t("placeholder")}
                   />
                 </div>
               ))}
@@ -182,7 +184,7 @@ export default function PresetReviewsSettings() {
                 ) : (
                   <Save className="h-3 w-3 mr-2" />
                 )}
-                Save Presets
+                {t("savePresets")}
               </Button>
             </div>
           </CardContent>

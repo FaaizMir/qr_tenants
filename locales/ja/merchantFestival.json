@@ -1,0 +1,101 @@
+{
+  "actions": {
+    "actions": "アクション",
+    "delete": "削除",
+    "edit": "編集",
+    "openMenu": "メニューを開く",
+    "viewDetails": "詳細を見る"
+  },
+  "active": "アクティブ",
+  "allStatus": "すべてのステータス",
+  "columns": {
+    "actions": "アクション",
+    "coupon": "クーポン",
+    "festivalDate": "フェスティバル日付",
+    "festivalName": "フェスティバル名",
+    "message": "メッセージ",
+    "no": "いいえ",
+    "noMessage": "メッセージはありません",
+    "none": "なし",
+    "recurring": "定期的",
+    "status": "ステータス",
+    "yes": "はい"
+  },
+  "deleteDialog": {
+    "cancel": "キャンセル",
+    "confirmDescription": "この操作は元に戻せません。この操作により、フェスティバルメッセージ「{festivalName}」が永久に削除され、サーバーからも削除されます。",
+    "confirmTitle": "本当に確信していますか？",
+    "delete": "削除",
+    "deleting": "削除中...",
+    "description": "本当に「{festivalName}」を削除してもよろしいですか？この操作は元に戻せません。",
+    "title": "フェスティバルメッセージを削除"
+  },
+  "details": {
+    "back": "戻る",
+    "backToList": "フェスティバルメッセージに戻る",
+    "couponBatchId": "クーポンバッチID",
+    "createdAt": "作成日時",
+    "delete": "削除",
+    "edit": "編集",
+    "festivalDate": "フェスティバルの日付",
+    "festivalMessage": "フェスティバルメッセージ",
+    "invalidDate": "無効な日付",
+    "lastUpdated": "最終更新日",
+    "messageDetails": "メッセージの詳細",
+    "na": "該当なし",
+    "notFound": "フェスティバルメッセージが見つかりません",
+    "recurringYearly": "毎年繰り返し",
+    "scheduleInfo": "スケジュール & 情報",
+    "status": "ステータス"
+  },
+  "enableTooltip": "挨拶を作成するには、機能スイッチボードで「フェスティバルキャンペーン」を有効にしてください",
+  "errors": {
+    "failedToCreate": "フェスティバルメッセージの作成に失敗しました",
+    "failedToDelete": "フェスティバルメッセージの削除に失敗しました",
+    "failedToLoad": "フェスティバルメッセージの読み込みに失敗しました",
+    "failedToLoadDetails": "フェスティバルメッセージの詳細を読み込めませんでした",
+    "failedToUpdate": "フェスティバルメッセージの更新に失敗しました"
+  },
+  "featureDisabled": "フェスティバルメッセージは現在無効です。機能を有効にしてください",
+  "featureDisabledSuffix": "新しい挨拶を作成するには上記を使用してください。",
+  "featureSwitchboard": "機能スイッチボード",
+  "form": {
+    "activeStatus": "アクティブステータス",
+    "cancel": "キャンセル",
+    "couponBatch": "クーポンバッチ（オプション）",
+    "createButton": "フェスティバルメッセージを作成",
+    "createDescription": "新しいフェスティバルメッセージをスケジュールするための詳細を入力してください",
+    "createTitle": "新しいフェスティバルメッセージを作成",
+    "editDescription": "以下にフェスティバルメッセージの詳細を更新してください",
+    "editTitle": "フェスティバルメッセージを編集",
+    "festivalDate": "フェスティバルの日付",
+    "festivalMessage": "フェスティバルメッセージ",
+    "festivalMessagePlaceholder": "こんにちは'{name}'、'{business_name}'から楽しいフェスティバルシーズンをお祈りします...",
+    "festivalName": "フェスティバル名",
+    "festivalNamePlaceholder": "例: ディワリ、クリスマス、元旦",
+    "messageActive": "メッセージはアクティブです",
+    "messageInactive": "メッセージは非アクティブです",
+    "oneTimeMessage": "一度きりのメッセージ",
+    "personalizationHint": "メッセージをパーソナライズするには'{name}'と'{business_name}'を使用してください",
+    "recurringYearly": "毎年繰り返し",
+    "repeatsEveryYear": "毎年繰り返す",
+    "required": "*",
+    "save": "保存",
+    "saving": "保存中...",
+    "selectCouponBatch": "クーポンバッチを選択...",
+    "updateButton": "フェスティバルメッセージを更新"
+  },
+  "inactive": "非アクティブ",
+  "newGreeting": "新しい挨拶",
+  "searchPlaceholder": "フェスティバル名で検索...",
+  "subtitle": "祝祭のためのパーソナライズされた挨拶をスケジュールする",
+  "success": {
+    "created": "フェスティバルメッセージは正常に作成されました",
+    "deleted": "フェスティバルメッセージは正常に削除されました",
+    "updated": "フェスティバルメッセージが正常に更新されました"
+  },
+  "title": "フェスティバルメッセージ",
+  "validation": {
+    "allFieldsRequired": "フェスティバル名、メッセージ、日付は必須です"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "title": "Tingkatkan Toko Anda",
+  "subtitle": "Pilih paket kredit untuk pesan WhatsApp, pembuatan kupon, dan iklan berbayar.",
+  "loading": "Memuat paket...",
+  "errors": {
+    "loadPackages": "Tidak dapat memuat paket kredit. Silakan coba lagi.",
+    "noMerchantId": "Tidak dapat menentukan ID merchant. Silakan hubungi dukungan.",
+    "purchaseFailed": "Gagal membeli paket. Silakan coba lagi.",
+    "requestFailed": "Permintaan gagal dengan status {status}."
+  },
+  "emptyState": {
+    "noPackages": "Tidak ada paket kredit yang ditemukan untuk jenis merchant Anda."
+  },
+  "packageTypes": {
+    "coupon": "Kupon",
+    "whatsappUI": "Pesan WhatsApp UI",
+    "whatsappBI": "Pesan WhatsApp BI",
+    "whatsapp": "Pesan WhatsApp",
+    "paidAds": "Iklan Berbayar",
+    "standard": "Standar"
+  },
+  "merchantTypes": {
+    "annual": "Tahunan",
+    "temporary": "Sementara",
+    "standard": "Standar"
+  },
+  "packageCard": {
+    "perCredit": "per kredit",
+    "baseCredits": "{credits} Kredit Dasar",
+    "bonusCredits": "+{bonusCredits} Kredit Bonus",
+    "enhancedFeatures": "Fitur dan kapasitas yang ditingkatkan",
+    "getStarted": "Mulai"
+  },
+  "checkout": {
+    "title": "Ringkasan Pesanan",
+    "subtitle": "Detail checkout",
+    "selectedPackage": "Paket Terpilih",
+    "premiumDescription": "Paket kredit premium untuk pertumbuhan bisnis Anda.",
+    "creditsIncluded": "Kredit Termasuk",
+    "bonusGift": "Hadiah Bonus",
+    "packageType": "Jenis Paket",
+    "totalAmount": "Jumlah Total",
+    "securePayment": "Pembayaran Aman",
+    "sslEncrypted": "Gateway Stripe Terenkripsi SSL",
+    "cardDetails": "Detail Kartu",
+    "paymentInfo": "Silakan masukkan informasi pembayaran Anda di bawah ini.",
+    "amountPayable": "Jumlah yang Harus Dibayar",
+    "trustedPartners": "Mitra Terpercaya",
+    "noSelection": "Tidak ada pilihan yang ditemukan",
+    "noSelectionMessage": "Silakan tutup jendela ini dan pilih paket kredit untuk melanjutkan upgrade Anda."
+  },
+  "success": {
+    "purchaseComplete": "Paket berhasil dibeli."
+  },
+  "toast": {
+    "purchaseSuccess": "Paket berhasil dibeli.",
+    "purchaseError": "Gagal membeli paket. Silakan coba lagi."
+  }
+}

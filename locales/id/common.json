@@ -1,14 +1,22 @@
 {
-  "home": "Beranda",
-  "dashboard": "Dasbor",
-  "merchants": "Pedagang",
-  "subscriptions": "Langganan",
-  "whiteLabelAgents": "Agen White Label",
-  "feedbacks": "Umpan Balik",
-  "coupons": "Kupon",
-  "analytics": "Analitik",
-  "settings": "Pengaturan",
-  "logout": "Keluar",
-  "viewAll": "Lihat Semua",
-  "goToDashboard": "Pergi ke Dasbor"
+  "guidance": {
+    "tip1": "Pilih nama batch yang deskriptif untuk identifikasi yang mudah",
+    "tip2": "Tetapkan tanggal validitas yang realistis untuk kampanye Anda",
+    "tip3": "Pilih template yang sesuai yang cocok dengan merek Anda",
+    "tip4": "Tinjau semua detail sebelum menghasilkan batch",
+    "title": "Panduan"
+  },
+  "table": {
+    "columns": "Kolom",
+    "goToFirstPage": "Pergi ke halaman pertama",
+    "goToLastPage": "Pergi ke halaman terakhir",
+    "goToNextPage": "Pergi ke halaman berikutnya",
+    "goToPreviousPage": "Pergi ke halaman sebelumnya",
+    "loadingData": "Memuat data...",
+    "noResults": "Tidak ada hasil.",
+    "page": "Halaman {current} dari {total}",
+    "rowsPerPage": "Baris per halaman",
+    "rowsSelected": "{selected} dari {total} baris terpilih.",
+    "searchPlaceholder": "Cari..."
+  }
 }

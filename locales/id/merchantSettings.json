@@ -1,0 +1,255 @@
+{
+  "batchSelector": {
+    "loading": "Memuat...",
+    "noBatchesDescription": "Buat batch kupon terlebih dahulu",
+    "noBatchesTitle": "Tidak ada batch yang tersedia",
+    "of": "dari",
+    "used": "digunakan"
+  },
+  "birthdayRewards": {
+    "actionRequired": "Tindakan Diperlukan: Klub Ulang Tahun",
+    "actionRequiredDescription": "Silakan pilih batch kupon untuk memberikan hadiah kepada pelanggan Anda di hari ulang tahun mereka.",
+    "birthdayReward": "Hadiah Ulang Tahun",
+    "days": "Hari",
+    "daysAfter": "Hari Setelah",
+    "daysBefore": "Hari Sebelum",
+    "description": "Pelanggan akan menerima pesan dengan hadiah ini di hari istimewa mereka.",
+    "enableMessage": "Aktifkan Klub Ulang Tahun untuk mengotomatiskan hadiah Anda",
+    "saveButton": "Simpan Pengaturan Ulang Tahun",
+    "saveFailed": "Simpan Gagal",
+    "saveFailedDescription": "Tidak dapat memperbarui pengaturan ulang tahun. Silakan coba lagi.",
+    "selected": "Terpilih",
+    "selectRewardBatch": "Pilih batch hadiah...",
+    "subtitle": "Perlakuan pelanggan otomatis",
+    "title": "Klub Ulang Tahun",
+    "updateSuccess": "Klub Ulang Tahun Diperbarui",
+    "updateSuccessDescription": "Pengaturan otomatisasi ulang tahun Anda telah disimpan."
+  },
+  "featureMasterControl": {
+    "active": "Aktif",
+    "error": "Proses Gagal",
+    "errorDescription": "Tidak dapat menyinkronkan pengaturan. Silakan periksa koneksi Anda.",
+    "features": {
+      "birthdayMessage": {
+        "description": "Hadiah otomatis pada ulang tahun pelanggan",
+        "label": "Pesan Ulang Tahun"
+      },
+      "facebookReviews": {
+        "description": "Tautan langsung ke ulasan Halaman Facebook",
+        "label": "Ulasan Facebook"
+      },
+      "festivalCampaign": {
+        "description": "Siaran untuk acara liburan khusus",
+        "label": "Kampanye Festival"
+      },
+      "googleReviews": {
+        "description": "Tautan ulasan ke profil Google Bisnis",
+        "label": "Ulasan Google"
+      },
+      "inactiveRecall": {
+        "description": "Secara otomatis ingatkan pelanggan yang tidak aktif",
+        "label": "Inaktif Recall"
+      },
+      "instagramReviews": {
+        "description": "Integrasi dengan Instagram Business",
+        "label": "Ulasan Instagram"
+      },
+      "luckyDraw": {
+        "description": "Sistem distribusi hadiah gamified",
+        "label": "Undian Beruntung"
+      },
+      "paidAds": {
+        "description": "Tampilkan spanduk gambar/video kepada pengguna",
+        "label": "Iklan Berbayar"
+      },
+      "presetReviews": {
+        "description": "Opsi umpan balik yang telah disiapkan untuk pelanggan",
+        "label": "Ulasan yang telah disiapkan"
+      },
+      "scheduledCampaign": {
+        "description": "Kampanye pesan pemasaran yang dijadwalkan",
+        "label": "Kampanye Terjadwal"
+      },
+      "xiaohongshuReviews": {
+        "description": "Terhubung dengan komunitas Red",
+        "label": "Ulasan XiaoHongShu"
+      }
+    },
+    "live": "Langsung",
+    "paused": "Dijeda",
+    "subtitle": "Kontrol kemampuan waktu nyata",
+    "success": "{feature} {status}",
+    "successDescription": "Berhasil memperbarui status {feature} Anda.",
+    "title": "Papan Fitur"
+  },
+  "inactiveRecall": {
+    "actionRequired": "Tindakan Diperlukan: Recall Tidak Aktif",
+    "actionRequiredDescription": "Silakan pilih kupon insentif untuk menarik kembali pelanggan yang tidak aktif.",
+    "chooseRecallReward": "Pilih hadiah ingatan...",
+    "daysOfInactivity": "Hari tidak aktif",
+    "description": "Pelanggan yang belum mengunjungi dalam waktu lama akan mendapatkan perlakuan ini.",
+    "enableMessage": "Aktifkan Win-Back Club untuk mengaktifkan kembali pelanggan yang tidak aktif",
+    "incentiveReward": "Hadiah Insentif",
+    "recallAfter": "Ingatkan Setelah",
+    "saveButton": "Simpan Pengaturan Win-Back",
+    "saveFailed": "Simpan Gagal",
+    "saveFailedDescription": "Tidak dapat memperbarui pengaturan recall. Silakan coba lagi.",
+    "selected": "Terpilih",
+    "subtitle": "Reaktivasi pelanggan yang tidur",
+    "title": "Klub Win-Back",
+    "updateSuccess": "Ingatkan Tidak Aktif Diperbarui",
+    "updateSuccessDescription": "Pengaturan otomatisasi win-back Anda telah disimpan."
+  },
+  "main": {
+    "description": "Kelola keterlibatan global Anda, mekanisme penghargaan, dan konten promosi dari satu dasbor berkinerja tinggi.",
+    "merchantActive": "Pedagang Aktif",
+    "proTip": "Tip Pro",
+    "proTipMessage": "Menggabungkan Hadiah Langsung dengan Preset yang kuat menciptakan loop umpan balik konversi tinggi yang meningkatkan SEO lokal Anda.",
+    "status": "Status",
+    "subtitle": "Strategi",
+    "subtitleHighlight": "Kontrol",
+    "tabs": {
+      "automations": "Automatisasi",
+      "campaigns": "Kampanye",
+      "festivalMessages": "Pesan Festival",
+      "paidAds": "Iklan Berbayar",
+      "settings": "Pengaturan"
+    },
+    "title": "Pusat Merchant",
+    "version": "Versi 2.0"
+  },
+  "paidAds": {
+    "14days": "14 Hari",
+    "30days": "30 Hari",
+    "7days": "7 Hari",
+    "active": "Aktif",
+    "addImage": "Tambahkan Gambar",
+    "addVideo": "Tambahkan Video",
+    "adjustImage": "Sesuaikan Gambar",
+    "adjustImageDescription": "Seret untuk memindahkan dan gunakan penggeser untuk memperbesar.",
+    "adPlacement": "Penempatan Iklan",
+    "adPreview": "Prabaca Iklan",
+    "adPreviewDescription": "Prabaca ukuran penuh dari iklan promosi",
+    "bottom": "Bawah",
+    "cancel": "Batalkan",
+    "duration": "Durasi",
+    "errorCropping": "Kesalahan memotong gambar",
+    "errorSaving": "Kesalahan menyimpan pengaturan",
+    "failedToDelete": "Gagal menghapus",
+    "imageAds": "Iklan Gambar",
+    "imageDeleted": "Gambar berhasil dihapus",
+    "imageRecommendation": "1200x600px disarankan",
+    "imageSelected": "Gambar dipilih. Klik Unggah & Simpan untuk menerapkan perubahan.",
+    "left": "Kiri",
+    "off": "MATI",
+    "pending": "Tertunda",
+    "right": "Kanan",
+    "saveImage": "Simpan Gambar",
+    "selectDuration": "Pilih durasi",
+    "selectPlacement": "Pilih penempatan",
+    "settingsUpdated": "Pengaturan dan iklan berhasil diperbarui",
+    "subtitle": "Konten pemasaran visual",
+    "title": "Spanduk Promosi",
+    "top": "Atas",
+    "uploadAndSave": "Unggah & Simpan",
+    "uploading": "Mengunggah...",
+    "videoAds": "Iklan Video",
+    "videoDeleted": "Video berhasil dihapus",
+    "videoRecommendation": "MP4, WebM (Maks 50MB)",
+    "videoSelected": "Video terpilih. Klik 'Unggah & Simpan' untuk menyelesaikan.",
+    "videoTooLarge": "File video terlalu besar. Ukuran maksimum adalah 50MB.",
+    "zoom": "Zoom"
+  },
+  "platformSettings": {
+    "active": "AKTIF",
+    "facebookPage": "Halaman Facebook",
+    "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "Ulasan Google",
+    "instagram": "Instagram",
+    "instagramPlaceholder": "https://instagram.com/...",
+    "off": "MATI",
+    "redPlaceholder": "URL Profil MERAH",
+    "saveFailed": "Simpan Gagal",
+    "saveFailedDescription": "Tidak dapat memperbarui platform. Silakan coba lagi.",
+    "savePlatforms": "Simpan Platform",
+    "subtitle": "Tinjau saluran",
+    "title": "Sambungan Sosial",
+    "updateSuccess": "Platform Diperbarui",
+    "updateSuccessDescription": "Tautan tinjauan sosial Anda telah diperbarui.",
+    "xiaohongshu": "XiaoHongShu"
+  },
+  "presetReviews": {
+    "active": "Aktif",
+    "off": "Matikan",
+    "placeholder": "Opsi umpan balik positif...",
+    "saveFailed": "Penyimpanan Gagal",
+    "saveFailedDescription": "Tidak dapat memperbarui preset. Silakan coba lagi.",
+    "savePresets": "Simpan Preset",
+    "subtitle": "Preset pelanggan",
+    "title": "Umpan Balik Cepat",
+    "updateSuccess": "Preset Diperbarui",
+    "updateSuccessDescription": "Opsi ulasan cepat Anda telah disimpan."
+  },
+  "rewardStrategy": {
+    "chooseRegularReward": "Pilih hadiah reguler...",
+    "directCoupon": "Kupon Langsung",
+    "directCouponDescription": "Akses Instan",
+    "featureSwitchboard": "Papan Fitur",
+    "luckyDraw": "Undian Beruntung",
+    "luckyDrawDescription": "Hadiah Gamified",
+    "luckyDrawTab": "Undian Beruntung",
+    "luckyDrawTip": "Konfigurasi hadiah di",
+    "managedVia": "Pemilihan dikelola melalui",
+    "saveFailed": "Penyimpanan Gagal",
+    "saveFailedDescription": "Tidak dapat memperbarui strategi hadiah. Silakan coba lagi.",
+    "saveStrategy": "Simpan Strategi",
+    "selectCouponBatch": "Silakan pilih Batch Kupon untuk Hadiah Langsung.",
+    "selectReward": "Pilih Hadiah",
+    "subtitle": "Hadiah utama",
+    "tab": "tab",
+    "title": "Mesin Insentif",
+    "updateSuccess": "Strategi Hadiah Diperbarui",
+    "updateSuccessDescription": "Konfigurasi hadiah utama Anda telah disimpan."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "Tindakan Diperlukan: Kampanye yang Dijadwalkan",
+    "actionRequiredDescription": "Silakan pilih batch kupon untuk disertakan dalam blast Anda.",
+    "active": "Aktif",
+    "attachCoupon": "Lampirkan Kupon",
+    "audience": "Audiens",
+    "audienceOptions": {
+      "active": "Aktif",
+      "all": "Semua Pengguna",
+      "firstTime": "Pertama kali",
+      "inactive": "Tidak Aktif",
+      "returning": "Kembali"
+    },
+    "campaignName": "Nama Kampanye",
+    "campaignNamePlaceholder": "Contoh: Penjualan Halloween",
+    "campaignScheduled": "Kampanye Dijadwalkan",
+    "campaignScheduledDescription": "Kampanye pemasaran Anda telah dijadwalkan untuk pengiriman.",
+    "done": "Selesai",
+    "incompleteCampaign": "Detail Kampanye Tidak Lengkap",
+    "incompleteCampaignDescription": "Silakan berikan nama, pesan, dan tanggal untuk siaran Anda.",
+    "launchDate": "Tanggal Peluncuran",
+    "message": "Pesan",
+    "messagePlaceholder": "Hai {name}, ...",
+    "off": "Mati",
+    "saveFailed": "Gagal Menyimpan",
+    "saveFailedDescription": "Tidak dapat menjadwalkan kampanye. Silakan coba lagi.",
+    "scheduleCampaign": "Jadwalkan Kampanye",
+    "selectAudience": "Pilih",
+    "selectCampaignReward": "Pilih hadiah kampanye...",
+    "selectDateTime": "Pilih tanggal & waktu",
+    "subtitle": "Jadwalkan ledakan",
+    "title": "Kampanye"
+  },
+  "stickySaveBar": {
+    "discardChanges": "Buang Perubahan",
+    "saveAllSettings": "Simpan Semua pengaturan",
+    "statusDescription": "Sinkronkan semua pengaturan hadiah dan keterlibatan platform Anda",
+    "statusReady": "Strategi Hadiah Siap",
+    "synchronizing": "Menyinkronkan..."
+  }
+}

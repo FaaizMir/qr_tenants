@@ -9,6 +9,7 @@ import {
   Filter,
   X,
   ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { InlineAd } from "./PaidAdsDisplay";
@@ -34,6 +35,7 @@ import {
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // --- HELPERS ---
 // --- HELPERS ---
@@ -69,9 +71,10 @@ const CATEGORY_IMAGES = {
     "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=800&q=80", // Hotel outdoors
   ],
   technology: [
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", // Circuits/Tech
-    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", // Computer
-    "https://images.unsplash.com/photo-1531297422935-40e6e91a002d?auto=format&fit=crop&w=800&q=80", // Electronics
+    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=80", // Tech workspace
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80", // Blue tech/data
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80", // Circuits
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1000&q=80", // Laptop and code
   ],
   services: [
     "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80", // Office Meeting
@@ -136,9 +139,13 @@ function getCategoryImage(category, id) {
     key = "hospitality";
   else if (
     normalizedCat.includes("tech") ||
+    normalizedCat.includes("software") ||
+    normalizedCat.includes("digital") ||
     normalizedCat.includes("computer") ||
     normalizedCat.includes("electronics") ||
-    normalizedCat.includes("it")
+    normalizedCat.includes(" it") ||
+    normalizedCat.includes("it ") ||
+    normalizedCat === "it"
   )
     key = "technology";
   else if (
@@ -155,8 +162,8 @@ function getCategoryImage(category, id) {
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-      .split("")
-      .reduce((a, b) => a + b.charCodeAt(0), 0)
+        .split("")
+        .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -168,15 +175,15 @@ export function MarketplaceFilters({
   setSelectedCategory,
   selectedRegion,
   setSelectedRegion,
-  sortBy,
-  setSortBy,
   categories,
   cities,
   handleGetCoupon,
 }) {
+  const t = useTranslations("Homepage.agent.marketplace");
+
   return (
     <div className="sticky top-20 z-40 mb-8">
-      <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-4xl mx-auto transition-all">
+      <div className="bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-2xl md:rounded-full shadow-xl shadow-slate-200/50 border border-white/50 ring-1 ring-slate-100 flex flex-col md:flex-row gap-3 items-center max-w-6xl mx-auto transition-all">
         {/* Search */}
         <div className="flex-1 relative w-full group">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400 group-focus-within:bg-primary/10 group-focus-within:text-primary transition-colors">
@@ -184,7 +191,7 @@ export function MarketplaceFilters({
           </div>
 
           <Input
-            placeholder="Search merchants, categories..."
+            placeholder={t("searchPlaceholder")}
             className="pl-12 h-12 rounded-full border bg-slate-50 text-base font-medium placeholder:text-slate-400 hover:bg-slate-100/50 focus:outline-none focus-visible:ring-0 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -210,11 +217,11 @@ export function MarketplaceFilters({
           "
               suppressHydrationWarning
             >
-              <SelectValue placeholder="Industry" />
+              <SelectValue placeholder={t("industry")} />
             </SelectTrigger>
 
             <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="all">All Industries</SelectItem>
+              <SelectItem value="all">{t("allIndustries")}</SelectItem>
               {categories.map((cat) => (
                 <SelectItem key={cat} value={cat}>
                   {cat}
@@ -242,47 +249,17 @@ export function MarketplaceFilters({
             >
               <div className="flex items-center gap-2 truncate">
                 <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
-                <SelectValue placeholder="City" />
+                <SelectValue placeholder={t("city")} />
               </div>
             </SelectTrigger>
 
             <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="all">Everywhere</SelectItem>
+              <SelectItem value="all">{t("everywhere")}</SelectItem>
               {cities.map((city) => (
                 <SelectItem key={city} value={city}>
                   {city}
                 </SelectItem>
               ))}
-            </SelectContent>
-          </Select>
-
-          {/* Sort */}
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger
-              className="
-            w-full md:w-44 h-11
-            rounded-full
-            bg-slate-50
-            px-4
-            text-sm font-medium text-slate-700
-            hover:bg-slate-100
-            focus:outline-none
-            focus:ring-0
-            focus-visible:ring-0
-            transition-colors
-          "
-              suppressHydrationWarning
-            >
-              <div className="flex items-center gap-2 truncate">
-                <TrendingUp className="w-4 h-4 text-slate-500 shrink-0" />
-                <SelectValue placeholder="Sort" />
-              </div>
-            </SelectTrigger>
-
-            <SelectContent className="rounded-xl shadow-md border-slate-200">
-              <SelectItem value="newest">Newest First</SelectItem>
-              <SelectItem value="popularity">Most Popular</SelectItem>
-              <SelectItem value="expiring">Expiring Soon</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -297,11 +274,18 @@ export function MerchantList({
   setSelectedMerchantId,
   loading,
   error,
+  page: rawPage,
+  totalItems: rawTotalItems,
   hasMore,
-  handleLoadMore,
-  loadingMore,
+  onPageChange,
   ads = [],
+  onAdClick,
 }) {
+  const t = useTranslations("Homepage.agent.marketplace");
+  const tDetail = useTranslations("Homepage.agent.merchantDetail");
+  const page = Number(rawPage || 1);
+  const totalItems = Number(rawTotalItems || 0);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-40 min-h-[400px] w-full animate-in fade-in duration-700">
@@ -318,11 +302,10 @@ export function MerchantList({
 
         <div className="text-center space-y-2">
           <h3 className="font-bold text-slate-900 text-xl tracking-tight">
-            Loading Marketplace
+            {t("loadingMarketplace")}
           </h3>
           <p className="text-slate-400 text-sm font-medium max-w-60 mx-auto leading-relaxed">
-            We&apos;re curating the best verified merchants and exclusive deals
-            for you...
+            {t("curatingMessage")}
           </p>
         </div>
       </div>
@@ -333,16 +316,14 @@ export function MerchantList({
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center px-4 bg-red-50 rounded-3xl border border-red-100">
         <Shield className="w-12 h-12 text-red-500 mb-4" />
-        <h3 className="text-red-900 font-bold text-lg">
-          Unable to load merchants
-        </h3>
+        <h3 className="text-red-900 font-bold text-lg">{t("unableToLoad")}</h3>
         <p className="text-sm font-medium text-red-600/80 mb-6">{error}</p>
         <Button
           variant="outline"
           onClick={() => window.location.reload()}
           className="bg-white border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800"
         >
-          Retry Connection
+          {t("retryConnection")}
         </Button>
       </div>
     );
@@ -368,35 +349,115 @@ export function MerchantList({
     }
   });
 
+  if (merchants.length === 0) {
+    return (
+      <div className="space-y-8">
+        <div className="text-center py-24 bg-white rounded-4xl border border-dashed border-slate-200">
+          <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <Store className="h-8 w-8 text-slate-300" />
+          </div>
+          <h3 className="font-bold text-slate-900 text-lg">
+            {t("noMerchantsFound")}
+          </h3>
+          <p className="text-slate-500">{t("tryAdjustingFilters")}</p>
+        </div>
+
+        {/* Pagination for empty results when not on page 1 */}
+        {page > 1 && (
+          <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                onClick={() => onPageChange(page - 1)}
+                disabled={page === 1}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+
+              <div className="flex items-center gap-1.5 px-2">
+                {Array.from({ length: page }).map((_, i) => {
+                  const pageNum = i + 1;
+                  if (
+                    pageNum === 1 ||
+                    pageNum === page ||
+                    (pageNum >= page - 1 && pageNum <= page + 1)
+                  ) {
+                    return (
+                      <Button
+                        key={pageNum}
+                        variant={page === pageNum ? "default" : "outline"}
+                        size="icon"
+                        className={cn(
+                          "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                          page === pageNum
+                            ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                            : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                        )}
+                        onClick={() => onPageChange(pageNum)}
+                      >
+                        {pageNum}
+                      </Button>
+                    );
+                  } else if (pageNum === 2 && page > 3) {
+                    return (
+                      <span
+                        key={pageNum}
+                        className="px-1 text-slate-400 font-bold"
+                      >
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                onClick={() => onPageChange(page + 1)}
+                disabled={true}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+              {t("pageNoResults", { page })}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
-      {/* Scrollable Container for Merchants */}
-      <div
-        className={cn(
-          "overflow-y-auto scroll-smooth h-[900px] pr-2",
-          // Custom scrollbar styles
-          "[&::-webkit-scrollbar]:w-2",
-          "[&::-webkit-scrollbar-track]:bg-slate-100",
-          "[&::-webkit-scrollbar-track]:rounded-full",
-          "[&::-webkit-scrollbar-thumb]:bg-slate-300",
-          "[&::-webkit-scrollbar-thumb]:rounded-full",
-          "[&::-webkit-scrollbar-thumb]:hover:bg-slate-400",
-          "pb-8",
-        )
-        }
-      >
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-x-8 gap-y-10">
+      {/* Container for Merchants - No Scrolling */}
+      <div className="px-1 py-4">
+        <div
+          className={cn(
+            "grid gap-x-4 gap-y-10",
+            merchants.length === 1
+              ? "grid-cols-1 w-full"
+              : merchants.length === 2
+                ? "grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full",
+          )}
+        >
           {combinedItems.map((item, idx) => {
             if (item.type === "ad") {
               return (
                 <div key={`ad-${idx}`} className="h-full">
-                  <InlineAd ad={item.data} />
+                  <InlineAd ad={item.data} onClick={onAdClick} />
                 </div>
               );
             }
 
             const merchant = item.data;
-            console.log("merchantdata", merchant);
             const isSelected = selectedMerchantId === merchant.id;
 
             return (
@@ -404,20 +465,23 @@ export function MerchantList({
                 key={merchant.id}
                 onClick={() => setSelectedMerchantId(merchant.id)}
                 className={cn(
-                  "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col h-full min-h-[380px] transition-all duration-500",
-                  "shadow-md shadow-slate-200/60 ",
+                  "group relative bg-white rounded-[2.5rem] overflow-hidden cursor-pointer flex flex-col transition-all duration-500",
+                  "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+                  "w-full",
                   isSelected
-                    ? "shadow-xl shadow-slate-300/70"
-                    : "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2",
+                    ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] scale-[1.02]"
+                    : "hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2",
                 )}
               >
                 {/* Cover Image Area */}
-                <div className="h-44 bg-slate-200 relative overflow-hidden">
+                <div className="relative overflow-hidden bg-slate-200 h-44">
                   <Image
                     src={getCategoryImage(merchant.category, merchant.id)}
-                    alt="cover"
+                    alt={`${merchant.name} cover`}
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={false}
                     unoptimized
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
@@ -438,8 +502,8 @@ export function MerchantList({
                 </div>
 
                 {/* Content */}
-                <div className="p-6 pt-6 flex-1 flex flex-col relative bg-white border-x border-b border-slate-50 rounded-b-[2.5rem]">
-                  <div className="space-y-2 mb-6 text-left ">
+                <div className="p-7 py-8 flex flex-col relative bg-white rounded-b-[2.5rem]">
+                  <div className="space-y-1 mb-6 text-left">
                     <h3 className="font-bold text-xl text-slate-900 leading-tight group-hover:text-primary transition-colors">
                       {merchant.name}
                     </h3>
@@ -453,18 +517,20 @@ export function MerchantList({
                         ))}
                       </div>
                       <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">
-                        Verified Merchant
+                        {tDetail("verifiedMerchant")}
                       </span>
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                  <div className="mt-auto pt-6 flex items-center justify-between">
                     <div className="flex flex-col text-left">
                       <span className="text-[9px] uppercase text-slate-400 font-bold tracking-wider">
-                        Available Deals
+                        {tDetail("availableDeals")}
                       </span>
                       <span className="text-base font-bold text-slate-900">
-                        {merchant.batches?.length || 0} Offers
+                        {tDetail("offers", {
+                          count: merchant.batches?.length || 0,
+                        })}
                       </span>
                     </div>
                     <Button
@@ -477,7 +543,8 @@ export function MerchantList({
                           : "bg-slate-50 text-slate-600 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20",
                       )}
                     >
-                      Details <ChevronRight className="w-4 h-4 ml-1" />
+                      {tDetail("details")}{" "}
+                      <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
                 </div>
@@ -487,24 +554,99 @@ export function MerchantList({
         </div>
       </div>
 
-      {hasMore && (
-        <div className="flex justify-center pt-8 ">
-          <Button
-            variant="outline"
-            size="lg"
-            className="rounded-full px-8 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-bold"
-            onClick={handleLoadMore}
-            disabled={loadingMore}
-          >
-            {loadingMore ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              "Load More Merchants"
-            )}
-          </Button>
+      {/* Pagination */}
+      {(totalItems > 6 || hasMore || page > 1) && !loading && (
+        <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+              onClick={() => onPageChange(page - 1)}
+              disabled={page === 1}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+
+            <div className="flex items-center gap-1.5 px-2">
+              {Array.from({
+                length: Math.max(
+                  page,
+                  hasMore && totalItems <= page * 6
+                    ? page + 1
+                    : Math.ceil(totalItems / 6),
+                ),
+              }).map((_, i) => {
+                const pageNum = i + 1;
+                const totalPages = Math.max(
+                  page,
+                  hasMore && totalItems <= page * 6
+                    ? page + 1
+                    : Math.ceil(totalItems / 6),
+                );
+
+                // Only show current, 1st, last, and neighbors
+                if (
+                  pageNum === 1 ||
+                  pageNum === totalPages ||
+                  (pageNum >= page - 1 && pageNum <= page + 1)
+                ) {
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant={page === pageNum ? "default" : "outline"}
+                      size="icon"
+                      className={cn(
+                        "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                        page === pageNum
+                          ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                          : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                      )}
+                      onClick={() => onPageChange(pageNum)}
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                } else if (
+                  (pageNum === 2 && page > 3) ||
+                  (pageNum === totalPages - 1 && page < totalPages - 2)
+                ) {
+                  return (
+                    <span
+                      key={pageNum}
+                      className="px-1 text-slate-400 font-bold"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+                return null;
+              })}
+            </div>
+
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+              onClick={() => onPageChange(page + 1)}
+              disabled={!hasMore}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {totalItems > 0 && (
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+              {(page - 1) * 6 >= totalItems ||
+              (totalItems <= page * 6 && hasMore)
+                ? t("showingPage", { page })
+                : t("showing", {
+                    start: (page - 1) * 6 + 1,
+                    end: Math.min(page * 6, totalItems),
+                    total: totalItems,
+                  })}
+            </p>
+          )}
         </div>
       )}
     </div>
@@ -513,6 +655,7 @@ export function MerchantList({
 
 export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   const router = useRouter();
+  const tDetail = useTranslations("Homepage.agent.merchantDetail");
 
   // Mobile/Tablet View handled via simple conditionally rendered sheet or similar if needed,
   // but for now keeping the "selected means highlighted" flow.
@@ -522,19 +665,19 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
   if (!activeMerchant) {
     return (
-      <div className="hidden lg:flex sticky top-28 h-[600px] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
+      <div className="hidden lg:flex sticky mt-5  w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
         <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center">
           <h3 className="font-bold text-slate-900 text-2xl mb-4 tracking-tight">
-            Ready to Explore?
+            {tDetail("readyToExplore")}
           </h3>
           <p className="text-slate-400 max-w-60 text-sm font-medium leading-relaxed">
-            Click on a merchant profile on the left to unlock their{" "}
+            {tDetail("clickMerchantPrompt")}{" "}
             <span className="text-primary font-semibold">
-              exclusive coupons
+              {tDetail("exclusiveCoupons")}
             </span>{" "}
-            and limited-time offers.
+            {tDetail("limitedTimeOffers")}
           </p>
 
           <div className="mt-10 flex items-center gap-2 opacity-30">
@@ -547,8 +690,14 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
     );
   }
 
+  const couponsCount = activeMerchant.batches?.length || 0;
+
   return (
-    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden sticky top-28 animate-in slide-in-from-right-10 duration-500 ease-out max-h-[calc(100vh-140px)] flex flex-col">
+    <div
+      className={cn(
+        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all h-[777px]",
+      )}
+    >
       {/* Header */}
       <div className="relative h-48 bg-slate-900 shrink-0">
         <Image
@@ -583,74 +732,80 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-emerald-500" />
-              Available Coupons
+              {tDetail("availableCoupons")}
             </h3>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              {activeMerchant.batches?.length || 0} Deals Found
+              {tDetail("dealsFound", {
+                count: activeMerchant.batches?.length || 0,
+              })}
             </span>
           </div>
         </div>
 
         {/* Scrollable Coupons Section */}
         <div className="px-6 md:px-8 pb-6 md:pb-8 overflow-y-auto flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
-          <div className="space-y-4">
+          <div className="space-y-6">
             {activeMerchant.batches?.length > 0 ? (
               activeMerchant.batches.map((batch) => (
                 <div
                   key={batch.id}
-                  className="group bg-white rounded-2xl shadow-sm shadow-slate-200/70 hover:shadow-lg hover:scale-[0.99] hover:shadow-slate-300/40 hover:-translate-y-0.5 transition-all duration-300 ease-out relative overflow-hidden flex flex-col"
+                  className="group bg-white rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out relative overflow-hidden"
                 >
-                  <div className="absolute top-2 right-2 z-10">
+                  {/* Status Badge */}
+                  <div className="absolute top-4 right-4 z-10">
                     <Badge
                       variant={batch.is_active ? "neutral" : "secondary"}
                       className={cn(
-                        "font-bold text-[10px] shadow-sm",
+                        "font-bold text-[10px] shadow-lg",
                         batch.is_active
                           ? "bg-emerald-100 text-emerald-700"
                           : "bg-slate-100 text-slate-500",
                       )}
                     >
-                      {batch.is_active ? "LIVE" : "EXPIRED"}
+                      {batch.is_active ? tDetail("live") : tDetail("expired")}
                     </Badge>
                   </div>
 
-                  {/* HTML Preview Thumbnail - Full Width Top */}
+                  {/* HTML Preview - Full Display */}
                   <div
-                    className="w-full cursor-pointer hover:opacity-90 transition overflow-hidden bg-slate-50/50"
+                    className="w-full cursor-pointer hover:opacity-95 transition-opacity"
                     onClick={() => handleGetCoupon(activeMerchant, batch)}
                     dangerouslySetInnerHTML={{ __html: batch.rendered_html }}
                   />
 
-                  {/* Content - Bottom */}
-                  <div className="p-3 space-y-2 border-t border-slate-50">
-                    <div className="flex justify-between items-start gap-2">
-                      <h4 className="font-bold text-slate-900 text-sm leading-tight line-clamp-2">
+                  {/* Bottom Section - Info & Action */}
+                  <div className="p-5 space-y-3 border-t border-slate-100 bg-slate-50/30">
+                    <div className="flex justify-between items-start gap-3">
+                      <h4 className="font-bold text-slate-900 text-base leading-tight line-clamp-2 flex-1">
                         {batch.batch_name}
                       </h4>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-                        {batch.total_quantity - batch.issued_quantity} left
+                      <span className="text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200 whitespace-nowrap">
+                        {tDetail("left", {
+                          count: batch.total_quantity - batch.issued_quantity,
+                        })}
                       </span>
                     </div>
 
-                    <div className="pt-1">
-                      <Button
-                        size="sm"
-                        className="w-full text-xs font-bold rounded-lg h-8 shadow-sm"
-                        onClick={() => handleGetCoupon(activeMerchant, batch)}
-                      >
-                        Get Coupon
-                      </Button>
-                    </div>
+                    <Button
+                      size="default"
+                      className="w-full text-sm font-bold rounded-xl h-11 shadow-md hover:shadow-lg transition-all"
+                      onClick={() => handleGetCoupon(activeMerchant, batch)}
+                    >
+                      {tDetail("getCoupon")}
+                    </Button>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-                <p className="text-sm text-slate-500 font-medium">
-                  No active coupons at the moment.
+              <div className="h-full flex flex-col items-center justify-center text-center py-12 bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
+                <div className="bg-white p-4 rounded-2xl shadow-sm mb-4">
+                  <TrendingUp className="w-8 h-8 text-slate-300" />
+                </div>
+                <p className="text-sm text-slate-500 font-bold">
+                  {tDetail("noActiveCoupons")}
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  {tDetail("checkBackLater")}
                 </p>
               </div>
             )}

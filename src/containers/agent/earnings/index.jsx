@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
-import { useTranslations } from "next-intl";
 import { kpiData as getKpiData, monthlyEarnings, commissionBreakdown as mockBreakdown } from "./earnings-data";
 import { earningsColumns } from "./earnings-columns";
 import { KpiCard } from "@/components/common/kpi-card";
@@ -32,8 +31,6 @@ export default function AgentEarningsContainer() {
     topMerchant: "—",
   });
 
-  const tAgentEarnings = useTranslations("dashboard.agentEarnings");
-
   useEffect(() => {
     if (!adminId) return;
 
@@ -43,14 +40,13 @@ export default function AgentEarningsContainer() {
         const res = await axiosInstance.get(`/wallets/admin/${adminId}/transactions`, {
           params: {
             page: 1,
-            limit: 100, // Fetch more to allow for client-side aggregation
+            limit: 100,
             type: "commission",
           },
         });
 
         const rawData = res.data.data || [];
 
-        // Grouping by merchant_id and source (merchant type)
         const grouped = rawData.reduce((acc, item) => {
           let meta = {};
           try {
@@ -104,7 +100,7 @@ export default function AgentEarningsContainer() {
 
   const KpiData = [
     {
-      title: tAgentEarnings("totalearnings"),
+      title: "Total Earnings",
       value: `$${stats.totalEarned.toLocaleString()}`,
       icon: DollarSign,
       trend: "up",
@@ -117,17 +113,31 @@ export default function AgentEarningsContainer() {
     },
     {
       title: "Earnings Type",
-      value: "Prepaid ",
+      value: "Prepaid",
       icon: Lock,
     }
   ];
 
-  const EarningColumns = earningsColumns(tAgentEarnings);
+  const EarningColumns = earningsColumns();
 
-  const filteredEarnings = earnings.filter((item) =>
-    item.merchant.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-    item.source?.toLowerCase().includes(debouncedSearch.toLowerCase())
-  );
+  const filteredEarnings = useMemo(() => {
+    return earnings.filter((item) =>
+      item.merchant.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      item.source?.toLowerCase().includes(debouncedSearch.toLowerCase())
+    );
+  }, [earnings, debouncedSearch]);
+
+  // Reset to first page when search changes
+  useEffect(() => {
+    setPage(0);
+  }, [debouncedSearch]);
+
+  // Paginate the filtered data
+  const paginatedEarnings = useMemo(() => {
+    const startIndex = page * pageSize;
+    const endIndex = startIndex + pageSize;
+    return filteredEarnings.slice(startIndex, endIndex);
+  }, [filteredEarnings, page, pageSize]);
 
   return (
     <div className="space-y-6">
@@ -138,10 +148,9 @@ export default function AgentEarningsContainer() {
       </div>
 
       <div className="grid gap-6">
-        {/* Main Breakdown Table - Now Full Width */}
-        <Card className="shadow-sm">
+        <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader className="pb-4">
-            <CardTitle>{tAgentEarnings("commissionbreakdown")}</CardTitle>
+            <CardTitle>Commission Breakdown</CardTitle>
             <CardDescription className="text-xs">Consolidated commissions per merchant.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -150,11 +159,11 @@ export default function AgentEarningsContainer() {
               onSearchChange={setSearch}
             />
             <DataTable
-              data={filteredEarnings}
+              data={paginatedEarnings}
               columns={EarningColumns}
               page={page}
               pageSize={pageSize}
-              total={total}
+              total={filteredEarnings.length}
               setPage={setPage}
               setPageSize={setPageSize}
               loading={loading}

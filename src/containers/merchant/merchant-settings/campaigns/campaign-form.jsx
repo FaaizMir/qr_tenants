@@ -24,6 +24,7 @@ import BatchSelector from "../components/BatchSelector";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function CampaignFormDialog({
   open,
@@ -32,6 +33,7 @@ export default function CampaignFormDialog({
   merchantId,
   onSuccess,
 }) {
+  const t = useTranslations("merchantCampaigns");
   const isEditMode = !!campaign;
 
   const [formData, setFormData] = useState({
@@ -76,12 +78,12 @@ export default function CampaignFormDialog({
 
     // Validation
     if (!formData.name || !formData.message || !formData.date) {
-      toast.error("All fields are required");
+      toast.error(t("validation.allFieldsRequired"));
       return;
     }
 
     if (formData.sendCoupons && !formData.batchId) {
-      toast.error("Please select a coupon batch");
+      toast.error(t("validation.selectCouponBatch"));
       return;
     }
 
@@ -103,11 +105,11 @@ export default function CampaignFormDialog({
       if (isEditMode) {
         // Use PUT for updates as per API documentation
         await axiosInstance.put(`/scheduled-campaigns/${campaign.id}`, payload);
-        toast.success("Campaign updated successfully");
+        toast.success(t("success.updated"));
       } else {
         payload.merchant_id = merchantId;
         await axiosInstance.post("/scheduled-campaigns", payload);
-        toast.success("Campaign created successfully");
+        toast.success(t("success.created"));
       }
 
       onSuccess();
@@ -116,8 +118,8 @@ export default function CampaignFormDialog({
       const errorMsg =
         error?.response?.data?.message ||
         (isEditMode
-          ? "Failed to update campaign"
-          : "Failed to create campaign");
+          ? t("errors.failedToUpdate")
+          : t("errors.failedToCreate"));
       toast.error(errorMsg);
     } finally {
       setSaving(false);
@@ -129,22 +131,22 @@ export default function CampaignFormDialog({
       <DialogContent className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {isEditMode ? "Edit Campaign" : "Create New Campaign"}
+            {isEditMode ? t("form.editTitle") : t("form.createTitle")}
           </DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Update your campaign details below"
-              : "Fill in the details to schedule a new campaign"}
+              ? t("form.editDescription")
+              : t("form.createDescription")}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-5 py-4 ">
           <div className="space-y-2">
             <Label className="text-sm font-semibold">
-              Campaign Name <span className="text-red-500">*</span>
+              {t("form.campaignName")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
-              placeholder="Ex: Halloween Sale, Summer Promo"
+              placeholder={t("form.campaignNamePlaceholder")}
               value={formData.name}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, name: e.target.value }))
@@ -157,7 +159,7 @@ export default function CampaignFormDialog({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm font-semibold">
-                Launch Date & Time <span className="text-red-500">*</span>
+                {t("form.launchDateTime")} <span className="text-red-500">{t("form.required")}</span>
               </Label>
               <div className="relative group">
                 <Input
@@ -174,7 +176,7 @@ export default function CampaignFormDialog({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-semibold">Target Audience</Label>
+              <Label className="text-sm font-semibold">{t("form.targetAudience")}</Label>
               <div className="relative">
                 <Select
                   value={formData.audience}
@@ -186,11 +188,11 @@ export default function CampaignFormDialog({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Users</SelectItem>
-                    <SelectItem value="active">Active Users</SelectItem>
-                    <SelectItem value="inactive">Inactive Users</SelectItem>
-                    <SelectItem value="first_time">First-time Users</SelectItem>
-                    <SelectItem value="returning">Returning Users</SelectItem>
+                    <SelectItem value="all">{t("form.allUsers")}</SelectItem>
+                    <SelectItem value="active">{t("form.activeUsers")}</SelectItem>
+                    <SelectItem value="inactive">{t("form.inactiveUsers")}</SelectItem>
+                    <SelectItem value="first_time">{t("form.firstTimeUsers")}</SelectItem>
+                    <SelectItem value="returning">{t("form.returningUsers")}</SelectItem>
                   </SelectContent>
                 </Select>
                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
@@ -200,10 +202,10 @@ export default function CampaignFormDialog({
 
           <div className="space-y-2">
             <Label className="text-sm font-semibold">
-              Campaign Message <span className="text-red-500">*</span>
+              {t("form.campaignMessage")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Textarea
-              placeholder="Hi {name}, we have a special offer just for you..."
+              placeholder={t("form.campaignMessagePlaceholder")}
               value={formData.message}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, message: e.target.value }))
@@ -212,7 +214,7 @@ export default function CampaignFormDialog({
               required
             />
             <p className="text-xs text-muted-foreground">
-              Use {"{name}"} to personalize the message
+              {t("form.personalizationHint")}
             </p>
           </div>
 
@@ -221,7 +223,7 @@ export default function CampaignFormDialog({
               <div className="flex items-center gap-2">
                 <Ticket className="h-4 w-4 text-orange-500" />
                 <Label className="text-sm font-semibold cursor-pointer">
-                  Attach Coupon to Campaign
+                  {t("form.attachCoupon")}
                 </Label>
               </div>
               <Switch
@@ -235,7 +237,7 @@ export default function CampaignFormDialog({
             {formData.sendCoupons && (
               <div className="space-y-2 pt-2">
                 <Label className="text-xs text-muted-foreground">
-                  Select Coupon Batch
+                  {t("form.selectCouponBatch")}
                 </Label>
                 <BatchSelector
                   selectedId={formData.batchId}
@@ -243,7 +245,7 @@ export default function CampaignFormDialog({
                   onSelect={(id) =>
                     setFormData((prev) => ({ ...prev, batchId: id }))
                   }
-                  placeholder="Choose a coupon batch..."
+                  placeholder={t("form.chooseCouponBatch")}
                   className="h-10"
                 />
               </div>
@@ -258,18 +260,18 @@ export default function CampaignFormDialog({
             onClick={() => onOpenChange(false)}
             disabled={saving}
           >
-            Cancel
+            {t("form.cancel")}
           </Button>
           <Button onClick={handleSubmit} disabled={saving}>
             {saving ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                Saving...
+                {t("form.saving")}
               </>
             ) : (
               <>
                 <Save className="h-4 w-4 mr-2" />
-                {isEditMode ? "Update Campaign" : "Create Campaign"}
+                {isEditMode ? t("form.updateButton") : t("form.createButton")}
               </>
             )}
           </Button>

@@ -1,0 +1,59 @@
+{
+  "title": "เพิ่มพลังให้ร้านค้าของคุณ",
+  "subtitle": "เลือกแพ็คเกจเครดิตสำหรับข้อความ WhatsApp การสร้างคูปอง และโฆษณาแบบชำระเงิน",
+  "loading": "กำลังโหลดแพ็คเกจ...",
+  "errors": {
+    "loadPackages": "ไม่สามารถโหลดแพ็คเกจเครดิตได้ กรุณาลองอีกครั้ง",
+    "noMerchantId": "ไม่สามารถระบุ ID ผู้ขายได้ กรุณาติดต่อฝ่ายสนับสนุน",
+    "purchaseFailed": "การซื้อแพ็คเกจล้มเหลว กรุณาลองอีกครั้ง",
+    "requestFailed": "คำขอล้มเหลวด้วยสถานะ {status}"
+  },
+  "emptyState": {
+    "noPackages": "ไม่พบแพ็คเกจเครดิตสำหรับประเภทผู้ขายของคุณ"
+  },
+  "packageTypes": {
+    "coupon": "คูปอง",
+    "whatsappUI": "ข้อความ WhatsApp UI",
+    "whatsappBI": "ข้อความ WhatsApp BI",
+    "whatsapp": "ข้อความ WhatsApp",
+    "paidAds": "โฆษณาแบบชำระเงิน",
+    "standard": "มาตรฐาน"
+  },
+  "merchantTypes": {
+    "annual": "รายปี",
+    "temporary": "ชั่วคราว",
+    "standard": "มาตรฐาน"
+  },
+  "packageCard": {
+    "perCredit": "ต่อเครดิต",
+    "baseCredits": "{credits} เครดิตพื้นฐาน",
+    "bonusCredits": "+{bonusCredits} เครดิตโบนัส",
+    "enhancedFeatures": "คุณสมบัติและความจุที่ได้รับการปรับปรุง",
+    "getStarted": "เริ่มต้น"
+  },
+  "checkout": {
+    "title": "ภาพรวมคำสั่งซื้อ",
+    "subtitle": "รายละเอียดการชำระเงิน",
+    "selectedPackage": "แพ็คเกจที่เลือก",
+    "premiumDescription": "แพ็คเกจเครดิตพรีเมียมสำหรับการเติบโตของธุรกิจของคุณ",
+    "creditsIncluded": "เครดิตที่รวมอยู่",
+    "bonusGift": "ของขวัญโบนัส",
+    "packageType": "ประเภทแพ็คเกจ",
+    "totalAmount": "จำนวนเงินทั้งหมด",
+    "securePayment": "การชำระเงินที่ปลอดภัย",
+    "sslEncrypted": "เกตเวย์ Stripe เข้ารหัส SSL",
+    "cardDetails": "รายละเอียดบัตร",
+    "paymentInfo": "กรุณากรอกข้อมูลการชำระเงินของคุณด้านล่าง",
+    "amountPayable": "จำนวนเงินที่ต้องชำระ",
+    "trustedPartners": "พันธมิตรที่เชื่อถือได้",
+    "noSelection": "ไม่พบการเลือก",
+    "noSelectionMessage": "กรุณาปิดหน้าต่างนี้และเลือกแพ็คเกจเครดิตเพื่อดำเนินการอัปเกรดของคุณ"
+  },
+  "success": {
+    "purchaseComplete": "ซื้อแพ็คเกจสำเร็จแล้ว"
+  },
+  "toast": {
+    "purchaseSuccess": "ซื้อแพ็คเกจสำเร็จแล้ว",
+    "purchaseError": "การซื้อแพ็คเกจล้มเหลว กรุณาลองอีกครั้ง"
+  }
+}

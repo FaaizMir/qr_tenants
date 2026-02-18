@@ -39,6 +39,7 @@ import {
   Play,
 } from "lucide-react";
 import Cropper from "react-easy-crop";
+import imageCompression from "browser-image-compression";
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { getCroppedImg, getImageUrl } from "@/lib/utils/imageUtils";
@@ -54,6 +55,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   });
 
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
   );
@@ -113,6 +115,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     if (!merchantId) return;
 
     setUploading(true);
+    setUploadProgress(0);
     try {
       // 1. Update general settings (toggle, placement, duration)
       await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, {
@@ -131,12 +134,22 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             pendingFile.filename || "image.jpg",
           );
           formData.append("paidAdPlacement", state.placement || "top");
+          formData.append(
+            "paidAdDuration",
+            String(state.paid_ad_duration || "7"),
+          );
 
           const response = await axiosInstance.post(
             `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
+              onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total,
+                );
+                setUploadProgress(percentCompleted);
+              },
             },
           );
 
@@ -150,12 +163,26 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           }
         } else if (pendingFile.type === "video") {
           formData.append("paidAdVideo", pendingFile.file);
+          formData.append("paidAdPlacement", state.placement || "top");
+          formData.append(
+            "paidAdDuration",
+            String(state.paid_ad_duration || "7"),
+          );
 
           const response = await axiosInstance.post(
             `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
+              timeout: 180000, // 3 minutes timeout for video uploads
+              maxContentLength: Infinity,
+              maxBodyLength: Infinity,
+              onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total,
+                );
+                setUploadProgress(percentCompleted);
+              },
             },
           );
 
@@ -174,9 +201,16 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       toast.success("Settings and ad updated successfully");
     } catch (error) {
       console.error(error);
-      toast.error(error?.response?.data?.message || "Error saving settings");
+      if (error.code === "ECONNABORTED") {
+        toast.error(
+          "Upload timeout. Please try with a smaller file or check your connection.",
+        );
+      } else {
+        toast.error(error?.response?.data?.message || "Error saving settings");
+      }
     } finally {
       setUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -199,6 +233,15 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const handleFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+
+      // More generous initial size check (10MB) - we'll compress after
+      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+      if (file.size > maxSize) {
+        toast.error("Image size must be less than 10MB");
+        e.target.value = null; // Clear the input
+        return;
+      }
+
       setCurrentFilename(file.name);
       let imageDataUrl = await readFile(file);
       setImageSrc(imageDataUrl);
@@ -212,13 +255,19 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     const file = e.target.files[0];
     if (!file || !merchantId) return;
 
-    // Size limit check (e.g., 50MB)
-    if (file.size > 50 * 1024 * 1024) {
-      toast.error("Video file is too large. Max size is 50MB.");
+    // Size limit check (25MB)
+    const maxSize = 25 * 1024 * 1024; // 25MB in bytes
+    if (file.size > maxSize) {
+      toast.error("Video file is too large. Max size is 25MB.");
+      e.target.value = null; // Clear the input
       return;
     }
 
-    // setUploading(true); // Defer upload
+    // Optimize video format check - prefer MP4 and WebM
+    const fileType = file.type.toLowerCase();
+    if (!fileType.includes("mp4") && !fileType.includes("webm")) {
+      toast.warning("For best performance, use MP4 or WebM format.");
+    }
 
     // Create local object URL for preview
     const objectUrl = URL.createObjectURL(file);
@@ -230,7 +279,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       filename: file.name,
     });
     setActiveTab("video");
-    toast.info("Video selected. Click 'Upload & Save' to finish.");
+
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+    toast.info(
+      `Video selected (${sizeMB}MB). Click 'Upload & Save' to finish.`,
+    );
   };
 
   const readFile = (file) => {
@@ -244,22 +297,44 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const handleCropAndSave = async () => {
     try {
       const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
-      const objectUrl = URL.createObjectURL(croppedBlob);
+
+      // Compress the cropped image for faster upload
+      const options = {
+        maxSizeMB: 0.8, // Target 800KB max
+        maxWidthOrHeight: 1920, // Max dimension
+        useWebWorker: true,
+        fileType: "image/jpeg", // Convert to JPEG for better compression
+        initialQuality: 0.85, // High quality but compressed
+      };
+
+      toast.info("Optimizing image...");
+      const compressedFile = await imageCompression(croppedBlob, options);
+
+      const objectUrl = URL.createObjectURL(compressedFile);
+      const filename =
+        currentFilename?.replace(/\.[^/.]+$/, ".jpg") || "image.jpg";
 
       setPendingFile({
-        file: croppedBlob,
+        file: compressedFile,
         type: "image",
         previewUrl: objectUrl,
-        filename: currentFilename || "image.jpg",
+        filename: filename,
       });
 
       setActiveTab("image");
       setIsCropperOpen(false);
       setImageSrc(null); // Clear raw source
-      toast.info("Image selected. Click Upload & Save to apply changes.");
+
+      const sizeReduction = (
+        ((croppedBlob.size - compressedFile.size) / croppedBlob.size) *
+        100
+      ).toFixed(0);
+      toast.success(
+        `Image optimized! Size reduced by ${sizeReduction}%. Ready to upload.`,
+      );
     } catch (error) {
       console.error(error);
-      toast.error("Error cropping image");
+      toast.error("Error processing image");
     }
   };
 
@@ -500,7 +575,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                             Add Image
                           </span>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
-                            1200x600px recommended
+                            Auto-compressed • Max 10MB
                           </p>
                         </div>
                       </Label>
@@ -599,7 +674,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                             Add Video
                           </span>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
-                            MP4, WebM (Max 50MB)
+                            MP4, WebM (Max 25MB)
+                          </p>
+                          <p className="text-[10px] text-muted-foreground">
+                            Smaller files upload faster
                           </p>
                         </div>
                       </Label>
@@ -623,7 +701,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         image={imageSrc}
                         crop={crop}
                         zoom={zoom}
-                        aspect={1}
+                        aspect={16 / 9}
                         onCropChange={setCrop}
                         onCropComplete={onCropComplete}
                         onZoomChange={setZoom}
@@ -713,20 +791,42 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                 </DialogContent>
               </Dialog>
               <div className="flex justify-end pt-4">
-                <Button
-                  onClick={handleSubmit}
-                  disabled={uploading}
-                  className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto"
-                >
-                  {uploading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Uploading...
-                    </>
-                  ) : (
-                    "Upload & Save"
+                <div className="w-full sm:w-auto">
+                  {uploading && uploadProgress > 0 && (
+                    <div className="mb-2">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-muted-foreground">
+                          Upload Progress
+                        </span>
+                        <span className="text-xs font-semibold text-primary">
+                          {uploadProgress}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-blue-700 h-2 rounded-full transition-all duration-300 ease-out"
+                          style={{ width: `${uploadProgress}%` }}
+                        />
+                      </div>
+                    </div>
                   )}
-                </Button>
+                  <Button
+                    onClick={handleSubmit}
+                    disabled={uploading}
+                    className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto"
+                  >
+                    {uploading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {uploadProgress > 0
+                          ? `Uploading... ${uploadProgress}%`
+                          : "Uploading..."}
+                      </>
+                    ) : (
+                      "Upload & Save"
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>

@@ -1,15 +1,30 @@
 {
-  "description": "Không gian làm việc an toàn, đa người dùng cho đại lý và thương nhân.\nXem bảng điều khiển, phát hành phiếu giảm giá và theo dõi phản hồi của khách hàng từ một nơi.",
-  "description2": "Sử dụng thông tin đăng nhập đại lý hoặc thương nhân của bạn để tiếp tục.",
-  "forgotPassword": "Quên mật khẩu?",
-  "heading1": "Đăng nhập để khởi động phản hồi QR, phiếu giảm giá và thông báo WhatsApp.",
-  "label1": "Phản hồi QR trong vài giây",
-  "label2": "Theo dõi WhatsApp đã sẵn sàng",
-  "label3": "Người thuê được cách ly và an toàn",
-  "label4": "Tên người dùng",
-  "label5": "Mật khẩu",
-  "qrReview": "Đánh giá QR SaaS",
-  "registerAgent": "Đăng ký làm đại lý",
+  "qrReview": "QR REVIEW SAAS",
+  "heading1": "Đăng nhập để khởi chạy phản hồi QR, phiếu giảm giá và thông báo WhatsApp.",
+  "description": "Không gian làm việc đa thuê bao an toàn cho đại lý và thương nhân. Xem bảng điều khiển, phát hành phiếu giảm giá và theo dõi phản hồi của khách hàng từ một nơi.",
+  "label1": "Phản hồi QR",
+  "label2": "Tự động hóa WhatsApp",
+  "label3": "An toàn & Đã xác minh",
+  "welcome": "Chào mừng trở lại",
   "signin": "Đăng nhập",
-  "welcome": "Chào mừng trở lại"
+  "description2": "Nhập thông tin đăng nhập của bạn để truy cập bảng điều khiển",
+  "label4": "Tên người dùng hoặc Email",
+  "label5": "Mật khẩu",
+  "forgotPassword": "Quên mật khẩu?",
+  "noAccount": "Không có tài khoản?",
+  "signupLink": "Đăng ký tại đây",
+  "placeholders": {
+    "username": "Nhập tên người dùng hoặc email của bạn",
+    "password": "Nhập mật khẩu của bạn",
+    "loadingText": "Đang đăng nhập...",
+    "submitLoading": "Đăng nhập"
+  },
+  "validations": {
+    "error1": "Tên người dùng hoặc mật khẩu không hợp lệ",
+    "error2": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "invalidCredentials": "Email hoặc mật khẩu không hợp lệ. Vui lòng kiểm tra thông tin đăng nhập của bạn.",
+    "accountInactive": "Tài khoản của bạn không hoạt động. Vui lòng liên hệ với đại lý của bạn.",
+    "unableToDetermineRole": "Không thể xác định vai trò người dùng",
+    "credentialsSignin": "Email hoặc mật khẩu không hợp lệ. Vui lòng kiểm tra thông tin đăng nhập của bạn."
+  }
 }

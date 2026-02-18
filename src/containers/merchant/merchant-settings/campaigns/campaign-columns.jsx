@@ -44,31 +44,31 @@ const formatDate = (dateString) => {
 };
 
 // Get status badge
-const getStatusBadge = (status) => {
+const getStatusBadge = (status, t) => {
   const statusConfig = {
     scheduled: {
       variant: "default",
-      label: "Scheduled",
+      label: t("scheduled"),
       class: "bg-blue-100 text-blue-800 hover:bg-blue-100",
     },
     processing: {
       variant: "secondary",
-      label: "Processing",
+      label: t("processing"),
       class: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
     },
     completed: {
       variant: "secondary",
-      label: "Completed",
+      label: t("completed"),
       class: "bg-green-100 text-green-800 hover:bg-green-100",
     },
     failed: {
       variant: "destructive",
-      label: "Failed",
+      label: t("failed"),
       class: "bg-red-100 text-red-800 hover:bg-red-100",
     },
     cancelled: {
       variant: "outline",
-      label: "Cancelled",
+      label: t("cancelled"),
       class: "bg-gray-100 text-gray-800 hover:bg-gray-100",
     },
   };
@@ -81,7 +81,7 @@ const getStatusBadge = (status) => {
 };
 
 // Actions Cell Component
-const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
+const ActionsCell = ({ campaign, onEdit, onDelete, onCancel, t }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
 
@@ -105,7 +105,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
           <DropdownMenuLabel className="text-xs font-semibold text-gray-500 uppercase">
-            Campaign Options
+            {t("actions.campaignOptions")}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
@@ -114,7 +114,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
               className="flex items-center gap-2 cursor-pointer"
             >
               <FileText className="h-4 w-4" />
-              <span>Details</span>
+              <span>{t("actions.details")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -123,7 +123,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
             disabled={!canEdit}
           >
             <Edit2 className="h-4 w-4" />
-            <span>Edit</span>
+            <span>{t("actions.edit")}</span>
           </DropdownMenuItem>
 
           {canDelete && (
@@ -134,7 +134,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
                 className="flex items-center gap-2 cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
               >
                 <Trash2 className="h-4 w-4" />
-                <span>Delete</span>
+                <span>{t("actions.delete")}</span>
               </DropdownMenuItem>
             </>
           )}
@@ -146,15 +146,14 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <CalendarClock className="h-5 w-5 text-orange-500" />
-              Cancel Campaign
+              {t("cancelDialog.title")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to cancel &quot;{campaign.campaign_name}
-              &quot;? The campaign will not be sent.
+              {t("cancelDialog.description", { campaignName: campaign.campaign_name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="rounded-xl">{t("cancelDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
                 onCancel(campaign.id);
@@ -162,7 +161,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
               }}
               className="bg-orange-600 hover:bg-orange-700 rounded-xl"
             >
-              Cancel Campaign
+              {t("cancelDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -173,15 +172,14 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <Trash2 className="h-5 w-5 text-red-500" />
-              Delete Campaign
+              {t("deleteDialog.title")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete &quot;{campaign.campaign_name}
-              &quot;? This action cannot be undone.
+              {t("deleteDialog.description", { campaignName: campaign.campaign_name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="rounded-xl">{t("deleteDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
                 onDelete(campaign.id);
@@ -189,7 +187,7 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
               }}
               className="bg-red-600 hover:bg-red-700 rounded-xl"
             >
-              Delete
+              {t("deleteDialog.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -198,10 +196,10 @@ const ActionsCell = ({ campaign, onEdit, onDelete, onCancel }) => {
   );
 };
 
-export const getCampaignColumns = (onEdit, onDelete, onCancel) => [
+export const getCampaignColumns = (onEdit, onDelete, onCancel, t) => [
   {
     accessorKey: "campaign_name",
-    header: "Campaign",
+    header: t("columns.campaign"),
     cell: ({ row }) => (
       <div className="flex items-center gap-3 min-w-[200px]">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-linear-to-br from-blue-50 to-blue-100 text-blue-600 ">
@@ -220,7 +218,7 @@ export const getCampaignColumns = (onEdit, onDelete, onCancel) => [
   },
   {
     accessorKey: "scheduled_date",
-    header: "Scheduled Date",
+    header: t("columns.scheduledDate"),
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <CalendarClock className="h-4 w-4 text-muted-foreground" />
@@ -232,39 +230,39 @@ export const getCampaignColumns = (onEdit, onDelete, onCancel) => [
   },
   {
     accessorKey: "target_audience",
-    header: "Audience",
+    header: t("columns.audience"),
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <Users className="h-4 w-4 text-muted-foreground" />
         <span className="capitalize text-sm">
-          {row.getValue("target_audience") || "All"}
+          {row.getValue("target_audience") || t("columns.all")}
         </span>
       </div>
     ),
   },
   {
     accessorKey: "send_coupons",
-    header: "Coupon",
+    header: t("columns.coupon"),
     cell: ({ row }) => {
       const sendCoupons = row.getValue("send_coupons");
       return sendCoupons ? (
         <div className="flex items-center gap-1.5 text-green-600">
           <Ticket className="h-4 w-4" />
-          <span className="text-sm font-medium">Included</span>
+          <span className="text-sm font-medium">{t("columns.included")}</span>
         </div>
       ) : (
-        <span className="text-sm text-muted-foreground">No</span>
+        <span className="text-sm text-muted-foreground">{t("columns.no")}</span>
       );
     },
   },
   {
     accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => getStatusBadge(row.getValue("status")),
+    header: t("columns.status"),
+    cell: ({ row }) => getStatusBadge(row.getValue("status"), t),
   },
   {
     id: "actions",
-    header: () => <div className="text-center">Actions</div>,
+    header: () => <div className="text-center">{t("columns.actions")}</div>,
     cell: ({ row }) => {
       const campaign = row.original;
       return (
@@ -274,6 +272,7 @@ export const getCampaignColumns = (onEdit, onDelete, onCancel) => [
             onEdit={onEdit}
             onDelete={onDelete}
             onCancel={onCancel}
+            t={t}
           />
         </div>
       );

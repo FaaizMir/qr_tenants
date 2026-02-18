@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import {
   Card,
@@ -35,6 +36,7 @@ import { cn } from "@/lib/utils";
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
 export default function MerchantPurchase() {
+  const t = useTranslations("merchantPurchase");
   const { data: session } = useSession();
   const user = session?.user;
 
@@ -70,7 +72,7 @@ export default function MerchantPurchase() {
         setPackages(Array.isArray(data) ? data : []);
       } catch (err) {
         if (!mounted) return;
-        setError("Unable to load credit packages. Please try again.");
+        setError(t("errors.loadPackages"));
       } finally {
         if (mounted) setLoading(false);
       }
@@ -122,7 +124,7 @@ export default function MerchantPurchase() {
     );
 
     if (!merchant_id) {
-      toast.error("Unable to determine merchant id. Please contact support.", {
+      toast.error(t("errors.noMerchantId"), {
         closeButton: true,
         duration: false,
       });
@@ -150,7 +152,7 @@ export default function MerchantPurchase() {
         payload,
       );
 
-      toast.success("Package purchased successfully.", {
+      toast.success(t("success.purchaseComplete"), {
         closeButton: true,
         duration: false,
       });
@@ -213,17 +215,16 @@ export default function MerchantPurchase() {
     <div className="space-y-10 animate-in fade-in duration-500">
       <div className="flex flex-col gap-3">
         <h1 className="text-4xl font-extrabold tracking-tight bg-linear-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
-          Power Up Your Store
+          {t("title")}
         </h1>
         <p className="text-muted-foreground ">
-          Choose a credit package for WhatsApp messages, coupon creation, and
-          paid ads.
+          {t("subtitle")}
         </p>
       </div>
 
       {visiblePackages.length === 0 ? (
         <div className="rounded-xl border border-muted-foreground/20 bg-muted/10 p-6 text-muted-foreground">
-          No credit packages found for your merchant type.
+          {t("emptyState.noPackages")}
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -232,20 +233,20 @@ export default function MerchantPurchase() {
             const currency = pkg.currency || "USD";
 
             const getCategoryTheme = (type) => {
-              const t = type?.toLowerCase() || "";
-              if (t.includes("coupon"))
+              const t_type = type?.toLowerCase() || "";
+              if (t_type.includes("coupon"))
                 return {
-                  label: "Coupon",
+                  label: t("packageTypes.coupon"),
                   icon: <CheckCircle2 className="h-4 w-4" />,
                   bg: "bg-blue-50",
                   text: "text-blue-600",
                   badge: "bg-blue-100/80 text-blue-700 border-blue-200",
                 };
-              if (t.includes("whatsapp")) {
+              if (t_type.includes("whatsapp")) {
                 // Differentiate UI vs BI whatsapp package types
-                if (t.includes("ui")) {
+                if (t_type.includes("ui")) {
                   return {
-                    label: "Whatsapp UI Message",
+                    label: t("packageTypes.whatsappUI"),
                     icon: <Sparkles className="h-4 w-4" />,
                     bg: "bg-emerald-50",
                     text: "text-emerald-600",
@@ -253,9 +254,9 @@ export default function MerchantPurchase() {
                       "bg-emerald-100/80 text-emerald-700 border-emerald-200",
                   };
                 }
-                if (t.includes("bi")) {
+                if (t_type.includes("bi")) {
                   return {
-                    label: "Whatsapp BI Message",
+                    label: t("packageTypes.whatsappBI"),
                     icon: <Sparkles className="h-4 w-4" />,
                     bg: "bg-emerald-50",
                     text: "text-emerald-600",
@@ -264,7 +265,7 @@ export default function MerchantPurchase() {
                   };
                 }
                 return {
-                  label: "Whatsapp Message",
+                  label: t("packageTypes.whatsapp"),
                   icon: <Sparkles className="h-4 w-4" />,
                   bg: "bg-emerald-50",
                   text: "text-emerald-600",
@@ -272,16 +273,16 @@ export default function MerchantPurchase() {
                     "bg-emerald-100/80 text-emerald-700 border-emerald-200",
                 };
               }
-              if (t.includes("ad"))
+              if (t_type.includes("ad"))
                 return {
-                  label: "Paid Ads",
+                  label: t("packageTypes.paidAds"),
                   icon: <Wallet className="h-4 w-4" />,
                   bg: "bg-violet-50",
                   text: "text-violet-600",
                   badge: "bg-violet-100/80 text-violet-700 border-violet-200",
                 };
               return {
-                label: type || "Standard",
+                label: type || t("packageTypes.standard"),
                 icon: <Zap className="h-4 w-4" />,
                 bg: "bg-slate-50",
                 text: "text-slate-600",
@@ -328,11 +329,15 @@ export default function MerchantPurchase() {
                           : "bg-slate-100 text-slate-600",
                       )}
                     >
-                      {pkg.merchant_type || "Standard"}
+                      {pkg.merchant_type === "annual" 
+                        ? t("merchantTypes.annual")
+                        : pkg.merchant_type === "temporary"
+                        ? t("merchantTypes.temporary")
+                        : t("merchantTypes.standard")}
                     </Badge>
                   </div>
                   <CardDescription className="text-xs line-clamp-1 mt-1">
-                    {pkg.description || "Enhanced features and capacity"}
+                    {pkg.description || t("packageCard.enhancedFeatures")}
                   </CardDescription>
                 </CardHeader>
 
@@ -346,7 +351,7 @@ export default function MerchantPurchase() {
                     <p className="text-[10px] text-muted-foreground mt-1.5 font-medium uppercase tracking-widest">
                       {currency}{" "}
                       {pkg.price_per_credit || (price / pkg.credits).toFixed(2)}{" "}
-                      per credit
+                      {t("packageCard.perCredit")}
                     </p>
                   </div>
 
@@ -356,7 +361,7 @@ export default function MerchantPurchase() {
                         <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                       </div>
                       <span className="font-medium text-foreground">
-                        {pkg.credits} Base Credits
+                        {t("packageCard.baseCredits", { credits: pkg.credits })}
                       </span>
                     </div>
                     {pkg.bonus_credits > 0 && (
@@ -365,7 +370,7 @@ export default function MerchantPurchase() {
                           <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                         </div>
                         <span className="font-semibold text-emerald-600">
-                          +{pkg.bonus_credits} Bonus Credits
+                          {t("packageCard.bonusCredits", { bonusCredits: pkg.bonus_credits })}
                         </span>
                       </div>
                     )}
@@ -376,7 +381,7 @@ export default function MerchantPurchase() {
                     className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
                     onClick={() => handleStartCheckout(pkg)}
                   >
-                    Get Started
+                    {t("packageCard.getStarted")}
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </CardContent>
@@ -394,10 +399,10 @@ export default function MerchantPurchase() {
               <div>
                 <DialogHeader className="mb-6">
                   <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
-                    Order Overview
+                    {t("checkout.title")}
                   </DialogTitle>
                   <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mt-1 opacity-70">
-                    Checkout details
+                    {t("checkout.subtitle")}
                   </p>
                 </DialogHeader>
 
@@ -416,14 +421,14 @@ export default function MerchantPurchase() {
                       </div>
                       <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-2">
                         {selectedPackage.description ||
-                          "Premium credit package for your business growth."}
+                          t("checkout.premiumDescription")}
                       </p>
                     </div>
 
                     {/* Breakdown */}
                     <div className="space-y-3 px-1">
                       <div className="flex justify-between items-center text-sm font-medium">
-                        <span className="text-slate-500">Credits Included</span>
+                        <span className="text-slate-500">{t("checkout.creditsIncluded")}</span>
                         <span className="text-slate-900 font-bold bg-slate-100 px-3 py-1 rounded-full">
                           {selectedPackage.credits}
                         </span>
@@ -431,7 +436,7 @@ export default function MerchantPurchase() {
 
                       {selectedPackage.bonus_credits > 0 && (
                         <div className="flex justify-between items-center text-sm font-medium">
-                          <span className="text-slate-500">Bonus Gift</span>
+                          <span className="text-slate-500">{t("checkout.bonusGift")}</span>
                           <span className="text-emerald-600 font-bold bg-emerald-50 px-3 py-1 rounded-full">
                             +{selectedPackage.bonus_credits}
                           </span>
@@ -439,12 +444,12 @@ export default function MerchantPurchase() {
                       )}
 
                       <div className="flex justify-between items-center text-sm font-medium">
-                        <span className="text-slate-500">Package Type</span>
+                        <span className="text-slate-500">{t("checkout.packageType")}</span>
                         <Badge
                           variant="outline"
                           className="capitalize text-[10px] h-6 font-bold border-slate-200 bg-white"
                         >
-                          {selectedPackage.credit_type || "Standard"}
+                          {selectedPackage.credit_type || t("packageTypes.standard")}
                         </Badge>
                       </div>
 
@@ -452,7 +457,7 @@ export default function MerchantPurchase() {
                         <div className="flex justify-between items-end">
                           <div className="flex flex-col">
                             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">
-                              Total Amount
+                              {t("checkout.totalAmount")}
                             </span>
                             <span className="text-2xl font-black text-primary tracking-tighter">
                               {selectedPackage.currency || "USD"}{" "}
@@ -475,10 +480,10 @@ export default function MerchantPurchase() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">
-                    Secure Payment
+                    {t("checkout.securePayment")}
                   </p>
                   <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">
-                    SSL Encrypted Stripe Gateway
+                    {t("checkout.sslEncrypted")}
                   </p>
                 </div>
               </div>
@@ -491,10 +496,10 @@ export default function MerchantPurchase() {
                   {/* Payment Header */}
                   <div className="mb-6">
                     <h3 className="text-xl font-black text-slate-900 tracking-tight mb-0.5">
-                      Card Details
+                      {t("checkout.cardDetails")}
                     </h3>
                     <p className="text-sm text-slate-500 font-medium">
-                      Please enter your payment information below.
+                      {t("checkout.paymentInfo")}
                     </p>
                   </div>
 
@@ -503,7 +508,7 @@ export default function MerchantPurchase() {
                     <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-5 border border-slate-100 shadow-inner transition-all hover:bg-slate-50/80">
                       <div className="flex justify-between items-center mb-4">
                         <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                          Amount Payable
+                          {t("checkout.amountPayable")}
                         </span>
                         <span className="text-lg font-black text-slate-900">
                           {selectedPackage.currency || "USD"}{" "}
@@ -519,7 +524,7 @@ export default function MerchantPurchase() {
 
                     <div className="flex items-center justify-between pt-2">
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                        Trusted Partners
+                        {t("checkout.trustedPartners")}
                       </p>
                       <div className="flex gap-6 items-center opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 pointer-events-none">
                         <Image
@@ -556,11 +561,10 @@ export default function MerchantPurchase() {
                     <Wallet className="h-10 w-10 text-slate-300 animate-pulse" />
                   </div>
                   <h4 className="text-lg font-bold text-slate-900 mb-2">
-                    No selection found
+                    {t("checkout.noSelection")}
                   </h4>
                   <p className="text-sm text-slate-500 font-medium leading-relaxed">
-                    Please close this window and select a credit package to
-                    proceed with your upgrade.
+                    {t("checkout.noSelectionMessage")}
                   </p>
                 </div>
               )}

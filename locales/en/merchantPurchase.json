@@ -1,0 +1,59 @@
+{
+  "title": "Power Up Your Store",
+  "subtitle": "Choose a credit package for WhatsApp messages, coupon creation, and paid ads.",
+  "loading": "Loading packages...",
+  "errors": {
+    "loadPackages": "Unable to load credit packages. Please try again.",
+    "noMerchantId": "Unable to determine merchant id. Please contact support.",
+    "purchaseFailed": "Failed to purchase package. Please try again.",
+    "requestFailed": "Request failed with status {status}."
+  },
+  "emptyState": {
+    "noPackages": "No credit packages found for your merchant type."
+  },
+  "packageTypes": {
+    "coupon": "Coupon",
+    "whatsappUI": "Whatsapp UI Message",
+    "whatsappBI": "Whatsapp BI Message",
+    "whatsapp": "Whatsapp Message",
+    "paidAds": "Paid Ads",
+    "standard": "Standard"
+  },
+  "merchantTypes": {
+    "annual": "Annual",
+    "temporary": "Temporary",
+    "standard": "Standard"
+  },
+  "packageCard": {
+    "perCredit": "per credit",
+    "baseCredits": "{credits} Base Credits",
+    "bonusCredits": "+{bonusCredits} Bonus Credits",
+    "enhancedFeatures": "Enhanced features and capacity",
+    "getStarted": "Get Started"
+  },
+  "checkout": {
+    "title": "Order Overview",
+    "subtitle": "Checkout details",
+    "selectedPackage": "Selected Package",
+    "premiumDescription": "Premium credit package for your business growth.",
+    "creditsIncluded": "Credits Included",
+    "bonusGift": "Bonus Gift",
+    "packageType": "Package Type",
+    "totalAmount": "Total Amount",
+    "securePayment": "Secure Payment",
+    "sslEncrypted": "SSL Encrypted Stripe Gateway",
+    "cardDetails": "Card Details",
+    "paymentInfo": "Please enter your payment information below.",
+    "amountPayable": "Amount Payable",
+    "trustedPartners": "Trusted Partners",
+    "noSelection": "No selection found",
+    "noSelectionMessage": "Please close this window and select a credit package to proceed with your upgrade."
+  },
+  "success": {
+    "purchaseComplete": "Package purchased successfully."
+  },
+  "toast": {
+    "purchaseSuccess": "Package purchased successfully.",
+    "purchaseError": "Failed to purchase package. Please try again."
+  }
+}

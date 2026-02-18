@@ -10,13 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Copy, Plus } from "lucide-react";
 import { toast } from "@/lib/toast";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import useDebounce from "@/hooks/useDebounceRef";
 
-const columns = [
+const AllCouponsColumns = (t) => [
   {
     accessorKey: "coupon_code",
-    header: "Coupon Code",
+    header: t("allCoupons.columns.couponCode"),
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <span className="font-mono font-medium">
@@ -28,7 +28,7 @@ const columns = [
           className="h-6 w-6"
           onClick={() => {
             navigator.clipboard.writeText(row.original.coupon_code);
-            toast.success("Copied to clipboard");
+            toast.success(t("allCoupons.copiedToClipboard"));
           }}
         >
           <Copy className="h-3 w-3" />
@@ -38,17 +38,17 @@ const columns = [
   },
   {
     id: "batch_name",
-    header: "Batch Name",
+    header: t("allCoupons.columns.batchName"),
     cell: ({ row }) => row.original.batch?.batch_name || "-",
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("allCoupons.columns.status"),
     cell: ({ row }) => <StatusBadge status={row.original.status} />,
   },
   {
     id: "start_date",
-    header: "Start Date",
+    header: t("allCoupons.columns.startDate"),
     cell: ({ row }) => {
       const date = row.original.batch?.start_date;
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -56,7 +56,7 @@ const columns = [
   },
   {
     id: "expiry_date",
-    header: "Expiry Date",
+    header: t("allCoupons.columns.expiryDate"),
     cell: ({ row }) => {
       const date = row.original.batch?.end_date;
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -64,7 +64,7 @@ const columns = [
   },
   {
     accessorKey: "issued_at",
-    header: "Issued At",
+    header: t("allCoupons.columns.issuedAt"),
     cell: ({ row }) => {
       const date = row.original.issued_at;
       return date ? new Date(date).toLocaleString() : "-";
@@ -72,15 +72,16 @@ const columns = [
   },
   {
     accessorKey: "redeemed_at",
-    header: "Redeemed At",
+    header: t("allCoupons.columns.redeemedAt"),
     cell: ({ row }) => {
       const date = row.original.redeemed_at;
-      return date ? new Date(date).toLocaleString() : "Not redeemed";
+      return date ? new Date(date).toLocaleString() : t("allCoupons.notRedeemed");
     },
   },
 ];
 
 export default function MerchantAllCoupons() {
+  const t = useTranslations("merchantCoupons");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
@@ -110,14 +111,14 @@ export default function MerchantAllCoupons() {
         setCoupons(list);
         setTotal(totalCount);
       } catch (err) {
-        toast.error("Failed to load coupons");
+        toast.error(t("errors.failedToLoadCoupons"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchCoupons();
-  }, [page, pageSize, debouncedSearch]);
+  }, [page, pageSize, debouncedSearch, t]);
 
   const filteredCoupons = coupons.filter((c) =>
     c.coupon_code.toLowerCase().includes(debouncedSearch.toLowerCase())
@@ -127,15 +128,15 @@ export default function MerchantAllCoupons() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">All Coupons</h1>
+          <h1 className="text-3xl font-bold">{t("allCoupons.title")}</h1>
           <p className="text-muted-foreground">
-            View and manage all generated coupons
+            {t("allCoupons.subtitle")}
           </p>
         </div>
         <Link href={`/${locale}/merchant/coupons/create`}>
           <Button className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
-            Create Coupon
+            {t("allCoupons.createCoupon")}
           </Button>
         </Link>
       </div>
@@ -143,12 +144,12 @@ export default function MerchantAllCoupons() {
       <Card>
         <CardContent>
           <TableToolbar
-            placeholder="Search coupons..."
+            placeholder={t("allCoupons.searchPlaceholder")}
             onSearchChange={setSearch}
           />
           <DataTable
             data={filteredCoupons}
-            columns={columns}
+            columns={AllCouponsColumns(t)}
             page={page}
             pageSize={pageSize}
             total={total}

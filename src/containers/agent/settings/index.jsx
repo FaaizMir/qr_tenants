@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { BrandingForm } from "./branding-form";
 import { StripeConfigForm } from "./stripe-config-form";
@@ -9,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 
 export default function AgentSettingsContainer() {
-    const t = useTranslations("agent.settings");
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -27,10 +25,10 @@ export default function AgentSettingsContainer() {
         <div className="space-y-6 p-1">
             <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold tracking-tight bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                    {t("platformSettings")}
+                    Platform Settings
                 </h1>
                 <p className="text-muted-foreground">
-                    {t("settingsDescription")}
+                    Configure your platform branding and settings
                 </p>
             </div>
 

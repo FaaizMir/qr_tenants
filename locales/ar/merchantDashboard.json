@@ -1,0 +1,126 @@
+{
+  "common": {
+    "credits": "رصيد"
+  },
+  "couponStatus": {
+    "description": "توزيع الاسترداد",
+    "noCouponsYet": "لم يتم إصدار أي قسائم بعد",
+    "redeemed": "المستردة",
+    "title": "حالة القسيمة",
+    "unredeemed": "غير المستردة"
+  },
+  "errors": {
+    "failedToFetchBatches": "فشل في جلب الدفعات",
+    "failedToFetchDashboard": "فشل في جلب تحليلات لوحة التحكم",
+    "failedToFetchFee": "فشل في جلب رسوم الاشتراك:",
+    "failedToFetchWallet": "فشل في جلب المحفظة"
+  },
+  "feedbacks": {
+    "description": "توزيع المنصة",
+    "noDataYet": "لا توجد بيانات ملاحظات بعد",
+    "title": "الملاحظات"
+  },
+  "games": {
+    "luckyDrawSpins": "دورات السحب المحظوظ",
+    "title": "ألعاب"
+  },
+  "header": {
+    "createNewBatch": "إنشاء دفعة جديدة",
+    "title": "لوحة تحكم التاجر"
+  },
+  "kpi": {
+    "averageRating": "متوسط التقييم",
+    "remainingCredits": "الرصيد المتبقي",
+    "totalCouponsIssued": "إجمالي القسائم المصدرة",
+    "totalRedeemed": "إجمالي المستردات",
+    "trendDown": "أسفل",
+    "trendUp": "أعلى"
+  },
+  "metrics": {
+    "creditsUsed": "الأرصدة المستخدمة",
+    "expired": "منتهية الصلاحية",
+    "issued": "المصدرة",
+    "messagesSent": "الرسائل المرسلة",
+    "redeemed": "المستردة",
+    "totalCoupons": "إجمالي القسائم",
+    "totalCustomers": "إجمالي العملاء"
+  },
+  "page": {
+    "breadcrumb": "لوحة تحكم التاجر",
+    "title": "لوحة تحكم التاجر"
+  },
+  "placeholders": {
+    "comingSoon": "محتوى الإعدادات قادم قريبًا...",
+    "noData": "--"
+  },
+  "recentRedemptions": {
+    "amount": "المبلغ",
+    "code": "الرمز",
+    "customer": "العميل",
+    "hourAgo": "منذ {hours} ساعة",
+    "hoursAgo": "منذ {hours} ساعة",
+    "minsAgo": "منذ {mins} دقيقة",
+    "time": "الوقت",
+    "title": "عمليات الاسترداد الأخيرة"
+  },
+  "retention": {
+    "returningThisMonth": "العودة هذا الشهر",
+    "title": "الاحتفاظ"
+  },
+  "status": {
+    "active": "نشط",
+    "annual": "سنوي",
+    "completed": "مكتمل",
+    "exhausted": "منتهي",
+    "expired": "منتهي الصلاحية",
+    "failed": "فشل",
+    "inactive": "غير نشط",
+    "inProgress": "قيد التقدم",
+    "open": "مفتوح",
+    "paid": "مدفوع",
+    "pending": "معلق",
+    "resolved": "تم الحل",
+    "temporary": "مؤقت",
+    "unused": "غير مستخدم",
+    "used": "مستخدم"
+  },
+  "tabs": {
+    "automation": "أتمتة",
+    "coupons": "دفعات القسائم",
+    "feedbackForm": "نموذج التعليقات",
+    "overview": "نظرة عامة",
+    "settings": "الإعدادات",
+    "wallet": "المحفظة"
+  },
+  "topCustomers": {
+    "description": "أكثر المستخدمين نشاطًا",
+    "noDataYet": "لا توجد بيانات عملاء بعد",
+    "redeemed": "تم استردادها",
+    "title": "أعلى العملاء",
+    "visits": "الزيارات"
+  },
+  "upgrade": {
+    "description": "افتح جميع الميزات بما في ذلك التحليلات، الرسائل ثنائية الاتجاه، والمزيد.",
+    "errorMissingInfo": "غير قادر على المتابعة. معلومات الرسوم أو المسؤول مفقودة.",
+    "errorNoSessionUrl": "لم يتم إرجاع عنوان URL للجلسة",
+    "errorPaymentFailed": "فشل في بدء الدفع. يرجى المحاولة مرة أخرى.",
+    "pricePerYear": "/سنة",
+    "processing": "جارٍ المعالجة...",
+    "title": "الترقية إلى سنوي",
+    "upgradeNow": "ترقية الآن"
+  },
+  "whatsapp": {
+    "biMessages": "رسائل واجهة الأعمال (مبادرة الأعمال)",
+    "birthdayCampaigns": "حملات عيد الميلاد",
+    "description": "تحليل واجهة المستخدم وواجهة الأعمال",
+    "feedbackCoupons": "قسائم الملاحظات",
+    "festivalCampaigns": "حملات المهرجانات",
+    "homepageCoupons": "قسائم الصفحة الرئيسية",
+    "inactiveRecalls": "استدعاءات غير نشطة",
+    "luckyDrawWins": "جوائز السحب المحظوظ",
+    "noBiCampaigns": "لا توجد حملات BI بعد",
+    "noUiActivity": "لا توجد أنشطة واجهة مستخدم بعد",
+    "title": "واتساب",
+    "uiMessages": "رسائل واجهة المستخدم (مبادرة المستخدم)"
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "allCoupons": {
+    "columns": {
+      "batchName": "اسم الدفعة",
+      "couponCode": "رمز القسيمة",
+      "expiryDate": "تاريخ الانتهاء",
+      "issuedAt": "صدر في",
+      "redeemedAt": "تم استردادها في",
+      "startDate": "تاريخ البدء",
+      "status": "الحالة"
+    },
+    "copiedToClipboard": "تم النسخ إلى الحافظة",
+    "createCoupon": "إنشاء قسيمة",
+    "notRedeemed": "لم يتم استردادها",
+    "searchPlaceholder": "ابحث عن القسائم...",
+    "subtitle": "عرض وإدارة جميع القسائم المولدة",
+    "title": "جميع القسائم"
+  },
+  "breadcrumbs": {
+    "couponBatches": "دفعات القسائم",
+    "coupons": "قسائم",
+    "createCouponBatch": "إنشاء دفعة قسائم",
+    "detail": "التفاصيل",
+    "merchantDashboard": "لوحة تحكم التاجر"
+  },
+  "create": {
+    "annual": "سنوي",
+    "batchName": "اسم الدفعة",
+    "batchNamePlaceholder": "مثل، تخفيضات الصيف 2024",
+    "batchType": "نوع الدفعة",
+    "cancelButton": "إلغاء",
+    "createButton": "إنشاء دفعة",
+    "endDate": "تاريخ الانتهاء",
+    "form": {
+      "batchName": "اسم الدفعة",
+      "batchNamePlaceholder": "مثل: عرض الصيف 2024",
+      "description": "قم بتكوين معلمات القسيمة الخاصة بك (تطبق الحدود تلقائيًا)",
+      "endDate": "تاريخ الانتهاء",
+      "generateBatch": "إنشاء دفعة",
+      "generatingCodes": "جاري إنشاء الرموز...",
+      "halalCertified": "معتمد حلال",
+      "halalDescription": "أشر إلى الامتثال لمعايير الحلال",
+      "quantity": "الكمية",
+      "startDate": "تاريخ البدء",
+      "template": "القالب",
+      "title": "تفاصيل الدفعة"
+    },
+    "guidance": "إرشادات",
+    "isActive": "نشط",
+    "limits": {
+      "annual": "الحد السنوي: 1000 قسيمة",
+      "quantityLimit": "الحد: {max} رموز",
+      "quantityLimitAnnual": "الحد: {max} رموز (سنوي)",
+      "quantityLimitTemporary": "الحد: {max} رموز (مؤقت)",
+      "temporary": "الحد المؤقت: 100 قسيمة"
+    },
+    "merchantType": {
+      "annual": "تاجر سنوي",
+      "temporary": "تاجر مؤقت"
+    },
+    "quantity": "الكمية",
+    "quantityPlaceholder": "عدد القسائم",
+    "selectBatchType": "اختر نوع الدفعة",
+    "startDate": "تاريخ البدء",
+    "temporary": "مؤقت",
+    "title": "إنشاء دفعة قسائم",
+    "updateButton": "تحديث الدفعة"
+  },
+  "detail": {
+    "active": "نشط",
+    "batchIdNotAvailable": "معرف الدفعة غير متوفر",
+    "code": "الرمز",
+    "columns": {
+      "code": "الرمز",
+      "issuedAt": "تم الإصدار في",
+      "redemptionDate": "تاريخ الاسترداد",
+      "status": "الحالة"
+    },
+    "copiedToClipboard": "تم النسخ إلى الحافظة",
+    "couponsInBatch": "القسائم في الدفعة",
+    "downloadPdf": "تحميل PDF",
+    "editContent": "تحرير المحتوى",
+    "end": "نهاية:",
+    "exportPdf": "تصدير PDF",
+    "failedToDownloadPdf": "فشل في تنزيل PDF",
+    "failedToLoadCoupons": "فشل في تحميل القسائم",
+    "fetchingPdf": "جارٍ جلب PDF...",
+    "filters": {
+      "allStatus": "جميع الحالات",
+      "issued": "صادر",
+      "redeemed": "تم استردادها"
+    },
+    "inactive": "غير نشط",
+    "issuedAt": "صدر في",
+    "issuedQuantity": "الكمية المصدرة",
+    "loadingBatch": "جارٍ تحميل معلومات الدفعة...",
+    "noPdfData": "لم يتم استلام بيانات PDF",
+    "notRedeemed": "لم يتم استرداده",
+    "pdfDownloadedSuccessfully": "تم تنزيل PDF بنجاح",
+    "redemptionDate": "تاريخ الاسترداد",
+    "searchCode": "بحث عن الكود...",
+    "searchPlaceholder": "ابحث عن الرمز...",
+    "start": "بداية:",
+    "stats": {
+      "end": "النهاية:",
+      "issuedQuantity": "الكمية المصدرة",
+      "start": "بداية:",
+      "totalQuantity": "الكمية الإجمالية",
+      "utilized": "% المستخدم",
+      "validity": "صلاحية"
+    },
+    "status": "الحالة",
+    "title": "تفاصيل الدفعة",
+    "totalQuantity": "الكمية الإجمالية",
+    "utilized": "تم استخدامه",
+    "validity": "صلاحية"
+  },
+  "errors": {
+    "batchNameRequired": "اسم الدفعة مطلوب",
+    "endDateMustBeAfterStart": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء",
+    "endDateRequired": "تاريخ الانتهاء مطلوب",
+    "failedToCreateBatch": "فشل في إنشاء دفعة القسائم",
+    "failedToCreateCouponBatch": "فشل في إنشاء دفعة القسائم.",
+    "failedToDeleteCouponBatch": "فشل في حذف دفعة القسائم",
+    "failedToDownloadPdf": "فشل في تحميل PDF",
+    "failedToLoadCoupons": "فشل في تحميل القسائم",
+    "failedToLoadCouponsBatches": "فشل في تحميل دفعات القسائم",
+    "failedToUpdateBatch": "فشل في تحديث دفعة القسائم",
+    "quantityMustBePositive": "يجب أن تكون الكمية رقمًا موجبًا",
+    "quantityRequired": "الكمية مطلوبة",
+    "startDateRequired": "تاريخ البدء مطلوب"
+  },
+  "listing": {
+    "actions": {
+      "couponOptions": "خيارات القسيمة",
+      "delete": "حذف",
+      "details": "التفاصيل"
+    },
+    "allStatus": "جميع الحالات",
+    "breadcrumb": "قسائم",
+    "columnNames": {
+      "actions": "الإجراءات",
+      "batchName": "اسم الدفعة",
+      "batchType": "نوع الدفعة",
+      "isActive": "نشط",
+      "status": "الحالة",
+      "type": "النوع",
+      "usage": "الاستخدام",
+      "validity": "الصلاحية"
+    },
+    "columns": {
+      "actions": "الإجراءات",
+      "batchName": "اسم الدفعة",
+      "status": "الحالة",
+      "type": "نوع",
+      "usage": "الاستخدام",
+      "validity": "صلاحية"
+    },
+    "createBatch": "إنشاء دفعة",
+    "deleteDialog": {
+      "cancel": "إلغاء",
+      "confirm": "حذف",
+      "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى الحذف الدائم",
+      "title": "هل تريد حذف دفعة القسائم؟"
+    },
+    "exportPdf": "تصدير PDF",
+    "issued": "مصدرة",
+    "redeemed": "تم استردادها",
+    "searchPlaceholder": "البحث عن الدفعات...",
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "subtitle": "إدارة قسائم الخصم الخاصة بك",
+    "title": "دفعات القسائم",
+    "usage": {
+      "issued": "{count} تم إصدارها",
+      "total": "/ {count}"
+    },
+    "validity": {
+      "from": "من:",
+      "to": "إلى:"
+    }
+  },
+  "messages": {
+    "batchCreatedSuccessfully": "تم إنشاء دفعة القسائم بنجاح!",
+    "batchDeleted": "تم حذف دفعة القسائم",
+    "batchIdNotAvailable": "معرف الدفعة غير متوفر",
+    "copiedToClipboard": "تم النسخ إلى الحافظة",
+    "fetchingPdf": "جاري جلب PDF...",
+    "noPdfData": "لم يتم استلام بيانات PDF",
+    "pdfDownloadedSuccessfully": "تم تنزيل PDF بنجاح",
+    "unableToDetermineMerchantId": "غير قادر على تحديد معرف التاجر. يرجى الاتصال بالدعم.",
+    "uploadBrandImage": "يرجى تحميل صورة العلامة التجارية في محرر القالب."
+  },
+  "success": {
+    "batchCreated": "تم إنشاء دفعة القسائم بنجاح",
+    "batchUpdated": "تم تحديث دفعة القسائم بنجاح"
+  },
+  "template": {
+    "chooseTemplate": "اختر قالبًا",
+    "editContent": "تحرير المحتوى",
+    "editor": {
+      "brandImage": "صورة العلامة التجارية",
+      "brandImageMandatory": "صورة العلامة التجارية إلزامية",
+      "cancel": "إلغاء",
+      "changeImage": "تغيير الصورة",
+      "contentUpdatedSuccessfully": "تم تحديث المحتوى بنجاح",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف تفاصيل العرض...",
+      "done": "تم",
+      "failedToSaveContent": "فشل في حفظ المحتوى",
+      "header": "الرأس",
+      "headerPlaceholder": "على سبيل المثال عرض خاص",
+      "requiredForAllTemplates": "مطلوب لجميع القوالب",
+      "title": "تحرير محتوى القالب",
+      "titleField": "العنوان",
+      "titlePlaceholder": "على سبيل المثال 50% خصم",
+      "updateDescription": "تحديث صورة العلامة التجارية، الرأس، العنوان، والوصف. يتم عرض التغييرات مباشرة.",
+      "uploadBrandImage": "رفع صورة العلامة التجارية"
+    },
+    "hoverToPreview": "مرر فوق المعاينة أو انقر لفتح",
+    "loadingTemplates": "جارٍ تحميل القوالب…",
+    "preview": "معاينة",
+    "previewModal": {
+      "readOnlyPreview": "معاينة للقراءة فقط",
+      "title": "معاينة القالب"
+    },
+    "selected": "المحدد",
+    "templateLocked": "القالب مقفل للخطة المؤقتة"
+  }
+}

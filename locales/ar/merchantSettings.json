@@ -1,0 +1,255 @@
+{
+  "batchSelector": {
+    "loading": "جارٍ التحميل...",
+    "noBatchesDescription": "قم بإنشاء دفعة قسائم أولاً",
+    "noBatchesTitle": "لا توجد دفعات متاحة",
+    "of": "من",
+    "used": "مستخدم"
+  },
+  "birthdayRewards": {
+    "actionRequired": "الإجراء المطلوب: نادي عيد الميلاد",
+    "actionRequiredDescription": "يرجى اختيار دفعة قسائم لمكافأة عملائك في عيد ميلادهم.",
+    "birthdayReward": "مكافأة عيد الميلاد",
+    "days": "أيام",
+    "daysAfter": "بعد أيام",
+    "daysBefore": "أيام قبل",
+    "description": "سيستلم العملاء رسالة مع هذه المكافأة في يومهم الخاص.",
+    "enableMessage": "قم بتمكين نادي عيد الميلاد لأتمتة مكافآتك",
+    "saveButton": "احفظ إعدادات عيد الميلاد",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "لم يتمكن من تحديث إعدادات عيد الميلاد. يرجى المحاولة مرة أخرى.",
+    "selected": "محدد",
+    "selectRewardBatch": "اختر دفعة المكافآت...",
+    "subtitle": "مكافآت العملاء التلقائية",
+    "title": "نادي عيد الميلاد",
+    "updateSuccess": "تم تحديث نادي عيد الميلاد",
+    "updateSuccessDescription": "تم حفظ إعدادات أتمتة عيد الميلاد الخاصة بك."
+  },
+  "featureMasterControl": {
+    "active": "نشط",
+    "error": "فشل المعالجة",
+    "errorDescription": "لم نتمكن من مزامنة الإعداد. يرجى التحقق من اتصالك.",
+    "features": {
+      "birthdayMessage": {
+        "description": "مكافآت تلقائية في أعياد ميلاد العملاء",
+        "label": "رسالة عيد الميلاد"
+      },
+      "facebookReviews": {
+        "description": "رابط مباشر لمراجعات صفحة فيسبوك",
+        "label": "مراجعات فيسبوك"
+      },
+      "festivalCampaign": {
+        "description": "البث لفعاليات العطلات الخاصة",
+        "label": "حملة المهرجان"
+      },
+      "googleReviews": {
+        "description": "رابط المراجعة إلى ملف تعريف Google للأعمال",
+        "label": "مراجعات جوجل"
+      },
+      "inactiveRecall": {
+        "description": "استرجاع تلقائي للعملاء غير النشطين",
+        "label": "استرجاع غير نشط"
+      },
+      "instagramReviews": {
+        "description": "التكامل مع Instagram Business",
+        "label": "مراجعات إنستغرام"
+      },
+      "luckyDraw": {
+        "description": "نظام توزيع المكافآت الم gamified",
+        "label": "سحب محظوظ"
+      },
+      "paidAds": {
+        "description": "عرض لافتات الصور/الفيديو للمستخدمين",
+        "label": "إعلانات مدفوعة"
+      },
+      "presetReviews": {
+        "description": "خيارات ملاحظات مسبقة للعملاء",
+        "label": "مراجعات مسبقة"
+      },
+      "scheduledCampaign": {
+        "description": "حملات رسائل التسويق المجدولة",
+        "label": "حملة مجدولة"
+      },
+      "xiaohongshuReviews": {
+        "description": "تواصل مع مجتمع Red",
+        "label": "مراجعات شياوهونغشو"
+      }
+    },
+    "live": "مباشر",
+    "paused": "مؤقت",
+    "subtitle": "تحكم في القدرة في الوقت الحقيقي",
+    "success": "{feature} {status}",
+    "successDescription": "تم تحديث حالة {feature} بنجاح.",
+    "title": "لوحة ميزات"
+  },
+  "inactiveRecall": {
+    "actionRequired": "الإجراء مطلوب: استدعاء غير نشط",
+    "actionRequiredDescription": "يرجى اختيار قسيمة حافز لاستعادة العملاء غير النشطين.",
+    "chooseRecallReward": "اختر مكافأة الاسترجاع...",
+    "daysOfInactivity": "أيام عدم النشاط",
+    "description": "العملاء الذين لم يزوروا منذ فترة سيتلقون هذه المكافأة.",
+    "enableMessage": "قم بتمكين نادي استعادة العملاء لإعادة تنشيط العملاء المتوقفين",
+    "incentiveReward": "مكافأة الحافز",
+    "recallAfter": "استرجاع بعد",
+    "saveButton": "احفظ إعدادات استعادة العملاء",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "تعذر تحديث إعدادات الاسترجاع. يرجى المحاولة مرة أخرى.",
+    "selected": "محدد",
+    "subtitle": "إعادة تنشيط العملاء النائمين",
+    "title": "نادي استعادة العملاء",
+    "updateSuccess": "استرجاع غير نشط محدث",
+    "updateSuccessDescription": "تم حفظ إعدادات أتمتة استعادة العملاء."
+  },
+  "main": {
+    "description": "إدارة تفاعلك العالمي وآليات المكافآت ومحتوى الترويج من لوحة تحكم واحدة عالية الأداء.",
+    "merchantActive": "التاجر نشط",
+    "proTip": "نصيحة احترافية",
+    "proTipMessage": "دمج المكافآت المباشرة مع الإعدادات القوية ينشئ حلقة تغذية مرتدة عالية التحويل تعزز تحسين محركات البحث المحلية لديك.",
+    "status": "الحالة",
+    "subtitle": "استراتيجية",
+    "subtitleHighlight": "تحكم",
+    "tabs": {
+      "automations": "أتمتة",
+      "campaigns": "الحملات",
+      "festivalMessages": "رسائل المهرجان",
+      "paidAds": "إعلانات مدفوعة",
+      "settings": "الإعدادات"
+    },
+    "title": "مركز التجار",
+    "version": "الإصدار 2.0"
+  },
+  "paidAds": {
+    "14days": "14 يومًا",
+    "30days": "30 يومًا",
+    "7days": "7 أيام",
+    "active": "نشط",
+    "addImage": "إضافة صورة",
+    "addVideo": "أضف فيديو",
+    "adjustImage": "تعديل الصورة",
+    "adjustImageDescription": "اسحب لإعادة التمركز واستخدم شريط التمرير للتكبير.",
+    "adPlacement": "وضع الإعلان",
+    "adPreview": "معاينة الإعلان",
+    "adPreviewDescription": "معاينة كاملة لحملة الإعلان الترويجية",
+    "bottom": "أسفل",
+    "cancel": "إلغاء",
+    "duration": "المدة",
+    "errorCropping": "خطأ في قص الصورة",
+    "errorSaving": "خطأ في حفظ الإعدادات",
+    "failedToDelete": "فشل في الحذف",
+    "imageAds": "إعلانات الصور",
+    "imageDeleted": "تم حذف الصورة بنجاح",
+    "imageRecommendation": "1200x600 بكسل موصى به",
+    "imageSelected": "تم اختيار الصورة. انقر على تحميل وحفظ لتطبيق التغييرات.",
+    "left": "يسار",
+    "off": "إيقاف",
+    "pending": "معلق",
+    "right": "يمين",
+    "saveImage": "احفظ الصورة",
+    "selectDuration": "اختر المدة",
+    "selectPlacement": "اختر المكان",
+    "settingsUpdated": "تم تحديث الإعدادات والإعلانات بنجاح",
+    "subtitle": "محتوى التسويق المرئي",
+    "title": "لافتات ترويجية",
+    "top": "الأعلى",
+    "uploadAndSave": "تحميل وحفظ",
+    "uploading": "جارٍ التحميل...",
+    "videoAds": "إعلانات الفيديو",
+    "videoDeleted": "تم حذف الفيديو بنجاح",
+    "videoRecommendation": "MP4، WebM (حد أقصى 50 ميغابايت)",
+    "videoSelected": "تم اختيار الفيديو. انقر على 'تحميل وحفظ' لإنهاء.",
+    "videoTooLarge": "ملف الفيديو كبير جدًا. الحد الأقصى للحجم هو 50 ميجابايت.",
+    "zoom": "زووم"
+  },
+  "platformSettings": {
+    "active": "نشط",
+    "facebookPage": "صفحة فيسبوك",
+    "facebookPlaceholder": "https://facebook.com/...",
+    "googlePlaceholder": "https://g.page/r/...",
+    "googleReviews": "مراجعات جوجل",
+    "instagram": "إنستغرام",
+    "instagramPlaceholder": "https://instagram.com/...",
+    "off": "إيقاف",
+    "redPlaceholder": "رابط ملف تعريف RED",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "تعذر تحديث المنصات. يرجى المحاولة مرة أخرى.",
+    "savePlatforms": "احفظ المنصات",
+    "subtitle": "راجع القنوات",
+    "title": "الاتصال الاجتماعي",
+    "updateSuccess": "تم تحديث المنصات",
+    "updateSuccessDescription": "تم تحديث روابط مراجعتك الاجتماعية.",
+    "xiaohongshu": "شياو هونغ شو"
+  },
+  "presetReviews": {
+    "active": "نشط",
+    "off": "إيقاف",
+    "placeholder": "خيار التعليقات الإيجابية...",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "لم يتمكن من تحديث الإعدادات المسبقة. يرجى المحاولة مرة أخرى.",
+    "savePresets": "احفظ الإعدادات المسبقة",
+    "subtitle": "إعدادات العملاء",
+    "title": "ملاحظات سريعة",
+    "updateSuccess": "تم تحديث الإعدادات المسبقة",
+    "updateSuccessDescription": "تم حفظ خيارات مراجعتك السريعة."
+  },
+  "rewardStrategy": {
+    "chooseRegularReward": "اختر مكافأة عادية...",
+    "directCoupon": "قسيمة مباشرة",
+    "directCouponDescription": "وصول فوري",
+    "featureSwitchboard": "لوحة تحكم الميزات",
+    "luckyDraw": "سحب محظوظ",
+    "luckyDrawDescription": "جوائز مخصصة للألعاب",
+    "luckyDrawTab": "سحب محظوظ",
+    "luckyDrawTip": "قم بتكوين الجوائز في",
+    "managedVia": "يتم إدارة الاختيار عبر",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "لم يتمكن من تحديث استراتيجية المكافأة. يرجى المحاولة مرة أخرى.",
+    "saveStrategy": "احفظ الاستراتيجية",
+    "selectCouponBatch": "يرجى اختيار دفعة قسائم للمكافآت المباشرة.",
+    "selectReward": "اختر المكافأة",
+    "subtitle": "المكافأة الأساسية",
+    "tab": "علامة تبويب",
+    "title": "محرك الحوافز",
+    "updateSuccess": "تم تحديث استراتيجية المكافأة",
+    "updateSuccessDescription": "تم حفظ تكوين المكافأة الأساسي الخاص بك."
+  },
+  "scheduledCampaign": {
+    "actionRequired": "الإجراء المطلوب: الحملة المجدولة",
+    "actionRequiredDescription": "يرجى اختيار دفعة قسائم لتضمينها في حملتك.",
+    "active": "نشط",
+    "attachCoupon": "أرفق قسيمة",
+    "audience": "الجمهور",
+    "audienceOptions": {
+      "active": "نشط",
+      "all": "جميع المستخدمين",
+      "firstTime": "أول مرة",
+      "inactive": "غير نشط",
+      "returning": "عودة"
+    },
+    "campaignName": "اسم الحملة",
+    "campaignNamePlaceholder": "مثال: تخفيضات عيد الهالوين",
+    "campaignScheduled": "تم جدولة الحملة",
+    "campaignScheduledDescription": "تم جدولة حملتك التسويقية للتسليم.",
+    "done": "تم",
+    "incompleteCampaign": "تفاصيل الحملة غير مكتملة",
+    "incompleteCampaignDescription": "يرجى تقديم اسم ورسالة وتاريخ للبث الخاص بك.",
+    "launchDate": "تاريخ الإطلاق",
+    "message": "رسالة",
+    "messagePlaceholder": "مرحبًا {name}, ...",
+    "off": "إيقاف",
+    "saveFailed": "فشل الحفظ",
+    "saveFailedDescription": "لم يتمكن من جدولة الحملة. يرجى المحاولة مرة أخرى.",
+    "scheduleCampaign": "جدولة الحملة",
+    "selectAudience": "اختر",
+    "selectCampaignReward": "اختر مكافأة الحملة...",
+    "selectDateTime": "حدد التاريخ والوقت",
+    "subtitle": "جدولة الحملات",
+    "title": "الحملات"
+  },
+  "stickySaveBar": {
+    "discardChanges": "تجاهل التغييرات",
+    "saveAllSettings": "احفظ جميع الإعدادات",
+    "statusDescription": "قم بمزامنة جميع مكافآت منصتك وإعدادات التفاعل",
+    "statusReady": "استراتيجية المكافآت جاهزة",
+    "synchronizing": "جاري المزامنة..."
+  }
+}
