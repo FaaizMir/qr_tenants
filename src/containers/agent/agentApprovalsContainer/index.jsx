@@ -103,6 +103,33 @@ export default function AgentApprovalsContainer() {
     fetchApprovals();
   }, [adminId]);
 
+  const handleStatusUpdate = async (id, newStatus) => {
+    const action = newStatus ? "approve" : "reject";
+    try {
+      await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
+        id: id,
+        approval_status: newStatus,
+      });
+
+      // Update local state to reflect change immediately
+      setData((prevData) =>
+        prevData.map((item) =>
+          item.id === id ? { ...item, status: newStatus } : item,
+        ),
+      );
+
+      return true;
+    } catch (error) {
+      console.error(`Error ${action}ing approval:`, error);
+      
+      // Check if it's a slot limit error
+      if (error.response?.status === 400 && error.response?.data?.message?.includes('not enough slots')) {
+        throw new Error(error.response.data.message);
+      }
+      
+      throw error; // Re-throw so the UI can handle it
+    }
+  };
   const handleStatusUpdate =
     (async (id, newStatus) => {
       const action = newStatus ? "approve" : "reject";

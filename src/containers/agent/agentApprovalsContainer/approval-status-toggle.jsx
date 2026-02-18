@@ -26,6 +26,7 @@ export function ApprovalStatusToggle({
   const [pendingAction, setPendingAction] = useState(null); // 'approve' | 'reject'
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   // Sync state if props change (e.g. from parent re-fetch)
   useEffect(() => {
@@ -44,6 +45,7 @@ export function ApprovalStatusToggle({
 
   const handleConfirm = async () => {
     setIsLoading(true);
+    setErrorMessage(null); // Clear any previous errors
     const isApprove = pendingAction === "approve";
     try {
       if (onStatusChange) {
@@ -58,7 +60,15 @@ export function ApprovalStatusToggle({
       setIsDialogOpen(false);
     } catch (error) {
       console.error(`Failed to ${pendingAction} request`, error);
-      toast.error(`Failed to ${pendingAction} request`);
+      
+      // Check if it's a slot limit error
+      if (error.message && error.message.includes('not enough slots')) {
+        setErrorMessage(error.message);
+        // Keep dialog open to show the error
+      } else {
+        toast.error(error.message || `Failed to ${pendingAction} request`);
+        setIsDialogOpen(false);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -124,11 +134,19 @@ export function ApprovalStatusToggle({
                 {pendingAction === "approve" ? "Approve" : "Reject"} Ad Request
               </DialogTitle>
               <DialogDescription className="text-slate-500 mt-2">
-                Are you sure you want to {pendingAction === "approve" ? "approve" : "reject"} the request for{" "}
-                <span className="font-semibold text-slate-900">
-                  {merchantName}
-                </span>
-                ? This action cannot be undone.
+                {errorMessage ? (
+                  <span className="text-rose-600 font-semibold">
+                    {errorMessage}
+                  </span>
+                ) : (
+                  <>
+                    Are you sure you want to {pendingAction === "approve" ? "approve" : "reject"} the request for{" "}
+                    <span className="font-semibold text-slate-900">
+                      {merchantName}
+                    </span>
+                    ? This action cannot be undone.
+                  </>
+                )}
               </DialogDescription>
             </div>
           </DialogHeader>
@@ -137,28 +155,33 @@ export function ApprovalStatusToggle({
             <Button
               variant="outline"
               className="flex-1 h-10 rounded-lg font-semibold"
-              onClick={() => setIsDialogOpen(false)}
+              onClick={() => {
+                setIsDialogOpen(false);
+                setErrorMessage(null);
+              }}
               disabled={isLoading}
             >
-              Cancel
+              {errorMessage ? "Close" : "Cancel"}
             </Button>
-            <Button
-              className={`flex-1 h-10 rounded-lg font-semibold text-white ${pendingAction === "approve"
-                ? "bg-emerald-600 hover:bg-emerald-700 shadow-sm"
-                : "bg-rose-600 hover:bg-rose-700 shadow-sm"
-                }`}
-              onClick={handleConfirm}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Processing...
-                </div>
-              ) : (
-                `Yes, ${pendingAction === "approve" ? "Approve" : "Reject"}`
-              )}
-            </Button>
+            {!errorMessage && (
+              <Button
+                className={`flex-1 h-10 rounded-lg font-semibold text-white ${pendingAction === "approve"
+                  ? "bg-emerald-600 hover:bg-emerald-700 shadow-sm"
+                  : "bg-rose-600 hover:bg-rose-700 shadow-sm"
+                  }`}
+                onClick={handleConfirm}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Processing...
+                  </div>
+                ) : (
+                  `Yes, ${pendingAction === "approve" ? "Approve" : "Reject"}`
+                )}
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
