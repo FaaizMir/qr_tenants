@@ -153,6 +153,11 @@ export const useDashboardTabs = ({
       content: <MerchantCouponsListingContainer embedded={true} />,
     },
     {
+      value: "analytics",
+      label: t("analytics"),
+      content: <MerchantAnalyticsContainer embedded={true} />,
+    },
+    {
       value: "wallet",
       label: t("wallet"),
       content: <MerchantWalletContainer embedded={true} />,
