@@ -5,11 +5,67 @@ import {
   Play,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { getImageUrl } from "@/lib/utils/imageUtils";
+import axiosInstance from "@/lib/axios";
+
+/**
+ * Hook to track ad impressions
+ * Tracks when an ad is visible for more than 2 seconds
+ */
+const useAdImpression = (ad, agentId, onImpression) => {
+  const elementRef = useRef(null);
+  const timerRef = useRef(null);
+  const hasTrackedRef = useRef(false);
+
+  useEffect(() => {
+    if (!ad || !agentId || hasTrackedRef.current) return;
+
+    const element = elementRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Start timer when ad becomes visible
+            timerRef.current = setTimeout(() => {
+              if (!hasTrackedRef.current) {
+                hasTrackedRef.current = true;
+                if (onImpression) {
+                  onImpression(ad);
+                }
+              }
+            }, 2000); // 2 seconds
+          } else {
+            // Clear timer if ad is no longer visible
+            if (timerRef.current) {
+              clearTimeout(timerRef.current);
+              timerRef.current = null;
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.5, // At least 50% of the ad must be visible
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [ad, agentId, onImpression]);
+
+  return elementRef;
+};
 
 const AdMedia = ({ ad, className, showPlayIcon = false, priority = false }) => {
   const [hasError, setHasError] = useState(false);
@@ -123,8 +179,9 @@ const AD_DIMENSIONS = {
 };
 
 // Unified Ad Slot Component with TechCrunch-style layout
-function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", className = "", onClick }) {
+function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", className = "", onClick, agentId, onImpression }) {
   const t = useTranslations("Homepage.agent.ads");
+  const adRef = useAdImpression(ad, agentId, onImpression);
 
   if (!ad || (!ad.image && !ad.video)) return null;
 
@@ -142,6 +199,7 @@ function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", cl
 
   return (
     <div
+      ref={adRef}
       onClick={handleClick}
       className={cn(
         "block relative overflow-hidden group bg-slate-900 cursor-pointer",
@@ -214,47 +272,75 @@ function TechCrunchAdSlot({ ad, orientation = "horizontal", position = "top", cl
 
 // --- PREMIUM AD COMPONENTS (TechCrunch Layout) ---
 
-export function TopBannerAd({ ad, onClick }) {
+export function TopBannerAd({ ad, onClick, agentId, onImpression }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mb-8 flex justify-center">
       <div className="w-full max-w-[970px]">
-        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="top" onClick={onClick} />
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="horizontal" 
+          position="top" 
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
       </div>
     </div>
   );
 }
 
-export function SidebarAd({ ad, placement, onClick }) {
+export function SidebarAd({ ad, placement, onClick, agentId, onImpression }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mb-6 flex justify-center">
       <div className="w-full max-w-[300px]">
-        <TechCrunchAdSlot ad={ad} orientation="vertical" position={placement} onClick={onClick} />
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="vertical" 
+          position={placement}
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
       </div>
     </div>
   );
 }
 
-export function InlineAd({ ad, onClick }) {
+export function InlineAd({ ad, onClick, agentId, onImpression }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="col-span-1 flex justify-center">
-      <TechCrunchAdSlot ad={ad} orientation="vertical" position="inline" onClick={onClick} />
+      <TechCrunchAdSlot 
+        ad={ad} 
+        orientation="vertical" 
+        position="inline"
+        onClick={onClick}
+        agentId={agentId}
+        onImpression={onImpression}
+      />
     </div>
   );
 }
 
-export function BottomBannerAd({ ad, onClick }) {
+export function BottomBannerAd({ ad, onClick, agentId, onImpression }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
     <div className="w-full mt-6 mb-8 flex justify-center px-4">
       <div className="w-full max-w-[970px]">
-        <TechCrunchAdSlot ad={ad} orientation="horizontal" position="bottom" onClick={onClick} />
+        <TechCrunchAdSlot 
+          ad={ad} 
+          orientation="horizontal" 
+          position="bottom"
+          onClick={onClick}
+          agentId={agentId}
+          onImpression={onImpression}
+        />
       </div>
     </div>
   );
