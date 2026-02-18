@@ -391,10 +391,10 @@ export default function AgentLandingPage() {
 
   const handleAdClick = async (ad) => {
     console.log("Ad clicked:", ad);
-    
+
     // Extract merchant ID from the ad
     const merchantId = ad.id;
-    
+
     if (!merchantId) {
       console.error("No merchant ID found in ad");
       return;
@@ -402,7 +402,7 @@ export default function AgentLandingPage() {
 
     // Find the merchant in the current merchants list
     let merchant = merchants.find((m) => m.id === merchantId);
-    
+
     console.log("Merchant found in list:", merchant);
 
     // If merchant not found in current list, try to fetch it
@@ -418,7 +418,7 @@ export default function AgentLandingPage() {
 
         const rawData = response.data?.data?.merchants || [];
         console.log("Fetched merchant data:", rawData);
-        
+
         if (rawData.length > 0) {
           const item = rawData[0];
           merchant = {
@@ -457,7 +457,7 @@ export default function AgentLandingPage() {
     if (merchant && merchant.batches && merchant.batches.length > 0) {
       const activeBatch = merchant.batches.find((b) => b.is_active);
       console.log("Active batch found:", activeBatch);
-      
+
       if (activeBatch) {
         handleGetCoupon(merchant, activeBatch);
       } else {
