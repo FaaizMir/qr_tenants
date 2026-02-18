@@ -8,7 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { autoDeductions } from "./wallet-data";
 import { transactionColumns, deductionColumns } from "./wallet-columns";
 import { getWalletTabs } from "./wallet-tabs";
-import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
@@ -43,8 +42,6 @@ export default function AgentWalletContainer() {
   const { isSubscriptionExpired, refreshSubscription } = useSubscription();
   const adminId = session?.user?.adminId;
   const isExpired = isSubscriptionExpired;
-
-  const tAgentWallet = useTranslations("dashboard.agentWallet");
 
   /** Top-Up Packages */
   const [topUpPackages] = useState(walletTopUpPackages);

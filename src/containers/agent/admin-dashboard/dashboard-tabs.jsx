@@ -9,7 +9,6 @@ import AnalyticsTab from "./analytics-tab";
 export const getDashboardTabs = ({
   kpiData,
   recentActivities,
-  tAgentDashboard,
 }) => [
     {
       value: "overview",

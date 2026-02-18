@@ -1,19 +1,23 @@
 import { DollarSign, TrendingUp, Award } from "lucide-react";
 
-export const kpiData = (tAgentEarnings) => [
+export const kpiData = () => [
   {
-    title: tAgentEarnings("totalearnings"),
+    title: "Total Earnings",
     value: "$45,230",
     icon: DollarSign,
     trend: "up",
     trendValue: "+15.3%",
   },
   {
-    title: tAgentEarnings("commissionratecolumn"),
+    title: "Commission Rate",
     value: "12.5%",
     icon: TrendingUp,
   },
-  { title: tAgentEarnings("topmerchant"), value: "Coffee House", icon: Award },
+  { 
+    title: "Top Merchant", 
+    value: "Coffee House", 
+    icon: Award 
+  },
 ];
 
 export const monthlyEarnings = [

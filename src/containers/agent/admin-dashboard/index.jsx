@@ -5,8 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminOverviewTab from "./overview-tab";
 import MerchantsTab from "./merchants-tab";
 import AnalyticsTab from "./analytics-tab";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function AgentDashboardContainer() {
   const [activeTab, setActiveTab] = useState("overview");
