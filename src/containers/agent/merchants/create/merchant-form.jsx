@@ -27,6 +27,8 @@ import { toast } from "@/lib/toast";
 import { createMerchant, updateMerchant } from "@/lib/services/helper";
 import AddressAutocomplete from "@/components/address-autocomplete";
 import { cn } from "@/lib/utils";
+import { AgentBalanceAlert } from "@/components/wallet/agent-balance-alert";
+import axiosInstance from "@/lib/axios";
 
 /**
  * MerchantForm - Create or Edit Merchant
@@ -44,6 +46,12 @@ export function MerchantForm({
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Wallet balance and platform cost
+  const [walletBalance, setWalletBalance] = useState(0);
+  const [platformCost, setPlatformCost] = useState(299); // Default
+  const [annualFee, setAnnualFee] = useState(299); // Default
+  const [loadingWallet, setLoadingWallet] = useState(true);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -97,6 +105,36 @@ export function MerchantForm({
       });
     }
   }, [isEdit, initialData]);
+
+  // Fetch agent wallet balance and platform cost settings
+  useEffect(() => {
+    const fetchWalletAndSettings = async () => {
+      if (!session?.user?.adminId) return;
+
+      try {
+        setLoadingWallet(true);
+
+        // Fetch agent wallet
+        const walletRes = await axiosInstance.get(`/wallets/admin/${session.user.adminId}`);
+        const balance = Number(walletRes.data?.balance || 0);
+        setWalletBalance(balance);
+
+        // Fetch platform cost settings
+        const settingsRes = await axiosInstance.get('/super-admin-settings/platform-cost-settings');
+        const settings = settingsRes.data?.data || {};
+        
+        setPlatformCost(Number(settings.merchantAnnualPlatformCost || 299));
+        setAnnualFee(Number(settings.merchantAnnualFee || 299));
+      } catch (error) {
+        console.error("Error fetching wallet or settings:", error);
+        // Use defaults if fetch fails
+      } finally {
+        setLoadingWallet(false);
+      }
+    };
+
+    fetchWalletAndSettings();
+  }, [session?.user?.adminId]);
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -196,11 +234,27 @@ export function MerchantForm({
     }
   };
 
+  // Check if user has sufficient balance for annual merchant
+  const isAnnualMerchant = formData.merchant_type === "annual";
+  const hasInsufficientBalance = isAnnualMerchant && !loadingWallet && walletBalance < platformCost;
+
   return (
     <form
       onSubmit={handleSubmit}
       className="space-y-8 w-full max-w-5xl mx-auto"
     >
+      {/* Show wallet balance alert for annual merchants */}
+      {!isEdit && isAnnualMerchant && !loadingWallet && (
+        <AgentBalanceAlert
+          balance={walletBalance}
+          requiredBalance={platformCost}
+          platformCost={platformCost}
+          merchantPayment={annualFee}
+          currency="USD"
+          operationType="merchant_creation"
+        />
+      )}
+
       {/* Account Info */}
       <Card className="border-l-4 border-l-primary shadow-md">
         <CardHeader>
@@ -454,7 +508,12 @@ export function MerchantForm({
           <Button variant="ghost" type="button" onClick={() => router.back()}>
             Cancel
           </Button>
-          <Button type="submit" disabled={loading} className="min-w-[140px]">
+          <Button 
+            type="submit" 
+            disabled={loading || hasInsufficientBalance} 
+            className="min-w-[140px]"
+            title={hasInsufficientBalance ? "Insufficient wallet balance for annual merchant creation" : ""}
+          >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading
               ? isEdit

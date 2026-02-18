@@ -3,8 +3,10 @@
 import React, { useMemo, useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const StripeCheckout = ({ pkg }) => {
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -17,10 +19,43 @@ const StripeCheckout = ({ pkg }) => {
     return `${currency.toUpperCase()} ${(amountCents / 100).toLocaleString()}`;
   }, [amountCents, currency]);
 
+  const validateAgentBalance = async () => {
+    try {
+      const adminId = session?.user?.adminId; // Extract admin ID from session
+      console.log("Validating agent balance for adminId:", adminId, "and packageId:", pkg?.id);
+      if (!adminId) {
+        throw new Error("Unable to retrieve admin ID from session. Please log in again.");
+      }
+
+      const { data } = await axiosInstance.get(
+        `/wallets/validate-balance?package_id=${pkg?.id}&admin_id=${adminId}`
+      );
+
+      if (!data?.isValid) {
+        throw new Error(
+          `Insufficient agent wallet balance. Required: ${data?.required}, Available: ${data?.available}. Please top up your wallet to complete this purchase.`
+        );
+      }
+    } catch (err) {
+      const status = err?.response?.status;
+      const msg =
+        status === 404
+          ? "Unable to validate wallet balance. Please contact support."
+          : err?.response?.data?.message ||
+            err?.message ||
+            "Unable to validate wallet balance. Please try again.";
+      setError(msg);
+      throw err; // Prevent further execution
+    }
+  };
+
   const handleCheckout = async () => {
     try {
       setLoading(true);
       setError("");
+
+      // Validate wallet balance before proceeding
+      await validateAgentBalance();
 
       const { data } = await axiosInstance.post(
         "/stripe/create-checkout-session",

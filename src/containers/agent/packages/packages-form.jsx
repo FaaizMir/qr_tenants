@@ -17,16 +17,14 @@ import { LoadingSpinner } from "@/helper/Loader";
 import { toast } from "@/lib/toast";
 import {
   Save,
-  Package,
+  Target,
   StepBack,
   Trash2,
   Tag,
   Layers,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
   Wallet,
-  Zap,
   ArrowLeft,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -49,12 +47,6 @@ import {
   SelectField,
   TextareaField,
 } from "@/components/form-fields";
-
-const BASE_CREDIT_TYPES = [
-  { value: "coupon", label: "Coupon" },
-  { value: "whatsapp ui message", label: "WhatsApp UI Message" },
-  { value: "whatsapp bi message", label: "WhatsApp BI Message" },
-];
 
 export default function PackageForm({ isEdit = false, onSuccess }) {
   const [submitting, setSubmitting] = useState(false);
@@ -79,8 +71,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       credits: "",
       pricePerCredit: "",
       currency: "USD",
-      creditType: "general",
-      customCreditType: "",
       merchantType: "annual",
       sortOrder: 1,
       isActive: "true",
@@ -90,7 +80,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
   const formValues = watch();
   const price = watch("price");
   const credits = watch("credits");
-  const selectedCreditType = watch("creditType");
   const pricePerCredit = watch("pricePerCredit");
   const selectedMerchantType = watch("merchantType");
 
@@ -111,13 +100,13 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         const data = res?.data?.data;
         if (!data) return;
 
-        // Prevent super admin from editing paid ads packages (agent-only)
-        if (data.credit_type === 'paid ads') {
-          toast.error("Paid ads packages can only be managed by agents", {
+        // Verify this is a paid ads package
+        if (data.credit_type !== 'paid ads') {
+          toast.error("You can only edit paid ads packages", {
             closeButton: true,
             duration: false,
           });
-          router.push("/master-admin/packages");
+          router.push("/agent/packages");
           return;
         }
 
@@ -127,16 +116,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           price: data.price,
           credits: data.credits,
           currency: data.currency,
-          creditType: BASE_CREDIT_TYPES.some(
-            (opt) => opt.value === data.credit_type,
-          )
-            ? data.credit_type
-            : "custom",
-          customCreditType: BASE_CREDIT_TYPES.some(
-            (opt) => opt.value === data.credit_type,
-          )
-            ? ""
-            : data.credit_type,
           merchantType: data.merchant_type,
           sortOrder: data.sort_order,
           isActive: data.is_active ? "true" : "false",
@@ -155,14 +134,11 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
   const onSubmit = async (data) => {
     setSubmitting(true);
     try {
-      const finalCreditType =
-        data.creditType === "custom" ? data.customCreditType : data.creditType;
-
       const payload = {
         name: data.name,
         description: data.description,
         credits: Number(data.credits),
-        credit_type: finalCreditType,
+        credit_type: "paid ads", // Always paid ads for agents
         price: Number(data.price),
         price_per_credit: Number(data.price) / Number(data.credits),
         currency: data.currency,
@@ -192,7 +168,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
       onSuccess?.();
       if (!isEdit) reset();
-      router.push("/master-admin/packages");
+      router.push("/agent/packages");
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
@@ -214,7 +190,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         closeButton: true,
         duration: false,
       });
-      router.push("/master-admin/packages");
+      router.push("/agent/packages");
     } catch (err) {
       toast.error(err?.response?.data?.message || "Failed to delete package", {
         closeButton: true,
@@ -224,24 +200,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       setSubmitting(false);
     }
   };
-
-  const filteredCreditTypeOptions = BASE_CREDIT_TYPES.filter((opt) => {
-    if (selectedMerchantType === "temporary") {
-      return (
-        opt.value === "whatsapp ui message" ||
-        opt.value === "coupon"
-      );
-    }
-    return true; // annual → allow all
-  });
-  useEffect(() => {
-    if (
-      selectedMerchantType === "temporary" &&
-      watch("creditType") === "whatsapp bi message"
-    ) {
-      setValue("creditType", "whatsapp ui message");
-    }
-  }, [selectedMerchantType, setValue, watch]);
 
   return (
     <div className="max-w-full  px-6">
@@ -254,14 +212,14 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-primary/20 shadow-lg">
-                      <Package className="h-6 w-6" />
+                      <Target className="h-6 w-6" />
                     </div>
                     <div>
                       <CardTitle className="text-2xl">
-                        {isEdit ? "Edit Credit Package" : "Create New Package"}
+                        {isEdit ? "Edit Paid Ads Package" : "Create Paid Ads Package"}
                       </CardTitle>
                       <CardDescription>
-                        Define pricing and credit limits for merchants.
+                        Define pricing and credits for paid advertising campaigns.
                       </CardDescription>
                     </div>
                   </div>
@@ -270,7 +228,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     variant="ghost"
                     size="sm"
                     className="hover:bg-muted"
-                    onClick={() => router.push("/master-admin/packages")}
+                    onClick={() => router.push("/agent/packages")}
                   >
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     Back to List
@@ -279,6 +237,19 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
               </CardHeader>
 
               <CardContent className="p-8 space-y-8">
+                {/* Info Banner */}
+                <div className="rounded-lg bg-blue-50 border border-blue-200 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                      <Target className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-sm text-blue-900">Paid Ads Credit Package</h4>
+                      <p className="text-xs text-blue-700">This package type is specifically for paid advertising campaigns</p>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Section 1: Identity */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
@@ -291,7 +262,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     <TextField
                       label="Package Name"
                       name="name"
-                      placeholder="e.g. Premium Growth Bundle"
+                      placeholder="e.g. Premium Ads Bundle"
                       register={register}
                       errors={errors}
                       validation={{ required: "Package name is required" }}
@@ -385,7 +356,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                       Classification
                     </h3>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField
                       label="Merchant Plan"
                       name="merchantType"
@@ -395,13 +366,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                         { value: "annual", label: "Annual / Premium" },
                         { value: "temporary", label: "Temporary / Basic" },
                       ]}
-                    />
-                    <SelectField
-                      label="Credit Type"
-                      name="creditType"
-                      control={control}
-                      errors={errors}
-                      options={filteredCreditTypeOptions}
                     />
 
                     <SelectField
@@ -415,21 +379,6 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                       ]}
                     />
                   </div>
-
-                  {selectedCreditType === "custom" && (
-                    <div className="animate-in fade-in slide-in-from-top-2 pt-2">
-                      <TextField
-                        label="Specify Custom Credit Type"
-                        name="customCreditType"
-                        placeholder="e.g. Birthday Special"
-                        register={register}
-                        errors={errors}
-                        validation={{
-                          required: "Custom credit type is required",
-                        }}
-                      />
-                    </div>
-                  )}
                 </div>
               </CardContent>
 
@@ -476,7 +425,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => router.push("/master-admin/packages")}
+                    onClick={() => router.push("/agent/packages")}
                   >
                     Cancel
                   </Button>
@@ -513,139 +462,85 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
             </h3>
           </div>
 
-          {(() => {
-            const getCategoryTheme = (type) => {
-              const t = type?.toLowerCase() || "";
-              if (t.includes("coupon"))
-                return {
-                  label: "Coupon",
-                  icon: <CheckCircle2 className="h-4 w-4" />,
-                  bg: "bg-blue-50",
-                  text: "text-blue-600",
-                  badge: "bg-blue-100/80 text-blue-700 border-blue-200",
-                };
-              if (t.includes("whatsapp"))
-                return {
-                  label: "Whatsapp Message",
-                  icon: <Sparkles className="h-4 w-4" />,
-                  bg: "bg-emerald-50",
-                  text: "text-emerald-600",
-                  badge:
-                    "bg-emerald-100/80 text-emerald-700 border-emerald-200",
-                };
-              if (t.includes("ad"))
-                return {
-                  label: "Paid Ads",
-                  icon: <Wallet className="h-4 w-4" />,
-                  bg: "bg-violet-50",
-                  text: "text-violet-600",
-                  badge: "bg-violet-100/80 text-violet-700 border-violet-200",
-                };
-              return {
-                label: type || "Standard",
-                icon: <Zap className="h-4 w-4" />,
-                bg: "bg-slate-50",
-                text: "text-slate-600",
-                badge: "bg-slate-100 text-slate-700 border-slate-200",
-              };
-            };
-            const theme = getCategoryTheme(
-              formValues.creditType === "custom"
-                ? formValues.customCreditType
-                : formValues.creditType,
-            );
-
-            return (
-              <div className="group relative flex flex-col bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                {/* Header Section from Purchase Index */}
-                <div className="p-6 pb-4">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={cn(
-                        "p-2.5 rounded-xl transition-colors duration-300",
-                        theme.bg,
-                        theme.text,
-                      )}
-                    >
-                      {theme.icon}
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className={cn(
-                        "rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border",
-                        theme.badge,
-                      )}
-                    >
-                      {theme.label}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-slate-900 truncate">
-                      {formValues.name || "Package Title"}
-                    </h3>
-                    <Badge
-                      className={cn(
-                        "text-[9px] font-black uppercase px-2 py-0.5 rounded-md",
-                        formValues.merchantType?.toLowerCase() === "annual"
-                          ? "bg-amber-100 text-amber-700"
-                          : "bg-slate-100 text-slate-600",
-                      )}
-                    >
-                      {formValues.merchantType || "Standard"}
-                    </Badge>
-                  </div>
-                  <p className="text-xs text-muted-foreground line-clamp-1 mt-1 font-medium">
-                    {formValues.description || "Enhanced features and capacity"}
-                  </p>
+          <div className="group relative flex flex-col bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+            {/* Header Section */}
+            <div className="p-6 pb-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 transition-colors duration-300">
+                  <Wallet className="h-4 w-4" />
                 </div>
-
-                {/* Content Section from Purchase Index */}
-                <div className="p-6 pt-0 flex-1 flex flex-col">
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-extrabold tracking-tight text-slate-900">
-                        {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
-                        {Number(formValues.price || 0).toLocaleString()}
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-muted-foreground mt-1.5 font-bold uppercase tracking-widest">
-                      {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
-                      {formValues.pricePerCredit || "0.00"} per credit
-                    </p>
-                  </div>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm">
-                      <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                      </div>
-                      <span className="font-medium text-slate-700">
-                        {formValues.credits || "0"} Base Credits
-                      </span>
-                    </div>
-                  </div>
-
-                  <Button
-                    variant="outline"
-                    className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
-                    disabled
-                  >
-                    Get Started
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
-
-                {/* Status Overlay */}
-                {formValues.isActive === "false" && (
-                  <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center rotate-[-10deg]">
-                    <div className="bg-red-500 text-white px-8 py-2 font-bold text-xl shadow-2xl skew-x-[-15deg] border-4 border-white tracking-tight">
-                      HIDDEN / DRAFT
-                    </div>
-                  </div>
-                )}
+                <Badge
+                  variant="outline"
+                  className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border bg-blue-100/80 text-blue-700 border-blue-200"
+                >
+                  Paid Ads
+                </Badge>
               </div>
-            );
-          })()}
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-slate-900 truncate">
+                  {formValues.name || "Package Title"}
+                </h3>
+                <Badge
+                  className={cn(
+                    "text-[9px] font-black uppercase px-2 py-0.5 rounded-md",
+                    formValues.merchantType?.toLowerCase() === "annual"
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-slate-100 text-slate-600",
+                  )}
+                >
+                  {formValues.merchantType || "Standard"}
+                </Badge>
+              </div>
+              <p className="text-xs text-muted-foreground line-clamp-1 mt-1 font-medium">
+                {formValues.description || "Enhanced advertising capacity"}
+              </p>
+            </div>
+
+            {/* Content Section */}
+            <div className="p-6 pt-0 flex-1 flex flex-col">
+              <div className="mb-6">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-extrabold tracking-tight text-slate-900">
+                    {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
+                    {Number(formValues.price || 0).toLocaleString()}
+                  </span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1.5 font-bold uppercase tracking-widest">
+                  {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
+                  {formValues.pricePerCredit || "0.00"} per credit
+                </p>
+              </div>
+
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                  </div>
+                  <span className="font-medium text-slate-700">
+                    {formValues.credits || "0"} Advertising Credits
+                  </span>
+                </div>
+              </div>
+
+              <Button
+                variant="outline"
+                className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
+                disabled
+              >
+                Get Started
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
+
+            {/* Status Overlay */}
+            {formValues.isActive === "false" && (
+              <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center rotate-[-10deg]">
+                <div className="bg-red-500 text-white px-8 py-2 font-bold text-xl shadow-2xl skew-x-[-15deg] border-4 border-white tracking-tight">
+                  HIDDEN / DRAFT
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -199,10 +199,10 @@ export default function MasterAdminOverviewTab() {
                 <div className="space-y-4">
                     <h3 className="text-sm font-semibold text-muted-foreground">Financial Performance</h3>
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <OverviewCard label="Total Commissions" value={`$${(revenue.totalCommissions || 0).toLocaleString()}`} icon={Wallet} color="text-emerald-600" bg="bg-emerald-50/50" />
-                        <OverviewCard label="Subscription Revenue" value={`$${(revenue.annualSubscriptionRevenue || 0).toLocaleString()}`} icon={TrendingUp} color="text-blue-600" bg="bg-blue-50/50" />
-                        <OverviewCard label="Credit Purchases" value={`$${(revenue.creditPurchaseRevenue || 0).toLocaleString()}`} icon={DollarSign} color="text-purple-600" bg="bg-purple-50/50" />
-                        <OverviewCard label="Total Revenue" value={`$${((revenue.totalCommissions || 0) + (revenue.annualSubscriptionRevenue || 0) + (revenue.creditPurchaseRevenue || 0)).toLocaleString()}`} icon={CheckCircle} color="text-green-600" bg="bg-green-50/50" />
+                        <OverviewCard label="Agent Subscriptions" value={`$${(revenue.agentSubscriptionRevenue || 0).toLocaleString()}`} icon={Shield} color="text-cyan-600" bg="bg-cyan-100" />
+                        <OverviewCard label="Merchant Subscriptions" value={`$${(revenue.annualSubscriptionRevenue || 0).toLocaleString()}`} icon={TrendingUp} color="text-blue-600" bg="bg-blue-100" />
+                        <OverviewCard label="Package Commissions" value={`$${(revenue.creditPurchaseRevenue || 0).toLocaleString()}`} icon={DollarSign} color="text-purple-600" bg="bg-purple-100" />
+                        <OverviewCard label="Total Platform Revenue" value={`$${(revenue.totalCommissions || 0).toLocaleString()}`} icon={CheckCircle} color="text-green-600" bg="bg-green-100" />
                     </div>
                 </div>
             )}
@@ -362,21 +362,21 @@ export default function MasterAdminOverviewTab() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <RevenueList
-                                label="Commissions"
-                                amount={revenue.totalCommissions}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
-                                color="bg-emerald-500"
+                                label="Agent Subscriptions"
+                                amount={revenue.agentSubscriptionRevenue || 0}
+                                total={revenue.totalCommissions}
+                                color="bg-cyan-500"
                             />
                             <RevenueList
-                                label="Subscriptions"
-                                amount={revenue.annualSubscriptionRevenue}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
+                                label="Merchant Subscriptions"
+                                amount={revenue.annualSubscriptionRevenue || 0}
+                                total={revenue.totalCommissions}
                                 color="bg-blue-500"
                             />
                             <RevenueList
-                                label="Credit Sales"
-                                amount={revenue.creditPurchaseRevenue}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
+                                label="Package Commissions"
+                                amount={revenue.creditPurchaseRevenue || 0}
+                                total={revenue.totalCommissions}
                                 color="bg-purple-500"
                             />
                         </CardContent>

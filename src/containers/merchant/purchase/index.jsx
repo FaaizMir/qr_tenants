@@ -165,13 +165,26 @@ export default function MerchantPurchase() {
         err?.response?.data,
         err,
       );
-      const msg =
-        err?.response?.data?.message ||
-        (err?.response?.status
-          ? t("errors.requestFailed", { status: err.response.status })
-          : err?.message) ||
-        t("errors.purchaseFailed");
-      toast.error(msg, { closeButton: true, duration: false });
+      
+      const errorData = err?.response?.data;
+      const errorMsg = errorData?.message || err?.message;
+     
+      // Check if it's an insufficient agent balance error
+      if (errorMsg && errorMsg.includes("Insufficient agent wallet balance")) {
+        toast.error("Agent Prepaid Balance Insufficient", {
+          description: "Your agent needs to top up their prepaid wallet. Please contact your agent to add funds before completing this purchase.",
+          closeButton: true,
+          duration: false,
+        });
+      } else {
+        const msg =
+          errorMsg ||
+          (err?.response?.status
+            ? `Request failed with status ${err.response.status}.`
+            : err?.message) ||
+          "Failed to purchase package. Please try again.";
+        toast.error(msg, { closeButton: true, duration: false });
+      }
     } finally {
       setPurchasingId(null);
     }

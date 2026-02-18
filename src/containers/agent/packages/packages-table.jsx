@@ -6,11 +6,9 @@ import {
   Plus,
   Package,
   Activity,
-  ShieldCheck,
-  EyeOff,
-  LayoutGrid,
+  Target,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import TableToolbar from "@/components/common/table-toolbar";
 import { DataTable } from "@/components/common/data-table";
@@ -42,10 +40,6 @@ export default function PackagesTable() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { data: session } = useSession();
 
-  // Stats calculation
-  const totalPackages = packages.length;
-  const activePackagesCount = packages.filter((p) => p.is_active).length;
-
   // Fetch packages from API
   const fetchPackages = async () => {
     setLoading(true);
@@ -56,10 +50,10 @@ export default function PackagesTable() {
         },
       });
 
-      // Handle different response structures and filter out paid ads (agent-only)
+      // Handle different response structures and filter for paid ads only
       const data = Array.isArray(res?.data) ? res.data : res?.data?.data || [];
-      const superAdminPackages = data.filter(pkg => pkg.credit_type !== 'paid ads');
-      setPackages(superAdminPackages);
+      const paidAdsPackages = data.filter(pkg => pkg.credit_type === 'paid ads');
+      setPackages(paidAdsPackages);
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch packages");
@@ -72,15 +66,14 @@ export default function PackagesTable() {
     fetchPackages();
   }, []);
 
-  // Filter packages by name or credit type
+  // Filter packages by name
   const filteredPackages = packages.filter(
     (pkg) =>
-      pkg.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      pkg.credit_type.toLowerCase().includes(debouncedSearch.toLowerCase())
+      pkg.name.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   const handleEdit = (pkg) => {
-    router.push(`/master-admin/packages/edit/${pkg.id}`);
+    router.push(`/agent/packages/edit/${pkg.id}`);
   };
 
   const handleDelete = (pkg) => {
@@ -100,7 +93,7 @@ export default function PackagesTable() {
         }
       );
       toast.success("Package deleted successfully");
-      fetchPackages(); // Refresh list
+      fetchPackages();
     } catch (err) {
       toast.error(err?.response?.data?.message || "Failed to delete package");
     } finally {
@@ -122,15 +115,15 @@ export default function PackagesTable() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
           <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner border border-primary/5">
-            <Package className="h-8 w-8" />
+            <Target className="h-8 w-8" />
           </div>
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-              Packages
+              Paid Ads Packages
             </h1>
             <p className="text-muted-foreground font-medium flex items-center gap-2 text-sm">
               <Activity className="h-4 w-4 text-emerald-500" />
-              Manage and monitor all merchant credit bundles
+              Manage your paid advertising credit packages
             </p>
           </div>
         </div>
@@ -142,18 +135,18 @@ export default function PackagesTable() {
           <CardContent className="p-8">
             <div className="mb-6">
               <TableToolbar
-                placeholder="Search by package name, credit type..."
+                placeholder="Search by package name..."
                 search={search}
                 onSearchChange={setSearch}
                 total={filteredPackages.length}
                 rightSlot={
                   <Button
-                    onClick={() => router.push("/master-admin/packages/create")}
+                    onClick={() => router.push("/agent/packages/create")}
                     size="lg"
                     className="shadow-xl shadow-primary/20 font-bold px-8 h-12 rounded-xl"
                   >
                     <Plus className="h-5 w-5 mr-2 stroke-[3px]" />
-                    Create New Package
+                    Create Paid Ads Package
                   </Button>
                 }
               />
@@ -187,7 +180,7 @@ export default function PackagesTable() {
               <span className="text-slate-900 font-bold italic underline decoration-red-500 decoration-2">
                 {packageToDelete?.name}
               </span>
-              . This action is terminal and cannot be reversed by anyone.
+              . This action is terminal and cannot be reversed.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="mt-8 gap-3">
