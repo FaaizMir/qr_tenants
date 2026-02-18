@@ -79,7 +79,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       credits: "",
       pricePerCredit: "",
       currency: "USD",
-      creditType: "general",
+      creditType: "coupon",
       customCreditType: "",
       merchantType: "annual",
       sortOrder: 1,
@@ -112,7 +112,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         if (!data) return;
 
         // Prevent super admin from editing paid ads packages (agent-only)
-        if (data.credit_type === 'paid ads') {
+        if (data.credit_type === "paid ads") {
           toast.error("Paid ads packages can only be managed by agents", {
             closeButton: true,
             duration: false,
@@ -227,10 +227,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
   const filteredCreditTypeOptions = BASE_CREDIT_TYPES.filter((opt) => {
     if (selectedMerchantType === "temporary") {
-      return (
-        opt.value === "whatsapp ui message" ||
-        opt.value === "coupon"
-      );
+      return opt.value === "whatsapp ui message" || opt.value === "coupon";
     }
     return true; // annual → allow all
   });
@@ -343,6 +340,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     <NumberField
                       label="Total Credits"
                       name="credits"
+                      placeholder={"0"}
                       register={register}
                       errors={errors}
                       validation={{ required: "Credits are required", min: 1 }}
