@@ -76,7 +76,7 @@ export default function AnalyticsTab() {
       <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-cyan-100 rounded-lg">
+            <div className="p-2 bg-cyan-50/50 rounded-lg">
               <MessageSquare className="h-5 w-5 text-cyan-600" />
             </div>
             <div>
@@ -88,7 +88,7 @@ export default function AnalyticsTab() {
           </div>
         </CardHeader>
         <CardContent className="p-0">
-          <ScrollArea className="h-[500px]">
+          <ScrollArea className="h-[400px]">
             <div className="space-y-2 px-6 pb-4">
               {whatsappPaginated.length > 0 ? (
                 whatsappPaginated.map((merchant, index) => (
@@ -141,8 +141,8 @@ export default function AnalyticsTab() {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-20 text-muted-foreground">
-                  <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-20" />
+                <div className="text-center py-12 text-muted-foreground">
+                  <MessageSquare className="h-10 w-10 mx-auto mb-2 opacity-20" />
                   <p className="text-sm">No WhatsApp usage data</p>
                 </div>
               )}
@@ -185,7 +185,7 @@ export default function AnalyticsTab() {
       <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-100 rounded-lg">
+            <div className="p-2 bg-blue-50/50 rounded-lg">
               <Ticket className="h-5 w-5 text-blue-600" />
             </div>
             <div>
@@ -197,7 +197,7 @@ export default function AnalyticsTab() {
           </div>
         </CardHeader>
         <CardContent className="p-0">
-          <ScrollArea className="h-[500px]">
+          <ScrollArea className="h-[400px]">
             <div className="space-y-2 px-6 pb-4">
               {couponPaginated.length > 0 ? (
                 couponPaginated.map((merchant, index) => {
@@ -261,8 +261,8 @@ export default function AnalyticsTab() {
                   );
                 })
               ) : (
-                <div className="text-center py-20 text-muted-foreground">
-                  <Ticket className="h-12 w-12 mx-auto mb-3 opacity-20" />
+                <div className="text-center py-12 text-muted-foreground">
+                  <Ticket className="h-10 w-10 mx-auto mb-2 opacity-20" />
                   <p className="text-sm">No coupon data available</p>
                 </div>
               )}

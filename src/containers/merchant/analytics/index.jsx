@@ -85,7 +85,7 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
   const prepareChartData = () => {
     if (!analytics.length) return { impressions: [], clicks: [], labels: [] };
 
-    const sortedData = [...analytics].sort((a, b) => 
+    const sortedData = [...analytics].sort((a, b) =>
       new Date(a.created_at) - new Date(b.created_at)
     );
 
@@ -103,7 +103,7 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
       <div className="space-y-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[...Array(4)].map((_, i) => (
-            <Card key={i}>
+            <Card key={i} className="border-0 shadow-md">
               <CardHeader className="pb-2">
                 <Skeleton className="h-4 w-24" />
               </CardHeader>
@@ -135,17 +135,19 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
       )}
 
       {/* KPI Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard
           title={t("totalImpressions") || "Total Impressions"}
           value={format(stats.totalImpressions)}
           icon={Eye}
+          compact={true}
           description={t("impressionsDesc") || "Total ad views across all campaigns"}
         />
         <KpiCard
           title={t("totalClicks") || "Total Clicks"}
           value={format(stats.totalClicks)}
           icon={MousePointerClick}
+          compact={true}
           description={t("clicksDesc") || "Total ad clicks from viewers"}
         />
         <KpiCard
@@ -154,38 +156,41 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
           icon={TrendingUp}
           trend={stats.ctr > 2 ? "up" : "neutral"}
           trendValue={stats.ctr > 2 ? "Good" : "Average"}
+          compact={true}
           description={t("ctrDesc") || "Percentage of impressions that converted to clicks"}
         />
         <KpiCard
           title={t("totalAds") || "Active Ads"}
           value={format(stats.totalAds)}
           icon={BarChart3}
+          compact={true}
           description={t("adsDesc") || "Total number of tracked advertisements"}
         />
       </div>
 
       {/* Charts */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <ChartWrapper
           title={t("impressionsChart") || "Impressions by Ad"}
           actions={
-            <span className="flex items-center text-xs font-medium text-blue-600 bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-0.5 rounded-full">
+            <span className="flex items-center text-[10px] font-bold text-blue-600 bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-0.5 rounded-full">
               <Eye className="w-3 h-3 mr-1" />
               {format(stats.totalImpressions)} {t("total") || "total"}
             </span>
           }
         >
-          <div className="h-[300px] w-full pt-4">
+          <div className="h-[150px] w-full pt-2">
             {chartData.impressions.length > 0 ? (
               <BarChart
                 data={chartData.impressions}
                 labels={chartData.labels}
                 colors={["#3b82f6"]}
-                horizontal={false}
+                height="130px"
               />
             ) : (
-              <div className="h-full flex items-center justify-center text-muted-foreground">
-                {t("noData") || "No data available"}
+              <div className="h-full flex flex-col items-center justify-center text-muted-foreground bg-gray-50/50 rounded-xl border border-dashed border-gray-100">
+                <Eye className="h-5 w-5 mb-1.5 opacity-20" />
+                <span className="text-[10px] font-bold">{t("noData") || "No data available"}</span>
               </div>
             )}
           </div>
@@ -194,23 +199,24 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
         <ChartWrapper
           title={t("clicksChart") || "Clicks by Ad"}
           actions={
-            <span className="flex items-center text-xs font-medium text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">
+            <span className="flex items-center text-[10px] font-bold text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">
               <MousePointerClick className="w-3 h-3 mr-1" />
               {format(stats.totalClicks)} {t("total") || "total"}
             </span>
           }
         >
-          <div className="h-[300px] w-full pt-4">
+          <div className="h-[150px] w-full pt-2">
             {chartData.clicks.length > 0 ? (
               <BarChart
                 data={chartData.clicks}
                 labels={chartData.labels}
                 colors={["#10b981"]}
-                horizontal={false}
+                height="130px"
               />
             ) : (
-              <div className="h-full flex items-center justify-center text-muted-foreground">
-                {t("noData") || "No data available"}
+              <div className="h-full flex flex-col items-center justify-center text-muted-foreground bg-gray-50/50 rounded-xl border border-dashed border-gray-100">
+                <MousePointerClick className="h-5 w-5 mb-1.5 opacity-20" />
+                <span className="text-[10px] font-bold">{t("noData") || "No data available"}</span>
               </div>
             )}
           </div>
@@ -218,7 +224,7 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
       </div>
 
       {/* Detailed Table */}
-      <Card>
+      <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
         <CardHeader>
           <CardTitle>{t("detailedAnalytics") || "Detailed Analytics"}</CardTitle>
           <CardDescription>
@@ -241,8 +247,8 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
                 </TableHeader>
                 <TableBody>
                   {analytics.map((item, index) => {
-                    const ctr = item.impressions > 0 
-                      ? ((item.clicks / item.impressions) * 100).toFixed(2) 
+                    const ctr = item.impressions > 0
+                      ? ((item.clicks / item.impressions) * 100).toFixed(2)
                       : 0;
                     return (
                       <TableRow key={index}>
@@ -251,9 +257,8 @@ export default function MerchantAnalyticsContainer({ embedded = false }) {
                         <TableCell className="text-right">{format(item.impressions)}</TableCell>
                         <TableCell className="text-right">{format(item.clicks)}</TableCell>
                         <TableCell className="text-right">
-                          <span className={`font-medium ${
-                            ctr > 2 ? 'text-green-600' : ctr > 1 ? 'text-yellow-600' : 'text-gray-600'
-                          }`}>
+                          <span className={`font-medium ${ctr > 2 ? 'text-green-600' : ctr > 1 ? 'text-yellow-600' : 'text-gray-600'
+                            }`}>
                             {ctr}%
                           </span>
                         </TableCell>
