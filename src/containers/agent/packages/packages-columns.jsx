@@ -73,8 +73,8 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
     header: "Package Info",
     cell: ({ row }) => (
       <div className="flex items-center gap-3 py-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-500/10 shadow-sm border border-purple-500/20">
-          <Target className="h-4 w-4 text-purple-600" />
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 shadow-sm border border-primary/20">
+          <Target className="h-4 w-4 text-primary" />
         </div>
         <div className="flex flex-col">
           <span className="font-bold text-sm text-foreground">

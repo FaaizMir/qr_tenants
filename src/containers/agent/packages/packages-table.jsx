@@ -114,7 +114,7 @@ export default function PackagesTable() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-4">
-          <div className="h-14 w-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 shadow-inner border border-purple-500/20">
+          <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner border border-primary/5">
             <Target className="h-8 w-8" />
           </div>
           <div>
@@ -122,7 +122,7 @@ export default function PackagesTable() {
               Paid Ads Packages
             </h1>
             <p className="text-muted-foreground font-medium flex items-center gap-2 text-sm">
-              <Activity className="h-4 w-4 text-purple-500" />
+              <Activity className="h-4 w-4 text-emerald-500" />
               Manage your paid advertising credit packages
             </p>
           </div>
@@ -143,7 +143,7 @@ export default function PackagesTable() {
                   <Button
                     onClick={() => router.push("/agent/packages/create")}
                     size="lg"
-                    className="shadow-xl shadow-purple-500/20 font-bold px-8 h-12 rounded-xl bg-purple-600 hover:bg-purple-700"
+                    className="shadow-xl shadow-primary/20 font-bold px-8 h-12 rounded-xl"
                   >
                     <Plus className="h-5 w-5 mr-2 stroke-[3px]" />
                     Create Paid Ads Package

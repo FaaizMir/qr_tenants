@@ -211,7 +211,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
               <CardHeader className="border-b pb-6 px-8">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-600 text-white shadow-purple-500/20 shadow-lg">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-primary/20 shadow-lg">
                       <Target className="h-6 w-6" />
                     </div>
                     <div>
@@ -238,14 +238,14 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
               <CardContent className="p-8 space-y-8">
                 {/* Info Banner */}
-                <div className="rounded-lg bg-purple-50 border border-purple-200 p-4">
+                <div className="rounded-lg bg-blue-50 border border-blue-200 p-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                       <Target className="h-4 w-4" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-purple-900">Paid Ads Credit Package</h4>
-                      <p className="text-xs text-purple-700">This package type is specifically for paid advertising campaigns</p>
+                      <h4 className="font-semibold text-sm text-blue-900">Paid Ads Credit Package</h4>
+                      <p className="text-xs text-blue-700">This package type is specifically for paid advertising campaigns</p>
                     </div>
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 {/* Section 1: Identity */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Tag className="h-4 w-4 text-purple-600" />
+                    <Tag className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
                       Identity & Pricing
                     </h3>
@@ -305,7 +305,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 {/* Section 2: Credits Configuration */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Layers className="h-4 w-4 text-purple-600" />
+                    <Layers className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
                       Credits & Allocation
                     </h3>
@@ -351,7 +351,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 {/* Section 3: Classification */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <StepBack className="h-4 w-4 text-purple-600" />
+                    <StepBack className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
                       Classification
                     </h3>
@@ -433,7 +433,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     type="submit"
                     size="lg"
                     disabled={submitting}
-                    className="min-w-[150px] shadow-lg shadow-purple-500/20 bg-purple-600 hover:bg-purple-700"
+                    className="min-w-[150px] shadow-lg shadow-primary/20"
                   >
                     {submitting ? (
                       <>
@@ -466,12 +466,12 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
             {/* Header Section */}
             <div className="p-6 pb-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 transition-colors duration-300">
+                <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 transition-colors duration-300">
                   <Wallet className="h-4 w-4" />
                 </div>
                 <Badge
                   variant="outline"
-                  className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border bg-purple-100/80 text-purple-700 border-purple-200"
+                  className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border bg-blue-100/80 text-blue-700 border-blue-200"
                 >
                   Paid Ads
                 </Badge>
@@ -524,7 +524,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
               <Button
                 variant="outline"
-                className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-purple-600 group-hover:text-white group-hover:border-purple-600 group-hover:scale-[1.02]"
+                className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
                 disabled
               >
                 Get Started
