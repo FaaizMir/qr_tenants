@@ -389,8 +389,39 @@ export default function AgentLandingPage() {
     setCouponDialogOpen(true);
   };
 
+  // Track impression
+  const handleAdImpression = useCallback(async (ad) => {
+    if (!agentId || !ad || !ad.id) return;
+
+    try {
+      await axiosInstance.post('/analytics/track-impression', {
+        merchantId: ad.id,
+        agentId: agentId,
+        paidAdId: ad.id,
+      });
+      console.log('Impression tracked for ad:', ad.id);
+    } catch (error) {
+      console.error('Failed to track impression:', error);
+    }
+  }, [agentId]);
+
+  // Track click and handle ad click
   const handleAdClick = async (ad) => {
     console.log("Ad clicked:", ad);
+    
+    // Track the click
+    if (agentId && ad && ad.id) {
+      try {
+        await axiosInstance.post('/analytics/track-click', {
+          merchantId: ad.id,
+          agentId: agentId,
+          paidAdId: ad.id,
+        });
+        console.log('Click tracked for ad:', ad.id);
+      } catch (error) {
+        console.error('Failed to track click:', error);
+      }
+    }
     
     // Extract merchant ID from the ad
     const merchantId = ad.id;
@@ -652,7 +683,12 @@ export default function AgentLandingPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-linear-to-b from-amber-500/30 via-amber-400/20 to-transparent rounded-3xl blur-3xl"></div>
                 <div className="relative">
-                  <TopBannerAd ad={topAd} onClick={handleAdClick} />
+                  <TopBannerAd 
+                    ad={topAd} 
+                    onClick={handleAdClick}
+                    agentId={agentId}
+                    onImpression={handleAdImpression}
+                  />
                 </div>
               </div>
             </div>
@@ -697,7 +733,12 @@ export default function AgentLandingPage() {
                     </span>
                     <span className="h-px flex-1 bg-slate-300"></span>
                   </div>
-                  <SidebarAd ad={leftAd} onClick={handleAdClick} />
+                  <SidebarAd 
+                    ad={leftAd} 
+                    onClick={handleAdClick}
+                    agentId={agentId}
+                    onImpression={handleAdImpression}
+                  />
                 </div>
               </div>
             )}
@@ -786,7 +827,12 @@ export default function AgentLandingPage() {
                   </span>
                   <span className="h-px flex-1 bg-slate-300"></span>
                 </div>
-                <SidebarAd ad={rightAd} onClick={handleAdClick} />
+                <SidebarAd 
+                  ad={rightAd} 
+                  onClick={handleAdClick}
+                  agentId={agentId}
+                  onImpression={handleAdImpression}
+                />
               </div>
             )}
 
@@ -867,7 +913,12 @@ export default function AgentLandingPage() {
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-b from-slate-900/50 to-transparent rounded-3xl blur-2xl"></div>
               <div className="relative">
-                <BottomBannerAd ad={bottomAd} onClick={handleAdClick} />
+                <BottomBannerAd 
+                  ad={bottomAd} 
+                  onClick={handleAdClick}
+                  agentId={agentId}
+                  onImpression={handleAdImpression}
+                />
               </div>
             </div>
           </div>
