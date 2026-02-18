@@ -530,7 +530,9 @@ export default function SupportContainer() {
                 onValueChange={setActiveTab}
                 className="w-full"
               >
-                <TabsList className={`grid ${hasAdminAccess ? 'grid-cols-1' : 'grid-cols-2'} w-full h-9`}>
+                <TabsList
+                  className={`grid ${hasAdminAccess ? "grid-cols-1" : "grid-cols-2"} w-full h-9`}
+                >
                   {hasAdminAccess ? (
                     <div className="flex items-center justify-center text-xs font-bold text-muted-foreground uppercase tracking-widest bg-muted/30 rounded-md">
                       Agents

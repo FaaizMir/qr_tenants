@@ -13,7 +13,7 @@ export const namespaces = [
   "merchantFestival",
   "systemLogs",
   "common",
-  "merchantPurchase"
+  "merchantPurchase",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {
@@ -26,7 +26,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const namespacePromises = namespaces.map((ns) =>
     import(`../../locales/${locale}/${ns}.json`)
       .then((m) => m.default)
-      .catch(() => ({}))
+      .catch(() => ({})),
   );
 
   const namespaceModules = await Promise.all(namespacePromises);

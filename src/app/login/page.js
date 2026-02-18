@@ -5,4 +5,3 @@ export default function LoginRedirect() {
   const targetLocale = routing.defaultLocale || "en";
   redirect(`/${targetLocale}/login`);
 }
-
