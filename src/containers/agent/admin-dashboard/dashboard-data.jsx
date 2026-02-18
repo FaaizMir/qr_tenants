@@ -8,9 +8,9 @@ import {
   Wallet
 } from "lucide-react";
 
-export const getKpiData = (t) => [
+export const getKpiData = () => [
   {
-    title: t("totalmerchants") || "Total Merchants",
+    title: "Total Merchants",
     value: "124",
     icon: Users,
     trend: "up",
@@ -18,7 +18,7 @@ export const getKpiData = (t) => [
     description: "14 new this month",
   },
   {
-    title: t("monthlyrevenue") || "Monthly Revenue",
+    title: "Monthly Revenue",
     value: "$4,250",
     icon: DollarSign,
     trend: "up",
@@ -43,7 +43,7 @@ export const getKpiData = (t) => [
   },
 ];
 
-export const getRecentActivities = (t) => [
+export const getRecentActivities = () => [
   {
     id: 1,
     merchant: "Burger King - Downtown",

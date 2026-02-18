@@ -70,6 +70,11 @@ export function AppSidebar({
       icon: Wallet,
     },
     {
+      title: "Ads Packages",
+      url: "/agent/packages",
+      icon: ShoppingCart,
+    },
+    {
       title: tSidebar("agent.approvals"),
       url: "/agent/approvals",
       icon: Package,

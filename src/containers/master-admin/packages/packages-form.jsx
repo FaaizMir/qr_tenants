@@ -52,7 +52,6 @@ import {
 
 const BASE_CREDIT_TYPES = [
   { value: "coupon", label: "Coupon" },
-  { value: "paid ads", label: "Paid Ads" },
   { value: "whatsapp ui message", label: "WhatsApp UI Message" },
   { value: "whatsapp bi message", label: "WhatsApp BI Message" },
 ];
@@ -80,7 +79,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       credits: "",
       pricePerCredit: "",
       currency: "USD",
-      creditType: "general",
+      creditType: "coupon",
       customCreditType: "",
       merchantType: "annual",
       sortOrder: 1,
@@ -112,6 +111,16 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
         const data = res?.data?.data;
         if (!data) return;
 
+        // Prevent super admin from editing paid ads packages (agent-only)
+        if (data.credit_type === "paid ads") {
+          toast.error("Paid ads packages can only be managed by agents", {
+            closeButton: true,
+            duration: false,
+          });
+          router.push("/master-admin/packages");
+          return;
+        }
+
         reset({
           name: data.name,
           description: data.description,
@@ -141,7 +150,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     };
 
     fetchPackage();
-  }, [isEdit, packageId, reset]);
+  }, [isEdit, packageId, reset, router]);
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -218,11 +227,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
   const filteredCreditTypeOptions = BASE_CREDIT_TYPES.filter((opt) => {
     if (selectedMerchantType === "temporary") {
-      return (
-        opt.value === "whatsapp ui message" ||
-        opt.value === "coupon" ||
-        opt.value === "paid ads"
-      );
+      return opt.value === "whatsapp ui message" || opt.value === "coupon";
     }
     return true; // annual → allow all
   });
@@ -335,6 +340,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     <NumberField
                       label="Total Credits"
                       name="credits"
+                      placeholder={"0"}
                       register={register}
                       errors={errors}
                       validation={{ required: "Credits are required", min: 1 }}

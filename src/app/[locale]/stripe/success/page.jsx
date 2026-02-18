@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ export default function StripeSuccessPage() {
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale || "en";
+  const hasProcessed = useRef(false); // Flag to prevent duplicate processing
 
   const refreshSubscription = async () => {
     try {
@@ -41,6 +42,11 @@ export default function StripeSuccessPage() {
 
   useEffect(() => {
     const processPayment = async () => {
+      // Prevent duplicate processing
+      if (hasProcessed.current) {
+        return;
+      }
+
       const pkg = JSON.parse(localStorage.getItem("stripe_package"));
       const role = session?.user?.role;
       const adminId = session?.user?.adminId;
@@ -51,6 +57,9 @@ export default function StripeSuccessPage() {
         return;
       }
 
+      // Mark as processing to prevent duplicate calls
+      hasProcessed.current = true;
+
       try {
         if (pkg.id === "subscription-renewal") {
           // Agent Subscription Renewal
@@ -59,6 +68,35 @@ export default function StripeSuccessPage() {
             await axiosInstance.post(`/wallets/admin/${adminId}/subscribe`);
             await refreshSubscription();
             toast.success("Subscription renewed successfully!");
+          }
+        } else if (pkg.id === "agent_subscription_initial") {
+          // Agent Initial Subscription + Wallet Balance
+          if (adminId) {
+            console.log("Processing initial subscription for admin", adminId, "with balance", pkg.wallet_balance);
+            await axiosInstance.post(`/wallets/admin/${adminId}/subscribe-with-balance`, {
+              walletBalance: Number(pkg.wallet_balance) || 0,
+              metadata: {
+                subscription_fee: pkg.subscription_fee,
+                wallet_balance: pkg.wallet_balance,
+                total_paid: pkg.price,
+              },
+            });
+            await refreshSubscription();
+            toast.success("Subscription activated successfully!" + (pkg.wallet_balance > 0 ? ` Wallet balance: ${pkg.currency} ${pkg.wallet_balance}` : ""));
+          }
+        } else if (pkg.id === "custom_wallet_topup") {
+          // Custom Wallet Top-Up (for agents with active subscription)
+          if (adminId) {
+            console.log("Processing custom wallet top-up for admin", adminId, "amount", pkg.wallet_balance);
+            await axiosInstance.post(`/wallets/admin/${adminId}/topup`, {
+              amount: Number(pkg.wallet_balance) || 0,
+              description: `Custom wallet top-up`,
+              metadata: {
+                top_up_amount: pkg.wallet_balance,
+                payment_date: new Date().toISOString(),
+              },
+            });
+            toast.success(`Wallet topped up successfully! Added ${pkg.currency} ${Number(pkg.wallet_balance).toLocaleString()}`);
           }
         } else if (merchantId) {
           if (pkg.id === "merchant-annual-upgrade") {
@@ -99,19 +137,21 @@ export default function StripeSuccessPage() {
         toast.error(
           "Payment successful, but failed to update your account. Please contact support.",
         );
+        // Reset flag on error so user can retry if needed
+        hasProcessed.current = false;
       } finally {
         setProcessing(false);
       }
     };
 
-    if (session) {
+    if (session && !hasProcessed.current) {
       processPayment();
-    } else {
+    } else if (!session) {
       // If no session but we have local storage, maybe wait a bit?
       // For now, if no session we can't do much.
       setProcessing(false);
     }
-  }, [refreshSubscription, session]);
+  }, [session]); // Removed refreshSubscription from dependencies
 
   const isAgentPayment =
     session?.user?.role === "agent" || session?.user?.role === "admin";

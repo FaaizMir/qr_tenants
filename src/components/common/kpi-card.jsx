@@ -11,6 +11,7 @@ export function KpiCard({
   trendValue,
   className = "",
   description,
+  compact = false,
 }) {
   const isTrendPositive = trend === "up";
   const isTrendNeutral = trend === "neutral";
@@ -21,19 +22,20 @@ export function KpiCard({
   return (
     <Card
       className={cn(
-        "relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group border-muted/60",
+        "relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group border-0 shadow-md",
         "bg-gradient-to-br from-white via-white to-gray-50/50 dark:from-card dark:via-card dark:to-muted/10", // Subtle gradient instead of icon
         className
       )}
     >
 
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start mb-4">
+      <CardContent className={cn(compact ? "p-4" : "p-6")}>
+        <div className={cn("flex justify-between items-start", compact ? "mb-2" : "mb-4")}>
           <div className={cn(
-            "p-2.5 rounded-xl shadow-sm transition-all duration-300",
+            "rounded-xl shadow-sm transition-all duration-300",
+            compact ? "p-2" : "p-2.5",
             "bg-primary/5 text-primary ring-1 ring-primary/10 group-hover:bg-primary/10 group-hover:scale-110"
           )}>
-            {Icon && <Icon className="w-5 h-5" />}
+            {Icon && <Icon className={cn(compact ? "w-4 h-4" : "w-5 h-5")} />}
           </div>
 
           {trendValue && (
@@ -52,11 +54,11 @@ export function KpiCard({
         </div>
 
         <div className="space-y-1 relative">
-          <h3 className="text-sm font-medium text-muted-foreground/80">{title}</h3>
-          <div className="text-3xl font-bold tracking-tight text-foreground">{value}</div>
+          <h3 className={cn("font-medium text-muted-foreground/80", compact ? "text-[11px]" : "text-sm")}>{title}</h3>
+          <div className={cn("font-bold tracking-tight text-foreground", compact ? "text-xl" : "text-3xl")}>{value}</div>
         </div>
 
-        {footerText && (
+        {!compact && footerText && (
           <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground flex items-center gap-1.5">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
             {footerText}

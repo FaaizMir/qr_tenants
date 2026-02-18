@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
-import { useTranslations } from "next-intl";
 
 const format = (num) => {
   const n = Number(num);
@@ -22,12 +21,11 @@ const format = (num) => {
 };
 
 const UpgradeCard = ({ feeData, adminId }) => {
-  const t = useTranslations("merchantDashboard.upgrade");
   const [upgrading, setUpgrading] = useState(false);
 
   const handleUpgrade = async () => {
     if (!feeData || !adminId) {
-      toast.error(t("errorMissingInfo"));
+      toast.error("Missing fee data or admin ID");
       return;
     }
 
@@ -57,11 +55,11 @@ const UpgradeCard = ({ feeData, adminId }) => {
       if (res.data?.sessionUrl) {
         window.location.href = res.data.sessionUrl;
       } else {
-        throw new Error(t("errorNoSessionUrl"));
+        throw new Error("No session URL returned");
       }
     } catch (error) {
       console.error("Upgrade failed:", error);
-      toast.error(t("errorPaymentFailed"));
+      toast.error("Payment failed. Please try again.");
       setUpgrading(false);
     }
   };
@@ -72,10 +70,10 @@ const UpgradeCard = ({ feeData, adminId }) => {
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <div className="space-y-1">
           <CardTitle className="text-lg font-bold text-blue-900">
-            {t("title")}
+            Upgrade to Annual
           </CardTitle>
           <CardDescription className="text-blue-700/80">
-            {t("description")}
+            Unlock premium features with annual subscription
           </CardDescription>
         </div>
         <div className="rounded-full bg-blue-200 p-2 text-blue-700">
@@ -88,7 +86,7 @@ const UpgradeCard = ({ feeData, adminId }) => {
             ? `${feeData.currency || "USD"} ${format(feeData.fee)}`
             : "--"}
           <span className="text-sm font-normal text-blue-700 ml-1">
-            {t("pricePerYear")}
+            per year
           </span>
         </div>
       </CardContent>
@@ -98,7 +96,7 @@ const UpgradeCard = ({ feeData, adminId }) => {
           disabled={!feeData || upgrading}
           onClick={handleUpgrade}
         >
-          {upgrading ? t("processing") : t("upgradeNow")}
+          {upgrading ? "Processing..." : "Upgrade Now"}
         </Button>
       </CardFooter>
     </Card>
@@ -122,13 +120,12 @@ export const useDashboardTabs = ({
   feeData,
   adminId,
 }) => {
-  const t = useTranslations("merchantDashboard.tabs");
   const isAnnual = subscriptionType === "annual";
 
   return [
     {
       value: "overview",
-      label: t("overview"),
+      label: "Overview",
       content: (
         <div className="space-y-6">
           {!isAnnual && <UpgradeCard feeData={feeData} adminId={adminId} />}
@@ -149,17 +146,22 @@ export const useDashboardTabs = ({
     },
     {
       value: "coupons",
-      label: t("coupons"),
+      label: "Coupons",
       content: <MerchantCouponsListingContainer embedded={true} />,
     },
     {
+      value: "Ads Performance",
+      label: "Ads Performance",
+      content: <MerchantAnalyticsContainer embedded={true} />,
+    },
+    {
       value: "wallet",
-      label: t("wallet"),
+      label: "Wallet",
       content: <MerchantWalletContainer embedded={true} />,
     },
     {
       value: "settings",
-      label: t("settings"),
+      label: "Settings",
       content: <MerchantSettings />,
     },
     // {

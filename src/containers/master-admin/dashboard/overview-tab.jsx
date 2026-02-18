@@ -16,9 +16,13 @@ import {
     Ticket,
     MessageSquare,
     DollarSign,
-    Shield, Activity
+    Shield,
+    Activity,
+    ChevronLeft,
+    ChevronRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -61,8 +65,13 @@ export default function MasterAdminOverviewTab() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Pagination State for Top Merchants
+    const [merchantsPage, setMerchantsPage] = useState(0);
+    const merchantsPerPage = 10;
+
     const handlePresetChange = (val) => {
         setFilterType(val);
+        setMerchantsPage(0); // Reset pagination when filter changes
         const now = new Date();
         let from = new Date();
         let to = new Date();
@@ -121,6 +130,15 @@ export default function MasterAdminOverviewTab() {
     const overview = data?.overview || {};
     const revenue = data?.revenue || {};
     const staffRole = session?.user?.staffRole || "Super Admin";
+
+    // Pagination logic for top merchants
+    const topMerchants = data?.topMerchants || [];
+    const totalMerchants = topMerchants.length;
+    const totalMerchantsPages = Math.ceil(totalMerchants / merchantsPerPage);
+    const paginatedMerchants = topMerchants.slice(
+        merchantsPage * merchantsPerPage,
+        (merchantsPage + 1) * merchantsPerPage
+    );
 
     // Role-based visibility flags
     const isSuperAdmin = staffRole === "Super Admin";
@@ -181,10 +199,10 @@ export default function MasterAdminOverviewTab() {
                 <div className="space-y-4">
                     <h3 className="text-sm font-semibold text-muted-foreground">Financial Performance</h3>
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <OverviewCard label="Total Commissions" value={`$${(revenue.totalCommissions || 0).toLocaleString()}`} icon={Wallet} color="text-emerald-600" bg="bg-emerald-100" />
-                        <OverviewCard label="Subscription Revenue" value={`$${(revenue.annualSubscriptionRevenue || 0).toLocaleString()}`} icon={TrendingUp} color="text-blue-600" bg="bg-blue-100" />
-                        <OverviewCard label="Credit Purchases" value={`$${(revenue.creditPurchaseRevenue || 0).toLocaleString()}`} icon={DollarSign} color="text-purple-600" bg="bg-purple-100" />
-                        <OverviewCard label="Total Revenue" value={`$${((revenue.totalCommissions || 0) + (revenue.annualSubscriptionRevenue || 0) + (revenue.creditPurchaseRevenue || 0)).toLocaleString()}`} icon={CheckCircle} color="text-green-600" bg="bg-green-100" />
+                        <OverviewCard label="Agent Subscriptions" value={`$${(revenue.agentSubscriptionRevenue || 0).toLocaleString()}`} icon={Shield} color="text-cyan-600" bg="bg-cyan-100" />
+                        <OverviewCard label="Merchant Subscriptions" value={`$${(revenue.annualSubscriptionRevenue || 0).toLocaleString()}`} icon={TrendingUp} color="text-blue-600" bg="bg-blue-100" />
+                        <OverviewCard label="Package Commissions" value={`$${(revenue.creditPurchaseRevenue || 0).toLocaleString()}`} icon={DollarSign} color="text-purple-600" bg="bg-purple-100" />
+                        <OverviewCard label="Total Platform Revenue" value={`$${(revenue.totalCommissions || 0).toLocaleString()}`} icon={CheckCircle} color="text-green-600" bg="bg-green-100" />
                     </div>
                 </div>
             )}
@@ -196,23 +214,23 @@ export default function MasterAdminOverviewTab() {
                     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {canSeeUsers && (
                             <>
-                                <OverviewCard label="Total Agents" value={overview.totalAdmins || 0} icon={Shield} color="text-slate-600" bg="bg-slate-100" />
-                                <OverviewCard label="Active Agents" value={overview.activeAdmins || 0} icon={UserCheck} color="text-indigo-600" bg="bg-indigo-100" />
-                                <OverviewCard label="Total Merchants" value={overview.totalMerchants || 0} icon={Store} color="text-blue-600" bg="bg-blue-100" />
-                                <OverviewCard label="Total Customers" value={overview.totalCustomers || 0} icon={Users} color="text-orange-600" bg="bg-orange-100" />
+                                <OverviewCard label="Total Agents" value={overview.totalAdmins || 0} icon={Shield} color="text-slate-600" bg="bg-slate-50/50" />
+                                <OverviewCard label="Active Agents" value={overview.activeAdmins || 0} icon={UserCheck} color="text-indigo-600" bg="bg-indigo-50/50" />
+                                <OverviewCard label="Total Merchants" value={overview.totalMerchants || 0} icon={Store} color="text-blue-600" bg="bg-blue-50/50" />
+                                <OverviewCard label="Total Customers" value={overview.totalCustomers || 0} icon={Users} color="text-orange-600" bg="bg-orange-50/50" />
                             </>
                         )}
                         {canSeeApprovals && (
                             <>
-                                <OverviewCard label="Coupons Issued" value={overview.totalCouponsIssued || 0} icon={Ticket} color="text-amber-600" bg="bg-amber-100" />
-                                <OverviewCard label="Coupons Redeemed" value={overview.totalCouponsRedeemed || 0} icon={CheckCircle} color="text-teal-600" bg="bg-teal-100" />
+                                <OverviewCard label="Coupons Issued" value={overview.totalCouponsIssued || 0} icon={Ticket} color="text-amber-600" bg="bg-amber-50/50" />
+                                <OverviewCard label="Coupons Redeemed" value={overview.totalCouponsRedeemed || 0} icon={CheckCircle} color="text-teal-600" bg="bg-teal-50/50" />
                             </>
                         )}
                         {canSeeFeedback && (
-                            <OverviewCard label="Feedback Recieved" value={overview.totalFeedbackSubmissions || 0} icon={MessageSquare} color="text-rose-600" bg="bg-rose-100" />
+                            <OverviewCard label="Feedback Recieved" value={overview.totalFeedbackSubmissions || 0} icon={MessageSquare} color="text-rose-600" bg="bg-rose-50/50" />
                         )}
                         {canSeeUsers && (
-                            <OverviewCard label="Active Merchants" value={overview.activeMerchants || 0} icon={CheckCircle} color="text-green-600" bg="bg-green-100" />
+                            <OverviewCard label="Active Merchants" value={overview.activeMerchants || 0} icon={CheckCircle} color="text-green-600" bg="bg-green-50/50" />
                         )}
                     </div>
                 </div>
@@ -220,7 +238,7 @@ export default function MasterAdminOverviewTab() {
 
             {isSuperAdmin && (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    <Card className="lg:col-span-1 shadow-sm border-muted/60">
+                    <Card className="lg:col-span-1 border-0 shadow-md hover:shadow-lg transition-all duration-200">
                         <CardHeader>
                             <CardTitle>Merchant Tier Distribution</CardTitle>
                             <CardDescription>Annual vs Temporary Subscription Ratio</CardDescription>
@@ -234,68 +252,98 @@ export default function MasterAdminOverviewTab() {
                         </CardContent>
                     </Card>
 
-                    <Card className="lg:col-span-2 shadow-sm border-muted/60 overflow-hidden">
+                    <Card className="lg:col-span-2 border-0 shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden">
                         <CardHeader className="bg-muted/10 border-b pb-4">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <CardTitle className="text-lg">Top Performing Merchants</CardTitle>
-                                    <CardDescription>Stores with highest volume and engagement</CardDescription>
+                                    <CardDescription>Stores with highest volume and engagement ({totalMerchants} total)</CardDescription>
                                 </div>
                                 <TrendingUp className="h-5 w-5 text-indigo-500" />
                             </div>
                         </CardHeader>
                         <CardContent className="p-0">
-                            <div className="divide-y divide-muted/60">
-                                {data?.topMerchants?.length > 0 ? (
-                                    data.topMerchants.map((merchant, idx) => (
-                                        <div key={merchant.merchantId || idx} className="flex items-center justify-between p-4 hover:bg-muted/5 transition-colors">
-                                            <div className="flex items-center gap-4">
-                                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm">
-                                                    {merchant.businessName?.charAt(0) || "M"}
-                                                </div>
-                                                <div>
-                                                    <div className="font-semibold text-sm">{merchant.businessName}</div>
-                                                    <div className="text-xs text-muted-foreground flex flex-col gap-1.5 mt-1">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="flex items-center gap-1">
-                                                                <Ticket className="h-3 w-3 text-amber-500" />
-                                                                {merchant.totalCouponsIssued || 0} Issued
-                                                            </span>
-                                                            <span className="text-muted/40 text-[10px]">•</span>
-                                                            <span className="text-[10px] font-bold text-indigo-600">
-                                                                {merchant.totalCouponsRedeemed > 0
-                                                                    ? ((merchant.totalCouponsRedeemed / merchant.totalCouponsIssued) * 100).toFixed(0)
-                                                                    : 0}% Success Rate
-                                                            </span>
-                                                        </div>
-                                                        <div className="w-32 h-1 bg-muted rounded-full overflow-hidden">
-                                                            <div
-                                                                className="h-full bg-indigo-500 rounded-full transition-all duration-500"
-                                                                style={{
-                                                                    width: `${merchant.totalCouponsIssued > 0
-                                                                        ? Math.min((merchant.totalCouponsRedeemed / merchant.totalCouponsIssued) * 100, 100)
-                                                                        : 0}%`
-                                                                }}
-                                                            />
+                            <ScrollArea className="h-[500px]">
+                                <div className="divide-y divide-muted/60">
+                                    {paginatedMerchants.length > 0 ? (
+                                        paginatedMerchants.map((merchant, idx) => (
+                                            <div key={merchant.merchantId || idx} className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm">
+                                                        {merchant.businessName?.charAt(0) || "M"}
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-semibold text-sm">{merchant.businessName}</div>
+                                                        <div className="text-xs text-muted-foreground flex flex-col gap-1.5 mt-1">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="flex items-center gap-1">
+                                                                    <Ticket className="h-3 w-3 text-amber-500" />
+                                                                    {merchant.totalCouponsIssued || 0} Issued
+                                                                </span>
+                                                                <span className="text-muted/40 text-[10px]">•</span>
+                                                                <span className="text-[10px] font-bold text-indigo-600">
+                                                                    {merchant.totalCouponsRedeemed > 0
+                                                                        ? ((merchant.totalCouponsRedeemed / merchant.totalCouponsIssued) * 100).toFixed(0)
+                                                                        : 0}% Success Rate
+                                                                </span>
+                                                            </div>
+                                                            <div className="w-32 h-1 bg-muted rounded-full overflow-hidden">
+                                                                <div
+                                                                    className="h-full bg-indigo-500 rounded-full transition-all duration-500"
+                                                                    style={{
+                                                                        width: `${merchant.totalCouponsIssued > 0
+                                                                            ? Math.min((merchant.totalCouponsRedeemed / merchant.totalCouponsIssued) * 100, 100)
+                                                                            : 0}%`
+                                                                    }}
+                                                                />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="text-right">
-                                                <div className="text-sm font-bold text-indigo-600">
-                                                    {merchant.totalCouponsRedeemed || 0}
+                                                <div className="text-right">
+                                                    <div className="text-sm font-bold text-indigo-600">
+                                                        {merchant.totalCouponsRedeemed || 0}
+                                                    </div>
+                                                    <div className="text-[10px] uppercase font-bold text-muted-foreground">Redeemed</div>
                                                 </div>
-                                                <div className="text-[10px] uppercase font-bold text-muted-foreground">Redeemed</div>
                                             </div>
+                                        ))
+                                    ) : (
+                                        <div className="p-12 text-center text-muted-foreground">
+                                            <Store className="mx-auto h-10 w-10 opacity-20 mb-2" />
+                                            <p className="text-sm">No performance data for this period</p>
                                         </div>
-                                    ))
-                                ) : (
-                                    <div className="p-12 text-center text-muted-foreground">
-                                        <Store className="mx-auto h-10 w-10 opacity-20 mb-2" />
-                                        <p className="text-sm">No performance data for this period</p>
+                                    )}
+                                </div>
+                            </ScrollArea>
+                            {totalMerchantsPages > 1 && (
+                                <div className="flex items-center justify-between border-t p-4 bg-muted/5">
+                                    <div className="text-sm text-muted-foreground">
+                                        Showing {merchantsPage * merchantsPerPage + 1} to {Math.min((merchantsPage + 1) * merchantsPerPage, totalMerchants)} of {totalMerchants}
                                     </div>
-                                )}
-                            </div>
+                                    <div className="flex items-center gap-2">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => setMerchantsPage(prev => Math.max(0, prev - 1))}
+                                            disabled={merchantsPage === 0}
+                                        >
+                                            <ChevronLeft className="h-4 w-4" />
+                                        </Button>
+                                        <div className="text-sm font-medium">
+                                            Page {merchantsPage + 1} of {totalMerchantsPages}
+                                        </div>
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => setMerchantsPage(prev => Math.min(totalMerchantsPages - 1, prev + 1))}
+                                            disabled={merchantsPage >= totalMerchantsPages - 1}
+                                        >
+                                            <ChevronRight className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
                         </CardContent>
                     </Card>
                 </div>
@@ -304,7 +352,7 @@ export default function MasterAdminOverviewTab() {
             {/* Additional Insights Row */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {canSeeFinance && (
-                    <Card className="shadow-sm border-muted/60">
+                    <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
                         <CardHeader>
                             <CardTitle className="text-sm font-bold flex items-center gap-2">
                                 <DollarSign className="h-4 w-4 text-emerald-500" />
@@ -314,21 +362,21 @@ export default function MasterAdminOverviewTab() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <RevenueList
-                                label="Commissions"
-                                amount={revenue.totalCommissions}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
-                                color="bg-emerald-500"
+                                label="Agent Subscriptions"
+                                amount={revenue.agentSubscriptionRevenue || 0}
+                                total={revenue.totalCommissions}
+                                color="bg-cyan-500"
                             />
                             <RevenueList
-                                label="Subscriptions"
-                                amount={revenue.annualSubscriptionRevenue}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
+                                label="Merchant Subscriptions"
+                                amount={revenue.annualSubscriptionRevenue || 0}
+                                total={revenue.totalCommissions}
                                 color="bg-blue-500"
                             />
                             <RevenueList
-                                label="Credit Sales"
-                                amount={revenue.creditPurchaseRevenue}
-                                total={revenue.totalCommissions + revenue.annualSubscriptionRevenue + revenue.creditPurchaseRevenue}
+                                label="Package Commissions"
+                                amount={revenue.creditPurchaseRevenue || 0}
+                                total={revenue.totalCommissions}
                                 color="bg-purple-500"
                             />
                         </CardContent>
@@ -336,7 +384,7 @@ export default function MasterAdminOverviewTab() {
                 )}
 
                 {canSeeFeedback && (
-                    <Card className="shadow-sm border-muted/60">
+                    <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
                         <CardHeader>
                             <CardTitle className="text-sm font-bold flex items-center gap-2">
                                 <Activity className="h-4 w-4 text-indigo-500" />
@@ -375,7 +423,7 @@ export default function MasterAdminOverviewTab() {
                 )}
 
                 {isSuperAdmin && (
-                    <Card className="shadow-sm border-muted/60 bg-primary/5">
+                    <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 bg-primary/5">
                         <CardHeader>
                             <CardTitle className="text-sm font-bold flex items-center gap-2 text-primary">
                                 <TrendingUp className="h-4 w-4" />
@@ -417,7 +465,7 @@ function RevenueList({ label, amount, total, color }) {
 
 function OverviewCard({ label, value, icon: Icon, color, bg }) {
     return (
-        <div className="bg-card border rounded-xl p-5 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+        <div className="bg-card border-0 shadow-md hover:shadow-lg transition-all duration-200 rounded-xl p-5 flex items-center justify-between">
             <div className="space-y-1">
                 <div className="text-xs font-semibold text-muted-foreground">{label}</div>
                 <div className="text-2xl font-bold">{value}</div>

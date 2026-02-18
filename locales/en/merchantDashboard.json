@@ -85,6 +85,7 @@
     "used": "Used"
   },
   "tabs": {
+    "analytics": "Ads Performance",
     "automation": "Automation",
     "coupons": "Coupon Batches",
     "feedbackForm": "Feedback Form",
@@ -98,6 +99,33 @@
     "redeemed": "Redeemed",
     "title": "Top Customers",
     "visits": "visits"
+  },
+  "analytics": {
+    "title": "Paid Ads Analytics",
+    "description": "Track impressions and clicks for your paid advertisements",
+    "totalImpressions": "Total Impressions",
+    "totalClicks": "Total Clicks",
+    "clickThroughRate": "Click-Through Rate",
+    "totalAds": "Active Ads",
+    "impressionsDesc": "Total ad views across all campaigns",
+    "clicksDesc": "Total ad clicks from viewers",
+    "ctrDesc": "Percentage of impressions that converted to clicks",
+    "adsDesc": "Total number of tracked advertisements",
+    "impressionsChart": "Impressions by Ad",
+    "clicksChart": "Clicks by Ad",
+    "total": "total",
+    "noData": "No data available",
+    "detailedAnalytics": "Detailed Analytics",
+    "detailedDesc": "Performance breakdown for each advertisement",
+    "adId": "Ad ID",
+    "agentId": "Agent ID",
+    "impressions": "Impressions",
+    "clicks": "Clicks",
+    "ctr": "CTR",
+    "createdAt": "Created",
+    "noAdsYet": "No ads tracked yet",
+    "noAdsDesc": "Your paid ad analytics will appear here once tracking begins",
+    "errorFetchFailed": "Failed to load analytics"
   },
   "upgrade": {
     "description": "Unlock all features including analytics, bi-directional messaging, and more.",

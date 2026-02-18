@@ -8,7 +8,6 @@ import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 
 import { getMerchantsColumns } from "./merchants-listing-columns";
-import { useTranslations } from "next-intl";
 import { getMerchants } from "@/lib/services/helper";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";

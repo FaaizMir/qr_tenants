@@ -665,7 +665,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
   if (!activeMerchant) {
     return (
-      <div className="hidden lg:flex sticky mt-5 h-[776px] w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
+      <div className="hidden lg:flex sticky mt-5  w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
         <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center">
@@ -690,8 +690,14 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
     );
   }
 
+  const couponsCount = activeMerchant.batches?.length || 0;
+
   return (
-    <div className="bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out h-[777px] flex flex-col">
+    <div
+      className={cn(
+        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all h-[777px]",
+      )}
+    >
       {/* Header */}
       <div className="relative h-48 bg-slate-900 shrink-0">
         <Image
@@ -738,7 +744,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
 
         {/* Scrollable Coupons Section */}
         <div className="px-6 md:px-8 pb-6 md:pb-8 overflow-y-auto flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
-          <div className="space-y-6 h-full">
+          <div className="space-y-6">
             {activeMerchant.batches?.length > 0 ? (
               activeMerchant.batches.map((batch) => (
                 <div

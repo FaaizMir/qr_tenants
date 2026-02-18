@@ -250,7 +250,7 @@ export default function MerchantDetailContainer({ params }) {
         {/* Overview TabContent */}
         <TabsContent value="overview" className="space-y-6 mt-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   WhatsApp Credits
@@ -259,14 +259,14 @@ export default function MerchantDetailContainer({ params }) {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {wallet?.whatsapp_message_credits ?? 0}
+                  {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Available balance
+                  UI: {wallet?.whatsapp_ui_credits ?? 0} • BI: {wallet?.whatsapp_bi_credits ?? 0}
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Ad Credits
@@ -282,7 +282,7 @@ export default function MerchantDetailContainer({ params }) {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Coupon Credits
@@ -298,7 +298,7 @@ export default function MerchantDetailContainer({ params }) {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Credits
@@ -317,7 +317,7 @@ export default function MerchantDetailContainer({ params }) {
           </div>
 
           <div className="grid gap-4 md:grid-cols-7">
-            <Card className="col-span-4">
+            <Card className="col-span-4 border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>Recent Transactions</CardTitle>
               </CardHeader>
@@ -325,77 +325,90 @@ export default function MerchantDetailContainer({ params }) {
                 <ScrollArea className="h-[250px]">
                   <div className="space-y-4 pr-4">
                     {transactions.length > 0 ? (
-                      transactions.map((tx) => (
-                        <div key={tx.id} className="flex gap-4 items-center">
-                          <div
-                            className={`p-2 rounded-full ${tx.type === "purchase" ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-700"}`}
-                          >
-                            {tx.type === "purchase" ? (
-                              <ArrowUpRight className="h-4 w-4" />
-                            ) : (
-                              <ArrowDownRight className="h-4 w-4" />
-                            )}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">
-                              {tx.description}
-                            </p>
-                            <div className="flex items-center gap-2 mt-1">
-                              <p className="text-xs text-muted-foreground">
-                                {new Date(tx.created_at).toLocaleDateString(
-                                  "en-GB",
-                                )}
-                              </p>
-                              {tx.credit_type && (
-                                <>
-                                  <span className="text-xs text-muted-foreground">
-                                    •
-                                  </span>
-                                  <Badge
-                                    variant="outline"
-                                    className="text-[10px] px-1.5 py-0 capitalize"
-                                  >
-                                    {tx.credit_type}
-                                  </Badge>
-                                </>
+                      transactions.map((tx) => {
+                        // Parse metadata for credit_usage transactions
+                        let metadata = null;
+                        try {
+                          metadata = tx.metadata ? JSON.parse(tx.metadata) : null;
+                        } catch (e) {
+                          console.error('Failed to parse transaction metadata:', e);
+                        }
+                        
+                        const creditsUsed = metadata?.credits_used || tx.credits;
+                        const creditType = metadata?.credit_type || tx.credit_type;
+                        
+                        return (
+                          <div key={tx.id} className="flex gap-4 items-center">
+                            <div
+                              className={`p-2 rounded-full ${tx.type === "purchase" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
+                            >
+                              {tx.type === "purchase" ? (
+                                <ArrowUpRight className="h-4 w-4" />
+                              ) : (
+                                <ArrowDownRight className="h-4 w-4" />
                               )}
-                              {tx.status && (
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {tx.description}
+                              </p>
+                              <div className="flex items-center gap-2 mt-1">
+                                <p className="text-xs text-muted-foreground">
+                                  {new Date(tx.created_at).toLocaleDateString(
+                                    "en-GB",
+                                  )}
+                                </p>
+                                {creditType && (
+                                  <>
+                                    <span className="text-xs text-muted-foreground">
+                                      •
+                                    </span>
+                                    <Badge
+                                      variant="outline"
+                                      className="text-[10px] px-1.5 py-0 capitalize"
+                                    >
+                                      {creditType}
+                                    </Badge>
+                                  </>
+                                )}
+                                {tx.status && (
+                                  <>
+                                    <span className="text-xs text-muted-foreground">
+                                      •
+                                    </span>
+                                    <Badge
+                                      variant={
+                                        tx.status === "completed"
+                                          ? "default"
+                                          : "secondary"
+                                      }
+                                      className="text-[10px] px-1.5 py-0 capitalize"
+                                    >
+                                      {tx.status}
+                                    </Badge>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              {tx.type === "purchase" && tx.amount ? (
                                 <>
-                                  <span className="text-xs text-muted-foreground">
-                                    •
-                                  </span>
-                                  <Badge
-                                    variant={
-                                      tx.status === "completed"
-                                        ? "default"
-                                        : "secondary"
-                                    }
-                                    className="text-[10px] px-1.5 py-0 capitalize"
-                                  >
-                                    {tx.status}
-                                  </Badge>
+                                  <p className="text-sm font-semibold text-green-600">
+                                    +{tx.credits} credits
+                                  </p>
+                                  <p className="text-[10px] text-muted-foreground">
+                                    ${parseFloat(tx.amount).toFixed(2)}
+                                  </p>
                                 </>
+                              ) : (
+                                <p className="text-sm font-semibold text-red-600">
+                                  -{creditsUsed || 0} credits
+                                </p>
                               )}
                             </div>
                           </div>
-                          <div className="text-right">
-                            {tx.type === "purchase" && tx.amount ? (
-                              <>
-                                <p className="text-sm font-semibold text-green-600">
-                                  +{tx.credits} credits
-                                </p>
-                                <p className="text-[10px] text-muted-foreground">
-                                  ${parseFloat(tx.amount).toFixed(2)}
-                                </p>
-                              </>
-                            ) : (
-                              <p className="text-sm font-semibold text-slate-700">
-                                {tx.credits ? `-${tx.credits}` : "0"} credits
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      ))
+                        );
+                      })
                     ) : (
                       <div className="text-center py-10 text-muted-foreground text-sm">
                         No transactions found.
@@ -440,7 +453,7 @@ export default function MerchantDetailContainer({ params }) {
               </CardContent>
             </Card>
 
-            <Card className="col-span-3 text-card-foreground">
+            <Card className="col-span-3 text-card-foreground border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
                 <CardTitle>Usage Summary</CardTitle>
                 <Lock className="h-4 w-4 text-muted-foreground" />
@@ -472,7 +485,25 @@ export default function MerchantDetailContainer({ params }) {
                       <span className="text-sm">WhatsApp Balance</span>
                     </div>
                     <span className="font-bold">
-                      {wallet?.whatsapp_message_credits ?? 0}
+                      {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Smartphone className="h-4 w-4 text-blue-400" />
+                      <span className="text-sm text-xs">WhatsApp UI</span>
+                    </div>
+                    <span className="font-semibold text-sm">
+                      {wallet?.whatsapp_ui_credits ?? 0}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Smartphone className="h-4 w-4 text-purple-400" />
+                      <span className="text-sm text-xs">WhatsApp BI</span>
+                    </div>
+                    <span className="font-semibold text-sm">
+                      {wallet?.whatsapp_bi_credits ?? 0}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
@@ -493,7 +524,7 @@ export default function MerchantDetailContainer({ params }) {
         {/* Activity TabContent */}
         <TabsContent value="activity" className="space-y-6 mt-6">
           <div className="grid gap-4 md:grid-cols-2">
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>
                   Customers ({customerMeta?.total || customers.length})
@@ -611,7 +642,7 @@ export default function MerchantDetailContainer({ params }) {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>Transaction Ledger</CardTitle>
                 <CardDescription>Historical credit usage</CardDescription>
@@ -632,81 +663,94 @@ export default function MerchantDetailContainer({ params }) {
                     </TableHeader>
                     <TableBody>
                       {transactions.length > 0 ? (
-                        transactions.map((tx) => (
-                          <TableRow key={tx.id}>
-                            <TableCell className="px-6">
-                              <div className="flex items-center gap-2">
-                                {tx.type === "purchase" ? (
-                                  <ArrowUpRight className="h-3 w-3 text-green-500" />
-                                ) : (
-                                  <ArrowDownRight className="h-3 w-3 text-slate-400" />
-                                )}
-                                <div>
-                                  <p className="text-xs font-medium">
-                                    {tx.description}
-                                  </p>
-                                  <div className="flex items-center gap-2 mt-1">
-                                    <p className="text-[10px] text-muted-foreground">
-                                      {new Date(
-                                        tx.created_at,
-                                      ).toLocaleDateString("en-GB")}
+                        transactions.map((tx) => {
+                          // Parse metadata for credit_usage transactions
+                          let metadata = null;
+                          try {
+                            metadata = tx.metadata ? JSON.parse(tx.metadata) : null;
+                          } catch (e) {
+                            console.error('Failed to parse transaction metadata:', e);
+                          }
+                          
+                          const creditsUsed = metadata?.credits_used || tx.credits;
+                          const creditType = metadata?.credit_type || tx.credit_type;
+                          
+                          return (
+                            <TableRow key={tx.id}>
+                              <TableCell className="px-6">
+                                <div className="flex items-center gap-2">
+                                  {tx.type === "purchase" ? (
+                                    <ArrowUpRight className="h-3 w-3 text-green-500" />
+                                  ) : (
+                                    <ArrowDownRight className="h-3 w-3 text-red-500" />
+                                  )}
+                                  <div>
+                                    <p className="text-xs font-medium">
+                                      {tx.description}
                                     </p>
-                                    {tx.credit_type && (
-                                      <>
-                                        <span className="text-[10px] text-muted-foreground">
-                                          •
-                                        </span>
-                                        <Badge
-                                          variant="outline"
-                                          className="text-[9px] px-1 py-0 capitalize"
-                                        >
-                                          {tx.credit_type}
-                                        </Badge>
-                                      </>
-                                    )}
-                                    {tx.status && (
-                                      <>
-                                        <span className="text-[10px] text-muted-foreground">
-                                          •
-                                        </span>
-                                        <Badge
-                                          variant={
-                                            tx.status === "completed"
-                                              ? "default"
-                                              : "secondary"
-                                          }
-                                          className="text-[9px] px-1 py-0"
-                                        >
-                                          {tx.status}
-                                        </Badge>
-                                      </>
-                                    )}
+                                    <div className="flex items-center gap-2 mt-1">
+                                      <p className="text-[10px] text-muted-foreground">
+                                        {new Date(
+                                          tx.created_at,
+                                        ).toLocaleDateString("en-GB")}
+                                      </p>
+                                      {creditType && (
+                                        <>
+                                          <span className="text-[10px] text-muted-foreground">
+                                            •
+                                          </span>
+                                          <Badge
+                                            variant="outline"
+                                            className="text-[9px] px-1 py-0 capitalize"
+                                          >
+                                            {creditType}
+                                          </Badge>
+                                        </>
+                                      )}
+                                      {tx.status && (
+                                        <>
+                                          <span className="text-[10px] text-muted-foreground">
+                                            •
+                                          </span>
+                                          <Badge
+                                            variant={
+                                              tx.status === "completed"
+                                                ? "default"
+                                                : "secondary"
+                                            }
+                                            className="text-[9px] px-1 py-0"
+                                          >
+                                            {tx.status}
+                                          </Badge>
+                                        </>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </TableCell>
-                            <TableCell className="text-right px-6 font-semibold">
-                              {tx.type === "purchase" ? (
-                                <span className="text-green-600">
-                                  +{tx.credits}
-                                </span>
-                              ) : (
-                                <span className="text-slate-700">
-                                  {tx.credits ? `-${tx.credits}` : "0"}
-                                </span>
-                              )}
-                            </TableCell>
-                            <TableCell className="text-right px-6 font-semibold">
-                              {tx.amount && parseFloat(tx.amount) > 0 ? (
-                                <span className="text-green-600">
-                                  ${parseFloat(tx.amount).toFixed(2)}
-                                </span>
-                              ) : (
-                                <span className="text-muted-foreground">-</span>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        ))
+                              </TableCell>
+                              <TableCell className="text-right px-6 font-semibold">
+                                {tx.type === "purchase" ? (
+                                  <span className="text-green-600">
+                                    +{tx.credits}
+                                  </span>
+                                ) : (
+                                  <span className="text-red-600">
+                                    -{creditsUsed || 0}
+                                  </span>
+                                )}
+                              </TableCell>
+                              <TableCell className="text-right px-6 font-semibold">
+                                {tx.amount && parseFloat(tx.amount) > 0 ? (
+                                  <span className="text-green-600">
+                                    ${parseFloat(tx.amount).toFixed(2)}
+                                  </span>
+                                ) : (
+                                  <span className="text-muted-foreground">-</span>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })
                       ) : (
                         <TableRow>
                           <TableCell
@@ -762,7 +806,7 @@ export default function MerchantDetailContainer({ params }) {
         {/* Billing/Limits TabContent */}
         <TabsContent value="billing" className="space-y-6 mt-6">
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="md:col-span-2">
+            <Card className="md:col-span-2 border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>Wallet Details</CardTitle>
                 <CardDescription>Live credit allocation</CardDescription>
@@ -774,9 +818,14 @@ export default function MerchantDetailContainer({ params }) {
                       WhatsApp
                     </p>
                     <p className="text-3xl font-bold">
-                      {wallet?.whatsapp_message_credits ?? 0}
+                      {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
                     </p>
-                    <Progress value={100} className="h-1 bg-green-100" />
+                    <div className="flex gap-2 text-[10px] text-muted-foreground mt-1">
+                      <span>UI: {wallet?.whatsapp_ui_credits ?? 0}</span>
+                      <span>•</span>
+                      <span>BI: {wallet?.whatsapp_bi_credits ?? 0}</span>
+                    </div>
+                    <Progress value={100} className="h-1.5 bg-green-100 mt-2" />
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -785,7 +834,8 @@ export default function MerchantDetailContainer({ params }) {
                     <p className="text-3xl font-bold">
                       {wallet?.paid_ad_credits ?? 0}
                     </p>
-                    <Progress value={100} className="h-1 bg-blue-100" />
+                    <div className="h-[14px]"></div>
+                    <Progress value={100} className="h-1.5 bg-blue-100 mt-2" />
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -794,20 +844,21 @@ export default function MerchantDetailContainer({ params }) {
                     <p className="text-3xl font-bold">
                       {wallet?.coupon_credits ?? 0}
                     </p>
-                    <Progress value={100} className="h-1 bg-purple-100" />
+                    <div className="h-[14px]"></div>
+                    <Progress value={100} className="h-1.5 bg-purple-100 mt-2" />
                   </div>
                 </div>
 
                 <Separator />
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Plan</span>
                     <span className="text-sm font-semibold capitalize">
                       {wallet?.subscription_type}
                     </span>
                   </div>
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
                       Expires
                     </span>
@@ -819,7 +870,7 @@ export default function MerchantDetailContainer({ params }) {
                         : "Never"}
                     </span>
                   </div>
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
                       Currency
                     </span>
@@ -827,7 +878,7 @@ export default function MerchantDetailContainer({ params }) {
                       {wallet?.currency}
                     </span>
                   </div>
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
                       Account
                     </span>
@@ -837,7 +888,7 @@ export default function MerchantDetailContainer({ params }) {
                       {wallet?.is_active ? "Verified" : "Inactive"}
                     </Badge>
                   </div>
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
                       Annual Fee
                     </span>
@@ -849,7 +900,7 @@ export default function MerchantDetailContainer({ params }) {
                       {wallet?.annual_fee_paid ? "Paid" : "Unpaid"}
                     </Badge>
                   </div>
-                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between">
+                  <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
                       Paid Ads
                     </span>
@@ -863,7 +914,7 @@ export default function MerchantDetailContainer({ params }) {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>
                   Coupon Batches ({batchMeta?.total || batches.length})
