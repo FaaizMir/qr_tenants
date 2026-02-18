@@ -151,25 +151,24 @@ export default function StatementsContainer() {
     { value: "12", label: "December" },
   ];
 
-  // Get current tab data
+  // Get current tab data with proper total count
   const getCurrentTabData = () => {
     switch (activeTab) {
       case "merchants":
-        return statements.merchants;
+        return { data: statements.merchants, total: counts.merchants };
       case "agents":
-        return statements.agents;
+        return { data: statements.agents, total: counts.agents };
       case "super_admin":
-        return statements.super_admin;
+        return { data: statements.super_admin, total: counts.super_admin };
       default:
-        return statements.all_statements;
+        return { 
+          data: statements.all_statements, 
+          total: counts.merchants + counts.agents + counts.super_admin 
+        };
     }
   };
 
-  const currentData = getCurrentTabData();
-  const paginatedData = currentData.slice(
-    page * pageSize,
-    (page + 1) * pageSize,
-  );
+  const { data: currentData, total: currentTotal } = getCurrentTabData();
 
   return (
     <div className="space-y-6">
@@ -323,7 +322,7 @@ export default function StatementsContainer() {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="all">
-                All ({statements.all_statements.length})
+                All ({counts.merchants + counts.agents + counts.super_admin})
               </TabsTrigger>
               <TabsTrigger value="merchants">
                 Merchants ({counts.merchants})
@@ -355,11 +354,11 @@ export default function StatementsContainer() {
               </div>
             ) : (
               <DataTable
-                data={paginatedData}
+                data={currentData}
                 columns={columns}
                 page={page}
                 pageSize={pageSize}
-                total={currentData.length}
+                total={currentTotal}
                 setPage={setPage}
                 setPageSize={setPageSize}
               />
