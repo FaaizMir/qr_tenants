@@ -162,8 +162,8 @@ function getCategoryImage(category, id) {
   // If id is undefined/null, use a random one based on random number (not ideal for SSR hydration but fallback)
   const seed = id
     ? String(id)
-      .split("")
-      .reduce((a, b) => a + b.charCodeAt(0), 0)
+        .split("")
+        .reduce((a, b) => a + b.charCodeAt(0), 0)
     : Math.floor(Math.random() * 1000);
   return images[seed % images.length];
 }
@@ -638,13 +638,13 @@ export function MerchantList({
           {totalItems > 0 && (
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
               {(page - 1) * 6 >= totalItems ||
-                (totalItems <= page * 6 && hasMore)
+              (totalItems <= page * 6 && hasMore)
                 ? t("showingPage", { page })
                 : t("showing", {
-                  start: (page - 1) * 6 + 1,
-                  end: Math.min(page * 6, totalItems),
-                  total: totalItems,
-                })}
+                    start: (page - 1) * 6 + 1,
+                    end: Math.min(page * 6, totalItems),
+                    total: totalItems,
+                  })}
             </p>
           )}
         </div>
@@ -695,8 +695,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
   return (
     <div
       className={cn(
-        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all",
-        couponsCount >= 2 ? "h-[777px]" : "h-fit max-h-[777px]"
+        "bg-white rounded-4xl shadow-2xl shadow-slate-200/50 overflow-hidden sticky mt-5 animate-in slide-in-from-right-10 duration-500 ease-out flex flex-col transition-all h-[777px]",
       )}
     >
       {/* Header */}
