@@ -53,11 +53,13 @@
     "dashboard": "ダッシュボード",
     "earnings": "収益",
     "merchants": "商人",
+    "packages": "パッケージ",
     "platform": "プラットフォーム",
     "QRScanner": "QRスキャナー",
     "statements": "ステートメント",
     "support": "サポート",
-    "wallet": "ウォレット"
+    "wallet": "ウォレット",
+    "logs": "アクティビティログ"
   },
   "agentWallet": {
     "agentwallet": "エージェントウォレット",

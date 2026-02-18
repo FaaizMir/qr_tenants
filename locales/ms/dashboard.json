@@ -53,11 +53,13 @@
     "dashboard": "Papan Pemuka",
     "earnings": "Pendapatan",
     "merchants": "Peniaga",
+    "packages": "Pakej",
     "platform": "Platform",
-    "QRScanner": "Pindai QR",
-    "statements": "Pernyataan",
+    "QRScanner": "Pengimbas QR",
+    "statements": "Penyata",
     "support": "Sokongan",
-    "wallet": "Dompet"
+    "wallet": "Dompet",
+    "logs": "Log Aktiviti"
   },
   "agentWallet": {
     "agentwallet": "Dompet Ejen",

@@ -53,11 +53,13 @@
     "dashboard": "Bảng điều khiển",
     "earnings": "Thu nhập",
     "merchants": "Nhà buôn",
+    "packages": "Gói",
     "platform": "Nền tảng",
     "QRScanner": "Máy quét QR",
     "statements": "Tuyên bố",
     "support": "Hỗ trợ",
-    "wallet": "Ví"
+    "wallet": "Ví",
+    "logs": "Nhật ký hoạt động"
   },
   "agentWallet": {
     "agentwallet": "Ví đại lý",

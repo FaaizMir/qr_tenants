@@ -53,11 +53,13 @@
     "dashboard": "แดชบอร์ด",
     "earnings": "รายได้",
     "merchants": "พ่อค้า",
+    "packages": "แพ็คเกจ",
     "platform": "แพลตฟอร์ม",
     "QRScanner": "เครื่องสแกน QR",
     "statements": "คำแถลง",
     "support": "สนับสนุน",
-    "wallet": "กระเป๋าเงิน"
+    "wallet": "กระเป๋าเงิน",
+    "logs": "บันทึกกิจกรรม"
   },
   "agentWallet": {
     "agentwallet": "กระเป๋าเงินตัวแทน",

@@ -72,6 +72,11 @@ export function AppSidebar({
       icon: Wallet,
     },
     {
+      title: tAgent("packages"),
+      url: "/agent/packages",
+      icon: ShoppingCart,
+    },
+    {
       title: "Approvals",
       url: "/agent/approvals",
       icon: Package,

@@ -53,11 +53,13 @@
     "dashboard": "대시보드",
     "earnings": "수익",
     "merchants": "상인",
+    "packages": "패키지",
     "platform": "플랫폼",
     "QRScanner": "QR 스캐너",
-    "statements": "진술",
+    "statements": "명세서",
     "support": "지원",
-    "wallet": "지갑"
+    "wallet": "지갑",
+    "logs": "활동 로그"
   },
   "agentWallet": {
     "agentwallet": "에이전트 지갑",

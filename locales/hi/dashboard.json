@@ -53,11 +53,13 @@
     "dashboard": "डैशबोर्ड",
     "earnings": "कमाई",
     "merchants": "व्यापारी",
+    "packages": "पैकेज",
     "platform": "प्लेटफ़ॉर्म",
     "QRScanner": "क्यूआर स्कैनर",
     "statements": "बयान",
     "support": "समर्थन",
-    "wallet": "बटुआ"
+    "wallet": "बटुआ",
+    "logs": "गतिविधि लॉग"
   },
   "agentWallet": {
     "agentwallet": "एजेंट वॉलेट",

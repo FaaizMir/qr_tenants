@@ -53,11 +53,13 @@
     "dashboard": "لوحة التحكم",
     "earnings": "الأرباح",
     "merchants": "التجار",
+    "packages": "الحزم",
     "platform": "منصة",
     "QRScanner": "ماسح QR",
     "statements": "بيانات",
     "support": "دعم",
-    "wallet": "محفظة"
+    "wallet": "محفظة",
+    "logs": "سجلات النشاط"
   },
   "agentWallet": {
     "agentwallet": "محفظة الوكيل",

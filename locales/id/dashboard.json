@@ -53,11 +53,13 @@
     "dashboard": "Dasbor",
     "earnings": "Pendapatan",
     "merchants": "Pedagang",
+    "packages": "Paket",
     "platform": "Platform",
     "QRScanner": "Pemindai QR",
     "statements": "Pernyataan",
     "support": "Dukungan",
-    "wallet": "Dompet"
+    "wallet": "Dompet",
+    "logs": "Log Aktivitas"
   },
   "agentWallet": {
     "agentwallet": "Dompet Agen",

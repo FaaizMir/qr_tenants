@@ -53,11 +53,13 @@
     "dashboard": "仪表板",
     "earnings": "收入",
     "merchants": "商家",
+    "packages": "套餐",
     "platform": "平台",
-    "QRScanner": "二维码扫描器",
-    "statements": "声明",
+    "QRScanner": "二维码扫描仪",
+    "statements": "报表",
     "support": "支持",
-    "wallet": "钱包"
+    "wallet": "钱包",
+    "logs": "活动日志"
   },
   "agentWallet": {
     "agentwallet": "代理钱包",
