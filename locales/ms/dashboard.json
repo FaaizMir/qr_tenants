@@ -48,8 +48,7 @@
     "subscription": "Langganan",
     "viewdetails": "Lihat Butiran"
   },
-  "agentSidebar": {
-    "couponsync": "Penyelarasan Kupon",
+  "agentSidebar": {    "adsPackages": "Pakej Iklan",    "couponsync": "Penyelarasan Kupon",
     "dashboard": "Papan Pemuka",
     "earnings": "Pendapatan",
     "merchants": "Peniaga",

@@ -48,8 +48,7 @@
     "subscription": "Langganan",
     "viewdetails": "Lihat Detail"
   },
-  "agentSidebar": {
-    "couponsync": "Sinkronisasi Kupon",
+  "agentSidebar": {    "adsPackages": "Paket Iklan",    "couponsync": "Sinkronisasi Kupon",
     "dashboard": "Dasbor",
     "earnings": "Pendapatan",
     "merchants": "Pedagang",

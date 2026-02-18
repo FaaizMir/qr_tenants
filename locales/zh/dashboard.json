@@ -48,8 +48,7 @@
     "subscription": "订阅",
     "viewdetails": "查看详情"
   },
-  "agentSidebar": {
-    "couponsync": "优惠券同步",
+  "agentSidebar": {    "adsPackages": "广告套餐",    "couponsync": "优惠券同步",
     "dashboard": "仪表板",
     "earnings": "收入",
     "merchants": "商家",

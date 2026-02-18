@@ -49,6 +49,7 @@
     "viewdetails": "상세 보기"
   },
   "agentSidebar": {
+    "adsPackages": "광고 패키지",
     "couponsync": "쿠폰 동기화",
     "dashboard": "대시보드",
     "earnings": "수익",

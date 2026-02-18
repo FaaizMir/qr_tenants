@@ -72,7 +72,7 @@ export function AppSidebar({
       icon: Wallet,
     },
     {
-      title: tAgent("packages"),
+      title: tAgent("adsPackages"),
       url: "/agent/packages",
       icon: ShoppingCart,
     },

@@ -49,6 +49,7 @@
     "viewdetails": "عرض التفاصيل"
   },
   "agentSidebar": {
+    "adsPackages": "حزم الإعلانات",
     "couponsync": "مزامنة القسائم",
     "dashboard": "لوحة التحكم",
     "earnings": "الأرباح",
