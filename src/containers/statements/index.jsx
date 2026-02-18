@@ -69,10 +69,8 @@ export default function StatementsContainer() {
     item.month.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
-  const paginatedData = filteredStatements.slice(
-    page * pageSize,
-    (page + 1) * pageSize,
-  );
+  // Use server-side pagination total instead of client-side filtering
+  const total = filteredStatements.length;
 
   return (
     <div className="space-y-6">
@@ -302,11 +300,11 @@ export default function StatementsContainer() {
             onSearchChange={setSearch}
           />
           <DataTable
-            data={paginatedData}
+            data={filteredStatements}
             columns={columns}
             page={page}
             pageSize={pageSize}
-            total={filteredStatements.length}
+            total={total}
             setPage={setPage}
             setPageSize={setPageSize}
           />

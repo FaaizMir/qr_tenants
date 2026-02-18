@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Download, FileText } from "lucide-react";
 import AdminOverviewTab from "./overview-tab";
+import MerchantsTab from "./merchants-tab";
+import AnalyticsTab from "./analytics-tab";
 
 export const getDashboardTabs = ({
   kpiData,
@@ -13,6 +15,16 @@ export const getDashboardTabs = ({
       value: "overview",
       label: "Overview",
       content: <AdminOverviewTab />,
+    },
+    {
+      value: "merchants",
+      label: "Merchants",
+      content: <MerchantsTab />,
+    },
+    {
+      value: "analytics",
+      label: "Analytics",
+      content: <AnalyticsTab />,
     },
 
     // {

@@ -315,7 +315,7 @@ export default function AdminOverviewTab() {
       </div>
 
       <div className="grid gap-6">
-        <Card>
+        <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
             <CardTitle>Merchant Distribution</CardTitle>
             <CardDescription>
@@ -332,7 +332,7 @@ export default function AdminOverviewTab() {
         </Card>
 
         {/* Revenue Breakdown */}
-        <Card>
+        <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
             <CardTitle>Revenue Breakdown</CardTitle>
             <CardDescription>Revenue Sources Distribution</CardDescription>
@@ -372,165 +372,6 @@ export default function AdminOverviewTab() {
             </div>
           </CardContent>
         </Card>
-
-        {/* Recently Added Merchants */}
-        {data?.merchantStats?.recentlyAdded?.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Recently Added Merchants</CardTitle>
-              <CardDescription>Latest merchant registrations</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {data.merchantStats.recentlyAdded.map((merchant) => (
-                  <div
-                    key={merchant.merchantId}
-                    className="flex items-center justify-between border rounded-lg p-3"
-                  >
-                    <div>
-                      <div className="font-medium">{merchant.businessName}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {new Date(merchant.createdAt).toLocaleDateString(
-                          "en-US",
-                          { month: "short", day: "numeric", year: "numeric" },
-                        )}
-                      </div>
-                    </div>
-                    <div
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${merchant.merchantType === "annual" ? "bg-purple-100 text-purple-700" : "bg-orange-100 text-orange-700"}`}
-                    >
-                      {merchant.merchantType}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Top Performers */}
-        {data?.merchantStats?.topPerformers?.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Top Performers</CardTitle>
-              <CardDescription>Merchants by revenue</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {data.merchantStats.topPerformers
-                  .slice(0, 5)
-                  .map((merchant) => (
-                    <div
-                      key={merchant.merchantId}
-                      className="border rounded-lg p-3"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-medium">
-                          {merchant.businessName}
-                        </div>
-                        <div className="text-sm font-bold text-emerald-600">
-                          ${merchant.totalRevenue?.toFixed(2) || 0}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
-                        <div>Issued: {merchant.totalCouponsIssued || 0}</div>
-                        <div>
-                          Redeemed: {merchant.totalCouponsRedeemed || 0}
-                        </div>
-                        <div>
-                          Rate:{" "}
-                          {merchant.totalCouponsIssued > 0
-                            ? (
-                                (merchant.totalCouponsRedeemed /
-                                  merchant.totalCouponsIssued) *
-                                100
-                              ).toFixed(1)
-                            : 0}
-                          %
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* WhatsApp by Merchant */}
-        {data?.whatsappStats?.byMerchant?.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>WhatsApp Usage by Merchant</CardTitle>
-              <CardDescription>
-                Message count and cost per merchant
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {data.whatsappStats.byMerchant.map((merchant) => (
-                  <div
-                    key={merchant.merchantId}
-                    className="border rounded-lg p-3 flex items-center justify-between"
-                  >
-                    <div>
-                      <div className="font-medium">{merchant.businessName}</div>
-                      <div className="text-xs text-muted-foreground">
-                        Messages: {merchant.messagesSent || 0}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold text-pink-600">
-                        ${(merchant.estimatedCost || 0).toFixed(2)}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Coupon Stats by Merchant */}
-        {data?.couponStats?.byMerchant?.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Coupon Stats by Merchant</CardTitle>
-              <CardDescription>Coupon issuance and redemption</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {data.couponStats.byMerchant.map((merchant) => (
-                  <div
-                    key={merchant.merchantId}
-                    className="border rounded-lg p-3"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="font-medium">{merchant.businessName}</div>
-                      <div className="text-sm text-muted-foreground">
-                        Redemption:{" "}
-                        {merchant.issued > 0
-                          ? (
-                              (merchant.redeemed / merchant.issued) *
-                              100
-                            ).toFixed(1)
-                          : 0}
-                        %
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div className="text-yellow-600">
-                        Issued: {merchant.issued || 0}
-                      </div>
-                      <div className="text-rose-600">
-                        Redeemed: {merchant.redeemed || 0}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </div>
   );
@@ -538,7 +379,7 @@ export default function AdminOverviewTab() {
 
 function OverviewCard({ label, value, icon: Icon, color, bg }) {
   return (
-    <div className="bg-card border rounded-lg p-4 shadow-sm flex items-center justify-between">
+    <div className="bg-card border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 rounded-lg p-4 flex items-center justify-between">
       <div>
         <div className="text-sm font-medium text-muted-foreground">{label}</div>
         <div className="text-2xl font-bold mt-1">{value}</div>
