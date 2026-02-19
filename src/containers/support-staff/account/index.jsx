@@ -49,7 +49,21 @@ export default function SupportStaffAccountContainer() {
         });
       } catch (error) {
         console.error("Failed to fetch account data:", error);
-        toast.error("Failed to load account information");
+        
+        // Handle fetch errors
+        if (error.response?.data?.errors) {
+          const errors = error.response.data.errors;
+          Object.keys(errors).forEach(field => {
+            const messages = Array.isArray(errors[field]) ? errors[field] : [errors[field]];
+            messages.forEach(msg => {
+              toast.error(`${field}: ${msg}`);
+            });
+          });
+        } else if (error.response?.data?.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Failed to load account information");
+        }
       } finally {
         setLoading(false);
       }
@@ -87,7 +101,24 @@ export default function SupportStaffAccountContainer() {
       toast.success("Account updated successfully");
     } catch (error) {
       console.error("Failed to update account:", error);
-      toast.error(error.response?.data?.message || "Failed to update account");
+      
+      // Handle validation errors
+      if (error.response?.data?.errors) {
+        const errors = error.response.data.errors;
+        // Display all validation errors
+        Object.keys(errors).forEach(field => {
+          const messages = Array.isArray(errors[field]) ? errors[field] : [errors[field]];
+          messages.forEach(msg => {
+            toast.error(`${field}: ${msg}`);
+          });
+        });
+      } else if (error.response?.data?.message) {
+        // Display single error message
+        toast.error(error.response.data.message);
+      } else {
+        // Fallback error message
+        toast.error("Failed to update account");
+      }
     } finally {
       setSaving(false);
     }
