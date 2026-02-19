@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
 import axiosInstance from "@/lib/axios";
+import useDebounce from "@/hooks/useDebounceRef";
 import {
   Loader2,
   Store,
@@ -169,6 +170,7 @@ export default function AgentLandingPage() {
 
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
 
@@ -247,16 +249,29 @@ export default function AgentLandingPage() {
       }
 
       try {
+        const params = {
+          adminId: agentId,
+          page: pageNum,
+          pageSize: 6,
+        };
+
+        // Add search parameter (searches merchant business name)
+        if (debouncedSearchQuery && debouncedSearchQuery.trim()) {
+          params.businessName = debouncedSearchQuery.trim();
+        }
+
+        // Add business type parameter
+        if (selectedCategory && selectedCategory !== "all") {
+          params.businessType = selectedCategory;
+        }
+
+        // Add city parameter (searches merchant's city)
+        if (selectedRegion && selectedRegion !== "all") {
+          params.city = selectedRegion;
+        }
+
         const response = await axiosInstance.get(`/coupons/public-feed`, {
-          params: {
-            adminId: agentId,
-            page: pageNum,
-            pageSize: 6, // Fetch 6 merchants per page
-            search: searchQuery,
-            businessType:
-              selectedCategory === "all" ? undefined : selectedCategory,
-            city: selectedRegion === "all" ? undefined : selectedRegion,
-          },
+          params,
         });
 
         const rawData =
@@ -295,7 +310,7 @@ export default function AgentLandingPage() {
           if (
             selectedCategory === "all" &&
             selectedRegion === "all" &&
-            !searchQuery
+            !debouncedSearchQuery
           ) {
             const cats = [
               ...new Set(
@@ -329,7 +344,7 @@ export default function AgentLandingPage() {
         setLoadingMore(false);
       }
     },
-    [agentId, searchQuery, selectedCategory, selectedRegion, t, totalMerchants],
+    [agentId, debouncedSearchQuery, selectedCategory, selectedRegion, t, totalMerchants],
   );
 
   // Fetch Main Data
@@ -361,7 +376,7 @@ export default function AgentLandingPage() {
     fetchData();
   }, [
     agentId,
-    searchQuery,
+    debouncedSearchQuery,
     selectedCategory,
     selectedRegion,
     fetchPaidAds,

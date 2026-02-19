@@ -111,7 +111,7 @@ export default function MerchantAccountContainer() {
   };
 
   const handleAddressChange = (locationData) => {
-    setAccountData(prev => ({
+    setAccountData((prev) => ({
       ...prev,
       address: locationData.address,
       city: locationData.city || prev.city,
@@ -206,7 +206,7 @@ export default function MerchantAccountContainer() {
               <p className="text-sm text-muted-foreground">
                 {accountData.email}
               </p>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 items-center">
                 <Badge variant="secondary" className="capitalize">
                   {accountData.merchantType}
                 </Badge>
