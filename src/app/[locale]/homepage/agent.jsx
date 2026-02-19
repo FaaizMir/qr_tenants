@@ -170,9 +170,10 @@ export default function AgentLandingPage() {
 
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedRegion, setSelectedRegion] = useState("all");
+  const [expiringSoon, setExpiringSoon] = useState(false);
 
   // Derived lists
   const [categories, setCategories] = useState([]);
@@ -270,6 +271,11 @@ export default function AgentLandingPage() {
           params.city = selectedRegion;
         }
 
+        // Add expiringSoon parameter
+        if (expiringSoon) {
+          params.expiringSoon = true;
+        }
+
         const response = await axiosInstance.get(`/coupons/public-feed`, {
           params,
         });
@@ -344,7 +350,15 @@ export default function AgentLandingPage() {
         setLoadingMore(false);
       }
     },
-    [agentId, debouncedSearchQuery, selectedCategory, selectedRegion, t, totalMerchants],
+    [
+      agentId,
+      debouncedSearchQuery,
+      selectedCategory,
+      selectedRegion,
+      expiringSoon,
+      t,
+      totalMerchants,
+    ],
   );
 
   // Fetch Main Data
@@ -379,6 +393,7 @@ export default function AgentLandingPage() {
     debouncedSearchQuery,
     selectedCategory,
     selectedRegion,
+    expiringSoon,
     fetchPaidAds,
     fetchMerchants,
     t,
@@ -405,20 +420,23 @@ export default function AgentLandingPage() {
   };
 
   // Track impression
-  const handleAdImpression = useCallback(async (ad) => {
-    if (!agentId || !ad || !ad.id) return;
+  const handleAdImpression = useCallback(
+    async (ad) => {
+      if (!agentId || !ad || !ad.id) return;
 
-    try {
-      await axiosInstance.post('/analytics/track-impression', {
-        merchantId: ad.id,
-        agentId: agentId,
-        paidAdId: ad.id,
-      });
-      console.log('Impression tracked for ad:', ad.id);
-    } catch (error) {
-      console.error('Failed to track impression:', error);
-    }
-  }, [agentId]);
+      try {
+        await axiosInstance.post("/analytics/track-impression", {
+          merchantId: ad.id,
+          agentId: agentId,
+          paidAdId: ad.id,
+        });
+        console.log("Impression tracked for ad:", ad.id);
+      } catch (error) {
+        console.error("Failed to track impression:", error);
+      }
+    },
+    [agentId],
+  );
 
   // Track click and handle ad click
   const handleAdClick = async (ad) => {
@@ -684,8 +702,8 @@ export default function AgentLandingPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-linear-to-b from-amber-500/30 via-amber-400/20 to-transparent rounded-3xl blur-3xl"></div>
                 <div className="relative">
-                  <TopBannerAd 
-                    ad={topAd} 
+                  <TopBannerAd
+                    ad={topAd}
                     onClick={handleAdClick}
                     agentId={agentId}
                     onImpression={handleAdImpression}
@@ -716,6 +734,11 @@ export default function AgentLandingPage() {
               setSelectedRegion(value);
               setPage(1);
             }}
+            expiringSoon={expiringSoon}
+            setExpiringSoon={(value) => {
+              setExpiringSoon(value);
+              setPage(1);
+            }}
             categories={categories}
             cities={cities}
           />
@@ -734,8 +757,8 @@ export default function AgentLandingPage() {
                     </span>
                     <span className="h-px flex-1 bg-slate-300"></span>
                   </div>
-                  <SidebarAd 
-                    ad={leftAd} 
+                  <SidebarAd
+                    ad={leftAd}
                     onClick={handleAdClick}
                     agentId={agentId}
                     onImpression={handleAdImpression}
@@ -828,8 +851,8 @@ export default function AgentLandingPage() {
                   </span>
                   <span className="h-px flex-1 bg-slate-300"></span>
                 </div>
-                <SidebarAd 
-                  ad={rightAd} 
+                <SidebarAd
+                  ad={rightAd}
                   onClick={handleAdClick}
                   agentId={agentId}
                   onImpression={handleAdImpression}
@@ -914,8 +937,8 @@ export default function AgentLandingPage() {
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-b from-slate-900/50 to-transparent rounded-3xl blur-2xl"></div>
               <div className="relative">
-                <BottomBannerAd 
-                  ad={bottomAd} 
+                <BottomBannerAd
+                  ad={bottomAd}
                   onClick={handleAdClick}
                   agentId={agentId}
                   onImpression={handleAdImpression}

@@ -66,7 +66,7 @@ export default function AgentAccountContainer() {
           mapUrl: "",
           avatar: data.user?.avatar || "",
           hasStripeKey: data.has_stripe_key || false,
-          stripeSecretKey: data.stripe_secret_key || "",
+          stripeSecretKey: data.stripe_key_masked || "",
         });
       } catch (error) {
         console.error("Failed to fetch account data:", error);
@@ -116,15 +116,22 @@ export default function AgentAccountContainer() {
     try {
       setSaving(true);
       
-      await axiosInstance.patch(`/admins/${adminId}`, {
+      // Prepare payload
+      const payload = {
         name: accountData.name,
         email: accountData.email,
         phone: accountData.phone,
         address: accountData.address,
         city: accountData.city,
         country: accountData.country,
-        stripe_secret_key: accountData.stripeSecretKey,
-      });
+      };
+
+      // Only include stripe_secret_key if it's been changed (not the masked value)
+      if (accountData.stripeSecretKey && accountData.stripeSecretKey !== maskedStripeKey) {
+        payload.stripe_secret_key = accountData.stripeSecretKey;
+      }
+      
+      await axiosInstance.patch(`/admins/${adminId}`, payload);
 
       // Update session with new data
       await updateSession({
@@ -293,6 +300,11 @@ export default function AgentAccountContainer() {
                       : "sk_test_... or sk_live_..."
                   }
                 />
+                {accountData.hasStripeKey && (
+                  <p className="text-xs text-muted-foreground">
+                    Current key is masked for security. Enter a new key to update.
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2 md:col-span-2">

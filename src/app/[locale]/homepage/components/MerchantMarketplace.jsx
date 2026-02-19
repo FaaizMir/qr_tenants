@@ -175,6 +175,8 @@ export function MarketplaceFilters({
   setSelectedCategory,
   selectedRegion,
   setSelectedRegion,
+  expiringSoon,
+  setExpiringSoon,
   categories,
   cities,
   handleGetCoupon,
@@ -262,6 +264,15 @@ export function MarketplaceFilters({
               ))}
             </SelectContent>
           </Select>
+
+          {/* Expiring Soon Toggle */}
+          <Button
+            variant={expiringSoon ? "default" : "outline"}
+            onClick={() => setExpiringSoon(!expiringSoon)}
+            className="h-9 px-4 rounded-full text-sm font-medium whitespace-nowrap border-slate-200"
+          >
+            {expiringSoon ? "Expiring Soon ✓" : "Expiring Soon"}
+          </Button>
         </div>
       </div>
     </div>
@@ -477,7 +488,7 @@ export function MerchantList({
                 <div
                   className={cn(
                     "relative overflow-hidden bg-slate-200",
-                    merchants.length === 1 ? "h-64" : "h-44",
+                    merchants.length === 1 ? "h-50" : "h-44",
                   )}
                 >
                   <Image
