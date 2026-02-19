@@ -61,8 +61,9 @@ export function StripeConfigForm() {
       setHasKey(hasExistingKey);
 
       if (hasExistingKey) {
-        // Key exists but is hidden by backend for security
-        setMaskedKey("sk_••••••••••••••••••••••••••••");
+        // Use masked key from backend if available, otherwise use default masking
+        const masked = data.stripe_key_masked || "sk_••••••••••••••••••••••••••••";
+        setMaskedKey(masked);
       }
     } catch (error) {
       console.error("Failed to fetch Stripe config:", error);
@@ -95,7 +96,11 @@ export function StripeConfigForm() {
       // Update state based on response
       const data = response.data?.data || response.data;
       setHasKey(data.has_stripe_key === true);
-      setMaskedKey("sk_••••••••••••••••••••••••••••");
+      
+      // Use masked key from backend response
+      const masked = data.stripe_key_masked || "sk_••••••••••••••••••••••••••••";
+      setMaskedKey(masked);
+      
       setStripeKey("");
       setShowKey(false);
     } catch (error) {

@@ -21,6 +21,7 @@ export default function AgentAccountContainer() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [maskedStripeKey, setMaskedStripeKey] = useState("");
   const [accountData, setAccountData] = useState({
     name: "",
     email: "",
@@ -47,6 +48,11 @@ export default function AgentAccountContainer() {
         setLoading(true);
         const response = await axiosInstance.get(`/admins/${adminId}`);
         const data = response.data.data;
+        
+        // Set masked Stripe key if available
+        if (data.stripe_key_masked) {
+          setMaskedStripeKey(data.stripe_key_masked);
+        }
         
         setAccountData({
           name: data.user?.name || "",
@@ -250,7 +256,11 @@ export default function AgentAccountContainer() {
                   type="password"
                   value={accountData.stripeSecretKey}
                   onChange={(e) => handleInputChange("stripeSecretKey", e.target.value)}
-                  placeholder="sk_test_... or sk_live_..."
+                  placeholder={
+                    maskedStripeKey
+                      ? `${maskedStripeKey} (leave blank to keep current)`
+                      : "sk_test_... or sk_live_..."
+                  }
                 />
               </div>
 
