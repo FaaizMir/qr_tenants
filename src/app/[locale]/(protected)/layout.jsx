@@ -119,9 +119,9 @@ export default function ProtectedLayout({ children, params }) {
       if (role !== "super_admin") {
         const subPath = parts[2] || ""; // /master-admin/[subPath]
         const rolePermissions = {
-          support_staff: ["support", "dashboard"],
-          ad_approver: ["approvals", "dashboard"],
-          finance_viewer: ["statements", "commission", "dashboard"],
+          support_staff: ["support", "dashboard", "support-staff"],
+          ad_approver: ["approvals", "dashboard", "ad-approver"],
+          finance_viewer: ["statements", "commission", "dashboard", "finance-viewer"],
         };
 
         const allowedPaths = rolePermissions[role] || ["dashboard"];

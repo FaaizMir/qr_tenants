@@ -10,7 +10,6 @@ import { CreditDisplay } from "@/components/common/credit-display";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-import { getKpiData, recentRedemptions } from "./dashboard-data";
 import { useDashboardTabs } from "./dashboard-tabs";
 import QRImageDialogHover from "@/components/common/qr-image-dialog";
 
@@ -117,11 +116,8 @@ export default function MerchantDashboardContainer() {
   }, [batches]);
 
   const subscriptionType = session?.user?.subscriptionType || "temporary";
-  const kpiData = getKpiData(walletCredits, t);
 
   const tabs = useDashboardTabs({
-    kpiData,
-    recentRedemptions,
     subscriptionType,
     creditStats,
     dashboardData,
