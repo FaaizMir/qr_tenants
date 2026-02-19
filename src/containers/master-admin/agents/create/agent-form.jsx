@@ -53,6 +53,7 @@ export function AgentForm({
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showStripeKey, setShowStripeKey] = useState(false);
+  const [maskedStripeKey, setMaskedStripeKey] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -88,6 +89,11 @@ export function AgentForm({
           console.debug("Fetched agent data for edit:", agent);
 
           const user = agent.user || {};
+
+          // Set masked Stripe key if available
+          if (agent.stripe_key_masked) {
+            setMaskedStripeKey(agent.stripe_key_masked);
+          }
 
           setFormData({
             name: user.name || agent.name || "",
@@ -126,6 +132,11 @@ export function AgentForm({
 
       // Handle nested user object if present
       const userData = initialData.user || {};
+
+      // Set masked Stripe key if available
+      if (initialData.stripe_key_masked) {
+        setMaskedStripeKey(initialData.stripe_key_masked);
+      }
 
       setFormData({
         name: userData.name || initialData.name || "",
@@ -352,7 +363,13 @@ export function AgentForm({
                 type={showStripeKey ? "text" : "password"}
                 value={formData.stripe_secret_key}
                 onChange={(e) => handleChange("stripe_secret_key", e.target.value)}
-                placeholder={isEdit ? "sk_••••••••••••• (leave blank to keep current)" : "sk_test_... or sk_live_..."}
+                placeholder={
+                  isEdit && maskedStripeKey
+                    ? `${maskedStripeKey} (leave blank to keep current)`
+                    : isEdit
+                    ? "sk_••••••••••••• (leave blank to keep current)"
+                    : "sk_test_... or sk_live_..."
+                }
                 className="pr-10 font-mono text-sm"
               />
               <button
