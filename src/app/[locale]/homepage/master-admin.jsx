@@ -58,8 +58,9 @@ export default function MasterAdminLandingPage() {
 
   // Filter State
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [selectedCountry, setSelectedCountry] = useState("all");
+  const [expiringSoon, setExpiringSoon] = useState(false);
   const [countries, setCountries] = useState([]);
 
   // Pagination State
@@ -109,12 +110,17 @@ export default function MasterAdminLandingPage() {
 
         // Add search parameter (searches agent name)
         if (debouncedSearchQuery && debouncedSearchQuery.trim()) {
-          params.businessName = debouncedSearchQuery.trim();
+          params.search = debouncedSearchQuery.trim();
         }
 
         // Add country parameter (searches agent's country)
         if (selectedCountry && selectedCountry !== "all") {
           params.country = selectedCountry;
+        }
+
+        // Add expiringSoon parameter
+        if (expiringSoon) {
+          params.expiringSoon = true;
         }
 
         const response = await axiosInstance.get("/coupons/super-admin-feed", {
@@ -130,13 +136,17 @@ export default function MasterAdminLandingPage() {
             id: agent.id,
             name: agent.name || agent.user?.name || t("fallback.unknownAgent"),
             email: agent.email || agent.user?.email,
-            location: agent.city || agent.country || agent.address || t("fallback.global"),
+            location:
+              agent.city ||
+              agent.country ||
+              agent.address ||
+              t("fallback.global"),
             country: agent.country || t("fallback.unknown"),
             status:
               agent.is_active === true ||
-                agent.is_active === 1 ||
-                agent.user?.is_active === true ||
-                agent.user?.is_active === 1
+              agent.is_active === 1 ||
+              agent.user?.is_active === true ||
+              agent.user?.is_active === 1
                 ? t("status.active")
                 : t("status.inactive"),
             joined: new Date().toLocaleDateString(),
@@ -163,7 +173,7 @@ export default function MasterAdminLandingPage() {
         setHasMore(transformed.length === 6);
         setTotalAgents(
           response.data?.pagination?.total ||
-          (pageNum === 1 ? transformed.length : totalAgents),
+            (pageNum === 1 ? transformed.length : totalAgents),
         );
         setPage(pageNum);
       } catch (err) {
@@ -174,7 +184,7 @@ export default function MasterAdminLandingPage() {
         setLoadingMore(false);
       }
     },
-    [debouncedSearchQuery, selectedCountry, t, totalAgents],
+    [debouncedSearchQuery, selectedCountry, expiringSoon, t, totalAgents],
   );
 
   // Initial load
@@ -185,7 +195,7 @@ export default function MasterAdminLandingPage() {
   // Trigger search when filters change (debounced search query)
   useEffect(() => {
     fetchAgents(1, true);
-  }, [debouncedSearchQuery, fetchAgents, selectedCountry]);
+  }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
   const handleAgentClick = (agent) => {
     // Store agent data with timestamp for security validation
@@ -311,14 +321,14 @@ export default function MasterAdminLandingPage() {
 
                 {/* Filters */}
                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                  <div className="relative group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                     <input
                       type="text"
                       placeholder={t("agentDirectory.searchPlaceholder")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 h-10 w-full sm:w-[250px] rounded-lg border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/50 outline-none transition-all placeholder:text-slate-400"
+                      className="pl-10 pr-4 h-10 w-full sm:w-[220px] rounded-full border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/50 outline-none transition-all placeholder:text-slate-400"
                     />
                   </div>
 
@@ -326,14 +336,18 @@ export default function MasterAdminLandingPage() {
                     value={selectedCountry}
                     onValueChange={(val) => setSelectedCountry(val)}
                   >
-                    <SelectTrigger className="w-full sm:w-[180px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-lg text-sm font-medium">
+                    <SelectTrigger className="w-full sm:w-[160px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-full text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">
                         <Globe className="h-3.5 w-3.5" />
-                        <SelectValue placeholder={t("agentDirectory.allCountries")} />
+                        <SelectValue
+                          placeholder={t("agentDirectory.allCountries")}
+                        />
                       </div>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">{t("agentDirectory.allCountries")}</SelectItem>
+                      <SelectItem value="all">
+                        {t("agentDirectory.allCountries")}
+                      </SelectItem>
                       {countries.map((c) => (
                         <SelectItem key={c} value={c}>
                           {c}
@@ -341,6 +355,14 @@ export default function MasterAdminLandingPage() {
                       ))}
                     </SelectContent>
                   </Select>
+
+                  <Button
+                    variant={expiringSoon ? "default" : "outline"}
+                    onClick={() => setExpiringSoon(!expiringSoon)}
+                    className="h-9 px-4 rounded-full text-sm font-medium whitespace-nowrap border-slate-200"
+                  >
+                    {expiringSoon ? "Expiring Soon ✓" : "Expiring Soon"}
+                  </Button>
                 </div>
               </div>
 
@@ -408,7 +430,8 @@ export default function MasterAdminLandingPage() {
                               </div>
                               <div className="flex items-center text-xs font-medium text-slate-500">
                                 <Store className="h-3.5 w-3.5 mr-2 text-slate-400" />
-                                {agent.merchantsCount} {t("agentDirectory.activeMerchants")}
+                                {agent.merchantsCount}{" "}
+                                {t("agentDirectory.activeMerchants")}
                               </div>
                             </div>
                           </div>
