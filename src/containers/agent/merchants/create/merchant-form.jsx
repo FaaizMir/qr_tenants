@@ -60,7 +60,7 @@ export function MerchantForm({
     role: "merchant",
     business_name: "",
     business_type: "",
-    merchant_type: "annual",
+    merchant_type: "temporary",
     address: "",
     city: "",
     country: "",
@@ -89,7 +89,7 @@ export function MerchantForm({
         business_type:
           initialData.business_type || initialData.businessType || "",
         merchant_type:
-          initialData.merchant_type || initialData.merchantType || "annual",
+          initialData.merchant_type || initialData.merchantType || "temporary",
         address: initialData.address || "",
         city: initialData.city || "",
         country: initialData.country || "",
@@ -472,7 +472,6 @@ export function MerchantForm({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="annual">Annual</SelectItem>
                   <SelectItem value="temporary">Temporary</SelectItem>
                 </SelectContent>
               </Select>
