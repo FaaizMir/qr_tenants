@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { Ticket, MessageSquare, Sparkles } from "lucide-react";
-import { KpiCard } from "@/components/common/kpi-card";
+import { Sparkles } from "lucide-react";
 import { CreditsOverview } from "@/containers/merchant/merchant-dashboard/credits-overview";
 import {
   Card,
@@ -107,16 +105,13 @@ const UpgradeCard = ({ feeData, adminId }) => {
 import MerchantCouponsListingContainer from "@/containers/merchant/coupons/listing";
 import MerchantWalletContainer from "@/containers/merchant/wallet";
 import MerchantAnalyticsContainer from "@/containers/merchant/analytics";
-import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
 import MerchantSettings from "@/containers/merchant/merchant-settings/MerchantSettings";
 
 export const useDashboardTabs = ({
-  kpiData,
-  recentRedemptions,
-  subscriptionType = "temporary",
   creditStats,
   dashboardData,
   loadingDashboard,
+  subscriptionType = "temporary",
   feeData,
   adminId,
 }) => {

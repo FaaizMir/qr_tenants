@@ -107,27 +107,6 @@ export function AppSidebar({
     },
   ];
 
-  // {
-  //   title: tAgent("earnings"),
-  //   url: "/agent/earnings",
-  //   icon: DollarSign,
-  // },
-  // {
-  //   title: tAgent("statements"),
-  //   url: "/agent/statements",
-  //   icon: FileText,
-  // },
-  // {
-  //   title: tAgent("couponsync"),
-  //   url: "/agent/coupon-sync",
-  //   icon: RefreshCw,
-  // },
-  // {
-  //   title: tAgent("support"),
-  //   url: "/agent/support",
-  //   icon: MessageSquare,
-  // },
-
   // Merchant navigation
   const merchantNav = [
     {
