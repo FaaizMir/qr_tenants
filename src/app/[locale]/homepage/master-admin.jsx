@@ -24,6 +24,7 @@ import TableToolbar from "@/components/common/table-toolbar";
 import { useTranslations, useLocale } from "next-intl";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import { useEffect, useState, useMemo, useCallback } from "react";
+import useDebounce from "@/hooks/useDebounceRef";
 import {
   Select,
   SelectContent,
@@ -57,6 +58,7 @@ export default function MasterAdminLandingPage() {
 
   // Filter State
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [selectedCountry, setSelectedCountry] = useState("all");
   const [countries, setCountries] = useState([]);
 
@@ -100,13 +102,23 @@ export default function MasterAdminLandingPage() {
       }
 
       try {
+        const params = {
+          page: pageNum,
+          pageSize: 6,
+        };
+
+        // Add search parameter (searches agent name)
+        if (debouncedSearchQuery && debouncedSearchQuery.trim()) {
+          params.businessName = debouncedSearchQuery.trim();
+        }
+
+        // Add country parameter (searches agent's country)
+        if (selectedCountry && selectedCountry !== "all") {
+          params.country = selectedCountry;
+        }
+
         const response = await axiosInstance.get("/coupons/super-admin-feed", {
-          params: {
-            page: pageNum,
-            pageSize: 6, // Fetch 6 agents per page
-            search: searchQuery,
-            country: selectedCountry === "all" ? undefined : selectedCountry,
-          },
+          params,
         });
 
         const agentsData = response.data?.data?.admins || [];
@@ -135,7 +147,7 @@ export default function MasterAdminLandingPage() {
           setAgents(transformed);
           // Extract filter options ONLY from initial unfiltered load
           // Don't update filter lists when filters are already applied
-          if (selectedCountry === "all" && !searchQuery) {
+          if (selectedCountry === "all" && !debouncedSearchQuery) {
             const uniqueCountries = [
               ...new Set(transformed.map((a) => a.country)),
             ]
@@ -162,12 +174,18 @@ export default function MasterAdminLandingPage() {
         setLoadingMore(false);
       }
     },
-    [searchQuery, selectedCountry, t, totalAgents],
+    [debouncedSearchQuery, selectedCountry, t, totalAgents],
   );
 
+  // Initial load
   useEffect(() => {
     fetchAgents(1, true);
   }, [fetchAgents]);
+
+  // Trigger search when filters change (debounced search query)
+  useEffect(() => {
+    fetchAgents(1, true);
+  }, [debouncedSearchQuery, fetchAgents, selectedCountry]);
 
   const handleAgentClick = (agent) => {
     // Store agent data with timestamp for security validation
@@ -299,20 +317,14 @@ export default function MasterAdminLandingPage() {
                       type="text"
                       placeholder={t("agentDirectory.searchPlaceholder")}
                       value={searchQuery}
-                      onChange={(e) => {
-                        setSearchQuery(e.target.value);
-                        setPage(1);
-                      }}
+                      onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-10 h-10 w-full sm:w-[250px] rounded-lg border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/50 outline-none transition-all placeholder:text-slate-400"
                     />
                   </div>
 
                   <Select
                     value={selectedCountry}
-                    onValueChange={(val) => {
-                      setSelectedCountry(val);
-                      setPage(1);
-                    }}
+                    onValueChange={(val) => setSelectedCountry(val)}
                   >
                     <SelectTrigger className="w-full sm:w-[180px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-lg text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">

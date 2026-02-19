@@ -442,7 +442,7 @@ export function MerchantList({
           className={cn(
             "grid gap-x-4 gap-y-10",
             merchants.length === 1
-              ? "grid-cols-1 w-full"
+              ? "grid-cols-1 max-w-2xl mx-auto"
               : merchants.length === 2
                 ? "grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto"
                 : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full",
@@ -474,7 +474,12 @@ export function MerchantList({
                 )}
               >
                 {/* Cover Image Area */}
-                <div className="relative overflow-hidden bg-slate-200 h-44">
+                <div
+                  className={cn(
+                    "relative overflow-hidden bg-slate-200",
+                    merchants.length === 1 ? "h-64" : "h-44",
+                  )}
+                >
                   <Image
                     src={getCategoryImage(merchant.category, merchant.id)}
                     alt={`${merchant.name} cover`}
@@ -668,7 +673,7 @@ export function MerchantDetail({ activeMerchant, handleGetCoupon }) {
       <div className="hidden lg:flex sticky mt-5  w-full flex-col items-center justify-center text-center p-12 border-2 border-dashed border-slate-200 rounded-[3rem] bg-white shadow-2xl shadow-slate-200/50 overflow-hidden group">
         <div className="absolute inset-0 bg-linear-to-br from-slate-50/50 to-transparent pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col items-center">
+        <div className="relative z-10 flex flex-col items-center h-66 justify-center">
           <h3 className="font-bold text-slate-900 text-2xl mb-4 tracking-tight">
             {tDetail("readyToExplore")}
           </h3>
