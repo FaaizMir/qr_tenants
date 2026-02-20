@@ -58,10 +58,11 @@ export const getApprovalColumns = (handleStatusUpdate) => [
                 </div>
               ) : (
                 <Image
-                  fill
+                  width={40}
+                  height={40}
                   src={url}
                   alt="Ad"
-                  className="w-10 h-10 object-cover rounded shadow-inner group-hover:opacity-80 transition-opacity"
+                  className="object-cover rounded shadow-inner group-hover:opacity-80 transition-opacity"
                 />
               )}
             </button>

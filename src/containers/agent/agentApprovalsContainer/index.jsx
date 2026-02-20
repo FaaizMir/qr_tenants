@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import { DataTable } from "@/components/common/data-table";
@@ -103,10 +103,10 @@ export default function AgentApprovalsContainer() {
     fetchApprovals();
   }, [adminId]);
 
-  // ...existing code...
-  const handleStatusUpdate =
-    (async (id, newStatus) => {
+  const handleStatusUpdate = useCallback(
+    async (id, newStatus) => {
       const action = newStatus ? "approve" : "reject";
+      console.log(`Attempting to ${action} approval with ID: ${id}, New Status: ${action}`);
       try {
         await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
           id: id,
@@ -126,7 +126,8 @@ export default function AgentApprovalsContainer() {
         throw error; // Re-throw so the UI can handle it
       }
     },
-    [adminId]);
+    [adminId]
+  );
 
   const columns = useMemo(
     () => getApprovalColumns(handleStatusUpdate),
@@ -168,6 +169,8 @@ export default function AgentApprovalsContainer() {
               <Image
                 src={previewContent.url}
                 alt="Ad Preview"
+                width={800}
+                height={800}
                 className="max-w-full max-h-[80vh] object-contain rounded-xl"
               />
             ) : (

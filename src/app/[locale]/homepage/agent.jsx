@@ -450,6 +450,18 @@ export default function AgentLandingPage() {
       return;
     }
 
+    // Track the click in analytics
+    try {
+      await axiosInstance.post("/analytics/track-click", {
+        merchantId: merchantId,
+        agentId: agentId,
+        paidAdId: ad.id,
+      });
+      console.log("Click tracked for ad:", ad.id);
+    } catch (error) {
+      console.error("Failed to track click:", error);
+    }
+
     // Find the merchant in the current merchants list
     let merchant = merchants.find((m) => m.id === merchantId);
 
