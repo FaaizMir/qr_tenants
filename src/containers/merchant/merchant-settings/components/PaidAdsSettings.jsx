@@ -129,7 +129,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     };
 
     fetchAvailablePlacements();
-  }, [merchantId]);
+  }, [merchantId, state.placement]);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
