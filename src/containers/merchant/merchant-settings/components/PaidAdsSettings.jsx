@@ -59,7 +59,12 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
   );
-  const [availablePlacements, setAvailablePlacements] = useState(["top", "bottom", "left", "right"]);
+  const [availablePlacements, setAvailablePlacements] = useState([
+    "top",
+    "bottom",
+    "left",
+    "right",
+  ]);
   const [loadingPlacements, setLoadingPlacements] = useState(true);
   // Cropper State
   const [imageSrc, setImageSrc] = useState(null);
@@ -94,7 +99,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   // Fetch available placements
   useEffect(() => {
     if (!merchantId) return;
-    
+
     const fetchAvailablePlacements = async () => {
       setLoadingPlacements(true);
       try {
@@ -102,13 +107,16 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         const response = await axiosInstance.get(
           `/approvals/available-placements/merchant/${merchantId}`,
         );
-        
+
         if (response.data && Array.isArray(response.data)) {
           setAvailablePlacements(response.data);
-          
+
           // If current placement is not available, set to first available
-          if (response.data.length > 0 && !response.data.includes(state.placement)) {
-            setState(prev => ({ ...prev, placement: response.data[0] }));
+          if (
+            response.data.length > 0 &&
+            !response.data.includes(state.placement)
+          ) {
+            setState((prev) => ({ ...prev, placement: response.data[0] }));
           }
         }
       } catch (error) {
@@ -119,9 +127,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         setLoadingPlacements(false);
       }
     };
-    
+
     fetchAvailablePlacements();
-  }, [merchantId]);
+  }, [merchantId, state.placement]);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -162,6 +170,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       if (pendingFile) {
         const formData = new FormData();
         if (pendingFile.type === "image") {
+          toast.info("Uploading image...");
           formData.append(
             "paidAdImage",
             pendingFile.file,
@@ -195,7 +204,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               paid_ad_video_status: false,
             }));
           }
+          toast.success("Image uploaded successfully");
         } else if (pendingFile.type === "video") {
+          toast.info("Uploading video... This may take a moment.");
           formData.append("paidAdVideo", pendingFile.file);
           formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
@@ -228,11 +239,12 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               paid_ad_video_status: true,
             }));
           }
+          toast.success("Video uploaded successfully");
         }
         setPendingFile(null);
+      } else {
+        toast.success("Settings updated successfully");
       }
-
-      toast.success("Settings and ad updated successfully");
     } catch (error) {
       console.error(error);
       if (error.code === "ECONNABORTED") {
@@ -315,9 +327,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     setActiveTab("video");
 
     const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
-    toast.info(
-      `Video selected (${sizeMB}MB). Click 'Upload & Save' to finish.`,
-    );
+    toast.info(`Video selected. Click 'Upload & Save' to finish.`);
   };
 
   const readFile = (file) => {
@@ -341,7 +351,6 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         initialQuality: 0.85, // High quality but compressed
       };
 
-      toast.info("Optimizing image...");
       const compressedFile = await imageCompression(croppedBlob, options);
 
       const objectUrl = URL.createObjectURL(compressedFile);
@@ -359,13 +368,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       setIsCropperOpen(false);
       setImageSrc(null); // Clear raw source
 
-      const sizeReduction = (
-        ((croppedBlob.size - compressedFile.size) / croppedBlob.size) *
-        100
-      ).toFixed(0);
-      toast.success(
-        `Image optimized! Size reduced by ${sizeReduction}%. Ready to upload.`,
-      );
+      const sizeMB = (compressedFile.size / (1024 * 1024)).toFixed(1);
+      toast.success(`Image ready for upload. Click 'Upload & Save' to finish.`);
     } catch (error) {
       console.error(error);
       toast.error("Error processing image");
@@ -464,7 +468,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         No slots available
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        All ad placement slots are currently occupied. Please try again later.
+                        All ad placement slots are currently occupied. Please
+                        try again later.
                       </p>
                     </div>
                   ) : (
@@ -496,7 +501,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                       </Select>
                       {availablePlacements.length < 4 && (
                         <p className="text-xs text-amber-600 font-medium">
-                          {4 - availablePlacements.length} slot(s) occupied. Only {availablePlacements.length} placement(s) available.
+                          {4 - availablePlacements.length} slot(s) occupied.
+                          Only {availablePlacements.length} placement(s)
+                          available.
                         </p>
                       )}
                     </>
