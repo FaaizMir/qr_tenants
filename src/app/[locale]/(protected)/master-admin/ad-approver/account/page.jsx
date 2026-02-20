@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import AdApproverAccountContainer from "@/containers/ad-approver/account";
+import AdApproverAccountContainer from "@/containers/master-admin/ad-approver/account";
 
 export default function AdApproverAccountPage() {
   const breadcrumbData = [

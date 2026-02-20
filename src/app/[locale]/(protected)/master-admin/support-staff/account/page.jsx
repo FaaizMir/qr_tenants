@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import SupportStaffAccountContainer from "@/containers/support-staff/account";
+import SupportStaffAccountContainer from "@/containers/master-admin/support-staff/account";
 
 export default function SupportStaffAccountPage() {
   const breadcrumbData = [

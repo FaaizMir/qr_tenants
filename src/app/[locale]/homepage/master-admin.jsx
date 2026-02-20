@@ -336,7 +336,7 @@ export default function MasterAdminLandingPage() {
                     value={selectedCountry}
                     onValueChange={(val) => setSelectedCountry(val)}
                   >
-                    <SelectTrigger className="w-full sm:w-[160px] h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-full text-sm font-medium">
+                    <SelectTrigger className="w-full sm:w-40 h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-full text-sm font-medium">
                       <div className="flex items-center gap-2 text-slate-600">
                         <Globe className="h-3.5 w-3.5" />
                         <SelectValue

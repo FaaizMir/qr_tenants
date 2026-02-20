@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import FinanceViewerAccountContainer from "@/containers/finance-viewer/account";
+import FinanceViewerAccountContainer from "@/containers/master-admin/finance-viewer/account";
 
 export default function FinanceViewerAccountPage() {
   const breadcrumbData = [
