@@ -199,7 +199,7 @@ export default function MasterAdminCommissionContainer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             {
-              title: "Admin Subscription",
+              title: "Agent Subscription",
               amount: walletData.revenue_admin_annual_subscription_fee,
               icon: Calendar,
               desc: "Annual fees from admins",
