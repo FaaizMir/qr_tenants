@@ -1,0 +1,91 @@
+{
+  "breadcrumbs": {
+    "merchantDashboard": "Merchant Dashboard",
+    "homepagePush": "Homepage Push"
+  },
+  "listing": {
+    "title": "Homepage Push Requests",
+    "subtitle": "Manage your coupon and ad placements on the super admin homepage",
+    "createRequest": "New Request",
+    "searchPlaceholder": "Search requests...",
+    "columns": {
+      "type": "Type",
+      "item": "Item",
+      "status": "Status",
+      "cost": "Cost",
+      "expiryDate": "Expiry Date",
+      "slot": "Slot",
+      "actions": "Actions"
+    },
+    "types": {
+      "coupon": "Coupon Push",
+      "ad": "Ad Push"
+    },
+    "actions": {
+      "pay": "Pay Now"
+    }
+  },
+  "create": {
+    "title": "Create Homepage Push Request",
+    "fields": {
+      "type": {
+        "label": "Request Type",
+        "options": {
+          "coupon": "Homepage Coupon Push",
+          "ad": "Homepage Ad Push"
+        }
+      },
+      "coupon": {
+        "label": "Select Coupon",
+        "placeholder": "Choose a coupon..."
+      },
+      "adType": {
+        "label": "Ad Type",
+        "options": {
+          "banner": "Banner Ad",
+          "popup": "Popup Ad",
+          "sidebar": "Sidebar Ad"
+        }
+      }
+    },
+    "pricing": {
+      "cost": "Placement Cost",
+      "duration": "Display Duration",
+      "days": "days",
+      "note": "Payment will be processed after agent and super admin approval. Platform cost is automatically deducted from your agent's wallet."
+    },
+    "info": {
+      "availableCouponSlots": "Available coupon slots: {count}/10",
+      "availableAdSlots": "Available ad slots: {count}/4"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit Request"
+    },
+    "errors": {
+      "selectCoupon": "Please select a coupon",
+      "failedToCreate": "Failed to create request",
+      "failedToLoadData": "Failed to load data",
+      "noSlotsAvailable": "No slots available at this time. Please try again later."
+    },
+    "success": {
+      "requestCreated": "Homepage push request created successfully!"
+    }
+  },
+  "details": {
+    "title": "Request Details",
+    "type": "Type",
+    "status": "Status",
+    "cost": "Cost",
+    "slot": "Slot",
+    "expiryDate": "Expiry Date",
+    "reason": "Reason"
+  },
+  "errors": {
+    "failedToLoadRequests": "Failed to load homepage push requests",
+    "paymentFailed": "Payment processing failed"
+  },
+  "success": {
+    "paymentProcessed": "Payment processed successfully! Your item is now active on the homepage."
+  }
+}
