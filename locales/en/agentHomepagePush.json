@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "Agent Dashboard",
+    "homepagePush": "Homepage Push Requests"
+  },
+  "listing": {
+    "title": "Homepage Push Requests",
+    "subtitle": "Review and manage homepage push requests from your merchants",
+    "searchPlaceholder": "Search requests...",
+    "columns": {
+      "merchant": "Merchant",
+      "type": "Type",
+      "item": "Item",
+      "status": "Status",
+      "createdAt": "Created At",
+      "actions": "Actions"
+    },
+    "types": {
+      "coupon": "Coupon Push",
+      "ad": "Ad Push"
+    },
+    "actions": {
+      "review": "Review"
+    }
+  },
+  "tabs": {
+    "pending": "Pending Review",
+    "all": "All Requests"
+  },
+  "review": {
+    "title": "Review Homepage Push Request",
+    "fields": {
+      "merchant": "Merchant",
+      "type": "Type",
+      "item": "Item",
+      "createdAt": "Created At",
+      "couponDetails": "Coupon Details",
+      "batch": "Batch",
+      "reason": "Reason for Disapproval",
+      "reasonPlaceholder": "Please provide a clear reason for disapproving this request..."
+    },
+    "types": {
+      "coupon": "Homepage Coupon Push",
+      "ad": "Homepage Ad Push"
+    },
+    "info": {
+      "selectAction": "Please select an action for this request:",
+      "forwardConfirm": "This request will be forwarded to the super admin for final approval. The merchant will be notified once the super admin makes a decision."
+    },
+    "actions": {
+      "forward": "Forward to Super Admin",
+      "disapprove": "Disapprove Request"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "back": "Back",
+      "confirmForward": "Confirm & Forward",
+      "confirmDisapprove": "Confirm & Disapprove"
+    },
+    "errors": {
+      "reasonRequired": "Please provide a reason for disapproval"
+    }
+  },
+  "details": {
+    "title": "Request Details",
+    "badges": {
+      "forwarded": "Forwarded to Super Admin"
+    },
+    "sections": {
+      "merchant": "Merchant Information",
+      "requestDetails": "Request Details",
+      "couponDetails": "Coupon Details",
+      "paymentPlacement": "Payment & Placement",
+      "disapprovalReason": "Reason for Disapproval"
+    },
+    "fields": {
+      "businessName": "Business Name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "type": "Type",
+      "item": "Item",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "couponCode": "Coupon Code",
+      "batchName": "Batch Name",
+      "couponStatus": "Coupon Status",
+      "description": "Description",
+      "cost": "Cost",
+      "slot": "Slot",
+      "activatedAt": "Activated At",
+      "expiresAt": "Expires At",
+      "paymentStatus": "Payment Status",
+      "paymentIntentId": "Payment Intent ID"
+    },
+    "types": {
+      "coupon": "Homepage Coupon Push",
+      "ad": "Homepage Ad Push"
+    }
+  },
+  "errors": {
+    "failedToLoadPending": "Failed to load pending requests",
+    "failedToLoadAll": "Failed to load requests",
+    "forwardFailed": "Failed to forward request",
+    "disapproveFailed": "Failed to disapprove request"
+  },
+  "success": {
+    "forwarded": "Request forwarded to super admin successfully!",
+    "disapproved": "Request disapproved successfully. Merchant has been notified."
+  }
+}
