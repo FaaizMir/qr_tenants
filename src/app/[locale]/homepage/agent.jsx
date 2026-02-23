@@ -760,7 +760,7 @@ export default function AgentLandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-8 transition-all duration-700">
             {/* Left Sidebar (Ads Only) - Always show if leftAd exists */}
             {leftAd && (
-              <div className="hidden xl:block lg:col-span-2 sticky top-28 space-y-8 pt-16">
+              <div className="hidden xl:block lg:col-span-2 sticky top-28 space-y-8 pt-16 mr-20">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2 opacity-50 px-2">
                     <span className="h-px flex-1 bg-slate-300"></span>
