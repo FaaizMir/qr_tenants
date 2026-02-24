@@ -48,6 +48,12 @@ export function PlatformSettingsForm() {
     whatsapp_ui_temporary_platform_cost: "",
     coupon_annual_platform_cost: "",
     coupon_temporary_platform_cost: "",
+    homepage_coupon_placement_cost: "",
+    homepage_ad_placement_cost: "",
+    max_homepage_coupons: "",
+    max_homepage_ads: "",
+    coupon_homepage_placement_duration_days: "",
+    ad_homepage_placement_duration_days: "",
     currency: "MYR",
   });
 
@@ -69,6 +75,12 @@ export function PlatformSettingsForm() {
         whatsapp_ui_temporary_platform_cost: data.whatsapp_ui_temporary_platform_cost || "",
         coupon_annual_platform_cost: data.coupon_annual_platform_cost || "",
         coupon_temporary_platform_cost: data.coupon_temporary_platform_cost || "",
+        homepage_coupon_placement_cost: data.homepage_coupon_placement_cost || "",
+        homepage_ad_placement_cost: data.homepage_ad_placement_cost || "",
+        max_homepage_coupons: data.max_homepage_coupons || "",
+        max_homepage_ads: data.max_homepage_ads || "",
+        coupon_homepage_placement_duration_days: data.coupon_homepage_placement_duration_days || "",
+        ad_homepage_placement_duration_days: data.ad_homepage_placement_duration_days || "",
         currency: data.currency || "MYR",
       });
     } catch (error) {
@@ -96,6 +108,12 @@ export function PlatformSettingsForm() {
       'whatsapp_ui_temporary_platform_cost',
       'coupon_annual_platform_cost',
       'coupon_temporary_platform_cost',
+      'homepage_coupon_placement_cost',
+      'homepage_ad_placement_cost',
+      'max_homepage_coupons',
+      'max_homepage_ads',
+      'coupon_homepage_placement_duration_days',
+      'ad_homepage_placement_duration_days',
     ];
 
     for (const field of numericFields) {
@@ -116,6 +134,12 @@ export function PlatformSettingsForm() {
         whatsapp_ui_temporary_platform_cost: Number(settings.whatsapp_ui_temporary_platform_cost),
         coupon_annual_platform_cost: Number(settings.coupon_annual_platform_cost),
         coupon_temporary_platform_cost: Number(settings.coupon_temporary_platform_cost),
+        homepage_coupon_placement_cost: Number(settings.homepage_coupon_placement_cost),
+        homepage_ad_placement_cost: Number(settings.homepage_ad_placement_cost),
+        max_homepage_coupons: Number(settings.max_homepage_coupons),
+        max_homepage_ads: Number(settings.max_homepage_ads),
+        coupon_homepage_placement_duration_days: Number(settings.coupon_homepage_placement_duration_days),
+        ad_homepage_placement_duration_days: Number(settings.ad_homepage_placement_duration_days),
         currency: settings.currency,
       };
 
@@ -412,6 +436,161 @@ export function PlatformSettingsForm() {
                 </div>
                 <p className="text-xs text-muted-foreground">
                   Per coupon for temporary merchants
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Homepage Placement Costs */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <h4 className="font-medium">Homepage Placement (Super Admin Homepage)</h4>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="homepage_coupon_cost">
+                  Homepage Coupon Placement Cost
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
+                    {settings.currency}
+                  </span>
+                  <Input
+                    id="homepage_coupon_cost"
+                    type="number"
+                    step="0.01"
+                    placeholder="50.00"
+                    value={settings.homepage_coupon_placement_cost}
+                    onChange={(e) =>
+                      handleChange("homepage_coupon_placement_cost", e.target.value)
+                    }
+                    className="pl-14"
+                    required
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Cost per coupon placement on super admin homepage
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="homepage_ad_cost">
+                  Homepage Ad Placement Cost
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
+                    {settings.currency}
+                  </span>
+                  <Input
+                    id="homepage_ad_cost"
+                    type="number"
+                    step="0.01"
+                    placeholder="100.00"
+                    value={settings.homepage_ad_placement_cost}
+                    onChange={(e) =>
+                      handleChange("homepage_ad_placement_cost", e.target.value)
+                    }
+                    className="pl-14"
+                    required
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Cost per ad placement on super admin homepage
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="max_homepage_coupons">
+                  Max Homepage Coupon Slots
+                </Label>
+                <Input
+                  id="max_homepage_coupons"
+                  type="number"
+                  step="1"
+                  placeholder="10"
+                  value={settings.max_homepage_coupons}
+                  onChange={(e) =>
+                    handleChange("max_homepage_coupons", e.target.value)
+                  }
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  Maximum number of coupons on homepage
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="max_homepage_ads">
+                  Max Homepage Ad Slots
+                </Label>
+                <Input
+                  id="max_homepage_ads"
+                  type="number"
+                  step="1"
+                  placeholder="4"
+                  value={settings.max_homepage_ads}
+                  onChange={(e) =>
+                    handleChange("max_homepage_ads", e.target.value)
+                  }
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  Maximum number of ads on homepage
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="coupon_placement_duration">
+                  Coupon Placement Duration
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="coupon_placement_duration"
+                    type="number"
+                    step="1"
+                    placeholder="7"
+                    value={settings.coupon_homepage_placement_duration_days}
+                    onChange={(e) =>
+                      handleChange("coupon_homepage_placement_duration_days", e.target.value)
+                    }
+                    className="pr-14"
+                    required
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium text-sm">
+                    days
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  How long coupons stay on homepage
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="ad_placement_duration">
+                  Ad Placement Duration
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="ad_placement_duration"
+                    type="number"
+                    step="1"
+                    placeholder="7"
+                    value={settings.ad_homepage_placement_duration_days}
+                    onChange={(e) =>
+                      handleChange("ad_homepage_placement_duration_days", e.target.value)
+                    }
+                    className="pr-14"
+                    required
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium text-sm">
+                    days
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  How long ads stay on homepage
                 </p>
               </div>
             </div>
