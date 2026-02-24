@@ -223,7 +223,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       </Card>
 
       {/* Payment Summary */}
-      <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+      <Card className="border-2 border-primary/30 bg-linear-to-br from-primary/5 to-transparent">
         <CardHeader>
           <div className="flex items-center gap-2">
             <div className="p-2 bg-primary rounded-full text-white">
@@ -296,7 +296,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       {/* What's Included */}
       <Card className="bg-slate-50 border-slate-200">
         <CardHeader>
-          <CardTitle className="text-sm">What's Included with Your Subscription</CardTitle>
+          <CardTitle className="text-sm">What&apos;s Included with Your Subscription</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -311,7 +311,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
               "12 months platform access",
             ].map((feature, idx) => (
               <div key={idx} className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
                 <span className="text-xs text-slate-700">{feature}</span>
               </div>
             ))}

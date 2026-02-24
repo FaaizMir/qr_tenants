@@ -45,7 +45,7 @@ export default function AgentWalletContainer() {
 
   /** Top-Up Packages */
   const [topUpPackages] = useState(walletTopUpPackages);
-  
+
   /** Credits Top-up */
   const [packages, setPackages] = useState([]);
   const [loadingPackages, setLoadingPackages] = useState(false);
@@ -147,7 +147,7 @@ export default function AgentWalletContainer() {
    * ---------------------------------- */
   useEffect(() => {
     // Set the default selected package (Standard - most popular)
-    const defaultPackage = topUpPackages.find(pkg => pkg.popular);
+    const defaultPackage = topUpPackages.find((pkg) => pkg.popular);
     if (defaultPackage) {
       setSelectedPackage(defaultPackage);
     }
@@ -220,32 +220,46 @@ export default function AgentWalletContainer() {
   return (
     <div className="space-y-6">
       {!walletStats.is_active && (
-        <Alert variant="destructive" className="border-2 bg-red-50">
-          <AlertTriangle className="h-5 w-5" />
-          <AlertTitle className="font-bold text-lg">
-            Subscription Activation Required
-          </AlertTitle>
-          <AlertDescription className="text-base">
-            Your account is not yet activated. Click "Activate Subscription" to pay your annual subscription fee and start using the platform. You can also add prepaid wallet balance during activation.
-          </AlertDescription>
-        </Alert>
+        <div className="flex items-start gap-4 bg-amber-50 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 mt-0.5">
+            <AlertTriangle className="h-4 w-4 text-amber-600" />
+          </div>
+          <div>
+            <p className="font-semibold text-amber-900 leading-tight mb-0.5">
+              Subscription Activation Required
+            </p>
+            <p className="text-sm text-amber-800/70 leading-relaxed">
+              Your account is not yet activated. Click &quot;Activate
+              Subscription&quot; to pay your annual subscription fee and start
+              using the platform. You can also add prepaid wallet balance during
+              activation.
+            </p>
+          </div>
+        </div>
       )}
       {walletStats.is_active && isExpired && (
-        <Alert variant="destructive" className="border-2">
-          <AlertTriangle className="h-5 w-5" />
-          <AlertTitle className="font-bold text-lg">
-            Subscription Expired
-          </AlertTitle>
-          <AlertDescription className="text-base">
-            Your subscription has expired. Renew your subscription to continue accessing all platform features.
-          </AlertDescription>
-        </Alert>
+        <div className="flex items-start gap-4 bg-amber-50 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 mt-0.5">
+            <AlertTriangle className="h-4 w-4 text-amber-600" />
+          </div>
+          <div>
+            <p className="font-semibold text-amber-900 leading-tight mb-0.5">
+              Subscription Expired
+            </p>
+            <p className="text-sm text-amber-800/70 leading-relaxed">
+              Your subscription has expired. Renew your subscription to continue
+              accessing all platform features.
+            </p>
+          </div>
+        </div>
       )}
 
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Agent Wallet</h1>
-          <p className="text-muted-foreground">Manage your wallet balance and transactions</p>
+          <p className="text-muted-foreground">
+            Manage your wallet balance and transactions
+          </p>
         </div>
 
         <Button
@@ -272,8 +286,10 @@ export default function AgentWalletContainer() {
         <DialogContent className="max-w-5xl max-h-[90vh] p-0 gap-0 border-none shadow-2xl rounded-3xl bg-white overflow-hidden block">
           <div className="grid grid-cols-1 md:grid-cols-12 h-full max-h-[90vh]">
             {/* LEFT — Top-Up Packages Selection */}
-            <div className="md:col-span-7 p-6 md:p-7 bg-slate-50/50 overflow-y-auto"
-                 style={{ maxHeight: '90vh' }}>
+            <div
+              className="md:col-span-7 p-6 md:p-7 bg-slate-50/50 overflow-y-auto"
+              style={{ maxHeight: "90vh" }}
+            >
               <DialogHeader className="mb-6">
                 <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
                   Choose Top-Up Amount
@@ -287,7 +303,7 @@ export default function AgentWalletContainer() {
                 {topUpPackages.map((pkg) => {
                   const isSelected = selectedPackage?.id === pkg.id;
                   const totalAmount = pkg.amount + (pkg.bonus || 0);
-                  
+
                   return (
                     <div
                       key={pkg.id}
@@ -296,17 +312,17 @@ export default function AgentWalletContainer() {
                         "relative p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 group hover:shadow-md",
                         isSelected
                           ? "border-primary bg-primary/5 shadow-md"
-                          : "border-slate-200 bg-white hover:border-primary/50"
+                          : "border-slate-200 bg-white hover:border-primary/50",
                       )}
                     >
                       {pkg.popular && (
                         <div className="absolute -top-2 -right-2">
-                          <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-3 py-1 shadow-lg">
+                          <Badge className="bg-linear-to-r from-orange-500 to-pink-500 text-white px-3 py-1 shadow-lg">
                             ⭐ Most Popular
                           </Badge>
                         </div>
                       )}
-                      
+
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-1">
@@ -314,7 +330,10 @@ export default function AgentWalletContainer() {
                               {pkg.name}
                             </h3>
                             {pkg.bonus > 0 && (
-                              <Badge variant="secondary" className="bg-green-100 text-green-700 border-green-200">
+                              <Badge
+                                variant="secondary"
+                                className="bg-green-100 text-green-700 border-green-200"
+                              >
                                 +{pkg.currency} {pkg.bonus} Bonus
                               </Badge>
                             )}
@@ -333,7 +352,7 @@ export default function AgentWalletContainer() {
                             ))}
                           </div>
                         </div>
-                        
+
                         <div className="text-right ml-4">
                           <div className="text-2xl font-black text-slate-900">
                             {pkg.currency} {pkg.amount.toLocaleString()}
@@ -348,7 +367,7 @@ export default function AgentWalletContainer() {
                           </div>
                         </div>
                       </div>
-                      
+
                       {isSelected && (
                         <div className="absolute top-4 left-4">
                           <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
@@ -363,8 +382,10 @@ export default function AgentWalletContainer() {
             </div>
 
             {/* RIGHT — Payment Details */}
-            <div className="md:col-span-5 bg-white p-6 md:p-7 flex flex-col border-t md:border-t-0 md:border-l border-slate-100 overflow-y-auto"
-                 style={{ maxHeight: '90vh' }}>
+            <div
+              className="md:col-span-5 bg-white p-6 md:p-7 flex flex-col border-t md:border-t-0 md:border-l border-slate-100 overflow-y-auto"
+              style={{ maxHeight: "90vh" }}
+            >
               {selectedPackage ? (
                 <div className="flex flex-col h-full">
                   <div className="mb-6">
@@ -374,12 +395,15 @@ export default function AgentWalletContainer() {
                     <div className="space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600">Package:</span>
-                        <span className="font-semibold text-slate-900">{selectedPackage.name}</span>
+                        <span className="font-semibold text-slate-900">
+                          {selectedPackage.name}
+                        </span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600">Base Amount:</span>
                         <span className="font-semibold text-slate-900">
-                          {selectedPackage.currency} {selectedPackage.amount.toLocaleString()}
+                          {selectedPackage.currency}{" "}
+                          {selectedPackage.amount.toLocaleString()}
                         </span>
                       </div>
                       {selectedPackage.bonus > 0 && (
@@ -387,14 +411,20 @@ export default function AgentWalletContainer() {
                           <div className="flex justify-between text-sm">
                             <span className="text-green-600">Bonus:</span>
                             <span className="font-semibold text-green-600">
-                              +{selectedPackage.currency} {selectedPackage.bonus.toLocaleString()}
+                              +{selectedPackage.currency}{" "}
+                              {selectedPackage.bonus.toLocaleString()}
                             </span>
                           </div>
                           <div className="h-px bg-slate-200" />
                           <div className="flex justify-between">
-                            <span className="text-sm font-bold text-slate-600">Total Credit:</span>
+                            <span className="text-sm font-bold text-slate-600">
+                              Total Credit:
+                            </span>
                             <span className="text-lg font-black text-primary">
-                              {selectedPackage.currency} {(selectedPackage.amount + selectedPackage.bonus).toLocaleString()}
+                              {selectedPackage.currency}{" "}
+                              {(
+                                selectedPackage.amount + selectedPackage.bonus
+                              ).toLocaleString()}
                             </span>
                           </div>
                         </>
@@ -407,49 +437,59 @@ export default function AgentWalletContainer() {
                       Payment Details
                     </h3>
                     <p className="text-sm text-slate-600 mb-4">
-                      Secure payment via Stripe. Your wallet will be credited immediately.
+                      Secure payment via Stripe. Your wallet will be credited
+                      immediately.
                     </p>
-                    
+
                     <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-200">
                       <div className="flex justify-between items-center mb-4">
                         <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                           Payment Amount
                         </span>
                         <span className="text-2xl font-black text-slate-900">
-                          {selectedPackage.currency} {selectedPackage.amount.toLocaleString()}
+                          {selectedPackage.currency}{" "}
+                          {selectedPackage.amount.toLocaleString()}
                         </span>
                       </div>
                       <StripeCheckout
                         pkg={{
                           ...selectedPackage,
                           price: selectedPackage.amount,
-                          credits: selectedPackage.bonus > 0 
-                            ? `${selectedPackage.amount + selectedPackage.bonus} (includes ${selectedPackage.bonus} bonus)`
-                            : selectedPackage.amount,
-                          type: 'wallet_topup'
+                          credits:
+                            selectedPackage.bonus > 0
+                              ? `${selectedPackage.amount + selectedPackage.bonus} (includes ${selectedPackage.bonus} bonus)`
+                              : selectedPackage.amount,
+                          type: "wallet_topup",
                         }}
                         onSuccess={async () => {
                           try {
                             // Credit the wallet after successful payment
-                            await axiosInstance.post(`/wallets/admin/${adminId}/topup`, {
-                              amount: selectedPackage.amount + (selectedPackage.bonus || 0),
-                              description: `Wallet top-up: ${selectedPackage.name}`,
-                              metadata: {
-                                package_id: selectedPackage.id,
-                                package_name: selectedPackage.name,
-                                base_amount: selectedPackage.amount,
-                                bonus_amount: selectedPackage.bonus || 0,
-                              }
-                            });
+                            await axiosInstance.post(
+                              `/wallets/admin/${adminId}/topup`,
+                              {
+                                amount:
+                                  selectedPackage.amount +
+                                  (selectedPackage.bonus || 0),
+                                description: `Wallet top-up: ${selectedPackage.name}`,
+                                metadata: {
+                                  package_id: selectedPackage.id,
+                                  package_name: selectedPackage.name,
+                                  base_amount: selectedPackage.amount,
+                                  bonus_amount: selectedPackage.bonus || 0,
+                                },
+                              },
+                            );
 
                             toast.success("Wallet topped up successfully!", {
-                              description: `${selectedPackage.currency} ${(selectedPackage.amount + (selectedPackage.bonus || 0)).toLocaleString()} added to your balance.`
+                              description: `${selectedPackage.currency} ${(selectedPackage.amount + (selectedPackage.bonus || 0)).toLocaleString()} added to your balance.`,
                             });
-                            
+
                             setCheckoutOpen(false);
-                            
+
                             // Refresh wallet balance
-                            const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+                            const res = await axiosInstance.get(
+                              `/wallets/admin/${adminId}`,
+                            );
                             const wallet = res.data;
                             setWalletStats({
                               balance: Number(wallet.balance),
@@ -459,12 +499,15 @@ export default function AgentWalletContainer() {
                               currency: wallet.currency,
                               is_active: wallet.is_active,
                               subscription_type: wallet.subscription_type,
-                              subscription_expires_at: wallet.subscription_expires_at,
+                              subscription_expires_at:
+                                wallet.subscription_expires_at,
                               admin: wallet.admin,
                             });
                           } catch (error) {
                             console.error("Failed to credit wallet:", error);
-                            toast.error("Payment successful but failed to credit wallet. Please contact support.");
+                            toast.error(
+                              "Payment successful but failed to credit wallet. Please contact support.",
+                            );
                           }
                         }}
                       />
@@ -521,7 +564,9 @@ export default function AgentWalletContainer() {
             onSuccess={async () => {
               // Refresh wallet data after successful payment
               try {
-                const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+                const res = await axiosInstance.get(
+                  `/wallets/admin/${adminId}`,
+                );
                 const wallet = res.data;
                 setWalletStats({
                   balance: Number(wallet.balance),
@@ -545,14 +590,18 @@ export default function AgentWalletContainer() {
       </Dialog>
 
       {/* Initial Subscription Payment Dialog */}
-      <Dialog open={initialSubscriptionOpen} onOpenChange={setInitialSubscriptionOpen}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <Dialog
+        open={initialSubscriptionOpen}
+        onOpenChange={setInitialSubscriptionOpen}
+      >
+        <DialogContent className="min-w-3xl mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
               Activate Your Account
             </DialogTitle>
             <p className="text-muted-foreground text-sm mt-2">
-              Pay your annual subscription and optionally add prepaid wallet balance
+              Pay your annual subscription and optionally add prepaid wallet
+              balance
             </p>
           </DialogHeader>
           <InitialSubscriptionPayment
@@ -561,7 +610,9 @@ export default function AgentWalletContainer() {
             onSuccess={async () => {
               // Refresh wallet data after successful payment
               try {
-                const res = await axiosInstance.get(`/wallets/admin/${adminId}`);
+                const res = await axiosInstance.get(
+                  `/wallets/admin/${adminId}`,
+                );
                 const wallet = res.data;
                 setWalletStats({
                   balance: Number(wallet.balance),
