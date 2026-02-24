@@ -594,7 +594,7 @@ export default function AgentWalletContainer() {
         open={initialSubscriptionOpen}
         onOpenChange={setInitialSubscriptionOpen}
       >
-        <DialogContent className="min-w-3xl mx-auto max-h-[90vh] overflow-y-auto">
+        <DialogContent className="min-w-2xl mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
               Activate Your Account
