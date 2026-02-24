@@ -21,6 +21,7 @@ import {
   CheckCircle,
   Search,
   ShieldCheck,
+  Home,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getTextDirection } from "@/i18n/routing";
@@ -101,6 +102,11 @@ export function AppSidebar({
       icon: MessageSquare,
     },
     {
+      title: tSidebar("agent.homepagePush"),
+      url: "/agent/homepage-push",
+      icon: Home,
+    },
+    {
       title: tSidebar("agent.logs"),
       url: "/agent/logs",
       icon: Search,
@@ -143,6 +149,11 @@ export function AppSidebar({
       title: tSidebar("merchant.luckyDraw"),
       url: "/merchant/lucky-draw",
       icon: Gift,
+    },
+    {
+      title: tSidebar("merchant.homepagePush"),
+      url: "/merchant/homepage-push",
+      icon: Home,
     },
     // Annual-only sections
     ...(subscriptionType === "annual"
@@ -215,6 +226,12 @@ export function AppSidebar({
       url: "/master-admin/approvals",
       icon: CheckCircle,
       allowedStaff: ["super_admin", "ad_approver"],
+    },
+    {
+      title: tSidebar("masterAdmin.homepagePush"),
+      url: "/master-admin/homepage-push",
+      icon: Home,
+      allowedStaff: ["super_admin"],
     },
     {
       title: tSidebar("masterAdmin.statements"),

@@ -14,6 +14,9 @@ export const namespaces = [
   "systemLogs",
   "common",
   "merchantPurchase",
+  "homepagePush",
+  "agentHomepagePush",
+  "superAdminHomepagePush",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {
