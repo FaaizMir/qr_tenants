@@ -53,10 +53,9 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
       const slotsResp = await axiosInstance.get("/approvals/available-homepage-slots");
       setSlots(slotsResp?.data || {});
 
-      // Fetch pricing from settings (optional - you might have a dedicated endpoint)
-      // For now, we'll display static pricing or fetch from settings
-      const settingsResp = await axiosInstance.get("/super-admin-settings");
-      const settings = settingsResp?.data;
+      // Fetch pricing from public endpoint
+      const settingsResp = await axiosInstance.get("/super-admin-settings/homepage-placement-pricing");
+      const settings = settingsResp?.data?.data || settingsResp?.data || {};
       setPricing({
         coupon: settings?.homepage_coupon_placement_cost || 50,
         ad: settings?.homepage_ad_placement_cost || 100,
