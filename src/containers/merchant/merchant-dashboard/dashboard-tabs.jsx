@@ -145,8 +145,8 @@ export const useDashboardTabs = ({
       content: <MerchantCouponsListingContainer embedded={true} />,
     },
     {
-      value: "Ads Performance",
-      label: "Ads Performance",
+      value: "Adsight",
+      label: "Adsight",
       content: <MerchantAnalyticsContainer embedded={true} />,
     },
     {
