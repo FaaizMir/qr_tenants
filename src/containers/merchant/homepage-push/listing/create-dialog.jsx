@@ -46,8 +46,11 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
     try {
       // Fetch available coupons
       const couponsResp = await axiosInstance.get("/coupons");
-      const couponsList = couponsResp?.data?.data || couponsResp?.data || [];
-      setCoupons(Array.isArray(couponsList) ? couponsList : couponsList.coupons || []);
+      const couponsPayload = couponsResp?.data?.data ?? couponsResp?.data ?? {};
+      const couponsList = Array.isArray(couponsPayload)
+        ? couponsPayload
+        : couponsPayload?.coupons || [];
+      setCoupons(couponsList);
 
       // Fetch available slots
       const slotsResp = await axiosInstance.get("/approvals/available-homepage-slots");
@@ -108,6 +111,9 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const cost = type === "coupon" ? pricing?.coupon : pricing?.ad;
   const duration = type === "coupon" ? pricing?.couponDuration : pricing?.adDuration;
 
+  const availableCoupons = coupons.filter((coupon) => Boolean(coupon?.id));
+  const hasAvailableCoupons = availableCoupons.length > 0;
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
@@ -161,18 +167,22 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
             {type === "coupon" && (
               <div className="space-y-2">
                 <Label>{t("fields.coupon.label")}</Label>
-                <Select value={selectedCouponId} onValueChange={setSelectedCouponId}>
+                <Select value={selectedCouponId} onValueChange={setSelectedCouponId} disabled={!hasAvailableCoupons}>
                   <SelectTrigger>
-                    <SelectValue placeholder={t("fields.coupon.placeholder")} />
+                    <SelectValue placeholder={hasAvailableCoupons ? t("fields.coupon.placeholder") : "No coupons available"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {coupons
-                      .filter((c) => c.status === "active")
-                      .map((coupon) => (
+                    {hasAvailableCoupons ? (
+                      availableCoupons.map((coupon) => (
                         <SelectItem key={coupon.id} value={coupon.id.toString()}>
                           {coupon.coupon_code} - {coupon.batch?.batch_name || "N/A"}
                         </SelectItem>
-                      ))}
+                      ))
+                    ) : (
+                      <SelectItem value="no-coupons" disabled>
+                        No coupons available
+                      </SelectItem>
+                    )}
                   </SelectContent>
                 </Select>
               </div>
@@ -224,7 +234,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
               </Button>
               <Button
                 type="submit"
-                disabled={submitting || availableSlots === 0 || (type === "coupon" && !selectedCouponId)}
+                disabled={submitting || availableSlots === 0 || (type === "coupon" && (!selectedCouponId || !hasAvailableCoupons))}
               >
                 {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {t("buttons.submit")}
