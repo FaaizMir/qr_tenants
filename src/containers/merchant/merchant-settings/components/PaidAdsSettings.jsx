@@ -464,7 +464,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                     </div>
                   ) : availablePlacements.length === 0 ? (
                     <div className="space-y-2">
-                      <div className="h-10 rounded-md border bg-rose-50 border-rose-200 flex items-center px-3 text-sm text-rose-700 font-semibold">
+                      <div className="mb-3 inline-flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700">
                         No slots available
                       </div>
                       <p className="text-xs text-muted-foreground">
@@ -862,8 +862,18 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                   </div>
                 </DialogContent>
               </Dialog>
-              <div className="flex justify-end pt-4">
-                <div className="w-full sm:w-auto">
+              <div className="flex flex-col items-end pt-4">
+                <div className="flex flex-col items-end w-full sm:w-auto">
+                  {availablePlacements.length === 0 && !loadingPlacements && (
+                    <div className="mb-3 flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700 max-w-xs ">
+                      <span className="mt-0.5 shrink-0 font-bold">⚠</span>
+                      <span>
+                        No ad slots available. All placements are currently
+                        occupied — you cannot upload a new ad until a slot opens
+                        up.
+                      </span>
+                    </div>
+                  )}
                   {uploading && uploadProgress > 0 && (
                     <div className="mb-2">
                       <div className="flex justify-between items-center mb-1">
@@ -884,8 +894,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                   )}
                   <Button
                     onClick={handleSubmit}
-                    disabled={uploading}
-                    className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto"
+                    disabled={uploading || availablePlacements.length === 0}
+                    className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
                   >
                     {uploading ? (
                       <>
@@ -894,6 +904,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           ? `Uploading... ${uploadProgress}%`
                           : "Uploading..."}
                       </>
+                    ) : availablePlacements.length === 0 ? (
+                      "No Slots Available"
                     ) : (
                       "Upload & Save"
                     )}
