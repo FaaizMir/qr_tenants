@@ -163,19 +163,40 @@ export default function HomepagePushListing() {
 
   const handleProcessPayment = async (request) => {
     try {
-      // In a real implementation, this would integrate with Stripe
-      // For now, we'll use a mock payment intent ID
-      const mockPaymentIntentId = `pi_${Date.now()}`;
-      
-      await axiosInstance.post(
-        `/approvals/${request.id}/process-payment`,
-        {
-          payment_intent_id: mockPaymentIntentId,
-        }
-      );
-      
-      toast.success(t("success.paymentProcessed"));
-      fetchRequests();
+      const amount = Number(request.payment_amount || 0);
+      if (amount <= 0) {
+        toast.error(t("errors.paymentFailed"));
+        return;
+      }
+
+      const stripePayload = {
+        id: `homepage-push-${request.id}`,
+        type: "homepage_push_payment",
+        approval_id: request.id,
+        approval_type: request.approval_type,
+        price: amount,
+        currency: "USD",
+        name:
+          request.approval_type === "homepage_coupon_push"
+            ? "Homepage Coupon Placement"
+            : "Homepage Ad Placement",
+      };
+
+      localStorage.setItem("stripe_package", JSON.stringify(stripePayload));
+
+      const { data } = await axiosInstance.post("/stripe/create-checkout-session", {
+        amount: Math.round(amount * 100),
+        currency: "usd",
+        package_id: request.id,
+      });
+
+      const sessionUrl = data?.sessionUrl;
+      if (!sessionUrl) {
+        toast.error(t("errors.paymentFailed"));
+        return;
+      }
+
+      window.location.href = sessionUrl;
     } catch (err) {
       const errorMsg = err.response?.data?.message || t("errors.paymentFailed");
       toast.error(errorMsg);

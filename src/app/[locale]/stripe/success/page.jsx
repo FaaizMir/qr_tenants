@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 export default function StripeSuccessPage() {
   const { data: session, update } = useSession();
   const [processing, setProcessing] = useState(true);
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const locale = params?.locale || "en";
   const hasProcessed = useRef(false); // Flag to prevent duplicate processing
 
@@ -48,6 +49,7 @@ export default function StripeSuccessPage() {
       }
 
       const pkg = JSON.parse(localStorage.getItem("stripe_package"));
+      const checkoutSessionId = searchParams?.get("session_id");
       const role = session?.user?.role;
       const adminId = session?.user?.adminId;
       const merchantId = session?.user?.merchantId;
@@ -99,7 +101,17 @@ export default function StripeSuccessPage() {
             toast.success(`Wallet topped up successfully! Added ${pkg.currency} ${Number(pkg.wallet_balance).toLocaleString()}`);
           }
         } else if (merchantId) {
-          if (pkg.id === "merchant-annual-upgrade") {
+          if (pkg.type === "homepage_push_payment" && pkg.approval_id) {
+            const paymentIntentId =
+              checkoutSessionId || `checkout_${Date.now()}_${pkg.approval_id}`;
+            await axiosInstance.post(
+              `/approvals/${pkg.approval_id}/process-payment`,
+              {
+                payment_intent_id: paymentIntentId,
+              },
+            );
+            toast.success("Payment processed successfully! Your item is now active on the homepage.");
+          } else if (pkg.id === "merchant-annual-upgrade") {
             // Merchant Annual Subscription Upgrade
             if (pkg.admin_id) {
               await axiosInstance.post(
@@ -151,7 +163,7 @@ export default function StripeSuccessPage() {
       // For now, if no session we can't do much.
       setProcessing(false);
     }
-  }, [session]); // Removed refreshSubscription from dependencies
+  }, [session, searchParams]); // Removed refreshSubscription from dependencies
 
   const isAgentPayment =
     session?.user?.role === "agent" || session?.user?.role === "admin";
