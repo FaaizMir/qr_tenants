@@ -141,8 +141,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
       <ApprovalStatusToggle
         initialStatus={row.original.status}
         merchantName={row.original.name}
-        onStatusChange={(newStatus) =>
-          handleStatusUpdate(row.original.id, newStatus)
+        onStatusChange={(newStatus, disapprovalReason) =>
+          handleStatusUpdate(row.original.id, newStatus, disapprovalReason)
         }
       />
     ),
