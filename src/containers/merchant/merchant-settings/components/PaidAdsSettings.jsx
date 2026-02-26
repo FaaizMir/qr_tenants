@@ -71,6 +71,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const [loadingPlacements, setLoadingPlacements] = useState(true);
   // Cropper State
   const [imageSrc, setImageSrc] = useState(null);
+  
+  // Confirmation Dialog State
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const [confirmChecked, setConfirmChecked] = useState(false);
 
   // Fetch true state from API on mount
   useEffect(() => {
@@ -159,8 +163,24 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const handleSubmit = async () => {
     if (!merchantId) return;
 
+    // Check if there's a pending file upload - if yes, show confirmation dialog
+    if (pendingFile) {
+      setConfirmChecked(false);
+      setIsConfirmDialogOpen(true);
+      return;
+    }
+
+    // If no pending file, proceed directly
+    await proceedWithSubmit();
+  };
+
+  const proceedWithSubmit = async () => {
+    if (!merchantId) return;
+
     setUploading(true);
     setUploadProgress(0);
+    setIsConfirmDialogOpen(false);
+    
     try {
       // 1. Update general settings (toggle, placement, duration)
       await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, {
@@ -316,16 +336,24 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       toast.warning(t("messages.videoFormatWarning"));
     }
 
-    // Create local object URL for preview
+    // Create local object URL for preview and duration check
     const objectUrl = URL.createObjectURL(file);
 
-    setPendingFile({
-      file: file,
-      type: "video",
-      previewUrl: objectUrl,
-      filename: file.name,
-    });
-    setActiveTab("video");
+    // Validate video duration (max 30 seconds)
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    
+    video.onloadedmetadata = function() {
+      URL.revokeObjectURL(video.src);
+      const duration = video.duration;
+      
+      // Check if duration exceeds 30 seconds
+      if (duration > 30) {
+        toast.error(`Video is too long (${Math.round(duration)}s). Maximum duration is 30 seconds.`);
+        e.target.value = null; // Clear the input
+        URL.revokeObjectURL(objectUrl); // Clean up
+        return;
+      }
 
     const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
     toast.info(t("messages.videoSelected"));
@@ -420,6 +448,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   };
 
   return (
+    <>
     <Card className="border-gray-100 shadow-2xl shadow-gray-200/50 overflow-hidden transition-all duration-700 hover:shadow-primary/5 bg-white rounded-[2.5rem] w-[1300px] ">
       <CardHeader className="p-6 border-b border-gray-100 bg-linear-to-r from-purple-50/30 to-transparent relative overflow-hidden">
         <div className="absolute -top-10 -right-10 p-4 opacity-5 pointer-events-none">
@@ -916,5 +945,56 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         </div>
       </div>
     </Card>
+
+    {/* Confirmation Dialog for Paid Ad Upload */}
+    <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-bold">Confirm Advertisement Submission</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
+            Please review and confirm the following before proceeding.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="py-4">
+          <div className="flex items-start gap-3 p-4 rounded-lg border-2 border-red-200 bg-red-50">
+            <input
+              type="checkbox"
+              id="confirm-checkbox"
+              checked={confirmChecked}
+              onChange={(e) => setConfirmChecked(e.target.checked)}
+              className="mt-1 h-4 w-4 rounded border-red-300 text-red-600 focus:ring-red-500 cursor-pointer"
+            />
+            <label
+              htmlFor="confirm-checkbox"
+              className="text-sm leading-relaxed text-red-700 font-medium cursor-pointer select-none"
+            >
+              I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.
+            </label>
+          </div>
+        </div>
+
+        <DialogFooter className="gap-2">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setIsConfirmDialogOpen(false);
+              setConfirmChecked(false);
+            }}
+            className="w-full sm:w-auto"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={proceedWithSubmit}
+            disabled={!confirmChecked}
+            className="bg-blue-700 hover:bg-blue-800 text-white w-full sm:w-auto"
+          >
+            Confirm & Submit
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  </>
   );
 }

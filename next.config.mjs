@@ -13,6 +13,12 @@ const nextConfig = {
         hostname: "qr-review.mustservices.io",
         pathname: "/backend/api/uploads/**",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/api/uploads/**",
+      },
     ],
   },
 };

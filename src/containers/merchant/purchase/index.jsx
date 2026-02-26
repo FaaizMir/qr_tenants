@@ -53,6 +53,11 @@ export default function MerchantPurchase() {
   const [purchasingId, setPurchasingId] = useState(null);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
+  
+  // Confirmation dialog for paid ads
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const [confirmChecked, setConfirmChecked] = useState(false);
+  const [pendingPackage, setPendingPackage] = useState(null);
 
   useEffect(() => {
     let mounted = true;
@@ -191,8 +196,29 @@ export default function MerchantPurchase() {
   };
 
   const handleStartCheckout = (pkg) => {
-    setSelectedPackage(pkg);
-    setCheckoutOpen(true);
+    // Check if it's a paid ads package
+    const isPaidAds = pkg?.credit_type?.toLowerCase().includes("ad");
+    
+    if (isPaidAds) {
+      // Show confirmation dialog first for paid ads
+      setPendingPackage(pkg);
+      setConfirmChecked(false);
+      setIsConfirmDialogOpen(true);
+    } else {
+      // For other packages, proceed directly
+      setSelectedPackage(pkg);
+      setCheckoutOpen(true);
+    }
+  };
+
+  const proceedToCheckout = () => {
+    if (pendingPackage) {
+      setSelectedPackage(pendingPackage);
+      setCheckoutOpen(true);
+      setIsConfirmDialogOpen(false);
+      setPendingPackage(null);
+      setConfirmChecked(false);
+    }
   };
 
   if (loading) {
@@ -471,6 +497,41 @@ export default function MerchantPurchase() {
                     </div>
                   </div>
                 )}
+
+                {/* Paid Ads Disclaimer */}
+                {selectedPackage && 
+                  selectedPackage.credit_type?.toLowerCase().includes("ad") && (
+                  <div className="mt-4 p-3.5 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                    <div className="flex gap-2.5">
+                      <div className="shrink-0 mt-0.5">
+                        <div className="p-1 bg-amber-500 rounded-md">
+                          <svg
+                            className="h-3.5 w-3.5 text-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2.5}
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-1.5">
+                        <p className="text-[10px] font-black text-amber-900 uppercase tracking-wide">
+                          Important Notice
+                        </p>
+                        <p className="text-[11px] leading-[1.6] text-amber-800/90 font-medium">
+                          By proceeding, you confirm your ad contains no gambling, adult content, illegal services, or material prohibited under Malaysian law. 
+                          <span className="font-semibold text-amber-900"> Payments are non-refundable if rejected for policy violations.</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Secure Badge */}
@@ -569,6 +630,59 @@ export default function MerchantPurchase() {
                 </div>
               )}
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Confirmation Dialog for Paid Ads */}
+      <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-slate-900">
+              Confirm Advertisement Purchase
+            </DialogTitle>
+            <p className="text-sm text-slate-500 mt-2">
+              Please review and confirm the following before proceeding with your purchase.
+            </p>
+          </DialogHeader>
+          
+          <div className="py-4">
+            <div className="flex items-start gap-3 p-4 rounded-lg border-2 border-red-200 bg-red-50">
+              <input
+                type="checkbox"
+                id="confirm-purchase-checkbox"
+                checked={confirmChecked}
+                onChange={(e) => setConfirmChecked(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-red-300 text-red-600 focus:ring-red-500 cursor-pointer shrink-0"
+              />
+              <label
+                htmlFor="confirm-purchase-checkbox"
+                className="text-sm leading-relaxed text-red-700 font-medium cursor-pointer select-none"
+              >
+                I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.
+              </label>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsConfirmDialogOpen(false);
+                setPendingPackage(null);
+                setConfirmChecked(false);
+              }}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={proceedToCheckout}
+              disabled={!confirmChecked}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Proceed to Payment
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

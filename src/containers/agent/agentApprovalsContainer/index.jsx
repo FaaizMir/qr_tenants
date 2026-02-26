@@ -104,14 +104,21 @@ export default function AgentApprovalsContainer() {
   }, [adminId]);
 
   const handleStatusUpdate = useCallback(
-    async (id, newStatus) => {
+    async (id, newStatus, disapprovalReason = null) => {
       const action = newStatus ? "approve" : "reject";
-      console.log(`Attempting to ${action} approval with ID: ${id}, New Status: ${action}`);
+      console.log(`Attempting to ${action} approval with ID: ${id}, New Status: ${action}, Reason: ${disapprovalReason}`);
       try {
-        await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
+        const requestBody = {
           id: id,
           approval_status: newStatus,
-        });
+        };
+        
+        // Add disapproval_reason only when rejecting
+        if (!newStatus && disapprovalReason) {
+          requestBody.disapproval_reason = disapprovalReason;
+        }
+        
+        await axiosInstance.patch(`/approvals/${adminId}/${action}`, requestBody);
 
         // Update local state to reflect change immediately
         setData((prevData) =>
