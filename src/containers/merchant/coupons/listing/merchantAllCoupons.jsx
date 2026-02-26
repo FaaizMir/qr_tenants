@@ -157,6 +157,15 @@ export default function MerchantAllCoupons() {
             setPageSize={setPageSize}
             isLoading={loading}
             pagination={true}
+            columnNameTranslations={{
+              coupon_code: t("allCoupons.columns.couponCode"),
+              batch_name: t("allCoupons.columns.batchName"),
+              status: t("allCoupons.columns.status"),
+              start_date: t("allCoupons.columns.startDate"),
+              expiry_date: t("allCoupons.columns.expiryDate"),
+              issued_at: t("allCoupons.columns.issuedAt"),
+              redeemed_at: t("allCoupons.columns.redeemedAt"),
+            }}
           />
         </CardContent>
       </Card>

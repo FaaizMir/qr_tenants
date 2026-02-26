@@ -121,6 +121,14 @@ export default function MerchantCustomerDataContainer() {
             setPage={setPage}
             setPageSize={setPageSize}
             loading={loading}
+            columnNameTranslations={{
+              name: tColumns("name"),
+              contact: tColumns("contactInfo"),
+              date_of_birth: tColumns("dateOfBirth"),
+              gender: tColumns("gender"),
+              reward: tColumns("rewardStatus"),
+              actions: tColumns("actions"),
+            }}
           />
         </CardContent>
       </Card>

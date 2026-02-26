@@ -32,6 +32,7 @@ import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantLuckyDrawContainer() {
   const t = useTranslations("merchantLuckyDraw.index");
+  const tColumns = useTranslations("merchantLuckyDraw.columns");
   const router = useRouter();
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
@@ -48,7 +49,7 @@ export default function MerchantLuckyDrawContainer() {
     setLoading(true);
     try {
       const response = await axiosInstance.get(
-        `/lucky-draw/prizes/merchant/${merchantId}`
+        `/lucky-draw/prizes/merchant/${merchantId}`,
       );
       const data = response?.data?.data || response?.data || [];
       setPrizes(Array.isArray(data) ? data : []);
@@ -93,14 +94,16 @@ export default function MerchantLuckyDrawContainer() {
   const filteredPrizes = prizes.filter(
     (prize) =>
       prize.prize_name?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      prize.prize_description?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      prize.prize_type?.toLowerCase().includes(debouncedSearch.toLowerCase())
+      prize.prize_description
+        ?.toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
+      prize.prize_type?.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
   // Pagination
   const paginatedData = filteredPrizes.slice(
     page * pageSize,
-    (page + 1) * pageSize
+    (page + 1) * pageSize,
   );
 
   const columns = PrizesColumns({ onEdit: handleEdit, onDelete: handleDelete });
@@ -110,17 +113,13 @@ export default function MerchantLuckyDrawContainer() {
       <div className="space-y-6">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold">{t("title")}</h1>
-          <p className="text-muted-foreground">
-            {t("subtitle")}
-          </p>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle>{t("prizesCard.title")}</CardTitle>
-            <CardDescription>
-              {t("prizesCard.description")}
-            </CardDescription>
+            <CardDescription>{t("prizesCard.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <TableToolbar
@@ -146,6 +145,16 @@ export default function MerchantLuckyDrawContainer() {
               setPage={setPage}
               setPageSize={setPageSize}
               loading={loading}
+              columnNameTranslations={{
+                prize_name: tColumns("prizeName"),
+                prize_description: tColumns("description"),
+                prize_type: tColumns("type"),
+                probability: tColumns("probability"),
+                daily_limit: tColumns("dailyLimit"),
+                total_limit: tColumns("totalLimit"),
+                is_active: tColumns("status"),
+                actions: tColumns("actions"),
+              }}
             />
           </CardContent>
         </Card>
@@ -157,7 +166,9 @@ export default function MerchantLuckyDrawContainer() {
           <AlertDialogHeader>
             <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t("deleteDialog.description", { prizeName: prizeToDelete?.prize_name })}
+              {t("deleteDialog.description", {
+                prizeName: prizeToDelete?.prize_name,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

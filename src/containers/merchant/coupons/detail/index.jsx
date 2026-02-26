@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Download, Copy, Tag, Calendar, Users, Edit } from "lucide-react";
+import {
+  ArrowLeft,
+  Download,
+  Copy,
+  Tag,
+  Calendar,
+  Users,
+  Edit,
+} from "lucide-react";
 import { TemplateEditorModal } from "@/components/templates/TemplateEditorModal";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -62,7 +70,6 @@ export default function MerchantCouponDetailContainer() {
       });
     }
   }, [batch]);
-
 
   const handleExportPdf = async () => {
     if (!id) {
@@ -179,7 +186,9 @@ export default function MerchantCouponDetailContainer() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{t("detail.title")}</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              {t("detail.title")}
+            </h1>
             <p className="text-muted-foreground flex items-center gap-2 mt-1">
               <Tag className="h-4 w-4" />
               {batch ? batch.batch_name : t("detail.loadingBatch")}
@@ -192,7 +201,9 @@ export default function MerchantCouponDetailContainer() {
               {batch.is_active ? t("detail.active") : t("detail.inactive")}
             </Badge>
             <Badge variant="outline" className="capitalize">
-              {batch.batch_type === "annual" ? t("create.annual") : t("create.temporary")}
+              {batch.batch_type === "annual"
+                ? t("create.annual")
+                : t("create.temporary")}
             </Badge>
             <Button
               variant="outline"
@@ -241,8 +252,8 @@ export default function MerchantCouponDetailContainer() {
               <p className="text-xs text-muted-foreground">
                 {batch.total_quantity > 0
                   ? Math.round(
-                    (batch.issued_quantity / batch.total_quantity) * 100
-                  )
+                      (batch.issued_quantity / batch.total_quantity) * 100,
+                    )
                   : 0}
                 {t("detail.stats.utilized")}
               </p>
@@ -250,17 +261,23 @@ export default function MerchantCouponDetailContainer() {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t("detail.stats.validity")}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {t("detail.stats.validity")}
+              </CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">{t("detail.stats.start")}</span>
+                  <span className="text-muted-foreground">
+                    {t("detail.stats.start")}
+                  </span>
                   <span>{new Date(batch.start_date).toLocaleDateString()}</span>
                 </div>
                 <div className="flex justify-between mt-1">
-                  <span className="text-muted-foreground">{t("detail.stats.end")}</span>
+                  <span className="text-muted-foreground">
+                    {t("detail.stats.end")}
+                  </span>
                   <span>{new Date(batch.end_date).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -285,9 +302,15 @@ export default function MerchantCouponDetailContainer() {
                     <SelectValue placeholder={t("detail.filters.allStatus")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">{t("detail.filters.allStatus")}</SelectItem>
-                    <SelectItem value="issued">{t("detail.filters.issued")}</SelectItem>
-                    <SelectItem value="redeemed">{t("detail.filters.redeemed")}</SelectItem>
+                    <SelectItem value="all">
+                      {t("detail.filters.allStatus")}
+                    </SelectItem>
+                    <SelectItem value="issued">
+                      {t("detail.filters.issued")}
+                    </SelectItem>
+                    <SelectItem value="redeemed">
+                      {t("detail.filters.redeemed")}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -308,6 +331,12 @@ export default function MerchantCouponDetailContainer() {
             setPageSize={setPageSize}
             loading={loading}
             pagination={true}
+            columnNameTranslations={{
+              coupon_code: t("detail.columns.code"),
+              status: t("detail.columns.status"),
+              issued_at: t("detail.columns.issuedAt"),
+              redeemed_at: t("detail.columns.redemptionDate"),
+            }}
           />
         </CardContent>
       </Card>
