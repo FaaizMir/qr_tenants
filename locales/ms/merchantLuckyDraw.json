@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "actionsMenu": {
+      "delete": "Padam Hadiah",
+      "edit": "Edit Hadiah",
+      "label": "Tindakan",
+      "openMenu": "Buka menu"
+    },
+    "dailyLimit": "Had Harian",
+    "description": "Penerangan",
+    "prizeName": "Nama Hadiah",
+    "probability": "Kebarangkalian",
+    "status": "Status",
+    "statusActive": "Aktif",
+    "statusInactive": "Tidak Aktif",
+    "totalLimit": "Had limit",
+    "type": "Jenis"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "Batal",
+      "create": "Cipta Hadiah",
+      "creating": "Mencipta...",
+      "update": "Kemas kini Hadiah",
+      "updating": "Mengemas kini..."
+    },
+    "cardDescription": {
+      "create": "Cipta hadiah baru untuk cabutan bertuah",
+      "edit": "Kemas kini maklumat hadiah"
+    },
+    "cardTitle": {
+      "create": "Tambah Hadiah Baru",
+      "edit": "Edit Hadiah"
+    },
+    "createSubtitle": "Tambah hadiah baru ke cabutan bertuah",
+    "createTitle": "Cipta Hadiah",
+    "editSubtitle": "Kemas kini butiran hadiah",
+    "editTitle": "Edit Hadiah",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "Tiada kumpulan ditemui",
+        "label": "Batch Kupon",
+        "placeholder": "Pilih kumpulan kupon...",
+        "required": "Kumpulan kupon diperlukan",
+        "searchPlaceholder": "Cari kumpulan..."
+      },
+      "dailyLimit": {
+        "label": "Had Harian"
+      },
+      "prizeDescription": {
+        "label": "Penerangan Hadiah"
+      },
+      "prizeName": {
+        "label": "Nama Hadiah",
+        "required": "Nama hadiah diperlukan"
+      },
+      "prizeType": {
+        "label": "Jenis Hadiah",
+        "options": {
+          "coupon": "Kupon"
+        }
+      },
+      "probability": {
+        "label": "Kebarangkalian (%)",
+        "max": "Maks 100%",
+        "min": "Min 0%",
+        "required": "Kebarangkalian diperlukan"
+      },
+      "sortOrder": {
+        "label": "Urutan Susun"
+      },
+      "status": {
+        "label": "Status",
+        "options": {
+          "active": "Aktif",
+          "inactive": "Tidak aktif"
+        }
+      },
+      "totalLimit": {
+        "label": "Had Jumlah"
+      }
+    },
+    "importantNotes": {
+      "note1": "Jumlah kebarangkalian mesti sama dengan 100%",
+      "note2": "Setiap hadiah memerlukan kumpulan kupon yang dipautkan",
+      "note3": "Had harian akan diset semula pada tengah malam",
+      "note4": "Jika had hadiah dicapai, sistem akan melangkau kepada hadiah seterusnya yang tersedia",
+      "title": "Penting"
+    },
+    "toasts": {
+      "createSuccess": "Hadiah berjaya dicipta!",
+      "loadFailed": "Gagal memuatkan butiran hadiah",
+      "noBatchSelected": "Sila pilih kumpulan kupon",
+      "noMerchantId": "ID Pedagang tidak ditemui",
+      "saveFailed": "Gagal menyimpan hadiah",
+      "updateSuccess": "Hadiah berjaya dikemas kini!"
+    }
+  },
+  "index": {
+    "createButton": "Cipta Hadiah",
+    "deleteDialog": {
+      "cancel": "Batal",
+      "confirm": "Padam",
+      "description": "Ini akan memadamkan hadiah \"{prizeName}\" secara kekal. Tindakan ini tidak boleh dibatalkan.",
+      "title": "Adakah anda pasti?"
+    },
+    "prizesCard": {
+      "description": "Urus semua hadiah untuk cabutan bertuah",
+      "title": "Hadiah"
+    },
+    "searchPlaceholder": "Cari hadiah mengikut nama, penerangan, atau jenis...",
+    "subtitle": "Konfigurasikan hadiah \"Putar Roda\" untuk pelanggan yang menyelesaikan ulasan.",
+    "title": "Tetapan Cabutan Bertuah",
+    "toasts": {
+      "deleteFailed": "Gagal untuk memadam hadiah",
+      "deleteSuccess": "Hadiah berjaya dipadam!",
+      "loadFailed": "Gagal memuat hadiah"
+    }
+  },
+  "page": {
+    "breadcrumb": "Cabutan Bertuah",
+    "dashboardBreadcrumb": "Papan Pemuka Pedagang"
+  }
+}

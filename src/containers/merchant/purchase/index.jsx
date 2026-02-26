@@ -176,8 +176,8 @@ export default function MerchantPurchase() {
      
       // Check if it's an insufficient agent balance error
       if (errorMsg && errorMsg.includes("Insufficient agent wallet balance")) {
-        toast.error("Agent Prepaid Balance Insufficient", {
-          description: "Your agent needs to top up their prepaid wallet. Please contact your agent to add funds before completing this purchase.",
+        toast.error(t("errors.agentBalanceInsufficient"), {
+          description: t("errors.agentBalanceInsufficinetDescription"),
           closeButton: true,
           duration: false,
         });
@@ -187,7 +187,7 @@ export default function MerchantPurchase() {
           (err?.response?.status
             ? `Request failed with status ${err.response.status}.`
             : err?.message) ||
-          "Failed to purchase package. Please try again.";
+          t("errors.purchaseFailed");
         toast.error(msg, { closeButton: true, duration: false });
       }
     } finally {

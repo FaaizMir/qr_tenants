@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "ID Iklan",
+    "adsDesc": "Total jumlah iklan yang dilacak",
+    "agentId": "ID Agen",
+    "clicks": "Klik",
+    "clicksChart": "Klik berdasarkan Iklan",
+    "clicksDesc": "Total klik iklan dari pemirsa",
+    "clickThroughRate": "Tingkat Klik-Tayang",
+    "createdAt": "Dibuat",
+    "ctr": "CTR",
+    "ctrDesc": "Persentase tayangan yang dikonversi menjadi klik",
+    "description": "Lacak tayangan dan klik untuk iklan berbayar Anda",
+    "detailedAnalytics": "Analitik Detail",
+    "detailedDesc": "Rincian kinerja untuk setiap iklan",
+    "errorFetchFailed": "Gagal memuat analitik",
+    "impressions": "Tayangan",
+    "impressionsChart": "Tayangan berdasarkan Iklan",
+    "impressionsDesc": "Total tampilan iklan di semua kampanye",
+    "noAdsDesc": "Analitik iklan berbayar Anda akan muncul di sini setelah pelacakan dimulai",
+    "noAdsYet": "Belum ada iklan yang dilacak",
+    "noData": "Tidak ada data tersedia",
+    "title": "Analitik Iklan Berbayar",
+    "total": "total",
+    "totalAds": "Iklan Aktif",
+    "totalClicks": "Total Klik",
+    "totalImpressions": "Total Tayangan"
+  },
   "common": {
     "credits": "Kredit"
   },
@@ -53,6 +80,9 @@
     "comingSoon": "Konten pengaturan akan segera hadir...",
     "noData": "--"
   },
+  "qrCode": {
+    "tapToZoom": "TEKAN UNTUK ZOOM"
+  },
   "recentRedemptions": {
     "amount": "Jumlah",
     "code": "Kode",
@@ -85,6 +115,7 @@
     "used": "Digunakan"
   },
   "tabs": {
+    "analytics": "Kinerja Iklan",
     "automation": "Otomatisasi",
     "coupons": "Batch Kupon",
     "feedbackForm": "Formulir Umpan Balik",

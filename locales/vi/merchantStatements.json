@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "Hành động",
+    "downloadPdf": "Tải PDF",
+    "generatedAt": "Được tạo vào",
+    "month": "Tháng",
+    "period": "Thời gian",
+    "status": "Trạng thái",
+    "statusLabels": {
+      "failed": "Thất bại",
+      "generated": "Đã tạo",
+      "pending": "Đang chờ"
+    },
+    "totalSpend": "Tổng chi tiêu",
+    "unknown": "Không xác định"
+  },
+  "index": {
+    "empty": {
+      "description": "Không có báo cáo nào cho thời gian đã chọn. Tạo một báo cáo mới để bắt đầu.",
+      "title": "Không tìm thấy báo cáo nào"
+    },
+    "filters": {
+      "currentMonth": "Tháng hiện tại",
+      "description": "Lọc báo cáo theo năm và tháng",
+      "loading": "Đang tải...",
+      "month": "Tháng",
+      "quickActions": "Hành động nhanh",
+      "refreshList": "Làm mới danh sách",
+      "selectYear": "Chọn năm",
+      "title": "Bộ lọc báo cáo",
+      "year": "Năm"
+    },
+    "months": {
+      "april": "Tháng Tư",
+      "august": "Tháng Tám",
+      "december": "Tháng Mười Hai",
+      "february": "Tháng Hai",
+      "january": "Tháng Một",
+      "july": "Tháng Bảy",
+      "june": "Tháng Sáu",
+      "march": "Tháng Ba",
+      "may": "Tháng Năm",
+      "november": "Tháng Mười Một",
+      "october": "Tháng Mười",
+      "september": "Tháng Chín"
+    },
+    "subtitle": "Báo cáo PDF tự động tạo hàng tháng bao gồm thu nhập, phí, thu nhập từ gói và sổ cái ví.",
+    "table": {
+      "found": "đã tìm thấy",
+      "loadingStatements": "Đang tải báo cáo...",
+      "statementsFound": "báo cáo",
+      "statementsFoundPlural": "các báo cáo",
+      "title": "Lịch sử báo cáo"
+    },
+    "title": "Báo cáo tài chính của thương nhân",
+    "toasts": {
+      "downloadFailed": "Tải PDF không thành công. Vui lòng thử lại.",
+      "downloadSuccess": "Tải báo cáo thành công!",
+      "loadFailed": "Tải báo cáo không thành công. Vui lòng thử lại."
+    }
+  }
+}

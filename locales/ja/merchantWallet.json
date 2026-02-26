@@ -69,6 +69,10 @@
   },
   "loadMore": "もっと読み込む",
   "noTransactions": "取引が見つかりません",
+  "page": {
+    "breadcrumb": "ウォレット",
+    "dashboardBreadcrumb": "マーチャントダッシュボード"
+  },
   "remainingCredits": "残りのクレジット",
   "subscription": {
     "annual": "年間",

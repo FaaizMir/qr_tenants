@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import {
   Card,
   CardHeader,
@@ -45,6 +46,8 @@ import axiosInstance from "@/lib/axios";
 import { getCroppedImg, getImageUrl } from "@/lib/utils/imageUtils";
 
 export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
+  const t = useTranslations("merchantPaidAds");
+  
   const [state, setState] = useState({
     paid_ads: initialConfig?.paid_ads ?? false,
     placement: initialConfig?.placement ?? "top",
@@ -190,7 +193,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       if (pendingFile) {
         const formData = new FormData();
         if (pendingFile.type === "image") {
-          toast.info("Uploading image...");
+          toast.info(t("messages.uploadingImage"));
           formData.append(
             "paidAdImage",
             pendingFile.file,
@@ -224,9 +227,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               paid_ad_video_status: false,
             }));
           }
-          toast.success("Image uploaded successfully");
+          toast.success(t("messages.imageUploaded"));
         } else if (pendingFile.type === "video") {
-          toast.info("Uploading video... This may take a moment.");
+          toast.info(t("messages.uploadingVideo"));
           formData.append("paidAdVideo", pendingFile.file);
           formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
@@ -259,20 +262,18 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               paid_ad_video_status: true,
             }));
           }
-          toast.success("Video uploaded successfully");
+          toast.success(t("messages.videoUploaded"));
         }
         setPendingFile(null);
       } else {
-        toast.success("Settings updated successfully");
+        toast.success(t("messages.settingsUpdated"));
       }
     } catch (error) {
       console.error(error);
       if (error.code === "ECONNABORTED") {
-        toast.error(
-          "Upload timeout. Please try with a smaller file or check your connection.",
-        );
+        toast.error(t("messages.uploadTimeout"));
       } else {
-        toast.error(error?.response?.data?.message || "Error saving settings");
+        toast.error(error?.response?.data?.message || t("messages.errorSaving"));
       }
     } finally {
       setUploading(false);
@@ -303,7 +304,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       // More generous initial size check (10MB) - we'll compress after
       const maxSize = 10 * 1024 * 1024; // 10MB in bytes
       if (file.size > maxSize) {
-        toast.error("Image size must be less than 10MB");
+        toast.error(t("messages.imageTooLarge"));
         e.target.value = null; // Clear the input
         return;
       }
@@ -324,7 +325,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     // Size limit check (25MB)
     const maxSize = 25 * 1024 * 1024; // 25MB in bytes
     if (file.size > maxSize) {
-      toast.error("Video file is too large. Max size is 25MB.");
+      toast.error(t("messages.videoTooLarge"));
       e.target.value = null; // Clear the input
       return;
     }
@@ -332,7 +333,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     // Optimize video format check - prefer MP4 and WebM
     const fileType = file.type.toLowerCase();
     if (!fileType.includes("mp4") && !fileType.includes("webm")) {
-      toast.warning("For best performance, use MP4 or WebM format.");
+      toast.warning(t("messages.videoFormatWarning"));
     }
 
     // Create local object URL for preview and duration check
@@ -354,27 +355,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         return;
       }
 
-      // Duration is valid, proceed with setting pending file
-      setPendingFile({
-        file: file,
-        type: "video",
-        previewUrl: objectUrl,
-        filename: file.name,
-      });
-      setActiveTab("video");
-
-      const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
-      toast.info(`Video selected (${Math.round(duration)}s). Click 'Upload & Save' to finish.`);
-    };
-
-    video.onerror = function() {
-      URL.revokeObjectURL(video.src);
-      toast.error("Could not load video. Please ensure it's a valid video file.");
-      e.target.value = null;
-      URL.revokeObjectURL(objectUrl);
-    };
-
-    video.src = objectUrl;
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+    toast.info(t("messages.videoSelected"));
   };
 
   const readFile = (file) => {
@@ -416,10 +398,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       setImageSrc(null); // Clear raw source
 
       const sizeMB = (compressedFile.size / (1024 * 1024)).toFixed(1);
-      toast.success(`Image ready for upload. Click 'Upload & Save' to finish.`);
+      toast.success(t("messages.imageReady"));
     } catch (error) {
       console.error(error);
-      toast.error("Error processing image");
+      toast.error(t("messages.errorProcessing"));
     }
   };
 
@@ -437,10 +419,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         paid_ad_image: "",
       }));
 
-      toast.success("Image deleted successfully");
+      toast.success(t("messages.imageDeleted"));
     } catch (error) {
       console.error("Error deleting image:", error);
-      toast.error("Failed to delete image");
+      toast.error(t("messages.errorDeleting"));
     }
   };
 
@@ -458,10 +440,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         paid_ad_video: "",
       }));
 
-      toast.success("Video deleted successfully");
+      toast.success(t("messages.videoDeleted"));
     } catch (error) {
       console.error("Error deleting video:", error);
-      toast.error("Failed to delete video");
+      toast.error(t("messages.errorDeleting"));
     }
   };
 
@@ -479,17 +461,17 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             </div>
             <div>
               <CardTitle className="text-xl font-bold text-gray-900">
-                Promotional Banners
+                {t("title")}
               </CardTitle>
               <CardDescription className="text-sm font-medium text-muted-foreground mt-0.5">
-                Visual marketing content
+                {t("description")}
               </CardDescription>
             </div>
           </div>
           <div
             className={`px-3 py-1 rounded-full text-[11px] font-bold shadow-sm border ${state.paid_ads ? "bg-emerald-50 text-emerald-600 border-emerald-100/50" : "bg-gray-100 text-gray-400 border-gray-200"}`}
           >
-            {state.paid_ads ? "Active" : "OFF"}
+            {state.paid_ads ? t("status.active") : t("status.off")}
           </div>
         </div>
       </CardHeader>
@@ -505,19 +487,18 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             <div className="animate-in fade-in slide-in-from-top-4 duration-300 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Ad Placement</Label>
+                  <Label>{t("placement.label")}</Label>
                   {loadingPlacements ? (
                     <div className="h-10 rounded-md border bg-muted animate-pulse flex items-center px-3 text-sm text-muted-foreground">
-                      Loading placements...
+                      {t("placement.loading")}
                     </div>
                   ) : availablePlacements.length === 0 ? (
                     <div className="space-y-2">
                       <div className="mb-3 inline-flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700">
-                        No slots available
+                        {t("placement.noSlotsAvailable")}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        All ad placement slots are currently occupied. Please
-                        try again later.
+                        {t("placement.noSlotsMessage")}
                       </p>
                     </div>
                   ) : (
@@ -530,28 +511,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         disabled={availablePlacements.length === 0}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select placement" />
+                          <SelectValue placeholder={t("placement.selectPlaceholder")} />
                         </SelectTrigger>
                         <SelectContent>
                           {availablePlacements.includes("top") && (
-                            <SelectItem value="top">Top</SelectItem>
+                            <SelectItem value="top">{t("placement.top")}</SelectItem>
                           )}
                           {availablePlacements.includes("left") && (
-                            <SelectItem value="left">Left</SelectItem>
+                            <SelectItem value="left">{t("placement.left")}</SelectItem>
                           )}
                           {availablePlacements.includes("right") && (
-                            <SelectItem value="right">Right</SelectItem>
+                            <SelectItem value="right">{t("placement.right")}</SelectItem>
                           )}
                           {availablePlacements.includes("bottom") && (
-                            <SelectItem value="bottom">Bottom</SelectItem>
+                            <SelectItem value="bottom">{t("placement.bottom")}</SelectItem>
                           )}
                         </SelectContent>
                       </Select>
                       {availablePlacements.length < 4 && (
                         <p className="text-xs text-amber-600 font-medium">
-                          {4 - availablePlacements.length} slot(s) occupied.
-                          Only {availablePlacements.length} placement(s)
-                          available.
+                          {t("placement.slotsOccupied", {
+                            count: 4 - availablePlacements.length,
+                            available: availablePlacements.length
+                          })}
                         </p>
                       )}
                     </>
@@ -559,7 +541,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Duration</Label>
+                  <Label>{t("duration.label")}</Label>
                   <Select
                     value={
                       state.paid_ad_duration
@@ -574,12 +556,12 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                     }}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select duration" />
+                      <SelectValue placeholder={t("duration.selectPlaceholder")} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="7">7 Days</SelectItem>
-                      <SelectItem value="14">14 Days</SelectItem>
-                      <SelectItem value="30">30 Days</SelectItem>
+                      <SelectItem value="7">{t("duration.days7")}</SelectItem>
+                      <SelectItem value="14">{t("duration.days14")}</SelectItem>
+                      <SelectItem value="30">{t("duration.days30")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -597,13 +579,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                     value="image"
                     className="flex items-center gap-2 font-semibold"
                   >
-                    <ImageIcon className="h-4 w-4" /> Image Ads
+                    <ImageIcon className="h-4 w-4" /> {t("tabs.image")}
                   </TabsTrigger>
                   <TabsTrigger
                     value="video"
                     className="flex items-center gap-2 font-semibold"
                   >
-                    <VideoIcon className="h-4 w-4" /> Video Ads
+                    <VideoIcon className="h-4 w-4" /> {t("tabs.video")}
                   </TabsTrigger>
                 </TabsList>
 
@@ -638,7 +620,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           </Button>
                         </div>
                         <div className="absolute top-2 right-2 bg-yellow-500 text-white text-[11px] px-2 py-0.5 rounded-full font-bold shadow-sm pointer-events-none">
-                          Pending
+                          {t("status.pending")}
                         </div>
                       </div>
                     ) : state.paid_ad_image ? (
@@ -670,7 +652,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         </div>
                         {!state.paid_ad_video_status && (
                           <div className="absolute top-2 right-2 bg-primary text-primary-foreground text-[11px] px-2 py-0.5 rounded-full font-bold shadow-sm flex items-center gap-1">
-                            <Check className="w-3 h-3" /> Active
+                            <Check className="w-3 h-3" /> {t("status.active")}
                           </div>
                         )}
                       </div>
@@ -692,10 +674,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         </div>
                         <div className="text-center">
                           <span className="text-sm font-medium text-foreground/80">
-                            Add Image
+                            {t("upload.addImage")}
                           </span>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
-                            Auto-compressed • Max 10MB
+                            {t("upload.imageInfo")}
                           </p>
                         </div>
                       </Label>
@@ -735,7 +717,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           </Button>
                         </div>
                         <div className="absolute top-2 right-2 bg-yellow-500 text-white text-[10px] px-2 py-0.5 rounded-full font-medium shadow-sm pointer-events-none">
-                          Pending
+                          {t("status.pending")}
                         </div>
                       </div>
                     ) : state.paid_ad_video ? (
@@ -769,7 +751,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         </div>
                         {state.paid_ad_video_status && (
                           <div className="absolute top-2 right-2 bg-primary text-primary-foreground text-[10px] px-2 py-0.5 rounded-full font-medium shadow-sm flex items-center gap-1">
-                            <Check className="w-3 h-3" /> Active
+                            <Check className="w-3 h-3" /> {t("status.active")}
                           </div>
                         )}
                       </div>
@@ -791,13 +773,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         </div>
                         <div className="text-center">
                           <span className="text-sm font-medium text-foreground/80">
-                            Add Video
+                            {t("upload.addVideo")}
                           </span>
                           <p className="text-[10px] text-muted-foreground mt-0.5">
-                            MP4, WebM • Max 30 seconds
+                            {t("upload.videoInfo")}
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            Max 25MB • Smaller files upload faster
+                            {t("upload.videoInfoExtra")}
                           </p>
                         </div>
                       </Label>
@@ -810,9 +792,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               <Dialog open={isCropperOpen} onOpenChange={setIsCropperOpen}>
                 <DialogContent className="sm:max-w-xl">
                   <DialogHeader>
-                    <DialogTitle>Adjust Image</DialogTitle>
+                    <DialogTitle>{t("cropper.title")}</DialogTitle>
                     <DialogDescription>
-                      Drag to reposition and use the slider to zoom.
+                      {t("cropper.description")}
                     </DialogDescription>
                   </DialogHeader>
                   <div className="relative w-full h-80 bg-slate-50 rounded-lg overflow-hidden border border-muted">
@@ -830,7 +812,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                   </div>
                   <div className="space-y-4 py-2">
                     <div className="flex items-center gap-4">
-                      <Label className="w-12">Zoom</Label>
+                      <Label className="w-12">{t("cropper.zoom")}</Label>
                       <div className="flex-1 flex items-center gap-3">
                         <Button
                           variant="outline"
@@ -864,13 +846,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                       variant="ghost"
                       onClick={() => setIsCropperOpen(false)}
                     >
-                      Cancel
+                      {t("cropper.cancel")}
                     </Button>
                     <Button onClick={handleCropAndSave} disabled={uploading}>
                       {uploading && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       )}
-                      Save Image
+                      {t("cropper.save")}
                     </Button>
                   </DialogFooter>
                 </DialogContent>
@@ -879,9 +861,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               {/* Preview Dialog */}
               <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                 <DialogContent className="max-w-[400px] w-[90vw] p-0 bg-white rounded-2xl overflow-hidden border-none shadow-2xl [&>button]:hidden">
-                  <DialogTitle className="sr-only">Ad Preview</DialogTitle>
+                  <DialogTitle className="sr-only">{t("preview.title")}</DialogTitle>
                   <DialogDescription className="sr-only">
-                    Full size preview of the promotional ad
+                    {t("preview.description")}
                   </DialogDescription>
                   <div className="relative flex items-center justify-center p-4">
                     {previewContent.type === "image" ? (
@@ -916,9 +898,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                     <div className="mb-3 flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700 max-w-xs ">
                       <span className="mt-0.5 shrink-0 font-bold">⚠</span>
                       <span>
-                        No ad slots available. All placements are currently
-                        occupied — you cannot upload a new ad until a slot opens
-                        up.
+                        {t("messages.noSlotsWarning")}
                       </span>
                     </div>
                   )}
@@ -926,7 +906,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                     <div className="mb-2">
                       <div className="flex justify-between items-center mb-1">
                         <span className="text-xs text-muted-foreground">
-                          Upload Progress
+                          {t("upload.uploadProgress")}
                         </span>
                         <span className="text-xs font-semibold text-primary">
                           {uploadProgress}%
@@ -949,13 +929,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         {uploadProgress > 0
-                          ? `Uploading... ${uploadProgress}%`
-                          : "Uploading..."}
+                          ? `${t("upload.uploading")} ${uploadProgress}%`
+                          : t("upload.uploading")}
                       </>
                     ) : availablePlacements.length === 0 ? (
-                      "No Slots Available"
+                      t("upload.noSlotsButton")
                     ) : (
-                      "Upload & Save"
+                      t("upload.uploadingSave")
                     )}
                   </Button>
                 </div>

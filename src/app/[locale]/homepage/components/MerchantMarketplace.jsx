@@ -271,7 +271,7 @@ export function MarketplaceFilters({
             onClick={() => setExpiringSoon(!expiringSoon)}
             className="h-9 px-4 rounded-full text-sm font-medium whitespace-nowrap border-slate-200"
           >
-            {expiringSoon ? "Expiring Soon ✓" : "Expiring Soon"}
+            {expiringSoon ? t("expiringSoonActive") : t("expiringSoon")}
           </Button>
         </div>
       </div>

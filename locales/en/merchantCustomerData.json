@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "Actions",
+    "contactInfo": "Contact Info",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "name": "Name",
+    "notAvailable": "N/A",
+    "reward": {
+      "eligible": "Eligible",
+      "notEligible": "Not Eligible"
+    },
+    "rewardStatus": "Reward Status",
+    "viewDetails": "Details"
+  },
+  "details": {
+    "backButton": "Back to Customers",
+    "badge": {
+      "eligibleForReward": "Eligible for Reward",
+      "standardCustomer": "Standard Customer"
+    },
+    "error": "Failed to load customer details. Please try again later.",
+    "loading": "Loading customer details...",
+    "notFound": "Customer not found",
+    "sections": {
+      "address": {
+        "noAddress": "No address provided",
+        "title": "Contact Address"
+      },
+      "essentialInfo": {
+        "active": "Active",
+        "dateOfBirth": "Date of Birth",
+        "gender": "Gender",
+        "inactive": "Inactive",
+        "notSpecified": "Not specified",
+        "phoneNumber": "Phone Number",
+        "rewardStatus": "Reward Status"
+      },
+      "systemInfo": {
+        "createdAt": "Created At",
+        "customerId": "Customer ID",
+        "lastUpdated": "Last Updated",
+        "merchantId": "Merchant ID",
+        "title": "System Information"
+      }
+    },
+    "subtitle": "Detailed overview of customer information",
+    "title": "Customer Profile"
+  },
+  "index": {
+    "exportButton": "Export CSV",
+    "locked": {
+      "description": "Customer Data access is available exclusively for Annual Information Subscription plan members.",
+      "title": "Premium Feature",
+      "upgradeCard": {
+        "features": {
+          "feature1": "Access detailed customer profiles",
+          "feature2": "Export customer data (CSV/Excel)",
+          "feature3": "Advanced segmentation",
+          "feature4": "Higher coupon limits (10,000/batch)"
+        },
+        "subtitle": "Unlock full customer insights",
+        "title": "Upgrade to Annual",
+        "upgradeButton": "Upgrade Now"
+      }
+    },
+    "searchPlaceholder": "Search customers...",
+    "subtitle": "View and manage your customer database",
+    "title": "Customer Data"
+  },
+  "page": {
+    "breadcrumb": "Customer Data",
+    "customerDetailsBreadcrumb": "Customer Details",
+    "dashboardBreadcrumb": "Merchant Dashboard"
+  }
+}

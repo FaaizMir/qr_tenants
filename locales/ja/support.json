@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "チャット",
+      "newChat": "新しいチャット",
+      "newMessage": "新しいメッセージ",
+      "newTicket": "新しいチケット",
+      "ticket": "チケット"
+    },
+    "conversation": {
+      "me": "私",
+      "noMessagesDesc": "会話を始めるためにメッセージを送信してください。",
+      "noMessagesTitle": "まだメッセージはありません",
+      "pressEnter": "送信するにはEnterを押してください",
+      "sendMessage": "メッセージを送信",
+      "typePlaceholder": "メッセージを入力..."
+    },
+    "disconnected": "切断されました",
+    "empty": {
+      "descriptionChat": "会話を開始するか、チャットを続ける。",
+      "descriptionTickets": "新しいサポートチケットを作成するか、既存のチケットを表示します。",
+      "tipChat": "チャット：",
+      "tipChatDesc": "カジュアルなメッセージ",
+      "tipTickets": "チケット：",
+      "tipTicketsDesc": "正式なサポートリクエスト",
+      "tipTitle": "💡 メッセージタイプを選択してください：",
+      "title": "サポートセンター"
+    },
+    "filters": {
+      "chat": "チャット",
+      "tickets": "チケット",
+      "viewAllCreateChat": "すべて表示 • チャットのみ作成"
+    },
+    "participants": {
+      "platformSupport": "プラットフォームサポート",
+      "yourSupportAgent": "あなたのサポートエージェント"
+    },
+    "search": "検索...",
+    "sidebar": {
+      "newChat": "新しい会話を始める",
+      "newTicket": "新しいサポートチケットを作成する",
+      "noItems": "アイテムが見つかりませんでした。",
+      "noMessages": "メッセージはありません"
+    },
+    "staffRole": "スタッフの役割：",
+    "subtitle": {
+      "admin": "エージェントとの会話やサポートチケットを管理します。",
+      "agentMerchants": "メッセージやチケットを通じて商人とコミュニケーションを取ります。",
+      "agentSupport": "プラットフォームサポートチームに連絡します。",
+      "merchant": "サポートエージェントとチャットするか、チケットを作成します。"
+    },
+    "superAdmin": "スーパ管理者",
+    "supportStaff": "サポートスタッフ",
+    "tabs": {
+      "agents": "エージェント",
+      "myMerchants": "私のマーチャント",
+      "supportAdmin": "サポート管理者"
+    },
+    "title": "サポート＆メッセージ",
+    "toasts": {
+      "loadFailed": "サポートデータの読み込みに失敗しました",
+      "messageFailed": "メッセージの送信に失敗しました。もう一度お試しください。",
+      "messageHistoryFailed": "メッセージ履歴の読み込みに失敗しました"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "サポート",
+      "dashboardBreadcrumb": "エージェントダッシュボード"
+    },
+    "breadcrumb": "サポート",
+    "dashboardBreadcrumb": "マーチャントダッシュボード",
+    "masterAdmin": {
+      "breadcrumb": "サポート",
+      "dashboardBreadcrumb": "マスター管理者ダッシュボード"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "エージェントサポート"
+      },
+      "merchantSupport": {
+        "title": "マーチャントサポート"
+      },
+      "supportDashboard": {
+        "title": "サポートダッシュボード"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "価格 tiers を定義するには、マスター設定 > パッケージに移動します。",
+        "a2": "はい、エージェント設定 > ブランディングの下でカスタムドメインを追加できます。",
+        "category": "エージェント",
+        "q1": "商人パッケージの設定方法は？",
+        "q2": "ドメインをカスタマイズできますか？"
+      },
+      "merchant": {
+        "a1": "クーポンタブに移動し、「新しいクーポンバッチを作成」をクリックします。",
+        "a2": "ビジネス開始クレジットは、顧客との会話を始めるときに使用されます。",
+        "category": "商人",
+        "q1": "新しいクーポンを作成するにはどうすればよいですか？",
+        "q2": "WA BIクレジットとは何ですか？"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "イギリスの商人のための手数料の分配について明確にしていただけますか？",
+        "question": "イギリスの商人のための手数料の分配について明確にしていただけますか？"
+      },
+      "agent2": {
+        "history1": "ホワイトラベルドメイン設定の支援をリクエストしています。",
+        "history2": "こんにちは、使用したいドメインを提供してください。",
+        "question": "ホワイトラベルのドメイン設定支援をリクエストしています。"
+      },
+      "agent3": {
+        "history": "緊急：6月の請求書に関する問題。年会費の引き落としが二重になっているようです。",
+        "question": "緊急：6月の請求書に関する問題。"
+      },
+      "merchant101": {
+        "history": "QRコードが少しぼやけて印刷されています。画像の品質を確認できますか？",
+        "question": "QRコードが少しぼやけて印刷されています。"
+      },
+      "merchant102": {
+        "history1": "こんにちは！マネージャーを雇いました。どのようにして彼らを私のマーチャントダッシュボードに追加しますか？",
+        "history2": "もちろん！設定 > ユーザー管理に移動して追加してください。",
+        "question": "新しいスタッフメンバーはダッシュボードアクセスが必要です。"
+      },
+      "merchant103": {
+        "history": "私のBIクレジットがキャンペーンに使用されたことに気付きました。もう一度違いを説明してもらえますか？",
+        "question": "WhatsAppクレジットの使用に関する質問。"
+      },
+      "merchant1": {
+        "history1": "購入したクレジットの返金はできますか？",
+        "history2": "こんにちは！返金リクエストは24時間以内に処理されます。",
+        "question": "購入したクレジットの返金を受けることはできますか？"
+      },
+      "merchant2": {
+        "history": "こんにちはサポート、夏のコレクションのための初めてのクーポンを発行しようとしていますが、エラーが出ています。",
+        "question": "最初のクーポンキャンペーンの設定に関するヘルプが必要です。"
+      },
+      "merchantTemp1": {
+        "history": "私の7日間のトライアルが終了します。どうやって延長できますか？",
+        "question": "私の7日間のトライアルが終了します。どうすれば延長できますか？"
+      }
+    },
+    "roles": {
+      "agent": "エージェント",
+      "merchant": "マーチャント",
+      "supportStaff": "サポートスタッフ",
+      "temporaryMerchant": "一時的な商人"
+    },
+    "senderNames": {
+      "bakery": "ベーカリー＆コ",
+      "coffeeHouse": "コーヒーハウス",
+      "digitalGrowth": "デジタル成長パートナー",
+      "globalSolutions": "グローバルソリューションズ株式会社",
+      "localGym": "地元のジム",
+      "luxuryBoutique": "ラグジュアリーブティック",
+      "megaMarketing": "メガマーケティングエージェンシー",
+      "pizzaPalace": "ピザパレス",
+      "popupStore": "ポップアップストア（仮）"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "有料広告の提出を承認/拒否する権限。",
+        "name": "広告承認者"
+      },
+      "financeViewer": {
+        "description": "ステートメントとウォレット台帳への読み取り専用アクセス。",
+        "name": "ファイナンスビューア"
+      },
+      "superAdmin": {
+        "description": "プラットフォームの完全な制御とシステム設定。",
+        "name": "スーパ管理者"
+      },
+      "supportStaff": {
+        "description": "エージェントおよびマーチャントチケットへの手動返信。",
+        "name": "サポートスタッフ"
+      }
+    }
+  }
+}

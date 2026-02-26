@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "การดำเนินการ",
+    "contactInfo": "ข้อมูลการติดต่อ",
+    "dateOfBirth": "วันเกิด",
+    "gender": "เพศ",
+    "name": "ชื่อ",
+    "notAvailable": "ไม่ใช่",
+    "reward": {
+      "eligible": "มีสิทธิ์",
+      "notEligible": "ไม่มีสิทธิ์"
+    },
+    "rewardStatus": "สถานะรางวัล",
+    "viewDetails": "รายละเอียด"
+  },
+  "details": {
+    "backButton": "กลับไปที่ลูกค้า",
+    "badge": {
+      "eligibleForReward": "มีสิทธิ์ได้รับรางวัล",
+      "standardCustomer": "ลูกค้าทั่วไป"
+    },
+    "error": "ไม่สามารถโหลดรายละเอียดลูกค้าได้ กรุณาลองอีกครั้งในภายหลัง",
+    "loading": "กำลังโหลดรายละเอียดลูกค้า...",
+    "notFound": "ไม่พบลูกค้า",
+    "sections": {
+      "address": {
+        "noAddress": "ไม่มีที่อยู่ที่ระบุ",
+        "title": "ที่อยู่ติดต่อ"
+      },
+      "essentialInfo": {
+        "active": "ใช้งาน",
+        "dateOfBirth": "วันเกิด",
+        "gender": "เพศ",
+        "inactive": "ไม่ทำงาน",
+        "notSpecified": "ไม่ได้ระบุ",
+        "phoneNumber": "หมายเลขโทรศัพท์",
+        "rewardStatus": "สถานะรางวัล"
+      },
+      "systemInfo": {
+        "createdAt": "สร้างเมื่อ",
+        "customerId": "รหัสลูกค้า",
+        "lastUpdated": "อัปเดตล่าสุด",
+        "merchantId": "รหัสผู้ค้า",
+        "title": "ข้อมูลระบบ"
+      }
+    },
+    "subtitle": "ภาพรวมรายละเอียดของข้อมูลลูกค้า",
+    "title": "โปรไฟล์ลูกค้า"
+  },
+  "index": {
+    "exportButton": "ส่งออก CSV",
+    "locked": {
+      "description": "การเข้าถึงข้อมูลลูกค้าใช้ได้เฉพาะสำหรับสมาชิกแผนการสมัครข้อมูลรายปีเท่านั้น",
+      "title": "ฟีเจอร์พรีเมียม",
+      "upgradeCard": {
+        "features": {
+          "feature1": "เข้าถึงโปรไฟล์ลูกค้าโดยละเอียด",
+          "feature2": "ส่งออกข้อมูลลูกค้า (CSV/Excel)",
+          "feature3": "การแบ่งกลุ่มขั้นสูง",
+          "feature4": "ขีดจำกัดคูปองสูงกว่า (10,000/ชุด)"
+        },
+        "subtitle": "ปลดล็อกข้อมูลเชิงลึกของลูกค้าแบบเต็ม",
+        "title": "อัปเกรดเป็นรายปี",
+        "upgradeButton": "อัปเกรดตอนนี้"
+      }
+    },
+    "searchPlaceholder": "ค้นหาลูกค้า...",
+    "subtitle": "ดูและจัดการฐานข้อมูลลูกค้าของคุณ",
+    "title": "ข้อมูลลูกค้า"
+  },
+  "page": {
+    "breadcrumb": "ข้อมูลลูกค้า",
+    "customerDetailsBreadcrumb": "รายละเอียดลูกค้า",
+    "dashboardBreadcrumb": "แดชบอร์ดผู้ค้า"
+  }
+}

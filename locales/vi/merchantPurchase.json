@@ -1,59 +1,99 @@
 {
-  "title": "Nâng Cấp Cửa Hàng Của Bạn",
-  "subtitle": "Chọn gói tín dụng cho tin nhắn WhatsApp, tạo phiếu giảm giá và quảng cáo trả phí.",
-  "loading": "Đang tải gói...",
-  "errors": {
-    "loadPackages": "Không thể tải gói tín dụng. Vui lòng thử lại.",
-    "noMerchantId": "Không thể xác định ID người bán. Vui lòng liên hệ hỗ trợ.",
-    "purchaseFailed": "Mua gói thất bại. Vui lòng thử lại.",
-    "requestFailed": "Yêu cầu thất bại với trạng thái {status}."
+  "checkout": {
+    "amountPayable": "Số tiền phải trả",
+    "bonusGift": "Quà tặng thưởng",
+    "cardDetails": "Chi tiết thẻ",
+    "creditsIncluded": "Tín dụng bao gồm",
+    "noSelection": "Chưa chọn gói nào",
+    "noSelectionMessage": "Vui lòng chọn một gói để tiếp tục thanh toán.",
+    "packageType": "Loại gói",
+    "paymentInfo": "Nhập thông tin thanh toán của bạn bên dưới",
+    "premiumDescription": "Gói tín dụng cao cấp với các tính năng nâng cao",
+    "securePayment": "Thanh toán an toàn",
+    "sslEncrypted": "Mã hóa SSL",
+    "subtitle": "Xem lại giao dịch của bạn",
+    "title": "Tóm tắt đơn hàng",
+    "totalAmount": "Tổng số tiền",
+    "trustedPartners": "Đối tác đáng tin cậy"
   },
   "emptyState": {
-    "noPackages": "Không tìm thấy gói tín dụng cho loại người bán của bạn."
+    "noPackages": "Hiện tại không có gói tín dụng nào có sẵn."
   },
-  "packageTypes": {
-    "coupon": "Phiếu giảm giá",
-    "whatsappUI": "Tin nhắn WhatsApp UI",
-    "whatsappBI": "Tin nhắn WhatsApp BI",
-    "whatsapp": "Tin nhắn WhatsApp",
-    "paidAds": "Quảng cáo trả phí",
-    "standard": "Tiêu chuẩn"
+  "errors": {
+    "agentBalanceInsufficient": "Số dư trước trả của đại lý không đủ",
+    "agentBalanceInsufficinetDescription": "Đại lý của bạn cần nạp tiền vào ví trả trước. Vui lòng liên hệ với đại lý của bạn để thêm tiền trước khi hoàn tất giao dịch này.",
+    "loadPackages": "Không thể tải gói tín dụng",
+    "noMerchantId": "Không tìm thấy ID người bán. Vui lòng đăng nhập lại.",
+    "purchaseFailed": "Không thể mua gói. Vui lòng thử lại."
   },
   "merchantTypes": {
     "annual": "Hàng năm",
-    "temporary": "Tạm thời",
-    "standard": "Tiêu chuẩn"
+    "standard": "Tiêu chuẩn",
+    "temporary": "Tạm thời"
   },
   "packageCard": {
-    "perCredit": "mỗi tín dụng",
-    "baseCredits": "{credits} Tín dụng cơ bản",
-    "bonusCredits": "+{bonusCredits} Tín dụng thưởng",
-    "enhancedFeatures": "Tính năng và dung lượng nâng cao",
-    "getStarted": "Bắt đầu"
+    "baseCredits": "{credits} tín dụng đã bao gồm",
+    "bonusCredits": "+{bonusCredits} tín dụng thưởng",
+    "enhancedFeatures": "Các tính năng nâng cao cho doanh nghiệp của bạn",
+    "getStarted": "Bắt đầu",
+    "perCredit": "mỗi tín dụng"
   },
-  "checkout": {
-    "title": "Tổng quan đơn hàng",
-    "subtitle": "Chi tiết thanh toán",
-    "selectedPackage": "Gói đã chọn",
-    "premiumDescription": "Gói tín dụng cao cấp cho sự phát triển kinh doanh của bạn.",
-    "creditsIncluded": "Tín dụng bao gồm",
-    "bonusGift": "Quà tặng thưởng",
-    "packageType": "Loại gói",
-    "totalAmount": "Tổng số tiền",
-    "securePayment": "Thanh toán an toàn",
-    "sslEncrypted": "Cổng Stripe mã hóa SSL",
-    "cardDetails": "Chi tiết thẻ",
-    "paymentInfo": "Vui lòng nhập thông tin thanh toán của bạn bên dưới.",
-    "amountPayable": "Số tiền phải trả",
-    "trustedPartners": "Đối tác đáng tin cậy",
-    "noSelection": "Không tìm thấy lựa chọn",
-    "noSelectionMessage": "Vui lòng đóng cửa sổ này và chọn gói tín dụng để tiếp tục nâng cấp của bạn."
+  "packageTypes": {
+    "coupon": "Mã giảm giá",
+    "paidAds": "Quảng cáo trả phí",
+    "standard": "Tiêu chuẩn",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "Giao diện WhatsApp"
   },
+  "page": {
+    "breadcrumb": "Mua",
+    "dashboardBreadcrumb": "Bảng điều khiển Người bán"
+  },
+  "stripeCancel": {
+    "backToDashboard": "Quay lại bảng điều khiển",
+    "backToPurchase": "Quay lại mua hàng",
+    "description": "Phiên thanh toán Stripe của bạn đã bị hủy. Không có khoản thanh toán nào được thực hiện.",
+    "goToWallet": "Đi đến ví",
+    "title": "Thanh toán đã bị hủy"
+  },
+  "stripeCheckout": {
+    "credits": "tín dụng",
+    "errors": {
+      "insufficientBalance": "Số dư ví của đại lý không đủ. Cần: {required}, Có sẵn: {available}. Vui lòng nạp thêm tiền vào ví của bạn để hoàn tất giao dịch này.",
+      "noAdminId": "Không thể lấy ID quản trị từ phiên. Vui lòng đăng nhập lại.",
+      "startCheckout": "Không thể bắt đầu thanh toán Stripe. Vui lòng thử lại.",
+      "startPayment": "Không thể bắt đầu thanh toán. Vui lòng thử lại.",
+      "validateBalance": "Không thể xác thực số dư ví. Vui lòng liên hệ với bộ phận hỗ trợ.",
+      "validateBalanceRetry": "Không thể xác thực số dư ví. Vui lòng thử lại."
+    },
+    "packagePurchase": "Mua gói",
+    "payableAmount": "Số tiền phải thanh toán",
+    "payWithStripe": "Thanh toán bằng Stripe",
+    "redirecting": "Đang chuyển hướng đến Stripe..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "Quay lại bảng điều khiển",
+    "backToPurchase": "Quay lại mua hàng",
+    "description": "Thanh toán của bạn đã được hoàn tất thành công.",
+    "goToWallet": "Đi đến ví",
+    "processing": "Đang thêm tín dụng vào ví của bạn...",
+    "reflected": "Tín dụng sẽ được phản ánh trong ví của bạn sớm thôi.",
+    "title": "Thanh toán thành công",
+    "toasts": {
+      "creditsAdded": "Tín dụng đã được thêm thành công!",
+      "processingFailed": "Thanh toán thành công, nhưng không thể cập nhật tài khoản của bạn. Vui lòng liên hệ với bộ phận hỗ trợ.",
+      "subscriptionActivated": "Đăng ký đã được kích hoạt thành công!",
+      "subscriptionRenewed": "Đăng ký đã được gia hạn thành công!",
+      "upgradedToAnnual": "Nâng cấp lên gói đăng ký hàng năm thành công!",
+      "upgradeFailed": "Nâng cấp không thành công: Thiếu thông tin quản trị.",
+      "walletBalance": "Số dư ví: {currency} {balance}",
+      "walletToppedUp": "Ví đã được nạp tiền thành công! Đã thêm {currency} {amount}"
+    }
+  },
+  "subtitle": "Chọn một gói tín dụng phù hợp với nhu cầu kinh doanh của bạn",
   "success": {
-    "purchaseComplete": "Gói đã được mua thành công."
+    "purchaseComplete": "Mua hàng đã hoàn tất thành công!"
   },
-  "toast": {
-    "purchaseSuccess": "Gói đã được mua thành công.",
-    "purchaseError": "Mua gói thất bại. Vui lòng thử lại."
-  }
+  "title": "Mua tín dụng"
 }

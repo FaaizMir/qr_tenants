@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "작업",
+    "category": "카테고리",
+    "dateTime": "날짜 및 시간",
+    "description": "설명",
+    "details": "세부정보",
+    "noDetails": "세부정보 없음",
+    "severity": "심각도",
+    "systemActivity": "시스템 활동"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "상인 활동, 지갑 거래 및 수수료 로그 모니터링.",
+    "masterAdmin": "플랫폼 전반에 걸쳐 모든 시스템 활동, 감사 기록 및 중요한 오류를 확인합니다.",
+    "merchant": "스토어의 운영, 쿠폰 사용 및 고객 상호작용을 추적하세요."
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "방법: {value}",
+      "user": "사용자: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "{count}개의 쿠폰이 생성되었습니다",
+      "quantity": "수량: {value}",
+      "type": "유형: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "플랫폼: {value}",
+      "review": "리뷰: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "쿠폰",
+      "credits": "크레딧",
+      "paidAd": "유료 광고",
+      "platformCommission": "플랫폼 수수료: {rate}%",
+      "unitPrice": "단가: {value}",
+      "whatsappBI": "WhatsApp BI",
+      "whatsappUI": "WhatsApp UI"
+    }
+  },
+  "errors": {
+    "failedToLoad": "로그를 로드하지 못했습니다"
+  },
+  "filters": {
+    "logCategory": "로그 카테고리",
+    "pickDateRange": "날짜 범위 선택",
+    "refresh": "새로 고침"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "캠페인 로그",
+      "couponLogs": "쿠폰 로그",
+      "customerLogs": "고객 로그",
+      "merchantScopedLogs": "상인 범위 로그",
+      "myMerchantsActivity": "내 상인 활동",
+      "walletEarnings": "지갑 및 수익",
+      "whatsappBIFeedback": "WhatsApp BI 피드백",
+      "whatsappUIFeedback": "WhatsApp UI 피드백"
+    },
+    "masterAdmin": {
+      "agentActivities": "에이전트 활동",
+      "allPlatformActivity": "모든 플랫폼 활동",
+      "authenticationEvents": "인증 이벤트",
+      "campaignLogs": "캠페인 로그",
+      "couponOperations": "쿠폰 운영",
+      "criticalErrors": "치명적인 오류",
+      "customerActions": "고객 작업",
+      "merchantActivities": "상인 활동",
+      "walletTransactions": "지갑 거래",
+      "whatsappBIDetailed": "WhatsApp BI (상세)",
+      "whatsappBIFeedback": "WhatsApp BI 피드백",
+      "whatsappCreditWallet": "WhatsApp 크레딧 (지갑)",
+      "whatsappUIDetailed": "WhatsApp UI (상세)",
+      "whatsappUIFeedback": "WhatsApp UI 피드백"
+    },
+    "merchant": {
+      "campaignLogs": "캠페인 로그",
+      "couponUsage": "쿠폰 사용",
+      "customerActions": "고객 작업",
+      "securityAuth": "보안 및 인증",
+      "storeActivity": "스토어 활동",
+      "walletTransactions": "지갑 거래",
+      "whatsappBIFeedback": "WhatsApp BI 피드백",
+      "whatsappUIFeedback": "WhatsApp UI 피드백"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "에이전트 대시보드",
+        "logs": "시스템 로그"
+      },
+      "description": "상인 활동, 지갑 거래 및 수수료 로그 모니터링.",
+      "title": "활동 로그"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "마스터 관리자 대시보드",
+        "logs": "시스템 로그"
+      },
+      "description": "플랫폼 전반의 모든 시스템 활동, 감사 기록 및 중요한 오류를 확인하세요.",
+      "title": "시스템 로그"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "상인 대시보드",
+        "logs": "시스템 로그"
+      },
+      "description": "스토어의 운영, 쿠폰 사용 및 고객 상호작용을 추적하세요.",
+      "title": "스토어 로그"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "중요",
+    "error": "오류",
+    "info": "정보",
+    "success": "성공",
+    "warning": "경고"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "활동 로그",
+    "masterAdmin": "시스템 로그",
+    "merchant": "상점 로그"
   }
 }

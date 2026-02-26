@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "الإجراءات",
+    "actionsMenu": {
+      "delete": "حذف الجائزة",
+      "edit": "تحرير الجائزة",
+      "label": "الإجراءات",
+      "openMenu": "فتح القائمة"
+    },
+    "dailyLimit": "الحد اليومي",
+    "description": "الوصف",
+    "prizeName": "اسم الجائزة",
+    "probability": "احتمالية",
+    "status": "الحالة",
+    "statusActive": "نشط",
+    "statusInactive": "غير نشط",
+    "totalLimit": "الحد الإجمالي",
+    "type": "النوع"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "إلغاء",
+      "create": "إنشاء جائزة",
+      "creating": "جارٍ الإنشاء...",
+      "update": "تحديث الجائزة",
+      "updating": "جارٍ التحديث..."
+    },
+    "cardDescription": {
+      "create": "إنشاء جائزة جديدة للسحب المحظوظ",
+      "edit": "تحديث معلومات الجائزة"
+    },
+    "cardTitle": {
+      "create": "إضافة جائزة جديدة",
+      "edit": "تعديل الجائزة"
+    },
+    "createSubtitle": "إضافة جائزة جديدة إلى السحب",
+    "createTitle": "إنشاء جائزة",
+    "editSubtitle": "تحديث تفاصيل الجائزة",
+    "editTitle": "تعديل الجائزة",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "لم يتم العثور على دفعات",
+        "label": "دفعة القسائم",
+        "placeholder": "اختر دفعة القسائم...",
+        "required": "دفعة القسائم مطلوبة",
+        "searchPlaceholder": "البحث عن الدفعات..."
+      },
+      "dailyLimit": {
+        "label": "الحد اليومي"
+      },
+      "prizeDescription": {
+        "label": "وصف الجائزة"
+      },
+      "prizeName": {
+        "label": "اسم الجائزة",
+        "required": "اسم الجائزة مطلوب"
+      },
+      "prizeType": {
+        "label": "نوع الجائزة",
+        "options": {
+          "coupon": "قسيمة"
+        }
+      },
+      "probability": {
+        "label": "احتمالية (%)",
+        "max": "الحد الأقصى 100%",
+        "min": "الحد الأدنى 0%",
+        "required": "الاحتمالية مطلوبة"
+      },
+      "sortOrder": {
+        "label": "ترتيب الفرز"
+      },
+      "status": {
+        "label": "الحالة",
+        "options": {
+          "active": "نشط",
+          "inactive": "غير نشط"
+        }
+      },
+      "totalLimit": {
+        "label": "الحد الإجمالي"
+      }
+    },
+    "importantNotes": {
+      "note1": "يجب أن تساوي الاحتمالية الإجمالية 100%",
+      "note2": "كل جائزة تتطلب دفعة قسائم مرتبطة",
+      "note3": "تُعاد تعيين الحدود اليومية عند منتصف الليل",
+      "note4": "إذا تم الوصول إلى حد الجائزة، سيتخطى النظام إلى الجائزة المتاحة التالية",
+      "title": "مهم"
+    },
+    "toasts": {
+      "createSuccess": "تم إنشاء الجائزة بنجاح!",
+      "loadFailed": "فشل في تحميل تفاصيل الجائزة",
+      "noBatchSelected": "يرجى اختيار دفعة القسائم",
+      "noMerchantId": "لم يتم العثور على معرف التاجر",
+      "saveFailed": "فشل في حفظ الجائزة",
+      "updateSuccess": "تم تحديث الجائزة بنجاح!"
+    }
+  },
+  "index": {
+    "createButton": "إنشاء جائزة",
+    "deleteDialog": {
+      "cancel": "إلغاء",
+      "confirm": "حذف",
+      "description": "سيؤدي هذا إلى حذف الجائزة \"{prizeName}\" بشكل دائم. لا يمكن التراجع عن هذا الإجراء.",
+      "title": "هل أنت متأكد؟"
+    },
+    "prizesCard": {
+      "description": "إدارة جميع الجوائز للسحب",
+      "title": "الجوائز"
+    },
+    "searchPlaceholder": "ابحث عن الجوائز حسب الاسم أو الوصف أو النوع...",
+    "subtitle": "قم بتكوين جوائز \"لف العجلة\" للعملاء الذين يكملون مراجعة.",
+    "title": "إعدادات السحب المحظوظ",
+    "toasts": {
+      "deleteFailed": "فشل في حذف الجائزة",
+      "deleteSuccess": "تم حذف الجائزة بنجاح!",
+      "loadFailed": "فشل في تحميل الجوائز"
+    }
+  },
+  "page": {
+    "breadcrumb": "السحب المحظوظ",
+    "dashboardBreadcrumb": "لوحة تحكم التاجر"
+  }
+}

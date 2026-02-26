@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "क्रिया",
+    "category": "श्रेणी",
+    "dateTime": "तारीख और समय",
+    "description": "विवरण",
+    "details": "विवरण",
+    "noDetails": "कोई विवरण नहीं",
+    "severity": "गंभीरता",
+    "systemActivity": "सिस्टम गतिविधि"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "व्यापारी गतिविधियों, वॉलेट लेनदेन और कमीशन लॉग की निगरानी करें।",
+    "masterAdmin": "प्लेटफ़ॉर्म पर सभी सिस्टम गतिविधियों, ऑडिट ट्रेल्स और महत्वपूर्ण त्रुटियों को देखें।",
+    "merchant": "अपने स्टोर के संचालन, कूपन उपयोग और ग्राहक इंटरैक्शन को ट्रैक करें।"
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "विधि: {value}",
+      "user": "उपयोगकर्ता: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "{count} कूपन उत्पन्न हुए",
+      "quantity": "मात्रा: {value}",
+      "type": "प्रकार: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "प्लेटफ़ॉर्म: {value}",
+      "review": "समीक्षा: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "कूपन",
+      "credits": "क्रेडिट्स",
+      "paidAd": "भुगतान किया गया विज्ञापन",
+      "platformCommission": "प्लेटफ़ॉर्म कमीशन: {rate}%",
+      "unitPrice": "यूनिट मूल्य: {value}",
+      "whatsappBI": "व्हाट्सएप बीआई",
+      "whatsappUI": "व्हाट्सएप यूआई"
+    }
+  },
+  "errors": {
+    "failedToLoad": "लॉग लोड करने में विफल"
+  },
+  "filters": {
+    "logCategory": "लॉग श्रेणी",
+    "pickDateRange": "एक तारीख सीमा चुनें",
+    "refresh": "रीफ्रेश"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "कैम्पेन लॉग्स",
+      "couponLogs": "कूपन लॉग",
+      "customerLogs": "ग्राहक लॉग",
+      "merchantScopedLogs": "व्यापारी-स्कोप लॉग्स",
+      "myMerchantsActivity": "मेरे व्यापारियों की गतिविधि",
+      "walletEarnings": "वॉलेट और आय",
+      "whatsappBIFeedback": "व्हाट्सएप बीआई फीडबैक",
+      "whatsappUIFeedback": "व्हाट्सएप यूआई फीडबैक"
+    },
+    "masterAdmin": {
+      "agentActivities": "एजेंट गतिविधियाँ",
+      "allPlatformActivity": "सभी प्लेटफ़ॉर्म गतिविधि",
+      "authenticationEvents": "प्रमाणीकरण घटनाएँ",
+      "campaignLogs": "अभियान लॉग",
+      "couponOperations": "कूपन संचालन",
+      "criticalErrors": "गंभीर त्रुटियाँ",
+      "customerActions": "ग्राहक क्रियाएँ",
+      "merchantActivities": "व्यापारी गतिविधियाँ",
+      "walletTransactions": "वॉलेट लेनदेन",
+      "whatsappBIDetailed": "व्हाट्सएप बीआई (विस्तृत)",
+      "whatsappBIFeedback": "व्हाट्सएप बीआई फीडबैक",
+      "whatsappCreditWallet": "व्हाट्सएप क्रेडिट्स (वॉलेट)",
+      "whatsappUIDetailed": "व्हाट्सएप यूआई (विस्तृत)",
+      "whatsappUIFeedback": "व्हाट्सएप यूआई फीडबैक"
+    },
+    "merchant": {
+      "campaignLogs": "अभियान लॉग",
+      "couponUsage": "कूपन उपयोग",
+      "customerActions": "ग्राहक क्रियाएँ",
+      "securityAuth": "सुरक्षा और प्रमाणीकरण",
+      "storeActivity": "स्टोर गतिविधि",
+      "walletTransactions": "वॉलेट लेनदेन",
+      "whatsappBIFeedback": "व्हाट्सएप बीआई फीडबैक",
+      "whatsappUIFeedback": "व्हाट्सएप यूआई फीडबैक"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "एजेंट डैशबोर्ड",
+        "logs": "सिस्टम लॉग"
+      },
+      "description": "व्यापारी गतिविधियों, वॉलेट लेनदेन और कमीशन लॉग की निगरानी करें।",
+      "title": "गतिविधि लॉग"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "मास्टर एडमिन डैशबोर्ड",
+        "logs": "सिस्टम लॉग"
+      },
+      "description": "प्लेटफ़ॉर्म पर सभी सिस्टम गतिविधियों, ऑडिट ट्रेल्स और महत्वपूर्ण त्रुटियों को देखें।",
+      "title": "सिस्टम लॉग्स"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "व्यापारी डैशबोर्ड",
+        "logs": "सिस्टम लॉग"
+      },
+      "description": "अपने स्टोर के संचालन, कूपन उपयोग और ग्राहक इंटरैक्शन को ट्रैक करें।",
+      "title": "स्टोर लॉग्स"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "महत्वपूर्ण",
+    "error": "त्रुटि",
+    "info": "जानकारी",
+    "success": "सफलता",
+    "warning": "चेतावनी"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "गतिविधि लॉग्स",
+    "masterAdmin": "सिस्टम लॉग",
+    "merchant": "स्टोर लॉग"
   }
 }

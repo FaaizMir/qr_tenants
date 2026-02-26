@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "Hành động",
+    "actionsMenu": {
+      "delete": "Xóa giải thưởng",
+      "edit": "Chỉnh sửa giải thưởng",
+      "label": "Hành động",
+      "openMenu": "Mở menu"
+    },
+    "dailyLimit": "Giới hạn hàng ngày",
+    "description": "Mô tả",
+    "prizeName": "Tên giải thưởng",
+    "probability": "Xác suất",
+    "status": "Trạng thái",
+    "statusActive": "Kích hoạt",
+    "statusInactive": "Không hoạt động",
+    "totalLimit": "Giới hạn tổng",
+    "type": "Loại"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "Hủy",
+      "create": "Tạo Giải thưởng",
+      "creating": "Đang tạo...",
+      "update": "Cập nhật giải thưởng",
+      "updating": "Đang cập nhật..."
+    },
+    "cardDescription": {
+      "create": "Tạo một giải thưởng mới cho rút thăm may mắn",
+      "edit": "Cập nhật thông tin giải thưởng"
+    },
+    "cardTitle": {
+      "create": "Thêm giải thưởng mới",
+      "edit": "Chỉnh sửa Giải thưởng"
+    },
+    "createSubtitle": "Thêm một giải thưởng mới vào chương trình quay số",
+    "createTitle": "Tạo Giải thưởng",
+    "editSubtitle": "Cập nhật chi tiết giải thưởng",
+    "editTitle": "Chỉnh sửa Giải thưởng",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "Không tìm thấy lô hàng",
+        "label": "Lô phiếu",
+        "placeholder": "Chọn lô phiếu giảm giá...",
+        "required": "Cần có lô phiếu",
+        "searchPlaceholder": "Tìm kiếm lô hàng..."
+      },
+      "dailyLimit": {
+        "label": "Giới hạn hàng ngày"
+      },
+      "prizeDescription": {
+        "label": "Mô tả giải thưởng"
+      },
+      "prizeName": {
+        "label": "Tên Giải thưởng",
+        "required": "Tên giải thưởng là bắt buộc"
+      },
+      "prizeType": {
+        "label": "Loại giải thưởng",
+        "options": {
+          "coupon": "Phiếu giảm giá"
+        }
+      },
+      "probability": {
+        "label": "Xác suất (%)",
+        "max": "Tối đa 100%",
+        "min": "Tối thiểu 0%",
+        "required": "Xác suất là bắt buộc"
+      },
+      "sortOrder": {
+        "label": "Thứ tự sắp xếp"
+      },
+      "status": {
+        "label": "Trạng thái",
+        "options": {
+          "active": "Kích hoạt",
+          "inactive": "Không hoạt động"
+        }
+      },
+      "totalLimit": {
+        "label": "Giới hạn tổng"
+      }
+    },
+    "importantNotes": {
+      "note1": "Tổng xác suất phải bằng 100%",
+      "note2": "Mỗi giải thưởng yêu cầu một lô phiếu liên kết",
+      "note3": "Giới hạn hàng ngày được đặt lại vào nửa đêm",
+      "note4": "Nếu giới hạn giải thưởng đạt, hệ thống sẽ bỏ qua giải thưởng tiếp theo có sẵn",
+      "title": "Quan trọng"
+    },
+    "toasts": {
+      "createSuccess": "Giải thưởng đã được tạo thành công!",
+      "loadFailed": "Không thể tải chi tiết giải thưởng",
+      "noBatchSelected": "Vui lòng chọn một lô phiếu giảm giá",
+      "noMerchantId": "Không tìm thấy ID thương nhân",
+      "saveFailed": "Lưu giải thưởng không thành công",
+      "updateSuccess": "Giải thưởng đã được cập nhật thành công!"
+    }
+  },
+  "index": {
+    "createButton": "Tạo giải thưởng",
+    "deleteDialog": {
+      "cancel": "Hủy",
+      "confirm": "Xóa",
+      "description": "Điều này sẽ xóa vĩnh viễn giải thưởng \"{prizeName}\". Hành động này không thể hoàn tác.",
+      "title": "Bạn có chắc không?"
+    },
+    "prizesCard": {
+      "description": "Quản lý tất cả giải thưởng cho chương trình quay số",
+      "title": "Giải thưởng"
+    },
+    "searchPlaceholder": "Tìm kiếm giải thưởng theo tên, mô tả hoặc loại...",
+    "subtitle": "Cấu hình các giải thưởng \"Quay bánh xe\" cho khách hàng hoàn thành đánh giá.",
+    "title": "Cài đặt Rút thăm may mắn",
+    "toasts": {
+      "deleteFailed": "Không thể xóa giải thưởng",
+      "deleteSuccess": "Xóa giải thưởng thành công!",
+      "loadFailed": "Không thể tải giải thưởng"
+    }
+  },
+  "page": {
+    "breadcrumb": "Rút thăm may mắn",
+    "dashboardBreadcrumb": "Bảng điều khiển Thương nhân"
+  }
+}

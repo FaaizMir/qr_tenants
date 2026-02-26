@@ -14,6 +14,7 @@ import {
     Loader2,
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import axios from "@/lib/axios";
 import {
     Card,
@@ -28,6 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import { useParams } from "next/navigation";
 
 export default function CustomerDetailsContainer() {
+    const t = useTranslations("merchantCustomerData.details");
     const [customer, setCustomer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -41,7 +43,7 @@ export default function CustomerDetailsContainer() {
                 setCustomer(res.data.data);
             } catch (err) {
                 console.error("Failed to fetch customer details", err);
-                setError("Failed to load customer details. Please try again later.");
+                setError(t("error"));
             } finally {
                 setLoading(false);
             }
@@ -50,7 +52,7 @@ export default function CustomerDetailsContainer() {
         if (id) {
             fetchCustomer();
         }
-    }, [id]);
+    }, [id, t]);
 
     if (loading) {
         return (
@@ -64,12 +66,12 @@ export default function CustomerDetailsContainer() {
         return (
             <div className="flex h-[60vh] flex-col items-center justify-center space-y-4">
                 <p className="text-destructive font-medium">
-                    {error || "Customer not found"}
+                    {error || t("notFound")}
                 </p>
                 <Link href="/merchant/customer-data">
                     <Button variant="outline">
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to Customers
+                        {t("backButton")}
                     </Button>
                 </Link>
             </div>
@@ -87,10 +89,10 @@ export default function CustomerDetailsContainer() {
                     </Link>
                     <div>
                         <h1 className="text-3xl font-bold tracking-tight">
-                            Customer Profile
+                            {t("title")}
                         </h1>
                         <p className="text-muted-foreground">
-                            Detailed overview of customer information
+                            {t("subtitle")}
                         </p>
                     </div>
                 </div>
@@ -99,7 +101,7 @@ export default function CustomerDetailsContainer() {
                         variant={customer.reward ? "default" : "secondary"}
                         className="h-fit px-3 py-1 text-sm"
                     >
-                        {customer.reward ? "Eligible for Reward" : "Standard Customer"}
+                        {customer.reward ? t("badge.eligibleForReward") : t("badge.standardCustomer")}
                     </Badge>
                 </div>
             </div>
@@ -121,7 +123,7 @@ export default function CustomerDetailsContainer() {
                                 <Phone className="h-4 w-4" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground">Phone Number</p>
+                                <p className="text-xs text-muted-foreground">{t("sections.essentialInfo.phoneNumber")}</p>
                                 <p className="text-sm font-medium">{customer.phone}</p>
                             </div>
                         </div>
@@ -130,9 +132,9 @@ export default function CustomerDetailsContainer() {
                                 <Calendar className="h-4 w-4" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground">Date of Birth</p>
+                                <p className="text-xs text-muted-foreground">{t("sections.essentialInfo.dateOfBirth")}</p>
                                 <p className="text-sm font-medium">
-                                    {customer.date_of_birth || "Not specified"}
+                                    {customer.date_of_birth || t("sections.essentialInfo.notSpecified")}
                                 </p>
                             </div>
                         </div>
@@ -141,9 +143,9 @@ export default function CustomerDetailsContainer() {
                                 <Users className="h-4 w-4" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground">Gender</p>
+                                <p className="text-xs text-muted-foreground">{t("sections.essentialInfo.gender")}</p>
                                 <p className="text-sm font-medium capitalize">
-                                    {customer.gender || "Not specified"}
+                                    {customer.gender || t("sections.essentialInfo.notSpecified")}
                                 </p>
                             </div>
                         </div>
@@ -153,9 +155,9 @@ export default function CustomerDetailsContainer() {
                                 <Gift className="h-4 w-4" />
                             </div>
                             <div>
-                                <p className="text-xs text-muted-foreground">Reward Status</p>
+                                <p className="text-xs text-muted-foreground">{t("sections.essentialInfo.rewardStatus")}</p>
                                 <p className="text-sm font-medium">
-                                    {customer.reward ? "Active" : "Inactive"}
+                                    {customer.reward ? t("sections.essentialInfo.active") : t("sections.essentialInfo.inactive")}
                                 </p>
                             </div>
                         </div>
@@ -168,25 +170,25 @@ export default function CustomerDetailsContainer() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <MapPin className="h-5 w-5 text-primary" />
-                                Contact Address
+                                {t("sections.address.title")}
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="rounded-xl bg-muted/30 p-4 border border-border/50">
                                 <p className="text-sm leading-relaxed text-muted-foreground">
-                                    {customer.address || "No address provided"}
+                                    {customer.address || t("sections.address.noAddress")}
                                 </p>
                             </div>
 
                             <div className="mt-8">
                                 <h3 className="flex items-center gap-2 font-semibold mb-4">
                                     <History className="h-5 w-5 text-primary" />
-                                    System Information
+                                    {t("sections.systemInfo.title")}
                                 </h3>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50">
                                         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
-                                            Customer ID
+                                            {t("sections.systemInfo.customerId")}
                                         </p>
                                         <p className="font-mono text-sm font-semibold">
                                             #C-{customer.id}
@@ -194,7 +196,7 @@ export default function CustomerDetailsContainer() {
                                     </div>
                                     <div className="rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50">
                                         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
-                                            Merchant ID
+                                            {t("sections.systemInfo.merchantId")}
                                         </p>
                                         <p className="text-sm font-semibold">
                                             {customer.merchant_id}
@@ -202,7 +204,7 @@ export default function CustomerDetailsContainer() {
                                     </div>
                                     <div className="rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50">
                                         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
-                                            Created At
+                                            {t("sections.systemInfo.createdAt")}
                                         </p>
                                         <p className="text-sm font-semibold">
                                             {new Date(customer.created_at).toLocaleDateString()}{" "}
@@ -216,7 +218,7 @@ export default function CustomerDetailsContainer() {
                                     </div>
                                     <div className="rounded-lg border bg-card p-4 transition-colors hover:bg-muted/50">
                                         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
-                                            Last Updated
+                                            {t("sections.systemInfo.lastUpdated")}
                                         </p>
                                         <p className="text-sm font-semibold">
                                             {new Date(customer.updated_at).toLocaleDateString()}{" "}

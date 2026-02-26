@@ -69,6 +69,10 @@
   },
   "loadMore": "加载更多",
   "noTransactions": "未找到交易",
+  "page": {
+    "breadcrumb": "钱包",
+    "dashboardBreadcrumb": "商户仪表板"
+  },
   "remainingCredits": "剩余信用",
   "subscription": {
     "annual": "年度",

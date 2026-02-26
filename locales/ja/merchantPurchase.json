@@ -1,59 +1,99 @@
 {
-  "title": "ストアをパワーアップ",
-  "subtitle": "WhatsAppメッセージ、クーポン作成、有料広告のクレジットパッケージを選択してください。",
-  "loading": "パッケージを読み込んでいます...",
-  "errors": {
-    "loadPackages": "クレジットパッケージを読み込めません。もう一度お試しください。",
-    "noMerchantId": "マーチャントIDを特定できません。サポートにお問い合わせください。",
-    "purchaseFailed": "パッケージの購入に失敗しました。もう一度お試しください。",
-    "requestFailed": "リクエストがステータス{status}で失敗しました。"
+  "checkout": {
+    "amountPayable": "支払うべき金額",
+    "bonusGift": "ボーナスギフト",
+    "cardDetails": "カードの詳細",
+    "creditsIncluded": "含まれているクレジット",
+    "noSelection": "パッケージが選択されていません",
+    "noSelectionMessage": "チェックアウトを続行するにはパッケージを選択してください。",
+    "packageType": "パッケージタイプ",
+    "paymentInfo": "以下にお支払い情報を入力してください",
+    "premiumDescription": "強化された機能を持つプレミアムクレジットパッケージ",
+    "securePayment": "安全な支払い",
+    "sslEncrypted": "SSL暗号化",
+    "subtitle": "購入を確認する",
+    "title": "注文の概要",
+    "totalAmount": "合計金額",
+    "trustedPartners": "信頼できるパートナー"
   },
   "emptyState": {
-    "noPackages": "お客様のマーチャントタイプのクレジットパッケージが見つかりません。"
+    "noPackages": "現在利用可能なクレジットパッケージはありません。"
+  },
+  "errors": {
+    "agentBalanceInsufficient": "エージェントのプリペイド残高が不足しています",
+    "agentBalanceInsufficinetDescription": "エージェントはプリペイドウォレットにチャージする必要があります。この購入を完了する前に、エージェントに連絡して資金を追加してください。",
+    "loadPackages": "クレジットパッケージの読み込みに失敗しました",
+    "noMerchantId": "マーチャントIDが見つかりません。再度ログインしてください。",
+    "purchaseFailed": "パッケージの購入に失敗しました。再試行してください。"
+  },
+  "merchantTypes": {
+    "annual": "年次",
+    "standard": "スタンダード",
+    "temporary": "一時的"
+  },
+  "packageCard": {
+    "baseCredits": "{credits} クレジットが含まれています",
+    "bonusCredits": "+{bonusCredits} ボーナスクレジット",
+    "enhancedFeatures": "ビジネス向けの強化された機能",
+    "getStarted": "始める",
+    "perCredit": "クレジットあたり"
   },
   "packageTypes": {
     "coupon": "クーポン",
-    "whatsappUI": "WhatsApp UIメッセージ",
-    "whatsappBI": "WhatsApp BIメッセージ",
-    "whatsapp": "WhatsAppメッセージ",
     "paidAds": "有料広告",
-    "standard": "スタンダード"
+    "standard": "スタンダード",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "WhatsApp UI"
   },
-  "merchantTypes": {
-    "annual": "年間",
-    "temporary": "一時的",
-    "standard": "スタンダード"
+  "page": {
+    "breadcrumb": "購入",
+    "dashboardBreadcrumb": "マーチャントダッシュボード"
   },
-  "packageCard": {
-    "perCredit": "クレジットあたり",
-    "baseCredits": "{credits}ベースクレジット",
-    "bonusCredits": "+{bonusCredits}ボーナスクレジット",
-    "enhancedFeatures": "強化された機能と容量",
-    "getStarted": "始める"
+  "stripeCancel": {
+    "backToDashboard": "ダッシュボードに戻る",
+    "backToPurchase": "購入に戻る",
+    "description": "あなたのStripeチェックアウトセッションはキャンセルされました。支払いは行われませんでした。",
+    "goToWallet": "ウォレットに移動",
+    "title": "支払いがキャンセルされました"
   },
-  "checkout": {
-    "title": "注文概要",
-    "subtitle": "チェックアウト詳細",
-    "selectedPackage": "選択されたパッケージ",
-    "premiumDescription": "ビジネスの成長のためのプレミアムクレジットパッケージ。",
-    "creditsIncluded": "含まれるクレジット",
-    "bonusGift": "ボーナスギフト",
-    "packageType": "パッケージタイプ",
-    "totalAmount": "合計金額",
-    "securePayment": "安全な支払い",
-    "sslEncrypted": "SSL暗号化Stripeゲートウェイ",
-    "cardDetails": "カード詳細",
-    "paymentInfo": "以下に支払い情報を入力してください。",
-    "amountPayable": "支払額",
-    "trustedPartners": "信頼できるパートナー",
-    "noSelection": "選択が見つかりません",
-    "noSelectionMessage": "このウィンドウを閉じて、アップグレードを続行するためにクレジットパッケージを選択してください。"
+  "stripeCheckout": {
+    "credits": "クレジット",
+    "errors": {
+      "insufficientBalance": "エージェントのウォレット残高が不足しています。必要: {required}, 利用可能: {available}。この購入を完了するにはウォレットにチャージしてください。",
+      "noAdminId": "セッションから管理者IDを取得できませんでした。再度ログインしてください。",
+      "startCheckout": "Stripeチェックアウトを開始できませんでした。もう一度お試しください。",
+      "startPayment": "支払いを開始できませんでした。再試行してください。",
+      "validateBalance": "ウォレット残高を検証できませんでした。サポートにお問い合わせください。",
+      "validateBalanceRetry": "ウォレット残高を検証できませんでした。もう一度お試しください。"
+    },
+    "packagePurchase": "パッケージ購入",
+    "payableAmount": "支払うべき金額",
+    "payWithStripe": "Stripeで支払う",
+    "redirecting": "Stripeにリダイレクト中..."
   },
+  "stripeSuccess": {
+    "backToDashboard": "ダッシュボードに戻る",
+    "backToPurchase": "購入に戻る",
+    "description": "お支払いは正常に完了しました。",
+    "goToWallet": "ウォレットに移動",
+    "processing": "ウォレットにクレジットを追加しています...",
+    "reflected": "クレジットはすぐにウォレットに反映されます。",
+    "title": "支払い成功",
+    "toasts": {
+      "creditsAdded": "クレジットが正常に追加されました！",
+      "processingFailed": "支払いは成功しましたが、アカウントの更新に失敗しました。サポートにお問い合わせください。",
+      "subscriptionActivated": "サブスクリプションが正常にアクティブになりました！",
+      "subscriptionRenewed": "サブスクリプションが正常に更新されました！",
+      "upgradedToAnnual": "年次サブスクリプションに正常にアップグレードされました！",
+      "upgradeFailed": "アップグレードに失敗しました: 管理者情報が不足しています。",
+      "walletBalance": "ウォレット残高: {currency} {balance}",
+      "walletToppedUp": "ウォレットが正常にチャージされました！追加された金額: {currency} {amount}"
+    }
+  },
+  "subtitle": "ビジネスニーズに合ったクレジットパッケージを選択してください",
   "success": {
-    "purchaseComplete": "パッケージが正常に購入されました。"
+    "purchaseComplete": "購入が成功しました！"
   },
-  "toast": {
-    "purchaseSuccess": "パッケージが正常に購入されました。",
-    "purchaseError": "パッケージの購入に失敗しました。もう一度お試しください。"
-  }
+  "title": "クレジットを購入"
 }

@@ -187,7 +187,7 @@ export default function FestivalForm({
               {t("form.festivalMessage")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Textarea
-              placeholder={t("form.festivalMessagePlaceholder")}
+              placeholder={t("form.festivalMessagePlaceholder", { name: "{name}", business_name: "{business_name}" })}
               value={formData.message}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, message: e.target.value }))
@@ -196,7 +196,7 @@ export default function FestivalForm({
               required
             />
             <p className="text-xs text-muted-foreground">
-              {t("form.personalizationHint")}
+              {t("form.personalizationHint", { name: "{name}", business_name: "{business_name}" })}
             </p>
           </div>
 

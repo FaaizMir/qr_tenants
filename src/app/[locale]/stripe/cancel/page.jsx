@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function StripeCancelPage() {
+  const t = useTranslations("merchantPurchase.stripeCancel");
   const { data: session } = useSession();
   const params = useParams();
   const locale = params?.locale || "en";
@@ -17,17 +19,17 @@ export default function StripeCancelPage() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center space-y-4">
       <h1 className="text-3xl font-bold tracking-tight">
-        Payment cancelled
+        {t("title")}
       </h1>
       <p className="text-muted-foreground max-w-md">
-        Your Stripe Checkout session was cancelled. No payment was taken.
+        {t("description")}
       </p>
       <div className="flex gap-3">
         <Link href={backPath}>
-          <Button>{isAgent ? "Back to dashboard" : "Back to purchase"}</Button>
+          <Button>{isAgent ? t("backToDashboard") : t("backToPurchase")}</Button>
         </Link>
         <Link href={walletPath}>
-          <Button variant="outline">Go to wallet</Button>
+          <Button variant="outline">{t("goToWallet")}</Button>
         </Link>
       </div>
     </div>

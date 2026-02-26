@@ -1,59 +1,99 @@
 {
-  "title": "अपने स्टोर को पावर अप करें",
-  "subtitle": "व्हाट्सएप संदेश, कूपन निर्माण और भुगतान विज्ञापनों के लिए एक क्रेडिट पैकेज चुनें।",
-  "loading": "पैकेज लोड हो रहे हैं...",
-  "errors": {
-    "loadPackages": "क्रेडिट पैकेज लोड करने में असमर्थ। कृपया पुनः प्रयास करें।",
-    "noMerchantId": "व्यापारी आईडी निर्धारित करने में असमर्थ। कृपया सहायता से संपर्क करें।",
-    "purchaseFailed": "पैकेज खरीदने में विफल। कृपया पुनः प्रयास करें।",
-    "requestFailed": "अनुरोध स्थिति {status} के साथ विफल रहा।"
+  "checkout": {
+    "amountPayable": "भुगतान करने योग्य राशि",
+    "bonusGift": "बोनस उपहार",
+    "cardDetails": "कार्ड विवरण",
+    "creditsIncluded": "क्रेडिट शामिल हैं",
+    "noSelection": "कोई पैकेज चयनित नहीं",
+    "noSelectionMessage": "कृपया चेकआउट के साथ जारी रखने के लिए एक पैकेज चुनें।",
+    "packageType": "पैकेज प्रकार",
+    "paymentInfo": "नीचे अपनी भुगतान जानकारी दर्ज करें",
+    "premiumDescription": "उन्नत सुविधाओं के साथ प्रीमियम क्रेडिट पैकेज",
+    "securePayment": "सुरक्षित भुगतान",
+    "sslEncrypted": "SSL एन्क्रिप्टेड",
+    "subtitle": "अपने खरीदारी की समीक्षा करें",
+    "title": "आदेश सारांश",
+    "totalAmount": "कुल राशि",
+    "trustedPartners": "विश्वसनीय भागीदार"
   },
   "emptyState": {
-    "noPackages": "आपके व्यापारी प्रकार के लिए कोई क्रेडिट पैकेज नहीं मिला।"
+    "noPackages": "इस समय कोई क्रेडिट पैकेज उपलब्ध नहीं हैं।"
   },
-  "packageTypes": {
-    "coupon": "कूपन",
-    "whatsappUI": "व्हाट्सएप UI संदेश",
-    "whatsappBI": "व्हाट्सएप BI संदेश",
-    "whatsapp": "व्हाट्सएप संदेश",
-    "paidAds": "भुगतान विज्ञापन",
-    "standard": "मानक"
+  "errors": {
+    "agentBalanceInsufficient": "एजेंट प्रीपेड बैलेंस अपर्याप्त",
+    "agentBalanceInsufficinetDescription": "आपके एजेंट को अपने प्रीपेड वॉलेट को टॉप अप करने की आवश्यकता है। कृपया इस खरीदारी को पूरा करने से पहले अपने एजेंट से धन जोड़ने के लिए संपर्क करें।",
+    "loadPackages": "क्रेडिट पैकेज लोड करने में विफल",
+    "noMerchantId": "व्यापारी आईडी नहीं मिली। कृपया फिर से लॉग इन करें।",
+    "purchaseFailed": "पैकेज खरीदने में विफल। कृपया फिर से प्रयास करें।"
   },
   "merchantTypes": {
     "annual": "वार्षिक",
-    "temporary": "अस्थायी",
-    "standard": "मानक"
+    "standard": "मानक",
+    "temporary": "अस्थायी"
   },
   "packageCard": {
-    "perCredit": "प्रति क्रेडिट",
-    "baseCredits": "{credits} बेस क्रेडिट",
+    "baseCredits": "{credits} क्रेडिट शामिल हैं",
     "bonusCredits": "+{bonusCredits} बोनस क्रेडिट",
-    "enhancedFeatures": "उन्नत सुविधाएँ और क्षमता",
-    "getStarted": "शुरू करें"
+    "enhancedFeatures": "आपके व्यवसाय के लिए उन्नत सुविधाएँ",
+    "getStarted": "शुरू करें",
+    "perCredit": "प्रति क्रेडिट"
   },
-  "checkout": {
-    "title": "ऑर्डर अवलोकन",
-    "subtitle": "चेकआउट विवरण",
-    "selectedPackage": "चयनित पैकेज",
-    "premiumDescription": "आपके व्यवसाय की वृद्धि के लिए प्रीमियम क्रेडिट पैकेज।",
-    "creditsIncluded": "शामिल क्रेडिट",
-    "bonusGift": "बोनस उपहार",
-    "packageType": "पैकेज प्रकार",
-    "totalAmount": "कुल राशि",
-    "securePayment": "सुरक्षित भुगतान",
-    "sslEncrypted": "SSL एन्क्रिप्टेड स्ट्राइप गेटवे",
-    "cardDetails": "कार्ड विवरण",
-    "paymentInfo": "कृपया नीचे अपनी भुगतान जानकारी दर्ज करें।",
-    "amountPayable": "देय राशि",
-    "trustedPartners": "विश्वसनीय भागीदार",
-    "noSelection": "कोई चयन नहीं मिला",
-    "noSelectionMessage": "कृपया इस विंडो को बंद करें और अपने अपग्रेड के साथ आगे बढ़ने के लिए एक क्रेडिट पैकेज चुनें।"
+  "packageTypes": {
+    "coupon": "कूपन",
+    "paidAds": "भुगतान किए गए विज्ञापन",
+    "standard": "मानक",
+    "whatsapp": "व्हाट्सएप",
+    "whatsappBI": "व्हाट्सएप BI",
+    "whatsappUI": "व्हाट्सएप UI"
   },
+  "page": {
+    "breadcrumb": "खरीदें",
+    "dashboardBreadcrumb": "व्यापारी डैशबोर्ड"
+  },
+  "stripeCancel": {
+    "backToDashboard": "डैशबोर्ड पर वापस जाएं",
+    "backToPurchase": "खरीदारी पर वापस जाएं",
+    "description": "आपका स्ट्राइप चेकआउट सत्र रद्द कर दिया गया। कोई भुगतान नहीं लिया गया।",
+    "goToWallet": "वॉलेट पर जाएं",
+    "title": "भुगतान रद्द कर दिया गया"
+  },
+  "stripeCheckout": {
+    "credits": "क्रेडिट",
+    "errors": {
+      "insufficientBalance": "अपर्याप्त एजेंट वॉलेट बैलेंस। आवश्यक: {required}, उपलब्ध: {available}। कृपया इस खरीदारी को पूरा करने के लिए अपने वॉलेट को टॉप अप करें।",
+      "noAdminId": "सत्र से व्यवस्थापक आईडी प्राप्त करने में असमर्थ। कृपया फिर से लॉग इन करें।",
+      "startCheckout": "स्ट्राइप चेकआउट शुरू करने में असमर्थ। कृपया फिर से प्रयास करें।",
+      "startPayment": "भुगतान शुरू करने में असमर्थ। कृपया फिर से प्रयास करें।",
+      "validateBalance": "वॉलेट बैलेंस को मान्य करने में असमर्थ। कृपया सहायता से संपर्क करें।",
+      "validateBalanceRetry": "वॉलेट बैलेंस को मान्य करने में असमर्थ। कृपया फिर से प्रयास करें।"
+    },
+    "packagePurchase": "पैकेज खरीदें",
+    "payableAmount": "भुगतान करने योग्य राशि",
+    "payWithStripe": "Stripe के साथ भुगतान करें",
+    "redirecting": "स्ट्राइप पर रीडायरेक्ट किया जा रहा है..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "डैशबोर्ड पर वापस जाएं",
+    "backToPurchase": "खरीदारी पर वापस जाएं",
+    "description": "आपका भुगतान सफलतापूर्वक पूरा हो गया।",
+    "goToWallet": "वॉलेट पर जाएं",
+    "processing": "आपके वॉलेट में क्रेडिट जोड़ना...",
+    "reflected": "क्रेडिट जल्द ही आपके वॉलेट में दिखाई देंगे।",
+    "title": "भुगतान सफल",
+    "toasts": {
+      "creditsAdded": "क्रेडिट सफलतापूर्वक जोड़े गए!",
+      "processingFailed": "भुगतान सफल, लेकिन आपके खाते को अपडेट करने में विफल। कृपया सहायता से संपर्क करें।",
+      "subscriptionActivated": "सदस्यता सफलतापूर्वक सक्रिय की गई!",
+      "subscriptionRenewed": "सदस्यता सफलतापूर्वक नवीनीकरण किया गया!",
+      "upgradedToAnnual": "वार्षिक सदस्यता में सफलतापूर्वक अपग्रेड किया गया!",
+      "upgradeFailed": "अपग्रेड विफल: प्रशासनिक जानकारी गायब।",
+      "walletBalance": "वॉलेट बैलेंस: {currency} {balance}",
+      "walletToppedUp": "वॉलेट सफलतापूर्वक टॉप अप किया गया! जोड़ा गया {currency} {amount}"
+    }
+  },
+  "subtitle": "एक क्रेडिट पैकेज चुनें जो आपके व्यवसाय की आवश्यकताओं के अनुकूल हो",
   "success": {
-    "purchaseComplete": "पैकेज सफलतापूर्वक खरीदा गया।"
+    "purchaseComplete": "खरीदारी सफलतापूर्वक पूरी हुई!"
   },
-  "toast": {
-    "purchaseSuccess": "पैकेज सफलतापूर्वक खरीदा गया।",
-    "purchaseError": "पैकेज खरीदने में विफल। कृपया पुनः प्रयास करें।"
-  }
+  "title": "क्रेडिट खरीदें"
 }

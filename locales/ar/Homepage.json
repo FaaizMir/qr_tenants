@@ -66,6 +66,8 @@
       "city": "مدينة",
       "curatingMessage": "نحن نجمع أفضل التجار المعتمدين والعروض الحصرية لك...",
       "everywhere": "في كل مكان",
+      "expiringSoon": "ستنتهي قريبًا",
+      "expiringSoonActive": "ستنتهي قريبًا ✓",
       "industry": "صناعة",
       "loadingMarketplace": "جارٍ تحميل السوق",
       "noMerchantsFound": "لم يتم العثور على تجار",
@@ -147,6 +149,8 @@
       "agents": "الوكلاء",
       "allCountries": "جميع البلدان",
       "description": "إدارة شبكة وكلاء المستأجرين العالمية الخاصة بك.",
+      "expiringSoon": "ستنتهي قريبًا",
+      "expiringSoonActive": "ستنتهي قريبًا ✓",
       "noAgentsFound": "لم يتم العثور على وكلاء",
       "of": "من",
       "pageNoResults": "الصفحة - لا توجد نتائج",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "اتصل",
       "copyright": "© 2024 QR Rev Inc. جميع الحقوق محفوظة.",
+      "globalMerchantNetwork": "شبكة التجار العالمية",
       "privacy": "الخصوصية",
       "terms": "الشروط"
     },

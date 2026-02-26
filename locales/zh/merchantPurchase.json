@@ -1,59 +1,99 @@
 {
-  "title": "为您的商店充电",
-  "subtitle": "选择用于WhatsApp消息、优惠券创建和付费广告的积分套餐。",
-  "loading": "正在加载套餐...",
-  "errors": {
-    "loadPackages": "无法加载积分套餐。请重试。",
-    "noMerchantId": "无法确定商户ID。请联系支持。",
-    "purchaseFailed": "购买套餐失败。请重试。",
-    "requestFailed": "请求失败，状态为{status}。"
+  "checkout": {
+    "amountPayable": "应付金额",
+    "bonusGift": "奖励礼物",
+    "cardDetails": "卡片详情",
+    "creditsIncluded": "包含积分",
+    "noSelection": "未选择套餐",
+    "noSelectionMessage": "请选择一个包以继续结账。",
+    "packageType": "套餐类型",
+    "paymentInfo": "在下面输入您的支付信息",
+    "premiumDescription": "具有增强功能的高级信用套餐",
+    "securePayment": "安全支付",
+    "sslEncrypted": "SSL 加密",
+    "subtitle": "查看您的购买",
+    "title": "订单摘要",
+    "totalAmount": "总金额",
+    "trustedPartners": "可信赖的合作伙伴"
   },
   "emptyState": {
-    "noPackages": "未找到适合您商户类型的积分套餐。"
+    "noPackages": "目前没有可用的信用包。"
   },
-  "packageTypes": {
-    "coupon": "优惠券",
-    "whatsappUI": "WhatsApp UI消息",
-    "whatsappBI": "WhatsApp BI消息",
-    "whatsapp": "WhatsApp消息",
-    "paidAds": "付费广告",
-    "standard": "标准"
+  "errors": {
+    "agentBalanceInsufficient": "代理预付余额不足",
+    "agentBalanceInsufficinetDescription": "您的代理需要为他们的预付钱包充值。请联系您的代理在完成此购买之前添加资金。",
+    "loadPackages": "加载信用包失败",
+    "noMerchantId": "未找到商户 ID。请重新登录。",
+    "purchaseFailed": "购买包失败。请再试一次。"
   },
   "merchantTypes": {
     "annual": "年度",
-    "temporary": "临时",
-    "standard": "标准"
+    "standard": "标准",
+    "temporary": "临时"
   },
   "packageCard": {
-    "perCredit": "每积分",
-    "baseCredits": "{credits}基础积分",
-    "bonusCredits": "+{bonusCredits}奖励积分",
-    "enhancedFeatures": "增强的功能和容量",
-    "getStarted": "开始使用"
+    "baseCredits": "包含 {credits} 个信用",
+    "bonusCredits": "+{bonusCredits} 奖励积分",
+    "enhancedFeatures": "为您的业务提供增强功能",
+    "getStarted": "开始使用",
+    "perCredit": "每个信用"
   },
-  "checkout": {
-    "title": "订单概览",
-    "subtitle": "结账详情",
-    "selectedPackage": "已选套餐",
-    "premiumDescription": "为您的业务增长提供的高级积分套餐。",
-    "creditsIncluded": "包含积分",
-    "bonusGift": "奖励礼物",
-    "packageType": "套餐类型",
-    "totalAmount": "总金额",
-    "securePayment": "安全支付",
-    "sslEncrypted": "SSL加密Stripe网关",
-    "cardDetails": "卡片详情",
-    "paymentInfo": "请在下方输入您的支付信息。",
-    "amountPayable": "应付金额",
-    "trustedPartners": "可信赖的合作伙伴",
-    "noSelection": "未找到选择",
-    "noSelectionMessage": "请关闭此窗口并选择积分套餐以继续您的升级。"
+  "packageTypes": {
+    "coupon": "优惠券",
+    "paidAds": "付费广告",
+    "standard": "标准",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "WhatsApp 界面"
   },
+  "page": {
+    "breadcrumb": "购买",
+    "dashboardBreadcrumb": "商户仪表板"
+  },
+  "stripeCancel": {
+    "backToDashboard": "返回仪表板",
+    "backToPurchase": "返回购买",
+    "description": "您的 Stripe 结账会话已取消。未进行任何支付。",
+    "goToWallet": "前往钱包",
+    "title": "支付已取消"
+  },
+  "stripeCheckout": {
+    "credits": "积分",
+    "errors": {
+      "insufficientBalance": "代理钱包余额不足。所需：{required}，可用：{available}。请充值您的钱包以完成此购买。",
+      "noAdminId": "无法从会话中检索管理员 ID。请重新登录。",
+      "startCheckout": "无法启动 Stripe 结账。请再试一次。",
+      "startPayment": "无法开始支付。请再试一次。",
+      "validateBalance": "无法验证钱包余额。请联系支持。",
+      "validateBalanceRetry": "无法验证钱包余额。请再试一次。"
+    },
+    "packagePurchase": "套餐购买",
+    "payableAmount": "应付金额",
+    "payWithStripe": "使用 Stripe 支付",
+    "redirecting": "正在重定向到 Stripe..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "返回仪表板",
+    "backToPurchase": "返回购买",
+    "description": "您的支付已成功完成。",
+    "goToWallet": "前往钱包",
+    "processing": "正在向您的钱包添加积分...",
+    "reflected": "积分将很快反映在您的钱包中。",
+    "title": "支付成功",
+    "toasts": {
+      "creditsAdded": "积分添加成功！",
+      "processingFailed": "支付成功，但未能更新您的帐户。请联系支持。",
+      "subscriptionActivated": "订阅成功激活！",
+      "subscriptionRenewed": "订阅成功续订！",
+      "upgradedToAnnual": "成功升级到年度订阅！",
+      "upgradeFailed": "升级失败：缺少管理员信息。",
+      "walletBalance": "钱包余额：{currency} {balance}",
+      "walletToppedUp": "钱包充值成功！添加了 {currency} {amount}"
+    }
+  },
+  "subtitle": "选择适合您业务需求的信用包",
   "success": {
-    "purchaseComplete": "套餐购买成功。"
+    "purchaseComplete": "购买成功！"
   },
-  "toast": {
-    "purchaseSuccess": "套餐购买成功。",
-    "purchaseError": "购买套餐失败。请重试。"
-  }
+  "title": "购买信用"
 }

@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "Hành động",
+    "contactInfo": "Thông tin liên hệ",
+    "dateOfBirth": "Ngày sinh",
+    "gender": "Giới tính",
+    "name": "Tên",
+    "notAvailable": "Không áp dụng",
+    "reward": {
+      "eligible": "Đủ điều kiện",
+      "notEligible": "Không đủ điều kiện"
+    },
+    "rewardStatus": "Trạng thái thưởng",
+    "viewDetails": "Chi tiết"
+  },
+  "details": {
+    "backButton": "Quay lại khách hàng",
+    "badge": {
+      "eligibleForReward": "Đủ điều kiện nhận thưởng",
+      "standardCustomer": "Khách hàng tiêu chuẩn"
+    },
+    "error": "Không thể tải thông tin khách hàng. Vui lòng thử lại sau.",
+    "loading": "Đang tải thông tin khách hàng...",
+    "notFound": "Không tìm thấy khách hàng",
+    "sections": {
+      "address": {
+        "noAddress": "Không có địa chỉ được cung cấp",
+        "title": "Địa chỉ liên hệ"
+      },
+      "essentialInfo": {
+        "active": "Hoạt động",
+        "dateOfBirth": "Ngày sinh",
+        "gender": "Giới tính",
+        "inactive": "Không hoạt động",
+        "notSpecified": "Không xác định",
+        "phoneNumber": "Số điện thoại",
+        "rewardStatus": "Trạng thái Phần thưởng"
+      },
+      "systemInfo": {
+        "createdAt": "Ngày tạo",
+        "customerId": "ID khách hàng",
+        "lastUpdated": "Cập nhật lần cuối",
+        "merchantId": "ID thương nhân",
+        "title": "Thông tin hệ thống"
+      }
+    },
+    "subtitle": "Tổng quan chi tiết về thông tin khách hàng",
+    "title": "Hồ sơ Khách hàng"
+  },
+  "index": {
+    "exportButton": "Xuất CSV",
+    "locked": {
+      "description": "Quyền truy cập dữ liệu khách hàng chỉ có sẵn cho các thành viên của gói đăng ký thông tin hàng năm.",
+      "title": "Tính năng cao cấp",
+      "upgradeCard": {
+        "features": {
+          "feature1": "Truy cập hồ sơ khách hàng chi tiết",
+          "feature2": "Xuất dữ liệu khách hàng (CSV/Excel)",
+          "feature3": "Phân khúc nâng cao",
+          "feature4": "Giới hạn phiếu giảm giá cao hơn (10.000/lần)"
+        },
+        "subtitle": "Mở khóa thông tin khách hàng đầy đủ",
+        "title": "Nâng cấp lên hàng năm",
+        "upgradeButton": "Nâng cấp ngay"
+      }
+    },
+    "searchPlaceholder": "Tìm kiếm khách hàng...",
+    "subtitle": "Xem và quản lý cơ sở dữ liệu khách hàng của bạn",
+    "title": "Dữ liệu khách hàng"
+  },
+  "page": {
+    "breadcrumb": "Dữ liệu Khách hàng",
+    "customerDetailsBreadcrumb": "Chi tiết Khách hàng",
+    "dashboardBreadcrumb": "Bảng điều khiển Người bán"
+  }
+}

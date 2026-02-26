@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "إجراءات",
+    "downloadPdf": "تنزيل PDF",
+    "generatedAt": "تم إنشاؤه في",
+    "month": "الشهر",
+    "period": "الفترة",
+    "status": "الحالة",
+    "statusLabels": {
+      "failed": "فشل",
+      "generated": "تم الإنشاء",
+      "pending": "معلق"
+    },
+    "totalSpend": "إجمالي الإنفاق",
+    "unknown": "غير معروف"
+  },
+  "index": {
+    "empty": {
+      "description": "لا توجد بيانات متاحة للفترة المحددة. قم بإنشاء بيان جديد للبدء.",
+      "title": "لم يتم العثور على بيانات"
+    },
+    "filters": {
+      "currentMonth": "الشهر الحالي",
+      "description": "تصفية البيانات حسب السنة والشهر",
+      "loading": "جار التحميل...",
+      "month": "الشهر",
+      "quickActions": "إجراءات سريعة",
+      "refreshList": "تحديث القائمة",
+      "selectYear": "اختر السنة",
+      "title": "مرشحات البيانات",
+      "year": "السنة"
+    },
+    "months": {
+      "april": "أبريل",
+      "august": "أغسطس",
+      "december": "ديسمبر",
+      "february": "فبراير",
+      "january": "يناير",
+      "july": "يوليو",
+      "june": "يونيو",
+      "march": "مارس",
+      "may": "مايو",
+      "november": "نوفمبر",
+      "october": "أكتوبر",
+      "september": "سبتمبر"
+    },
+    "subtitle": "تقارير PDF الشهرية التي تم إنشاؤها تلقائيًا بما في ذلك الأرباح والرسوم ودخل الحزمة ودفتر المحفظة.",
+    "table": {
+      "found": "تم العثور عليه",
+      "loadingStatements": "جارٍ تحميل البيانات...",
+      "statementsFound": "بيان",
+      "statementsFoundPlural": "البيانات",
+      "title": "تاريخ البيان"
+    },
+    "title": "البيانات المالية للتجار",
+    "toasts": {
+      "downloadFailed": "فشل في تنزيل PDF. يرجى المحاولة مرة أخرى.",
+      "downloadSuccess": "تم تنزيل البيان بنجاح!",
+      "loadFailed": "فشل في تحميل البيانات. يرجى المحاولة مرة أخرى."
+    }
+  }
+}

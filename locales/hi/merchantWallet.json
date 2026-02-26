@@ -69,6 +69,10 @@
   },
   "loadMore": "और लोड करें",
   "noTransactions": "कोई लेनदेन नहीं मिला",
+  "page": {
+    "breadcrumb": "बटुआ",
+    "dashboardBreadcrumb": "व्यापारी डैशबोर्ड"
+  },
   "remainingCredits": "शेष क्रेडिट",
   "subscription": {
     "annual": "वार्षिक",

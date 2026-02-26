@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "アクション",
+    "downloadPdf": "PDFをダウンロード",
+    "generatedAt": "生成日時",
+    "month": "月",
+    "period": "期間",
+    "status": "ステータス",
+    "statusLabels": {
+      "failed": "失敗",
+      "generated": "生成済み",
+      "pending": "保留中"
+    },
+    "totalSpend": "総支出",
+    "unknown": "不明"
+  },
+  "index": {
+    "empty": {
+      "description": "選択した期間に利用可能な明細はありません。新しい明細を生成して開始してください。",
+      "title": "明細が見つかりませんでした"
+    },
+    "filters": {
+      "currentMonth": "現在の月",
+      "description": "年と月で明細をフィルタリング",
+      "loading": "読み込み中...",
+      "month": "月",
+      "quickActions": "クイックアクション",
+      "refreshList": "リストを更新",
+      "selectYear": "年を選択",
+      "title": "明細フィルター",
+      "year": "年"
+    },
+    "months": {
+      "april": "4月",
+      "august": "8月",
+      "december": "12月",
+      "february": "2月",
+      "january": "1月",
+      "july": "7月",
+      "june": "6月",
+      "march": "3月",
+      "may": "5月",
+      "november": "11月",
+      "october": "10月",
+      "september": "9月"
+    },
+    "subtitle": "毎月自動生成されるPDFレポートには、収益、手数料、パッケージ収入、ウォレット元帳が含まれています。",
+    "table": {
+      "found": "見つかりました",
+      "loadingStatements": "ステートメントを読み込んでいます...",
+      "statementsFound": "ステートメント",
+      "statementsFoundPlural": "ステートメント",
+      "title": "ステートメント履歴"
+    },
+    "title": "マーチャント財務諸表",
+    "toasts": {
+      "downloadFailed": "PDFのダウンロードに失敗しました。再試行してください。",
+      "downloadSuccess": "ステートメントが正常にダウンロードされました！",
+      "loadFailed": "明細の読み込みに失敗しました。再試行してください。"
+    }
+  }
+}

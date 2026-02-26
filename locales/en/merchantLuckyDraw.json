@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "Actions",
+    "actionsMenu": {
+      "delete": "Delete Prize",
+      "edit": "Edit Prize",
+      "label": "Actions",
+      "openMenu": "Open menu"
+    },
+    "dailyLimit": "Daily Limit",
+    "description": "Description",
+    "prizeName": "Prize Name",
+    "probability": "Probability",
+    "status": "Status",
+    "statusActive": "Active",
+    "statusInactive": "Inactive",
+    "totalLimit": "Total Limit",
+    "type": "Type"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Prize",
+      "creating": "Creating...",
+      "update": "Update Prize",
+      "updating": "Updating..."
+    },
+    "cardDescription": {
+      "create": "Create a new prize for the lucky draw",
+      "edit": "Update the prize information"
+    },
+    "cardTitle": {
+      "create": "Add New Prize",
+      "edit": "Edit Prize"
+    },
+    "createSubtitle": "Add a new prize to the lucky draw",
+    "createTitle": "Create Prize",
+    "editSubtitle": "Update prize details",
+    "editTitle": "Edit Prize",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "No batches found",
+        "label": "Coupon Batch",
+        "placeholder": "Select coupon batch...",
+        "required": "Coupon batch is required",
+        "searchPlaceholder": "Search batches..."
+      },
+      "dailyLimit": {
+        "label": "Daily Limit"
+      },
+      "prizeDescription": {
+        "label": "Prize Description"
+      },
+      "prizeName": {
+        "label": "Prize Name",
+        "required": "Prize name is required"
+      },
+      "prizeType": {
+        "label": "Prize Type",
+        "options": {
+          "coupon": "Coupon"
+        }
+      },
+      "probability": {
+        "label": "Probability (%)",
+        "max": "Max 100%",
+        "min": "Min 0%",
+        "required": "Probability is required"
+      },
+      "sortOrder": {
+        "label": "Sort Order"
+      },
+      "status": {
+        "label": "Status",
+        "options": {
+          "active": "Active",
+          "inactive": "Inactive"
+        }
+      },
+      "totalLimit": {
+        "label": "Total Limit"
+      }
+    },
+    "importantNotes": {
+      "note1": "Total probability must equal 100%",
+      "note2": "Each prize requires a linked coupon batch",
+      "note3": "Daily limits reset at midnight",
+      "note4": "If a prize limit is reached, the system will skip to the next available prize",
+      "title": "Important"
+    },
+    "toasts": {
+      "createSuccess": "Prize created successfully!",
+      "loadFailed": "Failed to load prize details",
+      "noBatchSelected": "Please select a coupon batch",
+      "noMerchantId": "Merchant ID not found",
+      "saveFailed": "Failed to save prize",
+      "updateSuccess": "Prize updated successfully!"
+    }
+  },
+  "index": {
+    "createButton": "Create Prize",
+    "deleteDialog": {
+      "cancel": "Cancel",
+      "confirm": "Delete",
+      "description": "This will permanently delete the prize \"{prizeName}\". This action cannot be undone.",
+      "title": "Are you sure?"
+    },
+    "prizesCard": {
+      "description": "Manage all prizes for the lucky draw",
+      "title": "Prizes"
+    },
+    "searchPlaceholder": "Search prizes by name, description, or type...",
+    "subtitle": "Configure the \"Spin the Wheel\" prizes for customers who complete a review.",
+    "title": "Lucky Draw Settings",
+    "toasts": {
+      "deleteFailed": "Failed to delete prize",
+      "deleteSuccess": "Prize deleted successfully!",
+      "loadFailed": "Failed to load prizes"
+    }
+  },
+  "page": {
+    "breadcrumb": "Lucky Draw",
+    "dashboardBreadcrumb": "Merchant Dashboard"
+  }
+}

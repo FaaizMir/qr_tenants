@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "contactInfo": "Maklumat Hubungi",
+    "dateOfBirth": "Tarikh Lahir",
+    "gender": "Jantina",
+    "name": "Nama",
+    "notAvailable": "N/A",
+    "reward": {
+      "eligible": "Layak",
+      "notEligible": "Tidak Layak"
+    },
+    "rewardStatus": "Status Ganjaran",
+    "viewDetails": "Butiran"
+  },
+  "details": {
+    "backButton": "Kembali ke Pelanggan",
+    "badge": {
+      "eligibleForReward": "Layak untuk Ganjaran",
+      "standardCustomer": "Pelanggan Standard"
+    },
+    "error": "Gagal memuatkan butiran pelanggan. Sila cuba lagi nanti.",
+    "loading": "Memuatkan butiran pelanggan...",
+    "notFound": "Pelanggan tidak ditemui",
+    "sections": {
+      "address": {
+        "noAddress": "Tiada alamat diberikan",
+        "title": "Alamat Hubungi"
+      },
+      "essentialInfo": {
+        "active": "Aktif",
+        "dateOfBirth": "Tarikh Lahir",
+        "gender": "Jantina",
+        "inactive": "Tidak Aktif",
+        "notSpecified": "Tidak dinyatakan",
+        "phoneNumber": "Nombor Telefon",
+        "rewardStatus": "Status Ganjaran"
+      },
+      "systemInfo": {
+        "createdAt": "Dicipta Pada",
+        "customerId": "ID Pelanggan",
+        "lastUpdated": "Dikemas kini Terakhir",
+        "merchantId": "ID Pedagang",
+        "title": "Maklumat Sistem"
+      }
+    },
+    "subtitle": "Gambaran terperinci mengenai maklumat pelanggan",
+    "title": "Profil Pelanggan"
+  },
+  "index": {
+    "exportButton": "Eksport CSV",
+    "locked": {
+      "description": "Akses data pelanggan hanya tersedia untuk ahli pelan Langganan Maklumat Tahunan.",
+      "title": "Ciri Premium",
+      "upgradeCard": {
+        "features": {
+          "feature1": "Akses profil pelanggan yang terperinci",
+          "feature2": "Eksport data pelanggan (CSV/Excel)",
+          "feature3": "Pemisahan lanjutan",
+          "feature4": "Had kupon yang lebih tinggi (10,000/kelompok)"
+        },
+        "subtitle": "Buka pandangan pelanggan sepenuhnya",
+        "title": "Tingkatkan ke Tahunan",
+        "upgradeButton": "Tingkatkan Sekarang"
+      }
+    },
+    "searchPlaceholder": "Cari pelanggan...",
+    "subtitle": "Lihat dan urus pangkalan data pelanggan anda",
+    "title": "Data Pelanggan"
+  },
+  "page": {
+    "breadcrumb": "Data Pelanggan",
+    "customerDetailsBreadcrumb": "Butiran Pelanggan",
+    "dashboardBreadcrumb": "Papan Pemuka Pedagang"
+  }
+}

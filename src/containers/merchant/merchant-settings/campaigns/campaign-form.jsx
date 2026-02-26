@@ -205,7 +205,7 @@ export default function CampaignFormDialog({
               {t("form.campaignMessage")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Textarea
-              placeholder={t("form.campaignMessagePlaceholder")}
+              placeholder={t("form.campaignMessagePlaceholder", { name: "{name}" })}
               value={formData.message}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, message: e.target.value }))
@@ -214,7 +214,7 @@ export default function CampaignFormDialog({
               required
             />
             <p className="text-xs text-muted-foreground">
-              {t("form.personalizationHint")}
+              {t("form.personalizationHint", { name: "{name}" })}
             </p>
           </div>
 

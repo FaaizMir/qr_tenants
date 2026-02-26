@@ -66,6 +66,8 @@
       "city": "都市",
       "curatingMessage": "私たちはあなたのために最高の認証された商人と独占的な取引をキュレーションしています...",
       "everywhere": "どこでも",
+      "expiringSoon": "まもなく期限切れ",
+      "expiringSoonActive": "まもなく期限切れ ✓",
       "industry": "業界",
       "loadingMarketplace": "マーケットプレイスを読み込んでいます",
       "noMerchantsFound": "マーチャントが見つかりませんでした",
@@ -147,6 +149,8 @@
       "agents": "エージェント",
       "allCountries": "すべての国",
       "description": "グローバルなテナントエージェントネットワークを管理します。",
+      "expiringSoon": "まもなく期限切れ",
+      "expiringSoonActive": "まもなく期限切れ ✓",
       "noAgentsFound": "エージェントが見つかりません",
       "of": "の",
       "pageNoResults": "ページ - 結果がありません",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "お問い合わせ",
       "copyright": "© 2024 QR Rev Inc. 無断転載を禁じます。",
+      "globalMerchantNetwork": "グローバルマーチャントネットワーク",
       "privacy": "プライバシー",
       "terms": "利用規約"
     },

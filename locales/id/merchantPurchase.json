@@ -1,59 +1,99 @@
 {
-  "title": "Tingkatkan Toko Anda",
-  "subtitle": "Pilih paket kredit untuk pesan WhatsApp, pembuatan kupon, dan iklan berbayar.",
-  "loading": "Memuat paket...",
-  "errors": {
-    "loadPackages": "Tidak dapat memuat paket kredit. Silakan coba lagi.",
-    "noMerchantId": "Tidak dapat menentukan ID merchant. Silakan hubungi dukungan.",
-    "purchaseFailed": "Gagal membeli paket. Silakan coba lagi.",
-    "requestFailed": "Permintaan gagal dengan status {status}."
+  "checkout": {
+    "amountPayable": "Jumlah yang Harus Dibayar",
+    "bonusGift": "Hadiah Bonus",
+    "cardDetails": "Detail Kartu",
+    "creditsIncluded": "Kredit Termasuk",
+    "noSelection": "Tidak Ada Paket yang Dipilih",
+    "noSelectionMessage": "Silakan pilih paket untuk melanjutkan proses checkout.",
+    "packageType": "Jenis Paket",
+    "paymentInfo": "Masukkan informasi pembayaran Anda di bawah",
+    "premiumDescription": "Paket kredit premium dengan fitur yang ditingkatkan",
+    "securePayment": "Pembayaran Aman",
+    "sslEncrypted": "Terenkripsi SSL",
+    "subtitle": "Tinjau pembelian Anda",
+    "title": "Ringkasan Pesanan",
+    "totalAmount": "Jumlah Total",
+    "trustedPartners": "Mitra Terpercaya"
   },
   "emptyState": {
-    "noPackages": "Tidak ada paket kredit yang ditemukan untuk jenis merchant Anda."
+    "noPackages": "Tidak ada paket kredit yang tersedia saat ini."
   },
-  "packageTypes": {
-    "coupon": "Kupon",
-    "whatsappUI": "Pesan WhatsApp UI",
-    "whatsappBI": "Pesan WhatsApp BI",
-    "whatsapp": "Pesan WhatsApp",
-    "paidAds": "Iklan Berbayar",
-    "standard": "Standar"
+  "errors": {
+    "agentBalanceInsufficient": "Saldo Prabayar Agen Tidak Cukup",
+    "agentBalanceInsufficinetDescription": "Agen Anda perlu mengisi ulang dompet prabayar mereka. Silakan hubungi agen Anda untuk menambahkan dana sebelum menyelesaikan pembelian ini.",
+    "loadPackages": "Gagal memuat paket kredit",
+    "noMerchantId": "ID Merchant tidak ditemukan. Silakan masuk lagi.",
+    "purchaseFailed": "Gagal membeli paket. Silakan coba lagi."
   },
   "merchantTypes": {
     "annual": "Tahunan",
-    "temporary": "Sementara",
-    "standard": "Standar"
+    "standard": "Standar",
+    "temporary": "Sementara"
   },
   "packageCard": {
-    "perCredit": "per kredit",
-    "baseCredits": "{credits} Kredit Dasar",
-    "bonusCredits": "+{bonusCredits} Kredit Bonus",
-    "enhancedFeatures": "Fitur dan kapasitas yang ditingkatkan",
-    "getStarted": "Mulai"
+    "baseCredits": "{credits} kredit termasuk",
+    "bonusCredits": "+{bonusCredits} kredit bonus",
+    "enhancedFeatures": "Fitur yang ditingkatkan untuk bisnis Anda",
+    "getStarted": "Mulai",
+    "perCredit": "per kredit"
   },
-  "checkout": {
-    "title": "Ringkasan Pesanan",
-    "subtitle": "Detail checkout",
-    "selectedPackage": "Paket Terpilih",
-    "premiumDescription": "Paket kredit premium untuk pertumbuhan bisnis Anda.",
-    "creditsIncluded": "Kredit Termasuk",
-    "bonusGift": "Hadiah Bonus",
-    "packageType": "Jenis Paket",
-    "totalAmount": "Jumlah Total",
-    "securePayment": "Pembayaran Aman",
-    "sslEncrypted": "Gateway Stripe Terenkripsi SSL",
-    "cardDetails": "Detail Kartu",
-    "paymentInfo": "Silakan masukkan informasi pembayaran Anda di bawah ini.",
-    "amountPayable": "Jumlah yang Harus Dibayar",
-    "trustedPartners": "Mitra Terpercaya",
-    "noSelection": "Tidak ada pilihan yang ditemukan",
-    "noSelectionMessage": "Silakan tutup jendela ini dan pilih paket kredit untuk melanjutkan upgrade Anda."
+  "packageTypes": {
+    "coupon": "Kupon",
+    "paidAds": "Iklan Berbayar",
+    "standard": "Standar",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "Antarmuka WhatsApp"
   },
+  "page": {
+    "breadcrumb": "Pembelian",
+    "dashboardBreadcrumb": "Dasbor Merchant"
+  },
+  "stripeCancel": {
+    "backToDashboard": "Kembali ke dasbor",
+    "backToPurchase": "Kembali ke pembelian",
+    "description": "Sesi Stripe Checkout Anda dibatalkan. Tidak ada pembayaran yang diambil.",
+    "goToWallet": "Pergi ke dompet",
+    "title": "Pembayaran dibatalkan"
+  },
+  "stripeCheckout": {
+    "credits": "kredit",
+    "errors": {
+      "insufficientBalance": "Saldo dompet agen tidak cukup. Diperlukan: {required}, Tersedia: {available}. Silakan isi ulang dompet Anda untuk menyelesaikan pembelian ini.",
+      "noAdminId": "Tidak dapat mengambil ID admin dari sesi. Silakan masuk lagi.",
+      "startCheckout": "Tidak dapat memulai Stripe Checkout. Silakan coba lagi.",
+      "startPayment": "Tidak dapat memulai pembayaran. Silakan coba lagi.",
+      "validateBalance": "Tidak dapat memvalidasi saldo dompet. Silakan hubungi dukungan.",
+      "validateBalanceRetry": "Tidak dapat memvalidasi saldo dompet. Silakan coba lagi."
+    },
+    "packagePurchase": "Pembelian paket",
+    "payableAmount": "Jumlah yang harus dibayar",
+    "payWithStripe": "Bayar dengan Stripe",
+    "redirecting": "Mengalihkan ke Stripe..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "Kembali ke dasbor",
+    "backToPurchase": "Kembali ke pembelian",
+    "description": "Pembayaran Anda telah berhasil diselesaikan.",
+    "goToWallet": "Pergi ke dompet",
+    "processing": "Menambahkan kredit ke dompet Anda...",
+    "reflected": "Kredit akan tercermin di dompet Anda segera.",
+    "title": "Pembayaran berhasil",
+    "toasts": {
+      "creditsAdded": "Kredit berhasil ditambahkan!",
+      "processingFailed": "Pembayaran berhasil, tetapi gagal memperbarui akun Anda. Silakan hubungi dukungan.",
+      "subscriptionActivated": "Langganan berhasil diaktifkan!",
+      "subscriptionRenewed": "Langganan berhasil diperpanjang!",
+      "upgradedToAnnual": "Berhasil meningkatkan ke Langganan Tahunan!",
+      "upgradeFailed": "Peningkatan gagal: Informasi admin hilang.",
+      "walletBalance": "Saldo dompet: {currency} {balance}",
+      "walletToppedUp": "Dompet berhasil diisi ulang! Ditambahkan {currency} {amount}"
+    }
+  },
+  "subtitle": "Pilih paket kredit yang sesuai dengan kebutuhan bisnis Anda",
   "success": {
-    "purchaseComplete": "Paket berhasil dibeli."
+    "purchaseComplete": "Pembelian berhasil diselesaikan!"
   },
-  "toast": {
-    "purchaseSuccess": "Paket berhasil dibeli.",
-    "purchaseError": "Gagal membeli paket. Silakan coba lagi."
-  }
+  "title": "Beli Kredit"
 }

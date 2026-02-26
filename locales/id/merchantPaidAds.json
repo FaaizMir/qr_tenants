@@ -1,0 +1,75 @@
+{
+  "cropper": {
+    "cancel": "Batal",
+    "description": "Seret untuk memindahkan dan gunakan penggeser untuk memperbesar.",
+    "save": "Simpan Gambar",
+    "title": "Sesuaikan Gambar",
+    "zoom": "Perbesar"
+  },
+  "description": "Konten pemasaran visual",
+  "duration": {
+    "days14": "14 Hari",
+    "days30": "30 Hari",
+    "days7": "7 Hari",
+    "label": "Durasi",
+    "selectPlaceholder": "Pilih durasi"
+  },
+  "messages": {
+    "errorDeleting": "Gagal menghapus",
+    "errorProcessing": "Kesalahan memproses gambar",
+    "errorSaving": "Kesalahan menyimpan pengaturan",
+    "imageDeleted": "Gambar berhasil dihapus",
+    "imageReady": "Gambar siap untuk diunggah. Klik 'Unggah & Simpan' untuk menyelesaikan.",
+    "imageTooLarge": "Ukuran gambar harus kurang dari 10MB",
+    "imageUploaded": "Gambar berhasil diunggah",
+    "noSlotsWarning": "Tidak ada slot iklan yang tersedia. Semua penempatan saat ini terisi — Anda tidak dapat mengunggah iklan baru sampai slot terbuka.",
+    "settingsUpdated": "Pengaturan berhasil diperbarui",
+    "uploadingImage": "Mengunggah gambar...",
+    "uploadingVideo": "Mengunggah video... Ini mungkin memerlukan waktu.",
+    "uploadTimeout": "Waktu unggah habis. Silakan coba dengan file yang lebih kecil atau periksa koneksi Anda.",
+    "videoDeleted": "Video berhasil dihapus",
+    "videoFormatWarning": "Untuk kinerja terbaik, gunakan format MP4 atau WebM.",
+    "videoSelected": "Video yang dipilih. Klik 'Unggah & Simpan' untuk menyelesaikan.",
+    "videoTooLarge": "File video terlalu besar. Ukuran maksimum adalah 25MB.",
+    "videoUploaded": "Video berhasil diunggah"
+  },
+  "placement": {
+    "bottom": "Bawah",
+    "label": "Penempatan Iklan",
+    "left": "Kiri",
+    "loading": "Memuat penempatan...",
+    "noSlotsAvailable": "Tidak ada slot yang tersedia",
+    "noSlotsMessage": "Semua slot penempatan iklan saat ini terisi. Silakan coba lagi nanti.",
+    "right": "Benar",
+    "selectPlaceholder": "Pilih penempatan",
+    "slotsOccupied": "{count} slot terisi. Hanya {available} penempatan yang tersedia.",
+    "top": "Atas"
+  },
+  "preview": {
+    "description": "Prabaca ukuran penuh dari iklan promosi",
+    "title": "Prabaca Iklan"
+  },
+  "status": {
+    "active": "Aktif",
+    "off": "MATI",
+    "pending": "Menunggu"
+  },
+  "tabs": {
+    "image": "Iklan Gambar",
+    "video": "Iklan Video"
+  },
+  "title": "Spanduk Promosi",
+  "upload": {
+    "addImage": "Tambahkan Gambar",
+    "addVideo": "Tambahkan Video",
+    "imageInfo": "Otomatis terkompresi • Maks 10MB",
+    "imageReady": "Gambar siap untuk diunggah. Klik 'Unggah & Simpan' untuk menyelesaikan.",
+    "noSlotsButton": "Tidak Ada Slot yang Tersedia",
+    "uploading": "Mengunggah...",
+    "uploadingSave": "Unggah & Simpan",
+    "uploadProgress": "Progres Unggah",
+    "videoInfo": "MP4, WebM (Maks 25MB)",
+    "videoInfoExtra": "File yang lebih kecil diunggah lebih cepat",
+    "videoSelected": "Video dipilih. Klik 'Unggah & Simpan' untuk menyelesaikan."
+  }
+}
