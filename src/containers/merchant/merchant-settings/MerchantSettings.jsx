@@ -67,7 +67,8 @@ export default function MerchantSettings() {
             </span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 leading-none">
-            {t("main.subtitle")} <span className="text-primary">{t("main.subtitleHighlight")}</span>
+            {t("main.subtitle")}{" "}
+            <span className="text-primary">{t("main.subtitleHighlight")}</span>
           </h1>
           <p className="text-base text-muted-foreground font-medium max-w-xl leading-relaxed">
             {t("main.description")}
@@ -155,7 +156,7 @@ export default function MerchantSettings() {
           className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
         >
           <div className="flex justify-center">
-            <PaidAdsSettings merchantId={merchantId} />
+            <PaidAdsSettings config={{}} merchantId={merchantId} />
           </div>
         </TabsContent>
 
