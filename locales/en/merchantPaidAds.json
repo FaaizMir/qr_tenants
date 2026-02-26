@@ -1,4 +1,11 @@
 {
+  "confirmation": {
+    "cancel": "Cancel",
+    "checkboxLabel": "I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.",
+    "description": "Please review and confirm the following before proceeding.",
+    "submit": "Confirm & Submit",
+    "title": "Confirm Advertisement Submission"
+  },
   "cropper": {
     "cancel": "Cancel",
     "description": "Drag to reposition and use the slider to zoom.",
@@ -29,8 +36,10 @@
     "uploadTimeout": "Upload timeout. Please try with a smaller file or check your connection.",
     "videoDeleted": "Video deleted successfully",
     "videoFormatWarning": "For best performance, use MP4 or WebM format.",
+    "videoMetadataError": "Failed to load video metadata",
     "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
     "videoTooLarge": "Video file is too large. Max size is 25MB.",
+    "videoTooLong": "Video is too long ({duration}s). Maximum duration is 30 seconds.",
     "videoUploaded": "Video uploaded successfully"
   },
   "placement": {

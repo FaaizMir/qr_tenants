@@ -1,4 +1,11 @@
 {
+  "confirmation": {
+    "cancel": "Hủy",
+    "checkboxLabel": "Tôi xác nhận rằng quảng cáo này không chứa cờ bạc, nội dung người lớn, dịch vụ bất hợp pháp, hoặc bất kỳ nội dung nào bị cấm theo luật Malaysia. Tôi hiểu rằng khoản thanh toán là không hoàn lại nếu quảng cáo bị từ chối do vi phạm chính sách.",
+    "description": "Vui lòng xem xét và xác nhận các thông tin sau trước khi tiếp tục.",
+    "submit": "Xác nhận & Gửi",
+    "title": "Xác nhận Gửi Quảng Cáo"
+  },
   "cropper": {
     "cancel": "Hủy",
     "description": "Kéo để định vị lại và sử dụng thanh trượt để phóng to.",
@@ -29,8 +36,10 @@
     "uploadTimeout": "Thời gian tải lên đã hết. Vui lòng thử với tệp nhỏ hơn hoặc kiểm tra kết nối của bạn.",
     "videoDeleted": "Video đã xóa thành công",
     "videoFormatWarning": "Để có hiệu suất tốt nhất, hãy sử dụng định dạng MP4 hoặc WebM.",
+    "videoMetadataError": "Không thể tải thông tin video",
     "videoSelected": "Video đã được chọn. Nhấn 'Tải lên & Lưu' để hoàn tất.",
     "videoTooLarge": "Tệp video quá lớn. Kích thước tối đa là 25MB.",
+    "videoTooLong": "Video quá dài ({duration}s). Thời gian tối đa là 30 giây.",
     "videoUploaded": "Video đã được tải lên thành công"
   },
   "placement": {

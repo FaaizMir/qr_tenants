@@ -352,7 +352,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       // Check if duration exceeds 30 seconds
       if (duration > 30) {
         toast.error(
-          `Video is too long (${Math.round(duration)}s). Maximum duration is 30 seconds.`,
+          t("messages.videoTooLong", { duration: Math.round(duration) }),
         );
         e.target.value = null; // Clear the input
         URL.revokeObjectURL(objectUrl); // Clean up
@@ -373,7 +373,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     };
 
     video.onerror = function () {
-      toast.error("Failed to load video metadata");
+      toast.error(t("messages.videoMetadataError"));
       URL.revokeObjectURL(objectUrl);
       e.target.value = null;
     };
@@ -1003,10 +1003,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           <DialogContent className="max-w-md">
             <DialogHeader>
               <DialogTitle className="text-xl font-bold">
-                Confirm Advertisement Submission
+                {t("confirmation.title")}
               </DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground">
-                Please review and confirm the following before proceeding.
+                {t("confirmation.description")}
               </DialogDescription>
             </DialogHeader>
 
@@ -1023,11 +1023,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                   htmlFor="confirm-checkbox"
                   className="text-sm leading-relaxed text-red-700 font-medium cursor-pointer select-none"
                 >
-                  I confirm that this advertisement does not contain gambling,
-                  adult content, illegal services, or any content prohibited
-                  under Malaysian law. I understand that payment is
-                  non-refundable if the advertisement is rejected due to policy
-                  violation.
+                  {t("confirmation.checkboxLabel")}
                 </label>
               </div>
             </div>
@@ -1041,14 +1037,14 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                 }}
                 className="w-full sm:w-auto"
               >
-                Cancel
+                {t("confirmation.cancel")}
               </Button>
               <Button
                 onClick={proceedWithSubmit}
                 disabled={!confirmChecked}
                 className="bg-blue-700 hover:bg-blue-800 text-white w-full sm:w-auto"
               >
-                Confirm & Submit
+                {t("confirmation.submit")}
               </Button>
             </DialogFooter>
           </DialogContent>

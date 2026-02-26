@@ -1,4 +1,11 @@
 {
+  "confirmation": {
+    "cancel": "취소",
+    "checkboxLabel": "이 광고에는 도박, 성인 콘텐츠, 불법 서비스 또는 말레이시아 법률에 따라 금지된 콘텐츠가 포함되어 있지 않음을 확인합니다. 정책 위반으로 광고가 거부될 경우 결제는 환불되지 않음을 이해합니다.",
+    "description": "진행하기 전에 다음 내용을 검토하고 확인해 주세요.",
+    "submit": "확인 및 제출",
+    "title": "광고 제출 확인"
+  },
   "cropper": {
     "cancel": "취소",
     "description": "드래그하여 위치를 조정하고 슬라이더를 사용하여 확대/축소하세요.",
@@ -29,8 +36,10 @@
     "uploadTimeout": "업로드 시간 초과. 더 작은 파일로 시도하거나 연결을 확인하세요.",
     "videoDeleted": "비디오가 성공적으로 삭제되었습니다",
     "videoFormatWarning": "최고의 성능을 위해 MP4 또는 WebM 형식을 사용하세요.",
+    "videoMetadataError": "비디오 메타데이터를 로드하지 못했습니다",
     "videoSelected": "비디오가 선택되었습니다. '업로드 및 저장'을 클릭하여 완료하세요.",
     "videoTooLarge": "비디오 파일이 너무 큽니다. 최대 크기는 25MB입니다.",
+    "videoTooLong": "비디오가 너무 깁니다 ({duration}s). 최대 길이는 30초입니다.",
     "videoUploaded": "비디오가 성공적으로 업로드되었습니다."
   },
   "placement": {

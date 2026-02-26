@@ -1,4 +1,11 @@
 {
+  "confirmation": {
+    "cancel": "Batal",
+    "checkboxLabel": "Saya mengesahkan bahawa iklan ini tidak mengandungi perjudian, kandungan dewasa, perkhidmatan haram, atau sebarang kandungan yang dilarang di bawah undang-undang Malaysia. Saya faham bahawa pembayaran tidak boleh dikembalikan jika iklan ditolak kerana pelanggaran dasar.",
+    "description": "Sila semak dan sahkan yang berikut sebelum meneruskan.",
+    "submit": "Sahkan & Hantar",
+    "title": "Sahkan Penghantaran Iklan"
+  },
   "cropper": {
     "cancel": "Batal",
     "description": "Seret untuk mengubah kedudukan dan gunakan penggeser untuk zum.",
@@ -29,8 +36,10 @@
     "uploadTimeout": "Muat naik tamat. Sila cuba dengan fail yang lebih kecil atau semak sambungan anda.",
     "videoDeleted": "Video telah dipadam dengan jayanya",
     "videoFormatWarning": "Untuk prestasi terbaik, gunakan format MP4 atau WebM.",
+    "videoMetadataError": "Gagal memuatkan metadata video",
     "videoSelected": "Video dipilih. Klik 'Muat Naik & Simpan' untuk selesai.",
     "videoTooLarge": "Fail video terlalu besar. Saiz maksimum ialah 25MB.",
+    "videoTooLong": "Video terlalu panjang ({duration}s). Tempoh maksimum adalah 30 saat.",
     "videoUploaded": "Video dimuat naik dengan jayanya"
   },
   "placement": {
