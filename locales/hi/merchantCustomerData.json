@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "क्रियाएँ",
+    "contactInfo": "संपर्क जानकारी",
+    "dateOfBirth": "जन्म तिथि",
+    "gender": "लिंग",
+    "name": "नाम",
+    "notAvailable": "एन/ए",
+    "reward": {
+      "eligible": "योग्य",
+      "notEligible": "अयोग्य"
+    },
+    "rewardStatus": "इनाम स्थिति",
+    "viewDetails": "विवरण"
+  },
+  "details": {
+    "backButton": "ग्राहकों पर वापस जाएं",
+    "badge": {
+      "eligibleForReward": "इनाम के लिए योग्य",
+      "standardCustomer": "मानक ग्राहक"
+    },
+    "error": "ग्राहक विवरण लोड करने में विफल। कृपया बाद में फिर से प्रयास करें।",
+    "loading": "ग्राहक विवरण लोड हो रहा है...",
+    "notFound": "ग्राहक नहीं मिला",
+    "sections": {
+      "address": {
+        "noAddress": "कोई पता प्रदान नहीं किया गया",
+        "title": "संपर्क पता"
+      },
+      "essentialInfo": {
+        "active": "सक्रिय",
+        "dateOfBirth": "जन्म तिथि",
+        "gender": "लिंग",
+        "inactive": "निष्क्रिय",
+        "notSpecified": "निर्धारित नहीं",
+        "phoneNumber": "फोन नंबर",
+        "rewardStatus": "इनाम स्थिति"
+      },
+      "systemInfo": {
+        "createdAt": "निर्मित किया गया",
+        "customerId": "ग्राहक आईडी",
+        "lastUpdated": "अंतिम अपडेट",
+        "merchantId": "व्यापारी आईडी",
+        "title": "सिस्टम जानकारी"
+      }
+    },
+    "subtitle": "ग्राहक जानकारी का विस्तृत अवलोकन",
+    "title": "ग्राहक प्रोफाइल"
+  },
+  "index": {
+    "exportButton": "CSV निर्यात करें",
+    "locked": {
+      "description": "ग्राहक डेटा तक पहुंच केवल वार्षिक सूचना सदस्यता योजना के सदस्यों के लिए उपलब्ध है।",
+      "title": "प्रीमियम सुविधा",
+      "upgradeCard": {
+        "features": {
+          "feature1": "विस्तृत ग्राहक प्रोफाइल तक पहुँचें",
+          "feature2": "ग्राहक डेटा निर्यात करें (CSV/Excel)",
+          "feature3": "उन्नत विभाजन",
+          "feature4": "उच्च कूपन सीमाएँ (10,000/बैच)"
+        },
+        "subtitle": "पूर्ण ग्राहक अंतर्दृष्टि अनलॉक करें",
+        "title": "वार्षिक में अपग्रेड करें",
+        "upgradeButton": "अभी अपग्रेड करें"
+      }
+    },
+    "searchPlaceholder": "ग्राहकों की खोज करें...",
+    "subtitle": "अपने ग्राहक डेटाबेस को देखें और प्रबंधित करें",
+    "title": "ग्राहक डेटा"
+  },
+  "page": {
+    "breadcrumb": "ग्राहक डेटा",
+    "customerDetailsBreadcrumb": "ग्राहक विवरण",
+    "dashboardBreadcrumb": "व्यापारी डैशबोर्ड"
+  }
+}

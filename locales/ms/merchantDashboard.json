@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "ID Iklan",
+    "adsDesc": "Jumlah iklan yang dijejaki",
+    "agentId": "ID Ejen",
+    "clicks": "Klik",
+    "clicksChart": "Klik mengikut Iklan",
+    "clicksDesc": "Jumlah klik iklan dari penonton",
+    "clickThroughRate": "Kadar Klik-Terus",
+    "createdAt": "Dicipta",
+    "ctr": "CTR",
+    "ctrDesc": "Peratusan tayangan yang ditukar kepada klik",
+    "description": "Jejak tayangan dan klik untuk iklan berbayar anda",
+    "detailedAnalytics": "Analitik Terperinci",
+    "detailedDesc": "Pecahan prestasi untuk setiap iklan",
+    "errorFetchFailed": "Gagal memuatkan analitik",
+    "impressions": "Tayangan",
+    "impressionsChart": "Tayangan mengikut Iklan",
+    "impressionsDesc": "Jumlah tayangan iklan di semua kempen",
+    "noAdsDesc": "Analitik iklan berbayar anda akan muncul di sini setelah penjejakan bermula",
+    "noAdsYet": "Tiada iklan yang dikesan lagi",
+    "noData": "Tiada data tersedia",
+    "title": "Analitik Iklan Berbayar",
+    "total": "jumlah",
+    "totalAds": "Iklan Aktif",
+    "totalClicks": "Jumlah Klik",
+    "totalImpressions": "Jumlah Tayangan"
+  },
   "common": {
     "credits": "Kredit"
   },
@@ -38,7 +65,7 @@
   },
   "metrics": {
     "creditsUsed": "Kredit Digunakan",
-    "expired": "Tamat Tempoh",
+    "expired": "Tamat tempoh",
     "issued": "Dikeluarkan",
     "messagesSent": "Mesej Dihantar",
     "redeemed": "Tebus",
@@ -52,6 +79,9 @@
   "placeholders": {
     "comingSoon": "Kandungan tetapan akan datang tidak lama lagi...",
     "noData": "--"
+  },
+  "qrCode": {
+    "tapToZoom": "TEKAN UNTUK ZOOM"
   },
   "recentRedemptions": {
     "amount": "Jumlah",

@@ -1,13 +1,13 @@
-"use client";
-
+import { getTranslations } from "next-intl/server";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-// Logic moved to src/containers/merchant/customer-data/index.jsx
 import MerchantCustomerDataContainer from "@/containers/merchant/customer-data";
 
-export default function MerchantCustomerDataPage() {
+export default async function MerchantCustomerDataPage() {
+  const t = await getTranslations("merchantCustomerData.page");
+
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
-    { name: "Customer Data", url: "/merchant/customer-data" },
+    { name: t("dashboardBreadcrumb"), url: "/merchant/dashboard" },
+    { name: t("breadcrumb"), url: "/merchant/customer-data" },
   ];
 
   return (

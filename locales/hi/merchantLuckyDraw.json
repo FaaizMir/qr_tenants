@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "क्रियाएँ",
+    "actionsMenu": {
+      "delete": "इनाम हटाएं",
+      "edit": "इनाम संपादित करें",
+      "label": "क्रियाएँ",
+      "openMenu": "मेनू खोलें"
+    },
+    "dailyLimit": "दैनिक सीमा",
+    "description": "विवरण",
+    "prizeName": "इनाम का नाम",
+    "probability": "संभावना",
+    "status": "स्थिति",
+    "statusActive": "सक्रिय",
+    "statusInactive": "निष्क्रिय",
+    "totalLimit": "कुल सीमा",
+    "type": "प्रकार"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "रद्द करें",
+      "create": "इनाम बनाएं",
+      "creating": "बनाना...",
+      "update": "इनाम अपडेट करें",
+      "updating": "अपडेट हो रहा है..."
+    },
+    "cardDescription": {
+      "create": "लकी ड्रा के लिए एक नया इनाम बनाएं",
+      "edit": "इनाम जानकारी अपडेट करें"
+    },
+    "cardTitle": {
+      "create": "नया इनाम जोड़ें",
+      "edit": "इनाम संपादित करें"
+    },
+    "createSubtitle": "लकी ड्रॉ में नया इनाम जोड़ें",
+    "createTitle": "इनाम बनाएं",
+    "editSubtitle": "इनाम विवरण अपडेट करें",
+    "editTitle": "इनाम संपादित करें",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "कोई बैच नहीं मिला",
+        "label": "कूपन बैच",
+        "placeholder": "कूपन बैच चुनें...",
+        "required": "कूपन बैच आवश्यक है",
+        "searchPlaceholder": "बैच खोजें..."
+      },
+      "dailyLimit": {
+        "label": "दैनिक सीमा"
+      },
+      "prizeDescription": {
+        "label": "इनाम विवरण"
+      },
+      "prizeName": {
+        "label": "इनाम का नाम",
+        "required": "इनाम का नाम आवश्यक है"
+      },
+      "prizeType": {
+        "label": "इनाम प्रकार",
+        "options": {
+          "coupon": "कूपन"
+        }
+      },
+      "probability": {
+        "label": "संभावना (%)",
+        "max": "अधिकतम 100%",
+        "min": "न्यूनतम 0%",
+        "required": "संभावना आवश्यक है"
+      },
+      "sortOrder": {
+        "label": "क्रमबद्धता"
+      },
+      "status": {
+        "label": "स्थिति",
+        "options": {
+          "active": "सक्रिय",
+          "inactive": "निष्क्रिय"
+        }
+      },
+      "totalLimit": {
+        "label": "कुल सीमा"
+      }
+    },
+    "importantNotes": {
+      "note1": "कुल संभावना 100% के बराबर होनी चाहिए",
+      "note2": "प्रत्येक इनाम के लिए एक लिंक किया गया कूपन बैच आवश्यक है",
+      "note3": "दैनिक सीमाएँ मध्यरात्रि में रीसेट होती हैं",
+      "note4": "यदि इनाम सीमा तक पहुँच जाती है, तो सिस्टम अगले उपलब्ध इनाम पर कूद जाएगा",
+      "title": "महत्वपूर्ण"
+    },
+    "toasts": {
+      "createSuccess": "इनाम सफलतापूर्वक बनाया गया!",
+      "loadFailed": "इनाम विवरण लोड करने में विफल",
+      "noBatchSelected": "कृपया एक कूपन बैच चुनें",
+      "noMerchantId": "व्यापारी आईडी नहीं मिली",
+      "saveFailed": "इनाम को सहेजने में विफल",
+      "updateSuccess": "इनाम सफलतापूर्वक अपडेट किया गया!"
+    }
+  },
+  "index": {
+    "createButton": "इनाम बनाएं",
+    "deleteDialog": {
+      "cancel": "रद्द करें",
+      "confirm": "हटाएँ",
+      "description": "यह स्थायी रूप से इनाम \"{prizeName}\" को हटा देगा। यह क्रिया पूर्ववत नहीं की जा सकती।",
+      "title": "क्या आप सुनिश्चित हैं?"
+    },
+    "prizesCard": {
+      "description": "लकी ड्रॉ के लिए सभी इनाम प्रबंधित करें",
+      "title": "इनाम"
+    },
+    "searchPlaceholder": "नाम, विवरण, या प्रकार द्वारा इनाम खोजें...",
+    "subtitle": "ग्राहकों के लिए \"पहिया घुमाएँ\" पुरस्कारों को कॉन्फ़िगर करें जो समीक्षा पूरी करते हैं।",
+    "title": "लकी ड्रा सेटिंग्स",
+    "toasts": {
+      "deleteFailed": "इनाम हटाने में विफल",
+      "deleteSuccess": "इनाम सफलतापूर्वक हटाया गया!",
+      "loadFailed": "इनाम लोड करने में विफल"
+    }
+  },
+  "page": {
+    "breadcrumb": "लकी ड्रा",
+    "dashboardBreadcrumb": "व्यापारी डैशबोर्ड"
+  }
+}

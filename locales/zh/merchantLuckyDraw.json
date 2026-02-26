@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "操作",
+    "actionsMenu": {
+      "delete": "删除奖品",
+      "edit": "编辑奖品",
+      "label": "操作",
+      "openMenu": "打开菜单"
+    },
+    "dailyLimit": "每日限额",
+    "description": "描述",
+    "prizeName": "奖品名称",
+    "probability": "概率",
+    "status": "状态",
+    "statusActive": "激活",
+    "statusInactive": "未激活",
+    "totalLimit": "总限额",
+    "type": "类型"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "取消",
+      "create": "创建奖品",
+      "creating": "正在创建...",
+      "update": "更新奖品",
+      "updating": "更新中..."
+    },
+    "cardDescription": {
+      "create": "为抽奖创建一个新奖品",
+      "edit": "更新奖品信息"
+    },
+    "cardTitle": {
+      "create": "添加新奖品",
+      "edit": "编辑奖品"
+    },
+    "createSubtitle": "向抽奖中添加新奖品",
+    "createTitle": "创建奖品",
+    "editSubtitle": "更新奖品详情",
+    "editTitle": "编辑奖品",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "未找到批次",
+        "label": "优惠券批次",
+        "placeholder": "选择优惠券批次...",
+        "required": "需要优惠券批次",
+        "searchPlaceholder": "搜索批次..."
+      },
+      "dailyLimit": {
+        "label": "每日限制"
+      },
+      "prizeDescription": {
+        "label": "奖品描述"
+      },
+      "prizeName": {
+        "label": "奖品名称",
+        "required": "奖品名称是必填项"
+      },
+      "prizeType": {
+        "label": "奖品类型",
+        "options": {
+          "coupon": "优惠券"
+        }
+      },
+      "probability": {
+        "label": "概率 (%)",
+        "max": "最大100%",
+        "min": "最小 0%",
+        "required": "概率是必需的"
+      },
+      "sortOrder": {
+        "label": "排序顺序"
+      },
+      "status": {
+        "label": "状态",
+        "options": {
+          "active": "激活",
+          "inactive": "未激活"
+        }
+      },
+      "totalLimit": {
+        "label": "总限制"
+      }
+    },
+    "importantNotes": {
+      "note1": "总概率必须等于100%",
+      "note2": "每个奖品需要一个关联的优惠券批次",
+      "note3": "每日限额在午夜重置",
+      "note4": "如果达到奖品限制，系统将跳过到下一个可用奖品",
+      "title": "重要"
+    },
+    "toasts": {
+      "createSuccess": "奖品创建成功！",
+      "loadFailed": "加载奖品详情失败",
+      "noBatchSelected": "请选择一个优惠券批次",
+      "noMerchantId": "未找到商户ID",
+      "saveFailed": "保存奖品失败",
+      "updateSuccess": "奖品更新成功！"
+    }
+  },
+  "index": {
+    "createButton": "创建奖品",
+    "deleteDialog": {
+      "cancel": "取消",
+      "confirm": "删除",
+      "description": "这将永久删除奖品 \"{prizeName}\"。此操作无法撤销。",
+      "title": "你确定吗？"
+    },
+    "prizesCard": {
+      "description": "管理抽奖的所有奖品",
+      "title": "奖品"
+    },
+    "searchPlaceholder": "通过名称、描述或类型搜索奖品...",
+    "subtitle": "为完成评论的客户配置“转盘”奖品。",
+    "title": "抽奖设置",
+    "toasts": {
+      "deleteFailed": "删除奖品失败",
+      "deleteSuccess": "奖品删除成功！",
+      "loadFailed": "加载奖品失败"
+    }
+  },
+  "page": {
+    "breadcrumb": "抽奖",
+    "dashboardBreadcrumb": "商户仪表板"
+  }
+}

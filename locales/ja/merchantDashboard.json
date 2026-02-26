@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "広告ID",
+    "adsDesc": "追跡された広告の総数",
+    "agentId": "エージェントID",
+    "clicks": "クリック",
+    "clicksChart": "広告別クリック数",
+    "clicksDesc": "視聴者からの広告クリックの合計",
+    "clickThroughRate": "クリック率",
+    "createdAt": "作成済み",
+    "ctr": "CTR",
+    "ctrDesc": "インプレッションからクリックに変換された割合",
+    "description": "有料広告のインプレッションとクリックを追跡",
+    "detailedAnalytics": "詳細分析",
+    "detailedDesc": "各広告のパフォーマンスの内訳",
+    "errorFetchFailed": "分析の読み込みに失敗しました",
+    "impressions": "インプレッション",
+    "impressionsChart": "広告別インプレッション",
+    "impressionsDesc": "すべてのキャンペーンでの広告の合計表示回数",
+    "noAdsDesc": "追跡が開始されると、ここに有料広告の分析が表示されます",
+    "noAdsYet": "まだ追跡されている広告はありません",
+    "noData": "データは利用できません",
+    "title": "有料広告分析",
+    "total": "合計",
+    "totalAds": "アクティブ広告",
+    "totalClicks": "合計クリック数",
+    "totalImpressions": "総インプレッション"
+  },
   "common": {
     "credits": "クレジット"
   },
@@ -53,6 +80,9 @@
     "comingSoon": "設定内容は近日公開予定です...",
     "noData": "--"
   },
+  "qrCode": {
+    "tapToZoom": "タップしてズーム"
+  },
   "recentRedemptions": {
     "amount": "金額",
     "code": "コード",
@@ -85,6 +115,7 @@
     "used": "使用済み"
   },
   "tabs": {
+    "analytics": "広告のパフォーマンス",
     "automation": "自動化",
     "coupons": "クーポンバッチ",
     "feedbackForm": "フィードバックフォーム",

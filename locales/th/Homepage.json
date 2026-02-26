@@ -66,6 +66,8 @@
       "city": "เมือง",
       "curatingMessage": "เรากำลังคัดสรรผู้ค้าและข้อเสนอพิเศษที่ดีที่สุดสำหรับคุณ...",
       "everywhere": "ทุกที่",
+      "expiringSoon": "ใกล้หมดอายุ",
+      "expiringSoonActive": "ใกล้หมดอายุ ✓",
       "industry": "อุตสาหกรรม",
       "loadingMarketplace": "กำลังโหลดตลาด",
       "noMerchantsFound": "ไม่พบผู้ค้า",
@@ -147,6 +149,8 @@
       "agents": "ตัวแทน",
       "allCountries": "ทุกประเทศ",
       "description": "จัดการเครือข่ายตัวแทนทั่วโลกของคุณ",
+      "expiringSoon": "ใกล้หมดอายุ",
+      "expiringSoonActive": "ใกล้หมดอายุ ✓",
       "noAgentsFound": "ไม่พบตัวแทน",
       "of": "ของ",
       "pageNoResults": "หน้า - ไม่มีผลลัพธ์",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "ติดต่อ",
       "copyright": "© 2024 QR Rev Inc. สงวนลิขสิทธิ์ทั้งหมด.",
+      "globalMerchantNetwork": "เครือข่ายผู้ค้าโลก",
       "privacy": "ความเป็นส่วนตัว",
       "terms": "ข้อกำหนด"
     },

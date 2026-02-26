@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "Hành động",
+    "category": "Danh mục",
+    "dateTime": "Ngày & Giờ",
+    "description": "Mô tả",
+    "details": "Chi tiết",
+    "noDetails": "Không có chi tiết",
+    "severity": "Mức độ nghiêm trọng",
+    "systemActivity": "Hoạt động Hệ thống"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "Giám sát hoạt động của thương nhân, giao dịch ví và nhật ký hoa hồng.",
+    "masterAdmin": "Xem tất cả hoạt động hệ thống, nhật ký kiểm toán và lỗi nghiêm trọng trên nền tảng.",
+    "merchant": "Theo dõi hoạt động của cửa hàng, việc sử dụng phiếu giảm giá và tương tác của khách hàng."
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "Phương pháp: {value}",
+      "user": "Người dùng: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "{count} phiếu giảm giá đã được tạo",
+      "quantity": "Số lượng: {value}",
+      "type": "Loại: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "Nền tảng: {value}",
+      "review": "Đánh giá: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "Phiếu giảm giá",
+      "credits": "tín dụng",
+      "paidAd": "Quảng cáo Trả phí",
+      "platformCommission": "Hoa hồng nền tảng: {rate}%",
+      "unitPrice": "Giá đơn vị: {value}",
+      "whatsappBI": "Phản hồi BI WhatsApp",
+      "whatsappUI": "Giao diện WhatsApp"
+    }
+  },
+  "errors": {
+    "failedToLoad": "Không thể tải nhật ký"
+  },
+  "filters": {
+    "logCategory": "Danh mục nhật ký",
+    "pickDateRange": "Chọn khoảng thời gian",
+    "refresh": "Làm mới"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "Nhật ký chiến dịch",
+      "couponLogs": "Nhật ký phiếu giảm giá",
+      "customerLogs": "Nhật ký khách hàng",
+      "merchantScopedLogs": "Nhật ký theo thương nhân",
+      "myMerchantsActivity": "Hoạt động của Các Nhà cung cấp của tôi",
+      "walletEarnings": "Ví & Thu nhập",
+      "whatsappBIFeedback": "Phản hồi BI WhatsApp",
+      "whatsappUIFeedback": "Phản hồi giao diện WhatsApp"
+    },
+    "masterAdmin": {
+      "agentActivities": "Hoạt động của đại lý",
+      "allPlatformActivity": "Tất cả Hoạt động Nền tảng",
+      "authenticationEvents": "Sự kiện xác thực",
+      "campaignLogs": "Nhật ký chiến dịch",
+      "couponOperations": "Hoạt động phiếu giảm giá",
+      "criticalErrors": "Lỗi Nghiêm trọng",
+      "customerActions": "Hành động của Khách hàng",
+      "merchantActivities": "Hoạt động của thương nhân",
+      "walletTransactions": "Giao dịch Ví",
+      "whatsappBIDetailed": "BI WhatsApp (Chi tiết)",
+      "whatsappBIFeedback": "Phản hồi WhatsApp BI",
+      "whatsappCreditWallet": "Tín dụng WhatsApp (Ví)",
+      "whatsappUIDetailed": "Giao diện WhatsApp (Chi tiết)",
+      "whatsappUIFeedback": "Phản hồi giao diện WhatsApp"
+    },
+    "merchant": {
+      "campaignLogs": "Nhật ký Chiến dịch",
+      "couponUsage": "Sử dụng phiếu giảm giá",
+      "customerActions": "Hành động của Khách hàng",
+      "securityAuth": "Bảo mật & Xác thực",
+      "storeActivity": "Hoạt động cửa hàng",
+      "walletTransactions": "Giao dịch ví",
+      "whatsappBIFeedback": "Phản hồi BI WhatsApp",
+      "whatsappUIFeedback": "Phản hồi giao diện WhatsApp"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển đại lý",
+        "logs": "Nhật ký Hệ thống"
+      },
+      "description": "Giám sát hoạt động của thương nhân, giao dịch ví và nhật ký hoa hồng.",
+      "title": "Nhật ký Hoạt động"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển quản trị viên chính",
+        "logs": "Nhật ký hệ thống"
+      },
+      "description": "Xem tất cả các hoạt động hệ thống, dấu vết kiểm toán và lỗi nghiêm trọng trên nền tảng.",
+      "title": "Nhật ký hệ thống"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "Bảng điều khiển Nhà cung cấp",
+        "logs": "Nhật ký Hệ thống"
+      },
+      "description": "Theo dõi hoạt động của cửa hàng, việc sử dụng phiếu giảm giá và tương tác của khách hàng.",
+      "title": "Nhật ký cửa hàng"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "Nguy cấp",
+    "error": "Lỗi",
+    "info": "Thông tin",
+    "success": "Thành công",
+    "warning": "Cảnh báo"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "Nhật ký hoạt động",
+    "masterAdmin": "Nhật ký hệ thống",
+    "merchant": "Nhật ký cửa hàng"
   }
 }

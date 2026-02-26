@@ -5,7 +5,6 @@
       "availableIn": "Available in {city}",
       "exclusiveIn": "EXCLUSIVE IN {city}",
       "experienceNow": "Experience Now",
-      "featured": "Featured",
       "featuredPartner": "Featured Partner",
       "limitedTime": "LIMITED TIME",
       "partner": "Partner",
@@ -67,6 +66,8 @@
       "city": "City",
       "curatingMessage": "We're curating the best verified merchants and exclusive deals for you...",
       "everywhere": "Everywhere",
+      "expiringSoon": "Expiring Soon",
+      "expiringSoonActive": "Expiring Soon ✓",
       "industry": "Industry",
       "loadingMarketplace": "Loading Marketplace",
       "noMerchantsFound": "No merchants found",
@@ -75,7 +76,6 @@
       "searchPlaceholder": "Search merchants, categories...",
       "showing": "Showing {start} - {end} of {total}",
       "showingPage": "Showing Page {page}",
-      "showingRange": "Showing {start} - {end} of {total} merchants",
       "tryAdjustingFilters": "Try adjusting your filters or search.",
       "unableToLoad": "Unable to load merchants"
     },
@@ -149,6 +149,8 @@
       "agents": "Agents",
       "allCountries": "All Countries",
       "description": "Manage your global network of tenant agents.",
+      "expiringSoon": "Expiring Soon",
+      "expiringSoonActive": "Expiring Soon ✓",
       "noAgentsFound": "No agents found",
       "of": "of",
       "pageNoResults": "Page - No Results",
@@ -187,7 +189,7 @@
     "footer": {
       "contact": "Contact",
       "copyright": "© 2024 QR Rev Inc. All rights reserved.",
-      "globalMerchantNetwork": "Global Agent Network",
+      "globalMerchantNetwork": "Global Merchant Network",
       "privacy": "Privacy",
       "terms": "Terms"
     },

@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "การดำเนินการ",
+    "category": "หมวดหมู่",
+    "dateTime": "วันที่ & เวลา",
+    "description": "คำอธิบาย",
+    "details": "รายละเอียด",
+    "noDetails": "ไม่มีรายละเอียด",
+    "severity": "ความรุนแรง",
+    "systemActivity": "กิจกรรมของระบบ"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "ติดตามกิจกรรมของผู้ค้า, การทำธุรกรรมในกระเป๋าเงิน, และบันทึกค่าคอมมิชชั่น.",
+    "masterAdmin": "ดูทุกกิจกรรมของระบบ, บันทึกการตรวจสอบ, และข้อผิดพลาดที่สำคัญทั่วทั้งแพลตฟอร์ม.",
+    "merchant": "ติดตามการดำเนินงานของร้านค้าของคุณ การใช้คูปอง และการมีปฏิสัมพันธ์กับลูกค้า"
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "วิธีการ: {value}",
+      "user": "ผู้ใช้: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "สร้างคูปอง {count} ใบ",
+      "quantity": "จำนวน: {value}",
+      "type": "ประเภท: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "แพลตฟอร์ม: {value}",
+      "review": "รีวิว: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "คูปอง",
+      "credits": "เครดิต",
+      "paidAd": "โฆษณาที่ชำระเงิน",
+      "platformCommission": "ค่าคอมมิชชั่นแพลตฟอร์ม: {rate}%",
+      "unitPrice": "ราคาต่อหน่วย: {value}",
+      "whatsappBI": "BI WhatsApp",
+      "whatsappUI": "UI WhatsApp"
+    }
+  },
+  "errors": {
+    "failedToLoad": "ไม่สามารถโหลดบันทึกได้"
+  },
+  "filters": {
+    "logCategory": "หมวดหมู่บันทึก",
+    "pickDateRange": "เลือกช่วงวันที่",
+    "refresh": "รีเฟรช"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "บันทึกแคมเปญ",
+      "couponLogs": "บันทึกคูปอง",
+      "customerLogs": "บันทึกลูกค้า",
+      "merchantScopedLogs": "บันทึกที่มีขอบเขตของผู้ค้า",
+      "myMerchantsActivity": "กิจกรรมของผู้ค้า",
+      "walletEarnings": "กระเป๋าเงิน & รายได้",
+      "whatsappBIFeedback": "ข้อเสนอแนะแบบ BI ของ WhatsApp",
+      "whatsappUIFeedback": "ข้อเสนอแนะ UI WhatsApp"
+    },
+    "masterAdmin": {
+      "agentActivities": "กิจกรรมของตัวแทน",
+      "allPlatformActivity": "กิจกรรมทั้งหมดในแพลตฟอร์ม",
+      "authenticationEvents": "เหตุการณ์การตรวจสอบสิทธิ์",
+      "campaignLogs": "บันทึกแคมเปญ",
+      "couponOperations": "การดำเนินการคูปอง",
+      "criticalErrors": "ข้อผิดพลาดที่สำคัญ",
+      "customerActions": "การกระทำของลูกค้า",
+      "merchantActivities": "กิจกรรมของผู้ค้า",
+      "walletTransactions": "ธุรกรรมกระเป๋าเงิน",
+      "whatsappBIDetailed": "BI ของ WhatsApp (รายละเอียด)",
+      "whatsappBIFeedback": "ข้อเสนอแนะ WhatsApp BI",
+      "whatsappCreditWallet": "เครดิต WhatsApp (กระเป๋าเงิน)",
+      "whatsappUIDetailed": "UI ของ WhatsApp (รายละเอียด)",
+      "whatsappUIFeedback": "ข้อเสนอแนะ UI WhatsApp"
+    },
+    "merchant": {
+      "campaignLogs": "บันทึกแคมเปญ",
+      "couponUsage": "การใช้คูปอง",
+      "customerActions": "การกระทำของลูกค้า",
+      "securityAuth": "ความปลอดภัย & การตรวจสอบสิทธิ์",
+      "storeActivity": "กิจกรรมการจัดเก็บ",
+      "walletTransactions": "ธุรกรรมกระเป๋าเงิน",
+      "whatsappBIFeedback": "ข้อเสนอแนะ BI WhatsApp",
+      "whatsappUIFeedback": "ข้อเสนอแนะ UI WhatsApp"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "แดชบอร์ดตัวแทน",
+        "logs": "บันทึกระบบ"
+      },
+      "description": "ติดตามกิจกรรมของผู้ค้า, การทำธุรกรรมในกระเป๋าเงิน, และบันทึกค่าคอมมิชชั่น.",
+      "title": "บันทึกกิจกรรม"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "แดชบอร์ดผู้ดูแลระบบหลัก",
+        "logs": "บันทึกระบบ"
+      },
+      "description": "ดูการทำงานทั้งหมดของระบบ เส้นทางการตรวจสอบ และข้อผิดพลาดที่สำคัญทั่วทั้งแพลตฟอร์ม",
+      "title": "บันทึกระบบ"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "แดชบอร์ดผู้ค้า",
+        "logs": "บันทึกระบบ"
+      },
+      "description": "ติดตามการดำเนินงานของร้านค้าของคุณ การใช้คูปอง และการมีปฏิสัมพันธ์กับลูกค้า",
+      "title": "บันทึกการจัดเก็บ"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "วิกฤต",
+    "error": "ข้อผิดพลาด",
+    "info": "ข้อมูล",
+    "success": "สำเร็จ",
+    "warning": "คำเตือน"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "บันทึกกิจกรรม",
+    "masterAdmin": "บันทึกระบบ",
+    "merchant": "บันทึกของร้านค้า"
   }
 }

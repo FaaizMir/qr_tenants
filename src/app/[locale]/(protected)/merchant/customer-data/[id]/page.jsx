@@ -1,12 +1,18 @@
+import { getTranslations } from "next-intl/server";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import CustomerDetailsContainer from "@/containers/merchant/customer-data/CustomerDetailsContainer";
 
-export default function CustomerDetailsPage({ params }) {
-  const { id } = params;
+export default async function CustomerDetailsPage({ params }) {
+  const { id } = await params;
+  const t = await getTranslations("merchantCustomerData.page");
+
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
-    { name: "Customer Data", url: "/merchant/customer-data" },
-    { name: "Customer Details", url: `/merchant/customer-data/${id}` },
+    { name: t("dashboardBreadcrumb"), url: "/merchant/dashboard" },
+    { name: t("breadcrumb"), url: "/merchant/customer-data" },
+    {
+      name: t("customerDetailsBreadcrumb"),
+      url: `/merchant/customer-data/${id}`,
+    },
   ];
 
   return (

@@ -1,13 +1,45 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "Action",
+    "category": "Category",
+    "dateTime": "Date & Time",
+    "description": "Description",
+    "details": "Details",
+    "noDetails": "No details",
+    "severity": "Severity",
+    "systemActivity": "System Activity"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
+    "agent": "Monitor merchant activities, wallet transactions, and commission logs.",
+    "masterAdmin": "View all system activities, audit trails, and critical errors across the platform.",
+    "merchant": "Track your store's operations, coupon usage, and customer interactions."
+  },
+  "details": {
+    "auth": {
+      "method": "Method: {value}",
+      "user": "User: {value}"
+    },
+    "coupon": {
+      "couponsGenerated": "{count} coupons generated",
+      "quantity": "Quantity: {value}",
+      "type": "Type: {value}"
+    },
+    "customer": {
+      "platform": "Platform: {value}",
+      "review": "Review: {value}"
+    },
+    "wallet": {
+      "coupon": "Coupon",
+      "credits": "credits",
+      "paidAd": "Paid Ad",
+      "platformCommission": "Platform Commission: {rate}%",
+      "unitPrice": "Unit Price: {value}",
+      "whatsappBI": "WhatsApp BI",
+      "whatsappUI": "WhatsApp UI"
+    }
+  },
+  "errors": {
+    "failedToLoad": "Failed to load logs"
   },
   "filters": {
     "logCategory": "Log Category",
@@ -15,98 +47,79 @@
     "refresh": "Refresh"
   },
   "logTypes": {
+    "agent": {
+      "campaignLogs": "Campaign Logs",
+      "couponLogs": "Coupon Logs",
+      "customerLogs": "Customer Logs",
+      "merchantScopedLogs": "Merchant-Scoped Logs",
+      "myMerchantsActivity": "My Merchants Activity",
+      "walletEarnings": "Wallet & Earnings",
+      "whatsappBIFeedback": "WhatsApp BI Feedback",
+      "whatsappUIFeedback": "WhatsApp UI Feedback"
+    },
     "masterAdmin": {
+      "agentActivities": "Agent Activities",
       "allPlatformActivity": "All Platform Activity",
       "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
+      "campaignLogs": "Campaign Logs",
       "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
+      "criticalErrors": "Critical Errors",
       "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
+      "merchantActivities": "Merchant Activities",
+      "walletTransactions": "Wallet Transactions",
+      "whatsappBIDetailed": "WhatsApp BI (Detailed)",
+      "whatsappBIFeedback": "WhatsApp BI Feedback",
+      "whatsappCreditWallet": "WhatsApp Credits (Wallet)",
+      "whatsappUIDetailed": "WhatsApp UI (Detailed)",
+      "whatsappUIFeedback": "WhatsApp UI Feedback"
     },
     "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
       "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
+      "couponUsage": "Coupon Usage",
       "customerActions": "Customer Actions",
       "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
+      "storeActivity": "Store Activity",
+      "walletTransactions": "Wallet Transactions",
+      "whatsappBIFeedback": "WhatsApp BI Feedback",
+      "whatsappUIFeedback": "WhatsApp UI Feedback"
     }
   },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
-  },
-  "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "Agent Dashboard",
+        "logs": "System Logs"
+      },
+      "description": "Monitor merchant activities, wallet transactions, and commission logs.",
+      "title": "Activity Logs"
     },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
-    "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "Master Admin Dashboard",
+        "logs": "System Logs"
+      },
+      "description": "View all system activities, audit trails, and critical errors across the platform.",
+      "title": "System Logs"
     },
     "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
-    },
-    "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
-    },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+      "breadcrumb": {
+        "dashboard": "Merchant Dashboard",
+        "logs": "System Logs"
+      },
+      "description": "Track your store's operations, coupon usage, and customer interactions.",
+      "title": "Store Logs"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "Critical",
+    "error": "Error",
+    "info": "Info",
+    "success": "Success",
+    "warning": "Warning"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "Activity Logs",
+    "masterAdmin": "System Logs",
+    "merchant": "Store Logs"
   }
 }

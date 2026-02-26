@@ -1,0 +1,75 @@
+{
+  "cropper": {
+    "cancel": "Hủy",
+    "description": "Kéo để định vị lại và sử dụng thanh trượt để phóng to.",
+    "save": "Lưu hình ảnh",
+    "title": "Điều chỉnh hình ảnh",
+    "zoom": "Phóng to"
+  },
+  "description": "Nội dung tiếp thị trực quan",
+  "duration": {
+    "days14": "14 Ngày",
+    "days30": "30 Ngày",
+    "days7": "7 Ngày",
+    "label": "Thời gian",
+    "selectPlaceholder": "Chọn thời gian"
+  },
+  "messages": {
+    "errorDeleting": "Xóa không thành công",
+    "errorProcessing": "Lỗi xử lý hình ảnh",
+    "errorSaving": "Lỗi lưu cài đặt",
+    "imageDeleted": "Hình ảnh đã xóa thành công",
+    "imageReady": "Hình ảnh đã sẵn sàng để tải lên. Nhấn 'Tải lên & Lưu' để hoàn tất.",
+    "imageTooLarge": "Kích thước hình ảnh phải nhỏ hơn 10MB",
+    "imageUploaded": "Hình ảnh đã được tải lên thành công",
+    "noSlotsWarning": "Không có vị trí quảng cáo nào có sẵn. Tất cả các vị trí hiện đang bị chiếm — bạn không thể tải lên quảng cáo mới cho đến khi có một vị trí mở.",
+    "settingsUpdated": "Cài đặt đã được cập nhật thành công",
+    "uploadingImage": "Đang tải hình ảnh...",
+    "uploadingVideo": "Đang tải video... Điều này có thể mất một chút thời gian.",
+    "uploadTimeout": "Thời gian tải lên đã hết. Vui lòng thử với tệp nhỏ hơn hoặc kiểm tra kết nối của bạn.",
+    "videoDeleted": "Video đã xóa thành công",
+    "videoFormatWarning": "Để có hiệu suất tốt nhất, hãy sử dụng định dạng MP4 hoặc WebM.",
+    "videoSelected": "Video đã được chọn. Nhấn 'Tải lên & Lưu' để hoàn tất.",
+    "videoTooLarge": "Tệp video quá lớn. Kích thước tối đa là 25MB.",
+    "videoUploaded": "Video đã được tải lên thành công"
+  },
+  "placement": {
+    "bottom": "Dưới",
+    "label": "Vị trí quảng cáo",
+    "left": "Trái",
+    "loading": "Đang tải vị trí...",
+    "noSlotsAvailable": "Không còn chỗ nào",
+    "noSlotsMessage": "Tất cả các vị trí quảng cáo hiện đang được chiếm dụng. Vui lòng thử lại sau.",
+    "right": "Đúng",
+    "selectPlaceholder": "Chọn vị trí",
+    "slotsOccupied": "{count} vị trí đã được chiếm. Chỉ còn {available} vị trí có sẵn.",
+    "top": "Trên"
+  },
+  "preview": {
+    "description": "Xem trước kích thước đầy đủ của quảng cáo",
+    "title": "Xem trước quảng cáo"
+  },
+  "status": {
+    "active": "Hoạt động",
+    "off": "TẮT",
+    "pending": "Đang chờ"
+  },
+  "tabs": {
+    "image": "Quảng cáo hình ảnh",
+    "video": "Quảng cáo video"
+  },
+  "title": "Biểu ngữ quảng cáo",
+  "upload": {
+    "addImage": "Thêm hình ảnh",
+    "addVideo": "Thêm video",
+    "imageInfo": "Tự động nén • Tối đa 10MB",
+    "imageReady": "Hình ảnh sẵn sàng để tải lên. Nhấn 'Tải lên & Lưu' để hoàn tất.",
+    "noSlotsButton": "Không còn chỗ nào",
+    "uploading": "Đang tải lên...",
+    "uploadingSave": "Tải lên & Lưu",
+    "uploadProgress": "Tiến trình tải lên",
+    "videoInfo": "MP4, WebM (Tối đa 25MB)",
+    "videoInfoExtra": "Tệp nhỏ hơn tải lên nhanh hơn",
+    "videoSelected": "Video đã được chọn. Nhấn 'Tải lên & Lưu' để hoàn tất."
+  }
+}

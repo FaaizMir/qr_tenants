@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "聊天",
+      "newChat": "新聊天",
+      "newMessage": "新消息",
+      "newTicket": "新工单",
+      "ticket": "工单"
+    },
+    "conversation": {
+      "me": "我",
+      "noMessagesDesc": "发送消息以开始对话。",
+      "noMessagesTitle": "尚无消息",
+      "pressEnter": "按回车键发送",
+      "sendMessage": "发送消息",
+      "typePlaceholder": "输入消息..."
+    },
+    "disconnected": "已断开连接",
+    "empty": {
+      "descriptionChat": "开始对话或继续聊天。",
+      "descriptionTickets": "创建新的支持工单或查看现有工单。",
+      "tipChat": "聊天：",
+      "tipChatDesc": "快速随意消息",
+      "tipTickets": "工单：",
+      "tipTicketsDesc": "正式支持请求",
+      "tipTitle": "💡 选择您的消息类型：",
+      "title": "支持中心"
+    },
+    "filters": {
+      "chat": "聊天",
+      "tickets": "票务",
+      "viewAllCreateChat": "查看全部 • 仅创建聊天"
+    },
+    "participants": {
+      "platformSupport": "平台支持",
+      "yourSupportAgent": "您的支持代理"
+    },
+    "search": "搜索...",
+    "sidebar": {
+      "newChat": "开始新的对话",
+      "newTicket": "创建新的支持票",
+      "noItems": "未找到项目。",
+      "noMessages": "没有消息"
+    },
+    "staffRole": "员工角色：",
+    "subtitle": {
+      "admin": "与代理管理对话和支持票。",
+      "agentMerchants": "通过消息和工单与您的商户沟通。",
+      "agentSupport": "联系平台支持团队。",
+      "merchant": "与您的支持代理聊天或创建工单。"
+    },
+    "superAdmin": "超级管理员",
+    "supportStaff": "支持人员",
+    "tabs": {
+      "agents": "代理",
+      "myMerchants": "我的商户",
+      "supportAdmin": "支持管理员"
+    },
+    "title": "支持与消息",
+    "toasts": {
+      "loadFailed": "加载支持数据失败",
+      "messageFailed": "发送消息失败。请再试一次。",
+      "messageHistoryFailed": "加载消息历史失败"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "支持",
+      "dashboardBreadcrumb": "代理仪表板"
+    },
+    "breadcrumb": "支持",
+    "dashboardBreadcrumb": "商家仪表板",
+    "masterAdmin": {
+      "breadcrumb": "支持",
+      "dashboardBreadcrumb": "主管理员仪表板"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "代理支持"
+      },
+      "merchantSupport": {
+        "title": "商户支持"
+      },
+      "supportDashboard": {
+        "title": "支持仪表板"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "导航到主设置 > 套餐以定义定价层。",
+        "a2": "是的，在代理设置 > 品牌中，您可以添加自定义域名。",
+        "category": "代理",
+        "q1": "如何设置商户套餐？",
+        "q2": "我可以自定义域名吗？"
+      },
+      "merchant": {
+        "a1": "转到优惠券选项卡并点击'创建新优惠券批次'。",
+        "a2": "业务启动的积分用于您与客户开始对话时。",
+        "category": "商户",
+        "q1": "我该如何创建新的优惠券？",
+        "q2": "WA BI积分是什么？"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "您能否澄清英国商家的佣金分成？",
+        "question": "您能否澄清英国商家的佣金分成？"
+      },
+      "agent2": {
+        "history1": "请求白标域名设置协助。",
+        "history2": "你好，请提供您想要使用的域名。",
+        "question": "请求白标域名设置协助。"
+      },
+      "agent3": {
+        "history": "紧急：我六月账单的计费问题。年度费用扣除似乎翻倍了。",
+        "question": "紧急：我6月份账单的问题。"
+      },
+      "merchant101": {
+        "history": "二维码打印得有点模糊。你能检查一下图像质量吗？",
+        "question": "二维码打印得有点模糊。"
+      },
+      "merchant102": {
+        "history1": "嘿！刚刚雇了一位经理。我该如何将他们添加到我的商户仪表板？",
+        "history2": "当然！前往设置 > 用户管理以添加他们。",
+        "question": "新员工需要仪表板访问权限。"
+      },
+      "merchant103": {
+        "history": "我注意到我的BI积分被用于一个活动。您能再解释一下区别吗？",
+        "question": "关于WhatsApp积分使用的问题。"
+      },
+      "merchant1": {
+        "history1": "我可以退还我购买的积分吗？",
+        "history2": "你好！退款请求在24小时内处理。",
+        "question": "我可以退还我购买的积分吗？"
+      },
+      "merchant2": {
+        "history": "您好，支持团队，我正在尝试为夏季系列推出我的第一个优惠券，但遇到了错误。",
+        "question": "需要帮助设置我的第一个优惠券活动。"
+      },
+      "merchantTemp1": {
+        "history": "我的7天试用即将结束，我该如何延长？",
+        "question": "我的7天试用期快结束了，我该如何延长？"
+      }
+    },
+    "roles": {
+      "agent": "代理",
+      "merchant": "商户",
+      "supportStaff": "支持人员",
+      "temporaryMerchant": "临时商户"
+    },
+    "senderNames": {
+      "bakery": "面包店与公司",
+      "coffeeHouse": "咖啡屋",
+      "digitalGrowth": "数字增长合作伙伴",
+      "globalSolutions": "全球解决方案有限公司",
+      "localGym": "本地健身房",
+      "luxuryBoutique": "奢侈品精品店",
+      "megaMarketing": "大型营销机构",
+      "pizzaPalace": "比萨宫",
+      "popupStore": "临时弹出商店"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "有权批准/拒绝付费广告提交。",
+        "name": "广告审核员"
+      },
+      "financeViewer": {
+        "description": "只读访问报表和钱包账本。",
+        "name": "财务查看器"
+      },
+      "superAdmin": {
+        "description": "全面平台控制和系统配置。",
+        "name": "超级管理员"
+      },
+      "supportStaff": {
+        "description": "手动回复代理和商家工单。",
+        "name": "支持人员"
+      }
+    }
+  }
+}

@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "Aksi",
+    "category": "Kategori",
+    "dateTime": "Tanggal & Waktu",
+    "description": "Deskripsi",
+    "details": "Detail",
+    "noDetails": "Tidak ada rincian",
+    "severity": "Tingkat Keparahan",
+    "systemActivity": "Aktivitas Sistem"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "Pantau aktivitas pedagang, transaksi dompet, dan log komisi.",
+    "masterAdmin": "Lihat semua aktivitas sistem, jejak audit, dan kesalahan kritis di seluruh platform.",
+    "merchant": "Lacak operasi toko Anda, penggunaan kupon, dan interaksi pelanggan."
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "Metode: {value}",
+      "user": "Pengguna: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "{count} kupon dihasilkan",
+      "quantity": "Kuantitas: {value}",
+      "type": "Tipe: {value}"
     },
     "customer": {
       "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "review": "Ulasan: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "Kupon",
+      "credits": "kredit",
+      "paidAd": "Iklan Berbayar",
+      "platformCommission": "Komisi Platform: {rate}%",
+      "unitPrice": "Harga Satuan: {value}",
+      "whatsappBI": "BI WhatsApp",
+      "whatsappUI": "UI WhatsApp"
+    }
+  },
+  "errors": {
+    "failedToLoad": "Gagal memuat log"
+  },
+  "filters": {
+    "logCategory": "Kategori Log",
+    "pickDateRange": "Pilih rentang tanggal",
+    "refresh": "Segarkan"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "Log Kampanye",
+      "couponLogs": "Log Kupon",
+      "customerLogs": "Log Pelanggan",
+      "merchantScopedLogs": "Log Berdasarkan Merchant",
+      "myMerchantsActivity": "Aktivitas Pedagang Saya",
+      "walletEarnings": "Dompet & Pendapatan",
+      "whatsappBIFeedback": "Umpan Balik WhatsApp BI",
+      "whatsappUIFeedback": "Umpan Balik UI WhatsApp"
+    },
+    "masterAdmin": {
+      "agentActivities": "Aktivitas Agen",
+      "allPlatformActivity": "Semua Aktivitas Platform",
+      "authenticationEvents": "Peristiwa Autentikasi",
+      "campaignLogs": "Log Kampanye",
+      "couponOperations": "Operasi Kupon",
+      "criticalErrors": "Kesalahan Kritis",
+      "customerActions": "Tindakan Pelanggan",
+      "merchantActivities": "Aktivitas Merchant",
+      "walletTransactions": "Transaksi Dompet",
+      "whatsappBIDetailed": "WhatsApp BI (Detail)",
+      "whatsappBIFeedback": "Umpan Balik WhatsApp BI",
+      "whatsappCreditWallet": "Kredit WhatsApp (Dompet)",
+      "whatsappUIDetailed": "UI WhatsApp (Detail)",
+      "whatsappUIFeedback": "Umpan Balik UI WhatsApp"
+    },
+    "merchant": {
+      "campaignLogs": "Log Kampanye",
+      "couponUsage": "Penggunaan Kupon",
+      "customerActions": "Tindakan Pelanggan",
+      "securityAuth": "Keamanan & Autentikasi",
+      "storeActivity": "Aktivitas Toko",
+      "walletTransactions": "Transaksi Dompet",
+      "whatsappBIFeedback": "Umpan Balik BI WhatsApp",
+      "whatsappUIFeedback": "Umpan Balik UI WhatsApp"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "Dasbor Agen",
+        "logs": "Log Sistem"
+      },
+      "description": "Pantau aktivitas pedagang, transaksi dompet, dan log komisi.",
+      "title": "Log Aktivitas"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "Dasbor Admin Utama",
+        "logs": "Log Sistem"
+      },
+      "description": "Lihat semua aktivitas sistem, jejak audit, dan kesalahan kritis di seluruh platform.",
+      "title": "Log Sistem"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "Dasbor Pedagang",
+        "logs": "Log Sistem"
+      },
+      "description": "Lacak operasi toko Anda, penggunaan kupon, dan interaksi pelanggan.",
+      "title": "Log Toko"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "Kritis",
+    "error": "Kesalahan",
+    "info": "Info",
+    "success": "Sukses",
+    "warning": "Peringatan"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "Log Aktivitas",
+    "masterAdmin": "Log Sistem",
+    "merchant": "Log Toko"
   }
 }

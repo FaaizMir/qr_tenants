@@ -69,6 +69,10 @@
   },
   "loadMore": "โหลดเพิ่มเติม",
   "noTransactions": "ไม่พบธุรกรรม",
+  "page": {
+    "breadcrumb": "กระเป๋าเงิน",
+    "dashboardBreadcrumb": "แดชบอร์ดผู้ค้า"
+  },
   "remainingCredits": "เครดิตที่เหลือ",
   "subscription": {
     "annual": "ประจำปี",

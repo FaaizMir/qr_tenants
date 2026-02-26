@@ -14,6 +14,11 @@ export const namespaces = [
   "systemLogs",
   "common",
   "merchantPurchase",
+  "merchantPaidAds",
+  "merchantLuckyDraw",
+  "merchantCustomerData",
+  "merchantStatements",
+  "support",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

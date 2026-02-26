@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "채팅",
+      "newChat": "새 채팅",
+      "newMessage": "새 메시지",
+      "newTicket": "새 티켓",
+      "ticket": "티켓"
+    },
+    "conversation": {
+      "me": "나",
+      "noMessagesDesc": "대화를 시작하려면 메시지를 보내세요.",
+      "noMessagesTitle": "아직 메시지가 없습니다.",
+      "pressEnter": "전송하려면 Enter 키를 누르세요.",
+      "sendMessage": "메시지 보내기",
+      "typePlaceholder": "메시지를 입력하세요..."
+    },
+    "disconnected": "연결 끊김",
+    "empty": {
+      "descriptionChat": "대화를 시작하거나 계속 채팅하기.",
+      "descriptionTickets": "새 지원 티켓을 생성하거나 기존 티켓을 확인하세요.",
+      "tipChat": "채팅:",
+      "tipChatDesc": "빠른 캐주얼 메시지",
+      "tipTickets": "티켓:",
+      "tipTicketsDesc": "정식 지원 요청",
+      "tipTitle": "💡 메시지 유형을 선택하세요:",
+      "title": "지원 센터"
+    },
+    "filters": {
+      "chat": "채팅",
+      "tickets": "티켓",
+      "viewAllCreateChat": "모두 보기 • 채팅만 만들기"
+    },
+    "participants": {
+      "platformSupport": "플랫폼 지원",
+      "yourSupportAgent": "귀하의 지원 에이전트"
+    },
+    "search": "검색...",
+    "sidebar": {
+      "newChat": "새로운 대화를 시작하세요",
+      "newTicket": "새 지원 티켓 만들기",
+      "noItems": "항목을 찾을 수 없습니다.",
+      "noMessages": "메시지가 없습니다"
+    },
+    "staffRole": "직원 역할:",
+    "subtitle": {
+      "admin": "대화 및 지원 티켓을 에이전트와 관리하세요.",
+      "agentMerchants": "메시지와 티켓을 통해 상인과 소통하세요.",
+      "agentSupport": "플랫폼 지원 팀에 문의하세요.",
+      "merchant": "지원 담당자와 채팅하거나 티켓을 생성하세요."
+    },
+    "superAdmin": "슈퍼 관리자",
+    "supportStaff": "지원 직원",
+    "tabs": {
+      "agents": "에이전트",
+      "myMerchants": "내 상인들",
+      "supportAdmin": "지원 관리자"
+    },
+    "title": "지원 및 메시지",
+    "toasts": {
+      "loadFailed": "지원 데이터를 로드하지 못했습니다",
+      "messageFailed": "메시지 전송에 실패했습니다. 다시 시도해 주세요.",
+      "messageHistoryFailed": "메시지 기록을 불러오는 데 실패했습니다"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "지원",
+      "dashboardBreadcrumb": "에이전트 대시보드"
+    },
+    "breadcrumb": "지원",
+    "dashboardBreadcrumb": "상인 대시보드",
+    "masterAdmin": {
+      "breadcrumb": "지원",
+      "dashboardBreadcrumb": "마스터 관리자 대시보드"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "에이전트 지원"
+      },
+      "merchantSupport": {
+        "title": "상인 지원"
+      },
+      "supportDashboard": {
+        "title": "지원 대시보드"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "가격 책정을 정의하려면 마스터 설정 > 패키지로 이동하십시오.",
+        "a2": "네, 에이전트 설정 > 브랜딩에서 사용자 정의 도메인을 추가할 수 있습니다.",
+        "category": "에이전트",
+        "q1": "상인 패키지를 설정하는 방법은 무엇인가요?",
+        "q2": "도메인을 사용자 정의할 수 있나요?"
+      },
+      "merchant": {
+        "a1": "쿠폰 탭으로 이동하여 '새 쿠폰 배치 만들기'를 클릭하세요.",
+        "a2": "비즈니스 시작 크레딧은 고객과의 대화를 시작할 때 사용됩니다.",
+        "category": "상인",
+        "q1": "새로운 쿠폰을 어떻게 생성하나요?",
+        "q2": "WA BI 크레딧이란 무엇인가요?"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "영국 상인을 위한 수수료 분배를 명확히 해주실 수 있나요?",
+        "question": "영국 상인을 위한 수수료 분배를 명확히 해주실 수 있나요?"
+      },
+      "agent2": {
+        "history1": "화이트 라벨 도메인 설정 지원 요청 중입니다.",
+        "history2": "안녕하세요, 사용하고 싶은 도메인을 제공해 주세요.",
+        "question": "화이트 라벨 도메인 설정 지원 요청합니다."
+      },
+      "agent3": {
+        "history": "긴급: 6월 명세서에 대한 청구 문제. 연회비 공제가 두 배로 보입니다.",
+        "question": "긴급: 6월 명세서에 대한 청구 문제입니다."
+      },
+      "merchant101": {
+        "history": "QR 코드가 약간 흐릿하게 인쇄되고 있습니다. 이미지 품질을 확인해 주시겠습니까?",
+        "question": "QR 코드가 약간 흐릿하게 인쇄되고 있습니다."
+      },
+      "merchant102": {
+        "history1": "안녕하세요! 방금 매니저를 고용했습니다. 그들을 내 상인 대시보드에 어떻게 추가하나요?",
+        "history2": "물론입니다! 설정 > 사용자 관리로 가서 추가하세요.",
+        "question": "새 직원이 대시보드 접근이 필요합니다."
+      },
+      "merchant103": {
+        "history": "내 BI 크레딧이 캠페인에 사용된 것을 보았습니다. 차이점을 다시 설명해 주실 수 있나요?",
+        "question": "WhatsApp 크레딧 사용에 대한 질문."
+      },
+      "merchant1": {
+        "history1": "구매한 크레딧에 대한 환불을 받을 수 있나요?",
+        "history2": "안녕하세요! 환불 요청은 24시간 이내에 처리됩니다.",
+        "question": "구매한 크레딧에 대한 환불을 받을 수 있나요?"
+      },
+      "merchant2": {
+        "history": "안녕하세요 지원팀, 여름 컬렉션을 위한 첫 번째 쿠폰을 출시하려고 하는데 오류가 발생하고 있습니다.",
+        "question": "첫 번째 쿠폰 캠페인을 설정하는 데 도움이 필요합니다."
+      },
+      "merchantTemp1": {
+        "history": "내 7일 무료 체험이 종료되는데, 어떻게 연장하나요?",
+        "question": "내 7일 무료 체험이 끝나가는데, 어떻게 연장하나요?"
+      }
+    },
+    "roles": {
+      "agent": "에이전트",
+      "merchant": "상인",
+      "supportStaff": "지원 직원",
+      "temporaryMerchant": "임시 상인"
+    },
+    "senderNames": {
+      "bakery": "베이커리 & Co",
+      "coffeeHouse": "커피 하우스",
+      "digitalGrowth": "디지털 성장 파트너",
+      "globalSolutions": "글로벌 솔루션 주식회사",
+      "localGym": "지역 체육관",
+      "luxuryBoutique": "럭셔리 부티크",
+      "megaMarketing": "메가 마케팅 에이전시",
+      "pizzaPalace": "피자 팰리스",
+      "popupStore": "팝업 스토어 (임시)"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "유료 광고 제출을 승인/거부할 수 있는 권한.",
+        "name": "광고 승인자"
+      },
+      "financeViewer": {
+        "description": "명세서 및 지갑 원장에 대한 읽기 전용 액세스.",
+        "name": "재무 뷰어"
+      },
+      "superAdmin": {
+        "description": "전체 플랫폼 제어 및 시스템 구성.",
+        "name": "슈퍼 관리자"
+      },
+      "supportStaff": {
+        "description": "에이전트 및 상인 티켓에 대한 수동 응답.",
+        "name": "지원 직원"
+      }
+    }
+  }
+}

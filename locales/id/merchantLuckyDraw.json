@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "actionsMenu": {
+      "delete": "Hapus Hadiah",
+      "edit": "Edit Hadiah",
+      "label": "Tindakan",
+      "openMenu": "Buka menu"
+    },
+    "dailyLimit": "Batas Harian",
+    "description": "Deskripsi",
+    "prizeName": "Nama Hadiah",
+    "probability": "Probabilitas",
+    "status": "Status",
+    "statusActive": "Aktif",
+    "statusInactive": "Tidak Aktif",
+    "totalLimit": "Batas Total",
+    "type": "Jenis"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "Batal",
+      "create": "Buat Hadiah",
+      "creating": "Sedang membuat...",
+      "update": "Perbarui Hadiah",
+      "updating": "Memperbarui..."
+    },
+    "cardDescription": {
+      "create": "Buat hadiah baru untuk undian beruntung",
+      "edit": "Perbarui informasi hadiah"
+    },
+    "cardTitle": {
+      "create": "Tambahkan Hadiah Baru",
+      "edit": "Edit Hadiah"
+    },
+    "createSubtitle": "Tambahkan hadiah baru ke undian berhadiah",
+    "createTitle": "Buat Hadiah",
+    "editSubtitle": "Perbarui detail hadiah",
+    "editTitle": "Edit Hadiah",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "Tidak ada batch yang ditemukan",
+        "label": "Batch Kupon",
+        "placeholder": "Pilih batch kupon...",
+        "required": "Batch kupon diperlukan",
+        "searchPlaceholder": "Cari batch..."
+      },
+      "dailyLimit": {
+        "label": "Batas Harian"
+      },
+      "prizeDescription": {
+        "label": "Deskripsi Hadiah"
+      },
+      "prizeName": {
+        "label": "Nama Hadiah",
+        "required": "Nama hadiah diperlukan"
+      },
+      "prizeType": {
+        "label": "Jenis Hadiah",
+        "options": {
+          "coupon": "Kupon"
+        }
+      },
+      "probability": {
+        "label": "Probabilitas (%)",
+        "max": "Maks 100%",
+        "min": "Min 0%",
+        "required": "Probabilitas diperlukan"
+      },
+      "sortOrder": {
+        "label": "Urutan Sortir"
+      },
+      "status": {
+        "label": "Status",
+        "options": {
+          "active": "Aktif",
+          "inactive": "Tidak aktif"
+        }
+      },
+      "totalLimit": {
+        "label": "Batas Total"
+      }
+    },
+    "importantNotes": {
+      "note1": "Total probabilitas harus sama dengan 100%",
+      "note2": "Setiap hadiah memerlukan batch kupon yang terhubung",
+      "note3": "Batas harian direset pada tengah malam",
+      "note4": "Jika batas hadiah tercapai, sistem akan melewati hadiah berikutnya yang tersedia",
+      "title": "Penting"
+    },
+    "toasts": {
+      "createSuccess": "Hadiah berhasil dibuat!",
+      "loadFailed": "Gagal memuat detail hadiah",
+      "noBatchSelected": "Silakan pilih batch kupon",
+      "noMerchantId": "ID Merchant tidak ditemukan",
+      "saveFailed": "Gagal menyimpan hadiah",
+      "updateSuccess": "Hadiah berhasil diperbarui!"
+    }
+  },
+  "index": {
+    "createButton": "Buat Hadiah",
+    "deleteDialog": {
+      "cancel": "Batal",
+      "confirm": "Hapus",
+      "description": "Ini akan menghapus hadiah \"{prizeName}\" secara permanen. Tindakan ini tidak dapat dibatalkan.",
+      "title": "Apakah Anda yakin?"
+    },
+    "prizesCard": {
+      "description": "Kelola semua hadiah untuk undian berhadiah",
+      "title": "Hadiah"
+    },
+    "searchPlaceholder": "Cari hadiah berdasarkan nama, deskripsi, atau tipe...",
+    "subtitle": "Konfigurasikan hadiah \"Putar Roda\" untuk pelanggan yang menyelesaikan ulasan.",
+    "title": "Pengaturan Undian Beruntung",
+    "toasts": {
+      "deleteFailed": "Gagal menghapus hadiah",
+      "deleteSuccess": "Hadiah berhasil dihapus!",
+      "loadFailed": "Gagal memuat hadiah"
+    }
+  },
+  "page": {
+    "breadcrumb": "Undian Beruntung",
+    "dashboardBreadcrumb": "Dasbor Merchant"
+  }
+}

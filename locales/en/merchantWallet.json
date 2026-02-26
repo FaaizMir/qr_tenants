@@ -69,6 +69,10 @@
   },
   "loadMore": "Load More",
   "noTransactions": "No transactions found",
+  "page": {
+    "breadcrumb": "Wallet",
+    "dashboardBreadcrumb": "Merchant Dashboard"
+  },
   "remainingCredits": "Remaining Credits",
   "subscription": {
     "annual": "Annual",

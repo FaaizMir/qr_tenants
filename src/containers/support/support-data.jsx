@@ -1,18 +1,21 @@
-export const mockMessages = [
+// This file contains mock data and FAQs for the support system
+// To use translations, import useTranslations from 'next-intl' in the component that uses this data
+
+export const getMockMessages = (t) => [
   // MASTER INBOX: AGENT SUPPORT
   {
     id: "msg_1",
     senderId: "agent_1",
-    senderName: "Mega Marketing Agency",
-    senderRole: "Agent",
+    senderName: t("support.supportData.senderNames.megaMarketing"),
+    senderRole: t("support.supportData.roles.agent"),
     targetInbox: "master_agent_support",
-    text: "Can you clarify the commission split for UK merchants?",
+    text: t("support.supportData.mockMessages.agent1.question"),
     timestamp: "2024-06-02T10:00:00Z",
     unread: true,
     history: [
       {
-        role: "Agent",
-        text: "Can you clarify the commission split for UK merchants?",
+        role: t("support.supportData.roles.agent"),
+        text: t("support.supportData.mockMessages.agent1.history"),
         time: "10:00 AM",
       },
     ],
@@ -20,21 +23,21 @@ export const mockMessages = [
   {
     id: "msg_5",
     senderId: "agent_2",
-    senderName: "Global Solutions Ltd",
-    senderRole: "Agent",
+    senderName: t("support.supportData.senderNames.globalSolutions"),
+    senderRole: t("support.supportData.roles.agent"),
     targetInbox: "master_agent_support",
-    text: "Requesting white-label domain setup assistance.",
+    text: t("support.supportData.mockMessages.agent2.question"),
     timestamp: "2024-06-01T09:15:00Z",
     unread: false,
     history: [
       {
-        role: "Agent",
-        text: "Requesting white-label domain setup assistance.",
+        role: t("support.supportData.roles.agent"),
+        text: t("support.supportData.mockMessages.agent2.history1"),
         time: "09:15 AM",
       },
       {
-        role: "Support Staff",
-        text: "Hello, please provide the domain you'd like to use.",
+        role: t("support.supportData.roles.supportStaff"),
+        text: t("support.supportData.mockMessages.agent2.history2"),
         time: "11:30 AM",
       },
     ],
@@ -42,16 +45,16 @@ export const mockMessages = [
   {
     id: "msg_6",
     senderId: "agent_3",
-    senderName: "Digital Growth Partner",
-    senderRole: "Agent",
+    senderName: t("support.supportData.senderNames.digitalGrowth"),
+    senderRole: t("support.supportData.roles.agent"),
     targetInbox: "master_agent_support",
-    text: "Urgent: Billing issue for my June statement.",
+    text: t("support.supportData.mockMessages.agent3.question"),
     timestamp: "2024-06-03T08:45:00Z",
     unread: true,
     history: [
       {
-        role: "Agent",
-        text: "Urgent: Billing issue for my June statement. The annual fee deduction seems doubled.",
+        role: t("support.supportData.roles.agent"),
+        text: t("support.supportData.mockMessages.agent3.history"),
         time: "08:45 AM",
       },
     ],
@@ -61,21 +64,21 @@ export const mockMessages = [
   {
     id: "msg_2",
     senderId: "merch_1",
-    senderName: "Pizza Palace",
-    senderRole: "Merchant",
+    senderName: t("support.supportData.senderNames.pizzaPalace"),
+    senderRole: t("support.supportData.roles.merchant"),
     targetInbox: "master_merchant_support",
-    text: "Can I get a refund on the credits I bought?",
+    text: t("support.supportData.mockMessages.merchant1.question"),
     timestamp: "2024-06-02T09:30:00Z",
     unread: false,
     history: [
       {
-        role: "Merchant",
-        text: "Can I get a refund on the credits I bought?",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchant1.history1"),
         time: "09:30 AM",
       },
       {
-        role: "Support Staff",
-        text: "Hello! Refund requests are processed within 24 hours.",
+        role: t("support.supportData.roles.supportStaff"),
+        text: t("support.supportData.mockMessages.merchant1.history2"),
         time: "09:45 AM",
       },
     ],
@@ -83,16 +86,16 @@ export const mockMessages = [
   {
     id: "msg_4",
     senderId: "merch_temp_1",
-    senderName: "Pop-up Store (Temp)",
-    senderRole: "Temporary Merchant",
+    senderName: t("support.supportData.senderNames.popupStore"),
+    senderRole: t("support.supportData.roles.temporaryMerchant"),
     targetInbox: "master_merchant_support",
-    text: "My 7-day trial is ending, how do I extend?",
+    text: t("support.supportData.mockMessages.merchantTemp1.question"),
     timestamp: "2024-06-01T15:20:00Z",
     unread: false,
     history: [
       {
-        role: "Merchant",
-        text: "My 7-day trial is ending, how do I extend?",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchantTemp1.history"),
         time: "03:20 PM",
       },
     ],
@@ -100,16 +103,16 @@ export const mockMessages = [
   {
     id: "msg_7",
     senderId: "merch_2",
-    senderName: "Luxury Boutique",
-    senderRole: "Merchant",
+    senderName: t("support.supportData.senderNames.luxuryBoutique"),
+    senderRole: t("support.supportData.roles.merchant"),
     targetInbox: "master_merchant_support",
-    text: "Need help setting up my first coupon campaign.",
+    text: t("support.supportData.mockMessages.merchant2.question"),
     timestamp: "2024-06-03T10:00:00Z",
     unread: true,
     history: [
       {
-        role: "Merchant",
-        text: "Hello support, I'm trying to launch my first coupon for the summer collection but getting an error.",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchant2.history"),
         time: "10:00 AM",
       },
     ],
@@ -120,17 +123,17 @@ export const mockMessages = [
   {
     id: "msg_3",
     senderId: "merch_101",
-    senderName: "Coffee House",
-    senderRole: "Merchant",
+    senderName: t("support.supportData.senderNames.coffeeHouse"),
+    senderRole: t("support.supportData.roles.merchant"),
     targetInbox: "agent_merchant_support",
     agentId: "agent_1",
-    text: "The QR codes are printing a bit blurry.",
+    text: t("support.supportData.mockMessages.merchant101.question"),
     timestamp: "2024-06-02T11:15:00Z",
     unread: true,
     history: [
       {
-        role: "Merchant",
-        text: "The QR codes are printing a bit blurry. Can you check the image quality?",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchant101.history"),
         time: "11:15 AM",
       },
     ],
@@ -138,22 +141,22 @@ export const mockMessages = [
   {
     id: "msg_8",
     senderId: "merch_102",
-    senderName: "Local Gym",
-    senderRole: "Merchant",
+    senderName: t("support.supportData.senderNames.localGym"),
+    senderRole: t("support.supportData.roles.merchant"),
     targetInbox: "agent_merchant_support",
     agentId: "agent_1",
-    text: "New staff member needs dashboard access.",
+    text: t("support.supportData.mockMessages.merchant102.question"),
     timestamp: "2024-06-02T14:30:00Z",
     unread: false,
     history: [
       {
-        role: "Merchant",
-        text: "Hey! Just hired a manager. How do I add them to my merchant dashboard?",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchant102.history1"),
         time: "02:30 PM",
       },
       {
-        role: "Agent",
-        text: "Sure! Go to Settings > User Management to add them.",
+        role: t("support.supportData.roles.agent"),
+        text: t("support.supportData.mockMessages.merchant102.history2"),
         time: "02:45 PM",
       },
     ],
@@ -161,71 +164,76 @@ export const mockMessages = [
   {
     id: "msg_9",
     senderId: "merch_103",
-    senderName: "Bakery & Co",
-    senderRole: "Merchant",
+    senderName: t("support.supportData.senderNames.bakery"),
+    senderRole: t("support.supportData.roles.merchant"),
     targetInbox: "agent_merchant_support",
     agentId: "agent_1",
-    text: "Question about WhatsApp credits usage.",
+    text: t("support.supportData.mockMessages.merchant103.question"),
     timestamp: "2024-06-03T11:20:00Z",
     unread: true,
     history: [
       {
-        role: "Merchant",
-        text: "I noticed my BI credits were used for a campaign. Can you explain the difference again?",
+        role: t("support.supportData.roles.merchant"),
+        text: t("support.supportData.mockMessages.merchant103.history"),
         time: "11:20 AM",
       },
     ],
   },
 ];
 
-export const supportFAQs = [
+export const getSupportFAQs = (t) => [
   {
-    category: "Merchant",
+    category: t("support.supportData.faqs.merchant.category"),
     questions: [
       {
-        q: "How do I create a new coupon?",
-        a: "Go to the Coupons tab and click 'Create New Coupon Batch'.",
+        q: t("support.supportData.faqs.merchant.q1"),
+        a: t("support.supportData.faqs.merchant.a1"),
       },
       {
-        q: "What are WA BI credits?",
-        a: "Business Initiated credits are used when you start a conversation with a customer.",
+        q: t("support.supportData.faqs.merchant.q2"),
+        a: t("support.supportData.faqs.merchant.a2"),
       },
     ],
   },
   {
-    category: "Agent",
+    category: t("support.supportData.faqs.agent.category"),
     questions: [
       {
-        q: "How to set up merchant packages?",
-        a: "Navigate to Master Settings > Packages to define pricing tiers.",
+        q: t("support.supportData.faqs.agent.q1"),
+        a: t("support.supportData.faqs.agent.a1"),
       },
       {
-        q: "Can I customize the domain?",
-        a: "Yes, under Agent Settings > Branding you can add your custom domain.",
+        q: t("support.supportData.faqs.agent.q2"),
+        a: t("support.supportData.faqs.agent.a2"),
       },
     ],
   },
 ];
 
-export const staticStaffRoles = [
+export const getStaticStaffRoles = (t) => [
   {
     id: 1,
-    name: "Support Staff",
-    description: "Manual replies to agent and merchant tickets.",
+    name: t("support.supportData.staffRoles.supportStaff.name"),
+    description: t("support.supportData.staffRoles.supportStaff.description"),
   },
   {
     id: 2,
-    name: "Ad Approver",
-    description: "Authorized to approve/reject paid ad submissions.",
+    name: t("support.supportData.staffRoles.adApprover.name"),
+    description: t("support.supportData.staffRoles.adApprover.description"),
   },
   {
     id: 3,
-    name: "Finance Viewer",
-    description: "ReadOnly access to statements and wallet ledgers.",
+    name: t("support.supportData.staffRoles.financeViewer.name"),
+    description: t("support.supportData.staffRoles.financeViewer.description"),
   },
   {
     id: 4,
-    name: "Super Admin",
-    description: "Full platform control and system configuration.",
+    name: t("support.supportData.staffRoles.superAdmin.name"),
+    description: t("support.supportData.staffRoles.superAdmin.description"),
   },
 ];
+
+// Legacy exports for backward compatibility (not recommended - use the getter functions above)
+export const mockMessages = [];
+export const supportFAQs = [];
+export const staticStaffRoles = [];

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import {
   Card,
@@ -20,6 +21,7 @@ import UniversalComboBoxField from "@/components/form-fields/universal-combobox-
 import { TextField, NumberField, SelectField } from "@/components/form-fields";
 
 export default function PrizeForm({ isEdit = false }) {
+  const t = useTranslations("merchantLuckyDraw.form");
   const router = useRouter();
   const params = useParams();
   const { data: session } = useSession();
@@ -89,12 +91,12 @@ export default function PrizeForm({ isEdit = false }) {
         }
       } catch (err) {
         console.error(err);
-        toast.error("Failed to load prize details");
+        toast.error(t("toasts.loadFailed"));
       }
     };
 
     fetchPrize();
-  }, [isEdit, prizeId, setValue]);
+  }, [isEdit, prizeId, setValue, t]);
 
   const handleCancel = () => {
     router.push("/merchant/lucky-draw");
@@ -102,12 +104,12 @@ export default function PrizeForm({ isEdit = false }) {
 
   const onSubmit = async (data) => {
     if (!merchantId) {
-      toast.error("Merchant ID not found");
+      toast.error(t("toasts.noMerchantId"));
       return;
     }
 
     if (!data.batch_id) {
-      toast.error("Please select a coupon batch");
+      toast.error(t("toasts.noBatchSelected"));
       return;
     }
 
@@ -144,16 +146,16 @@ export default function PrizeForm({ isEdit = false }) {
           `/lucky-draw/prizes/${prizeId}`,
           Patchpayload,
         );
-        toast.success("Prize updated successfully!");
+        toast.success(t("toasts.updateSuccess"));
       } else {
         // Create new prize
         await axiosInstance.post("/lucky-draw/prizes", Postpayload);
-        toast.success("Prize created successfully!");
+        toast.success(t("toasts.createSuccess"));
       }
 
       router.push("/merchant/lucky-draw");
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Failed to save prize");
+      toast.error(err?.response?.data?.message || t("toasts.saveFailed"));
     } finally {
       setLoading(false);
     }
@@ -167,12 +169,10 @@ export default function PrizeForm({ isEdit = false }) {
         </Button>
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold">
-            {isEdit ? "Edit Prize" : "Create Prize"}
+            {isEdit ? t("editTitle") : t("createTitle")}
           </h1>
           <p className="text-muted-foreground">
-            {isEdit
-              ? "Update prize details"
-              : "Add a new prize to the lucky draw"}
+            {isEdit ? t("editSubtitle") : t("createSubtitle")}
           </p>
         </div>
       </div>
@@ -182,49 +182,47 @@ export default function PrizeForm({ isEdit = false }) {
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>{isEdit ? "Edit Prize" : "Add New Prize"}</CardTitle>
+              <CardTitle>{isEdit ? t("cardTitle.edit") : t("cardTitle.create")}</CardTitle>
               <CardDescription>
-                {isEdit
-                  ? "Update the prize information"
-                  : "Create a new prize for the lucky draw"}
+                {isEdit ? t("cardDescription.edit") : t("cardDescription.create")}
               </CardDescription>
             </CardHeader>
             <form onSubmit={handleSubmit(onSubmit)}>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <TextField
-                    label="Prize Name"
+                    label={t("fields.prizeName.label")}
                     name="prize_name"
                     register={register}
                     errors={errors}
-                    validation={{ required: "Prize name is required" }}
+                    validation={{ required: t("fields.prizeName.required") }}
                   />
 
                   <SelectField
-                    label="Prize Type"
+                    label={t("fields.prizeType.label")}
                     name="prize_type"
                     control={control}
                     errors={errors}
-                    options={[{ value: "coupon", label: "Coupon" }]}
+                    options={[{ value: "coupon", label: t("fields.prizeType.options.coupon") }]}
                   />
                 </div>
 
                 <TextField
-                  label="Prize Description"
+                  label={t("fields.prizeDescription.label")}
                   name="prize_description"
                   register={register}
                   errors={errors}
                 />
 
                 <UniversalComboBoxField
-                  label="Coupon Batch"
+                  label={t("fields.couponBatch.label")}
                   name="batch_id"
                   control={control}
                   errors={errors}
-                  validation={{ required: "Coupon batch is required" }}
-                  placeholder="Select coupon batch..."
-                  searchPlaceholder="Search batches..."
-                  emptyMessage="No batches found"
+                  validation={{ required: t("fields.couponBatch.required") }}
+                  placeholder={t("fields.couponBatch.placeholder")}
+                  searchPlaceholder={t("fields.couponBatch.searchPlaceholder")}
+                  emptyMessage={t("fields.couponBatch.emptyMessage")}
                   apiEndpoint="/coupon-batches"
                   dataToStore="batches"
                   valueKey="id"
@@ -237,19 +235,19 @@ export default function PrizeForm({ isEdit = false }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <NumberField
-                    label="Probability (%)"
+                    label={t("fields.probability.label")}
                     name="probability"
                     register={register}
                     errors={errors}
                     validation={{
-                      required: "Probability is required",
-                      min: { value: 0, message: "Min 0%" },
-                      max: { value: 100, message: "Max 100%" },
+                      required: t("fields.probability.required"),
+                      min: { value: 0, message: t("fields.probability.min") },
+                      max: { value: 100, message: t("fields.probability.max") },
                     }}
                   />
 
                   <NumberField
-                    label="Daily Limit"
+                    label={t("fields.dailyLimit.label")}
                     name="daily_limit"
                     register={register}
                     errors={errors}
@@ -257,7 +255,7 @@ export default function PrizeForm({ isEdit = false }) {
                   />
 
                   <NumberField
-                    label="Total Limit"
+                    label={t("fields.totalLimit.label")}
                     name="total_limit"
                     register={register}
                     errors={errors}
@@ -267,7 +265,7 @@ export default function PrizeForm({ isEdit = false }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <NumberField
-                    label="Sort Order"
+                    label={t("fields.sortOrder.label")}
                     name="sort_order"
                     register={register}
                     errors={errors}
@@ -275,30 +273,26 @@ export default function PrizeForm({ isEdit = false }) {
                   />
 
                   <SelectField
-                    label="Status"
+                    label={t("fields.status.label")}
                     name="is_active"
                     control={control}
                     errors={errors}
                     options={[
-                      { value: "true", label: "Active" },
-                      { value: "false", label: "Inactive" },
+                      { value: "true", label: t("fields.status.options.active") },
+                      { value: "false", label: t("fields.status.options.inactive") },
                     ]}
                   />
                 </div>
               </CardContent>
               <CardFooter className="justify-between border-t p-4 bg-muted/20">
                 <Button type="button" variant="outline" onClick={handleCancel}>
-                  Cancel
+                  {t("buttons.cancel")}
                 </Button>
                 <Button type="submit" disabled={loading}>
                   {loading ? (
-                    isEdit ? (
-                      "Updating..."
-                    ) : (
-                      "Creating..."
-                    )
+                    isEdit ? t("buttons.updating") : t("buttons.creating")
                   ) : (
-                    <>{isEdit ? "Update Prize" : "Create Prize"}</>
+                    <>{isEdit ? t("buttons.update") : t("buttons.create")}</>
                   )}
                 </Button>
               </CardFooter>
@@ -312,16 +306,15 @@ export default function PrizeForm({ isEdit = false }) {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-yellow-800">
                 <AlertCircle className="h-5 w-5" />
-                Important
+                {t("importantNotes.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm text-yellow-800/80 space-y-2">
-              <p>• Total probability must equal 100%</p>
-              <p>• Each prize requires a linked coupon batch</p>
-              <p>• Daily limits reset at midnight</p>
+              <p>• {t("importantNotes.note1")}</p>
+              <p>• {t("importantNotes.note2")}</p>
+              <p>• {t("importantNotes.note3")}</p>
               <p>
-                • If a prize limit is reached, the system will skip to the next
-                available prize
+                • {t("importantNotes.note4")}
               </p>
             </CardContent>
           </Card>

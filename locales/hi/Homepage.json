@@ -66,6 +66,8 @@
       "city": "शहर",
       "curatingMessage": "हम आपके लिए सर्वश्रेष्ठ सत्यापित व्यापारियों और विशेष सौदों का चयन कर रहे हैं...",
       "everywhere": "हर जगह",
+      "expiringSoon": "जल्द समाप्त होने वाला",
+      "expiringSoonActive": "जल्द समाप्त होने वाला ✓",
       "industry": "उद्योग",
       "loadingMarketplace": "मार्केटप्लेस लोड हो रहा है",
       "noMerchantsFound": "कोई व्यापारी नहीं मिला",
@@ -147,6 +149,8 @@
       "agents": "एजेंट",
       "allCountries": "सभी देश",
       "description": "अपने वैश्विक किरायेदार एजेंटों के नेटवर्क का प्रबंधन करें।",
+      "expiringSoon": "जल्द समाप्त होने वाला",
+      "expiringSoonActive": "जल्द समाप्त होने वाला ✓",
       "noAgentsFound": "कोई एजेंट नहीं मिला",
       "of": "का",
       "pageNoResults": "पृष्ठ - कोई परिणाम नहीं",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "संपर्क करें",
       "copyright": "© 2024 QR Rev Inc. सभी अधिकार सुरक्षित।",
+      "globalMerchantNetwork": "वैश्विक व्यापारी नेटवर्क",
       "privacy": "गोपनीयता",
       "terms": "शर्तें"
     },

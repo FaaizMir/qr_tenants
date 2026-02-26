@@ -69,6 +69,10 @@
   },
   "loadMore": "تحميل المزيد",
   "noTransactions": "لم يتم العثور على معاملات",
+  "page": {
+    "breadcrumb": "محفظة",
+    "dashboardBreadcrumb": "لوحة تحكم التاجر"
+  },
   "remainingCredits": "الرصيد المتبقي",
   "subscription": {
     "annual": "سنوي",

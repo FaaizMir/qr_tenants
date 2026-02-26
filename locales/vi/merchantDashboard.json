@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "ID quảng cáo",
+    "adsDesc": "Tổng số quảng cáo được theo dõi",
+    "agentId": "ID đại lý",
+    "clicks": "Số lần nhấp",
+    "clicksChart": "Số lần nhấp theo quảng cáo",
+    "clicksDesc": "Tổng số lần nhấp quảng cáo từ người xem",
+    "clickThroughRate": "Tỷ lệ nhấp chuột",
+    "createdAt": "Đã tạo",
+    "ctr": "CTR",
+    "ctrDesc": "Tỷ lệ số lần hiển thị chuyển đổi thành nhấp chuột",
+    "description": "Theo dõi số lần hiển thị và nhấp chuột cho quảng cáo đã trả tiền của bạn",
+    "detailedAnalytics": "Phân tích chi tiết",
+    "detailedDesc": "Phân tích hiệu suất cho từng quảng cáo",
+    "errorFetchFailed": "Không thể tải phân tích",
+    "impressions": "Số lần hiển thị",
+    "impressionsChart": "Số lần hiển thị theo quảng cáo",
+    "impressionsDesc": "Tổng số lần xem quảng cáo trên tất cả các chiến dịch",
+    "noAdsDesc": "Phân tích quảng cáo đã trả tiền của bạn sẽ xuất hiện ở đây khi theo dõi bắt đầu",
+    "noAdsYet": "Chưa theo dõi quảng cáo nào",
+    "noData": "Không có dữ liệu",
+    "title": "Phân tích quảng cáo đã trả tiền",
+    "total": "tổng",
+    "totalAds": "Quảng cáo đang hoạt động",
+    "totalClicks": "Tổng số lần nhấp",
+    "totalImpressions": "Tổng số lần hiển thị"
+  },
   "common": {
     "credits": "Tín dụng"
   },
@@ -53,6 +80,9 @@
     "comingSoon": "Nội dung cài đặt sẽ có sớm...",
     "noData": "--"
   },
+  "qrCode": {
+    "tapToZoom": "NHẤN ĐỂ PHÓNG TO"
+  },
   "recentRedemptions": {
     "amount": "Số tiền",
     "code": "Mã",
@@ -85,6 +115,7 @@
     "used": "Đã sử dụng"
   },
   "tabs": {
+    "analytics": "Hiệu suất quảng cáo",
     "automation": "Tự động hóa",
     "coupons": "Lô phiếu giảm giá",
     "feedbackForm": "Mẫu phản hồi",

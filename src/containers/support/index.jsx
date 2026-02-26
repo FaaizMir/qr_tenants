@@ -8,12 +8,11 @@ import {
   CheckCheck,
   Shield,
   Clock,
-  Image as ImageIcon,
-  ChevronRight,
   HelpCircle,
   Loader2,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import {
   Card,
   CardContent,
@@ -27,8 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supportFAQs } from "./support-data";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { format } from "date-fns";
 import axiosInstance from "@/lib/axios";
 import { useSocket } from "@/hooks/useSocket";
@@ -36,6 +34,7 @@ import { toast } from "sonner";
 import { getMerchants } from "@/lib/services/helper";
 
 export default function SupportContainer() {
+  const t = useTranslations("support.index");
   const { data: session } = useSession();
   const user = session?.user;
   const { emit, on, off, isConnected } = useSocket();
@@ -123,7 +122,7 @@ export default function SupportContainer() {
           const sa = res.data.data?.[0] || res.data?.[0];
           if (sa) {
             setParticipants([
-              { ...sa, name: "Platform Support", role: "SUPER_ADMIN" },
+              { ...sa, name: t("participants.platformSupport"), role: "SUPER_ADMIN" },
             ]);
           }
         } catch (err) {
@@ -138,7 +137,7 @@ export default function SupportContainer() {
             merchantData.data?.data?.admin_id || merchantData.data?.admin_id;
           if (agentId) {
             setParticipants([
-              { id: agentId, name: "Your Support Agent", role: "AGENT" },
+              { id: agentId, name: t("participants.yourSupportAgent"), role: "AGENT" },
             ]);
           }
         } catch (err) {
@@ -150,11 +149,11 @@ export default function SupportContainer() {
       }
     } catch (error) {
       console.error("Failed to fetch support data:", error);
-      toast.error("Failed to load support data");
+      toast.error(t("toasts.loadFailed"));
     } finally {
       setLoading(false);
     }
-  }, [hasAdminAccess, isAgent, isMerchant, activeTab, user?.merchantId]);
+  }, [hasAdminAccess, isAgent, activeTab, isMerchant, t, user?.merchantId]);
 
   useEffect(() => {
     fetchData();
@@ -303,11 +302,11 @@ export default function SupportContainer() {
       emit("joinConversation", { conversationId: selectedConversation.id });
     } catch (error) {
       console.error("Failed to fetch messages:", error);
-      toast.error("Failed to load message history");
+      toast.error(t("toasts.messageHistoryFailed"));
     } finally {
       setMessagesLoading(false);
     }
-  }, [selectedConversation, emit]);
+  }, [selectedConversation, emit, t]);
 
   useEffect(() => {
     fetchMessages();
@@ -470,7 +469,7 @@ export default function SupportContainer() {
       setReplyText("");
     } catch (error) {
       console.error("Failed to send message:", error);
-      toast.error("Failed to send message. Please try again.");
+      toast.error(t("toasts.messageFailed"));
     }
   };
 
@@ -488,23 +487,18 @@ export default function SupportContainer() {
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <MessageSquare className="h-6 w-6 text-primary" />
-            Support & Messages
+            {t("title")}
             {!isConnected && (
               <Badge variant="destructive" className="ml-2 text-[10px]">
-                Disconnected
+                {t("disconnected")}
               </Badge>
             )}
           </h1>
           <p className="text-sm text-muted-foreground">
-            {hasAdminAccess &&
-              "Manage conversations and support tickets with agents."}
-            {isAgent &&
-              activeTab === "merchants" &&
-              "Communicate with your merchants via messages and tickets."}
-            {isAgent &&
-              activeTab === "agents" &&
-              "Contact platform support team."}
-            {isMerchant && "Chat with your support agent or create tickets."}
+            {hasAdminAccess && t("subtitle.admin")}
+            {isAgent && activeTab === "merchants" && t("subtitle.agentMerchants")}
+            {isAgent && activeTab === "agents" && t("subtitle.agentSupport")}
+            {isMerchant && t("subtitle.merchant")}
           </p>
         </div>
 
@@ -512,10 +506,10 @@ export default function SupportContainer() {
           <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-lg border text-xs font-medium">
             <Shield className="h-3.5 w-3.5 text-primary" />
             <span>
-              Staff Role:{" "}
+              {t("staffRole")}{" "}
               {isSupportStaff
-                ? "Support Staff"
-                : user?.staffRole || "Super Admin"}
+                ? t("supportStaff")
+                : user?.staffRole || t("superAdmin")}
             </span>
           </div>
         )}
@@ -535,15 +529,15 @@ export default function SupportContainer() {
                 >
                   {hasAdminAccess ? (
                     <div className="flex items-center justify-center text-xs font-bold text-muted-foreground uppercase tracking-widest bg-muted/30 rounded-md">
-                      Agents
+                      {t("tabs.agents")}
                     </div>
                   ) : (
                     <>
                       <TabsTrigger value="merchants" className="text-xs">
-                        My Merchants
+                        {t("tabs.myMerchants")}
                       </TabsTrigger>
                       <TabsTrigger value="agents" className="text-xs">
-                        Support Admin
+                        {t("tabs.supportAdmin")}
                       </TabsTrigger>
                     </>
                   )}
@@ -565,7 +559,7 @@ export default function SupportContainer() {
                       }`}
                     >
                       <MessageSquare className="h-3 w-3" />
-                      Chat
+                      {t("filters.chat")}
                     </button>
                     <button
                       onClick={() => setConversationTypeFilter("support")}
@@ -576,7 +570,7 @@ export default function SupportContainer() {
                       }`}
                     >
                       <HelpCircle className="h-3 w-3" />
-                      Tickets
+                      {t("filters.tickets")}
                     </button>
                   </div>
                 ) : (
@@ -584,7 +578,7 @@ export default function SupportContainer() {
                   <div className="flex gap-1.5 p-1 bg-muted/30 rounded-lg">
                     <div className="flex-1 px-2 py-1.5 text-[10px] font-medium rounded bg-background shadow-sm text-foreground flex items-center justify-center gap-1">
                       <MessageSquare className="h-3 w-3" />
-                      View All • Create Chat Only
+                      {t("filters.viewAllCreateChat")}
                     </div>
                   </div>
                 )}
@@ -592,7 +586,7 @@ export default function SupportContainer() {
                 <div className="relative">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search..."
+                    placeholder={t("search")}
                     className="pl-9 h-9 text-sm bg-muted/30 border-none focus-visible:ring-1"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -610,7 +604,7 @@ export default function SupportContainer() {
                     </div>
                   ) : filteredItems.length === 0 ? (
                     <div className="p-8 text-center text-muted-foreground text-sm">
-                      No items found.
+                      {t("sidebar.noItems")}
                     </div>
                   ) : (
                     filteredItems.map((item) => (
@@ -664,7 +658,7 @@ export default function SupportContainer() {
                                 className="text-[9px] h-4 px-1 bg-blue-500"
                               >
                                 <HelpCircle className="h-2.5 w-2.5 mr-0.5" />
-                                Ticket
+                                {t("badges.ticket")}
                               </Badge>
                             )}
                           {item.isConversation && item.category === "chat" && (
@@ -673,7 +667,7 @@ export default function SupportContainer() {
                               className="text-[9px] h-4 px-1 bg-green-500"
                             >
                               <MessageSquare className="h-2.5 w-2.5 mr-0.5" />
-                              Chat
+                              {t("badges.chat")}
                             </Badge>
                           )}
                           {!item.isConversation &&
@@ -682,7 +676,7 @@ export default function SupportContainer() {
                                 variant="secondary"
                                 className="text-[9px] h-4 px-1"
                               >
-                                NEW TICKET
+                                {t("badges.newTicket")}
                               </Badge>
                             )}
                           {!item.isConversation &&
@@ -691,17 +685,17 @@ export default function SupportContainer() {
                                 variant="secondary"
                                 className="text-[9px] h-4 px-1"
                               >
-                                NEW CHAT
+                                {t("badges.newChat")}
                               </Badge>
                             )}
                         </div>
                         <p className="text-xs truncate text-muted-foreground">
                           {item.isConversation
                             ? item.messages?.[item.messages.length - 1]
-                                ?.content || "No messages"
+                                ?.content || t("sidebar.noMessages")
                             : conversationTypeFilter === "support"
-                              ? "Create a new support ticket"
-                              : "Start a new conversation"}
+                              ? t("sidebar.newTicket")
+                              : t("sidebar.newChat")}
                         </p>
                       </button>
                     ))
@@ -742,7 +736,7 @@ export default function SupportContainer() {
                               className="text-[9px] h-4 px-1 bg-blue-500"
                             >
                               <HelpCircle className="h-2.5 w-2.5 mr-0.5" />
-                              Ticket
+                              {t("badges.ticket")}
                             </Badge>
                           ) : (
                             <Badge
@@ -750,7 +744,7 @@ export default function SupportContainer() {
                               className="text-[9px] h-4 px-1 bg-green-500"
                             >
                               <MessageSquare className="h-2.5 w-2.5 mr-0.5" />
-                              Chat
+                              {t("badges.chat")}
                             </Badge>
                           )}
                         </>
@@ -768,14 +762,14 @@ export default function SupportContainer() {
                               variant="secondary"
                               className="text-[9px] h-4 px-1"
                             >
-                              NEW CHAT
+                              {t("badges.newChat")}
                             </Badge>
                           ) : (
                             <Badge
                               variant="secondary"
                               className="text-[9px] h-4 px-1"
                             >
-                              NEW MESSAGE
+                              {t("badges.newMessage")}
                             </Badge>
                           )}
                         </>
@@ -804,7 +798,7 @@ export default function SupportContainer() {
                       }`}
                     >
                       <MessageSquare className="h-3 w-3" />
-                      Chat
+                      {t("filters.chat")}
                     </button>
                     <button
                       onClick={() => setConversationTypeFilter("support")}
@@ -815,7 +809,7 @@ export default function SupportContainer() {
                       }`}
                     >
                       <HelpCircle className="h-3 w-3" />
-                      Tickets
+                      {t("filters.tickets")}
                     </button>
                   </div>
                 )}
@@ -833,9 +827,9 @@ export default function SupportContainer() {
                         <MessageSquare className="h-8 w-8 text-muted-foreground/40" />
                       </div>
                       <div>
-                        <h3 className="font-bold">No messages yet</h3>
+                        <h3 className="font-bold">{t("conversation.noMessagesTitle")}</h3>
                         <p className="text-sm text-muted-foreground">
-                          Send a message to start the conversation.
+                          {t("conversation.noMessagesDesc")}
                         </p>
                       </div>
                     </div>
@@ -892,7 +886,7 @@ export default function SupportContainer() {
                               <div className="flex flex-row-reverse gap-3 max-w-[85%] sm:max-w-[70%] text-right">
                                 <Avatar className="h-8 w-8 mt-auto mb-1 shrink-0">
                                   <AvatarFallback className="bg-primary text-white text-[10px] font-bold">
-                                    ME
+                                    {t("conversation.me")}
                                   </AvatarFallback>
                                 </Avatar>
                                 <div className="group relative">
@@ -953,7 +947,7 @@ export default function SupportContainer() {
                   <div className="max-w-4xl mx-auto flex flex-col gap-3">
                     <div className="relative">
                       <Textarea
-                        placeholder="Type a message..."
+                        placeholder={t("conversation.typePlaceholder")}
                         className="min-h-20 bg-muted/20 border-border/50 resize-none focus-visible:ring-primary/30 p-4 pb-12 rounded-xl text-sm"
                         value={replyText}
                         onChange={(e) => setReplyText(e.target.value)}
@@ -965,7 +959,7 @@ export default function SupportContainer() {
                         }}
                       />
                       <div className="absolute right-3 bottom-3 text-[10px] text-muted-foreground font-medium">
-                        Press Enter to send
+                        {t("conversation.pressEnter")}
                       </div>
                     </div>
                     <div className="flex justify-end">
@@ -975,7 +969,7 @@ export default function SupportContainer() {
                         disabled={!replyText.trim() || !isConnected}
                         className="h-9 px-6 gap-2 rounded-full shadow-lg"
                       >
-                        Send Message <Send className="h-3.5 w-3.5" />
+                        {t("conversation.sendMessage")} <Send className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>
@@ -996,7 +990,7 @@ export default function SupportContainer() {
                     }`}
                   >
                     <MessageSquare className="h-3 w-3" />
-                    Chat
+                    {t("filters.chat")}
                   </button>
                   <button
                     onClick={() => setConversationTypeFilter("support")}
@@ -1007,7 +1001,7 @@ export default function SupportContainer() {
                     }`}
                   >
                     <HelpCircle className="h-3 w-3" />
-                    Tickets
+                    {t("filters.tickets")}
                   </button>
                 </div>
               )}
@@ -1017,28 +1011,28 @@ export default function SupportContainer() {
                   <MessageSquare className="h-10 w-10 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold">Support Center</h2>
+                  <h2 className="text-2xl font-bold">{t("empty.title")}</h2>
                   <p className="text-muted-foreground mt-2">
                     {conversationTypeFilter === "support"
-                      ? "Create a new support ticket or view existing tickets."
-                      : "Start a conversation or continue chatting."}
+                      ? t("empty.descriptionTickets")
+                      : t("empty.descriptionChat")}
                   </p>
                   {!showSidebar && (
                     <div className="mt-4 p-4 bg-muted/30 rounded-lg text-left text-xs space-y-2">
                       <p className="font-medium text-foreground">
-                        💡 Choose your message type:
+                        {t("empty.tipTitle")}
                       </p>
                       <p>
                         <span className="text-green-600 font-medium">
-                          Chat:
+                          {t("empty.tipChat")}
                         </span>{" "}
-                        Quick casual messages
+                        {t("empty.tipChatDesc")}
                       </p>
                       <p>
                         <span className="text-blue-600 font-medium">
-                          Tickets:
+                          {t("empty.tipTickets")}
                         </span>{" "}
-                        Formal support requests
+                        {t("empty.tipTicketsDesc")}
                       </p>
                     </div>
                   )}

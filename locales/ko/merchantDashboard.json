@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "광고 ID",
+    "adsDesc": "추적된 광고의 총 수",
+    "agentId": "대리인 ID",
+    "clicks": "클릭 수",
+    "clicksChart": "광고별 클릭 수",
+    "clicksDesc": "시청자로부터의 총 광고 클릭 수",
+    "clickThroughRate": "클릭률",
+    "createdAt": "생성됨",
+    "ctr": "CTR",
+    "ctrDesc": "클릭으로 전환된 노출의 비율",
+    "description": "유료 광고의 노출 수와 클릭 수를 추적하세요",
+    "detailedAnalytics": "상세 분석",
+    "detailedDesc": "각 광고에 대한 성과 분석",
+    "errorFetchFailed": "분석 로드 실패",
+    "impressions": "노출 수",
+    "impressionsChart": "광고별 노출 수",
+    "impressionsDesc": "모든 캠페인에서의 총 광고 조회 수",
+    "noAdsDesc": "추적이 시작되면 여기에 유료 광고 분석이 표시됩니다",
+    "noAdsYet": "아직 추적된 광고가 없습니다",
+    "noData": "사용 가능한 데이터 없음",
+    "title": "유료 광고 분석",
+    "total": "총계",
+    "totalAds": "활성 광고",
+    "totalClicks": "총 클릭 수",
+    "totalImpressions": "총 노출 수"
+  },
   "common": {
     "credits": "크레딧"
   },
@@ -53,6 +80,9 @@
     "comingSoon": "설정 내용이 곧 제공됩니다...",
     "noData": "--"
   },
+  "qrCode": {
+    "tapToZoom": "확대하려면 탭하세요"
+  },
   "recentRedemptions": {
     "amount": "금액",
     "code": "코드",
@@ -85,6 +115,7 @@
     "used": "사용됨"
   },
   "tabs": {
+    "analytics": "광고 성과",
     "automation": "자동화",
     "coupons": "쿠폰 배치",
     "feedbackForm": "피드백 양식",

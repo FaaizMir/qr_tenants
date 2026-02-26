@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
 const format = (num) => {
   const n = Number(num);
@@ -19,11 +20,12 @@ const format = (num) => {
 };
 
 const UpgradeCard = ({ feeData, adminId }) => {
+  const t = useTranslations("merchantDashboard.upgrade");
   const [upgrading, setUpgrading] = useState(false);
 
   const handleUpgrade = async () => {
     if (!feeData || !adminId) {
-      toast.error("Missing fee data or admin ID");
+      toast.error(t("errorMissingInfo"));
       return;
     }
 
@@ -53,11 +55,11 @@ const UpgradeCard = ({ feeData, adminId }) => {
       if (res.data?.sessionUrl) {
         window.location.href = res.data.sessionUrl;
       } else {
-        throw new Error("No session URL returned");
+        throw new Error(t("errorNoSessionUrl"));
       }
     } catch (error) {
       console.error("Upgrade failed:", error);
-      toast.error("Payment failed. Please try again.");
+      toast.error(t("errorPaymentFailed"));
       setUpgrading(false);
     }
   };
@@ -68,10 +70,10 @@ const UpgradeCard = ({ feeData, adminId }) => {
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <div className="space-y-1">
           <CardTitle className="text-lg font-bold text-blue-900">
-            Upgrade to Annual
+            {t("title")}
           </CardTitle>
           <CardDescription className="text-blue-700/80">
-            Unlock premium features with annual subscription
+            {t("description")}
           </CardDescription>
         </div>
         <div className="rounded-full bg-blue-200 p-2 text-blue-700">
@@ -84,7 +86,7 @@ const UpgradeCard = ({ feeData, adminId }) => {
             ? `${feeData.currency || "USD"} ${format(feeData.fee)}`
             : "--"}
           <span className="text-sm font-normal text-blue-700 ml-1">
-            per year
+            {t("pricePerYear")}
           </span>
         </div>
       </CardContent>
@@ -94,7 +96,7 @@ const UpgradeCard = ({ feeData, adminId }) => {
           disabled={!feeData || upgrading}
           onClick={handleUpgrade}
         >
-          {upgrading ? "Processing..." : "Upgrade Now"}
+          {upgrading ? t("processing") : t("upgradeNow")}
         </Button>
       </CardFooter>
     </Card>
@@ -115,12 +117,13 @@ export const useDashboardTabs = ({
   feeData,
   adminId,
 }) => {
+  const t = useTranslations("merchantDashboard.tabs");
   const isAnnual = subscriptionType === "annual";
 
   return [
     {
       value: "overview",
-      label: "Overview",
+      label: t("overview"),
       content: (
         <div className="space-y-6">
           {!isAnnual && <UpgradeCard feeData={feeData} adminId={adminId} />}
@@ -141,52 +144,23 @@ export const useDashboardTabs = ({
     },
     {
       value: "coupons",
-      label: "Coupons",
+      label: t("coupons"),
       content: <MerchantCouponsListingContainer embedded={true} />,
     },
     {
       value: "Adsight",
-      label: "Adsight",
+      label: t("analytics"),
       content: <MerchantAnalyticsContainer embedded={true} />,
     },
     {
       value: "wallet",
-      label: "Wallet",
+      label: t("wallet"),
       content: <MerchantWalletContainer embedded={true} />,
     },
     {
       value: "settings",
-      label: "Settings",
+      label: t("settings"),
       content: <MerchantSettings />,
     },
-    // {
-    //   value: "automation",
-    //   label: t("automation"),
-    //   content: <AutomationSettings />,
-    // },
-
-    /* {
-      value: "feedback-form",
-      label: t("feedbackForm"),
-      content: (
-        <MerchantFeedbackFormContainer />
-      ),
-    }, */
-    /*{
-      value: "settings",
-      label: t("settings"),
-      content: (
-        <Card>
-          <CardHeader>
-            <CardTitle>Account Settings</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Settings content coming soon...
-            </p>
-          </CardContent>
-        </Card>
-      ),
-    },*/
   ];
 };

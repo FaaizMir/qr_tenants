@@ -69,6 +69,10 @@
   },
   "loadMore": "더 불러오기",
   "noTransactions": "거래가 없습니다",
+  "page": {
+    "breadcrumb": "지갑",
+    "dashboardBreadcrumb": "상인 대시보드"
+  },
   "remainingCredits": "남은 크레딧",
   "subscription": {
     "annual": "연간",

@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "downloadPdf": "Unduh PDF",
+    "generatedAt": "Dibuat Pada",
+    "month": "Bulan",
+    "period": "Periode",
+    "status": "Status",
+    "statusLabels": {
+      "failed": "Gagal",
+      "generated": "Dihasilkan",
+      "pending": "Menunggu"
+    },
+    "totalSpend": "Total Pengeluaran",
+    "unknown": "Tidak diketahui"
+  },
+  "index": {
+    "empty": {
+      "description": "Tidak ada laporan yang tersedia untuk periode yang dipilih. Buat laporan baru untuk memulai.",
+      "title": "Tidak Ada Laporan Ditemukan"
+    },
+    "filters": {
+      "currentMonth": "Bulan Saat Ini",
+      "description": "Filter laporan berdasarkan tahun dan bulan",
+      "loading": "Memuat...",
+      "month": "Bulan",
+      "quickActions": "Tindakan Cepat",
+      "refreshList": "Segarkan Daftar",
+      "selectYear": "Pilih tahun",
+      "title": "Filter Laporan",
+      "year": "Tahun"
+    },
+    "months": {
+      "april": "April",
+      "august": "Agustus",
+      "december": "Desember",
+      "february": "Februari",
+      "january": "Januari",
+      "july": "Juli",
+      "june": "Juni",
+      "march": "Maret",
+      "may": "Mei",
+      "november": "November",
+      "october": "Oktober",
+      "september": "September"
+    },
+    "subtitle": "Laporan PDF yang dihasilkan secara otomatis setiap bulan termasuk pendapatan, biaya, pendapatan paket, dan buku besar dompet.",
+    "table": {
+      "found": "ditemukan",
+      "loadingStatements": "Memuat pernyataan...",
+      "statementsFound": "pernyataan",
+      "statementsFoundPlural": "pernyataan",
+      "title": "Riwayat Pernyataan"
+    },
+    "title": "Pernyataan Keuangan Merchant",
+    "toasts": {
+      "downloadFailed": "Gagal mengunduh PDF. Silakan coba lagi.",
+      "downloadSuccess": "Pernyataan berhasil diunduh!",
+      "loadFailed": "Gagal memuat laporan. Silakan coba lagi."
+    }
+  }
+}

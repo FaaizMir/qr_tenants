@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import {
   Calendar,
   Download,
@@ -36,6 +37,7 @@ import useDebounce from "@/hooks/useDebounceRef";
 import { getMerchantsColumns } from "./statement-columns";
 
 export default function MerchantStatements() {
+  const t = useTranslations("merchantStatements");
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
   const router = useRouter();
@@ -84,7 +86,7 @@ export default function MerchantStatements() {
       setTotal(statementsArray.length);
     } catch (error) {
       console.error("Failed to fetch statements:", error);
-      toast.error("Failed to load statements. Please try again.");
+      toast.error(t("index.toasts.loadFailed"));
       setStatements([]);
       setTotal(0);
     } finally {
@@ -119,31 +121,31 @@ export default function MerchantStatements() {
       link.remove();
       window.URL.revokeObjectURL(url);
 
-      toast.success("Statement downloaded successfully!");
+      toast.success(t("index.toasts.downloadSuccess"));
     } catch (error) {
       console.error("PDF download failed:", error);
-      toast.error("Failed to download PDF. Please try again.");
+      toast.error(t("index.toasts.downloadFailed"));
     }
   };
 
-  const columns = getMerchantsColumns(handleDownloadPdf);
+  const columns = getMerchantsColumns(handleDownloadPdf, t);
 
   // Generate available years (current year and 2 previous years)
   const availableYears = Array.from({ length: 3 }, (_, i) => currentYear - i);
 
   const months = [
-    { value: "1", label: "January" },
-    { value: "2", label: "February" },
-    { value: "3", label: "March" },
-    { value: "4", label: "April" },
-    { value: "5", label: "May" },
-    { value: "6", label: "June" },
-    { value: "7", label: "July" },
-    { value: "8", label: "August" },
-    { value: "9", label: "September" },
-    { value: "10", label: "October" },
-    { value: "11", label: "November" },
-    { value: "12", label: "December" },
+    { value: "1", label: t("index.months.january") },
+    { value: "2", label: t("index.months.february") },
+    { value: "3", label: t("index.months.march") },
+    { value: "4", label: t("index.months.april") },
+    { value: "5", label: t("index.months.may") },
+    { value: "6", label: t("index.months.june") },
+    { value: "7", label: t("index.months.july") },
+    { value: "8", label: t("index.months.august") },
+    { value: "9", label: t("index.months.september") },
+    { value: "10", label: t("index.months.october") },
+    { value: "11", label: t("index.months.november") },
+    { value: "12", label: t("index.months.december") },
   ];
 
   return (
@@ -161,11 +163,10 @@ export default function MerchantStatements() {
           </Button>
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
-              Merchant Financial Statements
+              {t("index.title")}
             </h1>
             <p className="text-sm text-muted-foreground max-w-2xl">
-              Monthly auto-generated PDF reports including earnings, fees,
-              package income, and wallet ledger.
+              {t("index.subtitle")}
             </p>
           </div>
         </div>
@@ -176,21 +177,21 @@ export default function MerchantStatements() {
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
-            Statement Filters
+            {t("index.filters.title")}
           </CardTitle>
           <CardDescription className="text-xs">
-            Filter statements by year and month
+            {t("index.filters.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Year
+                {t("index.filters.year")}
               </label>
               <Select value={year} onValueChange={setYear}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Select year" />
+                  <SelectValue placeholder={t("index.filters.selectYear")} />
                 </SelectTrigger>
                 <SelectContent>
                   {availableYears.map((y) => (
@@ -204,14 +205,14 @@ export default function MerchantStatements() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Month
+                {t("index.filters.month")}
               </label>
               <Select value={month} onValueChange={setMonth}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Current month" />
+                  <SelectValue placeholder={t("index.filters.currentMonth")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Current Month</SelectItem>
+                  <SelectItem value="all">{t("index.filters.currentMonth")}</SelectItem>
                   {months.map((m) => (
                     <SelectItem key={m.value} value={m.value}>
                       {m.label}
@@ -223,7 +224,7 @@ export default function MerchantStatements() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Quick Actions
+                {t("index.filters.quickActions")}
               </label>
               <Button
                 variant="outline"
@@ -234,12 +235,12 @@ export default function MerchantStatements() {
                 {loading ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Loading...
+                    {t("index.filters.loading")}
                   </>
                 ) : (
                   <>
                     <RefreshCw className="h-4 w-4 mr-2" />
-                    Refresh List
+                    {t("index.filters.refreshList")}
                   </>
                 )}
               </Button>
@@ -255,10 +256,10 @@ export default function MerchantStatements() {
             <div>
               <CardTitle className="text-base font-semibold flex items-center gap-2">
                 <FileText className="h-4 w-4 text-primary" />
-                Statement History
+                {t("index.table.title")}
               </CardTitle>
               <CardDescription className="mt-0.5 text-xs">
-                {total} statement{total !== 1 ? "s" : ""} found
+                {total} {total !== 1 ? t("index.table.statementsFoundPlural") : t("index.table.statementsFound")} {t("index.table.found")}
               </CardDescription>
             </div>
           </div>
@@ -268,7 +269,7 @@ export default function MerchantStatements() {
             <div className="flex flex-col items-center justify-center py-12">
               <Loader2 className="h-10 w-10 animate-spin text-primary mb-3" />
               <p className="text-sm text-muted-foreground">
-                Loading statements...
+                {t("index.table.loadingStatements")}
               </p>
             </div>
           ) : statements.length === 0 ? (
@@ -277,11 +278,10 @@ export default function MerchantStatements() {
                 <FileText className="h-8 w-8 text-muted-foreground" />
               </div>
               <h3 className="text-lg font-semibold mb-2">
-                No Statements Found
+                {t("index.empty.title")}
               </h3>
               <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                No statements available for the selected period. Generate a new
-                statement to get started.
+                {t("index.empty.description")}
               </p>
             </div>
           ) : (

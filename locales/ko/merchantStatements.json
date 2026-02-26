@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "작업",
+    "downloadPdf": "PDF 다운로드",
+    "generatedAt": "생성일",
+    "month": "월",
+    "period": "기간",
+    "status": "상태",
+    "statusLabels": {
+      "failed": "실패",
+      "generated": "생성됨",
+      "pending": "대기 중"
+    },
+    "totalSpend": "총 지출",
+    "unknown": "알 수 없음"
+  },
+  "index": {
+    "empty": {
+      "description": "선택한 기간에 대한 명세서가 없습니다. 시작하려면 새 명세서를 생성하세요.",
+      "title": "명세서를 찾을 수 없음"
+    },
+    "filters": {
+      "currentMonth": "현재 월",
+      "description": "연도 및 월별로 명세서 필터링",
+      "loading": "로딩 중...",
+      "month": "월",
+      "quickActions": "빠른 작업",
+      "refreshList": "목록 새로 고침",
+      "selectYear": "연도 선택",
+      "title": "명세서 필터",
+      "year": "연도"
+    },
+    "months": {
+      "april": "4월",
+      "august": "8월",
+      "december": "12월",
+      "february": "2월",
+      "january": "1월",
+      "july": "7월",
+      "june": "6월",
+      "march": "3월",
+      "may": "5월",
+      "november": "11월",
+      "october": "10월",
+      "september": "9월"
+    },
+    "subtitle": "월간 자동 생성 PDF 보고서에는 수익, 수수료, 패키지 수입 및 지갑 원장이 포함됩니다.",
+    "table": {
+      "found": "찾음",
+      "loadingStatements": "명세서를 로딩 중...",
+      "statementsFound": "명세서",
+      "statementsFoundPlural": "명세서",
+      "title": "명세서 기록"
+    },
+    "title": "상인 재무 제표",
+    "toasts": {
+      "downloadFailed": "PDF 다운로드에 실패했습니다. 다시 시도해 주세요.",
+      "downloadSuccess": "성공적으로 다운로드된 명세서!",
+      "loadFailed": "명세서를 로드하는 데 실패했습니다. 다시 시도해 주세요."
+    }
+  }
+}
