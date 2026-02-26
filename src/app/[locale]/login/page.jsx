@@ -204,6 +204,7 @@ export default function LoginPage({ params }) {
                   onChange={(e) => setUsername(e.target.value)}
                   required
                   autoComplete="username"
+                  suppressHydrationWarning
                 />
               </div>
 
@@ -220,11 +221,13 @@ export default function LoginPage({ params }) {
                     required
                     autoComplete="current-password"
                     className="pr-10"
+                    suppressHydrationWarning
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    suppressHydrationWarning
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />

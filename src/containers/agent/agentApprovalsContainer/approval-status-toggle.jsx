@@ -13,6 +13,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import axiosInstance from "@/lib/axios";
 
 export function ApprovalStatusToggle({
   initialStatus = false,
@@ -27,6 +31,11 @@ export function ApprovalStatusToggle({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  
+  // Rejection reason states
+  const [selectedReason, setSelectedReason] = useState("");
+  const [customReason, setCustomReason] = useState("");
+  const [rejectionReasons, setRejectionReasons] = useState([]);
 
   // Sync state if props change (e.g. from parent re-fetch)
   useEffect(() => {
@@ -38,18 +47,69 @@ export function ApprovalStatusToggle({
     }
   }, [initialStatus]);
 
+  // Fetch rejection reasons from API
+  useEffect(() => {
+    const fetchRejectionReasons = async () => {
+      try {
+        const response = await axiosInstance.get("/approvals/rejection-reasons");
+        setRejectionReasons(response.data || []);
+      } catch (error) {
+        console.error("Error fetching rejection reasons:", error);
+        // Fallback to default reasons if API fails
+        setRejectionReasons([
+          { value: "gambling_content", label: "Gambling content" },
+          { value: "adult_sexual_content", label: "Adult / sexual content" },
+          { value: "illegal_services", label: "Illegal services" },
+          { value: "misleading_content", label: "Misleading content" },
+          { value: "other", label: "Other (manual reason input)" },
+        ]);
+      }
+    };
+    fetchRejectionReasons();
+  }, []);
+
   const handleActionClick = (action) => {
     setPendingAction(action);
     setIsDialogOpen(true);
+    // Reset rejection reason states when opening dialog
+    if (action === "reject") {
+      setSelectedReason("");
+      setCustomReason("");
+    }
   };
 
   const handleConfirm = async () => {
+    const isApprove = pendingAction === "approve";
+    
+    // Validate rejection reason if rejecting
+    if (!isApprove) {
+      if (!selectedReason) {
+        toast.error("Please select a rejection reason");
+        return;
+      }
+      if (selectedReason === "other" && !customReason.trim()) {
+        toast.error("Please provide a custom rejection reason");
+        return;
+      }
+    }
+    
     setIsLoading(true);
     setErrorMessage(null); // Clear any previous errors
-    const isApprove = pendingAction === "approve";
+    
     try {
+      // Prepare rejection reason for API
+      let disapprovalReason = null;
+      if (!isApprove) {
+        if (selectedReason === "other") {
+          disapprovalReason = customReason.trim();
+        } else {
+          const reasonObj = rejectionReasons.find(r => r.value === selectedReason);
+          disapprovalReason = reasonObj ? reasonObj.label : selectedReason;
+        }
+      }
+      
       if (onStatusChange) {
-        await onStatusChange(isApprove);
+        await onStatusChange(isApprove, disapprovalReason);
       }
 
       setStatus(isApprove);
@@ -126,7 +186,7 @@ export function ApprovalStatusToggle({
         open={isDialogOpen}
         onOpenChange={(open) => !open && !isLoading && setIsDialogOpen(false)}
       >
-        <DialogContent className="max-w-[420px] w-[95vw] rounded-2xl p-6 border shadow-lg bg-white">
+        <DialogContent className="max-w-[480px] w-[95vw] rounded-2xl p-6 border shadow-lg bg-white">
           <DialogHeader className="space-y-3">
 
             <div>
@@ -140,16 +200,63 @@ export function ApprovalStatusToggle({
                   </span>
                 ) : (
                   <>
-                    Are you sure you want to {pendingAction === "approve" ? "approve" : "reject"} the request for{" "}
-                    <span className="font-semibold text-slate-900">
-                      {merchantName}
-                    </span>
-                    ? This action cannot be undone.
+                    {pendingAction === "reject" ? (
+                      <span>
+                        Select a reason for rejecting the request from{" "}
+                        <span className="font-semibold text-slate-900">
+                          {merchantName}
+                        </span>
+                        .
+                      </span>
+                    ) : (
+                      <>
+                        Are you sure you want to approve the request for{" "}
+                        <span className="font-semibold text-slate-900">
+                          {merchantName}
+                        </span>
+                        ? This action cannot be undone.
+                      </>
+                    )}
                   </>
                 )}
               </DialogDescription>
             </div>
           </DialogHeader>
+
+          {/* Rejection Reasons - Only show when rejecting */}
+          {pendingAction === "reject" && !errorMessage && (
+            <div className="space-y-4 mt-4">
+              <RadioGroup value={selectedReason} onValueChange={setSelectedReason}>
+                {rejectionReasons.map((reason) => (
+                  <div key={reason.value} className="flex items-center space-x-2">
+                    <RadioGroupItem value={reason.value} id={reason.value} />
+                    <Label
+                      htmlFor={reason.value}
+                      className="text-sm font-medium cursor-pointer"
+                    >
+                      {reason.label}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+
+              {/* Custom reason textarea - Only show when "Other" is selected */}
+              {selectedReason === "other" && (
+                <div className="space-y-2 pl-6">
+                  <Label htmlFor="custom-reason" className="text-sm font-medium">
+                    Please specify the reason
+                  </Label>
+                  <Textarea
+                    id="custom-reason"
+                    value={customReason}
+                    onChange={(e) => setCustomReason(e.target.value)}
+                    placeholder="Enter the reason for rejection..."
+                    className="min-h-20 resize-none"
+                  />
+                </div>
+              )}
+            </div>
+          )}
 
           <DialogFooter className="mt-6 flex flex-col-reverse sm:flex-row gap-2">
             <Button
