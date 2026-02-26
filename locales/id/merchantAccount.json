@@ -1,0 +1,57 @@
+{
+  "accountDetails": {
+    "description": "Perbarui informasi akun Anda",
+    "title": "Detail Akun"
+  },
+  "buttons": {
+    "save": "Simpan Perubahan",
+    "saving": "Menyimpan..."
+  },
+  "fields": {
+    "address": "Alamat",
+    "businessName": "Nama Bisnis",
+    "businessType": "Jenis Bisnis",
+    "city": "Kota",
+    "country": "Negara",
+    "email": "Email",
+    "fullName": "Nama Lengkap",
+    "phone": "Telepon",
+    "taxId": "ID Pajak"
+  },
+  "messages": {
+    "loadError": "Gagal memuat informasi akun",
+    "updateError": "Gagal memperbarui akun",
+    "updateSuccess": "Akun berhasil diperbarui",
+    "validationError": "{field}: {message}"
+  },
+  "page": {
+    "breadcrumb": {
+      "account": "Akun",
+      "dashboard": "Dasbor"
+    },
+    "description": "Kelola informasi akun Anda",
+    "title": "Pengaturan Akun"
+  },
+  "placeholders": {
+    "address": "Mulai mengetik alamat...",
+    "businessName": "Masukkan nama bisnis",
+    "businessType": "Masukkan jenis bisnis",
+    "city": "Masukkan kota Anda",
+    "country": "Masukkan negara Anda",
+    "email": "Masukkan email Anda",
+    "name": "Masukkan nama Anda",
+    "phone": "Masukkan telepon Anda",
+    "taxId": "Masukkan ID pajak"
+  },
+  "profile": {
+    "description": "Informasi profil Anda",
+    "title": "Profil"
+  },
+  "qrCode": {
+    "altText": "Kode QR Merchant",
+    "description": "Bagikan kode QR ini dengan pelanggan untuk mengumpulkan ulasan",
+    "downloadButton": "Unduh Kode QR",
+    "title": "Kode QR Anda",
+    "urlLabel": "URL Kode QR"
+  }
+}

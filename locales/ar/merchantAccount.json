@@ -1,0 +1,57 @@
+{
+  "accountDetails": {
+    "description": "تحديث معلومات حسابك",
+    "title": "تفاصيل الحساب"
+  },
+  "buttons": {
+    "save": "احفظ التغييرات",
+    "saving": "جارٍ الحفظ..."
+  },
+  "fields": {
+    "address": "العنوان",
+    "businessName": "اسم العمل",
+    "businessType": "نوع العمل",
+    "city": "المدينة",
+    "country": "البلد",
+    "email": "البريد الإلكتروني",
+    "fullName": "الاسم الكامل",
+    "phone": "الهاتف",
+    "taxId": "رقم التعريف الضريبي"
+  },
+  "messages": {
+    "loadError": "فشل في تحميل معلومات الحساب",
+    "updateError": "فشل في تحديث الحساب",
+    "updateSuccess": "تم تحديث الحساب بنجاح",
+    "validationError": "{field}: {message}"
+  },
+  "page": {
+    "breadcrumb": {
+      "account": "الحساب",
+      "dashboard": "لوحة التحكم"
+    },
+    "description": "إدارة معلومات حسابك",
+    "title": "إعدادات الحساب"
+  },
+  "placeholders": {
+    "address": "ابدأ بكتابة عنوان...",
+    "businessName": "أدخل اسم العمل",
+    "businessType": "أدخل نوع العمل",
+    "city": "أدخل مدينتك",
+    "country": "أدخل بلدك",
+    "email": "أدخل بريدك الإلكتروني",
+    "name": "أدخل اسمك",
+    "phone": "أدخل رقم هاتفك",
+    "taxId": "أدخل رقم التعريف الضريبي"
+  },
+  "profile": {
+    "description": "معلومات ملفك الشخصي",
+    "title": "الملف الشخصي"
+  },
+  "qrCode": {
+    "altText": "رمز QR للتاجر",
+    "description": "شارك هذا الرمز QR مع العملاء لجمع المراجعات",
+    "downloadButton": "تنزيل رمز الاستجابة السريعة",
+    "title": "رمز QR الخاص بك",
+    "urlLabel": "رابط رمز الاستجابة السريعة"
+  }
+}

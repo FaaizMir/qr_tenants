@@ -1,0 +1,57 @@
+{
+  "accountDetails": {
+    "description": "Cập nhật thông tin tài khoản của bạn",
+    "title": "Chi tiết tài khoản"
+  },
+  "buttons": {
+    "save": "Lưu thay đổi",
+    "saving": "Đang lưu..."
+  },
+  "fields": {
+    "address": "Địa chỉ",
+    "businessName": "Tên doanh nghiệp",
+    "businessType": "Loại hình doanh nghiệp",
+    "city": "Thành phố",
+    "country": "Quốc gia",
+    "email": "Email",
+    "fullName": "Họ và tên",
+    "phone": "Điện thoại",
+    "taxId": "Mã số thuế"
+  },
+  "messages": {
+    "loadError": "Không thể tải thông tin tài khoản",
+    "updateError": "Cập nhật tài khoản không thành công",
+    "updateSuccess": "Tài khoản đã được cập nhật thành công",
+    "validationError": "{field}: {message}"
+  },
+  "page": {
+    "breadcrumb": {
+      "account": "Tài khoản",
+      "dashboard": "Bảng điều khiển"
+    },
+    "description": "Quản lý thông tin tài khoản của bạn",
+    "title": "Cài đặt tài khoản"
+  },
+  "placeholders": {
+    "address": "Bắt đầu gõ địa chỉ...",
+    "businessName": "Nhập tên doanh nghiệp",
+    "businessType": "Nhập loại hình doanh nghiệp",
+    "city": "Nhập thành phố của bạn",
+    "country": "Nhập quốc gia của bạn",
+    "email": "Nhập email của bạn",
+    "name": "Nhập tên của bạn",
+    "phone": "Nhập số điện thoại của bạn",
+    "taxId": "Nhập mã số thuế"
+  },
+  "profile": {
+    "description": "Thông tin hồ sơ của bạn",
+    "title": "Hồ sơ"
+  },
+  "qrCode": {
+    "altText": "Mã QR thương nhân",
+    "description": "Chia sẻ mã QR này với khách hàng để thu thập đánh giá",
+    "downloadButton": "Tải xuống mã QR",
+    "title": "Mã QR của bạn",
+    "urlLabel": "URL mã QR"
+  }
+}

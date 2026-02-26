@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import {
@@ -36,6 +37,7 @@ import { AddressAutocomplete } from "@/components/common/address-autocomplete";
 export default function MerchantAccountContainer() {
   const { data: session, update: updateSession } = useSession();
   const router = useRouter();
+  const t = useTranslations("merchantAccount");
   const merchantId = session?.user?.merchantId;
 
   const [loading, setLoading] = useState(true);
@@ -107,7 +109,7 @@ export default function MerchantAccountContainer() {
         } else if (error.response?.data?.message) {
           toast.error(error.response.data.message);
         } else {
-          toast.error("Failed to load account information");
+          toast.error(t("messages.loadError"));
         }
       } finally {
         setLoading(false);
@@ -162,7 +164,7 @@ export default function MerchantAccountContainer() {
         },
       });
 
-      toast.success("Account updated successfully");
+      toast.success(t("messages.updateSuccess"));
     } catch (error) {
       console.error("Failed to update account:", error);
       
@@ -181,7 +183,7 @@ export default function MerchantAccountContainer() {
         toast.error(error.response.data.message);
       } else {
         // Fallback error message
-        toast.error("Failed to update account");
+        toast.error(t("messages.updateError"));
       }
     } finally {
       setSaving(false);
@@ -210,16 +212,16 @@ export default function MerchantAccountContainer() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Account Settings</h1>
-        <p className="text-muted-foreground">Manage your account information</p>
+        <h1 className="text-3xl font-bold">{t("page.title")}</h1>
+        <p className="text-muted-foreground">{t("page.description")}</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Profile Card */}
         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Your profile information</CardDescription>
+            <CardTitle>{t("profile.title")}</CardTitle>
+            <CardDescription>{t("profile.description")}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center space-y-4">
             <Avatar className="h-24 w-24">
@@ -252,28 +254,28 @@ export default function MerchantAccountContainer() {
         {/* Account Details Form */}
         <Card className="md:col-span-2 border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Account Details</CardTitle>
-            <CardDescription>Update your account information</CardDescription>
+            <CardTitle>{t("accountDetails.title")}</CardTitle>
+            <CardDescription>{t("accountDetails.description")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">
                   <User className="h-4 w-4 inline mr-2" />
-                  Full Name
+                  {t("fields.fullName")}
                 </Label>
                 <Input
                   id="name"
                   value={accountData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
-                  placeholder="Enter your name"
+                  placeholder={t("placeholders.name")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="businessName">
                   <Store className="h-4 w-4 inline mr-2" />
-                  Business Name
+                  {t("fields.businessName")}
                 </Label>
                 <Input
                   id="businessName"
@@ -281,41 +283,41 @@ export default function MerchantAccountContainer() {
                   onChange={(e) =>
                     handleInputChange("businessName", e.target.value)
                   }
-                  placeholder="Enter business name"
+                  placeholder={t("placeholders.businessName")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">
                   <Mail className="h-4 w-4 inline mr-2" />
-                  Email
+                  {t("fields.email")}
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   value={accountData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder={t("placeholders.email")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">
                   <Phone className="h-4 w-4 inline mr-2" />
-                  Phone
+                  {t("fields.phone")}
                 </Label>
                 <Input
                   id="phone"
                   value={accountData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="Enter your phone"
+                  placeholder={t("placeholders.phone")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="businessType">
                   <Building2 className="h-4 w-4 inline mr-2" />
-                  Business Type
+                  {t("fields.businessType")}
                 </Label>
                 <Input
                   id="businessType"
@@ -323,56 +325,56 @@ export default function MerchantAccountContainer() {
                   onChange={(e) =>
                     handleInputChange("businessType", e.target.value)
                   }
-                  placeholder="Enter business type"
+                  placeholder={t("placeholders.businessType")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="taxId">
                   <FileText className="h-4 w-4 inline mr-2" />
-                  Tax ID
+                  {t("fields.taxId")}
                 </Label>
                 <Input
                   id="taxId"
                   value={accountData.taxId}
                   onChange={(e) => handleInputChange("taxId", e.target.value)}
-                  placeholder="Enter tax ID"
+                  placeholder={t("placeholders.taxId")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="city">
                   <Building2 className="h-4 w-4 inline mr-2" />
-                  City
+                  {t("fields.city")}
                 </Label>
                 <Input
                   id="city"
                   value={accountData.city}
                   onChange={(e) => handleInputChange("city", e.target.value)}
-                  placeholder="Enter your city"
+                  placeholder={t("placeholders.city")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="country">
                   <MapPin className="h-4 w-4 inline mr-2" />
-                  Country
+                  {t("fields.country")}
                 </Label>
                 <Input
                   id="country"
                   value={accountData.country}
                   onChange={(e) => handleInputChange("country", e.target.value)}
-                  placeholder="Enter your country"
+                  placeholder={t("placeholders.country")}
                 />
               </div>
 
               <div className="space-y-2 md:col-span-2">
                 <AddressAutocomplete
-                  label="Address"
+                  label={t("fields.address")}
                   name="address"
                   value={accountData.address}
                   onChange={handleAddressChange}
-                  placeholder="Start typing an address..."
+                  placeholder={t("placeholders.address")}
                 />
               </div>
             </div>
@@ -382,12 +384,12 @@ export default function MerchantAccountContainer() {
                 {saving ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Saving...
+                    {t("buttons.saving")}
                   </>
                 ) : (
                   <>
                     <Save className="h-4 w-4" />
-                    Save Changes
+                    {t("buttons.save")}
                   </>
                 )}
               </Button>
@@ -402,10 +404,10 @@ export default function MerchantAccountContainer() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <QrCode className="h-5 w-5" />
-              Your QR Code
+              {t("qrCode.title")}
             </CardTitle>
             <CardDescription>
-              Share this QR code with customers to collect reviews
+              {t("qrCode.description")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -414,7 +416,7 @@ export default function MerchantAccountContainer() {
                 <div className="p-4 bg-white rounded-lg border-2 border-muted">
                   <Image
                     src={accountData.qrCodeImage}
-                    alt="Merchant QR Code"
+                    alt={t("qrCode.altText")}
                     width={200}
                     height={200}
                     className="rounded"
@@ -423,7 +425,7 @@ export default function MerchantAccountContainer() {
               </div>
               <div className="flex-1 space-y-4">
                 <div>
-                  <Label className="text-sm font-medium">QR Code URL</Label>
+                  <Label className="text-sm font-medium">{t("qrCode.urlLabel")}</Label>
                   <div className="mt-1 p-3 bg-muted rounded-md text-sm break-all">
                     {accountData.qrCodeUrl}
                   </div>
@@ -434,7 +436,7 @@ export default function MerchantAccountContainer() {
                   className="gap-2"
                 >
                   <Download className="h-4 w-4" />
-                  Download QR Code
+                  {t("qrCode.downloadButton")}
                 </Button>
               </div>
             </div>
