@@ -27,9 +27,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const t = useTranslations("homepagePush.create");
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
-  const [selectedCouponId, setSelectedCouponId] = useState("");
+  const [selectedBatchId, setSelectedBatchId] = useState("");
   const [adType, setAdType] = useState("banner");
-  const [coupons, setCoupons] = useState([]);
+  const [couponBatches, setCouponBatches] = useState([]);
   const [slots, setSlots] = useState(null);
   const [pricing, setPricing] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -44,13 +44,15 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      // Fetch available coupons
-      const couponsResp = await axiosInstance.get("/coupons");
-      const couponsPayload = couponsResp?.data?.data ?? couponsResp?.data ?? {};
-      const couponsList = Array.isArray(couponsPayload)
-        ? couponsPayload
-        : couponsPayload?.coupons || [];
-      setCoupons(couponsList);
+      // Fetch merchant coupon batches
+      const batchesResp = await axiosInstance.get("/coupon-batches", {
+        params: { page: 1, pageSize: 200 },
+      });
+      const batchesPayload = batchesResp?.data?.data ?? batchesResp?.data ?? {};
+      const batchesList = Array.isArray(batchesPayload)
+        ? batchesPayload
+        : batchesPayload?.batches || [];
+      setCouponBatches(batchesList);
 
       // Fetch available slots
       const slotsResp = await axiosInstance.get("/approvals/available-homepage-slots");
@@ -76,7 +78,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (type === "coupon" && !selectedCouponId) {
+    if (type === "coupon" && !selectedBatchId) {
       toast.error(t("errors.selectCoupon"));
       return;
     }
@@ -85,7 +87,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
     try {
       if (type === "coupon") {
         await axiosInstance.post("/approvals/homepage-coupon-push", {
-          coupon_id: parseInt(selectedCouponId),
+          coupon_batch_id: parseInt(selectedBatchId),
         });
       } else {
         await axiosInstance.post("/approvals/homepage-ad-push", {
@@ -111,8 +113,10 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const cost = type === "coupon" ? pricing?.coupon : pricing?.ad;
   const duration = type === "coupon" ? pricing?.couponDuration : pricing?.adDuration;
 
-  const availableCoupons = coupons.filter((coupon) => Boolean(coupon?.id));
-  const hasAvailableCoupons = availableCoupons.length > 0;
+  const availableBatches = couponBatches.filter(
+    (batch) => Boolean(batch?.id) && batch?.is_active !== false,
+  );
+  const hasAvailableBatches = availableBatches.length > 0;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -167,20 +171,20 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
             {type === "coupon" && (
               <div className="space-y-2">
                 <Label>{t("fields.coupon.label")}</Label>
-                <Select value={selectedCouponId} onValueChange={setSelectedCouponId} disabled={!hasAvailableCoupons}>
+                <Select value={selectedBatchId} onValueChange={setSelectedBatchId} disabled={!hasAvailableBatches}>
                   <SelectTrigger>
-                    <SelectValue placeholder={hasAvailableCoupons ? t("fields.coupon.placeholder") : "No coupons available"} />
+                    <SelectValue placeholder={hasAvailableBatches ? t("fields.coupon.placeholder") : "No coupon batches available"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {hasAvailableCoupons ? (
-                      availableCoupons.map((coupon) => (
-                        <SelectItem key={coupon.id} value={coupon.id.toString()}>
-                          {coupon.coupon_code} - {coupon.batch?.batch_name || "N/A"}
+                    {hasAvailableBatches ? (
+                      availableBatches.map((batch) => (
+                        <SelectItem key={batch.id} value={batch.id.toString()}>
+                          {batch.batch_name}
                         </SelectItem>
                       ))
                     ) : (
                       <SelectItem value="no-coupons" disabled>
-                        No coupons available
+                        No coupon batches available
                       </SelectItem>
                     )}
                   </SelectContent>
@@ -234,7 +238,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
               </Button>
               <Button
                 type="submit"
-                disabled={submitting || availableSlots === 0 || (type === "coupon" && (!selectedCouponId || !hasAvailableCoupons))}
+                disabled={submitting || availableSlots === 0 || (type === "coupon" && (!selectedBatchId || !hasAvailableBatches))}
               >
                 {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {t("buttons.submit")}

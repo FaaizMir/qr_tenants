@@ -36,8 +36,8 @@
         }
       },
       "coupon": {
-        "label": "Select Coupon",
-        "placeholder": "Choose a coupon..."
+        "label": "Select Coupon Batch",
+        "placeholder": "Choose a coupon batch..."
       },
       "adType": {
         "label": "Ad Type",
@@ -63,7 +63,7 @@
       "submit": "Submit Request"
     },
     "errors": {
-      "selectCoupon": "Please select a coupon",
+      "selectCoupon": "Please select a coupon batch",
       "failedToCreate": "Failed to create request",
       "failedToLoadData": "Failed to load data",
       "noSlotsAvailable": "No slots available at this time. Please try again later."
