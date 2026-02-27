@@ -15,6 +15,7 @@ export default function QRImageDialogHover({
   label = "QR Code",
   openOnHover = false,
   sizeClass = "w-8 h-8",
+  downloadText = "Download",
 }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef(null);
@@ -85,7 +86,7 @@ export default function QRImageDialogHover({
             <img src={imageBase64} alt={label} className="max-w-[360px] max-h-[360px]" />
             <div className="w-full flex gap-2">
               <Button onClick={handleDownload} variant="outline" className="flex-1">
-                <Download className="h-4 w-4 mr-2" /> Download
+                <Download className="h-4 w-4 mr-2" /> {downloadText}
               </Button>
             </div>
           </div>

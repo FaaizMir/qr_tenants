@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "创建",
+    "dashboard": "仪表板",
+    "details": "详情",
+    "editMerchant": "编辑商户",
+    "merchantManagement": "商户管理",
+    "merchants": "商户"
+  },
+  "common": {
+    "error": "发生错误",
+    "loading": "加载中...",
+    "noData": "没有可用数据"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "商户管理员的登录详情。",
+      "emailAddress": "电子邮件地址",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "隐藏密码",
+      "initialPassword": "初始密码",
+      "merchantName": "商户名称",
+      "merchantNamePlaceholder": "约翰·多",
+      "role": "角色",
+      "showPassword": "显示密码",
+      "title": "账户凭证"
+    },
+    "actions": {
+      "cancel": "取消",
+      "createMerchant": "创建商户",
+      "creating": "创建中...",
+      "insufficientBalanceTooltip": "年商户创建的余额不足"
+    },
+    "businessProfile": {
+      "businessName": "商户名称",
+      "businessNamePlaceholder": "例如：Acme Café",
+      "businessType": "业务类型",
+      "businessTypePlaceholder": "选择业务类型...",
+      "businessTypes": {
+        "education": "教育",
+        "foodBeverage": "食品与饮料",
+        "health": "健康",
+        "hospitality": "酒店业",
+        "retail": "零售",
+        "services": "服务",
+        "technology": "技术"
+      },
+      "description": "向客户显示的主要业务详情。",
+      "taxId": "税号",
+      "taxIdPlaceholder": "例如 TX123456",
+      "title": "商业档案"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 主街，城市，国家",
+      "city": "城市",
+      "cityPlaceholder": "城市",
+      "country": "国家",
+      "countryPlaceholder": "国家",
+      "description": "搜索商业地址以自动填写详细信息。",
+      "locationUpdated": "位置已更新",
+      "searchAddress": "搜索地址",
+      "title": "位置详情"
+    },
+    "merchantType": {
+      "accountStatus": "账户状态",
+      "accountStatusDescription": "启用或禁用该商户对平台的访问权限。",
+      "active": "活跃",
+      "annual": "年度",
+      "description": "选择商户类型。",
+      "inactive": "非活动",
+      "label": "商户类型",
+      "temporary": "临时",
+      "title": "商户类型"
+    },
+    "messages": {
+      "createError": "创建商户失败",
+      "createErrorDescription": "请检查您的输入并重试。",
+      "createSuccess": "商户账户已成功创建。",
+      "validationFailed": "验证失败"
+    },
+    "subtitle": "创建一个新的商户账户，分配一个订阅计划，并配置初始限额。",
+    "title": " onboard 新商户",
+    "validation": {
+      "emailInvalid": "请输入有效的电子邮件地址",
+      "fieldEmpty": "{field} 不能为空",
+      "fieldInvalid": "{field} 无效",
+      "fieldRequired": "{field} 是必填项",
+      "fields": {
+        "address": "地址",
+        "business_name": "商业名称",
+        "business_type": "商业类型",
+        "city": "城市",
+        "country": "国家",
+        "email": "电子邮件地址",
+        "merchant_type": "商户类型",
+        "name": "商户名称",
+        "password": "密码",
+        "role": "角色",
+        "tax_id": "税号"
+      },
+      "passwordTooShort": "密码必须至少为8个字符"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "活动",
+        "birthday": "🎂",
+        "description": "最近注册的客户",
+        "female": "👩 女性",
+        "inactive": "非活动",
+        "joined": "📅 加入时间",
+        "male": "👨 男性",
+        "noData": "未找到客户。",
+        "other": "👤",
+        "pageOf": "第 {current} 页，共 {total} 页",
+        "reward": "奖励",
+        "title": "客户 ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "金额",
+          "credits": "积分",
+          "description": "描述"
+        },
+        "description": "历史信用使用",
+        "noData": "未找到记录。",
+        "pageOf": "第 {current} 页，共 {total} 页",
+        "title": "交易账本"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "活跃",
+        "consumed": "{percent}% 已消耗",
+        "description": "活跃的活动",
+        "halal": "清真",
+        "id": "身份证",
+        "inactive": "非活动",
+        "issued": "已发放",
+        "left": "{count} 剩余",
+        "luckyDraw": "✓ 幸运抽奖",
+        "noData": "没有活动批次。",
+        "pageOf": "第 {current} 页，共 {total} 页",
+        "public": "公开",
+        "title": "优惠券批次 ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "账户",
+        "ads": "广告",
+        "annualFee": "年费",
+        "bi": "BI",
+        "coupons": "优惠券",
+        "currency": "货币",
+        "description": "实时积分分配",
+        "disabled": "已禁用",
+        "enabled": "已启用",
+        "expires": "过期",
+        "inactive": "非活跃",
+        "never": "从不",
+        "paid": "已支付",
+        "paidAds": "付费广告",
+        "plan": "计划",
+        "title": "钱包详情",
+        "ui": "用户界面",
+        "unpaid": "未支付",
+        "verified": "已验证",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "未找到商户或无法加载。",
+      "title": "错误"
+    },
+    "header": {
+      "active": "活跃",
+      "editConfiguration": "编辑配置",
+      "inactive": "非活跃",
+      "memberSince": "会员自",
+      "subscription": "{type} 订阅"
+    },
+    "loadError": "加载商户详情失败",
+    "loading": "正在加载商户详情...",
+    "overview": {
+      "adCredits": {
+        "description": "用于促销",
+        "title": "广告积分"
+      },
+      "couponCredits": {
+        "description": "用于批次",
+        "title": "优惠券积分"
+      },
+      "recentTransactions": {
+        "credits": "积分",
+        "noData": "未找到交易。",
+        "pageOf": "第 {current} 页，共 {total} 页",
+        "title": "最近交易"
+      },
+      "totalCredits": {
+        "title": "总积分",
+        "usedLabel": "{used} 总共使用"
+      },
+      "usageSummary": {
+        "couponBalance": "优惠券余额",
+        "creditUsage": "信用使用情况",
+        "title": "使用摘要",
+        "whatsappBalance": "WhatsApp 余额",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "WhatsApp 界面"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "WhatsApp 余额",
+        "uiLabel": "用户界面"
+      }
+    },
+    "tabs": {
+      "activity": "活动",
+      "billing": "限制",
+      "overview": "概览"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "更新商户管理员详细信息。",
+      "newPassword": "新密码（留空以保持当前密码）",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "更新商户",
+      "updating": "正在更新..."
+    },
+    "loadingError": "加载商户数据失败",
+    "messages": {
+      "updateError": "更新商户失败",
+      "updateSuccess": "商户更新成功。"
+    },
+    "subtitle": "更新商户账户详情和配置。",
+    "title": "编辑商户",
+    "validation": {
+      "emailInvalid": "请输入有效的电子邮件地址",
+      "fieldEmpty": "{field} 不能为空",
+      "fieldInvalid": "{field} 无效",
+      "fieldRequired": "{field} 是必填项",
+      "fields": {
+        "address": "地址",
+        "business_name": "公司名称",
+        "business_type": "商业类型",
+        "city": "城市",
+        "country": "国家",
+        "email": "电子邮件地址",
+        "merchant_type": "商户类型",
+        "name": "商户名称",
+        "password": "密码",
+        "role": "角色",
+        "tax_id": "税号"
+      },
+      "passwordTooShort": "密码必须至少为8个字符"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "详情",
+      "edit": "编辑",
+      "merchantOptions": "商户选项"
+    },
+    "addMerchant": "添加商户",
+    "columnNames": {
+      "actions": "操作",
+      "businessType": "业务类型",
+      "location": "位置",
+      "name": "名称",
+      "qr": "二维码",
+      "status": "状态"
+    },
+    "columns": {
+      "actions": "操作",
+      "businessAccount": "业务与账户",
+      "categoryPlan": "类别与计划",
+      "location": "位置",
+      "noQr": "无二维码",
+      "qrScan": "二维码扫描",
+      "status": "状态"
+    },
+    "delete": {
+      "cancel": "取消",
+      "confirm": "删除",
+      "deleting": "删除中...",
+      "description": "您确定要删除吗 ",
+      "descriptionEnd": "? 此操作无法撤消。",
+      "errorMessage": "删除商户失败",
+      "successMessage": "商家 \"{merchantName}\" 删除成功。",
+      "title": "删除商家",
+      "trigger": "删除商户"
+    },
+    "qrDialog": {
+      "download": "下载",
+      "scanFor": "扫描 {name}"
+    },
+    "searchPlaceholder": "搜索商户...",
+    "statusToggle": {
+      "activatedSuccess": "商户成功激活",
+      "active": "活动",
+      "deactivatedSuccess": "商户已成功停用",
+      "inactive": "非活跃",
+      "updateError": "更新商户状态失败"
+    },
+    "subtitle": "管理和监控您的商户",
+    "title": "商户管理"
+  }
+}

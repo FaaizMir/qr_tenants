@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "إنشاء",
+    "dashboard": "لوحة التحكم",
+    "details": "التفاصيل",
+    "editMerchant": "تعديل التاجر",
+    "merchantManagement": "إدارة التجار",
+    "merchants": "التجار"
+  },
+  "common": {
+    "error": "حدث خطأ",
+    "loading": "جار التحميل...",
+    "noData": "لا توجد بيانات متاحة"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "تفاصيل تسجيل الدخول لمسؤول التاجر.",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "إخفاء كلمة المرور",
+      "initialPassword": "كلمة المرور الأولية",
+      "merchantName": "اسم التاجر",
+      "merchantNamePlaceholder": "جون دو",
+      "role": "دور",
+      "showPassword": "عرض كلمة المرور",
+      "title": "بيانات الاعتماد الحسابية"
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "createMerchant": "إنشاء تاجر",
+      "creating": "جارٍ الإنشاء...",
+      "insufficientBalanceTooltip": "رصيد المحفظة غير كافٍ لإنشاء تاجر سنوي"
+    },
+    "businessProfile": {
+      "businessName": "اسم العمل",
+      "businessNamePlaceholder": "مثل: مقهى أكمي",
+      "businessType": "نوع العمل",
+      "businessTypePlaceholder": "اختر نوع العمل...",
+      "businessTypes": {
+        "education": "التعليم",
+        "foodBeverage": "الطعام والمشروبات",
+        "health": "الصحة",
+        "hospitality": "ضيافة",
+        "retail": "تجزئة",
+        "services": "الخدمات",
+        "technology": "تكنولوجيا"
+      },
+      "description": "تفاصيل العمل الأساسية المعروضة للعملاء.",
+      "taxId": "رقم التعريف الضريبي",
+      "taxIdPlaceholder": "على سبيل المثال TX123456",
+      "title": "الملف الشخصي للأعمال"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 الشارع الرئيسي، المدينة، البلد",
+      "city": "المدينة",
+      "cityPlaceholder": "المدينة",
+      "country": "البلد",
+      "countryPlaceholder": "البلد",
+      "description": "ابحث عن عنوان العمل لملء التفاصيل تلقائيًا.",
+      "locationUpdated": "تم تحديث الموقع",
+      "searchAddress": "بحث عن العنوان",
+      "title": "تفاصيل الموقع"
+    },
+    "merchantType": {
+      "accountStatus": "حالة الحساب",
+      "accountStatusDescription": "قم بتمكين أو تعطيل وصول هذا التاجر إلى المنصة.",
+      "active": "نشط",
+      "annual": "سنوي",
+      "description": "اختر نوع التاجر.",
+      "inactive": "غير نشط",
+      "label": "نوع التاجر",
+      "temporary": "مؤقت",
+      "title": "نوع التاجر"
+    },
+    "messages": {
+      "createError": "فشل في إنشاء التاجر",
+      "createErrorDescription": "يرجى التحقق من إدخالك والمحاولة مرة أخرى.",
+      "createSuccess": "تم إنشاء حساب التاجر بنجاح.",
+      "validationFailed": "فشل التحقق"
+    },
+    "subtitle": "إنشاء حساب تاجر جديد، وتعيين خطة اشتراك، وتكوين الحدود الأولية.",
+    "title": "تسجيل تاجر جديد",
+    "validation": {
+      "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
+      "fieldEmpty": "يجب ألا يكون {field} فارغًا",
+      "fieldInvalid": "{field} غير صالح",
+      "fieldRequired": "{field} مطلوب",
+      "fields": {
+        "address": "عنوان",
+        "business_name": "اسم العمل",
+        "business_type": "نوع العمل",
+        "city": "مدينة",
+        "country": "البلد",
+        "email": "عنوان البريد الإلكتروني",
+        "merchant_type": "نوع التاجر",
+        "name": "اسم التاجر",
+        "password": "كلمة المرور",
+        "role": "دور",
+        "tax_id": "رقم التعريف الضريبي"
+      },
+      "passwordTooShort": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "نشط",
+        "birthday": "🎂",
+        "description": "العملاء المسجلون مؤخرًا",
+        "female": "👩 أنثى",
+        "inactive": "غير نشط",
+        "joined": "📅 انضم",
+        "male": "👨 ذكر",
+        "noData": "لم يتم العثور على عملاء.",
+        "other": "👤",
+        "pageOf": "الصفحة {current} من {total}",
+        "reward": "المكافأة",
+        "title": "العملاء ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "المبلغ",
+          "credits": "رصيد",
+          "description": "الوصف"
+        },
+        "description": "استخدام الائتمان التاريخي",
+        "noData": "لم يتم العثور على سجلات.",
+        "pageOf": "الصفحة {current} من {total}",
+        "title": "دفتر الأستاذ للمعاملات"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "نشط",
+        "consumed": "{percent}% مستهلك",
+        "description": "الحملات النشطة",
+        "halal": "حلال",
+        "id": "معرف",
+        "inactive": "غير نشط",
+        "issued": "صادر",
+        "left": "{count} متبقية",
+        "luckyDraw": "✓ سحب محظوظ",
+        "noData": "لا توجد دفعات نشطة.",
+        "pageOf": "الصفحة {current} من {total}",
+        "public": "عام",
+        "title": "دفعات القسائم ({count})",
+        "whatsapp": "✓ واتساب"
+      },
+      "walletDetails": {
+        "account": "الحساب",
+        "ads": "الإعلانات",
+        "annualFee": "الرسوم السنوية",
+        "bi": "BI",
+        "coupons": "قسائم",
+        "currency": "العملة",
+        "description": "تخصيص الاعتمادات المباشرة",
+        "disabled": "معطل",
+        "enabled": "مفعل",
+        "expires": "تنتهي صلاحيتها",
+        "inactive": "غير نشط",
+        "never": "أبداً",
+        "paid": "مدفوع",
+        "paidAds": "إعلانات مدفوعة",
+        "plan": "الخطة",
+        "title": "تفاصيل المحفظة",
+        "ui": "واجهة المستخدم",
+        "unpaid": "غير مدفوع",
+        "verified": "تم التحقق",
+        "whatsapp": "واتساب"
+      }
+    },
+    "error": {
+      "description": "لم يتم العثور على التاجر أو لم يمكن تحميله.",
+      "title": "خطأ"
+    },
+    "header": {
+      "active": "نشط",
+      "editConfiguration": "تعديل التكوين",
+      "inactive": "غير نشط",
+      "memberSince": "عضو منذ",
+      "subscription": "اشتراك {type}"
+    },
+    "loadError": "فشل في تحميل تفاصيل التاجر",
+    "loading": "جارٍ تحميل تفاصيل التاجر...",
+    "overview": {
+      "adCredits": {
+        "description": "للترويج",
+        "title": "رصيد الإعلانات"
+      },
+      "couponCredits": {
+        "description": "للمجموعات",
+        "title": "رصيد القسائم"
+      },
+      "recentTransactions": {
+        "credits": "الاعتمادات",
+        "noData": "لم يتم العثور على معاملات.",
+        "pageOf": "الصفحة {current} من {total}",
+        "title": "المعاملات الأخيرة"
+      },
+      "totalCredits": {
+        "title": "إجمالي الرصيد",
+        "usedLabel": "{used} تم استخدامه إجمالاً"
+      },
+      "usageSummary": {
+        "couponBalance": "رصيد القسائم",
+        "creditUsage": "استخدام الائتمان",
+        "title": "ملخص الاستخدام",
+        "whatsappBalance": "رصيد واتساب",
+        "whatsappBI": "واتساب BI",
+        "whatsappUI": "واجهة واتساب"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "رصيد واتساب",
+        "uiLabel": "واجهة المستخدم"
+      }
+    },
+    "tabs": {
+      "activity": "النشاط",
+      "billing": "الحدود",
+      "overview": "نظرة عامة"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "تحديث تفاصيل مسؤول التاجر.",
+      "newPassword": "كلمة مرور جديدة (اتركها فارغة للاحتفاظ بالحالية)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "تحديث التاجر",
+      "updating": "جارٍ التحديث..."
+    },
+    "loadingError": "فشل في تحميل بيانات التاجر",
+    "messages": {
+      "updateError": "فشل في تحديث التاجر",
+      "updateSuccess": "تم تحديث التاجر بنجاح."
+    },
+    "subtitle": "تحديث تفاصيل حساب التاجر والتكوين.",
+    "title": "تعديل التاجر",
+    "validation": {
+      "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
+      "fieldEmpty": "يجب ألا يكون {field} فارغًا",
+      "fieldInvalid": "{field} غير صالح",
+      "fieldRequired": "{field} مطلوب",
+      "fields": {
+        "address": "عنوان",
+        "business_name": "اسم العمل",
+        "business_type": "نوع العمل",
+        "city": "مدينة",
+        "country": "البلد",
+        "email": "عنوان البريد الإلكتروني",
+        "merchant_type": "نوع التاجر",
+        "name": "اسم التاجر",
+        "password": "كلمة المرور",
+        "role": "دور",
+        "tax_id": "رقم التعريف الضريبي"
+      },
+      "passwordTooShort": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "تفاصيل",
+      "edit": "تعديل",
+      "merchantOptions": "خيارات التاجر"
+    },
+    "addMerchant": "إضافة تاجر",
+    "columnNames": {
+      "actions": "إجراءات",
+      "businessType": "نوع العمل",
+      "location": "الموقع",
+      "name": "الاسم",
+      "qr": "رمز الاستجابة السريعة",
+      "status": "الحالة"
+    },
+    "columns": {
+      "actions": "إجراءات",
+      "businessAccount": "الأعمال والحساب",
+      "categoryPlan": "الفئة والخطة",
+      "location": "الموقع",
+      "noQr": "لا يوجد رمز QR",
+      "qrScan": "مسح QR",
+      "status": "الحالة"
+    },
+    "delete": {
+      "cancel": "إلغاء",
+      "confirm": "حذف",
+      "deleting": "جارٍ الحذف...",
+      "description": "هل أنت متأكد أنك تريد حذف ",
+      "descriptionEnd": "؟ لا يمكن التراجع عن هذا الإجراء.",
+      "errorMessage": "فشل في حذف التاجر",
+      "successMessage": "تم حذف التاجر \"{merchantName}\" بنجاح.",
+      "title": "حذف التاجر",
+      "trigger": "حذف التاجر"
+    },
+    "qrDialog": {
+      "download": "تحميل",
+      "scanFor": "امسح ضوئيًا لـ {name}"
+    },
+    "searchPlaceholder": "ابحث عن التجار...",
+    "statusToggle": {
+      "activatedSuccess": "تم تفعيل التاجر بنجاح",
+      "active": "نشط",
+      "deactivatedSuccess": "تم تعطيل التاجر بنجاح",
+      "inactive": "غير نشط",
+      "updateError": "فشل في تحديث حالة التاجر"
+    },
+    "subtitle": "إدارة ومراقبة التجار لديك",
+    "title": "إدارة التجار"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "Cipta Pakej",
+    "dashboard": "Papan Pemuka Ejen",
+    "edit": "Edit Pakej",
+    "packages": "Pakej Iklan"
+  },
+  "deleteDialog": {
+    "cancel": "Batalkan Penghapusan",
+    "confirm": "Disahkan, Padam Sekarang",
+    "description": "Anda akan memadam secara kekal ",
+    "descriptionEnd": ". Tindakan ini adalah terminal dan tidak boleh dibalikkan.",
+    "title": "Berhati-hati yang Melampau"
+  },
+  "form": {
+    "actions": {
+      "cancel": "Batal",
+      "delete": "Padam Pakej",
+      "save": "Terbitkan Pakej",
+      "saving": "Menyimpan...",
+      "update": "Kemas kini Pakej"
+    },
+    "backButton": "Kembali ke Senarai",
+    "createDescription": "Tentukan harga dan kredit untuk kempen pengiklanan berbayar.",
+    "createTitle": "Buat Pakej Iklan Berbayar",
+    "deleteConfirm": {
+      "cancel": "Batal",
+      "confirm": "Ya, padam pakej",
+      "description": "Ini akan menghapus secara kekal ",
+      "descriptionEnd": ". Tindakan ini tidak boleh dibatalkan.",
+      "title": "Adakah anda benar-benar pasti?"
+    },
+    "editDescription": "Tentukan harga dan kredit untuk kempen pengiklanan berbayar.",
+    "editTitle": "Edit Pakej Iklan Berbayar",
+    "fields": {
+      "currency": {
+        "label": "Mata Wang",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "USD ($)"
+        }
+      },
+      "description": {
+        "label": "Penerangan",
+        "placeholder": "Ringkasan pendek tentang apa yang ditawarkan oleh pakej ini..."
+      },
+      "displayPriority": {
+        "label": "Keutamaan Paparan",
+        "placeholder": "Pos. dalam senarai (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "Pelan Pedagang",
+        "options": {
+          "annual": "Tahunan / Premium",
+          "temporary": "Sementara / Asas"
+        }
+      },
+      "packageName": {
+        "label": "Nama Pakej",
+        "placeholder": "cth. Pakej Iklan Premium"
+      },
+      "packageStatus": {
+        "label": "Status Pakej",
+        "options": {
+          "active": "Aktif & Terlihat",
+          "inactive": "Tidak Aktif / Tersembunyi"
+        }
+      },
+      "price": {
+        "label": "Harga",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "AUTO",
+        "label": "Harga setiap Kredit"
+      },
+      "totalCredits": {
+        "label": "Jumlah Kredit"
+      }
+    },
+    "infoBanner": {
+      "description": "Jenis pakej ini khusus untuk kempen pengiklanan berbayar",
+      "title": "Pakej Kredit Iklan Berbayar"
+    },
+    "preview": {
+      "advertisingCredits": "Kredit Pengiklanan",
+      "defaultDescription": "Kapasiti pengiklanan yang dipertingkatkan",
+      "getStarted": "Mulakan",
+      "hiddenDraft": "TERSEMBUNYI / DRAF",
+      "packageTitle": "Tajuk Pakej",
+      "paidAds": "Iklan Berbayar",
+      "perCredit": "setiap kredit",
+      "title": "Pratonton Langsung"
+    },
+    "sections": {
+      "classification": "Klasifikasi",
+      "credits": "Kredit & Peruntukan",
+      "identity": "Identiti & Penetapan Harga"
+    },
+    "validation": {
+      "creditsMin": "Kredit mesti sekurang-kurangnya 1",
+      "creditsRequired": "Kredit diperlukan",
+      "descriptionRequired": "Penerangan diperlukan",
+      "nameRequired": "Nama pakej diperlukan",
+      "priceMin": "Harga mesti sekurang-kurangnya 1",
+      "priceRequired": "Harga diperlukan",
+      "priorityRequired": "Keutamaan paparan diperlukan"
+    }
+  },
+  "messages": {
+    "createError": "Gagal untuk mencipta pakej",
+    "createSuccess": "Pakej berjaya dibuat",
+    "deleteError": "Gagal untuk menghapus pakej",
+    "deleteSuccess": "Pakej berjaya dipadam",
+    "fetchError": "Gagal untuk mendapatkan pakej",
+    "loadError": "Gagal memuatkan butiran pakej",
+    "updateError": "Gagal mengemas kini pakej",
+    "updateSuccess": "Pakej berjaya dikemas kini",
+    "wrongTypeError": "Anda hanya boleh mengedit pakej iklan berbayar"
+  },
+  "subtitle": "Urus pakej kredit pengiklanan berbayar anda",
+  "table": {
+    "actions": {
+      "delete": "Padam Pakej",
+      "edit": "Edit Pakej",
+      "label": "Tindakan Pakej"
+    },
+    "columns": {
+      "credits": "Kredit",
+      "noDescription": "Tiada penerangan",
+      "packageInfo": "Info Pakej",
+      "perCredit": "setiap kredit",
+      "plan": "Rancangan",
+      "pricing": "Harga",
+      "rank": "Pangkat",
+      "status": "Status"
+    },
+    "createButton": "Buat Pakej Iklan Berbayar",
+    "searchPlaceholder": "Cari mengikut nama pakej...",
+    "status": {
+      "active": "Aktif",
+      "inactive": "Tidak Aktif"
+    }
+  },
+  "title": "Pakej Iklan Berbayar"
+}

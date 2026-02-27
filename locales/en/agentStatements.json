@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Agent Dashboard",
+    "statements": "Financial Statements"
+  },
+  "columns": {
+    "actions": "Actions",
+    "downloadPdf": "Download PDF",
+    "generatedAt": "Generated At",
+    "monthLabel": "Month {month}, {year}",
+    "noDate": "—",
+    "period": "Period",
+    "status": "Status",
+    "totalSpend": "Total Spend"
+  },
+  "filters": {
+    "description": "Filter statements by year and month",
+    "month": {
+      "all": "Current Month",
+      "label": "Month",
+      "placeholder": "Current month"
+    },
+    "quickActions": {
+      "label": "Quick Actions",
+      "loading": "Loading...",
+      "refresh": "Refresh List"
+    },
+    "title": "Statement Filters",
+    "year": {
+      "label": "Year",
+      "placeholder": "Select year"
+    }
+  },
+  "messages": {
+    "downloadError": "Failed to download PDF. Please try again.",
+    "downloadSuccess": "Statement downloaded successfully!",
+    "fetchError": "Failed to load statements. Please try again."
+  },
+  "months": {
+    "april": "April",
+    "august": "August",
+    "december": "December",
+    "february": "February",
+    "january": "January",
+    "july": "July",
+    "june": "June",
+    "march": "March",
+    "may": "May",
+    "november": "November",
+    "october": "October",
+    "september": "September"
+  },
+  "status": {
+    "failed": "Failed",
+    "generated": "Generated",
+    "pending": "Pending"
+  },
+  "subtitle": "Monthly auto-generated PDF reports including earnings, fees, package income, and wallet ledger.",
+  "table": {
+    "description": "{count} statement found",
+    "description_plural": "{count} statements found",
+    "loading": "Loading statements...",
+    "noData": {
+      "description": "No statements available for the selected period. Generate a new statement to get started.",
+      "title": "No Statements Found"
+    },
+    "title": "Statement History"
+  },
+  "title": "Agent Financial Statements"
+}

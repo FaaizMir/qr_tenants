@@ -3,27 +3,30 @@ import { Badge } from "@/components/ui/badge";
 import { Download, Calendar, FileText, DollarSign } from "lucide-react";
 import { format } from "date-fns";
 
-export const getAgentsColumns = (onDownload) => [
+export const getAgentsColumns = (onDownload, t) => [
   {
     id: "period",
-    header: "Period",
+    header: t("columns.period"),
+    meta: {
+      label: t("columns.period"),
+    },
     cell: ({ row }) => {
       const month = row.original.month;
       const year = row.original.year;
 
       const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        t("months.january"),
+        t("months.february"),
+        t("months.march"),
+        t("months.april"),
+        t("months.may"),
+        t("months.june"),
+        t("months.july"),
+        t("months.august"),
+        t("months.september"),
+        t("months.october"),
+        t("months.november"),
+        t("months.december"),
       ];
 
       const monthName = months[month - 1] || "Unknown";
@@ -38,7 +41,7 @@ export const getAgentsColumns = (onDownload) => [
               {monthName} {year}
             </span>
             <span className="text-xs text-muted-foreground">
-              Month {month}, {year}
+              {t("columns.monthLabel", { month, year })}
             </span>
           </div>
         </div>
@@ -47,13 +50,16 @@ export const getAgentsColumns = (onDownload) => [
   },
   {
     id: "status",
-    header: "Status",
+    header: t("columns.status"),
+    meta: {
+      label: t("columns.status"),
+    },
     cell: ({ row }) => {
       const status = row.original.status || "generated";
       const statusConfig = {
-        generated: { label: "Generated", variant: "default" },
-        pending: { label: "Pending", variant: "secondary" },
-        failed: { label: "Failed", variant: "destructive" },
+        generated: { label: t("status.generated"), variant: "default" },
+        pending: { label: t("status.pending"), variant: "secondary" },
+        failed: { label: t("status.failed"), variant: "destructive" },
       };
 
       const config = statusConfig[status] || statusConfig.generated;
@@ -63,7 +69,10 @@ export const getAgentsColumns = (onDownload) => [
   },
   {
     id: "total_spend",
-    header: "Total Spend",
+    header: t("columns.totalSpend"),
+    meta: {
+      label: t("columns.totalSpend"),
+    },
     cell: ({ row }) => {
       const statementData = row.original.statement_data;
       const totalSpend =
@@ -80,10 +89,13 @@ export const getAgentsColumns = (onDownload) => [
   },
   {
     id: "generated_at",
-    header: "Generated At",
+    header: t("columns.generatedAt"),
+    meta: {
+      label: t("columns.generatedAt"),
+    },
     cell: ({ row }) => {
       const date = row.original.created_at || row.original.generated_at;
-      if (!date) return "—";
+      if (!date) return t("columns.noDate");
 
       try {
         return (
@@ -92,13 +104,13 @@ export const getAgentsColumns = (onDownload) => [
           </span>
         );
       } catch (error) {
-        return "—";
+        return t("columns.noDate");
       }
     },
   },
   {
     id: "actions",
-    header: "Actions",
+    header: t("columns.actions"),
     cell: ({ row }) => {
       const statementId = row.original.id;
 
@@ -110,7 +122,7 @@ export const getAgentsColumns = (onDownload) => [
           onClick={() => onDownload(statementId)}
         >
           <Download className="h-4 w-4" />
-          Download PDF
+          {t("columns.downloadPdf")}
         </Button>
       );
     },

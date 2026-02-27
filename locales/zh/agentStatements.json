@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "代理仪表板",
+    "statements": "财务报表"
+  },
+  "columns": {
+    "actions": "操作",
+    "downloadPdf": "下载 PDF",
+    "generatedAt": "生成于",
+    "monthLabel": "{month} 月，{year} 年",
+    "noDate": "—",
+    "period": "期间",
+    "status": "状态",
+    "totalSpend": "总支出"
+  },
+  "filters": {
+    "description": "按年和月筛选报表",
+    "month": {
+      "all": "当前月份",
+      "label": "月份",
+      "placeholder": "当前月份"
+    },
+    "quickActions": {
+      "label": "快速操作",
+      "loading": "加载中...",
+      "refresh": "刷新列表"
+    },
+    "title": "报表筛选",
+    "year": {
+      "label": "年份",
+      "placeholder": "选择年份"
+    }
+  },
+  "messages": {
+    "downloadError": "下载 PDF 失败。请再试一次。",
+    "downloadSuccess": "报表下载成功！",
+    "fetchError": "加载报表失败。请再试一次。"
+  },
+  "months": {
+    "april": "四月",
+    "august": "八月",
+    "december": "十二月",
+    "february": "二月",
+    "january": "一月",
+    "july": "七月",
+    "june": "六月",
+    "march": "三月",
+    "may": "五月",
+    "november": "十一月",
+    "october": "十月",
+    "september": "九月"
+  },
+  "status": {
+    "failed": "失败",
+    "generated": "生成的",
+    "pending": "待处理"
+  },
+  "subtitle": "每月自动生成的PDF报告，包括收入、费用、套餐收入和钱包账本。",
+  "table": {
+    "description": "找到 {count} 条报表",
+    "description_plural": "找到 {count} 条记录",
+    "loading": "正在加载报表...",
+    "noData": {
+      "description": "所选期间没有可用的报表。生成新的报表以开始。",
+      "title": "未找到任何记录"
+    },
+    "title": "报表历史"
+  },
+  "title": "代理财务报表"
+}

@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "Thống kê phát hành và đổi lại",
+      "issued": "Đã phát hành",
+      "merchantsLabel": "thương nhân",
+      "noData": "Không có dữ liệu phiếu giảm giá",
+      "page": "Trang {current} của {total}",
+      "rank": "Xếp hạng",
+      "redeemed": "được chuộc lại",
+      "redeemedCount": "Đã đổi thưởng",
+      "redeemedLabel": "Đã sử dụng",
+      "title": "Hiệu suất Phiếu Giảm Giá"
+    },
+    "pagination": {
+      "pageOf": "Trang {{current}} của {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "Trung bình/tin nhắn",
+      "description": "Số lượng tin nhắn và chi phí",
+      "estimatedCost": "Chi phí ước tính",
+      "merchantsLabel": "thương nhân",
+      "messagesSent": "tin nhắn đã được gửi",
+      "noData": "Không có dữ liệu sử dụng WhatsApp",
+      "page": "Trang {current} của {total}",
+      "rank": "Hạng",
+      "title": "Sử dụng WhatsApp"
+    }
+  },
+  "common": {
+    "error": "Không thể lấy dữ liệu",
+    "loading": "Đang tải...",
+    "noData": "Không có dữ liệu"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "hàng năm",
+      "temporary": "tạm thời"
+    },
+    "pagination": {
+      "pageOf": "Trang {{current}} của {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "Đăng ký mới nhất",
+      "noData": "Không tìm thấy thương nhân nào",
+      "page": "Trang {current} của {total}",
+      "rankLabel": "#",
+      "title": "Các thương nhân vừa được thêm",
+      "totalLabel": "tổng số"
+    },
+    "topPerformers": {
+      "description": "Xếp hạng theo doanh thu",
+      "issued": "Đã phát hành",
+      "noData": "Không có dữ liệu hiệu suất",
+      "page": "Trang {current} của {total}",
+      "rate": "Tỷ lệ",
+      "redeemed": "Đã đổi",
+      "stats": {
+        "issued": "Đã phát hành",
+        "rate": "Tỷ lệ",
+        "redeemed": "Đã đổi"
+      },
+      "title": "Những người hoạt động tốt nhất",
+      "totalLabel": "tổng"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "Phiếu giảm giá đã phát hành",
+      "couponsRedeemed": "Phiếu giảm giá đã được sử dụng",
+      "totalCustomers": "Tổng số khách hàng",
+      "totalFeedback": "Tổng phản hồi"
+    },
+    "dateFilter": {
+      "customRange": "Khoảng thời gian tùy chỉnh",
+      "last30Days": "30 ngày qua",
+      "last7Days": "7 Ngày Qua",
+      "lastMonth": "Tháng trước",
+      "pickDate": "Chọn một ngày",
+      "selectRange": "Chọn khoảng",
+      "thisMonth": "Tháng Này",
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua"
+    },
+    "engagement": {
+      "activityPulse": "Nhịp đập hoạt động nền tảng",
+      "description": "Các chỉ số tương tác trên tất cả các cửa hàng",
+      "redemptionRate": "Tỷ lệ đổi",
+      "systemLoad": "Tải hệ thống bình thường",
+      "title": "Sự tham gia toàn cầu",
+      "totalFeedback": "Tổng phản hồi"
+    },
+    "growth": {
+      "customersCount": "+{count} Khách hàng",
+      "description": "Dữ liệu mở rộng nền tảng mới nhất",
+      "newCustomers": "Đăng ký Khách Hàng Mới",
+      "newMerchants": "+{count} Thương nhân",
+      "newStores": "Cửa hàng mới trong thời gian này",
+      "title": "Điểm nổi bật về tăng trưởng"
+    },
+    "kpiCards": {
+      "activeMerchants": "Các thương nhân hoạt động",
+      "annualMerchants": "Thương nhân hàng năm",
+      "inactiveMerchants": "Thương nhân không hoạt động",
+      "temporaryMerchants": "Thương nhân tạm thời",
+      "totalMerchants": "Tổng số thương nhân",
+      "totalRevenue": "Tổng doanh thu"
+    },
+    "kpis": {
+      "activeAgents": "Đại lý hoạt động",
+      "activeMerchants": "Thương nhân hoạt động",
+      "agentSubscriptions": "Đăng ký đại lý",
+      "annualMerchants": "Thương Nhân Hàng Năm",
+      "biMessagesSent": "Tin nhắn BI đã gửi",
+      "couponsIssued": "Phiếu giảm giá đã phát hành",
+      "couponsRedeemed": "Phiếu giảm giá đã được sử dụng",
+      "feedbackReceived": "Phản hồi đã nhận",
+      "inactiveMerchants": "Thương nhân không hoạt động",
+      "merchantSubscriptions": "Đăng ký thương nhân",
+      "packageCommissions": "Hoa hồng gói",
+      "temporaryMerchants": "Thương Nhân Tạm Thời",
+      "totalAgents": "Tổng Số Đại Lý",
+      "totalCustomers": "Tổng số khách hàng",
+      "totalFeedback": "Tổng phản hồi",
+      "totalMerchants": "Tổng Số Thương Nhân",
+      "totalMessages": "Tổng tin nhắn",
+      "totalPlatformRevenue": "Tổng doanh thu nền tảng",
+      "totalRevenue": "Doanh thu tổng cộng",
+      "uiMessagesSent": "Tin nhắn UI đã gửi",
+      "whatsappCost": "Chi phí WhatsApp"
+    },
+    "merchantDistribution": {
+      "annual": "Hàng năm",
+      "description": "Tỷ lệ đăng ký hàng năm so với tạm thời",
+      "noData": "Không có dữ liệu thương nhân nào",
+      "temporary": "Tạm thời",
+      "title": "Phân phối thương nhân",
+      "total": "Tổng cộng"
+    },
+    "merchantTierDistribution": {
+      "annual": "Hàng năm",
+      "description": "Tỷ lệ đăng ký hàng năm so với tạm thời",
+      "noData": "Không có dữ liệu thương nhân",
+      "temp": "Tạm thời",
+      "title": "Phân phối cấp độ thương nhân",
+      "totalStores": "Tổng cửa hàng"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "Đăng ký hàng năm",
+      "creditPurchase": "Mua tín dụng",
+      "description": "Phân phối nguồn doanh thu",
+      "title": "Phân tích doanh thu",
+      "whatsappCharges": "Phí WhatsApp"
+    },
+    "roleTitle": "Bảng điều khiển {role}",
+    "sections": {
+      "financialPerformance": "Hiệu suất tài chính",
+      "generalOverview": "Tổng quan chung",
+      "globalEngagement": "Sự tham gia toàn cầu",
+      "growthHighlights": "Điểm nổi bật về tăng trưởng",
+      "revenueStreams": "Dòng doanh thu"
+    },
+    "title": "Phân tích hệ thống",
+    "topPerformingMerchants": {
+      "description": "Cửa hàng có khối lượng và mức độ tương tác cao nhất ({count} tổng)",
+      "issued": "Đã phát hành",
+      "noData": "Không có dữ liệu hiệu suất cho thời gian này",
+      "page": "Trang {current} của {total}",
+      "redeemed": "Đã đổi",
+      "showing": "Hiển thị từ {from} đến {to} của {total}",
+      "successRate": "Tỷ lệ thành công",
+      "title": "Thương nhân hoạt động tốt nhất"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "Tin nhắn BI đã gửi",
+      "totalMessages": "Tổng số tin nhắn",
+      "uiMessagesSent": "Tin nhắn UI đã gửi",
+      "whatsappCost": "Chi phí WhatsApp"
+    }
+  },
+  "page": {
+    "breadcrumb": "Bảng điều khiển",
+    "description": "Tổng quan về hiệu suất và chỉ số của đại lý của bạn",
+    "title": "Bảng điều khiển đại lý"
+  },
+  "tabs": {
+    "analytics": "Phân tích",
+    "merchants": "Hiệu suất",
+    "overview": "Tổng quan"
+  }
+}

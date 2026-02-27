@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "승인",
+    "reject": "거부"
+  },
+  "columns": {
+    "adContent": "광고 콘텐츠",
+    "adPlacement": "광고 게재 위치",
+    "approvalStatus": "승인 상태",
+    "approvalType": "승인 유형",
+    "businessAccount": "비즈니스 및 계정",
+    "location": "위치",
+    "merchantType": "상인 유형",
+    "noAd": "광고 없음",
+    "requestedDate": "요청 날짜"
+  },
+  "dialog": {
+    "approveDescription": "정말로 {merchantName}의 요청을 승인하시겠습니까? 이 작업은 취소할 수 없습니다.",
+    "approveTitle": "광고 요청 승인",
+    "cancel": "취소",
+    "close": "닫기",
+    "confirmApprove": "네, 승인합니다",
+    "confirmReject": "네, 거부",
+    "processing": "처리 중...",
+    "rejectDescription": "{merchantName}에 대한 요청 거부 사유를 선택하세요.",
+    "rejectTitle": "광고 요청 거부"
+  },
+  "messages": {
+    "approveError": "요청 승인 실패",
+    "approveSuccess": "요청이 성공적으로 승인되었습니다",
+    "fetchError": "승인 정보를 가져오는 중 오류 발생",
+    "rejectError": "요청 거부 실패",
+    "rejectSuccess": "요청이 성공적으로 거부되었습니다"
+  },
+  "preview": {
+    "description": "프로모션 광고의 전체 크기 미리보기",
+    "title": "광고 미리보기",
+    "videoNotSupported": "브라우저가 비디오 태그를 지원하지 않습니다."
+  },
+  "rejectionReasons": {
+    "adultContent": "성인 / 성적 콘텐츠",
+    "gamblingContent": "도박 콘텐츠",
+    "illegalServices": "불법 서비스",
+    "misleadingContent": "오해의 소지가 있는 콘텐츠",
+    "other": "기타 (수동 사유 입력)",
+    "placeholder": "거부 사유를 입력하세요...",
+    "title": "이유를 명시해 주십시오"
+  },
+  "status": {
+    "approved": "승인됨",
+    "pending": "대기 중",
+    "rejected": "거부됨"
+  },
+  "subtitle": "에이전트 승인 관리",
+  "title": "승인",
+  "validation": {
+    "provideCustomReason": "사용자 지정 거부 사유를 제공해 주세요",
+    "selectReason": "거부 사유를 선택해 주세요"
+  }
+}

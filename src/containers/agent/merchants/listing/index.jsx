@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table";
@@ -18,6 +19,7 @@ export default function AgentMerchantsListingContainer({
   showEdit = true,
   isMasterAdmin = false,
 }) {
+  const t = useTranslations("agentMerchants.listing");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -77,16 +79,26 @@ export default function AgentMerchantsListingContainer({
     fetchMerchants();
   };
 
-  const columns = getMerchantsColumns(handleDeleted, showEdit, isMasterAdmin);
+  const columns = getMerchantsColumns(handleDeleted, showEdit, isMasterAdmin, t);
+
+  // Column name translations for visibility dropdown
+  const columnNameTranslations = {
+    name: t("columnNames.name"),
+    businessType: t("columnNames.businessType"),
+    location: t("columnNames.location"),
+    status: t("columnNames.status"),
+    qr: t("columnNames.qr"),
+    actions: t("columnNames.actions"),
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">
-            Merchant Management
+            {t("title")}
           </h1>
-          <p className="text-muted-foreground">Manage and monitor your merchants</p>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
       </div>
 
@@ -94,13 +106,13 @@ export default function AgentMerchantsListingContainer({
         <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search merchants..."
+            placeholder={t("searchPlaceholder")}
             onSearchChange={setSearch}
             rightSlot={
               showCreate && (
                 <Button onClick={() => router.push("/agent/merchants/create")}>
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Merchant
+                  {t("addMerchant")}
                 </Button>
               )
             }
@@ -114,6 +126,7 @@ export default function AgentMerchantsListingContainer({
             setPage={setPage}
             setPageSize={setPageSize}
             isLoading={loading}
+            columnNameTranslations={columnNameTranslations}
           />
         </CardContent>
       </Card>

@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "Tạo",
+    "dashboard": "Bảng điều khiển",
+    "details": "Chi tiết",
+    "editMerchant": "Chỉnh sửa Nhà cung cấp",
+    "merchantManagement": "Quản lý thương nhân",
+    "merchants": "Thương nhân"
+  },
+  "common": {
+    "error": "Đã xảy ra lỗi",
+    "loading": "Đang tải...",
+    "noData": "Không có dữ liệu"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "Thông tin đăng nhập cho quản trị viên thương nhân.",
+      "emailAddress": "Địa chỉ email",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "Ẩn mật khẩu",
+      "initialPassword": "Mật khẩu ban đầu",
+      "merchantName": "Tên thương nhân",
+      "merchantNamePlaceholder": "John Doe",
+      "role": "Vai trò",
+      "showPassword": "Hiện mật khẩu",
+      "title": "Thông tin tài khoản"
+    },
+    "actions": {
+      "cancel": "Hủy",
+      "createMerchant": "Tạo Người bán",
+      "creating": "Đang tạo...",
+      "insufficientBalanceTooltip": "Số dư ví không đủ để tạo thương nhân hàng năm"
+    },
+    "businessProfile": {
+      "businessName": "Tên doanh nghiệp",
+      "businessNamePlaceholder": "ví dụ: Acme Café",
+      "businessType": "Loại hình kinh doanh",
+      "businessTypePlaceholder": "Chọn loại hình kinh doanh...",
+      "businessTypes": {
+        "education": "Giáo dục",
+        "foodBeverage": "Thực phẩm & Đồ uống",
+        "health": "Sức khỏe",
+        "hospitality": "Khách sạn",
+        "retail": "Bán lẻ",
+        "services": "Dịch vụ",
+        "technology": "Công nghệ"
+      },
+      "description": "Thông tin doanh nghiệp chính được hiển thị cho khách hàng.",
+      "taxId": "Mã số thuế",
+      "taxIdPlaceholder": "ví dụ: TX123456",
+      "title": "Hồ sơ doanh nghiệp"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 Đường Chính, Thành phố, Quốc gia",
+      "city": "Thành phố",
+      "cityPlaceholder": "Thành phố",
+      "country": "Quốc gia",
+      "countryPlaceholder": "Quốc gia",
+      "description": "Tìm kiếm địa chỉ doanh nghiệp để tự động điền thông tin.",
+      "locationUpdated": "Địa điểm đã được cập nhật",
+      "searchAddress": "Tìm kiếm địa chỉ",
+      "title": "Chi tiết vị trí"
+    },
+    "merchantType": {
+      "accountStatus": "Trạng thái Tài khoản",
+      "accountStatusDescription": "Bật hoặc tắt quyền truy cập của thương nhân này vào nền tảng.",
+      "active": "Đang hoạt động",
+      "annual": "Hàng năm",
+      "description": "Chọn loại nhà cung cấp.",
+      "inactive": "Không hoạt động",
+      "label": "Loại nhà cung cấp",
+      "temporary": "Tạm thời",
+      "title": "Loại thương nhân"
+    },
+    "messages": {
+      "createError": "Tạo thương nhân không thành công",
+      "createErrorDescription": "Vui lòng kiểm tra đầu vào của bạn và thử lại.",
+      "createSuccess": "Tài khoản thương nhân đã được tạo thành công.",
+      "validationFailed": "Xác thực không thành công"
+    },
+    "subtitle": "Tạo một tài khoản thương nhân mới, gán một kế hoạch đăng ký và cấu hình giới hạn ban đầu.",
+    "title": "Thêm thương nhân mới",
+    "validation": {
+      "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+      "fieldEmpty": "{field} không được để trống",
+      "fieldInvalid": "{field} không hợp lệ",
+      "fieldRequired": "{field} là bắt buộc",
+      "fields": {
+        "address": "Địa chỉ",
+        "business_name": "Tên doanh nghiệp",
+        "business_type": "Loại hình doanh nghiệp",
+        "city": "Thành phố",
+        "country": "Quốc gia",
+        "email": "Địa chỉ email",
+        "merchant_type": "Loại thương nhân",
+        "name": "Tên thương nhân",
+        "password": "Mật khẩu",
+        "role": "Vai trò",
+        "tax_id": "Mã số thuế"
+      },
+      "passwordTooShort": "Mật khẩu phải có ít nhất 8 ký tự"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "Hoạt động",
+        "birthday": "🎂",
+        "description": "Khách hàng mới đăng ký gần đây",
+        "female": "👩 nữ",
+        "inactive": "Không hoạt động",
+        "joined": "📅 Đã tham gia",
+        "male": "👨 nam",
+        "noData": "Không tìm thấy khách hàng nào.",
+        "other": "👤",
+        "pageOf": "Trang {current} của {total}",
+        "reward": "Phần thưởng",
+        "title": "Khách hàng ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "Số tiền",
+          "credits": "Tín dụng",
+          "description": "Mô tả"
+        },
+        "description": "Sử dụng tín dụng lịch sử",
+        "noData": "Không tìm thấy bản ghi nào.",
+        "pageOf": "Trang {current} của {total}",
+        "title": "Sổ cái giao dịch"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "Đang hoạt động",
+        "consumed": "{percent}% đã tiêu thụ",
+        "description": "Chiến dịch đang hoạt động",
+        "halal": "Halal",
+        "id": "ID",
+        "inactive": "Không hoạt động",
+        "issued": "đã phát hành",
+        "left": "{count} còn lại",
+        "luckyDraw": "✓ Rút thăm trúng thưởng",
+        "noData": "Không có lô nào đang hoạt động.",
+        "pageOf": "Trang {current} của {total}",
+        "public": "Công khai",
+        "title": "Lô phiếu giảm giá ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "Tài khoản",
+        "ads": "Quảng cáo",
+        "annualFee": "Phí hàng năm",
+        "bi": "BI",
+        "coupons": "Mã giảm giá",
+        "currency": "Tiền tệ",
+        "description": "Phân bổ tín dụng trực tiếp",
+        "disabled": "Đã tắt",
+        "enabled": "Đã bật",
+        "expires": "Hết hạn",
+        "inactive": "Không hoạt động",
+        "never": "Không bao giờ",
+        "paid": "Đã thanh toán",
+        "paidAds": "Quảng cáo đã trả tiền",
+        "plan": "Kế hoạch",
+        "title": "Chi tiết ví",
+        "ui": "Giao diện người dùng",
+        "unpaid": "Chưa thanh toán",
+        "verified": "Đã xác minh",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "Không tìm thấy thương nhân hoặc không thể tải.",
+      "title": "Lỗi"
+    },
+    "header": {
+      "active": "Đang hoạt động",
+      "editConfiguration": "Chỉnh sửa cấu hình",
+      "inactive": "Không hoạt động",
+      "memberSince": "Thành viên từ",
+      "subscription": "Đăng ký {type}"
+    },
+    "loadError": "Không thể tải thông tin người bán",
+    "loading": "Đang tải chi tiết người bán...",
+    "overview": {
+      "adCredits": {
+        "description": "Để khuyến mãi",
+        "title": "Tín dụng quảng cáo"
+      },
+      "couponCredits": {
+        "description": "Cho các lô",
+        "title": "Tín dụng phiếu giảm giá"
+      },
+      "recentTransactions": {
+        "credits": "tín dụng",
+        "noData": "Không tìm thấy giao dịch nào.",
+        "pageOf": "Trang {current} của {total}",
+        "title": "Giao dịch Gần đây"
+      },
+      "totalCredits": {
+        "title": "Tổng số tín dụng",
+        "usedLabel": "{used} đã sử dụng tổng cộng"
+      },
+      "usageSummary": {
+        "couponBalance": "Số dư phiếu giảm giá",
+        "creditUsage": "Sử dụng tín dụng",
+        "title": "Tóm tắt sử dụng",
+        "whatsappBalance": "Số dư WhatsApp",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "Giao diện WhatsApp"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "Tín dụng WhatsApp",
+        "uiLabel": "Giao diện người dùng"
+      }
+    },
+    "tabs": {
+      "activity": "Hoạt động",
+      "billing": "Giới hạn",
+      "overview": "Tổng quan"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "Cập nhật thông tin quản trị viên thương nhân.",
+      "newPassword": "Mật khẩu mới (để trống để giữ nguyên mật khẩu hiện tại)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "Cập nhật thương nhân",
+      "updating": "Đang cập nhật..."
+    },
+    "loadingError": "Không thể tải dữ liệu thương nhân",
+    "messages": {
+      "updateError": "Cập nhật thương nhân không thành công",
+      "updateSuccess": "Thương nhân đã được cập nhật thành công."
+    },
+    "subtitle": "Cập nhật chi tiết và cấu hình tài khoản người bán.",
+    "title": "Chỉnh sửa thương nhân",
+    "validation": {
+      "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+      "fieldEmpty": "{field} không được để trống",
+      "fieldInvalid": "{field} không hợp lệ",
+      "fieldRequired": "{field} là bắt buộc",
+      "fields": {
+        "address": "Địa chỉ",
+        "business_name": "Tên doanh nghiệp",
+        "business_type": "Loại hình doanh nghiệp",
+        "city": "Thành phố",
+        "country": "Quốc gia",
+        "email": "Địa chỉ email",
+        "merchant_type": "Loại thương nhân",
+        "name": "Tên thương nhân",
+        "password": "Mật khẩu",
+        "role": "Vai trò",
+        "tax_id": "Mã số thuế"
+      },
+      "passwordTooShort": "Mật khẩu phải có ít nhất 8 ký tự"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "Chi tiết",
+      "edit": "Chỉnh sửa",
+      "merchantOptions": "Tùy chọn Người bán"
+    },
+    "addMerchant": "Thêm thương nhân",
+    "columnNames": {
+      "actions": "Hành động",
+      "businessType": "Loại hình doanh nghiệp",
+      "location": "Vị trí",
+      "name": "Tên",
+      "qr": "QR",
+      "status": "Trạng thái"
+    },
+    "columns": {
+      "actions": "Hành động",
+      "businessAccount": "Doanh nghiệp & Tài khoản",
+      "categoryPlan": "Danh mục & Kế hoạch",
+      "location": "Vị trí",
+      "noQr": "KHÔNG QR",
+      "qrScan": "Quét QR",
+      "status": "Trạng thái"
+    },
+    "delete": {
+      "cancel": "Hủy",
+      "confirm": "Xóa",
+      "deleting": "Đang xóa...",
+      "description": "Bạn có chắc chắn muốn xóa ",
+      "descriptionEnd": "? Hành động này không thể hoàn tác.",
+      "errorMessage": "Xóa nhà cung cấp không thành công",
+      "successMessage": "Người bán \"{merchantName}\" đã xóa thành công.",
+      "title": "Xóa Nhà cung cấp",
+      "trigger": "Xóa thương nhân"
+    },
+    "qrDialog": {
+      "download": "Tải xuống",
+      "scanFor": "Quét cho {name}"
+    },
+    "searchPlaceholder": "Tìm kiếm thương nhân...",
+    "statusToggle": {
+      "activatedSuccess": "Người bán đã được kích hoạt thành công",
+      "active": "Đang hoạt động",
+      "deactivatedSuccess": "Thương nhân đã được vô hiệu hóa thành công",
+      "inactive": "Không hoạt động",
+      "updateError": "Cập nhật trạng thái thương nhân không thành công"
+    },
+    "subtitle": "Quản lý và theo dõi các thương nhân của bạn",
+    "title": "Quản lý thương nhân"
+  }
+}

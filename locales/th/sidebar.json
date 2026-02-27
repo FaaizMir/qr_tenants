@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "แพ็คเกจโฆษณา",
     "approvals": "การอนุมัติ",
     "couponsync": "การซิงค์คูปอง",
     "dashboard": "แดชบอร์ด",

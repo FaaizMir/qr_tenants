@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "@/lib/toast";
 import { Check, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -23,6 +24,7 @@ export function ApprovalStatusToggle({
   merchantName = "this merchant",
   onStatusChange,
 }) {
+  const t = useTranslations("agentApprovals");
   // status: true/'approved' (Approved), false/'rejected' (Rejected), 'pending' (Pending)
   const [status, setStatus] = useState(initialStatus);
   const [localAction, setLocalAction] = useState(null); // 'approved' | 'rejected'
@@ -57,16 +59,16 @@ export function ApprovalStatusToggle({
         console.error("Error fetching rejection reasons:", error);
         // Fallback to default reasons if API fails
         setRejectionReasons([
-          { value: "gambling_content", label: "Gambling content" },
-          { value: "adult_sexual_content", label: "Adult / sexual content" },
-          { value: "illegal_services", label: "Illegal services" },
-          { value: "misleading_content", label: "Misleading content" },
-          { value: "other", label: "Other (manual reason input)" },
+          { value: "gambling_content", label: t("rejectionReasons.gamblingContent") },
+          { value: "adult_sexual_content", label: t("rejectionReasons.adultContent") },
+          { value: "illegal_services", label: t("rejectionReasons.illegalServices") },
+          { value: "misleading_content", label: t("rejectionReasons.misleadingContent") },
+          { value: "other", label: t("rejectionReasons.other") },
         ]);
       }
     };
     fetchRejectionReasons();
-  }, []);
+  }, [t]);
 
   const handleActionClick = (action) => {
     setPendingAction(action);
@@ -84,11 +86,11 @@ export function ApprovalStatusToggle({
     // Validate rejection reason if rejecting
     if (!isApprove) {
       if (!selectedReason) {
-        toast.error("Please select a rejection reason");
+        toast.error(t("validation.selectReason"));
         return;
       }
       if (selectedReason === "other" && !customReason.trim()) {
-        toast.error("Please provide a custom rejection reason");
+        toast.error(t("validation.provideCustomReason"));
         return;
       }
     }
@@ -115,7 +117,7 @@ export function ApprovalStatusToggle({
       setStatus(isApprove);
       setLocalAction(isApprove ? "approved" : "rejected");
       toast.success(
-        `Request ${isApprove ? "approved" : "rejected"} successfully`,
+        isApprove ? t("messages.approveSuccess") : t("messages.rejectSuccess")
       );
       setIsDialogOpen(false);
     } catch (error) {
@@ -126,7 +128,10 @@ export function ApprovalStatusToggle({
         setErrorMessage(error.message);
         // Keep dialog open to show the error
       } else {
-        toast.error(error.message || `Failed to ${pendingAction} request`);
+        toast.error(
+          error.message || 
+          (isApprove ? t("messages.approveError") : t("messages.rejectError"))
+        );
         setIsDialogOpen(false);
       }
     } finally {
@@ -144,7 +149,7 @@ export function ApprovalStatusToggle({
       <div className="flex items-center justify-start">
         <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-full text-[11px] font-bold shadow-sm animate-in fade-in zoom-in duration-300 w-fit">
           <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Approved
+          {t("status.approved")}
         </div>
       </div>
     );
@@ -155,7 +160,7 @@ export function ApprovalStatusToggle({
       <div className="flex items-center justify-start">
         <div className="flex items-center gap-1.5 px-3 py-1 bg-rose-50 border border-rose-100 text-rose-700 rounded-full text-[11px] font-bold shadow-sm animate-in fade-in zoom-in duration-300 w-fit">
           <div className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-          Rejected
+          {t("status.rejected")}
         </div>
       </div>
     );
@@ -170,7 +175,7 @@ export function ApprovalStatusToggle({
           onClick={() => handleActionClick("approve")}
         >
           <Check className="h-3.5 w-3.5 mr-1 stroke-[3px]" />
-          Approve
+          {t("actions.approve")}
         </Button>
         <Button
           size="sm"
@@ -178,7 +183,7 @@ export function ApprovalStatusToggle({
           onClick={() => handleActionClick("reject")}
         >
           <X className="h-3.5 w-3.5 mr-1 stroke-[3px]" />
-          Reject
+          {t("actions.reject")}
         </Button>
       </div>
 
@@ -191,7 +196,7 @@ export function ApprovalStatusToggle({
 
             <div>
               <DialogTitle className="text-xl font-bold">
-                {pendingAction === "approve" ? "Approve" : "Reject"} Ad Request
+                {pendingAction === "approve" ? t("dialog.approveTitle") : t("dialog.rejectTitle")}
               </DialogTitle>
               <DialogDescription className="text-slate-500 mt-2">
                 {errorMessage ? (
@@ -201,21 +206,9 @@ export function ApprovalStatusToggle({
                 ) : (
                   <>
                     {pendingAction === "reject" ? (
-                      <span>
-                        Select a reason for rejecting the request from{" "}
-                        <span className="font-semibold text-slate-900">
-                          {merchantName}
-                        </span>
-                        .
-                      </span>
+                      t("dialog.rejectDescription", { merchantName })
                     ) : (
-                      <>
-                        Are you sure you want to approve the request for{" "}
-                        <span className="font-semibold text-slate-900">
-                          {merchantName}
-                        </span>
-                        ? This action cannot be undone.
-                      </>
+                      t("dialog.approveDescription", { merchantName })
                     )}
                   </>
                 )}
@@ -244,13 +237,13 @@ export function ApprovalStatusToggle({
               {selectedReason === "other" && (
                 <div className="space-y-2 pl-6">
                   <Label htmlFor="custom-reason" className="text-sm font-medium">
-                    Please specify the reason
+                    {t("rejectionReasons.title")}
                   </Label>
                   <Textarea
                     id="custom-reason"
                     value={customReason}
                     onChange={(e) => setCustomReason(e.target.value)}
-                    placeholder="Enter the reason for rejection..."
+                    placeholder={t("rejectionReasons.placeholder")}
                     className="min-h-20 resize-none"
                   />
                 </div>
@@ -268,7 +261,7 @@ export function ApprovalStatusToggle({
               }}
               disabled={isLoading}
             >
-              {errorMessage ? "Close" : "Cancel"}
+              {errorMessage ? t("dialog.close") : t("dialog.cancel")}
             </Button>
             {!errorMessage && (
               <Button
@@ -282,10 +275,10 @@ export function ApprovalStatusToggle({
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Processing...
+                    {t("dialog.processing")}
                   </div>
                 ) : (
-                  `Yes, ${pendingAction === "approve" ? "Approve" : "Reject"}`
+                  pendingAction === "approve" ? t("dialog.confirmApprove") : t("dialog.confirmReject")
                 )}
               </Button>
             )}

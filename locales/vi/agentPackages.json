@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "Tạo gói",
+    "dashboard": "Bảng điều khiển đại lý",
+    "edit": "Chỉnh sửa gói",
+    "packages": "Gói quảng cáo"
+  },
+  "deleteDialog": {
+    "cancel": "Hủy bỏ xóa",
+    "confirm": "Đã xác nhận, xóa ngay",
+    "description": "Bạn sắp xóa vĩnh viễn ",
+    "descriptionEnd": ". Hành động này là cuối cùng và không thể đảo ngược.",
+    "title": "Cảnh báo cực kỳ"
+  },
+  "form": {
+    "actions": {
+      "cancel": "Hủy",
+      "delete": "Xóa gói",
+      "save": "Xuất bản gói",
+      "saving": "Đang lưu...",
+      "update": "Cập nhật gói"
+    },
+    "backButton": "Quay lại danh sách",
+    "createDescription": "Định nghĩa giá cả và tín dụng cho các chiến dịch quảng cáo trả tiền.",
+    "createTitle": "Tạo gói quảng cáo trả phí",
+    "deleteConfirm": {
+      "cancel": "Hủy",
+      "confirm": "Có, xóa gói",
+      "description": "Điều này sẽ xóa vĩnh viễn ",
+      "descriptionEnd": ". Hành động này không thể hoàn tác.",
+      "title": "Bạn có chắc chắn không?"
+    },
+    "editDescription": "Định nghĩa giá cả và tín dụng cho các chiến dịch quảng cáo trả phí.",
+    "editTitle": "Chỉnh sửa gói quảng cáo trả phí",
+    "fields": {
+      "currency": {
+        "label": "Tiền tệ",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "USD ($)"
+        }
+      },
+      "description": {
+        "label": "Mô tả",
+        "placeholder": "Tóm tắt ngắn gọn về những gì gói này cung cấp..."
+      },
+      "displayPriority": {
+        "label": "Ưu tiên hiển thị",
+        "placeholder": "Vị trí trong danh sách (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "Kế hoạch thương nhân",
+        "options": {
+          "annual": "Hàng năm / Cao cấp",
+          "temporary": "Tạm thời / Cơ bản"
+        }
+      },
+      "packageName": {
+        "label": "Tên gói",
+        "placeholder": "ví dụ: Gói quảng cáo cao cấp"
+      },
+      "packageStatus": {
+        "label": "Trạng thái gói",
+        "options": {
+          "active": "Hoạt động & Hiển thị",
+          "inactive": "Không hoạt động / Ẩn"
+        }
+      },
+      "price": {
+        "label": "Giá",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "TỰ ĐỘNG",
+        "label": "Giá mỗi tín dụng"
+      },
+      "totalCredits": {
+        "label": "Tổng tín dụng"
+      }
+    },
+    "infoBanner": {
+      "description": "Loại gói này dành riêng cho các chiến dịch quảng cáo trả tiền",
+      "title": "Gói tín dụng quảng cáo trả phí"
+    },
+    "preview": {
+      "advertisingCredits": "Tín dụng quảng cáo",
+      "defaultDescription": "Nâng cao khả năng quảng cáo",
+      "getStarted": "Bắt đầu",
+      "hiddenDraft": "ẨN / NHÁP",
+      "packageTitle": "Tiêu đề gói",
+      "paidAds": "Quảng cáo đã trả tiền",
+      "perCredit": "mỗi tín dụng",
+      "title": "Xem trước trực tiếp"
+    },
+    "sections": {
+      "classification": "Phân loại",
+      "credits": "Tín dụng & Phân bổ",
+      "identity": "Danh tính & Giá cả"
+    },
+    "validation": {
+      "creditsMin": "Số tín dụng phải ít nhất là 1",
+      "creditsRequired": "Cần có tín dụng",
+      "descriptionRequired": "Mô tả là bắt buộc",
+      "nameRequired": "Tên gói là bắt buộc",
+      "priceMin": "Giá phải ít nhất là 1",
+      "priceRequired": "Giá là bắt buộc",
+      "priorityRequired": "Ưu tiên hiển thị là bắt buộc"
+    }
+  },
+  "messages": {
+    "createError": "Tạo gói không thành công",
+    "createSuccess": "Gói đã được tạo thành công",
+    "deleteError": "Xóa gói không thành công",
+    "deleteSuccess": "Gói đã được xóa thành công",
+    "fetchError": "Không thể lấy gói",
+    "loadError": "Không thể tải chi tiết gói",
+    "updateError": "Cập nhật gói không thành công",
+    "updateSuccess": "Gói đã được cập nhật thành công",
+    "wrongTypeError": "Bạn chỉ có thể chỉnh sửa các gói quảng cáo trả phí"
+  },
+  "subtitle": "Quản lý các gói tín dụng quảng cáo trả phí của bạn",
+  "table": {
+    "actions": {
+      "delete": "Xóa gói",
+      "edit": "Chỉnh sửa gói",
+      "label": "Hành động gói"
+    },
+    "columns": {
+      "credits": "Tín dụng",
+      "noDescription": "Không có mô tả",
+      "packageInfo": "Thông tin gói",
+      "perCredit": "mỗi tín dụng",
+      "plan": "Kế hoạch",
+      "pricing": "Giá cả",
+      "rank": "Xếp hạng",
+      "status": "Trạng thái"
+    },
+    "createButton": "Tạo gói quảng cáo trả phí",
+    "searchPlaceholder": "Tìm kiếm theo tên gói...",
+    "status": {
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động"
+    }
+  },
+  "title": "Gói quảng cáo trả phí"
+}

@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "Statistik penerbitan dan penebusan",
+      "issued": "Diterbitkan",
+      "merchantsLabel": "pedagang",
+      "noData": "Tidak ada data kupon yang tersedia",
+      "page": "Halaman {current} dari {total}",
+      "rank": "Peringkat",
+      "redeemed": "ditukarkan",
+      "redeemedCount": "Ditukarkan",
+      "redeemedLabel": "Ditukarkan",
+      "title": "Kinerja Kupon"
+    },
+    "pagination": {
+      "pageOf": "Halaman {{current}} dari {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "Rata/msg",
+      "description": "Jumlah pesan dan biaya",
+      "estimatedCost": "Estimasi biaya",
+      "merchantsLabel": "merchant",
+      "messagesSent": "pesan terkirim",
+      "noData": "Tidak ada data penggunaan WhatsApp",
+      "page": "Halaman {current} dari {total}",
+      "rank": "Peringkat",
+      "title": "Penggunaan WhatsApp"
+    }
+  },
+  "common": {
+    "error": "Gagal mengambil data",
+    "loading": "Memuat...",
+    "noData": "Tidak ada data yang tersedia"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "tahunan",
+      "temporary": "sementara"
+    },
+    "pagination": {
+      "pageOf": "Halaman {{current}} dari {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "Pendaftaran terbaru",
+      "noData": "Tidak ada pedagang yang ditemukan",
+      "page": "Halaman {current} dari {total}",
+      "rankLabel": "#",
+      "title": "Pedagang yang Baru Ditambahkan",
+      "totalLabel": "total"
+    },
+    "topPerformers": {
+      "description": "Diurutkan berdasarkan pendapatan",
+      "issued": "Diterbitkan",
+      "noData": "Tidak ada data kinerja yang tersedia",
+      "page": "Halaman {current} dari {total}",
+      "rate": "Tarif",
+      "redeemed": "Ditukarkan",
+      "stats": {
+        "issued": "Diterbitkan",
+        "rate": "Tingkat",
+        "redeemed": "Ditukarkan"
+      },
+      "title": "Performa Terbaik",
+      "totalLabel": "total"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "Kupon Diterbitkan",
+      "couponsRedeemed": "Kupon Ditukarkan",
+      "totalCustomers": "Total Pelanggan",
+      "totalFeedback": "Total Umpan Balik"
+    },
+    "dateFilter": {
+      "customRange": "Rentang Kustom",
+      "last30Days": "30 Hari Terakhir",
+      "last7Days": "7 Hari Terakhir",
+      "lastMonth": "Bulan Lalu",
+      "pickDate": "Pilih tanggal",
+      "selectRange": "Pilih rentang",
+      "thisMonth": "Bulan Ini",
+      "today": "Hari Ini",
+      "yesterday": "Kemarin"
+    },
+    "engagement": {
+      "activityPulse": "Denyut Aktivitas Platform",
+      "description": "Metrik interaksi di semua toko",
+      "redemptionRate": "Tingkat Penebusan",
+      "systemLoad": "Beban Sistem Normal",
+      "title": "Keterlibatan Global",
+      "totalFeedback": "Total Umpan Balik"
+    },
+    "growth": {
+      "customersCount": "+{count} Pelanggan",
+      "description": "Data ekspansi platform terbaru",
+      "newCustomers": "Pendaftaran Pelanggan Baru",
+      "newMerchants": "+{count} Pedagang",
+      "newStores": "Toko Baru Periode Ini",
+      "title": "Sorotan Pertumbuhan"
+    },
+    "kpiCards": {
+      "activeMerchants": "Pedagang Aktif",
+      "annualMerchants": "Pedagang Tahunan",
+      "inactiveMerchants": "Pedagang Tidak Aktif",
+      "temporaryMerchants": "Merchant Sementara",
+      "totalMerchants": "Total Merchant",
+      "totalRevenue": "Total Pendapatan"
+    },
+    "kpis": {
+      "activeAgents": "Agen Aktif",
+      "activeMerchants": "Pedagang Aktif",
+      "agentSubscriptions": "Langganan Agen",
+      "annualMerchants": "Pedagang Tahunan",
+      "biMessagesSent": "Pesan BI Terkirim",
+      "couponsIssued": "Kupon Diterbitkan",
+      "couponsRedeemed": "Kupon Ditukarkan",
+      "feedbackReceived": "Umpan Balik Diterima",
+      "inactiveMerchants": "Pedagang Tidak Aktif",
+      "merchantSubscriptions": "Langganan Merchant",
+      "packageCommissions": "Komisi Paket",
+      "temporaryMerchants": "Pedagang Sementara",
+      "totalAgents": "Total Agen",
+      "totalCustomers": "Total Pelanggan",
+      "totalFeedback": "Total Umpan Balik",
+      "totalMerchants": "Total Pedagang",
+      "totalMessages": "Total Pesan",
+      "totalPlatformRevenue": "Total Pendapatan Platform",
+      "totalRevenue": "Total Pendapatan",
+      "uiMessagesSent": "Pesan UI Terkirim",
+      "whatsappCost": "Biaya WhatsApp"
+    },
+    "merchantDistribution": {
+      "annual": "Tahunan",
+      "description": "Rasio Langganan Tahunan vs Sementara",
+      "noData": "Tidak ada data pedagang yang tersedia",
+      "temporary": "Sementara",
+      "title": "Distribusi Merchant",
+      "total": "Total"
+    },
+    "merchantTierDistribution": {
+      "annual": "Tahunan",
+      "description": "Rasio Langganan Tahunan vs Sementara",
+      "noData": "Tidak ada data pedagang yang tersedia",
+      "temp": "Sementara",
+      "title": "Distribusi Tingkat Merchant",
+      "totalStores": "Total Toko"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "Langganan Tahunan",
+      "creditPurchase": "Pembelian Kredit",
+      "description": "Distribusi Sumber Pendapatan",
+      "title": "Rincian Pendapatan",
+      "whatsappCharges": "Biaya WhatsApp"
+    },
+    "roleTitle": "Dasbor {role}",
+    "sections": {
+      "financialPerformance": "Kinerja Keuangan",
+      "generalOverview": "Ikhtisar Umum",
+      "globalEngagement": "Keterlibatan Global",
+      "growthHighlights": "Sorotan Pertumbuhan",
+      "revenueStreams": "Aliran Pendapatan"
+    },
+    "title": "Analitik Sistem",
+    "topPerformingMerchants": {
+      "description": "Toko dengan volume dan keterlibatan tertinggi ({count} total)",
+      "issued": "Diterbitkan",
+      "noData": "Tidak ada data kinerja untuk periode ini",
+      "page": "Halaman {current} dari {total}",
+      "redeemed": "Ditukarkan",
+      "showing": "Menampilkan {from} hingga {to} dari {total}",
+      "successRate": "Tingkat Keberhasilan",
+      "title": "Pedagang Berkinerja Terbaik"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "Pesan BI Terkirim",
+      "totalMessages": "Total Pesan",
+      "uiMessagesSent": "Pesan UI Terkirim",
+      "whatsappCost": "Biaya WhatsApp"
+    }
+  },
+  "page": {
+    "breadcrumb": "Dasbor",
+    "description": "Ikhtisar kinerja dan metrik agen Anda",
+    "title": "Dasbor Agen"
+  },
+  "tabs": {
+    "analytics": "Analitik",
+    "merchants": "Kinerja",
+    "overview": "Ikhtisar"
+  }
+}

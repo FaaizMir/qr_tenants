@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "Activate Subscription",
+    "topUpWallet": "Top Up Wallet"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "Your subscription has expired. Renew your subscription to continue accessing all platform features.",
+      "title": "Subscription Expired"
+    },
+    "subscriptionRequired": {
+      "description": "Your account is not yet activated. Click \"Activate Subscription\" to pay your annual subscription fee and start using the platform. You can also add prepaid wallet balance during activation.",
+      "title": "Subscription Activation Required"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "Available prepaid credits",
+      "title": "Current Balance"
+    },
+    "securityNote": {
+      "description": "Your wallet is protected with industry-standard encryption. All transactions are audited in real-time to ensure the safety of your funds.",
+      "title": "Financial Security"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "ACTIVE ACCOUNT",
+      "inactive": "INACTIVE",
+      "noDate": "No Date",
+      "noType": "N/A",
+      "package": "{type} Package",
+      "planType": "Plan Type",
+      "renewalDate": "Renewal Date",
+      "status": "Status",
+      "title": "Subscription & Account Status"
+    },
+    "totalEarnings": {
+      "description": "Lifetime profits",
+      "title": "Total Earnings"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "Enter the amount you want to add to your prepaid wallet balance. This balance will be used for platform operations.",
+      "title": "Top Up Your Wallet:"
+    },
+    "amountCard": {
+      "hint": "Enter the exact amount you want to add to your wallet. Platform costs will be automatically deducted from this balance.",
+      "instantCredit": {
+        "description": "Your wallet will be credited immediately after successful payment.",
+        "title": "Instant Credit:"
+      },
+      "label": "Amount to Add",
+      "placeholder": "0.00",
+      "quickSelect": "Quick Select:",
+      "subtitle": "Minimum {currency} 100 required",
+      "title": "Enter Top-Up Amount"
+    },
+    "infoCard": {
+      "merchantPayments": "100% Merchant Payments: All merchant payments go directly to your Stripe account",
+      "platformCosts": "Platform Costs: Automatically deducted from this prepaid wallet balance",
+      "title": "Prepaid Wallet Model",
+      "yourProfit": "Your Profit: Merchant Payment - Platform Cost = Your Earnings"
+    },
+    "subtitle": "Add prepaid balance to your wallet for platform operations",
+    "summary": {
+      "payButton": "Pay {currency} {amount} with Stripe",
+      "processing": "Redirecting to Stripe...",
+      "securePayment": {
+        "description": "SSL Encrypted Stripe Gateway",
+        "title": "Secure Payment"
+      },
+      "title": "Payment Summary",
+      "totalPayment": "Total Payment:",
+      "walletTopup": "Wallet Top-Up:"
+    },
+    "title": "Top Up Your Wallet",
+    "validation": {
+      "createError": "Failed to start payment process",
+      "invalidAmount": "Please enter a valid amount",
+      "minimumAmount": "Minimum top-up amount is 100",
+      "paymentError": "Unable to start payment. Please try again."
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "frequency": "Frequency"
+    },
+    "searchPlaceholder": "Search deductions...",
+    "title": "Auto Deductions Log"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "To start using the platform, you need to pay your annual subscription fee. You can also add a prepaid balance to your wallet in the same transaction.",
+      "title": "Welcome!"
+    },
+    "features": {
+      "analytics": "Analytics & reporting",
+      "chatSupport": "Chat support system",
+      "couponManagement": "Coupon management system",
+      "platformAccess": "12 months platform access",
+      "qrGeneration": "QR code generation",
+      "reviewCollection": "Review collection tools",
+      "title": "What's Included with Your Subscription",
+      "unlimitedMerchants": "Unlimited merchant accounts",
+      "whatsappIntegration": "WhatsApp messaging integration"
+    },
+    "loading": "Loading subscription information...",
+    "subscriptionFee": {
+      "access": "Annual Platform Access",
+      "description": "Full access to all features for 12 months",
+      "required": "Required",
+      "subtitle": "Required to activate your account",
+      "title": "Annual Subscription Fee"
+    },
+    "subtitle": "Pay your annual subscription and optionally add prepaid wallet balance",
+    "summary": {
+      "payButton": "Pay {currency} {amount} with Stripe",
+      "processing": "Redirecting to Stripe...",
+      "securePayment": {
+        "description": "SSL Encrypted Stripe Gateway",
+        "title": "Secure Payment"
+      },
+      "subscriptionFee": "Subscription Fee:",
+      "title": "Payment Summary",
+      "totalPayment": "Total Payment:",
+      "walletBalance": "Wallet Balance:"
+    },
+    "title": "Activate Your Account",
+    "validation": {
+      "createError": "Failed to start payment process",
+      "loadError": "Failed to load subscription information",
+      "minimumAmount": "Minimum balance amount is 100",
+      "negativeAmount": "Balance amount cannot be negative",
+      "paymentError": "Unable to start payment. Please try again."
+    },
+    "walletBalance": {
+      "hint": "Minimum {currency} 100 if adding balance. Platform costs will be deducted from this wallet.",
+      "label": "Wallet Balance Amount",
+      "modelInfo": {
+        "description": "Merchant payments go 100% to your Stripe account. Platform costs are automatically deducted from this prepaid wallet balance.",
+        "title": "Prepaid Wallet Model:"
+      },
+      "optional": "Optional",
+      "placeholder": "0.00",
+      "subtitle": "Optional prepaid balance for platform operations",
+      "title": "Add Wallet Balance"
+    }
+  },
+  "messages": {
+    "creditError": "Failed to credit wallet",
+    "subscriptionSuccess": "Subscription activated successfully!",
+    "topupError": "Payment successful but failed to credit wallet. Please contact support.",
+    "topupSuccess": "Wallet topped up successfully!",
+    "topupSuccessDescription": "{currency} {amount} added to your balance."
+  },
+  "subtitle": "Manage your wallet balance and transactions",
+  "tabs": {
+    "balance": "Balance",
+    "earnings": "Earnings",
+    "transactions": "Transactions"
+  },
+  "title": "Agent Wallet",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} Bonus",
+    "dialogSubtitle": "Select a prepaid wallet package that suits your needs",
+    "dialogTitle": "Choose Top-Up Amount",
+    "get": "Get {currency} {amount}",
+    "mostPopular": "⭐ Most Popular",
+    "orderSummary": {
+      "baseAmount": "Base Amount:",
+      "bonus": "Bonus:",
+      "package": "Package:",
+      "title": "Order Summary",
+      "totalCredit": "Total Credit:"
+    },
+    "packages": {
+      "business": {
+        "description": "Ideal for growing agencies",
+        "feature1": "Covers ~8-10 annual merchants",
+        "feature2": "Or ~20,000 WhatsApp UI messages",
+        "feature3": "Or ~5,000 WhatsApp BI messages",
+        "feature4": "✨ Bonus RM150 included",
+        "name": "Business Top-Up"
+      },
+      "enterprise": {
+        "description": "For large-scale operations",
+        "feature1": "Covers ~17-20 annual merchants",
+        "feature2": "Or ~40,000 WhatsApp UI messages",
+        "feature3": "Or ~10,000 WhatsApp BI messages",
+        "feature4": "✨ Bonus RM500 included",
+        "name": "Enterprise Top-Up"
+      },
+      "premium": {
+        "description": "Maximum value for high-volume agencies",
+        "feature1": "Covers ~38-40 annual merchants",
+        "feature2": "Or ~80,000 WhatsApp UI messages",
+        "feature3": "Or ~20,000 WhatsApp BI messages",
+        "feature4": "✨ Bonus RM1,500 included",
+        "name": "Premium Top-Up"
+      },
+      "standard": {
+        "description": "Best for small to medium operations",
+        "feature1": "Covers ~3-4 annual merchants",
+        "feature2": "Or ~8000 WhatsApp UI messages",
+        "feature3": "Or ~2000 WhatsApp BI messages",
+        "feature4": "✨ Bonus RM50 included",
+        "name": "Standard Top-Up"
+      },
+      "starter": {
+        "description": "Perfect for getting started with a few merchants",
+        "feature1": "Covers ~1-2 annual merchants",
+        "feature2": "Or ~4000 WhatsApp UI messages",
+        "feature3": "Or ~1000 WhatsApp BI messages",
+        "name": "Starter Top-Up"
+      }
+    },
+    "paymentAmount": "Payment Amount",
+    "paymentDetails": {
+      "description": "Secure payment via Stripe. Your wallet will be credited immediately.",
+      "paymentAmount": "Payment Amount",
+      "title": "Payment Details"
+    },
+    "selectPackage": {
+      "description": "Choose a top-up amount from the options on the left.",
+      "title": "Select a Package"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "status": "Status",
+      "type": "Type"
+    },
+    "noData": "-",
+    "searchPlaceholder": "Search transactions...",
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending"
+    }
+  }
+}

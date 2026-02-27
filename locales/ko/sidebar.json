@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "광고 패키지",
     "approvals": "승인",
     "couponsync": "쿠폰 동기화",
     "dashboard": "대시보드",

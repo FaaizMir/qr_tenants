@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "대시보드",
+    "earnings": "수익"
+  },
+  "columns": {
+    "commissionEarned": "획득한 수수료",
+    "commissionRate": "수수료 비율",
+    "date": "날짜",
+    "merchant": "상인",
+    "noData": "—",
+    "source": "수수료",
+    "totalSales": "총 판매"
+  },
+  "commissionBreakdown": {
+    "description": "상인별 통합 수수료.",
+    "searchPlaceholder": "상인 또는 출처 검색...",
+    "title": "수수료 내역"
+  },
+  "errors": {
+    "fetchFailed": "수익을 가져오는 데 실패했습니다"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "활성 상인"
+    },
+    "earningsType": {
+      "title": "수익 유형",
+      "value": "선불"
+    },
+    "totalEarnings": {
+      "title": "총 수익",
+      "trend": "실시간 데이터"
+    }
+  },
+  "noData": "—"
+}

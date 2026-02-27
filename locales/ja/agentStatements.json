@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "エージェントダッシュボード",
+    "statements": "財務諸表"
+  },
+  "columns": {
+    "actions": "アクション",
+    "downloadPdf": "PDFをダウンロード",
+    "generatedAt": "生成日時",
+    "monthLabel": "{year}年{month}月",
+    "noDate": "—",
+    "period": "期間",
+    "status": "ステータス",
+    "totalSpend": "総支出"
+  },
+  "filters": {
+    "description": "年と月でステートメントをフィルタリング",
+    "month": {
+      "all": "今月",
+      "label": "月",
+      "placeholder": "今月"
+    },
+    "quickActions": {
+      "label": "クイックアクション",
+      "loading": "読み込み中...",
+      "refresh": "リストを更新"
+    },
+    "title": "ステートメントフィルター",
+    "year": {
+      "label": "年",
+      "placeholder": "年を選択"
+    }
+  },
+  "messages": {
+    "downloadError": "PDFのダウンロードに失敗しました。もう一度お試しください。",
+    "downloadSuccess": "ステートメントが正常にダウンロードされました！",
+    "fetchError": "ステートメントの読み込みに失敗しました。もう一度お試しください。"
+  },
+  "months": {
+    "april": "4月",
+    "august": "8月",
+    "december": "12月",
+    "february": "2月",
+    "january": "1月",
+    "july": "7月",
+    "june": "6月",
+    "march": "3月",
+    "may": "5月",
+    "november": "11月",
+    "october": "10月",
+    "september": "9月"
+  },
+  "status": {
+    "failed": "失敗",
+    "generated": "生成済み",
+    "pending": "保留中"
+  },
+  "subtitle": "収益、手数料、パッケージ収入、ウォレット元帳を含む月次自動生成PDFレポート。",
+  "table": {
+    "description": "{count} 件のステートメントが見つかりました",
+    "description_plural": "{count} 件のステートメントが見つかりました",
+    "loading": "ステートメントを読み込んでいます...",
+    "noData": {
+      "description": "選択した期間に利用可能なステートメントはありません。新しいステートメントを生成して開始してください。",
+      "title": "ステートメントが見つかりません"
+    },
+    "title": "ステートメント履歴"
+  },
+  "title": "エージェント財務諸表"
+}

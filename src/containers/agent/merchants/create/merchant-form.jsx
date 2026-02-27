@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -42,6 +43,10 @@ export function MerchantForm({
   isEdit = false,
   merchantId = null,
 }) {
+  const t = useTranslations("agentMerchants.create");
+  const tEdit = useTranslations("agentMerchants.edit");
+  const tValidation = useTranslations(isEdit ? "agentMerchants.edit.validation" : "agentMerchants.create.validation");
+  const tCommon = useTranslations("agentMerchants.common");
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
@@ -171,11 +176,11 @@ export function MerchantForm({
       if (isEdit && merchantId) {
         console.debug("Updating merchant payload:", payload);
         await updateMerchant(merchantId, payload);
-        toast.success("Merchant updated successfully.");
+        toast.success(tEdit("messages.updateSuccess"));
       } else {
         console.debug("Creating merchant payload:", payload);
         await createMerchant(payload);
-        toast.success("Merchant account created successfully.");
+        toast.success(t("messages.createSuccess"));
       }
 
       router.push("/agent/merchants");
@@ -192,11 +197,32 @@ export function MerchantForm({
       if (errorData?.errors && typeof errorData.errors === "object") {
         const errorMessages = Object.entries(errorData.errors).map(
           ([field, messages]) => {
-            const fieldName = field
-              .replace(/_/g, " ")
-              .replace(/\b\w/g, (c) => c.toUpperCase());
+            // Try to get translated field name, fallback to formatted field name
+            const fieldName = tValidation.has(`fields.${field}`) 
+              ? tValidation(`fields.${field}`)
+              : field.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+            
             const errorList = Array.isArray(messages) ? messages : [messages];
-            return `${fieldName}: ${errorList.join(", ")}`;
+            
+            // Translate common error patterns
+            const translatedErrors = errorList.map(msg => {
+              const msgLower = String(msg).toLowerCase();
+              
+              if (msgLower.includes("should not be empty") || msgLower.includes("is required")) {
+                return tValidation("fieldEmpty", { field: fieldName });
+              } else if (msgLower.includes("invalid") || msgLower.includes("must be")) {
+                return tValidation("fieldInvalid", { field: fieldName });
+              } else if (msgLower.includes("email")) {
+                return tValidation("emailInvalid");
+              } else if (msgLower.includes("password") && msgLower.includes("characters")) {
+                return tValidation("passwordTooShort");
+              }
+              
+              // Return original message if no pattern matches
+              return `${fieldName}: ${msg}`;
+            });
+            
+            return translatedErrors.join(", ");
           },
         );
 
@@ -211,7 +237,7 @@ export function MerchantForm({
       // Handle error array
       else if (Array.isArray(errorData?.errors)) {
         const firstError = errorData.errors[0];
-        toast.error(firstError?.message || firstError || "Validation failed", {
+        toast.error(firstError?.message || firstError || t("messages.validationFailed"), {
           description:
             errorData.errors
               .slice(1, 2)
@@ -225,8 +251,8 @@ export function MerchantForm({
       }
       // Fallback error
       else {
-        toast.error(`Failed to ${isEdit ? "update" : "create"} merchant`, {
-          description: "Please check your input and try again.",
+        toast.error(isEdit ? tEdit("messages.updateError") : t("messages.createError"), {
+          description: t("messages.createErrorDescription"),
         });
       }
     } finally {
@@ -262,31 +288,29 @@ export function MerchantForm({
             <div className="p-2 bg-primary/10 rounded-full text-primary">
               <User className="h-4 w-4" />
             </div>
-            <CardTitle>Account Credentials</CardTitle>
+            <CardTitle>{t("accountCredentials.title")}</CardTitle>
           </div>
           <CardDescription>
-            {isEdit
-              ? "Update merchant administrator details."
-              : "Login details for the merchant administrator."}
+            {isEdit ? tEdit("accountCredentials.description") : t("accountCredentials.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="name">Merchant Name</Label>
+            <Label htmlFor="name">{t("accountCredentials.merchantName")}</Label>
             <Input
               id="name"
-              placeholder="John Doe"
+              placeholder={t("accountCredentials.merchantNamePlaceholder")}
               required
               value={formData.name}
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="email">{t("accountCredentials.emailAddress")}</Label>
             <Input
               id="email"
               type="email"
-              placeholder="merchant@business.com"
+              placeholder={t("accountCredentials.emailPlaceholder")}
               required
               value={formData.email}
               onChange={(e) => handleChange("email", e.target.value)}
@@ -295,8 +319,8 @@ export function MerchantForm({
           <div className="space-y-2">
             <Label htmlFor="password">
               {isEdit
-                ? "New Password (leave blank to keep current)"
-                : "Initial Password"}
+                ? tEdit("accountCredentials.newPassword")
+                : t("accountCredentials.initialPassword")}
             </Label>
             <div className="relative">
               <Input
@@ -305,14 +329,14 @@ export function MerchantForm({
                 required={!isEdit}
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
-                placeholder={isEdit ? "••••••••" : ""}
+                placeholder={isEdit ? tEdit("accountCredentials.passwordPlaceholder") : ""}
                 className="pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? t("accountCredentials.hidePassword") : t("accountCredentials.showPassword")}
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -323,7 +347,7 @@ export function MerchantForm({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="role">Role</Label>
+            <Label htmlFor="role">{t("accountCredentials.role")}</Label>
             <Input id="role" disabled value={formData.role} />
           </div>
         </CardContent>
@@ -336,49 +360,49 @@ export function MerchantForm({
             <div className="p-2 bg-indigo-500/10 rounded-full text-indigo-600">
               <Store className="h-4 w-4" />
             </div>
-            <CardTitle>Business Profile</CardTitle>
+            <CardTitle>{t("businessProfile.title")}</CardTitle>
           </div>
           <CardDescription>
-            Primary business details displayed to customers.
+            {t("businessProfile.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="business_name">Business Name</Label>
+            <Label htmlFor="business_name">{t("businessProfile.businessName")}</Label>
             <Input
               id="business_name"
-              placeholder="e.g. Acme Café"
+              placeholder={t("businessProfile.businessNamePlaceholder")}
               required
               value={formData.business_name}
               onChange={(e) => handleChange("business_name", e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <Label>Business Type</Label>
+            <Label>{t("businessProfile.businessType")}</Label>
             <Select
               value={formData.business_type}
               onValueChange={(v) => handleChange("business_type", v)}
               required
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select business type..." />
+                <SelectValue placeholder={t("businessProfile.businessTypePlaceholder")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Food & Beverage">Food & Beverage</SelectItem>
-                <SelectItem value="Retail">Retail</SelectItem>
-                <SelectItem value="Services">Services</SelectItem>
-                <SelectItem value="Health">Health</SelectItem>
-                <SelectItem value="Education">Education</SelectItem>
-                <SelectItem value="Technology">Technology</SelectItem>
-                <SelectItem value="Hospitality">Hospitality</SelectItem>
+                <SelectItem value="Food & Beverage">{t("businessProfile.businessTypes.foodBeverage")}</SelectItem>
+                <SelectItem value="Retail">{t("businessProfile.businessTypes.retail")}</SelectItem>
+                <SelectItem value="Services">{t("businessProfile.businessTypes.services")}</SelectItem>
+                <SelectItem value="Health">{t("businessProfile.businessTypes.health")}</SelectItem>
+                <SelectItem value="Education">{t("businessProfile.businessTypes.education")}</SelectItem>
+                <SelectItem value="Technology">{t("businessProfile.businessTypes.technology")}</SelectItem>
+                <SelectItem value="Hospitality">{t("businessProfile.businessTypes.hospitality")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="tax_id">Tax ID</Label>
+            <Label htmlFor="tax_id">{t("businessProfile.taxId")}</Label>
             <Input
               id="tax_id"
-              placeholder="e.g. TX123456"
+              placeholder={t("businessProfile.taxIdPlaceholder")}
               value={formData.tax_id}
               onChange={(e) => handleChange("tax_id", e.target.value)}
             />
@@ -393,19 +417,19 @@ export function MerchantForm({
             <div className="p-2 bg-orange-500/10 rounded-full text-orange-600">
               <Store className="h-4 w-4" />
             </div>
-            <CardTitle>Location Details</CardTitle>
+            <CardTitle>{t("locationDetails.title")}</CardTitle>
           </div>
           <CardDescription>
-            Search for the business address to auto-fill details.
+            {t("locationDetails.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="address">Search Address</Label>
+            <Label htmlFor="address">{t("locationDetails.searchAddress")}</Label>
             <AddressAutocomplete
               label="Address"
               name="address"
-              placeholder="123 Main St, City, Country"
+              placeholder={t("locationDetails.addressPlaceholder")}
               value={formData.address}
               onChange={(locationData) => {
                 setFormData((prev) => ({
@@ -417,26 +441,26 @@ export function MerchantForm({
                   city: locationData.city || prev.city,
                   country: locationData.country || prev.country,
                 }));
-                toast.success("Location updated");
+                toast.success(t("locationDetails.locationUpdated"));
               }}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="city">City</Label>
+            <Label htmlFor="city">{t("locationDetails.city")}</Label>
             <Input
               id="city"
-              placeholder="City"
+              placeholder={t("locationDetails.cityPlaceholder")}
               required
               value={formData.city}
               onChange={(e) => handleChange("city", e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="country">Country</Label>
+            <Label htmlFor="country">{t("locationDetails.country")}</Label>
             <Input
               id="country"
-              placeholder="Country"
+              placeholder={t("locationDetails.countryPlaceholder")}
               required
               value={formData.country}
               onChange={(e) => handleChange("country", e.target.value)}
@@ -456,14 +480,14 @@ export function MerchantForm({
             <div className="p-2 bg-emerald-500/10 rounded-full text-emerald-600">
               <CreditCard className="h-4 w-4" />
             </div>
-            <CardTitle>Merchant Type</CardTitle>
+            <CardTitle>{t("merchantType.title")}</CardTitle>
           </div>
-          <CardDescription>Select the merchant type.</CardDescription>
+          <CardDescription>{t("merchantType.description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid md:grid-cols-1 gap-6">
             <div className="space-y-2">
-              <Label>Merchant Type</Label>
+              <Label>{t("merchantType.label")}</Label>
               <Select
                 value={formData.merchant_type}
                 onValueChange={(v) => handleChange("merchant_type", v)}
@@ -472,7 +496,7 @@ export function MerchantForm({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="temporary">Temporary</SelectItem>
+                  <SelectItem value="temporary">{t("merchantType.temporary")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -480,9 +504,9 @@ export function MerchantForm({
 
           <div className="flex items-center justify-between p-4 rounded-lg border bg-zinc-50/50 dark:bg-zinc-800/30">
             <div className="space-y-0.5">
-              <Label className="text-base">Account Status</Label>
+              <Label className="text-base">{t("merchantType.accountStatus")}</Label>
               <CardDescription>
-                Enable or disable this merchant&apos;s access to the platform.
+                {t("merchantType.accountStatusDescription")}
               </CardDescription>
             </div>
             <div className="flex items-center gap-3">
@@ -492,7 +516,7 @@ export function MerchantForm({
                   formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
-                {formData.is_active ? "Active" : "Inactive"}
+                {formData.is_active ? t("merchantType.active") : t("merchantType.inactive")}
               </span>
               <Switch
                 checked={formData.is_active}
@@ -505,22 +529,22 @@ export function MerchantForm({
         </CardContent>
         <CardFooter className="bg-muted/10 border-t px-6 py-4 flex justify-between items-center">
           <Button variant="ghost" type="button" onClick={() => router.back()}>
-            Cancel
+            {t("actions.cancel")}
           </Button>
           <Button 
             type="submit" 
             disabled={loading || hasInsufficientBalance} 
             className="min-w-[140px]"
-            title={hasInsufficientBalance ? "Insufficient wallet balance for annual merchant creation" : ""}
+            title={hasInsufficientBalance ? t("actions.insufficientBalanceTooltip") : ""}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading
               ? isEdit
-                ? "Updating..."
-                : "Creating..."
+                ? tEdit("actions.updating")
+                : t("actions.creating")
               : isEdit
-                ? "Update Merchant"
-                : "Create Merchant"}
+                ? tEdit("actions.updateMerchant")
+                : t("actions.createMerchant")}
           </Button>
         </CardFooter>
       </Card>

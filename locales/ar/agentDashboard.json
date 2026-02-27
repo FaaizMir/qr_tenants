@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "إحصائيات الإصدار والاسترداد",
+      "issued": "صادر",
+      "merchantsLabel": "التجار",
+      "noData": "لا توجد بيانات قسائم متاحة",
+      "page": "الصفحة {current} من {total}",
+      "rank": "الرتبة",
+      "redeemed": "مفتوح",
+      "redeemedCount": "تم استرداده",
+      "redeemedLabel": "المستردة",
+      "title": "أداء القسائم"
+    },
+    "pagination": {
+      "pageOf": "الصفحة {{current}} من {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "متوسط/رسالة",
+      "description": "عدد الرسائل والتكلفة",
+      "estimatedCost": "التكلفة المقدرة",
+      "merchantsLabel": "التجار",
+      "messagesSent": "الرسائل المرسلة",
+      "noData": "لا توجد بيانات استخدام WhatsApp",
+      "page": "الصفحة {current} من {total}",
+      "rank": "الرتبة",
+      "title": "استخدام WhatsApp"
+    }
+  },
+  "common": {
+    "error": "فشل في جلب البيانات",
+    "loading": "جار التحميل...",
+    "noData": "لا تتوفر بيانات"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "سنوي",
+      "temporary": "مؤقت"
+    },
+    "pagination": {
+      "pageOf": "الصفحة {{current}} من {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "أحدث التسجيلات",
+      "noData": "لم يتم العثور على تجار",
+      "page": "الصفحة {current} من {total}",
+      "rankLabel": "#",
+      "title": "التجار المضافون حديثًا",
+      "totalLabel": "إجمالي"
+    },
+    "topPerformers": {
+      "description": "مرتبة حسب الإيرادات",
+      "issued": "تم الإصدار",
+      "noData": "لا تتوفر بيانات أداء",
+      "page": "الصفحة {current} من {total}",
+      "rate": "المعدل",
+      "redeemed": "تم استرداده",
+      "stats": {
+        "issued": "صادر",
+        "rate": "المعدل",
+        "redeemed": "تم استردادها"
+      },
+      "title": "أفضل المؤدين",
+      "totalLabel": "الإجمالي"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "القسائم الصادرة",
+      "couponsRedeemed": "القسائم المستردة",
+      "totalCustomers": "إجمالي العملاء",
+      "totalFeedback": "إجمالي التعليقات"
+    },
+    "dateFilter": {
+      "customRange": "نطاق مخصص",
+      "last30Days": "آخر 30 يومًا",
+      "last7Days": "آخر 7 أيام",
+      "lastMonth": "الشهر الماضي",
+      "pickDate": "اختر تاريخًا",
+      "selectRange": "اختر النطاق",
+      "thisMonth": "هذا الشهر",
+      "today": "اليوم",
+      "yesterday": "أمس"
+    },
+    "engagement": {
+      "activityPulse": "نبض نشاط المنصة",
+      "description": "مقاييس التفاعل عبر جميع المتاجر",
+      "redemptionRate": "معدل الاسترداد",
+      "systemLoad": "حمل النظام العادي",
+      "title": "التفاعل العالمي",
+      "totalFeedback": "إجمالي التعليقات"
+    },
+    "growth": {
+      "customersCount": "+{count} عملاء",
+      "description": "أحدث بيانات توسيع المنصة",
+      "newCustomers": "تسجيلات العملاء الجدد",
+      "newMerchants": "+{count} تاجر",
+      "newStores": "متاجر جديدة في هذه الفترة",
+      "title": "أبرز نقاط النمو"
+    },
+    "kpiCards": {
+      "activeMerchants": "التجار النشطون",
+      "annualMerchants": "التجار السنويون",
+      "inactiveMerchants": "التجار غير النشطين",
+      "temporaryMerchants": "التجار المؤقتون",
+      "totalMerchants": "إجمالي التجار",
+      "totalRevenue": "إجمالي الإيرادات"
+    },
+    "kpis": {
+      "activeAgents": "الوكلاء النشطون",
+      "activeMerchants": "التجار النشطون",
+      "agentSubscriptions": "اشتراكات الوكلاء",
+      "annualMerchants": "التجار السنويين",
+      "biMessagesSent": "رسائل BI المرسلة",
+      "couponsIssued": "القسائم المصدرة",
+      "couponsRedeemed": "القسائم المستردة",
+      "feedbackReceived": "تم استلام التعليقات",
+      "inactiveMerchants": "التجار غير النشطين",
+      "merchantSubscriptions": "اشتراكات التجار",
+      "packageCommissions": "عمولات الحزمة",
+      "temporaryMerchants": "التجار المؤقتون",
+      "totalAgents": "إجمالي الوكلاء",
+      "totalCustomers": "إجمالي العملاء",
+      "totalFeedback": "إجمالي التعليقات",
+      "totalMerchants": "إجمالي التجار",
+      "totalMessages": "إجمالي الرسائل",
+      "totalPlatformRevenue": "إجمالي إيرادات المنصة",
+      "totalRevenue": "الإيرادات الإجمالية",
+      "uiMessagesSent": "رسائل واجهة المستخدم المرسلة",
+      "whatsappCost": "تكلفة واتساب"
+    },
+    "merchantDistribution": {
+      "annual": "سنوي",
+      "description": "نسبة الاشتراك السنوي إلى المؤقت",
+      "noData": "لا توجد بيانات تجارية متاحة",
+      "temporary": "مؤقت",
+      "title": "توزيع التجار",
+      "total": "الإجمالي"
+    },
+    "merchantTierDistribution": {
+      "annual": "سنوي",
+      "description": "نسبة الاشتراك السنوي مقابل المؤقت",
+      "noData": "لا توجد بيانات تاجر متاحة",
+      "temp": "مؤقت",
+      "title": "توزيع مستويات التجار",
+      "totalStores": "إجمالي المتاجر"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "الاشتراك السنوي",
+      "creditPurchase": "شراء ائتمان",
+      "description": "توزيع مصادر الإيرادات",
+      "title": "تفصيل الإيرادات",
+      "whatsappCharges": "رسوم واتساب"
+    },
+    "roleTitle": "لوحة معلومات {role}",
+    "sections": {
+      "financialPerformance": "الأداء المالي",
+      "generalOverview": "نظرة عامة عامة",
+      "globalEngagement": "الانخراط العالمي",
+      "growthHighlights": "أبرز نقاط النمو",
+      "revenueStreams": "مصادر الإيرادات"
+    },
+    "title": "تحليلات النظام",
+    "topPerformingMerchants": {
+      "description": "المتاجر ذات أعلى حجم وتفاعل ({count} إجمالي)",
+      "issued": "تم الإصدار",
+      "noData": "لا توجد بيانات أداء لهذه الفترة",
+      "page": "الصفحة {current} من {total}",
+      "redeemed": "تم استرداده",
+      "showing": "عرض {from} إلى {to} من {total}",
+      "successRate": "معدل النجاح",
+      "title": "أفضل التجار أداءً"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "رسائل BI المرسلة",
+      "totalMessages": "إجمالي الرسائل",
+      "uiMessagesSent": "رسائل واجهة المستخدم المرسلة",
+      "whatsappCost": "تكلفة واتساب"
+    }
+  },
+  "page": {
+    "breadcrumb": "لوحة التحكم",
+    "description": "نظرة عامة على أداء وكيلك ومقاييسه",
+    "title": "لوحة معلومات الوكيل"
+  },
+  "tabs": {
+    "analytics": "التحليلات",
+    "merchants": "الأداء",
+    "overview": "نظرة عامة"
+  }
+}

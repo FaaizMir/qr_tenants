@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import {
   Card,
@@ -16,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight, Loader2, MessageSquare, Ticket, DollarSign } from "lucide-react";
 
 export default function AnalyticsTab() {
+  const t = useTranslations("agentDashboard.analytics");
   const { data: session } = useSession();
   const adminId = session?.adminId;
 
@@ -80,9 +82,9 @@ export default function AnalyticsTab() {
               <MessageSquare className="h-5 w-5 text-cyan-600" />
             </div>
             <div>
-              <CardTitle className="text-lg">WhatsApp Usage</CardTitle>
+              <CardTitle className="text-lg">{t("whatsappUsage.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Message count and cost • {whatsappData.length} merchants
+                {t("whatsappUsage.description")} • {whatsappData.length} {t("whatsappUsage.merchantsLabel")}
               </CardDescription>
             </div>
           </div>
@@ -107,7 +109,7 @@ export default function AnalyticsTab() {
                           </h4>
                           <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
                             <MessageSquare className="h-3 w-3" />
-                            <span>{merchant.messagesSent || 0} messages sent</span>
+                            <span>{merchant.messagesSent || 0} {t("whatsappUsage.messagesSent")}</span>
                           </div>
                         </div>
                       </div>
@@ -117,14 +119,14 @@ export default function AnalyticsTab() {
                           {(merchant.estimatedCost || 0).toFixed(2)}
                         </div>
                         <div className="text-[10px] text-muted-foreground">
-                          Est. cost
+                          {t("whatsappUsage.estimatedCost")}
                         </div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-2">
                       <div className="text-center p-2 bg-muted rounded-lg">
-                        <div className="text-xs text-muted-foreground mb-0.5">Avg/msg</div>
+                        <div className="text-xs text-muted-foreground mb-0.5">{t("whatsappUsage.avgPerMessage")}</div>
                         <div className="text-sm font-bold">
                           ${merchant.messagesSent > 0 
                             ? ((merchant.estimatedCost || 0) / merchant.messagesSent).toFixed(3)
@@ -132,7 +134,7 @@ export default function AnalyticsTab() {
                         </div>
                       </div>
                       <div className="text-center p-2 bg-muted rounded-lg">
-                        <div className="text-xs text-muted-foreground mb-0.5">Rank</div>
+                        <div className="text-xs text-muted-foreground mb-0.5">{t("whatsappUsage.rank")}</div>
                         <div className="text-sm font-bold">
                           #{(whatsappPage - 1) * pageSize + index + 1}
                         </div>
@@ -143,7 +145,7 @@ export default function AnalyticsTab() {
               ) : (
                 <div className="text-center py-12 text-muted-foreground">
                   <MessageSquare className="h-10 w-10 mx-auto mb-2 opacity-20" />
-                  <p className="text-sm">No WhatsApp usage data</p>
+                  <p className="text-sm">{t("whatsappUsage.noData")}</p>
                 </div>
               )}
             </div>
@@ -152,7 +154,7 @@ export default function AnalyticsTab() {
           {whatsappTotalPages > 1 && (
             <div className="flex items-center justify-between px-6 py-3 border-t bg-muted/30">
               <p className="text-xs text-muted-foreground font-medium">
-                Page {whatsappPage} of {whatsappTotalPages}
+                {t("pagination.pageOf", { current: whatsappPage, total: whatsappTotalPages })}
               </p>
               <div className="flex gap-1">
                 <Button
@@ -189,9 +191,9 @@ export default function AnalyticsTab() {
               <Ticket className="h-5 w-5 text-blue-600" />
             </div>
             <div>
-              <CardTitle className="text-lg">Coupon Performance</CardTitle>
+              <CardTitle className="text-lg">{t("couponPerformance.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Issuance and redemption stats • {couponData.length} merchants
+                {t("couponPerformance.description")} • {couponData.length} {t("couponPerformance.merchantsLabel")}
               </CardDescription>
             </div>
           </div>
@@ -230,7 +232,7 @@ export default function AnalyticsTab() {
                                     : "bg-red-50 text-red-700 border-red-200"
                                 }`}
                               >
-                                {redemptionRate}% redeemed
+                                {redemptionRate}% {t("couponPerformance.redeemed")}
                               </Badge>
                             </div>
                           </div>
@@ -239,19 +241,19 @@ export default function AnalyticsTab() {
                       
                       <div className="grid grid-cols-3 gap-2">
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Issued</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("couponPerformance.issued")}</div>
                           <div className="text-sm font-bold">
                             {merchant.issued || 0}
                           </div>
                         </div>
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Redeemed</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("couponPerformance.redeemedLabel")}</div>
                           <div className="text-sm font-bold">
                             {merchant.redeemed || 0}
                           </div>
                         </div>
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Rank</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("couponPerformance.rank")}</div>
                           <div className="text-sm font-bold">
                             #{(couponPage - 1) * pageSize + index + 1}
                           </div>
@@ -263,7 +265,7 @@ export default function AnalyticsTab() {
               ) : (
                 <div className="text-center py-12 text-muted-foreground">
                   <Ticket className="h-10 w-10 mx-auto mb-2 opacity-20" />
-                  <p className="text-sm">No coupon data available</p>
+                  <p className="text-sm">{t("couponPerformance.noData")}</p>
                 </div>
               )}
             </div>
@@ -272,7 +274,7 @@ export default function AnalyticsTab() {
           {couponTotalPages > 1 && (
             <div className="flex items-center justify-between px-6 py-3 border-t bg-muted/30">
               <p className="text-xs text-muted-foreground font-medium">
-                Page {couponPage} of {couponTotalPages}
+                {t("pagination.pageOf", { current: couponPage, total: couponTotalPages })}
               </p>
               <div className="flex gap-1">
                 <Button

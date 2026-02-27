@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "Gói Quảng Cáo",
     "approvals": "Phê duyệt",
     "couponsync": "Đồng bộ phiếu giảm giá",
     "dashboard": "Bảng điều khiển",

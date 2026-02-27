@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "Pakej Iklan",
     "approvals": "Kelulusan",
     "couponsync": "Penyegerakan Kupon",
     "dashboard": "Papan pemuka",

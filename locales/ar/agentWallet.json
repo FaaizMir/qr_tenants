@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "تفعيل الاشتراك",
+    "topUpWallet": "شحن المحفظة"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "انتهت صلاحية اشتراكك. قم بتجديد اشتراكك للاستمرار في الوصول إلى جميع ميزات المنصة.",
+      "title": "انتهت صلاحية الاشتراك"
+    },
+    "subscriptionRequired": {
+      "description": "حسابك لم يتم تفعيله بعد. انقر على \"تفعيل الاشتراك\" لدفع رسوم اشتراكك السنوية وبدء استخدام المنصة. يمكنك أيضًا إضافة رصيد محفظة مدفوعة مسبقًا أثناء التفعيل.",
+      "title": "تفعيل الاشتراك مطلوب"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "رصيد الائتمان المتاح",
+      "title": "الرصيد الحالي"
+    },
+    "securityNote": {
+      "description": "محفظتك محمية بتشفير قياسي صناعي. جميع المعاملات يتم تدقيقها في الوقت الفعلي لضمان سلامة أموالك.",
+      "title": "الأمان المالي"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "حساب نشط",
+      "inactive": "غير نشط",
+      "noDate": "لا توجد تاريخ",
+      "noType": "غير متاح",
+      "package": "حزمة {type}",
+      "planType": "نوع الخطة",
+      "renewalDate": "تاريخ التجديد",
+      "status": "الحالة",
+      "title": "حالة الاشتراك والحساب"
+    },
+    "totalEarnings": {
+      "description": "الأرباح مدى الحياة",
+      "title": "إجمالي الأرباح"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "أدخل المبلغ الذي تريد إضافته إلى رصيد محفظتك المدفوعة مسبقًا. سيتم استخدام هذا الرصيد لعمليات المنصة.",
+      "title": "قم بتمويل محفظتك:"
+    },
+    "amountCard": {
+      "hint": "أدخل المبلغ الدقيق الذي تريد إضافته إلى محفظتك. سيتم خصم تكاليف المنصة تلقائيًا من هذا الرصيد.",
+      "instantCredit": {
+        "description": "سيتم إضافة رصيد إلى محفظتك على الفور بعد الدفع الناجح.",
+        "title": "رصيد فوري:"
+      },
+      "label": "المبلغ المراد إضافته",
+      "placeholder": "0.00",
+      "quickSelect": "اختيار سريع:",
+      "subtitle": "الحد الأدنى المطلوب {currency} 100",
+      "title": "أدخل مبلغ الشحن"
+    },
+    "infoCard": {
+      "merchantPayments": "100% مدفوعات التجار: جميع مدفوعات التجار تذهب مباشرة إلى حساب Stripe الخاص بك",
+      "platformCosts": "تكاليف المنصة: يتم خصمها تلقائيًا من رصيد المحفظة المدفوع مسبقًا",
+      "title": "نموذج المحفظة المدفوعة مسبقًا",
+      "yourProfit": "أرباحك: دفع التاجر - تكلفة المنصة = أرباحك"
+    },
+    "subtitle": "أضف رصيدًا مدفوعًا مسبقًا إلى محفظتك لعمليات المنصة",
+    "summary": {
+      "payButton": "ادفع {currency} {amount} مع Stripe",
+      "processing": "إعادة التوجيه إلى Stripe...",
+      "securePayment": {
+        "description": "بوابة Stripe مشفرة SSL",
+        "title": "دفع آمن"
+      },
+      "title": "ملخص الدفع",
+      "totalPayment": "إجمالي الدفع:",
+      "walletTopup": "شحن المحفظة:"
+    },
+    "title": "شحن محفظتك",
+    "validation": {
+      "createError": "فشل في بدء عملية الدفع",
+      "invalidAmount": "يرجى إدخال مبلغ صالح",
+      "minimumAmount": "أقل مبلغ للإضافة هو 100",
+      "paymentError": "غير قادر على بدء الدفع. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "المبلغ",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "frequency": "التردد"
+    },
+    "searchPlaceholder": "البحث عن الخصومات...",
+    "title": "سجل الخصومات التلقائية"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "للبدء في استخدام المنصة، تحتاج إلى دفع رسوم اشتراكك السنوية. يمكنك أيضًا إضافة رصيد مسبق الدفع إلى محفظتك في نفس المعاملة.",
+      "title": "مرحبًا!"
+    },
+    "features": {
+      "analytics": "التحليلات والتقارير",
+      "chatSupport": "نظام دعم الدردشة",
+      "couponManagement": "نظام إدارة القسائم",
+      "platformAccess": "وصول إلى المنصة لمدة 12 شهرًا",
+      "qrGeneration": "إنشاء رمز الاستجابة السريعة",
+      "reviewCollection": "مراجعة أدوات التحصيل",
+      "title": "ما الذي يتضمنه اشتراكك",
+      "unlimitedMerchants": "حسابات تجار غير محدودة",
+      "whatsappIntegration": "تكامل رسائل واتساب"
+    },
+    "loading": "جارٍ تحميل معلومات الاشتراك...",
+    "subscriptionFee": {
+      "access": "الوصول السنوي إلى المنصة",
+      "description": "الوصول الكامل إلى جميع الميزات لمدة 12 شهرًا",
+      "required": "مطلوب",
+      "subtitle": "مطلوب لتفعيل حسابك",
+      "title": "رسوم الاشتراك السنوي"
+    },
+    "subtitle": "ادفع اشتراكك السنوي وأضف رصيد محفظة مدفوع مسبقًا إذا رغبت في ذلك",
+    "summary": {
+      "payButton": "ادفع {currency} {amount} باستخدام Stripe",
+      "processing": "إعادة التوجيه إلى Stripe...",
+      "securePayment": {
+        "description": "بوابة Stripe مشفرة SSL",
+        "title": "دفع آمن"
+      },
+      "subscriptionFee": "رسوم الاشتراك:",
+      "title": "ملخص الدفع",
+      "totalPayment": "إجمالي الدفع:",
+      "walletBalance": "رصيد المحفظة:"
+    },
+    "title": "قم بتفعيل حسابك",
+    "validation": {
+      "createError": "فشل في بدء عملية الدفع",
+      "loadError": "فشل في تحميل معلومات الاشتراك",
+      "minimumAmount": "الحد الأدنى لمبلغ الرصيد هو 100",
+      "negativeAmount": "لا يمكن أن يكون مبلغ الرصيد سالبًا",
+      "paymentError": "غير قادر على بدء الدفع. يرجى المحاولة مرة أخرى."
+    },
+    "walletBalance": {
+      "hint": "الحد الأدنى {currency} 100 عند إضافة رصيد. سيتم خصم تكاليف المنصة من هذه المحفظة.",
+      "label": "مبلغ رصيد المحفظة",
+      "modelInfo": {
+        "description": "تذهب مدفوعات التجار 100% إلى حسابك في Stripe. يتم خصم تكاليف المنصة تلقائيًا من رصيد هذه المحفظة المدفوعة مسبقًا.",
+        "title": "نموذج المحفظة المسبقة الدفع:"
+      },
+      "optional": "اختياري",
+      "placeholder": "0.00",
+      "subtitle": "رصيد مدفوع مسبقًا اختياري لعمليات المنصة",
+      "title": "إضافة رصيد المحفظة"
+    }
+  },
+  "messages": {
+    "creditError": "فشل في إضافة رصيد إلى المحفظة",
+    "subscriptionSuccess": "تم تفعيل الاشتراك بنجاح!",
+    "topupError": "تم الدفع بنجاح ولكن فشل في إضافة الرصيد إلى المحفظة. يرجى الاتصال بالدعم.",
+    "topupSuccess": "تم شحن المحفظة بنجاح!",
+    "topupSuccessDescription": "{currency} {amount} تمت إضافته إلى رصيدك."
+  },
+  "subtitle": "إدارة رصيد محفظتك والمعاملات",
+  "tabs": {
+    "balance": "الرصيد",
+    "earnings": "الأرباح",
+    "transactions": "المعاملات"
+  },
+  "title": "محفظة الوكيل",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} مكافأة",
+    "dialogSubtitle": "اختر حزمة محفظة مسبقة الدفع تناسب احتياجاتك",
+    "dialogTitle": "اختر مبلغ الإضافة",
+    "get": "احصل على {currency} {amount}",
+    "mostPopular": "⭐ الأكثر شعبية",
+    "orderSummary": {
+      "baseAmount": "المبلغ الأساسي:",
+      "bonus": "مكافأة:",
+      "package": "الحزمة:",
+      "title": "ملخص الطلب",
+      "totalCredit": "إجمالي الرصيد:"
+    },
+    "packages": {
+      "business": {
+        "description": "مثالي لوكالات النمو",
+        "feature1": "يغطي ~8-10 تاجر سنوي",
+        "feature2": "أو ~20,000 رسالة واجهة مستخدم على واتساب",
+        "feature3": "أو ~5,000 رسالة WhatsApp BI",
+        "feature4": "✨ مكافأة RM150 مشمولة",
+        "name": "إعادة شحن الأعمال"
+      },
+      "enterprise": {
+        "description": "للعمليات واسعة النطاق",
+        "feature1": "يغطي ~17-20 تاجر سنوي",
+        "feature2": "أو ~40,000 رسالة واجهة مستخدم واتساب",
+        "feature3": "أو ~10,000 رسالة WhatsApp BI",
+        "feature4": "✨ مكافأة RM500 مشمولة",
+        "name": "إضافة رصيد مؤسسي"
+      },
+      "premium": {
+        "description": "أقصى قيمة للوكالات ذات الحجم الكبير",
+        "feature1": "يشمل ~38-40 تاجر سنوي",
+        "feature2": "أو ~80,000 رسالة واجهة WhatsApp",
+        "feature3": "أو ~20,000 رسالة WhatsApp BI",
+        "feature4": "✨ مكافأة RM1,500 مشمولة",
+        "name": "شحن مميز"
+      },
+      "standard": {
+        "description": "الأفضل للعمليات الصغيرة إلى المتوسطة",
+        "feature1": "يغطي ~3-4 تجار سنويًا",
+        "feature2": "أو ~8000 رسالة UI عبر واتساب",
+        "feature3": "أو ~2000 رسالة WhatsApp BI",
+        "feature4": "✨ مكافأة RM50 مشمولة",
+        "name": "إضافة رصيد قياسية"
+      },
+      "starter": {
+        "description": "مثالي للبدء مع عدد قليل من التجار",
+        "feature1": "يغطي ~1-2 تاجر سنوي",
+        "feature2": "أو ~4000 رسالة WhatsApp UI",
+        "feature3": "أو ~1000 رسالة BI عبر واتساب",
+        "name": "إعادة شحن البداية"
+      }
+    },
+    "paymentAmount": "مبلغ الدفع",
+    "paymentDetails": {
+      "description": "دفع آمن عبر Stripe. سيتم إضافة المبلغ إلى محفظتك على الفور.",
+      "paymentAmount": "مبلغ الدفع",
+      "title": "تفاصيل الدفع"
+    },
+    "selectPackage": {
+      "description": "اختر مبلغ الشحن من الخيارات على اليسار.",
+      "title": "اختر حزمة"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "المبلغ",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "status": "الحالة",
+      "type": "اكتب"
+    },
+    "noData": "-",
+    "searchPlaceholder": "بحث عن المعاملات...",
+    "status": {
+      "completed": "مكتمل",
+      "pending": "معلق"
+    }
+  }
+}

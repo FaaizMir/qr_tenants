@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Dasbor Agen",
+    "statements": "Laporan Keuangan"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "downloadPdf": "Unduh PDF",
+    "generatedAt": "Dihasilkan Pada",
+    "monthLabel": "Bulan {month}, {year}",
+    "noDate": "—",
+    "period": "Periode",
+    "status": "Status",
+    "totalSpend": "Total Pengeluaran"
+  },
+  "filters": {
+    "description": "Filter pernyataan berdasarkan tahun dan bulan",
+    "month": {
+      "all": "Bulan Ini",
+      "label": "Bulan",
+      "placeholder": "bulan ini"
+    },
+    "quickActions": {
+      "label": "Tindakan Cepat",
+      "loading": "Memuat...",
+      "refresh": "Segarkan Daftar"
+    },
+    "title": "Filter Pernyataan",
+    "year": {
+      "label": "Tahun",
+      "placeholder": "Pilih tahun"
+    }
+  },
+  "messages": {
+    "downloadError": "Gagal mengunduh PDF. Silakan coba lagi.",
+    "downloadSuccess": "Pernyataan berhasil diunduh!",
+    "fetchError": "Gagal memuat laporan. Silakan coba lagi."
+  },
+  "months": {
+    "april": "April",
+    "august": "Agustus",
+    "december": "Desember",
+    "february": "Februari",
+    "january": "Januari",
+    "july": "Juli",
+    "june": "Juni",
+    "march": "Maret",
+    "may": "Mei",
+    "november": "November",
+    "october": "Oktober",
+    "september": "September"
+  },
+  "status": {
+    "failed": "Gagal",
+    "generated": "Dihasilkan",
+    "pending": "Menunggu"
+  },
+  "subtitle": "Laporan PDF yang dihasilkan secara otomatis setiap bulan termasuk pendapatan, biaya, pendapatan paket, dan buku besar dompet.",
+  "table": {
+    "description": "{count} pernyataan ditemukan",
+    "description_plural": "{count} pernyataan ditemukan",
+    "loading": "Memuat pernyataan...",
+    "noData": {
+      "description": "Tidak ada pernyataan tersedia untuk periode yang dipilih. Buat pernyataan baru untuk memulai.",
+      "title": "Tidak Ada Pernyataan Ditemukan"
+    },
+    "title": "Riwayat Pernyataan"
+  },
+  "title": "Laporan Keuangan Agen"
+}

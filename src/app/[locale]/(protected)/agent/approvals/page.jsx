@@ -6,12 +6,13 @@ import React from "react";
 import AgentApprovalsContainer from "@/containers/agent/agentApprovalsContainer";
 
 export default function AgentApprovals() {
+    const t = useTranslations("agentApprovals");
+    
     return (
         <div className="space-y-6">
             <BreadcrumbComponent
                 data={[
-                    { name: "Dashboard", url: "/agent/dashboard" },
-                    { name: "Approvals", url: "/agent/approvals" },
+                    { name: t("title"), url: "/agent/approvals" },
                 ]}
             />
             <AgentApprovalsContainer />

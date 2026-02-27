@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Dashboard",
+    "earnings": "Earnings"
+  },
+  "columns": {
+    "commissionEarned": "Commission Earned",
+    "commissionRate": "Commission Rate",
+    "date": "Date",
+    "merchant": "Merchant",
+    "noData": "—",
+    "source": "Commission",
+    "totalSales": "Total Sales"
+  },
+  "commissionBreakdown": {
+    "description": "Consolidated commissions per merchant.",
+    "searchPlaceholder": "Search merchant or source...",
+    "title": "Commission Breakdown"
+  },
+  "errors": {
+    "fetchFailed": "Failed to fetch earnings"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "Active Merchants"
+    },
+    "earningsType": {
+      "title": "Earnings Type",
+      "value": "Prepaid"
+    },
+    "totalEarnings": {
+      "title": "Total Earnings",
+      "trend": "Live Data"
+    }
+  },
+  "noData": "—"
+}

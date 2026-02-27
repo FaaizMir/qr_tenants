@@ -138,7 +138,10 @@ export function DataTable({
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
                 .map((column) => {
-                  const columnName = columnNameTranslations?.[column.id] || column.id.replace(/_/g, " ");
+                  const columnName =
+                    columnNameTranslations?.[column.id] ||
+                    column.columnDef.meta?.label ||
+                    column.id.replace(/_/g, " ");
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
@@ -175,9 +178,9 @@ export function DataTable({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
                       </TableHead>
                     );
                   })}
@@ -195,7 +198,7 @@ export function DataTable({
                       <TableCell key={cell.id}>
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </TableCell>
                     ))}
@@ -229,4 +232,3 @@ export function DataTable({
     </div>
   );
 }
-

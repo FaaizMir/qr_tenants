@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "仪表板",
+    "earnings": "收入"
+  },
+  "columns": {
+    "commissionEarned": "赚取的佣金",
+    "commissionRate": "佣金率",
+    "date": "日期",
+    "merchant": "商户",
+    "noData": "—",
+    "source": "佣金",
+    "totalSales": "总销售额"
+  },
+  "commissionBreakdown": {
+    "description": "每个商户的合并佣金。",
+    "searchPlaceholder": "搜索商户或来源...",
+    "title": "佣金明细"
+  },
+  "errors": {
+    "fetchFailed": "未能获取收入"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "活跃商户"
+    },
+    "earningsType": {
+      "title": "收入类型",
+      "value": "预付费"
+    },
+    "totalEarnings": {
+      "title": "总收入",
+      "trend": "实时数据"
+    }
+  },
+  "noData": "—"
+}

@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "जारी और विमोचन आंकड़े",
+      "issued": "जारी किया गया",
+      "merchantsLabel": "व्यापारी",
+      "noData": "कोई कूपन डेटा उपलब्ध नहीं है",
+      "page": "पृष्ठ {current} का {total}",
+      "rank": "रैंक",
+      "redeemed": "उद्धारित",
+      "redeemedCount": "विमोचित",
+      "redeemedLabel": "भुनाए गए",
+      "title": "कूपन प्रदर्शन"
+    },
+    "pagination": {
+      "pageOf": "पृष्ठ {{current}} का {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "औसत/संदेश",
+      "description": "संदेश की संख्या और लागत",
+      "estimatedCost": "अनुमानित लागत",
+      "merchantsLabel": "व्यापारी",
+      "messagesSent": "भेजे गए संदेश",
+      "noData": "कोई व्हाट्सएप उपयोग डेटा नहीं",
+      "page": "पृष्ठ {current} का {total}",
+      "rank": "रैंक",
+      "title": "व्हाट्सएप उपयोग"
+    }
+  },
+  "common": {
+    "error": "डेटा प्राप्त करने में विफल",
+    "loading": "लोड हो रहा है...",
+    "noData": "कोई डेटा उपलब्ध नहीं है"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "वार्षिक",
+      "temporary": "अस्थायी"
+    },
+    "pagination": {
+      "pageOf": "पृष्ठ {{current}} का {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "नवीनतम पंजीकरण",
+      "noData": "कोई व्यापारी नहीं मिला",
+      "page": "पृष्ठ {current} का {total}",
+      "rankLabel": "#",
+      "title": "हाल ही में जोड़े गए व्यापारी",
+      "totalLabel": "कुल"
+    },
+    "topPerformers": {
+      "description": "राजस्व के अनुसार रैंक किया गया",
+      "issued": "जारी किया गया",
+      "noData": "कोई प्रदर्शन डेटा उपलब्ध नहीं है",
+      "page": "पृष्ठ {current} का {total}",
+      "rate": "दर",
+      "redeemed": "भुनाया गया",
+      "stats": {
+        "issued": "जारी किया गया",
+        "rate": "दर",
+        "redeemed": "भुनाए गए"
+      },
+      "title": "शीर्ष प्रदर्शन करने वाले",
+      "totalLabel": "कुल"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "जारी किए गए कूपन",
+      "couponsRedeemed": "कूपन भुनाए गए",
+      "totalCustomers": "कुल ग्राहक",
+      "totalFeedback": "कुल फीडबैक"
+    },
+    "dateFilter": {
+      "customRange": "कस्टम रेंज",
+      "last30Days": "अंतिम 30 दिन",
+      "last7Days": "पिछले 7 दिन",
+      "lastMonth": "पिछला महीना",
+      "pickDate": "एक तारीख चुनें",
+      "selectRange": "रेंज चुनें",
+      "thisMonth": "इस महीने",
+      "today": "आज",
+      "yesterday": "कल"
+    },
+    "engagement": {
+      "activityPulse": "प्लेटफ़ॉर्म गतिविधि पल्स",
+      "description": "सभी स्टोर में इंटरैक्शन मेट्रिक्स",
+      "redemptionRate": "भुनाने की दर",
+      "systemLoad": "सामान्य प्रणाली लोड",
+      "title": "वैश्विक जुड़ाव",
+      "totalFeedback": "कुल फीडबैक"
+    },
+    "growth": {
+      "customersCount": "+{count} ग्राहक",
+      "description": "नवीनतम प्लेटफ़ॉर्म विस्तार डेटा",
+      "newCustomers": "नए ग्राहक पंजीकरण",
+      "newMerchants": "+{count} व्यापारी",
+      "newStores": "इस अवधि में नए स्टोर",
+      "title": "विकास की मुख्य बातें"
+    },
+    "kpiCards": {
+      "activeMerchants": "सक्रिय व्यापारी",
+      "annualMerchants": "वार्षिक व्यापारी",
+      "inactiveMerchants": "निष्क्रिय व्यापारी",
+      "temporaryMerchants": "अस्थायी व्यापारी",
+      "totalMerchants": "कुल व्यापारी",
+      "totalRevenue": "कुल राजस्व"
+    },
+    "kpis": {
+      "activeAgents": "सक्रिय एजेंट",
+      "activeMerchants": "सक्रिय व्यापारी",
+      "agentSubscriptions": "एजेंट सदस्यताएँ",
+      "annualMerchants": "वार्षिक व्यापारी",
+      "biMessagesSent": "BI संदेश भेजे गए",
+      "couponsIssued": "जारी किए गए कूपन",
+      "couponsRedeemed": "कूपन भुनाए गए",
+      "feedbackReceived": "प्रतिक्रिया प्राप्त हुई",
+      "inactiveMerchants": "निष्क्रिय व्यापारी",
+      "merchantSubscriptions": "व्यापारी सदस्यताएँ",
+      "packageCommissions": "पैकेज कमीशन",
+      "temporaryMerchants": "अस्थायी व्यापारी",
+      "totalAgents": "कुल एजेंट",
+      "totalCustomers": "कुल ग्राहक",
+      "totalFeedback": "कुल फीडबैक",
+      "totalMerchants": "कुल व्यापारी",
+      "totalMessages": "कुल संदेश",
+      "totalPlatformRevenue": "कुल प्लेटफ़ॉर्म राजस्व",
+      "totalRevenue": "कुल राजस्व",
+      "uiMessagesSent": "यूआई संदेश भेजे गए",
+      "whatsappCost": "व्हाट्सएप लागत"
+    },
+    "merchantDistribution": {
+      "annual": "वार्षिक",
+      "description": "वार्षिक बनाम अस्थायी सदस्यता अनुपात",
+      "noData": "कोई व्यापारी डेटा उपलब्ध नहीं है",
+      "temporary": "अस्थायी",
+      "title": "व्यापारी वितरण",
+      "total": "कुल"
+    },
+    "merchantTierDistribution": {
+      "annual": "वार्षिक",
+      "description": "वार्षिक बनाम अस्थायी सदस्यता अनुपात",
+      "noData": "कोई व्यापारी डेटा उपलब्ध नहीं है",
+      "temp": "अस्थायी",
+      "title": "व्यापारी स्तर वितरण",
+      "totalStores": "कुल स्टोर"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "वार्षिक सदस्यता",
+      "creditPurchase": "क्रेडिट खरीद",
+      "description": "राजस्व स्रोत वितरण",
+      "title": "राजस्व का विभाजन",
+      "whatsappCharges": "व्हाट्सएप शुल्क"
+    },
+    "roleTitle": "{role} डैशबोर्ड",
+    "sections": {
+      "financialPerformance": "वित्तीय प्रदर्शन",
+      "generalOverview": "सामान्य अवलोकन",
+      "globalEngagement": "वैश्विक सहभागिता",
+      "growthHighlights": "विकास हाइलाइट्स",
+      "revenueStreams": "राजस्व धाराएँ"
+    },
+    "title": "सिस्टम विश्लेषण",
+    "topPerformingMerchants": {
+      "description": "उच्चतम मात्रा और सहभागिता वाले स्टोर ({count} कुल)",
+      "issued": "जारी किया गया",
+      "noData": "इस अवधि के लिए कोई प्रदर्शन डेटा नहीं",
+      "page": "पृष्ठ {current} का {total}",
+      "redeemed": "भुनाया गया",
+      "showing": "{from} से {to} का {total} दिखा रहा है",
+      "successRate": "सफलता दर",
+      "title": "शीर्ष प्रदर्शन करने वाले व्यापारी"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "BI संदेश भेजे गए",
+      "totalMessages": "कुल संदेश",
+      "uiMessagesSent": "UI संदेश भेजे गए",
+      "whatsappCost": "व्हाट्सएप लागत"
+    }
+  },
+  "page": {
+    "breadcrumb": "डैशबोर्ड",
+    "description": "आपके एजेंट के प्रदर्शन और मेट्रिक्स का अवलोकन",
+    "title": "एजेंट डैशबोर्ड"
+  },
+  "tabs": {
+    "analytics": "विश्लेषण",
+    "merchants": "प्रदर्शन",
+    "overview": "सारांश"
+  }
+}

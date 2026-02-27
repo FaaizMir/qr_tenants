@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Bảng điều khiển đại lý",
+    "statements": "Báo cáo tài chính"
+  },
+  "columns": {
+    "actions": "Hành động",
+    "downloadPdf": "Tải xuống PDF",
+    "generatedAt": "Đã tạo lúc",
+    "monthLabel": "Tháng {month}, {year}",
+    "noDate": "—",
+    "period": "Thời gian",
+    "status": "Trạng thái",
+    "totalSpend": "Tổng chi tiêu"
+  },
+  "filters": {
+    "description": "Lọc bản sao kê theo năm và tháng",
+    "month": {
+      "all": "Tháng hiện tại",
+      "label": "Tháng",
+      "placeholder": "Tháng hiện tại"
+    },
+    "quickActions": {
+      "label": "Hành động nhanh",
+      "loading": "Đang tải...",
+      "refresh": "Làm mới danh sách"
+    },
+    "title": "Bộ lọc bản sao kê",
+    "year": {
+      "label": "Năm",
+      "placeholder": "Chọn năm"
+    }
+  },
+  "messages": {
+    "downloadError": "Tải xuống PDF không thành công. Vui lòng thử lại.",
+    "downloadSuccess": "Bản sao kê đã tải xuống thành công!",
+    "fetchError": "Không thể tải các báo cáo. Vui lòng thử lại."
+  },
+  "months": {
+    "april": "Tháng Tư",
+    "august": "Tháng Tám",
+    "december": "Tháng Mười Hai",
+    "february": "Tháng Hai",
+    "january": "Tháng Một",
+    "july": "Tháng Bảy",
+    "june": "Tháng Sáu",
+    "march": "Tháng Ba",
+    "may": "Tháng Năm",
+    "november": "Tháng Mười Một",
+    "october": "Tháng Mười",
+    "september": "Tháng Chín"
+  },
+  "status": {
+    "failed": "Thất bại",
+    "generated": "Đã tạo",
+    "pending": "Đang chờ"
+  },
+  "subtitle": "Các báo cáo PDF tự động tạo hàng tháng bao gồm thu nhập, phí, thu nhập từ gói và sổ cái ví.",
+  "table": {
+    "description": "Tìm thấy {count} báo cáo",
+    "description_plural": "{count} bản sao kê được tìm thấy",
+    "loading": "Đang tải báo cáo...",
+    "noData": {
+      "description": "Không có báo cáo nào cho khoảng thời gian đã chọn. Tạo một báo cáo mới để bắt đầu.",
+      "title": "Không tìm thấy bản sao kê"
+    },
+    "title": "Lịch sử bản sao kê"
+  },
+  "title": "Báo cáo tài chính của đại lý"
+}

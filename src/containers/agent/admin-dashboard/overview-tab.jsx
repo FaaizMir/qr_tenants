@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import {
   Calendar as CalendarIcon,
@@ -57,6 +58,7 @@ const formatDisplayDate = (date) => {
 };
 
 export default function AdminOverviewTab() {
+  const t = useTranslations("agentDashboard.overview");
   const { data: session } = useSession();
   const adminId = session?.adminId;
 
@@ -157,16 +159,16 @@ export default function AdminOverviewTab() {
           <Select value={filterType} onValueChange={handlePresetChange}>
             <SelectTrigger className="w-40">
               <CalendarIcon className="mr-2 h-4 w-4" />
-              <SelectValue placeholder="Select range" />
+              <SelectValue placeholder={t("dateFilter.selectRange")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="today">Today</SelectItem>
-              <SelectItem value="yesterday">Yesterday</SelectItem>
-              <SelectItem value="this_month">This Month</SelectItem>
-              <SelectItem value="last_month">Last Month</SelectItem>
-              <SelectItem value="last_7_days">Last 7 Days</SelectItem>
-              <SelectItem value="last_30_days">Last 30 Days</SelectItem>
-              <SelectItem value="custom">Custom Range</SelectItem>
+              <SelectItem value="today">{t("dateFilter.today")}</SelectItem>
+              <SelectItem value="yesterday">{t("dateFilter.yesterday")}</SelectItem>
+              <SelectItem value="this_month">{t("dateFilter.thisMonth")}</SelectItem>
+              <SelectItem value="last_month">{t("dateFilter.lastMonth")}</SelectItem>
+              <SelectItem value="last_7_days">{t("dateFilter.last7Days")}</SelectItem>
+              <SelectItem value="last_30_days">{t("dateFilter.last30Days")}</SelectItem>
+              <SelectItem value="custom">{t("dateFilter.customRange")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -187,7 +189,7 @@ export default function AdminOverviewTab() {
                       formatDisplayDate(dateRange.from)
                     )
                   ) : (
-                    <span>Pick a date</span>
+                    <span>{t("dateFilter.pickDate")}</span>
                   )}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
@@ -207,42 +209,42 @@ export default function AdminOverviewTab() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <OverviewCard
-          label="Total Revenue"
+          label={t("kpiCards.totalRevenue")}
           value={`$${overview.totalRevenue?.toLocaleString() || 0}`}
           icon={Wallet}
           color="text-emerald-600"
           bg="bg-emerald-100"
         />
         <OverviewCard
-          label="Total Merchants"
+          label={t("kpiCards.totalMerchants")}
           value={overview.totalMerchants || 0}
           icon={Store}
           color="text-blue-600"
           bg="bg-blue-100"
         />
         <OverviewCard
-          label="Active Merchants"
+          label={t("kpiCards.activeMerchants")}
           value={overview.activeMerchants || 0}
           icon={CheckCircle}
           color="text-green-600"
           bg="bg-green-100"
         />
         <OverviewCard
-          label="Inactive Merchants"
+          label={t("kpiCards.inactiveMerchants")}
           value={overview.inactiveMerchants || 0}
           icon={AlertCircle}
           color="text-red-600"
           bg="bg-red-100"
         />
         <OverviewCard
-          label="Annual Merchants"
+          label={t("kpiCards.annualMerchants")}
           value={overview.annualMerchants || 0}
           icon={TrendingUp}
           color="text-purple-600"
           bg="bg-purple-100"
         />
         <OverviewCard
-          label="Temporary Merchants"
+          label={t("kpiCards.temporaryMerchants")}
           value={overview.temporaryMerchants || 0}
           icon={Users}
           color="text-orange-600"
@@ -253,28 +255,28 @@ export default function AdminOverviewTab() {
       {/* WhatsApp Stats */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <OverviewCard
-          label="UI Messages Sent"
+          label={t("whatsappStats.uiMessagesSent")}
           value={data?.whatsappStats?.messageBreakdown?.uiMessages?.count || 0}
           icon={Zap}
           color="text-blue-600"
           bg="bg-blue-100"
         />
         <OverviewCard
-          label="BI Messages Sent"
+          label={t("whatsappStats.biMessagesSent")}
           value={data?.whatsappStats?.messageBreakdown?.biMessages?.count || 0}
           icon={MessageCircle}
           color="text-indigo-600"
           bg="bg-indigo-100"
         />
         <OverviewCard
-          label="Total Messages"
+          label={t("whatsappStats.totalMessages")}
           value={data?.whatsappStats?.totalMessagesSent || 0}
           icon={MessageCircle}
           color="text-cyan-600"
           bg="bg-cyan-100"
         />
         <OverviewCard
-          label="WhatsApp Cost"
+          label={t("whatsappStats.whatsappCost")}
           value={`$${(data?.whatsappStats?.totalCost || 0).toFixed(2)}`}
           icon={Wallet}
           color="text-pink-600"
@@ -285,28 +287,28 @@ export default function AdminOverviewTab() {
       {/* Coupon & Customer Stats */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <OverviewCard
-          label="Coupons Issued"
+          label={t("couponCustomerStats.couponsIssued")}
           value={data?.couponStats?.totalCouponsIssued || 0}
           icon={Gift}
           color="text-yellow-600"
           bg="bg-yellow-100"
         />
         <OverviewCard
-          label="Coupons Redeemed"
+          label={t("couponCustomerStats.couponsRedeemed")}
           value={data?.couponStats?.totalCouponsRedeemed || 0}
           icon={Award}
           color="text-rose-600"
           bg="bg-rose-100"
         />
         <OverviewCard
-          label="Total Customers"
+          label={t("couponCustomerStats.totalCustomers")}
           value={data?.customerEngagement?.totalCustomers || 0}
           icon={Users}
           color="text-teal-600"
           bg="bg-teal-100"
         />
         <OverviewCard
-          label="Total Feedback"
+          label={t("couponCustomerStats.totalFeedback")}
           value={data?.customerEngagement?.totalFeedbacks || 0}
           icon={MessageCircle}
           color="text-violet-600"
@@ -317,9 +319,9 @@ export default function AdminOverviewTab() {
       <div className="grid gap-6">
         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Merchant Distribution</CardTitle>
+            <CardTitle>{t("merchantDistribution.title")}</CardTitle>
             <CardDescription>
-              Annual vs Temporary Subscription Ratio
+              {t("merchantDistribution.description")}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center py-10">
@@ -327,6 +329,7 @@ export default function AdminOverviewTab() {
               annual={overview.annualMerchants || 0}
               temporary={overview.temporaryMerchants || 0}
               total={overview.totalMerchants || 0}
+              t={t}
             />
           </CardContent>
         </Card>
@@ -334,14 +337,14 @@ export default function AdminOverviewTab() {
         {/* Revenue Breakdown */}
         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Revenue Breakdown</CardTitle>
-            <CardDescription>Revenue Sources Distribution</CardDescription>
+            <CardTitle>{t("revenueBreakdown.title")}</CardTitle>
+            <CardDescription>{t("revenueBreakdown.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-3">
               <div className="border rounded-lg p-4">
                 <div className="text-sm font-medium text-muted-foreground">
-                  Annual Subscription
+                  {t("revenueBreakdown.annualSubscription")}
                 </div>
                 <div className="text-2xl font-bold mt-2">
                   $
@@ -352,7 +355,7 @@ export default function AdminOverviewTab() {
               </div>
               <div className="border rounded-lg p-4">
                 <div className="text-sm font-medium text-muted-foreground">
-                  Credit Purchase
+                  {t("revenueBreakdown.creditPurchase")}
                 </div>
                 <div className="text-2xl font-bold mt-2">
                   ${(data?.revenueStats?.creditPurchaseRevenue || 0).toFixed(2)}
@@ -360,7 +363,7 @@ export default function AdminOverviewTab() {
               </div>
               <div className="border rounded-lg p-4">
                 <div className="text-sm font-medium text-muted-foreground">
-                  WhatsApp Charges
+                  {t("revenueBreakdown.whatsappCharges")}
                 </div>
                 <div className="text-2xl font-bold mt-2">
                   $
@@ -393,11 +396,11 @@ function OverviewCard({ label, value, icon: Icon, color, bg }) {
   );
 }
 
-function MerchantTypeChart({ annual, temporary, total }) {
+function MerchantTypeChart({ annual, temporary, total, t }) {
   if (total === 0)
     return (
       <div className="text-muted-foreground py-20">
-        No merchant data available
+        {t("merchantDistribution.noData")}
       </div>
     );
 
@@ -415,7 +418,7 @@ function MerchantTypeChart({ annual, temporary, total }) {
         <div className="absolute w-44 h-44 bg-card rounded-full flex flex-col items-center justify-center shadow-inner">
           <span className="text-4xl font-bold">{total}</span>
           <span className="text-sm text-muted-foreground uppercase tracking-wider">
-            Total
+            {t("merchantDistribution.total")}
           </span>
         </div>
       </div>
@@ -424,7 +427,7 @@ function MerchantTypeChart({ annual, temporary, total }) {
         <div className="flex flex-col items-center gap-1">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-violet-500 rounded-full" />
-            <span className="text-sm font-medium">Annual</span>
+            <span className="text-sm font-medium">{t("merchantDistribution.annual")}</span>
           </div>
           <div className="text-2xl font-bold">{annual}</div>
           <div className="text-xs text-muted-foreground">
@@ -434,7 +437,7 @@ function MerchantTypeChart({ annual, temporary, total }) {
         <div className="flex flex-col items-center gap-1">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-orange-400 rounded-full" />
-            <span className="text-sm font-medium">Temporary</span>
+            <span className="text-sm font-medium">{t("merchantDistribution.temporary")}</span>
           </div>
           <div className="text-2xl font-bold">{temporary}</div>
           <div className="text-xs text-muted-foreground">

@@ -70,7 +70,7 @@ export function AppSidebar({
       icon: Wallet,
     },
     {
-      title: "Ads Packages",
+      title: tSidebar("agent.adsPackages"),
       url: "/agent/packages",
       icon: ShoppingCart,
     },
@@ -270,10 +270,14 @@ export function AppSidebar({
     name:
       user?.name ||
       user?.username ||
-      (role === "agent" ? tSidebar("agent.defaultName") : tSidebar("merchant.defaultName")),
+      (role === "agent"
+        ? tSidebar("agent.defaultName")
+        : tSidebar("merchant.defaultName")),
     email:
       user?.email ||
-      (role === "agent" ? tSidebar("agent.defaultEmail") : tSidebar("merchant.defaultEmail")),
+      (role === "agent"
+        ? tSidebar("agent.defaultEmail")
+        : tSidebar("merchant.defaultEmail")),
     avatar: user?.avatar || "/images/avatar.jpg",
   };
 

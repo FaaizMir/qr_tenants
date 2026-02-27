@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "パッケージを作成",
+    "dashboard": "エージェントダッシュボード",
+    "edit": "パッケージを編集",
+    "packages": "広告パッケージ"
+  },
+  "deleteDialog": {
+    "cancel": "削除を中止",
+    "confirm": "確認済み、今すぐ削除",
+    "description": "永久に削除しようとしています ",
+    "descriptionEnd": "この操作は最終的なものであり、元に戻すことはできません。",
+    "title": "極度の注意"
+  },
+  "form": {
+    "actions": {
+      "cancel": "キャンセル",
+      "delete": "パッケージを削除",
+      "save": "パッケージを公開",
+      "saving": "保存中...",
+      "update": "パッケージを更新"
+    },
+    "backButton": "リストに戻る",
+    "createDescription": "有料広告キャンペーンの価格とクレジットを定義します。",
+    "createTitle": "有料広告パッケージを作成",
+    "deleteConfirm": {
+      "cancel": "キャンセル",
+      "confirm": "はい、パッケージを削除します",
+      "description": "これにより、永久に削除されます",
+      "descriptionEnd": "この操作は元に戻せません。",
+      "title": "本当に確信していますか？"
+    },
+    "editDescription": "有料広告キャンペーンの価格とクレジットを定義します。",
+    "editTitle": "有料広告パッケージを編集",
+    "fields": {
+      "currency": {
+        "label": "通貨",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "USD ($)"
+        }
+      },
+      "description": {
+        "label": "説明",
+        "placeholder": "このパッケージが提供する内容の短い概要..."
+      },
+      "displayPriority": {
+        "label": "表示優先度",
+        "placeholder": "リスト内の位置 (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "マーチャントプラン",
+        "options": {
+          "annual": "年間 / プレミアム",
+          "temporary": "一時的 / 基本"
+        }
+      },
+      "packageName": {
+        "label": "パッケージ名",
+        "placeholder": "例：プレミアム広告バンドル"
+      },
+      "packageStatus": {
+        "label": "パッケージのステータス",
+        "options": {
+          "active": "アクティブ＆表示中",
+          "inactive": "非アクティブ / 隠し"
+        }
+      },
+      "price": {
+        "label": "価格",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "自動",
+        "label": "クレジットあたりの価格"
+      },
+      "totalCredits": {
+        "label": "合計クレジット"
+      }
+    },
+    "infoBanner": {
+      "description": "このパッケージタイプは有料広告キャンペーン専用です",
+      "title": "有料広告クレジットパッケージ"
+    },
+    "preview": {
+      "advertisingCredits": "広告クレジット",
+      "defaultDescription": "強化された広告能力",
+      "getStarted": "始める",
+      "hiddenDraft": "隠し / ドラフト",
+      "packageTitle": "パッケージタイトル",
+      "paidAds": "有料広告",
+      "perCredit": "クレジットごと",
+      "title": "ライブプレビュー"
+    },
+    "sections": {
+      "classification": "分類",
+      "credits": "クレジットと配分",
+      "identity": "アイデンティティと価格設定"
+    },
+    "validation": {
+      "creditsMin": "クレジットは少なくとも1でなければなりません",
+      "creditsRequired": "クレジットが必要です",
+      "descriptionRequired": "説明は必須です",
+      "nameRequired": "パッケージ名は必須です",
+      "priceMin": "価格は最低でも1でなければなりません",
+      "priceRequired": "価格は必須です",
+      "priorityRequired": "表示優先度は必須です"
+    }
+  },
+  "messages": {
+    "createError": "パッケージの作成に失敗しました",
+    "createSuccess": "パッケージが正常に作成されました",
+    "deleteError": "パッケージの削除に失敗しました",
+    "deleteSuccess": "パッケージが正常に削除されました",
+    "fetchError": "パッケージの取得に失敗しました",
+    "loadError": "パッケージの詳細を読み込めませんでした",
+    "updateError": "パッケージの更新に失敗しました",
+    "updateSuccess": "パッケージが正常に更新されました",
+    "wrongTypeError": "有料広告パッケージのみを編集できます"
+  },
+  "subtitle": "有料広告クレジットパッケージを管理する",
+  "table": {
+    "actions": {
+      "delete": "パッケージを削除",
+      "edit": "パッケージを編集",
+      "label": "パッケージアクション"
+    },
+    "columns": {
+      "credits": "クレジット",
+      "noDescription": "説明はありません",
+      "packageInfo": "パッケージ情報",
+      "perCredit": "クレジットごと",
+      "plan": "プラン",
+      "pricing": "価格設定",
+      "rank": "ランク",
+      "status": "ステータス"
+    },
+    "createButton": "有料広告パッケージを作成",
+    "searchPlaceholder": "パッケージ名で検索...",
+    "status": {
+      "active": "アクティブ",
+      "inactive": "非アクティブ"
+    }
+  },
+  "title": "有料広告パッケージ"
+}

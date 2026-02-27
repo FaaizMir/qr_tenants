@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "发行和赎回统计",
+      "issued": "已发放",
+      "merchantsLabel": "商家",
+      "noData": "没有可用的优惠券数据",
+      "page": "第 {current} 页，共 {total} 页",
+      "rank": "排名",
+      "redeemed": "赎回",
+      "redeemedCount": "已兑换",
+      "redeemedLabel": "已兑换",
+      "title": "优惠券表现"
+    },
+    "pagination": {
+      "pageOf": "第 {{current}} 页，共 {{total}} 页"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "平均/消息",
+      "description": "消息数量和费用",
+      "estimatedCost": "估计成本",
+      "merchantsLabel": "商户",
+      "messagesSent": "消息已发送",
+      "noData": "没有 WhatsApp 使用数据",
+      "page": "第 {current} 页，共 {total} 页",
+      "rank": "排名",
+      "title": "WhatsApp 使用情况"
+    }
+  },
+  "common": {
+    "error": "获取数据失败",
+    "loading": "加载中...",
+    "noData": "没有可用数据"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "年度",
+      "temporary": "临时"
+    },
+    "pagination": {
+      "pageOf": "第 {{current}} 页，共 {{total}} 页"
+    },
+    "recentlyAdded": {
+      "description": "最新注册",
+      "noData": "未找到商户",
+      "page": "第 {current} 页，共 {total} 页",
+      "rankLabel": "#",
+      "title": "最近添加的商户",
+      "totalLabel": "总计"
+    },
+    "topPerformers": {
+      "description": "按收入排名",
+      "issued": "已发行",
+      "noData": "没有可用的性能数据",
+      "page": "第 {current} 页，共 {total} 页",
+      "rate": "比率",
+      "redeemed": "已兑换",
+      "stats": {
+        "issued": "已发放",
+        "rate": "比率",
+        "redeemed": "已兑换"
+      },
+      "title": "顶尖表现者",
+      "totalLabel": "总计"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "已发放优惠券",
+      "couponsRedeemed": "已兑换优惠券",
+      "totalCustomers": "总客户",
+      "totalFeedback": "总反馈"
+    },
+    "dateFilter": {
+      "customRange": "自定义范围",
+      "last30Days": "过去30天",
+      "last7Days": "过去 7 天",
+      "lastMonth": "上个月",
+      "pickDate": "选择日期",
+      "selectRange": "选择范围",
+      "thisMonth": "本月",
+      "today": "今天",
+      "yesterday": "昨天"
+    },
+    "engagement": {
+      "activityPulse": "平台活动脉搏",
+      "description": "所有商店的互动指标",
+      "redemptionRate": "兑换率",
+      "systemLoad": "正常系统负载",
+      "title": "全球参与度",
+      "totalFeedback": "总反馈"
+    },
+    "growth": {
+      "customersCount": "+{count} 位客户",
+      "description": "最新平台扩展数据",
+      "newCustomers": "新客户注册",
+      "newMerchants": "+{count} 个商户",
+      "newStores": "本期新商店",
+      "title": "增长亮点"
+    },
+    "kpiCards": {
+      "activeMerchants": "活跃商家",
+      "annualMerchants": "年度商家",
+      "inactiveMerchants": "非活跃商家",
+      "temporaryMerchants": "临时商户",
+      "totalMerchants": "总商户",
+      "totalRevenue": "总收入"
+    },
+    "kpis": {
+      "activeAgents": "活跃代理人",
+      "activeMerchants": "活跃商户",
+      "agentSubscriptions": "代理订阅",
+      "annualMerchants": "年度商户",
+      "biMessagesSent": "已发送的 BI 消息",
+      "couponsIssued": "已发行优惠券",
+      "couponsRedeemed": "已兑换的优惠券",
+      "feedbackReceived": "反馈已收到",
+      "inactiveMerchants": "不活跃商户",
+      "merchantSubscriptions": "商家订阅",
+      "packageCommissions": "套餐佣金",
+      "temporaryMerchants": "临时商户",
+      "totalAgents": "总代理",
+      "totalCustomers": "总客户数",
+      "totalFeedback": "总反馈",
+      "totalMerchants": "总商户",
+      "totalMessages": "总消息",
+      "totalPlatformRevenue": "总平台收入",
+      "totalRevenue": "总收入",
+      "uiMessagesSent": "发送的用户界面消息",
+      "whatsappCost": "WhatsApp 成本"
+    },
+    "merchantDistribution": {
+      "annual": "年度",
+      "description": "年度与临时订阅比例",
+      "noData": "没有可用的商家数据",
+      "temporary": "临时",
+      "title": "商户分布",
+      "total": "总计"
+    },
+    "merchantTierDistribution": {
+      "annual": "年度",
+      "description": "年度与临时订阅比例",
+      "noData": "没有商户数据可用",
+      "temp": "临时",
+      "title": "商家等级分布",
+      "totalStores": "总商店"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "年度订阅",
+      "creditPurchase": "信用购买",
+      "description": "收入来源分布",
+      "title": "收入细分",
+      "whatsappCharges": "WhatsApp 收费"
+    },
+    "roleTitle": "{role} 仪表板",
+    "sections": {
+      "financialPerformance": "财务表现",
+      "generalOverview": "总体概述",
+      "globalEngagement": "全球参与",
+      "growthHighlights": "增长亮点",
+      "revenueStreams": "收入来源"
+    },
+    "title": "系统分析",
+    "topPerformingMerchants": {
+      "description": "交易量和参与度最高的商店（共 {count} 家）",
+      "issued": "已发行",
+      "noData": "此期间没有性能数据",
+      "page": "第 {current} 页，共 {total} 页",
+      "redeemed": "已兑换",
+      "showing": "显示 {from} 到 {to} 的 {total}",
+      "successRate": "成功率",
+      "title": "表现最佳的商户"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "发送的 BI 消息",
+      "totalMessages": "总消息",
+      "uiMessagesSent": "发送的 UI 消息",
+      "whatsappCost": "WhatsApp费用"
+    }
+  },
+  "page": {
+    "breadcrumb": "仪表板",
+    "description": "您的代理性能和指标概述",
+    "title": "代理仪表板"
+  },
+  "tabs": {
+    "analytics": "分析",
+    "merchants": "表现",
+    "overview": "概述"
+  }
+}

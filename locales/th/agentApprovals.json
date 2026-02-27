@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "อนุมัติ",
+    "reject": "ปฏิเสธ"
+  },
+  "columns": {
+    "adContent": "เนื้อหาโฆษณา",
+    "adPlacement": "การวางโฆษณา",
+    "approvalStatus": "สถานะการอนุมัติ",
+    "approvalType": "ประเภทการอนุมัติ",
+    "businessAccount": "ธุรกิจ & บัญชี",
+    "location": "ตำแหน่งที่ตั้ง",
+    "merchantType": "ประเภทผู้ค้า",
+    "noAd": "ไม่มีโฆษณา",
+    "requestedDate": "วันที่ขอ"
+  },
+  "dialog": {
+    "approveDescription": "คุณแน่ใจหรือไม่ว่าต้องการอนุมัติคำขอสำหรับ {merchantName}? การกระทำนี้ไม่สามารถย้อนกลับได้.",
+    "approveTitle": "อนุมัติคำขอโฆษณา",
+    "cancel": "ยกเลิก",
+    "close": "ปิด",
+    "confirmApprove": "ใช่ อนุมัติ",
+    "confirmReject": "ใช่, ปฏิเสธ",
+    "processing": "กำลังประมวลผล...",
+    "rejectDescription": "เลือกเหตุผลในการปฏิเสธคำขอจาก {merchantName}.",
+    "rejectTitle": "ปฏิเสธคำขอโฆษณา"
+  },
+  "messages": {
+    "approveError": "ไม่สามารถอนุมัติคำขอได้",
+    "approveSuccess": "คำขอได้รับการอนุมัติเรียบร้อยแล้ว",
+    "fetchError": "เกิดข้อผิดพลาดในการดึงข้อมูลการอนุมัติ",
+    "rejectError": "ไม่สามารถปฏิเสธคำขอได้",
+    "rejectSuccess": "คำขอถูกปฏิเสธเรียบร้อยแล้ว"
+  },
+  "preview": {
+    "description": "ตัวอย่างขนาดเต็มของโฆษณาโปรโมชั่น",
+    "title": "ตัวอย่างโฆษณา",
+    "videoNotSupported": "เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ"
+  },
+  "rejectionReasons": {
+    "adultContent": "เนื้อหาผู้ใหญ่ / เนื้อหาเกี่ยวกับเพศ",
+    "gamblingContent": "เนื้อหาการพนัน",
+    "illegalServices": "บริการที่ผิดกฎหมาย",
+    "misleadingContent": "เนื้อหาที่ทำให้เข้าใจผิด",
+    "other": "อื่น ๆ (กรอกเหตุผลด้วยตนเอง)",
+    "placeholder": "กรุณาใส่เหตุผลในการปฏิเสธ...",
+    "title": "กรุณาระบุเหตุผล"
+  },
+  "status": {
+    "approved": "ได้รับการอนุมัติ",
+    "pending": "รอดำเนินการ",
+    "rejected": "ถูกปฏิเสธ"
+  },
+  "subtitle": "จัดการการอนุมัติของตัวแทน",
+  "title": "การอนุมัติ",
+  "validation": {
+    "provideCustomReason": "กรุณาให้เหตุผลในการปฏิเสธที่กำหนดเอง",
+    "selectReason": "กรุณาเลือกเหตุผลในการปฏิเสธ"
+  }
+}

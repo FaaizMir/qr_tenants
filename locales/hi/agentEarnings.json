@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "डैशबोर्ड",
+    "earnings": "कमाई"
+  },
+  "columns": {
+    "commissionEarned": "कमाई गई कमीशन",
+    "commissionRate": "कमीशन दर",
+    "date": "तारीख",
+    "merchant": "व्यापारी",
+    "noData": "—",
+    "source": "कमीशन",
+    "totalSales": "कुल बिक्री"
+  },
+  "commissionBreakdown": {
+    "description": "व्यापारी के अनुसार समेकित कमीशन।",
+    "searchPlaceholder": "व्यापारी या स्रोत खोजें...",
+    "title": "कमीशन का विवरण"
+  },
+  "errors": {
+    "fetchFailed": "कमाई प्राप्त करने में विफल"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "सक्रिय व्यापारी"
+    },
+    "earningsType": {
+      "title": "कमाई का प्रकार",
+      "value": "पूर्व भुगतान"
+    },
+    "totalEarnings": {
+      "title": "कुल कमाई",
+      "trend": "सीधा डेटा"
+    }
+  },
+  "noData": "—"
+}

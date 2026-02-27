@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "激活订阅",
+    "topUpWallet": "充值钱包"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "您的订阅已过期。请续订您的订阅以继续访问所有平台功能。",
+      "title": "订阅已过期"
+    },
+    "subscriptionRequired": {
+      "description": "您的账户尚未激活。点击 \"激活订阅\" 支付您的年度订阅费用并开始使用平台。您还可以在激活期间添加预付钱包余额。",
+      "title": "需要激活订阅"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "可用的预付信用",
+      "title": "当前余额"
+    },
+    "securityNote": {
+      "description": "您的钱包采用行业标准加密保护。所有交易都实时审核，以确保您的资金安全。",
+      "title": "财务安全"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "活跃账户",
+      "inactive": "未激活",
+      "noDate": "无日期",
+      "noType": "不适用",
+      "package": "{type} 套餐",
+      "planType": "计划类型",
+      "renewalDate": "续订日期",
+      "status": "状态",
+      "title": "订阅与账户状态"
+    },
+    "totalEarnings": {
+      "description": "终身利润",
+      "title": "总收入"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "输入您想要添加到预付钱包余额的金额。此余额将用于平台操作。",
+      "title": "充值您的钱包："
+    },
+    "amountCard": {
+      "hint": "输入您想要添加到钱包的确切金额。平台费用将从此余额中自动扣除。",
+      "instantCredit": {
+        "description": "成功付款后，您的钱包将立即获得信用。",
+        "title": "即时信用："
+      },
+      "label": "要添加的金额",
+      "placeholder": "0.00",
+      "quickSelect": "快速选择：",
+      "subtitle": "最低要求 {currency} 100",
+      "title": "输入充值金额"
+    },
+    "infoCard": {
+      "merchantPayments": "100%商户付款：所有商户付款直接进入您的Stripe账户",
+      "platformCosts": "平台费用：自动从此预付钱包余额中扣除",
+      "title": "预付钱包模型",
+      "yourProfit": "您的利润：商户支付 - 平台成本 = 您的收益"
+    },
+    "subtitle": "为您的钱包添加预付余额以进行平台操作",
+    "summary": {
+      "payButton": "使用Stripe支付 {currency} {amount}",
+      "processing": "正在重定向到Stripe...",
+      "securePayment": {
+        "description": "SSL加密的Stripe网关",
+        "title": "安全支付"
+      },
+      "title": "付款摘要",
+      "totalPayment": "总付款：",
+      "walletTopup": "钱包充值："
+    },
+    "title": "充值您的钱包",
+    "validation": {
+      "createError": "支付流程启动失败",
+      "invalidAmount": "请输入有效金额",
+      "minimumAmount": "最低充值金额为100",
+      "paymentError": "无法开始支付。请再试一次。"
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "金额",
+      "date": "日期",
+      "description": "描述",
+      "frequency": "频率"
+    },
+    "searchPlaceholder": "搜索扣款...",
+    "title": "自动扣款日志"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "要开始使用平台，您需要支付年度订阅费用。您也可以在同一交易中向您的钱包添加预付余额。",
+      "title": "欢迎！"
+    },
+    "features": {
+      "analytics": "分析与报告",
+      "chatSupport": "聊天支持系统",
+      "couponManagement": "优惠券管理系统",
+      "platformAccess": "12个月平台访问",
+      "qrGeneration": "二维码生成",
+      "reviewCollection": "审查收款工具",
+      "title": "您的订阅包含什么",
+      "unlimitedMerchants": "无限商户账户",
+      "whatsappIntegration": "WhatsApp消息集成"
+    },
+    "loading": "加载订阅信息...",
+    "subscriptionFee": {
+      "access": "年度平台访问",
+      "description": "12个月内可访问所有功能",
+      "required": "必填",
+      "subtitle": "激活您的账户所需",
+      "title": "年度订阅费用"
+    },
+    "subtitle": "支付您的年度订阅并可选择添加预付钱包余额",
+    "summary": {
+      "payButton": "使用 Stripe 支付 {currency} {amount}",
+      "processing": "正在重定向到Stripe...",
+      "securePayment": {
+        "description": "SSL加密Stripe网关",
+        "title": "安全支付"
+      },
+      "subscriptionFee": "订阅费用：",
+      "title": "付款摘要",
+      "totalPayment": "总付款：",
+      "walletBalance": "钱包余额："
+    },
+    "title": "激活您的账户",
+    "validation": {
+      "createError": "支付流程启动失败",
+      "loadError": "无法加载订阅信息",
+      "minimumAmount": "最低余额金额为100",
+      "negativeAmount": "余额金额不能为负",
+      "paymentError": "无法开始付款。请再试一次。"
+    },
+    "walletBalance": {
+      "hint": "如果添加余额，最低 {currency} 100。平台费用将从此钱包中扣除。",
+      "label": "钱包余额金额",
+      "modelInfo": {
+        "description": "商户付款100%进入您的Stripe账户。平台费用会自动从此预付钱包余额中扣除。",
+        "title": "预付钱包模型："
+      },
+      "optional": "可选",
+      "placeholder": "0.00",
+      "subtitle": "可选的预付余额用于平台操作",
+      "title": "添加钱包余额"
+    }
+  },
+  "messages": {
+    "creditError": "未能为钱包充值",
+    "subscriptionSuccess": "订阅成功激活！",
+    "topupError": "支付成功但未能记入钱包。请联系支持。",
+    "topupSuccess": "钱包充值成功！",
+    "topupSuccessDescription": "{currency} {amount} 已添加到您的余额。"
+  },
+  "subtitle": "管理您的钱包余额和交易",
+  "tabs": {
+    "balance": "余额",
+    "earnings": "收益",
+    "transactions": "交易"
+  },
+  "title": "代理钱包",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} 奖金",
+    "dialogSubtitle": "选择适合您需求的预付钱包套餐",
+    "dialogTitle": "选择充值金额",
+    "get": "获取 {currency} {amount}",
+    "mostPopular": "⭐ 最受欢迎",
+    "orderSummary": {
+      "baseAmount": "基本金额：",
+      "bonus": "奖金：",
+      "package": "套餐：",
+      "title": "订单摘要",
+      "totalCredit": "总信用："
+    },
+    "packages": {
+      "business": {
+        "description": "适合成长中的机构",
+        "feature1": "覆盖约8-10个年度商户",
+        "feature2": "或 ~20,000 条 WhatsApp UI 消息",
+        "feature3": "或约5,000条WhatsApp BI消息",
+        "feature4": "✨ 包含 RM150 奖金",
+        "name": "商业充值"
+      },
+      "enterprise": {
+        "description": "用于大规模操作",
+        "feature1": "覆盖约17-20个年度商户",
+        "feature2": "或 ~40,000 条 WhatsApp UI 消息",
+        "feature3": "或 ~10,000 条 WhatsApp BI 消息",
+        "feature4": "✨ 包含 RM500 奖金",
+        "name": "企业充值"
+      },
+      "premium": {
+        "description": "高容量代理的最大值",
+        "feature1": "覆盖约38-40个年度商户",
+        "feature2": "或约80,000条WhatsApp UI消息",
+        "feature3": "或 ~20,000 条 WhatsApp BI 消息",
+        "feature4": "✨ 包含 RM1,500 奖金",
+        "name": "高级充值"
+      },
+      "standard": {
+        "description": "最适合小型到中型运营",
+        "feature1": "覆盖 ~3-4 个年度商户",
+        "feature2": "或约8000条WhatsApp UI消息",
+        "feature3": "或 ~2000 条 WhatsApp BI 消息",
+        "feature4": "✨ 包含 RM50 奖金",
+        "name": "标准充值"
+      },
+      "starter": {
+        "description": "非常适合与少量商户开始",
+        "feature1": "覆盖约1-2个年度商户",
+        "feature2": "或 ~4000 条 WhatsApp UI 消息",
+        "feature3": "或约1000条WhatsApp BI消息",
+        "name": "启动充值"
+      }
+    },
+    "paymentAmount": "付款金额",
+    "paymentDetails": {
+      "description": "通过 Stripe 安全支付。您的钱包将立即获得信用。",
+      "paymentAmount": "付款金额",
+      "title": "支付详情"
+    },
+    "selectPackage": {
+      "description": "从左侧选项中选择充值金额。",
+      "title": "选择一个套餐"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "金额",
+      "date": "日期",
+      "description": "描述",
+      "status": "状态",
+      "type": "类型"
+    },
+    "noData": "-",
+    "searchPlaceholder": "搜索交易...",
+    "status": {
+      "completed": "已完成",
+      "pending": "待处理"
+    }
+  }
+}
