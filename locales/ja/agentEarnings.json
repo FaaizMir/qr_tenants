@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "ダッシュボード",
+    "earnings": "収益"
+  },
+  "columns": {
+    "commissionEarned": "獲得手数料",
+    "commissionRate": "手数料率",
+    "date": "日付",
+    "merchant": "商人",
+    "noData": "—",
+    "source": "手数料",
+    "totalSales": "総売上"
+  },
+  "commissionBreakdown": {
+    "description": "商人ごとの統合手数料。",
+    "searchPlaceholder": "商人またはソースを検索...",
+    "title": "手数料内訳"
+  },
+  "errors": {
+    "fetchFailed": "収益の取得に失敗しました"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "アクティブ商人"
+    },
+    "earningsType": {
+      "title": "収益タイプ",
+      "value": "前払い"
+    },
+    "totalEarnings": {
+      "title": "総収益",
+      "trend": "ライブデータ"
+    }
+  },
+  "noData": "—"
+}

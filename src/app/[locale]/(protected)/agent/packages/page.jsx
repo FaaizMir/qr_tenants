@@ -1,10 +1,13 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import PackagesTable from "@/containers/agent/packages/packages-table";
+import { getTranslations } from "next-intl/server";
 
-export default function AgentPackages() {
+export default async function AgentPackages() {
+  const t = await getTranslations("agentPackages");
+  
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Paid Ads Packages", url: "/agent/packages" },
+    { name: t("breadcrumbs.dashboard"), url: "/agent/dashboard" },
+    { name: t("breadcrumbs.packages"), url: "/agent/packages" },
   ];
   return (
     <div className="space-y-6">

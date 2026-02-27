@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "Approve",
+    "reject": "Reject"
+  },
+  "columns": {
+    "adContent": "Ad Content",
+    "adPlacement": "Ad Placement",
+    "approvalStatus": "Approval Status",
+    "approvalType": "Approval Type",
+    "businessAccount": "Business & Account",
+    "location": "Location",
+    "merchantType": "Merchant Type",
+    "noAd": "No Ad",
+    "requestedDate": "Requested Date"
+  },
+  "dialog": {
+    "approveDescription": "Are you sure you want to approve the request for {merchantName}? This action cannot be undone.",
+    "approveTitle": "Approve Ad Request",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirmApprove": "Yes, Approve",
+    "confirmReject": "Yes, Reject",
+    "processing": "Processing...",
+    "rejectDescription": "Select a reason for rejecting the request from {merchantName}.",
+    "rejectTitle": "Reject Ad Request"
+  },
+  "messages": {
+    "approveError": "Failed to approve request",
+    "approveSuccess": "Request approved successfully",
+    "fetchError": "Error fetching approvals",
+    "rejectError": "Failed to reject request",
+    "rejectSuccess": "Request rejected successfully"
+  },
+  "preview": {
+    "description": "Full size preview of the promotional ad",
+    "title": "Ad Preview",
+    "videoNotSupported": "Your browser does not support the video tag."
+  },
+  "rejectionReasons": {
+    "adultContent": "Adult / sexual content",
+    "gamblingContent": "Gambling content",
+    "illegalServices": "Illegal services",
+    "misleadingContent": "Misleading content",
+    "other": "Other (manual reason input)",
+    "placeholder": "Enter the reason for rejection...",
+    "title": "Please specify the reason"
+  },
+  "status": {
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
+  "subtitle": "Manage agent approvals",
+  "title": "Approvals",
+  "validation": {
+    "provideCustomReason": "Please provide a custom rejection reason",
+    "selectReason": "Please select a rejection reason"
+  }
+}

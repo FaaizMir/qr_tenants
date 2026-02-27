@@ -20,11 +20,12 @@ export const getMerchantsColumns = (
   onDeleted,
   showEdit = true,
   isMasterAdmin = false,
+  t,
 ) => {
   const columns = [
     {
       accessorKey: "name",
-      header: "Business & Account",
+      header: t("columns.businessAccount"),
       cell: ({ row }) => (
         <div className="flex items-start gap-3 py-1">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10">
@@ -43,7 +44,7 @@ export const getMerchantsColumns = (
     },
     {
       accessorKey: "businessType",
-      header: "Category & Plan",
+      header: t("columns.categoryPlan"),
       cell: ({ row }) => (
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400">
@@ -61,7 +62,7 @@ export const getMerchantsColumns = (
     },
     {
       accessorKey: "location",
-      header: "Location",
+      header: t("columns.location"),
       cell: ({ row }) => (
         <div className="flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
           <MapPin className="h-3.5 w-3.5 shrink-0 text-orange-500" />
@@ -73,7 +74,7 @@ export const getMerchantsColumns = (
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("columns.status"),
       cell: ({ row }) => (
         <div className="flex items-center h-full">
           {showEdit ? (
@@ -96,7 +97,7 @@ export const getMerchantsColumns = (
     },
     {
       accessorKey: "qr",
-      header: () => <div className="text-center font-semibold">QR Scan</div>,
+      header: () => <div className="text-center font-semibold">{t("columns.qrScan")}</div>,
       cell: ({ row }) => {
         const raw = row.original.raw || {};
         const img = raw.qr_code_image || raw.qr_code || null;
@@ -107,12 +108,13 @@ export const getMerchantsColumns = (
                 <QRImageDialogHover
                   imageBase64={img}
                   filename={`qr-${row.original.id}.png`}
-                  label={`Scan for ${row.original.name}`}
+                  label={t("qrDialog.scanFor", { name: row.original.name })}
+                  downloadText={t("qrDialog.download")}
                 />
               </div>
             ) : (
               <span className="text-slate-400 text-[10px] uppercase font-black tracking-widest bg-slate-100 px-2 py-1 rounded">
-                NO QR
+                {t("columns.noQr")}
               </span>
             )}
           </div>
@@ -125,7 +127,7 @@ export const getMerchantsColumns = (
   if (!isMasterAdmin) {
     columns.push({
       id: "actions",
-      header: "Actions",
+      header: t("columns.actions"),
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-start pr-2">
@@ -140,14 +142,14 @@ export const getMerchantsColumns = (
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
                 <DropdownMenuLabel className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
-                  Merchant Options
+                  {t("actions.merchantOptions")}
                 </DropdownMenuLabel>
                 {/* Edit */}
                 {showEdit && (
                   <DropdownMenuItem asChild>
                     <Link href={`/agent/merchants/edit/${row.original.id}`}>
                       <Edit className="mr-2 h-4 w-4" />
-                      Edit
+                      {t("actions.edit")}
                     </Link>
                   </DropdownMenuItem>
                 )}
@@ -155,7 +157,7 @@ export const getMerchantsColumns = (
                 <DropdownMenuItem asChild>
                   <Link href={`/agent/merchants/${row.original.id}`}>
                     <FileText className="mr-2 h-4 w-4" />
-                    Details
+                    {t("actions.details")}
                   </Link>
                 </DropdownMenuItem>
                 {/* Delete */}

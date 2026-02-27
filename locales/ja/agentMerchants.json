@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "作成",
+    "dashboard": "ダッシュボード",
+    "details": "詳細",
+    "editMerchant": "マーチャントを編集",
+    "merchantManagement": "マーチャント管理",
+    "merchants": "マーチャント"
+  },
+  "common": {
+    "error": "エラーが発生しました",
+    "loading": "読み込み中...",
+    "noData": "データが利用できません"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "マーチャント管理者のログイン詳細。",
+      "emailAddress": "メールアドレス",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "パスワードを隠す",
+      "initialPassword": "初期パスワード",
+      "merchantName": "商人名",
+      "merchantNamePlaceholder": "ジョン・ドー",
+      "role": "役割",
+      "showPassword": "パスワードを表示",
+      "title": "アカウント認証情報"
+    },
+    "actions": {
+      "cancel": "キャンセル",
+      "createMerchant": "マーチャントを作成",
+      "creating": "作成中...",
+      "insufficientBalanceTooltip": "年間マーチャント作成のためのウォレット残高が不足しています"
+    },
+    "businessProfile": {
+      "businessName": "ビジネス名",
+      "businessNamePlaceholder": "例: アクメカフェ",
+      "businessType": "ビジネスタイプ",
+      "businessTypePlaceholder": "ビジネスタイプを選択...",
+      "businessTypes": {
+        "education": "教育",
+        "foodBeverage": "食品と飲料",
+        "health": "健康",
+        "hospitality": "ホスピタリティ",
+        "retail": "小売",
+        "services": "サービス",
+        "technology": "テクノロジー"
+      },
+      "description": "顧客に表示される主要なビジネス詳細。",
+      "taxId": "税務ID",
+      "taxIdPlaceholder": "例: TX123456",
+      "title": "ビジネスプロフィール"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 メインストリート, 市, 国",
+      "city": "市",
+      "cityPlaceholder": "市",
+      "country": "国",
+      "countryPlaceholder": "国",
+      "description": "ビジネスアドレスを検索して詳細を自動入力します。",
+      "locationUpdated": "場所が更新されました",
+      "searchAddress": "住所を検索",
+      "title": "所在地の詳細"
+    },
+    "merchantType": {
+      "accountStatus": "アカウントステータス",
+      "accountStatusDescription": "このマーチャントのプラットフォームへのアクセスを有効または無効にします。",
+      "active": "アクティブ",
+      "annual": "年次",
+      "description": "マーチャントタイプを選択してください。",
+      "inactive": "非アクティブ",
+      "label": "マーチャントタイプ",
+      "temporary": "一時的",
+      "title": "マーチャントタイプ"
+    },
+    "messages": {
+      "createError": "マーチャントの作成に失敗しました",
+      "createErrorDescription": "入力内容を確認して再試行してください。",
+      "createSuccess": "マーチャントアカウントが正常に作成されました。",
+      "validationFailed": "検証に失敗しました"
+    },
+    "subtitle": "新しいマーチャントアカウントを作成し、サブスクリプションプランを割り当て、初期制限を設定します。",
+    "title": "新しいマーチャントをオンボード",
+    "validation": {
+      "emailInvalid": "有効なメールアドレスを入力してください",
+      "fieldEmpty": "{field}は空であってはいけません",
+      "fieldInvalid": "{field}は無効です",
+      "fieldRequired": "{field}は必須です",
+      "fields": {
+        "address": "住所",
+        "business_name": "ビジネス名",
+        "business_type": "ビジネスタイプ",
+        "city": "市",
+        "country": "国",
+        "email": "メールアドレス",
+        "merchant_type": "商人タイプ",
+        "name": "商人名",
+        "password": "パスワード",
+        "role": "役割",
+        "tax_id": "税務ID"
+      },
+      "passwordTooShort": "パスワードは8文字以上でなければなりません"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "アクティブ",
+        "birthday": "🎂",
+        "description": "最近登録された顧客",
+        "female": "👩 女性",
+        "inactive": "非アクティブ",
+        "joined": "📅 参加日",
+        "male": "👨 男性",
+        "noData": "顧客が見つかりませんでした。",
+        "other": "👤",
+        "pageOf": "ページ {current} / {total}",
+        "reward": "報酬",
+        "title": "顧客 ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "金額",
+          "credits": "クレジット",
+          "description": "説明"
+        },
+        "description": "履歴クレジット使用量",
+        "noData": "レコードが見つかりませんでした。",
+        "pageOf": "ページ {current} / {total}",
+        "title": "取引台帳"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "アクティブ",
+        "consumed": "{percent}% 消費済み",
+        "description": "アクティブキャンペーン",
+        "halal": "ハラール",
+        "id": "ID",
+        "inactive": "非アクティブ",
+        "issued": "発行済み",
+        "left": "{count} 残り",
+        "luckyDraw": "✓ ラッキードロー",
+        "noData": "アクティブなバッチはありません。",
+        "pageOf": "ページ {current} / {total}",
+        "public": "公開",
+        "title": "クーポンバッチ ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "アカウント",
+        "ads": "広告",
+        "annualFee": "年会費",
+        "bi": "BI",
+        "coupons": "クーポン",
+        "currency": "通貨",
+        "description": "ライブクレジット割り当て",
+        "disabled": "無効",
+        "enabled": "有効",
+        "expires": "期限切れ",
+        "inactive": "非アクティブ",
+        "never": "決して",
+        "paid": "支払い済み",
+        "paidAds": "有料広告",
+        "plan": "プラン",
+        "title": "ウォレットの詳細",
+        "ui": "UI",
+        "unpaid": "未払い",
+        "verified": "確認済み",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "マーチャントが見つからないか、読み込むことができませんでした。",
+      "title": "エラー"
+    },
+    "header": {
+      "active": "アクティブ",
+      "editConfiguration": "設定を編集",
+      "inactive": "非アクティブ",
+      "memberSince": "会員登録日",
+      "subscription": "{type} サブスクリプション"
+    },
+    "loadError": "マーチャントの詳細の読み込みに失敗しました",
+    "loading": "マーチャントの詳細を読み込んでいます...",
+    "overview": {
+      "adCredits": {
+        "description": "プロモーション用",
+        "title": "広告クレジット"
+      },
+      "couponCredits": {
+        "description": "バッチ用",
+        "title": "クーポンクレジット"
+      },
+      "recentTransactions": {
+        "credits": "クレジット",
+        "noData": "取引が見つかりませんでした。",
+        "pageOf": "ページ {current} / {total}",
+        "title": "最近の取引"
+      },
+      "totalCredits": {
+        "title": "合計クレジット",
+        "usedLabel": "{used} 使用済み 合計"
+      },
+      "usageSummary": {
+        "couponBalance": "クーポン残高",
+        "creditUsage": "クレジット使用量",
+        "title": "使用状況の概要",
+        "whatsappBalance": "WhatsApp残高",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "WhatsApp UI"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "WhatsAppクレジット",
+        "uiLabel": "UI"
+      }
+    },
+    "tabs": {
+      "activity": "アクティビティ",
+      "billing": "制限",
+      "overview": "概要"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "マーチャント管理者の詳細を更新します。",
+      "newPassword": "新しいパスワード（現在のパスワードを保持するには空白のままにしてください）",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "マーチャントを更新",
+      "updating": "更新中..."
+    },
+    "loadingError": "マーチャントデータの読み込みに失敗しました",
+    "messages": {
+      "updateError": "マーチャントの更新に失敗しました",
+      "updateSuccess": "マーチャントが正常に更新されました。"
+    },
+    "subtitle": "マーチャントアカウントの詳細と設定を更新します。",
+    "title": "マーチャントを編集",
+    "validation": {
+      "emailInvalid": "有効なメールアドレスを入力してください",
+      "fieldEmpty": "{field}は空であってはいけません",
+      "fieldInvalid": "{field}は無効です",
+      "fieldRequired": "{field}は必須です",
+      "fields": {
+        "address": "住所",
+        "business_name": "ビジネス名",
+        "business_type": "ビジネスタイプ",
+        "city": "市",
+        "country": "国",
+        "email": "メールアドレス",
+        "merchant_type": "商人タイプ",
+        "name": "商人名",
+        "password": "パスワード",
+        "role": "役割",
+        "tax_id": "税務ID"
+      },
+      "passwordTooShort": "パスワードは8文字以上でなければなりません"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "詳細",
+      "edit": "編集",
+      "merchantOptions": "マーチャントオプション"
+    },
+    "addMerchant": "マーチャントを追加",
+    "columnNames": {
+      "actions": "アクション",
+      "businessType": "ビジネスタイプ",
+      "location": "場所",
+      "name": "名前",
+      "qr": "QR",
+      "status": "ステータス"
+    },
+    "columns": {
+      "actions": "アクション",
+      "businessAccount": "ビジネス & アカウント",
+      "categoryPlan": "カテゴリ & プラン",
+      "location": "位置情報",
+      "noQr": "QRなし",
+      "qrScan": "QRスキャン",
+      "status": "ステータス"
+    },
+    "delete": {
+      "cancel": "キャンセル",
+      "confirm": "削除",
+      "deleting": "削除中...",
+      "description": "本当に削除してもよろしいですか",
+      "descriptionEnd": "? この操作は元に戻せません。",
+      "errorMessage": "マーチャントの削除に失敗しました",
+      "successMessage": "\"{merchantName}\"の商人が正常に削除されました。",
+      "title": "マーチャントを削除",
+      "trigger": "マーチャントを削除"
+    },
+    "qrDialog": {
+      "download": "ダウンロード",
+      "scanFor": "{name}をスキャン"
+    },
+    "searchPlaceholder": "マーチャントを検索...",
+    "statusToggle": {
+      "activatedSuccess": "マーチャントが正常にアクティブ化されました",
+      "active": "アクティブ",
+      "deactivatedSuccess": "マーチャントが正常に無効化されました",
+      "inactive": "非アクティブ",
+      "updateError": "マーチャントのステータスの更新に失敗しました"
+    },
+    "subtitle": "マーチャントを管理および監視する",
+    "title": "マーチャント管理"
+  }
+}

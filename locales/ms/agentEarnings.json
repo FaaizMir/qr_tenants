@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Papan Pemuka",
+    "earnings": "Pendapatan"
+  },
+  "columns": {
+    "commissionEarned": "Komisen Diperoleh",
+    "commissionRate": "Kadar Komisen",
+    "date": "Tarikh",
+    "merchant": "Pedagang",
+    "noData": "—",
+    "source": "Komisen",
+    "totalSales": "Jumlah Jualan"
+  },
+  "commissionBreakdown": {
+    "description": "Komisen terkumpul mengikut pedagang.",
+    "searchPlaceholder": "Cari pedagang atau sumber...",
+    "title": "Pecahan Komisen"
+  },
+  "errors": {
+    "fetchFailed": "Gagal untuk mendapatkan pendapatan"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "Pedagang Aktif"
+    },
+    "earningsType": {
+      "title": "Jenis Pendapatan",
+      "value": "Prabayar"
+    },
+    "totalEarnings": {
+      "title": "Jumlah Pendapatan",
+      "trend": "Data Langsung"
+    }
+  },
+  "noData": "—"
+}

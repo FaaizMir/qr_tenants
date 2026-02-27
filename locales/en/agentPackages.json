@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "Create Package",
+    "dashboard": "Agent Dashboard",
+    "edit": "Edit Package",
+    "packages": "Ads Packages"
+  },
+  "deleteDialog": {
+    "cancel": "Abort Deletion",
+    "confirm": "Confirmed, Delete Now",
+    "description": "You are about to permanently delete ",
+    "descriptionEnd": ". This action is terminal and cannot be reversed.",
+    "title": "Extreme Caution"
+  },
+  "form": {
+    "actions": {
+      "cancel": "Cancel",
+      "delete": "Delete Package",
+      "save": "Publish Package",
+      "saving": "Saving...",
+      "update": "Update Package"
+    },
+    "backButton": "Back to List",
+    "createDescription": "Define pricing and credits for paid advertising campaigns.",
+    "createTitle": "Create Paid Ads Package",
+    "deleteConfirm": {
+      "cancel": "Cancel",
+      "confirm": "Yes, delete package",
+      "description": "This will permanently remove ",
+      "descriptionEnd": ". This action cannot be undone.",
+      "title": "Are you absolutely sure?"
+    },
+    "editDescription": "Define pricing and credits for paid advertising campaigns.",
+    "editTitle": "Edit Paid Ads Package",
+    "fields": {
+      "currency": {
+        "label": "Currency",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "USD ($)"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Short summary of what this package offers..."
+      },
+      "displayPriority": {
+        "label": "Display Priority",
+        "placeholder": "Pos. in list (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "Merchant Plan",
+        "options": {
+          "annual": "Annual / Premium",
+          "temporary": "Temporary / Basic"
+        }
+      },
+      "packageName": {
+        "label": "Package Name",
+        "placeholder": "e.g. Premium Ads Bundle"
+      },
+      "packageStatus": {
+        "label": "Package Status",
+        "options": {
+          "active": "Active & Visible",
+          "inactive": "Inactive / Hidden"
+        }
+      },
+      "price": {
+        "label": "Price",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "AUTO",
+        "label": "Price per Credit"
+      },
+      "totalCredits": {
+        "label": "Total Credits"
+      }
+    },
+    "infoBanner": {
+      "description": "This package type is specifically for paid advertising campaigns",
+      "title": "Paid Ads Credit Package"
+    },
+    "preview": {
+      "advertisingCredits": "Advertising Credits",
+      "defaultDescription": "Enhanced advertising capacity",
+      "getStarted": "Get Started",
+      "hiddenDraft": "HIDDEN / DRAFT",
+      "packageTitle": "Package Title",
+      "paidAds": "Paid Ads",
+      "perCredit": "per credit",
+      "title": "Live Preview"
+    },
+    "sections": {
+      "classification": "Classification",
+      "credits": "Credits & Allocation",
+      "identity": "Identity & Pricing"
+    },
+    "validation": {
+      "creditsMin": "Credits must be at least 1",
+      "creditsRequired": "Credits are required",
+      "descriptionRequired": "Description is required",
+      "nameRequired": "Package name is required",
+      "priceMin": "Price must be at least 1",
+      "priceRequired": "Price is required",
+      "priorityRequired": "Display priority is required"
+    }
+  },
+  "messages": {
+    "createError": "Failed to create package",
+    "createSuccess": "Package created successfully",
+    "deleteError": "Failed to delete package",
+    "deleteSuccess": "Package deleted successfully",
+    "fetchError": "Failed to fetch packages",
+    "loadError": "Failed to load package details",
+    "updateError": "Failed to update package",
+    "updateSuccess": "Package updated successfully",
+    "wrongTypeError": "You can only edit paid ads packages"
+  },
+  "subtitle": "Manage your paid advertising credit packages",
+  "table": {
+    "actions": {
+      "delete": "Delete Package",
+      "edit": "Edit Package",
+      "label": "Package Actions"
+    },
+    "columns": {
+      "credits": "Credits",
+      "noDescription": "No description",
+      "packageInfo": "Package Info",
+      "perCredit": "per credit",
+      "plan": "Plan",
+      "pricing": "Pricing",
+      "rank": "Rank",
+      "status": "Status"
+    },
+    "createButton": "Create Paid Ads Package",
+    "searchPlaceholder": "Search by package name...",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "title": "Paid Ads Packages"
+}

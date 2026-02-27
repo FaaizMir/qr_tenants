@@ -122,7 +122,11 @@ export default function SupportContainer() {
           const sa = res.data.data?.[0] || res.data?.[0];
           if (sa) {
             setParticipants([
-              { ...sa, name: t("participants.platformSupport"), role: "SUPER_ADMIN" },
+              {
+                ...sa,
+                name: t("participants.platformSupport"),
+                role: "SUPER_ADMIN",
+              },
             ]);
           }
         } catch (err) {
@@ -137,7 +141,11 @@ export default function SupportContainer() {
             merchantData.data?.data?.admin_id || merchantData.data?.admin_id;
           if (agentId) {
             setParticipants([
-              { id: agentId, name: t("participants.yourSupportAgent"), role: "AGENT" },
+              {
+                id: agentId,
+                name: t("participants.yourSupportAgent"),
+                role: "AGENT",
+              },
             ]);
           }
         } catch (err) {
@@ -496,7 +504,9 @@ export default function SupportContainer() {
           </h1>
           <p className="text-sm text-muted-foreground">
             {hasAdminAccess && t("subtitle.admin")}
-            {isAgent && activeTab === "merchants" && t("subtitle.agentMerchants")}
+            {isAgent &&
+              activeTab === "merchants" &&
+              t("subtitle.agentMerchants")}
             {isAgent && activeTab === "agents" && t("subtitle.agentSupport")}
             {isMerchant && t("subtitle.merchant")}
           </p>
@@ -755,7 +765,7 @@ export default function SupportContainer() {
                               variant="secondary"
                               className="text-[9px] h-4 px-1"
                             >
-                              NEW TICKET
+                              {t("badges.newTicket")}
                             </Badge>
                           ) : conversationTypeFilter === "chat" ? (
                             <Badge
@@ -827,7 +837,9 @@ export default function SupportContainer() {
                         <MessageSquare className="h-8 w-8 text-muted-foreground/40" />
                       </div>
                       <div>
-                        <h3 className="font-bold">{t("conversation.noMessagesTitle")}</h3>
+                        <h3 className="font-bold">
+                          {t("conversation.noMessagesTitle")}
+                        </h3>
                         <p className="text-sm text-muted-foreground">
                           {t("conversation.noMessagesDesc")}
                         </p>
@@ -969,7 +981,8 @@ export default function SupportContainer() {
                         disabled={!replyText.trim() || !isConnected}
                         className="h-9 px-6 gap-2 rounded-full shadow-lg"
                       >
-                        {t("conversation.sendMessage")} <Send className="h-3.5 w-3.5" />
+                        {t("conversation.sendMessage")}{" "}
+                        <Send className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>

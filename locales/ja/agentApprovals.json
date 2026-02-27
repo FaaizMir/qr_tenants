@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "承認",
+    "reject": "却下"
+  },
+  "columns": {
+    "adContent": "広告コンテンツ",
+    "adPlacement": "広告掲載",
+    "approvalStatus": "承認状況",
+    "approvalType": "承認タイプ",
+    "businessAccount": "ビジネス & アカウント",
+    "location": "場所",
+    "merchantType": "商人タイプ",
+    "noAd": "広告なし",
+    "requestedDate": "リクエスト日"
+  },
+  "dialog": {
+    "approveDescription": "{merchantName}のリクエストを承認してもよろしいですか？この操作は元に戻せません。",
+    "approveTitle": "広告リクエストを承認",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "confirmApprove": "はい、承認する",
+    "confirmReject": "はい、拒否します",
+    "processing": "処理中...",
+    "rejectDescription": "{merchantName}からリクエストを拒否する理由を選択してください。",
+    "rejectTitle": "広告リクエストを却下"
+  },
+  "messages": {
+    "approveError": "リクエストの承認に失敗しました",
+    "approveSuccess": "リクエストが正常に承認されました",
+    "fetchError": "承認の取得中にエラーが発生しました",
+    "rejectError": "リクエストの拒否に失敗しました",
+    "rejectSuccess": "リクエストは正常に拒否されました"
+  },
+  "preview": {
+    "description": "プロモーション広告のフルサイズプレビュー",
+    "title": "広告プレビュー",
+    "videoNotSupported": "お使いのブラウザはvideoタグをサポートしていません。"
+  },
+  "rejectionReasons": {
+    "adultContent": "成人向け / 性的コンテンツ",
+    "gamblingContent": "ギャンブルコンテンツ",
+    "illegalServices": "違法サービス",
+    "misleadingContent": "誤解を招くコンテンツ",
+    "other": "その他（手動理由入力）",
+    "placeholder": "拒否の理由を入力してください...",
+    "title": "理由を指定してください"
+  },
+  "status": {
+    "approved": "承認済み",
+    "pending": "保留中",
+    "rejected": "却下"
+  },
+  "subtitle": "エージェント承認を管理",
+  "title": "承認",
+  "validation": {
+    "provideCustomReason": "カスタム拒否理由を提供してください",
+    "selectReason": "拒否理由を選択してください"
+  }
+}

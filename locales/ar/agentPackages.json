@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "إنشاء حزمة",
+    "dashboard": "لوحة معلومات الوكيل",
+    "edit": "تعديل الحزمة",
+    "packages": "حزم الإعلانات"
+  },
+  "deleteDialog": {
+    "cancel": "إلغاء الحذف",
+    "confirm": "تم التأكيد، احذف الآن",
+    "description": "أنت على وشك حذف ",
+    "descriptionEnd": "هذه العملية نهائية ولا يمكن التراجع عنها.",
+    "title": "حذر شديد"
+  },
+  "form": {
+    "actions": {
+      "cancel": "إلغاء",
+      "delete": "احذف الحزمة",
+      "save": "نشر الحزمة",
+      "saving": "جارٍ الحفظ...",
+      "update": "تحديث الحزمة"
+    },
+    "backButton": "العودة إلى القائمة",
+    "createDescription": "حدد التسعير والاعتمادات لحملات الإعلانات المدفوعة.",
+    "createTitle": "إنشاء حزمة إعلانات مدفوعة",
+    "deleteConfirm": {
+      "cancel": "إلغاء",
+      "confirm": "نعم، احذف الحزمة",
+      "description": "سيؤدي ذلك إلى إزالة ",
+      "descriptionEnd": "لا يمكن التراجع عن هذا الإجراء.",
+      "title": "هل أنت متأكد تمامًا؟"
+    },
+    "editDescription": "حدد الأسعار والائتمانات لحملات الإعلانات المدفوعة.",
+    "editTitle": "تعديل حزمة إعلانات مدفوعة",
+    "fields": {
+      "currency": {
+        "label": "العملة",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "دولار أمريكي ($)"
+        }
+      },
+      "description": {
+        "label": "الوصف",
+        "placeholder": "ملخص قصير لما تقدمه هذه الحزمة..."
+      },
+      "displayPriority": {
+        "label": "أولوية العرض",
+        "placeholder": "الموقع في القائمة (1، 2، 3...)"
+      },
+      "merchantPlan": {
+        "label": "خطة التاجر",
+        "options": {
+          "annual": "سنوي / مميز",
+          "temporary": "مؤقت / أساسي"
+        }
+      },
+      "packageName": {
+        "label": "اسم الحزمة",
+        "placeholder": "مثل حزمة إعلانات مميزة"
+      },
+      "packageStatus": {
+        "label": "حالة الحزمة",
+        "options": {
+          "active": "نشط ومرئي",
+          "inactive": "غير نشط / مخفي"
+        }
+      },
+      "price": {
+        "label": "السعر",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "تلقائي",
+        "label": "السعر لكل اعتماد"
+      },
+      "totalCredits": {
+        "label": "إجمالي الاعتمادات"
+      }
+    },
+    "infoBanner": {
+      "description": "هذا النوع من الحزم مخصص لحملات الإعلانات المدفوعة",
+      "title": "حزمة ائتمان الإعلانات المدفوعة"
+    },
+    "preview": {
+      "advertisingCredits": "ائتمانات الإعلان",
+      "defaultDescription": "قدرة إعلانية محسّنة",
+      "getStarted": "ابدأ الآن",
+      "hiddenDraft": "مخفي / مسودة",
+      "packageTitle": "عنوان الحزمة",
+      "paidAds": "إعلانات مدفوعة",
+      "perCredit": "لكل ائتمان",
+      "title": "معاينة مباشرة"
+    },
+    "sections": {
+      "classification": "تصنيف",
+      "credits": "الائتمانات والتخصيص",
+      "identity": "الهوية والتسعير"
+    },
+    "validation": {
+      "creditsMin": "يجب أن تكون الرصيد على الأقل 1",
+      "creditsRequired": "الرصيد مطلوب",
+      "descriptionRequired": "الوصف مطلوب",
+      "nameRequired": "اسم الحزمة مطلوب",
+      "priceMin": "يجب أن يكون السعر على الأقل 1",
+      "priceRequired": "السعر مطلوب",
+      "priorityRequired": "أولوية العرض مطلوبة"
+    }
+  },
+  "messages": {
+    "createError": "فشل في إنشاء الحزمة",
+    "createSuccess": "تم إنشاء الحزمة بنجاح",
+    "deleteError": "فشل في حذف الحزمة",
+    "deleteSuccess": "تم حذف الحزمة بنجاح",
+    "fetchError": "فشل في جلب الحزم",
+    "loadError": "فشل في تحميل تفاصيل الحزمة",
+    "updateError": "فشل في تحديث الحزمة",
+    "updateSuccess": "تم تحديث الحزمة بنجاح",
+    "wrongTypeError": "يمكنك فقط تعديل حزم الإعلانات المدفوعة"
+  },
+  "subtitle": "إدارة حزم ائتمان الإعلانات المدفوعة الخاصة بك",
+  "table": {
+    "actions": {
+      "delete": "حذف الحزمة",
+      "edit": "تعديل الحزمة",
+      "label": "إجراءات الحزمة"
+    },
+    "columns": {
+      "credits": "الاعتمادات",
+      "noDescription": "لا يوجد وصف",
+      "packageInfo": "معلومات الحزمة",
+      "perCredit": "لكل ائتمان",
+      "plan": "خطة",
+      "pricing": "التسعير",
+      "rank": "الرتبة",
+      "status": "الحالة"
+    },
+    "createButton": "إنشاء حزمة إعلانات مدفوعة",
+    "searchPlaceholder": "البحث باسم الحزمة...",
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    }
+  },
+  "title": "حزم الإعلانات المدفوعة"
+}

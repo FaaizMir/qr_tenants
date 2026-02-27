@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/lib/toast";
 import { updateMerchant } from "@/lib/services/helper";
 
 export function MerchantStatusToggle({ initialStatus, merchantId }) {
+    const t = useTranslations("agentMerchants.listing.statusToggle");
     const [isActive, setIsActive] = useState(initialStatus === "active" || initialStatus === true);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,11 +21,11 @@ export function MerchantStatusToggle({ initialStatus, merchantId }) {
 
         try {
             await updateMerchant(merchantId, { is_active: checked });
-            toast.success(`Merchant ${checked ? "activated" : "deactivated"} successfully`);
+            toast.success(checked ? t("activatedSuccess") : t("deactivatedSuccess"));
         } catch (error) {
             console.error("Error toggling merchant status:", error);
             setIsActive(originalState); // Revert on error
-            toast.error(error?.response?.data?.message || "Failed to update merchant status");
+            toast.error(error?.response?.data?.message || t("updateError"));
         } finally {
             setIsLoading(false);
         }
@@ -37,7 +39,7 @@ export function MerchantStatusToggle({ initialStatus, merchantId }) {
                 disabled={isLoading}
             />
             <span className="text-sm capitalize text-muted-foreground w-[60px]">
-                {isActive ? "Active" : "Inactive"}
+                {isActive ? t("active") : t("inactive")}
             </span>
         </div>
     );

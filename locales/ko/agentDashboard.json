@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "발행 및 상환 통계",
+      "issued": "발행됨",
+      "merchantsLabel": "상인",
+      "noData": "사용 가능한 쿠폰 데이터 없음",
+      "page": "페이지 {current} / {total}",
+      "rank": "순위",
+      "redeemed": "구속된",
+      "redeemedCount": "사용됨",
+      "redeemedLabel": "사용됨",
+      "title": "쿠폰 성과"
+    },
+    "pagination": {
+      "pageOf": "페이지 {{current}} 중 {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "평균/메시지",
+      "description": "메시지 수 및 비용",
+      "estimatedCost": "추정 비용",
+      "merchantsLabel": "상인",
+      "messagesSent": "전송된 메시지",
+      "noData": "WhatsApp 사용 데이터가 없습니다",
+      "page": "페이지 {current} / {total}",
+      "rank": "순위",
+      "title": "WhatsApp 사용"
+    }
+  },
+  "common": {
+    "error": "데이터를 가져오는 데 실패했습니다",
+    "loading": "로딩 중...",
+    "noData": "사용 가능한 데이터가 없습니다"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "연간",
+      "temporary": "임시"
+    },
+    "pagination": {
+      "pageOf": "페이지 {{current}} 중 {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "최신 등록",
+      "noData": "상인이 없습니다",
+      "page": "페이지 {current} / {total}",
+      "rankLabel": "#",
+      "title": "최근 추가된 상인",
+      "totalLabel": "총계"
+    },
+    "topPerformers": {
+      "description": "수익 기준으로 정렬됨",
+      "issued": "발행됨",
+      "noData": "사용 가능한 성능 데이터가 없습니다",
+      "page": "페이지 {current} / {total}",
+      "rate": "비율",
+      "redeemed": "사용됨",
+      "stats": {
+        "issued": "발행됨",
+        "rate": "비율",
+        "redeemed": "사용된"
+      },
+      "title": "최고 실적자",
+      "totalLabel": "총계"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "발행된 쿠폰",
+      "couponsRedeemed": "사용된 쿠폰",
+      "totalCustomers": "총 고객",
+      "totalFeedback": "총 피드백"
+    },
+    "dateFilter": {
+      "customRange": "사용자 지정 범위",
+      "last30Days": "지난 30일",
+      "last7Days": "지난 7일",
+      "lastMonth": "지난 달",
+      "pickDate": "날짜 선택",
+      "selectRange": "범위 선택",
+      "thisMonth": "이번 달",
+      "today": "오늘",
+      "yesterday": "어제"
+    },
+    "engagement": {
+      "activityPulse": "플랫폼 활동 맥박",
+      "description": "모든 매장의 상호작용 지표",
+      "redemptionRate": "사용률",
+      "systemLoad": "정상 시스템 부하",
+      "title": "글로벌 참여",
+      "totalFeedback": "총 피드백"
+    },
+    "growth": {
+      "customersCount": "+{count} 고객",
+      "description": "최신 플랫폼 확장 데이터",
+      "newCustomers": "신규 고객 등록",
+      "newMerchants": "+{count} 상인",
+      "newStores": "이번 기간의 신규 상점",
+      "title": "성장 하이라이트"
+    },
+    "kpiCards": {
+      "activeMerchants": "활성 상인",
+      "annualMerchants": "연간 상인",
+      "inactiveMerchants": "비활성 상인",
+      "temporaryMerchants": "임시 상인",
+      "totalMerchants": "총 상인",
+      "totalRevenue": "총 수익"
+    },
+    "kpis": {
+      "activeAgents": "활동 중인 에이전트",
+      "activeMerchants": "활성 상인",
+      "agentSubscriptions": "에이전트 구독",
+      "annualMerchants": "연간 상인",
+      "biMessagesSent": "BI 메시지 전송",
+      "couponsIssued": "발급된 쿠폰",
+      "couponsRedeemed": "쿠폰 사용",
+      "feedbackReceived": "피드백 수신됨",
+      "inactiveMerchants": "비활성 상인",
+      "merchantSubscriptions": "상인 구독",
+      "packageCommissions": "패키지 수수료",
+      "temporaryMerchants": "임시 상인",
+      "totalAgents": "총 에이전트",
+      "totalCustomers": "총 고객 수",
+      "totalFeedback": "총 피드백",
+      "totalMerchants": "총 상인",
+      "totalMessages": "총 메시지",
+      "totalPlatformRevenue": "총 플랫폼 수익",
+      "totalRevenue": "총 수익",
+      "uiMessagesSent": "UI 메시지 전송됨",
+      "whatsappCost": "WhatsApp 비용"
+    },
+    "merchantDistribution": {
+      "annual": "연간",
+      "description": "연간 대 임시 구독 비율",
+      "noData": "상인 데이터가 없습니다",
+      "temporary": "임시",
+      "title": "상인 분포",
+      "total": "총계"
+    },
+    "merchantTierDistribution": {
+      "annual": "연간",
+      "description": "연간 대 임시 구독 비율",
+      "noData": "상인 데이터가 없습니다",
+      "temp": "임시",
+      "title": "상인 등급 분포",
+      "totalStores": "총 상점"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "연간 구독",
+      "creditPurchase": "신용 구매",
+      "description": "수익원 분포",
+      "title": "수익 분류",
+      "whatsappCharges": "WhatsApp 요금"
+    },
+    "roleTitle": "{role} 대시보드",
+    "sections": {
+      "financialPerformance": "재무 성과",
+      "generalOverview": "일반 개요",
+      "globalEngagement": "글로벌 참여",
+      "growthHighlights": "성장 하이라이트",
+      "revenueStreams": "수익원"
+    },
+    "title": "시스템 분석",
+    "topPerformingMerchants": {
+      "description": "가장 많은 거래량과 참여를 보인 상점 ({count}개 전체)",
+      "issued": "발행됨",
+      "noData": "이 기간에 대한 성과 데이터가 없습니다",
+      "page": "페이지 {current} / {total}",
+      "redeemed": "사용됨",
+      "showing": "{from}에서 {to}까지 {total} 중 표시",
+      "successRate": "성공률",
+      "title": "최고 성과 상인"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "전송된 BI 메시지",
+      "totalMessages": "총 메시지",
+      "uiMessagesSent": "전송된 UI 메시지",
+      "whatsappCost": "WhatsApp 비용"
+    }
+  },
+  "page": {
+    "breadcrumb": "대시보드",
+    "description": "귀하의 에이전트 성과 및 지표 개요",
+    "title": "에이전트 대시보드"
+  },
+  "tabs": {
+    "analytics": "분석",
+    "merchants": "성능",
+    "overview": "개요"
+  }
+}

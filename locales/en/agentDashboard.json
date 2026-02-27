@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "Issuance and redemption stats",
+      "issued": "Issued",
+      "merchantsLabel": "merchants",
+      "noData": "No coupon data available",
+      "page": "Page {current} of {total}",
+      "rank": "Rank",
+      "redeemed": "redeemed",
+      "redeemedCount": "Redeemed",
+      "redeemedLabel": "Redeemed",
+      "title": "Coupon Performance"
+    },
+    "pagination": {
+      "pageOf": "Page {{current}} of {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "Avg/msg",
+      "description": "Message count and cost",
+      "estimatedCost": "Est. cost",
+      "merchantsLabel": "merchants",
+      "messagesSent": "messages sent",
+      "noData": "No WhatsApp usage data",
+      "page": "Page {current} of {total}",
+      "rank": "Rank",
+      "title": "WhatsApp Usage"
+    }
+  },
+  "common": {
+    "error": "Failed to fetch data",
+    "loading": "Loading...",
+    "noData": "No data available"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "annual",
+      "temporary": "temporary"
+    },
+    "pagination": {
+      "pageOf": "Page {{current}} of {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "Latest registrations",
+      "noData": "No merchants found",
+      "page": "Page {current} of {total}",
+      "rankLabel": "#",
+      "title": "Recently Added Merchants",
+      "totalLabel": "total"
+    },
+    "topPerformers": {
+      "description": "Ranked by revenue",
+      "issued": "Issued",
+      "noData": "No performance data available",
+      "page": "Page {current} of {total}",
+      "rate": "Rate",
+      "redeemed": "Redeemed",
+      "stats": {
+        "issued": "Issued",
+        "rate": "Rate",
+        "redeemed": "Redeemed"
+      },
+      "title": "Top Performers",
+      "totalLabel": "total"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "Coupons Issued",
+      "couponsRedeemed": "Coupons Redeemed",
+      "totalCustomers": "Total Customers",
+      "totalFeedback": "Total Feedback"
+    },
+    "dateFilter": {
+      "customRange": "Custom Range",
+      "last30Days": "Last 30 Days",
+      "last7Days": "Last 7 Days",
+      "lastMonth": "Last Month",
+      "pickDate": "Pick a date",
+      "selectRange": "Select range",
+      "thisMonth": "This Month",
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "engagement": {
+      "activityPulse": "Platform Activity Pulse",
+      "description": "Interaction metrics across all stores",
+      "redemptionRate": "Redemption Rate",
+      "systemLoad": "Normal System Load",
+      "title": "Global Engagement",
+      "totalFeedback": "Total Feedback"
+    },
+    "growth": {
+      "customersCount": "+{count} Customers",
+      "description": "Latest platform expansion data",
+      "newCustomers": "New Customer Registrations",
+      "newMerchants": "+{count} Merchants",
+      "newStores": "New Stores This Period",
+      "title": "Growth Highlights"
+    },
+    "kpiCards": {
+      "activeMerchants": "Active Merchants",
+      "annualMerchants": "Annual Merchants",
+      "inactiveMerchants": "Inactive Merchants",
+      "temporaryMerchants": "Temporary Merchants",
+      "totalMerchants": "Total Merchants",
+      "totalRevenue": "Total Revenue"
+    },
+    "kpis": {
+      "activeAgents": "Active Agents",
+      "activeMerchants": "Active Merchants",
+      "agentSubscriptions": "Agent Subscriptions",
+      "annualMerchants": "Annual Merchants",
+      "biMessagesSent": "BI Messages Sent",
+      "couponsIssued": "Coupons Issued",
+      "couponsRedeemed": "Coupons Redeemed",
+      "feedbackReceived": "Feedback Recieved",
+      "inactiveMerchants": "Inactive Merchants",
+      "merchantSubscriptions": "Merchant Subscriptions",
+      "packageCommissions": "Package Commissions",
+      "temporaryMerchants": "Temporary Merchants",
+      "totalAgents": "Total Agents",
+      "totalCustomers": "Total Customers",
+      "totalFeedback": "Total Feedback",
+      "totalMerchants": "Total Merchants",
+      "totalMessages": "Total Messages",
+      "totalPlatformRevenue": "Total Platform Revenue",
+      "totalRevenue": "Total Revenue",
+      "uiMessagesSent": "UI Messages Sent",
+      "whatsappCost": "WhatsApp Cost"
+    },
+    "merchantDistribution": {
+      "annual": "Annual",
+      "description": "Annual vs Temporary Subscription Ratio",
+      "noData": "No merchant data available",
+      "temporary": "Temporary",
+      "title": "Merchant Distribution",
+      "total": "Total"
+    },
+    "merchantTierDistribution": {
+      "annual": "Annual",
+      "description": "Annual vs Temporary Subscription Ratio",
+      "noData": "No merchant data available",
+      "temp": "Temp",
+      "title": "Merchant Tier Distribution",
+      "totalStores": "Total Stores"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "Annual Subscription",
+      "creditPurchase": "Credit Purchase",
+      "description": "Revenue Sources Distribution",
+      "title": "Revenue Breakdown",
+      "whatsappCharges": "WhatsApp Charges"
+    },
+    "roleTitle": "{role} Dashboard",
+    "sections": {
+      "financialPerformance": "Financial Performance",
+      "generalOverview": "General Overview",
+      "globalEngagement": "Global Engagement",
+      "growthHighlights": "Growth Highlights",
+      "revenueStreams": "Revenue Streams"
+    },
+    "title": "System Analytics",
+    "topPerformingMerchants": {
+      "description": "Stores with highest volume and engagement ({count} total)",
+      "issued": "Issued",
+      "noData": "No performance data for this period",
+      "page": "Page {current} of {total}",
+      "redeemed": "Redeemed",
+      "showing": "Showing {from} to {to} of {total}",
+      "successRate": "Success Rate",
+      "title": "Top Performing Merchants"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "BI Messages Sent",
+      "totalMessages": "Total Messages",
+      "uiMessagesSent": "UI Messages Sent",
+      "whatsappCost": "WhatsApp Cost"
+    }
+  },
+  "page": {
+    "breadcrumb": "Dashboard",
+    "description": "Overview of your agent performance and metrics",
+    "title": "Agent Dashboard"
+  },
+  "tabs": {
+    "analytics": "Analytics",
+    "merchants": "Performance",
+    "overview": "Overview"
+  }
+}

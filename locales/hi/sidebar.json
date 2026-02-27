@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "विज्ञापन पैकेज",
     "approvals": "अनुमोदन",
     "couponsync": "कूपन समन्वय",
     "dashboard": "डैशबोर्ड",

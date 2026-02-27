@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "حزم الإعلانات",
     "approvals": "الموافقات",
     "couponsync": "مزامنة القسائم",
     "dashboard": "لوحة التحكم",

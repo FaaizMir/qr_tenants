@@ -1,10 +1,13 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import AgentMerchantsListingContainer from "@/containers/agent/merchants/listing";
+import { getTranslations } from "next-intl/server";
 
 export default async function AgentMerchantsPage() {
+  const t = await getTranslations("agentMerchants.breadcrumbs");
+  
   const breadcrumbData = [
-    { name: "Dashboard", url: "/agent/dashboard" },
-    { name: "Merchant Management", url: "/agent/merchants" },
+    { name: t("dashboard"), url: "/agent/dashboard" },
+    { name: t("merchantManagement"), url: "/agent/merchants" },
   ];
   return (
     <>

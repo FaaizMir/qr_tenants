@@ -41,6 +41,7 @@ import {
 } from "@/components/ui/table";
 
 import { useEffect, useCallback, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   getMerchantById,
   getMerchantWallet,
@@ -59,6 +60,7 @@ import {
 } from "next/navigation";
 
 export default function MerchantDetailContainer({ params }) {
+  const t = useTranslations("agentMerchants.detail");
   const { id: merchantId } = useParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -129,11 +131,11 @@ export default function MerchantDetailContainer({ params }) {
       );
     } catch (error) {
       console.error("Error fetching merchant details:", error);
-      toast.error("Failed to load merchant details");
+      toast.error(t("loadError"));
     } finally {
       setLoading(false);
     }
-  }, [merchantId, transactionPage, customerPage, batchPage]);
+  }, [merchantId, transactionPage, customerPage, batchPage, t]);
 
   useEffect(() => {
     if (merchantId) {
@@ -155,7 +157,7 @@ export default function MerchantDetailContainer({ params }) {
       <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <p className="text-muted-foreground animate-pulse">
-          Loading merchant details...
+          {t("loading")}
         </p>
       </div>
     );
@@ -165,9 +167,9 @@ export default function MerchantDetailContainer({ params }) {
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
+        <AlertTitle>{t("error.title")}</AlertTitle>
         <AlertDescription>
-          Merchant not found or could not be loaded.
+          {t("error.description")}
         </AlertDescription>
       </Alert>
     );
@@ -196,7 +198,7 @@ export default function MerchantDetailContainer({ params }) {
               variant={merchant.user?.is_active ? "default" : "destructive"}
               className="capitalize"
             >
-              {merchant.user?.is_active ? "Active" : "Inactive"}
+              {merchant.user?.is_active ? t("header.active") : t("header.inactive")}
             </Badge>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -210,13 +212,13 @@ export default function MerchantDetailContainer({ params }) {
               variant="secondary"
               className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-100"
             >
-              {capitalizeFirst(merchant.merchant_type)} Subscription
+              {t("header.subscription", { type: capitalizeFirst(merchant.merchant_type) })}
             </Badge>
             <Badge
               variant="outline"
               className="text-muted-foreground font-normal border-none p-0"
             >
-              Member since{" "}
+              {t("header.memberSince")}{" "}
               {new Date(merchant.created_at).toLocaleDateString("en-GB")}
             </Badge>
           </div>
@@ -231,7 +233,7 @@ export default function MerchantDetailContainer({ params }) {
             variant="outline"
             onClick={() => router.push(`/agent/merchants/edit/${merchantId}`)}
           >
-            <Settings className="mr-2 h-4 w-4" /> Edit Configuration
+            <Settings className="mr-2 h-4 w-4" /> {t("header.editConfiguration")}
           </Button>
         </div>
       </div>
@@ -241,10 +243,16 @@ export default function MerchantDetailContainer({ params }) {
         className="w-full"
         onValueChange={handleTabChange}
       >
-        <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="activity">Activity</TabsTrigger>
-          <TabsTrigger value="billing">Limits</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 lg:w-[500px]">
+          <TabsTrigger value="overview" className="data-[state=active]:bg-background">
+            {t("tabs.overview")}
+          </TabsTrigger>
+          <TabsTrigger value="activity" className="data-[state=active]:bg-background">
+            {t("tabs.activity")}
+          </TabsTrigger>
+          <TabsTrigger value="billing" className="data-[state=active]:bg-background">
+            {t("tabs.billing")}
+          </TabsTrigger>
         </TabsList>
 
         {/* Overview TabContent */}
@@ -253,7 +261,7 @@ export default function MerchantDetailContainer({ params }) {
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  WhatsApp Credits
+                  {t("overview.whatsappCredits.title")}
                 </CardTitle>
                 <Smartphone className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
@@ -262,14 +270,14 @@ export default function MerchantDetailContainer({ params }) {
                   {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  UI: {wallet?.whatsapp_ui_credits ?? 0} • BI: {wallet?.whatsapp_bi_credits ?? 0}
+                  {t("overview.whatsappCredits.uiLabel")}: {wallet?.whatsapp_ui_credits ?? 0} • {t("overview.whatsappCredits.biLabel")}: {wallet?.whatsapp_bi_credits ?? 0}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Ad Credits
+                  {t("overview.adCredits.title")}
                 </CardTitle>
                 <Activity className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
@@ -278,14 +286,14 @@ export default function MerchantDetailContainer({ params }) {
                   {wallet?.paid_ad_credits ?? 0}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  For promotions
+                  {t("overview.adCredits.description")}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Coupon Credits
+                  {t("overview.couponCredits.title")}
                 </CardTitle>
                 <Ticket className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
@@ -294,14 +302,14 @@ export default function MerchantDetailContainer({ params }) {
                   {wallet?.coupon_credits ?? 0}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  For batches
+                  {t("overview.couponCredits.description")}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Total Credits
+                  {t("overview.totalCredits.title")}
                 </CardTitle>
                 <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
@@ -310,7 +318,7 @@ export default function MerchantDetailContainer({ params }) {
                   {wallet?.total_credits_purchased ?? 0}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {wallet?.total_credits_used ?? 0} used total
+                  {t("overview.totalCredits.usedLabel", { used: wallet?.total_credits_used ?? 0 })}
                 </p>
               </CardContent>
             </Card>
@@ -319,7 +327,7 @@ export default function MerchantDetailContainer({ params }) {
           <div className="grid gap-4 md:grid-cols-7">
             <Card className="col-span-4 border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
-                <CardTitle>Recent Transactions</CardTitle>
+                <CardTitle>{t("overview.recentTransactions.title")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ScrollArea className="h-[250px]">
@@ -394,7 +402,7 @@ export default function MerchantDetailContainer({ params }) {
                               {tx.type === "purchase" && tx.amount ? (
                                 <>
                                   <p className="text-sm font-semibold text-green-600">
-                                    +{tx.credits} credits
+                                    +{tx.credits} {t("overview.recentTransactions.credits")}
                                   </p>
                                   <p className="text-[10px] text-muted-foreground">
                                     ${parseFloat(tx.amount).toFixed(2)}
@@ -402,7 +410,7 @@ export default function MerchantDetailContainer({ params }) {
                                 </>
                               ) : (
                                 <p className="text-sm font-semibold text-red-600">
-                                  -{creditsUsed || 0} credits
+                                  -{creditsUsed || 0} {t("overview.recentTransactions.credits")}
                                 </p>
                               )}
                             </div>
@@ -411,7 +419,7 @@ export default function MerchantDetailContainer({ params }) {
                       })
                     ) : (
                       <div className="text-center py-10 text-muted-foreground text-sm">
-                        No transactions found.
+                        {t("overview.recentTransactions.noData")}
                       </div>
                     )}
                   </div>
@@ -419,8 +427,7 @@ export default function MerchantDetailContainer({ params }) {
                 {transactionMeta && transactionMeta.totalPages > 1 && (
                   <div className="flex items-center justify-between pt-3 border-t mt-3">
                     <p className="text-xs text-muted-foreground">
-                      Page {transactionMeta.page} of{" "}
-                      {transactionMeta.totalPages}
+                      {t("overview.recentTransactions.pageOf", { current: transactionMeta.page, total: transactionMeta.totalPages })}
                     </p>
                     <div className="flex gap-1">
                       <Button
@@ -455,13 +462,13 @@ export default function MerchantDetailContainer({ params }) {
 
             <Card className="col-span-3 text-card-foreground border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
-                <CardTitle>Usage Summary</CardTitle>
+                <CardTitle>{t("overview.usageSummary.title")}</CardTitle>
                 <Lock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Credit Usage</span>
+                    <span>{t("overview.usageSummary.creditUsage")}</span>
                     <span className="text-muted-foreground font-mono">
                       {wallet?.total_credits_used ?? 0} /{" "}
                       {wallet?.total_credits_purchased ?? 0}
@@ -482,7 +489,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Smartphone className="h-4 w-4 text-emerald-500" />
-                      <span className="text-sm">WhatsApp Balance</span>
+                      <span className="text-sm">{t("overview.usageSummary.whatsappBalance")}</span>
                     </div>
                     <span className="font-bold">
                       {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
@@ -491,7 +498,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Smartphone className="h-4 w-4 text-blue-400" />
-                      <span className="text-sm text-xs">WhatsApp UI</span>
+                      <span className="text-sm text-xs">{t("overview.usageSummary.whatsappUI")}</span>
                     </div>
                     <span className="font-semibold text-sm">
                       {wallet?.whatsapp_ui_credits ?? 0}
@@ -500,7 +507,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Smartphone className="h-4 w-4 text-purple-400" />
-                      <span className="text-sm text-xs">WhatsApp BI</span>
+                      <span className="text-sm text-xs">{t("overview.usageSummary.whatsappBI")}</span>
                     </div>
                     <span className="font-semibold text-sm">
                       {wallet?.whatsapp_bi_credits ?? 0}
@@ -509,7 +516,7 @@ export default function MerchantDetailContainer({ params }) {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Ticket className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm">Coupon Balance</span>
+                      <span className="text-sm">{t("overview.usageSummary.couponBalance")}</span>
                     </div>
                     <span className="font-bold">
                       {wallet?.coupon_credits ?? 0}
@@ -527,9 +534,9 @@ export default function MerchantDetailContainer({ params }) {
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>
-                  Customers ({customerMeta?.total || customers.length})
+                  {t("activity.customers.title", { count: customerMeta?.total || customers.length })}
                 </CardTitle>
-                <CardDescription>Recently registered customers</CardDescription>
+                <CardDescription>{t("activity.customers.description")}</CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <ScrollArea className="h-[350px]">
@@ -554,7 +561,7 @@ export default function MerchantDetailContainer({ params }) {
                                     variant="outline"
                                     className="text-[9px] px-1.5 py-0 bg-amber-50 text-amber-700 border-amber-200"
                                   >
-                                    Reward
+                                    {t("activity.customers.reward")}
                                   </Badge>
                                 )}
                               </div>
@@ -565,10 +572,10 @@ export default function MerchantDetailContainer({ params }) {
                                 {c.gender && (
                                   <span className="capitalize">
                                     {c.gender === "male"
-                                      ? "👨"
+                                      ? t("activity.customers.male")
                                       : c.gender === "female"
-                                        ? "👩"
-                                        : "👤"}{" "}
+                                        ? t("activity.customers.female")
+                                        : t("activity.customers.other")}{" "}
                                     {c.gender}
                                   </span>
                                 )}
@@ -576,7 +583,7 @@ export default function MerchantDetailContainer({ params }) {
                                   <>
                                     <span>•</span>
                                     <span>
-                                      🎂{" "}
+                                      {t("activity.customers.birthday")}{" "}
                                       {new Date(
                                         c.date_of_birth,
                                       ).toLocaleDateString("en-GB")}
@@ -585,7 +592,7 @@ export default function MerchantDetailContainer({ params }) {
                                 )}
                                 <span>•</span>
                                 <span>
-                                  📅 Joined{" "}
+                                  {t("activity.customers.joined")}{" "}
                                   {new Date(c.created_at).toLocaleDateString(
                                     "en-GB",
                                   )}
@@ -597,13 +604,13 @@ export default function MerchantDetailContainer({ params }) {
                             variant={c.is_active ? "outline" : "secondary"}
                             className="shrink-0 ml-2"
                           >
-                            {c.is_active ? "Active" : "Inactive"}
+                            {c.is_active ? t("activity.customers.active") : t("activity.customers.inactive")}
                           </Badge>
                         </div>
                       ))
                     ) : (
                       <div className="text-center py-20 text-muted-foreground text-sm">
-                        No customers found.
+                        {t("activity.customers.noData")}
                       </div>
                     )}
                   </div>
@@ -611,7 +618,7 @@ export default function MerchantDetailContainer({ params }) {
                 {customerMeta && customerMeta.totalPages > 1 && (
                   <div className="flex items-center justify-between px-6 py-3 border-t">
                     <p className="text-xs text-muted-foreground">
-                      Page {customerMeta.page} of {customerMeta.totalPages}
+                      {t("activity.customers.pageOf", { current: customerMeta.page, total: customerMeta.totalPages })}
                     </p>
                     <div className="flex gap-1">
                       <Button
@@ -644,20 +651,20 @@ export default function MerchantDetailContainer({ params }) {
 
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
-                <CardTitle>Transaction Ledger</CardTitle>
-                <CardDescription>Historical credit usage</CardDescription>
+                <CardTitle>{t("activity.transactionLedger.title")}</CardTitle>
+                <CardDescription>{t("activity.transactionLedger.description")}</CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <ScrollArea className="h-[400px]">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="px-6">Description</TableHead>
+                        <TableHead className="px-6">{t("activity.transactionLedger.columns.description")}</TableHead>
                         <TableHead className="text-right px-6">
-                          Credits
+                          {t("activity.transactionLedger.columns.credits")}
                         </TableHead>
                         <TableHead className="text-right px-6">
-                          Amount
+                          {t("activity.transactionLedger.columns.amount")}
                         </TableHead>
                       </TableRow>
                     </TableHeader>
@@ -757,7 +764,7 @@ export default function MerchantDetailContainer({ params }) {
                             colSpan={3}
                             className="text-center py-20 text-muted-foreground text-sm"
                           >
-                            No records found.
+                            {t("activity.transactionLedger.noData")}
                           </TableCell>
                         </TableRow>
                       )}
@@ -767,8 +774,7 @@ export default function MerchantDetailContainer({ params }) {
                 {transactionMeta && transactionMeta.totalPages > 1 && (
                   <div className="flex items-center justify-between px-6 py-3 border-t">
                     <p className="text-xs text-muted-foreground">
-                      Page {transactionMeta.page} of{" "}
-                      {transactionMeta.totalPages}
+                      {t("activity.transactionLedger.pageOf", { current: transactionMeta.page, total: transactionMeta.totalPages })}
                     </p>
                     <div className="flex gap-1">
                       <Button
@@ -808,28 +814,28 @@ export default function MerchantDetailContainer({ params }) {
           <div className="grid gap-4 md:grid-cols-3">
             <Card className="md:col-span-2 border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
-                <CardTitle>Wallet Details</CardTitle>
-                <CardDescription>Live credit allocation</CardDescription>
+                <CardTitle>{t("billing.walletDetails.title")}</CardTitle>
+                <CardDescription>{t("billing.walletDetails.description")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-8">
                 <div className="grid gap-6 md:grid-cols-3">
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      WhatsApp
+                      {t("billing.walletDetails.whatsapp")}
                     </p>
                     <p className="text-3xl font-bold">
                       {((wallet?.whatsapp_ui_credits ?? 0) + (wallet?.whatsapp_bi_credits ?? 0))}
                     </p>
                     <div className="flex gap-2 text-[10px] text-muted-foreground mt-1">
-                      <span>UI: {wallet?.whatsapp_ui_credits ?? 0}</span>
+                      <span>{t("billing.walletDetails.ui")}: {wallet?.whatsapp_ui_credits ?? 0}</span>
                       <span>•</span>
-                      <span>BI: {wallet?.whatsapp_bi_credits ?? 0}</span>
+                      <span>{t("billing.walletDetails.bi")}: {wallet?.whatsapp_bi_credits ?? 0}</span>
                     </div>
                     <Progress value={100} className="h-1.5 bg-green-100 mt-2" />
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      Ads
+                      {t("billing.walletDetails.ads")}
                     </p>
                     <p className="text-3xl font-bold">
                       {wallet?.paid_ad_credits ?? 0}
@@ -839,7 +845,7 @@ export default function MerchantDetailContainer({ params }) {
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      Coupons
+                      {t("billing.walletDetails.coupons")}
                     </p>
                     <p className="text-3xl font-bold">
                       {wallet?.coupon_credits ?? 0}
@@ -853,26 +859,26 @@ export default function MerchantDetailContainer({ params }) {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Plan</span>
+                    <span className="text-sm text-muted-foreground">{t("billing.walletDetails.plan")}</span>
                     <span className="text-sm font-semibold capitalize">
                       {wallet?.subscription_type}
                     </span>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
-                      Expires
+                      {t("billing.walletDetails.expires")}
                     </span>
                     <span className="text-sm font-semibold">
                       {wallet?.subscription_expires_at
                         ? new Date(
                             wallet.subscription_expires_at,
                           ).toLocaleDateString("en-GB")
-                        : "Never"}
+                        : t("billing.walletDetails.never")}
                     </span>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
-                      Currency
+                      {t("billing.walletDetails.currency")}
                     </span>
                     <span className="text-sm font-semibold uppercase">
                       {wallet?.currency}
@@ -880,34 +886,34 @@ export default function MerchantDetailContainer({ params }) {
                   </div>
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
-                      Account
+                      {t("billing.walletDetails.account")}
                     </span>
                     <Badge
                       variant={wallet?.is_active ? "default" : "destructive"}
                     >
-                      {wallet?.is_active ? "Verified" : "Inactive"}
+                      {wallet?.is_active ? t("billing.walletDetails.verified") : t("billing.walletDetails.inactive")}
                     </Badge>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
-                      Annual Fee
+                      {t("billing.walletDetails.annualFee")}
                     </span>
                     <Badge
                       variant={
                         wallet?.annual_fee_paid ? "default" : "destructive"
                       }
                     >
-                      {wallet?.annual_fee_paid ? "Paid" : "Unpaid"}
+                      {wallet?.annual_fee_paid ? t("billing.walletDetails.paid") : t("billing.walletDetails.unpaid")}
                     </Badge>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-lg flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
-                      Paid Ads
+                      {t("billing.walletDetails.paidAds")}
                     </span>
                     <Badge
                       variant={merchant?.paid_ads ? "default" : "secondary"}
                     >
-                      {merchant?.paid_ads ? "Enabled" : "Disabled"}
+                      {merchant?.paid_ads ? t("billing.walletDetails.enabled") : t("billing.walletDetails.disabled")}
                     </Badge>
                   </div>
                 </div>
@@ -917,9 +923,9 @@ export default function MerchantDetailContainer({ params }) {
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
               <CardHeader>
                 <CardTitle>
-                  Coupon Batches ({batchMeta?.total || batches.length})
+                  {t("billing.couponBatches.title", { count: batchMeta?.total || batches.length })}
                 </CardTitle>
-                <CardDescription>Active campaigns</CardDescription>
+                <CardDescription>{t("billing.couponBatches.description")}</CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <ScrollArea className="h-[350px]">
@@ -938,14 +944,14 @@ export default function MerchantDetailContainer({ params }) {
                                     variant="default"
                                     className="text-[9px] px-1.5 py-0"
                                   >
-                                    Active
+                                    {t("billing.couponBatches.active")}
                                   </Badge>
                                 ) : (
                                   <Badge
                                     variant="secondary"
                                     className="text-[9px] px-1.5 py-0"
                                   >
-                                    Inactive
+                                    {t("billing.couponBatches.inactive")}
                                   </Badge>
                                 )}
                               </div>
@@ -957,14 +963,14 @@ export default function MerchantDetailContainer({ params }) {
                                   {batch.batch_type}
                                 </Badge>
                                 <span className="text-[10px] text-muted-foreground font-mono">
-                                  ID: {String(batch.id).substring(0, 6)}
+                                  {t("billing.couponBatches.id")}: {String(batch.id).substring(0, 6)}
                                 </span>
                                 {batch.ishalal && (
                                   <Badge
                                     variant="outline"
                                     className="text-[9px] px-1.5 py-0 bg-green-50 text-green-700 border-green-200"
                                   >
-                                    Halal
+                                    {t("billing.couponBatches.halal")}
                                   </Badge>
                                 )}
                                 {batch.visibility && (
@@ -972,7 +978,7 @@ export default function MerchantDetailContainer({ params }) {
                                     variant="outline"
                                     className="text-[9px] px-1.5 py-0 bg-blue-50 text-blue-700 border-blue-200"
                                   >
-                                    Public
+                                    {t("billing.couponBatches.public")}
                                   </Badge>
                                 )}
                               </div>
@@ -991,12 +997,12 @@ export default function MerchantDetailContainer({ params }) {
                               <div className="flex items-center gap-2 mt-1">
                                 {batch.whatsapp_enabled && (
                                   <span className="text-[9px] text-emerald-600">
-                                    ✓ WhatsApp
+                                    {t("billing.couponBatches.whatsapp")}
                                   </span>
                                 )}
                                 {batch.lucky_draw_enabled && (
                                   <span className="text-[9px] text-purple-600">
-                                    ✓ Lucky Draw
+                                    {t("billing.couponBatches.luckyDraw")}
                                   </span>
                                 )}
                               </div>
@@ -1006,7 +1012,7 @@ export default function MerchantDetailContainer({ params }) {
                                 {batch.issued_quantity} / {batch.total_quantity}
                               </p>
                               <p className="text-[9px] text-muted-foreground">
-                                issued
+                                {t("billing.couponBatches.issued")}
                               </p>
                             </div>
                           </div>
@@ -1020,16 +1026,14 @@ export default function MerchantDetailContainer({ params }) {
                             />
                             <div className="flex justify-between text-[9px] text-muted-foreground">
                               <span>
-                                {Math.round(
+                                {t("billing.couponBatches.consumed", { percent: Math.round(
                                   (batch.issued_quantity /
                                     batch.total_quantity) *
                                     100,
-                                )}
-                                % consumed
+                                )})}
                               </span>
                               <span>
-                                {batch.total_quantity - batch.issued_quantity}{" "}
-                                left
+                                {t("billing.couponBatches.left", { count: batch.total_quantity - batch.issued_quantity })}
                               </span>
                             </div>
                           </div>
@@ -1037,7 +1041,7 @@ export default function MerchantDetailContainer({ params }) {
                       ))
                     ) : (
                       <div className="text-center py-20 text-muted-foreground text-sm">
-                        No batches active.
+                        {t("billing.couponBatches.noData")}
                       </div>
                     )}
                   </div>
@@ -1045,7 +1049,7 @@ export default function MerchantDetailContainer({ params }) {
                 {batchMeta && batchMeta.total > 20 && (
                   <div className="flex items-center justify-between px-6 py-3 border-t">
                     <p className="text-xs text-muted-foreground">
-                      Page {batchMeta.page} of {Math.ceil(batchMeta.total / 20)}
+                      {t("billing.couponBatches.pageOf", { current: batchMeta.page, total: Math.ceil(batchMeta.total / 20) })}
                     </p>
                     <div className="flex gap-1">
                       <Button

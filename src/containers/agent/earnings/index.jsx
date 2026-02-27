@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import { kpiData as getKpiData, monthlyEarnings, commissionBreakdown as mockBreakdown } from "./earnings-data";
 import { earningsColumns } from "./earnings-columns";
@@ -15,6 +16,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import useDebounce from "@/hooks/useDebounceRef";
 
 export default function AgentEarningsContainer() {
+  const t = useTranslations("agentEarnings");
   const { data: session } = useSession();
   const adminId = session?.user?.adminId;
 
@@ -62,10 +64,10 @@ export default function AgentEarningsContainer() {
           if (!acc[groupKey]) {
             acc[groupKey] = {
               merchant_id: merchantId,
-              merchant: meta.merchant_id ? `Merchant #${meta.merchant_id}` : "Unknown",
+              merchant: meta.merchant_id ? `Merchant #${meta.merchant_id}` : t("columns.noData"),
               totalSales: 0,
               commission: 0,
-              rate: meta.commission_rate ? `${(meta.commission_rate * 100).toFixed(1)}%` : "—",
+              rate: meta.commission_rate ? `${(meta.commission_rate * 100).toFixed(1)}%` : t("columns.noData"),
               source: sourceType,
               date: item.completed_at || item.created_at,
             };
@@ -89,36 +91,36 @@ export default function AgentEarningsContainer() {
         }));
 
       } catch (error) {
-        console.error("Failed to fetch earnings:", error);
+        console.error(t("errors.fetchFailed"), error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchEarnings();
-  }, [adminId]);
+  }, [adminId, t]);
 
   const KpiData = [
     {
-      title: "Total Earnings",
+      title: t("kpi.totalEarnings.title"),
       value: `$${stats.totalEarned.toLocaleString()}`,
       icon: DollarSign,
       trend: "up",
-      trendValue: "Live Data",
+      trendValue: t("kpi.totalEarnings.trend"),
     },
     {
-      title: "Active Merchants",
+      title: t("kpi.activeMerchants.title"),
       value: earnings.length.toString(),
       icon: TrendingUp,
     },
     {
-      title: "Earnings Type",
-      value: "Prepaid",
+      title: t("kpi.earningsType.title"),
+      value: t("kpi.earningsType.value"),
       icon: Lock,
     }
   ];
 
-  const EarningColumns = earningsColumns();
+  const EarningColumns = earningsColumns(t);
 
   const filteredEarnings = useMemo(() => {
     return earnings.filter((item) =>
@@ -150,12 +152,12 @@ export default function AgentEarningsContainer() {
       <div className="grid gap-6">
         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader className="pb-4">
-            <CardTitle>Commission Breakdown</CardTitle>
-            <CardDescription className="text-xs">Consolidated commissions per merchant.</CardDescription>
+            <CardTitle>{t("commissionBreakdown.title")}</CardTitle>
+            <CardDescription className="text-xs">{t("commissionBreakdown.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <TableToolbar
-              placeholder="Search merchant or source..."
+              placeholder={t("commissionBreakdown.searchPlaceholder")}
               onSearchChange={setSearch}
             />
             <DataTable

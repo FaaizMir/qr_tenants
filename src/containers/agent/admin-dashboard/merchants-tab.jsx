@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import {
   Card,
@@ -16,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight, Loader2, Store, TrendingUp, Calendar } from "lucide-react";
 
 export default function MerchantsTab() {
+  const t = useTranslations("agentDashboard.merchants");
   const { data: session } = useSession();
   const adminId = session?.adminId;
 
@@ -80,9 +82,9 @@ export default function MerchantsTab() {
               <Store className="h-5 w-5 text-slate-600" />
             </div>
             <div>
-              <CardTitle className="text-lg">Recently Added Merchants</CardTitle>
+              <CardTitle className="text-lg">{t("recentlyAdded.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Latest registrations • {recentMerchants.length} total
+                {t("recentlyAdded.description")} • {recentMerchants.length} {t("recentlyAdded.totalLabel")}
               </CardDescription>
             </div>
           </div>
@@ -113,7 +115,7 @@ export default function MerchantsTab() {
                                 : "bg-orange-50 text-orange-700 border-orange-200"
                             }`}
                           >
-                            {merchant.merchantType}
+                            {t(`merchantTypes.${merchant.merchantType}`)}
                           </Badge>
                         </div>
                         <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
@@ -135,7 +137,7 @@ export default function MerchantsTab() {
               ) : (
                 <div className="text-center py-20 text-muted-foreground">
                   <Store className="h-12 w-12 mx-auto mb-3 opacity-20" />
-                  <p className="text-sm">No merchants found</p>
+                  <p className="text-sm">{t("recentlyAdded.noData")}</p>
                 </div>
               )}
             </div>
@@ -144,7 +146,7 @@ export default function MerchantsTab() {
           {recentTotalPages > 1 && (
             <div className="flex items-center justify-between px-6 py-3 border-t bg-muted/30">
               <p className="text-xs text-muted-foreground font-medium">
-                Page {recentPage} of {recentTotalPages}
+                {t("pagination.pageOf", { current: recentPage, total: recentTotalPages })}
               </p>
               <div className="flex gap-1">
                 <Button
@@ -181,9 +183,9 @@ export default function MerchantsTab() {
               <TrendingUp className="h-5 w-5 text-green-600" />
             </div>
             <div>
-              <CardTitle className="text-lg">Top Performers</CardTitle>
+              <CardTitle className="text-lg">{t("topPerformers.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Ranked by revenue • {topPerformers.length} total
+                {t("topPerformers.description")} • {topPerformers.length} {t("topPerformers.totalLabel")}
               </CardDescription>
             </div>
           </div>
@@ -228,19 +230,19 @@ export default function MerchantsTab() {
                       
                       <div className="grid grid-cols-3 gap-3">
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Issued</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("topPerformers.stats.issued")}</div>
                           <div className="text-sm font-bold">
                             {merchant.totalCouponsIssued || 0}
                           </div>
                         </div>
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Redeemed</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("topPerformers.stats.redeemed")}</div>
                           <div className="text-sm font-bold">
                             {merchant.totalCouponsRedeemed || 0}
                           </div>
                         </div>
                         <div className="text-center p-2 bg-muted rounded-lg">
-                          <div className="text-xs text-muted-foreground mb-0.5">Rate</div>
+                          <div className="text-xs text-muted-foreground mb-0.5">{t("topPerformers.stats.rate")}</div>
                           <div className="text-sm font-bold">
                             {redemptionRate}%
                           </div>
@@ -252,7 +254,7 @@ export default function MerchantsTab() {
               ) : (
                 <div className="text-center py-20 text-muted-foreground">
                   <TrendingUp className="h-12 w-12 mx-auto mb-3 opacity-20" />
-                  <p className="text-sm">No performance data available</p>
+                  <p className="text-sm">{t("topPerformers.noData")}</p>
                 </div>
               )}
             </div>
@@ -261,7 +263,7 @@ export default function MerchantsTab() {
           {topTotalPages > 1 && (
             <div className="flex items-center justify-between px-6 py-3 border-t bg-muted/30">
               <p className="text-xs text-muted-foreground font-medium">
-                Page {topPage} of {topTotalPages}
+                {t("pagination.pageOf", { current: topPage, total: topTotalPages })}
               </p>
               <div className="flex gap-1">
                 <Button

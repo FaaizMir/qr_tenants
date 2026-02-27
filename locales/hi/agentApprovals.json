@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "अनुमोदित करें",
+    "reject": "अस्वीकृत करें"
+  },
+  "columns": {
+    "adContent": "विज्ञापन सामग्री",
+    "adPlacement": "विज्ञापन स्थान",
+    "approvalStatus": "अनुमोदन स्थिति",
+    "approvalType": "अनुमोदन प्रकार",
+    "businessAccount": "व्यापार और खाता",
+    "location": "स्थान",
+    "merchantType": "व्यापारी प्रकार",
+    "noAd": "कोई विज्ञापन नहीं",
+    "requestedDate": "अनुरोधित तिथि"
+  },
+  "dialog": {
+    "approveDescription": "क्या आप सुनिश्चित हैं कि आप {merchantName} के लिए अनुरोध को मंजूरी देना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।",
+    "approveTitle": "विज्ञापन अनुरोध अनुमोदित करें",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "confirmApprove": "हाँ, मंजूर करें",
+    "confirmReject": "हाँ, अस्वीकृत करें",
+    "processing": "प्रसंस्करण...",
+    "rejectDescription": "{merchantName} से अनुरोध अस्वीकृत करने के लिए एक कारण चुनें।",
+    "rejectTitle": "विज्ञापन अनुरोध अस्वीकृत करें"
+  },
+  "messages": {
+    "approveError": "अनुरोध को मंजूरी देने में विफल",
+    "approveSuccess": "अनुरोध सफलतापूर्वक अनुमोदित किया गया",
+    "fetchError": "अनुमोदनों को लाने में त्रुटि",
+    "rejectError": "अनुरोध को अस्वीकृत करने में विफल",
+    "rejectSuccess": "अनुरोध सफलतापूर्वक अस्वीकृत किया गया"
+  },
+  "preview": {
+    "description": "प्रचारात्मक विज्ञापन का पूर्ण आकार पूर्वावलोकन",
+    "title": "विज्ञापन पूर्वावलोकन",
+    "videoNotSupported": "आपका ब्राउज़र वीडियो टैग का समर्थन नहीं करता।"
+  },
+  "rejectionReasons": {
+    "adultContent": "व्यस्क / यौन सामग्री",
+    "gamblingContent": "जुआ सामग्री",
+    "illegalServices": "गैरकानूनी सेवाएँ",
+    "misleadingContent": "भ्रामक सामग्री",
+    "other": "अन्य (हाथ से कारण इनपुट)",
+    "placeholder": "अस्वीकृति का कारण दर्ज करें...",
+    "title": "कृपया कारण निर्दिष्ट करें"
+  },
+  "status": {
+    "approved": "अनुमोदित",
+    "pending": "लंबित",
+    "rejected": "अस्वीकृत"
+  },
+  "subtitle": "एजेंट अनुमोदनों का प्रबंधन करें",
+  "title": "अनुमोदन",
+  "validation": {
+    "provideCustomReason": "कृपया एक कस्टम अस्वीकृति कारण प्रदान करें",
+    "selectReason": "कृपया एक अस्वीकृति कारण चुनें"
+  }
+}

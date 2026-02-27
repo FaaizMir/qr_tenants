@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Papan Pemuka Ejen",
+    "statements": "Penyata Kewangan"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "downloadPdf": "Muat turun PDF",
+    "generatedAt": "Dihasilkan Pada",
+    "monthLabel": "Bulan {month}, {year}",
+    "noDate": "—",
+    "period": "Tempoh",
+    "status": "Status",
+    "totalSpend": "Jumlah Perbelanjaan"
+  },
+  "filters": {
+    "description": "Tapis pernyataan mengikut tahun dan bulan",
+    "month": {
+      "all": "Bulan Semasa",
+      "label": "Bulan",
+      "placeholder": "Bulan semasa"
+    },
+    "quickActions": {
+      "label": "Tindakan Pantas",
+      "loading": "Memuatkan...",
+      "refresh": "Segarkan Senarai"
+    },
+    "title": "Penapis Pernyataan",
+    "year": {
+      "label": "Tahun",
+      "placeholder": "Pilih tahun"
+    }
+  },
+  "messages": {
+    "downloadError": "Gagal memuat turun PDF. Sila cuba lagi.",
+    "downloadSuccess": "Pernyataan dimuat turun dengan jayanya!",
+    "fetchError": "Gagal memuat kenyataan. Sila cuba lagi."
+  },
+  "months": {
+    "april": "April",
+    "august": "Ogos",
+    "december": "Disember",
+    "february": "Februari",
+    "january": "Januari",
+    "july": "Julai",
+    "june": "Jun",
+    "march": "Mac",
+    "may": "Mei",
+    "november": "November",
+    "october": "Oktober",
+    "september": "September"
+  },
+  "status": {
+    "failed": "Gagal",
+    "generated": "Dihasilkan",
+    "pending": "Menunggu"
+  },
+  "subtitle": "Laporan PDF yang dijana secara automatik bulanan termasuk pendapatan, yuran, pendapatan pakej, dan lejar dompet.",
+  "table": {
+    "description": "{count} penyata ditemui",
+    "description_plural": "{count} pernyataan ditemui",
+    "loading": "Memuatkan penyata...",
+    "noData": {
+      "description": "Tiada penyata tersedia untuk tempoh yang dipilih. Hasilkan penyata baru untuk memulakan.",
+      "title": "Tiada Pernyataan Ditemui"
+    },
+    "title": "Sejarah Pernyataan"
+  },
+  "title": "Penyata Kewangan Ejen"
+}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { Lock, Download } from "lucide-react";
@@ -33,6 +33,15 @@ export default function MerchantCustomerDataContainer() {
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
+
+  const columnTranslations = {
+    name: tColumns("name"),
+    contact: tColumns("contactInfo"),
+    date_of_birth: tColumns("dateOfBirth"),
+    gender: tColumns("gender"),
+    reward: tColumns("rewardStatus"),
+    actions: tColumns("actions"),
+  };
 
   useEffect(() => {
     if (subscription !== "annual") return;
@@ -121,6 +130,7 @@ export default function MerchantCustomerDataContainer() {
             setPage={setPage}
             setPageSize={setPageSize}
             loading={loading}
+            columnsBtn={true}
             columnNameTranslations={{
               name: tColumns("name"),
               contact: tColumns("contactInfo"),

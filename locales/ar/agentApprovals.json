@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "الموافقة",
+    "reject": "رفض"
+  },
+  "columns": {
+    "adContent": "محتوى الإعلان",
+    "adPlacement": "وضع الإعلان",
+    "approvalStatus": "حالة الموافقة",
+    "approvalType": "نوع الموافقة",
+    "businessAccount": "الأعمال والحساب",
+    "location": "الموقع",
+    "merchantType": "نوع التاجر",
+    "noAd": "لا يوجد إعلان",
+    "requestedDate": "تاريخ الطلب"
+  },
+  "dialog": {
+    "approveDescription": "هل أنت متأكد أنك تريد الموافقة على الطلب لـ {merchantName}? لا يمكن التراجع عن هذا الإجراء.",
+    "approveTitle": "الموافقة على طلب الإعلان",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "confirmApprove": "نعم، الموافقة",
+    "confirmReject": "نعم، ارفض",
+    "processing": "جارٍ المعالجة...",
+    "rejectDescription": "اختر سببًا لرفض الطلب من {merchantName}.",
+    "rejectTitle": "رفض طلب الإعلان"
+  },
+  "messages": {
+    "approveError": "فشل في الموافقة على الطلب",
+    "approveSuccess": "تمت الموافقة على الطلب بنجاح",
+    "fetchError": "خطأ في جلب الموافقات",
+    "rejectError": "فشل في رفض الطلب",
+    "rejectSuccess": "تم رفض الطلب بنجاح"
+  },
+  "preview": {
+    "description": "معاينة كاملة لحجم الإعلان الترويجي",
+    "title": "معاينة الإعلان",
+    "videoNotSupported": "متصفحك لا يدعم علامة الفيديو."
+  },
+  "rejectionReasons": {
+    "adultContent": "محتوى للبالغين / جنسي",
+    "gamblingContent": "محتوى القمار",
+    "illegalServices": "خدمات غير قانونية",
+    "misleadingContent": "محتوى مضلل",
+    "other": "أخرى (إدخال سبب يدوي)",
+    "placeholder": "أدخل سبب الرفض...",
+    "title": "يرجى تحديد السبب"
+  },
+  "status": {
+    "approved": "موافق عليه",
+    "pending": "معلق",
+    "rejected": "مرفوض"
+  },
+  "subtitle": "إدارة موافقات الوكلاء",
+  "title": "الموافقات",
+  "validation": {
+    "provideCustomReason": "يرجى تقديم سبب مخصص للرفض",
+    "selectReason": "يرجى اختيار سبب الرفض"
+  }
+}

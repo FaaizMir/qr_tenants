@@ -20,6 +20,13 @@ export const namespaces = [
   "merchantStatements",
   "support",
   "merchantAccount",
+  "agentDashboard",
+  "agentMerchants",
+  "agentWallet",
+  "agentEarnings",
+  "agentPackages",
+  "agentStatements",
+  "agentApprovals"
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

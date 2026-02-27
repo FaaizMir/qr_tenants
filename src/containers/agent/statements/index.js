@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import {
   Calendar,
   Download,
@@ -37,6 +38,7 @@ import useDebounce from "@/hooks/useDebounceRef";
 import { getAgentsColumns } from "./statement-columns";
 
 export default function AgentStatements() {
+  const t = useTranslations("agentStatements");
   const params = useParams();
   const { data: session } = useSession();
   const agentId = session?.user?.adminId;
@@ -87,7 +89,7 @@ export default function AgentStatements() {
       setTotal(metadata.total || metadata.totalCount || statementsArray.length);
     } catch (error) {
       console.error("Failed to fetch statements:", error);
-      toast.error("Failed to load statements. Please try again.");
+      toast.error(t("messages.fetchError"));
       setStatements([]);
       setTotal(0);
     } finally {
@@ -122,31 +124,31 @@ export default function AgentStatements() {
       link.remove();
       window.URL.revokeObjectURL(url);
 
-      toast.success("Statement downloaded successfully!");
+      toast.success(t("messages.downloadSuccess"));
     } catch (error) {
       console.error("PDF download failed:", error);
-      toast.error("Failed to download PDF. Please try again.");
+      toast.error(t("messages.downloadError"));
     }
   };
 
-  const columns = getAgentsColumns(handleDownloadPdf);
+  const columns = getAgentsColumns(handleDownloadPdf, t);
 
   // Generate available years (current year and 2 previous years)
   const availableYears = Array.from({ length: 3 }, (_, i) => currentYear - i);
 
   const months = [
-    { value: "1", label: "January" },
-    { value: "2", label: "February" },
-    { value: "3", label: "March" },
-    { value: "4", label: "April" },
-    { value: "5", label: "May" },
-    { value: "6", label: "June" },
-    { value: "7", label: "July" },
-    { value: "8", label: "August" },
-    { value: "9", label: "September" },
-    { value: "10", label: "October" },
-    { value: "11", label: "November" },
-    { value: "12", label: "December" },
+    { value: "1", label: t("months.january") },
+    { value: "2", label: t("months.february") },
+    { value: "3", label: t("months.march") },
+    { value: "4", label: t("months.april") },
+    { value: "5", label: t("months.may") },
+    { value: "6", label: t("months.june") },
+    { value: "7", label: t("months.july") },
+    { value: "8", label: t("months.august") },
+    { value: "9", label: t("months.september") },
+    { value: "10", label: t("months.october") },
+    { value: "11", label: t("months.november") },
+    { value: "12", label: t("months.december") },
   ];
 
   return (
@@ -164,11 +166,10 @@ export default function AgentStatements() {
           </Button>
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
-              Agent Financial Statements
+              {t("title")}
             </h1>
             <p className="text-sm text-muted-foreground max-w-2xl">
-              Monthly auto-generated PDF reports including earnings, fees,
-              package income, and wallet ledger.
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -179,21 +180,21 @@ export default function AgentStatements() {
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
-            Statement Filters
+            {t("filters.title")}
           </CardTitle>
           <CardDescription className="text-xs">
-            Filter statements by year and month
+            {t("filters.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Year
+                {t("filters.year.label")}
               </label>
               <Select value={year} onValueChange={setYear}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Select year" />
+                  <SelectValue placeholder={t("filters.year.placeholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   {availableYears.map((y) => (
@@ -207,14 +208,14 @@ export default function AgentStatements() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Month
+                {t("filters.month.label")}
               </label>
               <Select value={month} onValueChange={setMonth}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Current month" />
+                  <SelectValue placeholder={t("filters.month.placeholder")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Current Month</SelectItem>
+                  <SelectItem value="all">{t("filters.month.all")}</SelectItem>
                   {months.map((m) => (
                     <SelectItem key={m.value} value={m.value}>
                       {m.label}
@@ -226,7 +227,7 @@ export default function AgentStatements() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Quick Actions
+                {t("filters.quickActions.label")}
               </label>
               <Button
                 variant="outline"
@@ -237,12 +238,12 @@ export default function AgentStatements() {
                 {loading ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Loading...
+                    {t("filters.quickActions.loading")}
                   </>
                 ) : (
                   <>
                     <RefreshCw className="h-4 w-4 mr-2" />
-                    Refresh List
+                    {t("filters.quickActions.refresh")}
                   </>
                 )}
               </Button>
@@ -258,10 +259,10 @@ export default function AgentStatements() {
             <div>
               <CardTitle className="text-base font-semibold flex items-center gap-2">
                 <FileText className="h-4 w-4 text-primary" />
-                Statement History
+                {t("table.title")}
               </CardTitle>
               <CardDescription className="mt-0.5 text-xs">
-                {total} statement{total !== 1 ? "s" : ""} found
+                {total === 1 ? t("table.description", { count: total }) : t("table.description_plural", { count: total })}
               </CardDescription>
             </div>
           </div>
@@ -271,7 +272,7 @@ export default function AgentStatements() {
             <div className="flex flex-col items-center justify-center py-12">
               <Loader2 className="h-10 w-10 animate-spin text-primary mb-3" />
               <p className="text-sm text-muted-foreground">
-                Loading statements...
+                {t("table.loading")}
               </p>
             </div>
           ) : statements.length === 0 ? (
@@ -280,11 +281,10 @@ export default function AgentStatements() {
                 <FileText className="h-8 w-8 text-muted-foreground" />
               </div>
               <h3 className="text-lg font-semibold mb-2">
-                No Statements Found
+                {t("table.noData.title")}
               </h3>
               <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                No statements available for the selected period. Generate a new
-                statement to get started.
+                {t("table.noData.description")}
               </p>
             </div>
           ) : (

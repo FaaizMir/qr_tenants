@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "बनाएँ",
+    "dashboard": "डैशबोर्ड",
+    "details": "विवरण",
+    "editMerchant": "व्यापारी संपादित करें",
+    "merchantManagement": "व्यापारी प्रबंधन",
+    "merchants": "व्यापारी"
+  },
+  "common": {
+    "error": "एक त्रुटि हुई",
+    "loading": "लोड हो रहा है...",
+    "noData": "कोई डेटा उपलब्ध नहीं है"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "व्यापारी प्रशासक के लिए लॉगिन विवरण।",
+      "emailAddress": "ईमेल पता",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "पासवर्ड छिपाएँ",
+      "initialPassword": "प्रारंभिक पासवर्ड",
+      "merchantName": "व्यापारी का नाम",
+      "merchantNamePlaceholder": "जॉन डो",
+      "role": "भूमिका",
+      "showPassword": "पासवर्ड दिखाएँ",
+      "title": "खाता क्रेडेंशियल्स"
+    },
+    "actions": {
+      "cancel": "रद्द करें",
+      "createMerchant": "व्यापारी बनाएं",
+      "creating": "बनाते हुए...",
+      "insufficientBalanceTooltip": "वार्षिक व्यापारी निर्माण के लिए अपर्याप्त वॉलेट बैलेंस"
+    },
+    "businessProfile": {
+      "businessName": "व्यापार का नाम",
+      "businessNamePlaceholder": "जैसे कि Acme कैफे",
+      "businessType": "व्यापार प्रकार",
+      "businessTypePlaceholder": "व्यापार प्रकार चुनें...",
+      "businessTypes": {
+        "education": "शिक्षा",
+        "foodBeverage": "खाद्य और पेय",
+        "health": "स्वास्थ्य",
+        "hospitality": "अतिथि सत्कार",
+        "retail": "खुदरा",
+        "services": "सेवाएँ",
+        "technology": "प्रौद्योगिकी"
+      },
+      "description": "ग्राहकों को प्रदर्शित की गई प्राथमिक व्यावसायिक विवरण।",
+      "taxId": "कर आईडी",
+      "taxIdPlaceholder": "जैसे कि TX123456",
+      "title": "व्यापार प्रोफ़ाइल"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 मेन स्ट, शहर, देश",
+      "city": "शहर",
+      "cityPlaceholder": "शहर",
+      "country": "देश",
+      "countryPlaceholder": "देश",
+      "description": "विवरण स्वचालित रूप से भरने के लिए व्यवसाय पते की खोज करें।",
+      "locationUpdated": "स्थान अपडेट किया गया",
+      "searchAddress": "पता खोजें",
+      "title": "स्थान विवरण"
+    },
+    "merchantType": {
+      "accountStatus": "खाता स्थिति",
+      "accountStatusDescription": "इस व्यापारी की प्लेटफ़ॉर्म तक पहुँच को सक्षम या अक्षम करें।",
+      "active": "सक्रिय",
+      "annual": "वार्षिक",
+      "description": "व्यापारी प्रकार चुनें।",
+      "inactive": "निष्क्रिय",
+      "label": "व्यापारी प्रकार",
+      "temporary": "अस्थायी",
+      "title": "व्यापारी प्रकार"
+    },
+    "messages": {
+      "createError": "व्यापारी बनाने में विफल",
+      "createErrorDescription": "कृपया अपनी इनपुट की जांच करें और फिर से प्रयास करें।",
+      "createSuccess": "व्यापारी खाता सफलतापूर्वक बनाया गया।",
+      "validationFailed": "मान्यता विफल"
+    },
+    "subtitle": "एक नया व्यापारी खाता बनाएं, एक सदस्यता योजना सौंपें, और प्रारंभिक सीमाएँ कॉन्फ़िगर करें।",
+    "title": "नए व्यापारी को ऑनबोर्ड करें",
+    "validation": {
+      "emailInvalid": "कृपया एक मान्य ईमेल पता दर्ज करें",
+      "fieldEmpty": "{field} खाली नहीं होना चाहिए",
+      "fieldInvalid": "{field} अमान्य है",
+      "fieldRequired": "{field} आवश्यक है",
+      "fields": {
+        "address": "पता",
+        "business_name": "व्यापार का नाम",
+        "business_type": "व्यापार प्रकार",
+        "city": "शहर",
+        "country": "देश",
+        "email": "ईमेल पता",
+        "merchant_type": "व्यापारी प्रकार",
+        "name": "व्यापारी नाम",
+        "password": "पासवर्ड",
+        "role": "भूमिका",
+        "tax_id": "कर आईडी"
+      },
+      "passwordTooShort": "पासवर्ड कम से कम 8 वर्णों का होना चाहिए"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "सक्रिय",
+        "birthday": "🎂",
+        "description": "हाल ही में पंजीकृत ग्राहक",
+        "female": "👩 महिला",
+        "inactive": "निष्क्रिय",
+        "joined": "📅 शामिल हुए",
+        "male": "👨 पुरुष",
+        "noData": "कोई ग्राहक नहीं मिला।",
+        "other": "👤",
+        "pageOf": "पृष्ठ {current} का {total}",
+        "reward": "इनाम",
+        "title": "ग्राहक ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "राशि",
+          "credits": "क्रेडिट",
+          "description": "विवरण"
+        },
+        "description": "ऐतिहासिक क्रेडिट उपयोग",
+        "noData": "कोई रिकॉर्ड नहीं मिला।",
+        "pageOf": "पृष्ठ {current} का {total}",
+        "title": "लेनदेन खाता"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "सक्रिय",
+        "consumed": "{percent}% उपभोग किया गया",
+        "description": "सक्रिय अभियान",
+        "halal": "हलाल",
+        "id": "आईडी",
+        "inactive": "निष्क्रिय",
+        "issued": "जारी किया गया",
+        "left": "{count} बचे हैं",
+        "luckyDraw": "✓ लकी ड्रा",
+        "noData": "कोई बैच सक्रिय नहीं।",
+        "pageOf": "पृष्ठ {current} का {total}",
+        "public": "सार्वजनिक",
+        "title": "कूपन बैच ({count})",
+        "whatsapp": "✓ व्हाट्सएप"
+      },
+      "walletDetails": {
+        "account": "खाता",
+        "ads": "विज्ञापन",
+        "annualFee": "वार्षिक शुल्क",
+        "bi": "बीआई",
+        "coupons": "कूपन",
+        "currency": "मुद्रा",
+        "description": "सीधे क्रेडिट आवंटन",
+        "disabled": "अक्षम",
+        "enabled": "सक्षम",
+        "expires": "समाप्त होता है",
+        "inactive": "निष्क्रिय",
+        "never": "कभी नहीं",
+        "paid": "भुगतान किया",
+        "paidAds": "भुगतान किए गए विज्ञापन",
+        "plan": "योजना",
+        "title": "वॉलेट विवरण",
+        "ui": "यूआई",
+        "unpaid": "अवैतनिक",
+        "verified": "सत्यापित",
+        "whatsapp": "व्हाट्सएप"
+      }
+    },
+    "error": {
+      "description": "व्यापारी नहीं मिला या लोड नहीं किया जा सका।",
+      "title": "त्रुटि"
+    },
+    "header": {
+      "active": "सक्रिय",
+      "editConfiguration": "कॉन्फ़िगरेशन संपादित करें",
+      "inactive": "निष्क्रिय",
+      "memberSince": "सदस्यता कब से",
+      "subscription": "{type} सदस्यता"
+    },
+    "loadError": "व्यापारी विवरण लोड करने में विफल",
+    "loading": "व्यापारी विवरण लोड हो रहा है...",
+    "overview": {
+      "adCredits": {
+        "description": "प्रमोशनों के लिए",
+        "title": "एड क्रेडिट्स"
+      },
+      "couponCredits": {
+        "description": "बैचों के लिए",
+        "title": "कूपन क्रेडिट"
+      },
+      "recentTransactions": {
+        "credits": "क्रेडिट",
+        "noData": "कोई लेनदेन नहीं मिला।",
+        "pageOf": "पृष्ठ {current} का {total}",
+        "title": "हाल की लेनदेन"
+      },
+      "totalCredits": {
+        "title": "कुल क्रेडिट",
+        "usedLabel": "{used} कुल उपयोग किया गया"
+      },
+      "usageSummary": {
+        "couponBalance": "कूपन बैलेंस",
+        "creditUsage": "क्रेडिट उपयोग",
+        "title": "उपयोग सारांश",
+        "whatsappBalance": "व्हाट्सएप बैलेंस",
+        "whatsappBI": "व्हाट्सएप BI",
+        "whatsappUI": "व्हाट्सएप UI"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "व्हाट्सएप क्रेडिट",
+        "uiLabel": "यूआई"
+      }
+    },
+    "tabs": {
+      "activity": "गतिविधि",
+      "billing": "सीमाएँ",
+      "overview": "सारांश"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "व्यापारी प्रशासक विवरण अपडेट करें।",
+      "newPassword": "नया पासवर्ड (वर्तमान रखने के लिए खाली छोड़ें)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "व्यापारी अपडेट करें",
+      "updating": "अपडेट हो रहा है..."
+    },
+    "loadingError": "व्यापारी डेटा लोड करने में विफल",
+    "messages": {
+      "updateError": "व्यापारी को अपडेट करने में विफल",
+      "updateSuccess": "व्यापारी सफलतापूर्वक अपडेट किया गया।"
+    },
+    "subtitle": "व्यापारी खाता विवरण और कॉन्फ़िगरेशन अपडेट करें।",
+    "title": "व्यापारी संपादित करें",
+    "validation": {
+      "emailInvalid": "कृपया एक मान्य ईमेल पता दर्ज करें",
+      "fieldEmpty": "{field} खाली नहीं होना चाहिए",
+      "fieldInvalid": "{field} अमान्य है",
+      "fieldRequired": "{field} आवश्यक है",
+      "fields": {
+        "address": "पता",
+        "business_name": "व्यापार का नाम",
+        "business_type": "व्यापार प्रकार",
+        "city": "शहर",
+        "country": "देश",
+        "email": "ईमेल पता",
+        "merchant_type": "व्यापारी प्रकार",
+        "name": "व्यापारी नाम",
+        "password": "पासवर्ड",
+        "role": "भूमिका",
+        "tax_id": "कर आईडी"
+      },
+      "passwordTooShort": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "विवरण",
+      "edit": "संपादित करें",
+      "merchantOptions": "व्यापारी विकल्प"
+    },
+    "addMerchant": "व्यापारी जोड़ें",
+    "columnNames": {
+      "actions": "क्रियाएँ",
+      "businessType": "व्यापार प्रकार",
+      "location": "स्थान",
+      "name": "नाम",
+      "qr": "क्यूआर",
+      "status": "स्थिति"
+    },
+    "columns": {
+      "actions": "क्रियाएँ",
+      "businessAccount": "व्यापार और खाता",
+      "categoryPlan": "श्रेणी और योजना",
+      "location": "स्थान",
+      "noQr": "कोई QR नहीं",
+      "qrScan": "QR स्कैन",
+      "status": "स्थिति"
+    },
+    "delete": {
+      "cancel": "रद्द करें",
+      "confirm": "हटाएँ",
+      "deleting": "हटाते हुए...",
+      "description": "क्या आप वाकई इसे हटाना चाहते हैं ",
+      "descriptionEnd": "? यह क्रिया पूर्ववत नहीं की जा सकती।",
+      "errorMessage": "व्यापारी को हटाने में विफल",
+      "successMessage": "व्यापारी \"{merchantName}\" सफलतापूर्वक हटाया गया।",
+      "title": "व्यापारी हटाएँ",
+      "trigger": "व्यापारी हटाएँ"
+    },
+    "qrDialog": {
+      "download": "डाउनलोड करें",
+      "scanFor": "{name} के लिए स्कैन करें"
+    },
+    "searchPlaceholder": "व्यापारियों की खोज करें...",
+    "statusToggle": {
+      "activatedSuccess": "व्यापारी सफलतापूर्वक सक्रिय किया गया",
+      "active": "सक्रिय",
+      "deactivatedSuccess": "व्यापारी सफलतापूर्वक निष्क्रिय किया गया",
+      "inactive": "निष्क्रिय",
+      "updateError": "व्यापारी स्थिति को अपडेट करने में विफल"
+    },
+    "subtitle": "अपने व्यापारियों का प्रबंधन और निगरानी करें",
+    "title": "व्यापारी प्रबंधन"
+  }
+}

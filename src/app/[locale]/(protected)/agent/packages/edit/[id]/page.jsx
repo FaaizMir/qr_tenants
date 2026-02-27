@@ -1,11 +1,14 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import PackageForm from "@/containers/agent/packages/packages-form";
+import { getTranslations } from "next-intl/server";
 
-export default function EditPackagePage() {
+export default async function EditPackagePage() {
+  const t = await getTranslations("agentPackages");
+  
   const breadcrumbData = [
-    { name: "Agent Dashboard", url: "/agent/dashboard" },
-    { name: "Paid Ads Packages", url: "/agent/packages" },
-    { name: "Edit Package", url: "#" },
+    { name: t("breadcrumbs.dashboard"), url: "/agent/dashboard" },
+    { name: t("breadcrumbs.packages"), url: "/agent/packages" },
+    { name: t("breadcrumbs.edit"), url: "#" },
   ];
 
   return (

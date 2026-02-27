@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { PageTabs } from "@/components/common/page-tabs";
 import { DataTable } from "@/components/common/data-table";
 import TableToolbar from "@/components/common/table-toolbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { autoDeductions } from "./wallet-data";
 import { transactionColumns, deductionColumns } from "./wallet-columns";
-import { getWalletTabs } from "./wallet-tabs";
+import { useWalletTabs } from "./wallet-tabs";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
@@ -38,6 +39,7 @@ import { CustomWalletTopup } from "./custom-wallet-topup";
 const CREDIT_PACKAGES_API = "/wallets/credit-packages";
 
 export default function AgentWalletContainer() {
+  const t = useTranslations("agentWallet");
   const { data: session } = useSession();
   const { isSubscriptionExpired, refreshSubscription } = useSubscription();
   const adminId = session?.user?.adminId;
@@ -77,9 +79,10 @@ export default function AgentWalletContainer() {
   const [transactions, setTransactions] = useState([]);
   const [txTotal, setTxTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [walletLoaded, setWalletLoaded] = useState(false);
 
-  const TransactionColumns = transactionColumns();
-  const DeductionColumns = deductionColumns();
+  const TransactionColumns = transactionColumns(t);
+  const DeductionColumns = deductionColumns(t);
 
   /* ----------------------------------
    * Fetch wallet stats
@@ -105,6 +108,8 @@ export default function AgentWalletContainer() {
         });
       } catch (error) {
         console.error("Failed to fetch wallet:", error);
+      } finally {
+        setWalletLoaded(true);
       }
     };
 
@@ -176,7 +181,7 @@ export default function AgentWalletContainer() {
       <CardHeader></CardHeader>
       <CardContent>
         <TableToolbar
-          placeholder="Search transactions..."
+          placeholder={t("transactions.searchPlaceholder")}
           onSearchChange={setTxSearch}
         />
 
@@ -197,11 +202,11 @@ export default function AgentWalletContainer() {
   const deductionTable = (
     <Card>
       <CardHeader>
-        <CardTitle>Auto Deductions Log</CardTitle>
+        <CardTitle>{t("deductions.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <TableToolbar
-          placeholder="Search deductions..."
+          placeholder={t("deductions.searchPlaceholder")}
           onSearchChange={() => {}}
         />
         <DataTable data={autoDeductions} columns={DeductionColumns} />
@@ -209,7 +214,7 @@ export default function AgentWalletContainer() {
     </Card>
   );
 
-  const tabs = getWalletTabs({
+  const tabs = useWalletTabs({
     walletStats,
     transactions,
     deductions: autoDeductions,
@@ -219,36 +224,32 @@ export default function AgentWalletContainer() {
 
   return (
     <div className="space-y-6">
-      {!walletStats.is_active && (
+      {walletLoaded && !walletStats.is_active && (
         <div className="flex items-start gap-4 bg-amber-50 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 mt-0.5">
             <AlertTriangle className="h-4 w-4 text-amber-600" />
           </div>
           <div>
             <p className="font-semibold text-amber-900 leading-tight mb-0.5">
-              Subscription Activation Required
+              {t("alerts.subscriptionRequired.title")}
             </p>
             <p className="text-sm text-amber-800/70 leading-relaxed">
-              Your account is not yet activated. Click &quot;Activate
-              Subscription&quot; to pay your annual subscription fee and start
-              using the platform. You can also add prepaid wallet balance during
-              activation.
+              {t("alerts.subscriptionRequired.description")}
             </p>
           </div>
         </div>
       )}
-      {walletStats.is_active && isExpired && (
+      {walletLoaded && walletStats.is_active && isExpired && (
         <div className="flex items-start gap-4 bg-amber-50 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 mt-0.5">
             <AlertTriangle className="h-4 w-4 text-amber-600" />
           </div>
           <div>
             <p className="font-semibold text-amber-900 leading-tight mb-0.5">
-              Subscription Expired
+              {t("alerts.subscriptionExpired.title")}
             </p>
             <p className="text-sm text-amber-800/70 leading-relaxed">
-              Your subscription has expired. Renew your subscription to continue
-              accessing all platform features.
+              {t("alerts.subscriptionExpired.description")}
             </p>
           </div>
         </div>
@@ -256,10 +257,8 @@ export default function AgentWalletContainer() {
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Agent Wallet</h1>
-          <p className="text-muted-foreground">
-            Manage your wallet balance and transactions
-          </p>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <Button
@@ -276,7 +275,9 @@ export default function AgentWalletContainer() {
           className="gap-2 bg-primary hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" />
-          {walletStats.is_active ? "Top Up Wallet" : "Activate Subscription"}
+          {walletStats.is_active
+            ? t("actions.topUpWallet")
+            : t("actions.activateSubscription")}
         </Button>
       </div>
 
@@ -292,10 +293,10 @@ export default function AgentWalletContainer() {
             >
               <DialogHeader className="mb-6">
                 <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
-                  Choose Top-Up Amount
+                  {t("topupPackages.dialogTitle")}
                 </DialogTitle>
                 <p className="text-slate-500 text-sm font-medium mt-1">
-                  Select a prepaid wallet package that suits your needs
+                  {t("topupPackages.dialogSubtitle")}
                 </p>
               </DialogHeader>
 
@@ -318,7 +319,7 @@ export default function AgentWalletContainer() {
                       {pkg.popular && (
                         <div className="absolute -top-2 -right-2">
                           <Badge className="bg-linear-to-r from-orange-500 to-pink-500 text-white px-3 py-1 shadow-lg">
-                            ⭐ Most Popular
+                            {t("topupPackages.mostPopular")}
                           </Badge>
                         </div>
                       )}
@@ -334,7 +335,10 @@ export default function AgentWalletContainer() {
                                 variant="secondary"
                                 className="bg-green-100 text-green-700 border-green-200"
                               >
-                                +{pkg.currency} {pkg.bonus} Bonus
+                                {t("topupPackages.bonus", {
+                                  currency: pkg.currency,
+                                  amount: pkg.bonus,
+                                })}
                               </Badge>
                             )}
                           </div>
@@ -359,11 +363,14 @@ export default function AgentWalletContainer() {
                           </div>
                           {pkg.bonus > 0 && (
                             <div className="text-xs font-bold text-green-600 mt-1">
-                              Get {pkg.currency} {totalAmount.toLocaleString()}
+                              {t("topupPackages.get", {
+                                currency: pkg.currency,
+                                amount: totalAmount.toLocaleString(),
+                              })}
                             </div>
                           )}
                           <div className="text-[10px] text-slate-500 uppercase tracking-wider mt-1">
-                            Payment Amount
+                            {t("topupPackages.paymentAmount")}
                           </div>
                         </div>
                       </div>

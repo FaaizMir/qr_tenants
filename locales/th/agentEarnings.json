@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "แดชบอร์ด",
+    "earnings": "รายได้"
+  },
+  "columns": {
+    "commissionEarned": "ค่าคอมมิชชั่นที่ได้รับ",
+    "commissionRate": "อัตราค่าคอมมิชชั่น",
+    "date": "วันที่",
+    "merchant": "ผู้ค้า",
+    "noData": "—",
+    "source": "ค่าคอมมิชชั่น",
+    "totalSales": "ยอดขายรวม"
+  },
+  "commissionBreakdown": {
+    "description": "ค่าคอมมิชชั่นรวมต่อผู้ค้า",
+    "searchPlaceholder": "ค้นหาผู้ค้าหรือแหล่งที่มา...",
+    "title": "การแยกค่าคอมมิชชั่น"
+  },
+  "errors": {
+    "fetchFailed": "ไม่สามารถดึงรายได้"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "ผู้ค้าที่ยังใช้งานอยู่"
+    },
+    "earningsType": {
+      "title": "ประเภทรายได้",
+      "value": "เติมเงินล่วงหน้า"
+    },
+    "totalEarnings": {
+      "title": "รายได้รวม",
+      "trend": "ข้อมูลสด"
+    }
+  },
+  "noData": "—"
+}

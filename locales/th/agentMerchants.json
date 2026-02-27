@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "สร้าง",
+    "dashboard": "แดชบอร์ด",
+    "details": "รายละเอียด",
+    "editMerchant": "แก้ไขผู้ค้า",
+    "merchantManagement": "การจัดการผู้ค้า",
+    "merchants": "พาณิชย์"
+  },
+  "common": {
+    "error": "เกิดข้อผิดพลาด",
+    "loading": "กำลังโหลด...",
+    "noData": "ไม่มีข้อมูลที่พร้อมใช้งาน"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "รายละเอียดการเข้าสู่ระบบสำหรับผู้ดูแลระบบพาณิชย์",
+      "emailAddress": "ที่อยู่อีเมล",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "ซ่อนรหัสผ่าน",
+      "initialPassword": "รหัสผ่านเริ่มต้น",
+      "merchantName": "ชื่อผู้ค้า",
+      "merchantNamePlaceholder": "จอห์น โด",
+      "role": "บทบาท",
+      "showPassword": "แสดงรหัสผ่าน",
+      "title": "ข้อมูลรับรองบัญชี"
+    },
+    "actions": {
+      "cancel": "ยกเลิก",
+      "createMerchant": "สร้างผู้ค้า",
+      "creating": "กำลังสร้าง...",
+      "insufficientBalanceTooltip": "ยอดเงินในกระเป๋าไม่เพียงพอสำหรับการสร้างผู้ค้าแบบประจำปี"
+    },
+    "businessProfile": {
+      "businessName": "ชื่อธุรกิจ",
+      "businessNamePlaceholder": "เช่น Acme Café",
+      "businessType": "ประเภทธุรกิจ",
+      "businessTypePlaceholder": "เลือกประเภทธุรกิจ...",
+      "businessTypes": {
+        "education": "การศึกษา",
+        "foodBeverage": "อาหารและเครื่องดื่ม",
+        "health": "สุขภาพ",
+        "hospitality": "การบริการ",
+        "retail": "ค้าปลีก",
+        "services": "บริการ",
+        "technology": "เทคโนโลยี"
+      },
+      "description": "รายละเอียดธุรกิจหลักที่แสดงให้ลูกค้าเห็น",
+      "taxId": "หมายเลขประจำตัวผู้เสียภาษี",
+      "taxIdPlaceholder": "เช่น TX123456",
+      "title": "โปรไฟล์ธุรกิจ"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 Main St, เมือง, ประเทศ",
+      "city": "เมือง",
+      "cityPlaceholder": "เมือง",
+      "country": "ประเทศ",
+      "countryPlaceholder": "ประเทศ",
+      "description": "ค้นหาที่อยู่ธุรกิจเพื่อเติมข้อมูลโดยอัตโนมัติ.",
+      "locationUpdated": "อัปเดตตำแหน่งที่ตั้ง",
+      "searchAddress": "ค้นหาที่อยู่",
+      "title": "รายละเอียดสถานที่"
+    },
+    "merchantType": {
+      "accountStatus": "สถานะบัญชี",
+      "accountStatusDescription": "เปิดหรือปิดการเข้าถึงแพลตฟอร์มของผู้ค้านี้",
+      "active": "ใช้งานอยู่",
+      "annual": "รายปี",
+      "description": "เลือกประเภทผู้ค้า",
+      "inactive": "ไม่ทำงาน",
+      "label": "ประเภทผู้ค้า",
+      "temporary": "ชั่วคราว",
+      "title": "ประเภทผู้ค้า"
+    },
+    "messages": {
+      "createError": "ไม่สามารถสร้างผู้ค้าได้",
+      "createErrorDescription": "กรุณาตรวจสอบข้อมูลของคุณและลองอีกครั้ง.",
+      "createSuccess": "สร้างบัญชีผู้ค้าเรียบร้อยแล้ว",
+      "validationFailed": "การตรวจสอบล้มเหลว"
+    },
+    "subtitle": "สร้างบัญชีผู้ค้าใหม่ กำหนดแผนการสมัครสมาชิก และกำหนดขีดจำกัดเริ่มต้น",
+    "title": "ลงทะเบียนผู้ค้าใหม่",
+    "validation": {
+      "emailInvalid": "กรุณาใส่อีเมลที่ถูกต้อง",
+      "fieldEmpty": "{field} ห้ามว่างเปล่า",
+      "fieldInvalid": "{field} ไม่ถูกต้อง",
+      "fieldRequired": "{field} เป็นสิ่งที่จำเป็น",
+      "fields": {
+        "address": "ที่อยู่",
+        "business_name": "ชื่อธุรกิจ",
+        "business_type": "ประเภทธุรกิจ",
+        "city": "เมือง",
+        "country": "ประเทศ",
+        "email": "ที่อยู่อีเมล",
+        "merchant_type": "ประเภทผู้ค้า",
+        "name": "ชื่อผู้ค้า",
+        "password": "รหัสผ่าน",
+        "role": "บทบาท",
+        "tax_id": "หมายเลขประจำตัวผู้เสียภาษี"
+      },
+      "passwordTooShort": "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "ใช้งาน",
+        "birthday": "🎂",
+        "description": "ลูกค้าที่ลงทะเบียนใหม่ล่าสุด",
+        "female": "👩 หญิง",
+        "inactive": "ไม่ทำงาน",
+        "joined": "📅 เข้าร่วม",
+        "male": "👨 ชาย",
+        "noData": "ไม่พบลูกค้า.",
+        "other": "👤",
+        "pageOf": "หน้า {current} จาก {total}",
+        "reward": "รางวัล",
+        "title": "ลูกค้า ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "จำนวนเงิน",
+          "credits": "เครดิต",
+          "description": "คำอธิบาย"
+        },
+        "description": "การใช้งานเครดิตย้อนหลัง",
+        "noData": "ไม่พบข้อมูล.",
+        "pageOf": "หน้า {current} จาก {total}",
+        "title": "บันทึกการทำธุรกรรม"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "ใช้งานอยู่",
+        "consumed": "{percent}% ที่ใช้ไป",
+        "description": "แคมเปญที่ใช้งานอยู่",
+        "halal": "ฮาลาล",
+        "id": "รหัสประจำตัว",
+        "inactive": "ไม่ทำงาน",
+        "issued": "ออก",
+        "left": "{count} ที่เหลือ",
+        "luckyDraw": "✓ การจับฉลาก",
+        "noData": "ไม่มีชุดที่ใช้งานอยู่",
+        "pageOf": "หน้า {current} จาก {total}",
+        "public": "สาธารณะ",
+        "title": "ชุดคูปอง ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "บัญชี",
+        "ads": "โฆษณา",
+        "annualFee": "ค่าธรรมเนียมรายปี",
+        "bi": "BI",
+        "coupons": "คูปอง",
+        "currency": "สกุลเงิน",
+        "description": "การจัดสรรเครดิตสด",
+        "disabled": "ปิดการใช้งาน",
+        "enabled": "เปิดใช้งาน",
+        "expires": "หมดอายุ",
+        "inactive": "ไม่ใช้งาน",
+        "never": "ไม่เคย",
+        "paid": "จ่ายเงิน",
+        "paidAds": "โฆษณาที่ชำระเงิน",
+        "plan": "แผน",
+        "title": "รายละเอียดกระเป๋าเงิน",
+        "ui": "UI",
+        "unpaid": "ยังไม่ได้ชำระ",
+        "verified": "ได้รับการตรวจสอบแล้ว",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "ไม่พบพาณิชย์หรือไม่สามารถโหลดได้",
+      "title": "ข้อผิดพลาด"
+    },
+    "header": {
+      "active": "ใช้งาน",
+      "editConfiguration": "แก้ไขการตั้งค่า",
+      "inactive": "ไม่ใช้งาน",
+      "memberSince": "สมาชิกตั้งแต่",
+      "subscription": "การสมัครสมาชิก {type}"
+    },
+    "loadError": "ไม่สามารถโหลดรายละเอียดของผู้ค้าได้",
+    "loading": "กำลังโหลดรายละเอียดผู้ค้า...",
+    "overview": {
+      "adCredits": {
+        "description": "สำหรับโปรโมชั่น",
+        "title": "เครดิตโฆษณา"
+      },
+      "couponCredits": {
+        "description": "สำหรับชุด",
+        "title": "เครดิตคูปอง"
+      },
+      "recentTransactions": {
+        "credits": "เครดิต",
+        "noData": "ไม่พบธุรกรรมใดๆ",
+        "pageOf": "หน้า {current} จาก {total}",
+        "title": "ธุรกรรมล่าสุด"
+      },
+      "totalCredits": {
+        "title": "เครดิตรวม",
+        "usedLabel": "{used} ใช้ทั้งหมด"
+      },
+      "usageSummary": {
+        "couponBalance": "ยอดคงเหลือคูปอง",
+        "creditUsage": "การใช้เครดิต",
+        "title": "สรุปการใช้งาน",
+        "whatsappBalance": "ยอดเงิน WhatsApp",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "UI ของ WhatsApp"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "เครดิต WhatsApp",
+        "uiLabel": "UI"
+      }
+    },
+    "tabs": {
+      "activity": "กิจกรรม",
+      "billing": "ขีดจำกัด",
+      "overview": "ภาพรวม"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "อัปเดตข้อมูลผู้ดูแลระบบพาณิชย์",
+      "newPassword": "รหัสผ่านใหม่ (เว้นว่างเพื่อรักษารหัสปัจจุบัน)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "อัปเดตผู้ค้า",
+      "updating": "กำลังอัปเดต..."
+    },
+    "loadingError": "ไม่สามารถโหลดข้อมูลผู้ค้าได้",
+    "messages": {
+      "updateError": "ไม่สามารถอัปเดตผู้ค้าได้",
+      "updateSuccess": "อัปเดตผู้ค้าเรียบร้อยแล้ว"
+    },
+    "subtitle": "อัปเดตรายละเอียดบัญชีผู้ค้าและการตั้งค่า.",
+    "title": "แก้ไขผู้ค้า",
+    "validation": {
+      "emailInvalid": "กรุณาใส่อีเมลที่ถูกต้อง",
+      "fieldEmpty": "{field} ห้ามว่างเปล่า",
+      "fieldInvalid": "{field} ไม่ถูกต้อง",
+      "fieldRequired": "{field} เป็นสิ่งที่จำเป็น",
+      "fields": {
+        "address": "ที่อยู่",
+        "business_name": "ชื่อธุรกิจ",
+        "business_type": "ประเภทธุรกิจ",
+        "city": "เมือง",
+        "country": "ประเทศ",
+        "email": "ที่อยู่อีเมล",
+        "merchant_type": "ประเภทผู้ค้า",
+        "name": "ชื่อผู้ค้า",
+        "password": "รหัสผ่าน",
+        "role": "บทบาท",
+        "tax_id": "หมายเลขประจำตัวผู้เสียภาษี"
+      },
+      "passwordTooShort": "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "รายละเอียด",
+      "edit": "แก้ไข",
+      "merchantOptions": "ตัวเลือกผู้ค้า"
+    },
+    "addMerchant": "เพิ่มผู้ค้า",
+    "columnNames": {
+      "actions": "การดำเนินการ",
+      "businessType": "ประเภทธุรกิจ",
+      "location": "สถานที่",
+      "name": "ชื่อ",
+      "qr": "QR",
+      "status": "สถานะ"
+    },
+    "columns": {
+      "actions": "การดำเนินการ",
+      "businessAccount": "ธุรกิจ & บัญชี",
+      "categoryPlan": "หมวดหมู่ & แผน",
+      "location": "ตำแหน่งที่ตั้ง",
+      "noQr": "ไม่มี QR",
+      "qrScan": "สแกน QR",
+      "status": "สถานะ"
+    },
+    "delete": {
+      "cancel": "ยกเลิก",
+      "confirm": "ลบ",
+      "deleting": "กำลังลบ...",
+      "description": "คุณแน่ใจหรือว่าต้องการลบ ",
+      "descriptionEnd": "? การกระทำนี้ไม่สามารถย้อนกลับได้.",
+      "errorMessage": "ลบผู้ค้าไม่สำเร็จ",
+      "successMessage": "ลบผู้ค้า \"{merchantName}\" เรียบร้อยแล้ว.",
+      "title": "ลบผู้ค้า",
+      "trigger": "ลบผู้ค้า"
+    },
+    "qrDialog": {
+      "download": "ดาวน์โหลด",
+      "scanFor": "สแกนสำหรับ {name}"
+    },
+    "searchPlaceholder": "ค้นหาผู้ค้า...",
+    "statusToggle": {
+      "activatedSuccess": "เปิดใช้งานผู้ค้าเรียบร้อยแล้ว",
+      "active": "ใช้งานอยู่",
+      "deactivatedSuccess": "ปิดการใช้งานผู้ค้าเรียบร้อยแล้ว",
+      "inactive": "ไม่ใช้งาน",
+      "updateError": "ไม่สามารถอัปเดตสถานะผู้ค้าได้"
+    },
+    "subtitle": "จัดการและติดตามผู้ค้าของคุณ",
+    "title": "การจัดการพาณิชย์"
+  }
+}
