@@ -96,7 +96,7 @@ export default function ApprovalDialog({ open, request, slots, onClose, onApprov
                 </p>
                 <p className="text-base font-mono">
                   {request.approval_type === "homepage_coupon_push"
-                    ? request.coupon?.coupon_code || "-"
+                    ? request.coupon?.batch?.batch_name || request.coupon?.coupon_code || "-"
                     : request.ad_type || "-"}
                 </p>
               </div>

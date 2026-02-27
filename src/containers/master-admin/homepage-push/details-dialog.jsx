@@ -121,7 +121,7 @@ export default function DetailsDialog({ open, request, onClose }) {
                 <p className="text-sm text-muted-foreground">{t("fields.item")}</p>
                 <p className="font-medium font-mono">
                   {request.approval_type === "homepage_coupon_push"
-                    ? request.coupon?.coupon_code || "-"
+                    ? request.coupon?.batch?.batch_name || request.coupon?.coupon_code || "-"
                     : request.ad_type || "-"}
                 </p>
               </div>
@@ -149,7 +149,7 @@ export default function DetailsDialog({ open, request, onClose }) {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-muted-foreground">{t("fields.couponCode")}</p>
-                  <p className="font-medium font-mono">{request.coupon.coupon_code}</p>
+                  <p className="font-medium font-mono">{request.coupon.batch?.batch_name || request.coupon.coupon_code}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">{t("fields.batchName")}</p>

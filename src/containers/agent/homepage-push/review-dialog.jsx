@@ -83,7 +83,7 @@ export default function ReviewDialog({ open, request, onClose, onForward, onDisa
                 </p>
                 <p className="text-base">
                   {request.approval_type === "homepage_coupon_push"
-                    ? request.coupon?.coupon_code || "-"
+                    ? request.coupon?.batch?.batch_name || request.coupon?.coupon_code || "-"
                     : request.ad_type || "-"}
                 </p>
               </div>

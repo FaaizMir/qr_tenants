@@ -36,7 +36,7 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
     header: t("listing.columns.item"),
     cell: ({ row }) => {
       if (row.original.approval_type === "homepage_coupon_push") {
-        return row.original.coupon?.coupon_code || "-";
+        return row.original.coupon?.batch?.batch_name || row.original.coupon?.coupon_code || "-";
       }
       return row.original.ad_type || "-";
     },
@@ -210,6 +210,7 @@ export default function HomepagePushListing() {
     return (
       r.approval_type?.toLowerCase().includes(searchLower) ||
       r.approval_status?.toLowerCase().includes(searchLower) ||
+      r.coupon?.batch?.batch_name?.toLowerCase().includes(searchLower) ||
       r.coupon?.coupon_code?.toLowerCase().includes(searchLower)
     );
   });
