@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "생성",
+    "dashboard": "대시보드",
+    "details": "세부정보",
+    "editMerchant": "상점 수정",
+    "merchantManagement": "상인 관리",
+    "merchants": "상인"
+  },
+  "common": {
+    "error": "오류가 발생했습니다",
+    "loading": "로딩 중...",
+    "noData": "데이터가 없습니다"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "상인 관리자에 대한 로그인 세부정보.",
+      "emailAddress": "이메일 주소",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "비밀번호 숨기기",
+      "initialPassword": "초기 비밀번호",
+      "merchantName": "상인 이름",
+      "merchantNamePlaceholder": "존 도우",
+      "role": "역할",
+      "showPassword": "비밀번호 표시",
+      "title": "계정 자격 증명"
+    },
+    "actions": {
+      "cancel": "취소",
+      "createMerchant": "상인 만들기",
+      "creating": "생성 중...",
+      "insufficientBalanceTooltip": "연간 상인 생성을 위한 지갑 잔액이 부족합니다."
+    },
+    "businessProfile": {
+      "businessName": "비즈니스 이름",
+      "businessNamePlaceholder": "예: Acme 카페",
+      "businessType": "업종",
+      "businessTypePlaceholder": "업종 선택...",
+      "businessTypes": {
+        "education": "교육",
+        "foodBeverage": "음식 및 음료",
+        "health": "건강",
+        "hospitality": "환대",
+        "retail": "소매",
+        "services": "서비스",
+        "technology": "기술"
+      },
+      "description": "고객에게 표시되는 기본 비즈니스 세부정보.",
+      "taxId": "세금 ID",
+      "taxIdPlaceholder": "예: TX123456",
+      "title": "비즈니스 프로필"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 메인 스트리트, 도시, 국가",
+      "city": "도시",
+      "cityPlaceholder": "도시",
+      "country": "국가",
+      "countryPlaceholder": "국가",
+      "description": "비즈니스 주소를 검색하여 세부 정보를 자동으로 채웁니다.",
+      "locationUpdated": "위치가 업데이트되었습니다",
+      "searchAddress": "주소 검색",
+      "title": "위치 세부정보"
+    },
+    "merchantType": {
+      "accountStatus": "계정 상태",
+      "accountStatusDescription": "이 상인의 플랫폼 접근을 활성화하거나 비활성화합니다.",
+      "active": "활성",
+      "annual": "연간",
+      "description": "상점 유형을 선택하세요.",
+      "inactive": "비활성",
+      "label": "상점 유형",
+      "temporary": "임시",
+      "title": "상인 유형"
+    },
+    "messages": {
+      "createError": "상인 생성을 실패했습니다.",
+      "createErrorDescription": "입력을 확인하고 다시 시도하십시오.",
+      "createSuccess": "상인 계정이 성공적으로 생성되었습니다.",
+      "validationFailed": "유효성 검사 실패"
+    },
+    "subtitle": "새 상인 계정을 생성하고, 구독 계획을 할당하고, 초기 한도를 설정합니다.",
+    "title": "새 상인 온보드",
+    "validation": {
+      "emailInvalid": "유효한 이메일 주소를 입력해 주세요",
+      "fieldEmpty": "{field}는 비어 있을 수 없습니다",
+      "fieldInvalid": "{field}가 유효하지 않습니다",
+      "fieldRequired": "{field}는 필수입니다",
+      "fields": {
+        "address": "주소",
+        "business_name": "상호명",
+        "business_type": "업종",
+        "city": "도시",
+        "country": "국가",
+        "email": "이메일 주소",
+        "merchant_type": "상인 유형",
+        "name": "상인 이름",
+        "password": "비밀번호",
+        "role": "역할",
+        "tax_id": "세금 ID"
+      },
+      "passwordTooShort": "비밀번호는 최소 8자 이상이어야 합니다"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "활성",
+        "birthday": "🎂",
+        "description": "최근 등록된 고객",
+        "female": "👩 여성",
+        "inactive": "비활성",
+        "joined": "📅 가입일",
+        "male": "👨 남성",
+        "noData": "고객을 찾을 수 없습니다.",
+        "other": "👤",
+        "pageOf": "페이지 {current} / {total}",
+        "reward": "보상",
+        "title": "고객 ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "금액",
+          "credits": "크레딧",
+          "description": "설명"
+        },
+        "description": "이전 신용 사용량",
+        "noData": "기록이 없습니다.",
+        "pageOf": "페이지 {current} / {total}",
+        "title": "거래 원장"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "활성",
+        "consumed": "{percent}% 소모됨",
+        "description": "활성 캠페인",
+        "halal": "할랄",
+        "id": "아이디",
+        "inactive": "비활성",
+        "issued": "발급됨",
+        "left": "{count} 남음",
+        "luckyDraw": "✓ 행운의 추첨",
+        "noData": "활성 배치 없음.",
+        "pageOf": "페이지 {current} / {total}",
+        "public": "공개",
+        "title": "쿠폰 배치 ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "계좌",
+        "ads": "광고",
+        "annualFee": "연회비",
+        "bi": "BI",
+        "coupons": "쿠폰",
+        "currency": "통화",
+        "description": "실시간 크레딧 할당",
+        "disabled": "비활성화됨",
+        "enabled": "활성화됨",
+        "expires": "만료",
+        "inactive": "비활성",
+        "never": "결코",
+        "paid": "유료",
+        "paidAds": "유료 광고",
+        "plan": "계획",
+        "title": "지갑 세부정보",
+        "ui": "UI",
+        "unpaid": "미납",
+        "verified": "확인됨",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "상인을 찾을 수 없거나 로드할 수 없습니다.",
+      "title": "오류"
+    },
+    "header": {
+      "active": "활성",
+      "editConfiguration": "구성 편집",
+      "inactive": "비활성",
+      "memberSince": "가입일",
+      "subscription": "{type} 구독"
+    },
+    "loadError": "상인 세부 정보를 로드하지 못했습니다.",
+    "loading": "상인 세부정보 로딩 중...",
+    "overview": {
+      "adCredits": {
+        "description": "프로모션용",
+        "title": "광고 크레딧"
+      },
+      "couponCredits": {
+        "description": "배치용",
+        "title": "쿠폰 크레딧"
+      },
+      "recentTransactions": {
+        "credits": "크레딧",
+        "noData": "거래가 없습니다.",
+        "pageOf": "페이지 {current} / {total}",
+        "title": "최근 거래"
+      },
+      "totalCredits": {
+        "title": "총 크레딧",
+        "usedLabel": "{used} 사용된 총량"
+      },
+      "usageSummary": {
+        "couponBalance": "쿠폰 잔액",
+        "creditUsage": "신용 사용량",
+        "title": "사용 요약",
+        "whatsappBalance": "WhatsApp 잔액",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "WhatsApp UI"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "WhatsApp 크레딧",
+        "uiLabel": "UI"
+      }
+    },
+    "tabs": {
+      "activity": "활동",
+      "billing": "한도",
+      "overview": "개요"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "상인 관리자 세부정보 업데이트.",
+      "newPassword": "새 비밀번호(현재 비밀번호 유지하려면 비워두세요)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "상인 업데이트",
+      "updating": "업데이트 중..."
+    },
+    "loadingError": "상인 데이터 로드 실패",
+    "messages": {
+      "updateError": "상인 업데이트 실패",
+      "updateSuccess": "상인이 성공적으로 업데이트되었습니다."
+    },
+    "subtitle": "상인 계정 세부정보 및 구성 업데이트.",
+    "title": "상인 편집",
+    "validation": {
+      "emailInvalid": "유효한 이메일 주소를 입력하십시오",
+      "fieldEmpty": "{field}는 비어 있을 수 없습니다",
+      "fieldInvalid": "{field}가 유효하지 않습니다",
+      "fieldRequired": "{field}는 필수입니다",
+      "fields": {
+        "address": "주소",
+        "business_name": "사업 이름",
+        "business_type": "업종",
+        "city": "도시",
+        "country": "국가",
+        "email": "이메일 주소",
+        "merchant_type": "상인 유형",
+        "name": "상인 이름",
+        "password": "비밀번호",
+        "role": "역할",
+        "tax_id": "세금 ID"
+      },
+      "passwordTooShort": "비밀번호는 최소 8자 이상이어야 합니다"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "세부정보",
+      "edit": "수정",
+      "merchantOptions": "상인 옵션"
+    },
+    "addMerchant": "상인 추가",
+    "columnNames": {
+      "actions": "작업",
+      "businessType": "업종",
+      "location": "위치",
+      "name": "이름",
+      "qr": "QR",
+      "status": "상태"
+    },
+    "columns": {
+      "actions": "작업",
+      "businessAccount": "비즈니스 및 계정",
+      "categoryPlan": "카테고리 및 계획",
+      "location": "위치",
+      "noQr": "NO QR",
+      "qrScan": "QR 스캔",
+      "status": "상태"
+    },
+    "delete": {
+      "cancel": "취소",
+      "confirm": "삭제",
+      "deleting": "삭제 중...",
+      "description": "정말로 삭제하시겠습니까 ",
+      "descriptionEnd": "? 이 작업은 실행 취소할 수 없습니다.",
+      "errorMessage": "상점을 삭제하지 못했습니다",
+      "successMessage": "상인 \"{merchantName}\"이(가) 성공적으로 삭제되었습니다.",
+      "title": "상인 삭제",
+      "trigger": "상인 삭제"
+    },
+    "qrDialog": {
+      "download": "다운로드",
+      "scanFor": "{name}에 대한 스캔"
+    },
+    "searchPlaceholder": "상인 검색...",
+    "statusToggle": {
+      "activatedSuccess": "상인이 성공적으로 활성화되었습니다",
+      "active": "활성",
+      "deactivatedSuccess": "상인이 성공적으로 비활성화되었습니다",
+      "inactive": "비활성",
+      "updateError": "상인 상태 업데이트 실패"
+    },
+    "subtitle": "상인을 관리하고 모니터링합니다",
+    "title": "상인 관리"
+  }
+}

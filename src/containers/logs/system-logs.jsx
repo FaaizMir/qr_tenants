@@ -376,6 +376,14 @@ export default function SystemLogsContainer({
           setPage={setPage}
           setPageSize={setPageSize}
           columnsBtn={true}
+          columnNameTranslations={{
+            created_at: t("columns.dateTime"),
+            category: t("columns.category"),
+            action: t("columns.action"),
+            message: t("columns.description"),
+            details: t("columns.details"),
+            level: t("columns.severity"),
+          }}
         />
       </CardContent>
     </Card>

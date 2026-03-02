@@ -2,47 +2,63 @@
 
 import React from "react";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export function SubscriptionExpiryPopup({ isOpen, onClose }) {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleGoToWallet = () => {
-        router.push("/agent/wallet");
-        onClose();
-    };
+  const handleGoToWallet = () => {
+    router.push("/agent/wallet");
+    onClose();
+  };
 
-    return (
-        <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2 text-destructive">
-                        <AlertTriangle className="h-5 w-5" />
-                        Subscription Purchase Required
-                    </DialogTitle>
-                    <DialogDescription className="py-4">
-                        Your agent subscription purchase is required. Most features will be restricted until you purchase your plan. Please top up your balance to restore full access.
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="flex sm:justify-between gap-2">
-                    <Button variant="ghost" onClick={onClose}>
-                        Remind me later
-                    </Button>
-                    <Button onClick={handleGoToWallet} className="gap-2">
-                        <Wallet className="h-4 w-4" />
-                        Go to Wallet
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
-    );
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-[425px] border-none shadow-2xl rounded-3xl p-0 overflow-hidden">
+        <div className="bg-linear-to-br from-amber-50 to-white p-6 pt-8">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-amber-100 rounded-2xl shadow-sm flex items-center justify-center mb-4">
+              <AlertTriangle className="h-8 w-8 text-amber-600" />
+            </div>
+
+            <DialogHeader className="p-0">
+              <DialogTitle className="text-2xl font-bold text-amber-900 tracking-tight text-center">
+                Subscription Required
+              </DialogTitle>
+              <DialogDescription className="text-sm font-medium text-amber-800/70 mt-2 leading-relaxed text-center">
+                Your agent subscription is required to continue. Most features
+                will be restricted until your plan is active.
+              </DialogDescription>
+            </DialogHeader>
+          </div>
+        </div>
+
+        <DialogFooter className="flex flex-col sm:flex-row gap-3 p-6 pt-2 bg-white">
+          <Button
+            variant="ghost"
+            onClick={onClose}
+            className="flex-1 text-black  bg-slate-200 hover:bg-slate-300 rounded-xl transition-all focus-visible:ring-0 focus-visible:ring-offset-0"
+          >
+            Remind me later
+          </Button>
+          <Button
+            onClick={handleGoToWallet}
+            className="flex-1 gap-2 bg-amber-100 hover:bg-amber-200 text-black rounded-xl shadow-md  transition-all hover:scale-[1.01] active:scale-[0.98]"
+          >
+            <Wallet className="h-4 w-4" />
+            Go to Wallet
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
 }

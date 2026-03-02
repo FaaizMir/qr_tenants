@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "Kích hoạt đăng ký",
+    "topUpWallet": "Nạp tiền vào ví"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "Đăng ký của bạn đã hết hạn. Hãy gia hạn đăng ký của bạn để tiếp tục truy cập tất cả các tính năng của nền tảng.",
+      "title": "Đăng ký đã hết hạn"
+    },
+    "subscriptionRequired": {
+      "description": "Tài khoản của bạn chưa được kích hoạt. Nhấp vào \"Kích hoạt đăng ký\" để thanh toán phí đăng ký hàng năm và bắt đầu sử dụng nền tảng. Bạn cũng có thể thêm số dư ví trả trước trong quá trình kích hoạt.",
+      "title": "Cần kích hoạt đăng ký"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "Tín dụng trả trước có sẵn",
+      "title": "Số dư hiện tại"
+    },
+    "securityNote": {
+      "description": "Ví của bạn được bảo vệ bằng mã hóa tiêu chuẩn ngành. Tất cả các giao dịch đều được kiểm toán theo thời gian thực để đảm bảo an toàn cho quỹ của bạn.",
+      "title": "An ninh tài chính"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "TÀI KHOẢN HOẠT ĐỘNG",
+      "inactive": "KHÔNG HOẠT ĐỘNG",
+      "noDate": "Không có ngày",
+      "noType": "Không áp dụng",
+      "package": "Gói {type}",
+      "planType": "Loại gói",
+      "renewalDate": "Ngày gia hạn",
+      "status": "Trạng thái",
+      "title": "Trạng thái Đăng ký & Tài khoản"
+    },
+    "totalEarnings": {
+      "description": "Lợi nhuận trọn đời",
+      "title": "Tổng thu nhập"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "Nhập số tiền bạn muốn thêm vào số dư ví trả trước của bạn. Số dư này sẽ được sử dụng cho các hoạt động trên nền tảng.",
+      "title": "Nạp tiền vào ví của bạn:"
+    },
+    "amountCard": {
+      "hint": "Nhập số tiền chính xác bạn muốn thêm vào ví của mình. Chi phí nền tảng sẽ được tự động trừ từ số dư này.",
+      "instantCredit": {
+        "description": "Ví của bạn sẽ được ghi có ngay lập tức sau khi thanh toán thành công.",
+        "title": "Tín dụng ngay lập tức:"
+      },
+      "label": "Số tiền cần thêm",
+      "placeholder": "0.00",
+      "quickSelect": "Chọn Nhanh:",
+      "subtitle": "Tối thiểu {currency} 100 yêu cầu",
+      "title": "Nhập số tiền nạp"
+    },
+    "infoCard": {
+      "merchantPayments": "100% Thanh toán của Thương nhân: Tất cả thanh toán của thương nhân đều được chuyển trực tiếp vào tài khoản Stripe của bạn",
+      "platformCosts": "Chi phí nền tảng: Tự động trừ từ số dư ví trả trước này",
+      "title": "Mô hình Ví Trả Trước",
+      "yourProfit": "Lợi nhuận của bạn: Thanh toán của thương nhân - Chi phí nền tảng = Thu nhập của bạn"
+    },
+    "subtitle": "Thêm số dư trả trước vào ví của bạn để thực hiện các hoạt động trên nền tảng",
+    "summary": {
+      "payButton": "Thanh toán {currency} {amount} với Stripe",
+      "processing": "Đang chuyển hướng đến Stripe...",
+      "securePayment": {
+        "description": "Cổng thanh toán Stripe mã hóa SSL",
+        "title": "Thanh toán an toàn"
+      },
+      "title": "Tóm tắt thanh toán",
+      "totalPayment": "Tổng thanh toán:",
+      "walletTopup": "Nạp tiền vào ví:"
+    },
+    "title": "Nạp tiền vào ví của bạn",
+    "validation": {
+      "createError": "Không thể bắt đầu quá trình thanh toán",
+      "invalidAmount": "Vui lòng nhập một số tiền hợp lệ",
+      "minimumAmount": "Số tiền nạp tối thiểu là 100",
+      "paymentError": "Không thể bắt đầu thanh toán. Vui lòng thử lại."
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "Số tiền",
+      "date": "Ngày",
+      "description": "Mô tả",
+      "frequency": "Tần suất"
+    },
+    "searchPlaceholder": "Tìm kiếm các khoản khấu trừ...",
+    "title": "Nhật ký khấu trừ tự động"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "Để bắt đầu sử dụng nền tảng, bạn cần thanh toán phí đăng ký hàng năm. Bạn cũng có thể thêm số dư trả trước vào ví của bạn trong cùng một giao dịch.",
+      "title": "Chào mừng!"
+    },
+    "features": {
+      "analytics": "Phân tích & báo cáo",
+      "chatSupport": "Hệ thống hỗ trợ trò chuyện",
+      "couponManagement": "Hệ thống quản lý phiếu giảm giá",
+      "platformAccess": "Truy cập nền tảng trong 12 tháng",
+      "qrGeneration": "Tạo mã QR",
+      "reviewCollection": "Xem xét các công cụ thu thập",
+      "title": "Những gì bao gồm trong gói đăng ký của bạn",
+      "unlimitedMerchants": "Tài khoản thương nhân không giới hạn",
+      "whatsappIntegration": "Tích hợp nhắn tin WhatsApp"
+    },
+    "loading": "Đang tải thông tin đăng ký...",
+    "subscriptionFee": {
+      "access": "Truy cập nền tảng hàng năm",
+      "description": "Truy cập đầy đủ tất cả các tính năng trong 12 tháng",
+      "required": "Bắt buộc",
+      "subtitle": "Cần thiết để kích hoạt tài khoản của bạn",
+      "title": "Phí đăng ký hàng năm"
+    },
+    "subtitle": "Thanh toán đăng ký hàng năm của bạn và tùy chọn thêm số dư ví trả trước",
+    "summary": {
+      "payButton": "Thanh toán {currency} {amount} bằng Stripe",
+      "processing": "Đang chuyển hướng đến Stripe...",
+      "securePayment": {
+        "description": "Cổng thanh toán Stripe mã hóa SSL",
+        "title": "Thanh toán an toàn"
+      },
+      "subscriptionFee": "Phí Đăng ký:",
+      "title": "Tóm tắt thanh toán",
+      "totalPayment": "Tổng thanh toán:",
+      "walletBalance": "Số dư ví:"
+    },
+    "title": "Kích hoạt tài khoản của bạn",
+    "validation": {
+      "createError": "Không thể bắt đầu quy trình thanh toán",
+      "loadError": "Không thể tải thông tin đăng ký",
+      "minimumAmount": "Số dư tối thiểu là 100",
+      "negativeAmount": "Số dư không thể âm",
+      "paymentError": "Không thể bắt đầu thanh toán. Vui lòng thử lại."
+    },
+    "walletBalance": {
+      "hint": "Số tiền tối thiểu {currency} 100 nếu thêm số dư. Chi phí nền tảng sẽ được trừ từ ví này.",
+      "label": "Số dư Ví",
+      "modelInfo": {
+        "description": "Thanh toán của thương nhân sẽ 100% vào tài khoản Stripe của bạn. Chi phí nền tảng sẽ tự động được trừ từ số dư ví trả trước này.",
+        "title": "Mô hình Ví trả trước:"
+      },
+      "optional": "Tùy chọn",
+      "placeholder": "0.00",
+      "subtitle": "Số dư trả trước tùy chọn cho các hoạt động trên nền tảng",
+      "title": "Thêm số dư Ví"
+    }
+  },
+  "messages": {
+    "creditError": "Không thể ghi có ví",
+    "subscriptionSuccess": "Đăng ký đã được kích hoạt thành công!",
+    "topupError": "Thanh toán thành công nhưng không thể ghi có vào ví. Vui lòng liên hệ với bộ phận hỗ trợ.",
+    "topupSuccess": "Ví đã được nạp thành công!",
+    "topupSuccessDescription": "{currency} {amount} đã được thêm vào số dư của bạn."
+  },
+  "subtitle": "Quản lý số dư ví và giao dịch của bạn",
+  "tabs": {
+    "balance": "Số dư",
+    "earnings": "Thu nhập",
+    "transactions": "Giao dịch"
+  },
+  "title": "Ví đại lý",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} Thưởng",
+    "dialogSubtitle": "Chọn gói ví trả trước phù hợp với nhu cầu của bạn",
+    "dialogTitle": "Chọn số tiền nạp",
+    "get": "Nhận {currency} {amount}",
+    "mostPopular": "⭐ Phổ biến nhất",
+    "orderSummary": {
+      "baseAmount": "Số tiền cơ bản:",
+      "bonus": "Thưởng:",
+      "package": "Gói:",
+      "title": "Tóm tắt đơn hàng",
+      "totalCredit": "Tổng tín dụng:"
+    },
+    "packages": {
+      "business": {
+        "description": "Lý tưởng cho các cơ quan đang phát triển",
+        "feature1": "Bao gồm ~8-10 thương nhân hàng năm",
+        "feature2": "Hoặc ~20.000 tin nhắn giao diện WhatsApp",
+        "feature3": "Hoặc ~5.000 tin nhắn WhatsApp BI",
+        "feature4": "✨ Tiền thưởng RM150 đã bao gồm",
+        "name": "Nạp tiền doanh nghiệp"
+      },
+      "enterprise": {
+        "description": "Đối với các hoạt động quy mô lớn",
+        "feature1": "Bao gồm ~17-20 thương nhân hàng năm",
+        "feature2": "Hoặc ~40,000 tin nhắn giao diện WhatsApp",
+        "feature3": "Hoặc ~10,000 tin nhắn WhatsApp BI",
+        "feature4": "✨ Bao gồm thưởng RM500",
+        "name": "Nạp tiền Doanh nghiệp"
+      },
+      "premium": {
+        "description": "Giá trị tối đa cho các đại lý có khối lượng lớn",
+        "feature1": "Bao gồm ~38-40 thương nhân hàng năm",
+        "feature2": "Hoặc ~80,000 tin nhắn giao diện WhatsApp",
+        "feature3": "Hoặc ~20,000 tin nhắn WhatsApp BI",
+        "feature4": "✨ Bao gồm thưởng RM1,500",
+        "name": "Nạp tiền cao cấp"
+      },
+      "standard": {
+        "description": "Tốt nhất cho các hoạt động nhỏ đến trung bình",
+        "feature1": "Bao phủ ~3-4 thương nhân hàng năm",
+        "feature2": "Hoặc ~8000 tin nhắn UI WhatsApp",
+        "feature3": "Hoặc ~2000 tin nhắn WhatsApp BI",
+        "feature4": "✨ Bao gồm thưởng RM50",
+        "name": "Nạp tiền tiêu chuẩn"
+      },
+      "starter": {
+        "description": "Hoàn hảo để bắt đầu với một vài thương nhân",
+        "feature1": "Bao gồm ~1-2 thương nhân hàng năm",
+        "feature2": "Hoặc ~4000 tin nhắn WhatsApp UI",
+        "feature3": "Hoặc ~1000 tin nhắn BI WhatsApp",
+        "name": "Nạp tiền Khởi đầu"
+      }
+    },
+    "paymentAmount": "Số tiền thanh toán",
+    "paymentDetails": {
+      "description": "Thanh toán an toàn qua Stripe. Ví của bạn sẽ được ghi có ngay lập tức.",
+      "paymentAmount": "Số tiền thanh toán",
+      "title": "Chi tiết Thanh toán"
+    },
+    "selectPackage": {
+      "description": "Chọn một số tiền nạp từ các tùy chọn bên trái.",
+      "title": "Chọn gói"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "Số tiền",
+      "date": "Ngày",
+      "description": "Mô tả",
+      "status": "Trạng thái",
+      "type": "Loại"
+    },
+    "noData": "-",
+    "searchPlaceholder": "Tìm kiếm giao dịch...",
+    "status": {
+      "completed": "Đã hoàn thành",
+      "pending": "Đang chờ xử lý"
+    }
+  }
+}

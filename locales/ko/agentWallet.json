@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "구독 활성화",
+    "topUpWallet": "지갑 충전"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "귀하의 구독이 만료되었습니다. 모든 플랫폼 기능에 계속 액세스하려면 구독을 갱신하십시오.",
+      "title": "구독 만료"
+    },
+    "subscriptionRequired": {
+      "description": "귀하의 계정은 아직 활성화되지 않았습니다. 연간 구독료를 지불하고 플랫폼을 사용하려면 \"구독 활성화\"를 클릭하세요. 활성화 중에 선불 지갑 잔액을 추가할 수도 있습니다.",
+      "title": "구독 활성화 필요"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "사용 가능한 선불 크레딧",
+      "title": "현재 잔액"
+    },
+    "securityNote": {
+      "description": "귀하의 지갑은 업계 표준 암호화로 보호됩니다. 모든 거래는 귀하의 자금 안전을 보장하기 위해 실시간으로 감사됩니다.",
+      "title": "재정 보안"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "활성 계정",
+      "inactive": "비활성",
+      "noDate": "날짜 없음",
+      "noType": "해당 없음",
+      "package": "{type} 패키지",
+      "planType": "플랜 유형",
+      "renewalDate": "갱신 날짜",
+      "status": "상태",
+      "title": "구독 및 계정 상태"
+    },
+    "totalEarnings": {
+      "description": "평생 수익",
+      "title": "총 수익"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "선불 지갑 잔액에 추가할 금액을 입력하세요. 이 잔액은 플랫폼 운영에 사용됩니다.",
+      "title": "지갑 충전:"
+    },
+    "amountCard": {
+      "hint": "지갑에 추가할 정확한 금액을 입력하세요. 플랫폼 비용은 이 잔액에서 자동으로 차감됩니다.",
+      "instantCredit": {
+        "description": "결제가 성공적으로 완료된 후 즉시 지갑에 크레딧이 추가됩니다.",
+        "title": "즉시 크레딧:"
+      },
+      "label": "추가할 금액",
+      "placeholder": "0.00",
+      "quickSelect": "빠른 선택:",
+      "subtitle": "최소 {currency} 100 필요",
+      "title": "충전 금액 입력"
+    },
+    "infoCard": {
+      "merchantPayments": "100% 상인 결제: 모든 상인 결제는 귀하의 Stripe 계정으로 직접 전송됩니다",
+      "platformCosts": "플랫폼 비용: 이 선불 지갑 잔액에서 자동으로 차감됩니다",
+      "title": "선불 지갑 모델",
+      "yourProfit": "당신의 수익: 상인 결제 - 플랫폼 비용 = 당신의 수익"
+    },
+    "subtitle": "플랫폼 운영을 위해 지갑에 선불 잔액 추가",
+    "summary": {
+      "payButton": "Stripe로 {currency} {amount} 지불하기",
+      "processing": "Stripe로 리디렉션 중...",
+      "securePayment": {
+        "description": "SSL 암호화된 Stripe 게이트웨이",
+        "title": "안전한 결제"
+      },
+      "title": "결제 요약",
+      "totalPayment": "총 결제:",
+      "walletTopup": "지갑 충전:"
+    },
+    "title": "지갑 충전하기",
+    "validation": {
+      "createError": "결제 프로세스를 시작하지 못했습니다",
+      "invalidAmount": "유효한 금액을 입력하십시오",
+      "minimumAmount": "최소 추가 충전 금액은 100입니다",
+      "paymentError": "결제를 시작할 수 없습니다. 다시 시도해 주세요."
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "금액",
+      "date": "날짜",
+      "description": "설명",
+      "frequency": "빈도"
+    },
+    "searchPlaceholder": "공제 검색 중...",
+    "title": "자동 공제 로그"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "플랫폼을 사용하려면 연간 구독료를 지불해야 합니다. 같은 거래에서 지갑에 선불 잔액을 추가할 수도 있습니다.",
+      "title": "환영합니다!"
+    },
+    "features": {
+      "analytics": "분석 및 보고",
+      "chatSupport": "채팅 지원 시스템",
+      "couponManagement": "쿠폰 관리 시스템",
+      "platformAccess": "12개월 플랫폼 접근",
+      "qrGeneration": "QR 코드 생성",
+      "reviewCollection": "수집 도구 검토",
+      "title": "구독에 포함된 내용",
+      "unlimitedMerchants": "무제한 상인 계정",
+      "whatsappIntegration": "WhatsApp 메시징 통합"
+    },
+    "loading": "구독 정보 로딩 중...",
+    "subscriptionFee": {
+      "access": "연간 플랫폼 액세스",
+      "description": "12개월 동안 모든 기능에 대한 전체 액세스",
+      "required": "필수",
+      "subtitle": "계정을 활성화하려면 필요합니다",
+      "title": "연간 구독료"
+    },
+    "subtitle": "연간 구독료를 지불하고 선택적으로 선불 지갑 잔액을 추가하십시오",
+    "summary": {
+      "payButton": "Stripe로 {currency} {amount} 결제",
+      "processing": "Stripe로 리디렉션 중...",
+      "securePayment": {
+        "description": "SSL 암호화된 Stripe 게이트웨이",
+        "title": "안전한 결제"
+      },
+      "subscriptionFee": "구독료:",
+      "title": "결제 요약",
+      "totalPayment": "총 결제 금액:",
+      "walletBalance": "지갑 잔액:"
+    },
+    "title": "계정을 활성화하세요",
+    "validation": {
+      "createError": "결제 프로세스를 시작하지 못했습니다",
+      "loadError": "구독 정보 로드 실패",
+      "minimumAmount": "최소 잔액 금액은 100입니다.",
+      "negativeAmount": "잔액 금액은 음수가 될 수 없습니다",
+      "paymentError": "결제를 시작할 수 없습니다. 다시 시도해 주세요."
+    },
+    "walletBalance": {
+      "hint": "잔액 추가 시 최소 {currency} 100입니다. 플랫폼 비용은 이 지갑에서 차감됩니다.",
+      "label": "지갑 잔액 금액",
+      "modelInfo": {
+        "description": "상인 결제는 100% 귀하의 Stripe 계정으로 전송됩니다. 플랫폼 비용은 이 선불 지갑 잔액에서 자동으로 차감됩니다.",
+        "title": "선불 지갑 모델:"
+      },
+      "optional": "선택 사항",
+      "placeholder": "0.00",
+      "subtitle": "플랫폼 운영을 위한 선택적 선불 잔액",
+      "title": "지갑 잔액 추가"
+    }
+  },
+  "messages": {
+    "creditError": "지갑에 크레딧을 추가하지 못했습니다",
+    "subscriptionSuccess": "구독이 성공적으로 활성화되었습니다!",
+    "topupError": "결제는 성공했지만 지갑에 적립되지 않았습니다. 지원팀에 문의하십시오.",
+    "topupSuccess": "지갑이 성공적으로 충전되었습니다!",
+    "topupSuccessDescription": "{currency} {amount}가 귀하의 잔액에 추가되었습니다."
+  },
+  "subtitle": "지갑 잔액 및 거래 관리",
+  "tabs": {
+    "balance": "잔액",
+    "earnings": "수익",
+    "transactions": "거래"
+  },
+  "title": "에이전트 지갑",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} 보너스",
+    "dialogSubtitle": "귀하의 필요에 맞는 선불 지갑 패키지를 선택하세요",
+    "dialogTitle": "추가 충전 금액 선택",
+    "get": "{currency} {amount} 받기",
+    "mostPopular": "⭐ 가장 인기 있음",
+    "orderSummary": {
+      "baseAmount": "기본 금액:",
+      "bonus": "보너스:",
+      "package": "패키지:",
+      "title": "주문 요약",
+      "totalCredit": "총 크레딧:"
+    },
+    "packages": {
+      "business": {
+        "description": "성장하는 에이전시에 이상적",
+        "feature1": "연간 상인 약 8-10명 포함",
+        "feature2": "또는 ~20,000 WhatsApp UI 메시지",
+        "feature3": "또는 약 5,000개의 WhatsApp BI 메시지",
+        "feature4": "✨ 보너스 RM150 포함",
+        "name": "비즈니스 충전"
+      },
+      "enterprise": {
+        "description": "대규모 운영을 위한",
+        "feature1": "연간 약 17-20개의 상인을 포함합니다",
+        "feature2": "또는 ~40,000 WhatsApp UI 메시지",
+        "feature3": "또는 ~10,000 WhatsApp BI 메시지",
+        "feature4": "✨ 보너스 RM500 포함",
+        "name": "기업 추가 충전"
+      },
+      "premium": {
+        "description": "대량 거래소를 위한 최대 값",
+        "feature1": "연간 약 38-40명의 상인 포함",
+        "feature2": "또는 약 80,000개의 WhatsApp UI 메시지",
+        "feature3": "또는 ~20,000개의 WhatsApp BI 메시지",
+        "feature4": "✨ 보너스 RM1,500 포함",
+        "name": "프리미엄 충전"
+      },
+      "standard": {
+        "description": "소규모에서 중규모 운영에 가장 적합",
+        "feature1": "연간 상인 ~3-4명 커버",
+        "feature2": "또는 약 8000개의 WhatsApp UI 메시지",
+        "feature3": "또는 ~2000개의 WhatsApp BI 메시지",
+        "feature4": "✨ 보너스 RM50 포함",
+        "name": "표준 추가 충전"
+      },
+      "starter": {
+        "description": "몇몇 상인과 함께 시작하기에 완벽함",
+        "feature1": "연간 상인 약 1-2명 포함",
+        "feature2": "또는 ~4000 WhatsApp UI 메시지",
+        "feature3": "또는 약 1000개의 WhatsApp BI 메시지",
+        "name": "시작 충전"
+      }
+    },
+    "paymentAmount": "결제 금액",
+    "paymentDetails": {
+      "description": "Stripe를 통한 안전한 결제. 귀하의 지갑은 즉시 충전됩니다.",
+      "paymentAmount": "결제 금액",
+      "title": "결제 세부정보"
+    },
+    "selectPackage": {
+      "description": "왼쪽 옵션에서 충전 금액을 선택하세요.",
+      "title": "패키지 선택"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "금액",
+      "date": "날짜",
+      "description": "설명",
+      "status": "상태",
+      "type": "유형"
+    },
+    "noData": "-",
+    "searchPlaceholder": "거래 검색...",
+    "status": {
+      "completed": "완료됨",
+      "pending": "대기 중"
+    }
+  }
+}

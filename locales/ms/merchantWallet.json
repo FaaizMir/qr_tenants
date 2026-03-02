@@ -69,6 +69,10 @@
   },
   "loadMore": "Muat Lebih Banyak",
   "noTransactions": "Tiada transaksi ditemui",
+  "page": {
+    "breadcrumb": "Dompet",
+    "dashboardBreadcrumb": "Papan Pemuka Pedagang"
+  },
   "remainingCredits": "Kredit yang tinggal",
   "subscription": {
     "annual": "Tahunan",

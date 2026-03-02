@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "Buat Paket",
+    "dashboard": "Dasbor Agen",
+    "edit": "Edit Paket",
+    "packages": "Paket Iklan"
+  },
+  "deleteDialog": {
+    "cancel": "Batalkan Penghapusan",
+    "confirm": "Dikonfirmasi, Hapus Sekarang",
+    "description": "Anda akan menghapus secara permanen ",
+    "descriptionEnd": ". Tindakan ini bersifat permanen dan tidak dapat dibatalkan.",
+    "title": "Kewaspadaan Ekstrem"
+  },
+  "form": {
+    "actions": {
+      "cancel": "Batalkan",
+      "delete": "Hapus Paket",
+      "save": "Terbitkan Paket",
+      "saving": "Menyimpan...",
+      "update": "Perbarui Paket"
+    },
+    "backButton": "Kembali ke Daftar",
+    "createDescription": "Tentukan harga dan kredit untuk kampanye iklan berbayar.",
+    "createTitle": "Buat Paket Iklan Berbayar",
+    "deleteConfirm": {
+      "cancel": "Batalkan",
+      "confirm": "Ya, hapus paket",
+      "description": "Ini akan menghapus secara permanen ",
+      "descriptionEnd": ". Tindakan ini tidak dapat dibatalkan.",
+      "title": "Apakah Anda benar-benar yakin?"
+    },
+    "editDescription": "Tentukan harga dan kredit untuk kampanye iklan berbayar.",
+    "editTitle": "Edit Paket Iklan Berbayar",
+    "fields": {
+      "currency": {
+        "label": "Mata Uang",
+        "options": {
+          "pkr": "PKR (Rs)",
+          "usd": "USD ($)"
+        }
+      },
+      "description": {
+        "label": "Deskripsi",
+        "placeholder": "Ringkasan singkat tentang apa yang ditawarkan paket ini..."
+      },
+      "displayPriority": {
+        "label": "Prioritas Tampilan",
+        "placeholder": "Pos. dalam daftar (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "Rencana Merchant",
+        "options": {
+          "annual": "Tahunan / Premium",
+          "temporary": "Sementara / Dasar"
+        }
+      },
+      "packageName": {
+        "label": "Nama Paket",
+        "placeholder": "mis. Paket Iklan Premium"
+      },
+      "packageStatus": {
+        "label": "Status Paket",
+        "options": {
+          "active": "Aktif & Terlihat",
+          "inactive": "Tidak Aktif / Tersembunyi"
+        }
+      },
+      "price": {
+        "label": "Harga",
+        "placeholder": "0,00"
+      },
+      "pricePerCredit": {
+        "auto": "OTOMATIS",
+        "label": "Harga per Kredit"
+      },
+      "totalCredits": {
+        "label": "Total Kredit"
+      }
+    },
+    "infoBanner": {
+      "description": "Jenis paket ini khusus untuk kampanye iklan berbayar",
+      "title": "Paket Kredit Iklan Berbayar"
+    },
+    "preview": {
+      "advertisingCredits": "Kredit Iklan",
+      "defaultDescription": "Kapasitas iklan yang ditingkatkan",
+      "getStarted": "Mulai",
+      "hiddenDraft": "TERSEMBUNYI / DRAFT",
+      "packageTitle": "Judul Paket",
+      "paidAds": "Iklan Berbayar",
+      "perCredit": "per kredit",
+      "title": "Pratampilan Langsung"
+    },
+    "sections": {
+      "classification": "Klasifikasi",
+      "credits": "Kredit & Alokasi",
+      "identity": "Identitas & Penetapan Harga"
+    },
+    "validation": {
+      "creditsMin": "Kredit harus setidaknya 1",
+      "creditsRequired": "Kredit diperlukan",
+      "descriptionRequired": "Deskripsi diperlukan",
+      "nameRequired": "Nama paket diperlukan",
+      "priceMin": "Harga harus setidaknya 1",
+      "priceRequired": "Harga diperlukan",
+      "priorityRequired": "Prioritas tampilan diperlukan"
+    }
+  },
+  "messages": {
+    "createError": "Gagal membuat paket",
+    "createSuccess": "Paket berhasil dibuat",
+    "deleteError": "Gagal menghapus paket",
+    "deleteSuccess": "Paket berhasil dihapus",
+    "fetchError": "Gagal mengambil paket",
+    "loadError": "Gagal memuat detail paket",
+    "updateError": "Gagal memperbarui paket",
+    "updateSuccess": "Paket berhasil diperbarui",
+    "wrongTypeError": "Anda hanya dapat mengedit paket iklan berbayar"
+  },
+  "subtitle": "Kelola paket kredit iklan berbayar Anda",
+  "table": {
+    "actions": {
+      "delete": "Hapus Paket",
+      "edit": "Edit Paket",
+      "label": "Tindakan Paket"
+    },
+    "columns": {
+      "credits": "Kredit",
+      "noDescription": "Tidak ada deskripsi",
+      "packageInfo": "Info Paket",
+      "perCredit": "per kredit",
+      "plan": "Rencana",
+      "pricing": "Penetapan Harga",
+      "rank": "Peringkat",
+      "status": "Status"
+    },
+    "createButton": "Buat Paket Iklan Berbayar",
+    "searchPlaceholder": "Cari berdasarkan nama paket...",
+    "status": {
+      "active": "Aktif",
+      "inactive": "Tidak Aktif"
+    }
+  },
+  "title": "Paket Iklan Berbayar"
+}

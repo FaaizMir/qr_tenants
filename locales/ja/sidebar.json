@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "広告パッケージ",
     "approvals": "承認",
     "couponsync": "クーポン同期",
     "dashboard": "ダッシュボード",

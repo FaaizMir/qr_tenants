@@ -1,13 +1,16 @@
 "use client";
 
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
+import { useTranslations } from "next-intl";
 // Logic moved to src/containers/merchant/lucky-draw/index.jsx
 import MerchantLuckyDrawContainer from "@/containers/merchant/lucky-draw";
 
 export default function MerchantLuckyDrawPage() {
+  const t = useTranslations("merchantLuckyDraw.page");
+  
   const breadcrumbData = [
-    { name: "Merchant Dashboard", url: "/merchant/dashboard" },
-    { name: "Lucky Draw", url: "/merchant/lucky-draw" },
+    { name: t("dashboardBreadcrumb"), url: "/merchant/dashboard" },
+    { name: t("breadcrumb"), url: "/merchant/lucky-draw" },
   ];
   return (
     <>

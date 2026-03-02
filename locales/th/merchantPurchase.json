@@ -1,59 +1,99 @@
 {
-  "title": "เพิ่มพลังให้ร้านค้าของคุณ",
-  "subtitle": "เลือกแพ็คเกจเครดิตสำหรับข้อความ WhatsApp การสร้างคูปอง และโฆษณาแบบชำระเงิน",
-  "loading": "กำลังโหลดแพ็คเกจ...",
-  "errors": {
-    "loadPackages": "ไม่สามารถโหลดแพ็คเกจเครดิตได้ กรุณาลองอีกครั้ง",
-    "noMerchantId": "ไม่สามารถระบุ ID ผู้ขายได้ กรุณาติดต่อฝ่ายสนับสนุน",
-    "purchaseFailed": "การซื้อแพ็คเกจล้มเหลว กรุณาลองอีกครั้ง",
-    "requestFailed": "คำขอล้มเหลวด้วยสถานะ {status}"
+  "checkout": {
+    "amountPayable": "จำนวนเงินที่ต้องชำระ",
+    "bonusGift": "ของขวัญโบนัส",
+    "cardDetails": "รายละเอียดบัตร",
+    "creditsIncluded": "เครดิตรวมอยู่ด้วย",
+    "noSelection": "ไม่มีแพ็คเกจที่เลือก",
+    "noSelectionMessage": "กรุณาเลือกแพ็คเกจเพื่อดำเนินการชำระเงินต่อไป.",
+    "packageType": "ประเภทแพ็คเกจ",
+    "paymentInfo": "กรอกข้อมูลการชำระเงินของคุณด้านล่าง",
+    "premiumDescription": "แพ็คเกจเครดิตพรีเมียมพร้อมฟีเจอร์ที่เพิ่มขึ้น",
+    "securePayment": "การชำระเงินที่ปลอดภัย",
+    "sslEncrypted": "เข้ารหัส SSL",
+    "subtitle": "ตรวจสอบการซื้อของคุณ",
+    "title": "สรุปคำสั่งซื้อ",
+    "totalAmount": "ยอดรวม",
+    "trustedPartners": "พันธมิตรที่เชื่อถือได้"
   },
   "emptyState": {
-    "noPackages": "ไม่พบแพ็คเกจเครดิตสำหรับประเภทผู้ขายของคุณ"
+    "noPackages": "ไม่มีแพ็คเกจเครดิตในขณะนี้."
+  },
+  "errors": {
+    "agentBalanceInsufficient": "ยอดเงินพรีเพดของตัวแทนไม่เพียงพอ",
+    "agentBalanceInsufficinetDescription": "ตัวแทนของคุณต้องเติมเงินในกระเป๋าเงินแบบพรีเพด กรุณาติดต่อกับตัวแทนของคุณเพื่อเพิ่มเงินก่อนที่จะทำการซื้อเสร็จสิ้น",
+    "loadPackages": "ไม่สามารถโหลดแพ็คเกจเครดิตได้",
+    "noMerchantId": "ไม่พบหมายเลขผู้ค้า กรุณาเข้าสู่ระบบอีกครั้ง.",
+    "purchaseFailed": "ไม่สามารถซื้อแพ็คเกจได้ กรุณาลองอีกครั้ง."
+  },
+  "merchantTypes": {
+    "annual": "ประจำปี",
+    "standard": "มาตรฐาน",
+    "temporary": "ชั่วคราว"
+  },
+  "packageCard": {
+    "baseCredits": "เครดิต {credits} รวมอยู่ด้วย",
+    "bonusCredits": "+{bonusCredits} เครดิตโบนัส",
+    "enhancedFeatures": "ฟีเจอร์ที่เพิ่มขึ้นสำหรับธุรกิจของคุณ",
+    "getStarted": "เริ่มต้น",
+    "perCredit": "ต่อเครดิต"
   },
   "packageTypes": {
     "coupon": "คูปอง",
-    "whatsappUI": "ข้อความ WhatsApp UI",
-    "whatsappBI": "ข้อความ WhatsApp BI",
-    "whatsapp": "ข้อความ WhatsApp",
-    "paidAds": "โฆษณาแบบชำระเงิน",
-    "standard": "มาตรฐาน"
+    "paidAds": "โฆษณาที่ชำระเงิน",
+    "standard": "มาตรฐาน",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "WhatsApp UI"
   },
-  "merchantTypes": {
-    "annual": "รายปี",
-    "temporary": "ชั่วคราว",
-    "standard": "มาตรฐาน"
+  "page": {
+    "breadcrumb": "ซื้อ",
+    "dashboardBreadcrumb": "แดชบอร์ดผู้ค้า"
   },
-  "packageCard": {
-    "perCredit": "ต่อเครดิต",
-    "baseCredits": "{credits} เครดิตพื้นฐาน",
-    "bonusCredits": "+{bonusCredits} เครดิตโบนัส",
-    "enhancedFeatures": "คุณสมบัติและความจุที่ได้รับการปรับปรุง",
-    "getStarted": "เริ่มต้น"
+  "stripeCancel": {
+    "backToDashboard": "กลับไปที่แดชบอร์ด",
+    "backToPurchase": "กลับไปที่การซื้อ",
+    "description": "เซสชันการชำระเงินของคุณถูกยกเลิก ไม่มีการชำระเงินเกิดขึ้น.",
+    "goToWallet": "ไปที่กระเป๋าเงิน",
+    "title": "การชำระเงินถูกยกเลิก"
   },
-  "checkout": {
-    "title": "ภาพรวมคำสั่งซื้อ",
-    "subtitle": "รายละเอียดการชำระเงิน",
-    "selectedPackage": "แพ็คเกจที่เลือก",
-    "premiumDescription": "แพ็คเกจเครดิตพรีเมียมสำหรับการเติบโตของธุรกิจของคุณ",
-    "creditsIncluded": "เครดิตที่รวมอยู่",
-    "bonusGift": "ของขวัญโบนัส",
-    "packageType": "ประเภทแพ็คเกจ",
-    "totalAmount": "จำนวนเงินทั้งหมด",
-    "securePayment": "การชำระเงินที่ปลอดภัย",
-    "sslEncrypted": "เกตเวย์ Stripe เข้ารหัส SSL",
-    "cardDetails": "รายละเอียดบัตร",
-    "paymentInfo": "กรุณากรอกข้อมูลการชำระเงินของคุณด้านล่าง",
-    "amountPayable": "จำนวนเงินที่ต้องชำระ",
-    "trustedPartners": "พันธมิตรที่เชื่อถือได้",
-    "noSelection": "ไม่พบการเลือก",
-    "noSelectionMessage": "กรุณาปิดหน้าต่างนี้และเลือกแพ็คเกจเครดิตเพื่อดำเนินการอัปเกรดของคุณ"
+  "stripeCheckout": {
+    "credits": "เครดิต",
+    "errors": {
+      "insufficientBalance": "ยอดเงินในกระเป๋าเงินของตัวแทนไม่เพียงพอ ต้องการ: {required}, มีอยู่: {available}. กรุณาเติมเงินในกระเป๋าเงินของคุณเพื่อทำการซื้อให้เสร็จสิ้น.",
+      "noAdminId": "ไม่สามารถดึง ID ผู้ดูแลระบบจากเซสชันได้ กรุณาเข้าสู่ระบบอีกครั้ง",
+      "startCheckout": "ไม่สามารถเริ่มการชำระเงินผ่าน Stripe ได้ กรุณาลองอีกครั้ง.",
+      "startPayment": "ไม่สามารถเริ่มการชำระเงินได้ กรุณาลองอีกครั้ง.",
+      "validateBalance": "ไม่สามารถตรวจสอบยอดเงินในกระเป๋าเงินได้ กรุณาติดต่อฝ่ายสนับสนุน.",
+      "validateBalanceRetry": "ไม่สามารถตรวจสอบยอดเงินในกระเป๋าเงินได้ กรุณาลองอีกครั้ง."
+    },
+    "packagePurchase": "การซื้อแพ็คเกจ",
+    "payableAmount": "จำนวนเงินที่ต้องชำระ",
+    "payWithStripe": "ชำระเงินด้วย Stripe",
+    "redirecting": "กำลังเปลี่ยนเส้นทางไปยัง Stripe..."
   },
+  "stripeSuccess": {
+    "backToDashboard": "กลับไปที่แดชบอร์ด",
+    "backToPurchase": "กลับไปที่การซื้อ",
+    "description": "การชำระเงินของคุณเสร็จสมบูรณ์แล้ว.",
+    "goToWallet": "ไปที่กระเป๋าเงิน",
+    "processing": "กำลังเพิ่มเครดิตไปยังกระเป๋าเงินของคุณ...",
+    "reflected": "เครดิตจะถูกสะท้อนในกระเป๋าเงินของคุณในไม่ช้า.",
+    "title": "การชำระเงินสำเร็จ",
+    "toasts": {
+      "creditsAdded": "เครดิตถูกเพิ่มเรียบร้อยแล้ว!",
+      "processingFailed": "การชำระเงินสำเร็จ แต่ไม่สามารถอัปเดตบัญชีของคุณได้ กรุณาติดต่อฝ่ายสนับสนุน.",
+      "subscriptionActivated": "เปิดใช้งานการสมัครสมาชิกสำเร็จ!",
+      "subscriptionRenewed": "ต่ออายุการสมัครสมาชิกสำเร็จ!",
+      "upgradedToAnnual": "อัปเกรดเป็นการสมัครสมาชิกประจำปีเรียบร้อยแล้ว!",
+      "upgradeFailed": "การอัปเกรดล้มเหลว: ข้อมูลผู้ดูแลระบบหายไป.",
+      "walletBalance": "ยอดเงินในกระเป๋าเงิน: {currency} {balance}",
+      "walletToppedUp": "เติมเงินในกระเป๋าเงินเรียบร้อยแล้ว! เพิ่ม {currency} {amount}"
+    }
+  },
+  "subtitle": "เลือกแพ็คเกจเครดิตที่เหมาะกับความต้องการทางธุรกิจของคุณ",
   "success": {
-    "purchaseComplete": "ซื้อแพ็คเกจสำเร็จแล้ว"
+    "purchaseComplete": "การซื้อเสร็จสมบูรณ์แล้ว!"
   },
-  "toast": {
-    "purchaseSuccess": "ซื้อแพ็คเกจสำเร็จแล้ว",
-    "purchaseError": "การซื้อแพ็คเกจล้มเหลว กรุณาลองอีกครั้ง"
-  }
+  "title": "ซื้อเครดิต"
 }

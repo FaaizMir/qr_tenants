@@ -69,6 +69,10 @@
   },
   "loadMore": "Tải thêm",
   "noTransactions": "Không tìm thấy giao dịch nào",
+  "page": {
+    "breadcrumb": "Ví",
+    "dashboardBreadcrumb": "Bảng điều khiển thương nhân"
+  },
   "remainingCredits": "Tín dụng còn lại",
   "subscription": {
     "annual": "Hàng năm",

@@ -141,7 +141,7 @@ export default function MerchantDashboardContainer() {
                 sizeClass="w-16 h-16"
               />
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-[7px] px-2 py-0.5 rounded-full font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-y-2 group-hover:translate-y-1 shadow-lg pointer-events-none">
-                TAP TO ZOOM
+                {t("qrCode.tapToZoom")}
               </div>
             </div>
           ) : (

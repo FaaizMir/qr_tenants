@@ -66,6 +66,8 @@
       "city": "Thành phố",
       "curatingMessage": "Chúng tôi đang chọn lọc những thương gia được xác minh tốt nhất và các ưu đãi độc quyền cho bạn...",
       "everywhere": "Mọi nơi",
+      "expiringSoon": "Sắp hết hạn",
+      "expiringSoonActive": "Sắp hết hạn ✓",
       "industry": "Ngành",
       "loadingMarketplace": "Đang tải Thị trường",
       "noMerchantsFound": "Không tìm thấy người bán nào",
@@ -147,6 +149,8 @@
       "agents": "Đại lý",
       "allCountries": "Tất cả các quốc gia",
       "description": "Quản lý mạng lưới đại lý toàn cầu của bạn.",
+      "expiringSoon": "Sắp hết hạn",
+      "expiringSoonActive": "Sắp hết hạn ✓",
       "noAgentsFound": "Không tìm thấy đại lý nào",
       "of": "của",
       "pageNoResults": "Trang - Không có kết quả",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "Liên hệ",
       "copyright": "© 2024 QR Rev Inc. Tất cả các quyền được bảo lưu.",
+      "globalMerchantNetwork": "Mạng lưới thương nhân toàn cầu",
       "privacy": "Quyền riêng tư",
       "terms": "Điều khoản"
     },

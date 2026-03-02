@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "لوحة معلومات الوكيل",
+    "statements": "البيانات المالية"
+  },
+  "columns": {
+    "actions": "الإجراءات",
+    "downloadPdf": "تحميل PDF",
+    "generatedAt": "تم الإنشاء في",
+    "monthLabel": "الشهر {month}، {year}",
+    "noDate": "—",
+    "period": "فترة",
+    "status": "حالة",
+    "totalSpend": "إجمالي الإنفاق"
+  },
+  "filters": {
+    "description": "تصفية البيانات حسب السنة والشهر",
+    "month": {
+      "all": "الشهر الحالي",
+      "label": "شهر",
+      "placeholder": "الشهر الحالي"
+    },
+    "quickActions": {
+      "label": "إجراءات سريعة",
+      "loading": "جارٍ التحميل...",
+      "refresh": "تحديث القائمة"
+    },
+    "title": "مرشحات البيان",
+    "year": {
+      "label": "السنة",
+      "placeholder": "اختر السنة"
+    }
+  },
+  "messages": {
+    "downloadError": "فشل في تحميل PDF. يرجى المحاولة مرة أخرى.",
+    "downloadSuccess": "تم تنزيل البيان بنجاح!",
+    "fetchError": "فشل في تحميل البيانات. يرجى المحاولة مرة أخرى."
+  },
+  "months": {
+    "april": "أبريل",
+    "august": "أغسطس",
+    "december": "ديسمبر",
+    "february": "فبراير",
+    "january": "يناير",
+    "july": "يوليو",
+    "june": "يونيو",
+    "march": "مارس",
+    "may": "مايو",
+    "november": "نوفمبر",
+    "october": "أكتوبر",
+    "september": "سبتمبر"
+  },
+  "status": {
+    "failed": "فشل",
+    "generated": "تم إنشاؤه",
+    "pending": "معلق"
+  },
+  "subtitle": "تقارير PDF الشهرية التي تم إنشاؤها تلقائيًا بما في ذلك الأرباح والرسوم ودخل الحزمة ودفتر المحفظة.",
+  "table": {
+    "description": "تم العثور على {count} بيان",
+    "description_plural": "تم العثور على {count} بيانات",
+    "loading": "جارٍ تحميل البيانات...",
+    "noData": {
+      "description": "لا توجد بيانات متاحة للفترة المحددة. قم بإنشاء بيان جديد للبدء.",
+      "title": "لم يتم العثور على بيانات"
+    },
+    "title": "تاريخ البيان"
+  },
+  "title": "بيانات الوكيل المالية"
+}

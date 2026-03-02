@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "downloadPdf": "Muat Turun PDF",
+    "generatedAt": "Dihasilkan Pada",
+    "month": "Bulan",
+    "period": "Tempoh",
+    "status": "Status",
+    "statusLabels": {
+      "failed": "Gagal",
+      "generated": "Dihasilkan",
+      "pending": "Menunggu"
+    },
+    "totalSpend": "Jumlah Perbelanjaan",
+    "unknown": "Tidak diketahui"
+  },
+  "index": {
+    "empty": {
+      "description": "Tiada penyata tersedia untuk tempoh yang dipilih. Hasilkan penyata baru untuk memulakan.",
+      "title": "Tiada Penyata Ditemui"
+    },
+    "filters": {
+      "currentMonth": "Bulan Semasa",
+      "description": "Tapis penyata mengikut tahun dan bulan",
+      "loading": "Memuatkan...",
+      "month": "Bulan",
+      "quickActions": "Tindakan Pantas",
+      "refreshList": "Segarkan Senarai",
+      "selectYear": "Pilih tahun",
+      "title": "Penapis Penyata",
+      "year": "Tahun"
+    },
+    "months": {
+      "april": "April",
+      "august": "Ogos",
+      "december": "Disember",
+      "february": "Februari",
+      "january": "Januari",
+      "july": "Julai",
+      "june": "Jun",
+      "march": "Mac",
+      "may": "Mei",
+      "november": "November",
+      "october": "Oktober",
+      "september": "September"
+    },
+    "subtitle": "Laporan PDF yang dijana secara automatik setiap bulan termasuk pendapatan, yuran, pendapatan pakej, dan lejar dompet.",
+    "table": {
+      "found": "ditemui",
+      "loadingStatements": "Memuatkan pernyataan...",
+      "statementsFound": "pernyataan",
+      "statementsFoundPlural": "pernyataan",
+      "title": "Sejarah Pernyataan"
+    },
+    "title": "Penyata Kewangan Pedagang",
+    "toasts": {
+      "downloadFailed": "Gagal memuat turun PDF. Sila cuba lagi.",
+      "downloadSuccess": "Pernyataan dimuat turun dengan jayanya!",
+      "loadFailed": "Gagal memuatkan penyata. Sila cuba lagi."
+    }
+  }
+}

@@ -1,59 +1,99 @@
 {
-  "title": "قم بتعزيز متجرك",
-  "subtitle": "اختر حزمة رصيد لرسائل واتساب وإنشاء القسائم والإعلانات المدفوعة.",
-  "loading": "جارٍ تحميل الحزم...",
-  "errors": {
-    "loadPackages": "تعذر تحميل حزم الرصيد. يرجى المحاولة مرة أخرى.",
-    "noMerchantId": "تعذر تحديد معرف التاجر. يرجى الاتصال بالدعم.",
-    "purchaseFailed": "فشل شراء الحزمة. يرجى المحاولة مرة أخرى.",
-    "requestFailed": "فشل الطلب بالحالة {status}."
+  "checkout": {
+    "amountPayable": "المبلغ المستحق",
+    "bonusGift": "هدية إضافية",
+    "cardDetails": "تفاصيل البطاقة",
+    "creditsIncluded": "الائتمانات المضمنة",
+    "noSelection": "لا يوجد حزمة مختارة",
+    "noSelectionMessage": "يرجى اختيار حزمة للمتابعة مع الدفع.",
+    "packageType": "نوع الحزمة",
+    "paymentInfo": "أدخل معلومات الدفع الخاصة بك أدناه",
+    "premiumDescription": "حزمة ائتمان مميزة مع ميزات محسّنة",
+    "securePayment": "دفع آمن",
+    "sslEncrypted": "مشفرة SSL",
+    "subtitle": "راجع عملية الشراء الخاصة بك",
+    "title": "ملخص الطلب",
+    "totalAmount": "المبلغ الإجمالي",
+    "trustedPartners": "شركاء موثوقون"
   },
   "emptyState": {
-    "noPackages": "لم يتم العثور على حزم رصيد لنوع التاجر الخاص بك."
+    "noPackages": "لا توجد حزم ائتمان متاحة في الوقت الحالي."
   },
-  "packageTypes": {
-    "coupon": "قسيمة",
-    "whatsappUI": "رسالة واتساب UI",
-    "whatsappBI": "رسالة واتساب BI",
-    "whatsapp": "رسالة واتساب",
-    "paidAds": "إعلانات مدفوعة",
-    "standard": "قياسي"
+  "errors": {
+    "agentBalanceInsufficient": "رصيد الوكيل المدفوع مسبقًا غير كافٍ",
+    "agentBalanceInsufficinetDescription": "يحتاج وكيلك إلى تعبئة محفظته المدفوعة مسبقًا. يرجى الاتصال بوكيلك لإضافة أموال قبل إتمام عملية الشراء.",
+    "loadPackages": "فشل في تحميل حزم الائتمان",
+    "noMerchantId": "لم يتم العثور على معرف التاجر. يرجى تسجيل الدخول مرة أخرى.",
+    "purchaseFailed": "فشل في شراء الحزمة. يرجى المحاولة مرة أخرى."
   },
   "merchantTypes": {
     "annual": "سنوي",
-    "temporary": "مؤقت",
-    "standard": "قياسي"
+    "standard": "قياسي",
+    "temporary": "مؤقت"
   },
   "packageCard": {
-    "perCredit": "لكل رصيد",
-    "baseCredits": "{credits} رصيد أساسي",
+    "baseCredits": "{credits} ائتمانات مشمولة",
     "bonusCredits": "+{bonusCredits} رصيد إضافي",
-    "enhancedFeatures": "ميزات وسعة محسّنة",
-    "getStarted": "ابدأ الآن"
+    "enhancedFeatures": "ميزات محسّنة لعملك",
+    "getStarted": "ابدأ الآن",
+    "perCredit": "لكل ائتمان"
   },
-  "checkout": {
-    "title": "نظرة عامة على الطلب",
-    "subtitle": "تفاصيل الدفع",
-    "selectedPackage": "الحزمة المحددة",
-    "premiumDescription": "حزمة رصيد متميزة لنمو عملك.",
-    "creditsIncluded": "الرصيد المتضمن",
-    "bonusGift": "هدية إضافية",
-    "packageType": "نوع الحزمة",
-    "totalAmount": "المبلغ الإجمالي",
-    "securePayment": "دفع آمن",
-    "sslEncrypted": "بوابة Stripe مشفرة بـ SSL",
-    "cardDetails": "تفاصيل البطاقة",
-    "paymentInfo": "يرجى إدخال معلومات الدفع الخاصة بك أدناه.",
-    "amountPayable": "المبلغ المستحق",
-    "trustedPartners": "شركاء موثوقون",
-    "noSelection": "لم يتم العثور على تحديد",
-    "noSelectionMessage": "يرجى إغلاق هذه النافذة واختيار حزمة رصيد للمتابعة مع الترقية."
+  "packageTypes": {
+    "coupon": "قسيمة",
+    "paidAds": "إعلانات مدفوعة",
+    "standard": "قياسي",
+    "whatsapp": "واتساب",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "واجهة WhatsApp"
   },
+  "page": {
+    "breadcrumb": "شراء",
+    "dashboardBreadcrumb": "لوحة تحكم التاجر"
+  },
+  "stripeCancel": {
+    "backToDashboard": "العودة إلى لوحة التحكم",
+    "backToPurchase": "العودة إلى الشراء",
+    "description": "تم إلغاء جلسة الدفع الخاصة بك عبر Stripe. لم يتم أخذ أي مدفوعات.",
+    "goToWallet": "اذهب إلى المحفظة",
+    "title": "تم إلغاء الدفع"
+  },
+  "stripeCheckout": {
+    "credits": "رصيد",
+    "errors": {
+      "insufficientBalance": "رصيد المحفظة غير كافٍ. المطلوب: {required}، المتاح: {available}. يرجى تعبئة محفظتك لإكمال هذا الشراء.",
+      "noAdminId": "غير قادر على استرداد معرف المسؤول من الجلسة. يرجى تسجيل الدخول مرة أخرى.",
+      "startCheckout": "غير قادر على بدء جلسة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.",
+      "startPayment": "غير قادر على بدء الدفع. يرجى المحاولة مرة أخرى.",
+      "validateBalance": "غير قادر على التحقق من رصيد المحفظة. يرجى الاتصال بالدعم.",
+      "validateBalanceRetry": "غير قادر على التحقق من رصيد المحفظة. يرجى المحاولة مرة أخرى."
+    },
+    "packagePurchase": "شراء الحزمة",
+    "payableAmount": "المبلغ المستحق",
+    "payWithStripe": "الدفع باستخدام Stripe",
+    "redirecting": "يتم إعادة التوجيه إلى Stripe..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "العودة إلى لوحة التحكم",
+    "backToPurchase": "العودة إلى الشراء",
+    "description": "تمت معالجة دفعتك بنجاح.",
+    "goToWallet": "اذهب إلى المحفظة",
+    "processing": "جارٍ إضافة رصيد إلى محفظتك...",
+    "reflected": "سيتم عكس الرصيد في محفظتك قريبًا.",
+    "title": "تم الدفع بنجاح",
+    "toasts": {
+      "creditsAdded": "تمت إضافة الرصيد بنجاح!",
+      "processingFailed": "تمت العملية بنجاح، ولكن فشل تحديث حسابك. يرجى الاتصال بالدعم.",
+      "subscriptionActivated": "تم تفعيل الاشتراك بنجاح!",
+      "subscriptionRenewed": "تم تجديد الاشتراك بنجاح!",
+      "upgradedToAnnual": "تم الترقية إلى اشتراك سنوي بنجاح!",
+      "upgradeFailed": "فشل الترقية: معلومات المسؤول مفقودة.",
+      "walletBalance": "رصيد المحفظة: {currency} {balance}",
+      "walletToppedUp": "تم تعبئة المحفظة بنجاح! تمت إضافة {currency} {amount}"
+    }
+  },
+  "subtitle": "اختر حزمة ائتمان تناسب احتياجات عملك",
   "success": {
-    "purchaseComplete": "تم شراء الحزمة بنجاح."
+    "purchaseComplete": "تم إكمال الشراء بنجاح!"
   },
-  "toast": {
-    "purchaseSuccess": "تم شراء الحزمة بنجاح.",
-    "purchaseError": "فشل شراء الحزمة. يرجى المحاولة مرة أخرى."
-  }
+  "title": "شراء ائتمانات"
 }

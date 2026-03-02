@@ -66,6 +66,8 @@
       "city": "Bandar",
       "curatingMessage": "Kami sedang mengumpulkan peniaga yang disahkan terbaik dan tawaran eksklusif untuk anda...",
       "everywhere": "Di mana-mana",
+      "expiringSoon": "Akan Tamat Tidak Lama Lagi",
+      "expiringSoonActive": "Akan Tamat Tidak Lama Lagi ✓",
       "industry": "Industri",
       "loadingMarketplace": "Memuatkan Pasaran",
       "noMerchantsFound": "Tiada peniaga ditemui",
@@ -147,6 +149,8 @@
       "agents": "Ejen",
       "allCountries": "Semua Negara",
       "description": "Urus rangkaian ejen penyewa global anda.",
+      "expiringSoon": "Akan Tamat Tidak Lama Lagi",
+      "expiringSoonActive": "Akan Tamat Tidak Lama Lagi ✓",
       "noAgentsFound": "Tiada ejen ditemui",
       "of": "daripada",
       "pageNoResults": "Halaman - Tiada Hasil",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "Hubungi",
       "copyright": "© 2024 QR Rev Inc. Semua hak terpelihara.",
+      "globalMerchantNetwork": "Rangkaian Pedagang Global",
       "privacy": "Privasi",
       "terms": "Terma"
     },

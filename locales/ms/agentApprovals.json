@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "Luluskan",
+    "reject": "Tolak"
+  },
+  "columns": {
+    "adContent": "Kandungan Iklan",
+    "adPlacement": "Penempatan Iklan",
+    "approvalStatus": "Status Kelulusan",
+    "approvalType": "Jenis Kelulusan",
+    "businessAccount": "Perniagaan & Akaun",
+    "location": "Lokasi",
+    "merchantType": "Jenis Pedagang",
+    "noAd": "Tiada Iklan",
+    "requestedDate": "Tarikh Diminta"
+  },
+  "dialog": {
+    "approveDescription": "Adakah anda pasti ingin meluluskan permintaan untuk {merchantName}? Tindakan ini tidak boleh dibatalkan.",
+    "approveTitle": "Luluskan Permintaan Iklan",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "confirmApprove": "Ya, Luluskan",
+    "confirmReject": "Ya, Tolak",
+    "processing": "Memproses...",
+    "rejectDescription": "Pilih sebab untuk menolak permintaan dari {merchantName}.",
+    "rejectTitle": "Tolak Permintaan Iklan"
+  },
+  "messages": {
+    "approveError": "Gagal meluluskan permintaan",
+    "approveSuccess": "Permintaan diluluskan dengan jayanya",
+    "fetchError": "Ralat mengambil kelulusan",
+    "rejectError": "Gagal menolak permintaan",
+    "rejectSuccess": "Permintaan ditolak dengan jayanya"
+  },
+  "preview": {
+    "description": "Pratonton saiz penuh iklan promosi",
+    "title": "Pratonton Iklan",
+    "videoNotSupported": "Pelayar anda tidak menyokong tag video."
+  },
+  "rejectionReasons": {
+    "adultContent": "Kandungan dewasa / seksual",
+    "gamblingContent": "Kandungan perjudian",
+    "illegalServices": "Perkhidmatan haram",
+    "misleadingContent": "Kandungan yang mengelirukan",
+    "other": "Lain-lain (input sebab manual)",
+    "placeholder": "Masukkan sebab penolakan...",
+    "title": "Sila nyatakan sebabnya"
+  },
+  "status": {
+    "approved": "Diluluskan",
+    "pending": "Menunggu",
+    "rejected": "Ditolak"
+  },
+  "subtitle": "Urus kelulusan ejen",
+  "title": "Kelulusan",
+  "validation": {
+    "provideCustomReason": "Sila berikan sebab penolakan khusus",
+    "selectReason": "Sila pilih sebab penolakan"
+  }
+}

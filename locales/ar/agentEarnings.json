@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "لوحة التحكم",
+    "earnings": "الأرباح"
+  },
+  "columns": {
+    "commissionEarned": "العمولة المكتسبة",
+    "commissionRate": "نسبة العمولة",
+    "date": "التاريخ",
+    "merchant": "التاجر",
+    "noData": "—",
+    "source": "العمولة",
+    "totalSales": "إجمالي المبيعات"
+  },
+  "commissionBreakdown": {
+    "description": "العمولات المجمعة لكل تاجر.",
+    "searchPlaceholder": "ابحث عن تاجر أو مصدر...",
+    "title": "تفصيل العمولة"
+  },
+  "errors": {
+    "fetchFailed": "فشل في جلب الأرباح"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "التجار النشطون"
+    },
+    "earningsType": {
+      "title": "نوع الأرباح",
+      "value": "مدفوع مسبقاً"
+    },
+    "totalEarnings": {
+      "title": "إجمالي الأرباح",
+      "trend": "بيانات حية"
+    }
+  },
+  "noData": "—"
+}

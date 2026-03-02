@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "إجراء",
+    "category": "فئة",
+    "dateTime": "التاريخ والوقت",
+    "description": "الوصف",
+    "details": "التفاصيل",
+    "noDetails": "لا توجد تفاصيل",
+    "severity": "الخطورة",
+    "systemActivity": "نشاط النظام"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "راقب أنشطة التجار، معاملات المحفظة، وسجلات العمولة.",
+    "masterAdmin": "عرض جميع أنشطة النظام، ومسارات التدقيق، والأخطاء الحرجة عبر المنصة.",
+    "merchant": "تتبع عمليات متجرك، واستخدام القسائم، وتفاعلات العملاء."
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "الطريقة: {value}",
+      "user": "المستخدم: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "تم إنشاء {count} قسائم",
+      "quantity": "الكمية: {value}",
+      "type": "النوع: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "المنصة: {value}",
+      "review": "مراجعة: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "قسيمة",
+      "credits": "الاعتمادات",
+      "paidAd": "إعلان مدفوع",
+      "platformCommission": "عمولة المنصة: {rate}%",
+      "unitPrice": "سعر الوحدة: {value}",
+      "whatsappBI": "WhatsApp BI",
+      "whatsappUI": "واجهة WhatsApp"
+    }
+  },
+  "errors": {
+    "failedToLoad": "فشل في تحميل السجلات"
+  },
+  "filters": {
+    "logCategory": "فئة السجل",
+    "pickDateRange": "اختر نطاق التاريخ",
+    "refresh": "تحديث"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "سجلات الحملات",
+      "couponLogs": "سجلات القسائم",
+      "customerLogs": "سجلات العملاء",
+      "merchantScopedLogs": "سجلات محددة للتاجر",
+      "myMerchantsActivity": "نشاط التجار الخاص بي",
+      "walletEarnings": "المحفظة والأرباح",
+      "whatsappBIFeedback": "تعليقات WhatsApp BI",
+      "whatsappUIFeedback": "تعليقات واجهة WhatsApp"
+    },
+    "masterAdmin": {
+      "agentActivities": "أنشطة الوكيل",
+      "allPlatformActivity": "جميع أنشطة المنصة",
+      "authenticationEvents": "أحداث المصادقة",
+      "campaignLogs": "سجلات الحملات",
+      "couponOperations": "عمليات القسيمة",
+      "criticalErrors": "أخطاء حرجة",
+      "customerActions": "إجراءات العملاء",
+      "merchantActivities": "أنشطة التاجر",
+      "walletTransactions": "معاملات المحفظة",
+      "whatsappBIDetailed": "WhatsApp BI (تفصيلية)",
+      "whatsappBIFeedback": "تعليقات WhatsApp BI",
+      "whatsappCreditWallet": "اعتمادات WhatsApp (المحفظة)",
+      "whatsappUIDetailed": "واجهة WhatsApp (تفصيلية)",
+      "whatsappUIFeedback": "تعليقات واجهة WhatsApp"
+    },
+    "merchant": {
+      "campaignLogs": "سجلات الحملة",
+      "couponUsage": "استخدام القسيمة",
+      "customerActions": "إجراءات العملاء",
+      "securityAuth": "الأمان والمصادقة",
+      "storeActivity": "نشاط المتجر",
+      "walletTransactions": "معاملات المحفظة",
+      "whatsappBIFeedback": "تعليقات WhatsApp BI",
+      "whatsappUIFeedback": "ملاحظات واجهة واتساب"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "لوحة معلومات الوكيل",
+        "logs": "سجلات النظام"
+      },
+      "description": "راقب أنشطة التجار، معاملات المحفظة، وسجلات العمولة.",
+      "title": "سجلات النشاط"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "لوحة تحكم المدير الرئيسي",
+        "logs": "سجلات النظام"
+      },
+      "description": "عرض جميع الأنشطة النظامية، ومسارات التدقيق، والأخطاء الحرجة عبر المنصة.",
+      "title": "سجلات النظام"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "لوحة تحكم التاجر",
+        "logs": "سجلات النظام"
+      },
+      "description": "تتبع عمليات متجرك، واستخدام القسائم، وتفاعلات العملاء.",
+      "title": "سجلات المتجر"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "حرج",
+    "error": "خطأ",
+    "info": "معلومات",
+    "success": "نجاح",
+    "warning": "تحذير"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "سجلات النشاط",
+    "masterAdmin": "سجلات النظام",
+    "merchant": "سجلات المتجر"
   }
 }

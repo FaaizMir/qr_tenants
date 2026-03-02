@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "الإجراءات",
+    "contactInfo": "معلومات الاتصال",
+    "dateOfBirth": "تاريخ الميلاد",
+    "gender": "الجنس",
+    "name": "الاسم",
+    "notAvailable": "غير متوفر",
+    "reward": {
+      "eligible": "مؤهل",
+      "notEligible": "غير مؤهل"
+    },
+    "rewardStatus": "حالة المكافأة",
+    "viewDetails": "التفاصيل"
+  },
+  "details": {
+    "backButton": "العودة إلى العملاء",
+    "badge": {
+      "eligibleForReward": "مؤهل للحصول على المكافأة",
+      "standardCustomer": "عميل عادي"
+    },
+    "error": "فشل في تحميل تفاصيل العميل. يرجى المحاولة مرة أخرى لاحقًا.",
+    "loading": "جارٍ تحميل تفاصيل العميل...",
+    "notFound": "لم يتم العثور على العميل",
+    "sections": {
+      "address": {
+        "noAddress": "لم يتم تقديم عنوان",
+        "title": "عنوان الاتصال"
+      },
+      "essentialInfo": {
+        "active": "نشط",
+        "dateOfBirth": "تاريخ الميلاد",
+        "gender": "الجنس",
+        "inactive": "غير نشط",
+        "notSpecified": "غير محدد",
+        "phoneNumber": "رقم الهاتف",
+        "rewardStatus": "حالة المكافأة"
+      },
+      "systemInfo": {
+        "createdAt": "تاريخ الإنشاء",
+        "customerId": "معرف العميل",
+        "lastUpdated": "آخر تحديث",
+        "merchantId": "معرف التاجر",
+        "title": "معلومات النظام"
+      }
+    },
+    "subtitle": "نظرة عامة مفصلة عن معلومات العملاء",
+    "title": "ملف تعريف العميل"
+  },
+  "index": {
+    "exportButton": "تصدير CSV",
+    "locked": {
+      "description": "الوصول إلى بيانات العميل متاح حصريًا لأعضاء خطة الاشتراك في المعلومات السنوية.",
+      "title": "ميزة مميزة",
+      "upgradeCard": {
+        "features": {
+          "feature1": "الوصول إلى ملفات تعريف العملاء التفصيلية",
+          "feature2": "تصدير بيانات العميل (CSV/Excel)",
+          "feature3": "التقسيم المتقدم",
+          "feature4": "حدود قسائم أعلى (10,000/دفعة)"
+        },
+        "subtitle": "فتح رؤى العملاء الكاملة",
+        "title": "ترقية إلى سنوي",
+        "upgradeButton": "ترقية الآن"
+      }
+    },
+    "searchPlaceholder": "ابحث عن العملاء...",
+    "subtitle": "عرض وإدارة قاعدة بيانات العملاء الخاصة بك",
+    "title": "بيانات العميل"
+  },
+  "page": {
+    "breadcrumb": "بيانات العميل",
+    "customerDetailsBreadcrumb": "تفاصيل العميل",
+    "dashboardBreadcrumb": "لوحة تحكم التاجر"
+  }
+}

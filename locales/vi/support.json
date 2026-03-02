@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "Trò chuyện",
+      "newChat": "TRÒ CHUYỆN MỚI",
+      "newMessage": "TIN NHẮN MỚI",
+      "newTicket": "VÉ MỚI",
+      "ticket": "Phiếu"
+    },
+    "conversation": {
+      "me": "TÔI",
+      "noMessagesDesc": "Gửi một tin nhắn để bắt đầu cuộc trò chuyện.",
+      "noMessagesTitle": "Chưa có tin nhắn nào",
+      "pressEnter": "Nhấn Enter để gửi",
+      "sendMessage": "Gửi tin nhắn",
+      "typePlaceholder": "Gõ một tin nhắn..."
+    },
+    "disconnected": "Mất kết nối",
+    "empty": {
+      "descriptionChat": "Bắt đầu cuộc trò chuyện hoặc tiếp tục trò chuyện.",
+      "descriptionTickets": "Tạo một vé hỗ trợ mới hoặc xem các vé hiện có.",
+      "tipChat": "Trò chuyện:",
+      "tipChatDesc": "Tin nhắn nhanh và thân mật",
+      "tipTickets": "Vé:",
+      "tipTicketsDesc": "Yêu cầu hỗ trợ chính thức",
+      "tipTitle": "💡 Chọn loại tin nhắn của bạn:",
+      "title": "Trung tâm hỗ trợ"
+    },
+    "filters": {
+      "chat": "Trò chuyện",
+      "tickets": "Vé",
+      "viewAllCreateChat": "Xem Tất cả • Tạo Chỉ Trò Chuyện"
+    },
+    "participants": {
+      "platformSupport": "Hỗ trợ nền tảng",
+      "yourSupportAgent": "Đại diện hỗ trợ của bạn"
+    },
+    "search": "Tìm kiếm...",
+    "sidebar": {
+      "newChat": "Bắt đầu một cuộc trò chuyện mới",
+      "newTicket": "Tạo một vé hỗ trợ mới",
+      "noItems": "Không tìm thấy mục nào.",
+      "noMessages": "Không có tin nhắn"
+    },
+    "staffRole": "Vai trò nhân viên:",
+    "subtitle": {
+      "admin": "Quản lý các cuộc trò chuyện và vé hỗ trợ với các đại lý.",
+      "agentMerchants": "Giao tiếp với các thương nhân của bạn qua tin nhắn và vé.",
+      "agentSupport": "Liên hệ với đội ngũ hỗ trợ nền tảng.",
+      "merchant": "Trò chuyện với đại lý hỗ trợ của bạn hoặc tạo vé."
+    },
+    "superAdmin": "Quản trị viên siêu cấp",
+    "supportStaff": "Nhân viên hỗ trợ",
+    "tabs": {
+      "agents": "Đại lý",
+      "myMerchants": "Các thương nhân của tôi",
+      "supportAdmin": "Quản trị viên hỗ trợ"
+    },
+    "title": "Hỗ trợ & Tin nhắn",
+    "toasts": {
+      "loadFailed": "Không thể tải dữ liệu hỗ trợ",
+      "messageFailed": "Gửi tin nhắn không thành công. Vui lòng thử lại.",
+      "messageHistoryFailed": "Không thể tải lịch sử tin nhắn"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "Hỗ trợ",
+      "dashboardBreadcrumb": "Bảng điều khiển đại lý"
+    },
+    "breadcrumb": "Hỗ trợ",
+    "dashboardBreadcrumb": "Bảng điều khiển thương nhân",
+    "masterAdmin": {
+      "breadcrumb": "Hỗ trợ",
+      "dashboardBreadcrumb": "Bảng điều khiển quản trị viên chính"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "Hỗ trợ đại lý"
+      },
+      "merchantSupport": {
+        "title": "Hỗ trợ thương nhân"
+      },
+      "supportDashboard": {
+        "title": "Bảng điều khiển hỗ trợ"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "Đi tới Cài đặt Chính > Gói để xác định các cấp giá.",
+        "a2": "Có, dưới Cài đặt đại lý > Thương hiệu bạn có thể thêm miền tùy chỉnh của mình.",
+        "category": "Đại lý",
+        "q1": "Làm thế nào để thiết lập gói thương nhân?",
+        "q2": "Tôi có thể tùy chỉnh tên miền không?"
+      },
+      "merchant": {
+        "a1": "Đi đến tab Phiếu giảm giá và nhấp vào 'Tạo lô phiếu giảm giá mới'.",
+        "a2": "Các tín dụng do Doanh nghiệp khởi tạo được sử dụng khi bạn bắt đầu một cuộc trò chuyện với khách hàng.",
+        "category": "Thương nhân",
+        "q1": "Làm thế nào để tôi tạo một phiếu giảm giá mới?",
+        "q2": "WA BI tín dụng là gì?"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "Bạn có thể làm rõ cách chia sẻ hoa hồng cho các thương nhân ở Vương quốc Anh không?",
+        "question": "Bạn có thể làm rõ cách chia sẻ hoa hồng cho các thương nhân ở Vương quốc Anh không?"
+      },
+      "agent2": {
+        "history1": "Yêu cầu hỗ trợ thiết lập miền nhãn trắng.",
+        "history2": "Xin chào, vui lòng cung cấp tên miền mà bạn muốn sử dụng.",
+        "question": "Yêu cầu hỗ trợ thiết lập tên miền nhãn trắng."
+      },
+      "agent3": {
+        "history": "Khẩn cấp: Vấn đề thanh toán cho hóa đơn tháng Sáu của tôi. Khoản phí hàng năm bị trừ dường như gấp đôi.",
+        "question": "Khẩn cấp: Vấn đề thanh toán cho hóa đơn tháng Sáu của tôi."
+      },
+      "merchant101": {
+        "history": "Các mã QR đang in hơi mờ. Bạn có thể kiểm tra chất lượng hình ảnh không?",
+        "question": "Mã QR đang in hơi mờ."
+      },
+      "merchant102": {
+        "history1": "Chào! Tôi vừa thuê một quản lý. Làm thế nào để tôi thêm họ vào bảng điều khiển thương nhân của mình?",
+        "history2": "Chắc chắn! Đi tới Cài đặt > Quản lý người dùng để thêm họ.",
+        "question": "Thành viên nhân viên mới cần quyền truy cập bảng điều khiển."
+      },
+      "merchant103": {
+        "history": "Tôi nhận thấy các tín dụng BI của tôi đã được sử dụng cho một chiến dịch. Bạn có thể giải thích sự khác biệt một lần nữa không?",
+        "question": "Câu hỏi về việc sử dụng tín dụng WhatsApp."
+      },
+      "merchant1": {
+        "history1": "Tôi có thể nhận lại tiền cho số tín dụng tôi đã mua không?",
+        "history2": "Xin chào! Các yêu cầu hoàn tiền được xử lý trong vòng 24 giờ.",
+        "question": "Tôi có thể nhận lại tiền cho các tín dụng tôi đã mua không?"
+      },
+      "merchant2": {
+        "history": "Xin chào hỗ trợ, tôi đang cố gắng phát hành coupon đầu tiên cho bộ sưu tập mùa hè nhưng gặp lỗi.",
+        "question": "Cần giúp đỡ để thiết lập chiến dịch phiếu giảm giá đầu tiên của tôi."
+      },
+      "merchantTemp1": {
+        "history": "Thời gian dùng thử 7 ngày của tôi sắp hết, làm thế nào để gia hạn?",
+        "question": "Thời gian dùng thử 7 ngày của tôi sắp hết, làm thế nào để tôi gia hạn?"
+      }
+    },
+    "roles": {
+      "agent": "Đại lý",
+      "merchant": "Nhà cung cấp",
+      "supportStaff": "Nhân viên hỗ trợ",
+      "temporaryMerchant": "Thương nhân tạm thời"
+    },
+    "senderNames": {
+      "bakery": "Tiệm bánh & Co",
+      "coffeeHouse": "Quán cà phê",
+      "digitalGrowth": "Đối tác tăng trưởng kỹ thuật số",
+      "globalSolutions": "Giải pháp toàn cầu Ltd",
+      "localGym": "Phòng tập thể dục địa phương",
+      "luxuryBoutique": "Cửa hàng sang trọng",
+      "megaMarketing": "Cơ quan Tiếp thị Mega",
+      "pizzaPalace": "Cung điện Pizza",
+      "popupStore": "Cửa hàng pop-up (Tạm thời)"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "Được ủy quyền để phê duyệt/từ chối các đơn đăng ký quảng cáo trả phí.",
+        "name": "Người phê duyệt quảng cáo"
+      },
+      "financeViewer": {
+        "description": "Quyền truy cập chỉ đọc vào các báo cáo và sổ cái ví.",
+        "name": "Người xem tài chính"
+      },
+      "superAdmin": {
+        "description": "Kiểm soát toàn bộ nền tảng và cấu hình hệ thống.",
+        "name": "Quản trị viên siêu"
+      },
+      "supportStaff": {
+        "description": "Phản hồi thủ công cho các vé của đại lý và thương nhân.",
+        "name": "Nhân viên hỗ trợ"
+      }
+    }
+  }
+}

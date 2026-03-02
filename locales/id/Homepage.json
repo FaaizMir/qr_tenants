@@ -66,6 +66,8 @@
       "city": "Kota",
       "curatingMessage": "Kami sedang mengkurasi pedagang terverifikasi terbaik dan penawaran eksklusif untuk Anda...",
       "everywhere": "Di mana-mana",
+      "expiringSoon": "Segera Berakhir",
+      "expiringSoonActive": "Segera Berakhir ✓",
       "industry": "Industri",
       "loadingMarketplace": "Memuat Marketplace",
       "noMerchantsFound": "Tidak ada pedagang yang ditemukan",
@@ -147,6 +149,8 @@
       "agents": "Agen",
       "allCountries": "Semua Negara",
       "description": "Kelola jaringan agen penyewa global Anda.",
+      "expiringSoon": "Segera Berakhir",
+      "expiringSoonActive": "Segera Berakhir ✓",
       "noAgentsFound": "Tidak ada agen yang ditemukan",
       "of": "dari",
       "pageNoResults": "Halaman - Tidak Ada Hasil",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "Kontak",
       "copyright": "© 2024 QR Rev Inc. Semua hak dilindungi.",
+      "globalMerchantNetwork": "Jaringan Pedagang Global",
       "privacy": "Privasi",
       "terms": "Syarat"
     },

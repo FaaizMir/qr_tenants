@@ -1,0 +1,57 @@
+{
+  "accountDetails": {
+    "description": "Update your account information",
+    "title": "Account Details"
+  },
+  "buttons": {
+    "save": "Save Changes",
+    "saving": "Saving..."
+  },
+  "fields": {
+    "address": "Address",
+    "businessName": "Business Name",
+    "businessType": "Business Type",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "taxId": "Tax ID"
+  },
+  "messages": {
+    "loadError": "Failed to load account information",
+    "updateError": "Failed to update account",
+    "updateSuccess": "Account updated successfully",
+    "validationError": "{field}: {message}"
+  },
+  "page": {
+    "breadcrumb": {
+      "account": "Account",
+      "dashboard": "Dashboard"
+    },
+    "description": "Manage your account information",
+    "title": "Account Settings"
+  },
+  "placeholders": {
+    "address": "Start typing an address...",
+    "businessName": "Enter business name",
+    "businessType": "Enter business type",
+    "city": "Enter your city",
+    "country": "Enter your country",
+    "email": "Enter your email",
+    "name": "Enter your name",
+    "phone": "Enter your phone",
+    "taxId": "Enter tax ID"
+  },
+  "profile": {
+    "description": "Your profile information",
+    "title": "Profile"
+  },
+  "qrCode": {
+    "altText": "Merchant QR Code",
+    "description": "Share this QR code with customers to collect reviews",
+    "downloadButton": "Download QR Code",
+    "title": "Your QR Code",
+    "urlLabel": "QR Code URL"
+  }
+}

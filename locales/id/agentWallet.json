@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "Aktifkan Langganan",
+    "topUpWallet": "Isi Ulang Dompet"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "Langganan Anda telah kedaluwarsa. Perbarui langganan Anda untuk terus mengakses semua fitur platform.",
+      "title": "Langganan Kadaluarsa"
+    },
+    "subscriptionRequired": {
+      "description": "Akun Anda belum diaktifkan. Klik \"Aktifkan Langganan\" untuk membayar biaya langganan tahunan Anda dan mulai menggunakan platform. Anda juga dapat menambahkan saldo dompet prabayar saat aktivasi.",
+      "title": "Aktivasi Langganan Diperlukan"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "Kredit prabayar yang tersedia",
+      "title": "Saldo Saat Ini"
+    },
+    "securityNote": {
+      "description": "Dompet Anda dilindungi dengan enkripsi standar industri. Semua transaksi diaudit secara real-time untuk memastikan keamanan dana Anda.",
+      "title": "Keamanan Finansial"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "AKUN AKTIF",
+      "inactive": "TIDAK AKTIF",
+      "noDate": "Tidak Ada Tanggal",
+      "noType": "N/A",
+      "package": "Paket {type}",
+      "planType": "Jenis Rencana",
+      "renewalDate": "Tanggal Pembaruan",
+      "status": "Status",
+      "title": "Langganan & Status Akun"
+    },
+    "totalEarnings": {
+      "description": "Keuntungan seumur hidup",
+      "title": "Total Pendapatan"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "Masukkan jumlah yang ingin Anda tambahkan ke saldo dompet prabayar Anda. Saldo ini akan digunakan untuk operasi platform.",
+      "title": "Isi Ulang Dompet Anda:"
+    },
+    "amountCard": {
+      "hint": "Masukkan jumlah tepat yang ingin Anda tambahkan ke dompet Anda. Biaya platform akan secara otomatis dipotong dari saldo ini.",
+      "instantCredit": {
+        "description": "Dompet Anda akan dikreditkan segera setelah pembayaran berhasil.",
+        "title": "Kredit Instan:"
+      },
+      "label": "Jumlah yang Akan Ditambahkan",
+      "placeholder": "0.00",
+      "quickSelect": "Pilih Cepat:",
+      "subtitle": "Minimum {currency} 100 diperlukan",
+      "title": "Masukkan Jumlah Top-Up"
+    },
+    "infoCard": {
+      "merchantPayments": "100% Pembayaran Pedagang: Semua pembayaran pedagang langsung masuk ke akun Stripe Anda",
+      "platformCosts": "Biaya Platform: Secara otomatis dipotong dari saldo dompet prabayar ini",
+      "title": "Model Dompet Prabayar",
+      "yourProfit": "Keuntungan Anda: Pembayaran Merchant - Biaya Platform = Penghasilan Anda"
+    },
+    "subtitle": "Tambahkan saldo prabayar ke dompet Anda untuk operasi platform",
+    "summary": {
+      "payButton": "Bayar {currency} {amount} dengan Stripe",
+      "processing": "Mengalihkan ke Stripe...",
+      "securePayment": {
+        "description": "Gerbang Stripe Terenkripsi SSL",
+        "title": "Pembayaran Aman"
+      },
+      "title": "Ringkasan Pembayaran",
+      "totalPayment": "Total Pembayaran:",
+      "walletTopup": "Top-Up Dompet:"
+    },
+    "title": "Isi Ulang Dompet Anda",
+    "validation": {
+      "createError": "Gagal memulai proses pembayaran",
+      "invalidAmount": "Silakan masukkan jumlah yang valid",
+      "minimumAmount": "Jumlah top-up minimum adalah 100",
+      "paymentError": "Tidak dapat memulai pembayaran. Silakan coba lagi."
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "Jumlah",
+      "date": "Tanggal",
+      "description": "Deskripsi",
+      "frequency": "Frekuensi"
+    },
+    "searchPlaceholder": "Cari potongan...",
+    "title": "Log Pemotongan Otomatis"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "Untuk mulai menggunakan platform, Anda perlu membayar biaya langganan tahunan Anda. Anda juga dapat menambahkan saldo prabayar ke dompet Anda dalam transaksi yang sama.",
+      "title": "Selamat datang!"
+    },
+    "features": {
+      "analytics": "Analitik & pelaporan",
+      "chatSupport": "Sistem dukungan obrolan",
+      "couponManagement": "Sistem manajemen kupon",
+      "platformAccess": "Akses platform 12 bulan",
+      "qrGeneration": "Pembuatan kode QR",
+      "reviewCollection": "Tinjau alat pengumpulan",
+      "title": "Apa yang Termasuk dalam Langganan Anda",
+      "unlimitedMerchants": "Akun merchant tak terbatas",
+      "whatsappIntegration": "Integrasi pesan WhatsApp"
+    },
+    "loading": "Memuat informasi langganan...",
+    "subscriptionFee": {
+      "access": "Akses Platform Tahunan",
+      "description": "Akses penuh ke semua fitur selama 12 bulan",
+      "required": "Diperlukan",
+      "subtitle": "Diperlukan untuk mengaktifkan akun Anda",
+      "title": "Biaya Langganan Tahunan"
+    },
+    "subtitle": "Bayar langganan tahunan Anda dan opsional tambahkan saldo dompet prabayar",
+    "summary": {
+      "payButton": "Bayar {currency} {amount} dengan Stripe",
+      "processing": "Mengalihkan ke Stripe...",
+      "securePayment": {
+        "description": "Gerbang Stripe Terenkripsi SSL",
+        "title": "Pembayaran Aman"
+      },
+      "subscriptionFee": "Biaya Langganan:",
+      "title": "Ringkasan Pembayaran",
+      "totalPayment": "Total Pembayaran:",
+      "walletBalance": "Saldo Dompet:"
+    },
+    "title": "Aktifkan Akun Anda",
+    "validation": {
+      "createError": "Gagal memulai proses pembayaran",
+      "loadError": "Gagal memuat informasi langganan",
+      "minimumAmount": "Jumlah saldo minimum adalah 100",
+      "negativeAmount": "Jumlah saldo tidak boleh negatif",
+      "paymentError": "Tidak dapat memulai pembayaran. Silakan coba lagi."
+    },
+    "walletBalance": {
+      "hint": "Minimum {currency} 100 jika menambahkan saldo. Biaya platform akan dipotong dari dompet ini.",
+      "label": "Jumlah Saldo Dompet",
+      "modelInfo": {
+        "description": "Pembayaran pedagang 100% masuk ke akun Stripe Anda. Biaya platform secara otomatis dipotong dari saldo dompet prabayar ini.",
+        "title": "Model Dompet Prabayar:"
+      },
+      "optional": "Opsional",
+      "placeholder": "0.00",
+      "subtitle": "Saldo prabayar opsional untuk operasi platform",
+      "title": "Tambahkan Saldo Dompet"
+    }
+  },
+  "messages": {
+    "creditError": "Gagal mengkredit dompet",
+    "subscriptionSuccess": "Langganan berhasil diaktifkan!",
+    "topupError": "Pembayaran berhasil tetapi gagal mengkredit dompet. Silakan hubungi dukungan.",
+    "topupSuccess": "Dompet berhasil diisi!",
+    "topupSuccessDescription": "{currency} {amount} ditambahkan ke saldo Anda."
+  },
+  "subtitle": "Kelola saldo dompet dan transaksi Anda",
+  "tabs": {
+    "balance": "Saldo",
+    "earnings": "Pendapatan",
+    "transactions": "Transaksi"
+  },
+  "title": "Dompet Agen",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} Bonus",
+    "dialogSubtitle": "Pilih paket dompet prabayar yang sesuai dengan kebutuhan Anda",
+    "dialogTitle": "Pilih Jumlah Top-Up",
+    "get": "Dapatkan {currency} {amount}",
+    "mostPopular": "⭐ Paling Populer",
+    "orderSummary": {
+      "baseAmount": "Jumlah Dasar:",
+      "bonus": "Bonus:",
+      "package": "Paket:",
+      "title": "Ringkasan Pesanan",
+      "totalCredit": "Total Kredit:"
+    },
+    "packages": {
+      "business": {
+        "description": "Ideal untuk agensi yang berkembang",
+        "feature1": "Menutupi ~8-10 pedagang tahunan",
+        "feature2": "Atau ~20.000 pesan UI WhatsApp",
+        "feature3": "Atau ~5.000 pesan WhatsApp BI",
+        "feature4": "✨ Bonus RM150 termasuk",
+        "name": "Isi Ulang Bisnis"
+      },
+      "enterprise": {
+        "description": "Untuk operasi berskala besar",
+        "feature1": "Menutupi ~17-20 pedagang tahunan",
+        "feature2": "Atau ~40.000 pesan UI WhatsApp",
+        "feature3": "Atau ~10.000 pesan WhatsApp BI",
+        "feature4": "✨ Bonus RM500 termasuk",
+        "name": "Top-Up Perusahaan"
+      },
+      "premium": {
+        "description": "Nilai maksimum untuk agensi bervolume tinggi",
+        "feature1": "Menutupi ~38-40 pedagang tahunan",
+        "feature2": "Atau ~80.000 pesan UI WhatsApp",
+        "feature3": "Atau ~20.000 pesan WhatsApp BI",
+        "feature4": "✨ Bonus RM1.500 termasuk",
+        "name": "Top-Up Premium"
+      },
+      "standard": {
+        "description": "Terbaik untuk operasi kecil hingga menengah",
+        "feature1": "Menutupi ~3-4 merchant tahunan",
+        "feature2": "Atau ~8000 pesan UI WhatsApp",
+        "feature3": "Atau ~2000 pesan WhatsApp BI",
+        "feature4": "✨ Bonus RM50 termasuk",
+        "name": "Top-Up Standar"
+      },
+      "starter": {
+        "description": "Sempurna untuk memulai dengan beberapa pedagang",
+        "feature1": "Menutupi ~1-2 pedagang tahunan",
+        "feature2": "Atau ~4000 pesan WhatsApp UI",
+        "feature3": "Atau ~1000 pesan WhatsApp BI",
+        "name": "Top-Up Pemula"
+      }
+    },
+    "paymentAmount": "Jumlah Pembayaran",
+    "paymentDetails": {
+      "description": "Pembayaran aman melalui Stripe. Dompet Anda akan dikreditkan segera.",
+      "paymentAmount": "Jumlah Pembayaran",
+      "title": "Detail Pembayaran"
+    },
+    "selectPackage": {
+      "description": "Pilih jumlah top-up dari opsi di sebelah kiri.",
+      "title": "Pilih Paket"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "Jumlah",
+      "date": "Tanggal",
+      "description": "Deskripsi",
+      "status": "Status",
+      "type": "Tipe"
+    },
+    "noData": "-",
+    "searchPlaceholder": "Cari transaksi...",
+    "status": {
+      "completed": "Selesai",
+      "pending": "Tertunda"
+    }
+  }
+}

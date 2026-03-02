@@ -43,7 +43,7 @@ export function SubscriptionProvider({ children }) {
         } finally {
             setLoading(false);
         }
-    }, [adminId, update]);
+    }, [adminId, merchantId, update]);
 
     const hasFetchedOnMount = React.useRef(false);
 
@@ -66,7 +66,7 @@ export function SubscriptionProvider({ children }) {
         };
 
         checkStatus();
-    }, [adminId, session?.user?.role, refreshSubscription, session]);
+    }, [adminId, session?.user?.role, refreshSubscription, session, merchantId]);
 
     // Keep local state in sync with session updates from other tabs/actions
     useEffect(() => {

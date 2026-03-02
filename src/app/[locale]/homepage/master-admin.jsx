@@ -535,7 +535,9 @@ export default function MasterAdminLandingPage() {
                     onClick={() => setExpiringSoon(!expiringSoon)}
                     className="h-9 px-4 rounded-full text-sm font-medium whitespace-nowrap border-slate-200"
                   >
-                    {expiringSoon ? "Expiring Soon ✓" : "Expiring Soon"}
+                    {expiringSoon
+                      ? t("agentDirectory.expiringSoonActive")
+                      : t("agentDirectory.expiringSoon")}
                   </Button>
                 </div>
               </div>

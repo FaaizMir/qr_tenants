@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import { DataTable } from "@/components/common/data-table";
 import { getApprovalColumns } from "./approval-columns";
@@ -16,9 +17,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { getImageUrl } from "@/lib/utils/imageUtils";
+import { toast } from "@/lib/toast";
 import Image from "next/image";
 
 export default function AgentApprovalsContainer() {
+  const t = useTranslations("agentApprovals");
   const { data: session } = useSession();
   const adminId = session?.adminId;
   const [data, setData] = useState([]);
@@ -95,23 +98,31 @@ export default function AgentApprovalsContainer() {
         setData(mappedData);
       } catch (error) {
         console.error("Error fetching approvals:", error);
+        toast.error(t("messages.fetchError"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchApprovals();
-  }, [adminId]);
+  }, [adminId, t]);
 
   const handleStatusUpdate = useCallback(
-    async (id, newStatus) => {
+    async (id, newStatus, disapprovalReason = null) => {
       const action = newStatus ? "approve" : "reject";
-      console.log(`Attempting to ${action} approval with ID: ${id}, New Status: ${action}`);
+      console.log(`Attempting to ${action} approval with ID: ${id}, New Status: ${action}, Reason: ${disapprovalReason}`);
       try {
-        await axiosInstance.patch(`/approvals/${adminId}/${action}`, {
+        const requestBody = {
           id: id,
           approval_status: newStatus,
-        });
+        };
+        
+        // Add disapproval_reason only when rejecting
+        if (!newStatus && disapprovalReason) {
+          requestBody.disapproval_reason = disapprovalReason;
+        }
+        
+        await axiosInstance.patch(`/approvals/${adminId}/${action}`, requestBody);
 
         // Update local state to reflect change immediately
         setData((prevData) =>
@@ -130,15 +141,15 @@ export default function AgentApprovalsContainer() {
   );
 
   const columns = useMemo(
-    () => getApprovalColumns(handleStatusUpdate),
-    [handleStatusUpdate],
+    () => getApprovalColumns(handleStatusUpdate, t),
+    [handleStatusUpdate, t],
   );
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Approvals</h1>
-        <p className="text-muted-foreground">Manage agent approvals</p>
+        <h1 className="text-3xl font-bold">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       <Card>
@@ -160,9 +171,9 @@ export default function AgentApprovalsContainer() {
       {/* Preview Dialog - SAME DESIGN as PaidAdsSettings */}
       <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
         <DialogContent className="max-w-[400px] w-[90vw] p-0 bg-white rounded-2xl overflow-hidden border-none shadow-2xl [&>button]:hidden">
-          <DialogTitle className="sr-only">Ad Preview</DialogTitle>
+          <DialogTitle className="sr-only">{t("preview.title")}</DialogTitle>
           <DialogDescription className="sr-only">
-            Full size preview of the promotional ad
+            {t("preview.description")}
           </DialogDescription>
           <div className="relative flex items-center justify-center p-4">
             {previewContent.type === "image" ? (
@@ -189,7 +200,7 @@ export default function AgentApprovalsContainer() {
               >
                 <source src={previewContent.url} type="video/mp4" />
                 <source src={previewContent.url} type="video/webm" />
-                Your browser does not support the video tag.
+                {t("preview.videoNotSupported")}
               </video>
             )}
             <Button

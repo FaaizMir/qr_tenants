@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "操作",
+    "category": "类别",
+    "dateTime": "日期和时间",
+    "description": "描述",
+    "details": "详情",
+    "noDetails": "无详细信息",
+    "severity": "严重性",
+    "systemActivity": "系统活动"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "监控商户活动、钱包交易和佣金日志。",
+    "masterAdmin": "查看平台上的所有系统活动、审计记录和关键错误。",
+    "merchant": "跟踪您商店的运营、优惠券使用和客户互动。"
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "方法: {value}",
+      "user": "用户: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "生成了 {count} 张优惠券",
+      "quantity": "数量: {value}",
+      "type": "类型: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "平台: {value}",
+      "review": "评论: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "优惠券",
+      "credits": "积分",
+      "paidAd": "付费广告",
+      "platformCommission": "平台佣金：{rate}%",
+      "unitPrice": "单价: {value}",
+      "whatsappBI": "WhatsApp BI",
+      "whatsappUI": "WhatsApp 用户界面"
+    }
+  },
+  "errors": {
+    "failedToLoad": "加载日志失败"
+  },
+  "filters": {
+    "logCategory": "日志类别",
+    "pickDateRange": "选择日期范围",
+    "refresh": "刷新"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "活动日志",
+      "couponLogs": "优惠券日志",
+      "customerLogs": "客户日志",
+      "merchantScopedLogs": "商户范围日志",
+      "myMerchantsActivity": "我的商户活动",
+      "walletEarnings": "钱包与收益",
+      "whatsappBIFeedback": "WhatsApp BI反馈",
+      "whatsappUIFeedback": "WhatsApp 用户界面反馈"
+    },
+    "masterAdmin": {
+      "agentActivities": "代理活动",
+      "allPlatformActivity": "所有平台活动",
+      "authenticationEvents": "身份验证事件",
+      "campaignLogs": "活动日志",
+      "couponOperations": "优惠券操作",
+      "criticalErrors": "关键错误",
+      "customerActions": "客户操作",
+      "merchantActivities": "商户活动",
+      "walletTransactions": "钱包交易",
+      "whatsappBIDetailed": "WhatsApp BI（详细）",
+      "whatsappBIFeedback": "WhatsApp BI反馈",
+      "whatsappCreditWallet": "WhatsApp 积分（钱包）",
+      "whatsappUIDetailed": "WhatsApp UI（详细）",
+      "whatsappUIFeedback": "WhatsApp 用户界面反馈"
+    },
+    "merchant": {
+      "campaignLogs": "活动日志",
+      "couponUsage": "优惠券使用",
+      "customerActions": "客户操作",
+      "securityAuth": "安全与认证",
+      "storeActivity": "存储活动",
+      "walletTransactions": "钱包交易",
+      "whatsappBIFeedback": "WhatsApp BI 反馈",
+      "whatsappUIFeedback": "WhatsApp UI反馈"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "代理仪表板",
+        "logs": "系统日志"
+      },
+      "description": "监控商户活动、钱包交易和佣金日志。",
+      "title": "活动日志"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "主管理员仪表板",
+        "logs": "系统日志"
+      },
+      "description": "查看平台上的所有系统活动、审计跟踪和关键错误。",
+      "title": "系统日志"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "商户仪表板",
+        "logs": "系统日志"
+      },
+      "description": "跟踪您商店的运营、优惠券使用和客户互动。",
+      "title": "存储日志"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "关键",
+    "error": "错误",
+    "info": "信息",
+    "success": "成功",
+    "warning": "警告"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "活动日志",
+    "masterAdmin": "系统日志",
+    "merchant": "商店日志"
   }
 }

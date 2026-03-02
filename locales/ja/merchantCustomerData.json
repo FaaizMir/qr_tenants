@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "アクション",
+    "contactInfo": "連絡先情報",
+    "dateOfBirth": "生年月日",
+    "gender": "性別",
+    "name": "名前",
+    "notAvailable": "該当なし",
+    "reward": {
+      "eligible": "対象",
+      "notEligible": "対象外"
+    },
+    "rewardStatus": "報酬ステータス",
+    "viewDetails": "詳細"
+  },
+  "details": {
+    "backButton": "顧客に戻る",
+    "badge": {
+      "eligibleForReward": "報酬の対象",
+      "standardCustomer": "標準顧客"
+    },
+    "error": "顧客の詳細を読み込めませんでした。後でもう一度お試しください。",
+    "loading": "顧客の詳細を読み込んでいます...",
+    "notFound": "顧客が見つかりません",
+    "sections": {
+      "address": {
+        "noAddress": "住所が提供されていません",
+        "title": "連絡先住所"
+      },
+      "essentialInfo": {
+        "active": "アクティブ",
+        "dateOfBirth": "生年月日",
+        "gender": "性別",
+        "inactive": "非アクティブ",
+        "notSpecified": "指定されていません",
+        "phoneNumber": "電話番号",
+        "rewardStatus": "報酬ステータス"
+      },
+      "systemInfo": {
+        "createdAt": "作成日",
+        "customerId": "顧客ID",
+        "lastUpdated": "最終更新日",
+        "merchantId": "マーチャントID",
+        "title": "システム情報"
+      }
+    },
+    "subtitle": "顧客情報の詳細概要",
+    "title": "顧客プロフィール"
+  },
+  "index": {
+    "exportButton": "CSVをエクスポート",
+    "locked": {
+      "description": "顧客データへのアクセスは年次情報サブスクリプションプランのメンバー専用です。",
+      "title": "プレミアム機能",
+      "upgradeCard": {
+        "features": {
+          "feature1": "詳細な顧客プロフィールにアクセスする",
+          "feature2": "顧客データをエクスポート (CSV/Excel)",
+          "feature3": "高度なセグメンテーション",
+          "feature4": "より高いクーポン制限 (10,000/バッチ)"
+        },
+        "subtitle": "完全な顧客インサイトをアンロック",
+        "title": "年次プランにアップグレード",
+        "upgradeButton": "今すぐアップグレード"
+      }
+    },
+    "searchPlaceholder": "顧客を検索...",
+    "subtitle": "顧客データベースを表示および管理する",
+    "title": "顧客データ"
+  },
+  "page": {
+    "breadcrumb": "顧客データ",
+    "customerDetailsBreadcrumb": "顧客詳細",
+    "dashboardBreadcrumb": "マーチャントダッシュボード"
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
+  const t = useTranslations("agentWallet.initialSubscription");
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [subscriptionFee, setSubscriptionFee] = useState(0);
@@ -46,7 +48,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       setCurrency(data.currency || "MYR");
     } catch (error) {
       console.error("Failed to fetch subscription fee:", error);
-      toast.error("Failed to load subscription information");
+      toast.error(t("validation.loadError"));
     } finally {
       setLoading(false);
     }
@@ -58,12 +60,12 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
     const balanceAmount = Number(customBalance) || 0;
 
     if (balanceAmount < 0) {
-      toast.error("Balance amount cannot be negative");
+      toast.error(t("validation.negativeAmount"));
       return;
     }
 
     if (balanceAmount > 0 && balanceAmount < 100) {
-      toast.error("Minimum balance amount is 100");
+      toast.error(t("validation.minimumAmount"));
       return;
     }
 
@@ -83,7 +85,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       const sessionUrl = data?.sessionUrl;
 
       if (!sessionUrl) {
-        toast.error("Unable to start payment. Please try again.");
+        toast.error(t("validation.paymentError"));
         setProcessing(false);
         return;
       }
@@ -108,7 +110,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
     } catch (error) {
       console.error("Failed to create checkout session:", error);
       toast.error(
-        error?.response?.data?.message || "Failed to start payment process"
+        error?.response?.data?.message || t("validation.createError")
       );
       setProcessing(false);
     }
@@ -118,7 +120,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-        <p className="text-sm text-muted-foreground">Loading subscription information...</p>
+        <p className="text-sm text-muted-foreground">{t("loading")}</p>
       </div>
     );
   }
@@ -131,9 +133,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       <Alert className="border-primary/50 bg-primary/5">
         <ShieldCheck className="h-4 w-4 text-primary" />
         <AlertDescription className="text-sm">
-          <strong>Welcome!</strong> To start using the platform, you need to pay your annual
-          subscription fee. You can also add a prepaid balance to your wallet in the same
-          transaction.
+          <strong>{t("alert.title")}</strong> {t("alert.description")}
         </AlertDescription>
       </Alert>
 
@@ -145,8 +145,8 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
               <ShieldCheck className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base">Annual Subscription Fee</CardTitle>
-              <CardDescription className="text-xs">Required to activate your account</CardDescription>
+              <CardTitle className="text-base">{t("subscriptionFee.title")}</CardTitle>
+              <CardDescription className="text-xs">{t("subscriptionFee.subtitle")}</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -154,13 +154,13 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
           <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-xs text-slate-600 mb-1">Annual Platform Access</p>
+                <p className="text-xs text-slate-600 mb-1">{t("subscriptionFee.access")}</p>
                 <p className="text-sm text-slate-500">
-                  Full access to all features for 12 months
+                  {t("subscriptionFee.description")}
                 </p>
               </div>
               <div className="text-right">
-                <Badge variant="secondary" className="mb-2">Required</Badge>
+                <Badge variant="secondary" className="mb-2">{t("subscriptionFee.required")}</Badge>
                 <p className="text-2xl font-black text-slate-900">
                   {currency} {subscriptionFee.toLocaleString()}
                 </p>
@@ -178,9 +178,9 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
               <Wallet className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base">Add Wallet Balance</CardTitle>
+              <CardTitle className="text-base">{t("walletBalance.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Optional prepaid balance for platform operations
+                {t("walletBalance.subtitle")}
               </CardDescription>
             </div>
           </div>
@@ -188,8 +188,8 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="customBalance">
-              Wallet Balance Amount
-              <Badge variant="outline" className="ml-2">Optional</Badge>
+              {t("walletBalance.label")}
+              <Badge variant="outline" className="ml-2">{t("walletBalance.optional")}</Badge>
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -200,7 +200,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
                 type="number"
                 step="0.01"
                 min="0"
-                placeholder="0.00"
+                placeholder={t("walletBalance.placeholder")}
                 value={customBalance}
                 onChange={(e) => setCustomBalance(e.target.value)}
                 className="pl-14 text-lg"
@@ -208,41 +208,40 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             </div>
             <p className="text-xs text-muted-foreground">
               <Info className="h-3 w-3 inline mr-1" />
-              Minimum {currency} 100 if adding balance. Platform costs will be deducted from this wallet.
+              {t("walletBalance.hint", { currency })}
             </p>
           </div>
 
           <Alert className="bg-blue-50 border-blue-200">
             <Info className="h-4 w-4 text-blue-600" />
             <AlertDescription className="text-xs text-blue-900">
-              <strong>Prepaid Wallet Model:</strong> Merchant payments go 100% to your Stripe
-              account. Platform costs are automatically deducted from this prepaid wallet balance.
+              <strong>{t("walletBalance.modelInfo.title")}</strong> {t("walletBalance.modelInfo.description")}
             </AlertDescription>
           </Alert>
         </CardContent>
       </Card>
 
       {/* Payment Summary */}
-      <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+      <Card className="border-2 border-primary/30 bg-linear-to-br from-primary/5 to-transparent">
         <CardHeader>
           <div className="flex items-center gap-2">
             <div className="p-2 bg-primary rounded-full text-white">
               <DollarSign className="h-4 w-4" />
             </div>
-            <CardTitle className="text-base">Payment Summary</CardTitle>
+            <CardTitle className="text-base">{t("summary.title")}</CardTitle>
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Subscription Fee:</span>
+              <span className="text-slate-600">{t("summary.subscriptionFee")}</span>
               <span className="font-semibold">
                 {currency} {subscriptionFee.toLocaleString()}
               </span>
             </div>
             {Number(customBalance) > 0 && (
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600">Wallet Balance:</span>
+                <span className="text-slate-600">{t("summary.walletBalance")}</span>
                 <span className="font-semibold">
                   +{currency} {Number(customBalance).toLocaleString()}
                 </span>
@@ -250,7 +249,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             )}
             <Separator />
             <div className="flex justify-between items-center">
-              <span className="text-base font-bold text-slate-900">Total Payment:</span>
+              <span className="text-base font-bold text-slate-900">{t("summary.totalPayment")}</span>
               <span className="text-2xl font-black text-primary">
                 {currency} {totalAmount.toLocaleString()}
               </span>
@@ -267,12 +266,12 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             {processing ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Redirecting to Stripe...
+                {t("summary.processing")}
               </>
             ) : (
               <>
                 <ShieldCheck className="mr-2 h-5 w-5" />
-                Pay {currency} {totalAmount.toLocaleString()} with Stripe
+                {t("summary.payButton", { currency, amount: totalAmount.toLocaleString() })}
               </>
             )}
           </Button>
@@ -283,10 +282,10 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             </div>
             <div>
               <p className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider leading-tight">
-                Secure Payment
+                {t("summary.securePayment.title")}
               </p>
               <p className="text-[10px] font-medium text-emerald-600/70 leading-tight">
-                SSL Encrypted Stripe Gateway
+                {t("summary.securePayment.description")}
               </p>
             </div>
           </div>
@@ -296,22 +295,22 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       {/* What's Included */}
       <Card className="bg-slate-50 border-slate-200">
         <CardHeader>
-          <CardTitle className="text-sm">What's Included with Your Subscription</CardTitle>
+          <CardTitle className="text-sm">{t("features.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              "Unlimited merchant accounts",
-              "WhatsApp messaging integration",
-              "QR code generation",
-              "Coupon management system",
-              "Review collection tools",
-              "Analytics & reporting",
-              "Chat support system",
-              "12 months platform access",
+              t("features.unlimitedMerchants"),
+              t("features.whatsappIntegration"),
+              t("features.qrGeneration"),
+              t("features.couponManagement"),
+              t("features.reviewCollection"),
+              t("features.analytics"),
+              t("features.chatSupport"),
+              t("features.platformAccess"),
             ].map((feature, idx) => (
               <div key={idx} className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
                 <span className="text-xs text-slate-700">{feature}</span>
               </div>
             ))}

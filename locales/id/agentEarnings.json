@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Dasbor",
+    "earnings": "Pendapatan"
+  },
+  "columns": {
+    "commissionEarned": "Komisi Diperoleh",
+    "commissionRate": "Tingkat Komisi",
+    "date": "Tanggal",
+    "merchant": "Pedagang",
+    "noData": "—",
+    "source": "Komisi",
+    "totalSales": "Total Penjualan"
+  },
+  "commissionBreakdown": {
+    "description": "Komisi terkonsolidasi per pedagang.",
+    "searchPlaceholder": "Cari pedagang atau sumber...",
+    "title": "Rincian Komisi"
+  },
+  "errors": {
+    "fetchFailed": "Gagal mengambil pendapatan"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "Pedagang Aktif"
+    },
+    "earningsType": {
+      "title": "Jenis Pendapatan",
+      "value": "Prabayar"
+    },
+    "totalEarnings": {
+      "title": "Total Pendapatan",
+      "trend": "Data Langsung"
+    }
+  },
+  "noData": "—"
+}

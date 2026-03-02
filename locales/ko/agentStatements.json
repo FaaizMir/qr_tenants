@@ -1,0 +1,70 @@
+{
+  "breadcrumbs": {
+    "dashboard": "에이전트 대시보드",
+    "statements": "재무 제표"
+  },
+  "columns": {
+    "actions": "작업",
+    "downloadPdf": "PDF 다운로드",
+    "generatedAt": "생성 일자",
+    "monthLabel": "{month}월, {year}",
+    "noDate": "—",
+    "period": "기간",
+    "status": "상태",
+    "totalSpend": "총 지출"
+  },
+  "filters": {
+    "description": "연도 및 월별로 명세서 필터링",
+    "month": {
+      "all": "현재 월",
+      "label": "월",
+      "placeholder": "현재 월"
+    },
+    "quickActions": {
+      "label": "빠른 작업",
+      "loading": "로딩 중...",
+      "refresh": "목록 새로 고침"
+    },
+    "title": "명세서 필터",
+    "year": {
+      "label": "연도",
+      "placeholder": "연도 선택"
+    }
+  },
+  "messages": {
+    "downloadError": "PDF 다운로드에 실패했습니다. 다시 시도해 주세요.",
+    "downloadSuccess": "명세서가 성공적으로 다운로드되었습니다!",
+    "fetchError": "진술을 로드하지 못했습니다. 다시 시도해 주세요."
+  },
+  "months": {
+    "april": "4월",
+    "august": "8월",
+    "december": "12월",
+    "february": "2월",
+    "january": "1월",
+    "july": "7월",
+    "june": "6월",
+    "march": "3월",
+    "may": "5월",
+    "november": "11월",
+    "october": "10월",
+    "september": "9월"
+  },
+  "status": {
+    "failed": "실패",
+    "generated": "생성됨",
+    "pending": "대기 중"
+  },
+  "subtitle": "수익, 수수료, 패키지 수입 및 지갑 원장을 포함한 월간 자동 생성 PDF 보고서.",
+  "table": {
+    "description": "{count} 개의 명세서가 발견되었습니다",
+    "description_plural": "{count}개의 명세서가 발견되었습니다",
+    "loading": "명세서를 로드하는 중...",
+    "noData": {
+      "description": "선택한 기간에 대한 명세서가 없습니다. 시작하려면 새 명세서를 생성하세요.",
+      "title": "발견된 명세서가 없습니다"
+    },
+    "title": "명세서 기록"
+  },
+  "title": "대리인 재무 제표"
+}

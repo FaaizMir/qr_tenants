@@ -1,0 +1,84 @@
+{
+  "confirmation": {
+    "cancel": "取消",
+    "checkboxLabel": "我确认此广告不包含赌博、成人内容、非法服务或马来西亚法律禁止的任何内容。我理解如果广告因政策违规而被拒绝，付款将不予退还。",
+    "description": "请在继续之前审核并确认以下内容。",
+    "submit": "确认并提交",
+    "title": "确认广告提交"
+  },
+  "cropper": {
+    "cancel": "取消",
+    "description": "拖动以重新定位并使用滑块进行缩放。",
+    "save": "保存图片",
+    "title": "调整图片",
+    "zoom": "缩放"
+  },
+  "description": "视觉营销内容",
+  "duration": {
+    "days14": "14 天",
+    "days30": "30天",
+    "days7": "7天",
+    "label": "持续时间",
+    "selectPlaceholder": "选择持续时间"
+  },
+  "messages": {
+    "errorDeleting": "删除失败",
+    "errorProcessing": "处理图像时出错",
+    "errorSaving": "保存设置时出错",
+    "imageDeleted": "图片删除成功",
+    "imageReady": "图像准备上传。点击 '上传并保存' 完成。",
+    "imageTooLarge": "图像大小必须小于10MB",
+    "imageUploaded": "图像上传成功",
+    "noSlotsWarning": "没有可用的广告插槽。所有位置当前已被占用 — 您无法上传新广告，直到有插槽空出。",
+    "settingsUpdated": "设置更新成功",
+    "uploadingImage": "正在上传图片...",
+    "uploadingVideo": "正在上传视频... 这可能需要一些时间。",
+    "uploadTimeout": "上传超时。请尝试使用较小的文件或检查您的连接。",
+    "videoDeleted": "视频删除成功",
+    "videoFormatWarning": "为了获得最佳性能，请使用 MP4 或 WebM 格式。",
+    "videoMetadataError": "加载视频元数据失败",
+    "videoSelected": "视频已选择。点击 '上传并保存' 完成。",
+    "videoTooLarge": "视频文件太大。最大大小为25MB。",
+    "videoTooLong": "视频太长（{duration}s）。最长时长为30秒。",
+    "videoUploaded": "视频上传成功"
+  },
+  "placement": {
+    "bottom": "底部",
+    "label": "广告位置",
+    "left": "左侧",
+    "loading": "加载广告位置中...",
+    "noSlotsAvailable": "没有可用的插槽",
+    "noSlotsMessage": "所有广告投放位置当前已被占用。请稍后再试。",
+    "right": "右",
+    "selectPlaceholder": "选择位置",
+    "slotsOccupied": "{count} 个插槽已被占用。仅有 {available} 个可用位置。",
+    "top": "顶部"
+  },
+  "preview": {
+    "description": "促销广告的完整预览",
+    "title": "广告预览"
+  },
+  "status": {
+    "active": "活跃",
+    "off": "关闭",
+    "pending": "待处理"
+  },
+  "tabs": {
+    "image": "图片广告",
+    "video": "视频广告"
+  },
+  "title": "促销横幅",
+  "upload": {
+    "addImage": "添加图像",
+    "addVideo": "添加视频",
+    "imageInfo": "自动压缩 • 最大10MB",
+    "imageReady": "图像准备上传。点击'上传并保存'完成。",
+    "noSlotsButton": "没有可用的插槽",
+    "uploading": "正在上传...",
+    "uploadingSave": "上传并保存",
+    "uploadProgress": "上传进度",
+    "videoInfo": "MP4, WebM（最大 25MB）",
+    "videoInfoExtra": "较小的文件上传更快",
+    "videoSelected": "已选择视频。点击'上传并保存'完成。"
+  }
+}

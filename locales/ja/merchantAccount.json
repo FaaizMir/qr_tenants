@@ -1,0 +1,57 @@
+{
+  "accountDetails": {
+    "description": "アカウント情報を更新する",
+    "title": "アカウントの詳細"
+  },
+  "buttons": {
+    "save": "変更を保存",
+    "saving": "保存中..."
+  },
+  "fields": {
+    "address": "住所",
+    "businessName": "ビジネス名",
+    "businessType": "ビジネスタイプ",
+    "city": "市",
+    "country": "国",
+    "email": "メール",
+    "fullName": "フルネーム",
+    "phone": "電話",
+    "taxId": "税ID"
+  },
+  "messages": {
+    "loadError": "アカウント情報の読み込みに失敗しました",
+    "updateError": "アカウントの更新に失敗しました",
+    "updateSuccess": "アカウントが正常に更新されました",
+    "validationError": "{field}: {message}"
+  },
+  "page": {
+    "breadcrumb": {
+      "account": "アカウント",
+      "dashboard": "ダッシュボード"
+    },
+    "description": "アカウント情報を管理する",
+    "title": "アカウント設定"
+  },
+  "placeholders": {
+    "address": "住所を入力し始めてください...",
+    "businessName": "ビジネス名を入力してください",
+    "businessType": "ビジネスタイプを入力してください",
+    "city": "あなたの市を入力してください",
+    "country": "あなたの国を入力してください",
+    "email": "メールアドレスを入力してください",
+    "name": "名前を入力してください",
+    "phone": "電話番号を入力してください",
+    "taxId": "税IDを入力してください"
+  },
+  "profile": {
+    "description": "あなたのプロフィール情報",
+    "title": "プロフィール"
+  },
+  "qrCode": {
+    "altText": "マーチャントQRコード",
+    "description": "このQRコードを顧客と共有してレビューを収集する",
+    "downloadButton": "QRコードをダウンロード",
+    "title": "あなたのQRコード",
+    "urlLabel": "QRコードURL"
+  }
+}

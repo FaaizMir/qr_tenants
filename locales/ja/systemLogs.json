@@ -1,112 +1,125 @@
 {
-  "titles": {
-    "masterAdmin": "Global Audit Trail",
-    "agent": "Agent Activity Stream",
-    "merchant": "Store Operations Log"
+  "columns": {
+    "action": "アクション",
+    "category": "カテゴリ",
+    "dateTime": "日付と時刻",
+    "description": "説明",
+    "details": "詳細",
+    "noDetails": "詳細はありません",
+    "severity": "重大度",
+    "systemActivity": "システムアクティビティ"
   },
   "descriptions": {
-    "masterAdmin": "Monitoring platform-wide events and system health",
-    "agent": "Tracking sub-merchant activities and wallet transactions",
-    "merchant": "Detailed record of your store coupons and customer interactions"
-  },
-  "filters": {
-    "logCategory": "Log Category",
-    "pickDateRange": "Pick a date range",
-    "refresh": "Refresh"
-  },
-  "logTypes": {
-    "masterAdmin": {
-      "allPlatformActivity": "All Platform Activity",
-      "authenticationEvents": "Authentication Events",
-      "agentActivities": "Agent Activities",
-      "merchantActivities": "Merchant Activities",
-      "criticalErrors": "Critical Errors",
-      "couponOperations": "Coupon Operations",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback",
-      "walletTransactions": "Wallet & Transactions",
-      "campaignLogs": "Campaign Logs",
-      "customerActions": "Customer Actions",
-      "whatsappUIDetailed": "WhatsApp UI Messages (Detailed)",
-      "whatsappBIDetailed": "WhatsApp BI Messages (Detailed)",
-      "whatsappCreditWallet": "WhatsApp Credit Wallet"
-    },
-    "agent": {
-      "myMerchantsActivity": "My Merchants Activity",
-      "merchantScopedLogs": "Merchant Scoped Logs",
-      "couponLogs": "Coupon Logs",
-      "campaignLogs": "Campaign Logs",
-      "walletEarnings": "Wallet & Earnings",
-      "customerLogs": "Customer Logs",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    },
-    "merchant": {
-      "storeActivity": "Store Activity",
-      "couponUsage": "Coupon Usage",
-      "campaignLogs": "Campaign Logs",
-      "walletTransactions": "Wallet Transactions",
-      "customerActions": "Customer Actions",
-      "securityAuth": "Security & Auth",
-      "whatsappUIFeedback": "WhatsApp UI Feedback",
-      "whatsappBIFeedback": "WhatsApp BI Feedback"
-    }
-  },
-  "columns": {
-    "dateTime": "Date & Time",
-    "category": "Category",
-    "action": "Action",
-    "description": "Description",
-    "details": "Details",
-    "severity": "Severity",
-    "noDetails": "No details",
-    "systemActivity": "system activity"
+    "agent": "マーチャントの活動、ウォレット取引、コミッションログを監視します。",
+    "masterAdmin": "プラットフォーム全体のシステム活動、監査トレイル、および重大なエラーを表示します。",
+    "merchant": "ストアの運営、クーポンの使用、顧客とのインタラクションを追跡します。"
   },
   "details": {
-    "coupon": {
-      "couponsGenerated": "{count} coupons generated",
-      "quantity": "Quantity: {value}",
-      "type": "Type: {value}"
-    },
-    "whatsapp": {
-      "type": "Type: {value}",
-      "campaign": "Campaign: {value}",
-      "id": "ID: {value}"
-    },
-    "wallet": {
-      "credits": "Credits",
-      "whatsappUI": "WhatsApp UI",
-      "whatsappBI": "WhatsApp BI",
-      "coupon": "Coupon",
-      "paidAd": "Paid Ad",
-      "platformCommission": "{rate}% Platform Commission",
-      "unitPrice": "Unit Price: {value}"
-    },
     "auth": {
-      "method": "Method: {value}",
-      "user": "User: {value}"
+      "method": "方法: {value}",
+      "user": "ユーザー: {value}"
     },
-    "merchant": {
-      "id": "ID: {value}",
-      "type": "Type: {value}"
+    "coupon": {
+      "couponsGenerated": "{count} 枚のクーポンが生成されました",
+      "quantity": "数量: {value}",
+      "type": "タイプ: {value}"
     },
     "customer": {
-      "platform": "Platform: {value}",
-      "review": "Review: {value}"
+      "platform": "プラットフォーム: {value}",
+      "review": "レビュー: {value}"
     },
-    "campaign": {
-      "status": "Status: {value}",
-      "id": "ID: {value}"
+    "wallet": {
+      "coupon": "クーポン",
+      "credits": "クレジット",
+      "paidAd": "有料広告",
+      "platformCommission": "プラットフォーム手数料: {rate}%",
+      "unitPrice": "単価: {value}",
+      "whatsappBI": "WhatsApp BI",
+      "whatsappUI": "WhatsApp UI"
+    }
+  },
+  "errors": {
+    "failedToLoad": "ログの読み込みに失敗しました"
+  },
+  "filters": {
+    "logCategory": "ログカテゴリ",
+    "pickDateRange": "日付範囲を選択",
+    "refresh": "更新"
+  },
+  "logTypes": {
+    "agent": {
+      "campaignLogs": "キャンペーンログ",
+      "couponLogs": "クーポンログ",
+      "customerLogs": "顧客ログ",
+      "merchantScopedLogs": "マーチャントスコープのログ",
+      "myMerchantsActivity": "私のマーチャントアクティビティ",
+      "walletEarnings": "ウォレット＆収益",
+      "whatsappBIFeedback": "WhatsApp BIフィードバック",
+      "whatsappUIFeedback": "WhatsApp UI フィードバック"
+    },
+    "masterAdmin": {
+      "agentActivities": "エージェントアクティビティ",
+      "allPlatformActivity": "すべてのプラットフォームアクティビティ",
+      "authenticationEvents": "認証イベント",
+      "campaignLogs": "キャンペーンログ",
+      "couponOperations": "クーポン操作",
+      "criticalErrors": "重大なエラー",
+      "customerActions": "顧客アクション",
+      "merchantActivities": "マーチャントアクティビティ",
+      "walletTransactions": "ウォレット取引",
+      "whatsappBIDetailed": "WhatsApp BI（詳細）",
+      "whatsappBIFeedback": "WhatsApp BIフィードバック",
+      "whatsappCreditWallet": "WhatsApp クレジット (ウォレット)",
+      "whatsappUIDetailed": "WhatsApp UI（詳細）",
+      "whatsappUIFeedback": "WhatsApp UI フィードバック"
+    },
+    "merchant": {
+      "campaignLogs": "キャンペーンログ",
+      "couponUsage": "クーポン使用",
+      "customerActions": "顧客アクション",
+      "securityAuth": "セキュリティと認証",
+      "storeActivity": "ストアアクティビティ",
+      "walletTransactions": "ウォレット取引",
+      "whatsappBIFeedback": "WhatsApp BI フィードバック",
+      "whatsappUIFeedback": "WhatsApp UIフィードバック"
+    }
+  },
+  "pages": {
+    "agent": {
+      "breadcrumb": {
+        "dashboard": "エージェントダッシュボード",
+        "logs": "システムログ"
+      },
+      "description": "マーチャントの活動、ウォレット取引、コミッションログを監視します。",
+      "title": "アクティビティログ"
+    },
+    "masterAdmin": {
+      "breadcrumb": {
+        "dashboard": "マスター管理者ダッシュボード",
+        "logs": "システムログ"
+      },
+      "description": "プラットフォーム全体のすべてのシステムアクティビティ、監査トレイル、および重大なエラーを表示します。",
+      "title": "システムログ"
+    },
+    "merchant": {
+      "breadcrumb": {
+        "dashboard": "マーチャントダッシュボード",
+        "logs": "システムログ"
+      },
+      "description": "ストアの運営、クーポンの使用、顧客とのインタラクションを追跡します。",
+      "title": "ストアログ"
     }
   },
   "severity": {
-    "critical": "critical",
-    "error": "error",
-    "warning": "warning",
-    "success": "success",
-    "info": "info"
+    "critical": "クリティカル",
+    "error": "エラー",
+    "info": "情報",
+    "success": "成功",
+    "warning": "警告"
   },
-  "errors": {
-    "failedToLoad": "Failed to load system logs"
+  "titles": {
+    "agent": "アクティビティログ",
+    "masterAdmin": "システムログ",
+    "merchant": "ストアログ"
   }
 }

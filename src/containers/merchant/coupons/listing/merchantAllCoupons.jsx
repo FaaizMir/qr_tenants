@@ -75,7 +75,9 @@ const AllCouponsColumns = (t) => [
     header: t("allCoupons.columns.redeemedAt"),
     cell: ({ row }) => {
       const date = row.original.redeemed_at;
-      return date ? new Date(date).toLocaleString() : t("allCoupons.notRedeemed");
+      return date
+        ? new Date(date).toLocaleString()
+        : t("allCoupons.notRedeemed");
     },
   },
 ];
@@ -121,7 +123,7 @@ export default function MerchantAllCoupons() {
   }, [page, pageSize, debouncedSearch, t]);
 
   const filteredCoupons = coupons.filter((c) =>
-    c.coupon_code.toLowerCase().includes(debouncedSearch.toLowerCase())
+    c.coupon_code.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
   return (
@@ -129,9 +131,7 @@ export default function MerchantAllCoupons() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">{t("allCoupons.title")}</h1>
-          <p className="text-muted-foreground">
-            {t("allCoupons.subtitle")}
-          </p>
+          <p className="text-muted-foreground">{t("allCoupons.subtitle")}</p>
         </div>
         <Link href={`/${locale}/merchant/coupons/create`}>
           <Button className="flex items-center gap-2">
@@ -157,6 +157,15 @@ export default function MerchantAllCoupons() {
             setPageSize={setPageSize}
             isLoading={loading}
             pagination={true}
+            columnNameTranslations={{
+              coupon_code: t("allCoupons.columns.couponCode"),
+              batch_name: t("allCoupons.columns.batchName"),
+              status: t("allCoupons.columns.status"),
+              start_date: t("allCoupons.columns.startDate"),
+              expiry_date: t("allCoupons.columns.expiryDate"),
+              issued_at: t("allCoupons.columns.issuedAt"),
+              redeemed_at: t("allCoupons.columns.redeemedAt"),
+            }}
           />
         </CardContent>
       </Card>

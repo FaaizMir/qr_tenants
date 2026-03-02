@@ -1,59 +1,99 @@
 {
-  "title": "스토어를 강화하세요",
-  "subtitle": "WhatsApp 메시지, 쿠폰 생성 및 유료 광고를 위한 크레딧 패키지를 선택하세요.",
-  "loading": "패키지를 로드하는 중...",
-  "errors": {
-    "loadPackages": "크레딧 패키지를 로드할 수 없습니다. 다시 시도해 주세요.",
-    "noMerchantId": "판매자 ID를 확인할 수 없습니다. 지원팀에 문의하세요.",
-    "purchaseFailed": "패키지 구매에 실패했습니다. 다시 시도해 주세요.",
-    "requestFailed": "요청이 상태 {status}로 실패했습니다."
+  "checkout": {
+    "amountPayable": "지불할 금액",
+    "bonusGift": "보너스 선물",
+    "cardDetails": "카드 세부정보",
+    "creditsIncluded": "포함된 크레딧",
+    "noSelection": "선택된 패키지 없음",
+    "noSelectionMessage": "체크아웃을 계속 진행하려면 패키지를 선택하세요.",
+    "packageType": "패키지 유형",
+    "paymentInfo": "아래에 결제 정보를 입력하세요",
+    "premiumDescription": "향상된 기능을 갖춘 프리미엄 크레딧 패키지",
+    "securePayment": "안전한 결제",
+    "sslEncrypted": "SSL 암호화",
+    "subtitle": "구매를 검토하세요",
+    "title": "주문 요약",
+    "totalAmount": "총 금액",
+    "trustedPartners": "신뢰할 수 있는 파트너"
   },
   "emptyState": {
-    "noPackages": "귀하의 판매자 유형에 대한 크레딧 패키지를 찾을 수 없습니다."
+    "noPackages": "현재 사용할 수 있는 크레딧 패키지가 없습니다."
   },
-  "packageTypes": {
-    "coupon": "쿠폰",
-    "whatsappUI": "WhatsApp UI 메시지",
-    "whatsappBI": "WhatsApp BI 메시지",
-    "whatsapp": "WhatsApp 메시지",
-    "paidAds": "유료 광고",
-    "standard": "표준"
+  "errors": {
+    "agentBalanceInsufficient": "에이전트 선불 잔액 부족",
+    "agentBalanceInsufficinetDescription": "귀하의 에이전트는 선불 지갑에 충전해야 합니다. 이 구매를 완료하기 전에 귀하의 에이전트에게 자금을 추가하도록 문의하십시오.",
+    "loadPackages": "크레딧 패키지를 로드하지 못했습니다",
+    "noMerchantId": "상인 ID를 찾을 수 없습니다. 다시 로그인 해주세요.",
+    "purchaseFailed": "패키지 구매에 실패했습니다. 다시 시도해주세요."
   },
   "merchantTypes": {
     "annual": "연간",
-    "temporary": "임시",
-    "standard": "표준"
+    "standard": "표준",
+    "temporary": "임시"
   },
   "packageCard": {
-    "perCredit": "크레딧당",
-    "baseCredits": "{credits} 기본 크레딧",
+    "baseCredits": "{credits} 크레딧 포함",
     "bonusCredits": "+{bonusCredits} 보너스 크레딧",
-    "enhancedFeatures": "향상된 기능 및 용량",
-    "getStarted": "시작하기"
+    "enhancedFeatures": "비즈니스를 위한 향상된 기능",
+    "getStarted": "시작하기",
+    "perCredit": "크레딧당"
   },
-  "checkout": {
-    "title": "주문 개요",
-    "subtitle": "결제 세부정보",
-    "selectedPackage": "선택된 패키지",
-    "premiumDescription": "비즈니스 성장을 위한 프리미엄 크레딧 패키지.",
-    "creditsIncluded": "포함된 크레딧",
-    "bonusGift": "보너스 선물",
-    "packageType": "패키지 유형",
-    "totalAmount": "총액",
-    "securePayment": "안전한 결제",
-    "sslEncrypted": "SSL 암호화 Stripe 게이트웨이",
-    "cardDetails": "카드 세부정보",
-    "paymentInfo": "아래에 결제 정보를 입력하세요.",
-    "amountPayable": "지불 금액",
-    "trustedPartners": "신뢰할 수 있는 파트너",
-    "noSelection": "선택 항목을 찾을 수 없음",
-    "noSelectionMessage": "이 창을 닫고 업그레이드를 진행하려면 크레딧 패키지를 선택하세요."
+  "packageTypes": {
+    "coupon": "쿠폰",
+    "paidAds": "유료 광고",
+    "standard": "표준",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "WhatsApp UI"
   },
+  "page": {
+    "breadcrumb": "구매",
+    "dashboardBreadcrumb": "상인 대시보드"
+  },
+  "stripeCancel": {
+    "backToDashboard": "대시보드로 돌아가기",
+    "backToPurchase": "구매로 돌아가기",
+    "description": "귀하의 Stripe 체크아웃 세션이 취소되었습니다. 결제가 이루어지지 않았습니다.",
+    "goToWallet": "지갑으로 가기",
+    "title": "결제가 취소되었습니다"
+  },
+  "stripeCheckout": {
+    "credits": "크레딧",
+    "errors": {
+      "insufficientBalance": "에이전트 지갑 잔액이 부족합니다. 필요: {required}, 사용 가능: {available}. 이 구매를 완료하려면 지갑을 충전하십시오.",
+      "noAdminId": "세션에서 관리자 ID를 가져올 수 없습니다. 다시 로그인해 주세요.",
+      "startCheckout": "Stripe 체크아웃을 시작할 수 없습니다. 다시 시도하십시오.",
+      "startPayment": "결시를 시작할 수 없습니다. 다시 시도해 주세요.",
+      "validateBalance": "지갑 잔액을 확인할 수 없습니다. 지원팀에 문의하십시오.",
+      "validateBalanceRetry": "지갑 잔액을 확인할 수 없습니다. 다시 시도하십시오."
+    },
+    "packagePurchase": "패키지 구매",
+    "payableAmount": "지불할 금액",
+    "payWithStripe": "Stripe로 결제하기",
+    "redirecting": "Stripe로 리디렉션 중..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "대시보드로 돌아가기",
+    "backToPurchase": "구매로 돌아가기",
+    "description": "귀하의 결제가 성공적으로 완료되었습니다.",
+    "goToWallet": "지갑으로 가기",
+    "processing": "지갑에 크레딧 추가 중...",
+    "reflected": "크레딧이 곧 귀하의 지갑에 반영됩니다.",
+    "title": "결제가 성공적으로 완료되었습니다.",
+    "toasts": {
+      "creditsAdded": "크레딧이 성공적으로 추가되었습니다!",
+      "processingFailed": "결제가 성공했지만 귀하의 계정을 업데이트하는 데 실패했습니다. 지원팀에 문의하십시오.",
+      "subscriptionActivated": "구독이 성공적으로 활성화되었습니다!",
+      "subscriptionRenewed": "구독이 성공적으로 갱신되었습니다!",
+      "upgradedToAnnual": "연간 구독으로 성공적으로 업그레이드되었습니다!",
+      "upgradeFailed": "업그레이드 실패: 관리자 정보가 누락되었습니다.",
+      "walletBalance": "지갑 잔액: {currency} {balance}",
+      "walletToppedUp": "지갑이 성공적으로 충전되었습니다! 추가된 금액: {currency} {amount}"
+    }
+  },
+  "subtitle": "비즈니스 요구에 맞는 크레딧 패키지를 선택하세요",
   "success": {
-    "purchaseComplete": "패키지가 성공적으로 구매되었습니다."
+    "purchaseComplete": "구매가 성공적으로 완료되었습니다!"
   },
-  "toast": {
-    "purchaseSuccess": "패키지가 성공적으로 구매되었습니다.",
-    "purchaseError": "패키지 구매에 실패했습니다. 다시 시도해 주세요."
-  }
+  "title": "크레딧 구매"
 }

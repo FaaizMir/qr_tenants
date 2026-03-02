@@ -1,0 +1,246 @@
+{
+  "actions": {
+    "activateSubscription": "サブスクリプションをアクティブにする",
+    "topUpWallet": "ウォレットにトップアップ"
+  },
+  "alerts": {
+    "subscriptionExpired": {
+      "description": "あなたのサブスクリプションは期限切れです。すべてのプラットフォーム機能にアクセスを続けるためにサブスクリプションを更新してください。",
+      "title": "サブスクリプションが期限切れです"
+    },
+    "subscriptionRequired": {
+      "description": "あなたのアカウントはまだアクティブ化されていません。「サブスクリプションを有効化」をクリックして年会費を支払い、プラットフォームの使用を開始してください。アクティブ化中にプリペイドウォレット残高を追加することもできます。",
+      "title": "サブスクリプションのアクティベーションが必要です"
+    }
+  },
+  "balance": {
+    "currentBalance": {
+      "description": "利用可能なプリペイドクレジット",
+      "title": "現在の残高"
+    },
+    "securityNote": {
+      "description": "あなたのウォレットは業界標準の暗号化で保護されています。すべての取引はリアルタイムで監査され、あなたの資金の安全が確保されています。",
+      "title": "財務セキュリティ"
+    },
+    "subscriptionStatus": {
+      "activeAccount": "アクティブアカウント",
+      "inactive": "非アクティブ",
+      "noDate": "日付なし",
+      "noType": "該当なし",
+      "package": "{type} パッケージ",
+      "planType": "プランタイプ",
+      "renewalDate": "更新日",
+      "status": "ステータス",
+      "title": "サブスクリプション & アカウントステータス"
+    },
+    "totalEarnings": {
+      "description": "生涯利益",
+      "title": "総収益"
+    }
+  },
+  "customTopup": {
+    "alert": {
+      "description": "プリペイドウォレット残高に追加したい金額を入力してください。この残高はプラットフォームの運営に使用されます。",
+      "title": "ウォレットにチャージする:"
+    },
+    "amountCard": {
+      "hint": "ウォレットに追加したい正確な金額を入力してください。プラットフォームコストはこの残高から自動的に差し引かれます。",
+      "instantCredit": {
+        "description": "成功した支払いの後、あなたのウォレットに即座にクレジットされます。",
+        "title": "即時クレジット："
+      },
+      "label": "追加する金額",
+      "placeholder": "0.00",
+      "quickSelect": "クイックセレクト:",
+      "subtitle": "最低{currency} 100が必要",
+      "title": "チャージ金額を入力してください"
+    },
+    "infoCard": {
+      "merchantPayments": "100%の加盟店支払い：すべての加盟店支払いは直接あなたのStripeアカウントに送られます",
+      "platformCosts": "プラットフォームコスト：このプリペイドウォレット残高から自動的に差し引かれます",
+      "title": "プリペイドウォレットモデル",
+      "yourProfit": "あなたの利益: マーチャント支払い - プラットフォームコスト = あなたの収益"
+    },
+    "subtitle": "プラットフォーム操作のためにウォレットにプリペイド残高を追加",
+    "summary": {
+      "payButton": "Stripeで{currency} {amount}を支払う",
+      "processing": "Stripeにリダイレクト中...",
+      "securePayment": {
+        "description": "SSL暗号化されたStripeゲートウェイ",
+        "title": "安全な支払い"
+      },
+      "title": "支払いの概要",
+      "totalPayment": "合計支払い：",
+      "walletTopup": "ウォレットトップアップ："
+    },
+    "title": "ウォレットにトップアップ",
+    "validation": {
+      "createError": "支払いプロセスの開始に失敗しました",
+      "invalidAmount": "有効な金額を入力してください",
+      "minimumAmount": "最低トップアップ金額は100です",
+      "paymentError": "支払いを開始できませんでした。もう一度お試しください。"
+    }
+  },
+  "deductions": {
+    "columns": {
+      "amount": "金額",
+      "date": "日付",
+      "description": "説明",
+      "frequency": "頻度"
+    },
+    "searchPlaceholder": "控除を検索中...",
+    "title": "自動控除ログ"
+  },
+  "initialSubscription": {
+    "alert": {
+      "description": "プラットフォームを使用開始するには、年会費を支払う必要があります。同じ取引でウォレットにプリペイド残高を追加することもできます。",
+      "title": "ようこそ！"
+    },
+    "features": {
+      "analytics": "分析と報告",
+      "chatSupport": "チャットサポートシステム",
+      "couponManagement": "クーポン管理システム",
+      "platformAccess": "12ヶ月のプラットフォームアクセス",
+      "qrGeneration": "QRコード生成",
+      "reviewCollection": "収集ツールをレビュー",
+      "title": "サブスクリプションに含まれるもの",
+      "unlimitedMerchants": "無制限のマーチャントアカウント",
+      "whatsappIntegration": "WhatsAppメッセージング統合"
+    },
+    "loading": "サブスクリプション情報を読み込んでいます...",
+    "subscriptionFee": {
+      "access": "年間プラットフォームアクセス",
+      "description": "すべての機能に12ヶ月間フルアクセス",
+      "required": "必須",
+      "subtitle": "アカウントを有効化するために必要",
+      "title": "年会費"
+    },
+    "subtitle": "年間サブスクリプションを支払い、オプションでプリペイドウォレット残高を追加",
+    "summary": {
+      "payButton": "Stripeで{currency} {amount}を支払う",
+      "processing": "Stripeにリダイレクト中...",
+      "securePayment": {
+        "description": "SSL暗号化されたStripeゲートウェイ",
+        "title": "安全な支払い"
+      },
+      "subscriptionFee": "サブスクリプション料金:",
+      "title": "支払い概要",
+      "totalPayment": "合計支払い：",
+      "walletBalance": "ウォレット残高："
+    },
+    "title": "アカウントを有効化してください",
+    "validation": {
+      "createError": "支払いプロセスの開始に失敗しました",
+      "loadError": "サブスクリプション情報の読み込みに失敗しました",
+      "minimumAmount": "最低残高は100です",
+      "negativeAmount": "残高は負の値にできません",
+      "paymentError": "支払いを開始できません。もう一度お試しください。"
+    },
+    "walletBalance": {
+      "hint": "残高を追加する場合は最低 {currency} 100 が必要です。プラットフォームのコストはこのウォレットから差し引かれます。",
+      "label": "ウォレット残高額",
+      "modelInfo": {
+        "description": "マーチャントの支払いは100%あなたのStripeアカウントに送金されます。プラットフォームのコストはこのプリペイドウォレット残高から自動的に差し引かれます。",
+        "title": "プリペイドウォレットモデル："
+      },
+      "optional": "オプション",
+      "placeholder": "0.00",
+      "subtitle": "プラットフォーム操作のためのオプションのプリペイド残高",
+      "title": "ウォレット残高を追加"
+    }
+  },
+  "messages": {
+    "creditError": "ウォレットへのクレジットに失敗しました",
+    "subscriptionSuccess": "サブスクリプションが正常に有効化されました！",
+    "topupError": "支払いは成功しましたが、ウォレットへのクレジットに失敗しました。サポートにお問い合わせください。",
+    "topupSuccess": "ウォレットが正常にチャージされました！",
+    "topupSuccessDescription": "{currency} {amount} があなたの残高に追加されました。"
+  },
+  "subtitle": "ウォレット残高と取引を管理",
+  "tabs": {
+    "balance": "残高",
+    "earnings": "収益",
+    "transactions": "取引"
+  },
+  "title": "エージェントウォレット",
+  "topupPackages": {
+    "bonus": "+{currency} {amount} ボーナス",
+    "dialogSubtitle": "ニーズに合ったプリペイドウォレットパッケージを選択してください",
+    "dialogTitle": "トップアップ金額を選択",
+    "get": "{currency} {amount}を取得",
+    "mostPopular": "⭐ 最も人気",
+    "orderSummary": {
+      "baseAmount": "基本金額:",
+      "bonus": "ボーナス：",
+      "package": "パッケージ：",
+      "title": "注文の概要",
+      "totalCredit": "合計クレジット:"
+    },
+    "packages": {
+      "business": {
+        "description": "成長中のエージェンシーに最適",
+        "feature1": "年間約8〜10の加盟店をカバー",
+        "feature2": "または約20,000のWhatsApp UIメッセージ",
+        "feature3": "または約5,000のWhatsApp BIメッセージ",
+        "feature4": "✨ ボーナスRM150が含まれています",
+        "name": "ビジネストップアップ"
+      },
+      "enterprise": {
+        "description": "大規模な運用向け",
+        "feature1": "約17-20の年間加盟店をカバー",
+        "feature2": "または約40,000のWhatsApp UIメッセージ",
+        "feature3": "または約10,000件のWhatsApp BIメッセージ",
+        "feature4": "✨ ボーナスRM500が含まれています",
+        "name": "エンタープライズトップアップ"
+      },
+      "premium": {
+        "description": "高ボリューム代理店の最大値",
+        "feature1": "年間約38〜40の加盟店をカバー",
+        "feature2": "または約80,000のWhatsApp UIメッセージ",
+        "feature3": "または約20,000件のWhatsApp BIメッセージ",
+        "feature4": "✨ ボーナスRM1,500が含まれています",
+        "name": "プレミアムトップアップ"
+      },
+      "standard": {
+        "description": "小規模から中規模の運営に最適",
+        "feature1": "年間約3-4件のマーチャントをカバー",
+        "feature2": "または約8000件のWhatsApp UIメッセージ",
+        "feature3": "または約2000件のWhatsApp BIメッセージ",
+        "feature4": "✨ ボーナスRM50が含まれています",
+        "name": "標準トップアップ"
+      },
+      "starter": {
+        "description": "数件の加盟店で始めるのに最適",
+        "feature1": "年間約1〜2の加盟店をカバー",
+        "feature2": "または約4,000件のWhatsApp UIメッセージ",
+        "feature3": "または約1000件のWhatsApp BIメッセージ",
+        "name": "スタータートップアップ"
+      }
+    },
+    "paymentAmount": "支払い金額",
+    "paymentDetails": {
+      "description": "Stripeを通じて安全に支払い。ウォレットはすぐにクレジットされます。",
+      "paymentAmount": "支払い金額",
+      "title": "支払い詳細"
+    },
+    "selectPackage": {
+      "description": "左のオプションからチャージ金額を選択してください。",
+      "title": "パッケージを選択"
+    }
+  },
+  "transactions": {
+    "columns": {
+      "amount": "金額",
+      "date": "日付",
+      "description": "説明",
+      "status": "ステータス",
+      "type": "タイプ"
+    },
+    "noData": "-",
+    "searchPlaceholder": "取引を検索...",
+    "status": {
+      "completed": "完了",
+      "pending": "保留中"
+    }
+  }
+}

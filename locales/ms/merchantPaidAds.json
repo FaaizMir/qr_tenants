@@ -1,0 +1,84 @@
+{
+  "confirmation": {
+    "cancel": "Batal",
+    "checkboxLabel": "Saya mengesahkan bahawa iklan ini tidak mengandungi perjudian, kandungan dewasa, perkhidmatan haram, atau sebarang kandungan yang dilarang di bawah undang-undang Malaysia. Saya faham bahawa pembayaran tidak boleh dikembalikan jika iklan ditolak kerana pelanggaran dasar.",
+    "description": "Sila semak dan sahkan yang berikut sebelum meneruskan.",
+    "submit": "Sahkan & Hantar",
+    "title": "Sahkan Penghantaran Iklan"
+  },
+  "cropper": {
+    "cancel": "Batal",
+    "description": "Seret untuk mengubah kedudukan dan gunakan penggeser untuk zum.",
+    "save": "Simpan Imej",
+    "title": "Laraskan Imej",
+    "zoom": "Zoom"
+  },
+  "description": "Kandungan pemasaran visual",
+  "duration": {
+    "days14": "14 Hari",
+    "days30": "30 Hari",
+    "days7": "7 Hari",
+    "label": "Tempoh",
+    "selectPlaceholder": "Pilih tempoh"
+  },
+  "messages": {
+    "errorDeleting": "Gagal untuk memadam",
+    "errorProcessing": "Ralat memproses imej",
+    "errorSaving": "Ralat menyimpan tetapan",
+    "imageDeleted": "Imej berjaya dipadam",
+    "imageReady": "Imej sedia untuk dimuat naik. Klik 'Muat Naik & Simpan' untuk selesai.",
+    "imageTooLarge": "Saiz imej mesti kurang daripada 10MB",
+    "imageUploaded": "Imej dimuat naik dengan jayanya",
+    "noSlotsWarning": "Tiada slot iklan tersedia. Semua penempatan kini diduduki — anda tidak boleh memuat naik iklan baru sehingga slot dibuka.",
+    "settingsUpdated": "Tetapan berjaya dikemas kini",
+    "uploadingImage": "Memuat naik imej...",
+    "uploadingVideo": "Sedang memuat naik video... Ini mungkin mengambil sedikit masa.",
+    "uploadTimeout": "Muat naik tamat. Sila cuba dengan fail yang lebih kecil atau semak sambungan anda.",
+    "videoDeleted": "Video telah dipadam dengan jayanya",
+    "videoFormatWarning": "Untuk prestasi terbaik, gunakan format MP4 atau WebM.",
+    "videoMetadataError": "Gagal memuatkan metadata video",
+    "videoSelected": "Video dipilih. Klik 'Muat Naik & Simpan' untuk selesai.",
+    "videoTooLarge": "Fail video terlalu besar. Saiz maksimum ialah 25MB.",
+    "videoTooLong": "Video terlalu panjang ({duration}s). Tempoh maksimum adalah 30 saat.",
+    "videoUploaded": "Video dimuat naik dengan jayanya"
+  },
+  "placement": {
+    "bottom": "Bawah",
+    "label": "Penempatan Iklan",
+    "left": "Kiri",
+    "loading": "Memuatkan penempatan...",
+    "noSlotsAvailable": "Tiada slot tersedia",
+    "noSlotsMessage": "Semua slot penempatan iklan kini telah dipenuhi. Sila cuba lagi nanti.",
+    "right": "Betul",
+    "selectPlaceholder": "Pilih penempatan",
+    "slotsOccupied": "{count} slot(s) diduduki. Hanya {available} penempatan(s) tersedia.",
+    "top": "Atas"
+  },
+  "preview": {
+    "description": "Pratonton saiz penuh iklan promosi",
+    "title": "Pratonton Iklan"
+  },
+  "status": {
+    "active": "Aktif",
+    "off": "MATI",
+    "pending": "Menunggu"
+  },
+  "tabs": {
+    "image": "Iklan Imej",
+    "video": "Iklan Video"
+  },
+  "title": "Sepanduk Promosi",
+  "upload": {
+    "addImage": "Tambah Imej",
+    "addVideo": "Tambah Video",
+    "imageInfo": "Auto-dikompres • Maks 10MB",
+    "imageReady": "Imej sedia untuk dimuat naik. Klik 'Muat Naik & Simpan' untuk menyelesaikan.",
+    "noSlotsButton": "Tiada Slot Tersedia",
+    "uploading": "Sedang memuat naik...",
+    "uploadingSave": "Muat Naik & Simpan",
+    "uploadProgress": "Kemajuan Muat Naik",
+    "videoInfo": "MP4, WebM (Maks 25MB)",
+    "videoInfoExtra": "Fail yang lebih kecil dimuat naik dengan lebih cepat",
+    "videoSelected": "Video dipilih. Klik 'Muat Naik & Simpan' untuk menyelesaikan."
+  }
+}

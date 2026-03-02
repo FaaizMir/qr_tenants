@@ -6,10 +6,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
+import { useTranslations } from "next-intl";
 
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 export default function StripeSuccessPage() {
+  const t = useTranslations("merchantPurchase.stripeSuccess");
   const { data: session, update } = useSession();
   const [processing, setProcessing] = useState(true);
   const router = useRouter();
@@ -69,7 +71,7 @@ export default function StripeSuccessPage() {
             console.log("Renewing subscription for admin", adminId);
             await axiosInstance.post(`/wallets/admin/${adminId}/subscribe`);
             await refreshSubscription();
-            toast.success("Subscription renewed successfully!");
+            toast.success(t("toasts.subscriptionRenewed"));
           }
         } else if (pkg.id === "agent_subscription_initial") {
           // Agent Initial Subscription + Wallet Balance
@@ -84,7 +86,10 @@ export default function StripeSuccessPage() {
               },
             });
             await refreshSubscription();
-            toast.success("Subscription activated successfully!" + (pkg.wallet_balance > 0 ? ` Wallet balance: ${pkg.currency} ${pkg.wallet_balance}` : ""));
+            const balanceMsg = pkg.wallet_balance > 0 
+              ? ` ${t("toasts.walletBalance", { currency: pkg.currency, balance: pkg.wallet_balance })}`
+              : "";
+            toast.success(t("toasts.subscriptionActivated") + balanceMsg);
           }
         } else if (pkg.id === "custom_wallet_topup") {
           // Custom Wallet Top-Up (for agents with active subscription)
@@ -98,7 +103,10 @@ export default function StripeSuccessPage() {
                 payment_date: new Date().toISOString(),
               },
             });
-            toast.success(`Wallet topped up successfully! Added ${pkg.currency} ${Number(pkg.wallet_balance).toLocaleString()}`);
+            toast.success(t("toasts.walletToppedUp", { 
+              currency: pkg.currency, 
+              amount: Number(pkg.wallet_balance).toLocaleString() 
+            }));
           }
         } else if (merchantId) {
           if (pkg.type === "homepage_push_payment" && pkg.approval_id) {
@@ -118,11 +126,11 @@ export default function StripeSuccessPage() {
                 `/wallets/merchant/${merchantId}/upgrade-to-annual`,
                 { admin_id: pkg.admin_id }
               );
-              toast.success("Upgraded to Annual Subscription successfully!");
+              toast.success(t("toasts.upgradedToAnnual"));
               await refreshSubscription();
             } else {
               console.error("Missing admin_id for upgrade");
-              toast.error("Upgrade failed: Missing admin information.");
+              toast.error(t("toasts.upgradeFailed"));
             }
           } else {
             // Standard Merchant Credit Purchase
@@ -139,16 +147,14 @@ export default function StripeSuccessPage() {
               `/wallets/merchant/${merchantId}/add-credits`,
               payload,
             );
-            toast.success("Credits added successfully!");
+            toast.success(t("toasts.creditsAdded"));
           }
         }
 
         localStorage.removeItem("stripe_package");
       } catch (err) {
         console.error("Failed to process payment completion:", err);
-        toast.error(
-          "Payment successful, but failed to update your account. Please contact support.",
-        );
+        toast.error(t("toasts.processingFailed"));
         // Reset flag on error so user can retry if needed
         hasProcessed.current = false;
       } finally {
@@ -176,12 +182,12 @@ export default function StripeSuccessPage() {
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center space-y-4">
-      <h1 className="text-3xl font-bold tracking-tight">Payment successful</h1>
+      <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
       <p className="text-muted-foreground max-w-md">
-        Your payment was completed successfully.{" "}
+        {t("description")}{" "}
         {processing
-          ? "Adding credits to your wallet..."
-          : "Credits will be reflected in your wallet shortly."}
+          ? t("processing")
+          : t("reflected")}
       </p>
       <div className="flex gap-3">
         <Button
@@ -191,7 +197,7 @@ export default function StripeSuccessPage() {
             router.push(walletPath);
           }}
         >
-          Go to wallet
+          {t("goToWallet")}
         </Button>
         <Button
           variant="outline"
@@ -201,7 +207,7 @@ export default function StripeSuccessPage() {
             router.push(backPath);
           }}
         >
-          {isAgentPayment ? "Back to dashboard" : "Back to purchase"}
+          {isAgentPayment ? t("backToDashboard") : t("backToPurchase")}
         </Button>
       </div>
     </div>

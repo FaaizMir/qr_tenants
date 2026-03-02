@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "Tindakan",
+    "contactInfo": "Info Kontak",
+    "dateOfBirth": "Tanggal Lahir",
+    "gender": "Jenis Kelamin",
+    "name": "Nama",
+    "notAvailable": "N/A",
+    "reward": {
+      "eligible": "Layak",
+      "notEligible": "Tidak Memenuhi Syarat"
+    },
+    "rewardStatus": "Status Hadiah",
+    "viewDetails": "Rincian"
+  },
+  "details": {
+    "backButton": "Kembali ke Pelanggan",
+    "badge": {
+      "eligibleForReward": "Layak untuk Hadiah",
+      "standardCustomer": "Pelanggan Standar"
+    },
+    "error": "Gagal memuat detail pelanggan. Silakan coba lagi nanti.",
+    "loading": "Memuat detail pelanggan...",
+    "notFound": "Pelanggan tidak ditemukan",
+    "sections": {
+      "address": {
+        "noAddress": "Tidak ada alamat yang diberikan",
+        "title": "Alamat Kontak"
+      },
+      "essentialInfo": {
+        "active": "Aktif",
+        "dateOfBirth": "Tanggal Lahir",
+        "gender": "Jenis Kelamin",
+        "inactive": "Tidak Aktif",
+        "notSpecified": "Tidak ditentukan",
+        "phoneNumber": "Nomor Telepon",
+        "rewardStatus": "Status Reward"
+      },
+      "systemInfo": {
+        "createdAt": "Dibuat Pada",
+        "customerId": "ID Pelanggan",
+        "lastUpdated": "Terakhir Diperbarui",
+        "merchantId": "ID Merchant",
+        "title": "Informasi Sistem"
+      }
+    },
+    "subtitle": "Ikhtisar rinci informasi pelanggan",
+    "title": "Profil Pelanggan"
+  },
+  "index": {
+    "exportButton": "Ekspor CSV",
+    "locked": {
+      "description": "Akses data pelanggan tersedia secara eksklusif untuk anggota rencana Langganan Informasi Tahunan.",
+      "title": "Fitur Premium",
+      "upgradeCard": {
+        "features": {
+          "feature1": "Akses profil pelanggan yang detail",
+          "feature2": "Ekspor data pelanggan (CSV/Excel)",
+          "feature3": "Segmentasi lanjutan",
+          "feature4": "Batas kupon lebih tinggi (10.000/ batch)"
+        },
+        "subtitle": "Buka wawasan pelanggan penuh",
+        "title": "Tingkatkan ke Tahunan",
+        "upgradeButton": "Tingkatkan Sekarang"
+      }
+    },
+    "searchPlaceholder": "Cari pelanggan...",
+    "subtitle": "Lihat dan kelola basis data pelanggan Anda",
+    "title": "Data Pelanggan"
+  },
+  "page": {
+    "breadcrumb": "Data Pelanggan",
+    "customerDetailsBreadcrumb": "Detail Pelanggan",
+    "dashboardBreadcrumb": "Dasbor Merchant"
+  }
+}

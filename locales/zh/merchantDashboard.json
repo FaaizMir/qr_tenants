@@ -1,4 +1,31 @@
 {
+  "analytics": {
+    "adId": "广告ID",
+    "adsDesc": "被跟踪广告的总数",
+    "agentId": "代理ID",
+    "clicks": "点击数",
+    "clicksChart": "广告点击次数",
+    "clicksDesc": "来自观众的广告总点击数",
+    "clickThroughRate": "点击率",
+    "createdAt": "已创建",
+    "ctr": "点击率",
+    "ctrDesc": "转化为点击的印象百分比",
+    "description": "跟踪您的付费广告的印象和点击",
+    "detailedAnalytics": "详细分析",
+    "detailedDesc": "每个广告的性能细分",
+    "errorFetchFailed": "无法加载分析",
+    "impressions": "印象",
+    "impressionsChart": "广告展示次数",
+    "impressionsDesc": "所有活动的广告总浏览量",
+    "noAdsDesc": "您的付费广告分析将在跟踪开始后显示在此处",
+    "noAdsYet": "尚未跟踪广告",
+    "noData": "无可用数据",
+    "title": "付费广告分析",
+    "total": "总计",
+    "totalAds": "活跃广告",
+    "totalClicks": "总点击数",
+    "totalImpressions": "总展示次数"
+  },
   "common": {
     "credits": "积分"
   },
@@ -52,6 +79,9 @@
   "placeholders": {
     "comingSoon": "设置内容即将推出...",
     "noData": "--"
+  },
+  "qrCode": {
+    "tapToZoom": "点击放大"
   },
   "recentRedemptions": {
     "amount": "金额",

@@ -4,8 +4,10 @@ import React, { useMemo, useState } from "react";
 import axiosInstance from "@/lib/axios";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 const StripeCheckout = ({ pkg }) => {
+  const t = useTranslations("merchantPurchase.stripeCheckout");
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -24,7 +26,7 @@ const StripeCheckout = ({ pkg }) => {
       const adminId = session?.user?.adminId; // Extract admin ID from session
       console.log("Validating agent balance for adminId:", adminId, "and packageId:", pkg?.id);
       if (!adminId) {
-        throw new Error("Unable to retrieve admin ID from session. Please log in again.");
+        throw new Error(t("errors.noAdminId"));
       }
 
       const { data } = await axiosInstance.get(
@@ -33,17 +35,20 @@ const StripeCheckout = ({ pkg }) => {
 
       if (!data?.isValid) {
         throw new Error(
-          `Insufficient agent wallet balance. Required: ${data?.required}, Available: ${data?.available}. Please top up your wallet to complete this purchase.`
+          t("errors.insufficientBalance", { 
+            required: data?.required, 
+            available: data?.available 
+          })
         );
       }
     } catch (err) {
       const status = err?.response?.status;
       const msg =
         status === 404
-          ? "Unable to validate wallet balance. Please contact support."
+          ? t("errors.validateBalance")
           : err?.response?.data?.message ||
             err?.message ||
-            "Unable to validate wallet balance. Please try again.";
+            t("errors.validateBalanceRetry");
       setError(msg);
       throw err; // Prevent further execution
     }
@@ -69,7 +74,7 @@ const StripeCheckout = ({ pkg }) => {
       const sessionUrl = data?.sessionUrl;
 
       if (!sessionUrl) {
-        setError("Unable to start Stripe Checkout. Please try again.");
+        setError(t("errors.startCheckout"));
         return;
       }
 
@@ -81,7 +86,7 @@ const StripeCheckout = ({ pkg }) => {
       const msg =
         err?.response?.data?.message ||
         err?.message ||
-        "Unable to start payment. Please try again.";
+        t("errors.startPayment");
       setError(msg);
     } finally {
       setLoading(false);
@@ -91,12 +96,12 @@ const StripeCheckout = ({ pkg }) => {
   return (
     <div className="space-y-3">
       <div className="space-y-1">
-        <div className="text-sm text-muted-foreground">Payable amount</div>
+        <div className="text-sm text-muted-foreground">{t("payableAmount")}</div>
         <div className="text-2xl font-semibold">{formattedPrice}</div>
         <div className="text-xs text-muted-foreground">
           {pkg?.name
-            ? `${pkg.name} • ${pkg?.credits ?? ""} credits`
-            : "Package purchase"}
+            ? `${pkg.name} • ${pkg?.credits ?? ""} ${t("credits")}`
+            : t("packagePurchase")}
         </div>
       </div>
 
@@ -105,7 +110,7 @@ const StripeCheckout = ({ pkg }) => {
         onClick={handleCheckout}
         disabled={loading}
       >
-        {loading ? "Redirecting to Stripe..." : "Pay with Stripe"}
+        {loading ? t("redirecting") : t("payWithStripe")}
       </Button>
 
       {error && <p className="text-xs text-destructive">{error}</p>}

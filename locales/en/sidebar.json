@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "Ads Packages",
     "approvals": "Approvals",
     "couponsync": "Coupon Sync",
     "dashboard": "Dashboard",

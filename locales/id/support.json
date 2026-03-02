@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "Obrolan",
+      "newChat": "OBROLAN BARU",
+      "newMessage": "PESAN BARU",
+      "newTicket": "TIKET BARU",
+      "ticket": "Tiket"
+    },
+    "conversation": {
+      "me": "SAYA",
+      "noMessagesDesc": "Kirim pesan untuk memulai percakapan.",
+      "noMessagesTitle": "Belum ada pesan",
+      "pressEnter": "Tekan Enter untuk mengirim",
+      "sendMessage": "Kirim Pesan",
+      "typePlaceholder": "Ketik pesan..."
+    },
+    "disconnected": "Terputus",
+    "empty": {
+      "descriptionChat": "Mulai percakapan atau lanjutkan obrolan.",
+      "descriptionTickets": "Buat tiket dukungan baru atau lihat tiket yang ada.",
+      "tipChat": "Obrolan:",
+      "tipChatDesc": "Pesan santai cepat",
+      "tipTickets": "Tiket:",
+      "tipTicketsDesc": "Permintaan dukungan formal",
+      "tipTitle": "💡 Pilih jenis pesan Anda:",
+      "title": "Pusat Dukungan"
+    },
+    "filters": {
+      "chat": "Obrolan",
+      "tickets": "Tiket",
+      "viewAllCreateChat": "Lihat Semua • Buat Obrolan Saja"
+    },
+    "participants": {
+      "platformSupport": "Dukungan Platform",
+      "yourSupportAgent": "Agen Dukungan Anda"
+    },
+    "search": "Cari...",
+    "sidebar": {
+      "newChat": "Mulai percakapan baru",
+      "newTicket": "Buat tiket dukungan baru",
+      "noItems": "Tidak ada item yang ditemukan.",
+      "noMessages": "Tidak ada pesan"
+    },
+    "staffRole": "Peran Staf:",
+    "subtitle": {
+      "admin": "Kelola percakapan dan tiket dukungan dengan agen.",
+      "agentMerchants": "Berkomunikasi dengan pedagang Anda melalui pesan dan tiket.",
+      "agentSupport": "Hubungi tim dukungan platform.",
+      "merchant": "Obrolan dengan agen dukungan Anda atau buat tiket."
+    },
+    "superAdmin": "Super Admin",
+    "supportStaff": "Staf Dukungan",
+    "tabs": {
+      "agents": "Agen",
+      "myMerchants": "Pedagang Saya",
+      "supportAdmin": "Admin Dukungan"
+    },
+    "title": "Dukungan & Pesan",
+    "toasts": {
+      "loadFailed": "Gagal memuat data dukungan",
+      "messageFailed": "Gagal mengirim pesan. Silakan coba lagi.",
+      "messageHistoryFailed": "Gagal memuat riwayat pesan"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "Dukungan",
+      "dashboardBreadcrumb": "Dasbor Agen"
+    },
+    "breadcrumb": "Dukungan",
+    "dashboardBreadcrumb": "Dasbor Pedagang",
+    "masterAdmin": {
+      "breadcrumb": "Dukungan",
+      "dashboardBreadcrumb": "Dasbor Admin Utama"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "Dukungan Agen"
+      },
+      "merchantSupport": {
+        "title": "Dukungan Merchant"
+      },
+      "supportDashboard": {
+        "title": "Dasbor Dukungan"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "Navigasi ke Pengaturan Utama > Paket untuk mendefinisikan tingkat harga.",
+        "a2": "Ya, di bawah Pengaturan Agen > Branding Anda dapat menambahkan domain kustom Anda.",
+        "category": "Agen",
+        "q1": "Bagaimana cara mengatur paket pedagang?",
+        "q2": "Bisakah saya menyesuaikan domain?"
+      },
+      "merchant": {
+        "a1": "Pergi ke tab Kupon dan klik 'Buat Batch Kupon Baru'.",
+        "a2": "Kredit yang Diinisiasi Bisnis digunakan saat Anda memulai percakapan dengan pelanggan.",
+        "category": "Pedagang",
+        "q1": "Bagaimana cara membuat kupon baru?",
+        "q2": "Apa itu kredit WA BI?"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "Bisakah Anda menjelaskan pembagian komisi untuk pedagang di Inggris?",
+        "question": "Bisakah Anda menjelaskan pembagian komisi untuk pedagang di Inggris?"
+      },
+      "agent2": {
+        "history1": "Meminta bantuan pengaturan domain white-label.",
+        "history2": "Halo, silakan berikan domain yang ingin Anda gunakan.",
+        "question": "Meminta bantuan pengaturan domain label putih."
+      },
+      "agent3": {
+        "history": "Penting: Masalah penagihan untuk pernyataan saya bulan Juni. Pemotongan biaya tahunan tampaknya dua kali lipat.",
+        "question": "Penting: Masalah penagihan untuk pernyataan saya bulan Juni."
+      },
+      "merchant101": {
+        "history": "Kode QR dicetak sedikit buram. Bisakah Anda memeriksa kualitas gambar?",
+        "question": "Kode QR dicetak sedikit kabur."
+      },
+      "merchant102": {
+        "history1": "Hei! Baru saja merekrut seorang manajer. Bagaimana cara menambahkannya ke dasbor pedagang saya?",
+        "history2": "Tentu! Pergi ke Pengaturan > Manajemen Pengguna untuk menambahkannya.",
+        "question": "Anggota staf baru membutuhkan akses dasbor."
+      },
+      "merchant103": {
+        "history": "Saya melihat kredit BI saya digunakan untuk kampanye. Bisakah Anda menjelaskan perbedaannya lagi?",
+        "question": "Pertanyaan tentang penggunaan kredit WhatsApp."
+      },
+      "merchant1": {
+        "history1": "Bisakah saya mendapatkan pengembalian dana untuk kredit yang saya beli?",
+        "history2": "Halo! Permintaan pengembalian dana diproses dalam waktu 24 jam.",
+        "question": "Bisakah saya mendapatkan pengembalian dana untuk kredit yang saya beli?"
+      },
+      "merchant2": {
+        "history": "Halo dukungan, saya mencoba meluncurkan kupon pertama saya untuk koleksi musim panas tetapi mendapatkan kesalahan.",
+        "question": "Butuh bantuan untuk mengatur kampanye kupon pertama saya."
+      },
+      "merchantTemp1": {
+        "history": "Masa percobaan 7 hari saya akan berakhir, bagaimana cara memperpanjangnya?",
+        "question": "Masa percobaan 7 hari saya akan berakhir, bagaimana cara memperpanjangnya?"
+      }
+    },
+    "roles": {
+      "agent": "Agen",
+      "merchant": "Pedagang",
+      "supportStaff": "Staf Dukungan",
+      "temporaryMerchant": "Pedagang Sementara"
+    },
+    "senderNames": {
+      "bakery": "Toko Roti & Co",
+      "coffeeHouse": "Kedai Kopi",
+      "digitalGrowth": "Mitra Pertumbuhan Digital",
+      "globalSolutions": "Global Solutions Ltd",
+      "localGym": "Gym Lokal",
+      "luxuryBoutique": "Butik Mewah",
+      "megaMarketing": "Agensi Pemasaran Mega",
+      "pizzaPalace": "Istana Pizza",
+      "popupStore": "Toko Pop-up (Sementara)"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "Diberi wewenang untuk menyetujui/menolak pengajuan iklan berbayar.",
+        "name": "Penyetuju Iklan"
+      },
+      "financeViewer": {
+        "description": "Akses Hanya Baca ke laporan dan buku besar dompet.",
+        "name": "Penampil Keuangan"
+      },
+      "superAdmin": {
+        "description": "Kontrol penuh platform dan konfigurasi sistem.",
+        "name": "Super Admin"
+      },
+      "supportStaff": {
+        "description": "Balasan manual untuk tiket agen dan pedagang.",
+        "name": "Staf Dukungan"
+      }
+    }
+  }
+}

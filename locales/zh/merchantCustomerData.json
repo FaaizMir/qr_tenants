@@ -1,0 +1,76 @@
+{
+  "columns": {
+    "actions": "操作",
+    "contactInfo": "联系信息",
+    "dateOfBirth": "出生日期",
+    "gender": "性别",
+    "name": "姓名",
+    "notAvailable": "不适用",
+    "reward": {
+      "eligible": "符合条件",
+      "notEligible": "不符合资格"
+    },
+    "rewardStatus": "奖励状态",
+    "viewDetails": "详情"
+  },
+  "details": {
+    "backButton": "返回客户",
+    "badge": {
+      "eligibleForReward": "符合奖励条件",
+      "standardCustomer": "标准客户"
+    },
+    "error": "加载客户详细信息失败。请稍后再试。",
+    "loading": "正在加载客户详细信息...",
+    "notFound": "未找到客户",
+    "sections": {
+      "address": {
+        "noAddress": "未提供地址",
+        "title": "联系地址"
+      },
+      "essentialInfo": {
+        "active": "活跃",
+        "dateOfBirth": "出生日期",
+        "gender": "性别",
+        "inactive": "非活跃",
+        "notSpecified": "未指定",
+        "phoneNumber": "电话号码",
+        "rewardStatus": "奖励状态"
+      },
+      "systemInfo": {
+        "createdAt": "创建于",
+        "customerId": "客户ID",
+        "lastUpdated": "最后更新",
+        "merchantId": "商户ID",
+        "title": "系统信息"
+      }
+    },
+    "subtitle": "客户信息的详细概述",
+    "title": "客户档案"
+  },
+  "index": {
+    "exportButton": "导出CSV",
+    "locked": {
+      "description": "客户数据访问仅对年度信息订阅计划成员开放。",
+      "title": "高级功能",
+      "upgradeCard": {
+        "features": {
+          "feature1": "访问详细的客户档案",
+          "feature2": "导出客户数据（CSV/Excel）",
+          "feature3": "高级细分",
+          "feature4": "更高的优惠券限额（10,000/批）"
+        },
+        "subtitle": "解锁完整客户洞察",
+        "title": "升级到年度",
+        "upgradeButton": "立即升级"
+      }
+    },
+    "searchPlaceholder": "搜索客户...",
+    "subtitle": "查看和管理您的客户数据库",
+    "title": "客户数据"
+  },
+  "page": {
+    "breadcrumb": "客户数据",
+    "customerDetailsBreadcrumb": "客户详情",
+    "dashboardBreadcrumb": "商户仪表板"
+  }
+}

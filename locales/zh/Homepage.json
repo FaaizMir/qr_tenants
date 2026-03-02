@@ -66,6 +66,8 @@
       "city": "城市",
       "curatingMessage": "我们正在为您策划最佳的认证商家和独家优惠...",
       "everywhere": "到处",
+      "expiringSoon": "即将到期",
+      "expiringSoonActive": "即将到期 ✓",
       "industry": "行业",
       "loadingMarketplace": "加载市场",
       "noMerchantsFound": "未找到商家",
@@ -147,6 +149,8 @@
       "agents": "代理",
       "allCountries": "所有国家",
       "description": "管理您全球的租户代理网络。",
+      "expiringSoon": "即将到期",
+      "expiringSoonActive": "即将到期 ✓",
       "noAgentsFound": "未找到代理",
       "of": "的",
       "pageNoResults": "页面 - 没有结果",
@@ -185,6 +189,7 @@
     "footer": {
       "contact": "联系",
       "copyright": "© 2024 QR Rev Inc. 保留所有权利。",
+      "globalMerchantNetwork": "全球商户网络",
       "privacy": "隐私",
       "terms": "条款"
     },

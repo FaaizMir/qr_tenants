@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "批准",
+    "reject": "拒绝"
+  },
+  "columns": {
+    "adContent": "广告内容",
+    "adPlacement": "广告投放",
+    "approvalStatus": "批准状态",
+    "approvalType": "批准类型",
+    "businessAccount": "商业与账户",
+    "location": "位置",
+    "merchantType": "商家类型",
+    "noAd": "没有广告",
+    "requestedDate": "请求日期"
+  },
+  "dialog": {
+    "approveDescription": "您确定要批准 {merchantName} 的请求吗？此操作无法撤销。",
+    "approveTitle": "批准广告请求",
+    "cancel": "取消",
+    "close": "关闭",
+    "confirmApprove": "是的，批准",
+    "confirmReject": "是的，拒绝",
+    "processing": "处理中...",
+    "rejectDescription": "从 {merchantName} 选择拒绝请求的原因。",
+    "rejectTitle": "拒绝广告请求"
+  },
+  "messages": {
+    "approveError": "请求批准失败",
+    "approveSuccess": "请求已成功批准",
+    "fetchError": "获取批准时出错",
+    "rejectError": "拒绝请求失败",
+    "rejectSuccess": "请求已成功拒绝"
+  },
+  "preview": {
+    "description": "促销广告的完整预览",
+    "title": "广告预览",
+    "videoNotSupported": "您的浏览器不支持视频标签。"
+  },
+  "rejectionReasons": {
+    "adultContent": "成人/色情内容",
+    "gamblingContent": "赌博内容",
+    "illegalServices": "非法服务",
+    "misleadingContent": "误导性内容",
+    "other": "其他（手动输入原因）",
+    "placeholder": "输入拒绝的原因...",
+    "title": "请说明原因"
+  },
+  "status": {
+    "approved": "已批准",
+    "pending": "待处理",
+    "rejected": "已拒绝"
+  },
+  "subtitle": "管理代理审批",
+  "title": "审批",
+  "validation": {
+    "provideCustomReason": "请提供自定义拒绝原因",
+    "selectReason": "请选择拒绝原因"
+  }
+}

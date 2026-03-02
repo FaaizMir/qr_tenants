@@ -1,0 +1,37 @@
+{
+  "breadcrumbs": {
+    "dashboard": "Bảng điều khiển",
+    "earnings": "Thu nhập"
+  },
+  "columns": {
+    "commissionEarned": "Hoa hồng đã kiếm được",
+    "commissionRate": "Tỷ lệ hoa hồng",
+    "date": "Ngày",
+    "merchant": "Nhà bán hàng",
+    "noData": "—",
+    "source": "Hoa hồng",
+    "totalSales": "Tổng doanh số"
+  },
+  "commissionBreakdown": {
+    "description": "Hoa hồng hợp nhất theo từng nhà bán hàng.",
+    "searchPlaceholder": "Tìm kiếm nhà bán hàng hoặc nguồn...",
+    "title": "Phân tích hoa hồng"
+  },
+  "errors": {
+    "fetchFailed": "Không thể lấy thu nhập"
+  },
+  "kpi": {
+    "activeMerchants": {
+      "title": "Nhà bán hàng hoạt động"
+    },
+    "earningsType": {
+      "title": "Loại thu nhập",
+      "value": "Trả trước"
+    },
+    "totalEarnings": {
+      "title": "Tổng thu nhập",
+      "trend": "Dữ liệu trực tiếp"
+    }
+  },
+  "noData": "—"
+}

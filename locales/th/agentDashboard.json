@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "สถิติการออกและการไถ่ถอน",
+      "issued": "ออก",
+      "merchantsLabel": "ผู้ค้า",
+      "noData": "ไม่มีข้อมูลคูปองที่มีอยู่",
+      "page": "หน้า {current} จาก {total}",
+      "rank": "อันดับ",
+      "redeemed": "ไถ่ถอน",
+      "redeemedCount": "ที่แลกแล้ว",
+      "redeemedLabel": "ที่ใช้แล้ว",
+      "title": "ประสิทธิภาพของคูปอง"
+    },
+    "pagination": {
+      "pageOf": "หน้า {{current}} จาก {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "เฉลี่ย/ข้อความ",
+      "description": "จำนวนข้อความและค่าใช้จ่าย",
+      "estimatedCost": "ค่าใช้จ่ายโดยประมาณ",
+      "merchantsLabel": "พ่อค้า",
+      "messagesSent": "ข้อความที่ส่ง",
+      "noData": "ไม่มีข้อมูลการใช้งาน WhatsApp",
+      "page": "หน้า {current} จาก {total}",
+      "rank": "อันดับ",
+      "title": "การใช้งาน WhatsApp"
+    }
+  },
+  "common": {
+    "error": "ไม่สามารถดึงข้อมูลได้",
+    "loading": "กำลังโหลด...",
+    "noData": "ไม่มีข้อมูลที่มีอยู่"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "ประจำปี",
+      "temporary": "ชั่วคราว"
+    },
+    "pagination": {
+      "pageOf": "หน้า {{current}} จาก {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "การลงทะเบียนล่าสุด",
+      "noData": "ไม่พบผู้ค้า",
+      "page": "หน้า {current} จาก {total}",
+      "rankLabel": "#",
+      "title": "ผู้ค้าใหม่ที่เพิ่มเข้ามา",
+      "totalLabel": "ทั้งหมด"
+    },
+    "topPerformers": {
+      "description": "จัดอันดับตามรายได้",
+      "issued": "ออก",
+      "noData": "ไม่มีข้อมูลประสิทธิภาพที่มีอยู่",
+      "page": "หน้า {current} จาก {total}",
+      "rate": "อัตรา",
+      "redeemed": "แลก",
+      "stats": {
+        "issued": "ออกให้",
+        "rate": "อัตรา",
+        "redeemed": "แลกแล้ว"
+      },
+      "title": "ผู้ที่มีผลงานดีที่สุด",
+      "totalLabel": "รวม"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "คูปองที่ออกให้",
+      "couponsRedeemed": "คูปองที่ใช้แล้ว",
+      "totalCustomers": "ลูกค้าทั้งหมด",
+      "totalFeedback": "ความคิดเห็นรวม"
+    },
+    "dateFilter": {
+      "customRange": "ช่วงที่กำหนดเอง",
+      "last30Days": "30 วันที่ผ่านมา",
+      "last7Days": "7 วันที่ผ่านมา",
+      "lastMonth": "เดือนที่แล้ว",
+      "pickDate": "เลือกวันที่",
+      "selectRange": "เลือกช่วง",
+      "thisMonth": "เดือนนี้",
+      "today": "วันนี้",
+      "yesterday": "เมื่อวานนี้"
+    },
+    "engagement": {
+      "activityPulse": "การวิเคราะห์กิจกรรมของแพลตฟอร์ม",
+      "description": "เมตริกการมีส่วนร่วมทั่วทั้งร้าน",
+      "redemptionRate": "อัตราการแลก",
+      "systemLoad": "โหลดระบบปกติ",
+      "title": "การมีส่วนร่วมทั่วโลก",
+      "totalFeedback": "ความคิดเห็นรวม"
+    },
+    "growth": {
+      "customersCount": "+{count} ลูกค้า",
+      "description": "ข้อมูลการขยายแพลตฟอร์มล่าสุด",
+      "newCustomers": "การลงทะเบียนลูกค้าใหม่",
+      "newMerchants": "+{count} ผู้ค้า",
+      "newStores": "ร้านค้าใหม่ในช่วงนี้",
+      "title": "จุดเด่นการเติบโต"
+    },
+    "kpiCards": {
+      "activeMerchants": "ผู้ค้าใช้งาน",
+      "annualMerchants": "ผู้ค้าในปี",
+      "inactiveMerchants": "ผู้ค้าไม่ใช้งาน",
+      "temporaryMerchants": "ผู้ค้าชั่วคราว",
+      "totalMerchants": "จำนวนผู้ค้า",
+      "totalRevenue": "รายได้รวม"
+    },
+    "kpis": {
+      "activeAgents": "ตัวแทนที่ใช้งานอยู่",
+      "activeMerchants": "ผู้ค้าแอคทีฟ",
+      "agentSubscriptions": "การสมัครสมาชิกตัวแทน",
+      "annualMerchants": "พ่อค้าแม่ค้าประจำปี",
+      "biMessagesSent": "ข้อความ BI ที่ส่ง",
+      "couponsIssued": "คูปองที่ออก",
+      "couponsRedeemed": "คูปองที่ใช้แล้ว",
+      "feedbackReceived": "ความคิดเห็นที่ได้รับ",
+      "inactiveMerchants": "ผู้ค้าไม่ทำกิจกรรม",
+      "merchantSubscriptions": "การสมัครสมาชิกของผู้ค้า",
+      "packageCommissions": "ค่าคอมมิชชั่นแพ็คเกจ",
+      "temporaryMerchants": "พ่อค้าแม่ค้าชั่วคราว",
+      "totalAgents": "จำนวนตัวแทนทั้งหมด",
+      "totalCustomers": "ลูกค้าทั้งหมด",
+      "totalFeedback": "ความคิดเห็นรวม",
+      "totalMerchants": "จำนวนพ่อค้าแม่ค้าทั้งหมด",
+      "totalMessages": "ข้อความรวม",
+      "totalPlatformRevenue": "รายได้รวมของแพลตฟอร์ม",
+      "totalRevenue": "รายได้รวม",
+      "uiMessagesSent": "ข้อความ UI ที่ส่ง",
+      "whatsappCost": "ค่าใช้จ่าย WhatsApp"
+    },
+    "merchantDistribution": {
+      "annual": "ประจำปี",
+      "description": "อัตราส่วนการสมัครสมาชิกประจำปีและชั่วคราว",
+      "noData": "ไม่มีข้อมูลผู้ค้า",
+      "temporary": "ชั่วคราว",
+      "title": "การกระจายผู้ค้า",
+      "total": "รวม"
+    },
+    "merchantTierDistribution": {
+      "annual": "ประจำปี",
+      "description": "อัตราส่วนการสมัครสมาชิกประจำปีและชั่วคราว",
+      "noData": "ไม่มีข้อมูลผู้ค้า",
+      "temp": "ชั่วคราว",
+      "title": "การกระจายระดับผู้ค้า",
+      "totalStores": "ร้านค้ารวม"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "การสมัครสมาชิกประจำปี",
+      "creditPurchase": "การซื้อเครดิต",
+      "description": "การกระจายแหล่งรายได้",
+      "title": "การแบ่งรายได้",
+      "whatsappCharges": "ค่าบริการ WhatsApp"
+    },
+    "roleTitle": "แดชบอร์ด {role}",
+    "sections": {
+      "financialPerformance": "ผลการดำเนินงานทางการเงิน",
+      "generalOverview": "ภาพรวมทั่วไป",
+      "globalEngagement": "การมีส่วนร่วมระดับโลก",
+      "growthHighlights": "จุดเด่นการเติบโต",
+      "revenueStreams": "แหล่งรายได้"
+    },
+    "title": "การวิเคราะห์ระบบ",
+    "topPerformingMerchants": {
+      "description": "ร้านค้าที่มียอดขายและการมีส่วนร่วมสูงสุด ({count} ทั้งหมด)",
+      "issued": "ออก",
+      "noData": "ไม่มีข้อมูลประสิทธิภาพในช่วงนี้",
+      "page": "หน้า {current} จาก {total}",
+      "redeemed": "แลก",
+      "showing": "แสดง {from} ถึง {to} จาก {total}",
+      "successRate": "อัตราความสำเร็จ",
+      "title": "ผู้ค้าทำผลงานได้ดีที่สุด"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "ข้อความ BI ที่ส่ง",
+      "totalMessages": "ข้อความทั้งหมด",
+      "uiMessagesSent": "ข้อความ UI ที่ส่ง",
+      "whatsappCost": "ค่าใช้จ่าย WhatsApp"
+    }
+  },
+  "page": {
+    "breadcrumb": "แดชบอร์ด",
+    "description": "ภาพรวมประสิทธิภาพและเมตริกของตัวแทนของคุณ",
+    "title": "แดชบอร์ดตัวแทน"
+  },
+  "tabs": {
+    "analytics": "การวิเคราะห์",
+    "merchants": "ประสิทธิภาพ",
+    "overview": "ภาพรวม"
+  }
+}

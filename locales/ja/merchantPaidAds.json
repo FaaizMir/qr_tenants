@@ -1,0 +1,84 @@
+{
+  "confirmation": {
+    "cancel": "キャンセル",
+    "checkboxLabel": "この広告にはギャンブル、成人向けコンテンツ、違法サービス、またはマレーシアの法律で禁止されているコンテンツが含まれていないことを確認します。ポリシー違反により広告が拒否された場合、支払いは返金不可であることを理解しています。",
+    "description": "次に進む前に、以下を確認して承認してください。",
+    "submit": "確認して送信",
+    "title": "広告の提出を確認"
+  },
+  "cropper": {
+    "cancel": "キャンセル",
+    "description": "ドラッグして再配置し、スライダーを使用してズームします。",
+    "save": "画像を保存",
+    "title": "画像を調整",
+    "zoom": "ズーム"
+  },
+  "description": "ビジュアルマーケティングコンテンツ",
+  "duration": {
+    "days14": "14日間",
+    "days30": "30日",
+    "days7": "7日間",
+    "label": "期間",
+    "selectPlaceholder": "期間を選択"
+  },
+  "messages": {
+    "errorDeleting": "削除に失敗しました",
+    "errorProcessing": "画像の処理中にエラーが発生しました",
+    "errorSaving": "設定の保存中にエラーが発生しました",
+    "imageDeleted": "画像が正常に削除されました",
+    "imageReady": "画像がアップロードの準備ができました。'アップロード＆保存'をクリックして完了してください。",
+    "imageTooLarge": "画像サイズは10MB未満でなければなりません",
+    "imageUploaded": "画像が正常にアップロードされました",
+    "noSlotsWarning": "広告スロットが利用できません。すべての配置が現在占有されています — スロットが空くまで新しい広告をアップロードできません。",
+    "settingsUpdated": "設定が正常に更新されました",
+    "uploadingImage": "画像をアップロード中...",
+    "uploadingVideo": "ビデオをアップロード中... しばらくお待ちください。",
+    "uploadTimeout": "アップロードタイムアウト。より小さいファイルで再試行するか、接続を確認してください。",
+    "videoDeleted": "動画が正常に削除されました",
+    "videoFormatWarning": "最良のパフォーマンスを得るために、MP4またはWebM形式を使用してください。",
+    "videoMetadataError": "ビデオメタデータの読み込みに失敗しました",
+    "videoSelected": "ビデオが選択されました。'アップロード＆保存'をクリックして完了してください。",
+    "videoTooLarge": "ビデオファイルが大きすぎます。最大サイズは25MBです。",
+    "videoTooLong": "ビデオが長すぎます ({duration}s)。最大の長さは30秒です。",
+    "videoUploaded": "ビデオが正常にアップロードされました"
+  },
+  "placement": {
+    "bottom": "下",
+    "label": "広告配置",
+    "left": "左",
+    "loading": "配置を読み込んでいます...",
+    "noSlotsAvailable": "スロットが利用できません",
+    "noSlotsMessage": "すべての広告掲載スロットは現在占有されています。後でもう一度お試しください。",
+    "right": "右",
+    "selectPlaceholder": "配置を選択",
+    "slotsOccupied": "{count} スロットが占有されています。利用可能な配置は {available} です。",
+    "top": "上"
+  },
+  "preview": {
+    "description": "プロモーション広告のフルサイズプレビュー",
+    "title": "広告プレビュー"
+  },
+  "status": {
+    "active": "アクティブ",
+    "off": "オフ",
+    "pending": "保留中"
+  },
+  "tabs": {
+    "image": "画像広告",
+    "video": "動画広告"
+  },
+  "title": "プロモーションバナー",
+  "upload": {
+    "addImage": "画像を追加",
+    "addVideo": "ビデオを追加",
+    "imageInfo": "自動圧縮 • 最大10MB",
+    "imageReady": "アップロードの準備ができました。完了するには「アップロード＆保存」をクリックしてください。",
+    "noSlotsButton": "スロットが利用できません",
+    "uploading": "アップロード中...",
+    "uploadingSave": "アップロード＆保存",
+    "uploadProgress": "アップロード進行状況",
+    "videoInfo": "MP4、WebM（最大25MB）",
+    "videoInfoExtra": "小さいファイルはより早くアップロードされます",
+    "videoSelected": "ビデオが選択されました。「アップロード＆保存」をクリックして完了します。"
+  }
+}

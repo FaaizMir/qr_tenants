@@ -1,10 +1,13 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import MerchantAccountContainer from "@/containers/merchant/account";
+import { useTranslations } from "next-intl";
 
 export default function MerchantAccountPage() {
+  const t = useTranslations("merchantAccount.page.breadcrumb");
+  
   const breadcrumbData = [
-    { name: "Dashboard", url: "/merchant/dashboard" },
-    { name: "Account", url: "/merchant/account" },
+    { name: t("dashboard"), url: "/merchant/dashboard" },
+    { name: t("account"), url: "/merchant/account" },
   ];
 
   return (

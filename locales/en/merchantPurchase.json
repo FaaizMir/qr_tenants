@@ -1,59 +1,99 @@
 {
-  "title": "Power Up Your Store",
-  "subtitle": "Choose a credit package for WhatsApp messages, coupon creation, and paid ads.",
-  "loading": "Loading packages...",
-  "errors": {
-    "loadPackages": "Unable to load credit packages. Please try again.",
-    "noMerchantId": "Unable to determine merchant id. Please contact support.",
-    "purchaseFailed": "Failed to purchase package. Please try again.",
-    "requestFailed": "Request failed with status {status}."
+  "checkout": {
+    "amountPayable": "Amount Payable",
+    "bonusGift": "Bonus Gift",
+    "cardDetails": "Card Details",
+    "creditsIncluded": "Credits Included",
+    "noSelection": "No Package Selected",
+    "noSelectionMessage": "Please select a package to continue with checkout.",
+    "packageType": "Package Type",
+    "paymentInfo": "Enter your payment information below",
+    "premiumDescription": "Premium credit package with enhanced features",
+    "securePayment": "Secure Payment",
+    "sslEncrypted": "SSL Encrypted",
+    "subtitle": "Review your purchase",
+    "title": "Order Summary",
+    "totalAmount": "Total Amount",
+    "trustedPartners": "Trusted Partners"
   },
   "emptyState": {
-    "noPackages": "No credit packages found for your merchant type."
+    "noPackages": "No credit packages available at the moment."
   },
-  "packageTypes": {
-    "coupon": "Coupon",
-    "whatsappUI": "Whatsapp UI Message",
-    "whatsappBI": "Whatsapp BI Message",
-    "whatsapp": "Whatsapp Message",
-    "paidAds": "Paid Ads",
-    "standard": "Standard"
+  "errors": {
+    "agentBalanceInsufficient": "Agent Prepaid Balance Insufficient",
+    "agentBalanceInsufficinetDescription": "Your agent needs to top up their prepaid wallet. Please contact your agent to add funds before completing this purchase.",
+    "loadPackages": "Failed to load credit packages",
+    "noMerchantId": "Merchant ID not found. Please log in again.",
+    "purchaseFailed": "Failed to purchase package. Please try again."
   },
   "merchantTypes": {
     "annual": "Annual",
-    "temporary": "Temporary",
-    "standard": "Standard"
+    "standard": "Standard",
+    "temporary": "Temporary"
   },
   "packageCard": {
-    "perCredit": "per credit",
-    "baseCredits": "{credits} Base Credits",
-    "bonusCredits": "+{bonusCredits} Bonus Credits",
-    "enhancedFeatures": "Enhanced features and capacity",
-    "getStarted": "Get Started"
+    "baseCredits": "{credits} credits included",
+    "bonusCredits": "+{bonusCredits} bonus credits",
+    "enhancedFeatures": "Enhanced features for your business",
+    "getStarted": "Get Started",
+    "perCredit": "per credit"
   },
-  "checkout": {
-    "title": "Order Overview",
-    "subtitle": "Checkout details",
-    "selectedPackage": "Selected Package",
-    "premiumDescription": "Premium credit package for your business growth.",
-    "creditsIncluded": "Credits Included",
-    "bonusGift": "Bonus Gift",
-    "packageType": "Package Type",
-    "totalAmount": "Total Amount",
-    "securePayment": "Secure Payment",
-    "sslEncrypted": "SSL Encrypted Stripe Gateway",
-    "cardDetails": "Card Details",
-    "paymentInfo": "Please enter your payment information below.",
-    "amountPayable": "Amount Payable",
-    "trustedPartners": "Trusted Partners",
-    "noSelection": "No selection found",
-    "noSelectionMessage": "Please close this window and select a credit package to proceed with your upgrade."
+  "packageTypes": {
+    "coupon": "Coupon",
+    "paidAds": "Paid Ads",
+    "standard": "Standard",
+    "whatsapp": "WhatsApp",
+    "whatsappBI": "WhatsApp BI",
+    "whatsappUI": "WhatsApp UI"
   },
+  "page": {
+    "breadcrumb": "Purchase",
+    "dashboardBreadcrumb": "Merchant Dashboard"
+  },
+  "stripeCancel": {
+    "backToDashboard": "Back to dashboard",
+    "backToPurchase": "Back to purchase",
+    "description": "Your Stripe Checkout session was cancelled. No payment was taken.",
+    "goToWallet": "Go to wallet",
+    "title": "Payment cancelled"
+  },
+  "stripeCheckout": {
+    "credits": "credits",
+    "errors": {
+      "insufficientBalance": "Insufficient agent wallet balance. Required: {required}, Available: {available}. Please top up your wallet to complete this purchase.",
+      "noAdminId": "Unable to retrieve admin ID from session. Please log in again.",
+      "startCheckout": "Unable to start Stripe Checkout. Please try again.",
+      "startPayment": "Unable to start payment. Please try again.",
+      "validateBalance": "Unable to validate wallet balance. Please contact support.",
+      "validateBalanceRetry": "Unable to validate wallet balance. Please try again."
+    },
+    "packagePurchase": "Package purchase",
+    "payableAmount": "Payable amount",
+    "payWithStripe": "Pay with Stripe",
+    "redirecting": "Redirecting to Stripe..."
+  },
+  "stripeSuccess": {
+    "backToDashboard": "Back to dashboard",
+    "backToPurchase": "Back to purchase",
+    "description": "Your payment was completed successfully.",
+    "goToWallet": "Go to wallet",
+    "processing": "Adding credits to your wallet...",
+    "reflected": "Credits will be reflected in your wallet shortly.",
+    "title": "Payment successful",
+    "toasts": {
+      "creditsAdded": "Credits added successfully!",
+      "processingFailed": "Payment successful, but failed to update your account. Please contact support.",
+      "subscriptionActivated": "Subscription activated successfully!",
+      "subscriptionRenewed": "Subscription renewed successfully!",
+      "upgradedToAnnual": "Upgraded to Annual Subscription successfully!",
+      "upgradeFailed": "Upgrade failed: Missing admin information.",
+      "walletBalance": "Wallet balance: {currency} {balance}",
+      "walletToppedUp": "Wallet topped up successfully! Added {currency} {amount}"
+    }
+  },
+  "subtitle": "Choose a credit package that fits your business needs",
   "success": {
-    "purchaseComplete": "Package purchased successfully."
+    "purchaseComplete": "Purchase completed successfully!"
   },
-  "toast": {
-    "purchaseSuccess": "Package purchased successfully.",
-    "purchaseError": "Failed to purchase package. Please try again."
-  }
+  "title": "Purchase Credits"
 }

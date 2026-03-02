@@ -1,0 +1,183 @@
+{
+  "index": {
+    "badges": {
+      "chat": "Chat",
+      "newChat": "NEW CHAT",
+      "newMessage": "NEW MESSAGE",
+      "newTicket": "NEW TICKET",
+      "ticket": "Ticket"
+    },
+    "conversation": {
+      "me": "ME",
+      "noMessagesDesc": "Send a message to start the conversation.",
+      "noMessagesTitle": "No messages yet",
+      "pressEnter": "Press Enter to send",
+      "sendMessage": "Send Message",
+      "typePlaceholder": "Type a message..."
+    },
+    "disconnected": "Disconnected",
+    "empty": {
+      "descriptionChat": "Start a conversation or continue chatting.",
+      "descriptionTickets": "Create a new support ticket or view existing tickets.",
+      "tipChat": "Chat:",
+      "tipChatDesc": "Quick casual messages",
+      "tipTickets": "Tickets:",
+      "tipTicketsDesc": "Formal support requests",
+      "tipTitle": "💡 Choose your message type:",
+      "title": "Support Center"
+    },
+    "filters": {
+      "chat": "Chat",
+      "tickets": "Tickets",
+      "viewAllCreateChat": "View All • Create Chat Only"
+    },
+    "participants": {
+      "platformSupport": "Platform Support",
+      "yourSupportAgent": "Your Support Agent"
+    },
+    "search": "Search...",
+    "sidebar": {
+      "newChat": "Start a new conversation",
+      "newTicket": "Create a new support ticket",
+      "noItems": "No items found.",
+      "noMessages": "No messages"
+    },
+    "staffRole": "Staff Role:",
+    "subtitle": {
+      "admin": "Manage conversations and support tickets with agents.",
+      "agentMerchants": "Communicate with your merchants via messages and tickets.",
+      "agentSupport": "Contact platform support team.",
+      "merchant": "Chat with your support agent or create tickets."
+    },
+    "superAdmin": "Super Admin",
+    "supportStaff": "Support Staff",
+    "tabs": {
+      "agents": "Agents",
+      "myMerchants": "My Merchants",
+      "supportAdmin": "Support Admin"
+    },
+    "title": "Support & Messages",
+    "toasts": {
+      "loadFailed": "Failed to load support data",
+      "messageFailed": "Failed to send message. Please try again.",
+      "messageHistoryFailed": "Failed to load message history"
+    }
+  },
+  "page": {
+    "agent": {
+      "breadcrumb": "Support",
+      "dashboardBreadcrumb": "Agent Dashboard"
+    },
+    "breadcrumb": "Support",
+    "dashboardBreadcrumb": "Merchant Dashboard",
+    "masterAdmin": {
+      "breadcrumb": "Support",
+      "dashboardBreadcrumb": "Master Admin Dashboard"
+    },
+    "supportPages": {
+      "agentSupport": {
+        "title": "Agent Support"
+      },
+      "merchantSupport": {
+        "title": "Merchant Support"
+      },
+      "supportDashboard": {
+        "title": "Support Dashboard"
+      }
+    }
+  },
+  "supportData": {
+    "faqs": {
+      "agent": {
+        "a1": "Navigate to Master Settings > Packages to define pricing tiers.",
+        "a2": "Yes, under Agent Settings > Branding you can add your custom domain.",
+        "category": "Agent",
+        "q1": "How to set up merchant packages?",
+        "q2": "Can I customize the domain?"
+      },
+      "merchant": {
+        "a1": "Go to the Coupons tab and click 'Create New Coupon Batch'.",
+        "a2": "Business Initiated credits are used when you start a conversation with a customer.",
+        "category": "Merchant",
+        "q1": "How do I create a new coupon?",
+        "q2": "What are WA BI credits?"
+      }
+    },
+    "mockMessages": {
+      "agent1": {
+        "history": "Can you clarify the commission split for UK merchants?",
+        "question": "Can you clarify the commission split for UK merchants?"
+      },
+      "agent2": {
+        "history1": "Requesting white-label domain setup assistance.",
+        "history2": "Hello, please provide the domain you'd like to use.",
+        "question": "Requesting white-label domain setup assistance."
+      },
+      "agent3": {
+        "history": "Urgent: Billing issue for my June statement. The annual fee deduction seems doubled.",
+        "question": "Urgent: Billing issue for my June statement."
+      },
+      "merchant101": {
+        "history": "The QR codes are printing a bit blurry. Can you check the image quality?",
+        "question": "The QR codes are printing a bit blurry."
+      },
+      "merchant102": {
+        "history1": "Hey! Just hired a manager. How do I add them to my merchant dashboard?",
+        "history2": "Sure! Go to Settings > User Management to add them.",
+        "question": "New staff member needs dashboard access."
+      },
+      "merchant103": {
+        "history": "I noticed my BI credits were used for a campaign. Can you explain the difference again?",
+        "question": "Question about WhatsApp credits usage."
+      },
+      "merchant1": {
+        "history1": "Can I get a refund on the credits I bought?",
+        "history2": "Hello! Refund requests are processed within 24 hours.",
+        "question": "Can I get a refund on the credits I bought?"
+      },
+      "merchant2": {
+        "history": "Hello support, I'm trying to launch my first coupon for the summer collection but getting an error.",
+        "question": "Need help setting up my first coupon campaign."
+      },
+      "merchantTemp1": {
+        "history": "My 7-day trial is ending, how do I extend?",
+        "question": "My 7-day trial is ending, how do I extend?"
+      }
+    },
+    "roles": {
+      "agent": "Agent",
+      "merchant": "Merchant",
+      "supportStaff": "Support Staff",
+      "temporaryMerchant": "Temporary Merchant"
+    },
+    "senderNames": {
+      "bakery": "Bakery & Co",
+      "coffeeHouse": "Coffee House",
+      "digitalGrowth": "Digital Growth Partner",
+      "globalSolutions": "Global Solutions Ltd",
+      "localGym": "Local Gym",
+      "luxuryBoutique": "Luxury Boutique",
+      "megaMarketing": "Mega Marketing Agency",
+      "pizzaPalace": "Pizza Palace",
+      "popupStore": "Pop-up Store (Temp)"
+    },
+    "staffRoles": {
+      "adApprover": {
+        "description": "Authorized to approve/reject paid ad submissions.",
+        "name": "Ad Approver"
+      },
+      "financeViewer": {
+        "description": "ReadOnly access to statements and wallet ledgers.",
+        "name": "Finance Viewer"
+      },
+      "superAdmin": {
+        "description": "Full platform control and system configuration.",
+        "name": "Super Admin"
+      },
+      "supportStaff": {
+        "description": "Manual replies to agent and merchant tickets.",
+        "name": "Support Staff"
+      }
+    }
+  }
+}

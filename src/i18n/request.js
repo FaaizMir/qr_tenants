@@ -17,6 +17,19 @@ export const namespaces = [
   "homepagePush",
   "agentHomepagePush",
   "superAdminHomepagePush",
+  "merchantPaidAds",
+  "merchantLuckyDraw",
+  "merchantCustomerData",
+  "merchantStatements",
+  "support",
+  "merchantAccount",
+  "agentDashboard",
+  "agentMerchants",
+  "agentWallet",
+  "agentEarnings",
+  "agentPackages",
+  "agentStatements",
+  "agentApprovals"
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

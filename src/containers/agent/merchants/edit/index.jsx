@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { MerchantForm } from "../create/merchant-form";
 import { getMerchantById } from "@/lib/services/helper";
 import { LoadingSpinner } from "@/helper/Loader";
 import { toast } from "@/lib/toast";
 
 export default function EditMerchantContainer({ merchantId }) {
+  const t = useTranslations("agentMerchants.edit");
   const [merchantData, setMerchantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,9 +23,9 @@ export default function EditMerchantContainer({ merchantId }) {
       } catch (err) {
         console.error("Error fetching merchant:", err);
         setError(
-          err?.response?.data?.message || "Failed to load merchant data",
+          err?.response?.data?.message || t("loadingError"),
         );
-        toast.error("Failed to load merchant data");
+        toast.error(t("loadingError"));
       } finally {
         setLoading(false);
       }
@@ -32,7 +34,7 @@ export default function EditMerchantContainer({ merchantId }) {
     if (merchantId) {
       fetchMerchant();
     }
-  }, [merchantId]);
+  }, [merchantId, t]);
 
   if (loading) {
     return (
@@ -54,10 +56,10 @@ export default function EditMerchantContainer({ merchantId }) {
     <div className="w-full max-w-5xl mx-auto space-y-6 lg:p-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Edit Merchant
+          {t("title")}
         </h1>
         <p className="text-muted-foreground">
-          Update merchant account details and configuration.
+          {t("subtitle")}
         </p>
       </div>
 

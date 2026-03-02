@@ -1,0 +1,146 @@
+{
+  "breadcrumbs": {
+    "create": "创建包裹",
+    "dashboard": "代理仪表板",
+    "edit": "编辑包裹",
+    "packages": "广告包"
+  },
+  "deleteDialog": {
+    "cancel": "中止删除",
+    "confirm": "确认，立即删除",
+    "description": "您即将永久删除",
+    "descriptionEnd": "。此操作是终极的，无法撤销。",
+    "title": "极度小心"
+  },
+  "form": {
+    "actions": {
+      "cancel": "取消",
+      "delete": "删除包",
+      "save": "发布包",
+      "saving": "保存中...",
+      "update": "更新包"
+    },
+    "backButton": "返回列表",
+    "createDescription": "为付费广告活动定义定价和积分。",
+    "createTitle": "创建付费广告包",
+    "deleteConfirm": {
+      "cancel": "取消",
+      "confirm": "是的，删除套餐",
+      "description": "这将永久删除",
+      "descriptionEnd": "此操作无法撤销。",
+      "title": "您确定吗？"
+    },
+    "editDescription": "定义付费广告活动的定价和积分。",
+    "editTitle": "编辑付费广告套餐",
+    "fields": {
+      "currency": {
+        "label": "货币",
+        "options": {
+          "pkr": "PKR（卢比）",
+          "usd": "美元 ($)"
+        }
+      },
+      "description": {
+        "label": "描述",
+        "placeholder": "此包提供的简短摘要..."
+      },
+      "displayPriority": {
+        "label": "显示优先级",
+        "placeholder": "列表中的位置 (1, 2, 3...)"
+      },
+      "merchantPlan": {
+        "label": "商户计划",
+        "options": {
+          "annual": "年度 / 会员",
+          "temporary": "临时 / 基本"
+        }
+      },
+      "packageName": {
+        "label": "包名称",
+        "placeholder": "例如：高级广告捆绑包。"
+      },
+      "packageStatus": {
+        "label": "包状态",
+        "options": {
+          "active": "活跃且可见",
+          "inactive": "非活动 / 隐藏"
+        }
+      },
+      "price": {
+        "label": "价格",
+        "placeholder": "0.00"
+      },
+      "pricePerCredit": {
+        "auto": "自动",
+        "label": "每积分价格"
+      },
+      "totalCredits": {
+        "label": "总积分"
+      }
+    },
+    "infoBanner": {
+      "description": "此包类型专门用于付费广告活动",
+      "title": "付费广告积分套餐"
+    },
+    "preview": {
+      "advertisingCredits": "广告积分",
+      "defaultDescription": "增强的广告能力",
+      "getStarted": "开始使用",
+      "hiddenDraft": "隐藏 / 草稿",
+      "packageTitle": "包裹标题",
+      "paidAds": "付费广告",
+      "perCredit": "每个信用",
+      "title": "实时预览"
+    },
+    "sections": {
+      "classification": "分类",
+      "credits": "积分与分配",
+      "identity": "身份与定价"
+    },
+    "validation": {
+      "creditsMin": "积分必须至少为1",
+      "creditsRequired": "积分是必需的",
+      "descriptionRequired": "描述是必需的",
+      "nameRequired": "包裹名称是必需的",
+      "priceMin": "价格必须至少为 1",
+      "priceRequired": "价格是必需的",
+      "priorityRequired": "显示优先级是必需的"
+    }
+  },
+  "messages": {
+    "createError": "创建包裹失败",
+    "createSuccess": "包创建成功",
+    "deleteError": "删除包失败",
+    "deleteSuccess": "套餐删除成功",
+    "fetchError": "获取包失败",
+    "loadError": "加载套餐详情失败",
+    "updateError": "更新包失败",
+    "updateSuccess": "包更新成功",
+    "wrongTypeError": "您只能编辑付费广告包"
+  },
+  "subtitle": "管理您的付费广告信用包",
+  "table": {
+    "actions": {
+      "delete": "删除套餐",
+      "edit": "编辑套餐",
+      "label": "套餐操作"
+    },
+    "columns": {
+      "credits": "积分",
+      "noDescription": "没有描述",
+      "packageInfo": "套餐信息",
+      "perCredit": "每个积分",
+      "plan": "计划",
+      "pricing": "定价",
+      "rank": "排名",
+      "status": "状态"
+    },
+    "createButton": "创建付费广告套餐",
+    "searchPlaceholder": "按包裹名称搜索...",
+    "status": {
+      "active": "活跃",
+      "inactive": "非活动"
+    }
+  },
+  "title": "付费广告包"
+}

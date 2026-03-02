@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -49,6 +50,7 @@ import {
 } from "@/components/form-fields";
 
 export default function PackageForm({ isEdit = false, onSuccess }) {
+  const t = useTranslations("agentPackages");
   const [submitting, setSubmitting] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
@@ -102,7 +104,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
         // Verify this is a paid ads package
         if (data.credit_type !== 'paid ads') {
-          toast.error("You can only edit paid ads packages", {
+          toast.error(t("messages.wrongTypeError"), {
             closeButton: true,
             duration: false,
           });
@@ -121,7 +123,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           isActive: data.is_active ? "true" : "false",
         });
       } catch {
-        toast.error("Failed to load package details", {
+        toast.error(t("messages.loadError"), {
           closeButton: true,
           duration: false,
         });
@@ -158,8 +160,8 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
 
       toast.success(
         isEdit
-          ? "Package updated successfully"
-          : "Package created successfully",
+          ? t("messages.updateSuccess")
+          : t("messages.createSuccess"),
         {
           closeButton: true,
           duration: false,
@@ -172,7 +174,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-          `Failed to ${isEdit ? "update" : "create"} package`,
+          (isEdit ? t("messages.updateError") : t("messages.createError")),
         { closeButton: true, duration: false },
       );
     } finally {
@@ -186,13 +188,13 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
       await axiosInstance.delete(`/wallets/credit-packages/${packageId}`, {
         params: { admin_id: session?.user?.adminId },
       });
-      toast.success("Package deleted successfully", {
+      toast.success(t("messages.deleteSuccess"), {
         closeButton: true,
         duration: false,
       });
       router.push("/agent/packages");
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Failed to delete package", {
+      toast.error(err?.response?.data?.message || t("messages.deleteError"), {
         closeButton: true,
         duration: false,
       });
@@ -216,10 +218,10 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     </div>
                     <div>
                       <CardTitle className="text-2xl">
-                        {isEdit ? "Edit Paid Ads Package" : "Create Paid Ads Package"}
+                        {isEdit ? t("form.editTitle") : t("form.createTitle")}
                       </CardTitle>
                       <CardDescription>
-                        Define pricing and credits for paid advertising campaigns.
+                        {isEdit ? t("form.editDescription") : t("form.createDescription")}
                       </CardDescription>
                     </div>
                   </div>
@@ -231,7 +233,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     onClick={() => router.push("/agent/packages")}
                   >
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back to List
+                    {t("form.backButton")}
                   </Button>
                 </div>
               </CardHeader>
@@ -244,8 +246,8 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                       <Target className="h-4 w-4" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-blue-900">Paid Ads Credit Package</h4>
-                      <p className="text-xs text-blue-700">This package type is specifically for paid advertising campaigns</p>
+                      <h4 className="font-semibold text-sm text-blue-900">{t("form.infoBanner.title")}</h4>
+                      <p className="text-xs text-blue-700">{t("form.infoBanner.description")}</p>
                     </div>
                   </div>
                 </div>
@@ -255,48 +257,48 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   <div className="flex items-center gap-2 mb-2">
                     <Tag className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                      Identity & Pricing
+                      {t("form.sections.identity")}
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <TextField
-                      label="Package Name"
+                      label={t("form.fields.packageName.label")}
                       name="name"
-                      placeholder="e.g. Premium Ads Bundle"
+                      placeholder={t("form.fields.packageName.placeholder")}
                       register={register}
                       errors={errors}
-                      validation={{ required: "Package name is required" }}
+                      validation={{ required: t("form.validation.nameRequired") }}
                     />
 
                     <div className="grid grid-cols-2 gap-4">
                       <NumberField
-                        label="Price"
+                        label={t("form.fields.price.label")}
                         name="price"
-                        placeholder="0.00"
+                        placeholder={t("form.fields.price.placeholder")}
                         register={register}
                         errors={errors}
-                        validation={{ required: "Price is required", min: 1 }}
+                        validation={{ required: t("form.validation.priceRequired"), min: { value: 1, message: t("form.validation.priceMin") } }}
                       />
                       <SelectField
-                        label="Currency"
+                        label={t("form.fields.currency.label")}
                         name="currency"
                         control={control}
                         errors={errors}
                         options={[
-                          { value: "USD", label: "USD ($)" },
-                          { value: "PKR", label: "PKR (Rs)" },
+                          { value: "USD", label: t("form.fields.currency.options.usd") },
+                          { value: "PKR", label: t("form.fields.currency.options.pkr") },
                         ]}
                       />
                     </div>
                   </div>
 
                   <TextareaField
-                    label="Description"
+                    label={t("form.fields.description.label")}
                     name="description"
-                    placeholder="Short summary of what this package offers..."
+                    placeholder={t("form.fields.description.placeholder")}
                     control={control}
                     errors={errors}
-                    rules={{ required: "Description is required" }}
+                    rules={{ required: t("form.validation.descriptionRequired") }}
                   />
                 </div>
 
@@ -307,21 +309,21 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   <div className="flex items-center gap-2 mb-2">
                     <Layers className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                      Credits & Allocation
+                      {t("form.sections.credits")}
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                     <NumberField
-                      label="Total Credits"
+                      label={t("form.fields.totalCredits.label")}
                       name="credits"
                       register={register}
                       errors={errors}
-                      validation={{ required: "Credits are required", min: 1 }}
+                      validation={{ required: t("form.validation.creditsRequired"), min: { value: 1, message: t("form.validation.creditsMin") } }}
                     />
 
                     <div className="relative">
                       <NumberField
-                        label="Price per Credit"
+                        label={t("form.fields.pricePerCredit.label")}
                         name="pricePerCredit"
                         register={register}
                         errors={errors}
@@ -330,18 +332,18 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                       />
                       <div className="absolute right-3 top-[34px]">
                         <span className="text-[10px] text-muted-foreground font-medium">
-                          AUTO
+                          {t("form.fields.pricePerCredit.auto")}
                         </span>
                       </div>
                     </div>
 
                     <NumberField
-                      label="Display Priority"
+                      label={t("form.fields.displayPriority.label")}
                       name="sortOrder"
-                      placeholder="Pos. in list (1, 2, 3...)"
+                      placeholder={t("form.fields.displayPriority.placeholder")}
                       register={register}
                       errors={errors}
-                      validation={{ required: true }}
+                      validation={{ required: t("form.validation.priorityRequired") }}
                     />
                   </div>
                 </div>
@@ -353,29 +355,29 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   <div className="flex items-center gap-2 mb-2">
                     <StepBack className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                      Classification
+                      {t("form.sections.classification")}
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <SelectField
-                      label="Merchant Plan"
+                      label={t("form.fields.merchantPlan.label")}
                       name="merchantType"
                       control={control}
                       errors={errors}
                       options={[
-                        { value: "annual", label: "Annual / Premium" },
-                        { value: "temporary", label: "Temporary / Basic" },
+                        { value: "annual", label: t("form.fields.merchantPlan.options.annual") },
+                        { value: "temporary", label: t("form.fields.merchantPlan.options.temporary") },
                       ]}
                     />
 
                     <SelectField
-                      label="Package Status"
+                      label={t("form.fields.packageStatus.label")}
                       name="isActive"
                       control={control}
                       errors={errors}
                       options={[
-                        { value: "true", label: "Active & Visible" },
-                        { value: "false", label: "Inactive / Hidden" },
+                        { value: "true", label: t("form.fields.packageStatus.options.active") },
+                        { value: "false", label: t("form.fields.packageStatus.options.inactive") },
                       ]}
                     />
                   </div>
@@ -393,27 +395,27 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                           disabled={submitting}
                         >
                           <Trash2 className="h-4 w-4 mr-2" />
-                          Delete Package
+                          {t("form.actions.delete")}
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
                           <AlertDialogTitle>
-                            Are you absolutely sure?
+                            {t("form.deleteConfirm.title")}
                           </AlertDialogTitle>
                           <AlertDialogDescription>
-                            This will permanently remove{" "}
+                            {t("form.deleteConfirm.description")}
                             <strong>{formValues.name || "this package"}</strong>
-                            . This action cannot be undone.
+                            {t("form.deleteConfirm.descriptionEnd")}
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogCancel>{t("form.deleteConfirm.cancel")}</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={handleDelete}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                           >
-                            Yes, delete package
+                            {t("form.deleteConfirm.confirm")}
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -427,7 +429,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     variant="outline"
                     onClick={() => router.push("/agent/packages")}
                   >
-                    Cancel
+                    {t("form.actions.cancel")}
                   </Button>
                   <Button
                     type="submit"
@@ -438,12 +440,12 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     {submitting ? (
                       <>
                         <LoadingSpinner className="h-4 w-4 mr-2 animate-spin" />
-                        Saving...
+                        {t("form.actions.saving")}
                       </>
                     ) : (
                       <>
                         <Save className="h-4 w-4 mr-2" />
-                        {isEdit ? "Update Package" : "Publish Package"}
+                        {isEdit ? t("form.actions.update") : t("form.actions.save")}
                       </>
                     )}
                   </Button>
@@ -458,7 +460,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
           <div className="mb-4 flex items-center gap-2 px-2">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              Live Preview
+              {t("form.preview.title")}
             </h3>
           </div>
 
@@ -473,12 +475,12 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                   variant="outline"
                   className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide border bg-blue-100/80 text-blue-700 border-blue-200"
                 >
-                  Paid Ads
+                  {t("form.preview.paidAds")}
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-slate-900 truncate">
-                  {formValues.name || "Package Title"}
+                  {formValues.name || t("form.preview.packageTitle")}
                 </h3>
                 <Badge
                   className={cn(
@@ -492,7 +494,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 </Badge>
               </div>
               <p className="text-xs text-muted-foreground line-clamp-1 mt-1 font-medium">
-                {formValues.description || "Enhanced advertising capacity"}
+                {formValues.description || t("form.preview.defaultDescription")}
               </p>
             </div>
 
@@ -507,7 +509,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 </div>
                 <p className="text-[10px] text-muted-foreground mt-1.5 font-bold uppercase tracking-widest">
                   {formValues.currency === "PKR" ? "Rs" : "$"}{" "}
-                  {formValues.pricePerCredit || "0.00"} per credit
+                  {formValues.pricePerCredit || "0.00"} {t("form.preview.perCredit")}
                 </p>
               </div>
 
@@ -517,7 +519,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                   </div>
                   <span className="font-medium text-slate-700">
-                    {formValues.credits || "0"} Advertising Credits
+                    {formValues.credits || "0"} {t("form.preview.advertisingCredits")}
                   </span>
                 </div>
               </div>
@@ -527,7 +529,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
                 className="w-full h-11 rounded-xl font-semibold transition-all group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-[1.02]"
                 disabled
               >
-                Get Started
+                {t("form.preview.getStarted")}
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
@@ -536,7 +538,7 @@ export default function PackageForm({ isEdit = false, onSuccess }) {
             {formValues.isActive === "false" && (
               <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-20 flex items-center justify-center rotate-[-10deg]">
                 <div className="bg-red-500 text-white px-8 py-2 font-bold text-xl shadow-2xl skew-x-[-15deg] border-4 border-white tracking-tight">
-                  HIDDEN / DRAFT
+                  {t("form.preview.hiddenDraft")}
                 </div>
               </div>
             )}

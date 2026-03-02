@@ -1,0 +1,84 @@
+{
+  "confirmation": {
+    "cancel": "Cancel",
+    "checkboxLabel": "I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.",
+    "description": "Please review and confirm the following before proceeding.",
+    "submit": "Confirm & Submit",
+    "title": "Confirm Advertisement Submission"
+  },
+  "cropper": {
+    "cancel": "Cancel",
+    "description": "Drag to reposition and use the slider to zoom.",
+    "save": "Save Image",
+    "title": "Adjust Image",
+    "zoom": "Zoom"
+  },
+  "description": "Visual marketing content",
+  "duration": {
+    "days14": "14 Days",
+    "days30": "30 Days",
+    "days7": "7 Days",
+    "label": "Duration",
+    "selectPlaceholder": "Select duration"
+  },
+  "messages": {
+    "errorDeleting": "Failed to delete",
+    "errorProcessing": "Error processing image",
+    "errorSaving": "Error saving settings",
+    "imageDeleted": "Image deleted successfully",
+    "imageReady": "Image ready for upload. Click 'Upload & Save' to finish.",
+    "imageTooLarge": "Image size must be less than 10MB",
+    "imageUploaded": "Image uploaded successfully",
+    "noSlotsWarning": "No ad slots available. All placements are currently occupied — you cannot upload a new ad until a slot opens up.",
+    "settingsUpdated": "Settings updated successfully",
+    "uploadingImage": "Uploading image...",
+    "uploadingVideo": "Uploading video... This may take a moment.",
+    "uploadTimeout": "Upload timeout. Please try with a smaller file or check your connection.",
+    "videoDeleted": "Video deleted successfully",
+    "videoFormatWarning": "For best performance, use MP4 or WebM format.",
+    "videoMetadataError": "Failed to load video metadata",
+    "videoSelected": "Video selected. Click 'Upload & Save' to finish.",
+    "videoTooLarge": "Video file is too large. Max size is 25MB.",
+    "videoTooLong": "Video is too long ({duration}s). Maximum duration is 30 seconds.",
+    "videoUploaded": "Video uploaded successfully"
+  },
+  "placement": {
+    "bottom": "Bottom",
+    "label": "Ad Placement",
+    "left": "Left",
+    "loading": "Loading placements...",
+    "noSlotsAvailable": "No slots available",
+    "noSlotsMessage": "All ad placement slots are currently occupied. Please try again later.",
+    "right": "Right",
+    "selectPlaceholder": "Select placement",
+    "slotsOccupied": "{count} slot(s) occupied. Only {available} placement(s) available.",
+    "top": "Top"
+  },
+  "preview": {
+    "description": "Full size preview of the promotional ad",
+    "title": "Ad Preview"
+  },
+  "status": {
+    "active": "Active",
+    "off": "OFF",
+    "pending": "Pending"
+  },
+  "tabs": {
+    "image": "Image Ads",
+    "video": "Video Ads"
+  },
+  "title": "Promotional Banners",
+  "upload": {
+    "addImage": "Add Image",
+    "addVideo": "Add Video",
+    "imageInfo": "Auto-compressed • Max 10MB",
+    "imageReady": "Image ready for upload. Click 'Upload & Save' to finish.",
+    "noSlotsButton": "No Slots Available",
+    "uploading": "Uploading...",
+    "uploadingSave": "Upload & Save",
+    "uploadProgress": "Upload Progress",
+    "videoInfo": "MP4, WebM (Max 25MB)",
+    "videoInfoExtra": "Smaller files upload faster",
+    "videoSelected": "Video selected. Click 'Upload & Save' to finish."
+  }
+}

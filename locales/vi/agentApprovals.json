@@ -1,0 +1,60 @@
+{
+  "actions": {
+    "approve": "Phê duyệt",
+    "reject": "Từ chối"
+  },
+  "columns": {
+    "adContent": "Nội dung quảng cáo",
+    "adPlacement": "Đặt quảng cáo",
+    "approvalStatus": "Trạng thái phê duyệt",
+    "approvalType": "Loại phê duyệt",
+    "businessAccount": "Doanh nghiệp & Tài khoản",
+    "location": "Vị trí",
+    "merchantType": "Loại thương nhân",
+    "noAd": "Không có quảng cáo",
+    "requestedDate": "Ngày yêu cầu"
+  },
+  "dialog": {
+    "approveDescription": "Bạn có chắc chắn muốn phê duyệt yêu cầu cho {merchantName}? Hành động này không thể hoàn tác.",
+    "approveTitle": "Phê duyệt yêu cầu quảng cáo",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "confirmApprove": "Có, Phê duyệt",
+    "confirmReject": "Có, từ chối",
+    "processing": "Đang xử lý...",
+    "rejectDescription": "Chọn lý do từ chối yêu cầu từ {merchantName}.",
+    "rejectTitle": "Từ chối yêu cầu quảng cáo"
+  },
+  "messages": {
+    "approveError": "Không thể phê duyệt yêu cầu",
+    "approveSuccess": "Yêu cầu đã được phê duyệt thành công",
+    "fetchError": "Lỗi khi lấy phê duyệt",
+    "rejectError": "Không thể từ chối yêu cầu",
+    "rejectSuccess": "Yêu cầu đã bị từ chối thành công"
+  },
+  "preview": {
+    "description": "Xem trước kích thước đầy đủ của quảng cáo khuyến mại",
+    "title": "Xem trước quảng cáo",
+    "videoNotSupported": "Trình duyệt của bạn không hỗ trợ thẻ video."
+  },
+  "rejectionReasons": {
+    "adultContent": "Nội dung người lớn / tình dục",
+    "gamblingContent": "Nội dung cờ bạc",
+    "illegalServices": "Dịch vụ bất hợp pháp",
+    "misleadingContent": "Nội dung gây hiểu lầm",
+    "other": "Khác (nhập lý do thủ công)",
+    "placeholder": "Nhập lý do từ chối...",
+    "title": "Vui lòng chỉ định lý do"
+  },
+  "status": {
+    "approved": "Đã được phê duyệt",
+    "pending": "Đang chờ xử lý",
+    "rejected": "Bị từ chối"
+  },
+  "subtitle": "Quản lý phê duyệt đại lý",
+  "title": "Phê duyệt",
+  "validation": {
+    "provideCustomReason": "Vui lòng cung cấp lý do từ chối tùy chỉnh",
+    "selectReason": "Vui lòng chọn lý do từ chối"
+  }
+}

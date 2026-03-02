@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "Create",
+    "dashboard": "Dashboard",
+    "details": "Details",
+    "editMerchant": "Edit Merchant",
+    "merchantManagement": "Merchant Management",
+    "merchants": "Merchants"
+  },
+  "common": {
+    "error": "An error occurred",
+    "loading": "Loading...",
+    "noData": "No data available"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "Login details for the merchant administrator.",
+      "emailAddress": "Email Address",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "Hide password",
+      "initialPassword": "Initial Password",
+      "merchantName": "Merchant Name",
+      "merchantNamePlaceholder": "John Doe",
+      "role": "Role",
+      "showPassword": "Show password",
+      "title": "Account Credentials"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "createMerchant": "Create Merchant",
+      "creating": "Creating...",
+      "insufficientBalanceTooltip": "Insufficient wallet balance for annual merchant creation"
+    },
+    "businessProfile": {
+      "businessName": "Business Name",
+      "businessNamePlaceholder": "e.g. Acme Café",
+      "businessType": "Business Type",
+      "businessTypePlaceholder": "Select business type...",
+      "businessTypes": {
+        "education": "Education",
+        "foodBeverage": "Food & Beverage",
+        "health": "Health",
+        "hospitality": "Hospitality",
+        "retail": "Retail",
+        "services": "Services",
+        "technology": "Technology"
+      },
+      "description": "Primary business details displayed to customers.",
+      "taxId": "Tax ID",
+      "taxIdPlaceholder": "e.g. TX123456",
+      "title": "Business Profile"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 Main St, City, Country",
+      "city": "City",
+      "cityPlaceholder": "City",
+      "country": "Country",
+      "countryPlaceholder": "Country",
+      "description": "Search for the business address to auto-fill details.",
+      "locationUpdated": "Location updated",
+      "searchAddress": "Search Address",
+      "title": "Location Details"
+    },
+    "merchantType": {
+      "accountStatus": "Account Status",
+      "accountStatusDescription": "Enable or disable this merchant's access to the platform.",
+      "active": "Active",
+      "annual": "Annual",
+      "description": "Select the merchant type.",
+      "inactive": "Inactive",
+      "label": "Merchant Type",
+      "temporary": "Temporary",
+      "title": "Merchant Type"
+    },
+    "messages": {
+      "createError": "Failed to create merchant",
+      "createErrorDescription": "Please check your input and try again.",
+      "createSuccess": "Merchant account created successfully.",
+      "validationFailed": "Validation failed"
+    },
+    "subtitle": "Create a new merchant account, assign a subscription plan, and configure initial limits.",
+    "title": "Onboard New Merchant",
+    "validation": {
+      "emailInvalid": "Please enter a valid email address",
+      "fieldEmpty": "{field} should not be empty",
+      "fieldInvalid": "{field} is invalid",
+      "fieldRequired": "{field} is required",
+      "fields": {
+        "address": "Address",
+        "business_name": "Business Name",
+        "business_type": "Business Type",
+        "city": "City",
+        "country": "Country",
+        "email": "Email Address",
+        "merchant_type": "Merchant Type",
+        "name": "Merchant Name",
+        "password": "Password",
+        "role": "Role",
+        "tax_id": "Tax ID"
+      },
+      "passwordTooShort": "Password must be at least 8 characters"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "Active",
+        "birthday": "🎂",
+        "description": "Recently registered customers",
+        "female": "👩 female",
+        "inactive": "Inactive",
+        "joined": "📅 Joined",
+        "male": "👨 male",
+        "noData": "No customers found.",
+        "other": "👤",
+        "pageOf": "Page {current} of {total}",
+        "reward": "Reward",
+        "title": "Customers ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "Amount",
+          "credits": "Credits",
+          "description": "Description"
+        },
+        "description": "Historical credit usage",
+        "noData": "No records found.",
+        "pageOf": "Page {current} of {total}",
+        "title": "Transaction Ledger"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "Active",
+        "consumed": "{percent}% consumed",
+        "description": "Active campaigns",
+        "halal": "Halal",
+        "id": "ID",
+        "inactive": "Inactive",
+        "issued": "issued",
+        "left": "{count} left",
+        "luckyDraw": "✓ Lucky Draw",
+        "noData": "No batches active.",
+        "pageOf": "Page {current} of {total}",
+        "public": "Public",
+        "title": "Coupon Batches ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "Account",
+        "ads": "Ads",
+        "annualFee": "Annual Fee",
+        "bi": "BI",
+        "coupons": "Coupons",
+        "currency": "Currency",
+        "description": "Live credit allocation",
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "expires": "Expires",
+        "inactive": "Inactive",
+        "never": "Never",
+        "paid": "Paid",
+        "paidAds": "Paid Ads",
+        "plan": "Plan",
+        "title": "Wallet Details",
+        "ui": "UI",
+        "unpaid": "Unpaid",
+        "verified": "Verified",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "Merchant not found or could not be loaded.",
+      "title": "Error"
+    },
+    "header": {
+      "active": "Active",
+      "editConfiguration": "Edit Configuration",
+      "inactive": "Inactive",
+      "memberSince": "Member since",
+      "subscription": "{type} Subscription"
+    },
+    "loadError": "Failed to load merchant details",
+    "loading": "Loading merchant details...",
+    "overview": {
+      "adCredits": {
+        "description": "For promotions",
+        "title": "Ad Credits"
+      },
+      "couponCredits": {
+        "description": "For batches",
+        "title": "Coupon Credits"
+      },
+      "recentTransactions": {
+        "credits": "credits",
+        "noData": "No transactions found.",
+        "pageOf": "Page {current} of {total}",
+        "title": "Recent Transactions"
+      },
+      "totalCredits": {
+        "title": "Total Credits",
+        "usedLabel": "{used} used total"
+      },
+      "usageSummary": {
+        "couponBalance": "Coupon Balance",
+        "creditUsage": "Credit Usage",
+        "title": "Usage Summary",
+        "whatsappBalance": "WhatsApp Balance",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "WhatsApp UI"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "WhatsApp Credits",
+        "uiLabel": "UI"
+      }
+    },
+    "tabs": {
+      "activity": "Activity",
+      "billing": "Limits",
+      "overview": "Overview"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "Update merchant administrator details.",
+      "newPassword": "New Password (leave blank to keep current)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "Update Merchant",
+      "updating": "Updating..."
+    },
+    "loadingError": "Failed to load merchant data",
+    "messages": {
+      "updateError": "Failed to update merchant",
+      "updateSuccess": "Merchant updated successfully."
+    },
+    "subtitle": "Update merchant account details and configuration.",
+    "title": "Edit Merchant",
+    "validation": {
+      "emailInvalid": "Please enter a valid email address",
+      "fieldEmpty": "{field} should not be empty",
+      "fieldInvalid": "{field} is invalid",
+      "fieldRequired": "{field} is required",
+      "fields": {
+        "address": "Address",
+        "business_name": "Business Name",
+        "business_type": "Business Type",
+        "city": "City",
+        "country": "Country",
+        "email": "Email Address",
+        "merchant_type": "Merchant Type",
+        "name": "Merchant Name",
+        "password": "Password",
+        "role": "Role",
+        "tax_id": "Tax ID"
+      },
+      "passwordTooShort": "Password must be at least 8 characters"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "Details",
+      "edit": "Edit",
+      "merchantOptions": "Merchant Options"
+    },
+    "addMerchant": "Add Merchant",
+    "columnNames": {
+      "actions": "Actions",
+      "businessType": "Business Type",
+      "location": "Location",
+      "name": "Name",
+      "qr": "QR",
+      "status": "Status"
+    },
+    "columns": {
+      "actions": "Actions",
+      "businessAccount": "Business & Account",
+      "categoryPlan": "Category & Plan",
+      "location": "Location",
+      "noQr": "NO QR",
+      "qrScan": "QR Scan",
+      "status": "Status"
+    },
+    "delete": {
+      "cancel": "Cancel",
+      "confirm": "Delete",
+      "deleting": "Deleting...",
+      "description": "Are you sure you want to delete ",
+      "descriptionEnd": "? This action cannot be undone.",
+      "errorMessage": "Failed to delete merchant",
+      "successMessage": "Merchant \"{merchantName}\" deleted successfully.",
+      "title": "Delete Merchant",
+      "trigger": "Delete Merchant"
+    },
+    "qrDialog": {
+      "download": "Download",
+      "scanFor": "Scan for {name}"
+    },
+    "searchPlaceholder": "Search merchants...",
+    "statusToggle": {
+      "activatedSuccess": "Merchant activated successfully",
+      "active": "Active",
+      "deactivatedSuccess": "Merchant deactivated successfully",
+      "inactive": "Inactive",
+      "updateError": "Failed to update merchant status"
+    },
+    "subtitle": "Manage and monitor your merchants",
+    "title": "Merchant Management"
+  }
+}

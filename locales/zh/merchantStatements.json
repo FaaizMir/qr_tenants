@@ -1,0 +1,62 @@
+{
+  "columns": {
+    "actions": "操作",
+    "downloadPdf": "下载 PDF",
+    "generatedAt": "生成于",
+    "month": "月份",
+    "period": "期间",
+    "status": "状态",
+    "statusLabels": {
+      "failed": "失败",
+      "generated": "已生成",
+      "pending": "待处理"
+    },
+    "totalSpend": "总支出",
+    "unknown": "未知"
+  },
+  "index": {
+    "empty": {
+      "description": "所选期间没有可用的报表。生成新的报表以开始。",
+      "title": "未找到报表"
+    },
+    "filters": {
+      "currentMonth": "当前月份",
+      "description": "按年和月过滤报表",
+      "loading": "加载中...",
+      "month": "月份",
+      "quickActions": "快速操作",
+      "refreshList": "刷新列表",
+      "selectYear": "选择年份",
+      "title": "报表过滤器",
+      "year": "年"
+    },
+    "months": {
+      "april": "四月",
+      "august": "八月",
+      "december": "十二月",
+      "february": "二月",
+      "january": "一月",
+      "july": "七月",
+      "june": "六月",
+      "march": "三月",
+      "may": "五月",
+      "november": "十一月",
+      "october": "十月",
+      "september": "九月"
+    },
+    "subtitle": "每月自动生成的PDF报告，包括收入、费用、套餐收入和钱包账本。",
+    "table": {
+      "found": "找到",
+      "loadingStatements": "正在加载报表...",
+      "statementsFound": "报表",
+      "statementsFoundPlural": "报表",
+      "title": "报表历史"
+    },
+    "title": "商户财务报表",
+    "toasts": {
+      "downloadFailed": "下载 PDF 失败。请再试一次。",
+      "downloadSuccess": "报表下载成功！",
+      "loadFailed": "加载报表失败。请再试一次。"
+    }
+  }
+}

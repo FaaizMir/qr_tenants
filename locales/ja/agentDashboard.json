@@ -1,0 +1,191 @@
+{
+  "analytics": {
+    "couponPerformance": {
+      "description": "発行および償還の統計",
+      "issued": "発行済み",
+      "merchantsLabel": "マーチャント",
+      "noData": "クーポンデータは利用できません",
+      "page": "ページ {current} / {total}",
+      "rank": "ランク",
+      "redeemed": "引き換えられた",
+      "redeemedCount": "引き換え済み",
+      "redeemedLabel": "利用済み",
+      "title": "クーポンパフォーマンス"
+    },
+    "pagination": {
+      "pageOf": "ページ {{current}} / {{total}}"
+    },
+    "whatsappUsage": {
+      "avgPerMessage": "平均/メッセージ",
+      "description": "メッセージの数とコスト",
+      "estimatedCost": "推定コスト",
+      "merchantsLabel": "商人",
+      "messagesSent": "メッセージが送信されました",
+      "noData": "WhatsAppの使用データはありません",
+      "page": "ページ {current} / {total}",
+      "rank": "ランク",
+      "title": "WhatsApp の使用状況"
+    }
+  },
+  "common": {
+    "error": "データの取得に失敗しました",
+    "loading": "読み込み中...",
+    "noData": "データは利用できません"
+  },
+  "merchants": {
+    "merchantTypes": {
+      "annual": "年間",
+      "temporary": "一時的な"
+    },
+    "pagination": {
+      "pageOf": "ページ {{current}} / {{total}}"
+    },
+    "recentlyAdded": {
+      "description": "最新の登録",
+      "noData": "商人が見つかりません",
+      "page": "ページ {current} / {total}",
+      "rankLabel": "＃",
+      "title": "最近追加されたマーチャント",
+      "totalLabel": "合計"
+    },
+    "topPerformers": {
+      "description": "収益によるランキング",
+      "issued": "発行済み",
+      "noData": "パフォーマンスデータは利用できません",
+      "page": "ページ {current} / {total}",
+      "rate": "レート",
+      "redeemed": "引き換え済み",
+      "stats": {
+        "issued": "発行済み",
+        "rate": "レート",
+        "redeemed": "引き換え済み"
+      },
+      "title": "トップパフォーマー",
+      "totalLabel": "合計"
+    }
+  },
+  "overview": {
+    "couponCustomerStats": {
+      "couponsIssued": "発行されたクーポン",
+      "couponsRedeemed": "クーポン利用済み",
+      "totalCustomers": "合計顧客",
+      "totalFeedback": "総フィードバック"
+    },
+    "dateFilter": {
+      "customRange": "カスタム範囲",
+      "last30Days": "過去30日",
+      "last7Days": "過去 7 日間",
+      "lastMonth": "先月",
+      "pickDate": "日付を選択",
+      "selectRange": "範囲を選択",
+      "thisMonth": "今月",
+      "today": "今日",
+      "yesterday": "昨日"
+    },
+    "engagement": {
+      "activityPulse": "プラットフォーム活動パルス",
+      "description": "すべての店舗のインタラクションメトリクス",
+      "redemptionRate": "引き換え率",
+      "systemLoad": "通常のシステム負荷",
+      "title": "グローバルエンゲージメント",
+      "totalFeedback": "総フィードバック"
+    },
+    "growth": {
+      "customersCount": "+{count} 顧客",
+      "description": "最新のプラットフォーム拡張データ",
+      "newCustomers": "新規顧客登録",
+      "newMerchants": "+{count} の加盟店",
+      "newStores": "この期間の新しい店舗",
+      "title": "成長のハイライト"
+    },
+    "kpiCards": {
+      "activeMerchants": "アクティブなマーチャント",
+      "annualMerchants": "年間マーチャント",
+      "inactiveMerchants": "非アクティブなマーチャント",
+      "temporaryMerchants": "一時的な商人",
+      "totalMerchants": "合計商人",
+      "totalRevenue": "合計収益"
+    },
+    "kpis": {
+      "activeAgents": "アクティブエージェント",
+      "activeMerchants": "アクティブマーチャント",
+      "agentSubscriptions": "エージェントサブスクリプション",
+      "annualMerchants": "年間マーチャント",
+      "biMessagesSent": "送信された BI メッセージ",
+      "couponsIssued": "発行されたクーポン",
+      "couponsRedeemed": "クーポンの引き換え",
+      "feedbackReceived": "フィードバックを受け取りました",
+      "inactiveMerchants": "非アクティブな加盟店",
+      "merchantSubscriptions": "マーチャントのサブスクリプション",
+      "packageCommissions": "パッケージコミッション",
+      "temporaryMerchants": "一時的なマーチャント",
+      "totalAgents": "総エージェント数",
+      "totalCustomers": "総顧客数",
+      "totalFeedback": "総フィードバック",
+      "totalMerchants": "総マーチャント数",
+      "totalMessages": "総メッセージ数",
+      "totalPlatformRevenue": "総プラットフォーム収益",
+      "totalRevenue": "総収益",
+      "uiMessagesSent": "UIメッセージ送信済み",
+      "whatsappCost": "WhatsApp コスト"
+    },
+    "merchantDistribution": {
+      "annual": "年間",
+      "description": "年間対一時的なサブスクリプション比率",
+      "noData": "利用可能なマーチャントデータはありません",
+      "temporary": "一時的",
+      "title": "商人の分布",
+      "total": "合計"
+    },
+    "merchantTierDistribution": {
+      "annual": "年間",
+      "description": "年間対一時的サブスクリプション比率",
+      "noData": "マーチャントデータは利用できません",
+      "temp": "テンポ",
+      "title": "マーチャントティアの分布",
+      "totalStores": "総店舗"
+    },
+    "revenueBreakdown": {
+      "annualSubscription": "年間サブスクリプション",
+      "creditPurchase": "クレジット購入",
+      "description": "収益源の分布",
+      "title": "収益の内訳",
+      "whatsappCharges": "WhatsAppの料金"
+    },
+    "roleTitle": "{role} ダッシュボード",
+    "sections": {
+      "financialPerformance": "財務パフォーマンス",
+      "generalOverview": "一般的な概要",
+      "globalEngagement": "グローバルエンゲージメント",
+      "growthHighlights": "成長のハイライト",
+      "revenueStreams": "収益ストリーム"
+    },
+    "title": "システム分析",
+    "topPerformingMerchants": {
+      "description": "最高のボリュームとエンゲージメントを持つ店舗（合計 {count}）",
+      "issued": "発行済み",
+      "noData": "この期間のパフォーマンスデータはありません",
+      "page": "ページ {current} / {total}",
+      "redeemed": "引き換え済み",
+      "showing": "{from} から {to} までの {total} を表示",
+      "successRate": "成功率",
+      "title": "トップパフォーマンスの商人"
+    },
+    "whatsappStats": {
+      "biMessagesSent": "送信されたBIメッセージ",
+      "totalMessages": "合計メッセージ",
+      "uiMessagesSent": "送信されたUIメッセージ",
+      "whatsappCost": "WhatsAppのコスト"
+    }
+  },
+  "page": {
+    "breadcrumb": "ダッシュボード",
+    "description": "エージェントのパフォーマンスと指標の概要",
+    "title": "エージェントダッシュボード"
+  },
+  "tabs": {
+    "analytics": "分析",
+    "merchants": "パフォーマンス",
+    "overview": "概要"
+  }
+}

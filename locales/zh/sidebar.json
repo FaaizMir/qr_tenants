@@ -1,5 +1,6 @@
 {
   "agent": {
+    "adsPackages": "广告套餐",
     "approvals": "审批",
     "couponsync": "优惠券同步",
     "dashboard": "仪表板",

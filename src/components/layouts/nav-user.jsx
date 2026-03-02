@@ -3,6 +3,7 @@
 import { BadgeCheck, ChevronsUpDown, LogOut, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -27,6 +28,7 @@ export function NavUser({ user }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
   const { data: session } = useSession();
+  const t = useTranslations("sidebar.common");
 
   const role = session?.user?.role?.toLowerCase() || "merchant";
 
@@ -100,7 +102,7 @@ export function NavUser({ user }) {
             <DropdownMenuGroup>
               <DropdownMenuItem onSelect={handleAccountClick}>
                 <BadgeCheck />
-                Account
+                {t("account")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -110,7 +112,7 @@ export function NavUser({ user }) {
               }}
             >
               <LogOut />
-              Log out
+              {t("logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

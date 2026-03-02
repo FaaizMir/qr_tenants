@@ -5,10 +5,11 @@ import { User, MapPin, ImageIcon, Play } from "lucide-react";
 import { ApprovalStatusToggle } from "./approval-status-toggle";
 import Image from "next/image";
 
-export const getApprovalColumns = (handleStatusUpdate) => [
+export const getApprovalColumns = (handleStatusUpdate, t) => [
   {
     accessorKey: "name",
-    header: "Business & Account",
+    header: t("columns.businessAccount"),
+    meta: { label: t("columns.businessAccount") },
     cell: ({ row }) => (
       <div className="flex items-start gap-3 py-1">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10">
@@ -29,7 +30,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "adImage",
-    header: "Ad Content",
+    header: t("columns.adContent"),
+    meta: { label: t("columns.adContent") },
     cell: ({ row }) => {
       const url = row.original.adImage;
       const isVideo = row.original.adType === "video";
@@ -69,7 +71,7 @@ export const getApprovalColumns = (handleStatusUpdate) => [
           ) : (
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground italic px-2">
               <ImageIcon className="h-3.5 w-3.5" />
-              No Ad
+              {t("columns.noAd")}
             </div>
           )}
         </div>
@@ -79,7 +81,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
 
   {
     accessorKey: "approvalType",
-    header: "Approval Type",
+    header: t("columns.approvalType"),
+    meta: { label: t("columns.approvalType") },
     cell: ({ row }) => (
       <Badge variant="secondary" className="capitalize">
         {row.original.approvalType?.replace("_", " ")}
@@ -88,7 +91,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "paid_ad_placement",
-    header: "Ad Placement",
+    header: t("columns.adPlacement"),
+    meta: { label: t("columns.adPlacement") },
     cell: ({ row }) => {
       const placement = row.original.paid_ad_placement;
       return (
@@ -102,7 +106,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "merchant_type",
-    header: "Merchant Type",
+    header: t("columns.merchantType"),
+    meta: { label: t("columns.merchantType") },
     cell: ({ row }) => {
       const merchantType = row.original.merchant_type;
       return (
@@ -116,7 +121,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "location",
-    header: "Location",
+    header: t("columns.location"),
+    meta: { label: t("columns.location") },
     cell: ({ row }) => (
       <div className="flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
         <MapPin className="h-3.5 w-3.5 shrink-0 text-orange-500" />
@@ -126,7 +132,8 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "createdAt",
-    header: "Requested Date",
+    header: t("columns.requestedDate"),
+    meta: { label: t("columns.requestedDate") },
     cell: ({ row }) => (
       <span className="text-sm text-slate-600 dark:text-slate-400">
         {row.original.createdAt}
@@ -135,14 +142,15 @@ export const getApprovalColumns = (handleStatusUpdate) => [
   },
   {
     accessorKey: "status",
-    header: "Approval Status",
+    header: t("columns.approvalStatus"),
+    meta: { label: t("columns.approvalStatus") },
 
     cell: ({ row }) => (
       <ApprovalStatusToggle
         initialStatus={row.original.status}
         merchantName={row.original.name}
-        onStatusChange={(newStatus) =>
-          handleStatusUpdate(row.original.id, newStatus)
+        onStatusChange={(newStatus, disapprovalReason) =>
+          handleStatusUpdate(row.original.id, newStatus, disapprovalReason)
         }
       />
     ),

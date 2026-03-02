@@ -1,0 +1,312 @@
+{
+  "breadcrumbs": {
+    "create": "Buat",
+    "dashboard": "Dasbor",
+    "details": "Detail",
+    "editMerchant": "Edit Pedagang",
+    "merchantManagement": "Manajemen Pedagang",
+    "merchants": "Pedagang"
+  },
+  "common": {
+    "error": "Terjadi kesalahan",
+    "loading": "Memuat...",
+    "noData": "Tidak ada data tersedia"
+  },
+  "create": {
+    "accountCredentials": {
+      "description": "Detail login untuk administrator pedagang.",
+      "emailAddress": "Alamat Email",
+      "emailPlaceholder": "merchant@business.com",
+      "hidePassword": "Sembunyikan kata sandi",
+      "initialPassword": "Kata Sandi Awal",
+      "merchantName": "Nama Merchant",
+      "merchantNamePlaceholder": "John Doe",
+      "role": "Peran",
+      "showPassword": "Tampilkan kata sandi",
+      "title": "Kredensial Akun"
+    },
+    "actions": {
+      "cancel": "Batal",
+      "createMerchant": "Buat Merchant",
+      "creating": "Membuat...",
+      "insufficientBalanceTooltip": "Saldo dompet tidak cukup untuk pembuatan merchant tahunan"
+    },
+    "businessProfile": {
+      "businessName": "Nama Bisnis",
+      "businessNamePlaceholder": "mis. Acme Café",
+      "businessType": "Jenis Bisnis",
+      "businessTypePlaceholder": "Pilih jenis bisnis...",
+      "businessTypes": {
+        "education": "Pendidikan",
+        "foodBeverage": "Makanan & Minuman",
+        "health": "Kesehatan",
+        "hospitality": "Perhotelan",
+        "retail": "Ritel",
+        "services": "Layanan",
+        "technology": "Teknologi"
+      },
+      "description": "Detail bisnis utama yang ditampilkan kepada pelanggan.",
+      "taxId": "ID Pajak",
+      "taxIdPlaceholder": "mis. TX123456",
+      "title": "Profil Bisnis"
+    },
+    "locationDetails": {
+      "addressPlaceholder": "123 Main St, Kota, Negara",
+      "city": "Kota",
+      "cityPlaceholder": "Kota",
+      "country": "Negara",
+      "countryPlaceholder": "Negara",
+      "description": "Cari alamat bisnis untuk mengisi detail secara otomatis.",
+      "locationUpdated": "Lokasi diperbarui",
+      "searchAddress": "Cari Alamat",
+      "title": "Detail Lokasi"
+    },
+    "merchantType": {
+      "accountStatus": "Status Akun",
+      "accountStatusDescription": "Aktifkan atau nonaktifkan akses merchant ini ke platform.",
+      "active": "Aktif",
+      "annual": "Tahunan",
+      "description": "Pilih tipe pedagang.",
+      "inactive": "Tidak aktif",
+      "label": "Tipe Pedagang",
+      "temporary": "Sementara",
+      "title": "Jenis Merchant"
+    },
+    "messages": {
+      "createError": "Gagal membuat merchant",
+      "createErrorDescription": "Silakan periksa input Anda dan coba lagi.",
+      "createSuccess": "Akun pedagang berhasil dibuat.",
+      "validationFailed": "Validasi gagal"
+    },
+    "subtitle": "Buat akun merchant baru, tetapkan rencana langganan, dan atur batas awal.",
+    "title": "Onboard Merchant Baru",
+    "validation": {
+      "emailInvalid": "Silakan masukkan alamat email yang valid",
+      "fieldEmpty": "{field} tidak boleh kosong",
+      "fieldInvalid": "{field} tidak valid",
+      "fieldRequired": "{field} diperlukan",
+      "fields": {
+        "address": "Alamat",
+        "business_name": "Nama Bisnis",
+        "business_type": "Jenis Bisnis",
+        "city": "Kota",
+        "country": "Negara",
+        "email": "Alamat Email",
+        "merchant_type": "Tipe Merchant",
+        "name": "Nama Merchant",
+        "password": "Kata Sandi",
+        "role": "Peran",
+        "tax_id": "ID Pajak"
+      },
+      "passwordTooShort": "Kata sandi harus terdiri dari setidaknya 8 karakter"
+    }
+  },
+  "detail": {
+    "activity": {
+      "customers": {
+        "active": "Aktif",
+        "birthday": "🎂",
+        "description": "Pelanggan yang baru terdaftar",
+        "female": "👩 perempuan",
+        "inactive": "Tidak aktif",
+        "joined": "📅 Bergabung",
+        "male": "👨 laki-laki",
+        "noData": "Tidak ada pelanggan yang ditemukan.",
+        "other": "👤",
+        "pageOf": "Halaman {current} dari {total}",
+        "reward": "Reward",
+        "title": "Pelanggan ({count})"
+      },
+      "transactionLedger": {
+        "columns": {
+          "amount": "Jumlah",
+          "credits": "Kredit",
+          "description": "Deskripsi"
+        },
+        "description": "Penggunaan kredit historis",
+        "noData": "Tidak ada catatan yang ditemukan.",
+        "pageOf": "Halaman {current} dari {total}",
+        "title": "Buku Transaksi"
+      }
+    },
+    "billing": {
+      "couponBatches": {
+        "active": "Aktif",
+        "consumed": "{percent}% terpakai",
+        "description": "Kampanye aktif",
+        "halal": "Halal",
+        "id": "ID",
+        "inactive": "Tidak aktif",
+        "issued": "dikeluarkan",
+        "left": "{count} tersisa",
+        "luckyDraw": "✓ Undian Beruntung",
+        "noData": "Tidak ada batch yang aktif.",
+        "pageOf": "Halaman {current} dari {total}",
+        "public": "Publik",
+        "title": "Batch Kupon ({count})",
+        "whatsapp": "✓ WhatsApp"
+      },
+      "walletDetails": {
+        "account": "Akun",
+        "ads": "Iklan",
+        "annualFee": "Biaya Tahunan",
+        "bi": "BI",
+        "coupons": "Kupon",
+        "currency": "Mata Uang",
+        "description": "alokasi kredit langsung",
+        "disabled": "Dinonaktifkan",
+        "enabled": "Diaktifkan",
+        "expires": "Kedaluwarsa",
+        "inactive": "Tidak Aktif",
+        "never": "Tidak pernah",
+        "paid": "Dibayar",
+        "paidAds": "Iklan Berbayar",
+        "plan": "Rencana",
+        "title": "Detail Dompet",
+        "ui": "Antarmuka Pengguna",
+        "unpaid": "Belum dibayar",
+        "verified": "Terverifikasi",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "error": {
+      "description": "Pedagang tidak ditemukan atau tidak dapat dimuat.",
+      "title": "Kesalahan"
+    },
+    "header": {
+      "active": "Aktif",
+      "editConfiguration": "Edit Konfigurasi",
+      "inactive": "Tidak aktif",
+      "memberSince": "Anggota sejak",
+      "subscription": "{type} Langganan"
+    },
+    "loadError": "Gagal memuat detail pedagang",
+    "loading": "Memuat detail merchant...",
+    "overview": {
+      "adCredits": {
+        "description": "Untuk promosi",
+        "title": "Kredit Iklan"
+      },
+      "couponCredits": {
+        "description": "Untuk batch",
+        "title": "Kredit Kupon"
+      },
+      "recentTransactions": {
+        "credits": "kredit",
+        "noData": "Tidak ada transaksi yang ditemukan.",
+        "pageOf": "Halaman {current} dari {total}",
+        "title": "Transaksi Terbaru"
+      },
+      "totalCredits": {
+        "title": "Total Kredit",
+        "usedLabel": "{used} digunakan total"
+      },
+      "usageSummary": {
+        "couponBalance": "Saldo Kupon",
+        "creditUsage": "Penggunaan Kredit",
+        "title": "Ringkasan Penggunaan",
+        "whatsappBalance": "Saldo WhatsApp",
+        "whatsappBI": "WhatsApp BI",
+        "whatsappUI": "Antarmuka WhatsApp"
+      },
+      "whatsappCredits": {
+        "biLabel": "BI",
+        "title": "Kredit WhatsApp",
+        "uiLabel": "Antarmuka Pengguna"
+      }
+    },
+    "tabs": {
+      "activity": "Aktivitas",
+      "billing": "Batas",
+      "overview": "Ikhtisar"
+    }
+  },
+  "edit": {
+    "accountCredentials": {
+      "description": "Perbarui detail administrator pedagang.",
+      "newPassword": "Kata Sandi Baru (biarkan kosong untuk mempertahankan yang saat ini)",
+      "passwordPlaceholder": "••••••••"
+    },
+    "actions": {
+      "updateMerchant": "Perbarui Pedagang",
+      "updating": "Memperbarui..."
+    },
+    "loadingError": "Gagal memuat data pedagang",
+    "messages": {
+      "updateError": "Gagal memperbarui merchant",
+      "updateSuccess": "Merchant berhasil diperbarui."
+    },
+    "subtitle": "Perbarui detail dan konfigurasi akun merchant.",
+    "title": "Edit Merchant",
+    "validation": {
+      "emailInvalid": "Silakan masukkan alamat email yang valid",
+      "fieldEmpty": "{field} tidak boleh kosong",
+      "fieldInvalid": "{field} tidak valid",
+      "fieldRequired": "{field} diperlukan",
+      "fields": {
+        "address": "Alamat",
+        "business_name": "Nama Bisnis",
+        "business_type": "Jenis Bisnis",
+        "city": "Kota",
+        "country": "Negara",
+        "email": "Alamat Email",
+        "merchant_type": "Tipe Merchant",
+        "name": "Nama Merchant",
+        "password": "Kata Sandi",
+        "role": "Peran",
+        "tax_id": "ID Pajak"
+      },
+      "passwordTooShort": "Kata sandi harus terdiri dari setidaknya 8 karakter"
+    }
+  },
+  "listing": {
+    "actions": {
+      "details": "Rincian",
+      "edit": "Edit",
+      "merchantOptions": "Opsi Merchant"
+    },
+    "addMerchant": "Tambah Pedagang",
+    "columnNames": {
+      "actions": "Tindakan",
+      "businessType": "Jenis Bisnis",
+      "location": "Lokasi",
+      "name": "Nama",
+      "qr": "QR",
+      "status": "Status"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "businessAccount": "Bisnis & Akun",
+      "categoryPlan": "Kategori & Rencana",
+      "location": "Lokasi",
+      "noQr": "TIDAK QR",
+      "qrScan": "Pindai QR",
+      "status": "Status"
+    },
+    "delete": {
+      "cancel": "Batal",
+      "confirm": "Hapus",
+      "deleting": "Menghapus...",
+      "description": "Apakah Anda yakin ingin menghapus ",
+      "descriptionEnd": "? Tindakan ini tidak dapat dibatalkan.",
+      "errorMessage": "Gagal menghapus pedagang",
+      "successMessage": "Merchant \"{merchantName}\" berhasil dihapus.",
+      "title": "Hapus Merchant",
+      "trigger": "Hapus Pedagang"
+    },
+    "qrDialog": {
+      "download": "Unduh",
+      "scanFor": "Pindai untuk {name}"
+    },
+    "searchPlaceholder": "Cari merchant...",
+    "statusToggle": {
+      "activatedSuccess": "Merchant berhasil diaktifkan",
+      "active": "Aktif",
+      "deactivatedSuccess": "Pedagang dinonaktifkan dengan sukses",
+      "inactive": "Tidak aktif",
+      "updateError": "Gagal memperbarui status pedagang"
+    },
+    "subtitle": "Kelola dan pantau pedagang Anda",
+    "title": "Manajemen Pedagang"
+  }
+}

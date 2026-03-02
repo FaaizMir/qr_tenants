@@ -1,0 +1,125 @@
+{
+  "columns": {
+    "actions": "アクション",
+    "actionsMenu": {
+      "delete": "賞を削除",
+      "edit": "賞品を編集",
+      "label": "アクション",
+      "openMenu": "メニューを開く"
+    },
+    "dailyLimit": "デイリー制限",
+    "description": "説明",
+    "prizeName": "賞品名",
+    "probability": "確率",
+    "status": "ステータス",
+    "statusActive": "アクティブ",
+    "statusInactive": "非アクティブ",
+    "totalLimit": "合計制限",
+    "type": "タイプ"
+  },
+  "form": {
+    "buttons": {
+      "cancel": "キャンセル",
+      "create": "賞を作成",
+      "creating": "作成中...",
+      "update": "賞を更新",
+      "updating": "更新中..."
+    },
+    "cardDescription": {
+      "create": "くじ引きのための新しい賞を作成",
+      "edit": "賞品情報を更新"
+    },
+    "cardTitle": {
+      "create": "新しい賞品を追加",
+      "edit": "賞を編集"
+    },
+    "createSubtitle": "抽選に新しい賞品を追加",
+    "createTitle": "賞を作成",
+    "editSubtitle": "賞品の詳細を更新",
+    "editTitle": "賞を編集",
+    "fields": {
+      "couponBatch": {
+        "emptyMessage": "バッチが見つかりません",
+        "label": "クーポンバッチ",
+        "placeholder": "クーポンバッチを選択...",
+        "required": "クーポンバッチが必要です",
+        "searchPlaceholder": "バッチを検索..."
+      },
+      "dailyLimit": {
+        "label": "日次制限"
+      },
+      "prizeDescription": {
+        "label": "賞の説明"
+      },
+      "prizeName": {
+        "label": "賞の名前",
+        "required": "賞の名前は必須です"
+      },
+      "prizeType": {
+        "label": "賞の種類",
+        "options": {
+          "coupon": "クーポン"
+        }
+      },
+      "probability": {
+        "label": "確率 (%)",
+        "max": "最大100%",
+        "min": "最小 0%",
+        "required": "確率は必須です"
+      },
+      "sortOrder": {
+        "label": "並べ替え順序"
+      },
+      "status": {
+        "label": "ステータス",
+        "options": {
+          "active": "アクティブ",
+          "inactive": "非アクティブ"
+        }
+      },
+      "totalLimit": {
+        "label": "総制限"
+      }
+    },
+    "importantNotes": {
+      "note1": "総確率は100%に等しくなければなりません",
+      "note2": "各賞にはリンクされたクーポンバッチが必要です",
+      "note3": "デイリー制限は真夜中にリセットされます",
+      "note4": "賞品の制限に達した場合、システムは次の利用可能な賞品にスキップします",
+      "title": "重要"
+    },
+    "toasts": {
+      "createSuccess": "賞が正常に作成されました！",
+      "loadFailed": "賞品の詳細を読み込めませんでした",
+      "noBatchSelected": "クーポンバッチを選択してください",
+      "noMerchantId": "マーチャントIDが見つかりません",
+      "saveFailed": "賞の保存に失敗しました",
+      "updateSuccess": "賞が正常に更新されました！"
+    }
+  },
+  "index": {
+    "createButton": "賞を作成",
+    "deleteDialog": {
+      "cancel": "キャンセル",
+      "confirm": "削除",
+      "description": "この操作は賞 \"{prizeName}\" を永久に削除します。この操作は元に戻せません。",
+      "title": "本当ですか？"
+    },
+    "prizesCard": {
+      "description": "抽選のすべての賞品を管理",
+      "title": "賞品"
+    },
+    "searchPlaceholder": "名前、説明、またはタイプで賞を検索...",
+    "subtitle": "レビューを完了した顧客のために「ホイールを回す」賞品を設定します。",
+    "title": "くじ引き設定",
+    "toasts": {
+      "deleteFailed": "賞品の削除に失敗しました",
+      "deleteSuccess": "賞品が正常に削除されました！",
+      "loadFailed": "賞の読み込みに失敗しました"
+    }
+  },
+  "page": {
+    "breadcrumb": "くじ引き",
+    "dashboardBreadcrumb": "マーチャントダッシュボード"
+  }
+}

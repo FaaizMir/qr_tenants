@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 import {
   Card,
@@ -30,6 +31,8 @@ import { PrizesColumns } from "./prizes-columns";
 import useDebounce from "@/hooks/useDebounceRef";
 
 export default function MerchantLuckyDrawContainer() {
+  const t = useTranslations("merchantLuckyDraw.index");
+  const tColumns = useTranslations("merchantLuckyDraw.columns");
   const router = useRouter();
   const { data: session } = useSession();
   const merchantId = session?.user?.merchantId;
@@ -46,17 +49,17 @@ export default function MerchantLuckyDrawContainer() {
     setLoading(true);
     try {
       const response = await axiosInstance.get(
-        `/lucky-draw/prizes/merchant/${merchantId}`
+        `/lucky-draw/prizes/merchant/${merchantId}`,
       );
       const data = response?.data?.data || response?.data || [];
       setPrizes(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Failed to fetch prizes:", err);
-      toast.error("Failed to load prizes");
+      toast.error(t("toasts.loadFailed"));
     } finally {
       setLoading(false);
     }
-  }, [merchantId]);
+  }, [merchantId, t]);
 
   // Fetch prizes
   useEffect(() => {
@@ -77,10 +80,10 @@ export default function MerchantLuckyDrawContainer() {
 
     try {
       await axiosInstance.delete(`/lucky-draw/prizes/${prizeToDelete.id}`);
-      toast.success("Prize deleted successfully!");
+      toast.success(t("toasts.deleteSuccess"));
       fetchPrizes();
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Failed to delete prize");
+      toast.error(err?.response?.data?.message || t("toasts.deleteFailed"));
     } finally {
       setDeleteDialogOpen(false);
       setPrizeToDelete(null);
@@ -91,14 +94,16 @@ export default function MerchantLuckyDrawContainer() {
   const filteredPrizes = prizes.filter(
     (prize) =>
       prize.prize_name?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      prize.prize_description?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      prize.prize_type?.toLowerCase().includes(debouncedSearch.toLowerCase())
+      prize.prize_description
+        ?.toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
+      prize.prize_type?.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
   // Pagination
   const paginatedData = filteredPrizes.slice(
     page * pageSize,
-    (page + 1) * pageSize
+    (page + 1) * pageSize,
   );
 
   const columns = PrizesColumns({ onEdit: handleEdit, onDelete: handleDelete });
@@ -107,23 +112,18 @@ export default function MerchantLuckyDrawContainer() {
     <>
       <div className="space-y-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">Lucky Draw Settings</h1>
-          <p className="text-muted-foreground">
-            Configure the &quot;Spin the Wheel&quot; prizes for customers who
-            complete a review.
-          </p>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Prizes</CardTitle>
-            <CardDescription>
-              Manage all prizes for the lucky draw
-            </CardDescription>
+            <CardTitle>{t("prizesCard.title")}</CardTitle>
+            <CardDescription>{t("prizesCard.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <TableToolbar
-              placeholder="Search prizes by name, description, or type..."
+              placeholder={t("searchPlaceholder")}
               search={search}
               onSearchChange={setSearch}
               total={filteredPrizes.length}
@@ -132,7 +132,7 @@ export default function MerchantLuckyDrawContainer() {
                   onClick={() => router.push("/merchant/lucky-draw/create")}
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  Create Prize
+                  {t("createButton")}
                 </Button>
               }
             />
@@ -145,6 +145,16 @@ export default function MerchantLuckyDrawContainer() {
               setPage={setPage}
               setPageSize={setPageSize}
               loading={loading}
+              columnNameTranslations={{
+                prize_name: tColumns("prizeName"),
+                prize_description: tColumns("description"),
+                prize_type: tColumns("type"),
+                probability: tColumns("probability"),
+                daily_limit: tColumns("dailyLimit"),
+                total_limit: tColumns("totalLimit"),
+                is_active: tColumns("status"),
+                actions: tColumns("actions"),
+              }}
             />
           </CardContent>
         </Card>
@@ -154,21 +164,22 @@ export default function MerchantLuckyDrawContainer() {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the prize &quot;
-              {prizeToDelete?.prize_name}&quot;. This action cannot be undone.
+              {t("deleteDialog.description", {
+                prizeName: prizeToDelete?.prize_name,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => setPrizeToDelete(null)}>
-              Cancel
+              {t("deleteDialog.cancel")}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmDelete}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              {t("deleteDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
