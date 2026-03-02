@@ -67,6 +67,17 @@ export default function MasterAdminLandingPage() {
   const [homepageCoupons, setHomepageCoupons] = useState([]);
   const [homepageAds, setHomepageAds] = useState([]);
 
+  const normalizeHomepageAdPlacement = (placement) => {
+    const normalized = String(placement || "").trim().toLowerCase();
+    const mapped = {
+      homepage_ad_slot_1: "top",
+      homepage_ad_slot_2: "left",
+      homepage_ad_slot_3: "right",
+      homepage_ad_slot_4: "bottom",
+    };
+    return mapped[normalized] || normalized || "top";
+  };
+
   // Pagination State
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -207,14 +218,35 @@ export default function MasterAdminLandingPage() {
       setHomepageCoupons(couponsList);
 
       const transformedAds = adsList
-        .filter((item) => item && item.id)
-        .filter((item) => item.paid_ad_image || item.paid_ad_video)
+        .filter((item) => item && (item.id || item.merchant_id || item.merchant?.id))
+        .filter((item) => {
+          const hasImage =
+            item.paid_ad_image ||
+            item.merchant?.settings?.paid_ad_image ||
+            item.merchant?.paid_ad_image;
+          const hasVideo =
+            item.paid_ad_video ||
+            item.merchant?.settings?.paid_ad_video;
+          return hasImage || hasVideo;
+        })
         .map((item) => ({
           id: item.merchant_id || item.merchant?.id || item.id,
-          image: item.paid_ad_image || null,
-          video: item.paid_ad_video || null,
-          isVideo: item.paid_ad_video_status || false,
-          placement: item.paid_ad_placement || "top",
+          image:
+            item.paid_ad_image ||
+            item.merchant?.settings?.paid_ad_image ||
+            item.merchant?.paid_ad_image ||
+            null,
+          video:
+            item.paid_ad_video ||
+            item.merchant?.settings?.paid_ad_video ||
+            null,
+          isVideo:
+            item.paid_ad_video_status ||
+            item.merchant?.settings?.paid_ad_video_status ||
+            false,
+          placement: normalizeHomepageAdPlacement(
+            item.paid_ad_placement || item.placement || item.merchant?.settings?.paid_ad_placement,
+          ),
           title: item.merchant?.business_name || "Sponsored Deal",
           description: item.merchant?.city
             ? `Visit ${item.merchant?.business_name} in ${item.merchant?.city}, ${item.merchant?.country || ""}.`
@@ -258,10 +290,21 @@ export default function MasterAdminLandingPage() {
     router.push(`/homepage/agent`);
   };
 
-  const topHomepageAd = homepageAds.find((a) => a.placement === "top") || null;
-  const leftHomepageAd = homepageAds.find((a) => a.placement === "left") || null;
-  const rightHomepageAd = homepageAds.find((a) => a.placement === "right") || null;
-  const bottomHomepageAd = homepageAds.find((a) => a.placement === "bottom") || null;
+  const topHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "top") ||
+    homepageAds[0] ||
+    null;
+  const leftHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "left") ||
+    null;
+  const rightHomepageAd =
+    homepageAds.find((a) => {
+      const placement = normalizeHomepageAdPlacement(a.placement);
+      return placement === "right" || placement === "sidebar";
+    }) || null;
+  const bottomHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "bottom") ||
+    null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
