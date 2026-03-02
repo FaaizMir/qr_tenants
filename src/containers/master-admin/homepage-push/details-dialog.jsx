@@ -39,6 +39,14 @@ export default function DetailsDialog({ open, request, onClose }) {
     label: request.approval_status, 
     variant: "default" 
   };
+  const expiresAt =
+    request.approval_type === "homepage_coupon_push"
+      ? request.couponbatch_expired_at
+      : request.ad_expired_at;
+  const activatedAt =
+    request.approval_type === "homepage_coupon_push"
+      ? request.couponbatch_created_at
+      : request.ad_created_at;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -188,7 +196,7 @@ export default function DetailsDialog({ open, request, onClose }) {
           )}
 
           {/* Payment & Placement Info */}
-          {(request.payment_amount || request.placement || request.ad_expired_at) && (
+          {(request.payment_amount || request.placement || expiresAt) && (
             <div className="rounded-lg border p-4 space-y-3">
               <div className="flex items-center gap-2 text-lg font-semibold">
                 <DollarSign className="h-5 w-5" />
@@ -212,25 +220,25 @@ export default function DetailsDialog({ open, request, onClose }) {
                     <p className="font-medium">{request.placement}</p>
                   </div>
                 )}
-                {request.ad_created_at && (
+                {activatedAt && (
                   <div>
                     <p className="text-sm text-muted-foreground">
                       <Clock className="h-4 w-4 inline mr-1" />
                       {t("fields.activatedAt")}
                     </p>
                     <p className="font-medium">
-                      {new Date(request.ad_created_at).toLocaleDateString()}
+                      {new Date(activatedAt).toLocaleDateString()}
                     </p>
                   </div>
                 )}
-                {request.ad_expired_at && (
+                {expiresAt && (
                   <div>
                     <p className="text-sm text-muted-foreground">
                       <Clock className="h-4 w-4 inline mr-1" />
                       {t("fields.expiresAt")}
                     </p>
                     <p className="font-medium">
-                      {new Date(request.ad_expired_at).toLocaleDateString()}
+                      {new Date(expiresAt).toLocaleDateString()}
                     </p>
                   </div>
                 )}

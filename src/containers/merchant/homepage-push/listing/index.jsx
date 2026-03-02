@@ -19,6 +19,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+const getHomepagePushExpiryDate = (request) => {
+  if (!request) return null;
+  if (request.approval_type === "homepage_coupon_push") {
+    return request.couponbatch_expired_at || null;
+  }
+  return request.ad_expired_at || null;
+};
+
 const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "approval_type",
@@ -71,7 +79,7 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
     accessorKey: "ad_expired_at",
     header: t("listing.columns.expiryDate"),
     cell: ({ row }) => {
-      const date = row.original.ad_expired_at;
+      const date = getHomepagePushExpiryDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
     },
   },
@@ -300,13 +308,13 @@ export default function HomepagePushListing() {
                   </p>
                   <p className="text-base">{selectedRequest.placement || "-"}</p>
                 </div>
-                {selectedRequest.ad_expired_at && (
+                {getHomepagePushExpiryDate(selectedRequest) && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
                       {t("details.expiryDate")}
                     </p>
                     <p className="text-base">
-                      {new Date(selectedRequest.ad_expired_at).toLocaleString()}
+                      {new Date(getHomepagePushExpiryDate(selectedRequest)).toLocaleString()}
                     </p>
                   </div>
                 )}

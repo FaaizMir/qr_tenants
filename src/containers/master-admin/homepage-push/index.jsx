@@ -16,6 +16,22 @@ import ApprovalDialog from "./approval-dialog";
 import DetailsDialog from "./details-dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
+const getHomepagePushExpiryDate = (request) => {
+  if (!request) return null;
+  if (request.approval_type === "homepage_coupon_push") {
+    return request.couponbatch_expired_at || null;
+  }
+  return request.ad_expired_at || null;
+};
+
+const getHomepagePushActivatedDate = (request) => {
+  if (!request) return null;
+  if (request.approval_type === "homepage_coupon_push") {
+    return request.couponbatch_created_at || null;
+  }
+  return request.ad_created_at || null;
+};
+
 const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "merchant",
@@ -124,7 +140,7 @@ const ActiveItemColumns = (t) => [
     accessorKey: "ad_created_at",
     header: t("active.columns.activatedAt"),
     cell: ({ row }) => {
-      const date = row.original.ad_created_at;
+      const date = getHomepagePushActivatedDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
     },
   },
@@ -132,7 +148,7 @@ const ActiveItemColumns = (t) => [
     accessorKey: "ad_expired_at",
     header: t("active.columns.expiresAt"),
     cell: ({ row }) => {
-      const date = row.original.ad_expired_at;
+      const date = getHomepagePushExpiryDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
     },
   },
