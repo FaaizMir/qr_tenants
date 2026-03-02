@@ -78,7 +78,13 @@ export default function ApprovalDialog({ open, request, slots, onClose, onApprov
                 <p className="text-sm font-medium text-muted-foreground">
                   {t("fields.agent")}
                 </p>
-                <p className="text-base">{request.admin?.name || "-"}</p>
+                <p className="text-base">
+                  {request.admin?.user?.name ||
+                    // request.merchant?.admin?.user?.name ||
+                    // request.admin?.name ||
+                    // request.merchant?.admin?.name ||
+                    "-"}
+                </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">

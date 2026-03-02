@@ -25,7 +25,12 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "admin",
     header: t("listing.columns.agent"),
-    cell: ({ row }) => row.original.admin?.name || "-",
+    cell: ({ row }) =>
+      row.original.admin?.user?.name ||
+      // row.original.merchant?.admin?.user?.name ||
+      // row.original.admin?.name ||
+      // row.original.merchant?.admin?.name ||
+      "-",
   },
   {
     accessorKey: "approval_type",
@@ -256,7 +261,10 @@ export default function SuperAdminHomepagePushContainer() {
     const searchLower = debouncedSearch.toLowerCase();
     return (
       r.merchant?.business_name?.toLowerCase().includes(searchLower) ||
+      r.admin?.user?.name?.toLowerCase().includes(searchLower) ||
+      // r.merchant?.admin?.user?.name?.toLowerCase().includes(searchLower) ||
       r.admin?.name?.toLowerCase().includes(searchLower) ||
+      // r.merchant?.admin?.name?.toLowerCase().includes(searchLower) ||
       r.approval_type?.toLowerCase().includes(searchLower) ||
       r.coupon?.batch?.batch_name?.toLowerCase().includes(searchLower) ||
       r.coupon?.coupon_code?.toLowerCase().includes(searchLower)

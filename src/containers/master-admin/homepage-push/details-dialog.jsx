@@ -88,15 +88,33 @@ export default function DetailsDialog({ open, request, onClose }) {
               <div className="space-y-2">
                 <div>
                   <p className="text-sm text-muted-foreground">{t("fields.agentName")}</p>
-                  <p className="font-medium">{request.admin?.name || "-"}</p>
+                  <p className="font-medium">
+                    {request.admin?.user?.name ||
+                      // request.merchant?.admin?.user?.name ||
+                      // request.admin?.name ||
+                      // request.merchant?.admin?.name ||
+                      "-"}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">{t("fields.agentEmail")}</p>
-                  <p className="font-medium">{request.admin?.email || "-"}</p>
+                  <p className="font-medium">
+                    {request.admin?.user?.email ||
+                      // request.merchant?.admin?.user?.email ||
+                      // request.admin?.email ||
+                      // request.merchant?.admin?.email ||
+                      "-"}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">{t("fields.agentPhone")}</p>
-                  <p className="font-medium">{request.admin?.phone || "-"}</p>
+                  <p className="font-medium">
+                    {request.admin?.user?.phone ||
+                      // request.merchant?.admin?.user?.phone ||
+                      // request.admin?.phone ||
+                      // request.merchant?.admin?.phone ||
+                      "-"}
+                  </p>
                 </div>
               </div>
             </div>
