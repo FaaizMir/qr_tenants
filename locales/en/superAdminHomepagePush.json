@@ -1,0 +1,139 @@
+{
+  "breadcrumbs": {
+    "superAdminDashboard": "Super Admin Dashboard",
+    "homepagePush": "Homepage Push Management"
+  },
+  "listing": {
+    "title": "Homepage Push Management",
+    "subtitle": "Review and approve homepage placement requests from agents",
+    "searchPlaceholder": "Search requests...",
+    "columns": {
+      "merchant": "Merchant",
+      "agent": "Agent",
+      "type": "Type",
+      "item": "Item",
+      "submittedAt": "Submitted",
+      "actions": "Actions"
+    },
+    "types": {
+      "coupon": "Coupon Push",
+      "ad": "Ad Push"
+    },
+    "actions": {
+      "review": "Review"
+    }
+  },
+  "tabs": {
+    "forwarded": "Pending Approval",
+    "active": "Active on Homepage"
+  },
+  "slots": {
+    "couponSlots": "Coupon Slots",
+    "adSlots": "Ad Slots",
+    "available": "available"
+  },
+  "active": {
+    "searchPlaceholder": "Search active items...",
+    "columns": {
+      "merchant": "Merchant",
+      "type": "Type",
+      "item": "Item",
+      "slot": "Slot",
+      "activatedAt": "Activated",
+      "expiresAt": "Expires"
+    }
+  },
+  "approval": {
+    "title": "Review Homepage Push Request",
+    "fields": {
+      "merchant": "Merchant",
+      "agent": "Forwarded by Agent",
+      "type": "Type",
+      "item": "Item",
+      "submittedAt": "Submitted At",
+      "couponBatch": "Coupon Batch",
+      "reason": "Reason for Rejection",
+      "reasonPlaceholder": "Please provide a clear reason for rejecting this request..."
+    },
+    "types": {
+      "coupon": "Homepage Coupon Push",
+      "ad": "Homepage Ad Push"
+    },
+    "info": {
+      "selectAction": "Select an action for this request:",
+      "couponSlots": "Coupon slots available: {count} of {max}",
+      "adSlots": "Ad slots available: {count} of {max}",
+      "approveConfirm": "This request will be approved and the merchant will be notified to complete payment.",
+      "afterApproval": "After approval:",
+      "merchantWillPay": "Merchant will pay via agent's Stripe account",
+      "agentWalletDeducted": "Platform cost will be deducted from agent's wallet",
+      "slotAssigned": "Next available slot will be automatically assigned",
+      "expirySet": "Expiry date will be set based on system settings"
+    },
+    "actions": {
+      "approve": "Approve Request",
+      "reject": "Reject Request"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "back": "Back",
+      "confirmApprove": "Confirm & Approve",
+      "confirmReject": "Confirm & Reject"
+    },
+    "errors": {
+      "reasonRequired": "Please provide a reason for rejection",
+      "noSlotsAvailable": "No slots available! Cannot approve this request at this time."
+    }
+  },
+  "details": {
+    "title": "Request Details",
+    "badges": {
+      "forwarded": "Forwarded by Agent"
+    },
+    "sections": {
+      "merchant": "Merchant Information",
+      "agent": "Agent Information",
+      "requestDetails": "Request Details",
+      "couponDetails": "Coupon Details",
+      "paymentPlacement": "Payment & Placement",
+      "reason": "Reason"
+    },
+    "fields": {
+      "businessName": "Business Name",
+      "email": "Email",
+      "phone": "Phone",
+      "agentName": "Agent Name",
+      "agentEmail": "Agent Email",
+      "agentPhone": "Agent Phone",
+      "type": "Type",
+      "item": "Item",
+      "createdAt": "Created At",
+      "couponCode": "Coupon Code",
+      "batchName": "Batch Name",
+      "couponStatus": "Coupon Status",
+      "description": "Description",
+      "cost": "Cost",
+      "slot": "Slot",
+      "activatedAt": "Activated At",
+      "expiresAt": "Expires At"
+    },
+    "types": {
+      "coupon": "Homepage Coupon Push",
+      "ad": "Homepage Ad Push"
+    }
+  },
+  "info": {
+    "noForwardedRequests": "No pending requests at this time. All forwarded requests have been processed.",
+    "noActiveItems": "No active items on homepage currently."
+  },
+  "errors": {
+    "failedToLoadForwarded": "Failed to load forwarded requests",
+    "failedToLoadActive": "Failed to load active items",
+    "approveFailed": "Failed to approve request",
+    "rejectFailed": "Failed to reject request"
+  },
+  "success": {
+    "approved": "Request approved successfully! Merchant has been notified to complete payment.",
+    "rejected": "Request rejected. Merchant and agent have been notified."
+  }
+}

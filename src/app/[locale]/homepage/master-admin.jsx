@@ -36,7 +36,7 @@ import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
 import { cn } from "@/lib/utils";
-import { TopBannerAd } from "./components/PaidAdsDisplay";
+import { TopBannerAd, SidebarAd, BottomBannerAd } from "./components/PaidAdsDisplay";
 
 // --- Main Page Component ---
 export default function MasterAdminLandingPage() {
@@ -62,6 +62,21 @@ export default function MasterAdminLandingPage() {
   const [selectedCountry, setSelectedCountry] = useState("all");
   const [expiringSoon, setExpiringSoon] = useState(false);
   const [countries, setCountries] = useState([]);
+
+  // Homepage push display state
+  const [homepageCoupons, setHomepageCoupons] = useState([]);
+  const [homepageAds, setHomepageAds] = useState([]);
+
+  const normalizeHomepageAdPlacement = (placement) => {
+    const normalized = String(placement || "").trim().toLowerCase();
+    const mapped = {
+      homepage_ad_slot_1: "top",
+      homepage_ad_slot_2: "left",
+      homepage_ad_slot_3: "right",
+      homepage_ad_slot_4: "bottom",
+    };
+    return mapped[normalized] || normalized || "top";
+  };
 
   // Pagination State
   const [page, setPage] = useState(1);
@@ -187,10 +202,77 @@ export default function MasterAdminLandingPage() {
     [debouncedSearchQuery, selectedCountry, expiringSoon, t, totalAgents],
   );
 
+  const fetchHomepagePlacements = useCallback(async () => {
+    try {
+      const [couponResp, adResp] = await Promise.all([
+        axiosInstance.get("/approvals/homepage-coupons"),
+        axiosInstance.get("/approvals/homepage-ads"),
+      ]);
+
+      const couponsData = couponResp?.data?.data || couponResp?.data || [];
+      const adsData = adResp?.data?.data || adResp?.data || [];
+
+      const couponsList = Array.isArray(couponsData) ? couponsData : [];
+      const adsList = Array.isArray(adsData) ? adsData : [];
+
+      setHomepageCoupons(couponsList);
+
+      const transformedAds = adsList
+        .filter((item) => item && (item.id || item.merchant_id || item.merchant?.id))
+        .filter((item) => {
+          const hasImage =
+            item.paid_ad_image ||
+            item.merchant?.settings?.paid_ad_image ||
+            item.merchant?.paid_ad_image;
+          const hasVideo =
+            item.paid_ad_video ||
+            item.merchant?.settings?.paid_ad_video;
+          return hasImage || hasVideo;
+        })
+        .map((item) => ({
+          id: item.merchant_id || item.merchant?.id || item.id,
+          image:
+            item.paid_ad_image ||
+            item.merchant?.settings?.paid_ad_image ||
+            item.merchant?.paid_ad_image ||
+            null,
+          video:
+            item.paid_ad_video ||
+            item.merchant?.settings?.paid_ad_video ||
+            null,
+          isVideo:
+            item.paid_ad_video_status ||
+            item.merchant?.settings?.paid_ad_video_status ||
+            false,
+          placement: normalizeHomepageAdPlacement(
+            item.paid_ad_placement || item.placement || item.merchant?.settings?.paid_ad_placement,
+          ),
+          title: item.merchant?.business_name || "Sponsored Deal",
+          description: item.merchant?.city
+            ? `Visit ${item.merchant?.business_name} in ${item.merchant?.city}, ${item.merchant?.country || ""}.`
+            : "Discover our sponsored partner.",
+          cta: "View Offer",
+          tagline: item.merchant?.city
+            ? `EXCLUSIVE IN ${String(item.merchant.city).toUpperCase()}`
+            : "LIMITED TIME",
+          city: item.merchant?.city,
+          businessType: item.merchant?.business_type,
+        }));
+
+      setHomepageAds(transformedAds);
+    } catch (err) {
+      console.error("Failed to load homepage placements:", err);
+    }
+  }, []);
+
   // Initial load
   useEffect(() => {
     fetchAgents(1, true);
   }, [fetchAgents]);
+
+  useEffect(() => {
+    fetchHomepagePlacements();
+  }, [fetchHomepagePlacements]);
 
   // Trigger search when filters change (debounced search query)
   useEffect(() => {
@@ -207,6 +289,22 @@ export default function MasterAdminLandingPage() {
     localStorage.setItem("selectedAgent", JSON.stringify(agentData));
     router.push(`/homepage/agent`);
   };
+
+  const topHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "top") ||
+    homepageAds[0] ||
+    null;
+  const leftHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "left") ||
+    null;
+  const rightHomepageAd =
+    homepageAds.find((a) => {
+      const placement = normalizeHomepageAdPlacement(a.placement);
+      return placement === "right" || placement === "sidebar";
+    }) || null;
+  const bottomHomepageAd =
+    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "bottom") ||
+    null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
@@ -304,6 +402,82 @@ export default function MasterAdminLandingPage() {
             </div>
           </div>
         </section>
+
+        {/* -- Super Admin Homepage Placements (Coupon Batches + Ads) -- */}
+        {(homepageCoupons.length > 0 || homepageAds.length > 0) && (
+          <section className="bg-slate-50 py-16 border-t border-slate-100">
+            <div className="px-6 lg:px-10 max-w-[1600px] mx-auto space-y-10">
+              <div className="text-center max-w-3xl mx-auto">
+                <Badge variant="outline" className="mb-3 bg-primary/5 text-primary border-primary/20">
+                  Featured Homepage Placements
+                </Badge>
+                <h2 className="text-3xl font-black tracking-tight text-slate-900">
+                  Live Coupon Batches & Sponsored Ads
+                </h2>
+                <p className="text-slate-500 mt-2">
+                  Approved and paid homepage placements are shown here exactly like the agent storefront experience.
+                </p>
+              </div>
+
+              {topHomepageAd && <TopBannerAd ad={topHomepageAd} />}
+
+              <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+                <div className="hidden xl:block xl:col-span-2">
+                  {leftHomepageAd && <SidebarAd ad={leftHomepageAd} placement="left" />}
+                </div>
+
+                <div className="xl:col-span-8 space-y-6">
+                  {homepageCoupons.length > 0 ? (
+                    homepageCoupons.map((approval) => {
+                      const batch = approval?.coupon?.batch;
+                      if (!batch) return null;
+
+                      return (
+                        <div
+                          key={approval.id}
+                          className="group bg-white rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
+                        >
+                          {batch.rendered_html ? (
+                            <div
+                              className="w-full"
+                              dangerouslySetInnerHTML={{ __html: batch.rendered_html }}
+                            />
+                          ) : (
+                            <div className="p-6 bg-gradient-to-r from-slate-900 to-slate-700 text-white">
+                              <p className="text-xs uppercase tracking-widest opacity-80">Coupon Batch</p>
+                              <h3 className="text-2xl font-black mt-2">{batch.batch_name}</h3>
+                              <p className="text-sm opacity-85 mt-2 line-clamp-2">{batch.description || "Exclusive coupon offers available now."}</p>
+                            </div>
+                          )}
+                          <div className="p-5 border-t border-slate-100 bg-slate-50/30">
+                            <div className="flex items-center justify-between gap-3">
+                              <h4 className="font-bold text-slate-900 text-base leading-tight">
+                                {batch.batch_name}
+                              </h4>
+                              <span className="text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200">
+                                Slot: {approval.placement || "-"}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200">
+                      <p className="text-slate-500 font-medium">No active homepage coupon batches right now.</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="hidden xl:block xl:col-span-2">
+                  {rightHomepageAd && <SidebarAd ad={rightHomepageAd} placement="right" />}
+                </div>
+              </div>
+
+              {bottomHomepageAd && <BottomBannerAd ad={bottomHomepageAd} />}
+            </div>
+          </section>
+        )}
 
         {/* -- Main Content Area (Agent Directory) -- */}
         <section className="bg-slate-50 py-20" id="agent-directory">
