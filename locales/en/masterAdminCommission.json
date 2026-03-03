@@ -21,6 +21,10 @@
         "description": "Recurring merchant fees",
         "title": "Merchant Fees"
       },
+      "homepagePlacement": {
+        "description": "Paid homepage ad/coupon placements",
+        "title": "Homepage Placement"
+      },
       "tempPackages": {
         "description": "Short-term merchant plans",
         "title": "Temp. Packages"

@@ -200,10 +200,11 @@ export default function MasterAdminOverviewTab() {
             {canSeeFinance && (
                 <div className="space-y-4">
                     <h3 className="text-sm font-semibold text-muted-foreground">{t("sections.financialPerformance")}</h3>
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
                         <OverviewCard label={t("financialCards.agentSubscriptions")} value={`$${(revenue.agentSubscriptionRevenue || 0).toLocaleString()}`} icon={Shield} color="text-cyan-600" bg="bg-cyan-100" />
                         <OverviewCard label={t("financialCards.merchantSubscriptions")} value={`$${(revenue.annualSubscriptionRevenue || 0).toLocaleString()}`} icon={TrendingUp} color="text-blue-600" bg="bg-blue-100" />
                         <OverviewCard label={t("financialCards.packageCommissions")} value={`$${(revenue.creditPurchaseRevenue || 0).toLocaleString()}`} icon={DollarSign} color="text-purple-600" bg="bg-purple-100" />
+                        <OverviewCard label={t("financialCards.homepagePlacementRevenue")} value={`$${(revenue.homepagePlacementRevenue || 0).toLocaleString()}`} icon={Wallet} color="text-orange-600" bg="bg-orange-100" />
                         <OverviewCard label={t("financialCards.totalPlatformRevenue")} value={`$${(revenue.totalCommissions || 0).toLocaleString()}`} icon={CheckCircle} color="text-green-600" bg="bg-green-100" />
                     </div>
                 </div>
