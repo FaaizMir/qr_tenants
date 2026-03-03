@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "ホームページプッシュリクエスト",
+    "merchantDashboard": "マーチャントダッシュボード"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "キャンセル",
+      "submit": "リクエストを送信"
+    },
+    "errors": {
+      "failedToCreate": "リクエストの作成に失敗しました",
+      "failedToLoadData": "必要なデータの読み込みに失敗しました",
+      "noSlotsAvailable": "このタイプのリクエストには利用可能なスロットがありません",
+      "selectCoupon": "クーポンバッチを選択してください"
+    },
+    "fields": {
+      "adType": {
+        "label": "広告の配置",
+        "options": {
+          "bottom": "ボトムバナー",
+          "left": "左サイドバー",
+          "right": "右サイドバー",
+          "top": "トップバナー"
+        }
+      },
+      "coupon": {
+        "label": "クーポンバッチを選択",
+        "placeholder": "クーポンバッチを選択"
+      },
+      "type": {
+        "label": "リクエストタイプ",
+        "options": {
+          "ad": "ホームページ広告プッシュ",
+          "coupon": "ホームページクーポンプッシュ"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "利用可能な広告スロット: {count}",
+      "availableCouponSlots": "利用可能なクーポンスロット: {count}"
+    },
+    "pricing": {
+      "cost": "コスト",
+      "days": "日",
+      "duration": "期間",
+      "note": "エージェントとスーパ管理者の承認後に支払いが処理されます。"
+    },
+    "success": {
+      "requestCreated": "リクエストが正常に送信されました！あなたのエージェントによってレビューされます。"
+    },
+    "title": "ホームページプッシュリクエストを作成"
+  },
+  "details": {
+    "cost": "コスト",
+    "expiryDate": "有効期限",
+    "reason": "理由",
+    "slot": "スロット",
+    "status": "ステータス",
+    "title": "リクエストの詳細",
+    "type": "タイプ"
+  },
+  "errors": {
+    "failedToLoadRequests": "ホームページプッシュリクエストの読み込みに失敗しました",
+    "paymentFailed": "支払い処理に失敗しました。再試行してください。"
+  },
+  "listing": {
+    "actions": {
+      "pay": "今すぐ支払う"
+    },
+    "columns": {
+      "actions": "アクション",
+      "cost": "コスト",
+      "expiryDate": "期限切れ",
+      "item": "アイテム",
+      "slot": "スロット",
+      "status": "ステータス",
+      "type": "タイプ"
+    },
+    "createRequest": "新しいリクエストを作成",
+    "searchPlaceholder": "リクエストを検索...",
+    "subtitle": "ホームページの配置リクエストを提出して管理する",
+    "title": "ホームページプッシュリクエスト",
+    "types": {
+      "ad": "広告プッシュ",
+      "coupon": "クーポンプッシュ"
+    }
+  }
+}

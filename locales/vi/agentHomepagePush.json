@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "Bảng điều khiển đại lý",
+    "homepagePush": "Yêu cầu đẩy trên trang chủ"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Chuyển tiếp đến Quản trị viên siêu cấp"
+    },
+    "fields": {
+      "activatedAt": "Được kích hoạt vào",
+      "batchName": "Tên lô",
+      "businessName": "Tên doanh nghiệp",
+      "city": "Thành phố",
+      "cost": "Chi phí",
+      "couponCode": "Mã phiếu giảm giá",
+      "couponStatus": "Trạng thái phiếu giảm giá",
+      "createdAt": "Ngày tạo",
+      "description": "Mô tả",
+      "email": "Email",
+      "expiresAt": "Hết hạn vào",
+      "item": "Mục",
+      "paymentIntentId": "ID Ý định thanh toán",
+      "paymentStatus": "Trạng thái thanh toán",
+      "phone": "Điện thoại",
+      "slot": "Khe",
+      "type": "Loại",
+      "updatedAt": "Cập nhật vào"
+    },
+    "sections": {
+      "couponDetails": "Chi tiết phiếu giảm giá",
+      "disapprovalReason": "Lý do từ chối",
+      "merchant": "Thông tin thương nhân",
+      "paymentPlacement": "Thanh toán & Đặt chỗ",
+      "requestDetails": "Chi tiết yêu cầu"
+    },
+    "title": "Chi tiết yêu cầu",
+    "types": {
+      "ad": "Quảng cáo trên trang chủ",
+      "coupon": "Đẩy coupon trên trang chủ"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "Không thể từ chối yêu cầu",
+    "failedToLoadAll": "Không thể tải yêu cầu",
+    "failedToLoadPending": "Không thể tải yêu cầu đang chờ",
+    "forwardFailed": "Không thể chuyển tiếp yêu cầu"
+  },
+  "listing": {
+    "actions": {
+      "review": "Xem xét"
+    },
+    "columns": {
+      "actions": "Hành động",
+      "createdAt": "Được tạo vào",
+      "item": "Mặt hàng",
+      "merchant": "Nhà cung cấp",
+      "status": "Trạng thái",
+      "type": "Loại"
+    },
+    "searchPlaceholder": "Tìm kiếm yêu cầu...",
+    "subtitle": "Xem xét và quản lý các yêu cầu đẩy trang chủ từ các nhà cung cấp của bạn",
+    "title": "Yêu cầu đẩy trang chủ",
+    "types": {
+      "ad": "Đẩy quảng cáo",
+      "coupon": "Đẩy phiếu giảm giá"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "Từ chối yêu cầu",
+      "forward": "Chuyển đến quản trị viên siêu cấp"
+    },
+    "buttons": {
+      "back": "Quay lại",
+      "cancel": "Hủy",
+      "confirmDisapprove": "Xác nhận & Không chấp thuận",
+      "confirmForward": "Xác nhận & Chuyển tiếp"
+    },
+    "errors": {
+      "reasonRequired": "Vui lòng cung cấp lý do từ chối"
+    },
+    "fields": {
+      "batch": "Lô",
+      "couponDetails": "Chi tiết phiếu giảm giá",
+      "createdAt": "Ngày tạo",
+      "item": "Mặt hàng",
+      "merchant": "Nhà cung cấp",
+      "reason": "Lý do từ chối",
+      "reasonPlaceholder": "Vui lòng cung cấp lý do rõ ràng cho việc từ chối yêu cầu này...",
+      "type": "Loại"
+    },
+    "info": {
+      "forwardConfirm": "Yêu cầu này sẽ được chuyển đến quản trị viên siêu cấp để phê duyệt cuối cùng. Người bán sẽ được thông báo khi quản trị viên siêu cấp đưa ra quyết định.",
+      "selectAction": "Vui lòng chọn một hành động cho yêu cầu này:"
+    },
+    "title": "Xem xét yêu cầu đẩy trang chủ",
+    "types": {
+      "ad": "Quảng cáo trên trang chủ",
+      "coupon": "Đẩy coupon trên trang chủ"
+    }
+  },
+  "success": {
+    "disapproved": "Yêu cầu đã bị từ chối thành công. Nhà cung cấp đã được thông báo.",
+    "forwarded": "Yêu cầu đã được chuyển đến quản trị viên siêu cấp thành công!"
+  },
+  "tabs": {
+    "all": "Tất cả yêu cầu",
+    "pending": "Đang chờ xem xét"
+  }
+}

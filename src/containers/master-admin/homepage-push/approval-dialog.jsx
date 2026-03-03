@@ -17,7 +17,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 
 export default function ApprovalDialog({ open, request, slots, onClose, onApprove, onReject }) {
-  const t = useTranslations("superAdminHomepagePush.approval");
+  const t = useTranslations("masterAdminHomepagePush.approval");
   const [action, setAction] = useState(null); // 'approve' or 'reject'
   const [reason, setReason] = useState("");
   const [submitting, setSubmitting] = useState(false);

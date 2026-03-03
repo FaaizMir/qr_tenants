@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "مفعل",
+      "expiresAt": "تنتهي",
+      "item": "عنصر",
+      "merchant": "التاجر",
+      "slot": "الفتحة",
+      "type": "النوع"
+    },
+    "searchPlaceholder": "البحث عن العناصر النشطة..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "الموافقة على الطلب",
+      "reject": "رفض الطلب"
+    },
+    "buttons": {
+      "back": "عودة",
+      "cancel": "إلغاء",
+      "confirmApprove": "تأكيد وموافقة",
+      "confirmReject": "تأكيد & رفض"
+    },
+    "errors": {
+      "noSlotsAvailable": "لا توجد أماكن متاحة! لا يمكن الموافقة على هذا الطلب في الوقت الحالي.",
+      "reasonRequired": "يرجى تقديم سبب الرفض"
+    },
+    "fields": {
+      "agent": "تمت الإحالة بواسطة الوكيل",
+      "couponBatch": "دفعة القسائم",
+      "item": "العنصر",
+      "merchant": "التاجر",
+      "reason": "سبب الرفض",
+      "reasonPlaceholder": "يرجى تقديم سبب واضح لرفض هذا الطلب...",
+      "submittedAt": "تاريخ التقديم",
+      "type": "النوع"
+    },
+    "info": {
+      "adSlots": "أماكن الإعلانات المتاحة: {count} من {max}",
+      "afterApproval": "بعد الموافقة:",
+      "agentWalletDeducted": "ستُخصم تكلفة المنصة من محفظة الوكيل",
+      "approveConfirm": "سيتم الموافقة على هذا الطلب وسيتم إبلاغ التاجر لإكمال الدفع.",
+      "couponSlots": "عدد قسائم الكوبون المتاحة: {count} من {max}",
+      "expirySet": "سيتم تعيين تاريخ انتهاء الصلاحية بناءً على إعدادات النظام",
+      "merchantWillPay": "سيدفع التاجر عبر حساب سترايب الخاص بالوكيل",
+      "selectAction": "اختر إجراءً لهذا الطلب:",
+      "slotAssigned": "سيتم تعيين الفتحة المتاحة التالية تلقائيًا"
+    },
+    "title": "مراجعة طلب دفع الصفحة الرئيسية",
+    "types": {
+      "ad": "دفع إعلان الصفحة الرئيسية",
+      "coupon": "دفع قسيمة الصفحة الرئيسية"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "إدارة دفع الصفحة الرئيسية",
+    "masterAdminDashboard": "لوحة تحكم المسؤول الرئيسي"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "تمت الإحالة بواسطة الوكيل"
+    },
+    "fields": {
+      "activatedAt": "تم التفعيل في",
+      "agentEmail": "بريد الوكيل الإلكتروني",
+      "agentName": "اسم الوكيل",
+      "agentPhone": "هاتف الوكيل",
+      "batchName": "اسم الدفعة",
+      "businessName": "اسم العمل",
+      "cost": "التكلفة",
+      "couponCode": "رمز القسيمة",
+      "couponStatus": "حالة القسيمة",
+      "createdAt": "تاريخ الإنشاء",
+      "description": "الوصف",
+      "email": "البريد الإلكتروني",
+      "expiresAt": "تنتهي في",
+      "item": "عنصر",
+      "phone": "الهاتف",
+      "slot": "الفتحة",
+      "type": "النوع"
+    },
+    "sections": {
+      "agent": "معلومات الوكيل",
+      "couponDetails": "تفاصيل القسيمة",
+      "merchant": "معلومات التاجر",
+      "paymentPlacement": "الدفع والتوزيع",
+      "reason": "السبب",
+      "requestDetails": "تفاصيل الطلب"
+    },
+    "title": "تفاصيل الطلب",
+    "types": {
+      "ad": "دفع إعلان الصفحة الرئيسية",
+      "coupon": "دفع قسيمة الصفحة الرئيسية"
+    }
+  },
+  "errors": {
+    "approveFailed": "فشل في الموافقة على الطلب",
+    "failedToLoadActive": "فشل في تحميل العناصر النشطة",
+    "failedToLoadForwarded": "فشل في تحميل الطلبات المحالة",
+    "rejectFailed": "فشل في رفض الطلب"
+  },
+  "info": {
+    "noActiveItems": "لا توجد عناصر نشطة على الصفحة الرئيسية حالياً.",
+    "noForwardedRequests": "لا توجد طلبات معلقة في الوقت الحالي. تم معالجة جميع الطلبات المحالة."
+  },
+  "listing": {
+    "actions": {
+      "review": "مراجعة"
+    },
+    "columns": {
+      "actions": "الإجراءات",
+      "agent": "الوكيل",
+      "item": "عنصر",
+      "merchant": "تاجر",
+      "submittedAt": "تم الإرسال",
+      "type": "النوع"
+    },
+    "searchPlaceholder": "البحث عن الطلبات...",
+    "subtitle": "راجع ووافق على طلبات وضع الصفحة الرئيسية من الوكلاء",
+    "title": "إدارة دفع الصفحة الرئيسية",
+    "types": {
+      "ad": "دفع الإعلان",
+      "coupon": "دفع القسيمة"
+    }
+  },
+  "slots": {
+    "adSlots": "أماكن الإعلانات",
+    "available": "متاح",
+    "couponSlots": "فتحات القسيمة"
+  },
+  "success": {
+    "approved": "تمت الموافقة على الطلب بنجاح! تم إبلاغ التاجر لإكمال الدفع.",
+    "rejected": "تم رفض الطلب. تم إبلاغ التاجر والوكيل."
+  },
+  "tabs": {
+    "active": "نشط على الصفحة الرئيسية",
+    "forwarded": "في انتظار الموافقة"
+  }
+}

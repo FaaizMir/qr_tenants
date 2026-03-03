@@ -144,6 +144,15 @@
     "title": "Dapatkan Kupon Anda"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "Temui rakan kongsi yang disponsor.",
+      "exclusiveIn": "EKSKLUSIF DI {city}",
+      "limitedTime": "MASA TERHAD",
+      "sponsored": "Disponsor",
+      "sponsoredDeal": "Tawaran Disponsor",
+      "viewOffer": "Lihat Tawaran",
+      "visitBusiness": "Lawati {businessName} di {city}, {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "Peniaga Aktif",
       "agents": "Ejen",
@@ -151,6 +160,7 @@
       "description": "Urus rangkaian ejen penyewa global anda.",
       "expiringSoon": "Akan Tamat Tidak Lama Lagi",
       "expiringSoonActive": "Akan Tamat Tidak Lama Lagi ✓",
+      "loadingAgents": "Memuatkan agen...",
       "noAgentsFound": "Tiada ejen ditemui",
       "of": "daripada",
       "pageNoResults": "Halaman - Tiada Hasil",
@@ -158,8 +168,22 @@
       "showing": "Menunjukkan",
       "showingPage": "Menunjukkan Halaman",
       "title": "Direktori Ejen",
+      "total": "jumlah",
       "tryAdjustingFilters": "Cuba sesuaikan penapis anda.",
       "viewStorefront": "Lihat Kedai"
+    },
+    "couponBatches": {
+      "active": "Aktif",
+      "batches": "kumpulan",
+      "clearSearch": "Bersihkan carian",
+      "description": "Penempatan halaman utama yang diluluskan dan dibayar ditunjukkan tepat seperti kedai agen.",
+      "exclusiveOffers": "Tawaran kupon eksklusif tersedia sekarang.",
+      "noActiveBatches": "Tiada kumpulan kupon halaman utama aktif sekarang.",
+      "noBatchesFound": "Tiada kumpulan yang sepadan dengan carian anda.",
+      "searchPlaceholder": "Cari kumpulan kupon...",
+      "showingBatches": "Menunjukkan {start}–{end} daripada {total} kumpulan",
+      "subtitle": "Kumpulan Kupon Langsung & Iklan Bersponsor",
+      "title": "Penempatan Halaman Utama Terpilih"
     },
     "errors": {
       "failedToLoadAgents": "Gagal memuatkan ejen."

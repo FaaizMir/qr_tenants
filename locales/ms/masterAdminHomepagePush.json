@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "Diaktifkan",
+      "expiresAt": "Tamat",
+      "item": "Item",
+      "merchant": "Peniaga",
+      "slot": "Slot",
+      "type": "Jenis"
+    },
+    "searchPlaceholder": "Cari item aktif..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "Luluskan Permintaan",
+      "reject": "Tolak Permintaan"
+    },
+    "buttons": {
+      "back": "Kembali",
+      "cancel": "Batal",
+      "confirmApprove": "Sahkan & Luluskan",
+      "confirmReject": "Sahkan & Tolak"
+    },
+    "errors": {
+      "noSlotsAvailable": "Tiada slot tersedia! Tidak dapat meluluskan permintaan ini pada masa ini.",
+      "reasonRequired": "Sila berikan sebab penolakan"
+    },
+    "fields": {
+      "agent": "Diteruskan oleh Ejen",
+      "couponBatch": "Batch Kupon",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "reason": "Sebab Penolakan",
+      "reasonPlaceholder": "Sila berikan alasan yang jelas untuk menolak permintaan ini...",
+      "submittedAt": "Dihantar Pada",
+      "type": "Jenis"
+    },
+    "info": {
+      "adSlots": "Slot iklan tersedia: {count} daripada {max}",
+      "afterApproval": "Selepas kelulusan:",
+      "agentWalletDeducted": "Kos platform akan ditolak dari dompet ejen",
+      "approveConfirm": "Permintaan ini akan diluluskan dan peniaga akan diberitahu untuk menyelesaikan pembayaran.",
+      "couponSlots": "Slot kupon tersedia: {count} daripada {max}",
+      "expirySet": "Tarikh luput akan ditetapkan berdasarkan tetapan sistem",
+      "merchantWillPay": "Peniaga akan membayar melalui akaun Stripe ejen",
+      "selectAction": "Pilih tindakan untuk permintaan ini:",
+      "slotAssigned": "Slot yang tersedia seterusnya akan ditugaskan secara automatik"
+    },
+    "title": "Semak Permintaan Dorongan Halaman Utama",
+    "types": {
+      "ad": "Dorongan Iklan Halaman Utama",
+      "coupon": "Dorongan Kupon Halaman Utama"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "Pengurusan Pemberitahuan Halaman Utama",
+    "masterAdminDashboard": "Papan Pemuka Admin Utama"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Diteruskan oleh Ejen"
+    },
+    "fields": {
+      "activatedAt": "Diaktifkan Pada",
+      "agentEmail": "Emel Ejen",
+      "agentName": "Nama Ejen",
+      "agentPhone": "Telefon Ejen",
+      "batchName": "Nama Batch",
+      "businessName": "Nama Perniagaan",
+      "cost": "Kos",
+      "couponCode": "Kod Kupon",
+      "couponStatus": "Status Kupon",
+      "createdAt": "Dicipta Pada",
+      "description": "Penerangan",
+      "email": "Emel",
+      "expiresAt": "Tamat Pada",
+      "item": "Item",
+      "phone": "Telefon",
+      "slot": "Slot",
+      "type": "Jenis"
+    },
+    "sections": {
+      "agent": "Maklumat Ejen",
+      "couponDetails": "Butiran Kupon",
+      "merchant": "Maklumat Pedagang",
+      "paymentPlacement": "Pembayaran & Penempatan",
+      "reason": "Alasan",
+      "requestDetails": "Butiran Permintaan"
+    },
+    "title": "Butiran Permintaan",
+    "types": {
+      "ad": "Dorongan Iklan Halaman Utama",
+      "coupon": "Dorongan Kupon Halaman Utama"
+    }
+  },
+  "errors": {
+    "approveFailed": "Gagal untuk meluluskan permintaan",
+    "failedToLoadActive": "Gagal memuat item aktif",
+    "failedToLoadForwarded": "Gagal memuat permintaan yang diteruskan",
+    "rejectFailed": "Gagal untuk menolak permintaan"
+  },
+  "info": {
+    "noActiveItems": "Tiada item aktif di halaman utama pada masa ini.",
+    "noForwardedRequests": "Tiada permintaan tertunda pada masa ini. Semua permintaan yang dihantar telah diproses."
+  },
+  "listing": {
+    "actions": {
+      "review": "Semak"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "agent": "Ejen",
+      "item": "Item",
+      "merchant": "Peniaga",
+      "submittedAt": "Dihantar",
+      "type": "Jenis"
+    },
+    "searchPlaceholder": "Mencari permintaan...",
+    "subtitle": "Semak dan luluskan permintaan penempatan halaman utama daripada ejen",
+    "title": "Pengurusan Push Halaman Utama",
+    "types": {
+      "ad": "Dorongan Iklan",
+      "coupon": "Pemberitahuan Kupon"
+    }
+  },
+  "slots": {
+    "adSlots": "Slot Iklan",
+    "available": "tersedia",
+    "couponSlots": "Slot Kupon"
+  },
+  "success": {
+    "approved": "Permintaan diluluskan dengan jayanya! Peniaga telah diberitahu untuk menyelesaikan pembayaran.",
+    "rejected": "Permintaan ditolak. Pedagang dan ejen telah diberitahu."
+  },
+  "tabs": {
+    "active": "Aktif di Halaman Utama",
+    "forwarded": "Menunggu Kelulusan"
+  }
+}

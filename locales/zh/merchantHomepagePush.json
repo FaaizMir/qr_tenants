@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "主页推送请求",
+    "merchantDashboard": "商户仪表板"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "取消",
+      "submit": "提交请求"
+    },
+    "errors": {
+      "failedToCreate": "请求创建失败",
+      "failedToLoadData": "加载所需数据失败",
+      "noSlotsAvailable": "此类型请求没有可用的广告位",
+      "selectCoupon": "请选择一个优惠券批次"
+    },
+    "fields": {
+      "adType": {
+        "label": "广告投放",
+        "options": {
+          "bottom": "底部横幅",
+          "left": "左侧边栏",
+          "right": "右侧边栏",
+          "top": "顶部横幅"
+        }
+      },
+      "coupon": {
+        "label": "选择优惠券批次",
+        "placeholder": "选择一个优惠券批次"
+      },
+      "type": {
+        "label": "请求类型",
+        "options": {
+          "ad": "主页广告推送",
+          "coupon": "首页优惠券推送"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "可用广告位: {count}",
+      "availableCouponSlots": "可用优惠券插槽：{count}"
+    },
+    "pricing": {
+      "cost": "费用",
+      "days": "天数",
+      "duration": "持续时间",
+      "note": "付款将在代理和超级管理员批准后处理。"
+    },
+    "success": {
+      "requestCreated": "请求提交成功！将由您的代理进行审核。"
+    },
+    "title": "创建主页推送请求"
+  },
+  "details": {
+    "cost": "费用",
+    "expiryDate": "到期时间",
+    "reason": "原因",
+    "slot": "插槽",
+    "status": "状态",
+    "title": "请求详情",
+    "type": "类型"
+  },
+  "errors": {
+    "failedToLoadRequests": "加载首页推送请求失败",
+    "paymentFailed": "付款处理失败。请再试一次。"
+  },
+  "listing": {
+    "actions": {
+      "pay": "立即支付"
+    },
+    "columns": {
+      "actions": "操作",
+      "cost": "费用",
+      "expiryDate": "到期",
+      "item": "项目",
+      "slot": "广告位",
+      "status": "状态",
+      "type": "类型"
+    },
+    "createRequest": "创建新请求",
+    "searchPlaceholder": "搜索请求...",
+    "subtitle": "提交并管理您的主页投放请求",
+    "title": "首页推送请求",
+    "types": {
+      "ad": "广告推送",
+      "coupon": "优惠券推送"
+    }
+  }
+}

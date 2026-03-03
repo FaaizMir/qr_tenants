@@ -186,8 +186,9 @@ function TechCrunchAdSlot({
   onImpression,
   width = 300,
   height = 600,
+  translationNamespace = "Homepage.agent.ads",
 }) {
-  const t = useTranslations("Homepage.agent.ads");
+  const t = useTranslations(translationNamespace);
   const adRef = useAdImpression(ad, agentId, onImpression);
 
   if (!ad || (!ad.image && !ad.video)) return null;
@@ -290,7 +291,7 @@ const HORIZONTAL_AD_HEIGHT = 220;
 const VERTICAL_AD_WIDTH = 250;
 const VERTICAL_AD_HEIGHT = 600;
 
-export function TopBannerAd({ ad, onClick, agentId, onImpression }) {
+export function TopBannerAd({ ad, onClick, agentId, onImpression, translationNamespace = "Homepage.agent.ads" }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
@@ -305,13 +306,14 @@ export function TopBannerAd({ ad, onClick, agentId, onImpression }) {
           onImpression={onImpression}
           width={HORIZONTAL_AD_WIDTH}
           height={HORIZONTAL_AD_HEIGHT}
+          translationNamespace={translationNamespace}
         />
       </div>
     </div>
   );
 }
 
-export function SidebarAd({ ad, placement, onClick, agentId, onImpression }) {
+export function SidebarAd({ ad, placement, onClick, agentId, onImpression, translationNamespace = "Homepage.agent.ads" }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
@@ -326,13 +328,14 @@ export function SidebarAd({ ad, placement, onClick, agentId, onImpression }) {
           onImpression={onImpression}
           width={VERTICAL_AD_WIDTH}
           height={VERTICAL_AD_HEIGHT}
+          translationNamespace={translationNamespace}
         />
       </div>
     </div>
   );
 }
 
-export function InlineAd({ ad, onClick, agentId, onImpression }) {
+export function InlineAd({ ad, onClick, agentId, onImpression, translationNamespace = "Homepage.agent.ads" }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
@@ -347,13 +350,14 @@ export function InlineAd({ ad, onClick, agentId, onImpression }) {
           onImpression={onImpression}
           width={VERTICAL_AD_WIDTH}
           height={VERTICAL_AD_HEIGHT}
+          translationNamespace={translationNamespace}
         />
       </div>
     </div>
   );
 }
 
-export function BottomBannerAd({ ad, onClick, agentId, onImpression }) {
+export function BottomBannerAd({ ad, onClick, agentId, onImpression, translationNamespace = "Homepage.agent.ads" }) {
   if (!ad || (!ad.image && !ad.video)) return null;
 
   return (
@@ -368,6 +372,7 @@ export function BottomBannerAd({ ad, onClick, agentId, onImpression }) {
           onImpression={onImpression}
           width={HORIZONTAL_AD_WIDTH}
           height={HORIZONTAL_AD_HEIGHT}
+          translationNamespace={translationNamespace}
         />
       </div>
     </div>

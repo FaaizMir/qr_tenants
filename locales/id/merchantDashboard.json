@@ -131,6 +131,10 @@
     "visits": "kunjungan"
   },
   "upgrade": {
+    "banner": {
+      "button": "Tingkatkan Sekarang",
+      "message": "Dapatkan lebih banyak layanan dan buka lebih banyak fitur untuk bisnis Anda"
+    },
     "description": "Buka semua fitur termasuk analitik, pesan dua arah, dan lainnya.",
     "errorMissingInfo": "Tidak dapat melanjutkan. Informasi biaya atau admin hilang.",
     "errorNoSessionUrl": "Tidak ada URL sesi yang dikembalikan",

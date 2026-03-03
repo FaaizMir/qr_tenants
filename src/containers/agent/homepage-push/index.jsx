@@ -19,11 +19,17 @@ const AgentRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "merchant",
     header: t("listing.columns.merchant"),
+    meta: {
+      label: t("listing.columns.merchant"),
+    },
     cell: ({ row }) => row.original.merchant?.business_name || "-",
   },
   {
     accessorKey: "approval_type",
     header: t("listing.columns.type"),
+    meta: {
+      label: t("listing.columns.type"),
+    },
     cell: ({ row }) => (
       <span className="font-medium">
         {row.original.approval_type === "homepage_coupon_push"
@@ -35,6 +41,9 @@ const AgentRequestColumns = (t, onViewDetails, onReview) => [
   {
     id: "item",
     header: t("listing.columns.item"),
+    meta: {
+      label: t("listing.columns.item"),
+    },
     cell: ({ row }) => {
       if (row.original.approval_type === "homepage_coupon_push") {
         return row.original.coupon?.batch?.batch_name || row.original.coupon?.coupon_code || "-";
@@ -45,6 +54,9 @@ const AgentRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "approval_status",
     header: t("listing.columns.status"),
+    meta: {
+      label: t("listing.columns.status"),
+    },
     cell: ({ row }) => {
       const statusMap = {
         pending_agent_review: { label: "Pending Review", variant: "warning" },
@@ -65,6 +77,9 @@ const AgentRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "created_at",
     header: t("listing.columns.createdAt"),
+    meta: {
+      label: t("listing.columns.createdAt"),
+    },
     cell: ({ row }) => {
       const date = row.original.created_at;
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -73,6 +88,9 @@ const AgentRequestColumns = (t, onViewDetails, onReview) => [
   {
     id: "actions",
     header: t("listing.columns.actions"),
+    meta: {
+      label: t("listing.columns.actions"),
+    },
     cell: ({ row }) => (
       <div className="flex gap-2">
         <Button

@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "Homepage Push Requests",
+    "merchantDashboard": "Merchant Dashboard"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit Request"
+    },
+    "errors": {
+      "failedToCreate": "Failed to create request",
+      "failedToLoadData": "Failed to load required data",
+      "noSlotsAvailable": "No slots available for this type of request",
+      "selectCoupon": "Please select a coupon batch"
+    },
+    "fields": {
+      "adType": {
+        "label": "Ad Placement",
+        "options": {
+          "bottom": "Bottom Banner",
+          "left": "Left Sidebar",
+          "right": "Right Sidebar",
+          "top": "Top Banner"
+        }
+      },
+      "coupon": {
+        "label": "Select Coupon Batch",
+        "placeholder": "Choose a coupon batch"
+      },
+      "type": {
+        "label": "Request Type",
+        "options": {
+          "ad": "Homepage Ad Push",
+          "coupon": "Homepage Coupon Push"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "Available ad slots: {count}",
+      "availableCouponSlots": "Available coupon slots: {count}"
+    },
+    "pricing": {
+      "cost": "Cost",
+      "days": "days",
+      "duration": "Duration",
+      "note": "Payment will be processed after agent and super admin approval."
+    },
+    "success": {
+      "requestCreated": "Request submitted successfully! It will be reviewed by your agent."
+    },
+    "title": "Create Homepage Push Request"
+  },
+  "details": {
+    "cost": "Cost",
+    "expiryDate": "Expires At",
+    "reason": "Reason",
+    "slot": "Slot",
+    "status": "Status",
+    "title": "Request Details",
+    "type": "Type"
+  },
+  "errors": {
+    "failedToLoadRequests": "Failed to load homepage push requests",
+    "paymentFailed": "Payment processing failed. Please try again."
+  },
+  "listing": {
+    "actions": {
+      "pay": "Pay Now"
+    },
+    "columns": {
+      "actions": "Actions",
+      "cost": "Cost",
+      "expiryDate": "Expires",
+      "item": "Item",
+      "slot": "Slot",
+      "status": "Status",
+      "type": "Type"
+    },
+    "createRequest": "Create New Request",
+    "searchPlaceholder": "Search requests...",
+    "subtitle": "Submit and manage your homepage placement requests",
+    "title": "Homepage Push Requests",
+    "types": {
+      "ad": "Ad Push",
+      "coupon": "Coupon Push"
+    }
+  }
+}

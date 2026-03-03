@@ -3,10 +3,10 @@ import SuperAdminHomepagePushContainer from "@/containers/master-admin/homepage-
 import { getTranslations } from "next-intl/server";
 
 export default async function SuperAdminHomepagePushPage() {
-  const t = await getTranslations("superAdminHomepagePush.breadcrumbs");
+  const t = await getTranslations("masterAdminHomepagePush.breadcrumbs");
   
   const breadcrumbData = [
-    { name: t("superAdminDashboard"), url: "/master-admin/dashboard" },
+    { name: t("masterAdminDashboard"), url: "/master-admin/dashboard" },
     { name: t("homepagePush"), url: "/master-admin/homepage-push" },
   ];
 

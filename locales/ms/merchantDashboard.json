@@ -131,6 +131,10 @@
     "visits": "lawatan"
   },
   "upgrade": {
+    "banner": {
+      "button": "Tingkatkan Sekarang",
+      "message": "Dapatkan lebih banyak perkhidmatan dan buka lebih banyak ciri untuk perniagaan anda"
+    },
     "description": "Buka semua ciri termasuk analitik, pemesejan dua hala, dan banyak lagi.",
     "errorMissingInfo": "Tidak dapat meneruskan. Maklumat yuran atau admin hilang.",
     "errorNoSessionUrl": "Tiada URL sesi yang dikembalikan",

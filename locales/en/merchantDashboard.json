@@ -131,6 +131,10 @@
     "visits": "visits"
   },
   "upgrade": {
+    "banner": {
+      "button": "Upgrade Now",
+      "message": "Get more services and unlock more features for your business"
+    },
     "description": "Unlock all features including analytics, bi-directional messaging, and more.",
     "errorMissingInfo": "Unable to proceed. Missing fee or admin information.",
     "errorNoSessionUrl": "No session URL returned",

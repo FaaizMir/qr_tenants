@@ -144,6 +144,15 @@
     "title": "获取您的优惠券"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "发现我们的赞助合作伙伴。",
+      "exclusiveIn": "在 {city} 独家",
+      "limitedTime": "限时",
+      "sponsored": "赞助",
+      "sponsoredDeal": "赞助交易",
+      "viewOffer": "查看优惠",
+      "visitBusiness": "访问 {businessName} 在 {city}, {country}。"
+    },
     "agentDirectory": {
       "activeMerchants": "活跃商家",
       "agents": "代理",
@@ -151,6 +160,7 @@
       "description": "管理您全球的租户代理网络。",
       "expiringSoon": "即将到期",
       "expiringSoonActive": "即将到期 ✓",
+      "loadingAgents": "加载代理...",
       "noAgentsFound": "未找到代理",
       "of": "的",
       "pageNoResults": "页面 - 没有结果",
@@ -158,8 +168,22 @@
       "showing": "显示中",
       "showingPage": "显示页面",
       "title": "代理目录",
+      "total": "总计",
       "tryAdjustingFilters": "尝试调整您的过滤器。",
       "viewStorefront": "查看店面"
+    },
+    "couponBatches": {
+      "active": "活跃",
+      "batches": "批次",
+      "clearSearch": "清除搜索",
+      "description": "批准并支付的主页位置显示与代理商店面完全相同。",
+      "exclusiveOffers": "独家优惠券优惠现已提供。",
+      "noActiveBatches": "当前没有活跃的主页优惠券批次。",
+      "noBatchesFound": "没有批次匹配您的搜索。",
+      "searchPlaceholder": "搜索优惠券批次...",
+      "showingBatches": "显示 {start}–{end} 共 {total} 个批次",
+      "subtitle": "实时优惠券批次和赞助广告",
+      "title": "特色主页位置"
     },
     "errors": {
       "failedToLoadAgents": "加载代理失败。"

@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "Permintaan Dorong Halaman Utama",
+    "merchantDashboard": "Papan Pemuka Pedagang"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "Batal",
+      "submit": "Hantar Permintaan"
+    },
+    "errors": {
+      "failedToCreate": "Gagal untuk membuat permintaan",
+      "failedToLoadData": "Gagal memuatkan data yang diperlukan",
+      "noSlotsAvailable": "Tiada slot tersedia untuk jenis permintaan ini",
+      "selectCoupon": "Sila pilih kumpulan kupon"
+    },
+    "fields": {
+      "adType": {
+        "label": "Penempatan Iklan",
+        "options": {
+          "bottom": "Sepanduk Bawah",
+          "left": "Bar Sisi Kiri",
+          "right": "Bar Sisi Kanan",
+          "top": "Sepanduk Atas"
+        }
+      },
+      "coupon": {
+        "label": "Pilih Batch Kupon",
+        "placeholder": "Pilih kumpulan kupon"
+      },
+      "type": {
+        "label": "Jenis Permintaan",
+        "options": {
+          "ad": "Dorong Iklan Halaman Utama",
+          "coupon": "Dorongan Kupon Halaman Utama"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "Slot iklan yang tersedia: {count}",
+      "availableCouponSlots": "Slot kupon yang tersedia: {count}"
+    },
+    "pricing": {
+      "cost": "Kos",
+      "days": "hari",
+      "duration": "Tempoh",
+      "note": "Pembayaran akan diproses selepas kelulusan ejen dan pentadbir super."
+    },
+    "success": {
+      "requestCreated": "Permintaan dihantar dengan jayanya! Ia akan disemak oleh ejen anda."
+    },
+    "title": "Buat Permintaan Push Halaman Utama"
+  },
+  "details": {
+    "cost": "Kos",
+    "expiryDate": "Tamat Pada",
+    "reason": "Sebab",
+    "slot": "Slot",
+    "status": "Status",
+    "title": "Butiran Permintaan",
+    "type": "Jenis"
+  },
+  "errors": {
+    "failedToLoadRequests": "Gagal memuatkan permintaan dorongan halaman utama",
+    "paymentFailed": "Pemprosesan pembayaran gagal. Sila cuba lagi."
+  },
+  "listing": {
+    "actions": {
+      "pay": "Bayar Sekarang"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "cost": "Kos",
+      "expiryDate": "Tamat tempoh",
+      "item": "Item",
+      "slot": "Slot",
+      "status": "Status",
+      "type": "Jenis"
+    },
+    "createRequest": "Buat Permintaan Baru",
+    "searchPlaceholder": "Cari permintaan...",
+    "subtitle": "Hantar dan urus permintaan penempatan halaman utama anda",
+    "title": "Permintaan Dorongan Halaman Utama",
+    "types": {
+      "ad": "Dorongan Iklan",
+      "coupon": "Dorong Kupon"
+    }
+  }
+}

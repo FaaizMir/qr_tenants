@@ -91,11 +91,11 @@ export function AppSidebar({
       url: "/agent/statements",
       icon: FileText,
     },
-    {
-      title: tSidebar("agent.couponsync"),
-      url: "/agent/coupon-sync",
-      icon: RefreshCw,
-    },
+    // {
+    //   title: tSidebar("agent.couponsync"),
+    //   url: "/agent/coupon-sync",
+    //   icon: RefreshCw,
+    // },
     {
       title: tSidebar("agent.support"),
       url: "/agent/support",
@@ -221,17 +221,17 @@ export function AppSidebar({
       icon: DollarSign,
       allowedStaff: ["super_admin", "finance_viewer"],
     },
-    {
-      title: tSidebar("masterAdmin.approvals"),
-      url: "/master-admin/approvals",
-      icon: CheckCircle,
-      allowedStaff: ["super_admin", "ad_approver"],
-    },
+    // {
+    //   title: tSidebar("masterAdmin.approvals"),
+    //   url: "/master-admin/approvals",
+    //   icon: CheckCircle,
+    //   allowedStaff: ["super_admin", "ad_approver"],
+    // },
     {
       title: tSidebar("masterAdmin.homepagePush"),
       url: "/master-admin/homepage-push",
       icon: Home,
-      allowedStaff: ["super_admin"],
+      allowedStaff: ["super_admin", "ad_approver"],
     },
     {
       title: tSidebar("masterAdmin.statements"),

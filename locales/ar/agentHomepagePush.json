@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "لوحة معلومات الوكيل",
+    "homepagePush": "طلبات دفع الصفحة الرئيسية"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "تم تحويله إلى المشرف الأعلى"
+    },
+    "fields": {
+      "activatedAt": "تاريخ التفعيل",
+      "batchName": "اسم الدفعة",
+      "businessName": "اسم العمل",
+      "city": "المدينة",
+      "cost": "التكلفة",
+      "couponCode": "رمز القسيمة",
+      "couponStatus": "حالة القسيمة",
+      "createdAt": "تاريخ الإنشاء",
+      "description": "الوصف",
+      "email": "البريد الإلكتروني",
+      "expiresAt": "تاريخ الانتهاء",
+      "item": "عنصر",
+      "paymentIntentId": "معرف نية الدفع",
+      "paymentStatus": "حالة الدفع",
+      "phone": "الهاتف",
+      "slot": "الفتحة",
+      "type": "نوع",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sections": {
+      "couponDetails": "تفاصيل القسيمة",
+      "disapprovalReason": "سبب الرفض",
+      "merchant": "معلومات التاجر",
+      "paymentPlacement": "الدفع والتوزيع",
+      "requestDetails": "تفاصيل الطلب"
+    },
+    "title": "تفاصيل الطلب",
+    "types": {
+      "ad": "دفع إعلان الصفحة الرئيسية",
+      "coupon": "دفع قسيمة الصفحة الرئيسية"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "فشل في رفض الطلب",
+    "failedToLoadAll": "فشل في تحميل الطلبات",
+    "failedToLoadPending": "فشل في تحميل الطلبات المعلقة",
+    "forwardFailed": "فشل في تحويل الطلب"
+  },
+  "listing": {
+    "actions": {
+      "review": "مراجعة"
+    },
+    "columns": {
+      "actions": "إجراءات",
+      "createdAt": "تاريخ الإنشاء",
+      "item": "العنصر",
+      "merchant": "التاجر",
+      "status": "الحالة",
+      "type": "النوع"
+    },
+    "searchPlaceholder": "طلبات البحث...",
+    "subtitle": "راجع وادارة طلبات الدفع على الصفحة الرئيسية من التجار لديك",
+    "title": "طلبات دفع الصفحة الرئيسية",
+    "types": {
+      "ad": "دفع الإعلان",
+      "coupon": "دفع القسيمة"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "رفض الطلب",
+      "forward": "تحويل إلى المشرف الأعلى"
+    },
+    "buttons": {
+      "back": "عودة",
+      "cancel": "إلغاء",
+      "confirmDisapprove": "تأكيد ورفض",
+      "confirmForward": "تأكيد وإرسال"
+    },
+    "errors": {
+      "reasonRequired": "يرجى تقديم سبب للرفض"
+    },
+    "fields": {
+      "batch": "الدفعة",
+      "couponDetails": "تفاصيل القسيمة",
+      "createdAt": "تاريخ الإنشاء",
+      "item": "عنصر",
+      "merchant": "التاجر",
+      "reason": "سبب الرفض",
+      "reasonPlaceholder": "يرجى تقديم سبب واضح لرفض هذا الطلب...",
+      "type": "نوع"
+    },
+    "info": {
+      "forwardConfirm": "سيتم تحويل هذا الطلب إلى المشرف الأعلى للموافقة النهائية. سيتم إبلاغ التاجر بمجرد أن يتخذ المشرف الأعلى قرارًا.",
+      "selectAction": "يرجى اختيار إجراء لهذا الطلب:"
+    },
+    "title": "راجع طلب الدفع على الصفحة الرئيسية",
+    "types": {
+      "ad": "دفع إعلان الصفحة الرئيسية",
+      "coupon": "دفع قسيمة الصفحة الرئيسية"
+    }
+  },
+  "success": {
+    "disapproved": "تم رفض الطلب بنجاح. تم إبلاغ التاجر.",
+    "forwarded": "تم تحويل الطلب إلى المشرف الأعلى بنجاح!"
+  },
+  "tabs": {
+    "all": "جميع الطلبات",
+    "pending": "قيد المراجعة"
+  }
+}

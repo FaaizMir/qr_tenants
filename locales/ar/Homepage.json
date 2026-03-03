@@ -144,6 +144,15 @@
     "title": "احصل على قسيمتك"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "اكتشف شريكنا الراعي.",
+      "exclusiveIn": "حصري في {city}",
+      "limitedTime": "لفترة محدودة",
+      "sponsored": "مدعوم",
+      "sponsoredDeal": "عرض مدعوم",
+      "viewOffer": "عرض العرض",
+      "visitBusiness": "قم بزيارة {businessName} في {city}، {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "التجار النشطون",
       "agents": "الوكلاء",
@@ -151,6 +160,7 @@
       "description": "إدارة شبكة وكلاء المستأجرين العالمية الخاصة بك.",
       "expiringSoon": "ستنتهي قريبًا",
       "expiringSoonActive": "ستنتهي قريبًا ✓",
+      "loadingAgents": "جارٍ تحميل الوكلاء...",
       "noAgentsFound": "لم يتم العثور على وكلاء",
       "of": "من",
       "pageNoResults": "الصفحة - لا توجد نتائج",
@@ -158,8 +168,22 @@
       "showing": "عرض",
       "showingPage": "عرض الصفحة",
       "title": "دليل الوكلاء",
+      "total": "الإجمالي",
       "tryAdjustingFilters": "حاول ضبط الفلاتر الخاصة بك.",
       "viewStorefront": "عرض واجهة المتجر"
+    },
+    "couponBatches": {
+      "active": "نشط",
+      "batches": "دفعات",
+      "clearSearch": "مسح البحث",
+      "description": "تمت الموافقة على مواضع الصفحة الرئيسية المدفوعة وعرضها تمامًا مثل واجهة وكيل.",
+      "exclusiveOffers": "عروض قسائم حصرية متاحة الآن.",
+      "noActiveBatches": "لا توجد دفعات قسائم نشطة في الصفحة الرئيسية الآن.",
+      "noBatchesFound": "لا توجد دفعات تطابق بحثك.",
+      "searchPlaceholder": "ابحث عن دفعات القسائم...",
+      "showingBatches": "عرض {start}–{end} من {total} دفعات",
+      "subtitle": "دفعات القسائم الحية والإعلانات المدعومة",
+      "title": "مواضع الصفحة الرئيسية المميزة"
     },
     "errors": {
       "failedToLoadAgents": "فشل في تحميل الوكلاء."

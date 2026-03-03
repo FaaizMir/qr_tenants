@@ -131,6 +131,10 @@
     "visits": "访问"
   },
   "upgrade": {
+    "banner": {
+      "button": "立即升级",
+      "message": "为您的业务获取更多服务并解锁更多功能"
+    },
     "description": "解锁所有功能，包括分析、双向消息传递等。",
     "errorMissingInfo": "无法继续。缺少费用或管理员信息。",
     "errorNoSessionUrl": "未返回会话 URL",

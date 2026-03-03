@@ -25,7 +25,7 @@ import { Loader2, Info } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
-  const t = useTranslations("homepagePush.create");
+  const t = useTranslations("merchantHomepagePush.create");
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
   const [selectedBatchId, setSelectedBatchId] = useState("");
   const [adPlacement, setAdPlacement] = useState("top");

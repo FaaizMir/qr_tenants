@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "Đã kích hoạt",
+      "expiresAt": "Hết hạn",
+      "item": "Mục",
+      "merchant": "Nhà cung cấp",
+      "slot": "Chỗ",
+      "type": "Loại"
+    },
+    "searchPlaceholder": "Tìm kiếm các mục đang hoạt động..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "Phê duyệt yêu cầu",
+      "reject": "Từ chối yêu cầu"
+    },
+    "buttons": {
+      "back": "Quay lại",
+      "cancel": "Hủy bỏ",
+      "confirmApprove": "Xác nhận & Phê duyệt",
+      "confirmReject": "Xác nhận & Từ chối"
+    },
+    "errors": {
+      "noSlotsAvailable": "Không có slot nào khả dụng! Không thể phê duyệt yêu cầu này vào lúc này.",
+      "reasonRequired": "Vui lòng cung cấp lý do từ chối"
+    },
+    "fields": {
+      "agent": "Chuyển tiếp bởi Đại lý",
+      "couponBatch": "Lô coupon",
+      "item": "Mặt hàng",
+      "merchant": "Thương nhân",
+      "reason": "Lý do từ chối",
+      "reasonPlaceholder": "Vui lòng cung cấp lý do rõ ràng để từ chối yêu cầu này...",
+      "submittedAt": "Ngày gửi",
+      "type": "Loại"
+    },
+    "info": {
+      "adSlots": "Slot quảng cáo khả dụng: {count} trong số {max}",
+      "afterApproval": "Sau khi phê duyệt:",
+      "agentWalletDeducted": "Chi phí nền tảng sẽ được trừ từ ví của đại lý",
+      "approveConfirm": "Yêu cầu này sẽ được phê duyệt và nhà cung cấp sẽ được thông báo để hoàn tất thanh toán.",
+      "couponSlots": "Số lượng coupon có sẵn: {count} trong {max}",
+      "expirySet": "Ngày hết hạn sẽ được thiết lập dựa trên cài đặt hệ thống",
+      "merchantWillPay": "Nhà cung cấp sẽ thanh toán qua tài khoản Stripe của đại lý",
+      "selectAction": "Chọn một hành động cho yêu cầu này:",
+      "slotAssigned": "Slot tiếp theo có sẵn sẽ được tự động chỉ định"
+    },
+    "title": "Xem xét yêu cầu đẩy trang chính",
+    "types": {
+      "ad": "Quảng cáo đẩy trên trang chính",
+      "coupon": "Đẩy mã giảm giá trên Trang chính"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "Quản lý đẩy trang chủ",
+    "masterAdminDashboard": "Bảng điều khiển Quản trị viên chính"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Chuyển tiếp bởi Đại lý"
+    },
+    "fields": {
+      "activatedAt": "Kích hoạt vào lúc",
+      "agentEmail": "Email của đại lý",
+      "agentName": "Tên đại lý",
+      "agentPhone": "Điện thoại của đại lý",
+      "batchName": "Tên lô",
+      "businessName": "Tên doanh nghiệp",
+      "cost": "Chi phí",
+      "couponCode": "Mã giảm giá",
+      "couponStatus": "Trạng thái phiếu giảm giá",
+      "createdAt": "Ngày tạo",
+      "description": "Mô tả",
+      "email": "Email",
+      "expiresAt": "Hết hạn vào",
+      "item": "Mặt hàng",
+      "phone": "Điện thoại",
+      "slot": "Chỗ",
+      "type": "Loại"
+    },
+    "sections": {
+      "agent": "Thông tin đại lý",
+      "couponDetails": "Chi tiết phiếu giảm giá",
+      "merchant": "Thông tin thương nhân",
+      "paymentPlacement": "Thanh toán & Đặt chỗ",
+      "reason": "Lý do",
+      "requestDetails": "Chi tiết yêu cầu"
+    },
+    "title": "Chi tiết yêu cầu",
+    "types": {
+      "ad": "Đẩy quảng cáo trang chính",
+      "coupon": "Quảng cáo phiếu giảm giá trên trang chính"
+    }
+  },
+  "errors": {
+    "approveFailed": "Không thể phê duyệt yêu cầu",
+    "failedToLoadActive": "Không thể tải các mục hoạt động",
+    "failedToLoadForwarded": "Không thể tải các yêu cầu đã chuyển tiếp",
+    "rejectFailed": "Không thể từ chối yêu cầu"
+  },
+  "info": {
+    "noActiveItems": "Hiện tại không có mặt hàng nào hoạt động trên trang chủ.",
+    "noForwardedRequests": "Không có yêu cầu nào đang chờ xử lý tại thời điểm này. Tất cả các yêu cầu đã chuyển tiếp đã được xử lý."
+  },
+  "listing": {
+    "actions": {
+      "review": "Xem xét"
+    },
+    "columns": {
+      "actions": "Hành động",
+      "agent": "Đại lý",
+      "item": "Mục",
+      "merchant": "Nhà cung cấp",
+      "submittedAt": "Đã gửi",
+      "type": "Loại"
+    },
+    "searchPlaceholder": "Tìm kiếm yêu cầu...",
+    "subtitle": "Xem xét và phê duyệt yêu cầu đặt trang chính từ các đại lý",
+    "title": "Quản lý đẩy trang chủ",
+    "types": {
+      "ad": "Quảng cáo đẩy",
+      "coupon": "Đẩy coupon"
+    }
+  },
+  "slots": {
+    "adSlots": "Slot quảng cáo",
+    "available": "có sẵn",
+    "couponSlots": "Slots phiếu giảm giá"
+  },
+  "success": {
+    "approved": "Yêu cầu đã được phê duyệt thành công! Người bán đã được thông báo để hoàn tất thanh toán.",
+    "rejected": "Yêu cầu bị từ chối. Thương nhân và đại lý đã được thông báo."
+  },
+  "tabs": {
+    "active": "Hoạt động trên Trang chính",
+    "forwarded": "Đang chờ phê duyệt"
+  }
+}

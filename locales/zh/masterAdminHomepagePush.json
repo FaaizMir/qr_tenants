@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "已激活",
+      "expiresAt": "到期",
+      "item": "项目",
+      "merchant": "商户",
+      "slot": "插槽",
+      "type": "类型"
+    },
+    "searchPlaceholder": "搜索活动项目..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "批准请求",
+      "reject": "拒绝请求"
+    },
+    "buttons": {
+      "back": "返回",
+      "cancel": "取消",
+      "confirmApprove": "确认并批准",
+      "confirmReject": "确认并拒绝"
+    },
+    "errors": {
+      "noSlotsAvailable": "没有可用的插槽！此时无法批准该请求。",
+      "reasonRequired": "请提供拒绝理由"
+    },
+    "fields": {
+      "agent": "由代理转发",
+      "couponBatch": "优惠券批次",
+      "item": "项目",
+      "merchant": "商户",
+      "reason": "拒绝理由",
+      "reasonPlaceholder": "请提供拒绝此请求的明确理由...",
+      "submittedAt": "提交时间",
+      "type": "类型"
+    },
+    "info": {
+      "adSlots": "可用广告插槽：{count} / {max}",
+      "afterApproval": "审核后：",
+      "agentWalletDeducted": "平台费用将从代理的钱包中扣除",
+      "approveConfirm": "该请求将被批准，商家将被通知完成付款。",
+      "couponSlots": "可用优惠券插槽：{count} / {max}",
+      "expirySet": "到期日期将根据系统设置确定",
+      "merchantWillPay": "商户将通过代理的Stripe账户付款",
+      "selectAction": "选择此请求的操作：",
+      "slotAssigned": "下一个可用名额将自动分配"
+    },
+    "title": "审核首页推送请求",
+    "types": {
+      "ad": "主页广告推送",
+      "coupon": "主页优惠券推送"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "主页推送管理",
+    "masterAdminDashboard": "主管理员仪表板"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "由代理转发"
+    },
+    "fields": {
+      "activatedAt": "激活时间",
+      "agentEmail": "代理电子邮件",
+      "agentName": "代理名称",
+      "agentPhone": "代理电话",
+      "batchName": "批次名称",
+      "businessName": "商家名称",
+      "cost": "成本",
+      "couponCode": "优惠券代码",
+      "couponStatus": "优惠券状态",
+      "createdAt": "创建时间",
+      "description": "描述",
+      "email": "电子邮件",
+      "expiresAt": "到期时间",
+      "item": "项目",
+      "phone": "电话",
+      "slot": "插槽",
+      "type": "类型"
+    },
+    "sections": {
+      "agent": "代理信息",
+      "couponDetails": "优惠券详情",
+      "merchant": "商户信息",
+      "paymentPlacement": "支付与投放",
+      "reason": "理由",
+      "requestDetails": "请求详情"
+    },
+    "title": "请求详情",
+    "types": {
+      "ad": "首页广告推送",
+      "coupon": "主页优惠券推送"
+    }
+  },
+  "errors": {
+    "approveFailed": "请求批准失败",
+    "failedToLoadActive": "加载活动项目失败",
+    "failedToLoadForwarded": "加载转发请求失败",
+    "rejectFailed": "拒绝请求失败"
+  },
+  "info": {
+    "noActiveItems": "当前主页上没有活动项目。",
+    "noForwardedRequests": "当前没有待处理的请求。所有转发的请求已处理。"
+  },
+  "listing": {
+    "actions": {
+      "review": "审核"
+    },
+    "columns": {
+      "actions": "操作",
+      "agent": "代理",
+      "item": "项目",
+      "merchant": "商家",
+      "submittedAt": "已提交",
+      "type": "类型"
+    },
+    "searchPlaceholder": "搜索请求...",
+    "subtitle": "审核并批准代理的主页投放请求",
+    "title": "主页推送管理",
+    "types": {
+      "ad": "广告推送",
+      "coupon": "优惠券推送"
+    }
+  },
+  "slots": {
+    "adSlots": "广告插槽",
+    "available": "可用的",
+    "couponSlots": "优惠券名额"
+  },
+  "success": {
+    "approved": "请求已成功批准！商家已被通知完成付款。",
+    "rejected": "请求被拒绝。商户和代理已被通知。"
+  },
+  "tabs": {
+    "active": "在主页上激活",
+    "forwarded": "待批准"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "代理仪表板",
+    "homepagePush": "首页推送请求"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "已转发给超级管理员"
+    },
+    "fields": {
+      "activatedAt": "激活于",
+      "batchName": "批次名称",
+      "businessName": "商户名称",
+      "city": "城市",
+      "cost": "费用",
+      "couponCode": "优惠码",
+      "couponStatus": "优惠券状态",
+      "createdAt": "创建时间",
+      "description": "描述",
+      "email": "电子邮件",
+      "expiresAt": "到期于",
+      "item": "项目",
+      "paymentIntentId": "支付意图ID",
+      "paymentStatus": "支付状态",
+      "phone": "电话",
+      "slot": "插槽",
+      "type": "类型",
+      "updatedAt": "更新于"
+    },
+    "sections": {
+      "couponDetails": "优惠券详情",
+      "disapprovalReason": "拒绝理由",
+      "merchant": "商户信息",
+      "paymentPlacement": "支付与投放",
+      "requestDetails": "请求详情"
+    },
+    "title": "请求详情",
+    "types": {
+      "ad": "首页广告推送",
+      "coupon": "首页优惠券推送"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "拒绝请求失败",
+    "failedToLoadAll": "加载请求失败",
+    "failedToLoadPending": "加载待处理请求失败",
+    "forwardFailed": "转发请求失败"
+  },
+  "listing": {
+    "actions": {
+      "review": "审核"
+    },
+    "columns": {
+      "actions": "操作",
+      "createdAt": "创建于",
+      "item": "项目",
+      "merchant": "商家",
+      "status": "状态",
+      "type": "类型"
+    },
+    "searchPlaceholder": "搜索请求...",
+    "subtitle": "查看和管理来自商家的主页推送请求",
+    "title": "主页推送请求",
+    "types": {
+      "ad": "广告推送",
+      "coupon": "优惠券推送"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "拒绝请求",
+      "forward": "转发给超级管理员"
+    },
+    "buttons": {
+      "back": "返回",
+      "cancel": "取消",
+      "confirmDisapprove": "确认和拒绝",
+      "confirmForward": "确认并转发"
+    },
+    "errors": {
+      "reasonRequired": "请提供拒绝的理由"
+    },
+    "fields": {
+      "batch": "批次",
+      "couponDetails": "优惠券详情",
+      "createdAt": "创建时间",
+      "item": "项目",
+      "merchant": "商家",
+      "reason": "拒绝理由",
+      "reasonPlaceholder": "请提供拒绝此请求的明确理由...",
+      "type": "类型"
+    },
+    "info": {
+      "forwardConfirm": "该请求将转发给超级管理员以进行最终批准。一旦超级管理员做出决定，商家将收到通知。",
+      "selectAction": "请选择此请求的操作："
+    },
+    "title": "审核主页推送请求",
+    "types": {
+      "ad": "首页广告推送",
+      "coupon": "首页优惠券推送"
+    }
+  },
+  "success": {
+    "disapproved": "请求已成功拒绝。商家已被通知。",
+    "forwarded": "请求已成功转发给超级管理员！"
+  },
+  "tabs": {
+    "all": "所有请求",
+    "pending": "待审核"
+  }
+}

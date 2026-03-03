@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 export default function DetailsDialog({ open, request, onClose }) {
-  const t = useTranslations("superAdminHomepagePush.details");
+  const t = useTranslations("masterAdminHomepagePush.details");
 
   if (!request) return null;
 

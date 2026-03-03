@@ -144,6 +144,15 @@
     "title": "Nhận phiếu giảm giá của bạn"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "Khám phá đối tác tài trợ của chúng tôi.",
+      "exclusiveIn": "ĐỘC QUYỀN TẠI {city}",
+      "limitedTime": "THỜI GIAN CÓ HẠN",
+      "sponsored": "Tài trợ",
+      "sponsoredDeal": "Ưu đãi tài trợ",
+      "viewOffer": "Xem ưu đãi",
+      "visitBusiness": "Truy cập {businessName} tại {city}, {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "Thương nhân hoạt động",
       "agents": "Đại lý",
@@ -151,6 +160,7 @@
       "description": "Quản lý mạng lưới đại lý toàn cầu của bạn.",
       "expiringSoon": "Sắp hết hạn",
       "expiringSoonActive": "Sắp hết hạn ✓",
+      "loadingAgents": "Đang tải đại lý...",
       "noAgentsFound": "Không tìm thấy đại lý nào",
       "of": "của",
       "pageNoResults": "Trang - Không có kết quả",
@@ -158,8 +168,22 @@
       "showing": "Đang hiển thị",
       "showingPage": "Đang hiển thị trang",
       "title": "Danh bạ đại lý",
+      "total": "tổng cộng",
       "tryAdjustingFilters": "Hãy thử điều chỉnh các bộ lọc của bạn.",
       "viewStorefront": "Xem Cửa hàng"
+    },
+    "couponBatches": {
+      "active": "Hoạt động",
+      "batches": "lô",
+      "clearSearch": "Xóa tìm kiếm",
+      "description": "Các vị trí trên trang chính đã được phê duyệt và thanh toán hiển thị chính xác như cửa hàng của đại lý.",
+      "exclusiveOffers": "Các ưu đãi phiếu giảm giá độc quyền hiện có.",
+      "noActiveBatches": "Hiện tại không có lô phiếu giảm giá trên trang chính nào hoạt động.",
+      "noBatchesFound": "Không có lô nào phù hợp với tìm kiếm của bạn.",
+      "searchPlaceholder": "Tìm kiếm các lô phiếu giảm giá...",
+      "showingBatches": "Hiển thị {start}–{end} của {total} lô",
+      "subtitle": "Các lô phiếu giảm giá trực tiếp & Quảng cáo tài trợ",
+      "title": "Các vị trí trên trang chính nổi bật"
     },
     "errors": {
       "failedToLoadAgents": "Không thể tải các đại lý."

@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "エージェントダッシュボード",
+    "homepagePush": "ホームページプッシュリクエスト"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "スーパ管理者に転送されました"
+    },
+    "fields": {
+      "activatedAt": "有効化日時",
+      "batchName": "バッチ名",
+      "businessName": "ビジネス名",
+      "city": "市",
+      "cost": "コスト",
+      "couponCode": "クーポンコード",
+      "couponStatus": "クーポンのステータス",
+      "createdAt": "作成日時",
+      "description": "説明",
+      "email": "メール",
+      "expiresAt": "有効期限",
+      "item": "アイテム",
+      "paymentIntentId": "支払いインテントID",
+      "paymentStatus": "支払い状況",
+      "phone": "電話",
+      "slot": "スロット",
+      "type": "タイプ",
+      "updatedAt": "更新日時"
+    },
+    "sections": {
+      "couponDetails": "クーポンの詳細",
+      "disapprovalReason": "却下の理由",
+      "merchant": "マーチャント情報",
+      "paymentPlacement": "支払いと配置",
+      "requestDetails": "リクエストの詳細"
+    },
+    "title": "リクエストの詳細",
+    "types": {
+      "ad": "ホームページ広告プッシュ",
+      "coupon": "ホームページクーポンプッシュ"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "リクエストの却下に失敗しました",
+    "failedToLoadAll": "リクエストの読み込みに失敗しました",
+    "failedToLoadPending": "保留中のリクエストの読み込みに失敗しました",
+    "forwardFailed": "リクエストの転送に失敗しました"
+  },
+  "listing": {
+    "actions": {
+      "review": "レビュー"
+    },
+    "columns": {
+      "actions": "アクション",
+      "createdAt": "作成日時",
+      "item": "アイテム",
+      "merchant": "マーチャント",
+      "status": "ステータス",
+      "type": "タイプ"
+    },
+    "searchPlaceholder": "検索リクエスト...",
+    "subtitle": "マーチャントからのホームページプッシュリクエストをレビューおよび管理する",
+    "title": "ホームページプッシュリクエスト",
+    "types": {
+      "ad": "広告プッシュ",
+      "coupon": "クーポンプッシュ"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "リクエストを却下",
+      "forward": "スーパ管理者に転送"
+    },
+    "buttons": {
+      "back": "戻る",
+      "cancel": "キャンセル",
+      "confirmDisapprove": "確認 & 拒否",
+      "confirmForward": "確認して転送"
+    },
+    "errors": {
+      "reasonRequired": "却下の理由を提供してください"
+    },
+    "fields": {
+      "batch": "バッチ",
+      "couponDetails": "クーポンの詳細",
+      "createdAt": "作成日時",
+      "item": "アイテム",
+      "merchant": "マーチャント",
+      "reason": "却下の理由",
+      "reasonPlaceholder": "このリクエストを却下する明確な理由を提供してください...",
+      "type": "タイプ"
+    },
+    "info": {
+      "forwardConfirm": "このリクエストは最終承認のためにスーパ管理者に転送されます。スーパ管理者が決定を下すと、商人に通知されます。",
+      "selectAction": "このリクエストのアクションを選択してください:"
+    },
+    "title": "ホームページプッシュリクエストをレビューする",
+    "types": {
+      "ad": "ホームページ広告プッシュ",
+      "coupon": "ホームページクーポンプッシュ"
+    }
+  },
+  "success": {
+    "disapproved": "リクエストは正常に却下されました。マーチャントに通知されました。",
+    "forwarded": "リクエストはスーパ管理者に正常に転送されました!"
+  },
+  "tabs": {
+    "all": "すべてのリクエスト",
+    "pending": "保留中のレビュー"
+  }
+}
