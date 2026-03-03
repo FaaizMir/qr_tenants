@@ -40,11 +40,12 @@
         "placeholder": "Choose a coupon batch..."
       },
       "adType": {
-        "label": "Ad Type",
+        "label": "Ad Placement",
         "options": {
-          "banner": "Banner Ad",
-          "popup": "Popup Ad",
-          "sidebar": "Sidebar Ad"
+          "top": "Top",
+          "left": "Left",
+          "right": "Right",
+          "bottom": "Bottom"
         }
       }
     },
