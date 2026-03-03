@@ -28,7 +28,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const t = useTranslations("homepagePush.create");
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
   const [selectedBatchId, setSelectedBatchId] = useState("");
-  const [adType, setAdType] = useState("banner");
+  const [adPlacement, setAdPlacement] = useState("top");
   const [couponBatches, setCouponBatches] = useState([]);
   const [slots, setSlots] = useState(null);
   const [pricing, setPricing] = useState(null);
@@ -91,7 +91,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
         });
       } else {
         await axiosInstance.post("/approvals/homepage-ad-push", {
-          ad_type: adType,
+          ad_placement: adPlacement,
         });
       }
 
@@ -192,23 +192,26 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
               </div>
             )}
 
-            {/* Ad Type (if type is ad) */}
+            {/* Ad Placement (if type is ad) */}
             {type === "ad" && (
               <div className="space-y-2">
                 <Label>{t("fields.adType.label")}</Label>
-                <Select value={adType} onValueChange={setAdType}>
+                <Select value={adPlacement} onValueChange={setAdPlacement}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="banner">
-                      {t("fields.adType.options.banner")}
+                    <SelectItem value="top">
+                      {t("fields.adType.options.top")}
                     </SelectItem>
-                    <SelectItem value="popup">
-                      {t("fields.adType.options.popup")}
+                    <SelectItem value="left">
+                      {t("fields.adType.options.left")}
                     </SelectItem>
-                    <SelectItem value="sidebar">
-                      {t("fields.adType.options.sidebar")}
+                    <SelectItem value="right">
+                      {t("fields.adType.options.right")}
+                    </SelectItem>
+                    <SelectItem value="bottom">
+                      {t("fields.adType.options.bottom")}
                     </SelectItem>
                   </SelectContent>
                 </Select>
