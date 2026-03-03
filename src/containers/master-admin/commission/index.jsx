@@ -198,7 +198,7 @@ export default function MasterAdminCommissionContainer() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {[
             {
               title: t("cards.sources.agentSubscription.title"),
@@ -223,6 +223,12 @@ export default function MasterAdminCommissionContainer() {
               amount: walletData.commission_merchant_annual_fee,
               icon: DollarSign,
               desc: t("cards.sources.merchantFees.description"),
+            },
+            {
+              title: t("cards.sources.homepagePlacement.title"),
+              amount: walletData.homepage_placement_revenue,
+              icon: Wallet,
+              desc: t("cards.sources.homepagePlacement.description"),
             },
           ].map((item, index) => (
             <Card

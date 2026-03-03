@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "การสมัครสมาชิกตัวแทน",
+    "homepagePlacementRevenue": "รายได้จากการวางตำแหน่งหน้าแรก",
     "merchantSubscriptions": "การสมัครสมาชิกผู้ค้า",
     "packageCommissions": "ค่าคอมมิชชั่นแพ็คเกจ",
     "totalPlatformRevenue": "รายได้รวมของแพลตฟอร์ม"

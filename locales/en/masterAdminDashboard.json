@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "Agent Subscriptions",
+    "homepagePlacementRevenue": "Homepage Placement Revenue",
     "merchantSubscriptions": "Merchant Subscriptions",
     "packageCommissions": "Package Commissions",
     "totalPlatformRevenue": "Total Platform Revenue"
