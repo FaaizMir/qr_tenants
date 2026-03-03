@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "पैकेज बनाएं",
+    "editPackage": "पैकेज संपादित करें",
+    "masterAdminDashboard": "मास्टर एडमिन डैशबोर्ड",
+    "packages": "पैकेज"
+  },
+  "columns": {
+    "actions": "क्रियाएँ",
+    "active": "सक्रिय",
+    "credits": "क्रेडिट",
+    "deleteAction": "पैकेज हटाएं",
+    "editAction": "पैकेज संपादित करें",
+    "inactive": "निष्क्रिय",
+    "menuLabel": "पैकेज क्रियाएँ",
+    "noDescription": "कोई विवरण नहीं",
+    "packageInfo": "पैकेज जानकारी",
+    "perCredit": "प्रति क्रेडिट",
+    "plan": "योजना",
+    "pricing": "मूल्य निर्धारण",
+    "rank": "रैंक",
+    "status": "स्थिति",
+    "type": "प्रकार"
+  },
+  "deleteDialog": {
+    "cancel": "हटाने को रद्द करें",
+    "confirm": "पुष्टिकृत, अब हटाएँ",
+    "description": "आप {name} को स्थायी रूप से हटाने वाले हैं। यह क्रिया अंतिम है और इसे किसी भी व्यक्ति द्वारा पूर्ववत नहीं किया जा सकता।",
+    "title": "अत्यधिक सावधानी"
+  },
+  "form": {
+    "backButton": "सूची में वापस जाएँ",
+    "buttons": {
+      "cancel": "रद्द करें",
+      "delete": "पैकेज हटाएँ",
+      "save": "पैकेज प्रकाशित करें",
+      "saving": "सहेजना...",
+      "update": "पैकेज अपडेट करें"
+    },
+    "createTitle": "नया पैकेज बनाएं",
+    "deleteDialog": {
+      "cancel": "रद्द करें",
+      "confirm": "हाँ, पैकेज हटाएं",
+      "description": "यह {name} को स्थायी रूप से हटा देगा। यह क्रिया पूर्ववत नहीं की जा सकती।",
+      "title": "क्या आप बिल्कुल सुनिश्चित हैं?"
+    },
+    "editTitle": "क्रेडिट पैकेज संपादित करें",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "क्रेडिट प्रकार",
+      "currency": "मुद्रा",
+      "customCreditType": "कस्टम क्रेडिट प्रकार निर्दिष्ट करें",
+      "customCreditTypePlaceholder": "जैसे कि जन्मदिन विशेष",
+      "description": "विवरण",
+      "descriptionPlaceholder": "इस पैकेज में क्या है इसका संक्षिप्त सारांश...",
+      "displayPriority": "प्रदर्शन प्राथमिकता",
+      "displayPriorityPlaceholder": "सूची में स्थिति (1, 2, 3...)",
+      "merchantPlan": "व्यापारी योजना",
+      "packageName": "पैकेज का नाम",
+      "packageNamePlaceholder": "उदाहरण के लिए प्रीमियम ग्रोथ बंडल",
+      "packageStatus": "पैकेज स्थिति",
+      "price": "कीमत",
+      "pricePerCredit": "क्रेडिट प्रति मूल्य",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "कुल क्रेडिट"
+    },
+    "hints": {
+      "autoCalculated": "स्वचालित"
+    },
+    "messages": {
+      "createError": "पैकेज बनाने में विफल",
+      "createSuccess": "पैकेज सफलतापूर्वक बनाया गया",
+      "deleteError": "पैकेज हटाने में विफल",
+      "deleteSuccess": "पैकेज सफलतापूर्वक हटाया गया",
+      "fetchError": "पैकेज विवरण लोड करने में विफल",
+      "paidAdsRestriction": "भुगतान किए गए विज्ञापन पैकेज केवल एजेंटों द्वारा प्रबंधित किए जा सकते हैं",
+      "updateError": "पैकेज अपडेट करने में विफल",
+      "updateSuccess": "पैकेज सफलतापूर्वक अपडेट किया गया"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "कूपन",
+        "custom": "कस्टम",
+        "whatsappBI": "व्हाट्सएप बीआई संदेश",
+        "whatsappUI": "व्हाट्सएप यूआई संदेश"
+      },
+      "currency": {
+        "pkr": "पीकेआर (रु)",
+        "usd": "यूएसडी ($)"
+      },
+      "merchantType": {
+        "annual": "वार्षिक / प्रीमियम",
+        "temporary": "अस्थायी / बुनियादी"
+      },
+      "status": {
+        "active": "सक्रिय और दृश्य",
+        "inactive": "निष्क्रिय / छिपा हुआ"
+      }
+    },
+    "preview": {
+      "baseCredits": "बेस क्रेडिट",
+      "categories": {
+        "coupon": "कूपन",
+        "paidAds": "भुगतान किए गए विज्ञापन",
+        "standard": "मानक",
+        "whatsapp": "व्हाट्सएप संदेश"
+      },
+      "enhancedFeatures": "सुधारित सुविधाएँ और क्षमता",
+      "getStarted": "शुरू करें",
+      "hiddenDraft": "छिपा हुआ / ड्राफ्ट",
+      "title": "सीधा पूर्वावलोकन"
+    },
+    "sections": {
+      "classification": "वर्गीकरण",
+      "credits": "क्रेडिट और आवंटन",
+      "identity": "पहचान और मूल्य निर्धारण"
+    },
+    "subtitle": "व्यापारियों के लिए मूल्य निर्धारण और क्रेडिट सीमाएँ परिभाषित करें।",
+    "validation": {
+      "creditsMin": "क्रेडिट कम से कम 1 होना चाहिए",
+      "creditsRequired": "क्रेडिट आवश्यक हैं",
+      "customTypeRequired": "कस्टम क्रेडिट प्रकार आवश्यक है",
+      "descriptionRequired": "विवरण आवश्यक है",
+      "nameRequired": "पैकेज का नाम आवश्यक है",
+      "priceMin": "कीमत कम से कम 1 होनी चाहिए",
+      "priceRequired": "कीमत आवश्यक है"
+    }
+  },
+  "listing": {
+    "createButton": "नया पैकेज बनाएं",
+    "noPackages": "कोई पैकेज नहीं मिला",
+    "noPackagesDescription": "शुरू करने के लिए अपना पहला पैकेज बनाएं",
+    "searchPlaceholder": "पैकेज नाम, क्रेडिट प्रकार द्वारा खोजें..."
+  },
+  "messages": {
+    "deleteError": "पैकेज हटाने में विफल",
+    "deleteSuccess": "पैकेज सफलतापूर्वक हटाया गया",
+    "fetchError": "पैकेज प्राप्त करने में विफल"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "स्वचालित कटौती सक्षम",
+    "badge": "प्लेटफ़ॉर्म मानक",
+    "billingCycle": "बिलिंग चक्र",
+    "billingCycleValue": "365 दिन की आवर्ती",
+    "dialog": {
+      "cancelButton": "रद्द करें",
+      "confirmButton": "पुष्टि करें और अपडेट करें",
+      "description": "सभी एजेंटों के लिए प्लेटफ़ॉर्म पर नई वार्षिक सदस्यता शुल्क सेट करें। परिवर्तन नए नवीनीकरण के लिए तुरंत प्रभावी होते हैं।",
+      "label": "नया वार्षिक शुल्क",
+      "placeholder": "0.00",
+      "title": "सदस्यता शुल्क अपडेट करें",
+      "updatingButton": "अपडेट हो रहा है...",
+      "warning": "सावधान: नाटकीय मूल्य परिवर्तन एजेंटों की बनाए रखने की क्षमता को प्रभावित कर सकते हैं। परिवर्तन सिस्टम ऑडिट में लॉग किए जाएंगे।"
+    },
+    "globalCurrency": "वैश्विक मुद्रा",
+    "insightDescription": "सदस्यता शुल्क को समायोजित करने से नए एजेंटों के लिए प्लेटफ़ॉर्म की पहुंच प्रभावित होती है। सुनिश्चित करें कि मूल्य प्रतिस्पर्धी बना रहे जबकि प्लेटफ़ॉर्म की गुणवत्ता बनाए रखें।",
+    "insightTitle": "राजस्व बुद्धिमत्ता",
+    "messages": {
+      "fetchError": "सदस्यता शुल्क प्राप्त करने में विफल",
+      "updateError": "शुल्क अपडेट करने में विफल",
+      "updateSuccess": "सदस्यता शुल्क सफलतापूर्वक अपडेट किया गया",
+      "validationError": "कृपया एक मान्य राशि दर्ज करें"
+    },
+    "perYear": "/ प्रति वर्ष निश्चित",
+    "status": "स्थिति",
+    "statusValue": "सक्रिय योजना",
+    "syncButton": "डेटा समन्वयित करें",
+    "title": "एजेंट वार्षिक सदस्यता",
+    "updateButton": "मूल्य संरचना अपडेट करें"
+  },
+  "subtitle": "सभी व्यापारी क्रेडिट बंडलों का प्रबंधन और निगरानी करें",
+  "title": "पैकेज"
+}

@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "Semua Laporan",
+    "masterAdminDashboard": "Dasbor Admin Utama"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "Unduh PDF",
+      "header": "Tindakan"
+    },
+    "generatedAt": {
+      "header": "Dihasilkan Pada"
+    },
+    "owner": {
+      "agent": "Agen",
+      "header": "Pemilik",
+      "merchant": "Pedagang",
+      "superAdmin": "Super Admin"
+    },
+    "period": {
+      "header": "Periode",
+      "unknown": "Tidak Dikenal"
+    },
+    "status": {
+      "failed": "Gagal",
+      "generated": "Dihasilkan",
+      "header": "Status",
+      "pending": "Menunggu"
+    }
+  },
+  "filters": {
+    "description": "Saring laporan berdasarkan tahun dan bulan",
+    "loading": "Memuat...",
+    "month": "Bulan",
+    "quickActions": "Tindakan Cepat",
+    "refreshList": "Segarkan Daftar",
+    "selectMonth": "Pilih bulan",
+    "selectYear": "Pilih tahun",
+    "title": "Filter Pernyataan",
+    "year": "Tahun"
+  },
+  "header": {
+    "subtitle": "Lihat dan unduh pernyataan bulanan untuk pedagang, agen, dan admin platform.",
+    "title": "Semua Laporan Keuangan"
+  },
+  "messages": {
+    "downloadError": "Gagal mengunduh PDF. Silakan coba lagi.",
+    "downloadSuccess": "Pernyataan berhasil diunduh!",
+    "loadError": "Gagal memuat pernyataan. Silakan coba lagi."
+  },
+  "months": {
+    "april": "April",
+    "august": "Agustus",
+    "december": "Desember",
+    "february": "Februari",
+    "january": "Januari",
+    "july": "Juli",
+    "june": "Juni",
+    "march": "Maret",
+    "may": "Mei",
+    "november": "November",
+    "october": "Oktober",
+    "september": "September"
+  },
+  "summaryCards": {
+    "agents": "Agen",
+    "merchants": "Pedagang",
+    "superAdmin": "Super Admin"
+  },
+  "table": {
+    "loading": "Memuat pernyataan...",
+    "noData": {
+      "message": "Tidak ada pernyataan yang tersedia untuk periode yang dipilih.",
+      "title": "Tidak Ada Pernyataan Ditemukan"
+    },
+    "tabs": {
+      "agents": "Agen ({count})",
+      "all": "Semua ({count})",
+      "merchants": "Pedagang ({count})",
+      "superAdmin": "Super Admin ({count})"
+    },
+    "title": "Riwayat Laporan"
+  }
+}

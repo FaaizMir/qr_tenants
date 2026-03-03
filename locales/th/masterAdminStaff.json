@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "การจัดการโฆษณา",
+    "financeOnly": "การเงินเท่านั้น",
+    "fullAccess": "เข้าถึงทั้งหมด",
+    "readOnly": "อ่านอย่างเดียว",
+    "supportHelp": "ช่วยเหลือสนับสนุน"
+  },
+  "actions": {
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "menuLabel": "ตัวเลือกพนักงาน"
+  },
+  "breadcrumb": {
+    "addStaff": "เพิ่มพนักงาน",
+    "editStaff": "แก้ไขพนักงาน",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก",
+    "staffManagement": "การจัดการพนักงาน"
+  },
+  "columns": {
+    "access": "การเข้าถึง",
+    "actions": "การดำเนินการ",
+    "phone": "โทรศัพท์",
+    "role": "บทบาท",
+    "staffMember": "สมาชิกพนักงาน",
+    "status": "สถานะ"
+  },
+  "delete": {
+    "cancel": "ยกเลิก",
+    "confirm": "ลบถาวร",
+    "deleting": "กำลังลบ...",
+    "description": "คุณแน่ใจหรือว่าต้องการลบ",
+    "descriptionEnd": "? การกระทำนี้ไม่สามารถย้อนกลับได้",
+    "descriptionPermanent": "? นี่จะทำให้การเข้าถึงแพลตฟอร์มของพวกเขาถูกเพิกถอนอย่างถาวร",
+    "error": "ไม่สามารถลบสมาชิกพนักงานได้",
+    "success": "ลบสมาชิกพนักงานเรียบร้อยแล้ว.",
+    "title": "ลบสมาชิกพนักงาน?",
+    "unknownRole": "บทบาทที่ไม่รู้จัก"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "ควบคุมว่าบัญชีนี้ใช้งานอยู่หรือไม่.",
+      "disabled": "บัญชีถูกปิดใช้งาน",
+      "disabledDescription": "การเข้าถึงของพนักงานถูกเพิกถอนในขณะนี้.",
+      "enabled": "บัญชีเปิดใช้งาน",
+      "enabledDescription": "พนักงานสามารถเข้าสู่ระบบและจัดการแพลตฟอร์มได้",
+      "title": "การมองเห็นบัญชี"
+    },
+    "buttons": {
+      "cancel": "ยกเลิก",
+      "createAccount": "สร้างบัญชี",
+      "savingChanges": "กำลังบันทึกการเปลี่ยนแปลง",
+      "updateProfile": "อัปเดตโปรไฟล์"
+    },
+    "createSubtitle": "มอบหมายบทบาทใหม่และสิทธิ์การเข้าถึง",
+    "createTitle": "สร้างบัญชีเจ้าหน้าที่ใหม่",
+    "editSubtitle": "แก้ไขสิทธิ์การบริหารที่มีอยู่",
+    "editTitle": "แก้ไขบัญชีพนักงาน",
+    "fields": {
+      "accountPassword": "รหัสผ่านบัญชี",
+      "emailAddress": "ที่อยู่อีเมล",
+      "fullName": "ชื่อเต็ม",
+      "phoneNumber": "หมายเลขโทรศัพท์",
+      "systemRole": "บทบาทระบบ",
+      "updatePassword": "อัปเดตรหัสผ่าน (ไม่บังคับ)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* เว้นว่างไว้เพื่อรักษารหัสผ่านปัจจุบัน"
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "เช่น โรเบิร์ต ฟ็อกซ์",
+      "passwordCreate": "กรุณาใส่รหัสผ่านที่ปลอดภัย",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "รายละเอียดที่สำคัญและข้อมูลติดต่อ",
+      "title": "ข้อมูลพนักงาน"
+    },
+    "validation": {
+      "emailRequired": "ต้องการอีเมล",
+      "nameRequired": "ต้องระบุชื่อเต็ม",
+      "passwordMinLength": "ต้องมีอย่างน้อย 8 ตัวอักษร",
+      "passwordRequired": "ต้องการรหัสผ่าน",
+      "phoneRequired": "ต้องการหมายเลขโทรศัพท์",
+      "roleRequired": "ต้องระบุบทบาท"
+    }
+  },
+  "listing": {
+    "addStaff": "เพิ่มพนักงาน",
+    "clearSearch": "ล้างการค้นหา",
+    "noStaffDescription": "ลองปรับการค้นหาของคุณหรือเพิ่มสมาชิกพนักงานใหม่",
+    "noStaffFound": "ไม่พบพนักงาน",
+    "refresh": "รีเฟรช",
+    "searchPlaceholder": "ค้นหาสมาชิกพนักงาน..."
+  },
+  "messages": {
+    "createError": "ไม่สามารถบันทึกสมาชิกพนักงานได้",
+    "createSuccess": "สร้างบัญชีเจ้าหน้าที่เรียบร้อยแล้ว",
+    "fetchError": "ไม่สามารถโหลดข้อมูลพนักงานได้",
+    "fetchStaffError": "ไม่สามารถดึงข้อมูลพนักงานได้",
+    "updateSuccess": "อัปเดตโปรไฟล์เจ้าหน้าที่เรียบร้อยแล้ว"
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "ตรวจสอบโฆษณา",
+      "title": "ผู้อนุมัติโฆษณา"
+    },
+    "financeViewer": {
+      "description": "บัญชีแยกประเภทและงบการเงิน",
+      "title": "ผู้ดูแลการเงิน"
+    },
+    "role": "บทบาท",
+    "superAdmin": {
+      "description": "เข้าถึงทั้งหมด",
+      "title": "ผู้ดูแลระบบระดับสูง"
+    },
+    "supportStaff": {
+      "description": "ตั๋วและการตอบกลับ",
+      "title": "พนักงานสนับสนุน"
+    }
+  },
+  "roles": {
+    "adApprover": "ผู้อนุมัติโฆษณา",
+    "admin": "ผู้ดูแลระบบ",
+    "financeViewer": "ผู้ดูการเงิน",
+    "superAdmin": "ผู้ดูแลระบบระดับสูง",
+    "supportStaff": "เจ้าหน้าที่สนับสนุน"
+  },
+  "status": {
+    "active": "ใช้งาน",
+    "inactive": "ไม่ทำงาน"
+  },
+  "statusToggle": {
+    "disableSuccess": "บัญชีพนักงานถูกปิดใช้งานเรียบร้อยแล้ว",
+    "enableSuccess": "บัญชีพนักงานเปิดใช้งานเรียบร้อยแล้ว",
+    "updateError": "ไม่สามารถอัปเดตสถานะเจ้าหน้าที่ได้"
+  },
+  "subtitle": "จัดการบทบาทและสิทธิ์การดูแลแพลตฟอร์ม.",
+  "title": "การจัดการพนักงาน"
+}

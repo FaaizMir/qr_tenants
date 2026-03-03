@@ -14,6 +14,7 @@ import axiosInstance from "@/lib/axios";
 import { getAgentsColumns } from "./agent-columns";
 
 export default function AgentMerchantsListingContainer() {
+  const t = useTranslations("masterAdminAgents");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -49,13 +50,13 @@ export default function AgentMerchantsListingContainer() {
       setTotal(resp?.data?.meta?.total ?? 0);
       setData(items);
     } catch (error) {
-      console.error("Failed to load admins", error);
+      console.error(t("messages.loadError"), error);
       setData([]);
       setTotal(0);
     } finally {
       setLoading(false);
     }
-  }, [page, pageSize, debouncedSearch]);
+  }, [page, pageSize, debouncedSearch, t]);
 
   useEffect(() => {
     fetchAgents();
@@ -65,15 +66,15 @@ export default function AgentMerchantsListingContainer() {
     fetchAgents();
   };
 
-  const columns = getAgentsColumns(handleDeleted);
+  const columns = getAgentsColumns(handleDeleted, t);
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Agent Management</h1>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
           <p className="text-muted-foreground">
-            Manage your agents and their accounts.
+            {t("subtitle")}
           </p>
         </div>
       </div>
@@ -82,14 +83,14 @@ export default function AgentMerchantsListingContainer() {
         <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search agents..."
+            placeholder={t("listing.searchPlaceholder")}
             onSearchChange={setSearch}
             rightSlot={
               <Button
                 onClick={() => router.push("/master-admin/agents/create")}
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Add Agent
+                {t("listing.addAgent")}
               </Button>
             }
           />

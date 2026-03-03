@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
-const ActionCell = ({ row, onEdit, onDelete }) => {
+const ActionCell = ({ row, onEdit, onDelete, t }) => {
   const router = useRouter();
   const pkg = row.original;
 
@@ -38,7 +38,7 @@ const ActionCell = ({ row, onEdit, onDelete }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuLabel>Package Actions</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("columns.menuLabel")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
@@ -49,7 +49,7 @@ const ActionCell = ({ row, onEdit, onDelete }) => {
           }
         >
           <Pencil className="mr-2 h-4 w-4 text-blue-500" />
-          Edit Package
+          {t("columns.editAction")}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
@@ -59,17 +59,18 @@ const ActionCell = ({ row, onEdit, onDelete }) => {
           }
         >
           <Trash2 className="mr-2 h-4 w-4" />
-          Delete Package
+          {t("columns.deleteAction")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
 
-export const PackagesColumns = ({ onEdit, onDelete }) => [
+export const PackagesColumns = ({ onEdit, onDelete, t }) => [
   {
     accessorKey: "name",
-    header: "Package Info",
+    header: t("columns.packageInfo"),
+    meta: { label: t("columns.packageInfo") },
     cell: ({ row }) => (
       <div className="flex items-center gap-3 py-2">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 shadow-sm border border-primary/20">
@@ -80,7 +81,7 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
             {row.original.name}
           </span>
           <span className="text-[10px] text-muted-foreground truncate max-w-[150px]">
-            {row.original.description || "No description"}
+            {row.original.description || t("columns.noDescription")}
           </span>
         </div>
       </div>
@@ -88,8 +89,9 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     accessorKey: "price",
-    header: "Pricing",
-    cell: ({ row }) => (
+    header: t("columns.pricing"),
+    meta: { label: t("columns.pricing") },
+    cell: ({ row}) => (
       <div className="flex flex-col">
         <div className="flex items-center text-sm font-bold text-emerald-600">
           <DollarSign className="h-3 w-3 mr-0.5" />
@@ -99,14 +101,15 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
           </span>
         </div>
         <div className="text-[10px] text-muted-foreground">
-          {row.original.price_per_credit} per credit
+          {row.original.price_per_credit} {t("columns.perCredit")}
         </div>
       </div>
     ),
   },
   {
     accessorKey: "credits",
-    header: "Credits",
+    header: t("columns.credits"),
+    meta: { label: t("columns.credits") },
     cell: ({ row }) => (
       <div className="flex items-center gap-2 font-semibold">
         <Layers className="h-4 w-4 text-orange-500" />
@@ -116,7 +119,8 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     accessorKey: "credit_type",
-    header: "Type",
+    header: t("columns.type"),
+    meta: { label: t("columns.type") },
     cell: ({ row }) => {
       const type = row.original.credit_type?.toLowerCase();
       return (
@@ -138,7 +142,8 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     accessorKey: "merchant_type",
-    header: "Plan",
+    header: t("columns.plan"),
+    meta: { label: t("columns.plan") },
     cell: ({ row }) => (
       <div className="flex items-center text-[11px] font-medium text-slate-600">
         <Calendar className="h-3.5 w-3.5 mr-1.5 text-slate-400" />
@@ -148,7 +153,8 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     accessorKey: "is_active",
-    header: "Status",
+    header: t("columns.status"),
+    meta: { label: t("columns.status") },
     cell: ({ row }) => {
       const active = row.original.is_active;
       return (
@@ -165,7 +171,7 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
               active ? "text-emerald-700" : "text-slate-500"
             )}
           >
-            {active ? "Active" : "Inactive"}
+            {active ? t("columns.active") : t("columns.inactive")}
           </span>
         </div>
       );
@@ -173,7 +179,8 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     accessorKey: "sort_order",
-    header: "Rank",
+    header: t("columns.rank"),
+    meta: { label: t("columns.rank") },
     cell: ({ row }) => (
       <Badge variant="secondary" className="font-mono text-[10px]">
         #{row.original.sort_order}
@@ -182,9 +189,10 @@ export const PackagesColumns = ({ onEdit, onDelete }) => [
   },
   {
     id: "actions",
-    header: "",
+    header: t("columns.actions"),
+    meta: { label: t("columns.actions") },
     cell: ({ row }) => (
-      <ActionCell row={row} onEdit={onEdit} onDelete={onDelete} />
+      <ActionCell row={row} onEdit={onEdit} onDelete={onDelete} t={t} />
     ),
   },
 ];

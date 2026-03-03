@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "Buat Paket",
+    "editPackage": "Edit Paket",
+    "masterAdminDashboard": "Dasbor Admin Utama",
+    "packages": "Paket"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "active": "Aktif",
+    "credits": "Kredit",
+    "deleteAction": "Hapus Paket",
+    "editAction": "Edit Paket",
+    "inactive": "Tidak aktif",
+    "menuLabel": "Tindakan Paket",
+    "noDescription": "Tidak ada deskripsi",
+    "packageInfo": "Info Paket",
+    "perCredit": "per kredit",
+    "plan": "Rencana",
+    "pricing": "Harga",
+    "rank": "Peringkat",
+    "status": "Status",
+    "type": "Tipe"
+  },
+  "deleteDialog": {
+    "cancel": "Batalkan Penghapusan",
+    "confirm": "Dikonfirmasi, Hapus Sekarang",
+    "description": "Anda akan menghapus {name} secara permanen. Tindakan ini bersifat final dan tidak dapat dibatalkan oleh siapa pun.",
+    "title": "Kewaspadaan Ekstrem"
+  },
+  "form": {
+    "backButton": "Kembali ke Daftar",
+    "buttons": {
+      "cancel": "Batalkan",
+      "delete": "Hapus Paket",
+      "save": "Terbitkan Paket",
+      "saving": "Menyimpan...",
+      "update": "Perbarui Paket"
+    },
+    "createTitle": "Buat Paket Baru",
+    "deleteDialog": {
+      "cancel": "Batalkan",
+      "confirm": "Ya, hapus paket",
+      "description": "Ini akan menghapus {name} secara permanen. Tindakan ini tidak dapat dibatalkan.",
+      "title": "Apakah Anda benar-benar yakin?"
+    },
+    "editTitle": "Edit Paket Kredit",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "Jenis Kredit",
+      "currency": "Mata Uang",
+      "customCreditType": "Tentukan Jenis Kredit Kustom",
+      "customCreditTypePlaceholder": "mis. Spesial Ulang Tahun",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Ringkasan singkat tentang apa yang ditawarkan paket ini...",
+      "displayPriority": "Prioritas Tampilan",
+      "displayPriorityPlaceholder": "Pos. dalam daftar (1, 2, 3...)",
+      "merchantPlan": "Rencana Pedagang",
+      "packageName": "Nama Paket",
+      "packageNamePlaceholder": "mis. Paket Pertumbuhan Premium",
+      "packageStatus": "Status Paket",
+      "price": "Harga",
+      "pricePerCredit": "Harga per Kredit",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "Total Kredit"
+    },
+    "hints": {
+      "autoCalculated": "OTOMATIS"
+    },
+    "messages": {
+      "createError": "Gagal membuat paket",
+      "createSuccess": "Paket berhasil dibuat",
+      "deleteError": "Gagal menghapus paket",
+      "deleteSuccess": "Paket berhasil dihapus",
+      "fetchError": "Gagal memuat detail paket",
+      "paidAdsRestriction": "Paket iklan berbayar hanya dapat dikelola oleh agen",
+      "updateError": "Gagal memperbarui paket",
+      "updateSuccess": "Paket berhasil diperbarui"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "Kupon",
+        "custom": "Kustom",
+        "whatsappBI": "Pesan WhatsApp BI",
+        "whatsappUI": "Pesan UI WhatsApp"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "Tahunan / Premium",
+        "temporary": "Sementara / Dasar"
+      },
+      "status": {
+        "active": "Aktif & Terlihat",
+        "inactive": "Tidak Aktif / Tersembunyi"
+      }
+    },
+    "preview": {
+      "baseCredits": "Kredit Dasar",
+      "categories": {
+        "coupon": "Kupon",
+        "paidAds": "Iklan Berbayar",
+        "standard": "Standar",
+        "whatsapp": "Pesan Whatsapp"
+      },
+      "enhancedFeatures": "Fitur dan kapasitas yang ditingkatkan",
+      "getStarted": "Mulai",
+      "hiddenDraft": "TERSEMBUNYI / DRAF",
+      "title": "Prabaca Langsung"
+    },
+    "sections": {
+      "classification": "Klasifikasi",
+      "credits": "Kredit & Alokasi",
+      "identity": "Identitas & Penetapan Harga"
+    },
+    "subtitle": "Tentukan harga dan batas kredit untuk pedagang.",
+    "validation": {
+      "creditsMin": "Kredit harus minimal 1",
+      "creditsRequired": "Kredit diperlukan",
+      "customTypeRequired": "Tipe kredit kustom diperlukan",
+      "descriptionRequired": "Deskripsi diperlukan",
+      "nameRequired": "Nama paket diperlukan",
+      "priceMin": "Harga harus setidaknya 1",
+      "priceRequired": "Harga diperlukan"
+    }
+  },
+  "listing": {
+    "createButton": "Buat Paket Baru",
+    "noPackages": "Tidak ada paket yang ditemukan",
+    "noPackagesDescription": "Buat paket pertama Anda untuk memulai",
+    "searchPlaceholder": "Cari berdasarkan nama paket, jenis kredit..."
+  },
+  "messages": {
+    "deleteError": "Gagal menghapus paket",
+    "deleteSuccess": "Paket berhasil dihapus",
+    "fetchError": "Gagal mengambil paket"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "Pengurangan Otomatis Diaktifkan",
+    "badge": "Platform Standar",
+    "billingCycle": "Siklus Penagihan",
+    "billingCycleValue": "365 Hari Berulang",
+    "dialog": {
+      "cancelButton": "Batalkan",
+      "confirmButton": "Konfirmasi & Perbarui",
+      "description": "Tetapkan biaya keanggotaan tahunan baru untuk semua agen di platform. Perubahan berlaku segera untuk perpanjangan baru.",
+      "label": "Biaya Tahunan Baru",
+      "placeholder": "0.00",
+      "title": "Perbarui Biaya Langganan",
+      "updatingButton": "Memperbarui...",
+      "warning": "Hati-hati: Perubahan harga yang drastis dapat mempengaruhi retensi agen. Perubahan akan dicatat dalam audit sistem."
+    },
+    "globalCurrency": "Mata Uang Global",
+    "insightDescription": "Menyesuaikan biaya langganan mempengaruhi aksesibilitas platform untuk agen baru. Pastikan harga tetap kompetitif sambil mempertahankan kualitas platform.",
+    "insightTitle": "Inteligensi Pendapatan",
+    "messages": {
+      "fetchError": "Gagal mengambil biaya langganan",
+      "updateError": "Gagal memperbarui biaya",
+      "updateSuccess": "Biaya langganan berhasil diperbarui",
+      "validationError": "Silakan masukkan jumlah yang valid"
+    },
+    "perYear": "/ Tetap Per Tahun",
+    "status": "Status",
+    "statusValue": "Rencana Aktif",
+    "syncButton": "Sinkronkan Data",
+    "title": "Keanggotaan Tahunan Agen",
+    "updateButton": "Perbarui Struktur Harga"
+  },
+  "subtitle": "Kelola dan pantau semua bundel kredit pedagang",
+  "title": "Paket"
+}

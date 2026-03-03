@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "Commission",
+    "masterAdminDashboard": "Master Admin Dashboard"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "{year} Fiscal Year",
+      "title": "Revenue Allocation"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "Annual fees from admins",
+        "title": "Agent Subscription"
+      },
+      "annualPackages": {
+        "description": "Long-term merchant plans",
+        "title": "Annual Packages"
+      },
+      "merchantFees": {
+        "description": "Recurring merchant fees",
+        "title": "Merchant Fees"
+      },
+      "tempPackages": {
+        "description": "Short-term merchant plans",
+        "title": "Temp. Packages"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "All-time earnings",
+      "title": "Total Revenue",
+      "updatedToday": "Updated today"
+    }
+  },
+  "errors": {
+    "loadFailed": "Failed to load wallet information"
+  },
+  "header": {
+    "managementSubtitle": "Manage commissions and earnings.",
+    "managementTitle": "Commission Management",
+    "subtitle": "Real-time financial overview and revenue breakdown",
+    "title": "Commission Hub"
+  },
+  "noData": {
+    "message": "Unable to load wallet information. Please try again later.",
+    "title": "No Wallet Data"
+  },
+  "status": {
+    "operatingWallet": "Operating Wallet",
+    "systemActive": "System Active",
+    "systemInactive": "System Inactive",
+    "systemStatus": "System Status"
+  }
+}

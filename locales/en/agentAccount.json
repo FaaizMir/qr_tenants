@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "Update your account information",
+    "title": "Account Details"
+  },
+  "breadcrumb": {
+    "account": "Account",
+    "dashboard": "Dashboard"
+  },
+  "buttons": {
+    "saveChanges": "Save Changes",
+    "saving": "Saving..."
+  },
+  "fields": {
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "stripeSecretKey": "Stripe Secret Key"
+  },
+  "hints": {
+    "stripeKeyMasked": "Current key is masked for security. Enter a new key to update."
+  },
+  "messages": {
+    "fetchError": "Failed to load account information",
+    "updateError": "Failed to update account",
+    "updateSuccess": "Account updated successfully",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "Start typing an address...",
+    "city": "Enter your city",
+    "country": "Enter your country",
+    "email": "Enter your email",
+    "name": "Enter your name",
+    "phone": "Enter your phone",
+    "stripeKeyExisting": "{maskedKey} (leave blank to keep current)",
+    "stripeKeyNew": "sk_test_... or sk_live_..."
+  },
+  "profile": {
+    "description": "Your profile information",
+    "noStripeKey": "No Stripe Key",
+    "stripeConnected": "Stripe Connected",
+    "title": "Profile"
+  },
+  "subtitle": "Manage your account information",
+  "title": "Account Settings"
+}

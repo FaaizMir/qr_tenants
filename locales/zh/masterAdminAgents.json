@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "删除",
+    "details": "详情",
+    "edit": "编辑",
+    "menuLabel": "代理选项"
+  },
+  "breadcrumb": {
+    "agentDetails": "代理详情",
+    "agents": "代理",
+    "createAgent": "创建代理",
+    "editAgent": "编辑代理",
+    "masterAdminDashboard": "主管理员仪表板"
+  },
+  "columns": {
+    "actions": "操作",
+    "agentAccount": "代理账户",
+    "location": "位置",
+    "phone": "电话",
+    "status": "状态"
+  },
+  "create": {
+    "subtitle": "创建一个新的代理账户并配置他们的访问权限和权限。",
+    "title": " onboard 新代理"
+  },
+  "delete": {
+    "cancel": "取消",
+    "confirm": "删除代理",
+    "deleting": "正在删除...",
+    "description": "此操作无法撤消。这将永久删除代理",
+    "descriptionEnd": "并从我们的服务器中删除他们的数据。",
+    "descriptionName": " {name}",
+    "error": "删除代理失败",
+    "success": "代理删除成功",
+    "title": "您确定吗？"
+  },
+  "details": {
+    "accessControl": {
+      "status": "状态",
+      "statusDescription": "当前账户有效性",
+      "title": "访问控制"
+    },
+    "accountInformation": {
+      "emailAddress": "电子邮件地址",
+      "fullName": "全名",
+      "memberSince": "会员自",
+      "phoneNumber": "电话号码",
+      "title": "账户信息"
+    },
+    "editAgent": "编辑代理",
+    "goBack": "返回",
+    "loading": "正在加载代理详情...",
+    "locationDetails": {
+      "city": "城市",
+      "country": "国家",
+      "fullAddress": "完整地址",
+      "title": "位置详情"
+    },
+    "notFound": "未找到代理。"
+  },
+  "form": {
+    "accountStatus": {
+      "active": "活跃",
+      "activeDescription": "禁用时，代理无法登录或管理商户。",
+      "activeLabel": "活动状态",
+      "description": "控制代理对系统的访问。",
+      "inactive": "非活动",
+      "title": "账户状态"
+    },
+    "agentDetails": {
+      "descriptionCreate": "输入新代理的个人信息。",
+      "descriptionEdit": "更新代理的个人和登录信息。",
+      "title": "代理详情"
+    },
+    "buttons": {
+      "cancel": "取消",
+      "createAgent": "创建代理",
+      "creating": "正在创建...",
+      "hideKey": "隐藏密钥",
+      "hidePassword": "隐藏密码",
+      "showKey": "显示密钥",
+      "showPassword": "显示密码",
+      "updateAgent": "更新代理",
+      "updating": "正在更新..."
+    },
+    "fields": {
+      "city": "城市",
+      "country": "国家",
+      "emailAddress": "电子邮件地址",
+      "fullName": "全名",
+      "newPassword": "新密码（留空以保持当前密码）",
+      "password": "密码",
+      "phoneNumber": "电话号码",
+      "searchAddress": "搜索地址",
+      "stripeSecretKey": "Stripe 秘钥（可选）"
+    },
+    "hints": {
+      "passwordRequirements": "最少8个字符，字母数字。",
+      "stripeKeyCreate": "配置 Stripe API 密钥以接收商户付款。可以在代理设置中稍后设置。",
+      "stripeKeyEdit": "更新代理的Stripe API密钥。留空以保持现有配置。"
+    },
+    "locationDetails": {
+      "description": "代理的地址信息。",
+      "title": "位置详情"
+    },
+    "placeholders": {
+      "address": "123 代理街，城市，国家",
+      "city": "城市",
+      "country": "国家",
+      "email": "agent@example.com",
+      "name": "例如：约翰·多",
+      "passwordCreate": "输入一个安全的密码",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey}（留空以保持当前状态）",
+      "stripeKeyExistingGeneric": "sk_•••••••••••••（留空以保持当前）",
+      "stripeKeyNew": "sk_test_... 或 sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "添加代理",
+    "searchPlaceholder": "搜索代理..."
+  },
+  "messages": {
+    "addressSelected": "已选择地址",
+    "checkInput": "请检查您的输入并重试。",
+    "createError": "创建代理失败",
+    "createSuccess": "代理账户创建成功。",
+    "fetchError": "加载代理详情失败",
+    "loadError": "加载管理员失败",
+    "updateError": "更新代理失败",
+    "updateSuccess": "代理资料更新成功。",
+    "validationError": "{field}: {message}",
+    "validationFailed": "验证失败"
+  },
+  "status": {
+    "active": "活跃",
+    "inactive": "非活动"
+  },
+  "statusToggle": {
+    "activateSuccess": "代理已成功激活",
+    "deactivateSuccess": "代理已成功停用",
+    "updateError": "更新代理状态失败"
+  },
+  "subtitle": "管理您的代理及其账户。",
+  "title": "代理管理"
+}

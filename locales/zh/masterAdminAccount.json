@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "更新您的帐户信息",
+    "title": "帐户详情"
+  },
+  "breadcrumbs": {
+    "account": "帐户",
+    "dashboard": "仪表板"
+  },
+  "buttons": {
+    "saveChanges": "保存更改",
+    "saving": "保存中..."
+  },
+  "fields": {
+    "email": "电子邮件",
+    "fullName": "全名",
+    "phone": "电话",
+    "role": "角色"
+  },
+  "messages": {
+    "fetchError": "加载帐户信息失败",
+    "updateError": "更新帐户失败",
+    "updateSuccess": "帐户更新成功",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "输入您的电子邮件",
+    "name": "输入您的姓名",
+    "phone": "输入您的电话"
+  },
+  "profile": {
+    "description": "您的个人资料信息",
+    "title": "个人资料"
+  },
+  "subtitle": "管理您的帐户信息",
+  "title": "帐户设置"
+}

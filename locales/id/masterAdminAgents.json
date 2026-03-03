@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "Hapus",
+    "details": "Detail",
+    "edit": "Edit",
+    "menuLabel": "Opsi Agen"
+  },
+  "breadcrumb": {
+    "agentDetails": "Detail Agen",
+    "agents": "Agen",
+    "createAgent": "Buat Agen",
+    "editAgent": "Edit Agen",
+    "masterAdminDashboard": "Dasbor Admin Utama"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "agentAccount": "Akun Agen",
+    "location": "Lokasi",
+    "phone": "Telepon",
+    "status": "Status"
+  },
+  "create": {
+    "subtitle": "Buat akun agen baru dan atur akses serta izin mereka.",
+    "title": "Merekrut Agen Baru"
+  },
+  "delete": {
+    "cancel": "Batal",
+    "confirm": "Hapus Agen",
+    "deleting": "Menghapus...",
+    "description": "Tindakan ini tidak dapat dibatalkan. Ini akan menghapus agen secara permanen",
+    "descriptionEnd": " dan menghapus data mereka dari server kami.",
+    "descriptionName": " {name}",
+    "error": "Gagal menghapus agen",
+    "success": "Agen berhasil dihapus",
+    "title": "Apakah Anda benar-benar yakin?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "Status",
+      "statusDescription": "Masa berlaku akun saat ini",
+      "title": "Kontrol Akses"
+    },
+    "accountInformation": {
+      "emailAddress": "Alamat Email",
+      "fullName": "Nama Lengkap",
+      "memberSince": "Anggota Sejak",
+      "phoneNumber": "Nomor Telepon",
+      "title": "Informasi Akun"
+    },
+    "editAgent": "Edit Agen",
+    "goBack": "Kembali",
+    "loading": "Memuat detail agen...",
+    "locationDetails": {
+      "city": "Kota",
+      "country": "Negara",
+      "fullAddress": "Alamat Lengkap",
+      "title": "Detail Lokasi"
+    },
+    "notFound": "Agen tidak ditemukan."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "Aktif",
+      "activeDescription": "Ketika dinonaktifkan, agen tidak dapat masuk atau mengelola pedagang.",
+      "activeLabel": "Status Aktif",
+      "description": "Kontrol akses agen ke sistem.",
+      "inactive": "Tidak aktif",
+      "title": "Status Akun"
+    },
+    "agentDetails": {
+      "descriptionCreate": "Masukkan detail pribadi untuk agen baru.",
+      "descriptionEdit": "Perbarui informasi pribadi dan login agen.",
+      "title": "Detail Agen"
+    },
+    "buttons": {
+      "cancel": "Batal",
+      "createAgent": "Buat Agen",
+      "creating": "Membuat...",
+      "hideKey": "Sembunyikan kunci",
+      "hidePassword": "Sembunyikan kata sandi",
+      "showKey": "Tampilkan kunci",
+      "showPassword": "Tampilkan kata sandi",
+      "updateAgent": "Perbarui Agen",
+      "updating": "Memperbarui..."
+    },
+    "fields": {
+      "city": "Kota",
+      "country": "Negara",
+      "emailAddress": "Alamat Email",
+      "fullName": "Nama Lengkap",
+      "newPassword": "Kata Sandi Baru (biarkan kosong untuk mempertahankan yang saat ini)",
+      "password": "Kata Sandi",
+      "phoneNumber": "Nomor Telepon",
+      "searchAddress": "Cari Alamat",
+      "stripeSecretKey": "Kunci Rahasia Stripe (Opsional)"
+    },
+    "hints": {
+      "passwordRequirements": "Min. 8 karakter, alfanumerik.",
+      "stripeKeyCreate": "Konfigurasi kunci API Stripe untuk menerima pembayaran pedagang. Dapat diatur nanti di pengaturan agen.",
+      "stripeKeyEdit": "Perbarui kunci API Stripe agen. Biarkan kosong untuk mempertahankan konfigurasi yang ada."
+    },
+    "locationDetails": {
+      "description": "Informasi alamat untuk agen.",
+      "title": "Detail Lokasi"
+    },
+    "placeholders": {
+      "address": "123 Agen St, Kota, Negara",
+      "city": "Kota",
+      "country": "Negara",
+      "email": "agen@example.com",
+      "name": "mis. John Doe",
+      "passwordCreate": "Masukkan kata sandi yang aman",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (biarkan kosong untuk mempertahankan yang saat ini)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (biarkan kosong untuk mempertahankan yang saat ini)",
+      "stripeKeyNew": "sk_test_... atau sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "Tambah Agen",
+    "searchPlaceholder": "Cari agen..."
+  },
+  "messages": {
+    "addressSelected": "Alamat yang dipilih",
+    "checkInput": "Silakan periksa input Anda dan coba lagi.",
+    "createError": "Gagal membuat agen",
+    "createSuccess": "Akun agen berhasil dibuat.",
+    "fetchError": "Gagal memuat detail agen",
+    "loadError": "Gagal memuat admin",
+    "updateError": "Gagal memperbarui agen",
+    "updateSuccess": "Profil agen berhasil diperbarui.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "Validasi gagal"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Tidak Aktif"
+  },
+  "statusToggle": {
+    "activateSuccess": "Agen berhasil diaktifkan",
+    "deactivateSuccess": "Agen berhasil dinonaktifkan",
+    "updateError": "Gagal memperbarui status agen"
+  },
+  "subtitle": "Kelola agen dan akun mereka.",
+  "title": "Manajemen Agen"
+}

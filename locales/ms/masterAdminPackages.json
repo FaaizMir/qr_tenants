@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "Buat Pakej",
+    "editPackage": "Edit Pakej",
+    "masterAdminDashboard": "Papan Pemuka Admin Utama",
+    "packages": "Pakej"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "active": "Aktif",
+    "credits": "Kredit",
+    "deleteAction": "Padam Pakej",
+    "editAction": "Edit Pakej",
+    "inactive": "Tidak aktif",
+    "menuLabel": "Tindakan Pakej",
+    "noDescription": "Tiada penerangan",
+    "packageInfo": "Info Pakej",
+    "perCredit": "setiap kredit",
+    "plan": "Pelan",
+    "pricing": "Harga",
+    "rank": "Pangkat",
+    "status": "Status",
+    "type": "Jenis"
+  },
+  "deleteDialog": {
+    "cancel": "Batalkan Penghapusan",
+    "confirm": "Disahkan, Padam Sekarang",
+    "description": "Anda akan memadam {name} secara kekal. Tindakan ini adalah muktamad dan tidak boleh dibatalkan oleh sesiapa pun.",
+    "title": "Berhati-hati"
+  },
+  "form": {
+    "backButton": "Kembali ke Senarai",
+    "buttons": {
+      "cancel": "Batal",
+      "delete": "Padam Pakej",
+      "save": "Terbitkan Pakej",
+      "saving": "Menyimpan...",
+      "update": "Kemas Kini Pakej"
+    },
+    "createTitle": "Buat Pakej Baru",
+    "deleteDialog": {
+      "cancel": "Batal",
+      "confirm": "Ya, padam pakej",
+      "description": "Ini akan menghapuskan {name} secara kekal. Tindakan ini tidak boleh dibatalkan.",
+      "title": "Adakah anda benar-benar pasti?"
+    },
+    "editTitle": "Edit Pakej Kredit",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "Jenis Kredit",
+      "currency": "Mata Wang",
+      "customCreditType": "Tentukan Jenis Kredit Khas",
+      "customCreditTypePlaceholder": "cth. Istimewa Hari Jadi",
+      "description": "Penerangan",
+      "descriptionPlaceholder": "Ringkasan pendek tentang apa yang ditawarkan oleh pakej ini...",
+      "displayPriority": "Keutamaan Paparan",
+      "displayPriorityPlaceholder": "Pos. dalam senarai (1, 2, 3...)",
+      "merchantPlan": "Pelan Pedagang",
+      "packageName": "Nama Pakej",
+      "packageNamePlaceholder": "contoh. Pakej Pertumbuhan Premium",
+      "packageStatus": "Status Pakej",
+      "price": "Harga",
+      "pricePerCredit": "Harga setiap Kredit",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "Jumlah Kredit"
+    },
+    "hints": {
+      "autoCalculated": "AUTO"
+    },
+    "messages": {
+      "createError": "Gagal untuk mencipta pakej",
+      "createSuccess": "Pakej berjaya dicipta",
+      "deleteError": "Gagal untuk memadam pakej",
+      "deleteSuccess": "Pakej berjaya dipadam",
+      "fetchError": "Gagal untuk memuatkan butiran pakej",
+      "paidAdsRestriction": "Pakej iklan berbayar hanya boleh diuruskan oleh ejen",
+      "updateError": "Gagal untuk mengemas kini pakej",
+      "updateSuccess": "Pakej telah dikemas kini dengan jayanya"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "Kupon",
+        "custom": "Kustom",
+        "whatsappBI": "Mesej BI WhatsApp",
+        "whatsappUI": "Mesej UI WhatsApp"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "Tahunan / Premium",
+        "temporary": "Sementara / Asas"
+      },
+      "status": {
+        "active": "Aktif & Terlihat",
+        "inactive": "Tidak Aktif / Tersembunyi"
+      }
+    },
+    "preview": {
+      "baseCredits": "Kredit Asas",
+      "categories": {
+        "coupon": "Kupon",
+        "paidAds": "Iklan Berbayar",
+        "standard": "Standard",
+        "whatsapp": "Mesej Whatsapp"
+      },
+      "enhancedFeatures": "Ciri-ciri dan kapasiti yang dipertingkatkan",
+      "getStarted": "Mula",
+      "hiddenDraft": "Tersembunyi / DRAF",
+      "title": "Pratonton Langsung"
+    },
+    "sections": {
+      "classification": "Klasifikasi",
+      "credits": "Kredit & Peruntukan",
+      "identity": "Identiti & Penetapan Harga"
+    },
+    "subtitle": "Tentukan harga dan had kredit untuk peniaga.",
+    "validation": {
+      "creditsMin": "Kredit mesti sekurang-kurangnya 1",
+      "creditsRequired": "Kredit diperlukan",
+      "customTypeRequired": "Jenis kredit khusus diperlukan",
+      "descriptionRequired": "Penerangan diperlukan",
+      "nameRequired": "Nama pakej diperlukan",
+      "priceMin": "Harga mesti sekurang-kurangnya 1",
+      "priceRequired": "Harga diperlukan"
+    }
+  },
+  "listing": {
+    "createButton": "Cipta Pakej Baru",
+    "noPackages": "Tiada pakej ditemui",
+    "noPackagesDescription": "Buat pakej pertama anda untuk memulakan",
+    "searchPlaceholder": "Cari mengikut nama pakej, jenis kredit..."
+  },
+  "messages": {
+    "deleteError": "Gagal untuk memadam pakej",
+    "deleteSuccess": "Pakej telah dipadamkan dengan jayanya",
+    "fetchError": "Gagal untuk mengambil pakej"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "Pelepasan Automatik Diaktifkan",
+    "badge": "Standard Platform",
+    "billingCycle": "Kitaran Penagihan",
+    "billingCycleValue": "365 Hari Berulang",
+    "dialog": {
+      "cancelButton": "Batal",
+      "confirmButton": "Sahkan & Kemas kini",
+      "description": "Tetapkan yuran keahlian tahunan baru untuk semua ejen di platform. Perubahan berkuat kuasa serta-merta untuk pembaharuan baru.",
+      "label": "Yuran Tahunan Baru",
+      "placeholder": "0.00",
+      "title": "Kemas kini Yuran Langganan",
+      "updatingButton": "Mengemas kini...",
+      "warning": "Berhati-hati: Perubahan harga yang drastik boleh mempengaruhi pengekalan ejen. Perubahan akan direkod dalam audit sistem."
+    },
+    "globalCurrency": "Mata Wang Global",
+    "insightDescription": "Mengubah yuran langganan mempengaruhi aksesibiliti platform untuk ejen baru. Pastikan harga tetap kompetitif sambil mengekalkan kualiti platform.",
+    "insightTitle": "Inteligens Pendapatan",
+    "messages": {
+      "fetchError": "Gagal untuk mendapatkan yuran langganan",
+      "updateError": "Gagal untuk mengemas kini yuran",
+      "updateSuccess": "Yuran langganan telah dikemas kini dengan jayanya",
+      "validationError": "Sila masukkan jumlah yang sah"
+    },
+    "perYear": "/ Tetap Setiap Tahun",
+    "status": "Status",
+    "statusValue": "Pelan Aktif",
+    "syncButton": "Sinkronkan Data",
+    "title": "Keahlian Tahunan Ejen",
+    "updateButton": "Kemas Kini Struktur Harga"
+  },
+  "subtitle": "Urus dan pantau semua kumpulan kredit pedagang",
+  "title": "Pakej"
+}

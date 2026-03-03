@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "Delete",
+    "details": "Details",
+    "edit": "Edit",
+    "menuLabel": "Agent Options"
+  },
+  "breadcrumb": {
+    "agentDetails": "Agent Details",
+    "agents": "Agents",
+    "createAgent": "Create Agent",
+    "editAgent": "Edit Agent",
+    "masterAdminDashboard": "Master Admin Dashboard"
+  },
+  "columns": {
+    "actions": "Actions",
+    "agentAccount": "Agent Account",
+    "location": "Location",
+    "phone": "Phone",
+    "status": "Status"
+  },
+  "create": {
+    "subtitle": "Create a new agent account and configure their access and permissions.",
+    "title": "Onboard New Agent"
+  },
+  "delete": {
+    "cancel": "Cancel",
+    "confirm": "Delete Agent",
+    "deleting": "Deleting...",
+    "description": "This action cannot be undone. This will permanently delete the agent",
+    "descriptionEnd": " and remove their data from our servers.",
+    "descriptionName": " {name}",
+    "error": "Failed to delete agent",
+    "success": "Agent deleted successfully",
+    "title": "Are you absolutely sure?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "Status",
+      "statusDescription": "Current account validity",
+      "title": "Access Control"
+    },
+    "accountInformation": {
+      "emailAddress": "Email Address",
+      "fullName": "Full Name",
+      "memberSince": "Member Since",
+      "phoneNumber": "Phone Number",
+      "title": "Account Information"
+    },
+    "editAgent": "Edit Agent",
+    "goBack": "Go Back",
+    "loading": "Loading agent details...",
+    "locationDetails": {
+      "city": "City",
+      "country": "Country",
+      "fullAddress": "Full Address",
+      "title": "Location Details"
+    },
+    "notFound": "Agent not found."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "Active",
+      "activeDescription": "When disabled, the agent cannot log in or manage merchants.",
+      "activeLabel": "Active Status",
+      "description": "Control the agent's access to the system.",
+      "inactive": "Inactive",
+      "title": "Account Status"
+    },
+    "agentDetails": {
+      "descriptionCreate": "Enter the personal details for the new agent.",
+      "descriptionEdit": "Update agent personal and login information.",
+      "title": "Agent Details"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "createAgent": "Create Agent",
+      "creating": "Creating...",
+      "hideKey": "Hide key",
+      "hidePassword": "Hide password",
+      "showKey": "Show key",
+      "showPassword": "Show password",
+      "updateAgent": "Update Agent",
+      "updating": "Updating..."
+    },
+    "fields": {
+      "city": "City",
+      "country": "Country",
+      "emailAddress": "Email Address",
+      "fullName": "Full Name",
+      "newPassword": "New Password (leave blank to keep current)",
+      "password": "Password",
+      "phoneNumber": "Phone Number",
+      "searchAddress": "Search Address",
+      "stripeSecretKey": "Stripe Secret Key (Optional)"
+    },
+    "hints": {
+      "passwordRequirements": "Min. 8 characters, alphanumeric.",
+      "stripeKeyCreate": "Configure Stripe API key for receiving merchant payments. Can be set later in agent settings.",
+      "stripeKeyEdit": "Update agent's Stripe API key. Leave blank to keep existing configuration."
+    },
+    "locationDetails": {
+      "description": "Address information for the agent.",
+      "title": "Location Details"
+    },
+    "placeholders": {
+      "address": "123 Agent St, City, Country",
+      "city": "City",
+      "country": "Country",
+      "email": "agent@example.com",
+      "name": "e.g. John Doe",
+      "passwordCreate": "Enter a secure password",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (leave blank to keep current)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (leave blank to keep current)",
+      "stripeKeyNew": "sk_test_... or sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "Add Agent",
+    "searchPlaceholder": "Search agents..."
+  },
+  "messages": {
+    "addressSelected": "Address selected",
+    "checkInput": "Please check your input and try again.",
+    "createError": "Failed to create agent",
+    "createSuccess": "Agent account created successfully.",
+    "fetchError": "Failed to load agent details",
+    "loadError": "Failed to load admins",
+    "updateError": "Failed to update agent",
+    "updateSuccess": "Agent profile updated successfully.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "Validation failed"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "statusToggle": {
+    "activateSuccess": "Agent activated successfully",
+    "deactivateSuccess": "Agent deactivated successfully",
+    "updateError": "Failed to update agent status"
+  },
+  "subtitle": "Manage your agents and their accounts.",
+  "title": "Agent Management"
+}

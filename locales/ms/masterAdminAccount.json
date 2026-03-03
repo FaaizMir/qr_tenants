@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "Kemas kini maklumat akaun anda",
+    "title": "Butiran Akaun"
+  },
+  "breadcrumbs": {
+    "account": "Akaun",
+    "dashboard": "Papan Pemuka"
+  },
+  "buttons": {
+    "saveChanges": "Simpan Perubahan",
+    "saving": "Menyimpan..."
+  },
+  "fields": {
+    "email": "Emel",
+    "fullName": "Nama Penuh",
+    "phone": "Telefon",
+    "role": "Peranan"
+  },
+  "messages": {
+    "fetchError": "Gagal memuatkan maklumat akaun",
+    "updateError": "Gagal mengemas kini akaun",
+    "updateSuccess": "Akaun berjaya dikemas kini",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "Masukkan emel anda",
+    "name": "Masukkan nama anda",
+    "phone": "Masukkan telefon anda"
+  },
+  "profile": {
+    "description": "Maklumat profil anda",
+    "title": "Profil"
+  },
+  "subtitle": "Urus maklumat akaun anda",
+  "title": "Tetapan Akaun"
+}

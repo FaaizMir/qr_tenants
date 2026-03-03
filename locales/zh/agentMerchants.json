@@ -4,6 +4,7 @@
     "dashboard": "仪表板",
     "details": "详情",
     "editMerchant": "编辑商户",
+    "masterAdminDashboard": "主管理员仪表板",
     "merchantManagement": "商户管理",
     "merchants": "商户"
   },
@@ -26,6 +27,7 @@
       "title": "账户凭证"
     },
     "actions": {
+      "back": "返回",
       "cancel": "取消",
       "createMerchant": "创建商户",
       "creating": "创建中...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "返回",
       "updateMerchant": "更新商户",
       "updating": "正在更新..."
     },

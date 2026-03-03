@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "تحديث معلومات حسابك",
+    "title": "تفاصيل الحساب"
+  },
+  "breadcrumb": {
+    "account": "الحساب",
+    "dashboard": "لوحة التحكم"
+  },
+  "buttons": {
+    "saveChanges": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ..."
+  },
+  "fields": {
+    "address": "العنوان",
+    "city": "المدينة",
+    "country": "البلد",
+    "email": "البريد الإلكتروني",
+    "fullName": "الاسم الكامل",
+    "phone": "الهاتف",
+    "stripeSecretKey": "مفتاح سري لـ Stripe"
+  },
+  "hints": {
+    "stripeKeyMasked": "المفتاح الحالي مخفي لأسباب أمنية. أدخل مفتاحًا جديدًا للتحديث."
+  },
+  "messages": {
+    "fetchError": "فشل في تحميل معلومات الحساب",
+    "updateError": "فشل في تحديث الحساب",
+    "updateSuccess": "تم تحديث الحساب بنجاح",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "ابدأ بكتابة عنوان...",
+    "city": "أدخل مدينتك",
+    "country": "أدخل بلدك",
+    "email": "أدخل بريدك الإلكتروني",
+    "name": "أدخل اسمك",
+    "phone": "أدخل رقم هاتفك",
+    "stripeKeyExisting": "{maskedKey} (اتركه فارغًا للاحتفاظ بالوضع الحالي)",
+    "stripeKeyNew": "sk_test_... أو sk_live_..."
+  },
+  "profile": {
+    "description": "معلومات ملفك الشخصي",
+    "noStripeKey": "لا يوجد مفتاح Stripe",
+    "stripeConnected": "متصل بـ Stripe",
+    "title": "الملف الشخصي"
+  },
+  "subtitle": "إدارة معلومات حسابك",
+  "title": "إعدادات الحساب"
+}

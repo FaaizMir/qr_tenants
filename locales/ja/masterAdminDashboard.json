@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "ダッシュボード"
+  },
+  "engagement": {
+    "activityPulse": "プラットフォームアクティビティパルス",
+    "description": "すべての店舗のインタラクションメトリクス",
+    "redemptionRate": "引き換え率",
+    "systemLoad": "通常のシステム負荷",
+    "title": "グローバルエンゲージメント",
+    "totalFeedback": "総フィードバック"
+  },
+  "filters": {
+    "customRange": "カスタム範囲",
+    "last30Days": "過去30日間",
+    "last7Days": "過去7日間",
+    "lastMonth": "先月",
+    "pickDate": "日付を選択",
+    "selectRange": "範囲を選択",
+    "thisMonth": "今月",
+    "today": "今日",
+    "yesterday": "昨日"
+  },
+  "financialCards": {
+    "agentSubscriptions": "エージェントサブスクリプション",
+    "merchantSubscriptions": "マーチャントサブスクリプション",
+    "packageCommissions": "パッケージ手数料",
+    "totalPlatformRevenue": "総プラットフォーム収益"
+  },
+  "growth": {
+    "customers": "+{count} 顧客",
+    "description": "最新のプラットフォーム拡張データ",
+    "merchants": "+{count} マーチャント",
+    "newCustomers": "新規顧客登録",
+    "newStores": "今期の新店舗",
+    "title": "成長のハイライト"
+  },
+  "merchantTier": {
+    "annual": "年間",
+    "description": "年間対一時的サブスクリプション比率",
+    "noData": "利用可能なマーチャントデータはありません",
+    "temp": "テンポ",
+    "title": "マーチャントティア分布",
+    "totalStores": "総店舗数"
+  },
+  "messages": {
+    "fetchError": "マスター管理者ダッシュボードの取得に失敗しました"
+  },
+  "overviewCards": {
+    "activeAgents": "アクティブエージェント",
+    "activeMerchants": "アクティブマーチャント",
+    "couponsIssued": "発行されたクーポン",
+    "couponsRedeemed": "引き換えられたクーポン",
+    "feedbackReceived": "フィードバックを受け取りました",
+    "totalAgents": "総エージェント数",
+    "totalCustomers": "総顧客数",
+    "totalMerchants": "総マーチャント数"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "エージェントサブスクリプション",
+    "description": "プラットフォーム総収益の内訳",
+    "merchantSubscriptions": "マーチャントサブスクリプション",
+    "packageCommissions": "パッケージコミッション",
+    "title": "収益ストリーム"
+  },
+  "roles": {
+    "adApprover": "広告承認者",
+    "financeViewer": "ファイナンスビューア",
+    "superAdmin": "スーパ管理者",
+    "supportStaff": "サポートスタッフ"
+  },
+  "sections": {
+    "financialPerformance": "財務パフォーマンス",
+    "generalOverview": "一般的な概要",
+    "globalEngagement": "グローバルエンゲージメント",
+    "growthHighlights": "成長のハイライト",
+    "revenueStreams": "収益ストリーム",
+    "roleDashboard": "{role} ダッシュボード",
+    "systemAnalytics": "システム分析"
+  },
+  "subtitle": "プラットフォームのパフォーマンスとメトリクスの概要",
+  "title": "マスター管理者ダッシュボード",
+  "topMerchants": {
+    "description": "最高のボリュームとエンゲージメントを持つ店舗 ({total} 合計)",
+    "issued": "発行済み",
+    "noData": "この期間のパフォーマンスデータはありません",
+    "page": "ページ {current} / {total}",
+    "redeemed": "引き換え済み",
+    "showing": "{from} から {to} まで {total} を表示",
+    "successRate": "{rate}% 成功率",
+    "title": "トップパフォーマンスのマーチャント"
+  }
+}

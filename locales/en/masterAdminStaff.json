@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "Ads Management",
+    "financeOnly": "Finance Only",
+    "fullAccess": "Full Access",
+    "readOnly": "Read Only",
+    "supportHelp": "Support Help"
+  },
+  "actions": {
+    "delete": "Delete",
+    "edit": "Edit",
+    "menuLabel": "Staff Options"
+  },
+  "breadcrumb": {
+    "addStaff": "Add Staff",
+    "editStaff": "Edit Staff",
+    "masterAdminDashboard": "Master Admin Dashboard",
+    "staffManagement": "Staff Management"
+  },
+  "columns": {
+    "access": "Access",
+    "actions": "Actions",
+    "phone": "Phone",
+    "role": "Role",
+    "staffMember": "Staff Member",
+    "status": "Status"
+  },
+  "delete": {
+    "cancel": "Cancel",
+    "confirm": "Delete Permanently",
+    "deleting": "Deleting...",
+    "description": "Are you sure you want to remove",
+    "descriptionEnd": "? This action cannot be undone.",
+    "descriptionPermanent": "? This will permanently revoke their access to the platform.",
+    "error": "Failed to delete staff member.",
+    "success": "Staff member deleted successfully.",
+    "title": "Delete Staff Member?",
+    "unknownRole": "Unknown role"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "Control if this account is active.",
+      "disabled": "Account Disabled",
+      "disabledDescription": "Staff access is currently revoked.",
+      "enabled": "Account Enabled",
+      "enabledDescription": "Staff can log in and manage the platform.",
+      "title": "Account Visibility"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "createAccount": "Create Account",
+      "savingChanges": "Saving Changes",
+      "updateProfile": "Update Profile"
+    },
+    "createSubtitle": "Assign new roles and access permissions.",
+    "createTitle": "Create New Staff Account",
+    "editSubtitle": "Modify existing administrative privileges.",
+    "editTitle": "Edit Staff Account",
+    "fields": {
+      "accountPassword": "Account Password",
+      "emailAddress": "Email Address",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "systemRole": "System Role",
+      "updatePassword": "Update Password (Optional)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* Leave blank to keep the current password."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "e.g. Robert Fox",
+      "passwordCreate": "Enter a secure password",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "Essential details and contact info.",
+      "title": "Staff Information"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "nameRequired": "Full name is required",
+      "passwordMinLength": "Min 8 characters required",
+      "passwordRequired": "Password is required",
+      "phoneRequired": "Phone number is required",
+      "roleRequired": "Role is required"
+    }
+  },
+  "listing": {
+    "addStaff": "Add Staff",
+    "clearSearch": "Clear Search",
+    "noStaffDescription": "Try adjusting your search or add a new staff member.",
+    "noStaffFound": "No staff found",
+    "refresh": "Refresh",
+    "searchPlaceholder": "Search staff members..."
+  },
+  "messages": {
+    "createError": "Failed to save staff member.",
+    "createSuccess": "Staff account created successfully.",
+    "fetchError": "Failed to load staff data.",
+    "fetchStaffError": "Failed to fetch staff",
+    "updateSuccess": "Staff profile updated successfully."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "Review ads",
+      "title": "Ad Approver"
+    },
+    "financeViewer": {
+      "description": "Ledgers & Statements",
+      "title": "Finance Viewer"
+    },
+    "role": "Role",
+    "superAdmin": {
+      "description": "Full Access",
+      "title": "Super Admin"
+    },
+    "supportStaff": {
+      "description": "Tickets & Replies",
+      "title": "Support Staff"
+    }
+  },
+  "roles": {
+    "adApprover": "Ad Approver",
+    "admin": "Admin",
+    "financeViewer": "Finance Viewer",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Support Staff"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "statusToggle": {
+    "disableSuccess": "Staff account disabled successfully.",
+    "enableSuccess": "Staff account enabled successfully.",
+    "updateError": "Failed to update staff status."
+  },
+  "subtitle": "Manage platform administrative roles and permissions.",
+  "title": "Staff Management"
+}

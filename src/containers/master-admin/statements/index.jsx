@@ -34,8 +34,10 @@ import {
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { getStatementsColumns } from "./statements-columns";
+import { useTranslations } from "next-intl";
 
 export default function StatementsContainer() {
+  const t = useTranslations("masterAdminStatements");
   const router = useRouter();
 
   const [statements, setStatements] = useState({
@@ -85,7 +87,7 @@ export default function StatementsContainer() {
       setCounts(data.counts || { merchants: 0, agents: 0, super_admin: 0 });
     } catch (error) {
       console.error("Failed to fetch statements:", error);
-      toast.error("Failed to load statements. Please try again.");
+      toast.error(t("messages.loadError"));
       setStatements({
         merchants: [],
         agents: [],
@@ -125,30 +127,30 @@ export default function StatementsContainer() {
       link.remove();
       window.URL.revokeObjectURL(url);
 
-      toast.success("Statement downloaded successfully!");
+      toast.success(t("messages.downloadSuccess"));
     } catch (error) {
       console.error("PDF download failed:", error);
-      toast.error("Failed to download PDF. Please try again.");
+      toast.error(t("messages.downloadError"));
     }
   };
 
-  const columns = getStatementsColumns(handleDownloadPdf);
+  const columns = getStatementsColumns(handleDownloadPdf, t);
 
   const availableYears = Array.from({ length: 3 }, (_, i) => currentYear - i);
 
   const months = [
-    { value: "1", label: "January" },
-    { value: "2", label: "February" },
-    { value: "3", label: "March" },
-    { value: "4", label: "April" },
-    { value: "5", label: "May" },
-    { value: "6", label: "June" },
-    { value: "7", label: "July" },
-    { value: "8", label: "August" },
-    { value: "9", label: "September" },
-    { value: "10", label: "October" },
-    { value: "11", label: "November" },
-    { value: "12", label: "December" },
+    { value: "1", label: t("months.january") },
+    { value: "2", label: t("months.february") },
+    { value: "3", label: t("months.march") },
+    { value: "4", label: t("months.april") },
+    { value: "5", label: t("months.may") },
+    { value: "6", label: t("months.june") },
+    { value: "7", label: t("months.july") },
+    { value: "8", label: t("months.august") },
+    { value: "9", label: t("months.september") },
+    { value: "10", label: t("months.october") },
+    { value: "11", label: t("months.november") },
+    { value: "12", label: t("months.december") },
   ];
 
   // Get current tab data with proper total count
@@ -185,11 +187,10 @@ export default function StatementsContainer() {
           </Button>
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
-              All Financial Statements
+              {t("header.title")}
             </h1>
             <p className="text-sm text-muted-foreground max-w-2xl">
-              View and download monthly statements for merchants, agents, and
-              platform admin.
+              {t("header.subtitle")}
             </p>
           </div>
         </div>
@@ -203,7 +204,7 @@ export default function StatementsContainer() {
               </div>
               <div>
                 <p className="text-2xl font-bold">{counts.merchants}</p>
-                <p className="text-xs text-muted-foreground">Merchants</p>
+                <p className="text-xs text-muted-foreground">{t("summaryCards.merchants")}</p>
               </div>
             </CardContent>
           </Card>
@@ -215,7 +216,7 @@ export default function StatementsContainer() {
               </div>
               <div>
                 <p className="text-2xl font-bold">{counts.agents}</p>
-                <p className="text-xs text-muted-foreground">Agents</p>
+                <p className="text-xs text-muted-foreground">{t("summaryCards.agents")}</p>
               </div>
             </CardContent>
           </Card>
@@ -227,7 +228,7 @@ export default function StatementsContainer() {
               </div>
               <div>
                 <p className="text-2xl font-bold">{counts.super_admin}</p>
-                <p className="text-xs text-muted-foreground">Super Admin</p>
+                <p className="text-xs text-muted-foreground">{t("summaryCards.superAdmin")}</p>
               </div>
             </CardContent>
           </Card>
@@ -239,21 +240,21 @@ export default function StatementsContainer() {
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
-            Statement Filters
+            {t("filters.title")}
           </CardTitle>
           <CardDescription className="text-xs">
-            Filter statements by year and month
+            {t("filters.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Year
+                {t("filters.year")}
               </label>
               <Select value={year} onValueChange={setYear}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Select year" />
+                  <SelectValue placeholder={t("filters.selectYear")} />
                 </SelectTrigger>
                 <SelectContent>
                   {availableYears.map((y) => (
@@ -267,11 +268,11 @@ export default function StatementsContainer() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Month
+                {t("filters.month")}
               </label>
               <Select value={month} onValueChange={setMonth}>
                 <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Select month" />
+                  <SelectValue placeholder={t("filters.selectMonth")} />
                 </SelectTrigger>
                 <SelectContent>
                   {months.map((m) => (
@@ -285,7 +286,7 @@ export default function StatementsContainer() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Quick Actions
+                {t("filters.quickActions")}
               </label>
               <Button
                 variant="outline"
@@ -296,12 +297,12 @@ export default function StatementsContainer() {
                 {loading ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Loading...
+                    {t("filters.loading")}
                   </>
                 ) : (
                   <>
                     <RefreshCw className="h-4 w-4 mr-2" />
-                    Refresh List
+                    {t("filters.refreshList")}
                   </>
                 )}
               </Button>
@@ -315,21 +316,23 @@ export default function StatementsContainer() {
         <CardHeader className="pb-4">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
             <FileText className="h-4 w-4 text-primary" />
-            Statement History
+            {t("table.title")}
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="all">
-                All ({counts.merchants + counts.agents + counts.super_admin})
+                {t("table.tabs.all", { count: counts.merchants + counts.agents + counts.super_admin })}
               </TabsTrigger>
               <TabsTrigger value="merchants">
-                Merchants ({counts.merchants})
+                {t("table.tabs.merchants", { count: counts.merchants })}
               </TabsTrigger>
-              <TabsTrigger value="agents">Agents ({counts.agents})</TabsTrigger>
+              <TabsTrigger value="agents">
+                {t("table.tabs.agents", { count: counts.agents })}
+              </TabsTrigger>
               <TabsTrigger value="super_admin">
-                Super Admin ({counts.super_admin})
+                {t("table.tabs.superAdmin", { count: counts.super_admin })}
               </TabsTrigger>
             </TabsList>
 
@@ -337,7 +340,7 @@ export default function StatementsContainer() {
               <div className="flex flex-col items-center justify-center py-12">
                 <Loader2 className="h-10 w-10 animate-spin text-primary mb-3" />
                 <p className="text-sm text-muted-foreground">
-                  Loading statements...
+                  {t("table.loading")}
                 </p>
               </div>
             ) : currentData.length === 0 ? (
@@ -346,10 +349,10 @@ export default function StatementsContainer() {
                   <FileText className="h-8 w-8 text-muted-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">
-                  No Statements Found
+                  {t("table.noData.title")}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                  No statements available for the selected period.
+                  {t("table.noData.message")}
                 </p>
               </div>
             ) : (

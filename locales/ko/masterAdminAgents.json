@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "삭제",
+    "details": "세부정보",
+    "edit": "편집",
+    "menuLabel": "에이전트 옵션"
+  },
+  "breadcrumb": {
+    "agentDetails": "에이전트 세부정보",
+    "agents": "에이전트들",
+    "createAgent": "에이전트 생성",
+    "editAgent": "에이전트 편집",
+    "masterAdminDashboard": "마스터 관리자 대시보드"
+  },
+  "columns": {
+    "actions": "작업",
+    "agentAccount": "에이전트 계정",
+    "location": "위치",
+    "phone": "전화",
+    "status": "상태"
+  },
+  "create": {
+    "subtitle": "새 에이전트 계정을 생성하고 그들의 접근 권한 및 권한을 구성하세요.",
+    "title": "새 에이전트 온보드"
+  },
+  "delete": {
+    "cancel": "취소",
+    "confirm": "에이전트 삭제",
+    "deleting": "삭제하는 중...",
+    "description": "이 작업은 실행 취소할 수 없습니다. 에이전트가 영구적으로 삭제됩니다.",
+    "descriptionEnd": " 및 그들의 데이터를 우리의 서버에서 제거합니다.",
+    "descriptionName": " {name}",
+    "error": "에이전트를 삭제하지 못했습니다",
+    "success": "에이전트가 성공적으로 삭제되었습니다",
+    "title": "정말 확실하신가요?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "상태",
+      "statusDescription": "현재 계정 유효성",
+      "title": "액세스 제어"
+    },
+    "accountInformation": {
+      "emailAddress": "이메일 주소",
+      "fullName": "전체 이름",
+      "memberSince": "가입일",
+      "phoneNumber": "전화번호",
+      "title": "계정 정보"
+    },
+    "editAgent": "에이전트 편집",
+    "goBack": "뒤로 가기",
+    "loading": "에이전트 세부정보 로딩 중...",
+    "locationDetails": {
+      "city": "도시",
+      "country": "국가",
+      "fullAddress": "전체 주소",
+      "title": "위치 세부정보"
+    },
+    "notFound": "에이전트를 찾을 수 없습니다."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "활성",
+      "activeDescription": "비활성화되면 에이전트가 로그인하거나 상인을 관리할 수 없습니다.",
+      "activeLabel": "활성 상태",
+      "description": "시스템에 대한 에이전트의 접근을 제어하세요.",
+      "inactive": "비활성",
+      "title": "계정 상태"
+    },
+    "agentDetails": {
+      "descriptionCreate": "새 에이전트의 개인 정보를 입력하세요.",
+      "descriptionEdit": "에이전트 개인 및 로그인 정보를 업데이트합니다.",
+      "title": "에이전트 세부정보"
+    },
+    "buttons": {
+      "cancel": "취소",
+      "createAgent": "에이전트 생성",
+      "creating": "생성 중...",
+      "hideKey": "키 숨기기",
+      "hidePassword": "비밀번호 숨기기",
+      "showKey": "키 표시",
+      "showPassword": "비밀번호 표시",
+      "updateAgent": "에이전트 업데이트",
+      "updating": "업데이트 중..."
+    },
+    "fields": {
+      "city": "도시",
+      "country": "국가",
+      "emailAddress": "이메일 주소",
+      "fullName": "전체 이름",
+      "newPassword": "새 비밀번호 (현재 비밀번호 유지하려면 비워 두세요)",
+      "password": "비밀번호",
+      "phoneNumber": "전화번호",
+      "searchAddress": "주소 검색",
+      "stripeSecretKey": "Stripe 비밀 키 (선택 사항)"
+    },
+    "hints": {
+      "passwordRequirements": "최소 8자, 영숫자.",
+      "stripeKeyCreate": "상인 결제를 받기 위한 Stripe API 키를 구성하십시오. 에이전트 설정에서 나중에 설정할 수 있습니다.",
+      "stripeKeyEdit": "에이전트의 Stripe API 키를 업데이트합니다. 기존 구성을 유지하려면 비워 두세요."
+    },
+    "locationDetails": {
+      "description": "에이전트에 대한 주소 정보입니다.",
+      "title": "위치 세부정보"
+    },
+    "placeholders": {
+      "address": "123 에이전트 거리, 도시, 국가",
+      "city": "도시",
+      "country": "국가",
+      "email": "agent@example.com",
+      "name": "예: John Doe",
+      "passwordCreate": "안전한 비밀번호를 입력하세요",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (현재 값을 유지하려면 비워 두십시오)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (현재 유지하려면 비워 두세요)",
+      "stripeKeyNew": "sk_test_... 또는 sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "에이전트 추가",
+    "searchPlaceholder": "에이전트 검색..."
+  },
+  "messages": {
+    "addressSelected": "선택된 주소",
+    "checkInput": "입력을 확인하고 다시 시도하세요.",
+    "createError": "에이전트 생성 실패",
+    "createSuccess": "에이전트 계정이 성공적으로 생성되었습니다.",
+    "fetchError": "에이전트 세부정보를 로드하지 못했습니다",
+    "loadError": "관리자를 로드하지 못했습니다",
+    "updateError": "에이전트 업데이트 실패",
+    "updateSuccess": "에이전트 프로필이 성공적으로 업데이트되었습니다.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "유효성 검사 실패"
+  },
+  "status": {
+    "active": "활성",
+    "inactive": "비활성"
+  },
+  "statusToggle": {
+    "activateSuccess": "에이전트가 성공적으로 활성화되었습니다",
+    "deactivateSuccess": "에이전트가 성공적으로 비활성화되었습니다.",
+    "updateError": "에이전트 상태 업데이트에 실패했습니다."
+  },
+  "subtitle": "귀하의 에이전트 및 그 계정을 관리하세요.",
+  "title": "에이전트 관리"
+}

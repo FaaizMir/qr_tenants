@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "Perbarui informasi akun Anda",
+    "title": "Detail Akun"
+  },
+  "breadcrumbs": {
+    "account": "Akun",
+    "dashboard": "Dasbor"
+  },
+  "buttons": {
+    "saveChanges": "Simpan Perubahan",
+    "saving": "Menyimpan..."
+  },
+  "fields": {
+    "email": "Email",
+    "fullName": "Nama Lengkap",
+    "phone": "Telepon",
+    "role": "Peran"
+  },
+  "messages": {
+    "fetchError": "Gagal memuat informasi akun",
+    "updateError": "Gagal memperbarui akun",
+    "updateSuccess": "Akun berhasil diperbarui",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "Masukkan email Anda",
+    "name": "Masukkan nama Anda",
+    "phone": "Masukkan telepon Anda"
+  },
+  "profile": {
+    "description": "Informasi profil Anda",
+    "title": "Profil"
+  },
+  "subtitle": "Kelola informasi akun Anda",
+  "title": "Pengaturan Akun"
+}

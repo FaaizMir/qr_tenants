@@ -16,8 +16,10 @@ import {
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function MasterAdminCommissionContainer() {
+  const t = useTranslations("masterAdminCommission");
   const [walletData, setWalletData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +33,7 @@ export default function MasterAdminCommissionContainer() {
       const errorMsg =
         error.response?.data?.message ||
         error.response?.data?.error ||
-        "Failed to load wallet information";
+        t("errors.loadFailed");
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -68,10 +70,10 @@ export default function MasterAdminCommissionContainer() {
       <div className="space-y-6 p-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">
-            Commission Management
+            {t("header.managementTitle")}
           </h1>
           <p className="text-slate-500 text-sm">
-            Manage commissions and earnings.
+            {t("header.managementSubtitle")}
           </p>
         </div>
         <Card className="border-none shadow-sm bg-white rounded-2xl">
@@ -80,10 +82,10 @@ export default function MasterAdminCommissionContainer() {
               <Wallet className="w-8 h-8 text-slate-400" />
             </div>
             <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              No Wallet Data
+              {t("noData.title")}
             </h3>
             <p className="text-sm text-slate-500">
-              Unable to load wallet information. Please try again later.
+              {t("noData.message")}
             </p>
           </CardContent>
         </Card>
@@ -96,9 +98,9 @@ export default function MasterAdminCommissionContainer() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Commission Hub</h1>
+          <h1 className="text-2xl font-bold text-slate-900">{t("header.title")}</h1>
           <p className="text-slate-500 text-sm mt-1">
-            Real-time financial overview and revenue breakdown
+            {t("header.subtitle")}
           </p>
         </div>
         <div
@@ -115,7 +117,7 @@ export default function MasterAdminCommissionContainer() {
               walletData.is_active ? "bg-emerald-500" : "bg-rose-500",
             )}
           ></div>
-          {walletData.is_active ? "System Active" : "System Inactive"}
+          {walletData.is_active ? t("status.systemActive") : t("status.systemInactive")}
         </div>
       </div>
 
@@ -129,7 +131,7 @@ export default function MasterAdminCommissionContainer() {
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <p className="text-xs font-semibold text-slate-500 uppercase">
-                  Total Revenue
+                  {t("cards.totalRevenue.title")}
                 </p>
                 <div className="flex items-baseline gap-2">
                   <h2 className="text-4xl font-bold text-slate-900">
@@ -148,10 +150,10 @@ export default function MasterAdminCommissionContainer() {
             <div className="mt-8 flex items-center gap-2 text-sm text-slate-500">
               <ArrowUpRight className="w-4 h-4 text-emerald-500" />
               <span className="font-medium text-emerald-600">
-                All-time earnings
+                {t("cards.totalRevenue.allTimeEarnings")}
               </span>
               <span className="text-slate-300">•</span>
-              <span>Updated today</span>
+              <span>{t("cards.totalRevenue.updatedToday")}</span>
             </div>
           </CardContent>
         </Card>
@@ -168,7 +170,7 @@ export default function MasterAdminCommissionContainer() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase">
-                  Operating Wallet
+                  {t("status.operatingWallet")}
                 </p>
                 <p className="text-2xl font-bold mt-1">{walletData.currency}</p>
               </div>
@@ -176,7 +178,7 @@ export default function MasterAdminCommissionContainer() {
 
             <div className="flex items-center justify-between pt-6 border-t border-slate-800/50 mt-6">
               <span className="text-xs font-medium text-slate-400">
-                System Status
+                {t("status.systemStatus")}
               </span>
               <Activity className="w-4 h-4 text-emerald-400" />
             </div>
@@ -189,38 +191,38 @@ export default function MasterAdminCommissionContainer() {
         <div className="flex items-center justify-between px-1">
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
             <CreditCard className="w-5 h-5 text-slate-400" />
-            Revenue Allocation
+            {t("cards.revenueAllocation.title")}
           </h3>
           <span className="text-xs font-medium text-slate-400 uppercase">
-            {new Date().getFullYear()} Fiscal Year
+            {t("cards.revenueAllocation.fiscalYear", { year: new Date().getFullYear() })}
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             {
-              title: "Agent Subscription",
+              title: t("cards.sources.agentSubscription.title"),
               amount: walletData.revenue_admin_annual_subscription_fee,
               icon: Calendar,
-              desc: "Annual fees from admins",
+              desc: t("cards.sources.agentSubscription.description"),
             },
             {
-              title: "Temp. Packages",
+              title: t("cards.sources.tempPackages.title"),
               amount: walletData.commission_temporary_merchant_packages,
               icon: Package,
-              desc: "Short-term merchant plans",
+              desc: t("cards.sources.tempPackages.description"),
             },
             {
-              title: "Annual Packages",
+              title: t("cards.sources.annualPackages.title"),
               amount: walletData.commission_annual_merchant_packages,
               icon: Building2,
-              desc: "Long-term merchant plans",
+              desc: t("cards.sources.annualPackages.description"),
             },
             {
-              title: "Merchant Fees",
+              title: t("cards.sources.merchantFees.title"),
               amount: walletData.commission_merchant_annual_fee,
               icon: DollarSign,
-              desc: "Recurring merchant fees",
+              desc: t("cards.sources.merchantFees.description"),
             },
           ].map((item, index) => (
             <Card

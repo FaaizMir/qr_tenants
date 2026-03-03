@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "Tetapkan Semula",
+    "saveSettings": "Simpan Tetapan",
+    "saving": "Menyimpan..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "Papan Pemuka Admin Utama",
+    "platformSettings": "Tetapan Platform"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "Pembayaran pedagang - Kos platform = Pendapatan ejen",
+        "title": "Keuntungan Ejen:"
+      },
+      "merchantPayment": {
+        "description": "100% pergi ke akaun Stripe ejen",
+        "title": "Pembayaran Pedagang:"
+      },
+      "platformDeduction": {
+        "description": "Kos yang ditolak secara automatik dari dompet prabayar ejen",
+        "title": "Potongan Platform:"
+      }
+    },
+    "title": "Model Perniagaan Dompet Prabayar"
+  },
+  "currency": {
+    "description": "Mata wang platform untuk semua transaksi",
+    "description2": "Semua jumlah dipaparkan dalam mata wang ini",
+    "label": "Mata Wang Platform",
+    "options": {
+      "aud": "AUD (Dolar Australia)",
+      "eur": "EUR (Euro)",
+      "gbp": "GBP (Pound Sterling)",
+      "myr": "MYR (Ringgit Malaysia)",
+      "sgd": "SGD (Dolar Singapura)",
+      "usd": "USD (Dolar AS)"
+    },
+    "title": "Konfigurasi Mata Wang"
+  },
+  "header": {
+    "subtitle": "Urus yuran langganan, kos platform, dan tetapan mata wang",
+    "title": "Konfigurasi Platform"
+  },
+  "messages": {
+    "loadError": "Gagal memuat tetapan platform",
+    "updateError": "Gagal mengemas kini tetapan",
+    "updateSuccess": "Tetapan platform berjaya dikemas kini",
+    "validationError": "{field} mesti merupakan nombor yang sah"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "Setiap kupon untuk peniaga tahunan",
+        "label": "Kos Kupon (Tahunan)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "Setiap kupon untuk pedagang sementara",
+        "label": "Kos Kupon (Sementara)",
+        "placeholder": "0.05"
+      },
+      "title": "Penjanaan Kupon"
+    },
+    "description": "Kos secara automatik ditolak dari dompet prabayar ejen bagi setiap operasi",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "Ditolak apabila ejen mengaktifkan langganan pedagang tahunan",
+        "label": "Kos Platform Pedagang Tahunan",
+        "placeholder": "299.00"
+      },
+      "title": "Pengaktifan Pedagang"
+    },
+    "title": "Kos Platform (Model Dompet Prabayar)",
+    "whatsapp": {
+      "biCost": {
+        "description": "Setiap mesej BI",
+        "label": "Kos WhatsApp BI",
+        "placeholder": "0.45"
+      },
+      "title": "Pesanan WhatsApp",
+      "uiAnnual": {
+        "description": "Setiap UI (tahunan)",
+        "label": "Antaramuka WhatsApp (Tahunan)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "Setiap UI (sementara)",
+        "label": "Antaramuka WhatsApp (Sementara)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "Apa yang dibayar ejen untuk akses platform tahunan",
+      "label": "Yuran Langganan Tahunan Ejen",
+      "placeholder": "1499.00"
+    },
+    "description": "Harga langganan tahunan untuk ejen dan peniaga",
+    "merchantFee": {
+      "description": "Apa yang dibayar pedagang untuk langganan tahunan",
+      "label": "Yuran Langganan Tahunan Peniaga",
+      "placeholder": "1499.00"
+    },
+    "required": "Diperlukan",
+    "title": "Yuran Langganan"
+  }
+}

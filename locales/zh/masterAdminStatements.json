@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "所有报表",
+    "masterAdminDashboard": "主管理员仪表板"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "下载 PDF",
+      "header": "操作"
+    },
+    "generatedAt": {
+      "header": "生成于"
+    },
+    "owner": {
+      "agent": "代理",
+      "header": "所有者",
+      "merchant": "商户",
+      "superAdmin": "超级管理员"
+    },
+    "period": {
+      "header": "期间",
+      "unknown": "未知"
+    },
+    "status": {
+      "failed": "失败",
+      "generated": "已生成",
+      "header": "状态",
+      "pending": "待处理"
+    }
+  },
+  "filters": {
+    "description": "按年和月筛选报表",
+    "loading": "加载中...",
+    "month": "月份",
+    "quickActions": "快速操作",
+    "refreshList": "刷新列表",
+    "selectMonth": "选择月份",
+    "selectYear": "选择年份",
+    "title": "报表过滤器",
+    "year": "年"
+  },
+  "header": {
+    "subtitle": "查看并下载商户、代理和平台管理员的月度报表。",
+    "title": "所有财务报表"
+  },
+  "messages": {
+    "downloadError": "下载 PDF 失败。请再试一次。",
+    "downloadSuccess": "报表下载成功！",
+    "loadError": "加载报表失败。请再试一次。"
+  },
+  "months": {
+    "april": "四月",
+    "august": "八月",
+    "december": "十二月",
+    "february": "二月",
+    "january": "一月",
+    "july": "七月",
+    "june": "六月",
+    "march": "三月",
+    "may": "五月",
+    "november": "十一月",
+    "october": "十月",
+    "september": "九月"
+  },
+  "summaryCards": {
+    "agents": "代理人",
+    "merchants": "商户",
+    "superAdmin": "超级管理员"
+  },
+  "table": {
+    "loading": "正在加载报表...",
+    "noData": {
+      "message": "所选期间没有可用的报表。",
+      "title": "未找到报表"
+    },
+    "tabs": {
+      "agents": "代理 ({count})",
+      "all": "全部 ({count})",
+      "merchants": "商户 ({count})",
+      "superAdmin": "超级管理员 ({count})"
+    },
+    "title": "报表历史"
+  }
+}

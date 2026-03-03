@@ -4,6 +4,7 @@
     "dashboard": "डैशबोर्ड",
     "details": "विवरण",
     "editMerchant": "व्यापारी संपादित करें",
+    "masterAdminDashboard": "मास्टर एडमिन डैशबोर्ड",
     "merchantManagement": "व्यापारी प्रबंधन",
     "merchants": "व्यापारी"
   },
@@ -26,6 +27,7 @@
       "title": "खाता क्रेडेंशियल्स"
     },
     "actions": {
+      "back": "पीछे",
       "cancel": "रद्द करें",
       "createMerchant": "व्यापारी बनाएं",
       "creating": "बनाते हुए...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "पीछे",
       "updateMerchant": "व्यापारी अपडेट करें",
       "updating": "अपडेट हो रहा है..."
     },

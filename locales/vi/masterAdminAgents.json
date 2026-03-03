@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "Xóa",
+    "details": "Chi tiết",
+    "edit": "Chỉnh sửa",
+    "menuLabel": "Tùy chọn Đại lý"
+  },
+  "breadcrumb": {
+    "agentDetails": "Thông tin đại lý",
+    "agents": "Đại lý",
+    "createAgent": "Tạo đại lý",
+    "editAgent": "Chỉnh sửa đại lý",
+    "masterAdminDashboard": "Bảng điều khiển quản trị viên chính"
+  },
+  "columns": {
+    "actions": "Hành động",
+    "agentAccount": "Tài khoản đại lý",
+    "location": "Vị trí",
+    "phone": "Điện thoại",
+    "status": "Trạng thái"
+  },
+  "create": {
+    "subtitle": "Tạo một tài khoản đại lý mới và cấu hình quyền truy cập và quyền hạn của họ.",
+    "title": "Thêm đại lý mới"
+  },
+  "delete": {
+    "cancel": "Hủy",
+    "confirm": "Xóa Đại lý",
+    "deleting": "Đang xóa...",
+    "description": "Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn đại lý",
+    "descriptionEnd": " và xóa dữ liệu của họ khỏi máy chủ của chúng tôi.",
+    "descriptionName": " {name}",
+    "error": "Xóa đại lý không thành công",
+    "success": "Đại lý đã xóa thành công",
+    "title": "Bạn có chắc chắn không?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "Trạng thái",
+      "statusDescription": "Thời hạn tài khoản hiện tại",
+      "title": "Kiểm soát truy cập"
+    },
+    "accountInformation": {
+      "emailAddress": "Địa chỉ email",
+      "fullName": "Họ và tên",
+      "memberSince": "Thành viên từ",
+      "phoneNumber": "Số điện thoại",
+      "title": "Thông tin tài khoản"
+    },
+    "editAgent": "Chỉnh sửa đại lý",
+    "goBack": "Quay lại",
+    "loading": "Đang tải thông tin đại lý...",
+    "locationDetails": {
+      "city": "Thành phố",
+      "country": "Quốc gia",
+      "fullAddress": "Địa chỉ đầy đủ",
+      "title": "Chi tiết vị trí"
+    },
+    "notFound": "Không tìm thấy đại lý."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "Hoạt động",
+      "activeDescription": "Khi bị vô hiệu hóa, đại lý không thể đăng nhập hoặc quản lý thương nhân.",
+      "activeLabel": "Trạng thái hoạt động",
+      "description": "Kiểm soát quyền truy cập của đại lý vào hệ thống.",
+      "inactive": "Không hoạt động",
+      "title": "Trạng thái tài khoản"
+    },
+    "agentDetails": {
+      "descriptionCreate": "Nhập thông tin cá nhân cho đại lý mới.",
+      "descriptionEdit": "Cập nhật thông tin cá nhân và đăng nhập của đại lý.",
+      "title": "Thông tin đại lý"
+    },
+    "buttons": {
+      "cancel": "Hủy",
+      "createAgent": "Tạo đại lý",
+      "creating": "Đang tạo...",
+      "hideKey": "Ẩn khóa",
+      "hidePassword": "Ẩn mật khẩu",
+      "showKey": "Hiển thị khóa",
+      "showPassword": "Hiện mật khẩu",
+      "updateAgent": "Cập nhật Đại lý",
+      "updating": "Đang cập nhật..."
+    },
+    "fields": {
+      "city": "Thành phố",
+      "country": "Quốc gia",
+      "emailAddress": "Địa chỉ email",
+      "fullName": "Họ và tên",
+      "newPassword": "Mật khẩu mới (để trống để giữ nguyên mật khẩu hiện tại)",
+      "password": "Mật khẩu",
+      "phoneNumber": "Số điện thoại",
+      "searchAddress": "Tìm kiếm địa chỉ",
+      "stripeSecretKey": "Khóa bí mật Stripe (Tùy chọn)"
+    },
+    "hints": {
+      "passwordRequirements": "Tối thiểu 8 ký tự, chữ và số.",
+      "stripeKeyCreate": "Cấu hình khóa API Stripe để nhận thanh toán từ thương nhân. Có thể thiết lập sau trong cài đặt đại lý.",
+      "stripeKeyEdit": "Cập nhật khóa API Stripe của đại lý. Để trống để giữ cấu hình hiện tại."
+    },
+    "locationDetails": {
+      "description": "Thông tin địa chỉ cho đại lý.",
+      "title": "Chi tiết vị trí"
+    },
+    "placeholders": {
+      "address": "123 Đại lý St, Thành phố, Quốc gia",
+      "city": "Thành phố",
+      "country": "Quốc gia",
+      "email": "agent@example.com",
+      "name": "vd. John Doe",
+      "passwordCreate": "Nhập mật khẩu an toàn",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (để trống để giữ nguyên)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (để trống để giữ nguyên)",
+      "stripeKeyNew": "sk_test_... hoặc sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "Thêm đại lý",
+    "searchPlaceholder": "Tìm kiếm đại lý..."
+  },
+  "messages": {
+    "addressSelected": "Địa chỉ đã chọn",
+    "checkInput": "Vui lòng kiểm tra đầu vào của bạn và thử lại.",
+    "createError": "Tạo đại lý không thành công",
+    "createSuccess": "Tài khoản đại lý đã được tạo thành công.",
+    "fetchError": "Tải thông tin đại lý không thành công",
+    "loadError": "Không thể tải quản trị viên",
+    "updateError": "Cập nhật đại lý không thành công",
+    "updateSuccess": "Cập nhật hồ sơ đại lý thành công.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "Xác thực không thành công"
+  },
+  "status": {
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động"
+  },
+  "statusToggle": {
+    "activateSuccess": "Đại lý đã được kích hoạt thành công",
+    "deactivateSuccess": "Đại lý đã được vô hiệu hóa thành công",
+    "updateError": "Cập nhật trạng thái đại lý không thành công"
+  },
+  "subtitle": "Quản lý các đại lý và tài khoản của họ.",
+  "title": "Quản lý đại lý"
+}

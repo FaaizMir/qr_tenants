@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "コミッション",
+    "masterAdminDashboard": "マスター管理者ダッシュボード"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "{year} 会計年度",
+      "title": "収益配分"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "管理者からの年会費",
+        "title": "エージェントサブスクリプション"
+      },
+      "annualPackages": {
+        "description": "長期の商人プラン",
+        "title": "年間パッケージ"
+      },
+      "merchantFees": {
+        "description": "定期的なマーチャント手数料",
+        "title": "マーチャント手数料"
+      },
+      "tempPackages": {
+        "description": "短期マーチャントプラン",
+        "title": "一時的パッケージ"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "全期間の収益",
+      "title": "総収益",
+      "updatedToday": "本日更新"
+    }
+  },
+  "errors": {
+    "loadFailed": "ウォレット情報の読み込みに失敗しました"
+  },
+  "header": {
+    "managementSubtitle": "コミッションと収益を管理します。",
+    "managementTitle": "コミッション管理",
+    "subtitle": "リアルタイムの財務概要と収益内訳",
+    "title": "コミッションハブ"
+  },
+  "noData": {
+    "message": "ウォレット情報を読み込めません。後でもう一度お試しください。",
+    "title": "ウォレットデータなし"
+  },
+  "status": {
+    "operatingWallet": "オペレーティングウォレット",
+    "systemActive": "システムアクティブ",
+    "systemInactive": "システム非アクティブ",
+    "systemStatus": "システムステータス"
+  }
+}

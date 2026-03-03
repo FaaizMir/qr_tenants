@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "重置",
+    "saveSettings": "保存设置",
+    "saving": "保存中..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "主管理员仪表板",
+    "platformSettings": "平台设置"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "商户支付 - 平台成本 = 代理收入",
+        "title": "代理利润："
+      },
+      "merchantPayment": {
+        "description": "100% 进入代理的 Stripe 账户",
+        "title": "商户支付："
+      },
+      "platformDeduction": {
+        "description": "从代理的预付钱包中自动扣除的费用",
+        "title": "平台扣除："
+      }
+    },
+    "title": "预付钱包商业模式"
+  },
+  "currency": {
+    "description": "所有交易的平台货币",
+    "description2": "所有金额均以此货币显示",
+    "label": "平台货币",
+    "options": {
+      "aud": "澳大利亚元 (AUD)",
+      "eur": "欧元（EUR）",
+      "gbp": "英镑 (GBP)",
+      "myr": "马来西亚林吉特 (MYR)",
+      "sgd": "新加坡元 (SGD)",
+      "usd": "美元 (USD)"
+    },
+    "title": "货币配置"
+  },
+  "header": {
+    "subtitle": "管理订阅费用、平台成本和货币设置",
+    "title": "平台配置"
+  },
+  "messages": {
+    "loadError": "加载平台设置失败",
+    "updateError": "更新设置失败",
+    "updateSuccess": "平台设置成功更新",
+    "validationError": "{field} 必须是有效的数字"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "每个优惠券适用于年度商户",
+        "label": "优惠券费用（年度）",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "临时商户每个优惠券",
+        "label": "优惠券费用（临时）",
+        "placeholder": "0.05"
+      },
+      "title": "优惠券生成"
+    },
+    "description": "每次操作自动从代理的预付钱包中扣除费用",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "代理激活年度商户订阅时扣除",
+        "label": "年度商户平台成本",
+        "placeholder": "299.00"
+      },
+      "title": "商户激活"
+    },
+    "title": "平台费用（预付钱包模型）",
+    "whatsapp": {
+      "biCost": {
+        "description": "每条BI消息",
+        "label": "WhatsApp BI费用",
+        "placeholder": "0.45"
+      },
+      "title": "WhatsApp 消息",
+      "uiAnnual": {
+        "description": "每个用户界面（年度）",
+        "label": "WhatsApp 用户界面 (年度)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "每个用户界面（临时）",
+        "label": "WhatsApp 界面（临时）",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "代理为年度平台访问支付的费用",
+      "label": "代理年订阅费",
+      "placeholder": "1499.00"
+    },
+    "description": "代理和商家的年度订阅定价",
+    "merchantFee": {
+      "description": "商户为年度订阅支付的费用",
+      "label": "商户年度订阅费",
+      "placeholder": "1499.00"
+    },
+    "required": "必填",
+    "title": "订阅费用"
+  }
+}

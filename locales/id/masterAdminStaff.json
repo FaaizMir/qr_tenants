@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "Manajemen Iklan",
+    "financeOnly": "Hanya Keuangan",
+    "fullAccess": "Akses Penuh",
+    "readOnly": "Hanya Baca",
+    "supportHelp": "Bantuan Dukungan"
+  },
+  "actions": {
+    "delete": "Hapus",
+    "edit": "Edit",
+    "menuLabel": "Opsi Staf"
+  },
+  "breadcrumb": {
+    "addStaff": "Tambahkan Staf",
+    "editStaff": "Edit Staf",
+    "masterAdminDashboard": "Dasbor Admin Utama",
+    "staffManagement": "Manajemen Staf"
+  },
+  "columns": {
+    "access": "Akses",
+    "actions": "Tindakan",
+    "phone": "Telepon",
+    "role": "Peran",
+    "staffMember": "Anggota Staf",
+    "status": "Status"
+  },
+  "delete": {
+    "cancel": "Batal",
+    "confirm": "Hapus Permanen",
+    "deleting": "Menghapus...",
+    "description": "Apakah Anda yakin ingin menghapus",
+    "descriptionEnd": "? Tindakan ini tidak dapat dibatalkan.",
+    "descriptionPermanent": "? Ini akan secara permanen mencabut akses mereka ke platform.",
+    "error": "Gagal menghapus anggota staf.",
+    "success": "Anggota staf berhasil dihapus.",
+    "title": "Hapus Anggota Staf?",
+    "unknownRole": "Peran tidak dikenal"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "Kontrol apakah akun ini aktif.",
+      "disabled": "Akun Dinonaktifkan",
+      "disabledDescription": "Akses staf saat ini dicabut.",
+      "enabled": "Akun Diaktifkan",
+      "enabledDescription": "Staf dapat masuk dan mengelola platform.",
+      "title": "Visibilitas Akun"
+    },
+    "buttons": {
+      "cancel": "Batal",
+      "createAccount": "Buat Akun",
+      "savingChanges": "Menyimpan Perubahan",
+      "updateProfile": "Perbarui Profil"
+    },
+    "createSubtitle": "Tetapkan peran dan izin akses baru.",
+    "createTitle": "Buat Akun Staf Baru",
+    "editSubtitle": "Modifikasi hak administratif yang ada.",
+    "editTitle": "Edit Akun Staf",
+    "fields": {
+      "accountPassword": "Kata Sandi Akun",
+      "emailAddress": "Alamat Email",
+      "fullName": "Nama Lengkap",
+      "phoneNumber": "Nomor Telepon",
+      "systemRole": "Peran Sistem",
+      "updatePassword": "Perbarui Kata Sandi (Opsional)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* Biarkan kosong untuk mempertahankan kata sandi saat ini."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "mis. Robert Fox",
+      "passwordCreate": "Masukkan kata sandi yang aman",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "Detail penting dan informasi kontak.",
+      "title": "Informasi Staf"
+    },
+    "validation": {
+      "emailRequired": "Email diperlukan",
+      "nameRequired": "Nama lengkap diperlukan",
+      "passwordMinLength": "Minimal 8 karakter diperlukan",
+      "passwordRequired": "Kata sandi diperlukan",
+      "phoneRequired": "Nomor telepon diperlukan",
+      "roleRequired": "Peran diperlukan"
+    }
+  },
+  "listing": {
+    "addStaff": "Tambahkan Staf",
+    "clearSearch": "Hapus Pencarian",
+    "noStaffDescription": "Coba sesuaikan pencarian Anda atau tambahkan anggota staf baru.",
+    "noStaffFound": "Tidak ada staf ditemukan",
+    "refresh": "Segarkan",
+    "searchPlaceholder": "Cari anggota staf..."
+  },
+  "messages": {
+    "createError": "Gagal menyimpan anggota staf.",
+    "createSuccess": "Akun staf berhasil dibuat.",
+    "fetchError": "Gagal memuat data staf.",
+    "fetchStaffError": "Gagal mengambil staf",
+    "updateSuccess": "Profil staf berhasil diperbarui."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "Tinjau iklan",
+      "title": "Penyetuju Iklan"
+    },
+    "financeViewer": {
+      "description": "Buku Besar & Pernyataan",
+      "title": "Pengelola Keuangan"
+    },
+    "role": "Peran",
+    "superAdmin": {
+      "description": "Akses Penuh",
+      "title": "Super Admin"
+    },
+    "supportStaff": {
+      "description": "Tiket & Balasan",
+      "title": "Staf Dukungan"
+    }
+  },
+  "roles": {
+    "adApprover": "Penyetuju Iklan",
+    "admin": "Admin",
+    "financeViewer": "Penampil Keuangan",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Staf Dukungan"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Tidak Aktif"
+  },
+  "statusToggle": {
+    "disableSuccess": "Akun staf dinonaktifkan dengan sukses.",
+    "enableSuccess": "Akun staf diaktifkan dengan sukses.",
+    "updateError": "Gagal memperbarui status staf."
+  },
+  "subtitle": "Kelola peran dan izin administratif platform.",
+  "title": "Manajemen Staf"
+}

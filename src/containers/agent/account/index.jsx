@@ -3,18 +3,36 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Save, User, Mail, Phone, MapPin, Building2, Key } from "lucide-react";
+import {
+  Loader2,
+  Save,
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Building2,
+  Key,
+  ArrowLeft,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { AddressAutocomplete } from "@/components/common/address-autocomplete";
 
 export default function AgentAccountContainer() {
+  const t = useTranslations("agentAccount");
   const { data: session, update: updateSession } = useSession();
   const router = useRouter();
   const adminId = session?.user?.adminId;
@@ -48,12 +66,12 @@ export default function AgentAccountContainer() {
         setLoading(true);
         const response = await axiosInstance.get(`/admins/${adminId}`);
         const data = response.data.data;
-        
+
         // Set masked Stripe key if available
         if (data.stripe_key_masked) {
           setMaskedStripeKey(data.stripe_key_masked);
         }
-        
+
         setAccountData({
           name: data.user?.name || "",
           email: data.user?.email || "",
@@ -70,20 +88,24 @@ export default function AgentAccountContainer() {
         });
       } catch (error) {
         console.error("Failed to fetch account data:", error);
-        
+
         // Handle fetch errors
         if (error.response?.data?.errors) {
           const errors = error.response.data.errors;
-          Object.keys(errors).forEach(field => {
-            const messages = Array.isArray(errors[field]) ? errors[field] : [errors[field]];
-            messages.forEach(msg => {
-              toast.error(`${field}: ${msg}`);
+          Object.keys(errors).forEach((field) => {
+            const messages = Array.isArray(errors[field])
+              ? errors[field]
+              : [errors[field]];
+            messages.forEach((msg) => {
+              toast.error(
+                t("messages.validationError", { field, message: msg }),
+              );
             });
           });
         } else if (error.response?.data?.message) {
           toast.error(error.response.data.message);
         } else {
-          toast.error("Failed to load account information");
+          toast.error(t("messages.fetchError"));
         }
       } finally {
         setLoading(false);
@@ -94,14 +116,14 @@ export default function AgentAccountContainer() {
   }, [adminId, router]);
 
   const handleInputChange = (field, value) => {
-    setAccountData(prev => ({
+    setAccountData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleAddressChange = (locationData) => {
-    setAccountData(prev => ({
+    setAccountData((prev) => ({
       ...prev,
       address: locationData.address,
       city: locationData.city || prev.city,
@@ -115,7 +137,7 @@ export default function AgentAccountContainer() {
   const handleSave = async () => {
     try {
       setSaving(true);
-      
+
       // Prepare payload
       const payload = {
         name: accountData.name,
@@ -127,10 +149,13 @@ export default function AgentAccountContainer() {
       };
 
       // Only include stripe_secret_key if it's been changed (not the masked value)
-      if (accountData.stripeSecretKey && accountData.stripeSecretKey !== maskedStripeKey) {
+      if (
+        accountData.stripeSecretKey &&
+        accountData.stripeSecretKey !== maskedStripeKey
+      ) {
         payload.stripe_secret_key = accountData.stripeSecretKey;
       }
-      
+
       await axiosInstance.patch(`/admins/${adminId}`, payload);
 
       // Update session with new data
@@ -140,21 +165,23 @@ export default function AgentAccountContainer() {
           ...session.user,
           name: accountData.name,
           email: accountData.email,
-        }
+        },
       });
 
-      toast.success("Account updated successfully");
+      toast.success(t("messages.updateSuccess"));
     } catch (error) {
       console.error("Failed to update account:", error);
-      
+
       // Handle validation errors
       if (error.response?.data?.errors) {
         const errors = error.response.data.errors;
         // Display all validation errors
-        Object.keys(errors).forEach(field => {
-          const messages = Array.isArray(errors[field]) ? errors[field] : [errors[field]];
-          messages.forEach(msg => {
-            toast.error(`${field}: ${msg}`);
+        Object.keys(errors).forEach((field) => {
+          const messages = Array.isArray(errors[field])
+            ? errors[field]
+            : [errors[field]];
+          messages.forEach((msg) => {
+            toast.error(t("messages.validationError", { field, message: msg }));
           });
         });
       } else if (error.response?.data?.message) {
@@ -162,7 +189,7 @@ export default function AgentAccountContainer() {
         toast.error(error.response.data.message);
       } else {
         // Fallback error message
-        toast.error("Failed to update account");
+        toast.error(t("messages.updateError"));
       }
     } finally {
       setSaving(false);
@@ -179,17 +206,28 @@ export default function AgentAccountContainer() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Account Settings</h1>
-        <p className="text-muted-foreground">Manage your account information</p>
+      <div className="flex items-center gap-3">
+        <Button
+          variant="ghost"
+          size="icon"
+          type="button"
+          onClick={() => router.back()}
+          className="rounded-full shrink-0"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Profile Card */}
         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Your profile information</CardDescription>
+            <CardTitle>{t("profile.title")}</CardTitle>
+            <CardDescription>{t("profile.description")}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center space-y-4">
             <Avatar className="h-24 w-24">
@@ -200,10 +238,16 @@ export default function AgentAccountContainer() {
             </Avatar>
             <div className="text-center">
               <h3 className="font-semibold text-lg">{accountData.name}</h3>
-              <p className="text-sm text-muted-foreground">{accountData.email}</p>
+              <p className="text-sm text-muted-foreground">
+                {accountData.email}
+              </p>
               <div className="mt-2">
-                <Badge variant={accountData.hasStripeKey ? "default" : "secondary"}>
-                  {accountData.hasStripeKey ? "Stripe Connected" : "No Stripe Key"}
+                <Badge
+                  variant={accountData.hasStripeKey ? "default" : "secondary"}
+                >
+                  {accountData.hasStripeKey
+                    ? t("profile.stripeConnected")
+                    : t("profile.noStripeKey")}
                 </Badge>
               </div>
             </div>
@@ -213,126 +257,126 @@ export default function AgentAccountContainer() {
         {/* Account Details Form */}
         <Card className="md:col-span-2 border-0 shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader>
-            <CardTitle>Account Details</CardTitle>
-            <CardDescription>Update your account information</CardDescription>
+            <CardTitle>{t("accountDetails.title")}</CardTitle>
+            <CardDescription>{t("accountDetails.description")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">
                   <User className="h-4 w-4 inline mr-2" />
-                  Full Name
+                  {t("fields.fullName")}
                 </Label>
                 <Input
                   id="name"
                   value={accountData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
-                  placeholder="Enter your name"
+                  placeholder={t("placeholders.name")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">
                   <Mail className="h-4 w-4 inline mr-2" />
-                  Email
+                  {t("fields.email")}
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   value={accountData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder={t("placeholders.email")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">
                   <Phone className="h-4 w-4 inline mr-2" />
-                  Phone
+                  {t("fields.phone")}
                 </Label>
                 <Input
                   id="phone"
                   value={accountData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="Enter your phone"
+                  placeholder={t("placeholders.phone")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="city">
                   <Building2 className="h-4 w-4 inline mr-2" />
-                  City
+                  {t("fields.city")}
                 </Label>
                 <Input
                   id="city"
                   value={accountData.city}
                   onChange={(e) => handleInputChange("city", e.target.value)}
-                  placeholder="Enter your city"
+                  placeholder={t("placeholders.city")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="country">
                   <MapPin className="h-4 w-4 inline mr-2" />
-                  Country
+                  {t("fields.country")}
                 </Label>
                 <Input
                   id="country"
                   value={accountData.country}
                   onChange={(e) => handleInputChange("country", e.target.value)}
-                  placeholder="Enter your country"
+                  placeholder={t("placeholders.country")}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="stripeSecretKey">
                   <Key className="h-4 w-4 inline mr-2" />
-                  Stripe Secret Key
+                  {t("fields.stripeSecretKey")}
                 </Label>
                 <Input
                   id="stripeSecretKey"
                   type="password"
                   value={accountData.stripeSecretKey}
-                  onChange={(e) => handleInputChange("stripeSecretKey", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("stripeSecretKey", e.target.value)
+                  }
                   placeholder={
                     maskedStripeKey
-                      ? `${maskedStripeKey} (leave blank to keep current)`
-                      : "sk_test_... or sk_live_..."
+                      ? t("placeholders.stripeKeyExisting", {
+                          maskedKey: maskedStripeKey,
+                        })
+                      : t("placeholders.stripeKeyNew")
                   }
                 />
                 {accountData.hasStripeKey && (
                   <p className="text-xs text-muted-foreground">
-                    Current key is masked for security. Enter a new key to update.
+                    {t("hints.stripeKeyMasked")}
                   </p>
                 )}
               </div>
 
               <div className="space-y-2 md:col-span-2">
                 <AddressAutocomplete
-                  label="Address"
+                  label={t("fields.address")}
                   name="address"
                   value={accountData.address}
                   onChange={handleAddressChange}
-                  placeholder="Start typing an address..."
+                  placeholder={t("placeholders.address")}
                 />
               </div>
             </div>
 
             <div className="flex justify-end pt-4">
-              <Button
-                onClick={handleSave}
-                disabled={saving}
-                className="gap-2"
-              >
+              <Button onClick={handleSave} disabled={saving} className="gap-2">
                 {saving ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Saving...
+                    {t("buttons.saving")}
                   </>
                 ) : (
                   <>
                     <Save className="h-4 w-4" />
-                    Save Changes
+                    {t("buttons.saveChanges")}
                   </>
                 )}
               </Button>

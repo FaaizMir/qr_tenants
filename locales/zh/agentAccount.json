@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "更新您的账户信息",
+    "title": "帐户详情"
+  },
+  "breadcrumb": {
+    "account": "账户",
+    "dashboard": "仪表板"
+  },
+  "buttons": {
+    "saveChanges": "保存更改",
+    "saving": "保存中..."
+  },
+  "fields": {
+    "address": "地址",
+    "city": "城市",
+    "country": "国家",
+    "email": "电子邮件",
+    "fullName": "全名",
+    "phone": "电话",
+    "stripeSecretKey": "Stripe 秘密密钥"
+  },
+  "hints": {
+    "stripeKeyMasked": "当前密钥出于安全原因被隐藏。输入新密钥以进行更新。"
+  },
+  "messages": {
+    "fetchError": "加载帐户信息失败",
+    "updateError": "更新账户失败",
+    "updateSuccess": "帐户更新成功",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "开始输入地址...",
+    "city": "输入您的城市",
+    "country": "输入您的国家",
+    "email": "输入您的电子邮件",
+    "name": "输入您的姓名",
+    "phone": "输入您的电话",
+    "stripeKeyExisting": "{maskedKey}（留空以保持当前状态）",
+    "stripeKeyNew": "sk_test_... 或 sk_live_..."
+  },
+  "profile": {
+    "description": "您的个人资料信息",
+    "noStripeKey": "没有 Stripe 密钥",
+    "stripeConnected": "Stripe 已连接",
+    "title": "个人资料"
+  },
+  "subtitle": "管理您的帐户信息",
+  "title": "帐户设置"
+}

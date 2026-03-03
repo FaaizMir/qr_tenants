@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "Perbarui informasi akun Anda",
+    "title": "Detail Akun"
+  },
+  "breadcrumb": {
+    "account": "Akun",
+    "dashboard": "Dasbor"
+  },
+  "buttons": {
+    "saveChanges": "Simpan Perubahan",
+    "saving": "Menyimpan..."
+  },
+  "fields": {
+    "address": "Alamat",
+    "city": "Kota",
+    "country": "Negara",
+    "email": "Email",
+    "fullName": "Nama Lengkap",
+    "phone": "Telepon",
+    "stripeSecretKey": "Kunci Rahasia Stripe"
+  },
+  "hints": {
+    "stripeKeyMasked": "Kunci saat ini disembunyikan untuk keamanan. Masukkan kunci baru untuk memperbarui."
+  },
+  "messages": {
+    "fetchError": "Gagal memuat informasi akun",
+    "updateError": "Gagal memperbarui akun",
+    "updateSuccess": "Akun berhasil diperbarui",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "Mulai mengetik alamat...",
+    "city": "Masukkan kota Anda",
+    "country": "Masukkan negara Anda",
+    "email": "Masukkan email Anda",
+    "name": "Masukkan nama Anda",
+    "phone": "Masukkan nomor telepon Anda",
+    "stripeKeyExisting": "{maskedKey} (biarkan kosong untuk mempertahankan yang sekarang)",
+    "stripeKeyNew": "sk_test_... atau sk_live_..."
+  },
+  "profile": {
+    "description": "Informasi profil Anda",
+    "noStripeKey": "Tidak ada Kunci Stripe",
+    "stripeConnected": "Stripe Terhubung",
+    "title": "Profil"
+  },
+  "subtitle": "Kelola informasi akun Anda",
+  "title": "Pengaturan Akun"
+}

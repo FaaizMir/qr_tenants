@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import {
@@ -35,12 +36,6 @@ import {
   SwitchField,
 } from "@/components/form-fields";
 
-const STAFF_ROLES = [
-  { value: "support_staff", label: "Support Staff" },
-  { value: "ad_approver", label: "Ad Approver" },
-  { value: "finance_viewer", label: "Finance Viewer" },
-];
-
 export function StaffForm({
   initialData = null,
   isEdit = false,
@@ -50,11 +45,18 @@ export function StaffForm({
 }) {
   const router = useRouter();
   const { data: session } = useSession();
+  const t = useTranslations("masterAdminStaff");
   const [loading, setLoading] = useState(false);
   const { id: paramId } = useParams();
 
   // Use passed staffId or paramId
   const finalStaffId = staffId || paramId;
+
+  const STAFF_ROLES = [
+    { value: "support_staff", label: t("roles.supportStaff") },
+    { value: "ad_approver", label: t("roles.adApprover") },
+    { value: "finance_viewer", label: t("roles.financeViewer") },
+  ];
 
   const {
     register,
@@ -111,7 +113,7 @@ export function StaffForm({
           });
         } catch (error) {
           console.error("Failed to fetch staff data:", error);
-          toast.error("Failed to load staff data.");
+          toast.error(t("messages.fetchError"));
         } finally {
           setLoading(false);
         }
@@ -145,10 +147,10 @@ export function StaffForm({
 
       if (isEdit && finalStaffId) {
         await axiosInstance.patch(`${endpoint}/${finalStaffId}`, payload);
-        toast.success("Staff profile updated successfully.");
+        toast.success(t("messages.updateSuccess"));
       } else {
         await axiosInstance.post(endpoint, payload);
-        toast.success("Staff account created successfully.");
+        toast.success(t("messages.createSuccess"));
       }
 
       router.push("/master-admin/staff");
@@ -156,7 +158,7 @@ export function StaffForm({
     } catch (error) {
       console.error("Staff form error:", error);
       toast.error(
-        error?.response?.data?.message || "Failed to save staff member.",
+        error?.response?.data?.message || t("messages.createError"),
       );
     } finally {
       setLoading(false);
@@ -181,12 +183,10 @@ export function StaffForm({
           </Button>
           <div>
             <h1 className="text-2xl font-bold text-slate-900">
-              {isEdit ? "Edit Staff Account" : "Create New Staff Account"}
+              {isEdit ? t("form.editTitle") : t("form.createTitle")}
             </h1>
             <p className="text-sm text-muted-foreground">
-              {isEdit
-                ? "Modify existing administrative privileges."
-                : "Assign new roles and access permissions."}
+              {isEdit ? t("form.editSubtitle") : t("form.createSubtitle")}
             </p>
           </div>
         </div>
@@ -199,9 +199,9 @@ export function StaffForm({
               <User className="h-5 w-5" />
             </div>
             <div>
-              <CardTitle className="text-lg">Staff Information</CardTitle>
+              <CardTitle className="text-lg">{t("form.staffInformation.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Essential details and contact info.
+                {t("form.staffInformation.description")}
               </CardDescription>
             </div>
           </div>
@@ -210,60 +210,60 @@ export function StaffForm({
         <CardContent className="p-6">
           <div className="grid gap-x-8 gap-y-2 md:grid-cols-2">
             <TextField
-              label="Full Name"
+              label={t("form.fields.fullName")}
               name="name"
-              placeholder="e.g. Robert Fox"
+              placeholder={t("form.placeholders.name")}
               register={register}
               errors={errors}
               startIcon={<User className="h-4 w-4" />}
-              validation={{ required: "Full name is required" }}
+              validation={{ required: t("form.validation.nameRequired") }}
             />
 
             <EmailField
-              label="Email Address"
+              label={t("form.fields.emailAddress")}
               name="email"
-              placeholder="staff@platform.com"
+              placeholder={t("form.placeholders.email")}
               register={register}
               errors={errors}
               startIcon={<Mail className="h-4 w-4" />}
-              validation={{ required: "Email is required" }}
+              validation={{ required: t("form.validation.emailRequired") }}
             />
 
             <PhoneField
-              label="Phone Number"
+              label={t("form.fields.phoneNumber")}
               name="phone"
               control={control}
               errors={errors}
-              validation={{ required: "Phone number is required" }}
+              validation={{ required: t("form.validation.phoneRequired") }}
             />
 
             <SelectField
-              label="System Role"
+              label={t("form.fields.systemRole")}
               name="role"
               control={control}
               errors={errors}
               options={STAFF_ROLES}
-              validation={{ required: "Role is required" }}
+              validation={{ required: t("form.validation.roleRequired") }}
             />
 
             <div className="md:col-span-2">
               <PasswordField
                 label={
-                  isEdit ? "Update Password (Optional)" : "Account Password"
+                  isEdit ? t("form.fields.updatePassword") : t("form.fields.accountPassword")
                 }
                 name="password"
-                placeholder={isEdit ? "••••••••" : "Enter a secure password"}
+                placeholder={isEdit ? t("form.placeholders.passwordEdit") : t("form.placeholders.passwordCreate")}
                 register={register}
                 errors={errors}
                 validation={{
-                  required: !isEdit ? "Password is required" : false,
-                  minLength: { value: 8, message: "Min 8 characters required" },
+                  required: !isEdit ? t("form.validation.passwordRequired") : false,
+                  minLength: { value: 8, message: t("form.validation.passwordMinLength") },
                 }}
                 startIcon={<KeyRound className="h-4 w-4" />}
               />
               {isEdit && (
                 <p className="text-[10px] text-amber-600 mt-1 font-medium italic">
-                  * Leave blank to keep the current password.
+                  {t("form.hints.passwordKeepCurrent")}
                 </p>
               )}
             </div>
@@ -278,9 +278,9 @@ export function StaffForm({
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
-              <CardTitle className="text-lg">Account Visibility</CardTitle>
+              <CardTitle className="text-lg">{t("form.accountVisibility.title")}</CardTitle>
               <CardDescription className="text-xs">
-                Control if this account is active.
+                {t("form.accountVisibility.description")}
               </CardDescription>
             </div>
           </div>
@@ -288,11 +288,11 @@ export function StaffForm({
 
         <CardContent className="p-6">
           <SwitchField
-            label={isActiveValue ? "Account Enabled" : "Account Disabled"}
+            label={isActiveValue ? t("form.accountVisibility.enabled") : t("form.accountVisibility.disabled")}
             description={
               isActiveValue
-                ? "Staff can log in and manage the platform."
-                : "Staff access is currently revoked."
+                ? t("form.accountVisibility.enabledDescription")
+                : t("form.accountVisibility.disabledDescription")
             }
             name="is_active"
             checked={isActiveValue}
@@ -307,7 +307,7 @@ export function StaffForm({
             onClick={() => router.back()}
             className="hover:bg-slate-200/50 text-slate-600 font-medium rounded-xl h-11 px-6"
           >
-            Cancel
+            {t("form.buttons.cancel")}
           </Button>
           <Button
             type="submit"
@@ -317,12 +317,12 @@ export function StaffForm({
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Saving Changes
+                {t("form.buttons.savingChanges")}
               </>
             ) : (
               <>
                 <Check className="mr-2 h-4 w-4" />
-                {isEdit ? "Update Profile" : "Create Account"}
+                {isEdit ? t("form.buttons.updateProfile") : t("form.buttons.createAccount")}
               </>
             )}
           </Button>

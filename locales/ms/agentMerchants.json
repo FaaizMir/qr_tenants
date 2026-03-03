@@ -4,6 +4,7 @@
     "dashboard": "Papan Pemuka",
     "details": "Butiran",
     "editMerchant": "Edit Pedagang",
+    "masterAdminDashboard": "Papan Pemuka Pentadbir Utama",
     "merchantManagement": "Pengurusan Pedagang",
     "merchants": "Pedagang"
   },
@@ -26,6 +27,7 @@
       "title": "Kelayakan Akaun"
     },
     "actions": {
+      "back": "Kembali",
       "cancel": "Batal",
       "createMerchant": "Cipta Peniaga",
       "creating": "Sedang mencipta...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "Kembali",
       "updateMerchant": "Kemas kini Pedagang",
       "updating": "Mengemas kini..."
     },

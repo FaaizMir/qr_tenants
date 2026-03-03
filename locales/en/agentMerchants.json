@@ -4,6 +4,7 @@
     "dashboard": "Dashboard",
     "details": "Details",
     "editMerchant": "Edit Merchant",
+    "masterAdminDashboard": "Master Admin Dashboard",
     "merchantManagement": "Merchant Management",
     "merchants": "Merchants"
   },
@@ -26,6 +27,7 @@
       "title": "Account Credentials"
     },
     "actions": {
+      "back": "Back",
       "cancel": "Cancel",
       "createMerchant": "Create Merchant",
       "creating": "Creating...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "Back",
       "updateMerchant": "Update Merchant",
       "updating": "Updating..."
     },

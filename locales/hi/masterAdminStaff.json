@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "विज्ञापन प्रबंधन",
+    "financeOnly": "केवल वित्त",
+    "fullAccess": "पूर्ण पहुंच",
+    "readOnly": "केवल पढ़ें",
+    "supportHelp": "सहायता सहायता"
+  },
+  "actions": {
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "menuLabel": "कर्मचारी विकल्प"
+  },
+  "breadcrumb": {
+    "addStaff": "स्टाफ जोड़ें",
+    "editStaff": "कर्मचारी संपादित करें",
+    "masterAdminDashboard": "मास्टर एडमिन डैशबोर्ड",
+    "staffManagement": "कर्मचारी प्रबंधन"
+  },
+  "columns": {
+    "access": "पहुँच",
+    "actions": "क्रियाएँ",
+    "phone": "फोन",
+    "role": "भूमिका",
+    "staffMember": "स्टाफ सदस्य",
+    "status": "स्थिति"
+  },
+  "delete": {
+    "cancel": "रद्द करें",
+    "confirm": "स्थायी रूप से हटाएँ",
+    "deleting": "हटाना...",
+    "description": "क्या आप सुनिश्चित हैं कि आप हटाना चाहते हैं",
+    "descriptionEnd": "? यह क्रिया पूर्ववत नहीं की जा सकती।",
+    "descriptionPermanent": "? यह उनके प्लेटफ़ॉर्म तक पहुँच को स्थायी रूप से रद्द कर देगा।",
+    "error": "कर्मचारी सदस्य को हटाने में विफल।",
+    "success": "स्टाफ सदस्य सफलतापूर्वक हटाया गया।",
+    "title": "स्टाफ सदस्य हटाएँ?",
+    "unknownRole": "अज्ञात भूमिका"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "नियंत्रण करें कि यह खाता सक्रिय है।",
+      "disabled": "खाता निष्क्रिय है",
+      "disabledDescription": "स्टाफ की पहुँच वर्तमान में रद्द कर दी गई है।",
+      "enabled": "खाता सक्षम किया गया",
+      "enabledDescription": "कर्मचारी लॉग इन कर सकते हैं और प्लेटफ़ॉर्म का प्रबंधन कर सकते हैं।",
+      "title": "खाता दृश्यता"
+    },
+    "buttons": {
+      "cancel": "रद्द करें",
+      "createAccount": "खाता बनाएं",
+      "savingChanges": "परिवर्तन सहेजना",
+      "updateProfile": "प्रोफ़ाइल अपडेट करें"
+    },
+    "createSubtitle": "नए भूमिकाएँ और पहुँच अनुमतियाँ सौंपें।",
+    "createTitle": "नया कर्मचारी खाता बनाएं",
+    "editSubtitle": "मौजूदा प्रशासनिक विशेषाधिकारों को संशोधित करें।",
+    "editTitle": "स्टाफ खाता संपादित करें",
+    "fields": {
+      "accountPassword": "खाता पासवर्ड",
+      "emailAddress": "ईमेल पता",
+      "fullName": "पूरा नाम",
+      "phoneNumber": "फोन नंबर",
+      "systemRole": "सिस्टम भूमिका",
+      "updatePassword": "पासवर्ड अपडेट करें (वैकल्पिक)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* वर्तमान पासवर्ड बनाए रखने के लिए खाली छोड़ें।"
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "उदाहरण के लिए: रॉबर्ट फॉक्स",
+      "passwordCreate": "एक सुरक्षित पासवर्ड दर्ज करें",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "आवश्यक विवरण और संपर्क जानकारी।",
+      "title": "कर्मचारी जानकारी"
+    },
+    "validation": {
+      "emailRequired": "ईमेल आवश्यक है",
+      "nameRequired": "पूर्ण नाम आवश्यक है",
+      "passwordMinLength": "कम से कम 8 वर्ण आवश्यक हैं",
+      "passwordRequired": "पासवर्ड आवश्यक है",
+      "phoneRequired": "फोन नंबर आवश्यक है",
+      "roleRequired": "भूमिका आवश्यक है"
+    }
+  },
+  "listing": {
+    "addStaff": "स्टाफ जोड़ें",
+    "clearSearch": "खोज साफ़ करें",
+    "noStaffDescription": "अपने खोज को समायोजित करने का प्रयास करें या एक नया स्टाफ सदस्य जोड़ें।",
+    "noStaffFound": "कोई स्टाफ नहीं मिला",
+    "refresh": "रीफ्रेश",
+    "searchPlaceholder": "स्टाफ सदस्यों की खोज करें..."
+  },
+  "messages": {
+    "createError": "कर्मचारी सदस्य को सहेजने में विफल।",
+    "createSuccess": "कर्मचारी खाता सफलतापूर्वक बनाया गया।",
+    "fetchError": "कर्मचारी डेटा लोड करने में विफल।",
+    "fetchStaffError": "कर्मचारी प्राप्त करने में विफल",
+    "updateSuccess": "कर्मचारी प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।"
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "विज्ञापनों की समीक्षा करें",
+      "title": "विज्ञापन अनुमोदक"
+    },
+    "financeViewer": {
+      "description": "लेखाजोखा और विवरण",
+      "title": "वित्त दर्शक"
+    },
+    "role": "भूमिका",
+    "superAdmin": {
+      "description": "पूर्ण पहुँच",
+      "title": "सुपर एडमिन"
+    },
+    "supportStaff": {
+      "description": "टिकट और उत्तर",
+      "title": "समर्थन कर्मचारी"
+    }
+  },
+  "roles": {
+    "adApprover": "विज्ञापन अनुमोदक",
+    "admin": "व्यवस्थापक",
+    "financeViewer": "वित्त दर्शक",
+    "superAdmin": "सुपर एडमिन",
+    "supportStaff": "सहायता कर्मचारी"
+  },
+  "status": {
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय"
+  },
+  "statusToggle": {
+    "disableSuccess": "कर्मचारी खाता सफलतापूर्वक अक्षम किया गया।",
+    "enableSuccess": "कर्मचारी खाता सफलतापूर्वक सक्षम किया गया।",
+    "updateError": "कर्मचारी स्थिति को अपडेट करने में विफल।"
+  },
+  "subtitle": "प्लेटफ़ॉर्म प्रशासनिक भूमिकाओं और अनुमतियों का प्रबंधन करें।",
+  "title": "कर्मचारी प्रबंधन"
+}

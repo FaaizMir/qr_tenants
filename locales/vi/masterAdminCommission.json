@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "Hoa hồng",
+    "masterAdminDashboard": "Bảng điều khiển quản trị viên chính"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "Năm tài chính {year}",
+      "title": "Phân bổ doanh thu"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "Phí hàng năm từ quản trị viên",
+        "title": "Đăng ký đại lý"
+      },
+      "annualPackages": {
+        "description": "Kế hoạch thương nhân dài hạn",
+        "title": "Gói hàng năm"
+      },
+      "merchantFees": {
+        "description": "Phí thương nhân định kỳ",
+        "title": "Phí thương nhân"
+      },
+      "tempPackages": {
+        "description": "Kế hoạch thương nhân ngắn hạn",
+        "title": "Gói tạm thời"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "Thu nhập mọi thời đại",
+      "title": "Tổng doanh thu",
+      "updatedToday": "Cập nhật hôm nay"
+    }
+  },
+  "errors": {
+    "loadFailed": "Không thể tải thông tin ví"
+  },
+  "header": {
+    "managementSubtitle": "Quản lý hoa hồng và thu nhập.",
+    "managementTitle": "Quản lý hoa hồng",
+    "subtitle": "Tổng quan tài chính theo thời gian thực và phân tích doanh thu",
+    "title": "Trung tâm hoa hồng"
+  },
+  "noData": {
+    "message": "Không thể tải thông tin ví. Vui lòng thử lại sau.",
+    "title": "Không có dữ liệu ví"
+  },
+  "status": {
+    "operatingWallet": "Ví hoạt động",
+    "systemActive": "Hệ thống hoạt động",
+    "systemInactive": "Hệ thống không hoạt động",
+    "systemStatus": "Trạng thái hệ thống"
+  }
+}

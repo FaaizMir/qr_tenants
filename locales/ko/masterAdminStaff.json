@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "광고 관리",
+    "financeOnly": "재무 전용",
+    "fullAccess": "전체 접근",
+    "readOnly": "읽기 전용",
+    "supportHelp": "지원 도움"
+  },
+  "actions": {
+    "delete": "삭제",
+    "edit": "편집",
+    "menuLabel": "직원 옵션"
+  },
+  "breadcrumb": {
+    "addStaff": "직원 추가",
+    "editStaff": "직원 편집",
+    "masterAdminDashboard": "마스터 관리자 대시보드",
+    "staffManagement": "직원 관리"
+  },
+  "columns": {
+    "access": "접근",
+    "actions": "작업",
+    "phone": "전화",
+    "role": "역할",
+    "staffMember": "직원",
+    "status": "상태"
+  },
+  "delete": {
+    "cancel": "취소",
+    "confirm": "영구 삭제",
+    "deleting": "삭제 중...",
+    "description": "정말로 제거하시겠습니까?",
+    "descriptionEnd": "? 이 작업은 실행 취소할 수 없습니다.",
+    "descriptionPermanent": "? 이 작업은 그들의 플랫폼 접근 권한을 영구적으로 취소합니다.",
+    "error": "직원 삭제에 실패했습니다.",
+    "success": "직원이 성공적으로 삭제되었습니다.",
+    "title": "직원 삭제하시겠습니까?",
+    "unknownRole": "알 수 없는 역할"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "이 계정이 활성 상태인지 제어합니다.",
+      "disabled": "계정 비활성화됨",
+      "disabledDescription": "직원 접근이 현재 취소되었습니다.",
+      "enabled": "계정 활성화됨",
+      "enabledDescription": "직원은 로그인하여 플랫폼을 관리할 수 있습니다.",
+      "title": "계정 가시성"
+    },
+    "buttons": {
+      "cancel": "취소",
+      "createAccount": "계정 만들기",
+      "savingChanges": "변경 사항 저장 중",
+      "updateProfile": "프로필 업데이트"
+    },
+    "createSubtitle": "새 역할 및 접근 권한 할당.",
+    "createTitle": "새 직원 계정 만들기",
+    "editSubtitle": "기존 관리 권한 수정.",
+    "editTitle": "직원 계정 수정",
+    "fields": {
+      "accountPassword": "계정 비밀번호",
+      "emailAddress": "이메일 주소",
+      "fullName": "전체 이름",
+      "phoneNumber": "전화번호",
+      "systemRole": "시스템 역할",
+      "updatePassword": "비밀번호 업데이트 (선택 사항)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* 현재 비밀번호를 유지하려면 비워 두세요."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "예: 로버트 폭스",
+      "passwordCreate": "안전한 비밀번호를 입력하세요",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "필수 세부정보 및 연락처 정보입니다.",
+      "title": "직원 정보"
+    },
+    "validation": {
+      "emailRequired": "이메일이 필요합니다",
+      "nameRequired": "전체 이름이 필요합니다",
+      "passwordMinLength": "최소 8자 필요",
+      "passwordRequired": "비밀번호가 필요합니다",
+      "phoneRequired": "전화번호가 필요합니다",
+      "roleRequired": "역할이 필요합니다"
+    }
+  },
+  "listing": {
+    "addStaff": "직원 추가",
+    "clearSearch": "검색 지우기",
+    "noStaffDescription": "검색을 조정하거나 새 직원 추가를 시도하세요.",
+    "noStaffFound": "직원이 없습니다",
+    "refresh": "새로 고침",
+    "searchPlaceholder": "직원 검색..."
+  },
+  "messages": {
+    "createError": "직원 멤버를 저장하지 못했습니다.",
+    "createSuccess": "직원 계정이 성공적으로 생성되었습니다.",
+    "fetchError": "직원 데이터를 로드하는 데 실패했습니다.",
+    "fetchStaffError": "직원 정보를 가져오지 못했습니다.",
+    "updateSuccess": "직원 프로필이 성공적으로 업데이트되었습니다."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "광고 검토",
+      "title": "광고 승인자"
+    },
+    "financeViewer": {
+      "description": "장부 및 명세서",
+      "title": "재무 뷰어"
+    },
+    "role": "역할",
+    "superAdmin": {
+      "description": "전체 액세스",
+      "title": "슈퍼 관리자"
+    },
+    "supportStaff": {
+      "description": "티켓 및 답변",
+      "title": "지원 직원"
+    }
+  },
+  "roles": {
+    "adApprover": "광고 승인자",
+    "admin": "관리자",
+    "financeViewer": "재무 뷰어",
+    "superAdmin": "슈퍼 관리자",
+    "supportStaff": "지원 직원"
+  },
+  "status": {
+    "active": "활성",
+    "inactive": "비활성"
+  },
+  "statusToggle": {
+    "disableSuccess": "직원 계정이 성공적으로 비활성화되었습니다.",
+    "enableSuccess": "직원 계정이 성공적으로 활성화되었습니다.",
+    "updateError": "직원 상태 업데이트 실패."
+  },
+  "subtitle": "플랫폼 관리 역할 및 권한을 관리합니다.",
+  "title": "직원 관리"
+}

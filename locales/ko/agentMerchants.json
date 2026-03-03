@@ -4,6 +4,7 @@
     "dashboard": "대시보드",
     "details": "세부정보",
     "editMerchant": "상점 수정",
+    "masterAdminDashboard": "마스터 관리자 대시보드",
     "merchantManagement": "상인 관리",
     "merchants": "상인"
   },
@@ -26,6 +27,7 @@
       "title": "계정 자격 증명"
     },
     "actions": {
+      "back": "뒤로",
       "cancel": "취소",
       "createMerchant": "상인 만들기",
       "creating": "생성 중...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "뒤로",
       "updateMerchant": "상인 업데이트",
       "updating": "업데이트 중..."
     },

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
     CreditCard,
     Edit3,
@@ -28,6 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AgentSubscriptionFee() {
+    const t = useTranslations("masterAdminPackages.subscriptionFee");
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -42,7 +44,7 @@ export default function AgentSubscriptionFee() {
             setNewFee(res.data.data.admin_annual_subscription_fee);
         } catch (err) {
             console.error(err);
-            toast.error("Failed to fetch subscription fee");
+            toast.error(t("messages.fetchError"));
         } finally {
             setLoading(false);
         }
@@ -54,7 +56,7 @@ export default function AgentSubscriptionFee() {
 
     const handleUpdate = async () => {
         if (!newFee || isNaN(newFee)) {
-            toast.error("Please enter a valid amount");
+            toast.error(t("messages.validationError"));
             return;
         }
         console.log("newfee", newFee);
@@ -64,11 +66,11 @@ export default function AgentSubscriptionFee() {
             await axiosInstance.patch("/super-admin-settings", {
                 admin_annual_subscription_fee: Number(newFee),
             });
-            toast.success("Subscription fee updated successfully");
+            toast.success(t("messages.updateSuccess"));
             setIsUpdateOpen(false);
             fetchFee();
         } catch (err) {
-            toast.error(err?.response?.data?.message || "Failed to update fee");
+            toast.error(err?.response?.data?.message || t("messages.updateError"));
         } finally {
             setUpdating(false);
         }
@@ -94,14 +96,14 @@ export default function AgentSubscriptionFee() {
                 <CardHeader className="relative z-10 pb-2">
                     <div className="flex items-center justify-between mb-2">
                         <Badge className="bg-primary/20 text-primary-foreground border-none px-3 py-1 font-bold tracking-wider uppercase text-[10px]">
-                            Platform Standard
+                            {t("badge")}
                         </Badge>
                         <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm">
                             <CreditCard className="h-5 w-5 text-primary" />
                         </div>
                     </div>
                     <CardTitle className="text-2xl font-black tracking-tight flex items-center gap-2">
-                        Agent Annual Membership
+                        {t("title")}
                     </CardTitle>
                 </CardHeader>
 
@@ -112,7 +114,7 @@ export default function AgentSubscriptionFee() {
                             {Number(data?.admin_annual_subscription_fee).toLocaleString()}
                         </span>
                         <span className="text-slate-400 font-bold uppercase tracking-widest text-xs">
-                            / Fixed Per Year
+                            {t("perYear")}
                         </span>
                     </div>
 
@@ -121,21 +123,21 @@ export default function AgentSubscriptionFee() {
                             <div className="flex items-center gap-2 mb-1 text-slate-400">
                                 <Calendar className="h-3.5 w-3.5" />
                                 <span className="text-[10px] font-bold uppercase tracking-widest">
-                                    Billing Cycle
+                                    {t("billingCycle")}
                                 </span>
                             </div>
-                            <p className="font-bold text-sm">365 Days Recurring</p>
+                            <p className="font-bold text-sm">{t("billingCycleValue")}</p>
                         </div>
                         <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
                             <div className="flex items-center gap-2 mb-1 text-slate-400">
                                 <TrendingUp className="h-3.5 w-3.5" />
                                 <span className="text-[10px] font-bold uppercase tracking-widest">
-                                    Status
+                                    {t("status")}
                                 </span>
                             </div>
                             <p className="font-bold text-sm flex items-center gap-1.5 text-emerald-400">
                                 <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
-                                Active Plan
+                                {t("statusValue")}
                             </p>
                         </div>
                     </div>
@@ -146,7 +148,7 @@ export default function AgentSubscriptionFee() {
                             className="h-12 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-lg shadow-primary/20 group/btn"
                         >
                             <Edit3 className="h-4 w-4 mr-2 transition-transform group-hover/btn:-rotate-12" />
-                            Update Pricing Structure
+                            {t("updateButton")}
                         </Button>
                         <Button
                             variant="outline"
@@ -154,7 +156,7 @@ export default function AgentSubscriptionFee() {
                             className="h-12 rounded-2xl bg-white/5 border-white/10 text-white hover:bg-white/10 font-bold px-6"
                         >
                             <RefreshCcw className="h-4 w-4 mr-2" />
-                            Sync Data
+                            {t("syncButton")}
                         </Button>
                     </div>
                 </CardContent>
@@ -167,26 +169,24 @@ export default function AgentSubscriptionFee() {
                         <Sparkles className="h-6 w-6 text-yellow-300" />
                     </div>
                     <CardTitle className="text-xl font-bold leading-tight">
-                        Revenue Intelligence
+                        {t("insightTitle")}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="pb-8">
                     <p className="text-indigo-100 text-sm leading-relaxed mb-6 font-medium">
-                        Adjusting the subscription fee affects platform accessibility for
-                        new agents. Ensure the pricing remains competitive while
-                        maintaining platform quality.
+                        {t("insightDescription")}
                     </p>
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
                             <div className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
                             <span className="text-xs font-bold text-white/80 uppercase">
-                                Global Currency: {data?.currency || "USD"}
+                                {t("globalCurrency")}: {data?.currency || "USD"}
                             </span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="h-1.5 w-1.5 rounded-full bg-white opacity-40" />
                             <span className="text-xs font-bold text-white/80 uppercase">
-                                Auto-Deduction Enabled
+                                {t("autoDeduction")}
                             </span>
                         </div>
                     </div>
@@ -200,18 +200,17 @@ export default function AgentSubscriptionFee() {
 
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
-                            Update Subscription Fee
+                            {t("dialog.title")}
                         </DialogTitle>
                         <DialogDescription className="text-slate-500 font-medium pt-2">
-                            Set the new annual membership fee for all agents on the platform.
-                            Changes take effect immediately for new renewals.
+                            {t("dialog.description")}
                         </DialogDescription>
                     </DialogHeader>
 
                     <div className="py-8 space-y-6">
                         <div className="space-y-2">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
-                                New Annual Fee ({data?.currency || "USD"})
+                                {t("dialog.label")} ({data?.currency || "USD"})
                             </label>
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold group-focus-within:text-primary transition-colors">
@@ -222,7 +221,7 @@ export default function AgentSubscriptionFee() {
                                     value={newFee}
                                     onChange={(e) => setNewFee(e.target.value)}
                                     className="h-14 pl-8 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-primary/10 transition-all font-bold text-lg"
-                                    placeholder="0.00"
+                                    placeholder={t("dialog.placeholder")}
                                 />
                             </div>
                         </div>
@@ -230,8 +229,7 @@ export default function AgentSubscriptionFee() {
                         <div className="p-4 rounded-2xl bg-amber-50 border border-amber-100 flex gap-3">
                             <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
                             <p className="text-[11px] font-bold text-amber-800 leading-normal">
-                                Careful: Drastic price changes can influence agent retention.
-                                Changes will be logged in the system audit.
+                                {t("dialog.warning")}
                             </p>
                         </div>
                     </div>
@@ -246,7 +244,7 @@ export default function AgentSubscriptionFee() {
                             {updating ? (
                                 <RefreshCcw className="h-5 w-5 animate-spin" />
                             ) : (
-                                "Confirm & Update"
+                                t("dialog.confirmButton")
                             )}
                         </Button>
                         <Button
@@ -255,7 +253,7 @@ export default function AgentSubscriptionFee() {
                             onClick={() => setIsUpdateOpen(false)}
                             className="h-14 rounded-2xl px-6 font-bold bg-slate-100 hover:bg-slate-200 transition-all"
                         >
-                            Cancel
+                            {t("dialog.cancelButton")}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

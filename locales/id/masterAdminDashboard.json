@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "Dasbor"
+  },
+  "engagement": {
+    "activityPulse": "Denyut Aktivitas Platform",
+    "description": "Metrik interaksi di semua toko",
+    "redemptionRate": "Tingkat Penukaran",
+    "systemLoad": "Beban Sistem Normal",
+    "title": "Keterlibatan Global",
+    "totalFeedback": "Total Umpan Balik"
+  },
+  "filters": {
+    "customRange": "Rentang Kustom",
+    "last30Days": "30 Hari Terakhir",
+    "last7Days": "7 Hari Terakhir",
+    "lastMonth": "Bulan Lalu",
+    "pickDate": "Pilih tanggal",
+    "selectRange": "Pilih rentang",
+    "thisMonth": "Bulan Ini",
+    "today": "Hari ini",
+    "yesterday": "Kemarin"
+  },
+  "financialCards": {
+    "agentSubscriptions": "Langganan Agen",
+    "merchantSubscriptions": "Langganan Pedagang",
+    "packageCommissions": "Komisi Paket",
+    "totalPlatformRevenue": "Total Pendapatan Platform"
+  },
+  "growth": {
+    "customers": "+{count} Pelanggan",
+    "description": "Data ekspansi platform terbaru",
+    "merchants": "+{count} Pedagang",
+    "newCustomers": "Pendaftaran Pelanggan Baru",
+    "newStores": "Toko Baru Periode Ini",
+    "title": "Sorotan Pertumbuhan"
+  },
+  "merchantTier": {
+    "annual": "Tahunan",
+    "description": "Rasio Langganan Tahunan vs Sementara",
+    "noData": "Tidak ada data pedagang yang tersedia",
+    "temp": "Sementara",
+    "title": "Distribusi Tingkat Merchant",
+    "totalStores": "Total Toko"
+  },
+  "messages": {
+    "fetchError": "Gagal mengambil dasbor admin utama"
+  },
+  "overviewCards": {
+    "activeAgents": "Agen Aktif",
+    "activeMerchants": "Pedagang Aktif",
+    "couponsIssued": "Kupon Diterbitkan",
+    "couponsRedeemed": "Kupon Ditukarkan",
+    "feedbackReceived": "Umpan Balik Diterima",
+    "totalAgents": "Total Agen",
+    "totalCustomers": "Total Pelanggan",
+    "totalMerchants": "Total Pedagang"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "Langganan Agen",
+    "description": "Rincian total pendapatan platform",
+    "merchantSubscriptions": "Langganan Pedagang",
+    "packageCommissions": "Komisi Paket",
+    "title": "Aliran Pendapatan"
+  },
+  "roles": {
+    "adApprover": "Penyetuju Iklan",
+    "financeViewer": "Penampil Keuangan",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Staf Dukungan"
+  },
+  "sections": {
+    "financialPerformance": "Kinerja Keuangan",
+    "generalOverview": "Ikhtisar Umum",
+    "globalEngagement": "Keterlibatan Global",
+    "growthHighlights": "Sorotan Pertumbuhan",
+    "revenueStreams": "Aliran Pendapatan",
+    "roleDashboard": "Dasbor {role}",
+    "systemAnalytics": "Analitik Sistem"
+  },
+  "subtitle": "Ikhtisar kinerja dan metrik platform",
+  "title": "Dasbor Admin Utama",
+  "topMerchants": {
+    "description": "Toko dengan volume dan keterlibatan tertinggi ({total} total)",
+    "issued": "Diterbitkan",
+    "noData": "Tidak ada data kinerja untuk periode ini",
+    "page": "Halaman {current} dari {total}",
+    "redeemed": "Ditebus",
+    "showing": "Menampilkan {from} hingga {to} dari {total}",
+    "successRate": "Tingkat Keberhasilan {rate}%",
+    "title": "Pedagang Berkinerja Terbaik"
+  }
+}

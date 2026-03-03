@@ -19,10 +19,11 @@ import {
 import { DeleteAgentAction } from "./delete-agent-action";
 import { AgentStatusToggle } from "./agent-status-toggle";
 
-export const getAgentsColumns = (onDeleted) => [
+export const getAgentsColumns = (onDeleted, t) => [
   {
     id: "agent",
-    header: "Agent Account",
+    header: t("columns.agentAccount"),
+    meta: { label: t("columns.agentAccount") },
     cell: ({ row }) => {
       const user = row.original.user;
 
@@ -47,7 +48,8 @@ export const getAgentsColumns = (onDeleted) => [
   },
   {
     id: "phone",
-    header: "Phone",
+    header: t("columns.phone"),
+    meta: { label: t("columns.phone") },
     cell: ({ row }) => (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Phone className="h-3.5 w-3.5" />
@@ -57,7 +59,8 @@ export const getAgentsColumns = (onDeleted) => [
   },
   {
     id: "location",
-    header: "Location",
+    header: t("columns.location"),
+    meta: { label: t("columns.location") },
     cell: ({ row }) => {
       const city = row.original.city;
       const country = row.original.country;
@@ -72,17 +75,20 @@ export const getAgentsColumns = (onDeleted) => [
   },
   {
     id: "status",
-    header: "Status",
+    header: t("columns.status"),
+    meta: { label: t("columns.status") },
     cell: ({ row }) => (
       <AgentStatusToggle
         initialStatus={row.original.user?.is_active}
         agentId={row.original.id}
+        t={t}
       />
     ),
   },
   {
     id: "actions",
-    header: "Actions",
+    header: t("columns.actions"),
+    meta: { label: t("columns.actions") },
     cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -93,20 +99,20 @@ export const getAgentsColumns = (onDeleted) => [
 
         <DropdownMenuContent align="end" className="w-40">
           <DropdownMenuLabel className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
-            Agent Options
+            {t("actions.menuLabel")}
           </DropdownMenuLabel>
 
           <DropdownMenuItem asChild>
             <Link href={`/master-admin/agents/${row.original.id}`}>
               <FileText className="mr-2 h-4 w-4" />
-              Details
+              {t("actions.details")}
             </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
             <Link href={`/master-admin/agents/edit/${row.original.id}`}>
               <Edit className="mr-2 h-4 w-4" />
-              Edit
+              {t("actions.edit")}
             </Link>
           </DropdownMenuItem>
 
@@ -116,6 +122,7 @@ export const getAgentsColumns = (onDeleted) => [
             agentId={row.original.id}
             agentName={row.original.user?.name}
             onDeleted={onDeleted}
+            t={t}
           />
         </DropdownMenuContent>
       </DropdownMenu>

@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "डैशबोर्ड"
+  },
+  "engagement": {
+    "activityPulse": "प्लेटफ़ॉर्म गतिविधि पल्स",
+    "description": "सभी स्टोर में इंटरैक्शन मैट्रिक्स",
+    "redemptionRate": "रिडेम्प्शन दर",
+    "systemLoad": "सामान्य प्रणाली लोड",
+    "title": "वैश्विक सहभागिता",
+    "totalFeedback": "कुल फीडबैक"
+  },
+  "filters": {
+    "customRange": "कस्टम रेंज",
+    "last30Days": "पिछले 30 दिन",
+    "last7Days": "पिछले 7 दिन",
+    "lastMonth": "पिछला महीना",
+    "pickDate": "एक तारीख चुनें",
+    "selectRange": "रेंज चुनें",
+    "thisMonth": "इस महीने",
+    "today": "आज",
+    "yesterday": "कल"
+  },
+  "financialCards": {
+    "agentSubscriptions": "एजेंट सब्सक्रिप्शन",
+    "merchantSubscriptions": "व्यापारी सदस्यताएँ",
+    "packageCommissions": "पैकेज कमीशन",
+    "totalPlatformRevenue": "कुल प्लेटफ़ॉर्म राजस्व"
+  },
+  "growth": {
+    "customers": "+{count} ग्राहक",
+    "description": "नवीनतम प्लेटफ़ॉर्म विस्तार डेटा",
+    "merchants": "+{count} व्यापारी",
+    "newCustomers": "नए ग्राहक पंजीकरण",
+    "newStores": "इस अवधि में नए स्टोर",
+    "title": "विकास हाइलाइट्स"
+  },
+  "merchantTier": {
+    "annual": "वार्षिक",
+    "description": "वार्षिक बनाम अस्थायी सदस्यता अनुपात",
+    "noData": "कोई व्यापारी डेटा उपलब्ध नहीं है",
+    "temp": "अस्थायी",
+    "title": "व्यापारी स्तर वितरण",
+    "totalStores": "कुल स्टोर"
+  },
+  "messages": {
+    "fetchError": "मास्टर एडमिन डैशबोर्ड प्राप्त करने में विफल"
+  },
+  "overviewCards": {
+    "activeAgents": "सक्रिय एजेंट",
+    "activeMerchants": "सक्रिय व्यापारी",
+    "couponsIssued": "जारी किए गए कूपन",
+    "couponsRedeemed": "रिडीम किए गए कूपन",
+    "feedbackReceived": "प्रतिक्रिया प्राप्त हुई",
+    "totalAgents": "कुल एजेंट",
+    "totalCustomers": "कुल ग्राहक",
+    "totalMerchants": "कुल व्यापारी"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "एजेंट सदस्यताएँ",
+    "description": "कुल प्लेटफ़ॉर्म आय का विवरण",
+    "merchantSubscriptions": "व्यापारी सदस्यताएँ",
+    "packageCommissions": "पैकेज कमीशन",
+    "title": "राजस्व धाराएँ"
+  },
+  "roles": {
+    "adApprover": "विज्ञापन अनुमोदक",
+    "financeViewer": "वित्त दर्शक",
+    "superAdmin": "सुपर एडमिन",
+    "supportStaff": "समर्थन कर्मचारी"
+  },
+  "sections": {
+    "financialPerformance": "वित्तीय प्रदर्शन",
+    "generalOverview": "सामान्य अवलोकन",
+    "globalEngagement": "वैश्विक सहभागिता",
+    "growthHighlights": "विकास हाइलाइट्स",
+    "revenueStreams": "राजस्व धाराएँ",
+    "roleDashboard": "{role} डैशबोर्ड",
+    "systemAnalytics": "सिस्टम एनालिटिक्स"
+  },
+  "subtitle": "प्लेटफ़ॉर्म प्रदर्शन और मैट्रिक्स का अवलोकन",
+  "title": "मास्टर एडमिन डैशबोर्ड",
+  "topMerchants": {
+    "description": "उच्चतम मात्रा और सहभागिता वाले स्टोर ({total} कुल)",
+    "issued": "जारी किया गया",
+    "noData": "इस अवधि के लिए कोई प्रदर्शन डेटा नहीं",
+    "page": "पृष्ठ {current} का {total}",
+    "redeemed": "रिडीम किया गया",
+    "showing": "{from} से {to} तक {total} का प्रदर्शन",
+    "successRate": "{rate}% सफलता दर",
+    "title": "शीर्ष प्रदर्शन करने वाले व्यापारी"
+  }
+}

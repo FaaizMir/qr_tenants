@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "العمولة",
+    "masterAdminDashboard": "لوحة تحكم المدير الرئيسي"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "السنة المالية {year}",
+      "title": "توزيع الإيرادات"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "الرسوم السنوية من المسؤولين",
+        "title": "اشتراك الوكيل"
+      },
+      "annualPackages": {
+        "description": "خطط التجار طويلة الأجل",
+        "title": "حزم سنوية"
+      },
+      "merchantFees": {
+        "description": "رسوم التجار المتكررة",
+        "title": "رسوم التجار"
+      },
+      "tempPackages": {
+        "description": "خطط التجار قصيرة الأجل",
+        "title": "حزم مؤقتة"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "الأرباح على مر الزمن",
+      "title": "إجمالي الإيرادات",
+      "updatedToday": "تم التحديث اليوم"
+    }
+  },
+  "errors": {
+    "loadFailed": "فشل في تحميل معلومات المحفظة"
+  },
+  "header": {
+    "managementSubtitle": "إدارة العمولات والأرباح.",
+    "managementTitle": "إدارة العمولة",
+    "subtitle": "نظرة عامة مالية في الوقت الحقيقي وتفصيل الإيرادات",
+    "title": "مركز العمولات"
+  },
+  "noData": {
+    "message": "غير قادر على تحميل معلومات المحفظة. يرجى المحاولة مرة أخرى لاحقًا.",
+    "title": "لا توجد بيانات محفظة"
+  },
+  "status": {
+    "operatingWallet": "محفظة التشغيل",
+    "systemActive": "النظام نشط",
+    "systemInactive": "النظام غير نشط",
+    "systemStatus": "حالة النظام"
+  }
+}

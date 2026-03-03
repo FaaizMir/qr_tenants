@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "재설정",
+    "saveSettings": "설정 저장",
+    "saving": "저장 중..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "마스터 관리자 대시보드",
+    "platformSettings": "플랫폼 설정"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "상인 결제 - 플랫폼 비용 = 에이전트의 수익",
+        "title": "에이전트 수익:"
+      },
+      "merchantPayment": {
+        "description": "100%가 에이전트의 Stripe 계좌로 전송됩니다",
+        "title": "상인 결제:"
+      },
+      "platformDeduction": {
+        "description": "에이전트의 선불 지갑에서 자동으로 차감되는 비용",
+        "title": "플랫폼 공제:"
+      }
+    },
+    "title": "선불 지갑 비즈니스 모델"
+  },
+  "currency": {
+    "description": "모든 거래에 대한 플랫폼 통화",
+    "description2": "모든 금액은 이 통화로 표시됩니다",
+    "label": "플랫폼 통화",
+    "options": {
+      "aud": "AUD (호주 달러)",
+      "eur": "EUR (유로)",
+      "gbp": "GBP (영국 파운드)",
+      "myr": "MYR (말레이시아 링깃)",
+      "sgd": "SGD (싱가포르 달러)",
+      "usd": "USD (미국 달러)"
+    },
+    "title": "통화 설정"
+  },
+  "header": {
+    "subtitle": "구독료, 플랫폼 비용 및 통화 설정 관리",
+    "title": "플랫폼 구성"
+  },
+  "messages": {
+    "loadError": "플랫폼 설정을 로드하지 못했습니다",
+    "updateError": "설정 업데이트에 실패했습니다",
+    "updateSuccess": "플랫폼 설정이 성공적으로 업데이트되었습니다",
+    "validationError": "{field}는 유효한 숫자여야 합니다"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "연간 상인당 쿠폰",
+        "label": "쿠폰 비용 (연간)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "임시 상인을 위한 쿠폰당",
+        "label": "쿠폰 비용 (임시)",
+        "placeholder": "0.05"
+      },
+      "title": "쿠폰 생성"
+    },
+    "description": "작업당 에이전트의 선불 지갑에서 자동으로 공제되는 비용",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "에이전트가 연간 상인 구독을 활성화할 때 공제됨",
+        "label": "연간 상인 플랫폼 비용",
+        "placeholder": "299.00"
+      },
+      "title": "상인 활성화"
+    },
+    "title": "플랫폼 비용 (선불 지갑 모델)",
+    "whatsapp": {
+      "biCost": {
+        "description": "BI 메시지당",
+        "label": "WhatsApp BI 비용",
+        "placeholder": "0.45"
+      },
+      "title": "WhatsApp 메시징",
+      "uiAnnual": {
+        "description": "UI당 (연간)",
+        "label": "WhatsApp UI (연간)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "UI당 (임시)",
+        "label": "WhatsApp UI (임시)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "에이전트가 연간 플랫폼 접근을 위해 지불하는 비용",
+      "label": "에이전트 연간 구독료",
+      "placeholder": "1499.00"
+    },
+    "description": "에이전트 및 상인을 위한 연간 구독 가격",
+    "merchantFee": {
+      "description": "상인이 연간 구독에 지불하는 금액",
+      "label": "상인 연간 구독료",
+      "placeholder": "1499.00"
+    },
+    "required": "필수",
+    "title": "구독료"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "Kemas kini maklumat akaun anda",
+    "title": "Butiran Akaun"
+  },
+  "breadcrumb": {
+    "account": "Akaun",
+    "dashboard": "Papan Pemuka"
+  },
+  "buttons": {
+    "saveChanges": "Simpan Perubahan",
+    "saving": "Menyimpan..."
+  },
+  "fields": {
+    "address": "Alamat",
+    "city": "Bandar",
+    "country": "Negara",
+    "email": "Emel",
+    "fullName": "Nama Penuh",
+    "phone": "Telefon",
+    "stripeSecretKey": "Kunci Rahsia Stripe"
+  },
+  "hints": {
+    "stripeKeyMasked": "Kunci semasa disembunyikan untuk keselamatan. Masukkan kunci baru untuk mengemas kini."
+  },
+  "messages": {
+    "fetchError": "Gagal memuatkan maklumat akaun",
+    "updateError": "Gagal mengemas kini akaun",
+    "updateSuccess": "Akaun berjaya dikemas kini",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "Mulakan menaip alamat...",
+    "city": "Masukkan bandar anda",
+    "country": "Masukkan negara anda",
+    "email": "Masukkan emel anda",
+    "name": "Masukkan nama anda",
+    "phone": "Masukkan nombor telefon anda",
+    "stripeKeyExisting": "{maskedKey} (biarkan kosong untuk mengekalkan yang sedia ada)",
+    "stripeKeyNew": "sk_test_... atau sk_live_..."
+  },
+  "profile": {
+    "description": "Maklumat profil anda",
+    "noStripeKey": "Tiada Kunci Stripe",
+    "stripeConnected": "Stripe Disambungkan",
+    "title": "Profil"
+  },
+  "subtitle": "Urus maklumat akaun anda",
+  "title": "Tetapan Akaun"
+}

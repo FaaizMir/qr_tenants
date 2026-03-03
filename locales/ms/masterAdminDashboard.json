@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "Papan Pemuka"
+  },
+  "engagement": {
+    "activityPulse": "Nadi Aktiviti Platform",
+    "description": "Metrik interaksi di semua kedai",
+    "redemptionRate": "Kadar Tebus",
+    "systemLoad": "Beban Sistem Normal",
+    "title": "Penglibatan Global",
+    "totalFeedback": "Jumlah Maklum Balas"
+  },
+  "filters": {
+    "customRange": "Julat Tersuai",
+    "last30Days": "30 Hari Terakhir",
+    "last7Days": "7 Hari Terakhir",
+    "lastMonth": "Bulan Lepas",
+    "pickDate": "Pilih tarikh",
+    "selectRange": "Pilih julat",
+    "thisMonth": "Bulan Ini",
+    "today": "Hari ini",
+    "yesterday": "Semalam"
+  },
+  "financialCards": {
+    "agentSubscriptions": "Langganan Ejen",
+    "merchantSubscriptions": "Langganan Pedagang",
+    "packageCommissions": "Komisen Pakej",
+    "totalPlatformRevenue": "Jumlah Pendapatan Platform"
+  },
+  "growth": {
+    "customers": "+{count} Pelanggan",
+    "description": "Data pengembangan platform terkini",
+    "merchants": "+{count} Pedagang",
+    "newCustomers": "Pendaftaran Pelanggan Baru",
+    "newStores": "Kedai Baru Dalam Tempoh Ini",
+    "title": "Sorotan Pertumbuhan"
+  },
+  "merchantTier": {
+    "annual": "Tahun",
+    "description": "Perbandingan Langganan Tahunan vs Sementara",
+    "noData": "Tiada data pedagang tersedia",
+    "temp": "Sementara",
+    "title": "Pengagihan Tahap Pedagang",
+    "totalStores": "Jumlah Kedai"
+  },
+  "messages": {
+    "fetchError": "Gagal untuk mengambil papan pemuka pentadbir utama"
+  },
+  "overviewCards": {
+    "activeAgents": "Ejen Aktif",
+    "activeMerchants": "Pedagang Aktif",
+    "couponsIssued": "Kupon Dikeluarkan",
+    "couponsRedeemed": "Kupon Tebus",
+    "feedbackReceived": "Maklum Balas Diterima",
+    "totalAgents": "Jumlah Ejen",
+    "totalCustomers": "Jumlah Pelanggan",
+    "totalMerchants": "Jumlah Pedagang"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "Langganan Ejen",
+    "description": "Pecahan pendapatan keseluruhan platform",
+    "merchantSubscriptions": "Langganan Pedagang",
+    "packageCommissions": "Komisen Pakej",
+    "title": "Aliran Pendapatan"
+  },
+  "roles": {
+    "adApprover": "Pengesah Iklan",
+    "financeViewer": "Papar Kewangan",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Kakitangan Sokongan"
+  },
+  "sections": {
+    "financialPerformance": "Prestasi Kewangan",
+    "generalOverview": "Gambaran Umum",
+    "globalEngagement": "Penglibatan Global",
+    "growthHighlights": "Sorotan Pertumbuhan",
+    "revenueStreams": "Aliran Pendapatan",
+    "roleDashboard": "Papan Pemuka {role}",
+    "systemAnalytics": "Analitik Sistem"
+  },
+  "subtitle": "Gambaran keseluruhan prestasi platform dan metrik",
+  "title": "Papan Pemuka Pentadbir Utama",
+  "topMerchants": {
+    "description": "Kedai dengan jumlah dan penglibatan tertinggi ({total} jumlah)",
+    "issued": "Dikeluarkan",
+    "noData": "Tiada data prestasi untuk tempoh ini",
+    "page": "Halaman {current} daripada {total}",
+    "redeemed": "Tebus",
+    "showing": "Menunjukkan {from} hingga {to} daripada {total}",
+    "successRate": "{rate}% Kadar Kejayaan",
+    "title": "Pedagang Terbaik"
+  }
+}

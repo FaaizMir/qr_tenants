@@ -1,10 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import { StaffForm } from "@/containers/master-admin/staff/staff-form";
 
 export default async function CreateStaffPage() {
+  const t = await getTranslations("masterAdminStaff.breadcrumb");
+  
   const breadcrumbData = [
-    { name: "Staff Management", url: "/master-admin/staff" },
-    { name: "Add Staff", url: "/master-admin/staff/create" },
+    { name: t("staffManagement"), url: "/master-admin/staff" },
+    { name: t("addStaff"), url: "/master-admin/staff/create" },
   ];
 
   return (

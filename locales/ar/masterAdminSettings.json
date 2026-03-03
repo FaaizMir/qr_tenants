@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "إعادة تعيين",
+    "saveSettings": "حفظ الإعدادات",
+    "saving": "جارٍ الحفظ..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "لوحة تحكم المسؤول الرئيسي",
+    "platformSettings": "إعدادات المنصة"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "دفع التاجر - تكلفة المنصة = أرباح الوكيل",
+        "title": "ربح الوكيل:"
+      },
+      "merchantPayment": {
+        "description": "100% تذهب إلى حساب الوكيل في Stripe",
+        "title": "دفع التاجر:"
+      },
+      "platformDeduction": {
+        "description": "التكاليف المخصومة تلقائيًا من محفظة الوكيل المدفوعة مسبقًا",
+        "title": "خصم المنصة:"
+      }
+    },
+    "title": "نموذج أعمال المحفظة المدفوعة مسبقًا"
+  },
+  "currency": {
+    "description": "عملة المنصة لجميع المعاملات",
+    "description2": "تظهر جميع المبالغ بهذه العملة",
+    "label": "عملة المنصة",
+    "options": {
+      "aud": "AUD (دولار أسترالي)",
+      "eur": "يورو (EUR)",
+      "gbp": "جنيه إسترليني (GBP)",
+      "myr": "MYR (رينغيت ماليزي)",
+      "sgd": "SGD (دولار سنغافوري)",
+      "usd": "USD (دولار أمريكي)"
+    },
+    "title": "إعداد العملة"
+  },
+  "header": {
+    "subtitle": "إدارة رسوم الاشتراك، وتكاليف المنصة، وإعدادات العملة",
+    "title": "تكوين المنصة"
+  },
+  "messages": {
+    "loadError": "فشل في تحميل إعدادات المنصة",
+    "updateError": "فشل في تحديث الإعدادات",
+    "updateSuccess": "تم تحديث إعدادات المنصة بنجاح",
+    "validationError": "{field} يجب أن يكون رقمًا صالحًا"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "لكل قسيمة للتجار السنويين",
+        "label": "تكلفة القسيمة (سنوي)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "لكل قسيمة للتجار المؤقتين",
+        "label": "تكلفة القسيمة (مؤقتة)",
+        "placeholder": "0.05"
+      },
+      "title": "توليد القسائم"
+    },
+    "description": "التكاليف تُخصم تلقائيًا من محفظة الوكيل المدفوعة مسبقًا لكل عملية",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "يتم خصمه عندما يقوم الوكيل بتنشيط اشتراك سنوي للتاجر",
+        "label": "تكلفة منصة التاجر السنوية",
+        "placeholder": "299.00"
+      },
+      "title": "تنشيط التاجر"
+    },
+    "title": "تكاليف المنصة (نموذج المحفظة المدفوعة مسبقًا)",
+    "whatsapp": {
+      "biCost": {
+        "description": "لكل رسالة BI",
+        "label": "تكلفة WhatsApp BI",
+        "placeholder": "0.45"
+      },
+      "title": "رسائل واتساب",
+      "uiAnnual": {
+        "description": "لكل واجهة مستخدم (سنوي)",
+        "label": "واجهة WhatsApp (سنوي)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "لكل واجهة مستخدم (مؤقت)",
+        "label": "واجهة واتساب (مؤقتة)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "ما يدفعه الوكلاء للوصول السنوي إلى المنصة",
+      "label": "رسوم الاشتراك السنوي للوكيل",
+      "placeholder": "1499.00"
+    },
+    "description": "أسعار الاشتراك السنوي للوكيل والتجار",
+    "merchantFee": {
+      "description": "ما يدفعه التجار مقابل الاشتراك السنوي",
+      "label": "رسوم الاشتراك السنوي للتاجر",
+      "placeholder": "1499.00"
+    },
+    "required": "مطلوب",
+    "title": "رسوم الاشتراك"
+  }
+}

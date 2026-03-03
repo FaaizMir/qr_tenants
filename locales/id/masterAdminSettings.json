@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "Atur Ulang",
+    "saveSettings": "Simpan Pengaturan",
+    "saving": "Menyimpan..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "Dasbor Admin Utama",
+    "platformSettings": "Pengaturan Platform"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "Pembayaran merchant - Biaya platform = Pendapatan agen",
+        "title": "Keuntungan Agen:"
+      },
+      "merchantPayment": {
+        "description": "100% masuk ke akun Stripe agen",
+        "title": "Pembayaran Merchant:"
+      },
+      "platformDeduction": {
+        "description": "Biaya yang secara otomatis dipotong dari dompet prabayar agen",
+        "title": "Pengurangan Platform:"
+      }
+    },
+    "title": "Model Bisnis Dompet Prabayar"
+  },
+  "currency": {
+    "description": "Mata uang platform untuk semua transaksi",
+    "description2": "Semua jumlah ditampilkan dalam mata uang ini",
+    "label": "Mata Uang Platform",
+    "options": {
+      "aud": "AUD (Dolar Australia)",
+      "eur": "EUR (Euro)",
+      "gbp": "GBP (Poundsterling Inggris)",
+      "myr": "MYR (Ringgit Malaysia)",
+      "sgd": "SGD (Dolar Singapura)",
+      "usd": "USD (Dolar AS)"
+    },
+    "title": "Konfigurasi Mata Uang"
+  },
+  "header": {
+    "subtitle": "Kelola biaya langganan, biaya platform, dan pengaturan mata uang",
+    "title": "Konfigurasi Platform"
+  },
+  "messages": {
+    "loadError": "Gagal memuat pengaturan platform",
+    "updateError": "Gagal memperbarui pengaturan",
+    "updateSuccess": "Pengaturan platform berhasil diperbarui",
+    "validationError": "{field} harus berupa angka yang valid"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "Per kupon untuk pedagang tahunan",
+        "label": "Biaya Kupon (Tahunan)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "Per kupon untuk merchant sementara",
+        "label": "Biaya Kupon (Sementara)",
+        "placeholder": "0.05"
+      },
+      "title": "Generasi Kupon"
+    },
+    "description": "Biaya secara otomatis dipotong dari dompet prabayar agen per operasi",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "Dikurangi saat agen mengaktifkan langganan merchant tahunan",
+        "label": "Biaya Platform Merchant Tahunan",
+        "placeholder": "299.00"
+      },
+      "title": "Aktivasi Merchant"
+    },
+    "title": "Biaya Platform (Model Dompet Prabayar)",
+    "whatsapp": {
+      "biCost": {
+        "description": "Per pesan BI",
+        "label": "Biaya WhatsApp BI",
+        "placeholder": "0.45"
+      },
+      "title": "Pesan WhatsApp",
+      "uiAnnual": {
+        "description": "Per UI (tahunan)",
+        "label": "Antarmuka WhatsApp (Tahunan)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "Per UI (sementara)",
+        "label": "Antarmuka WhatsApp (Sementara)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "Apa yang dibayar agen untuk akses platform tahunan",
+      "label": "Biaya Langganan Tahunan Agen",
+      "placeholder": "1499.00"
+    },
+    "description": "Harga langganan tahunan untuk agen dan pedagang",
+    "merchantFee": {
+      "description": "Apa yang dibayar merchant untuk langganan tahunan",
+      "label": "Biaya Langganan Tahunan Pedagang",
+      "placeholder": "1499.00"
+    },
+    "required": "Diperlukan",
+    "title": "Biaya Langganan"
+  }
+}

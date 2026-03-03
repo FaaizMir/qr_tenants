@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "جميع البيانات",
+    "masterAdminDashboard": "لوحة تحكم المشرف الرئيسي"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "تنزيل PDF",
+      "header": "الإجراءات"
+    },
+    "generatedAt": {
+      "header": "تم إنشاؤه في"
+    },
+    "owner": {
+      "agent": "الوكيل",
+      "header": "المالك",
+      "merchant": "تاجر",
+      "superAdmin": "المشرف العام"
+    },
+    "period": {
+      "header": "الفترة",
+      "unknown": "غير معروف"
+    },
+    "status": {
+      "failed": "فشل",
+      "generated": "تم إنشاؤه",
+      "header": "الحالة",
+      "pending": "معلق"
+    }
+  },
+  "filters": {
+    "description": "تصفية البيانات حسب السنة والشهر",
+    "loading": "جارٍ التحميل...",
+    "month": "الشهر",
+    "quickActions": "إجراءات سريعة",
+    "refreshList": "تحديث القائمة",
+    "selectMonth": "اختر الشهر",
+    "selectYear": "اختر السنة",
+    "title": "مرشحات البيانات",
+    "year": "السنة"
+  },
+  "header": {
+    "subtitle": "عرض وتنزيل البيانات الشهرية للتجار والوكلاء ومدير المنصة.",
+    "title": "جميع البيانات المالية"
+  },
+  "messages": {
+    "downloadError": "فشل في تنزيل PDF. يرجى المحاولة مرة أخرى.",
+    "downloadSuccess": "تم تنزيل البيان بنجاح!",
+    "loadError": "فشل في تحميل البيانات. يرجى المحاولة مرة أخرى."
+  },
+  "months": {
+    "april": "أبريل",
+    "august": "أغسطس",
+    "december": "ديسمبر",
+    "february": "فبراير",
+    "january": "يناير",
+    "july": "يوليو",
+    "june": "يونيو",
+    "march": "مارس",
+    "may": "مايو",
+    "november": "نوفمبر",
+    "october": "أكتوبر",
+    "september": "سبتمبر"
+  },
+  "summaryCards": {
+    "agents": "الوكلاء",
+    "merchants": "التجار",
+    "superAdmin": "المشرف الأعلى"
+  },
+  "table": {
+    "loading": "جارٍ تحميل البيانات...",
+    "noData": {
+      "message": "لا توجد بيانات متاحة للفترة المحددة.",
+      "title": "لم يتم العثور على بيانات"
+    },
+    "tabs": {
+      "agents": "الوكلاء ({count})",
+      "all": "الكل ({count})",
+      "merchants": "التجار ({count})",
+      "superAdmin": "المشرف العام ({count})"
+    },
+    "title": "تاريخ البيانات"
+  }
+}

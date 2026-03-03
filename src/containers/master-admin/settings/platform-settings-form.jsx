@@ -35,8 +35,10 @@ import {
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { Separator } from "@/components/ui/separator";
+import { useTranslations } from "next-intl";
 
 export function PlatformSettingsForm() {
+  const t = useTranslations("masterAdminSettings");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({
@@ -85,7 +87,7 @@ export function PlatformSettingsForm() {
       });
     } catch (error) {
       console.error("Failed to fetch settings:", error);
-      toast.error("Failed to load platform settings");
+      toast.error(t("messages.loadError"));
     } finally {
       setLoading(false);
     }
@@ -118,7 +120,8 @@ export function PlatformSettingsForm() {
 
     for (const field of numericFields) {
       if (settings[field] && isNaN(Number(settings[field]))) {
-        toast.error(`${field.replace(/_/g, ' ')} must be a valid number`);
+        const fieldName = field.replace(/_/g, ' ');
+        toast.error(t("messages.validationError", { field: fieldName }));
         return;
       }
     }
@@ -144,12 +147,12 @@ export function PlatformSettingsForm() {
       };
 
       await axiosInstance.patch("/super-admin-settings", payload);
-      toast.success("Platform settings updated successfully");
+      toast.success(t("messages.updateSuccess"));
       fetchSettings(); // Refresh to get latest data
     } catch (error) {
       console.error("Failed to update settings:", error);
       toast.error(
-        error?.response?.data?.message || "Failed to update settings"
+        error?.response?.data?.message || t("messages.updateError")
       );
     } finally {
       setSaving(false);
@@ -186,9 +189,9 @@ export function PlatformSettingsForm() {
               <DollarSign className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle>Subscription Fees</CardTitle>
+              <CardTitle>{t("subscriptionFees.title")}</CardTitle>
               <CardDescription className="mt-1">
-                Annual subscription pricing for agents and merchants
+                {t("subscriptionFees.description")}
               </CardDescription>
             </div>
           </div>
@@ -197,8 +200,8 @@ export function PlatformSettingsForm() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="admin_fee">
-                Agent Annual Subscription Fee
-                <Badge variant="secondary" className="ml-2">Required</Badge>
+                {t("subscriptionFees.agentFee.label")}
+                <Badge variant="secondary" className="ml-2">{t("subscriptionFees.required")}</Badge>
               </Label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -208,7 +211,7 @@ export function PlatformSettingsForm() {
                   id="admin_fee"
                   type="number"
                   step="0.01"
-                  placeholder="1499.00"
+                  placeholder={t("subscriptionFees.agentFee.placeholder")}
                   value={settings.admin_annual_subscription_fee}
                   onChange={(e) =>
                     handleChange("admin_annual_subscription_fee", e.target.value)
@@ -218,14 +221,14 @@ export function PlatformSettingsForm() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                What agents pay for annual platform access
+                {t("subscriptionFees.agentFee.description")}
               </p>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="merchant_fee">
-                Merchant Annual Subscription Fee
-                <Badge variant="secondary" className="ml-2">Required</Badge>
+                {t("subscriptionFees.merchantFee.label")}
+                <Badge variant="secondary" className="ml-2">{t("subscriptionFees.required")}</Badge>
               </Label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -235,7 +238,7 @@ export function PlatformSettingsForm() {
                   id="merchant_fee"
                   type="number"
                   step="0.01"
-                  placeholder="1499.00"
+                  placeholder={t("subscriptionFees.merchantFee.placeholder")}
                   value={settings.merchant_annual_fee}
                   onChange={(e) =>
                     handleChange("merchant_annual_fee", e.target.value)
@@ -245,7 +248,7 @@ export function PlatformSettingsForm() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                What merchants pay for annual subscription
+                {t("subscriptionFees.merchantFee.description")}
               </p>
             </div>
           </div>
@@ -260,9 +263,9 @@ export function PlatformSettingsForm() {
               <Settings2 className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle>Platform Costs (Prepaid Wallet Model)</CardTitle>
+              <CardTitle>{t("platformCosts.title")}</CardTitle>
               <CardDescription className="mt-1">
-                Costs automatically deducted from agent's prepaid wallet per operation
+                {t("platformCosts.description")}
               </CardDescription>
             </div>
           </div>
@@ -272,11 +275,11 @@ export function PlatformSettingsForm() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4 text-muted-foreground" />
-              <h4 className="font-medium">Merchant Activation</h4>
+              <h4 className="font-medium">{t("platformCosts.merchantActivation.title")}</h4>
             </div>
             <div className="space-y-2">
               <Label htmlFor="merchant_platform_cost">
-                Annual Merchant Platform Cost
+                {t("platformCosts.merchantActivation.annualCost.label")}
               </Label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -286,7 +289,7 @@ export function PlatformSettingsForm() {
                   id="merchant_platform_cost"
                   type="number"
                   step="0.01"
-                  placeholder="299.00"
+                  placeholder={t("platformCosts.merchantActivation.annualCost.placeholder")}
                   value={settings.merchant_annual_platform_cost}
                   onChange={(e) =>
                     handleChange("merchant_annual_platform_cost", e.target.value)
@@ -296,7 +299,7 @@ export function PlatformSettingsForm() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                Deducted when agent activates an annual merchant subscription
+                {t("platformCosts.merchantActivation.annualCost.description")}
               </p>
             </div>
           </div>
@@ -307,11 +310,11 @@ export function PlatformSettingsForm() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <MessageSquare className="h-4 w-4 text-muted-foreground" />
-              <h4 className="font-medium">WhatsApp Messaging</h4>
+              <h4 className="font-medium">{t("platformCosts.whatsapp.title")}</h4>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               <div className="space-y-2">
-                <Label htmlFor="whatsapp_bi">WhatsApp BI Cost</Label>
+                <Label htmlFor="whatsapp_bi">{t("platformCosts.whatsapp.biCost.label")}</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
                     {settings.currency}
@@ -320,7 +323,7 @@ export function PlatformSettingsForm() {
                     id="whatsapp_bi"
                     type="number"
                     step="0.0001"
-                    placeholder="0.45"
+                    placeholder={t("platformCosts.whatsapp.biCost.placeholder")}
                     value={settings.whatsapp_bi_platform_cost}
                     onChange={(e) =>
                       handleChange("whatsapp_bi_platform_cost", e.target.value)
@@ -329,12 +332,12 @@ export function PlatformSettingsForm() {
                     required
                   />
                 </div>
-                <p className="text-xs text-muted-foreground">Per BI message</p>
+                <p className="text-xs text-muted-foreground">{t("platformCosts.whatsapp.biCost.description")}</p>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="whatsapp_ui_annual">
-                  WhatsApp UI (Annual)
+                  {t("platformCosts.whatsapp.uiAnnual.label")}
                 </Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -344,7 +347,7 @@ export function PlatformSettingsForm() {
                     id="whatsapp_ui_annual"
                     type="number"
                     step="0.0001"
-                    placeholder="0.12"
+                    placeholder={t("platformCosts.whatsapp.uiAnnual.placeholder")}
                     value={settings.whatsapp_ui_annual_platform_cost}
                     onChange={(e) =>
                       handleChange("whatsapp_ui_annual_platform_cost", e.target.value)
@@ -353,12 +356,12 @@ export function PlatformSettingsForm() {
                     required
                   />
                 </div>
-                <p className="text-xs text-muted-foreground">Per UI (annual)</p>
+                <p className="text-xs text-muted-foreground">{t("platformCosts.whatsapp.uiAnnual.description")}</p>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="whatsapp_ui_temp">
-                  WhatsApp UI (Temporary)
+                  {t("platformCosts.whatsapp.uiTemporary.label")}
                 </Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -368,7 +371,7 @@ export function PlatformSettingsForm() {
                     id="whatsapp_ui_temp"
                     type="number"
                     step="0.0001"
-                    placeholder="0.12"
+                    placeholder={t("platformCosts.whatsapp.uiTemporary.placeholder")}
                     value={settings.whatsapp_ui_temporary_platform_cost}
                     onChange={(e) =>
                       handleChange("whatsapp_ui_temporary_platform_cost", e.target.value)
@@ -377,7 +380,7 @@ export function PlatformSettingsForm() {
                     required
                   />
                 </div>
-                <p className="text-xs text-muted-foreground">Per UI (temp)</p>
+                <p className="text-xs text-muted-foreground">{t("platformCosts.whatsapp.uiTemporary.description")}</p>
               </div>
             </div>
           </div>
@@ -388,11 +391,11 @@ export function PlatformSettingsForm() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Ticket className="h-4 w-4 text-muted-foreground" />
-              <h4 className="font-medium">Coupon Generation</h4>
+              <h4 className="font-medium">{t("platformCosts.coupon.title")}</h4>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="coupon_annual">Coupon Cost (Annual)</Label>
+                <Label htmlFor="coupon_annual">{t("platformCosts.coupon.annual.label")}</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
                     {settings.currency}
@@ -401,7 +404,7 @@ export function PlatformSettingsForm() {
                     id="coupon_annual"
                     type="number"
                     step="0.0001"
-                    placeholder="0.05"
+                    placeholder={t("platformCosts.coupon.annual.placeholder")}
                     value={settings.coupon_annual_platform_cost}
                     onChange={(e) =>
                       handleChange("coupon_annual_platform_cost", e.target.value)
@@ -411,12 +414,12 @@ export function PlatformSettingsForm() {
                   />
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Per coupon for annual merchants
+                  {t("platformCosts.coupon.annual.description")}
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="coupon_temp">Coupon Cost (Temporary)</Label>
+                <Label htmlFor="coupon_temp">{t("platformCosts.coupon.temporary.label")}</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
                     {settings.currency}
@@ -425,7 +428,7 @@ export function PlatformSettingsForm() {
                     id="coupon_temp"
                     type="number"
                     step="0.0001"
-                    placeholder="0.05"
+                    placeholder={t("platformCosts.coupon.temporary.placeholder")}
                     value={settings.coupon_temporary_platform_cost}
                     onChange={(e) =>
                       handleChange("coupon_temporary_platform_cost", e.target.value)
@@ -435,7 +438,7 @@ export function PlatformSettingsForm() {
                   />
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Per coupon for temporary merchants
+                  {t("platformCosts.coupon.temporary.description")}
                 </p>
               </div>
             </div>
@@ -606,16 +609,16 @@ export function PlatformSettingsForm() {
               <Globe className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle>Currency Configuration</CardTitle>
+              <CardTitle>{t("currency.title")}</CardTitle>
               <CardDescription className="mt-1">
-                Platform currency for all transactions
+                {t("currency.description")}
               </CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-2 max-w-xs">
-            <Label htmlFor="currency">Platform Currency</Label>
+            <Label htmlFor="currency">{t("currency.label")}</Label>
             <Select
               value={settings.currency}
               onValueChange={(value) => handleChange("currency", value)}
@@ -624,16 +627,16 @@ export function PlatformSettingsForm() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="MYR">MYR (Malaysian Ringgit)</SelectItem>
-                <SelectItem value="USD">USD (US Dollar)</SelectItem>
-                <SelectItem value="EUR">EUR (Euro)</SelectItem>
-                <SelectItem value="GBP">GBP (British Pound)</SelectItem>
-                <SelectItem value="SGD">SGD (Singapore Dollar)</SelectItem>
-                <SelectItem value="AUD">AUD (Australian Dollar)</SelectItem>
+                <SelectItem value="MYR">{t("currency.options.myr")}</SelectItem>
+                <SelectItem value="USD">{t("currency.options.usd")}</SelectItem>
+                <SelectItem value="EUR">{t("currency.options.eur")}</SelectItem>
+                <SelectItem value="GBP">{t("currency.options.gbp")}</SelectItem>
+                <SelectItem value="SGD">{t("currency.options.sgd")}</SelectItem>
+                <SelectItem value="AUD">{t("currency.options.aud")}</SelectItem>
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              All amounts are displayed in this currency
+              {t("currency.description2")}
             </p>
           </div>
         </CardContent>
@@ -646,7 +649,7 @@ export function PlatformSettingsForm() {
             <div className="p-2 bg-primary/10 rounded-full text-primary">
               <TrendingUp className="h-4 w-4" />
             </div>
-            <CardTitle className="text-base">Prepaid Wallet Business Model</CardTitle>
+            <CardTitle className="text-base">{t("businessModel.title")}</CardTitle>
           </div>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted-foreground">
@@ -655,7 +658,7 @@ export function PlatformSettingsForm() {
               1
             </div>
             <p>
-              <strong className="text-foreground">Merchant Payment:</strong> 100% goes to agent's Stripe account
+              <strong className="text-foreground">{t("businessModel.steps.merchantPayment.title")}</strong> {t("businessModel.steps.merchantPayment.description")}
             </p>
           </div>
           <div className="flex items-start gap-3">
@@ -663,7 +666,7 @@ export function PlatformSettingsForm() {
               2
             </div>
             <p>
-              <strong className="text-foreground">Platform Deduction:</strong> Costs automatically deducted from agent's prepaid wallet
+              <strong className="text-foreground">{t("businessModel.steps.platformDeduction.title")}</strong> {t("businessModel.steps.platformDeduction.description")}
             </p>
           </div>
           <div className="flex items-start gap-3">
@@ -671,7 +674,7 @@ export function PlatformSettingsForm() {
               3
             </div>
             <p>
-              <strong className="text-foreground">Agent Profit:</strong> Merchant payment - Platform cost = Agent's earnings
+              <strong className="text-foreground">{t("businessModel.steps.agentProfit.title")}</strong> {t("businessModel.steps.agentProfit.description")}
             </p>
           </div>
         </CardContent>
@@ -686,18 +689,18 @@ export function PlatformSettingsForm() {
           disabled={saving}
         >
           <RefreshCw className="h-4 w-4 mr-2" />
-          Reset
+          {t("actions.reset")}
         </Button>
         <Button type="submit" disabled={saving}>
           {saving ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Saving...
+              {t("actions.saving")}
             </>
           ) : (
             <>
               <Save className="mr-2 h-4 w-4" />
-              Save Settings
+              {t("actions.saveSettings")}
             </>
           )}
         </Button>

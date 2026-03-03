@@ -11,10 +11,13 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 
-export const getStatementsColumns = (onDownload) => [
+export const getStatementsColumns = (onDownload, t) => [
   {
     id: "owner",
-    header: "Owner",
+    header: t("columns.owner.header"),
+    meta: {
+      label: t("columns.owner.header"),
+    },
     cell: ({ row }) => {
       const ownerType = row.original.owner_type;
       const ownerName = row.original.owner_name;
@@ -24,19 +27,19 @@ export const getStatementsColumns = (onDownload) => [
           icon: Store,
           color: "text-blue-600",
           bg: "bg-blue-50 dark:bg-blue-500/10",
-          label: "Merchant",
+          label: t("columns.owner.merchant"),
         },
         agent: {
           icon: Users,
           color: "text-purple-600",
           bg: "bg-purple-50 dark:bg-purple-500/10",
-          label: "Agent",
+          label: t("columns.owner.agent"),
         },
         super_admin: {
           icon: Shield,
           color: "text-emerald-600",
           bg: "bg-emerald-50 dark:bg-emerald-500/10",
-          label: "Super Admin",
+          label: t("columns.owner.superAdmin"),
         },
       };
 
@@ -64,27 +67,30 @@ export const getStatementsColumns = (onDownload) => [
   },
   {
     id: "period",
-    header: "Period",
+    header: t("columns.period.header"),
+    meta: {
+      label: t("columns.period.header"),
+    },
     cell: ({ row }) => {
       const month = row.original.month;
       const year = row.original.year;
 
       const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        t("months.january"),
+        t("months.february"),
+        t("months.march"),
+        t("months.april"),
+        t("months.may"),
+        t("months.june"),
+        t("months.july"),
+        t("months.august"),
+        t("months.september"),
+        t("months.october"),
+        t("months.november"),
+        t("months.december"),
       ];
 
-      const monthName = months[month - 1] || "Unknown";
+      const monthName = months[month - 1] || t("columns.period.unknown");
 
       return (
         <div className="flex items-center gap-2">
@@ -103,22 +109,25 @@ export const getStatementsColumns = (onDownload) => [
   },
   {
     id: "status",
-    header: "Status",
+    header: t("columns.status.header"),
+    meta: {
+      label: t("columns.status.header"),
+    },
     cell: ({ row }) => {
       const status = row.original.status || "generated";
       const statusConfig = {
         generated: {
-          label: "Generated",
+          label: t("columns.status.generated"),
           variant: "default",
           className: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10",
         },
         pending: {
-          label: "Pending",
+          label: t("columns.status.pending"),
           variant: "secondary",
           className: "bg-yellow-100 text-yellow-700 dark:bg-yellow-500/10",
         },
         failed: {
-          label: "Failed",
+          label: t("columns.status.failed"),
           variant: "destructive",
           className: "bg-red-100 text-red-700 dark:bg-red-500/10",
         },
@@ -135,7 +144,10 @@ export const getStatementsColumns = (onDownload) => [
   },
   {
     id: "generated_at",
-    header: "Generated At",
+    header: t("columns.generatedAt.header"),
+    meta: {
+      label: t("columns.generatedAt.header"),
+    },
     cell: ({ row }) => {
       const date = row.original.generated_at;
       if (!date) return "—";
@@ -153,7 +165,10 @@ export const getStatementsColumns = (onDownload) => [
   },
   {
     id: "actions",
-    header: "Actions",
+    header: t("columns.actions.header"),
+    meta: {
+      label: t("columns.actions.header"),
+    },
     cell: ({ row }) => {
       const statementId = row.original.id;
       const ownerName = row.original.owner_name;
@@ -167,7 +182,7 @@ export const getStatementsColumns = (onDownload) => [
           onClick={() => onDownload(statementId, ownerName, ownerType)}
         >
           <Download className="h-4 w-4" />
-          Download PDF
+          {t("columns.actions.downloadPdf")}
         </Button>
       );
     },

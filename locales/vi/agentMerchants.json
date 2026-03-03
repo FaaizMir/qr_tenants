@@ -4,6 +4,7 @@
     "dashboard": "Bảng điều khiển",
     "details": "Chi tiết",
     "editMerchant": "Chỉnh sửa Nhà cung cấp",
+    "masterAdminDashboard": "Bảng điều khiển Quản trị viên Chính",
     "merchantManagement": "Quản lý thương nhân",
     "merchants": "Thương nhân"
   },
@@ -26,6 +27,7 @@
       "title": "Thông tin tài khoản"
     },
     "actions": {
+      "back": "Quay lại",
       "cancel": "Hủy",
       "createMerchant": "Tạo Người bán",
       "creating": "Đang tạo...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "Quay lại",
       "updateMerchant": "Cập nhật thương nhân",
       "updating": "Đang cập nhật..."
     },

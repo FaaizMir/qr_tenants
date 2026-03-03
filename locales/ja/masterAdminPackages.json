@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "パッケージを作成",
+    "editPackage": "パッケージを編集",
+    "masterAdminDashboard": "マスター管理者ダッシュボード",
+    "packages": "パッケージ"
+  },
+  "columns": {
+    "actions": "アクション",
+    "active": "アクティブ",
+    "credits": "クレジット",
+    "deleteAction": "パッケージを削除",
+    "editAction": "パッケージを編集",
+    "inactive": "非アクティブ",
+    "menuLabel": "パッケージアクション",
+    "noDescription": "説明はありません",
+    "packageInfo": "パッケージ情報",
+    "perCredit": "クレジットごと",
+    "plan": "プラン",
+    "pricing": "価格設定",
+    "rank": "ランク",
+    "status": "ステータス",
+    "type": "タイプ"
+  },
+  "deleteDialog": {
+    "cancel": "削除を中止",
+    "confirm": "確認済み、今すぐ削除",
+    "description": "{name}を永久に削除しようとしています。この操作は最終的なものであり、誰も元に戻すことはできません。",
+    "title": "極度の注意"
+  },
+  "form": {
+    "backButton": "リストに戻る",
+    "buttons": {
+      "cancel": "キャンセル",
+      "delete": "パッケージを削除",
+      "save": "パッケージを公開",
+      "saving": "保存中...",
+      "update": "パッケージを更新"
+    },
+    "createTitle": "新しいパッケージを作成",
+    "deleteDialog": {
+      "cancel": "キャンセル",
+      "confirm": "はい、パッケージを削除",
+      "description": "これは{name}を永久に削除します。この操作は元に戻せません。",
+      "title": "本当に確信していますか？"
+    },
+    "editTitle": "クレジットパッケージを編集",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "クレジットタイプ",
+      "currency": "通貨",
+      "customCreditType": "カスタムクレジットタイプを指定する",
+      "customCreditTypePlaceholder": "例：誕生日スペシャル",
+      "description": "説明",
+      "descriptionPlaceholder": "このパッケージが提供する内容の簡単な概要...",
+      "displayPriority": "表示優先度",
+      "displayPriorityPlaceholder": "リスト内の位置 (1, 2, 3...)",
+      "merchantPlan": "マーチャントプラン",
+      "packageName": "パッケージ名",
+      "packageNamePlaceholder": "例：プレミアム成長バンドル",
+      "packageStatus": "パッケージのステータス",
+      "price": "価格",
+      "pricePerCredit": "クレジットあたりの価格",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "合計クレジット"
+    },
+    "hints": {
+      "autoCalculated": "自動"
+    },
+    "messages": {
+      "createError": "パッケージの作成に失敗しました",
+      "createSuccess": "パッケージが正常に作成されました",
+      "deleteError": "パッケージの削除に失敗しました",
+      "deleteSuccess": "パッケージが正常に削除されました",
+      "fetchError": "パッケージの詳細の読み込みに失敗しました",
+      "paidAdsRestriction": "有料広告パッケージはエージェントのみが管理できます",
+      "updateError": "パッケージの更新に失敗しました",
+      "updateSuccess": "パッケージが正常に更新されました"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "クーポン",
+        "custom": "カスタム",
+        "whatsappBI": "WhatsApp BIメッセージ",
+        "whatsappUI": "WhatsApp UIメッセージ"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "年間 / プレミアム",
+        "temporary": "一時的 / 基本"
+      },
+      "status": {
+        "active": "アクティブ＆表示中",
+        "inactive": "非アクティブ/非表示"
+      }
+    },
+    "preview": {
+      "baseCredits": "基本クレジット",
+      "categories": {
+        "coupon": "クーポン",
+        "paidAds": "有料広告",
+        "standard": "標準",
+        "whatsapp": "Whatsappメッセージ"
+      },
+      "enhancedFeatures": "強化された機能と容量",
+      "getStarted": "始める",
+      "hiddenDraft": "非表示 / 下書き",
+      "title": "ライブプレビュー"
+    },
+    "sections": {
+      "classification": "分類",
+      "credits": "クレジットと配分",
+      "identity": "アイデンティティと価格設定"
+    },
+    "subtitle": "商人のための価格設定とクレジット制限を定義します。",
+    "validation": {
+      "creditsMin": "クレジットは少なくとも1でなければなりません",
+      "creditsRequired": "クレジットが必要です",
+      "customTypeRequired": "カスタムクレジットタイプが必要です",
+      "descriptionRequired": "説明は必須です",
+      "nameRequired": "パッケージ名は必須です",
+      "priceMin": "価格は少なくとも1でなければなりません",
+      "priceRequired": "価格は必須です"
+    }
+  },
+  "listing": {
+    "createButton": "新しいパッケージを作成",
+    "noPackages": "パッケージが見つかりません",
+    "noPackagesDescription": "最初のパッケージを作成して開始する",
+    "searchPlaceholder": "パッケージ名、クレジットタイプで検索..."
+  },
+  "messages": {
+    "deleteError": "パッケージの削除に失敗しました",
+    "deleteSuccess": "パッケージが正常に削除されました",
+    "fetchError": "パッケージの取得に失敗しました"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "自動控除が有効",
+    "badge": "プラットフォーム標準",
+    "billingCycle": "請求サイクル",
+    "billingCycleValue": "365日間の定期購読",
+    "dialog": {
+      "cancelButton": "キャンセル",
+      "confirmButton": "確認と更新",
+      "description": "プラットフォーム上のすべてのエージェントの新しい年会費を設定します。変更は新しい更新に即座に適用されます。",
+      "label": "新しい年間料金",
+      "placeholder": "0.00",
+      "title": "サブスクリプション料金を更新する",
+      "updatingButton": "更新中...",
+      "warning": "注意: 大幅な価格変更はエージェントの維持に影響を与える可能性があります。変更はシステム監査に記録されます。"
+    },
+    "globalCurrency": "グローバル通貨",
+    "insightDescription": "サブスクリプション料金の調整は、新しいエージェントのプラットフォームへのアクセスに影響を与えます。価格が競争力を保ちながらプラットフォームの品質を維持することを確認してください。",
+    "insightTitle": "収益インテリジェンス",
+    "messages": {
+      "fetchError": "サブスクリプション料金の取得に失敗しました",
+      "updateError": "料金の更新に失敗しました",
+      "updateSuccess": "サブスクリプション料金が正常に更新されました",
+      "validationError": "有効な金額を入力してください"
+    },
+    "perYear": "/ 年間固定",
+    "status": "ステータス",
+    "statusValue": "アクティブプラン",
+    "syncButton": "データを同期",
+    "title": "エージェント年会費",
+    "updateButton": "価格構造を更新"
+  },
+  "subtitle": "すべてのマーチャントクレジットバンドルを管理および監視",
+  "title": "パッケージ"
+}
