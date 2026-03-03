@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "ค่าคอมมิชชั่น",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "ปีงบประมาณ {year}",
+      "title": "การจัดสรรรายได้"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "ค่าธรรมเนียมประจำปีจากผู้ดูแลระบบ",
+        "title": "การสมัครสมาชิกตัวแทน"
+      },
+      "annualPackages": {
+        "description": "แผนการค้าระยะยาว",
+        "title": "แพ็คเกจรายปี"
+      },
+      "merchantFees": {
+        "description": "ค่าธรรมเนียมผู้ค้าที่เกิดซ้ำ",
+        "title": "ค่าธรรมเนียมผู้ค้า"
+      },
+      "tempPackages": {
+        "description": "แผนผู้ค้าระยะสั้น",
+        "title": "แพ็คเกจชั่วคราว"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "รายได้ตลอดกาล",
+      "title": "รายได้รวม",
+      "updatedToday": "อัปเดตวันนี้"
+    }
+  },
+  "errors": {
+    "loadFailed": "ไม่สามารถโหลดข้อมูลกระเป๋าเงินได้"
+  },
+  "header": {
+    "managementSubtitle": "จัดการค่าคอมมิชชั่นและรายได้",
+    "managementTitle": "การจัดการค่าคอมมิชชั่น",
+    "subtitle": "ภาพรวมทางการเงินแบบเรียลไทม์และการแบ่งรายได้",
+    "title": "ศูนย์ค่าคอมมิชชั่น"
+  },
+  "noData": {
+    "message": "ไม่สามารถโหลดข้อมูลกระเป๋าเงินได้ กรุณาลองอีกครั้งในภายหลัง",
+    "title": "ไม่มีข้อมูลกระเป๋าเงิน"
+  },
+  "status": {
+    "operatingWallet": "กระเป๋าเงินที่ใช้งาน",
+    "systemActive": "ระบบทำงาน",
+    "systemInactive": "ระบบไม่ทำงาน",
+    "systemStatus": "สถานะระบบ"
+  }
+}

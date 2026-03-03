@@ -4,6 +4,7 @@
     "dashboard": "Dasbor",
     "details": "Detail",
     "editMerchant": "Edit Pedagang",
+    "masterAdminDashboard": "Dasbor Admin Utama",
     "merchantManagement": "Manajemen Pedagang",
     "merchants": "Pedagang"
   },
@@ -26,6 +27,7 @@
       "title": "Kredensial Akun"
     },
     "actions": {
+      "back": "Kembali",
       "cancel": "Batal",
       "createMerchant": "Buat Merchant",
       "creating": "Membuat...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "Kembali",
       "updateMerchant": "Perbarui Pedagang",
       "updating": "Memperbarui..."
     },

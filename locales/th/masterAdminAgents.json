@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "ลบ",
+    "details": "รายละเอียด",
+    "edit": "แก้ไข",
+    "menuLabel": "ตัวเลือกตัวแทน"
+  },
+  "breadcrumb": {
+    "agentDetails": "รายละเอียดตัวแทน",
+    "agents": "ตัวแทน",
+    "createAgent": "สร้างตัวแทน",
+    "editAgent": "แก้ไขตัวแทน",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก"
+  },
+  "columns": {
+    "actions": "การดำเนินการ",
+    "agentAccount": "บัญชีตัวแทน",
+    "location": "ตำแหน่งที่ตั้ง",
+    "phone": "โทรศัพท์",
+    "status": "สถานะ"
+  },
+  "create": {
+    "subtitle": "สร้างบัญชีตัวแทนใหม่และกำหนดการเข้าถึงและสิทธิ์ของพวกเขา.",
+    "title": "เพิ่มตัวแทนใหม่"
+  },
+  "delete": {
+    "cancel": "ยกเลิก",
+    "confirm": "ลบตัวแทน",
+    "deleting": "กำลังลบ...",
+    "description": "การกระทำนี้ไม่สามารถย้อนกลับได้ จะลบตัวแทนอย่างถาวร",
+    "descriptionEnd": "และลบข้อมูลของพวกเขาจากเซิร์ฟเวอร์ของเรา.",
+    "descriptionName": " {name}",
+    "error": "ลบตัวแทนไม่สำเร็จ",
+    "success": "ลบตัวแทนเรียบร้อยแล้ว",
+    "title": "คุณแน่ใจหรือไม่?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "สถานะ",
+      "statusDescription": "ความถูกต้องของบัญชีปัจจุบัน",
+      "title": "การควบคุมการเข้าถึง"
+    },
+    "accountInformation": {
+      "emailAddress": "ที่อยู่อีเมล",
+      "fullName": "ชื่อเต็ม",
+      "memberSince": "สมาชิกตั้งแต่",
+      "phoneNumber": "หมายเลขโทรศัพท์",
+      "title": "ข้อมูลบัญชี"
+    },
+    "editAgent": "แก้ไขตัวแทน",
+    "goBack": "กลับไป",
+    "loading": "กำลังโหลดรายละเอียดตัวแทน...",
+    "locationDetails": {
+      "city": "เมือง",
+      "country": "ประเทศ",
+      "fullAddress": "ที่อยู่ทั้งหมด",
+      "title": "รายละเอียดสถานที่"
+    },
+    "notFound": "ไม่พบตัวแทน."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "ใช้งาน",
+      "activeDescription": "เมื่อปิดใช้งาน ตัวแทนจะไม่สามารถเข้าสู่ระบบหรือจัดการผู้ค้าได้",
+      "activeLabel": "สถานะที่ใช้งาน",
+      "description": "ควบคุมการเข้าถึงของตัวแทนต่อระบบ",
+      "inactive": "ไม่ทำงาน",
+      "title": "สถานะบัญชี"
+    },
+    "agentDetails": {
+      "descriptionCreate": "กรอกข้อมูลส่วนตัวสำหรับตัวแทนใหม่",
+      "descriptionEdit": "อัปเดตข้อมูลส่วนบุคคลและข้อมูลการเข้าสู่ระบบของตัวแทน",
+      "title": "รายละเอียดตัวแทน"
+    },
+    "buttons": {
+      "cancel": "ยกเลิก",
+      "createAgent": "สร้างตัวแทน",
+      "creating": "กำลังสร้าง...",
+      "hideKey": "ซ่อนคีย์",
+      "hidePassword": "ซ่อนรหัสผ่าน",
+      "showKey": "แสดงคีย์",
+      "showPassword": "แสดงรหัสผ่าน",
+      "updateAgent": "อัปเดตตัวแทน",
+      "updating": "กำลังอัปเดต..."
+    },
+    "fields": {
+      "city": "เมือง",
+      "country": "ประเทศ",
+      "emailAddress": "ที่อยู่อีเมล",
+      "fullName": "ชื่อเต็ม",
+      "newPassword": "รหัสผ่านใหม่ (เว้นว่างไว้เพื่อรักษารหัสผ่านปัจจุบัน)",
+      "password": "รหัสผ่าน",
+      "phoneNumber": "หมายเลขโทรศัพท์",
+      "searchAddress": "ค้นหาที่อยู่",
+      "stripeSecretKey": "รหัสลับของ Stripe (ไม่บังคับ)"
+    },
+    "hints": {
+      "passwordRequirements": "อย่างน้อย 8 ตัวอักษร, ตัวอักษรและตัวเลข",
+      "stripeKeyCreate": "กำหนดค่า API คีย์ของ Stripe สำหรับการรับการชำระเงินของพาณิชย์ สามารถตั้งค่าได้ในภายหลังในการตั้งค่าตัวแทน",
+      "stripeKeyEdit": "อัปเดตคีย์ API ของ Stripe ของตัวแทน เว้นว่างไว้เพื่อรักษาการตั้งค่าที่มีอยู่"
+    },
+    "locationDetails": {
+      "description": "ข้อมูลที่อยู่สำหรับตัวแทน",
+      "title": "รายละเอียดสถานที่"
+    },
+    "placeholders": {
+      "address": "123 Agent St, City, Country",
+      "city": "เมือง",
+      "country": "ประเทศ",
+      "email": "agent@example.com",
+      "name": "เช่น John Doe",
+      "passwordCreate": "กรุณาใส่รหัสผ่านที่ปลอดภัย",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (เว้นว่างไว้เพื่อรักษาไว้ในปัจจุบัน)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (เว้นว่างไว้เพื่อรักษาการตั้งค่าปัจจุบัน)",
+      "stripeKeyNew": "sk_test_... หรือ sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "เพิ่มตัวแทน",
+    "searchPlaceholder": "ค้นหาตัวแทน..."
+  },
+  "messages": {
+    "addressSelected": "ที่อยู่ที่เลือก",
+    "checkInput": "กรุณาตรวจสอบข้อมูลที่คุณป้อนและลองอีกครั้ง",
+    "createError": "ไม่สามารถสร้างตัวแทนได้",
+    "createSuccess": "สร้างบัญชีตัวแทนเรียบร้อยแล้ว.",
+    "fetchError": "โหลดรายละเอียดตัวแทนไม่สำเร็จ",
+    "loadError": "ไม่สามารถโหลดผู้ดูแลระบบได้",
+    "updateError": "ไม่สามารถอัปเดตตัวแทนได้",
+    "updateSuccess": "อัปเดตโปรไฟล์ตัวแทนเรียบร้อยแล้ว",
+    "validationError": "{field}: {message}",
+    "validationFailed": "การตรวจสอบล้มเหลว"
+  },
+  "status": {
+    "active": "ใช้งาน",
+    "inactive": "ไม่ใช้งาน"
+  },
+  "statusToggle": {
+    "activateSuccess": "เปิดใช้งานตัวแทนเรียบร้อยแล้ว",
+    "deactivateSuccess": "ปิดการใช้งานตัวแทนเรียบร้อยแล้ว",
+    "updateError": "ไม่สามารถอัปเดตสถานะตัวแทนได้"
+  },
+  "subtitle": "จัดการตัวแทนและบัญชีของพวกเขา",
+  "title": "การจัดการตัวแทน"
+}

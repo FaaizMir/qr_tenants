@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "すべてのステートメント",
+    "masterAdminDashboard": "マスター管理者ダッシュボード"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "PDFをダウンロード",
+      "header": "アクション"
+    },
+    "generatedAt": {
+      "header": "生成日時"
+    },
+    "owner": {
+      "agent": "エージェント",
+      "header": "オーナー",
+      "merchant": "マーチャント",
+      "superAdmin": "スーパ管理者"
+    },
+    "period": {
+      "header": "期間",
+      "unknown": "不明"
+    },
+    "status": {
+      "failed": "失敗",
+      "generated": "生成済み",
+      "header": "ステータス",
+      "pending": "保留中"
+    }
+  },
+  "filters": {
+    "description": "年と月でステートメントをフィルタリング",
+    "loading": "読み込み中...",
+    "month": "月",
+    "quickActions": "クイックアクション",
+    "refreshList": "リストを更新",
+    "selectMonth": "月を選択",
+    "selectYear": "年を選択",
+    "title": "ステートメントフィルター",
+    "year": "年"
+  },
+  "header": {
+    "subtitle": "マーチャント、エージェント、プラットフォーム管理者の月次ステートメントを表示およびダウンロードします。",
+    "title": "すべての財務諸表"
+  },
+  "messages": {
+    "downloadError": "PDFのダウンロードに失敗しました。再試行してください。",
+    "downloadSuccess": "ステートメントが正常にダウンロードされました！",
+    "loadError": "ステートメントの読み込みに失敗しました。もう一度お試しください。"
+  },
+  "months": {
+    "april": "4月",
+    "august": "8月",
+    "december": "12月",
+    "february": "2月",
+    "january": "1月",
+    "july": "7月",
+    "june": "6月",
+    "march": "3月",
+    "may": "5月",
+    "november": "11月",
+    "october": "10月",
+    "september": "9月"
+  },
+  "summaryCards": {
+    "agents": "エージェント",
+    "merchants": "マーチャント",
+    "superAdmin": "スーパ管理者"
+  },
+  "table": {
+    "loading": "ステートメントを読み込み中...",
+    "noData": {
+      "message": "選択した期間のステートメントは利用できません。",
+      "title": "ステートメントが見つかりませんでした"
+    },
+    "tabs": {
+      "agents": "エージェント ({count})",
+      "all": "すべて ({count})",
+      "merchants": "マーチャント ({count})",
+      "superAdmin": "スーパ管理者 ({count})"
+    },
+    "title": "ステートメント履歴"
+  }
+}

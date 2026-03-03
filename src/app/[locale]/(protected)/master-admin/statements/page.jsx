@@ -1,10 +1,13 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import StatementsContainer from "@/containers/master-admin/statements";
+import { getTranslations } from "next-intl/server";
 
-export default function AllStatementsPage() {
+export default async function AllStatementsPage() {
+  const t = await getTranslations("masterAdminStatements.breadcrumbs");
+  
   const breadcrumbData = [
-    { name: "Master Admin Dashboard", url: "/master-admin/dashboard" },
-    { name: "All Statements", url: "/master-admin/statements" },
+    { name: t("masterAdminDashboard"), url: "/master-admin/dashboard" },
+    { name: t("allStatements"), url: "/master-admin/statements" },
   ];
 
   return (

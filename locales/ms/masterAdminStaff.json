@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "Pengurusan Iklan",
+    "financeOnly": "Kewangan Sahaja",
+    "fullAccess": "Akses Penuh",
+    "readOnly": "Baca Sahaja",
+    "supportHelp": "Bantuan Sokongan"
+  },
+  "actions": {
+    "delete": "Padam",
+    "edit": "Sunting",
+    "menuLabel": "Pilihan Staf"
+  },
+  "breadcrumb": {
+    "addStaff": "Tambah Kakitangan",
+    "editStaff": "Edit Kakitangan",
+    "masterAdminDashboard": "Papan Pemuka Pentadbir Utama",
+    "staffManagement": "Pengurusan Staf"
+  },
+  "columns": {
+    "access": "Akses",
+    "actions": "Tindakan",
+    "phone": "Telefon",
+    "role": "Peranan",
+    "staffMember": "Ahli Kakitangan",
+    "status": "Status"
+  },
+  "delete": {
+    "cancel": "Batal",
+    "confirm": "Hapus Secara Kekal",
+    "deleting": "Menghapus...",
+    "description": "Adakah anda pasti ingin mengeluarkan",
+    "descriptionEnd": "? Tindakan ini tidak boleh dibatalkan.",
+    "descriptionPermanent": "? Ini akan secara permanen mencabut akses mereka ke platform.",
+    "error": "Gagal untuk memadam ahli kakitangan.",
+    "success": "Anggota staf berjaya dihapuskan.",
+    "title": "Hapus Anggota Staf?",
+    "unknownRole": "Peranan tidak diketahui"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "Kawal jika akaun ini aktif.",
+      "disabled": "Akaun Dinonaktifkan",
+      "disabledDescription": "Akses staf kini dibatalkan.",
+      "enabled": "Akaun Diaktifkan",
+      "enabledDescription": "Kakitangan boleh log masuk dan mengurus platform.",
+      "title": "Keterlihatan Akaun"
+    },
+    "buttons": {
+      "cancel": "Batal",
+      "createAccount": "Buat Akaun",
+      "savingChanges": "Menyimpan Perubahan",
+      "updateProfile": "Kemas kini Profil"
+    },
+    "createSubtitle": "Tugaskan peranan baru dan kebenaran akses.",
+    "createTitle": "Buat Akaun Kakitangan Baru",
+    "editSubtitle": "Ubah hak pentadbiran yang sedia ada.",
+    "editTitle": "Edit Akaun Staf",
+    "fields": {
+      "accountPassword": "Kata Laluan Akaun",
+      "emailAddress": "Alamat Emel",
+      "fullName": "Nama Penuh",
+      "phoneNumber": "Nombor Telefon",
+      "systemRole": "Peranan Sistem",
+      "updatePassword": "Kemas kini Kata Laluan (Pilihan)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* Tinggalkan kosong untuk mengekalkan kata laluan semasa."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "cth. Robert Fox",
+      "passwordCreate": "Masukkan kata laluan yang selamat",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "Butiran penting dan maklumat hubungan.",
+      "title": "Maklumat Staf"
+    },
+    "validation": {
+      "emailRequired": "Email diperlukan",
+      "nameRequired": "Nama penuh diperlukan",
+      "passwordMinLength": "Minimum 8 aksara diperlukan",
+      "passwordRequired": "Kata laluan diperlukan",
+      "phoneRequired": "Nombor telefon diperlukan",
+      "roleRequired": "Peranan diperlukan"
+    }
+  },
+  "listing": {
+    "addStaff": "Tambah Kakitangan",
+    "clearSearch": "Kosongkan Carian",
+    "noStaffDescription": "Cuba sesuaikan carian anda atau tambah ahli kakitangan baru.",
+    "noStaffFound": "Tiada kakitangan ditemui",
+    "refresh": "Segarkan",
+    "searchPlaceholder": "Cari ahli kakitangan..."
+  },
+  "messages": {
+    "createError": "Gagal menyimpan anggota staf.",
+    "createSuccess": "Akaun kakitangan berjaya dibuat.",
+    "fetchError": "Gagal untuk memuatkan data kakitangan.",
+    "fetchStaffError": "Gagal mendapatkan staf",
+    "updateSuccess": "Profil kakitangan berjaya dikemas kini."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "Semak iklan",
+      "title": "Pengesah Iklan"
+    },
+    "financeViewer": {
+      "description": "Buku Tunai & Penyata",
+      "title": "Papar Kewangan"
+    },
+    "role": "Peranan",
+    "superAdmin": {
+      "description": "Akses Penuh",
+      "title": "Super Admin"
+    },
+    "supportStaff": {
+      "description": "Tiket & Balasan",
+      "title": "Staf Sokongan"
+    }
+  },
+  "roles": {
+    "adApprover": "Pengesah Iklan",
+    "admin": "Admin",
+    "financeViewer": "Papar Kewangan",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Kakitangan Sokongan"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Tidak Aktif"
+  },
+  "statusToggle": {
+    "disableSuccess": "Akaun kakitangan dinyahdayakan dengan jayanya.",
+    "enableSuccess": "Akaun kakitangan diaktifkan dengan jayanya.",
+    "updateError": "Gagal mengemas kini status kakitangan."
+  },
+  "subtitle": "Urus peranan dan kebenaran pentadbiran platform.",
+  "title": "Pengurusan Kakitangan"
+}

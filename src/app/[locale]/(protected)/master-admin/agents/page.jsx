@@ -1,10 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import MasterAdminAgentsContainer from "@/containers/master-admin/agents";
 
 export default async function MasterAdminAgentsPage() {
+  const t = await getTranslations("masterAdminAgents.breadcrumb");
+  
   const breadcrumbData = [
-    { name: "Master Admin Dashboard", url: "/master-admin/dashboard" },
-    { name: "Agents", url: "/master-admin/agents" },
+    { name: t("masterAdminDashboard"), url: "/master-admin/dashboard" },
+    { name: t("agents"), url: "/master-admin/agents" },
   ];
   return (
     <>

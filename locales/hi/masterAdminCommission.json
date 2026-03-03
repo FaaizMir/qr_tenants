@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "आयोग",
+    "masterAdminDashboard": "मास्टर एडमिन डैशबोर्ड"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "{year} वित्तीय वर्ष",
+      "title": "राजस्व आवंटन"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "वार्षिक शुल्क प्रशासन से",
+        "title": "एजेंट सदस्यता"
+      },
+      "annualPackages": {
+        "description": "दीर्घकालिक व्यापारी योजनाएँ",
+        "title": "वार्षिक पैकेज"
+      },
+      "merchantFees": {
+        "description": "दोहराने वाले व्यापारी शुल्क",
+        "title": "व्यापारी शुल्क"
+      },
+      "tempPackages": {
+        "description": "अल्पकालिक व्यापारी योजनाएँ",
+        "title": "अस्थायी पैकेज"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "सभी समय की कमाई",
+      "title": "कुल राजस्व",
+      "updatedToday": "आज अपडेट किया गया"
+    }
+  },
+  "errors": {
+    "loadFailed": "वॉलेट जानकारी लोड करने में विफल"
+  },
+  "header": {
+    "managementSubtitle": "आयोग और कमाई प्रबंधित करें।",
+    "managementTitle": "आयोग प्रबंधन",
+    "subtitle": "वास्तविक समय वित्तीय अवलोकन और राजस्व विभाजन",
+    "title": "आयोग हब"
+  },
+  "noData": {
+    "message": "वॉलेट जानकारी लोड करने में असमर्थ। कृपया बाद में फिर से प्रयास करें।",
+    "title": "कोई वॉलेट डेटा नहीं"
+  },
+  "status": {
+    "operatingWallet": "ऑपरेटिंग वॉलेट",
+    "systemActive": "सिस्टम सक्रिय",
+    "systemInactive": "सिस्टम निष्क्रिय",
+    "systemStatus": "सिस्टम स्थिति"
+  }
+}

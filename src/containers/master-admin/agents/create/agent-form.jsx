@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -48,6 +49,7 @@ export function AgentForm({
   isEdit = false,
   agentId = null,
 }) {
+  const t = useTranslations("masterAdminAgents");
   const router = useRouter();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
@@ -82,7 +84,7 @@ export function AgentForm({
 
           if (!agent) {
             console.error("No agent data found in response:", data);
-            toast.error("Failed to load agent details");
+            toast.error(t("messages.fetchError"));
             return;
           }
 
@@ -115,7 +117,7 @@ export function AgentForm({
           });
         } catch (error) {
           console.error("Failed to fetch agent details:", error);
-          toast.error("Failed to load agent details");
+          toast.error(t("messages.fetchError"));
         } finally {
           setLoading(false);
         }
@@ -123,7 +125,7 @@ export function AgentForm({
     };
 
     fetchAgent();
-  }, [isEdit, initialData, agentId]);
+  }, [isEdit, initialData, agentId, t]);
 
   // Populate form when initialData is provided (edit mode)
   useEffect(() => {
@@ -190,11 +192,11 @@ export function AgentForm({
       if (isEdit && agentId) {
         console.debug("Updating agent payload:", payload);
         await axiosInstance.patch(`/admins/${agentId}`, payload);
-        toast.success("Agent profile updated successfully.");
+        toast.success(t("messages.updateSuccess"));
       } else {
         console.debug("Creating agent payload:", payload);
         await axiosInstance.post(`/admins`, payload);
-        toast.success("Agent account created successfully.");
+        toast.success(t("messages.createSuccess"));
       }
 
       router.push("/master-admin/agents");
@@ -212,7 +214,7 @@ export function AgentForm({
               .replace(/_/g, " ")
               .replace(/\b\w/g, (c) => c.toUpperCase());
             const errorList = Array.isArray(messages) ? messages : [messages];
-            return `${fieldName}: ${errorList.join(", ")}`;
+            return t("messages.validationError", { field: fieldName, message: errorList.join(", ") });
           },
         );
 
@@ -227,7 +229,7 @@ export function AgentForm({
       // Handle error array
       else if (Array.isArray(errorData?.errors)) {
         const firstError = errorData.errors[0];
-        toast.error(firstError?.message || firstError || "Validation failed", {
+        toast.error(firstError?.message || firstError || t("messages.validationFailed"), {
           description:
             errorData.errors
               .slice(1, 2)
@@ -241,8 +243,8 @@ export function AgentForm({
       }
       // Fallback error
       else {
-        toast.error(`Failed to ${isEdit ? "update" : "create"} agent`, {
-          description: "Please check your input and try again.",
+        toast.error(isEdit ? t("messages.updateError") : t("messages.createError"), {
+          description: t("messages.checkInput"),
         });
       }
     } finally {
@@ -262,23 +264,23 @@ export function AgentForm({
             <div className="p-2 bg-primary/10 rounded-full text-primary">
               <User className="h-4 w-4" />
             </div>
-            <CardTitle>Agent Details</CardTitle>
+            <CardTitle>{t("form.agentDetails.title")}</CardTitle>
           </div>
           <CardDescription>
             {isEdit
-              ? "Update agent personal and login information."
-              : "Enter the personal details for the new agent."}
+              ? t("form.agentDetails.descriptionEdit")
+              : t("form.agentDetails.descriptionCreate")}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name">
-              Full Name <span className="text-red-500">*</span>
+              {t("form.fields.fullName")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
               id="name"
-              placeholder="e.g. John Doe"
+              placeholder={t("form.placeholders.name")}
               required
               value={formData.name}
               onChange={(e) => handleChange("name", e.target.value)}
@@ -288,12 +290,12 @@ export function AgentForm({
           {/* Email */}
           <div className="space-y-2">
             <Label htmlFor="email">
-              Email Address <span className="text-red-500">*</span>
+              {t("form.fields.emailAddress")} <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
               id="email"
               type="email"
-              placeholder="agent@example.com"
+              placeholder={t("form.placeholders.email")}
               required
               value={formData.email}
               onChange={(e) => handleChange("email", e.target.value)}
@@ -302,12 +304,12 @@ export function AgentForm({
 
           {/* Phone */}
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone">{t("form.fields.phoneNumber")}</Label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 id="phone"
-                placeholder="+1 234 567 890"
+                placeholder={t("form.placeholders.phone")}
                 className="pl-9"
                 value={formData.phone}
                 onChange={(e) => handleChange("phone", e.target.value)}
@@ -318,9 +320,9 @@ export function AgentForm({
           <div className="space-y-2 ">
             <Label htmlFor="password">
               {isEdit
-                ? "New Password (leave blank to keep current)"
-                : "Password"}{" "}
-              <span className="text-red-500">*</span>
+                ? t("form.fields.newPassword")
+                : t("form.fields.password")}{" "}
+              <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <div className="relative">
               <Input
@@ -329,14 +331,14 @@ export function AgentForm({
                 required={!isEdit}
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
-                placeholder={isEdit ? "••••••••" : "Enter a secure password"}
+                placeholder={isEdit ? t("form.placeholders.passwordEdit") : t("form.placeholders.passwordCreate")}
                 className="pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? t("form.buttons.hidePassword") : t("form.buttons.showPassword")}
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -347,7 +349,7 @@ export function AgentForm({
             </div>
             {!isEdit && (
               <p className="text-xs text-muted-foreground">
-                Min. 8 characters, alphanumeric.
+                {t("form.hints.passwordRequirements")}
               </p>
             )}
           </div>
@@ -355,7 +357,7 @@ export function AgentForm({
           {/* Stripe Secret Key */}
           <div className="space-y-2">
             <Label htmlFor="stripe_key">
-              Stripe Secret Key (Optional)
+              {t("form.fields.stripeSecretKey")}
             </Label>
             <div className="relative">
               <Input
@@ -365,10 +367,10 @@ export function AgentForm({
                 onChange={(e) => handleChange("stripe_secret_key", e.target.value)}
                 placeholder={
                   isEdit && maskedStripeKey
-                    ? `${maskedStripeKey} (leave blank to keep current)`
+                    ? t("form.placeholders.stripeKeyExisting", { maskedKey: maskedStripeKey })
                     : isEdit
-                    ? "sk_••••••••••••• (leave blank to keep current)"
-                    : "sk_test_... or sk_live_..."
+                    ? t("form.placeholders.stripeKeyExistingGeneric")
+                    : t("form.placeholders.stripeKeyNew")
                 }
                 className="pr-10 font-mono text-sm"
               />
@@ -376,7 +378,7 @@ export function AgentForm({
                 type="button"
                 onClick={() => setShowStripeKey(!showStripeKey)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showStripeKey ? "Hide key" : "Show key"}
+                title={showStripeKey ? t("form.buttons.hideKey") : t("form.buttons.showKey")}
               >
                 {showStripeKey ? (
                   <EyeOff className="h-4 w-4" />
@@ -387,8 +389,8 @@ export function AgentForm({
             </div>
             <p className="text-xs text-muted-foreground">
               {isEdit 
-                ? "Update agent's Stripe API key. Leave blank to keep existing configuration." 
-                : "Configure Stripe API key for receiving merchant payments. Can be set later in agent settings."}
+                ? t("form.hints.stripeKeyEdit")
+                : t("form.hints.stripeKeyCreate")}
             </p>
           </div>
         </CardContent>
@@ -401,17 +403,17 @@ export function AgentForm({
             <div className="p-2 bg-orange-500/10 rounded-full text-orange-600">
               <MapPin className="h-4 w-4" />
             </div>
-            <CardTitle>Location Details</CardTitle>
+            <CardTitle>{t("form.locationDetails.title")}</CardTitle>
           </div>
-          <CardDescription>Address information for the agent.</CardDescription>
+          <CardDescription>{t("form.locationDetails.description")}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="address">Search Address</Label>
+            <Label htmlFor="address">{t("form.fields.searchAddress")}</Label>
             <AddressAutocomplete
-              label="Address"
+              label={t("form.fields.searchAddress")}
               name="address"
-              placeholder="123 Agent St, City, Country"
+              placeholder={t("form.placeholders.address")}
               value={formData.address}
               onChange={(locationData) => {
                 setFormData((prev) => ({
@@ -422,25 +424,25 @@ export function AgentForm({
                   city: locationData.city || prev.city,
                   country: locationData.country || prev.country,
                 }));
-                toast.success("Address selected");
+                toast.success(t("messages.addressSelected"));
               }}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="city">City</Label>
+            <Label htmlFor="city">{t("form.fields.city")}</Label>
             <Input
               id="city"
-              placeholder="City"
+              placeholder={t("form.placeholders.city")}
               value={formData.city}
               onChange={(e) => handleChange("city", e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="country">Country</Label>
+            <Label htmlFor="country">{t("form.fields.country")}</Label>
             <Input
               id="country"
-              placeholder="Country"
+              placeholder={t("form.placeholders.country")}
               value={formData.country}
               onChange={(e) => handleChange("country", e.target.value)}
             />
@@ -459,18 +461,18 @@ export function AgentForm({
             <div className="p-2 bg-emerald-500/10 rounded-full text-emerald-600">
               <ShieldCheck className="h-4 w-4" />
             </div>
-            <CardTitle>Account Status</CardTitle>
+            <CardTitle>{t("form.accountStatus.title")}</CardTitle>
           </div>
           <CardDescription>
-            Control the agent&apos;s access to the system.
+            {t("form.accountStatus.description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between p-4 rounded-lg border bg-zinc-50/50 dark:bg-zinc-800/30">
             <div className="space-y-0.5">
-              <Label className="text-base">Active Status</Label>
+              <Label className="text-base">{t("form.accountStatus.activeLabel")}</Label>
               <CardDescription>
-                When disabled, the agent cannot log in or manage merchants.
+                {t("form.accountStatus.activeDescription")}
               </CardDescription>
             </div>
             <div className="flex items-center gap-3">
@@ -480,7 +482,7 @@ export function AgentForm({
                   formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
-                {formData.is_active ? "Active" : "Inactive"}
+                {formData.is_active ? t("form.accountStatus.active") : t("form.accountStatus.inactive")}
               </span>
               <Switch
                 checked={formData.is_active}
@@ -493,17 +495,17 @@ export function AgentForm({
         </CardContent>
         <CardFooter className="bg-muted/10 border-t px-6 py-4 flex justify-between items-center">
           <Button variant="ghost" type="button" onClick={() => router.back()}>
-            Cancel
+            {t("form.buttons.cancel")}
           </Button>
           <Button type="submit" disabled={loading} className="min-w-[140px]">
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading
               ? isEdit
-                ? "Updating..."
-                : "Creating..."
+                ? t("form.buttons.updating")
+                : t("form.buttons.creating")
               : isEdit
-                ? "Update Agent"
-                : "Create Agent"}
+                ? t("form.buttons.updateAgent")
+                : t("form.buttons.createAgent")}
           </Button>
         </CardFooter>
       </Card>

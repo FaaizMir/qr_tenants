@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "Semua Penyata",
+    "masterAdminDashboard": "Papan Pemuka Pentadbir Utama"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "Muat Turun PDF",
+      "header": "Tindakan"
+    },
+    "generatedAt": {
+      "header": "Dihasilkan Pada"
+    },
+    "owner": {
+      "agent": "Ejen",
+      "header": "Pemilik",
+      "merchant": "Peniaga",
+      "superAdmin": "Super Admin"
+    },
+    "period": {
+      "header": "Tempoh",
+      "unknown": "Tidak Dikenali"
+    },
+    "status": {
+      "failed": "Gagal",
+      "generated": "Dihasilkan",
+      "header": "Status",
+      "pending": "Tertunda"
+    }
+  },
+  "filters": {
+    "description": "Tapis penyata mengikut tahun dan bulan",
+    "loading": "Memuatkan...",
+    "month": "Bulan",
+    "quickActions": "Tindakan Pantas",
+    "refreshList": "Segarkan Senarai",
+    "selectMonth": "Pilih bulan",
+    "selectYear": "Pilih tahun",
+    "title": "Penapis Penyata",
+    "year": "Tahun"
+  },
+  "header": {
+    "subtitle": "Lihat dan muat turun penyata bulanan untuk peniaga, ejen, dan pentadbir platform.",
+    "title": "Semua Penyata Kewangan"
+  },
+  "messages": {
+    "downloadError": "Gagal memuat turun PDF. Sila cuba lagi.",
+    "downloadSuccess": "Penyata dimuat turun dengan jayanya!",
+    "loadError": "Gagal memuatkan penyata. Sila cuba lagi."
+  },
+  "months": {
+    "april": "April",
+    "august": "Ogos",
+    "december": "Disember",
+    "february": "Februari",
+    "january": "Januari",
+    "july": "Julai",
+    "june": "Jun",
+    "march": "Mac",
+    "may": "Mei",
+    "november": "November",
+    "october": "Oktober",
+    "september": "September"
+  },
+  "summaryCards": {
+    "agents": "Ejen",
+    "merchants": "Peniaga",
+    "superAdmin": "Super Admin"
+  },
+  "table": {
+    "loading": "Memuatkan penyata...",
+    "noData": {
+      "message": "Tiada penyata tersedia untuk tempoh yang dipilih.",
+      "title": "Tiada Penyata Ditemui"
+    },
+    "tabs": {
+      "agents": "Ejen ({count})",
+      "all": "Semua ({count})",
+      "merchants": "Peniaga ({count})",
+      "superAdmin": "Super Admin ({count})"
+    },
+    "title": "Sejarah Penyata"
+  }
+}

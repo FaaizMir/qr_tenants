@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "계정 정보 업데이트",
+    "title": "계정 세부정보"
+  },
+  "breadcrumb": {
+    "account": "계정",
+    "dashboard": "대시보드"
+  },
+  "buttons": {
+    "saveChanges": "변경 사항 저장",
+    "saving": "저장 중..."
+  },
+  "fields": {
+    "address": "주소",
+    "city": "도시",
+    "country": "국가",
+    "email": "이메일",
+    "fullName": "전체 이름",
+    "phone": "전화",
+    "stripeSecretKey": "Stripe 비밀 키"
+  },
+  "hints": {
+    "stripeKeyMasked": "현재 키는 보안을 위해 숨겨져 있습니다. 업데이트할 새 키를 입력하세요."
+  },
+  "messages": {
+    "fetchError": "계정 정보를 불러오는 데 실패했습니다",
+    "updateError": "계정 업데이트 실패",
+    "updateSuccess": "계정이 성공적으로 업데이트되었습니다",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "주소를 입력하기 시작하세요...",
+    "city": "도시를 입력하세요",
+    "country": "국가를 입력하세요",
+    "email": "이메일 입력",
+    "name": "이름을 입력하세요",
+    "phone": "전화번호 입력",
+    "stripeKeyExisting": "{maskedKey} (현재 값을 유지하려면 비워 두세요)",
+    "stripeKeyNew": "sk_test_... 또는 sk_live_..."
+  },
+  "profile": {
+    "description": "프로필 정보",
+    "noStripeKey": "Stripe 키 없음",
+    "stripeConnected": "Stripe 연결됨",
+    "title": "프로필"
+  },
+  "subtitle": "계정 정보 관리",
+  "title": "계정 설정"
+}

@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "Reset",
+    "saveSettings": "Save Settings",
+    "saving": "Saving..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "Master Admin Dashboard",
+    "platformSettings": "Platform Settings"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "Merchant payment - Platform cost = Agent's earnings",
+        "title": "Agent Profit:"
+      },
+      "merchantPayment": {
+        "description": "100% goes to agent's Stripe account",
+        "title": "Merchant Payment:"
+      },
+      "platformDeduction": {
+        "description": "Costs automatically deducted from agent's prepaid wallet",
+        "title": "Platform Deduction:"
+      }
+    },
+    "title": "Prepaid Wallet Business Model"
+  },
+  "currency": {
+    "description": "Platform currency for all transactions",
+    "description2": "All amounts are displayed in this currency",
+    "label": "Platform Currency",
+    "options": {
+      "aud": "AUD (Australian Dollar)",
+      "eur": "EUR (Euro)",
+      "gbp": "GBP (British Pound)",
+      "myr": "MYR (Malaysian Ringgit)",
+      "sgd": "SGD (Singapore Dollar)",
+      "usd": "USD (US Dollar)"
+    },
+    "title": "Currency Configuration"
+  },
+  "header": {
+    "subtitle": "Manage subscription fees, platform costs, and currency settings",
+    "title": "Platform Configuration"
+  },
+  "messages": {
+    "loadError": "Failed to load platform settings",
+    "updateError": "Failed to update settings",
+    "updateSuccess": "Platform settings updated successfully",
+    "validationError": "{field} must be a valid number"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "Per coupon for annual merchants",
+        "label": "Coupon Cost (Annual)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "Per coupon for temporary merchants",
+        "label": "Coupon Cost (Temporary)",
+        "placeholder": "0.05"
+      },
+      "title": "Coupon Generation"
+    },
+    "description": "Costs automatically deducted from agent's prepaid wallet per operation",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "Deducted when agent activates an annual merchant subscription",
+        "label": "Annual Merchant Platform Cost",
+        "placeholder": "299.00"
+      },
+      "title": "Merchant Activation"
+    },
+    "title": "Platform Costs (Prepaid Wallet Model)",
+    "whatsapp": {
+      "biCost": {
+        "description": "Per BI message",
+        "label": "WhatsApp BI Cost",
+        "placeholder": "0.45"
+      },
+      "title": "WhatsApp Messaging",
+      "uiAnnual": {
+        "description": "Per UI (annual)",
+        "label": "WhatsApp UI (Annual)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "Per UI (temp)",
+        "label": "WhatsApp UI (Temporary)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "What agents pay for annual platform access",
+      "label": "Agent Annual Subscription Fee",
+      "placeholder": "1499.00"
+    },
+    "description": "Annual subscription pricing for agents and merchants",
+    "merchantFee": {
+      "description": "What merchants pay for annual subscription",
+      "label": "Merchant Annual Subscription Fee",
+      "placeholder": "1499.00"
+    },
+    "required": "Required",
+    "title": "Subscription Fees"
+  }
+}

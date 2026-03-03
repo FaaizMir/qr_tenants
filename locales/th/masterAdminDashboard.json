@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "แดชบอร์ด"
+  },
+  "engagement": {
+    "activityPulse": "แพลตฟอร์มกิจกรรมพัลส์",
+    "description": "เมตริกการมีส่วนร่วมทั่วทั้งร้าน",
+    "redemptionRate": "อัตราการแลกเปลี่ยน",
+    "systemLoad": "โหลดระบบปกติ",
+    "title": "การมีส่วนร่วมทั่วโลก",
+    "totalFeedback": "ความคิดเห็นรวม"
+  },
+  "filters": {
+    "customRange": "ช่วงที่กำหนดเอง",
+    "last30Days": "30 วันที่ผ่านมา",
+    "last7Days": "7 วันที่ผ่านมา",
+    "lastMonth": "เดือนที่แล้ว",
+    "pickDate": "เลือกวันที่",
+    "selectRange": "เลือกช่วงเวลา",
+    "thisMonth": "เดือนนี้",
+    "today": "วันนี้",
+    "yesterday": "เมื่อวานนี้"
+  },
+  "financialCards": {
+    "agentSubscriptions": "การสมัครสมาชิกตัวแทน",
+    "merchantSubscriptions": "การสมัครสมาชิกผู้ค้า",
+    "packageCommissions": "ค่าคอมมิชชั่นแพ็คเกจ",
+    "totalPlatformRevenue": "รายได้รวมของแพลตฟอร์ม"
+  },
+  "growth": {
+    "customers": "+{count} ลูกค้า",
+    "description": "ข้อมูลการขยายแพลตฟอร์มล่าสุด",
+    "merchants": "+{count} ผู้ค้า",
+    "newCustomers": "การลงทะเบียนลูกค้าใหม่",
+    "newStores": "ร้านค้าใหม่ในช่วงนี้",
+    "title": "จุดเด่นการเติบโต"
+  },
+  "merchantTier": {
+    "annual": "รายปี",
+    "description": "อัตราส่วนการสมัครสมาชิกประจำปีต่อชั่วคราว",
+    "noData": "ไม่มีข้อมูลผู้ค้า",
+    "temp": "ชั่วคราว",
+    "title": "การกระจายระดับผู้ค้า",
+    "totalStores": "จำนวนร้านค้า"
+  },
+  "messages": {
+    "fetchError": "ไม่สามารถดึงแดชบอร์ดผู้ดูแลระบบหลักได้"
+  },
+  "overviewCards": {
+    "activeAgents": "ตัวแทนที่ใช้งานอยู่",
+    "activeMerchants": "ผู้ค้าที่ใช้งานอยู่",
+    "couponsIssued": "คูปองที่ออก",
+    "couponsRedeemed": "คูปองที่ใช้แล้ว",
+    "feedbackReceived": "ข้อเสนอแนะที่ได้รับ",
+    "totalAgents": "จำนวนตัวแทนทั้งหมด",
+    "totalCustomers": "จำนวนลูกค้าทั้งหมด",
+    "totalMerchants": "จำนวนผู้ค้า"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "การสมัครสมาชิกตัวแทน",
+    "description": "การแยกย่อยรายได้รวมของแพลตฟอร์ม",
+    "merchantSubscriptions": "การสมัครสมาชิกผู้ค้า",
+    "packageCommissions": "ค่าคอมมิชชั่นแพ็คเกจ",
+    "title": "กระแสรายได้"
+  },
+  "roles": {
+    "adApprover": "ผู้อนุมัติโฆษณา",
+    "financeViewer": "ผู้ดูแลการเงิน",
+    "superAdmin": "ผู้ดูแลระบบระดับสูง",
+    "supportStaff": "พนักงานสนับสนุน"
+  },
+  "sections": {
+    "financialPerformance": "ประสิทธิภาพทางการเงิน",
+    "generalOverview": "ภาพรวมทั่วไป",
+    "globalEngagement": "การมีส่วนร่วมระดับโลก",
+    "growthHighlights": "ไฮไลท์การเติบโต",
+    "revenueStreams": "แหล่งรายได้",
+    "roleDashboard": "แดชบอร์ด {role}",
+    "systemAnalytics": "การวิเคราะห์ระบบ"
+  },
+  "subtitle": "ภาพรวมของประสิทธิภาพและเมตริกของแพลตฟอร์ม",
+  "title": "แดชบอร์ดผู้ดูแลระบบหลัก",
+  "topMerchants": {
+    "description": "ร้านค้าที่มียอดขายและการมีส่วนร่วมสูงสุด ({total} รวม)",
+    "issued": "ที่ออก",
+    "noData": "ไม่มีข้อมูลประสิทธิภาพในช่วงเวลานี้",
+    "page": "หน้า {current} จาก {total}",
+    "redeemed": "ที่แลกแล้ว",
+    "showing": "แสดง {from} ถึง {to} จาก {total}",
+    "successRate": "อัตราความสำเร็จ {rate}%",
+    "title": "ผู้ค้าทำผลงานได้ดีที่สุด"
+  }
+}

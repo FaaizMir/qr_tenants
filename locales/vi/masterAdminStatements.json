@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "Tất cả các Báo cáo",
+    "masterAdminDashboard": "Bảng điều khiển quản trị viên chính"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "Tải xuống PDF",
+      "header": "Hành động"
+    },
+    "generatedAt": {
+      "header": "Được tạo vào"
+    },
+    "owner": {
+      "agent": "Đại lý",
+      "header": "Chủ sở hữu",
+      "merchant": "Người bán",
+      "superAdmin": "Quản trị viên siêu"
+    },
+    "period": {
+      "header": "Thời gian",
+      "unknown": "Không xác định"
+    },
+    "status": {
+      "failed": "Thất bại",
+      "generated": "Đã tạo",
+      "header": "Trạng thái",
+      "pending": "Đang chờ xử lý"
+    }
+  },
+  "filters": {
+    "description": "Lọc báo cáo theo năm và tháng",
+    "loading": "Đang tải...",
+    "month": "Tháng",
+    "quickActions": "Hành động nhanh",
+    "refreshList": "Làm mới danh sách",
+    "selectMonth": "Chọn tháng",
+    "selectYear": "Chọn năm",
+    "title": "Bộ lọc báo cáo",
+    "year": "Năm"
+  },
+  "header": {
+    "subtitle": "Xem và tải báo cáo hàng tháng cho thương nhân, đại lý và quản trị viên nền tảng.",
+    "title": "Tất cả các Báo cáo Tài chính"
+  },
+  "messages": {
+    "downloadError": "Tải xuống PDF không thành công. Vui lòng thử lại.",
+    "downloadSuccess": "Tải báo cáo thành công!",
+    "loadError": "Không thể tải báo cáo. Vui lòng thử lại."
+  },
+  "months": {
+    "april": "Tháng Tư",
+    "august": "Tháng Tám",
+    "december": "Tháng Mười Hai",
+    "february": "Tháng Hai",
+    "january": "Tháng Một",
+    "july": "Tháng Bảy",
+    "june": "Tháng Sáu",
+    "march": "Tháng Ba",
+    "may": "Tháng Năm",
+    "november": "Tháng Mười Một",
+    "october": "Tháng Mười",
+    "september": "Tháng Chín"
+  },
+  "summaryCards": {
+    "agents": "Đại lý",
+    "merchants": "Thương nhân",
+    "superAdmin": "Quản trị viên siêu cấp"
+  },
+  "table": {
+    "loading": "Đang tải báo cáo...",
+    "noData": {
+      "message": "Không có báo cáo nào cho khoảng thời gian đã chọn.",
+      "title": "Không tìm thấy báo cáo"
+    },
+    "tabs": {
+      "agents": "Đại lý ({count})",
+      "all": "Tất cả ({count})",
+      "merchants": "Người bán ({count})",
+      "superAdmin": "Quản trị viên siêu ({count})"
+    },
+    "title": "Lịch sử Báo cáo"
+  }
+}

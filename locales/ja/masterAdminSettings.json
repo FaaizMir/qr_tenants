@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "リセット",
+    "saveSettings": "設定を保存",
+    "saving": "保存中..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "マスター管理者ダッシュボード",
+    "platformSettings": "プラットフォーム設定"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "マーチャント支払い - プラットフォームコスト = エージェントの収益",
+        "title": "エージェントの利益:"
+      },
+      "merchantPayment": {
+        "description": "100% がエージェントのStripeアカウントに入ります",
+        "title": "マーチャント支払い:"
+      },
+      "platformDeduction": {
+        "description": "エージェントのプリペイドウォレットから自動的に差し引かれるコスト",
+        "title": "プラットフォーム差引:"
+      }
+    },
+    "title": "プリペイドウォレットビジネスモデル"
+  },
+  "currency": {
+    "description": "すべての取引のプラットフォーム通貨",
+    "description2": "すべての金額はこの通貨で表示されます",
+    "label": "プラットフォーム通貨",
+    "options": {
+      "aud": "AUD (オーストラリアドル)",
+      "eur": "EUR（ユーロ）",
+      "gbp": "GBP（イギリスポンド）",
+      "myr": "MYR (マレーシアリンギット)",
+      "sgd": "SGD (シンガポールドル)",
+      "usd": "USD (米ドル)"
+    },
+    "title": "通貨設定"
+  },
+  "header": {
+    "subtitle": "サブスクリプション料金、プラットフォームコスト、および通貨設定を管理",
+    "title": "プラットフォーム設定"
+  },
+  "messages": {
+    "loadError": "プラットフォーム設定の読み込みに失敗しました",
+    "updateError": "設定の更新に失敗しました",
+    "updateSuccess": "プラットフォーム設定が正常に更新されました",
+    "validationError": "{field} は有効な数値でなければなりません"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "年間商人ごとのクーポン",
+        "label": "クーポンコスト（年間）",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "一時的なマーチャントごとのクーポン",
+        "label": "クーポンコスト（仮）",
+        "placeholder": "0.05"
+      },
+      "title": "クーポン生成"
+    },
+    "description": "操作ごとにエージェントの前払いウォレットから自動的に差し引かれるコスト",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "エージェントが年間マーチャントサブスクリプションを有効化したときに差し引かれます",
+        "label": "年間マーチャントプラットフォームコスト",
+        "placeholder": "299.00"
+      },
+      "title": "マーチャントの有効化"
+    },
+    "title": "プラットフォームコスト（プリペイドウォレットモデル）",
+    "whatsapp": {
+      "biCost": {
+        "description": "BIメッセージごと",
+        "label": "WhatsApp BIコスト",
+        "placeholder": "0.45"
+      },
+      "title": "WhatsAppメッセージング",
+      "uiAnnual": {
+        "description": "UIごと（年間）",
+        "label": "WhatsApp UI（年間）",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "UIごと（仮）",
+        "label": "WhatsApp UI（仮）",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "エージェントが年間プラットフォームアクセスのために支払う金額",
+      "label": "エージェント年間サブスクリプション料金",
+      "placeholder": "1499.00"
+    },
+    "description": "エージェントと商人の年間サブスクリプション価格",
+    "merchantFee": {
+      "description": "マーチャントが年間サブスクリプションに支払う金額",
+      "label": "商人年間サブスクリプション料金",
+      "placeholder": "1499.00"
+    },
+    "required": "必須",
+    "title": "サブスクリプション料金"
+  }
+}

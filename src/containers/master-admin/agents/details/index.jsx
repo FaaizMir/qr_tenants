@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   User,
   Mail,
@@ -29,6 +30,9 @@ import axiosInstance from "@/lib/axios";
 import { cn } from "@/lib/utils";
 
 export default function AgentDetailContainer({ agentId }) {
+  const t = useTranslations("masterAdminAgents.details");
+  const tMessages = useTranslations("masterAdminAgents.messages");
+  const tStatus = useTranslations("masterAdminAgents.status");
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [agent, setAgent] = useState(null);
@@ -43,14 +47,14 @@ export default function AgentDetailContainer({ agentId }) {
         setAgent(data?.data || data);
       } catch (error) {
         console.error("Failed to fetch agent details:", error);
-        toast.error("Failed to load agent details");
+        toast.error(tMessages("fetchError"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchAgentDetails();
-  }, [agentId]);
+  }, [agentId, tMessages]);
 
   if (loading) {
     return (
@@ -63,9 +67,9 @@ export default function AgentDetailContainer({ agentId }) {
   if (!agent) {
     return (
       <div className="flex h-[400px] flex-col items-center justify-center space-y-4">
-        <p className="text-muted-foreground">Agent not found.</p>
+        <p className="text-muted-foreground">{t("notFound")}</p>
         <Button onClick={() => router.back()}>
-          <ArrowLeft className="mr-2 h-4 w-4" /> Go Back
+          <ArrowLeft className="mr-2 h-4 w-4" /> {t("goBack")}
         </Button>
       </div>
     );
@@ -96,7 +100,7 @@ export default function AgentDetailContainer({ agentId }) {
                 variant={status ? "default" : "destructive"}
                 className="capitalize"
               >
-                {status ? "Active" : "Inactive"}
+                {status ? tStatus("active") : tStatus("inactive")}
               </Badge>
             </div>
             <p className="text-muted-foreground mt-1 flex items-center gap-2">
@@ -109,7 +113,7 @@ export default function AgentDetailContainer({ agentId }) {
             variant="outline"
             onClick={() => router.push(`/master-admin/agents/edit/${agentId}`)}
           >
-            <Edit className="mr-2 h-4 w-4" /> Edit Agent
+            <Edit className="mr-2 h-4 w-4" /> {t("editAgent")}
           </Button>
         </div>
       </div>
@@ -120,14 +124,14 @@ export default function AgentDetailContainer({ agentId }) {
           <CardHeader>
             <CardTitle className="text-lg font-semibold flex items-center gap-2">
               <User className="h-5 w-5 text-primary" />
-              Account Information
+              {t("accountInformation.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
-                  Full Name
+                  {t("accountInformation.fullName")}
                 </p>
                 <p className="text-base font-semibold">
                   {user.name || agent.name || "—"}
@@ -135,7 +139,7 @@ export default function AgentDetailContainer({ agentId }) {
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
-                  Email Address
+                  {t("accountInformation.emailAddress")}
                 </p>
                 <p className="text-base font-semibold">
                   {user.email || agent.email || "—"}
@@ -143,7 +147,7 @@ export default function AgentDetailContainer({ agentId }) {
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
-                  Phone Number
+                  {t("accountInformation.phoneNumber")}
                 </p>
                 <p className="text-base font-semibold flex items-center gap-2">
                   <Phone className="h-4 w-4 text-muted-foreground" />
@@ -153,7 +157,7 @@ export default function AgentDetailContainer({ agentId }) {
 
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
-                  Member Since
+                  {t("accountInformation.memberSince")}
                 </p>
                 <p className="text-base font-semibold flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -173,12 +177,12 @@ export default function AgentDetailContainer({ agentId }) {
             <div className="space-y-4">
               <h3 className="text-sm font-semibold flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-orange-500" />
-                Location Details
+                {t("locationDetails.title")}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1 md:col-span-2">
                   <p className="text-sm font-medium text-muted-foreground">
-                    Full Address
+                    {t("locationDetails.fullAddress")}
                   </p>
                   <p className="text-base font-semibold">
                     {agent.address || "—"}
@@ -186,13 +190,13 @@ export default function AgentDetailContainer({ agentId }) {
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm font-medium text-muted-foreground">
-                    City
+                    {t("locationDetails.city")}
                   </p>
                   <p className="text-base font-semibold">{agent.city || "—"}</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm font-medium text-muted-foreground">
-                    Country
+                    {t("locationDetails.country")}
                   </p>
                   <p className="text-base font-semibold">
                     {agent.country || "—"}
@@ -209,19 +213,19 @@ export default function AgentDetailContainer({ agentId }) {
             <CardHeader>
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-primary" />
-                Access Control
+                {t("accessControl.title")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
                 <div className="space-y-0.5">
-                  <p className="text-sm font-medium">Status</p>
+                  <p className="text-sm font-medium">{t("accessControl.status")}</p>
                   <p className="text-xs text-muted-foreground">
-                    Current account validity
+                    {t("accessControl.statusDescription")}
                   </p>
                 </div>
                 <Badge variant={status ? "default" : "destructive"}>
-                  {status ? "Active" : "Inactive"}
+                  {status ? tStatus("active") : tStatus("inactive")}
                 </Badge>
               </div>
          

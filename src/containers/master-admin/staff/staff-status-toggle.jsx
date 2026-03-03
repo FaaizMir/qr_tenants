@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 
 export function StaffStatusToggle({ staff }) {
+    const t = useTranslations("masterAdminStaff");
     const [isActive, setIsActive] = useState(staff.is_active);
     const [loading, setLoading] = useState(false);
 
@@ -32,12 +34,12 @@ export function StaffStatusToggle({ staff }) {
             });
             setIsActive(checked);
             toast.success(
-                `Staff account ${checked ? "enabled" : "disabled"} successfully.`,
+                checked ? t("statusToggle.enableSuccess") : t("statusToggle.disableSuccess")
             );
         } catch (error) {
             console.error("Failed to update staff status:", error);
             toast.error(
-                error?.response?.data?.message || "Failed to update staff status.",
+                error?.response?.data?.message || t("statusToggle.updateError")
             );
         } finally {
             setLoading(false);
@@ -52,7 +54,7 @@ export function StaffStatusToggle({ staff }) {
                 disabled={loading}
             />
             <span className="text-sm capitalize text-muted-foreground w-[60px]">
-                {isActive ? "Active" : "Inactive"}
+                {isActive ? t("status.active") : t("status.inactive")}
             </span>
         </div>
     );

@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "حذف",
+    "details": "التفاصيل",
+    "edit": "تعديل",
+    "menuLabel": "خيارات الوكيل"
+  },
+  "breadcrumb": {
+    "agentDetails": "تفاصيل الوكيل",
+    "agents": "الوكلاء",
+    "createAgent": "إنشاء وكيل",
+    "editAgent": "تعديل الوكيل",
+    "masterAdminDashboard": "لوحة تحكم المسؤول الرئيسي"
+  },
+  "columns": {
+    "actions": "إجراءات",
+    "agentAccount": "حساب الوكيل",
+    "location": "الموقع",
+    "phone": "الهاتف",
+    "status": "الحالة"
+  },
+  "create": {
+    "subtitle": "إنشاء حساب وكيل جديد وتكوين وصوله وأذوناته.",
+    "title": "توظيف وكيل جديد"
+  },
+  "delete": {
+    "cancel": "إلغاء",
+    "confirm": "حذف الوكيل",
+    "deleting": "جاري الحذف...",
+    "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي ذلك إلى حذف الوكيل بشكل دائم",
+    "descriptionEnd": " وإزالة بياناتهم من خوادمنا.",
+    "descriptionName": " {name}",
+    "error": "فشل في حذف الوكيل",
+    "success": "تم حذف الوكيل بنجاح",
+    "title": "هل أنت متأكد تمامًا؟"
+  },
+  "details": {
+    "accessControl": {
+      "status": "الحالة",
+      "statusDescription": "صلاحية الحساب الحالي",
+      "title": "تحكم الوصول"
+    },
+    "accountInformation": {
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "fullName": "الاسم الكامل",
+      "memberSince": "عضو منذ",
+      "phoneNumber": "رقم الهاتف",
+      "title": "معلومات الحساب"
+    },
+    "editAgent": "تعديل الوكيل",
+    "goBack": "العودة",
+    "loading": "جارٍ تحميل تفاصيل الوكيل...",
+    "locationDetails": {
+      "city": "المدينة",
+      "country": "البلد",
+      "fullAddress": "العنوان الكامل",
+      "title": "تفاصيل الموقع"
+    },
+    "notFound": "لم يتم العثور على الوكيل."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "نشط",
+      "activeDescription": "عند التعطيل، لا يمكن للوكيل تسجيل الدخول أو إدارة التجار.",
+      "activeLabel": "الحالة النشطة",
+      "description": "التحكم في وصول الوكيل إلى النظام.",
+      "inactive": "غير نشط",
+      "title": "حالة الحساب"
+    },
+    "agentDetails": {
+      "descriptionCreate": "أدخل التفاصيل الشخصية للوكيل الجديد.",
+      "descriptionEdit": "تحديث معلومات الوكيل الشخصية وتسجيل الدخول.",
+      "title": "تفاصيل الوكيل"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "createAgent": "إنشاء وكيل",
+      "creating": "جارٍ الإنشاء...",
+      "hideKey": "إخفاء المفتاح",
+      "hidePassword": "إخفاء كلمة المرور",
+      "showKey": "عرض المفتاح",
+      "showPassword": "عرض كلمة المرور",
+      "updateAgent": "تحديث الوكيل",
+      "updating": "جارٍ التحديث..."
+    },
+    "fields": {
+      "city": "المدينة",
+      "country": "البلد",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "fullName": "الاسم الكامل",
+      "newPassword": "كلمة مرور جديدة (اتركها فارغة للاحتفاظ بالحالية)",
+      "password": "كلمة المرور",
+      "phoneNumber": "رقم الهاتف",
+      "searchAddress": "بحث عن عنوان",
+      "stripeSecretKey": "مفتاح سري من Stripe (اختياري)"
+    },
+    "hints": {
+      "passwordRequirements": "الحد الأدنى 8 أحرف، أبجدي رقمي.",
+      "stripeKeyCreate": "قم بتكوين مفتاح API الخاص بـ Stripe لاستلام مدفوعات التجار. يمكن تعيينه لاحقًا في إعدادات الوكيل.",
+      "stripeKeyEdit": "تحديث مفتاح API الخاص بـ Stripe للوكيل. اتركه فارغًا للاحتفاظ بالتكوين الحالي."
+    },
+    "locationDetails": {
+      "description": "معلومات العنوان للوكيل.",
+      "title": "تفاصيل الموقع"
+    },
+    "placeholders": {
+      "address": "123 شارع الوكيل، المدينة، الدولة",
+      "city": "المدينة",
+      "country": "البلد",
+      "email": "agent@example.com",
+      "name": "مثل: جون دو",
+      "passwordCreate": "أدخل كلمة مرور آمنة",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (اتركه فارغًا للاحتفاظ بالوضع الحالي)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (اتركه فارغًا للاحتفاظ بالحالية)",
+      "stripeKeyNew": "sk_test_... أو sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "إضافة وكيل",
+    "searchPlaceholder": "البحث عن الوكلاء..."
+  },
+  "messages": {
+    "addressSelected": "العنوان المحدد",
+    "checkInput": "يرجى التحقق من إدخالك والمحاولة مرة أخرى.",
+    "createError": "فشل في إنشاء الوكيل",
+    "createSuccess": "تم إنشاء حساب الوكيل بنجاح.",
+    "fetchError": "فشل في تحميل تفاصيل الوكيل",
+    "loadError": "فشل في تحميل المسؤولين",
+    "updateError": "فشل في تحديث الوكيل",
+    "updateSuccess": "تم تحديث ملف الوكيل بنجاح.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "فشل التحقق"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "statusToggle": {
+    "activateSuccess": "تم تفعيل الوكيل بنجاح",
+    "deactivateSuccess": "تم تعطيل الوكيل بنجاح",
+    "updateError": "فشل في تحديث حالة الوكيل"
+  },
+  "subtitle": "إدارة وكلائك وحساباتهم.",
+  "title": "إدارة الوكلاء"
+}

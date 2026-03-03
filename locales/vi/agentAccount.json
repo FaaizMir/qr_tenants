@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "Cập nhật thông tin tài khoản của bạn",
+    "title": "Chi tiết tài khoản"
+  },
+  "breadcrumb": {
+    "account": "Tài khoản",
+    "dashboard": "Bảng điều khiển"
+  },
+  "buttons": {
+    "saveChanges": "Lưu thay đổi",
+    "saving": "Đang lưu..."
+  },
+  "fields": {
+    "address": "Địa chỉ",
+    "city": "Thành phố",
+    "country": "Quốc gia",
+    "email": "Email",
+    "fullName": "Họ và tên",
+    "phone": "Điện thoại",
+    "stripeSecretKey": "Khóa bí mật Stripe"
+  },
+  "hints": {
+    "stripeKeyMasked": "Khóa hiện tại được ẩn để bảo mật. Nhập khóa mới để cập nhật."
+  },
+  "messages": {
+    "fetchError": "Không thể tải thông tin tài khoản",
+    "updateError": "Cập nhật tài khoản không thành công",
+    "updateSuccess": "Tài khoản đã được cập nhật thành công",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "Bắt đầu gõ địa chỉ...",
+    "city": "Nhập thành phố của bạn",
+    "country": "Nhập quốc gia của bạn",
+    "email": "Nhập email của bạn",
+    "name": "Nhập tên của bạn",
+    "phone": "Nhập số điện thoại của bạn",
+    "stripeKeyExisting": "{maskedKey} (để trống để giữ nguyên)",
+    "stripeKeyNew": "sk_test_... hoặc sk_live_..."
+  },
+  "profile": {
+    "description": "Thông tin hồ sơ của bạn",
+    "noStripeKey": "Không có khóa Stripe",
+    "stripeConnected": "Đã kết nối Stripe",
+    "title": "Hồ sơ"
+  },
+  "subtitle": "Quản lý thông tin tài khoản của bạn",
+  "title": "Cài đặt tài khoản"
+}

@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "อัปเดตข้อมูลบัญชีของคุณ",
+    "title": "รายละเอียดบัญชี"
+  },
+  "breadcrumbs": {
+    "account": "บัญชี",
+    "dashboard": "แดชบอร์ด"
+  },
+  "buttons": {
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "saving": "กำลังบันทึก..."
+  },
+  "fields": {
+    "email": "อีเมล",
+    "fullName": "ชื่อเต็ม",
+    "phone": "โทรศัพท์",
+    "role": "บทบาท"
+  },
+  "messages": {
+    "fetchError": "ไม่สามารถโหลดข้อมูลบัญชีได้",
+    "updateError": "ไม่สามารถอัปเดตบัญชีได้",
+    "updateSuccess": "อัปเดตบัญชีเรียบร้อยแล้ว",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "กรุณาใส่อีเมลของคุณ",
+    "name": "กรุณาใส่ชื่อของคุณ",
+    "phone": "กรุณาใส่หมายเลขโทรศัพท์ของคุณ"
+  },
+  "profile": {
+    "description": "ข้อมูลโปรไฟล์ของคุณ",
+    "title": "โปรไฟล์"
+  },
+  "subtitle": "จัดการข้อมูลบัญชีของคุณ",
+  "title": "การตั้งค่าบัญชี"
+}

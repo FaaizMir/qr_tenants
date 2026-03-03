@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "Quản lý quảng cáo",
+    "financeOnly": "Chỉ tài chính",
+    "fullAccess": "Quyền Truy Cập Đầy Đủ",
+    "readOnly": "Chỉ Đọc",
+    "supportHelp": "Trợ giúp hỗ trợ"
+  },
+  "actions": {
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "menuLabel": "Tùy chọn nhân viên"
+  },
+  "breadcrumb": {
+    "addStaff": "Thêm Nhân Viên",
+    "editStaff": "Chỉnh sửa Nhân viên",
+    "masterAdminDashboard": "Bảng điều khiển Quản trị viên Chính",
+    "staffManagement": "Quản lý nhân viên"
+  },
+  "columns": {
+    "access": "Truy cập",
+    "actions": "Hành động",
+    "phone": "Điện thoại",
+    "role": "Vai trò",
+    "staffMember": "Nhân Viên",
+    "status": "Trạng thái"
+  },
+  "delete": {
+    "cancel": "Hủy",
+    "confirm": "Xóa vĩnh viễn",
+    "deleting": "Đang xóa...",
+    "description": "Bạn có chắc chắn muốn xóa không",
+    "descriptionEnd": "? Hành động này không thể hoàn tác.",
+    "descriptionPermanent": "? Điều này sẽ vĩnh viễn thu hồi quyền truy cập của họ vào nền tảng.",
+    "error": "Xóa nhân viên không thành công.",
+    "success": "Thành viên nhân viên đã được xóa thành công.",
+    "title": "Xóa thành viên nhân viên?",
+    "unknownRole": "Vai trò không xác định"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "Kiểm soát xem tài khoản này có hoạt động hay không.",
+      "disabled": "Tài Khoản Đã Bị Vô Hiệu Hóa",
+      "disabledDescription": "Quyền truy cập của nhân viên hiện đang bị thu hồi.",
+      "enabled": "Tài khoản đã được kích hoạt",
+      "enabledDescription": "Nhân viên có thể đăng nhập và quản lý nền tảng.",
+      "title": "Khả năng hiển thị tài khoản"
+    },
+    "buttons": {
+      "cancel": "Hủy",
+      "createAccount": "Tạo tài khoản",
+      "savingChanges": "Đang lưu thay đổi",
+      "updateProfile": "Cập Nhật Hồ Sơ"
+    },
+    "createSubtitle": "Gán vai trò và quyền truy cập mới.",
+    "createTitle": "Tạo tài khoản nhân viên mới",
+    "editSubtitle": "Chỉnh sửa quyền quản trị hiện có.",
+    "editTitle": "Chỉnh sửa tài khoản nhân viên",
+    "fields": {
+      "accountPassword": "Mật khẩu Tài Khoản",
+      "emailAddress": "Địa chỉ email",
+      "fullName": "Họ và tên",
+      "phoneNumber": "Số điện thoại",
+      "systemRole": "Vai Trò Hệ Thống",
+      "updatePassword": "Cập Nhật Mật Khẩu (Tùy Chọn)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* Để trống để giữ mật khẩu hiện tại."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "vd. Robert Fox",
+      "passwordCreate": "Nhập mật khẩu an toàn",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "Thông tin chi tiết cần thiết và thông tin liên hệ.",
+      "title": "Thông tin nhân viên"
+    },
+    "validation": {
+      "emailRequired": "Email là bắt buộc",
+      "nameRequired": "Họ tên là bắt buộc",
+      "passwordMinLength": "Cần tối thiểu 8 ký tự",
+      "passwordRequired": "Mật khẩu là bắt buộc",
+      "phoneRequired": "Số điện thoại là bắt buộc",
+      "roleRequired": "Vai trò là bắt buộc"
+    }
+  },
+  "listing": {
+    "addStaff": "Thêm Nhân Viên",
+    "clearSearch": "Xóa tìm kiếm",
+    "noStaffDescription": "Hãy thử điều chỉnh tìm kiếm của bạn hoặc thêm một nhân viên mới.",
+    "noStaffFound": "Không tìm thấy nhân viên",
+    "refresh": "Làm Mới",
+    "searchPlaceholder": "Tìm kiếm nhân viên..."
+  },
+  "messages": {
+    "createError": "Không thể lưu thành viên nhân viên.",
+    "createSuccess": "Tài khoản nhân viên đã được tạo thành công.",
+    "fetchError": "Tải dữ liệu nhân viên không thành công.",
+    "fetchStaffError": "Không thể lấy thông tin nhân viên",
+    "updateSuccess": "Hồ sơ nhân viên đã được cập nhật thành công."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "Xem xét quảng cáo",
+      "title": "Người phê duyệt quảng cáo"
+    },
+    "financeViewer": {
+      "description": "Sổ cái & Báo cáo",
+      "title": "Người xem Tài chính"
+    },
+    "role": "Vai trò",
+    "superAdmin": {
+      "description": "Quyền truy cập đầy đủ",
+      "title": "Quản trị viên siêu cấp"
+    },
+    "supportStaff": {
+      "description": "Vé & Phản hồi",
+      "title": "Nhân viên hỗ trợ"
+    }
+  },
+  "roles": {
+    "adApprover": "Người phê duyệt quảng cáo",
+    "admin": "Quản trị viên",
+    "financeViewer": "Người xem tài chính",
+    "superAdmin": "Quản trị viên siêu",
+    "supportStaff": "Nhân viên hỗ trợ"
+  },
+  "status": {
+    "active": "Hoạt Động",
+    "inactive": "Không hoạt động"
+  },
+  "statusToggle": {
+    "disableSuccess": "Tài khoản nhân viên đã bị vô hiệu hóa thành công.",
+    "enableSuccess": "Tài khoản nhân viên đã được kích hoạt thành công.",
+    "updateError": "Cập nhật trạng thái nhân viên không thành công."
+  },
+  "subtitle": "Quản lý vai trò và quyền hạn quản trị nền tảng.",
+  "title": "Quản lý Nhân viên"
+}

@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "Tạo Gói",
+    "editPackage": "Chỉnh sửa gói",
+    "masterAdminDashboard": "Bảng điều khiển Quản trị viên Chính",
+    "packages": "Các gói"
+  },
+  "columns": {
+    "actions": "Hành động",
+    "active": "Hoạt động",
+    "credits": "Tín dụng",
+    "deleteAction": "Xóa Gói",
+    "editAction": "Chỉnh sửa gói",
+    "inactive": "Không hoạt động",
+    "menuLabel": "Hành động gói",
+    "noDescription": "Không có mô tả",
+    "packageInfo": "Thông tin gói",
+    "perCredit": "mỗi tín dụng",
+    "plan": "Kế hoạch",
+    "pricing": "Giá cả",
+    "rank": "Xếp hạng",
+    "status": "Trạng thái",
+    "type": "Loại"
+  },
+  "deleteDialog": {
+    "cancel": "Hủy bỏ xóa",
+    "confirm": "Đã xác nhận, xóa ngay",
+    "description": "Bạn sắp xóa vĩnh viễn {name}. Hành động này là cuối cùng và không thể được đảo ngược bởi bất kỳ ai.",
+    "title": "Cảnh giác cao độ"
+  },
+  "form": {
+    "backButton": "Quay lại danh sách",
+    "buttons": {
+      "cancel": "Hủy",
+      "delete": "Xóa gói",
+      "save": "Xuất bản Gói",
+      "saving": "Đang lưu...",
+      "update": "Cập Nhật Gói"
+    },
+    "createTitle": "Tạo Gói Mới",
+    "deleteDialog": {
+      "cancel": "Hủy",
+      "confirm": "Có, xóa gói",
+      "description": "Điều này sẽ xóa {name} vĩnh viễn. Hành động này không thể hoàn tác.",
+      "title": "Bạn có chắc chắn không?"
+    },
+    "editTitle": "Chỉnh sửa gói tín dụng",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "Loại tín dụng",
+      "currency": "Tiền tệ",
+      "customCreditType": "Chỉ định loại tín dụng tùy chỉnh",
+      "customCreditTypePlaceholder": "ví dụ: Đặc biệt sinh nhật",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Tóm tắt ngắn gọn về những gì gói này cung cấp...",
+      "displayPriority": "Ưu tiên hiển thị",
+      "displayPriorityPlaceholder": "Vị trí trong danh sách (1, 2, 3...)",
+      "merchantPlan": "Kế hoạch thương nhân",
+      "packageName": "Tên gói",
+      "packageNamePlaceholder": "Ví dụ: Gói Tăng Trưởng Cao Cấp",
+      "packageStatus": "Trạng thái gói",
+      "price": "Giá",
+      "pricePerCredit": "Giá mỗi tín dụng",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "Tổng tín dụng"
+    },
+    "hints": {
+      "autoCalculated": "TỰ ĐỘNG"
+    },
+    "messages": {
+      "createError": "Không thể tạo gói",
+      "createSuccess": "Gói đã được tạo thành công",
+      "deleteError": "Xóa gói không thành công",
+      "deleteSuccess": "Gói đã được xóa thành công",
+      "fetchError": "Không thể tải chi tiết gói",
+      "paidAdsRestriction": "Các gói quảng cáo trả phí chỉ có thể được quản lý bởi các đại lý",
+      "updateError": "Cập nhật gói không thành công",
+      "updateSuccess": "Gói đã được cập nhật thành công"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "Mã giảm giá",
+        "custom": "Tùy chỉnh",
+        "whatsappBI": "Tin nhắn WhatsApp BI",
+        "whatsappUI": "Tin nhắn Giao diện WhatsApp"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "Hàng năm / Cao cấp",
+        "temporary": "Tạm thời / Cơ bản"
+      },
+      "status": {
+        "active": "Hoạt động & Hiển thị",
+        "inactive": "Không hoạt động / Ẩn"
+      }
+    },
+    "preview": {
+      "baseCredits": "Tín dụng Cơ bản",
+      "categories": {
+        "coupon": "Mã giảm giá",
+        "paidAds": "Quảng cáo trả phí",
+        "standard": "Tiêu chuẩn",
+        "whatsapp": "Tin nhắn Whatsapp"
+      },
+      "enhancedFeatures": "Các tính năng và khả năng nâng cao",
+      "getStarted": "Bắt đầu",
+      "hiddenDraft": "ẨN / NHÁP",
+      "title": "Xem trước trực tiếp"
+    },
+    "sections": {
+      "classification": "Phân loại",
+      "credits": "Tín dụng & Phân bổ",
+      "identity": "Danh tính & Giá cả"
+    },
+    "subtitle": "Định nghĩa giá cả và giới hạn tín dụng cho các thương nhân.",
+    "validation": {
+      "creditsMin": "Tín dụng phải ít nhất là 1",
+      "creditsRequired": "Tín dụng là bắt buộc",
+      "customTypeRequired": "Loại tín dụng tùy chỉnh là bắt buộc",
+      "descriptionRequired": "Mô tả là bắt buộc",
+      "nameRequired": "Tên gói là bắt buộc",
+      "priceMin": "Giá phải ít nhất là 1",
+      "priceRequired": "Giá là bắt buộc"
+    }
+  },
+  "listing": {
+    "createButton": "Tạo Gói Mới",
+    "noPackages": "Không tìm thấy gói nào",
+    "noPackagesDescription": "Tạo gói đầu tiên của bạn để bắt đầu",
+    "searchPlaceholder": "Tìm kiếm theo tên gói, loại tín dụng..."
+  },
+  "messages": {
+    "deleteError": "Xóa gói không thành công",
+    "deleteSuccess": "Gói đã được xóa thành công",
+    "fetchError": "Không thể lấy gói"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "Tự động khấu trừ đã được kích hoạt",
+    "badge": "Tiêu chuẩn Nền tảng",
+    "billingCycle": "Chu kỳ thanh toán",
+    "billingCycleValue": "365 Ngày Tự Động Gia Hạn",
+    "dialog": {
+      "cancelButton": "Hủy",
+      "confirmButton": "Xác nhận & Cập nhật",
+      "description": "Đặt mức phí thành viên hàng năm mới cho tất cả các đại lý trên nền tảng. Thay đổi có hiệu lực ngay lập tức cho các lần gia hạn mới.",
+      "label": "Phí hàng năm mới",
+      "placeholder": "0.00",
+      "title": "Cập nhật phí đăng ký",
+      "updatingButton": "Đang cập nhật...",
+      "warning": "Cẩn thận: Thay đổi giá mạnh có thể ảnh hưởng đến việc giữ chân đại lý. Các thay đổi sẽ được ghi lại trong kiểm toán hệ thống."
+    },
+    "globalCurrency": "Tiền tệ toàn cầu",
+    "insightDescription": "Việc điều chỉnh phí đăng ký ảnh hưởng đến khả năng truy cập nền tảng cho các đại lý mới. Đảm bảo giá cả vẫn cạnh tranh trong khi duy trì chất lượng nền tảng.",
+    "insightTitle": "Trí tuệ doanh thu",
+    "messages": {
+      "fetchError": "Không thể lấy phí đăng ký",
+      "updateError": "Không thể cập nhật phí",
+      "updateSuccess": "Phí đăng ký đã được cập nhật thành công",
+      "validationError": "Vui lòng nhập một số tiền hợp lệ"
+    },
+    "perYear": "/ Cố định mỗi năm",
+    "status": "Trạng thái",
+    "statusValue": "Kế hoạch hoạt động",
+    "syncButton": "Đồng bộ Dữ liệu",
+    "title": "Thành viên hàng năm của đại lý",
+    "updateButton": "Cập nhật cấu trúc giá"
+  },
+  "subtitle": "Quản lý và theo dõi tất cả các gói tín dụng của thương nhân",
+  "title": "Các gói"
+}

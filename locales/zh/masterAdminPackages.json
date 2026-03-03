@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "创建套餐",
+    "editPackage": "编辑套餐",
+    "masterAdminDashboard": "主管理员仪表板",
+    "packages": "包裹"
+  },
+  "columns": {
+    "actions": "操作",
+    "active": "活跃",
+    "credits": "积分",
+    "deleteAction": "删除包",
+    "editAction": "编辑软件包",
+    "inactive": "非活动",
+    "menuLabel": "软件包操作",
+    "noDescription": "无描述",
+    "packageInfo": "软件包信息",
+    "perCredit": "每个信用",
+    "plan": "计划",
+    "pricing": "定价",
+    "rank": "排名",
+    "status": "状态",
+    "type": "类型"
+  },
+  "deleteDialog": {
+    "cancel": "中止删除",
+    "confirm": "确认，立即删除",
+    "description": "您即将永久删除 {name}。此操作是不可逆的，任何人都无法恢复。",
+    "title": "极度谨慎"
+  },
+  "form": {
+    "backButton": "返回列表",
+    "buttons": {
+      "cancel": "取消",
+      "delete": "删除套餐",
+      "save": "发布包",
+      "saving": "保存中...",
+      "update": "更新包"
+    },
+    "createTitle": "创建新包",
+    "deleteDialog": {
+      "cancel": "取消",
+      "confirm": "是的，删除套餐",
+      "description": "这将永久删除{name}。此操作无法撤消。",
+      "title": "您确定吗？"
+    },
+    "editTitle": "编辑积分软件包",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "信用类型",
+      "currency": "货币",
+      "customCreditType": "指定自定义信用类型",
+      "customCreditTypePlaceholder": "例如：生日特惠",
+      "description": "描述",
+      "descriptionPlaceholder": "此包裹提供的简短摘要...",
+      "displayPriority": "显示优先级",
+      "displayPriorityPlaceholder": "列表中的位置（1, 2, 3...）",
+      "merchantPlan": "商户计划",
+      "packageName": "套餐名称",
+      "packageNamePlaceholder": "例如：高级增长套餐",
+      "packageStatus": "套餐状态",
+      "price": "价格",
+      "pricePerCredit": "每个积分的价格",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "总积分"
+    },
+    "hints": {
+      "autoCalculated": "自动"
+    },
+    "messages": {
+      "createError": "创建软件包失败",
+      "createSuccess": "包已成功创建",
+      "deleteError": "删除包裹失败",
+      "deleteSuccess": "包已成功删除",
+      "fetchError": "加载软件包详细信息失败",
+      "paidAdsRestriction": "付费广告套餐只能由代理管理",
+      "updateError": "更新包裹失败",
+      "updateSuccess": "套餐更新成功"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "优惠券",
+        "custom": "自定义",
+        "whatsappBI": "WhatsApp BI 消息",
+        "whatsappUI": "WhatsApp UI 消息"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "美元 ($)"
+      },
+      "merchantType": {
+        "annual": "年度/高级",
+        "temporary": "临时 / 基本"
+      },
+      "status": {
+        "active": "活跃且可见",
+        "inactive": "不活跃 / 隐藏"
+      }
+    },
+    "preview": {
+      "baseCredits": "基础积分",
+      "categories": {
+        "coupon": "优惠券",
+        "paidAds": "付费广告",
+        "standard": "标准",
+        "whatsapp": "Whatsapp消息"
+      },
+      "enhancedFeatures": "增强的功能和容量",
+      "getStarted": "开始使用",
+      "hiddenDraft": "隐藏 / 草稿",
+      "title": "实时预览"
+    },
+    "sections": {
+      "classification": "分类",
+      "credits": "积分与分配",
+      "identity": "身份与定价"
+    },
+    "subtitle": "为商家定义定价和信用限额。",
+    "validation": {
+      "creditsMin": "积分必须至少为 1",
+      "creditsRequired": "需要积分",
+      "customTypeRequired": "需要自定义信用类型",
+      "descriptionRequired": "描述是必需的",
+      "nameRequired": "套餐名称是必需的",
+      "priceMin": "价格必须至少为1",
+      "priceRequired": "价格是必需的"
+    }
+  },
+  "listing": {
+    "createButton": "创建新包",
+    "noPackages": "未找到包裹",
+    "noPackagesDescription": "创建您的第一个套餐以开始",
+    "searchPlaceholder": "按包裹名称、信用类型搜索..."
+  },
+  "messages": {
+    "deleteError": "删除包裹失败",
+    "deleteSuccess": "套餐删除成功",
+    "fetchError": "获取软件包失败"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "自动扣除已启用",
+    "badge": "平台标准",
+    "billingCycle": "账单周期",
+    "billingCycleValue": "365天循环",
+    "dialog": {
+      "cancelButton": "取消",
+      "confirmButton": "确认并更新",
+      "description": "为平台上所有代理设置新的年度会员费。更改将立即对新的续订生效。",
+      "label": "新的年度费用",
+      "placeholder": "0.00",
+      "title": "更新订阅费用",
+      "updatingButton": "正在更新...",
+      "warning": "注意：剧烈的价格变化可能会影响代理的留存。更改将记录在系统审计中。"
+    },
+    "globalCurrency": "全球货币",
+    "insightDescription": "调整订阅费用会影响新代理的平台注册访问。确保定价在保持平台质量的同时保持竞争力。",
+    "insightTitle": "收入智能",
+    "messages": {
+      "fetchError": "获取订阅费用失败",
+      "updateError": "更新费用失败",
+      "updateSuccess": "订阅费用更新成功",
+      "validationError": "请输入有效金额"
+    },
+    "perYear": "/ 每年固定",
+    "status": "状态",
+    "statusValue": "有效计划",
+    "syncButton": "同步数据",
+    "title": "代理年会员",
+    "updateButton": "更新定价结构"
+  },
+  "subtitle": "管理和监控所有商户信用包",
+  "title": "套餐"
+}

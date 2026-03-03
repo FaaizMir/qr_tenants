@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "Update your account information",
+    "title": "Account Details"
+  },
+  "breadcrumbs": {
+    "account": "Account",
+    "dashboard": "Dashboard"
+  },
+  "buttons": {
+    "saveChanges": "Save Changes",
+    "saving": "Saving..."
+  },
+  "fields": {
+    "email": "Email",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "role": "Role"
+  },
+  "messages": {
+    "fetchError": "Failed to load account information",
+    "updateError": "Failed to update account",
+    "updateSuccess": "Account updated successfully",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "Enter your email",
+    "name": "Enter your name",
+    "phone": "Enter your phone"
+  },
+  "profile": {
+    "description": "Your profile information",
+    "title": "Profile"
+  },
+  "subtitle": "Manage your account information",
+  "title": "Account Settings"
+}

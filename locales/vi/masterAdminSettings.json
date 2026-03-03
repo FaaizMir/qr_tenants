@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "reset": "Đặt lại",
+    "saveSettings": "Lưu cài đặt",
+    "saving": "Đang lưu..."
+  },
+  "breadcrumbs": {
+    "masterAdminDashboard": "Bảng điều khiển quản trị viên chính",
+    "platformSettings": "Cài đặt nền tảng"
+  },
+  "businessModel": {
+    "steps": {
+      "agentProfit": {
+        "description": "Thanh toán của thương nhân - Chi phí nền tảng = Thu nhập của đại lý",
+        "title": "Lợi nhuận của đại lý:"
+      },
+      "merchantPayment": {
+        "description": "100% vào tài khoản Stripe của đại lý",
+        "title": "Thanh toán của thương nhân:"
+      },
+      "platformDeduction": {
+        "description": "Chi phí tự động trừ từ ví trả trước của đại lý",
+        "title": "Trừ trên nền tảng:"
+      }
+    },
+    "title": "Mô hình kinh doanh ví trả trước"
+  },
+  "currency": {
+    "description": "Tiền tệ nền tảng cho tất cả các giao dịch",
+    "description2": "Tất cả các khoản tiền đều được hiển thị bằng loại tiền tệ này",
+    "label": "Tiền tệ nền tảng",
+    "options": {
+      "aud": "AUD (Đô la Úc)",
+      "eur": "EUR (Euro)",
+      "gbp": "GBP (Bảng Anh)",
+      "myr": "MYR (Ringgit Malaysia)",
+      "sgd": "SGD (Đô la Singapore)",
+      "usd": "USD (Đô la Mỹ)"
+    },
+    "title": "Cấu hình tiền tệ"
+  },
+  "header": {
+    "subtitle": "Quản lý phí đăng ký, chi phí nền tảng và cài đặt tiền tệ",
+    "title": "Cấu hình nền tảng"
+  },
+  "messages": {
+    "loadError": "Không thể tải cài đặt nền tảng",
+    "updateError": "Cập nhật cài đặt không thành công",
+    "updateSuccess": "Cài đặt nền tảng đã được cập nhật thành công",
+    "validationError": "{field} phải là một số hợp lệ"
+  },
+  "platformCosts": {
+    "coupon": {
+      "annual": {
+        "description": "Mỗi phiếu cho các thương nhân hàng năm",
+        "label": "Chi phí phiếu giảm giá (Hàng năm)",
+        "placeholder": "0.05"
+      },
+      "temporary": {
+        "description": "Mỗi mã giảm giá cho các thương nhân tạm thời",
+        "label": "Chi phí phiếu (Tạm thời)",
+        "placeholder": "0.05"
+      },
+      "title": "Tạo mã giảm giá"
+    },
+    "description": "Chi phí tự động trừ từ ví trả trước của đại lý cho mỗi giao dịch",
+    "merchantActivation": {
+      "annualCost": {
+        "description": "Bị trừ khi đại lý kích hoạt đăng ký thương nhân hàng năm",
+        "label": "Chi phí nền tảng thương nhân hàng năm",
+        "placeholder": "299.00"
+      },
+      "title": "Kích hoạt thương nhân"
+    },
+    "title": "Chi phí nền tảng (Mô hình ví trả trước)",
+    "whatsapp": {
+      "biCost": {
+        "description": "Mỗi tin nhắn BI",
+        "label": "Chi phí WhatsApp BI",
+        "placeholder": "0.45"
+      },
+      "title": "Nhắn tin WhatsApp",
+      "uiAnnual": {
+        "description": "Mỗi UI (hàng năm)",
+        "label": "Giao diện WhatsApp (Hàng năm)",
+        "placeholder": "0.12"
+      },
+      "uiTemporary": {
+        "description": "Mỗi UI (tạm thời)",
+        "label": "Giao diện WhatsApp (Tạm thời)",
+        "placeholder": "0.12"
+      }
+    }
+  },
+  "subscriptionFees": {
+    "agentFee": {
+      "description": "Những gì đại lý phải trả để truy cập nền tảng hàng năm",
+      "label": "Phí đăng ký hàng năm của đại lý",
+      "placeholder": "1499.00"
+    },
+    "description": "Giá đăng ký hàng năm cho đại lý và thương nhân",
+    "merchantFee": {
+      "description": "Những gì thương nhân phải trả cho đăng ký hàng năm",
+      "label": "Phí đăng ký hàng năm của thương nhân",
+      "placeholder": "1499.00"
+    },
+    "required": "Bắt buộc",
+    "title": "Phí đăng ký"
+  }
+}

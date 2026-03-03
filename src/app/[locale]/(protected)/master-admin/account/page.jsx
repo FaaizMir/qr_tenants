@@ -1,10 +1,13 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
 import MasterAdminAccountContainer from "@/containers/master-admin/account";
+import { getTranslations } from "next-intl/server";
 
-export default function MasterAdminAccountPage() {
+export default async function MasterAdminAccountPage() {
+  const t = await getTranslations("masterAdminAccount.breadcrumbs");
+  
   const breadcrumbData = [
-    { name: "Dashboard", url: "/master-admin/dashboard" },
-    { name: "Account", url: "/master-admin/account" },
+    { name: t("dashboard"), url: "/master-admin/dashboard" },
+    { name: t("account"), url: "/master-admin/account" },
   ];
 
   return (

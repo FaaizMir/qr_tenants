@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "佣金",
+    "masterAdminDashboard": "主管理员仪表板"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "{year} 财政年度",
+      "title": "收入分配"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "管理员年费",
+        "title": "代理订阅"
+      },
+      "annualPackages": {
+        "description": "长期商户计划",
+        "title": "年度套餐"
+      },
+      "merchantFees": {
+        "description": "定期商户费用",
+        "title": "商户费用"
+      },
+      "tempPackages": {
+        "description": "短期商户计划",
+        "title": "临时套餐"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "历史收入",
+      "title": "总收入",
+      "updatedToday": "今天更新"
+    }
+  },
+  "errors": {
+    "loadFailed": "无法加载钱包信息"
+  },
+  "header": {
+    "managementSubtitle": "管理佣金和收入。",
+    "managementTitle": "佣金管理",
+    "subtitle": "实时财务概览和收入细分",
+    "title": "佣金中心"
+  },
+  "noData": {
+    "message": "无法加载钱包信息。请稍后再试。",
+    "title": "没有钱包数据"
+  },
+  "status": {
+    "operatingWallet": "操作钱包",
+    "systemActive": "系统已激活",
+    "systemInactive": "系统未激活",
+    "systemStatus": "系统状态"
+  }
+}

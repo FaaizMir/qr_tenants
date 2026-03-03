@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "إدارة الإعلانات",
+    "financeOnly": "مالية فقط",
+    "fullAccess": "وصول كامل",
+    "readOnly": "قراءة فقط",
+    "supportHelp": "مساعدة الدعم"
+  },
+  "actions": {
+    "delete": "حذف",
+    "edit": "تعديل",
+    "menuLabel": "خيارات الطاقم"
+  },
+  "breadcrumb": {
+    "addStaff": "إضافة موظف",
+    "editStaff": "تعديل الطاقم",
+    "masterAdminDashboard": "لوحة تحكم المدير الرئيسي",
+    "staffManagement": "إدارة الطاقم"
+  },
+  "columns": {
+    "access": "الوصول",
+    "actions": "الإجراءات",
+    "phone": "الهاتف",
+    "role": "الدور",
+    "staffMember": "عضو فريق",
+    "status": "الحالة"
+  },
+  "delete": {
+    "cancel": "إلغاء",
+    "confirm": "حذف نهائي",
+    "deleting": "جارٍ الحذف...",
+    "description": "هل أنت متأكد أنك تريد الإزالة",
+    "descriptionEnd": "؟ لا يمكن التراجع عن هذا الإجراء.",
+    "descriptionPermanent": "؟ سيؤدي ذلك إلى إلغاء وصولهم الدائم إلى المنصة.",
+    "error": "فشل في حذف عضو الطاقم.",
+    "success": "تم حذف عضو الطاقم بنجاح.",
+    "title": "هل تريد حذف عضو الطاقم؟",
+    "unknownRole": "دور غير معروف"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "تحكم إذا كان هذا الحساب نشطًا.",
+      "disabled": "تم تعطيل الحساب",
+      "disabledDescription": "تم إلغاء وصول الطاقم حاليًا.",
+      "enabled": "الحساب مفعل",
+      "enabledDescription": "يمكن للطاقم تسجيل الدخول وإدارة المنصة.",
+      "title": "رؤية الحساب"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "createAccount": "إنشاء حساب",
+      "savingChanges": "حفظ التغييرات",
+      "updateProfile": "تحديث الملف الشخصي"
+    },
+    "createSubtitle": "تعيين أدوار جديدة وأذونات وصول.",
+    "createTitle": "إنشاء حساب موظف جديد",
+    "editSubtitle": "تعديل الامتيازات الإدارية الحالية.",
+    "editTitle": "تعديل حساب الطاقم",
+    "fields": {
+      "accountPassword": "كلمة مرور الحساب",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الهاتف",
+      "systemRole": "دور النظام",
+      "updatePassword": "تحديث كلمة المرور (اختياري)"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* اتركه فارغًا للاحتفاظ بكلمة المرور الحالية."
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "مثل: روبرت فوكس",
+      "passwordCreate": "أدخل كلمة مرور آمنة",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "تفاصيل أساسية ومعلومات الاتصال.",
+      "title": "معلومات الطاقم"
+    },
+    "validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "nameRequired": "الاسم الكامل مطلوب",
+      "passwordMinLength": "مطلوب 8 أحرف كحد أدنى",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "roleRequired": "الدور مطلوب"
+    }
+  },
+  "listing": {
+    "addStaff": "إضافة موظف",
+    "clearSearch": "مسح البحث",
+    "noStaffDescription": "حاول تعديل بحثك أو إضافة عضو جديد في الفريق.",
+    "noStaffFound": "لم يتم العثور على موظفين",
+    "refresh": "تحديث",
+    "searchPlaceholder": "البحث عن أعضاء الفريق..."
+  },
+  "messages": {
+    "createError": "فشل في حفظ عضو الطاقم.",
+    "createSuccess": "تم إنشاء حساب الموظف بنجاح.",
+    "fetchError": "فشل في تحميل بيانات الطاقم.",
+    "fetchStaffError": "فشل في جلب الطاقم",
+    "updateSuccess": "تم تحديث ملف الموظف بنجاح."
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "مراجعة الإعلانات",
+      "title": "موافق الإعلانات"
+    },
+    "financeViewer": {
+      "description": "الدفاتر والبيانات",
+      "title": "عارض المالية"
+    },
+    "role": "الدور",
+    "superAdmin": {
+      "description": "وصول كامل",
+      "title": "المشرف الأعلى"
+    },
+    "supportStaff": {
+      "description": "التذاكر والردود",
+      "title": "طاقم الدعم"
+    }
+  },
+  "roles": {
+    "adApprover": "موافق الإعلانات",
+    "admin": "مدير",
+    "financeViewer": "عارض المالية",
+    "superAdmin": "المشرف الأعلى",
+    "supportStaff": "فريق الدعم"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "statusToggle": {
+    "disableSuccess": "تم تعطيل حساب الطاقم بنجاح.",
+    "enableSuccess": "تم تفعيل حساب الطاقم بنجاح.",
+    "updateError": "فشل في تحديث حالة الموظف."
+  },
+  "subtitle": "إدارة أدوار وصلاحيات الإدارة على المنصة.",
+  "title": "إدارة الطاقم"
+}

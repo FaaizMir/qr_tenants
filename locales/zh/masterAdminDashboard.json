@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "仪表板"
+  },
+  "engagement": {
+    "activityPulse": "平台活动脉搏",
+    "description": "所有商店的互动指标",
+    "redemptionRate": "兑换率",
+    "systemLoad": "正常系统负载",
+    "title": "全球参与度",
+    "totalFeedback": "总反馈"
+  },
+  "filters": {
+    "customRange": "自定义范围",
+    "last30Days": "过去30天",
+    "last7Days": "过去7天",
+    "lastMonth": "上个月",
+    "pickDate": "选择一个日期",
+    "selectRange": "选择范围",
+    "thisMonth": "本月",
+    "today": "今天",
+    "yesterday": "昨天"
+  },
+  "financialCards": {
+    "agentSubscriptions": "代理订阅",
+    "merchantSubscriptions": "商户订阅",
+    "packageCommissions": "套餐佣金",
+    "totalPlatformRevenue": "平台总收入"
+  },
+  "growth": {
+    "customers": "+{count} 客户",
+    "description": "最新平台扩展数据",
+    "merchants": "+{count} 商家",
+    "newCustomers": "新客户注册",
+    "newStores": "本期新店铺",
+    "title": "增长亮点"
+  },
+  "merchantTier": {
+    "annual": "年度",
+    "description": "年度与临时订阅比例",
+    "noData": "没有可用的商户数据",
+    "temp": "临时",
+    "title": "商户等级分布",
+    "totalStores": "总商店数"
+  },
+  "messages": {
+    "fetchError": "无法获取主管理员仪表板"
+  },
+  "overviewCards": {
+    "activeAgents": "活跃代理人",
+    "activeMerchants": "活跃商家",
+    "couponsIssued": "已发放优惠券",
+    "couponsRedeemed": "已兑换优惠券",
+    "feedbackReceived": "反馈已收到",
+    "totalAgents": "总代理",
+    "totalCustomers": "总客户数",
+    "totalMerchants": "总商户数"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "代理订阅",
+    "description": "平台总收入细分",
+    "merchantSubscriptions": "商户订阅",
+    "packageCommissions": "套餐佣金",
+    "title": "收入来源"
+  },
+  "roles": {
+    "adApprover": "广告审核员",
+    "financeViewer": "财务查看器",
+    "superAdmin": "超级管理员",
+    "supportStaff": "支持人员"
+  },
+  "sections": {
+    "financialPerformance": "财务表现",
+    "generalOverview": "总体概述",
+    "globalEngagement": "全球参与",
+    "growthHighlights": "增长亮点",
+    "revenueStreams": "收入来源",
+    "roleDashboard": "{role} 仪表板",
+    "systemAnalytics": "系统分析"
+  },
+  "subtitle": "平台表现和指标概述",
+  "title": "主管理员仪表板",
+  "topMerchants": {
+    "description": "交易量和参与度最高的商店（共 {total} 家）",
+    "issued": "已发行",
+    "noData": "此期间没有性能数据",
+    "page": "第 {current} 页，共 {total} 页",
+    "redeemed": "已兑换",
+    "showing": "显示 {from} 到 {to} 的 {total}",
+    "successRate": "{rate}% 成功率",
+    "title": "表现最佳的商家"
+  }
+}

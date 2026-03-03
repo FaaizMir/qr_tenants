@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "अपने खाता जानकारी को अपडेट करें",
+    "title": "खाता विवरण"
+  },
+  "breadcrumb": {
+    "account": "खाता",
+    "dashboard": "डैशबोर्ड"
+  },
+  "buttons": {
+    "saveChanges": "परिवर्तन सहेजें",
+    "saving": "सहेजना..."
+  },
+  "fields": {
+    "address": "पता",
+    "city": "शहर",
+    "country": "देश",
+    "email": "ईमेल",
+    "fullName": "पूरा नाम",
+    "phone": "फोन",
+    "stripeSecretKey": "स्ट्राइप गुप्त कुंजी"
+  },
+  "hints": {
+    "stripeKeyMasked": "वर्तमान कुंजी सुरक्षा के लिए छिपी हुई है। अपडेट करने के लिए एक नई कुंजी दर्ज करें।"
+  },
+  "messages": {
+    "fetchError": "खाता जानकारी लोड करने में विफल",
+    "updateError": "खाता अपडेट करने में विफल",
+    "updateSuccess": "खाता सफलतापूर्वक अपडेट किया गया",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "एक पता टाइप करना शुरू करें...",
+    "city": "अपने शहर को दर्ज करें",
+    "country": "अपने देश को दर्ज करें",
+    "email": "अपना ईमेल दर्ज करें",
+    "name": "अपना नाम दर्ज करें",
+    "phone": "अपना फोन नंबर दर्ज करें",
+    "stripeKeyExisting": "{maskedKey} (वर्तमान रखने के लिए खाली छोड़ें)",
+    "stripeKeyNew": "sk_test_... या sk_live_..."
+  },
+  "profile": {
+    "description": "आपकी प्रोफ़ाइल जानकारी",
+    "noStripeKey": "कोई स्ट्राइप कुंजी नहीं",
+    "stripeConnected": "स्ट्राइप कनेक्टेड",
+    "title": "प्रोफ़ाइल"
+  },
+  "subtitle": "अपने खाते की जानकारी प्रबंधित करें",
+  "title": "खाता सेटिंग्स"
+}

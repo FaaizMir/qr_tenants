@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "لوحة المعلومات"
+  },
+  "engagement": {
+    "activityPulse": "نبض نشاط المنصة",
+    "description": "مقاييس التفاعل عبر جميع المتاجر",
+    "redemptionRate": "معدل الاسترداد",
+    "systemLoad": "حمولة النظام العادية",
+    "title": "المشاركة العالمية",
+    "totalFeedback": "إجمالي التعليقات"
+  },
+  "filters": {
+    "customRange": "نطاق مخصص",
+    "last30Days": "آخر 30 يومًا",
+    "last7Days": "آخر 7 أيام",
+    "lastMonth": "الشهر الماضي",
+    "pickDate": "اختر تاريخًا",
+    "selectRange": "اختر النطاق",
+    "thisMonth": "هذا الشهر",
+    "today": "اليوم",
+    "yesterday": "أمس"
+  },
+  "financialCards": {
+    "agentSubscriptions": "اشتراكات الوكلاء",
+    "merchantSubscriptions": "اشتراكات التجار",
+    "packageCommissions": "عمولات الحزمة",
+    "totalPlatformRevenue": "إجمالي إيرادات المنصة"
+  },
+  "growth": {
+    "customers": "+{count} عملاء",
+    "description": "أحدث بيانات توسيع المنصة",
+    "merchants": "+{count} تاجر",
+    "newCustomers": "تسجيلات العملاء الجدد",
+    "newStores": "متاجر جديدة في هذه الفترة",
+    "title": "أبرز نقاط النمو"
+  },
+  "merchantTier": {
+    "annual": "سنوي",
+    "description": "نسبة الاشتراك السنوي مقابل الاشتراك المؤقت",
+    "noData": "لا توجد بيانات تاجر متاحة",
+    "temp": "مؤقت",
+    "title": "توزيع مستوى التاجر",
+    "totalStores": "إجمالي المتاجر"
+  },
+  "messages": {
+    "fetchError": "فشل في جلب لوحة تحكم المسؤول الرئيسي"
+  },
+  "overviewCards": {
+    "activeAgents": "الوكلاء النشطون",
+    "activeMerchants": "التجار النشطون",
+    "couponsIssued": "القسائم المصدرة",
+    "couponsRedeemed": "القسائم المستردة",
+    "feedbackReceived": "تم استلام الملاحظات",
+    "totalAgents": "إجمالي الوكلاء",
+    "totalCustomers": "إجمالي العملاء",
+    "totalMerchants": "إجمالي التجار"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "اشتراكات الوكلاء",
+    "description": "تفصيل إجمالي أرباح المنصة",
+    "merchantSubscriptions": "اشتراكات التجار",
+    "packageCommissions": "عمولات الحزمة",
+    "title": "مصادر الإيرادات"
+  },
+  "roles": {
+    "adApprover": "موافق الإعلانات",
+    "financeViewer": "عارض المالية",
+    "superAdmin": "المسؤول super",
+    "supportStaff": "فريق الدعم"
+  },
+  "sections": {
+    "financialPerformance": "الأداء المالي",
+    "generalOverview": "نظرة عامة عامة",
+    "globalEngagement": "الانخراط العالمي",
+    "growthHighlights": "أبرز النقاط في النمو",
+    "revenueStreams": "مصادر الإيرادات",
+    "roleDashboard": "لوحة معلومات {role}",
+    "systemAnalytics": "تحليلات النظام"
+  },
+  "subtitle": "نظرة عامة على أداء المنصة والمقاييس",
+  "title": "لوحة تحكم المسؤول الرئيسي",
+  "topMerchants": {
+    "description": "المتاجر ذات أعلى حجم وتفاعل ({total} إجمالي)",
+    "issued": "المصدرة",
+    "noData": "لا توجد بيانات أداء لهذه الفترة",
+    "page": "الصفحة {current} من {total}",
+    "redeemed": "المستردة",
+    "showing": "عرض {from} إلى {to} من {total}",
+    "successRate": "نسبة نجاح {rate}%",
+    "title": "أفضل التجار أداءً"
+  }
+}

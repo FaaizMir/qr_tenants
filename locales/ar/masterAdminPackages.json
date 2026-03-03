@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "إنشاء حزمة",
+    "editPackage": "تعديل الحزمة",
+    "masterAdminDashboard": "لوحة تحكم المسؤول الرئيسي",
+    "packages": "الحزم"
+  },
+  "columns": {
+    "actions": "الإجراءات",
+    "active": "نشط",
+    "credits": "الرصيد",
+    "deleteAction": "حذف الحزمة",
+    "editAction": "تحرير الحزمة",
+    "inactive": "غير نشط",
+    "menuLabel": "إجراءات الحزمة",
+    "noDescription": "لا توجد وصف",
+    "packageInfo": "معلومات الحزمة",
+    "perCredit": "لكل ائتمان",
+    "plan": "الخطة",
+    "pricing": "التسعير",
+    "rank": "الرتبة",
+    "status": "الحالة",
+    "type": "النوع"
+  },
+  "deleteDialog": {
+    "cancel": "إلغاء الحذف",
+    "confirm": "تم التأكيد، احذف الآن",
+    "description": "أنت على وشك حذف {name} بشكل دائم. هذه العملية نهائية ولا يمكن عكسها من قبل أي شخص.",
+    "title": "حذر شديد"
+  },
+  "form": {
+    "backButton": "العودة إلى القائمة",
+    "buttons": {
+      "cancel": "إلغاء",
+      "delete": "حذف الحزمة",
+      "save": "نشر الحزمة",
+      "saving": "جارٍ الحفظ...",
+      "update": "تحديث الحزمة"
+    },
+    "createTitle": "إنشاء حزمة جديدة",
+    "deleteDialog": {
+      "cancel": "إلغاء",
+      "confirm": "نعم، احذف الحزمة",
+      "description": "سيؤدي هذا إلى إزالة {name} بشكل دائم. لا يمكن التراجع عن هذا الإجراء.",
+      "title": "هل أنت متأكد تمامًا؟"
+    },
+    "editTitle": "تحرير حزمة الرصيد",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "نوع الائتمان",
+      "currency": "العملة",
+      "customCreditType": "حدد نوع الائتمان المخصص",
+      "customCreditTypePlaceholder": "مثل: عرض عيد الميلاد",
+      "description": "الوصف",
+      "descriptionPlaceholder": "ملخص قصير لما تقدمه هذه الحزمة...",
+      "displayPriority": "أولوية العرض",
+      "displayPriorityPlaceholder": "المركز في القائمة (1، 2، 3...)",
+      "merchantPlan": "خطة التاجر",
+      "packageName": "اسم الحزمة",
+      "packageNamePlaceholder": "على سبيل المثال: حزمة النمو المميزة",
+      "packageStatus": "حالة الحزمة",
+      "price": "السعر",
+      "pricePerCredit": "السعر لكل رصيد",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "إجمالي الرصيد"
+    },
+    "hints": {
+      "autoCalculated": "تلقائي"
+    },
+    "messages": {
+      "createError": "فشل في إنشاء الحزمة",
+      "createSuccess": "تم إنشاء الحزمة بنجاح",
+      "deleteError": "فشل في حذف الحزمة",
+      "deleteSuccess": "تم حذف الحزمة بنجاح",
+      "fetchError": "فشل في تحميل تفاصيل الحزمة",
+      "paidAdsRestriction": "يمكن إدارة حزم الإعلانات المدفوعة فقط بواسطة الوكلاء",
+      "updateError": "فشل في تحديث الحزمة",
+      "updateSuccess": "تم تحديث الحزمة بنجاح"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "قسيمة",
+        "custom": "مخصص",
+        "whatsappBI": "رسالة WhatsApp BI",
+        "whatsappUI": "رسالة واجهة واتساب"
+      },
+      "currency": {
+        "pkr": "PKR (روبية)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "سنوي / مميز",
+        "temporary": "مؤقت / أساسي"
+      },
+      "status": {
+        "active": "نشط ومرئي",
+        "inactive": "غير نشط / مخفي"
+      }
+    },
+    "preview": {
+      "baseCredits": "رصيد أساسي",
+      "categories": {
+        "coupon": "قسيمة",
+        "paidAds": "إعلانات مدفوعة",
+        "standard": "قياسي",
+        "whatsapp": "رسالة واتساب"
+      },
+      "enhancedFeatures": "ميزات محسّنة وسعة",
+      "getStarted": "ابدأ الآن",
+      "hiddenDraft": "مخفي / مسودة",
+      "title": "معاينة مباشرة"
+    },
+    "sections": {
+      "classification": "تصنيف",
+      "credits": "الرصيد والتخصيص",
+      "identity": "الهوية والتسعير"
+    },
+    "subtitle": "حدد الأسعار وحدود الائتمان للتجار.",
+    "validation": {
+      "creditsMin": "يجب أن تكون الرصيد على الأقل 1",
+      "creditsRequired": "الرصيد مطلوب",
+      "customTypeRequired": "نوع الائتمان المخصص مطلوب",
+      "descriptionRequired": "الوصف مطلوب",
+      "nameRequired": "اسم الحزمة مطلوب",
+      "priceMin": "يجب أن تكون الأسعار على الأقل 1",
+      "priceRequired": "السعر مطلوب"
+    }
+  },
+  "listing": {
+    "createButton": "إنشاء حزمة جديدة",
+    "noPackages": "لم يتم العثور على حزم",
+    "noPackagesDescription": "أنشئ حزمةك الأولى للبدء",
+    "searchPlaceholder": "ابحث باسم الحزمة، نوع الائتمان..."
+  },
+  "messages": {
+    "deleteError": "فشل في حذف الحزمة",
+    "deleteSuccess": "تم حذف الحزمة بنجاح",
+    "fetchError": "فشل في جلب الحزم"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "تم تفعيل الخصم التلقائي",
+    "badge": "القياسي على المنصة",
+    "billingCycle": "دورة الفوترة",
+    "billingCycleValue": "365 يومًا متكررًا",
+    "dialog": {
+      "cancelButton": "إلغاء",
+      "confirmButton": "تأكيد وتحديث",
+      "description": "حدد الرسوم السنوية الجديدة للعضوية لجميع الوكلاء على المنصة. ستدخل التغييرات حيز التنفيذ على الفور للتجديدات الجديدة.",
+      "label": "رسوم سنوية جديدة",
+      "placeholder": "0.00",
+      "title": "تحديث رسوم الاشتراك",
+      "updatingButton": "جارٍ التحديث...",
+      "warning": "احذر: يمكن أن تؤثر التغييرات الجذرية في الأسعار على احتفاظ الوكلاء. سيتم تسجيل التغييرات في تدقيق النظام."
+    },
+    "globalCurrency": "العملة العالمية",
+    "insightDescription": "تعديل رسوم الاشتراك يؤثر على إمكانية الوصول إلى المنصة للوكيل الجدد. تأكد من أن الأسعار تظل تنافسية مع الحفاظ على جودة المنصة.",
+    "insightTitle": "ذكاء الإيرادات",
+    "messages": {
+      "fetchError": "فشل في جلب رسوم الاشتراك",
+      "updateError": "فشل في تحديث الرسوم",
+      "updateSuccess": "تم تحديث رسوم الاشتراك بنجاح",
+      "validationError": "يرجى إدخال مبلغ صالح"
+    },
+    "perYear": "/ ثابت سنويًا",
+    "status": "الحالة",
+    "statusValue": "الخطة النشطة",
+    "syncButton": "مزامنة البيانات",
+    "title": "عضوية الوكيل السنوية",
+    "updateButton": "تحديث هيكل التسعير"
+  },
+  "subtitle": "إدارة ومراقبة جميع حزم ائتمان التجار",
+  "title": "الحزم"
+}

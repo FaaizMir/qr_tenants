@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
-export function DeleteAgentAction({ agentId, agentName, onDeleted }) {
+export function DeleteAgentAction({ agentId, agentName, onDeleted, t }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -27,14 +27,14 @@ export function DeleteAgentAction({ agentId, agentName, onDeleted }) {
 
         try {
             await axiosInstance.delete(`/admins/${agentId}`);
-            toast.success("Agent deleted successfully");
+            toast.success(t("delete.success"));
             if (onDeleted) {
                 onDeleted();
             }
             setOpen(false);
         } catch (error) {
             console.error(error);
-            toast.error("Failed to delete agent");
+            toast.error(t("delete.error"));
         } finally {
             setLoading(false);
         }
@@ -48,26 +48,26 @@ export function DeleteAgentAction({ agentId, agentName, onDeleted }) {
                     className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer"
                 >
                     <Trash2 className="mr-2 h-4 w-4" />
-                    Delete
+                    {t("actions.delete")}
                 </DropdownMenuItem>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("delete.title")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the agent
-                        <span className="font-medium text-foreground"> {agentName}</span> and
-                        remove their data from our servers.
+                        {t("delete.description")}
+                        <span className="font-medium text-foreground">{t("delete.descriptionName", { name: agentName })}</span>
+                        {t("delete.descriptionEnd")}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel disabled={loading}>{t("delete.cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                         onClick={handleDelete}
                         className="bg-red-600 hover:bg-red-700"
                         disabled={loading}
                     >
-                        {loading ? "Deleting..." : "Delete Agent"}
+                        {loading ? t("delete.deleting") : t("delete.confirm")}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

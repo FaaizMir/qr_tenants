@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "削除",
+    "details": "詳細",
+    "edit": "編集",
+    "menuLabel": "エージェントオプション"
+  },
+  "breadcrumb": {
+    "agentDetails": "エージェントの詳細",
+    "agents": "エージェント",
+    "createAgent": "エージェントを作成",
+    "editAgent": "エージェントを編集",
+    "masterAdminDashboard": "マスター管理者ダッシュボード"
+  },
+  "columns": {
+    "actions": "アクション",
+    "agentAccount": "エージェントアカウント",
+    "location": "位置",
+    "phone": "電話",
+    "status": "ステータス"
+  },
+  "create": {
+    "subtitle": "新しいエージェントアカウントを作成し、そのアクセス権と権限を設定します。",
+    "title": "新しいエージェントをオンボード"
+  },
+  "delete": {
+    "cancel": "キャンセル",
+    "confirm": "エージェントを削除",
+    "deleting": "削除中...",
+    "description": "この操作は元に戻せません。エージェントが永久に削除されます",
+    "descriptionEnd": "および彼らのデータを私たちのサーバーから削除します。",
+    "descriptionName": " {name}",
+    "error": "エージェントの削除に失敗しました",
+    "success": "エージェントが正常に削除されました",
+    "title": "本当に確信していますか？"
+  },
+  "details": {
+    "accessControl": {
+      "status": "ステータス",
+      "statusDescription": "現在のアカウントの有効期限",
+      "title": "アクセス制御"
+    },
+    "accountInformation": {
+      "emailAddress": "メールアドレス",
+      "fullName": "フルネーム",
+      "memberSince": "メンバー登録日",
+      "phoneNumber": "電話番号",
+      "title": "アカウント情報"
+    },
+    "editAgent": "エージェントを編集",
+    "goBack": "戻る",
+    "loading": "エージェントの詳細を読み込んでいます...",
+    "locationDetails": {
+      "city": "市",
+      "country": "国",
+      "fullAddress": "住所",
+      "title": "位置情報の詳細"
+    },
+    "notFound": "エージェントが見つかりません。"
+  },
+  "form": {
+    "accountStatus": {
+      "active": "アクティブ",
+      "activeDescription": "無効にすると、エージェントはログインしたり、マーチャントを管理したりできません。",
+      "activeLabel": "アクティブステータス",
+      "description": "エージェントのシステムへのアクセスを制御します。",
+      "inactive": "非アクティブ",
+      "title": "アカウントステータス"
+    },
+    "agentDetails": {
+      "descriptionCreate": "新しいエージェントの個人情報を入力してください。",
+      "descriptionEdit": "エージェントの個人情報とログイン情報を更新します。",
+      "title": "エージェントの詳細"
+    },
+    "buttons": {
+      "cancel": "キャンセル",
+      "createAgent": "エージェントを作成",
+      "creating": "作成中...",
+      "hideKey": "キーを隠す",
+      "hidePassword": "パスワードを隠す",
+      "showKey": "キーを表示",
+      "showPassword": "パスワードを表示",
+      "updateAgent": "エージェントを更新",
+      "updating": "更新中..."
+    },
+    "fields": {
+      "city": "市",
+      "country": "国",
+      "emailAddress": "メールアドレス",
+      "fullName": "フルネーム",
+      "newPassword": "新しいパスワード（現在のままにするには空白のままにしてください）",
+      "password": "パスワード",
+      "phoneNumber": "電話番号",
+      "searchAddress": "住所を検索",
+      "stripeSecretKey": "Stripeシークレットキー（オプション）"
+    },
+    "hints": {
+      "passwordRequirements": "最小8文字、英数字。",
+      "stripeKeyCreate": "マーチャント支払いを受け取るためのStripe APIキーを設定してください。後でエージェント設定で設定できます。",
+      "stripeKeyEdit": "エージェントのStripe APIキーを更新します。既存の設定を保持するには空白のままにしてください。"
+    },
+    "locationDetails": {
+      "description": "エージェントの住所情報。",
+      "title": "ロケーションの詳細"
+    },
+    "placeholders": {
+      "address": "123 エージェント通り, 市, 国",
+      "city": "市",
+      "country": "国",
+      "email": "agent@example.com",
+      "name": "例: ジョン・ドー",
+      "passwordCreate": "安全なパスワードを入力してください",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey}（現在のままにするには空白のままにしてください）",
+      "stripeKeyExistingGeneric": "sk_•••••••••••••（現在のままにするには空白のままにしてください）",
+      "stripeKeyNew": "sk_test_... または sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "エージェントを追加",
+    "searchPlaceholder": "エージェントを検索..."
+  },
+  "messages": {
+    "addressSelected": "選択された住所",
+    "checkInput": "入力内容を確認して再試行してください。",
+    "createError": "エージェントの作成に失敗しました",
+    "createSuccess": "エージェントアカウントが正常に作成されました。",
+    "fetchError": "エージェントの詳細の読み込みに失敗しました",
+    "loadError": "管理者の読み込みに失敗しました",
+    "updateError": "エージェントの更新に失敗しました",
+    "updateSuccess": "エージェントのプロフィールが正常に更新されました。",
+    "validationError": "{field}: {message}",
+    "validationFailed": "検証に失敗しました"
+  },
+  "status": {
+    "active": "アクティブ",
+    "inactive": "非アクティブ"
+  },
+  "statusToggle": {
+    "activateSuccess": "エージェントが正常にアクティブ化されました",
+    "deactivateSuccess": "エージェントが正常に無効化されました",
+    "updateError": "エージェントのステータスの更新に失敗しました"
+  },
+  "subtitle": "エージェントとそのアカウントを管理します。",
+  "title": "エージェント管理"
+}

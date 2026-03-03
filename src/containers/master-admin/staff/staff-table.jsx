@@ -2,6 +2,7 @@
 
 import { DataTable } from "@/components/common/data-table";
 import { getStaffColumns } from "./staff-columns";
+import { useTranslations } from "next-intl";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,6 +18,7 @@ import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
 
 export function StaffTable({ data, isLoading, total, page, pageSize, setPage, setPageSize, refresh }) {
+    const t = useTranslations("masterAdminStaff");
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const [staffToDelete, setStaffToDelete] = useState(null);
     const [deleting, setDeleting] = useState(false);
@@ -26,11 +28,11 @@ export function StaffTable({ data, isLoading, total, page, pageSize, setPage, se
         setDeleting(true);
         try {
             await axiosInstance.delete(`/superadmin-roles/${staffToDelete.id}`);
-            toast.success("Staff member deleted successfully.");
+            toast.success(t("delete.success"));
             refresh?.();
         } catch (error) {
             console.error("Failed to delete staff:", error);
-            toast.error(error?.response?.data?.message || "Failed to delete staff member.");
+            toast.error(error?.response?.data?.message || t("delete.error"));
         } finally {
             setDeleting(false);
             setDeleteConfirmOpen(false);
@@ -41,7 +43,7 @@ export function StaffTable({ data, isLoading, total, page, pageSize, setPage, se
     const columns = getStaffColumns((staff) => {
         setStaffToDelete(staff);
         setDeleteConfirmOpen(true);
-    });
+    }, t);
 
     return (
         <>
@@ -60,14 +62,13 @@ export function StaffTable({ data, isLoading, total, page, pageSize, setPage, se
             <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
                 <AlertDialogContent className="rounded-2xl border-none shadow-2xl">
                     <AlertDialogHeader>
-                        <AlertDialogTitle className="text-xl font-bold">Delete Staff Member?</AlertDialogTitle>
+                        <AlertDialogTitle className="text-xl font-bold">{t("delete.title")}</AlertDialogTitle>
                         <AlertDialogDescription className="text-base py-2">
-                            Are you sure you want to remove <strong>{staffToDelete?.name}</strong>?
-                            This will permanently revoke their access to the platform.
+                            {t("delete.description")} <strong>{staffToDelete?.name}</strong>{t("delete.descriptionPermanent")}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="pt-4">
-                        <AlertDialogCancel className="rounded-xl border-zinc-200">Cancel</AlertDialogCancel>
+                        <AlertDialogCancel className="rounded-xl border-zinc-200">{t("delete.cancel")}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={(e) => {
                                 e.preventDefault();
@@ -76,7 +77,7 @@ export function StaffTable({ data, isLoading, total, page, pageSize, setPage, se
                             disabled={deleting}
                             className="bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl px-6"
                         >
-                            {deleting ? "Deleting..." : "Delete Permanently"}
+                            {deleting ? t("delete.deleting") : t("delete.confirm")}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

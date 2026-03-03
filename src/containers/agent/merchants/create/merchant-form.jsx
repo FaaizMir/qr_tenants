@@ -23,7 +23,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Store, User, CreditCard, Eye, EyeOff } from "lucide-react";
+import {
+  Loader2,
+  Store,
+  User,
+  CreditCard,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+} from "lucide-react";
 import { toast } from "@/lib/toast";
 import { createMerchant, updateMerchant } from "@/lib/services/helper";
 import AddressAutocomplete from "@/components/address-autocomplete";
@@ -45,7 +53,11 @@ export function MerchantForm({
 }) {
   const t = useTranslations("agentMerchants.create");
   const tEdit = useTranslations("agentMerchants.edit");
-  const tValidation = useTranslations(isEdit ? "agentMerchants.edit.validation" : "agentMerchants.create.validation");
+  const tValidation = useTranslations(
+    isEdit
+      ? "agentMerchants.edit.validation"
+      : "agentMerchants.create.validation",
+  );
   const tCommon = useTranslations("agentMerchants.common");
   const router = useRouter();
   const { data: session } = useSession();
@@ -120,14 +132,18 @@ export function MerchantForm({
         setLoadingWallet(true);
 
         // Fetch agent wallet
-        const walletRes = await axiosInstance.get(`/wallets/admin/${session.user.adminId}`);
+        const walletRes = await axiosInstance.get(
+          `/wallets/admin/${session.user.adminId}`,
+        );
         const balance = Number(walletRes.data?.balance || 0);
         setWalletBalance(balance);
 
         // Fetch platform cost settings
-        const settingsRes = await axiosInstance.get('/super-admin-settings/platform-cost-settings');
+        const settingsRes = await axiosInstance.get(
+          "/super-admin-settings/platform-cost-settings",
+        );
         const settings = settingsRes.data?.data || {};
-        
+
         setPlatformCost(Number(settings.merchantAnnualPlatformCost || 299));
         setAnnualFee(Number(settings.merchantAnnualFee || 299));
       } catch (error) {
@@ -190,7 +206,6 @@ export function MerchantForm({
         error,
       );
 
-     
       const errorData = error?.response?.data;
 
       // Handle validation errors (field-specific errors)
@@ -198,30 +213,41 @@ export function MerchantForm({
         const errorMessages = Object.entries(errorData.errors).map(
           ([field, messages]) => {
             // Try to get translated field name, fallback to formatted field name
-            const fieldName = tValidation.has(`fields.${field}`) 
+            const fieldName = tValidation.has(`fields.${field}`)
               ? tValidation(`fields.${field}`)
-              : field.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-            
+              : field
+                  .replace(/_/g, " ")
+                  .replace(/\b\w/g, (c) => c.toUpperCase());
+
             const errorList = Array.isArray(messages) ? messages : [messages];
-            
+
             // Translate common error patterns
-            const translatedErrors = errorList.map(msg => {
+            const translatedErrors = errorList.map((msg) => {
               const msgLower = String(msg).toLowerCase();
-              
-              if (msgLower.includes("should not be empty") || msgLower.includes("is required")) {
+
+              if (
+                msgLower.includes("should not be empty") ||
+                msgLower.includes("is required")
+              ) {
                 return tValidation("fieldEmpty", { field: fieldName });
-              } else if (msgLower.includes("invalid") || msgLower.includes("must be")) {
+              } else if (
+                msgLower.includes("invalid") ||
+                msgLower.includes("must be")
+              ) {
                 return tValidation("fieldInvalid", { field: fieldName });
               } else if (msgLower.includes("email")) {
                 return tValidation("emailInvalid");
-              } else if (msgLower.includes("password") && msgLower.includes("characters")) {
+              } else if (
+                msgLower.includes("password") &&
+                msgLower.includes("characters")
+              ) {
                 return tValidation("passwordTooShort");
               }
-              
+
               // Return original message if no pattern matches
               return `${fieldName}: ${msg}`;
             });
-            
+
             return translatedErrors.join(", ");
           },
         );
@@ -237,13 +263,16 @@ export function MerchantForm({
       // Handle error array
       else if (Array.isArray(errorData?.errors)) {
         const firstError = errorData.errors[0];
-        toast.error(firstError?.message || firstError || t("messages.validationFailed"), {
-          description:
-            errorData.errors
-              .slice(1, 2)
-              .map((e) => e?.message || e)
-              .join("\n") || undefined,
-        });
+        toast.error(
+          firstError?.message || firstError || t("messages.validationFailed"),
+          {
+            description:
+              errorData.errors
+                .slice(1, 2)
+                .map((e) => e?.message || e)
+                .join("\n") || undefined,
+          },
+        );
       }
       // Handle single error message
       else if (errorData?.message || errorData?.error) {
@@ -251,9 +280,12 @@ export function MerchantForm({
       }
       // Fallback error
       else {
-        toast.error(isEdit ? tEdit("messages.updateError") : t("messages.createError"), {
-          description: t("messages.createErrorDescription"),
-        });
+        toast.error(
+          isEdit ? tEdit("messages.updateError") : t("messages.createError"),
+          {
+            description: t("messages.createErrorDescription"),
+          },
+        );
       }
     } finally {
       setLoading(false);
@@ -262,7 +294,8 @@ export function MerchantForm({
 
   // Check if user has sufficient balance for annual merchant
   const isAnnualMerchant = formData.merchant_type === "annual";
-  const hasInsufficientBalance = isAnnualMerchant && !loadingWallet && walletBalance < platformCost;
+  const hasInsufficientBalance =
+    isAnnualMerchant && !loadingWallet && walletBalance < platformCost;
 
   return (
     <form
@@ -284,14 +317,28 @@ export function MerchantForm({
       {/* Account Info */}
       <Card className="border-l-4 border-l-primary shadow-md">
         <CardHeader>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="p-2 bg-primary/10 rounded-full text-primary">
-              <User className="h-4 w-4" />
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-2">
+              <div className="p-2 bg-primary/10 rounded-full text-primary">
+                <User className="h-4 w-4" />
+              </div>
+              <CardTitle>{t("accountCredentials.title")}</CardTitle>
             </div>
-            <CardTitle>{t("accountCredentials.title")}</CardTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              type="button"
+              onClick={() => router.back()}
+              className="gap-1.5 text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {isEdit ? tEdit("actions.back") : t("actions.back")}
+            </Button>
           </div>
           <CardDescription>
-            {isEdit ? tEdit("accountCredentials.description") : t("accountCredentials.description")}
+            {isEdit
+              ? tEdit("accountCredentials.description")
+              : t("accountCredentials.description")}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
@@ -306,7 +353,9 @@ export function MerchantForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">{t("accountCredentials.emailAddress")}</Label>
+            <Label htmlFor="email">
+              {t("accountCredentials.emailAddress")}
+            </Label>
             <Input
               id="email"
               type="email"
@@ -329,14 +378,20 @@ export function MerchantForm({
                 required={!isEdit}
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
-                placeholder={isEdit ? tEdit("accountCredentials.passwordPlaceholder") : ""}
+                placeholder={
+                  isEdit ? tEdit("accountCredentials.passwordPlaceholder") : ""
+                }
                 className="pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showPassword ? t("accountCredentials.hidePassword") : t("accountCredentials.showPassword")}
+                title={
+                  showPassword
+                    ? t("accountCredentials.hidePassword")
+                    : t("accountCredentials.showPassword")
+                }
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -362,13 +417,13 @@ export function MerchantForm({
             </div>
             <CardTitle>{t("businessProfile.title")}</CardTitle>
           </div>
-          <CardDescription>
-            {t("businessProfile.description")}
-          </CardDescription>
+          <CardDescription>{t("businessProfile.description")}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="business_name">{t("businessProfile.businessName")}</Label>
+            <Label htmlFor="business_name">
+              {t("businessProfile.businessName")}
+            </Label>
             <Input
               id="business_name"
               placeholder={t("businessProfile.businessNamePlaceholder")}
@@ -385,16 +440,32 @@ export function MerchantForm({
               required
             >
               <SelectTrigger>
-                <SelectValue placeholder={t("businessProfile.businessTypePlaceholder")} />
+                <SelectValue
+                  placeholder={t("businessProfile.businessTypePlaceholder")}
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Food & Beverage">{t("businessProfile.businessTypes.foodBeverage")}</SelectItem>
-                <SelectItem value="Retail">{t("businessProfile.businessTypes.retail")}</SelectItem>
-                <SelectItem value="Services">{t("businessProfile.businessTypes.services")}</SelectItem>
-                <SelectItem value="Health">{t("businessProfile.businessTypes.health")}</SelectItem>
-                <SelectItem value="Education">{t("businessProfile.businessTypes.education")}</SelectItem>
-                <SelectItem value="Technology">{t("businessProfile.businessTypes.technology")}</SelectItem>
-                <SelectItem value="Hospitality">{t("businessProfile.businessTypes.hospitality")}</SelectItem>
+                <SelectItem value="Food & Beverage">
+                  {t("businessProfile.businessTypes.foodBeverage")}
+                </SelectItem>
+                <SelectItem value="Retail">
+                  {t("businessProfile.businessTypes.retail")}
+                </SelectItem>
+                <SelectItem value="Services">
+                  {t("businessProfile.businessTypes.services")}
+                </SelectItem>
+                <SelectItem value="Health">
+                  {t("businessProfile.businessTypes.health")}
+                </SelectItem>
+                <SelectItem value="Education">
+                  {t("businessProfile.businessTypes.education")}
+                </SelectItem>
+                <SelectItem value="Technology">
+                  {t("businessProfile.businessTypes.technology")}
+                </SelectItem>
+                <SelectItem value="Hospitality">
+                  {t("businessProfile.businessTypes.hospitality")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -419,13 +490,13 @@ export function MerchantForm({
             </div>
             <CardTitle>{t("locationDetails.title")}</CardTitle>
           </div>
-          <CardDescription>
-            {t("locationDetails.description")}
-          </CardDescription>
+          <CardDescription>{t("locationDetails.description")}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="address">{t("locationDetails.searchAddress")}</Label>
+            <Label htmlFor="address">
+              {t("locationDetails.searchAddress")}
+            </Label>
             <AddressAutocomplete
               label="Address"
               name="address"
@@ -496,7 +567,9 @@ export function MerchantForm({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="temporary">{t("merchantType.temporary")}</SelectItem>
+                  <SelectItem value="temporary">
+                    {t("merchantType.temporary")}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -504,7 +577,9 @@ export function MerchantForm({
 
           <div className="flex items-center justify-between p-4 rounded-lg border bg-zinc-50/50 dark:bg-zinc-800/30">
             <div className="space-y-0.5">
-              <Label className="text-base">{t("merchantType.accountStatus")}</Label>
+              <Label className="text-base">
+                {t("merchantType.accountStatus")}
+              </Label>
               <CardDescription>
                 {t("merchantType.accountStatusDescription")}
               </CardDescription>
@@ -516,7 +591,9 @@ export function MerchantForm({
                   formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
-                {formData.is_active ? t("merchantType.active") : t("merchantType.inactive")}
+                {formData.is_active
+                  ? t("merchantType.active")
+                  : t("merchantType.inactive")}
               </span>
               <Switch
                 checked={formData.is_active}
@@ -531,11 +608,15 @@ export function MerchantForm({
           <Button variant="ghost" type="button" onClick={() => router.back()}>
             {t("actions.cancel")}
           </Button>
-          <Button 
-            type="submit" 
-            disabled={loading || hasInsufficientBalance} 
+          <Button
+            type="submit"
+            disabled={loading || hasInsufficientBalance}
             className="min-w-[140px]"
-            title={hasInsufficientBalance ? t("actions.insufficientBalanceTooltip") : ""}
+            title={
+              hasInsufficientBalance
+                ? t("actions.insufficientBalanceTooltip")
+                : ""
+            }
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading

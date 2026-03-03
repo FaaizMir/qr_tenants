@@ -3,9 +3,11 @@ import MasterAdminCommissionContainer from "@/containers/master-admin/commission
 import { getTranslations } from "next-intl/server";
 
 export default async function MasterAdminCommissionPage() {
+  const t = await getTranslations("masterAdminCommission.breadcrumbs");
+  
   const breadcrumbData = [
-    { name: "Master Admin Dashboard", url: "/master-admin/dashboard" },
-    { name: "Commission", url: "/master-admin/commission" },
+    { name: t("masterAdminDashboard"), url: "/master-admin/dashboard" },
+    { name: t("commission"), url: "/master-admin/commission" },
   ];
   return (
     <>

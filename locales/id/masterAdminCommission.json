@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "Komisi",
+    "masterAdminDashboard": "Dasbor Admin Utama"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "Tahun Fiskal {year}",
+      "title": "Alokasi Pendapatan"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "Biaya tahunan dari admin",
+        "title": "Langganan Agen"
+      },
+      "annualPackages": {
+        "description": "Rencana pedagang jangka panjang",
+        "title": "Paket Tahunan"
+      },
+      "merchantFees": {
+        "description": "Biaya pedagang berulang",
+        "title": "Biaya Pedagang"
+      },
+      "tempPackages": {
+        "description": "Rencana pedagang jangka pendek",
+        "title": "Paket Sementara"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "Pendapatan sepanjang masa",
+      "title": "Total Pendapatan",
+      "updatedToday": "Diperbarui hari ini"
+    }
+  },
+  "errors": {
+    "loadFailed": "Gagal memuat informasi dompet"
+  },
+  "header": {
+    "managementSubtitle": "Kelola komisi dan pendapatan.",
+    "managementTitle": "Manajemen Komisi",
+    "subtitle": "Tinjauan keuangan waktu nyata dan rincian pendapatan",
+    "title": "Pusat Komisi"
+  },
+  "noData": {
+    "message": "Tidak dapat memuat informasi dompet. Silakan coba lagi nanti.",
+    "title": "Tidak Ada Data Dompet"
+  },
+  "status": {
+    "operatingWallet": "Dompet Operasi",
+    "systemActive": "Sistem Aktif",
+    "systemInactive": "Sistem Tidak Aktif",
+    "systemStatus": "Status Sistem"
+  }
+}

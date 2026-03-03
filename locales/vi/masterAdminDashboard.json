@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "Bảng điều khiển"
+  },
+  "engagement": {
+    "activityPulse": "Nhịp đập hoạt động nền tảng",
+    "description": "Các chỉ số tương tác trên tất cả các cửa hàng",
+    "redemptionRate": "Tỷ lệ đổi thưởng",
+    "systemLoad": "Tải hệ thống bình thường",
+    "title": "Sự tham gia toàn cầu",
+    "totalFeedback": "Tổng phản hồi"
+  },
+  "filters": {
+    "customRange": "Khoảng tùy chỉnh",
+    "last30Days": "30 ngày qua",
+    "last7Days": "7 ngày qua",
+    "lastMonth": "Tháng trước",
+    "pickDate": "Chọn một ngày",
+    "selectRange": "Chọn khoảng",
+    "thisMonth": "Tháng này",
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua"
+  },
+  "financialCards": {
+    "agentSubscriptions": "Đăng ký đại lý",
+    "merchantSubscriptions": "Đăng ký thương nhân",
+    "packageCommissions": "Hoa hồng gói",
+    "totalPlatformRevenue": "Tổng doanh thu nền tảng"
+  },
+  "growth": {
+    "customers": "+{count} Khách hàng",
+    "description": "Dữ liệu mở rộng nền tảng mới nhất",
+    "merchants": "+{count} Nhà bán hàng",
+    "newCustomers": "Đăng ký khách hàng mới",
+    "newStores": "Cửa hàng mới trong kỳ này",
+    "title": "Điểm nổi bật về tăng trưởng"
+  },
+  "merchantTier": {
+    "annual": "Hàng năm",
+    "description": "Tỷ lệ đăng ký hàng năm so với tạm thời",
+    "noData": "Không có dữ liệu thương nhân nào",
+    "temp": "Tạm thời",
+    "title": "Phân phối cấp độ thương nhân",
+    "totalStores": "Tổng số cửa hàng"
+  },
+  "messages": {
+    "fetchError": "Không thể lấy bảng điều khiển quản trị viên chính"
+  },
+  "overviewCards": {
+    "activeAgents": "Đại lý hoạt động",
+    "activeMerchants": "Nhà bán hàng hoạt động",
+    "couponsIssued": "Phiếu giảm giá đã phát hành",
+    "couponsRedeemed": "Phiếu giảm giá đã được đổi",
+    "feedbackReceived": "Phản hồi đã nhận",
+    "totalAgents": "Tổng số đại lý",
+    "totalCustomers": "Tổng số khách hàng",
+    "totalMerchants": "Tổng số thương nhân"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "Đăng ký đại lý",
+    "description": "Phân tích tổng thu nhập của nền tảng",
+    "merchantSubscriptions": "Đăng ký thương nhân",
+    "packageCommissions": "Hoa hồng gói",
+    "title": "Dòng doanh thu"
+  },
+  "roles": {
+    "adApprover": "Người phê duyệt quảng cáo",
+    "financeViewer": "Người xem tài chính",
+    "superAdmin": "Quản trị viên siêu cấp",
+    "supportStaff": "Nhân viên hỗ trợ"
+  },
+  "sections": {
+    "financialPerformance": "Hiệu suất tài chính",
+    "generalOverview": "Tổng quan chung",
+    "globalEngagement": "Sự tham gia toàn cầu",
+    "growthHighlights": "Điểm nổi bật về tăng trưởng",
+    "revenueStreams": "Dòng doanh thu",
+    "roleDashboard": "Bảng điều khiển {role}",
+    "systemAnalytics": "Phân tích hệ thống"
+  },
+  "subtitle": "Tổng quan về hiệu suất và các chỉ số của nền tảng",
+  "title": "Bảng điều khiển quản trị viên chính",
+  "topMerchants": {
+    "description": "Cửa hàng có khối lượng và sự tham gia cao nhất ({total} tổng)",
+    "issued": "Đã phát hành",
+    "noData": "Không có dữ liệu hiệu suất cho khoảng thời gian này",
+    "page": "Trang {current} của {total}",
+    "redeemed": "Đã đổi thưởng",
+    "showing": "Hiển thị {from} đến {to} của {total}",
+    "successRate": "Tỷ lệ thành công {rate}%",
+    "title": "Nhà bán hàng hoạt động tốt nhất"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "Create Package",
+    "editPackage": "Edit Package",
+    "masterAdminDashboard": "Master Admin Dashboard",
+    "packages": "Packages"
+  },
+  "columns": {
+    "actions": "Actions",
+    "active": "Active",
+    "credits": "Credits",
+    "deleteAction": "Delete Package",
+    "editAction": "Edit Package",
+    "inactive": "Inactive",
+    "menuLabel": "Package Actions",
+    "noDescription": "No description",
+    "packageInfo": "Package Info",
+    "perCredit": "per credit",
+    "plan": "Plan",
+    "pricing": "Pricing",
+    "rank": "Rank",
+    "status": "Status",
+    "type": "Type"
+  },
+  "deleteDialog": {
+    "cancel": "Abort Deletion",
+    "confirm": "Confirmed, Delete Now",
+    "description": "You are about to permanently delete {name}. This action is terminal and cannot be reversed by anyone.",
+    "title": "Extreme Caution"
+  },
+  "form": {
+    "backButton": "Back to List",
+    "buttons": {
+      "cancel": "Cancel",
+      "delete": "Delete Package",
+      "save": "Publish Package",
+      "saving": "Saving...",
+      "update": "Update Package"
+    },
+    "createTitle": "Create New Package",
+    "deleteDialog": {
+      "cancel": "Cancel",
+      "confirm": "Yes, delete package",
+      "description": "This will permanently remove {name}. This action cannot be undone.",
+      "title": "Are you absolutely sure?"
+    },
+    "editTitle": "Edit Credit Package",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "Credit Type",
+      "currency": "Currency",
+      "customCreditType": "Specify Custom Credit Type",
+      "customCreditTypePlaceholder": "e.g. Birthday Special",
+      "description": "Description",
+      "descriptionPlaceholder": "Short summary of what this package offers...",
+      "displayPriority": "Display Priority",
+      "displayPriorityPlaceholder": "Pos. in list (1, 2, 3...)",
+      "merchantPlan": "Merchant Plan",
+      "packageName": "Package Name",
+      "packageNamePlaceholder": "e.g. Premium Growth Bundle",
+      "packageStatus": "Package Status",
+      "price": "Price",
+      "pricePerCredit": "Price per Credit",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "Total Credits"
+    },
+    "hints": {
+      "autoCalculated": "AUTO"
+    },
+    "messages": {
+      "createError": "Failed to create package",
+      "createSuccess": "Package created successfully",
+      "deleteError": "Failed to delete package",
+      "deleteSuccess": "Package deleted successfully",
+      "fetchError": "Failed to load package details",
+      "paidAdsRestriction": "Paid ads packages can only be managed by agents",
+      "updateError": "Failed to update package",
+      "updateSuccess": "Package updated successfully"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "Coupon",
+        "custom": "Custom",
+        "whatsappBI": "WhatsApp BI Message",
+        "whatsappUI": "WhatsApp UI Message"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "Annual / Premium",
+        "temporary": "Temporary / Basic"
+      },
+      "status": {
+        "active": "Active & Visible",
+        "inactive": "Inactive / Hidden"
+      }
+    },
+    "preview": {
+      "baseCredits": "Base Credits",
+      "categories": {
+        "coupon": "Coupon",
+        "paidAds": "Paid Ads",
+        "standard": "Standard",
+        "whatsapp": "Whatsapp Message"
+      },
+      "enhancedFeatures": "Enhanced features and capacity",
+      "getStarted": "Get Started",
+      "hiddenDraft": "HIDDEN / DRAFT",
+      "title": "Live Preview"
+    },
+    "sections": {
+      "classification": "Classification",
+      "credits": "Credits & Allocation",
+      "identity": "Identity & Pricing"
+    },
+    "subtitle": "Define pricing and credit limits for merchants.",
+    "validation": {
+      "creditsMin": "Credits must be at least 1",
+      "creditsRequired": "Credits are required",
+      "customTypeRequired": "Custom credit type is required",
+      "descriptionRequired": "Description is required",
+      "nameRequired": "Package name is required",
+      "priceMin": "Price must be at least 1",
+      "priceRequired": "Price is required"
+    }
+  },
+  "listing": {
+    "createButton": "Create New Package",
+    "noPackages": "No packages found",
+    "noPackagesDescription": "Create your first package to get started",
+    "searchPlaceholder": "Search by package name, credit type..."
+  },
+  "messages": {
+    "deleteError": "Failed to delete package",
+    "deleteSuccess": "Package deleted successfully",
+    "fetchError": "Failed to fetch packages"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "Auto-Deduction Enabled",
+    "badge": "Platform Standard",
+    "billingCycle": "Billing Cycle",
+    "billingCycleValue": "365 Days Recurring",
+    "dialog": {
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm & Update",
+      "description": "Set the new annual membership fee for all agents on the platform. Changes take effect immediately for new renewals.",
+      "label": "New Annual Fee",
+      "placeholder": "0.00",
+      "title": "Update Subscription Fee",
+      "updatingButton": "Updating...",
+      "warning": "Careful: Drastic price changes can influence agent retention. Changes will be logged in the system audit."
+    },
+    "globalCurrency": "Global Currency",
+    "insightDescription": "Adjusting the subscription fee affects platform accessibility for new agents. Ensure the pricing remains competitive while maintaining platform quality.",
+    "insightTitle": "Revenue Intelligence",
+    "messages": {
+      "fetchError": "Failed to fetch subscription fee",
+      "updateError": "Failed to update fee",
+      "updateSuccess": "Subscription fee updated successfully",
+      "validationError": "Please enter a valid amount"
+    },
+    "perYear": "/ Fixed Per Year",
+    "status": "Status",
+    "statusValue": "Active Plan",
+    "syncButton": "Sync Data",
+    "title": "Agent Annual Membership",
+    "updateButton": "Update Pricing Structure"
+  },
+  "subtitle": "Manage and monitor all merchant credit bundles",
+  "title": "Packages"
+}

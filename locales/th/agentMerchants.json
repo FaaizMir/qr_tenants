@@ -4,6 +4,7 @@
     "dashboard": "แดชบอร์ด",
     "details": "รายละเอียด",
     "editMerchant": "แก้ไขผู้ค้า",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก",
     "merchantManagement": "การจัดการผู้ค้า",
     "merchants": "พาณิชย์"
   },
@@ -26,6 +27,7 @@
       "title": "ข้อมูลรับรองบัญชี"
     },
     "actions": {
+      "back": "กลับ",
       "cancel": "ยกเลิก",
       "createMerchant": "สร้างผู้ค้า",
       "creating": "กำลังสร้าง...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "กลับ",
       "updateMerchant": "อัปเดตผู้ค้า",
       "updating": "กำลังอัปเดต..."
     },

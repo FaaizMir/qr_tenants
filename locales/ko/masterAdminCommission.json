@@ -1,0 +1,54 @@
+{
+  "breadcrumbs": {
+    "commission": "수수료",
+    "masterAdminDashboard": "마스터 관리자 대시보드"
+  },
+  "cards": {
+    "revenueAllocation": {
+      "fiscalYear": "{year} 회계 연도",
+      "title": "수익 배분"
+    },
+    "sources": {
+      "agentSubscription": {
+        "description": "관리자 연회비",
+        "title": "에이전트 구독"
+      },
+      "annualPackages": {
+        "description": "장기 상인 계획",
+        "title": "연간 패키지"
+      },
+      "merchantFees": {
+        "description": "정기 상인 수수료",
+        "title": "상인 수수료"
+      },
+      "tempPackages": {
+        "description": "단기 상인 계획",
+        "title": "임시 패키지"
+      }
+    },
+    "totalRevenue": {
+      "allTimeEarnings": "역대 수익",
+      "title": "총 수익",
+      "updatedToday": "오늘 업데이트됨"
+    }
+  },
+  "errors": {
+    "loadFailed": "지갑 정보를 불러오는 데 실패했습니다"
+  },
+  "header": {
+    "managementSubtitle": "수수료 및 수익 관리.",
+    "managementTitle": "수수료 관리",
+    "subtitle": "실시간 재무 개요 및 수익 분석",
+    "title": "수수료 허브"
+  },
+  "noData": {
+    "message": "지갑 정보를 로드할 수 없습니다. 나중에 다시 시도해 주세요.",
+    "title": "지갑 데이터 없음"
+  },
+  "status": {
+    "operatingWallet": "운영 지갑",
+    "systemActive": "시스템 활성화",
+    "systemInactive": "시스템 비활성화",
+    "systemStatus": "시스템 상태"
+  }
+}

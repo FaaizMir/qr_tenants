@@ -4,6 +4,7 @@
     "dashboard": "ダッシュボード",
     "details": "詳細",
     "editMerchant": "マーチャントを編集",
+    "masterAdminDashboard": "マスター管理者ダッシュボード",
     "merchantManagement": "マーチャント管理",
     "merchants": "マーチャント"
   },
@@ -26,6 +27,7 @@
       "title": "アカウント認証情報"
     },
     "actions": {
+      "back": "戻る",
       "cancel": "キャンセル",
       "createMerchant": "マーチャントを作成",
       "creating": "作成中...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "戻る",
       "updateMerchant": "マーチャントを更新",
       "updating": "更新中..."
     },

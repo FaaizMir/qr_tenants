@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "Padam",
+    "details": "Butiran",
+    "edit": "Sunting",
+    "menuLabel": "Pilihan Ejen"
+  },
+  "breadcrumb": {
+    "agentDetails": "Butiran Ejen",
+    "agents": "Ejen",
+    "createAgent": "Cipta Ejen",
+    "editAgent": "Edit Ejen",
+    "masterAdminDashboard": "Papan Pemuka Admin Utama"
+  },
+  "columns": {
+    "actions": "Tindakan",
+    "agentAccount": "Akaun Ejen",
+    "location": "Lokasi",
+    "phone": "Telefon",
+    "status": "Status"
+  },
+  "create": {
+    "subtitle": "Buat akaun ejen baru dan konfigurasi akses serta kebenaran mereka.",
+    "title": "Mendaftar Ejen Baru"
+  },
+  "delete": {
+    "cancel": "Batal",
+    "confirm": "Padam Ejen",
+    "deleting": "Sedang memadam...",
+    "description": "Tindakan ini tidak boleh dibatalkan. Ini akan memadamkan ejen secara kekal",
+    "descriptionEnd": " dan mengeluarkan data mereka dari pelayan kami.",
+    "descriptionName": " {name}",
+    "error": "Gagal untuk memadam ejen",
+    "success": "Ejen telah dipadamkan dengan jayanya",
+    "title": "Adakah anda benar-benar pasti?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "Status",
+      "statusDescription": "Kesahan akaun semasa",
+      "title": "Kawalan Akses"
+    },
+    "accountInformation": {
+      "emailAddress": "Alamat Emel",
+      "fullName": "Nama Penuh",
+      "memberSince": "Ahli Sejak",
+      "phoneNumber": "Nombor Telefon",
+      "title": "Maklumat Akaun"
+    },
+    "editAgent": "Edit Ejen",
+    "goBack": "Kembali",
+    "loading": "Memuatkan butiran ejen...",
+    "locationDetails": {
+      "city": "Bandar",
+      "country": "Negara",
+      "fullAddress": "Alamat Penuh",
+      "title": "Butiran Lokasi"
+    },
+    "notFound": "Ejen tidak ditemui."
+  },
+  "form": {
+    "accountStatus": {
+      "active": "Aktif",
+      "activeDescription": "Apabila dinyahdayakan, ejen tidak dapat log masuk atau menguruskan peniaga.",
+      "activeLabel": "Status Aktif",
+      "description": "Kawal akses ejen ke sistem.",
+      "inactive": "Tidak aktif",
+      "title": "Status Akaun"
+    },
+    "agentDetails": {
+      "descriptionCreate": "Masukkan butiran peribadi untuk ejen baru.",
+      "descriptionEdit": "Kemas kini maklumat peribadi dan log masuk ejen.",
+      "title": "Butiran Ejen"
+    },
+    "buttons": {
+      "cancel": "Batal",
+      "createAgent": "Cipta Ejen",
+      "creating": "Mencipta...",
+      "hideKey": "Sembunyikan kunci",
+      "hidePassword": "Sembunyikan kata laluan",
+      "showKey": "Tunjukkan kunci",
+      "showPassword": "Tunjukkan kata laluan",
+      "updateAgent": "Kemas kini Ejen",
+      "updating": "Mengemas kini..."
+    },
+    "fields": {
+      "city": "Bandar",
+      "country": "Negara",
+      "emailAddress": "Alamat Emel",
+      "fullName": "Nama Penuh",
+      "newPassword": "Kata Laluan Baru (biarkan kosong untuk mengekalkan yang sedia ada)",
+      "password": "Kata Laluan",
+      "phoneNumber": "Nombor Telefon",
+      "searchAddress": "Cari Alamat",
+      "stripeSecretKey": "Kunci Rahsia Stripe (Pilihan)"
+    },
+    "hints": {
+      "passwordRequirements": "Min. 8 aksara, alfanumerik.",
+      "stripeKeyCreate": "Konfigurasikan kunci API Stripe untuk menerima pembayaran pedagang. Boleh ditetapkan kemudian dalam tetapan ejen.",
+      "stripeKeyEdit": "Kemas kini kunci API Stripe ejen. Biarkan kosong untuk mengekalkan konfigurasi sedia ada."
+    },
+    "locationDetails": {
+      "description": "Maklumat alamat untuk ejen.",
+      "title": "Butiran Lokasi"
+    },
+    "placeholders": {
+      "address": "123 Ejen St, Bandar, Negara",
+      "city": "Bandar",
+      "country": "Negara",
+      "email": "agent@example.com",
+      "name": "cth. John Doe",
+      "passwordCreate": "Masukkan kata laluan yang selamat",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (biarkan kosong untuk mengekalkan yang sedia ada)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (biarkan kosong untuk mengekalkan yang sedia ada)",
+      "stripeKeyNew": "sk_test_... atau sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "Tambah Ejen",
+    "searchPlaceholder": "Cari ejen..."
+  },
+  "messages": {
+    "addressSelected": "Alamat dipilih",
+    "checkInput": "Sila semak input anda dan cuba lagi.",
+    "createError": "Gagal mencipta ejen",
+    "createSuccess": "Akaun ejen berjaya dicipta.",
+    "fetchError": "Gagal untuk memuatkan butiran ejen",
+    "loadError": "Gagal memuatkan pentadbir",
+    "updateError": "Gagal mengemas kini ejen",
+    "updateSuccess": "Profil ejen berjaya dikemas kini.",
+    "validationError": "{field}: {message}",
+    "validationFailed": "Pengesahan gagal"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Tidak Aktif"
+  },
+  "statusToggle": {
+    "activateSuccess": "Ejen diaktifkan dengan jayanya",
+    "deactivateSuccess": "Ejen berjaya dinyahaktifkan",
+    "updateError": "Gagal mengemas kini status ejen"
+  },
+  "subtitle": "Urus ejen dan akaun mereka.",
+  "title": "Pengurusan Ejen"
+}

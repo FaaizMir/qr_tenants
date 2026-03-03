@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "All Statements",
+    "masterAdminDashboard": "Master Admin Dashboard"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "Download PDF",
+      "header": "Actions"
+    },
+    "generatedAt": {
+      "header": "Generated At"
+    },
+    "owner": {
+      "agent": "Agent",
+      "header": "Owner",
+      "merchant": "Merchant",
+      "superAdmin": "Super Admin"
+    },
+    "period": {
+      "header": "Period",
+      "unknown": "Unknown"
+    },
+    "status": {
+      "failed": "Failed",
+      "generated": "Generated",
+      "header": "Status",
+      "pending": "Pending"
+    }
+  },
+  "filters": {
+    "description": "Filter statements by year and month",
+    "loading": "Loading...",
+    "month": "Month",
+    "quickActions": "Quick Actions",
+    "refreshList": "Refresh List",
+    "selectMonth": "Select month",
+    "selectYear": "Select year",
+    "title": "Statement Filters",
+    "year": "Year"
+  },
+  "header": {
+    "subtitle": "View and download monthly statements for merchants, agents, and platform admin.",
+    "title": "All Financial Statements"
+  },
+  "messages": {
+    "downloadError": "Failed to download PDF. Please try again.",
+    "downloadSuccess": "Statement downloaded successfully!",
+    "loadError": "Failed to load statements. Please try again."
+  },
+  "months": {
+    "april": "April",
+    "august": "August",
+    "december": "December",
+    "february": "February",
+    "january": "January",
+    "july": "July",
+    "june": "June",
+    "march": "March",
+    "may": "May",
+    "november": "November",
+    "october": "October",
+    "september": "September"
+  },
+  "summaryCards": {
+    "agents": "Agents",
+    "merchants": "Merchants",
+    "superAdmin": "Super Admin"
+  },
+  "table": {
+    "loading": "Loading statements...",
+    "noData": {
+      "message": "No statements available for the selected period.",
+      "title": "No Statements Found"
+    },
+    "tabs": {
+      "agents": "Agents ({count})",
+      "all": "All ({count})",
+      "merchants": "Merchants ({count})",
+      "superAdmin": "Super Admin ({count})"
+    },
+    "title": "Statement History"
+  }
+}

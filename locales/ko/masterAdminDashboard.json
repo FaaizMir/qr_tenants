@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "대시보드"
+  },
+  "engagement": {
+    "activityPulse": "플랫폼 활동 맥박",
+    "description": "모든 매장에 대한 상호작용 메트릭",
+    "redemptionRate": "환급 비율",
+    "systemLoad": "정상 시스템 부하",
+    "title": "글로벌 참여",
+    "totalFeedback": "총 피드백"
+  },
+  "filters": {
+    "customRange": "사용자 정의 범위",
+    "last30Days": "최근 30일",
+    "last7Days": "최근 7일",
+    "lastMonth": "지난 달",
+    "pickDate": "날짜 선택",
+    "selectRange": "범위 선택",
+    "thisMonth": "이번 달",
+    "today": "오늘",
+    "yesterday": "어제"
+  },
+  "financialCards": {
+    "agentSubscriptions": "에이전트 구독",
+    "merchantSubscriptions": "상인 구독",
+    "packageCommissions": "패키지 수수료",
+    "totalPlatformRevenue": "총 플랫폼 수익"
+  },
+  "growth": {
+    "customers": "+{count} 고객",
+    "description": "최신 플랫폼 확장 데이터",
+    "merchants": "+{count} 상인",
+    "newCustomers": "신규 고객 등록",
+    "newStores": "이번 기간의 신규 상점",
+    "title": "성장 하이라이트"
+  },
+  "merchantTier": {
+    "annual": "연간",
+    "description": "연간 대 임시 구독 비율",
+    "noData": "상인 데이터가 없습니다",
+    "temp": "임시",
+    "title": "상인 등급 분포",
+    "totalStores": "총 매장 수"
+  },
+  "messages": {
+    "fetchError": "마스터 관리자 대시보드를 가져오는 데 실패했습니다"
+  },
+  "overviewCards": {
+    "activeAgents": "활동 중인 에이전트",
+    "activeMerchants": "활성 상인",
+    "couponsIssued": "발행된 쿠폰",
+    "couponsRedeemed": "사용된 쿠폰",
+    "feedbackReceived": "피드백 수신",
+    "totalAgents": "총 에이전트",
+    "totalCustomers": "총 고객 수",
+    "totalMerchants": "총 상인 수"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "에이전트 구독",
+    "description": "총 플랫폼 수익 분석",
+    "merchantSubscriptions": "상인 구독",
+    "packageCommissions": "패키지 수수료",
+    "title": "수익원"
+  },
+  "roles": {
+    "adApprover": "광고 승인자",
+    "financeViewer": "재무 뷰어",
+    "superAdmin": "슈퍼 관리자",
+    "supportStaff": "지원 직원"
+  },
+  "sections": {
+    "financialPerformance": "재무 성과",
+    "generalOverview": "일반 개요",
+    "globalEngagement": "글로벌 참여",
+    "growthHighlights": "성장 하이라이트",
+    "revenueStreams": "수익원",
+    "roleDashboard": "{role} 대시보드",
+    "systemAnalytics": "시스템 분석"
+  },
+  "subtitle": "플랫폼 성과 및 메트릭 개요",
+  "title": "마스터 관리자 대시보드",
+  "topMerchants": {
+    "description": "가장 높은 거래량과 참여를 가진 상점 ({total} 총)",
+    "issued": "발급됨",
+    "noData": "이 기간에 대한 성과 데이터가 없습니다",
+    "page": "페이지 {current} / {total}",
+    "redeemed": "환급됨",
+    "showing": "{total} 중 {from}에서 {to}까지 표시",
+    "successRate": "{rate}% 성공률",
+    "title": "최고 성과 상인"
+  }
+}

@@ -26,7 +26,16 @@ export const namespaces = [
   "agentEarnings",
   "agentPackages",
   "agentStatements",
-  "agentApprovals"
+  "agentApprovals",
+  "agentAccount",
+  "masterAdminDashboard",
+  "masterAdminAgents",
+  "masterAdminStaff",
+  "masterAdminPackages",
+  "masterAdminCommission",
+  "masterAdminStatements",
+  "masterAdminSettings",
+  "masterAdminAccount",
 ];
 
 export default getRequestConfig(async ({ requestLocale }) => {

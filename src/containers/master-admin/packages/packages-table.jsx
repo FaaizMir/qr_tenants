@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Plus,
   Package,
@@ -32,6 +33,7 @@ import {
 
 export default function PackagesTable() {
   const router = useRouter();
+  const t = useTranslations("masterAdminPackages");
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
@@ -62,7 +64,7 @@ export default function PackagesTable() {
       setPackages(superAdminPackages);
     } catch (err) {
       console.error(err);
-      toast.error("Failed to fetch packages");
+      toast.error(t("messages.fetchError"));
     } finally {
       setLoading(false);
     }
@@ -99,10 +101,10 @@ export default function PackagesTable() {
           params: { admin_id: session?.user?.adminId },
         }
       );
-      toast.success("Package deleted successfully");
+      toast.success(t("messages.deleteSuccess"));
       fetchPackages(); // Refresh list
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Failed to delete package");
+      toast.error(err?.response?.data?.message || t("messages.deleteError"));
     } finally {
       setLoading(false);
       setPackageToDelete(null);
@@ -116,6 +118,13 @@ export default function PackagesTable() {
     (page + 1) * pageSize
   );
 
+  // Define columns inside component to ensure translation context
+  const columns = PackagesColumns({
+    onEdit: handleEdit,
+    onDelete: handleDelete,
+    t,
+  });
+
   return (
     <div className="max-w-full space-y-8 py-6">
       {/* Header Section */}
@@ -126,11 +135,11 @@ export default function PackagesTable() {
           </div>
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-              Packages
+              {t("title")}
             </h1>
             <p className="text-muted-foreground font-medium flex items-center gap-2 text-sm">
               <Activity className="h-4 w-4 text-emerald-500" />
-              Manage and monitor all merchant credit bundles
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -142,7 +151,7 @@ export default function PackagesTable() {
           <CardContent className="p-8">
             <div className="mb-6">
               <TableToolbar
-                placeholder="Search by package name, credit type..."
+                placeholder={t("listing.searchPlaceholder")}
                 search={search}
                 onSearchChange={setSearch}
                 total={filteredPackages.length}
@@ -153,17 +162,14 @@ export default function PackagesTable() {
                     className="shadow-xl shadow-primary/20 font-bold px-8 h-12 rounded-xl"
                   >
                     <Plus className="h-5 w-5 mr-2 stroke-[3px]" />
-                    Create New Package
+                    {t("listing.createButton")}
                   </Button>
                 }
               />
             </div>
             <DataTable
               data={paginatedData}
-              columns={PackagesColumns({
-                onEdit: handleEdit,
-                onDelete: handleDelete,
-              })}
+              columns={columns}
               page={page}
               pageSize={pageSize}
               total={filteredPackages.length}
@@ -180,25 +186,21 @@ export default function PackagesTable() {
         <AlertDialogContent className="rounded-4xl border-none shadow-2xl p-8 max-w-md">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-2xl font-black italic font-mono uppercase text-slate-900">
-              Extreme Caution
+              {t("deleteDialog.title")}
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base text-slate-500 leading-relaxed font-medium">
-              You are about to permanently delete{" "}
-              <span className="text-slate-900 font-bold italic underline decoration-red-500 decoration-2">
-                {packageToDelete?.name}
-              </span>
-              . This action is terminal and cannot be reversed by anyone.
+              {t("deleteDialog.description", { name: packageToDelete?.name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="mt-8 gap-3">
             <AlertDialogCancel className="h-12 px-6 rounded-2xl font-bold border-slate-200 bg-slate-50 hover:bg-slate-100 transition-all">
-              Abort Deletion
+              {t("deleteDialog.cancel")}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmDelete}
               className="h-12 px-8 rounded-2xl bg-red-500 text-white font-bold hover:bg-red-600 shadow-lg shadow-red-200 transition-all"
             >
-              Confirmed, Delete Now
+              {t("deleteDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

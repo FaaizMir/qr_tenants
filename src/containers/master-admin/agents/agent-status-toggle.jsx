@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 
-export function AgentStatusToggle({ initialStatus, agentId }) {
+export function AgentStatusToggle({ initialStatus, agentId, t }) {
     const [isActive, setIsActive] = useState(initialStatus === "active" || initialStatus === true);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,11 +19,11 @@ export function AgentStatusToggle({ initialStatus, agentId }) {
 
         try {
             await axiosInstance.patch(`/admins/${agentId}`, { is_active: checked });
-            toast.success(`Agent ${checked ? "activated" : "deactivated"} successfully`);
+            toast.success(checked ? t("statusToggle.activateSuccess") : t("statusToggle.deactivateSuccess"));
         } catch (error) {
             console.error("Error toggling agent status:", error);
             setIsActive(originalState); // Revert on error
-            toast.error(error?.response?.data?.message || "Failed to update agent status");
+            toast.error(error?.response?.data?.message || t("statusToggle.updateError"));
         } finally {
             setIsLoading(false);
         }
@@ -37,7 +37,7 @@ export function AgentStatusToggle({ initialStatus, agentId }) {
                 disabled={isLoading}
             />
             <span className="text-sm capitalize text-muted-foreground w-[60px]">
-                {isActive ? "Active" : "Inactive"}
+                {isActive ? t("status.active") : t("status.inactive")}
             </span>
         </div>
     );

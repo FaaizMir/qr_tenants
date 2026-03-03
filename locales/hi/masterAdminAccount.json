@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "अपने खाते की जानकारी अपडेट करें",
+    "title": "खाता विवरण"
+  },
+  "breadcrumbs": {
+    "account": "खाता",
+    "dashboard": "डैशबोर्ड"
+  },
+  "buttons": {
+    "saveChanges": "परिवर्तन सहेजें",
+    "saving": "सहेजना..."
+  },
+  "fields": {
+    "email": "ईमेल",
+    "fullName": "पूरा नाम",
+    "phone": "फोन",
+    "role": "भूमिका"
+  },
+  "messages": {
+    "fetchError": "खाता जानकारी लोड करने में विफल",
+    "updateError": "खाता अपडेट करने में विफल",
+    "updateSuccess": "खाता सफलतापूर्वक अपडेट किया गया",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "अपना ईमेल दर्ज करें",
+    "name": "अपना नाम दर्ज करें",
+    "phone": "अपना फोन नंबर दर्ज करें"
+  },
+  "profile": {
+    "description": "आपकी प्रोफ़ाइल जानकारी",
+    "title": "प्रोफ़ाइल"
+  },
+  "subtitle": "अपने खाता जानकारी का प्रबंधन करें",
+  "title": "खाता सेटिंग्स"
+}

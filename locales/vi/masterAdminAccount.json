@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "Cập nhật thông tin tài khoản của bạn",
+    "title": "Chi tiết tài khoản"
+  },
+  "breadcrumbs": {
+    "account": "Tài khoản",
+    "dashboard": "Bảng điều khiển"
+  },
+  "buttons": {
+    "saveChanges": "Lưu thay đổi",
+    "saving": "Đang lưu..."
+  },
+  "fields": {
+    "email": "Email",
+    "fullName": "Họ và tên",
+    "phone": "Điện thoại",
+    "role": "Vai trò"
+  },
+  "messages": {
+    "fetchError": "Không thể tải thông tin tài khoản",
+    "updateError": "Cập nhật tài khoản không thành công",
+    "updateSuccess": "Tài khoản đã được cập nhật thành công",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "Nhập email của bạn",
+    "name": "Nhập tên của bạn",
+    "phone": "Nhập số điện thoại của bạn"
+  },
+  "profile": {
+    "description": "Thông tin hồ sơ của bạn",
+    "title": "Hồ sơ"
+  },
+  "subtitle": "Quản lý thông tin tài khoản của bạn",
+  "title": "Cài đặt tài khoản"
+}

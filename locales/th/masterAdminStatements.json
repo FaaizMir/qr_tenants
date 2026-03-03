@@ -1,0 +1,84 @@
+{
+  "breadcrumbs": {
+    "allStatements": "งบการเงินทั้งหมด",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก"
+  },
+  "columns": {
+    "actions": {
+      "downloadPdf": "ดาวน์โหลด PDF",
+      "header": "การดำเนินการ"
+    },
+    "generatedAt": {
+      "header": "สร้างเมื่อ"
+    },
+    "owner": {
+      "agent": "ตัวแทน",
+      "header": "เจ้าของ",
+      "merchant": "ผู้ค้า",
+      "superAdmin": "ผู้ดูแลระบบระดับสูง"
+    },
+    "period": {
+      "header": "ช่วงเวลา",
+      "unknown": "ไม่ทราบ"
+    },
+    "status": {
+      "failed": "ล้มเหลว",
+      "generated": "สร้าง",
+      "header": "สถานะ",
+      "pending": "รอดำเนินการ"
+    }
+  },
+  "filters": {
+    "description": "กรองงบการเงินตามปีและเดือน",
+    "loading": "กำลังโหลด...",
+    "month": "เดือน",
+    "quickActions": "การดำเนินการด่วน",
+    "refreshList": "รีเฟรชรายการ",
+    "selectMonth": "เลือกเดือน",
+    "selectYear": "เลือกปี",
+    "title": "ตัวกรองรายการ",
+    "year": "ปี"
+  },
+  "header": {
+    "subtitle": "ดูและดาวน์โหลดใบแจ้งยอดรายเดือนสำหรับพ่อค้า ตัวแทน และผู้ดูแลแพลตฟอร์ม.",
+    "title": "งบการเงินทั้งหมด"
+  },
+  "messages": {
+    "downloadError": "ไม่สามารถดาวน์โหลด PDF ได้ กรุณาลองอีกครั้ง.",
+    "downloadSuccess": "ดาวน์โหลดใบแจ้งยอดสำเร็จ!",
+    "loadError": "ไม่สามารถโหลดใบแจ้งยอดได้ กรุณาลองอีกครั้ง."
+  },
+  "months": {
+    "april": "เมษายน",
+    "august": "สิงหาคม",
+    "december": "ธันวาคม",
+    "february": "กุมภาพันธ์",
+    "january": "มกราคม",
+    "july": "กรกฎาคม",
+    "june": "มิถุนายน",
+    "march": "มีนาคม",
+    "may": "พฤษภาคม",
+    "november": "พฤศจิกายน",
+    "october": "ตุลาคม",
+    "september": "กันยายน"
+  },
+  "summaryCards": {
+    "agents": "ตัวแทน",
+    "merchants": "พ่อค้า",
+    "superAdmin": "ผู้ดูแลระบบ"
+  },
+  "table": {
+    "loading": "กำลังโหลดใบแจ้งยอด...",
+    "noData": {
+      "message": "ไม่มีรายการสำหรับช่วงเวลาที่เลือก.",
+      "title": "ไม่พบรายการ"
+    },
+    "tabs": {
+      "agents": "ตัวแทน ({count})",
+      "all": "ทั้งหมด ({count})",
+      "merchants": "ผู้ค้า ({count})",
+      "superAdmin": "ผู้ดูแลระบบระดับสูง ({count})"
+    },
+    "title": "ประวัติงบการเงิน"
+  }
+}

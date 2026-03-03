@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "สร้างแพ็คเกจ",
+    "editPackage": "แก้ไขแพ็คเกจ",
+    "masterAdminDashboard": "แดชบอร์ดผู้ดูแลระบบหลัก",
+    "packages": "แพ็คเกจ"
+  },
+  "columns": {
+    "actions": "การดำเนินการ",
+    "active": "ใช้งานอยู่",
+    "credits": "เครดิต",
+    "deleteAction": "ลบแพ็คเกจ",
+    "editAction": "แก้ไขแพ็คเกจ",
+    "inactive": "ไม่ใช้งาน",
+    "menuLabel": "การดำเนินการแพ็คเกจ",
+    "noDescription": "ไม่มีคำอธิบาย",
+    "packageInfo": "ข้อมูลแพ็คเกจ",
+    "perCredit": "ต่อเครดิต",
+    "plan": "แผน",
+    "pricing": "ราคา",
+    "rank": "อันดับ",
+    "status": "สถานะ",
+    "type": "ประเภท"
+  },
+  "deleteDialog": {
+    "cancel": "ยกเลิกการลบ",
+    "confirm": "ยืนยัน, ลบตอนนี้",
+    "description": "คุณกำลังจะลบ {name} อย่างถาวร การกระทำนี้ไม่สามารถย้อนกลับได้โดยใครก็ตาม",
+    "title": "ความระมัดระวังอย่างยิ่ง"
+  },
+  "form": {
+    "backButton": "กลับไปยังรายการ",
+    "buttons": {
+      "cancel": "ยกเลิก",
+      "delete": "ลบแพ็คเกจ",
+      "save": "เผยแพร่แพ็คเกจ",
+      "saving": "กำลังบันทึก...",
+      "update": "อัปเดตแพ็คเกจ"
+    },
+    "createTitle": "สร้างแพ็คเกจใหม่",
+    "deleteDialog": {
+      "cancel": "ยกเลิก",
+      "confirm": "ใช่, ลบแพ็คเกจ",
+      "description": "นี่จะลบ {name} อย่างถาวร การกระทำนี้ไม่สามารถย้อนกลับได้",
+      "title": "คุณแน่ใจจริงๆ หรือ?"
+    },
+    "editTitle": "แก้ไขแพ็คเกจเครดิต",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "ประเภทเครดิต",
+      "currency": "สกุลเงิน",
+      "customCreditType": "ระบุประเภทเครดิตที่กำหนดเอง",
+      "customCreditTypePlaceholder": "เช่น วันเกิดพิเศษ",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "สรุปสั้น ๆ ของสิ่งที่แพ็คเกจนี้เสนอ...",
+      "displayPriority": "ลำดับความสำคัญในการแสดงผล",
+      "displayPriorityPlaceholder": "ตำแหน่งในรายการ (1, 2, 3...)",
+      "merchantPlan": "แผนผู้ค้า",
+      "packageName": "ชื่อแพ็คเกจ",
+      "packageNamePlaceholder": "เช่น แพ็คเกจการเติบโตพรีเมียม",
+      "packageStatus": "สถานะแพ็คเกจ",
+      "price": "ราคา",
+      "pricePerCredit": "ราคาต่อเครดิต",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "เครดิตรวม"
+    },
+    "hints": {
+      "autoCalculated": "อัตโนมัติ"
+    },
+    "messages": {
+      "createError": "ไม่สามารถสร้างแพ็คเกจได้",
+      "createSuccess": "สร้างแพ็คเกจเรียบร้อยแล้ว",
+      "deleteError": "ลบแพ็คเกจไม่สำเร็จ",
+      "deleteSuccess": "ลบแพ็คเกจเรียบร้อยแล้ว",
+      "fetchError": "ไม่สามารถโหลดรายละเอียดแพ็คเกจได้",
+      "paidAdsRestriction": "แพ็คเกจโฆษณาที่ชำระเงินสามารถจัดการได้โดยตัวแทนเท่านั้น",
+      "updateError": "อัปเดตแพ็คเกจไม่สำเร็จ",
+      "updateSuccess": "อัปเดตแพ็คเกจเรียบร้อยแล้ว"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "คูปอง",
+        "custom": "กำหนดเอง",
+        "whatsappBI": "ข้อความ BI WhatsApp",
+        "whatsappUI": "ข้อความ UI WhatsApp"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "รายปี / พรีเมียม",
+        "temporary": "ชั่วคราว / พื้นฐาน"
+      },
+      "status": {
+        "active": "เปิดใช้งาน & มองเห็นได้",
+        "inactive": "ไม่เปิดใช้งาน / ซ่อน"
+      }
+    },
+    "preview": {
+      "baseCredits": "เครดิตพื้นฐาน",
+      "categories": {
+        "coupon": "คูปอง",
+        "paidAds": "โฆษณาที่ชำระเงิน",
+        "standard": "มาตรฐาน",
+        "whatsapp": "ข้อความ Whatsapp"
+      },
+      "enhancedFeatures": "ฟีเจอร์และความสามารถที่เพิ่มขึ้น",
+      "getStarted": "เริ่มต้น",
+      "hiddenDraft": "ซ่อน / ร่าง",
+      "title": "ดูตัวอย่างสด"
+    },
+    "sections": {
+      "classification": "การจำแนกประเภท",
+      "credits": "เครดิตและการจัดสรร",
+      "identity": "ตัวตน & ราคา"
+    },
+    "subtitle": "กำหนดราคาและขีดจำกัดเครดิตสำหรับผู้ค้า.",
+    "validation": {
+      "creditsMin": "เครดิตต้องมีอย่างน้อย 1",
+      "creditsRequired": "ต้องมีเครดิต",
+      "customTypeRequired": "ต้องการประเภทเครดิตที่กำหนดเอง",
+      "descriptionRequired": "ต้องระบุคำอธิบาย",
+      "nameRequired": "ชื่อแพ็คเกจเป็นสิ่งจำเป็น",
+      "priceMin": "ราคาต้องไม่น้อยกว่า 1",
+      "priceRequired": "ต้องระบุราคา"
+    }
+  },
+  "listing": {
+    "createButton": "สร้างแพ็คเกจใหม่",
+    "noPackages": "ไม่พบแพ็คเกจ",
+    "noPackagesDescription": "สร้างแพ็คเกจแรกของคุณเพื่อเริ่มต้น",
+    "searchPlaceholder": "ค้นหาตามชื่อแพ็คเกจ ประเภทเครดิต..."
+  },
+  "messages": {
+    "deleteError": "ลบแพ็คเกจไม่สำเร็จ",
+    "deleteSuccess": "ลบแพ็คเกจเรียบร้อยแล้ว",
+    "fetchError": "ไม่สามารถดึงแพ็คเกจได้"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "เปิดใช้งานการหักเงินอัตโนมัติ",
+    "badge": "แพลตฟอร์มมาตรฐาน",
+    "billingCycle": "รอบการเรียกเก็บเงิน",
+    "billingCycleValue": "365 วันต่อเนื่อง",
+    "dialog": {
+      "cancelButton": "ยกเลิก",
+      "confirmButton": "ยืนยันและอัปเดต",
+      "description": "ตั้งค่าค่าธรรมเนียมสมาชิกประจำปีใหม่สำหรับตัวแทนทั้งหมดในแพลตฟอร์ม การเปลี่ยนแปลงจะมีผลทันทีสำหรับการต่ออายุใหม่.",
+      "label": "ค่าธรรมเนียมรายปีใหม่",
+      "placeholder": "0.00",
+      "title": "อัปเดตค่าธรรมเนียมการสมัครสมาชิก",
+      "updatingButton": "กำลังอัปเดต...",
+      "warning": "ระวัง: การเปลี่ยนแปลงราคาที่รุนแรงอาจมีผลต่อการรักษาตัวแทน การเปลี่ยนแปลงจะถูกบันทึกในระบบตรวจสอบ."
+    },
+    "globalCurrency": "สกุลเงินทั่วโลก",
+    "insightDescription": "การปรับค่าธรรมเนียมการสมัครสมาชิกมีผลต่อการเข้าถึงแพลตฟอร์มสำหรับตัวแทนใหม่ ให้แน่ใจว่าราคาแข่งขันได้ในขณะที่รักษาคุณภาพของแพลตฟอร์ม",
+    "insightTitle": "ข้อมูลเชิงลึกเกี่ยวกับรายได้",
+    "messages": {
+      "fetchError": "ไม่สามารถดึงค่าธรรมเนียมการสมัครสมาชิกได้",
+      "updateError": "ไม่สามารถอัปเดตค่าธรรมเนียมได้",
+      "updateSuccess": "อัปเดตค่าธรรมเนียมการสมัครสมาชิกเรียบร้อยแล้ว",
+      "validationError": "กรุณาใส่จำนวนที่ถูกต้อง"
+    },
+    "perYear": "/ คงที่ต่อปี",
+    "status": "สถานะ",
+    "statusValue": "แผนที่ใช้งาน",
+    "syncButton": "ซิงค์ข้อมูล",
+    "title": "สมาชิกประจำปีของตัวแทน",
+    "updateButton": "อัปเดตโครงสร้างราคา"
+  },
+  "subtitle": "จัดการและติดตามชุดเครดิตของผู้ค้า",
+  "title": "แพ็คเกจ"
+}

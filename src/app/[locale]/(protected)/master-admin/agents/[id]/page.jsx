@@ -4,10 +4,11 @@ import { getTranslations } from "next-intl/server";
 
 export default async function MasterAdminAgentDetailsPage({ params }) {
   const { id } = await params;
+  const t = await getTranslations("masterAdminAgents.breadcrumb");
 
   const breadcrumbData = [
-    { name: "Agents", url: "/master-admin/agents" },
-    { name: "Agent Details", url: `/master-admin/agents/${id}` },
+    { name: t("agents"), url: "/master-admin/agents" },
+    { name: t("agentDetails"), url: `/master-admin/agents/${id}` },
   ];
 
   return (

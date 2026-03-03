@@ -4,6 +4,7 @@
     "dashboard": "لوحة التحكم",
     "details": "التفاصيل",
     "editMerchant": "تعديل التاجر",
+    "masterAdminDashboard": "لوحة تحكم المدير الرئيسي",
     "merchantManagement": "إدارة التجار",
     "merchants": "التجار"
   },
@@ -26,6 +27,7 @@
       "title": "بيانات الاعتماد الحسابية"
     },
     "actions": {
+      "back": "عودة",
       "cancel": "إلغاء",
       "createMerchant": "إنشاء تاجر",
       "creating": "جارٍ الإنشاء...",
@@ -228,6 +230,7 @@
       "passwordPlaceholder": "••••••••"
     },
     "actions": {
+      "back": "عودة",
       "updateMerchant": "تحديث التاجر",
       "updating": "جارٍ التحديث..."
     },

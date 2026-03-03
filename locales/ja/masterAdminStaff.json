@@ -1,0 +1,141 @@
+{
+  "access": {
+    "adsManagement": "広告管理",
+    "financeOnly": "ファイナンスのみ",
+    "fullAccess": "フルアクセス",
+    "readOnly": "読み取り専用",
+    "supportHelp": "サポートヘルプ"
+  },
+  "actions": {
+    "delete": "削除",
+    "edit": "編集",
+    "menuLabel": "スタッフオプション"
+  },
+  "breadcrumb": {
+    "addStaff": "スタッフを追加",
+    "editStaff": "スタッフを編集",
+    "masterAdminDashboard": "マスター管理者ダッシュボード",
+    "staffManagement": "スタッフ管理"
+  },
+  "columns": {
+    "access": "アクセス",
+    "actions": "アクション",
+    "phone": "電話",
+    "role": "役割",
+    "staffMember": "スタッフメンバー",
+    "status": "ステータス"
+  },
+  "delete": {
+    "cancel": "キャンセル",
+    "confirm": "完全に削除",
+    "deleting": "削除中...",
+    "description": "本当に削除してもよろしいですか？",
+    "descriptionEnd": "? この操作は元に戻せません。",
+    "descriptionPermanent": "? これにより、彼らのプラットフォームへのアクセスが永久に取り消されます。",
+    "error": "スタッフメンバーの削除に失敗しました。",
+    "success": "スタッフメンバーが正常に削除されました。",
+    "title": "スタッフメンバーを削除しますか？",
+    "unknownRole": "不明な役割"
+  },
+  "form": {
+    "accountVisibility": {
+      "description": "このアカウントがアクティブかどうかを制御します。",
+      "disabled": "アカウントが無効です",
+      "disabledDescription": "スタッフのアクセスは現在取り消されています。",
+      "enabled": "アカウントが有効化されました",
+      "enabledDescription": "スタッフはログインしてプラットフォームを管理できます。",
+      "title": "アカウントの可視性"
+    },
+    "buttons": {
+      "cancel": "キャンセル",
+      "createAccount": "アカウントを作成",
+      "savingChanges": "変更を保存中",
+      "updateProfile": "プロフィールを更新"
+    },
+    "createSubtitle": "新しい役割とアクセス権限を割り当てる。",
+    "createTitle": "新しいスタッフアカウントを作成",
+    "editSubtitle": "既存の管理権限を変更する。",
+    "editTitle": "スタッフアカウントを編集",
+    "fields": {
+      "accountPassword": "アカウントパスワード",
+      "emailAddress": "メールアドレス",
+      "fullName": "フルネーム",
+      "phoneNumber": "電話番号",
+      "systemRole": "システムロール",
+      "updatePassword": "パスワードを更新（オプション）"
+    },
+    "hints": {
+      "passwordKeepCurrent": "* 現在のパスワードを保持するには空白のままにしてください。"
+    },
+    "placeholders": {
+      "email": "staff@platform.com",
+      "name": "例：ロバート・フォックス",
+      "passwordCreate": "安全なパスワードを入力してください",
+      "passwordEdit": "••••••••"
+    },
+    "staffInformation": {
+      "description": "重要な詳細と連絡先情報。",
+      "title": "スタッフ情報"
+    },
+    "validation": {
+      "emailRequired": "メールアドレスは必須です",
+      "nameRequired": "フルネームは必須です",
+      "passwordMinLength": "最低8文字が必要です",
+      "passwordRequired": "パスワードは必須です",
+      "phoneRequired": "電話番号は必須です",
+      "roleRequired": "ロールは必須です"
+    }
+  },
+  "listing": {
+    "addStaff": "スタッフを追加",
+    "clearSearch": "検索をクリア",
+    "noStaffDescription": "検索を調整するか、新しいスタッフメンバーを追加してみてください。",
+    "noStaffFound": "スタッフが見つかりません",
+    "refresh": "更新",
+    "searchPlaceholder": "スタッフメンバーを検索..."
+  },
+  "messages": {
+    "createError": "スタッフメンバーの保存に失敗しました。",
+    "createSuccess": "スタッフアカウントが正常に作成されました。",
+    "fetchError": "スタッフデータの読み込みに失敗しました。",
+    "fetchStaffError": "スタッフの取得に失敗しました",
+    "updateSuccess": "スタッフプロファイルが正常に更新されました。"
+  },
+  "roleLegend": {
+    "adApprover": {
+      "description": "広告をレビュー",
+      "title": "広告承認者"
+    },
+    "financeViewer": {
+      "description": "元帳と明細書",
+      "title": "ファイナンスビューア"
+    },
+    "role": "役割",
+    "superAdmin": {
+      "description": "フルアクセス",
+      "title": "スーパ管理者"
+    },
+    "supportStaff": {
+      "description": "チケットと返信",
+      "title": "サポートスタッフ"
+    }
+  },
+  "roles": {
+    "adApprover": "広告承認者",
+    "admin": "管理者",
+    "financeViewer": "ファイナンスビューア",
+    "superAdmin": "スーパ管理者",
+    "supportStaff": "サポートスタッフ"
+  },
+  "status": {
+    "active": "アクティブ",
+    "inactive": "非アクティブ"
+  },
+  "statusToggle": {
+    "disableSuccess": "スタッフアカウントが正常に無効化されました。",
+    "enableSuccess": "スタッフアカウントが正常に有効化されました。",
+    "updateError": "スタッフのステータスの更新に失敗しました。"
+  },
+  "subtitle": "プラットフォームの管理役割と権限を管理します。",
+  "title": "スタッフ管理"
+}

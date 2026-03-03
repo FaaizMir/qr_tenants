@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Plus, Users, RefreshCw, ShieldAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
 import TableToolbar from "@/components/common/table-toolbar";
@@ -31,6 +32,7 @@ import { cn } from "@/lib/utils";
 
 export default function StaffManagement() {
   const router = useRouter();
+  const t = useTranslations("masterAdminStaff");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -120,12 +122,12 @@ export default function StaffManagement() {
       }
 
       await axiosInstance.delete(`${endpoint}/${staffToDelete.id}`);
-      toast.success("Staff member deleted successfully.");
+      toast.success(t("delete.success"));
       fetchStaff();
     } catch (error) {
       console.error("Failed to delete staff:", error);
       toast.error(
-        error?.response?.data?.message || "Failed to delete staff member.",
+        error?.response?.data?.message || t("delete.error"),
       );
     } finally {
       setDeleting(false);
@@ -138,19 +140,20 @@ export default function StaffManagement() {
     fetchStaff();
   }, [fetchStaff]);
 
-  const columns = getStaffColumns((staff) => {
-    setStaffToDelete(staff);
-    setDeleteConfirmOpen(true);
-  });
+  const columns = getStaffColumns(
+    (staff) => {
+      setStaffToDelete(staff);
+      setDeleteConfirmOpen(true);
+    },
+    t
+  );
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Staff Management</h1>
-          <p className="text-muted-foreground">
-            Manage platform administrative roles and permissions.
-          </p>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
       </div>
 
@@ -158,7 +161,7 @@ export default function StaffManagement() {
         <CardHeader></CardHeader>
         <CardContent>
           <TableToolbar
-            placeholder="Search staff members..."
+            placeholder={t("listing.searchPlaceholder")}
             onSearchChange={setSearch}
             rightSlot={
               <div className="flex items-center gap-2">
@@ -176,7 +179,7 @@ export default function StaffManagement() {
                   onClick={() => router.push("/master-admin/staff/create")}
                 >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Staff
+                  {t("listing.addStaff")}
                 </Button>
               </div>
             }
@@ -185,16 +188,16 @@ export default function StaffManagement() {
           {data.length === 0 && !loading ? (
             <div className="flex flex-col items-center justify-center py-20 text-center border rounded-lg bg-muted/10">
               <ShieldAlert className="w-10 h-10 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold">No staff found</h3>
+              <h3 className="text-lg font-semibold">{t("listing.noStaffFound")}</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Try adjusting your search or add a new staff member.
+                {t("listing.noStaffDescription")}
               </p>
               <Button
                 variant="outline"
                 className="mt-6"
                 onClick={() => setSearch("")}
               >
-                Clear Search
+                {t("listing.clearSearch")}
               </Button>
             </div>
           ) : (
@@ -216,23 +219,23 @@ export default function StaffManagement() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[
           {
-            role: "Support Staff",
-            desc: "Tickets & Replies",
+            role: t("roleLegend.supportStaff.title"),
+            desc: t("roleLegend.supportStaff.description"),
             color: "border-blue-100 bg-blue-50/50",
           },
           {
-            role: "Ad Approver",
-            desc: "Review ads",
+            role: t("roleLegend.adApprover.title"),
+            desc: t("roleLegend.adApprover.description"),
             color: "border-purple-100 bg-purple-50/50",
           },
           {
-            role: "Finance Viewer",
-            desc: "Ledgers & Statements",
+            role: t("roleLegend.financeViewer.title"),
+            desc: t("roleLegend.financeViewer.description"),
             color: "border-amber-100 bg-amber-50/50",
           },
           {
-            role: "Super Admin",
-            desc: "Full Access",
+            role: t("roleLegend.superAdmin.title"),
+            desc: t("roleLegend.superAdmin.description"),
             color: "border-red-100 bg-red-50/50",
           },
         ].map((item, i) => (
@@ -244,7 +247,7 @@ export default function StaffManagement() {
             )}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-              Role
+              {t("roleLegend.role")}
             </span>
             <span className="font-semibold text-sm">{item.role}</span>
             <span className="text-xs text-muted-foreground">{item.desc}</span>
@@ -256,15 +259,13 @@ export default function StaffManagement() {
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Staff Member?</AlertDialogTitle>
+            <AlertDialogTitle>{t("delete.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove{" "}
-              <strong>{staffToDelete?.name}</strong>? This action cannot be
-              undone.
+              {t("delete.description")} <strong>{staffToDelete?.name}</strong>{t("delete.descriptionEnd")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("delete.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={(e) => {
                 e.preventDefault();
@@ -273,7 +274,7 @@ export default function StaffManagement() {
               disabled={deleting}
               className="bg-red-600 hover:bg-red-700"
             >
-              {deleting ? "Deleting..." : "Delete Permanently"}
+              {deleting ? t("delete.deleting") : t("delete.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,0 +1,37 @@
+{
+  "accountDetails": {
+    "description": "قم بتحديث معلومات حسابك",
+    "title": "تفاصيل الحساب"
+  },
+  "breadcrumbs": {
+    "account": "الحساب",
+    "dashboard": "لوحة التحكم"
+  },
+  "buttons": {
+    "saveChanges": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ..."
+  },
+  "fields": {
+    "email": "البريد الإلكتروني",
+    "fullName": "الاسم الكامل",
+    "phone": "الهاتف",
+    "role": "الدور"
+  },
+  "messages": {
+    "fetchError": "فشل في تحميل معلومات الحساب",
+    "updateError": "فشل في تحديث الحساب",
+    "updateSuccess": "تم تحديث الحساب بنجاح",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "email": "أدخل بريدك الإلكتروني",
+    "name": "أدخل اسمك",
+    "phone": "أدخل هاتفك"
+  },
+  "profile": {
+    "description": "معلومات ملفك الشخصي",
+    "title": "الملف الشخصي"
+  },
+  "subtitle": "إدارة معلومات حسابك",
+  "title": "إعدادات الحساب"
+}

@@ -1,0 +1,50 @@
+{
+  "accountDetails": {
+    "description": "อัปเดตข้อมูลบัญชีของคุณ",
+    "title": "รายละเอียดบัญชี"
+  },
+  "breadcrumb": {
+    "account": "บัญชี",
+    "dashboard": "แดชบอร์ด"
+  },
+  "buttons": {
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "saving": "กำลังบันทึก..."
+  },
+  "fields": {
+    "address": "ที่อยู่",
+    "city": "เมือง",
+    "country": "ประเทศ",
+    "email": "อีเมล",
+    "fullName": "ชื่อเต็ม",
+    "phone": "โทรศัพท์",
+    "stripeSecretKey": "คีย์ลับของ Stripe"
+  },
+  "hints": {
+    "stripeKeyMasked": "คีย์ปัจจุบันถูกปิดบังเพื่อความปลอดภัย กรุณาใส่คีย์ใหม่เพื่ออัปเดต"
+  },
+  "messages": {
+    "fetchError": "ไม่สามารถโหลดข้อมูลบัญชีได้",
+    "updateError": "ไม่สามารถอัปเดตบัญชีได้",
+    "updateSuccess": "อัปเดตบัญชีเรียบร้อยแล้ว",
+    "validationError": "{field}: {message}"
+  },
+  "placeholders": {
+    "address": "เริ่มพิมพ์ที่อยู่...",
+    "city": "กรุณาใส่เมืองของคุณ",
+    "country": "กรุณาใส่ประเทศของคุณ",
+    "email": "กรุณาใส่อีเมลของคุณ",
+    "name": "กรุณาใส่ชื่อของคุณ",
+    "phone": "กรุณาใส่หมายเลขโทรศัพท์ของคุณ",
+    "stripeKeyExisting": "{maskedKey} (เว้นว่างไว้เพื่อรักษาข้อมูลปัจจุบัน)",
+    "stripeKeyNew": "sk_test_... หรือ sk_live_..."
+  },
+  "profile": {
+    "description": "ข้อมูลโปรไฟล์ของคุณ",
+    "noStripeKey": "ไม่มีคีย์ Stripe",
+    "stripeConnected": "เชื่อมต่อกับ Stripe",
+    "title": "โปรไฟล์"
+  },
+  "subtitle": "จัดการข้อมูลบัญชีของคุณ",
+  "title": "การตั้งค่าบัญชี"
+}

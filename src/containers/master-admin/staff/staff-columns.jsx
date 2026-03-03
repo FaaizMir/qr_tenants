@@ -24,33 +24,42 @@ import {
 import Link from "next/link";
 import { StaffStatusToggle } from "./staff-status-toggle";
 
-const ROLE_CONFIG = {
+const getRoleConfig = (t) => ({
     support_staff: {
-        label: "Support Staff",
+        label: t("roles.supportStaff"),
         color: "bg-blue-50 text-blue-700 border-blue-100",
     },
     ad_approver: {
-        label: "Ad Approver",
+        label: t("roles.adApprover"),
         color: "bg-purple-50 text-purple-700 border-purple-100",
     },
     finance_viewer: {
-        label: "Finance Viewer",
+        label: t("roles.financeViewer"),
         color: "bg-amber-50 text-amber-700 border-amber-100",
     },
     super_admin: {
-        label: "Super Admin",
+        label: t("roles.superAdmin"),
         color: "bg-red-50 text-red-700 border-red-100",
     },
     admin: {
-        label: "Admin",
+        label: t("roles.admin"),
         color: "bg-slate-50 text-slate-700 border-slate-100",
     },
+});
+
+const getAccessLabel = (role, t) => {
+    if (role === "super_admin") return t("access.fullAccess");
+    if (role === "ad_approver") return t("access.adsManagement");
+    if (role === "support_staff") return t("access.supportHelp");
+    if (role === "finance_viewer") return t("access.financeOnly");
+    return t("access.readOnly");
 };
 
-export const getStaffColumns = (onDelete) => [
+export const getStaffColumns = (onDelete, t) => [
     {
         accessorKey: "name",
-        header: "Staff Member",
+        header: t("columns.staffMember"),
+        meta: { label: t("columns.staffMember") },
         cell: ({ row }) => {
             const staff = row.original;
             return (
@@ -72,7 +81,8 @@ export const getStaffColumns = (onDelete) => [
     },
     {
         accessorKey: "phone",
-        header: "Phone",
+        header: t("columns.phone"),
+        meta: { label: t("columns.phone") },
         cell: ({ row }) => {
             const phone = row.original.phone || row.original.phone_number;
             return (
@@ -85,10 +95,12 @@ export const getStaffColumns = (onDelete) => [
     },
     {
         accessorKey: "admin_role",
-        header: "Role",
+        header: t("columns.role"),
+        meta: { label: t("columns.role") },
         cell: ({ row }) => {
             const role =
                 row.original.admin_role || row.original.role || "support_staff";
+            const ROLE_CONFIG = getRoleConfig(t);
             const config = ROLE_CONFIG[role] || ROLE_CONFIG.support_staff;
 
             return (
@@ -103,15 +115,12 @@ export const getStaffColumns = (onDelete) => [
     },
     {
         id: "permissions",
-        header: "Access",
+        header: t("columns.access"),
+        meta: { label: t("columns.access") },
         cell: ({ row }) => {
             const role =
                 row.original.admin_role || row.original.role || "support_staff";
-            let access = "Read Only";
-            if (role === "super_admin") access = "Full Access";
-            else if (role === "ad_approver") access = "Ads Management";
-            else if (role === "support_staff") access = "Support Help";
-            else if (role === "finance_viewer") access = "Finance Only";
+            const access = getAccessLabel(role, t);
 
             return (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -123,14 +132,16 @@ export const getStaffColumns = (onDelete) => [
     },
     {
         accessorKey: "is_active",
-        header: "Status",
+        header: t("columns.status"),
+        meta: { label: t("columns.status") },
         cell: ({ row }) => {
             return <StaffStatusToggle staff={row.original} />;
         },
     },
     {
         id: "actions",
-        header: "Actions",
+        header: t("columns.actions"),
+        meta: { label: t("columns.actions") },
         cell: ({ row }) => {
             const staff = row.original;
 
@@ -143,12 +154,12 @@ export const getStaffColumns = (onDelete) => [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-40">
                         <DropdownMenuLabel className="text-[10px] uppercase font-bold text-muted-foreground">
-                            Staff Options
+                            {t("actions.menuLabel")}
                         </DropdownMenuLabel>
                         <DropdownMenuItem asChild>
                             <Link href={`/master-admin/staff/edit/${staff.id}?role=${staff.role}`}>
                                 <Edit className="mr-2 h-4 w-4" />
-                                Edit
+                                {t("actions.edit")}
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
@@ -157,7 +168,7 @@ export const getStaffColumns = (onDelete) => [
                             onClick={() => onDelete(staff)}
                         >
                             <Trash2 className="mr-2 h-4 w-4" />
-                            Delete
+                            {t("actions.delete")}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

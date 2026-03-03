@@ -1,0 +1,173 @@
+{
+  "breadcrumb": {
+    "createPackage": "패키지 생성",
+    "editPackage": "패키지 편집",
+    "masterAdminDashboard": "마스터 관리자 대시보드",
+    "packages": "패키지"
+  },
+  "columns": {
+    "actions": "작업",
+    "active": "활성",
+    "credits": "크레딧",
+    "deleteAction": "패키지 삭제",
+    "editAction": "패키지 편집",
+    "inactive": "비활성",
+    "menuLabel": "패키지 작업",
+    "noDescription": "설명이 없습니다",
+    "packageInfo": "패키지 정보",
+    "perCredit": "크레딧당",
+    "plan": "계획",
+    "pricing": "가격 책정",
+    "rank": "순위",
+    "status": "상태",
+    "type": "유형"
+  },
+  "deleteDialog": {
+    "cancel": "삭제 중단",
+    "confirm": "확인됨, 지금 삭제",
+    "description": "{name}을(를) 영구적으로 삭제하려고 합니다. 이 작업은 영구적이며 누구도 되돌릴 수 없습니다.",
+    "title": "극도의 주의"
+  },
+  "form": {
+    "backButton": "목록으로 돌아가기",
+    "buttons": {
+      "cancel": "취소",
+      "delete": "패키지 삭제",
+      "save": "패키지 게시",
+      "saving": "저장 중...",
+      "update": "업데이트 패키지"
+    },
+    "createTitle": "새 패키지 만들기",
+    "deleteDialog": {
+      "cancel": "취소",
+      "confirm": "예, 패키지를 삭제합니다",
+      "description": "이 작업은 {name}을(를) 영구적으로 제거합니다. 이 작업은 실행 취소할 수 없습니다.",
+      "title": "정말 확실합니까?"
+    },
+    "editTitle": "크레딧 패키지 편집",
+    "fields": {
+      "creditsPlaceholder": "0",
+      "creditType": "신용 유형",
+      "currency": "통화",
+      "customCreditType": "사용자 정의 크레딧 유형 지정",
+      "customCreditTypePlaceholder": "예: 생일 특별",
+      "description": "설명",
+      "descriptionPlaceholder": "이 패키지가 제공하는 내용에 대한 간략한 요약...",
+      "displayPriority": "우선 표시",
+      "displayPriorityPlaceholder": "목록에서의 위치 (1, 2, 3...)",
+      "merchantPlan": "상인 계획",
+      "packageName": "패키지 이름",
+      "packageNamePlaceholder": "예: 프리미엄 성장 번들",
+      "packageStatus": "패키지 상태",
+      "price": "가격",
+      "pricePerCredit": "크레딧당 가격",
+      "pricePlaceholder": "0.00",
+      "totalCredits": "총 크레딧"
+    },
+    "hints": {
+      "autoCalculated": "자동"
+    },
+    "messages": {
+      "createError": "패키지를 생성하는 데 실패했습니다",
+      "createSuccess": "패키지가 성공적으로 생성되었습니다",
+      "deleteError": "패키지 삭제 실패",
+      "deleteSuccess": "패키지가 성공적으로 삭제되었습니다",
+      "fetchError": "패키지 세부정보를 로드하는 데 실패했습니다",
+      "paidAdsRestriction": "유료 광고 패키지는 에이전트만 관리할 수 있습니다.",
+      "updateError": "패키지 업데이트 실패",
+      "updateSuccess": "패키지가 성공적으로 업데이트되었습니다"
+    },
+    "options": {
+      "creditType": {
+        "coupon": "쿠폰",
+        "custom": "사용자 정의",
+        "whatsappBI": "WhatsApp BI 메시지",
+        "whatsappUI": "WhatsApp UI 메시지"
+      },
+      "currency": {
+        "pkr": "PKR (Rs)",
+        "usd": "USD ($)"
+      },
+      "merchantType": {
+        "annual": "연간 / 프리미엄",
+        "temporary": "임시 / 기본"
+      },
+      "status": {
+        "active": "활성 및 표시됨",
+        "inactive": "비활성 / 숨김"
+      }
+    },
+    "preview": {
+      "baseCredits": "기본 크레딧",
+      "categories": {
+        "coupon": "쿠폰",
+        "paidAds": "유료 광고",
+        "standard": "표준",
+        "whatsapp": "Whatsapp 메시지"
+      },
+      "enhancedFeatures": "향상된 기능 및 용량",
+      "getStarted": "시작하기",
+      "hiddenDraft": "숨김 / 초안",
+      "title": "실시간 미리보기"
+    },
+    "sections": {
+      "classification": "분류",
+      "credits": "크레딧 및 할당",
+      "identity": "신원 및 가격 책정"
+    },
+    "subtitle": "상인을 위한 가격 및 크레딧 한도를 정의하세요.",
+    "validation": {
+      "creditsMin": "크레딧은 최소 1 이상이어야 합니다",
+      "creditsRequired": "크레딧이 필요합니다",
+      "customTypeRequired": "사용자 정의 크레딧 유형이 필요합니다",
+      "descriptionRequired": "설명이 필요합니다",
+      "nameRequired": "패키지 이름이 필요합니다",
+      "priceMin": "가격은 최소 1 이상이어야 합니다.",
+      "priceRequired": "가격이 필요합니다"
+    }
+  },
+  "listing": {
+    "createButton": "새 패키지 만들기",
+    "noPackages": "패키지를 찾을 수 없습니다",
+    "noPackagesDescription": "시작하려면 첫 번째 패키지를 생성하세요",
+    "searchPlaceholder": "패키지 이름, 크레딧 유형으로 검색..."
+  },
+  "messages": {
+    "deleteError": "패키지 삭제 실패",
+    "deleteSuccess": "패키지가 성공적으로 삭제되었습니다",
+    "fetchError": "패키지를 가져오는 데 실패했습니다"
+  },
+  "subscriptionFee": {
+    "autoDeduction": "자동 공제 활성화",
+    "badge": "플랫폼 표준",
+    "billingCycle": "청구 주기",
+    "billingCycleValue": "365일 반복",
+    "dialog": {
+      "cancelButton": "취소",
+      "confirmButton": "확인 및 업데이트",
+      "description": "플랫폼의 모든 에이전트에 대한 새로운 연간 회원비를 설정하세요. 변경 사항은 새로운 갱신에 즉시 적용됩니다.",
+      "label": "새 연간 요금",
+      "placeholder": "0.00",
+      "title": "구독 요금 업데이트",
+      "updatingButton": "업데이트 중...",
+      "warning": "주의: 급격한 가격 변화는 에이전트 유지에 영향을 줄 수 있습니다. 변경 사항은 시스템 감사에 기록됩니다."
+    },
+    "globalCurrency": "전 세계 통화",
+    "insightDescription": "구독 요금을 조정하면 새로운 에이전트의 플랫폼 접근성에 영향을 미칩니다. 가격이 경쟁력을 유지하면서 플랫폼 품질을 유지하도록 하십시오.",
+    "insightTitle": "수익 인텔리전스",
+    "messages": {
+      "fetchError": "구독 요금을 가져오는 데 실패했습니다",
+      "updateError": "요금을 업데이트하는 데 실패했습니다",
+      "updateSuccess": "구독 요금이 성공적으로 업데이트되었습니다",
+      "validationError": "유효한 금액을 입력하십시오"
+    },
+    "perYear": "/ 연간 고정",
+    "status": "상태",
+    "statusValue": "활성 계획",
+    "syncButton": "데이터 동기화",
+    "title": "에이전트 연간 멤버십",
+    "updateButton": "가격 구조 업데이트"
+  },
+  "subtitle": "모든 상인 신용 번들을 관리하고 모니터링합니다",
+  "title": "패키지"
+}

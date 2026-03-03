@@ -1,0 +1,93 @@
+{
+  "breadcrumb": {
+    "dashboard": "Dashboard"
+  },
+  "engagement": {
+    "activityPulse": "Platform Activity Pulse",
+    "description": "Interaction metrics across all stores",
+    "redemptionRate": "Redemption Rate",
+    "systemLoad": "Normal System Load",
+    "title": "Global Engagement",
+    "totalFeedback": "Total Feedback"
+  },
+  "filters": {
+    "customRange": "Custom Range",
+    "last30Days": "Last 30 Days",
+    "last7Days": "Last 7 Days",
+    "lastMonth": "Last Month",
+    "pickDate": "Pick a date",
+    "selectRange": "Select range",
+    "thisMonth": "This Month",
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
+  "financialCards": {
+    "agentSubscriptions": "Agent Subscriptions",
+    "merchantSubscriptions": "Merchant Subscriptions",
+    "packageCommissions": "Package Commissions",
+    "totalPlatformRevenue": "Total Platform Revenue"
+  },
+  "growth": {
+    "customers": "+{count} Customers",
+    "description": "Latest platform expansion data",
+    "merchants": "+{count} Merchants",
+    "newCustomers": "New Customer Registrations",
+    "newStores": "New Stores This Period",
+    "title": "Growth Highlights"
+  },
+  "merchantTier": {
+    "annual": "Annual",
+    "description": "Annual vs Temporary Subscription Ratio",
+    "noData": "No merchant data available",
+    "temp": "Temp",
+    "title": "Merchant Tier Distribution",
+    "totalStores": "Total Stores"
+  },
+  "messages": {
+    "fetchError": "Failed to fetch master admin dashboard"
+  },
+  "overviewCards": {
+    "activeAgents": "Active Agents",
+    "activeMerchants": "Active Merchants",
+    "couponsIssued": "Coupons Issued",
+    "couponsRedeemed": "Coupons Redeemed",
+    "feedbackReceived": "Feedback Recieved",
+    "totalAgents": "Total Agents",
+    "totalCustomers": "Total Customers",
+    "totalMerchants": "Total Merchants"
+  },
+  "revenueBreakdown": {
+    "agentSubscriptions": "Agent Subscriptions",
+    "description": "Breakdown of total platform earnings",
+    "merchantSubscriptions": "Merchant Subscriptions",
+    "packageCommissions": "Package Commissions",
+    "title": "Revenue Streams"
+  },
+  "roles": {
+    "adApprover": "Ad Approver",
+    "financeViewer": "Finance Viewer",
+    "superAdmin": "Super Admin",
+    "supportStaff": "Support Staff"
+  },
+  "sections": {
+    "financialPerformance": "Financial Performance",
+    "generalOverview": "General Overview",
+    "globalEngagement": "Global Engagement",
+    "growthHighlights": "Growth Highlights",
+    "revenueStreams": "Revenue Streams",
+    "roleDashboard": "{role} Dashboard",
+    "systemAnalytics": "System Analytics"
+  },
+  "subtitle": "Overview of platform performance and metrics",
+  "title": "Master Admin Dashboard",
+  "topMerchants": {
+    "description": "Stores with highest volume and engagement ({total} total)",
+    "issued": "Issued",
+    "noData": "No performance data for this period",
+    "page": "Page {current} of {total}",
+    "redeemed": "Redeemed",
+    "showing": "Showing {from} to {to} of {total}",
+    "successRate": "{rate}% Success Rate",
+    "title": "Top Performing Merchants"
+  }
+}

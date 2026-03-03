@@ -1,0 +1,148 @@
+{
+  "actions": {
+    "delete": "हटाएँ",
+    "details": "विवरण",
+    "edit": "संपादित करें",
+    "menuLabel": "एजेंट विकल्प"
+  },
+  "breadcrumb": {
+    "agentDetails": "एजेंट विवरण",
+    "agents": "एजेंट",
+    "createAgent": "एजेंट बनाएं",
+    "editAgent": "एजेंट संपादित करें",
+    "masterAdminDashboard": "मास्टर एडमिन डैशबोर्ड"
+  },
+  "columns": {
+    "actions": "क्रियाएँ",
+    "agentAccount": "एजेंट खाता",
+    "location": "स्थान",
+    "phone": "फोन",
+    "status": "स्थिति"
+  },
+  "create": {
+    "subtitle": "एक नया एजेंट खाता बनाएं और उनकी पहुँच और अनुमतियों को कॉन्फ़िगर करें।",
+    "title": "नए एजेंट को ऑनबोर्ड करें"
+  },
+  "delete": {
+    "cancel": "रद्द करें",
+    "confirm": "एजेंट हटाएँ",
+    "deleting": "हटाना...",
+    "description": "यह क्रिया पूर्ववत नहीं की जा सकती। यह एजेंट को स्थायी रूप से हटा देगा",
+    "descriptionEnd": " और उनके डेटा को हमारे सर्वरों से हटा दें।",
+    "descriptionName": " {name}",
+    "error": "एजेंट को हटाने में विफल",
+    "success": "एजेंट सफलतापूर्वक हटाया गया",
+    "title": "क्या आप बिल्कुल सुनिश्चित हैं?"
+  },
+  "details": {
+    "accessControl": {
+      "status": "स्थिति",
+      "statusDescription": "वर्तमान खाता वैधता",
+      "title": "एक्सेस नियंत्रण"
+    },
+    "accountInformation": {
+      "emailAddress": "ईमेल पता",
+      "fullName": "पूरा नाम",
+      "memberSince": "सदस्यता प्रारंभ",
+      "phoneNumber": "फोन नंबर",
+      "title": "खाता जानकारी"
+    },
+    "editAgent": "एजेंट संपादित करें",
+    "goBack": "वापस जाएं",
+    "loading": "एजेंट विवरण लोड हो रहा है...",
+    "locationDetails": {
+      "city": "शहर",
+      "country": "देश",
+      "fullAddress": "पूर्ण पता",
+      "title": "स्थान विवरण"
+    },
+    "notFound": "एजेंट नहीं मिला।"
+  },
+  "form": {
+    "accountStatus": {
+      "active": "सक्रिय",
+      "activeDescription": "जब अक्षम किया जाता है, तो एजेंट लॉग इन या व्यापारियों का प्रबंधन नहीं कर सकता।",
+      "activeLabel": "सक्रिय स्थिति",
+      "description": "सिस्टम तक एजेंट की पहुंच को नियंत्रित करें।",
+      "inactive": "निष्क्रिय",
+      "title": "खाता स्थिति"
+    },
+    "agentDetails": {
+      "descriptionCreate": "नए एजेंट के लिए व्यक्तिगत विवरण दर्ज करें।",
+      "descriptionEdit": "एजेंट की व्यक्तिगत और लॉगिन जानकारी अपडेट करें।",
+      "title": "एजेंट विवरण"
+    },
+    "buttons": {
+      "cancel": "रद्द करें",
+      "createAgent": "एजेंट बनाएं",
+      "creating": "बनाते हुए...",
+      "hideKey": "कुंजी छिपाएं",
+      "hidePassword": "पासवर्ड छिपाएँ",
+      "showKey": "कुंजी दिखाएँ",
+      "showPassword": "पासवर्ड दिखाएं",
+      "updateAgent": "एजेंट अपडेट करें",
+      "updating": "अपडेट हो रहा है..."
+    },
+    "fields": {
+      "city": "शहर",
+      "country": "देश",
+      "emailAddress": "ईमेल पता",
+      "fullName": "पूरा नाम",
+      "newPassword": "नया पासवर्ड (वर्तमान रखने के लिए खाली छोड़ें)",
+      "password": "पासवर्ड",
+      "phoneNumber": "फोन नंबर",
+      "searchAddress": "पता खोजें",
+      "stripeSecretKey": "Stripe गुप्त कुंजी (वैकल्पिक)"
+    },
+    "hints": {
+      "passwordRequirements": "न्यूनतम 8 वर्ण, अल्फ़ान्यूमेरिक।",
+      "stripeKeyCreate": "व्यापारी भुगतान प्राप्त करने के लिए स्ट्राइप एपीआई कुंजी कॉन्फ़िगर करें। इसे बाद में एजेंट सेटिंग्स में सेट किया जा सकता है।",
+      "stripeKeyEdit": "एजेंट की स्ट्राइप एपीआई कुंजी अपडेट करें। मौजूदा कॉन्फ़िगरेशन रखने के लिए खाली छोड़ें।"
+    },
+    "locationDetails": {
+      "description": "एजेंट के लिए पता जानकारी।",
+      "title": "स्थान विवरण"
+    },
+    "placeholders": {
+      "address": "123 एजेंट स्ट्रीट, शहर, देश",
+      "city": "शहर",
+      "country": "देश",
+      "email": "agent@example.com",
+      "name": "जैसे: जॉन डो",
+      "passwordCreate": "एक सुरक्षित पासवर्ड दर्ज करें",
+      "passwordEdit": "••••••••",
+      "phone": "+1 234 567 890",
+      "stripeKeyExisting": "{maskedKey} (वर्तमान रखने के लिए खाली छोड़ें)",
+      "stripeKeyExistingGeneric": "sk_••••••••••••• (वर्तमान रखने के लिए खाली छोड़ें)",
+      "stripeKeyNew": "sk_test_... या sk_live_..."
+    },
+    "required": "*"
+  },
+  "listing": {
+    "addAgent": "एजेंट जोड़ें",
+    "searchPlaceholder": "एजेंट खोजें..."
+  },
+  "messages": {
+    "addressSelected": "चयनित पता",
+    "checkInput": "कृपया अपनी इनपुट की जांच करें और फिर से प्रयास करें।",
+    "createError": "एजेंट बनाने में विफल",
+    "createSuccess": "एजेंट खाता सफलतापूर्वक बनाया गया।",
+    "fetchError": "एजेंट विवरण लोड करने में विफल",
+    "loadError": "एडमिन लोड करने में विफल",
+    "updateError": "एजेंट को अपडेट करने में विफल",
+    "updateSuccess": "एजेंट प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।",
+    "validationError": "{field}: {message}",
+    "validationFailed": "मान्यता विफल"
+  },
+  "status": {
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय"
+  },
+  "statusToggle": {
+    "activateSuccess": "एजेंट सफलतापूर्वक सक्रिय किया गया",
+    "deactivateSuccess": "एजेंट सफलतापूर्वक निष्क्रिय किया गया",
+    "updateError": "एजेंट की स्थिति अपडेट करने में विफल"
+  },
+  "subtitle": "अपने एजेंटों और उनके खातों का प्रबंधन करें।",
+  "title": "एजेंट प्रबंधन"
+}
