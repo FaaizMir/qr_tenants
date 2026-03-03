@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "有効化",
+      "expiresAt": "期限切れ",
+      "item": "アイテム",
+      "merchant": "マーチャント",
+      "slot": "スロット",
+      "type": "タイプ"
+    },
+    "searchPlaceholder": "アクティブアイテムを検索中..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "リクエストを承認",
+      "reject": "リクエストを拒否"
+    },
+    "buttons": {
+      "back": "戻る",
+      "cancel": "キャンセル",
+      "confirmApprove": "確認して承認",
+      "confirmReject": "確認して拒否"
+    },
+    "errors": {
+      "noSlotsAvailable": "スロットが利用できません！このリクエストを現在承認することはできません。",
+      "reasonRequired": "拒否理由を提供してください"
+    },
+    "fields": {
+      "agent": "エージェントによって転送されました",
+      "couponBatch": "クーポンバッチ",
+      "item": "アイテム",
+      "merchant": "マーチャント",
+      "reason": "拒否理由",
+      "reasonPlaceholder": "このリクエストを拒否する明確な理由を提供してください...",
+      "submittedAt": "提出日",
+      "type": "タイプ"
+    },
+    "info": {
+      "adSlots": "利用可能な広告スロット: {count} / {max}",
+      "afterApproval": "承認後：",
+      "agentWalletDeducted": "プラットフォームのコストはエージェントのウォレットから差し引かれます",
+      "approveConfirm": "このリクエストは承認され、マーチャントには支払いを完了するよう通知されます。",
+      "couponSlots": "クーポンスロットの利用可能数: {count} / {max}",
+      "expirySet": "有効期限はシステム設定に基づいて設定されます",
+      "merchantWillPay": "マーチャントはエージェントのStripeアカウントを通じて支払います",
+      "selectAction": "このリクエストのアクションを選択してください:",
+      "slotAssigned": "次の利用可能なスロットが自動的に割り当てられます"
+    },
+    "title": "ホームページプッシュリクエストのレビュー",
+    "types": {
+      "ad": "ホームページ広告プッシュ",
+      "coupon": "ホームページクーポンプッシュ"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "ホームページプッシュ管理",
+    "masterAdminDashboard": "マスター管理者ダッシュボード"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "エージェントによって転送されました"
+    },
+    "fields": {
+      "activatedAt": "有効化日時",
+      "agentEmail": "エージェントのメール",
+      "agentName": "エージェント名",
+      "agentPhone": "エージェントの電話",
+      "batchName": "バッチ名",
+      "businessName": "ビジネス名",
+      "cost": "コスト",
+      "couponCode": "クーポンコード",
+      "couponStatus": "クーポンのステータス",
+      "createdAt": "作成日",
+      "description": "説明",
+      "email": "メール",
+      "expiresAt": "期限",
+      "item": "アイテム",
+      "phone": "電話",
+      "slot": "スロット",
+      "type": "タイプ"
+    },
+    "sections": {
+      "agent": "エージェント情報",
+      "couponDetails": "クーポンの詳細",
+      "merchant": "マーチャント情報",
+      "paymentPlacement": "支払いと配置",
+      "reason": "理由",
+      "requestDetails": "リクエストの詳細"
+    },
+    "title": "リクエストの詳細",
+    "types": {
+      "ad": "ホームページ広告プッシュ",
+      "coupon": "ホームページクーポンプッシュ"
+    }
+  },
+  "errors": {
+    "approveFailed": "リクエストの承認に失敗しました",
+    "failedToLoadActive": "アクティブアイテムの読み込みに失敗しました",
+    "failedToLoadForwarded": "転送されたリクエストの読み込みに失敗しました",
+    "rejectFailed": "リクエストの拒否に失敗しました"
+  },
+  "info": {
+    "noActiveItems": "現在、ホームページにアクティブなアイテムはありません。",
+    "noForwardedRequests": "現在保留中のリクエストはありません。すべての転送されたリクエストは処理されました。"
+  },
+  "listing": {
+    "actions": {
+      "review": "レビュー"
+    },
+    "columns": {
+      "actions": "アクション",
+      "agent": "エージェント",
+      "item": "アイテム",
+      "merchant": "マーチャント",
+      "submittedAt": "提出済み",
+      "type": "タイプ"
+    },
+    "searchPlaceholder": "リクエストを検索中...",
+    "subtitle": "エージェントからのホームページ配置リクエストをレビューして承認してください",
+    "title": "ホームページプッシュ管理",
+    "types": {
+      "ad": "広告プッシュ",
+      "coupon": "クーポンプッシュ"
+    }
+  },
+  "slots": {
+    "adSlots": "広告スロット",
+    "available": "利用可能",
+    "couponSlots": "クーポンスロット"
+  },
+  "success": {
+    "approved": "リクエストが正常に承認されました！マーチャントに支払いを完了するよう通知されました。",
+    "rejected": "リクエストが拒否されました。マーチャントとエージェントに通知されました。"
+  },
+  "tabs": {
+    "active": "ホームページでアクティブ",
+    "forwarded": "承認待ち"
+  }
+}

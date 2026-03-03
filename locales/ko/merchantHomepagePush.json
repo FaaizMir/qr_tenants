@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "홈페이지 푸시 요청",
+    "merchantDashboard": "상인 대시보드"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "취소",
+      "submit": "요청 제출"
+    },
+    "errors": {
+      "failedToCreate": "요청 생성에 실패했습니다",
+      "failedToLoadData": "필요한 데이터를 로드하는 데 실패했습니다",
+      "noSlotsAvailable": "이 유형의 요청에 대한 슬롯이 없습니다.",
+      "selectCoupon": "쿠폰 배치를 선택해 주세요"
+    },
+    "fields": {
+      "adType": {
+        "label": "광고 배치",
+        "options": {
+          "bottom": "하단 배너",
+          "left": "왼쪽 사이드바",
+          "right": "오른쪽 사이드바",
+          "top": "상단 배너"
+        }
+      },
+      "coupon": {
+        "label": "쿠폰 배치 선택",
+        "placeholder": "쿠폰 배치를 선택하세요"
+      },
+      "type": {
+        "label": "요청 유형",
+        "options": {
+          "ad": "홈페이지 광고 푸시",
+          "coupon": "홈페이지 쿠폰 푸시"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "사용 가능한 광고 슬롯: {count}",
+      "availableCouponSlots": "사용 가능한 쿠폰 슬롯: {count}"
+    },
+    "pricing": {
+      "cost": "비용",
+      "days": "일",
+      "duration": "기간",
+      "note": "결제는 에이전트와 슈퍼 관리자 승인이 완료된 후 처리됩니다."
+    },
+    "success": {
+      "requestCreated": "요청이 성공적으로 제출되었습니다! 귀하의 에이전트가 검토할 것입니다."
+    },
+    "title": "홈페이지 푸시 요청 생성"
+  },
+  "details": {
+    "cost": "비용",
+    "expiryDate": "만료일",
+    "reason": "이유",
+    "slot": "슬롯",
+    "status": "상태",
+    "title": "요청 세부정보",
+    "type": "유형"
+  },
+  "errors": {
+    "failedToLoadRequests": "홈페이지 푸시 요청을 불러오는 데 실패했습니다.",
+    "paymentFailed": "결제 처리에 실패했습니다. 다시 시도해 주세요."
+  },
+  "listing": {
+    "actions": {
+      "pay": "지금 결제하기"
+    },
+    "columns": {
+      "actions": "작업",
+      "cost": "비용",
+      "expiryDate": "만료",
+      "item": "항목",
+      "slot": "슬롯",
+      "status": "상태",
+      "type": "유형"
+    },
+    "createRequest": "새 요청 만들기",
+    "searchPlaceholder": "요청 검색...",
+    "subtitle": "홈페이지 배치 요청을 제출하고 관리하세요",
+    "title": "홈페이지 푸시 요청",
+    "types": {
+      "ad": "광고 푸시",
+      "coupon": "쿠폰 푸시"
+    }
+  }
+}

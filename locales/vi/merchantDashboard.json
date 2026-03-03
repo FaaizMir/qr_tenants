@@ -131,6 +131,10 @@
     "visits": "lượt truy cập"
   },
   "upgrade": {
+    "banner": {
+      "button": "Nâng cấp ngay",
+      "message": "Nhận thêm dịch vụ và mở khóa nhiều tính năng hơn cho doanh nghiệp của bạn"
+    },
     "description": "Mở khóa tất cả các tính năng bao gồm phân tích, nhắn tin hai chiều và nhiều hơn nữa.",
     "errorMissingInfo": "Không thể tiếp tục. Thiếu thông tin phí hoặc quản trị viên.",
     "errorNoSessionUrl": "Không có URL phiên nào được trả về",

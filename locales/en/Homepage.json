@@ -144,6 +144,15 @@
     "title": "Get Your Coupon"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "Discover our sponsored partner.",
+      "exclusiveIn": "EXCLUSIVE IN {city}",
+      "limitedTime": "LIMITED TIME",
+      "sponsored": "Sponsored",
+      "sponsoredDeal": "Sponsored Deal",
+      "viewOffer": "View Offer",
+      "visitBusiness": "Visit {businessName} in {city}, {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "Active Merchants",
       "agents": "Agents",
@@ -151,6 +160,7 @@
       "description": "Manage your global network of tenant agents.",
       "expiringSoon": "Expiring Soon",
       "expiringSoonActive": "Expiring Soon ✓",
+      "loadingAgents": "Loading agents...",
       "noAgentsFound": "No agents found",
       "of": "of",
       "pageNoResults": "Page - No Results",
@@ -158,8 +168,22 @@
       "showing": "Showing",
       "showingPage": "Showing Page",
       "title": "Agent Directory",
+      "total": "total",
       "tryAdjustingFilters": "Try adjusting your filters.",
       "viewStorefront": "View Storefront"
+    },
+    "couponBatches": {
+      "active": "Active",
+      "batches": "batches",
+      "clearSearch": "Clear search",
+      "description": "Approved and paid homepage placements shown exactly like the agent storefront.",
+      "exclusiveOffers": "Exclusive coupon offers available now.",
+      "noActiveBatches": "No active homepage coupon batches right now.",
+      "noBatchesFound": "No batches match your search.",
+      "searchPlaceholder": "Search coupon batches...",
+      "showingBatches": "Showing {start}–{end} of {total} batches",
+      "subtitle": "Live Coupon Batches & Sponsored Ads",
+      "title": "Featured Homepage Placements"
     },
     "errors": {
       "failedToLoadAgents": "Failed to load agents."

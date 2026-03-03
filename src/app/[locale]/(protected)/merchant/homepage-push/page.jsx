@@ -3,7 +3,7 @@ import HomepagePushListing from "@/containers/merchant/homepage-push/listing";
 import { getTranslations } from "next-intl/server";
 
 export default async function HomepagePushPage() {
-  const t = await getTranslations("homepagePush.breadcrumbs");
+  const t = await getTranslations("merchantHomepagePush.breadcrumbs");
   
   const breadcrumbData = [
     { name: t("merchantDashboard"), url: "/merchant/dashboard" },

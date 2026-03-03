@@ -17,6 +17,7 @@ import {
   LayoutDashboard,
   ShieldCheck,
   CreditCard,
+  TicketPercent,
 } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,11 @@ import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
 import { cn } from "@/lib/utils";
-import { TopBannerAd, SidebarAd, BottomBannerAd } from "./components/PaidAdsDisplay";
+import {
+  TopBannerAd,
+  SidebarAd,
+  BottomBannerAd,
+} from "./components/PaidAdsDisplay";
 
 // --- Main Page Component ---
 export default function MasterAdminLandingPage() {
@@ -67,8 +72,16 @@ export default function MasterAdminLandingPage() {
   const [homepageCoupons, setHomepageCoupons] = useState([]);
   const [homepageAds, setHomepageAds] = useState([]);
 
+  // Coupon section pagination + search
+  const COUPONS_PER_PAGE = 9;
+  const [couponPage, setCouponPage] = useState(1);
+  const [couponSearch, setCouponSearch] = useState("");
+  const debouncedCouponSearch = useDebounce(couponSearch, 400);
+
   const normalizeHomepageAdPlacement = (placement) => {
-    const normalized = String(placement || "").trim().toLowerCase();
+    const normalized = String(placement || "")
+      .trim()
+      .toLowerCase();
     const mapped = {
       homepage_ad_slot_1: "top",
       homepage_ad_slot_2: "left",
@@ -218,15 +231,16 @@ export default function MasterAdminLandingPage() {
       setHomepageCoupons(couponsList);
 
       const transformedAds = adsList
-        .filter((item) => item && (item.id || item.merchant_id || item.merchant?.id))
+        .filter(
+          (item) => item && (item.id || item.merchant_id || item.merchant?.id),
+        )
         .filter((item) => {
           const hasImage =
             item.paid_ad_image ||
             item.merchant?.settings?.paid_ad_image ||
             item.merchant?.paid_ad_image;
           const hasVideo =
-            item.paid_ad_video ||
-            item.merchant?.settings?.paid_ad_video;
+            item.paid_ad_video || item.merchant?.settings?.paid_ad_video;
           return hasImage || hasVideo;
         })
         .map((item) => ({
@@ -245,16 +259,24 @@ export default function MasterAdminLandingPage() {
             item.merchant?.settings?.paid_ad_video_status ||
             false,
           placement: normalizeHomepageAdPlacement(
-            item.paid_ad_placement || item.placement || item.merchant?.settings?.paid_ad_placement,
+            item.paid_ad_placement ||
+              item.placement ||
+              item.merchant?.settings?.paid_ad_placement,
           ),
-          title: item.merchant?.business_name || "Sponsored Deal",
+          title: item.merchant?.business_name || t("ads.sponsoredDeal"),
           description: item.merchant?.city
-            ? `Visit ${item.merchant?.business_name} in ${item.merchant?.city}, ${item.merchant?.country || ""}.`
-            : "Discover our sponsored partner.",
-          cta: "View Offer",
+            ? t("ads.visitBusiness", {
+                businessName: item.merchant?.business_name,
+                city: item.merchant?.city,
+                country: item.merchant?.country || "",
+              })
+            : t("ads.discoverPartner"),
+          cta: t("ads.viewOffer"),
           tagline: item.merchant?.city
-            ? `EXCLUSIVE IN ${String(item.merchant.city).toUpperCase()}`
-            : "LIMITED TIME",
+            ? t("ads.exclusiveIn", {
+                city: String(item.merchant.city).toUpperCase(),
+              })
+            : t("ads.limitedTime"),
           city: item.merchant?.city,
           businessType: item.merchant?.business_type,
         }));
@@ -290,21 +312,45 @@ export default function MasterAdminLandingPage() {
     router.push(`/homepage/agent`);
   };
 
+  // Filtered + paginated coupons
+  const filteredCoupons = useMemo(() => {
+    if (!debouncedCouponSearch.trim()) return homepageCoupons;
+    const q = debouncedCouponSearch.toLowerCase();
+    return homepageCoupons.filter((a) => {
+      const name = a?.coupon?.batch?.batch_name || "";
+      const desc = a?.coupon?.batch?.description || "";
+      return name.toLowerCase().includes(q) || desc.toLowerCase().includes(q);
+    });
+  }, [homepageCoupons, debouncedCouponSearch]);
+
+  const totalCouponPages = Math.max(
+    1,
+    Math.ceil(filteredCoupons.length / COUPONS_PER_PAGE),
+  );
+  const paginatedCoupons = useMemo(() => {
+    const start = (couponPage - 1) * COUPONS_PER_PAGE;
+    return filteredCoupons.slice(start, start + COUPONS_PER_PAGE);
+  }, [filteredCoupons, couponPage]);
+
   const topHomepageAd =
-    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "top") ||
+    homepageAds.find(
+      (a) => normalizeHomepageAdPlacement(a.placement) === "top",
+    ) ||
     homepageAds[0] ||
     null;
   const leftHomepageAd =
-    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "left") ||
-    null;
+    homepageAds.find(
+      (a) => normalizeHomepageAdPlacement(a.placement) === "left",
+    ) || null;
   const rightHomepageAd =
     homepageAds.find((a) => {
       const placement = normalizeHomepageAdPlacement(a.placement);
       return placement === "right" || placement === "sidebar";
     }) || null;
   const bottomHomepageAd =
-    homepageAds.find((a) => normalizeHomepageAdPlacement(a.placement) === "bottom") ||
-    null;
+    homepageAds.find(
+      (a) => normalizeHomepageAdPlacement(a.placement) === "bottom",
+    ) || null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
@@ -401,410 +447,643 @@ export default function MasterAdminLandingPage() {
               </div>
             </div>
           </div>
-        </section>
 
-        {/* -- Super Admin Homepage Placements (Coupon Batches + Ads) -- */}
-        {(homepageCoupons.length > 0 || homepageAds.length > 0) && (
-          <section className="bg-slate-50 py-16 border-t border-slate-100">
-            <div className="px-6 lg:px-10 max-w-[1600px] mx-auto space-y-10">
-              <div className="text-center max-w-3xl mx-auto">
-                <Badge variant="outline" className="mb-3 bg-primary/5 text-primary border-primary/20">
-                  Featured Homepage Placements
-                </Badge>
-                <h2 className="text-3xl font-black tracking-tight text-slate-900">
-                  Live Coupon Batches & Sponsored Ads
-                </h2>
-                <p className="text-slate-500 mt-2">
-                  Approved and paid homepage placements are shown here exactly like the agent storefront experience.
-                </p>
+          {topHomepageAd && (
+            <div className="relative z-10 px-6 lg:px-10 max-w-[1600px] mx-auto mt-8 mb-4">
+              <div className="flex items-center gap-2 mb-6 opacity-60 justify-center">
+                <span className="h-px w-24 bg-slate-300"></span>
+                <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.2em]">
+                  {t("ads.sponsored")}
+                </span>
+                <span className="h-px w-24 bg-slate-300"></span>
               </div>
-
-              {topHomepageAd && <TopBannerAd ad={topHomepageAd} />}
-
-              <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-                <div className="hidden xl:block xl:col-span-2">
-                  {leftHomepageAd && <SidebarAd ad={leftHomepageAd} placement="left" />}
+              <div className="relative">
+                <div className="absolute inset-0 bg-linear-to-b from-primary/10 via-primary/5 to-transparent rounded-3xl blur-3xl"></div>
+                <div className="relative">
+                  <TopBannerAd
+                    ad={topHomepageAd}
+                    translationNamespace="Homepage.masterAdmin.ads"
+                  />
                 </div>
+              </div>
+            </div>
+          )}
+        </section>
+        {/* -- Super Admin Homepage Placements (Coupon Batches + Left Ad) -- */}
+        {(homepageCoupons.length > 0 || leftHomepageAd) && (
+          <section className="bg-white py-20 border-t border-slate-100">
+            <div className="px-6 lg:px-10 max-w-[1600px] mx-auto">
+              <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start">
+                {/* Left sidebar ad */}
+                {leftHomepageAd && (
+                  <div className="hidden xl:block xl:col-span-2 sticky top-28">
+                    <div className="flex items-center gap-2 mb-3 opacity-50 px-1">
+                      <span className="h-px flex-1 bg-slate-200"></span>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+                        {t("ads.sponsored")}
+                      </span>
+                      <span className="h-px flex-1 bg-slate-200"></span>
+                    </div>
+                    <SidebarAd
+                      ad={leftHomepageAd}
+                      placement="left"
+                      translationNamespace="Homepage.masterAdmin.ads"
+                    />
+                  </div>
+                )}
 
-                <div className="xl:col-span-8 space-y-6">
-                  {homepageCoupons.length > 0 ? (
-                    homepageCoupons.map((approval) => {
-                      const batch = approval?.coupon?.batch;
-                      if (!batch) return null;
-
-                      return (
-                        <div
-                          key={approval.id}
-                          className="group bg-white rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
+                {/* Main coupons area */}
+                <div
+                  className={cn(
+                    "col-span-1 space-y-8",
+                    leftHomepageAd ? "xl:col-span-10" : "xl:col-span-12",
+                  )}
+                >
+                  {/* Section header */}
+                  <div className="flex flex-col items-center gap-5 text-center">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-center gap-2">
+                        <Badge
+                          variant="outline"
+                          className="bg-primary/5 text-primary border-primary/20 text-[11px] uppercase tracking-widest font-bold px-3 py-1"
                         >
-                          {batch.rendered_html ? (
-                            <div
-                              className="w-full"
-                              dangerouslySetInnerHTML={{ __html: batch.rendered_html }}
-                            />
-                          ) : (
-                            <div className="p-6 bg-gradient-to-r from-slate-900 to-slate-700 text-white">
-                              <p className="text-xs uppercase tracking-widest opacity-80">Coupon Batch</p>
-                              <h3 className="text-2xl font-black mt-2">{batch.batch_name}</h3>
-                              <p className="text-sm opacity-85 mt-2 line-clamp-2">{batch.description || "Exclusive coupon offers available now."}</p>
-                            </div>
-                          )}
-                          <div className="p-5 border-t border-slate-100 bg-slate-50/30">
-                            <div className="flex items-center justify-between gap-3">
-                              <h4 className="font-bold text-slate-900 text-base leading-tight">
-                                {batch.batch_name}
-                              </h4>
-                              <span className="text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200">
-                                Slot: {approval.placement || "-"}
-                              </span>
-                            </div>
-                          </div>
+                          {t("couponBatches.title")}
+                        </Badge>
+                        {homepageCoupons.length > 0 && (
+                          <span className="text-[11px] font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+                            {homepageCoupons.length}{" "}
+                            {t("couponBatches.batches")}
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-slate-900 leading-tight">
+                        {t("couponBatches.subtitle")}
+                      </h2>
+                      <p className="text-slate-500 font-medium max-w-full mx-auto">
+                        {t("couponBatches.description")}
+                      </p>
+                    </div>
+
+                    {homepageCoupons.length > 0 && (
+                      <div className="bg-white border border-slate-200/80 rounded-2xl shadow-[0_4px_24px_rgb(0,0,0,0.04)] p-2.5 flex items-center gap-2 w-full max-w-lg mx-auto">
+                        <div className="relative flex-1">
+                          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+                          <input
+                            type="text"
+                            placeholder={t("couponBatches.searchPlaceholder")}
+                            value={couponSearch}
+                            onChange={(e) => {
+                              setCouponSearch(e.target.value);
+                              setCouponPage(1);
+                            }}
+                            className="pl-9 pr-4 h-9 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary/40 outline-none transition-all placeholder:text-slate-400 text-slate-700"
+                          />
                         </div>
-                      );
-                    })
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Coupon Grid */}
+                  {paginatedCoupons.length > 0 ? (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {paginatedCoupons.map((approval) => {
+                          const batch = approval?.coupon?.batch;
+                          if (!batch) return null;
+
+                          return (
+                            <div
+                              key={approval.id}
+                              className="relative group bg-white p-8 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col overflow-hidden"
+                            >
+                              <span className="absolute top-5 end-6 text-xs font-bold text-primary">
+                                {t("couponBatches.active")}
+                              </span>
+                              {batch.rendered_html ? (
+                                <div
+                                  className="w-full mb-4 rounded-2xl overflow-hidden"
+                                  dangerouslySetInnerHTML={{
+                                    __html: batch.rendered_html,
+                                  }}
+                                />
+                              ) : (
+                                <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
+                                  <TicketPercent className="h-7 w-7" />
+                                </div>
+                              )}
+
+                              <h3 className="text-xl font-bold mb-3 text-slate-900 line-clamp-1">
+                                {batch.batch_name}
+                              </h3>
+
+                              <p className="text-slate-500 font-medium leading-relaxed text-sm line-clamp-2 flex-1 mb-5">
+                                {batch.description ||
+                                  t("couponBatches.exclusiveOffers")}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Pagination */}
+                      {totalCouponPages > 1 && (
+                        <div className="flex flex-col items-center gap-4 pt-8">
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                              onClick={() =>
+                                setCouponPage((p) => Math.max(1, p - 1))
+                              }
+                              disabled={couponPage === 1}
+                            >
+                              <ChevronLeft className="w-5 h-5" />
+                            </Button>
+
+                            <div className="flex items-center gap-1.5 px-2">
+                              {Array.from({ length: totalCouponPages }).map(
+                                (_, i) => {
+                                  const pg = i + 1;
+                                  if (
+                                    pg === 1 ||
+                                    pg === totalCouponPages ||
+                                    (pg >= couponPage - 1 &&
+                                      pg <= couponPage + 1)
+                                  ) {
+                                    return (
+                                      <Button
+                                        key={pg}
+                                        variant={
+                                          couponPage === pg
+                                            ? "default"
+                                            : "outline"
+                                        }
+                                        size="icon"
+                                        className={cn(
+                                          "w-10 h-10 rounded-xl font-bold transition-all text-sm",
+                                          couponPage === pg
+                                            ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                                            : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                                        )}
+                                        onClick={() => setCouponPage(pg)}
+                                      >
+                                        {pg}
+                                      </Button>
+                                    );
+                                  } else if (
+                                    (pg === 2 && couponPage > 3) ||
+                                    (pg === totalCouponPages - 1 &&
+                                      couponPage < totalCouponPages - 2)
+                                  ) {
+                                    return (
+                                      <span
+                                        key={pg}
+                                        className="px-1 text-slate-400 font-bold"
+                                      >
+                                        ...
+                                      </span>
+                                    );
+                                  }
+                                  return null;
+                                },
+                              )}
+                            </div>
+
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                              onClick={() =>
+                                setCouponPage((p) =>
+                                  Math.min(totalCouponPages, p + 1),
+                                )
+                              }
+                              disabled={couponPage === totalCouponPages}
+                            >
+                              <ChevronRight className="w-5 h-5" />
+                            </Button>
+                          </div>
+
+                          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+                            {t("couponBatches.showingBatches", {
+                              start: (couponPage - 1) * COUPONS_PER_PAGE + 1,
+                              end: Math.min(
+                                couponPage * COUPONS_PER_PAGE,
+                                filteredCoupons.length,
+                              ),
+                              total: filteredCoupons.length,
+                            })}
+                          </p>
+                        </div>
+                      )}
+                    </>
                   ) : (
-                    <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200">
-                      <p className="text-slate-500 font-medium">No active homepage coupon batches right now.</p>
+                    <div className="text-center py-20 bg-slate-50 rounded-3xl border border-dashed border-slate-200">
+                      <div className="h-16 w-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+                        <TicketPercent className="h-8 w-8 text-slate-300" />
+                      </div>
+                      <p className="font-bold text-slate-600">
+                        {couponSearch
+                          ? t("couponBatches.noBatchesFound")
+                          : t("couponBatches.noActiveBatches")}
+                      </p>
+                      {couponSearch && (
+                        <button
+                          onClick={() => setCouponSearch("")}
+                          className="mt-3 text-sm text-primary font-bold hover:underline"
+                        >
+                          {t("couponBatches.clearSearch")}
+                        </button>
+                      )}
                     </div>
                   )}
                 </div>
-
-                <div className="hidden xl:block xl:col-span-2">
-                  {rightHomepageAd && <SidebarAd ad={rightHomepageAd} placement="right" />}
-                </div>
               </div>
-
-              {bottomHomepageAd && <BottomBannerAd ad={bottomHomepageAd} />}
             </div>
           </section>
         )}
 
         {/* -- Main Content Area (Agent Directory) -- */}
-        <section className="bg-slate-50 py-20" id="agent-directory">
-          <div className="px-6 lg:px-10 max-w-[1600px] mx-auto">
-            <div className="space-y-10 animate-in fade-in duration-500">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
-                  <h2 className="text-3xl font-black tracking-tight text-slate-900">
-                    {t("agentDirectory.title")}
-                  </h2>
-                  <p className="text-slate-500 font-medium mt-1">
-                    {t("agentDirectory.description")}
-                  </p>
-                </div>
+        <section
+          className="relative bg-linear-to-b from-slate-50 to-white py-20 overflow-hidden"
+          id="agent-directory"
+        >
+          {/* Decorative background blobs */}
+          <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-primary/3 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-purple-500/3 rounded-full blur-3xl pointer-events-none" />
 
-                {/* Filters */}
-                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    <input
-                      type="text"
-                      placeholder={t("agentDirectory.searchPlaceholder")}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 h-10 w-full sm:w-[220px] rounded-full border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary/50 outline-none transition-all placeholder:text-slate-400"
-                    />
+          <div className="relative px-6 lg:px-10 max-w-[1600px] mx-auto">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start justify-center">
+              {/* Main content */}
+              <div
+                className={cn(
+                  "col-span-1 space-y-8 animate-in fade-in duration-500",
+                  rightHomepageAd ? "xl:col-span-10" : "xl:col-span-12",
+                )}
+              >
+                {/* Section Header */}
+                <div className="flex flex-col items-center gap-5 text-center">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2">
+                      <Badge
+                        variant="outline"
+                        className="bg-primary/5 text-primary border-primary/20 text-[11px] uppercase tracking-widest font-bold px-3 py-1"
+                      >
+                        {t("agentDirectory.title")}
+                      </Badge>
+                      {totalAgents > 0 && (
+                        <span className="text-[11px] font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+                          {totalAgents} {t("agentDirectory.total")}
+                        </span>
+                      )}
+                    </div>
+                    <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-slate-900 leading-tight">
+                      {t("agentDirectory.description")}
+                    </h2>
                   </div>
 
-                  <Select
-                    value={selectedCountry}
-                    onValueChange={(val) => setSelectedCountry(val)}
-                  >
-                    <SelectTrigger className="w-full sm:w-40 h-10 border-slate-200 bg-white focus:ring-2 focus:ring-primary/20 rounded-full text-sm font-medium">
-                      <div className="flex items-center gap-2 text-slate-600">
-                        <Globe className="h-3.5 w-3.5" />
-                        <SelectValue
-                          placeholder={t("agentDirectory.allCountries")}
-                        />
-                      </div>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">
-                        {t("agentDirectory.allCountries")}
-                      </SelectItem>
-                      {countries.map((c) => (
-                        <SelectItem key={c} value={c}>
-                          {c}
+                  {/* Filter Bar Card */}
+                  <div className="bg-white border border-slate-200/80 rounded-2xl shadow-[0_4px_24px_rgb(0,0,0,0.04)] p-2.5 flex flex-row items-center gap-2 w-full max-w-4xl mx-auto">
+                    {/* Search */}
+                    <div className="relative flex-1 min-w-0">
+                      <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder={t("agentDirectory.searchPlaceholder")}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-9 pr-4 h-9 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary/40 outline-none transition-all placeholder:text-slate-400 text-slate-700"
+                      />
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-px bg-slate-200 self-stretch my-0.5" />
+
+                    {/* Country */}
+                    <Select
+                      value={selectedCountry}
+                      onValueChange={(val) => setSelectedCountry(val)}
+                    >
+                      <SelectTrigger className="w-[150px] h-9 border-slate-200 bg-slate-50 hover:bg-white rounded-xl text-sm font-medium text-slate-700 focus:ring-2 focus:ring-primary/20 transition-all shrink-0">
+                        <div className="flex items-center gap-2">
+                          <Globe className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                          <SelectValue
+                            placeholder={t("agentDirectory.allCountries")}
+                          />
+                        </div>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">
+                          {t("agentDirectory.allCountries")}
                         </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                        {countries.map((c) => (
+                          <SelectItem key={c} value={c}>
+                            {c}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  <Button
-                    variant={expiringSoon ? "default" : "outline"}
-                    onClick={() => setExpiringSoon(!expiringSoon)}
-                    className="h-9 px-4 rounded-full text-sm font-medium whitespace-nowrap border-slate-200"
-                  >
-                    {expiringSoon
-                      ? t("agentDirectory.expiringSoonActive")
-                      : t("agentDirectory.expiringSoon")}
-                  </Button>
-                </div>
-              </div>
+                    {/* Divider */}
+                    <div className="w-px bg-slate-200 self-stretch my-0.5" />
 
-              {/* Agents Grid */}
-              {loading ? (
-                <div className="py-20 flex justify-center">
-                  <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                    {/* Expiring Soon Toggle */}
+                    <button
+                      onClick={() => setExpiringSoon(!expiringSoon)}
+                      className={cn(
+                        "h-9 px-4 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 border",
+                        expiringSoon
+                          ? "bg-amber-500 text-white border-amber-500 shadow-lg shadow-amber-500/25"
+                          : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-white hover:border-slate-300",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "w-1.5 h-1.5 rounded-full",
+                          expiringSoon
+                            ? "bg-white animate-pulse"
+                            : "bg-slate-400",
+                        )}
+                      />
+                      {expiringSoon
+                        ? t("agentDirectory.expiringSoonActive")
+                        : t("agentDirectory.expiringSoon")}
+                    </button>
+                  </div>
                 </div>
-              ) : agents.length > 0 ? (
-                <>
-                  {/* Scrollable Container - Fixed height for 6 agents */}
-                  <div
-                    ref={agentListRef}
-                    className={cn(
-                      "overflow-y-auto scroll-smooth max-h-[800px] pr-2",
-                      // Custom scrollbar styles
-                      "[&::-webkit-scrollbar]:w-2",
-                      "[&::-webkit-scrollbar-track]:bg-slate-100",
-                      "[&::-webkit-scrollbar-track]:rounded-full",
-                      "[&::-webkit-scrollbar-thumb]:bg-slate-300",
-                      "[&::-webkit-scrollbar-thumb]:rounded-full",
-                      "[&::-webkit-scrollbar-thumb]:hover:bg-slate-400",
-                    )}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                      {agents.map((agent) => (
-                        <div
-                          key={agent.id}
-                          onClick={() => handleAgentClick(agent)}
-                          className="group bg-white rounded-4xl p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] 
-  hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 ease-out cursor-pointer flex flex-col relative mb-4 hover:-translate-y-1"
-                        >
-                          {/* Header */}
-                          <div className="flex items-start justify-between mb-6">
-                            <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-xl font-black text-primary transition-all duration-300">
-                              {agent.name.charAt(0)}
+
+                {/* Agents Grid */}
+                {loading ? (
+                  <div className="py-24 flex flex-col items-center gap-4">
+                    <div className="relative">
+                      <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                      </div>
+                    </div>
+                    <p className="text-sm font-medium text-slate-400">
+                      {t("agentDirectory.loadingAgents")}
+                    </p>
+                  </div>
+                ) : agents.length > 0 ? (
+                  <>
+                    {/* Scrollable Container */}
+                    <div
+                      ref={agentListRef}
+                      className={cn(
+                        "overflow-y-auto scroll-smooth max-h-[860px] pr-2 -mr-2",
+                        "[&::-webkit-scrollbar]:w-1.5",
+                        "[&::-webkit-scrollbar-track]:bg-transparent",
+                        "[&::-webkit-scrollbar-thumb]:bg-slate-200",
+                        "[&::-webkit-scrollbar-thumb]:rounded-full",
+                        "[&::-webkit-scrollbar-thumb]:hover:bg-slate-300",
+                      )}
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {agents.map((agent) => (
+                          <div
+                            key={agent.id}
+                            onClick={() => handleAgentClick(agent)}
+                            className="group bg-white p-8 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 cursor-pointer flex flex-col"
+                          >
+                            {/* Icon */}
+                            <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 text-xl font-black group-hover:scale-105 transition-transform duration-300">
+                              {agent.name.charAt(0).toUpperCase()}
                             </div>
-                            <Badge
-                              variant={
-                                agent.status === "active"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className={cn(
-                                "uppercase text-[10px] tracking-widest font-bold px-2.5 py-1 border-0",
-                                agent.status === "active"
-                                  ? "bg-emerald-100 text-emerald-700"
-                                  : "bg-slate-100 text-slate-500",
-                              )}
-                            >
-                              {agent.status}
-                            </Badge>
-                          </div>
 
-                          {/* Content */}
-                          <div className="mb-6 flex-1 space-y-3">
-                            <h3 className="font-bold text-lg text-slate-900 line-clamp-1 tracking-tight">
+                            {/* Title */}
+                            <h3 className="text-xl font-bold mb-3 text-slate-900 line-clamp-1">
                               {agent.name}
                             </h3>
 
-                            <div className="space-y-2.5">
-                              <div className="flex items-center text-xs font-medium text-slate-500">
-                                <MapPin className="h-3.5 w-3.5 mr-2 text-slate-400" />
-                                {agent.location}
-                              </div>
-                              <div className="flex items-center text-xs font-medium text-slate-500">
-                                <Store className="h-3.5 w-3.5 mr-2 text-slate-400" />
+                            {/* Info */}
+                            <div className="flex flex-col gap-1.5 mb-6 flex-1">
+                              <p className="text-slate-500 font-medium flex items-center gap-1.5 text-sm">
+                                <MapPin className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                                {agent.location || "—"}
+                              </p>
+                              <p className="text-slate-500 font-medium flex items-center gap-1.5 text-sm">
+                                <Store className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                                 {agent.merchantsCount}{" "}
                                 {t("agentDirectory.activeMerchants")}
-                              </div>
+                              </p>
+                            </div>
+
+                            {/* CTA */}
+                            <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+                              <span className="text-sm font-bold text-primary group-hover:translate-x-0.5 transition-transform duration-200">
+                                {t("agentDirectory.viewStorefront")}
+                              </span>
+                              <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform duration-300" />
                             </div>
                           </div>
+                        ))}
+                      </div>
+                    </div>
 
-                          {/* Footer Actions */}
-                          <div className="mt-auto pt-5 flex items-center justify-between text-sm font-bold text-primary transition-colors duration-300">
-                            <span className="group-hover:translate-x-1 transition-transform duration-300">
-                              {t("agentDirectory.viewStorefront")}
-                            </span>
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    {/* Pagination */}
+                    {(totalAgents > 6 || hasMore || page > 1) && (
+                      <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                            onClick={() => fetchAgents(page - 1)}
+                            disabled={page === 1 || loading}
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </Button>
+
+                          <div className="flex items-center gap-1.5 px-2">
+                            {Array.from({
+                              length: Math.max(
+                                page,
+                                hasMore && totalAgents <= page * 6
+                                  ? page + 1
+                                  : Math.ceil(totalAgents / 6),
+                              ),
+                            }).map((_, i) => {
+                              const pageNum = i + 1;
+                              const totalPages = Math.max(
+                                page,
+                                hasMore && totalAgents <= page * 6
+                                  ? page + 1
+                                  : Math.ceil(totalAgents / 6),
+                              );
+
+                              // Only show current, 1st, last, and neighbors
+                              if (
+                                pageNum === 1 ||
+                                pageNum === totalPages ||
+                                (pageNum >= page - 1 && pageNum <= page + 1)
+                              ) {
+                                return (
+                                  <Button
+                                    key={pageNum}
+                                    variant={
+                                      page === pageNum ? "default" : "outline"
+                                    }
+                                    size="icon"
+                                    className={cn(
+                                      "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                                      page === pageNum
+                                        ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                                        : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                                    )}
+                                    onClick={() => fetchAgents(pageNum)}
+                                    disabled={loading}
+                                  >
+                                    {pageNum}
+                                  </Button>
+                                );
+                              } else if (
+                                (pageNum === 2 && page > 3) ||
+                                (pageNum === totalPages - 1 &&
+                                  page < totalPages - 2)
+                              ) {
+                                return (
+                                  <span
+                                    key={pageNum}
+                                    className="px-1 text-slate-400 font-bold"
+                                  >
+                                    ...
+                                  </span>
+                                );
+                              }
+                              return null;
+                            })}
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
 
-                  {/* Pagination */}
-                  {(totalAgents > 6 || hasMore || page > 1) && (
-                    <div className="flex flex-col items-center gap-6 pt-12 pb-8">
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
-                          onClick={() => fetchAgents(page - 1)}
-                          disabled={page === 1 || loading}
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </Button>
-
-                        <div className="flex items-center gap-1.5 px-2">
-                          {Array.from({
-                            length: Math.max(
-                              page,
-                              hasMore && totalAgents <= page * 6
-                                ? page + 1
-                                : Math.ceil(totalAgents / 6),
-                            ),
-                          }).map((_, i) => {
-                            const pageNum = i + 1;
-                            const totalPages = Math.max(
-                              page,
-                              hasMore && totalAgents <= page * 6
-                                ? page + 1
-                                : Math.ceil(totalAgents / 6),
-                            );
-
-                            // Only show current, 1st, last, and neighbors
-                            if (
-                              pageNum === 1 ||
-                              pageNum === totalPages ||
-                              (pageNum >= page - 1 && pageNum <= page + 1)
-                            ) {
-                              return (
-                                <Button
-                                  key={pageNum}
-                                  variant={
-                                    page === pageNum ? "default" : "outline"
-                                  }
-                                  size="icon"
-                                  className={cn(
-                                    "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
-                                    page === pageNum
-                                      ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
-                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
-                                  )}
-                                  onClick={() => fetchAgents(pageNum)}
-                                  disabled={loading}
-                                >
-                                  {pageNum}
-                                </Button>
-                              );
-                            } else if (
-                              (pageNum === 2 && page > 3) ||
-                              (pageNum === totalPages - 1 &&
-                                page < totalPages - 2)
-                            ) {
-                              return (
-                                <span
-                                  key={pageNum}
-                                  className="px-1 text-slate-400 font-bold"
-                                >
-                                  ...
-                                </span>
-                              );
-                            }
-                            return null;
-                          })}
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                            onClick={() => fetchAgents(page + 1)}
+                            disabled={!hasMore || loading}
+                          >
+                            <ChevronRight className="w-5 h-5" />
+                          </Button>
                         </div>
 
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
-                          onClick={() => fetchAgents(page + 1)}
-                          disabled={!hasMore || loading}
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </Button>
+                        {totalAgents > 0 && (
+                          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+                            {totalAgents <= page * 6 && hasMore
+                              ? `${t("agentDirectory.showingPage")} ${page}`
+                              : `${t("agentDirectory.showing")} ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalAgents)} ${t("agentDirectory.of")} ${totalAgents} ${t("agentDirectory.agents")}`}
+                          </p>
+                        )}
                       </div>
-
-                      {totalAgents > 0 && (
-                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
-                          {totalAgents <= page * 6 && hasMore
-                            ? `${t("agentDirectory.showingPage")} ${page}`
-                            : `${t("agentDirectory.showing")} ${(page - 1) * 6 + 1} - ${Math.min(page * 6, totalAgents)} ${t("agentDirectory.of")} ${totalAgents} ${t("agentDirectory.agents")}`}
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-slate-200 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-linear-to-br from-slate-50/80 to-white pointer-events-none" />
+                      <div className="relative">
+                        <div className="bg-linear-to-br from-slate-100 to-slate-50 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-5 shadow-inner">
+                          <Users className="h-9 w-9 text-slate-300" />
+                        </div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">
+                          {t("agentDirectory.noAgentsFound")}
+                        </h3>
+                        <p className="text-slate-400 text-sm font-medium">
+                          {t("agentDirectory.tryAdjustingFilters")}
                         </p>
-                      )}
+                      </div>
                     </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-slate-200">
-                    <div className="bg-slate-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-                      <Users className="h-8 w-8 text-slate-300" />
-                    </div>
-                    <h3 className="font-bold text-slate-900 text-lg">
-                      {t("agentDirectory.noAgentsFound")}
-                    </h3>
-                    <p className="text-slate-500">
-                      {t("agentDirectory.tryAdjustingFilters")}
-                    </p>
-                  </div>
 
-                  {/* Pagination for empty results when not on page 1 */}
-                  {page > 1 && (
-                    <div className="flex flex-col items-center gap-6 pt-12 pb-8">
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
-                          onClick={() => fetchAgents(page - 1)}
-                          disabled={page === 1 || loading}
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </Button>
+                    {/* Pagination for empty results when not on page 1 */}
+                    {page > 1 && (
+                      <div className="flex flex-col items-center gap-6 pt-12 pb-8">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                            onClick={() => fetchAgents(page - 1)}
+                            disabled={page === 1 || loading}
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </Button>
 
-                        <div className="flex items-center gap-1.5 px-2">
-                          {Array.from({ length: page }).map((_, i) => {
-                            const pageNum = i + 1;
-                            if (
-                              pageNum === 1 ||
-                              pageNum === page ||
-                              (pageNum >= page - 1 && pageNum <= page + 1)
-                            ) {
-                              return (
-                                <Button
-                                  key={pageNum}
-                                  variant={
-                                    page === pageNum ? "default" : "outline"
-                                  }
-                                  size="icon"
-                                  className={cn(
-                                    "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
-                                    page === pageNum
-                                      ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
-                                      : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
-                                  )}
-                                  onClick={() => fetchAgents(pageNum)}
-                                  disabled={loading}
-                                >
-                                  {pageNum}
-                                </Button>
-                              );
-                            } else if (pageNum === 2 && page > 3) {
-                              return (
-                                <span
-                                  key={pageNum}
-                                  className="px-1 text-slate-400 font-bold"
-                                >
-                                  ...
-                                </span>
-                              );
-                            }
-                            return null;
-                          })}
+                          <div className="flex items-center gap-1.5 px-2">
+                            {Array.from({ length: page }).map((_, i) => {
+                              const pageNum = i + 1;
+                              if (
+                                pageNum === 1 ||
+                                pageNum === page ||
+                                (pageNum >= page - 1 && pageNum <= page + 1)
+                              ) {
+                                return (
+                                  <Button
+                                    key={pageNum}
+                                    variant={
+                                      page === pageNum ? "default" : "outline"
+                                    }
+                                    size="icon"
+                                    className={cn(
+                                      "w-10 h-10 rounded-xl font-bold transition-all text-sm tracking-tight",
+                                      page === pageNum
+                                        ? "bg-primary text-white shadow-lg shadow-primary/25 border-primary scale-110 z-10"
+                                        : "border-slate-200 text-slate-500 hover:border-primary hover:text-primary hover:bg-primary/5 shadow-sm",
+                                    )}
+                                    onClick={() => fetchAgents(pageNum)}
+                                    disabled={loading}
+                                  >
+                                    {pageNum}
+                                  </Button>
+                                );
+                              } else if (pageNum === 2 && page > 3) {
+                                return (
+                                  <span
+                                    key={pageNum}
+                                    className="px-1 text-slate-400 font-bold"
+                                  >
+                                    ...
+                                  </span>
+                                );
+                              }
+                              return null;
+                            })}
+                          </div>
+
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
+                            onClick={() => fetchAgents(page + 1)}
+                            disabled={true}
+                          >
+                            <ChevronRight className="w-5 h-5" />
+                          </Button>
                         </div>
 
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="w-10 h-10 rounded-xl border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all disabled:opacity-30 shadow-sm"
-                          onClick={() => fetchAgents(page + 1)}
-                          disabled={true}
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </Button>
+                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
+                          {t("agentDirectory.pageNoResults")} {page}
+                        </p>
                       </div>
+                    )}
+                  </>
+                )}
+              </div>
 
-                      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">
-                        {t("agentDirectory.pageNoResults")} {page}
-                      </p>
-                    </div>
-                  )}
-                </>
+              {/* Right Sidebar Ad */}
+              {rightHomepageAd && (
+                <div className="hidden xl:block xl:col-span-2 sticky top-28 space-y-4">
+                  <div className="flex items-center gap-2 mb-2 opacity-50 px-2">
+                    <span className="h-px flex-1 bg-slate-300"></span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+                      {t("ads.sponsored")}
+                    </span>
+                    <span className="h-px flex-1 bg-slate-300"></span>
+                  </div>
+                  <SidebarAd
+                    ad={rightHomepageAd}
+                    placement="right"
+                    translationNamespace="Homepage.masterAdmin.ads"
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -877,7 +1156,29 @@ export default function MasterAdminLandingPage() {
       </main>
 
       {/* -- Footer -- */}
-      <footer className="bg-slate-950 text-slate-400 pt-12 pb-16 px-6 lg:px-10 border-t border-slate-900">
+      <footer className="bg-slate-950 text-slate-400 pt-10 pb-7 px-6 lg:px-10 border-t border-slate-900">
+        {/* Bottom Ad Banner - Prominent in Footer */}
+        {bottomHomepageAd && (
+          <div className="max-w-[1600px] mx-auto mb-12">
+            <div className="flex items-center gap-2 mb-4 opacity-60 justify-center">
+              <span className="h-px w-24 bg-slate-700"></span>
+              <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.2em]">
+                {t("ads.sponsored")}
+              </span>
+              <span className="h-px w-24 bg-slate-700"></span>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-linear-to-b from-slate-900/50 to-transparent rounded-3xl blur-2xl"></div>
+              <div className="relative">
+                <BottomBannerAd
+                  ad={bottomHomepageAd}
+                  translationNamespace="Homepage.masterAdmin.ads"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center text-white">

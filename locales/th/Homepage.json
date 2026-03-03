@@ -144,6 +144,15 @@
     "title": "รับคูปองของคุณ"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "ค้นพบพันธมิตรที่สนับสนุนของเรา.",
+      "exclusiveIn": "พิเศษใน {city}",
+      "limitedTime": "เวลาจำกัด",
+      "sponsored": "สนับสนุน",
+      "sponsoredDeal": "ข้อเสนอที่สนับสนุน",
+      "viewOffer": "ดูข้อเสนอ",
+      "visitBusiness": "เยี่ยมชม {businessName} ใน {city}, {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "ผู้ค้าที่ใช้งาน",
       "agents": "ตัวแทน",
@@ -151,6 +160,7 @@
       "description": "จัดการเครือข่ายตัวแทนทั่วโลกของคุณ",
       "expiringSoon": "ใกล้หมดอายุ",
       "expiringSoonActive": "ใกล้หมดอายุ ✓",
+      "loadingAgents": "กำลังโหลดตัวแทน...",
       "noAgentsFound": "ไม่พบตัวแทน",
       "of": "ของ",
       "pageNoResults": "หน้า - ไม่มีผลลัพธ์",
@@ -158,8 +168,22 @@
       "showing": "แสดง",
       "showingPage": "แสดงหน้า",
       "title": "ไดเรกทอรีตัวแทน",
+      "total": "รวม",
       "tryAdjustingFilters": "ลองปรับการกรองของคุณ.",
       "viewStorefront": "ดูหน้าร้าน"
+    },
+    "couponBatches": {
+      "active": "ใช้งาน",
+      "batches": "ชุด",
+      "clearSearch": "ล้างการค้นหา",
+      "description": "การวางตำแหน่งหน้าแรกที่ได้รับการอนุมัติและชำระเงินจะแสดงเหมือนกับหน้าร้านของตัวแทนอย่างแม่นยำ.",
+      "exclusiveOffers": "ข้อเสนอคูปองพิเศษที่มีอยู่ตอนนี้.",
+      "noActiveBatches": "ไม่มีชุดคูปองหน้าแรกที่ใช้งานอยู่ในขณะนี้.",
+      "noBatchesFound": "ไม่มีชุดที่ตรงกับการค้นหาของคุณ.",
+      "searchPlaceholder": "ค้นหาชุดคูปอง...",
+      "showingBatches": "แสดง {start}–{end} จาก {total} ชุด",
+      "subtitle": "ชุดคูปองสด & โฆษณาที่สนับสนุน",
+      "title": "การวางตำแหน่งหน้าแรกที่แนะนำ"
     },
     "errors": {
       "failedToLoadAgents": "ไม่สามารถโหลดตัวแทนได้."

@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "Papan Pemuka Ejen",
+    "homepagePush": "Permintaan Dorongan Halaman Utama"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Diteruskan kepada Super Admin"
+    },
+    "fields": {
+      "activatedAt": "Diaktifkan Pada",
+      "batchName": "Nama Batch",
+      "businessName": "Nama Perniagaan",
+      "city": "Bandar",
+      "cost": "Kos",
+      "couponCode": "Kod Kupon",
+      "couponStatus": "Status Kupon",
+      "createdAt": "Dicipta Pada",
+      "description": "Penerangan",
+      "email": "Emel",
+      "expiresAt": "Tamat Pada",
+      "item": "Item",
+      "paymentIntentId": "ID Niat Pembayaran",
+      "paymentStatus": "Status Pembayaran",
+      "phone": "Telefon",
+      "slot": "Slot",
+      "type": "Jenis",
+      "updatedAt": "Dikemas kini Pada"
+    },
+    "sections": {
+      "couponDetails": "Butiran Kupon",
+      "disapprovalReason": "Alasan untuk Penolakan",
+      "merchant": "Maklumat Pedagang",
+      "paymentPlacement": "Pembayaran & Penempatan",
+      "requestDetails": "Butiran Permintaan"
+    },
+    "title": "Butiran Permintaan",
+    "types": {
+      "ad": "Iklan Halaman Utama",
+      "coupon": "Dorongan Kupon Halaman Utama"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "Gagal untuk menolak permintaan",
+    "failedToLoadAll": "Gagal untuk memuatkan permintaan",
+    "failedToLoadPending": "Gagal memuat permintaan yang tertunda",
+    "forwardFailed": "Gagal untuk meneruskan permintaan"
+  },
+  "listing": {
+    "actions": {
+      "review": "Semak"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "createdAt": "Dicipta Pada",
+      "item": "Item",
+      "merchant": "Peniaga",
+      "status": "Status",
+      "type": "Jenis"
+    },
+    "searchPlaceholder": "Permintaan carian...",
+    "subtitle": "Semak dan urus permintaan push halaman utama daripada peniaga anda",
+    "title": "Permintaan Dorong Halaman Utama",
+    "types": {
+      "ad": "Dorong Iklan",
+      "coupon": "Dorong Kupon"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "Tolak Permintaan",
+      "forward": "Hantar kepada Pentadbir Super"
+    },
+    "buttons": {
+      "back": "Kembali",
+      "cancel": "Batal",
+      "confirmDisapprove": "Sahkan & Tolak",
+      "confirmForward": "Sahkan & Hantar"
+    },
+    "errors": {
+      "reasonRequired": "Sila berikan alasan untuk penolakan"
+    },
+    "fields": {
+      "batch": "Batch",
+      "couponDetails": "Butiran Kupon",
+      "createdAt": "Dicipta Pada",
+      "item": "Item",
+      "merchant": "Peniaga",
+      "reason": "Alasan untuk Penolakan",
+      "reasonPlaceholder": "Sila berikan alasan yang jelas untuk menolak permintaan ini...",
+      "type": "Jenis"
+    },
+    "info": {
+      "forwardConfirm": "Permintaan ini akan dihantar kepada pentadbir super untuk kelulusan akhir. Peniaga akan diberitahu setelah pentadbir super membuat keputusan.",
+      "selectAction": "Sila pilih tindakan untuk permintaan ini:"
+    },
+    "title": "Semak Permintaan Push Halaman Utama",
+    "types": {
+      "ad": "Dorongan Iklan Halaman Utama",
+      "coupon": "Dorongan Kupon Halaman Utama"
+    }
+  },
+  "success": {
+    "disapproved": "Permintaan ditolak dengan jayanya. Peniaga telah diberitahu.",
+    "forwarded": "Permintaan dihantar kepada pentadbir super dengan jayanya!"
+  },
+  "tabs": {
+    "all": "Semua Permintaan",
+    "pending": "Dalam Semakan"
+  }
+}

@@ -15,6 +15,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/lib/toast";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useTranslations } from "next-intl";
 
 export default function ProtectedLayout({ children, params }) {
   const { locale } = use(params);
@@ -26,6 +27,7 @@ export default function ProtectedLayout({ children, params }) {
   const pathnameHook = usePathname();
   const { isSubscriptionExpired } = useSubscription();
   const [hasShownExpiryToast, setHasShownExpiryToast] = useState(false);
+  const t = useTranslations("merchantDashboard.upgrade");
 
   useEffect(() => {
     if (role === "merchant" && isSubscriptionExpired && !hasShownExpiryToast) {
@@ -169,14 +171,14 @@ export default function ProtectedLayout({ children, params }) {
               <div className="flex items-center gap-2">
                 <span role="img" aria-label="info">✨</span>
                 <p className="font-medium text-sm md:text-base">
-                  Get more services and unlock more features for your business
+                  {t("banner.message")}
                 </p>
               </div>
               <button
                 onClick={() => router.push(`/${locale}/merchant/wallet`)}
                 className="bg-white text-blue-600 px-4 py-1.5 rounded-md text-sm font-bold hover:bg-blue-50 transition-colors shadow-sm whitespace-nowrap"
               >
-                Upgrade Now
+                {t("banner.button")}
               </button>
             </div>
           )}

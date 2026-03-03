@@ -1,0 +1,111 @@
+{
+  "breadcrumbs": {
+    "agentDashboard": "Dasbor Agen",
+    "homepagePush": "Permintaan Dorongan Beranda"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Diteruskan ke Super Admin"
+    },
+    "fields": {
+      "activatedAt": "Diaktifkan Pada",
+      "batchName": "Nama Batch",
+      "businessName": "Nama Bisnis",
+      "city": "Kota",
+      "cost": "Biaya",
+      "couponCode": "Kode Kupon",
+      "couponStatus": "Status Kupon",
+      "createdAt": "Dibuat Pada",
+      "description": "Deskripsi",
+      "email": "Email",
+      "expiresAt": "Berlaku Hingga",
+      "item": "Item",
+      "paymentIntentId": "ID Niat Pembayaran",
+      "paymentStatus": "Status Pembayaran",
+      "phone": "Telepon",
+      "slot": "Slot",
+      "type": "Tipe",
+      "updatedAt": "Diperbarui Pada"
+    },
+    "sections": {
+      "couponDetails": "Detail Kupon",
+      "disapprovalReason": "Alasan Penolakan",
+      "merchant": "Informasi Merchant",
+      "paymentPlacement": "Pembayaran & Penempatan",
+      "requestDetails": "Detail Permintaan"
+    },
+    "title": "Detail Permintaan",
+    "types": {
+      "ad": "Dorongan Iklan Beranda",
+      "coupon": "Dorongan Kupon Beranda"
+    }
+  },
+  "errors": {
+    "disapproveFailed": "Gagal menolak permintaan",
+    "failedToLoadAll": "Gagal memuat permintaan",
+    "failedToLoadPending": "Gagal memuat permintaan yang tertunda",
+    "forwardFailed": "Gagal meneruskan permintaan"
+  },
+  "listing": {
+    "actions": {
+      "review": "Tinjau"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "createdAt": "Dibuat Pada",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "status": "Status",
+      "type": "Tipe"
+    },
+    "searchPlaceholder": "Permintaan pencarian...",
+    "subtitle": "Tinjau dan kelola permintaan dorong beranda dari pedagang Anda",
+    "title": "Permintaan Dorong Beranda",
+    "types": {
+      "ad": "Dorong Iklan",
+      "coupon": "Dorong Kupon"
+    }
+  },
+  "review": {
+    "actions": {
+      "disapprove": "Tolak Permintaan",
+      "forward": "Teruskan ke Super Admin"
+    },
+    "buttons": {
+      "back": "Kembali",
+      "cancel": "Batal",
+      "confirmDisapprove": "Konfirmasi & Tolak",
+      "confirmForward": "Konfirmasi & Teruskan"
+    },
+    "errors": {
+      "reasonRequired": "Silakan berikan alasan untuk penolakan"
+    },
+    "fields": {
+      "batch": "Batch",
+      "couponDetails": "Detail Kupon",
+      "createdAt": "Dibuat Pada",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "reason": "Alasan Penolakan",
+      "reasonPlaceholder": "Silakan berikan alasan yang jelas untuk menolak permintaan ini...",
+      "type": "Tipe"
+    },
+    "info": {
+      "forwardConfirm": "Permintaan ini akan diteruskan ke super admin untuk persetujuan akhir. Pedagang akan diberitahu setelah super admin membuat keputusan.",
+      "selectAction": "Silakan pilih tindakan untuk permintaan ini:"
+    },
+    "title": "Tinjau Permintaan Dorong Beranda",
+    "types": {
+      "ad": "Dorongan Iklan Beranda",
+      "coupon": "Dorongan Kupon Beranda"
+    }
+  },
+  "success": {
+    "disapproved": "Permintaan ditolak dengan sukses. Pedagang telah diberitahu.",
+    "forwarded": "Permintaan berhasil diteruskan ke super admin!"
+  },
+  "tabs": {
+    "all": "Semua Permintaan",
+    "pending": "Menunggu Tinjauan"
+  }
+}

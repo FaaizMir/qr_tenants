@@ -131,6 +131,10 @@
     "visits": "방문"
   },
   "upgrade": {
+    "banner": {
+      "button": "지금 업그레이드",
+      "message": "더 많은 서비스와 기능을 비즈니스를 위해 잠금 해제하세요"
+    },
     "description": "모든 기능을 잠금 해제합니다. 분석, 양방향 메시징 등을 포함합니다.",
     "errorMissingInfo": "진행할 수 없습니다. 요금 또는 관리자 정보가 누락되었습니다.",
     "errorNoSessionUrl": "세션 URL이 반환되지 않았습니다",

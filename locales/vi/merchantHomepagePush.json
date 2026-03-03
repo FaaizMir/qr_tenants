@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "Yêu cầu đẩy trang chủ",
+    "merchantDashboard": "Bảng điều khiển thương nhân"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "Hủy",
+      "submit": "Gửi yêu cầu"
+    },
+    "errors": {
+      "failedToCreate": "Không thể tạo yêu cầu",
+      "failedToLoadData": "Không thể tải dữ liệu cần thiết",
+      "noSlotsAvailable": "Không có slot nào có sẵn cho loại yêu cầu này",
+      "selectCoupon": "Vui lòng chọn một lô phiếu giảm giá"
+    },
+    "fields": {
+      "adType": {
+        "label": "Vị trí quảng cáo",
+        "options": {
+          "bottom": "Biểu ngữ dưới cùng",
+          "left": "Thanh bên trái",
+          "right": "Thanh bên phải",
+          "top": "Biểu ngữ hàng đầu"
+        }
+      },
+      "coupon": {
+        "label": "Chọn lô phiếu giảm giá",
+        "placeholder": "Chọn một lô phiếu giảm giá"
+      },
+      "type": {
+        "label": "Loại yêu cầu",
+        "options": {
+          "ad": "Đẩy quảng cáo trang chủ",
+          "coupon": "Đẩy phiếu giảm giá trên trang chủ"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "Số lượng quảng cáo có sẵn: {count}",
+      "availableCouponSlots": "Số khe phiếu giảm giá có sẵn: {count}"
+    },
+    "pricing": {
+      "cost": "Chi phí",
+      "days": "ngày",
+      "duration": "Thời gian",
+      "note": "Thanh toán sẽ được xử lý sau khi được đại lý và quản trị viên siêu cấp phê duyệt."
+    },
+    "success": {
+      "requestCreated": "Yêu cầu đã được gửi thành công! Nó sẽ được xem xét bởi đại lý của bạn."
+    },
+    "title": "Tạo yêu cầu đẩy trang chủ"
+  },
+  "details": {
+    "cost": "Chi phí",
+    "expiryDate": "Hết hạn vào",
+    "reason": "Lý do",
+    "slot": "Khe",
+    "status": "Trạng thái",
+    "title": "Chi tiết yêu cầu",
+    "type": "Loại"
+  },
+  "errors": {
+    "failedToLoadRequests": "Không thể tải yêu cầu đẩy trên trang chủ",
+    "paymentFailed": "Xử lý thanh toán không thành công. Vui lòng thử lại."
+  },
+  "listing": {
+    "actions": {
+      "pay": "Thanh toán ngay"
+    },
+    "columns": {
+      "actions": "Hành động",
+      "cost": "Chi phí",
+      "expiryDate": "Hết hạn",
+      "item": "Mục",
+      "slot": "Slot",
+      "status": "Trạng thái",
+      "type": "Loại"
+    },
+    "createRequest": "Tạo yêu cầu mới",
+    "searchPlaceholder": "Tìm kiếm yêu cầu...",
+    "subtitle": "Gửi và quản lý các yêu cầu đặt trang chủ của bạn",
+    "title": "Yêu cầu đẩy trên trang chủ",
+    "types": {
+      "ad": "Đẩy quảng cáo",
+      "coupon": "Đẩy phiếu giảm giá"
+    }
+  }
+}

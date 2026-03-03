@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "Activated",
+      "expiresAt": "Expires",
+      "item": "Item",
+      "merchant": "Merchant",
+      "slot": "Slot",
+      "type": "Type"
+    },
+    "searchPlaceholder": "Search active items..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "Approve Request",
+      "reject": "Reject Request"
+    },
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "confirmApprove": "Confirm & Approve",
+      "confirmReject": "Confirm & Reject"
+    },
+    "errors": {
+      "noSlotsAvailable": "No slots available! Cannot approve this request at this time.",
+      "reasonRequired": "Please provide a reason for rejection"
+    },
+    "fields": {
+      "agent": "Forwarded by Agent",
+      "couponBatch": "Coupon Batch",
+      "item": "Item",
+      "merchant": "Merchant",
+      "reason": "Reason for Rejection",
+      "reasonPlaceholder": "Please provide a clear reason for rejecting this request...",
+      "submittedAt": "Submitted At",
+      "type": "Type"
+    },
+    "info": {
+      "adSlots": "Ad slots available: {count} of {max}",
+      "afterApproval": "After approval:",
+      "agentWalletDeducted": "Platform cost will be deducted from agent's wallet",
+      "approveConfirm": "This request will be approved and the merchant will be notified to complete payment.",
+      "couponSlots": "Coupon slots available: {count} of {max}",
+      "expirySet": "Expiry date will be set based on system settings",
+      "merchantWillPay": "Merchant will pay via agent's Stripe account",
+      "selectAction": "Select an action for this request:",
+      "slotAssigned": "Next available slot will be automatically assigned"
+    },
+    "title": "Review Homepage Push Request",
+    "types": {
+      "ad": "Homepage Ad Push",
+      "coupon": "Homepage Coupon Push"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "Homepage Push Management",
+    "masterAdminDashboard": "Master Admin Dashboard"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Forwarded by Agent"
+    },
+    "fields": {
+      "activatedAt": "Activated At",
+      "agentEmail": "Agent Email",
+      "agentName": "Agent Name",
+      "agentPhone": "Agent Phone",
+      "batchName": "Batch Name",
+      "businessName": "Business Name",
+      "cost": "Cost",
+      "couponCode": "Coupon Code",
+      "couponStatus": "Coupon Status",
+      "createdAt": "Created At",
+      "description": "Description",
+      "email": "Email",
+      "expiresAt": "Expires At",
+      "item": "Item",
+      "phone": "Phone",
+      "slot": "Slot",
+      "type": "Type"
+    },
+    "sections": {
+      "agent": "Agent Information",
+      "couponDetails": "Coupon Details",
+      "merchant": "Merchant Information",
+      "paymentPlacement": "Payment & Placement",
+      "reason": "Reason",
+      "requestDetails": "Request Details"
+    },
+    "title": "Request Details",
+    "types": {
+      "ad": "Homepage Ad Push",
+      "coupon": "Homepage Coupon Push"
+    }
+  },
+  "errors": {
+    "approveFailed": "Failed to approve request",
+    "failedToLoadActive": "Failed to load active items",
+    "failedToLoadForwarded": "Failed to load forwarded requests",
+    "rejectFailed": "Failed to reject request"
+  },
+  "info": {
+    "noActiveItems": "No active items on homepage currently.",
+    "noForwardedRequests": "No pending requests at this time. All forwarded requests have been processed."
+  },
+  "listing": {
+    "actions": {
+      "review": "Review"
+    },
+    "columns": {
+      "actions": "Actions",
+      "agent": "Agent",
+      "item": "Item",
+      "merchant": "Merchant",
+      "submittedAt": "Submitted",
+      "type": "Type"
+    },
+    "searchPlaceholder": "Search requests...",
+    "subtitle": "Review and approve homepage placement requests from agents",
+    "title": "Homepage Push Management",
+    "types": {
+      "ad": "Ad Push",
+      "coupon": "Coupon Push"
+    }
+  },
+  "slots": {
+    "adSlots": "Ad Slots",
+    "available": "available",
+    "couponSlots": "Coupon Slots"
+  },
+  "success": {
+    "approved": "Request approved successfully! Merchant has been notified to complete payment.",
+    "rejected": "Request rejected. Merchant and agent have been notified."
+  },
+  "tabs": {
+    "active": "Active on Homepage",
+    "forwarded": "Pending Approval"
+  }
+}

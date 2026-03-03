@@ -1,0 +1,89 @@
+{
+  "breadcrumbs": {
+    "homepagePush": "Permintaan Dorong Beranda",
+    "merchantDashboard": "Dasbor Merchant"
+  },
+  "create": {
+    "buttons": {
+      "cancel": "Batalkan",
+      "submit": "Kirim Permintaan"
+    },
+    "errors": {
+      "failedToCreate": "Gagal membuat permintaan",
+      "failedToLoadData": "Gagal memuat data yang diperlukan",
+      "noSlotsAvailable": "Tidak ada slot yang tersedia untuk jenis permintaan ini",
+      "selectCoupon": "Silakan pilih batch kupon"
+    },
+    "fields": {
+      "adType": {
+        "label": "Penempatan Iklan",
+        "options": {
+          "bottom": "Banner Bawah",
+          "left": "Sidebar Kiri",
+          "right": "Sidebar Kanan",
+          "top": "Banner Atas"
+        }
+      },
+      "coupon": {
+        "label": "Pilih Batch Kupon",
+        "placeholder": "Pilih batch kupon"
+      },
+      "type": {
+        "label": "Jenis Permintaan",
+        "options": {
+          "ad": "Dorong Iklan Beranda",
+          "coupon": "Dorongan Kupon Beranda"
+        }
+      }
+    },
+    "info": {
+      "availableAdSlots": "Slot iklan yang tersedia: {count}",
+      "availableCouponSlots": "Slot kupon yang tersedia: {count}"
+    },
+    "pricing": {
+      "cost": "Biaya",
+      "days": "hari",
+      "duration": "Durasi",
+      "note": "Pembayaran akan diproses setelah persetujuan agen dan super admin."
+    },
+    "success": {
+      "requestCreated": "Permintaan berhasil diajukan! Ini akan ditinjau oleh agen Anda."
+    },
+    "title": "Buat Permintaan Dorong Beranda"
+  },
+  "details": {
+    "cost": "Biaya",
+    "expiryDate": "Berlaku Hingga",
+    "reason": "Alasan",
+    "slot": "Slot",
+    "status": "Status",
+    "title": "Detail Permintaan",
+    "type": "Tipe"
+  },
+  "errors": {
+    "failedToLoadRequests": "Gagal memuat permintaan dorongan beranda",
+    "paymentFailed": "Proses pembayaran gagal. Silakan coba lagi."
+  },
+  "listing": {
+    "actions": {
+      "pay": "Bayar Sekarang"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "cost": "Biaya",
+      "expiryDate": "Kedaluwarsa",
+      "item": "Item",
+      "slot": "Slot",
+      "status": "Status",
+      "type": "Tipe"
+    },
+    "createRequest": "Buat Permintaan Baru",
+    "searchPlaceholder": "Cari permintaan...",
+    "subtitle": "Kirim dan kelola permintaan penempatan beranda Anda",
+    "title": "Permintaan Dorongan Beranda",
+    "types": {
+      "ad": "Dorongan Iklan",
+      "coupon": "Dorong Kupon"
+    }
+  }
+}

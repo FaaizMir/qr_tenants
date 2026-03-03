@@ -144,6 +144,15 @@
     "title": "쿠폰 받기"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "우리의 후원 파트너를 발견하세요.",
+      "exclusiveIn": "{city}에서 독점",
+      "limitedTime": "한정 시간",
+      "sponsored": "후원",
+      "sponsoredDeal": "후원 거래",
+      "viewOffer": "제안 보기",
+      "visitBusiness": "{city}, {country}의 {businessName} 방문하기."
+    },
     "agentDirectory": {
       "activeMerchants": "활성 상인",
       "agents": "에이전트",
@@ -151,6 +160,7 @@
       "description": "전 세계 임대 에이전트 네트워크를 관리하세요.",
       "expiringSoon": "곧 만료됨",
       "expiringSoonActive": "곧 만료됨 ✓",
+      "loadingAgents": "에이전트 로딩 중...",
       "noAgentsFound": "에이전트를 찾을 수 없습니다",
       "of": "의",
       "pageNoResults": "페이지 - 결과 없음",
@@ -158,8 +168,22 @@
       "showing": "표시 중",
       "showingPage": "페이지 표시",
       "title": "에이전트 디렉토리",
+      "total": "총계",
       "tryAdjustingFilters": "필터를 조정해 보세요.",
       "viewStorefront": "스토어프론트 보기"
+    },
+    "couponBatches": {
+      "active": "활성화",
+      "batches": "배치",
+      "clearSearch": "검색 지우기",
+      "description": "승인되고 지불된 홈페이지 배치가 에이전트 상점과 정확히 동일하게 표시됩니다.",
+      "exclusiveOffers": "현재 이용 가능한 독점 쿠폰 제안.",
+      "noActiveBatches": "현재 활성화된 홈페이지 쿠폰 배치가 없습니다.",
+      "noBatchesFound": "검색과 일치하는 배치가 없습니다.",
+      "searchPlaceholder": "쿠폰 배치 검색...",
+      "showingBatches": "{start}–{end}의 {total} 배치 표시",
+      "subtitle": "실시간 쿠폰 배치 및 후원 광고",
+      "title": "추천 홈페이지 배치"
     },
     "errors": {
       "failedToLoadAgents": "에이전트를 로드하지 못했습니다."

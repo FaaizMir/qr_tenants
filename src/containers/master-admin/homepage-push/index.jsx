@@ -36,11 +36,17 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "merchant",
     header: t("listing.columns.merchant"),
+    meta: {
+      label: t("listing.columns.merchant"),
+    },
     cell: ({ row }) => row.original.merchant?.business_name || "-",
   },
   {
     accessorKey: "admin",
     header: t("listing.columns.agent"),
+    meta: {
+      label: t("listing.columns.agent"),
+    },
     cell: ({ row }) =>
       row.original.admin?.user?.name ||
       // row.original.merchant?.admin?.user?.name ||
@@ -51,6 +57,9 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "approval_type",
     header: t("listing.columns.type"),
+    meta: {
+      label: t("listing.columns.type"),
+    },
     cell: ({ row }) => (
       <span className="font-medium">
         {row.original.approval_type === "homepage_coupon_push"
@@ -62,6 +71,9 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     id: "item",
     header: t("listing.columns.item"),
+    meta: {
+      label: t("listing.columns.item"),
+    },
     cell: ({ row }) => {
       if (row.original.approval_type === "homepage_coupon_push") {
         return row.original.coupon?.batch?.batch_name || row.original.coupon?.coupon_code || "-";
@@ -72,6 +84,9 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     accessorKey: "created_at",
     header: t("listing.columns.submittedAt"),
+    meta: {
+      label: t("listing.columns.submittedAt"),
+    },
     cell: ({ row }) => {
       const date = row.original.created_at;
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -80,6 +95,9 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
   {
     id: "actions",
     header: t("listing.columns.actions"),
+    meta: {
+      label: t("listing.columns.actions"),
+    },
     cell: ({ row }) => (
       <div className="flex gap-2">
         <Button
@@ -108,11 +126,17 @@ const ActiveItemColumns = (t) => [
   {
     accessorKey: "merchant",
     header: t("active.columns.merchant"),
+    meta: {
+      label: t("active.columns.merchant"),
+    },
     cell: ({ row }) => row.original.merchant?.business_name || "-",
   },
   {
     accessorKey: "approval_type",
     header: t("active.columns.type"),
+    meta: {
+      label: t("active.columns.type"),
+    },
     cell: ({ row }) => (
       <span className="font-medium">
         {row.original.approval_type === "homepage_coupon_push"
@@ -124,6 +148,9 @@ const ActiveItemColumns = (t) => [
   {
     id: "item",
     header: t("active.columns.item"),
+    meta: {
+      label: t("active.columns.item"),
+    },
     cell: ({ row }) => {
       if (row.original.approval_type === "homepage_coupon_push") {
         return row.original.coupon?.batch?.batch_name || row.original.coupon?.coupon_code || "-";
@@ -134,11 +161,17 @@ const ActiveItemColumns = (t) => [
   {
     accessorKey: "placement",
     header: t("active.columns.slot"),
+    meta: {
+      label: t("active.columns.slot"),
+    },
     cell: ({ row }) => row.original.placement || "-",
   },
   {
     accessorKey: "ad_created_at",
     header: t("active.columns.activatedAt"),
+    meta: {
+      label: t("active.columns.activatedAt"),
+    },
     cell: ({ row }) => {
       const date = getHomepagePushActivatedDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -147,6 +180,9 @@ const ActiveItemColumns = (t) => [
   {
     accessorKey: "ad_expired_at",
     header: t("active.columns.expiresAt"),
+    meta: {
+      label: t("active.columns.expiresAt"),
+    },
     cell: ({ row }) => {
       const date = getHomepagePushExpiryDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -155,7 +191,7 @@ const ActiveItemColumns = (t) => [
 ];
 
 export default function SuperAdminHomepagePushContainer() {
-  const t = useTranslations("superAdminHomepagePush");
+  const t = useTranslations("masterAdminHomepagePush");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");

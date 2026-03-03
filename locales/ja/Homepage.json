@@ -144,6 +144,15 @@
     "title": "クーポンを取得する"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "私たちのスポンサー提携先を発見してください。",
+      "exclusiveIn": "{city}限定",
+      "limitedTime": "期間限定",
+      "sponsored": "スポンサー",
+      "sponsoredDeal": "スポンサー付きディール",
+      "viewOffer": "オファーを見る",
+      "visitBusiness": "{businessName}を{city}、{country}で訪問してください。"
+    },
     "agentDirectory": {
       "activeMerchants": "アクティブ商人",
       "agents": "エージェント",
@@ -151,6 +160,7 @@
       "description": "グローバルなテナントエージェントネットワークを管理します。",
       "expiringSoon": "まもなく期限切れ",
       "expiringSoonActive": "まもなく期限切れ ✓",
+      "loadingAgents": "エージェントを読み込み中...",
       "noAgentsFound": "エージェントが見つかりません",
       "of": "の",
       "pageNoResults": "ページ - 結果がありません",
@@ -158,8 +168,22 @@
       "showing": "表示中",
       "showingPage": "ページを表示中",
       "title": "エージェントディレクトリ",
+      "total": "合計",
       "tryAdjustingFilters": "フィルターを調整してみてください。",
       "viewStorefront": "ストアフロントを見る"
+    },
+    "couponBatches": {
+      "active": "アクティブ",
+      "batches": "バッチ",
+      "clearSearch": "検索をクリア",
+      "description": "承認され、支払い済みのホームページ掲載はエージェントのストアフロントとまったく同じように表示されます。",
+      "exclusiveOffers": "独占クーポンオファーが今すぐ利用可能です。",
+      "noActiveBatches": "現在アクティブなホームページクーポンバッチはありません。",
+      "noBatchesFound": "検索に一致するバッチはありません。",
+      "searchPlaceholder": "クーポンバッチを検索中...",
+      "showingBatches": "{total}バッチのうち{start}～{end}を表示",
+      "subtitle": "ライブクーポンバッチとスポンサー広告",
+      "title": "特集ホームページ掲載"
     },
     "errors": {
       "failedToLoadAgents": "エージェントの読み込みに失敗しました。"

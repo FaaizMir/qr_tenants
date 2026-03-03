@@ -3,8 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Download,
   Calendar,
-  FileText,
-  User,
   Store,
   Users,
   Shield,

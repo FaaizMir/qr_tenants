@@ -144,6 +144,15 @@
     "title": "अपना कूपन प्राप्त करें"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "हमारे प्रायोजित भागीदार को खोजें।",
+      "exclusiveIn": "{city} में विशेष",
+      "limitedTime": "सीमित समय",
+      "sponsored": "प्रायोजित",
+      "sponsoredDeal": "प्रायोजित डील",
+      "viewOffer": "ऑफ़र देखें",
+      "visitBusiness": "{city}, {country} में {businessName} पर जाएं।"
+    },
     "agentDirectory": {
       "activeMerchants": "सक्रिय व्यापारी",
       "agents": "एजेंट",
@@ -151,6 +160,7 @@
       "description": "अपने वैश्विक किरायेदार एजेंटों के नेटवर्क का प्रबंधन करें।",
       "expiringSoon": "जल्द समाप्त होने वाला",
       "expiringSoonActive": "जल्द समाप्त होने वाला ✓",
+      "loadingAgents": "एजेंट लोड हो रहे हैं...",
       "noAgentsFound": "कोई एजेंट नहीं मिला",
       "of": "का",
       "pageNoResults": "पृष्ठ - कोई परिणाम नहीं",
@@ -158,8 +168,22 @@
       "showing": "दिखा रहा है",
       "showingPage": "पृष्ठ दिखा रहा है",
       "title": "एजेंट निर्देशिका",
+      "total": "कुल",
       "tryAdjustingFilters": "अपने फ़िल्टर समायोजित करने का प्रयास करें।",
       "viewStorefront": "स्टोरफ्रंट देखें"
+    },
+    "couponBatches": {
+      "active": "सक्रिय",
+      "batches": "बैच",
+      "clearSearch": "खोज साफ करें",
+      "description": "स्वीकृत और भुगतान किए गए होमपेज प्लेसमेंट एजेंट स्टोरफ्रंट की तरह ही दिखाए गए हैं।",
+      "exclusiveOffers": "विशेष कूपन ऑफ़र अब उपलब्ध हैं।",
+      "noActiveBatches": "इस समय कोई सक्रिय होमपेज कूपन बैच नहीं हैं।",
+      "noBatchesFound": "कोई बैच आपकी खोज से मेल नहीं खाता।",
+      "searchPlaceholder": "कूपन बैच खोजें...",
+      "showingBatches": "{start}–{end} का {total} बैच दिखा रहे हैं",
+      "subtitle": "लाइव कूपन बैच और प्रायोजित विज्ञापन",
+      "title": "विशेष होमपेज प्लेसमेंट"
     },
     "errors": {
       "failedToLoadAgents": "एजेंट लोड करने में विफल।"

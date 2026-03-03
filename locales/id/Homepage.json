@@ -144,6 +144,15 @@
     "title": "Dapatkan Kupon Anda"
   },
   "masterAdmin": {
+    "ads": {
+      "discoverPartner": "Temukan mitra sponsor kami.",
+      "exclusiveIn": "EKSKLUSIF DI {city}",
+      "limitedTime": "WAKTU TERBATAS",
+      "sponsored": "Disponsori",
+      "sponsoredDeal": "Penawaran Disponsori",
+      "viewOffer": "Lihat Penawaran",
+      "visitBusiness": "Kunjungi {businessName} di {city}, {country}."
+    },
     "agentDirectory": {
       "activeMerchants": "Pedagang Aktif",
       "agents": "Agen",
@@ -151,6 +160,7 @@
       "description": "Kelola jaringan agen penyewa global Anda.",
       "expiringSoon": "Segera Berakhir",
       "expiringSoonActive": "Segera Berakhir ✓",
+      "loadingAgents": "Memuat agen...",
       "noAgentsFound": "Tidak ada agen yang ditemukan",
       "of": "dari",
       "pageNoResults": "Halaman - Tidak Ada Hasil",
@@ -158,8 +168,22 @@
       "showing": "Menampilkan",
       "showingPage": "Menampilkan Halaman",
       "title": "Direktori Agen",
+      "total": "total",
       "tryAdjustingFilters": "Coba sesuaikan filter Anda.",
       "viewStorefront": "Lihat Etalase"
+    },
+    "couponBatches": {
+      "active": "Aktif",
+      "batches": "batch",
+      "clearSearch": "Bersihkan pencarian",
+      "description": "Penempatan halaman utama yang disetujui dan dibayar ditampilkan persis seperti etalase agen.",
+      "exclusiveOffers": "Penawaran kupon eksklusif tersedia sekarang.",
+      "noActiveBatches": "Tidak ada batch kupon halaman utama aktif saat ini.",
+      "noBatchesFound": "Tidak ada batch yang cocok dengan pencarian Anda.",
+      "searchPlaceholder": "Cari batch kupon...",
+      "showingBatches": "Menampilkan {start}–{end} dari {total} batch",
+      "subtitle": "Batch Kupon Langsung & Iklan Disponsori",
+      "title": "Penempatan Halaman Utama Unggulan"
     },
     "errors": {
       "failedToLoadAgents": "Gagal memuat agen."

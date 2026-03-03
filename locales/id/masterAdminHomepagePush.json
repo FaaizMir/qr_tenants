@@ -1,0 +1,139 @@
+{
+  "active": {
+    "columns": {
+      "activatedAt": "Diaktifkan",
+      "expiresAt": "Kedaluwarsa",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "slot": "Slot",
+      "type": "Tipe"
+    },
+    "searchPlaceholder": "Cari item aktif..."
+  },
+  "approval": {
+    "actions": {
+      "approve": "Setujui Permintaan",
+      "reject": "Tolak Permintaan"
+    },
+    "buttons": {
+      "back": "Kembali",
+      "cancel": "Batal",
+      "confirmApprove": "Konfirmasi & Setujui",
+      "confirmReject": "Konfirmasi & Tolak"
+    },
+    "errors": {
+      "noSlotsAvailable": "Tidak ada slot yang tersedia! Tidak dapat menyetujui permintaan ini saat ini.",
+      "reasonRequired": "Silakan berikan alasan penolakan"
+    },
+    "fields": {
+      "agent": "Diteruskan oleh Agen",
+      "couponBatch": "Batch Kupon",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "reason": "Alasan Penolakan",
+      "reasonPlaceholder": "Silakan berikan alasan yang jelas untuk menolak permintaan ini...",
+      "submittedAt": "Diajukan Pada",
+      "type": "Tipe"
+    },
+    "info": {
+      "adSlots": "Slot iklan tersedia: {count} dari {max}",
+      "afterApproval": "Setelah disetujui:",
+      "agentWalletDeducted": "Biaya platform akan dipotong dari dompet agen",
+      "approveConfirm": "Permintaan ini akan disetujui dan pedagang akan diberitahu untuk menyelesaikan pembayaran.",
+      "couponSlots": "Slot kupon tersedia: {count} dari {max}",
+      "expirySet": "Tanggal kedaluwarsa akan ditetapkan berdasarkan pengaturan sistem",
+      "merchantWillPay": "Pedagang akan membayar melalui akun Stripe agen",
+      "selectAction": "Pilih tindakan untuk permintaan ini:",
+      "slotAssigned": "Slot yang tersedia berikutnya akan secara otomatis ditugaskan"
+    },
+    "title": "Tinjau Permintaan Dorong Beranda",
+    "types": {
+      "ad": "Dorongan Iklan Beranda",
+      "coupon": "Dorongan Kupon Beranda"
+    }
+  },
+  "breadcrumbs": {
+    "homepagePush": "Manajemen Dorongan Beranda",
+    "masterAdminDashboard": "Dasbor Admin Utama"
+  },
+  "details": {
+    "badges": {
+      "forwarded": "Diteruskan oleh Agen"
+    },
+    "fields": {
+      "activatedAt": "Diaktifkan Pada",
+      "agentEmail": "Email Agen",
+      "agentName": "Nama Agen",
+      "agentPhone": "Telepon Agen",
+      "batchName": "Nama Batch",
+      "businessName": "Nama Bisnis",
+      "cost": "Biaya",
+      "couponCode": "Kode Kupon",
+      "couponStatus": "Status Kupon",
+      "createdAt": "Dibuat Pada",
+      "description": "Deskripsi",
+      "email": "Email",
+      "expiresAt": "Kedaluwarsa Pada",
+      "item": "Item",
+      "phone": "Telepon",
+      "slot": "Slot",
+      "type": "Tipe"
+    },
+    "sections": {
+      "agent": "Informasi Agen",
+      "couponDetails": "Detail Kupon",
+      "merchant": "Informasi Pedagang",
+      "paymentPlacement": "Pembayaran & Penempatan",
+      "reason": "Alasan",
+      "requestDetails": "Detail Permintaan"
+    },
+    "title": "Detail Permintaan",
+    "types": {
+      "ad": "Dorong Iklan Beranda",
+      "coupon": "Dorongan Kupon Beranda"
+    }
+  },
+  "errors": {
+    "approveFailed": "Gagal menyetujui permintaan",
+    "failedToLoadActive": "Gagal memuat item aktif",
+    "failedToLoadForwarded": "Gagal memuat permintaan yang diteruskan",
+    "rejectFailed": "Gagal menolak permintaan"
+  },
+  "info": {
+    "noActiveItems": "Tidak ada item aktif di beranda saat ini.",
+    "noForwardedRequests": "Tidak ada permintaan yang tertunda saat ini. Semua permintaan yang diteruskan telah diproses."
+  },
+  "listing": {
+    "actions": {
+      "review": "Tinjau"
+    },
+    "columns": {
+      "actions": "Tindakan",
+      "agent": "Agen",
+      "item": "Item",
+      "merchant": "Pedagang",
+      "submittedAt": "Dikirim",
+      "type": "Tipe"
+    },
+    "searchPlaceholder": "Mencari permintaan...",
+    "subtitle": "Tinjau dan setujui permintaan penempatan beranda dari agen",
+    "title": "Manajemen Dorongan Beranda",
+    "types": {
+      "ad": "Dorongan Iklan",
+      "coupon": "Dorongan Kupon"
+    }
+  },
+  "slots": {
+    "adSlots": "Slot Iklan",
+    "available": "tersedia",
+    "couponSlots": "Slot Kupon"
+  },
+  "success": {
+    "approved": "Permintaan disetujui dengan sukses! Pedagang telah diberitahu untuk menyelesaikan pembayaran.",
+    "rejected": "Permintaan ditolak. Pedagang dan agen telah diberitahu."
+  },
+  "tabs": {
+    "active": "Aktif di Beranda",
+    "forwarded": "Menunggu Persetujuan"
+  }
+}

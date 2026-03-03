@@ -31,6 +31,9 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "approval_type",
     header: t("listing.columns.type"),
+    meta: {
+      label: t("listing.columns.type"),
+    },
     cell: ({ row }) => (
       <span className="font-medium">
         {row.original.approval_type === "homepage_coupon_push"
@@ -42,6 +45,9 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     id: "item",
     header: t("listing.columns.item"),
+    meta: {
+      label: t("listing.columns.item"),
+    },
     cell: ({ row }) => {
       if (row.original.approval_type === "homepage_coupon_push") {
         return row.original.coupon?.batch?.batch_name || row.original.coupon?.coupon_code || "-";
@@ -52,6 +58,9 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "approval_status",
     header: t("listing.columns.status"),
+    meta: {
+      label: t("listing.columns.status"),
+    },
     cell: ({ row }) => {
       const statusMap = {
         pending_agent_review: { label: "Pending Agent Review", variant: "warning" },
@@ -69,6 +78,9 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "payment_amount",
     header: t("listing.columns.cost"),
+    meta: {
+      label: t("listing.columns.cost"),
+    },
     cell: ({ row }) => {
       return row.original.payment_amount
         ? `$${parseFloat(row.original.payment_amount).toFixed(2)}`
@@ -78,6 +90,9 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "ad_expired_at",
     header: t("listing.columns.expiryDate"),
+    meta: {
+      label: t("listing.columns.expiryDate"),
+    },
     cell: ({ row }) => {
       const date = getHomepagePushExpiryDate(row.original);
       return date ? new Date(date).toLocaleDateString() : "-";
@@ -86,11 +101,17 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "placement",
     header: t("listing.columns.slot"),
+    meta: {
+      label: t("listing.columns.slot"),
+    },
     cell: ({ row }) => row.original.placement || "-",
   },
   {
     id: "actions",
     header: t("listing.columns.actions"),
+    meta: {
+      label: t("listing.columns.actions"),
+    },
     cell: ({ row }) => (
       <div className="flex gap-2">
         <Button
@@ -116,7 +137,7 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
 ];
 
 export default function HomepagePushListing() {
-  const t = useTranslations("homepagePush");
+  const t = useTranslations("merchantHomepagePush");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [search, setSearch] = useState("");
