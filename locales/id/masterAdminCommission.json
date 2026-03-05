@@ -17,13 +17,13 @@
         "description": "Rencana pedagang jangka panjang",
         "title": "Paket Tahunan"
       },
+      "homepagePlacement": {
+        "description": "Penempatan iklan/koupon beranda berbayar",
+        "title": "Penempatan Beranda"
+      },
       "merchantFees": {
         "description": "Biaya pedagang berulang",
         "title": "Biaya Pedagang"
-      },
-      "homepagePlacement": {
-        "description": "Penempatan iklan/kupon homepage berbayar",
-        "title": "Penempatan Homepage"
       },
       "tempPackages": {
         "description": "Rencana pedagang jangka pendek",

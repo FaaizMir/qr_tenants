@@ -17,13 +17,13 @@
         "description": "Long-term merchant plans",
         "title": "Annual Packages"
       },
-      "merchantFees": {
-        "description": "Recurring merchant fees",
-        "title": "Merchant Fees"
-      },
       "homepagePlacement": {
         "description": "Paid homepage ad/coupon placements",
         "title": "Homepage Placement"
+      },
+      "merchantFees": {
+        "description": "Recurring merchant fees",
+        "title": "Merchant Fees"
       },
       "tempPackages": {
         "description": "Short-term merchant plans",

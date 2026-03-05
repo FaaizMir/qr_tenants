@@ -17,13 +17,13 @@
         "description": "แผนการค้าระยะยาว",
         "title": "แพ็คเกจรายปี"
       },
+      "homepagePlacement": {
+        "description": "การโฆษณา/คูปองที่หน้าแรกที่ชำระเงิน",
+        "title": "การวางตำแหน่งหน้าแรก"
+      },
       "merchantFees": {
         "description": "ค่าธรรมเนียมผู้ค้าที่เกิดซ้ำ",
         "title": "ค่าธรรมเนียมผู้ค้า"
-      },
-      "homepagePlacement": {
-        "description": "รายได้จากการวางตำแหน่งโฆษณา/คูปองบนหน้าแรก",
-        "title": "การวางตำแหน่งหน้าแรก"
       },
       "tempPackages": {
         "description": "แผนผู้ค้าระยะสั้น",

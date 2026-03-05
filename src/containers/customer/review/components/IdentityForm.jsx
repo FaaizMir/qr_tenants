@@ -45,6 +45,7 @@ export const IdentityForm = ({
   control,
   errors: formErrors,
   merchantConfig,
+  t,
 }) => {
   const phone = useWatch({ control, name: "phone" });
   const debouncedPhone = useDebounce(phone, 800);
@@ -107,7 +108,7 @@ export const IdentityForm = ({
         }
 
         setIsAutoFilled(true);
-        toast.success("We found your details and filled them for you 🎉");
+        toast.success(t("identityForm.autoFillSuccess"));
       } catch (err) {
         // 404 or not found is NORMAL - don't show error toast
         setIsAutoFilled(false);
@@ -150,37 +151,36 @@ export const IdentityForm = ({
 
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
-                Welcome to
+                {t("identityForm.welcome")}
                 <br />
                 <span className="text-5xl md:text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
-                  {merchantConfig?.name || "Our Store"}
+                  {merchantConfig?.name || t("common.welcome")}
                 </span>
               </h1>
 
               <div className="flex items-center justify-center gap-2 text-white/80">
                 <MapPin className="w-5 h-5" />
                 <p className="text-base font-medium">
-                  {merchantConfig?.address || "Store Location"}
+                  {merchantConfig?.address || t("identityForm.storeLocation")}
                 </p>
               </div>
 
               <p className="text-base text-white/90 font-medium max-w-sm leading-relaxed mx-auto pt-2">
-                Join thousands of happy customers and unlock exclusive rewards
-                designed just for you.
+                {t("identityForm.joinMembers")}
               </p>
 
               <div className="flex items-center justify-center gap-6 pt-4">
                 <div className="text-center">
                   <div className="text-3xl font-black text-white">5000+</div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wider">
-                    Members
+                    {t("identityForm.members")}
                   </div>
                 </div>
                 <div className="w-px h-12 bg-white/20"></div>
                 <div className="text-center">
                   <div className="text-3xl font-black text-white">4.9★</div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wider">
-                    Rating
+                    {t("identityForm.rating")}
                   </div>
                 </div>
               </div>
@@ -196,10 +196,10 @@ export const IdentityForm = ({
               <User className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-3xl font-bold text-zinc-900">
-              {merchantConfig?.name || "Welcome"}
+              {merchantConfig?.name || t("common.welcome")}
             </h2>
             <p className="text-sm text-zinc-500 mt-2">
-              {merchantConfig?.address || "Store Location"}
+              {merchantConfig?.address || t("identityForm.storeLocation")}
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
@@ -210,28 +210,28 @@ export const IdentityForm = ({
                 label={
                   <span className="flex items-center gap-2">
                     <Phone className="h-4 w-4" />
-                    Phone Number
+                    {t("identityForm.phoneNumber")}
                   </span>
                 }
                 required
                 defaultCountry="US"
-                placeholder="Enter phone number"
+                placeholder={t("identityForm.phoneEnterPlaceholder")}
                 className="mb-0"
                 error={formErrors.phone?.message}
                 validation={{
-                  required: "Phone number is required",
+                  required: t("identityForm.phoneRequired"),
                 }}
               />
 
               <div className="space-y-2">
                 <Label htmlFor="name" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
-                  Full Name <span className="text-red-500">*</span>
+                  {t("identityForm.fullName")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="name"
-                  {...register("name", { required: "Name is required" })}
-                  placeholder="Enter your full name"
+                  {...register("name", { required: t("identityForm.nameRequired") })}
+                  placeholder={t("identityForm.nameEnterPlaceholder")}
                   className={formErrors.name ? "border-red-500" : ""}
                 />
                 {formErrors.name && (
@@ -257,19 +257,19 @@ export const IdentityForm = ({
               <div className="space-y-2">
                 <Label htmlFor="email" className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  Email <span className="text-red-500">*</span>
+                  {t("identityForm.email")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   {...register("email", {
-                    required: "Email is required",
+                    required: t("identityForm.emailRequired"),
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
+                      message: t("identityForm.emailInvalid"),
                     },
                   })}
-                  placeholder="your.email@example.com"
+                  placeholder={t("identityForm.emailPlaceholder")}
                   className={formErrors.email ? "border-red-500" : ""}
                 />
                 {formErrors.email && (
@@ -295,14 +295,14 @@ export const IdentityForm = ({
               <div className="space-y-2">
                 <Label htmlFor="address" className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  Address <span className="text-red-500">*</span>
+                  {t("identityForm.address")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="address"
                   {...register("address", {
-                    required: "Address is required",
+                    required: t("identityForm.addressRequired"),
                   })}
-                  placeholder="Enter your address"
+                  placeholder={t("identityForm.addressPlaceholder")}
                   className={formErrors.address ? "border-red-500" : ""}
                 />
                 {formErrors.address && (
@@ -329,13 +329,13 @@ export const IdentityForm = ({
                 <div className="space-y-2">
                   <Label htmlFor="dob" className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
-                    Birthday <span className="text-red-500">*</span>
+                    {t("identityForm.birthday")} <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="dob"
                     type="date"
                     {...register("dob", {
-                      required: "Date of Birth is required",
+                      required: t("identityForm.dobRequired"),
                     })}
                     className={formErrors.dob ? "border-red-500" : ""}
                     max={new Date().toISOString().split("T")[0]}
@@ -363,12 +363,12 @@ export const IdentityForm = ({
                 <div className="space-y-2 ">
                   <Label htmlFor="gender" className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
-                    Gender <span className="text-red-500">*</span>
+                    {t("identityForm.gender")} <span className="text-red-500">*</span>
                   </Label>
                   <Controller
                     name="gender"
                     control={control}
-                    rules={{ required: "Gender is required" }}
+                    rules={{ required: t("identityForm.genderRequired") }}
                     render={({ field }) => (
                       <Select
                         onValueChange={field.onChange}
@@ -377,14 +377,14 @@ export const IdentityForm = ({
                         <SelectTrigger
                           className={`w-full ${formErrors.gender ? "border-red-500" : ""}`}
                         >
-                          <SelectValue placeholder="Select gender" />
+                          <SelectValue placeholder={t("identityForm.genderSelect")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="male">{t("identityForm.genderMale")}</SelectItem>
+                          <SelectItem value="female">{t("identityForm.genderFemale")}</SelectItem>
+                          <SelectItem value="other">{t("identityForm.genderOther")}</SelectItem>
                           <SelectItem value="prefer_not_to_say">
-                            Prefer not to say
+                            {t("identityForm.genderPreferNotToSay")}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -417,7 +417,7 @@ export const IdentityForm = ({
                   className="w-full h-10 rounded-md text-sm font-bold uppercase tracking-wide bg-zinc-900 hover:bg-zinc-800 text-white shadow-lg transition-all active:scale-95"
                 >
                   <span className="flex items-center justify-center gap-2">
-                    Continue to Review
+                    {t("identityForm.continueToReview")}
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </Button>
@@ -428,7 +428,7 @@ export const IdentityForm = ({
           <div className="mt-8 pt-6 border-t border-slate-200/50 text-center">
             <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
-              Secured by QR Tenants • All data encrypted
+              {t("identityForm.securedBy")}
             </p>
           </div>
         </div>
