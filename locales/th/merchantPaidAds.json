@@ -21,6 +21,9 @@
     "label": "ระยะเวลา",
     "selectPlaceholder": "เลือกระยะเวลา"
   },
+  "startDate": {
+    "label": "วันที่เริ่มต้น"
+  },
   "messages": {
     "errorDeleting": "ลบไม่สำเร็จ",
     "errorProcessing": "เกิดข้อผิดพลาดในการประมวลผลภาพ",

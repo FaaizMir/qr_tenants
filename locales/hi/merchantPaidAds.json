@@ -21,6 +21,9 @@
     "label": "अवधि",
     "selectPlaceholder": "अवधि चुनें"
   },
+  "startDate": {
+    "label": "प्रारंभ तिथि"
+  },
   "messages": {
     "errorDeleting": "हटाने में विफल",
     "errorProcessing": "छवि संसाधित करने में त्रुटि",

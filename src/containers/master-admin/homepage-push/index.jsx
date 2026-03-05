@@ -93,6 +93,28 @@ const SuperAdminRequestColumns = (t, onViewDetails, onReview) => [
     },
   },
   {
+    accessorKey: "ad_created_at",
+    header: t("active.columns.activatedAt"),
+    meta: {
+      label: t("active.columns.activatedAt"),
+    },
+    cell: ({ row }) => {
+      const date = getHomepagePushActivatedDate(row.original);
+      return date ? new Date(date).toLocaleDateString() : "-";
+    },
+  },
+  {
+    accessorKey: "ad_expired_at",
+    header: t("active.columns.expiresAt"),
+    meta: {
+      label: t("active.columns.expiresAt"),
+    },
+    cell: ({ row }) => {
+      const date = getHomepagePushExpiryDate(row.original);
+      return date ? new Date(date).toLocaleDateString() : "-";
+    },
+  },
+  {
     id: "actions",
     header: t("listing.columns.actions"),
     meta: {

@@ -21,6 +21,9 @@
     "label": "Tempoh",
     "selectPlaceholder": "Pilih tempoh"
   },
+  "startDate": {
+    "label": "Tarikh Mula"
+  },
   "messages": {
     "errorDeleting": "Gagal untuk memadam",
     "errorProcessing": "Ralat memproses imej",

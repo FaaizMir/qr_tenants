@@ -30,6 +30,7 @@ export default function DetailsDialog({ open, request, onClose }) {
     forwarded_to_superadmin: { label: "Forwarded", variant: "info" },
     rejected_by_superadmin: { label: "Rejected by Super Admin", variant: "destructive" },
     approved_pending_payment: { label: "Approved - Payment Pending", variant: "success" },
+    payment_completed_scheduled: { label: "Scheduled", variant: "info" },
     payment_completed_active: { label: "Active", variant: "success" },
     expired: { label: "Expired", variant: "secondary" },
   };
@@ -145,6 +146,24 @@ export default function DetailsDialog({ open, request, onClose }) {
                           : "-"}
                       </p>
                     </div>
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground mb-1 flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        {t("fields.activatedAt")}
+                      </p>
+                      <p className="font-medium">
+                        {activatedAt ? new Date(activatedAt).toLocaleString() : "-"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground mb-1 flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        {t("fields.expiresAt")}
+                      </p>
+                      <p className="font-medium">
+                        {expiresAt ? new Date(expiresAt).toLocaleString() : "-"}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -214,17 +233,6 @@ export default function DetailsDialog({ open, request, onClose }) {
                       )}
                     </div>
                     <div className="grid grid-cols-1 gap-3">
-                      {activatedAt && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1 flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {t("fields.activatedAt")}
-                          </p>
-                          <p className="font-medium">
-                            {new Date(activatedAt).toLocaleString()}
-                          </p>
-                        </div>
-                      )}
                       {expiresAt && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1 flex items-center gap-1">

@@ -12,7 +12,9 @@
     "location": "الموقع",
     "merchantType": "نوع التاجر",
     "noAd": "لا يوجد إعلان",
-    "requestedDate": "تاريخ الطلب"
+    "requestedDate": "تاريخ الطلب",
+    "adStartDate": "تاريخ بدء الإعلان",
+    "adEndDate": "تاريخ انتهاء الإعلان"
   },
   "dialog": {
     "approveDescription": "هل أنت متأكد أنك تريد الموافقة على الطلب لـ {merchantName}? لا يمكن التراجع عن هذا الإجراء.",

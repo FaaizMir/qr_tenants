@@ -27,6 +27,14 @@ const getHomepagePushExpiryDate = (request) => {
   return request.ad_expired_at || null;
 };
 
+const getHomepagePushStartDate = (request) => {
+  if (!request) return null;
+  if (request.approval_type === "homepage_coupon_push") {
+    return request.couponbatch_created_at || null;
+  }
+  return request.ad_created_at || null;
+};
+
 const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
   {
     accessorKey: "approval_type",
@@ -68,6 +76,7 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
         forwarded_to_superadmin: { label: "Forwarded to Super Admin", variant: "info" },
         rejected_by_superadmin: { label: "Rejected by Super Admin", variant: "destructive" },
         approved_pending_payment: { label: "Approved - Payment Pending", variant: "success" },
+        payment_completed_scheduled: { label: "Scheduled", variant: "info" },
         payment_completed_active: { label: "Active", variant: "success" },
         expired: { label: "Expired", variant: "secondary" },
       };
@@ -88,10 +97,21 @@ const HomepagePushColumns = (t, onViewDetails, onProcessPayment) => [
     },
   },
   {
-    accessorKey: "ad_expired_at",
-    header: t("listing.columns.expiryDate"),
+    accessorKey: "ad_created_at",
+    header: "Start Date",
     meta: {
-      label: t("listing.columns.expiryDate"),
+      label: "Start Date",
+    },
+    cell: ({ row }) => {
+      const date = getHomepagePushStartDate(row.original);
+      return date ? new Date(date).toLocaleDateString() : "-";
+    },
+  },
+  {
+    accessorKey: "ad_expired_at",
+    header: "End Date",
+    meta: {
+      label: "End Date",
     },
     cell: ({ row }) => {
       const date = getHomepagePushExpiryDate(row.original);
@@ -332,7 +352,19 @@ export default function HomepagePushListing() {
                 {getHomepagePushExpiryDate(selectedRequest) && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
-                      {t("details.expiryDate")}
+                      Start Date
+                    </p>
+                    <p className="text-base">
+                      {getHomepagePushStartDate(selectedRequest)
+                        ? new Date(getHomepagePushStartDate(selectedRequest)).toLocaleString()
+                        : "-"}
+                    </p>
+                  </div>
+                )}
+                {getHomepagePushExpiryDate(selectedRequest) && (
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      End Date
                     </p>
                     <p className="text-base">
                       {new Date(getHomepagePushExpiryDate(selectedRequest)).toLocaleString()}

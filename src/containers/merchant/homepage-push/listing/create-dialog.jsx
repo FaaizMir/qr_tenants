@@ -26,9 +26,18 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
   const t = useTranslations("merchantHomepagePush.create");
+  const getTodayDateString = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = `${today.getMonth() + 1}`.padStart(2, "0");
+    const day = `${today.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
   const [selectedBatchId, setSelectedBatchId] = useState("");
   const [adPlacement, setAdPlacement] = useState("top");
+  const [startDate, setStartDate] = useState(getTodayDateString());
   const [couponBatches, setCouponBatches] = useState([]);
   const [slots, setSlots] = useState(null);
   const [pricing, setPricing] = useState(null);
@@ -88,10 +97,12 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
       if (type === "coupon") {
         await axiosInstance.post("/approvals/homepage-coupon-push", {
           coupon_batch_id: parseInt(selectedBatchId),
+          start_date: startDate,
         });
       } else {
         await axiosInstance.post("/approvals/homepage-ad-push", {
           ad_placement: adPlacement,
+          start_date: startDate,
         });
       }
 
@@ -217,6 +228,16 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
                 </Select>
               </div>
             )}
+
+            <div className="space-y-2">
+              <Label>Start Date</Label>
+              <Input
+                type="date"
+                min={getTodayDateString()}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
 
             {/* Pricing Info */}
             {pricing && (

@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function ApprovalDialog({ open, request, slots, onClose, onApprove, onReject }) {
   const t = useTranslations("masterAdminHomepagePush.approval");
+  const tDetailsFields = useTranslations("masterAdminHomepagePush.details.fields");
   const [action, setAction] = useState(null); // 'approve' or 'reject'
   const [reason, setReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -52,6 +53,14 @@ export default function ApprovalDialog({ open, request, slots, onClose, onApprov
   if (!request) return null;
 
   const requestType = request.approval_type === "homepage_coupon_push" ? "coupon" : "ad";
+  const startAt =
+    request.approval_type === "homepage_coupon_push"
+      ? request.couponbatch_created_at
+      : request.ad_created_at;
+  const endAt =
+    request.approval_type === "homepage_coupon_push"
+      ? request.couponbatch_expired_at
+      : request.ad_expired_at;
   const availableSlots = requestType === "coupon" 
     ? slots?.coupons?.available || 0
     : slots?.ads?.available || 0;
@@ -114,6 +123,22 @@ export default function ApprovalDialog({ open, request, slots, onClose, onApprov
                   {request.created_at
                     ? new Date(request.created_at).toLocaleString()
                     : "-"}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {tDetailsFields("activatedAt")}
+                </p>
+                <p className="text-base">
+                  {startAt ? new Date(startAt).toLocaleString() : "-"}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {tDetailsFields("expiresAt")}
+                </p>
+                <p className="text-base">
+                  {endAt ? new Date(endAt).toLocaleString() : "-"}
                 </p>
               </div>
             </div>
