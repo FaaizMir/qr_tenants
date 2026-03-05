@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "エージェントサブスクリプション",
+    "homepagePlacementRevenue": "ホームページ掲載収益",
     "merchantSubscriptions": "マーチャントサブスクリプション",
     "packageCommissions": "パッケージ手数料",
     "totalPlatformRevenue": "総プラットフォーム収益"

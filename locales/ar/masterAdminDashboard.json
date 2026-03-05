@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "اشتراكات الوكلاء",
+    "homepagePlacementRevenue": "إيرادات وضع الصفحة الرئيسية",
     "merchantSubscriptions": "اشتراكات التجار",
     "packageCommissions": "عمولات الحزمة",
     "totalPlatformRevenue": "إجمالي إيرادات المنصة"

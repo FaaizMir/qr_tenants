@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "Langganan Ejen",
+    "homepagePlacementRevenue": "Hasil Penempatan Laman Utama",
     "merchantSubscriptions": "Langganan Pedagang",
     "packageCommissions": "Komisen Pakej",
     "totalPlatformRevenue": "Jumlah Pendapatan Platform"

@@ -17,6 +17,10 @@
         "description": "Pelan pedagang jangka panjang",
         "title": "Pakej Tahunan"
       },
+      "homepagePlacement": {
+        "description": "Penempatan iklan/kupon laman utama berbayar",
+        "title": "Penempatan Laman Utama"
+      },
       "merchantFees": {
         "description": "Yuran pedagang berulang",
         "title": "Yuran Pedagang"

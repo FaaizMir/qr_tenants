@@ -17,6 +17,10 @@
         "description": "Kế hoạch thương nhân dài hạn",
         "title": "Gói hàng năm"
       },
+      "homepagePlacement": {
+        "description": "Đặt quảng cáo/phiếu giảm giá trang chủ trả phí",
+        "title": "Đặt trang chủ"
+      },
       "merchantFees": {
         "description": "Phí thương nhân định kỳ",
         "title": "Phí thương nhân"
