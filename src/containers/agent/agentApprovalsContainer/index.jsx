@@ -88,6 +88,12 @@ export default function AgentApprovalsContainer() {
             createdAt: item.created_at
               ? new Date(item.created_at).toLocaleDateString()
               : "N/A",
+            adStartDate: item.ad_created_at
+              ? new Date(item.ad_created_at).toLocaleDateString()
+              : "—",
+            adEndDate: item.ad_expired_at
+              ? new Date(item.ad_expired_at).toLocaleDateString()
+              : "—",
             onPreview: handlePreview,
             merchant_type: item.merchant?.merchant_type ?? "—",
             paid_ad_placement:

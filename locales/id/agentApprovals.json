@@ -12,7 +12,9 @@
     "location": "Lokasi",
     "merchantType": "Jenis Pedagang",
     "noAd": "Tidak Ada Iklan",
-    "requestedDate": "Tanggal Diminta"
+    "requestedDate": "Tanggal Diminta",
+    "adStartDate": "Tanggal Mulai Iklan",
+    "adEndDate": "Tanggal Berakhir Iklan"
   },
   "dialog": {
     "approveDescription": "Apakah Anda yakin ingin menyetujui permintaan untuk {merchantName}? Tindakan ini tidak dapat dibatalkan.",

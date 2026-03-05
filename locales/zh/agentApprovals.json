@@ -12,7 +12,9 @@
     "location": "位置",
     "merchantType": "商家类型",
     "noAd": "没有广告",
-    "requestedDate": "请求日期"
+    "requestedDate": "请求日期",
+    "adStartDate": "广告开始日期",
+    "adEndDate": "广告结束日期"
   },
   "dialog": {
     "approveDescription": "您确定要批准 {merchantName} 的请求吗？此操作无法撤销。",

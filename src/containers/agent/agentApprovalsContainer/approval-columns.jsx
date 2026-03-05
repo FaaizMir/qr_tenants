@@ -141,6 +141,26 @@ export const getApprovalColumns = (handleStatusUpdate, t) => [
     ),
   },
   {
+    accessorKey: "adStartDate",
+    header: t("columns.adStartDate"),
+    meta: { label: t("columns.adStartDate") },
+    cell: ({ row }) => (
+      <span className="text-sm text-slate-600 dark:text-slate-400">
+        {row.original.adStartDate || "—"}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "adEndDate",
+    header: t("columns.adEndDate"),
+    meta: { label: t("columns.adEndDate") },
+    cell: ({ row }) => (
+      <span className="text-sm text-slate-600 dark:text-slate-400">
+        {row.original.adEndDate || "—"}
+      </span>
+    ),
+  },
+  {
     accessorKey: "status",
     header: t("columns.approvalStatus"),
     meta: { label: t("columns.approvalStatus") },
