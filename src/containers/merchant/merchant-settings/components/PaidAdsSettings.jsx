@@ -45,6 +45,14 @@ import { toast } from "@/lib/toast";
 import axiosInstance from "@/lib/axios";
 import { getCroppedImg, getImageUrl } from "@/lib/utils/imageUtils";
 
+const getTodayDateString = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `${today.getMonth() + 1}`.padStart(2, "0");
+  const day = `${today.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const t = useTranslations("merchantPaidAds");
 
@@ -55,6 +63,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     paid_ad_video: initialConfig?.paid_ad_video ?? "",
     paid_ad_video_status: initialConfig?.paid_ad_video_status ?? false,
     paid_ad_duration: initialConfig?.paid_ad_duration ?? 7,
+    paid_ad_start_date: getTodayDateString(),
   });
 
   const [uploading, setUploading] = useState(false);
@@ -204,6 +213,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             "paidAdDuration",
             String(state.paid_ad_duration || "7"),
           );
+          formData.append(
+            "paidAdStartDate",
+            state.paid_ad_start_date || getTodayDateString(),
+          );
 
           const response = await axiosInstance.post(
             `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
@@ -235,6 +248,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           formData.append(
             "paidAdDuration",
             String(state.paid_ad_duration || "7"),
+          );
+          formData.append(
+            "paidAdStartDate",
+            state.paid_ad_start_date || getTodayDateString(),
           );
 
           const response = await axiosInstance.post(
@@ -507,7 +524,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             <div className="overflow-hidden">
               <CardContent className="px-6 py-2">
                 <div className="animate-in fade-in slide-in-from-top-4 duration-300 space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
                       <Label>{t("placement.label")}</Label>
                       {loadingPlacements ? (
@@ -604,6 +621,22 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           </SelectItem>
                         </SelectContent>
                       </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>{t("startDate.label")}</Label>
+                      <input
+                        type="date"
+                        min={getTodayDateString()}
+                        value={state.paid_ad_start_date || getTodayDateString()}
+                        onChange={(e) => {
+                          setState({
+                            ...state,
+                            paid_ad_start_date: e.target.value,
+                          });
+                        }}
+                        className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                      />
                     </div>
                   </div>
                   <Tabs

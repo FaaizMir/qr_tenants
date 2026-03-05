@@ -21,6 +21,9 @@
     "label": "期間",
     "selectPlaceholder": "期間を選択"
   },
+  "startDate": {
+    "label": "開始日"
+  },
   "messages": {
     "errorDeleting": "削除に失敗しました",
     "errorProcessing": "画像の処理中にエラーが発生しました",

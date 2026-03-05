@@ -21,6 +21,9 @@
     "label": "Durasi",
     "selectPlaceholder": "Pilih durasi"
   },
+  "startDate": {
+    "label": "Tanggal Mulai"
+  },
   "messages": {
     "errorDeleting": "Gagal menghapus",
     "errorProcessing": "Kesalahan memproses gambar",

@@ -21,6 +21,9 @@
     "label": "기간",
     "selectPlaceholder": "기간 선택"
   },
+  "startDate": {
+    "label": "시작 날짜"
+  },
   "messages": {
     "errorDeleting": "삭제 실패",
     "errorProcessing": "이미지 처리 중 오류가 발생했습니다.",
