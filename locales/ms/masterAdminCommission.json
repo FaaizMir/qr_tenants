@@ -18,8 +18,8 @@
         "title": "Pakej Tahunan"
       },
       "homepagePlacement": {
-        "description": "Penempatan iklan/kupon laman utama berbayar",
-        "title": "Penempatan Laman Utama"
+        "description": "Penempatan iklan/kupon di halaman utama berbayar",
+        "title": "Penempatan Halaman Utama"
       },
       "merchantFees": {
         "description": "Yuran pedagang berulang",

@@ -11,6 +11,8 @@ import {
   Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/lib/toast";
+import { Loader2 } from "lucide-react";
 
 export const RewardSuccess = ({
   reward,
@@ -18,6 +20,7 @@ export const RewardSuccess = ({
   merchantConfig,
   prevStep,
   nextStep,
+  t,
 }) => {
   const hasWhatsAppError =
     reward?.whatsapp_status === "failed" ||
@@ -31,16 +34,36 @@ export const RewardSuccess = ({
   const hasValidReward = isLuckyDrawPrize || isDirectCoupon;
 
   // If there's an error or no valid reward, redirect to ThankYou
+  const didRedirect = React.useRef(false);
   React.useEffect(() => {
-    if (!reward || !hasValidReward || hasWhatsAppError) {
-      // Auto-redirect to ThankYou to display appropriate message
-      nextStep();
+    if (
+      (!reward || !hasValidReward || hasWhatsAppError) &&
+      !didRedirect.current
+    ) {
+      didRedirect.current = true;
+      if (hasWhatsAppError) {
+        toast.error(
+          reward?.whatsapp_notification?.credits_insufficient
+            ? t("rewardSuccess.whatsAppCreditExhausted", {
+                credits: reward?.whatsapp_notification?.available_credits ?? 0,
+              })
+            : t("rewardSuccess.whatsAppDeliveryFailed"),
+        );
+      }
+      // Defer navigation to avoid unmounting the component mid React commit cycle
+      setTimeout(() => nextStep(), 0);
     }
-  }, [reward, hasValidReward, hasWhatsAppError, nextStep]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // If still rendering (during redirect), show nothing or loading state
+  // If still rendering (during redirect), show a spinner — never return null
+  // as that causes React DOM removeChild errors when the parent unmounts us
   if (!reward || !hasValidReward || hasWhatsAppError) {
-    return null;
+    return (
+      <div className="w-full min-h-[60vh] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
   }
 
   // Get display name from either prize or coupon
@@ -63,15 +86,14 @@ export const RewardSuccess = ({
 
           <h1 className="text-5xl md:text-6xl font-bold text-zinc-900 mb-4 tracking-tight">
             <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600">
-              Congratulations!
+              {t("rewardSuccess.congratulations")}
             </span>
           </h1>
 
           <p className="text-lg text-zinc-600 font-medium max-w-md mx-auto">
-            Your reward is ready to claim at{" "}
-            <span className="font-bold text-zinc-900">
-              {merchantConfig?.name || "our store"}
-            </span>
+            {t("rewardSuccess.rewardReady", {
+              merchantName: merchantConfig?.name || t("rewardSuccess.ourStore"),
+            })}
           </p>
 
           <div className="flex items-center justify-center gap-2 mt-4 text-sm text-zinc-500">
@@ -98,8 +120,8 @@ export const RewardSuccess = ({
                   <Star className="w-3.5 h-3.5 text-emerald-400" />
                   <span className="text-xs font-bold uppercase tracking-wide text-emerald-400">
                     {isLuckyDrawPrize
-                      ? "Official Prize Confirmed"
-                      : "Coupon Issued"}
+                      ? t("rewardSuccess.officialPrizeConfirmed")
+                      : t("rewardSuccess.couponIssued")}
                   </span>
                 </div>
               </div>
@@ -122,10 +144,10 @@ export const RewardSuccess = ({
                   <div className="text-center space-y-2">
                     <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-2" />
                     <p className="text-base text-white font-semibold">
-                      Your reward is confirmed!
+                      {t("rewardSuccess.rewardConfirmed")}
                     </p>
                     <p className="text-sm text-zinc-400">
-                      Details have been sent to your WhatsApp
+                      {t("rewardSuccess.detailsSentWhatsApp")}
                     </p>
                   </div>
                 </div>
@@ -136,15 +158,19 @@ export const RewardSuccess = ({
                     <div className="w-2 h-2 rounded-full bg-red-500"></div>
                     <span className="text-xs font-bold text-red-400 uppercase tracking-wide">
                       {reward?.whatsapp_notification?.credits_insufficient
-                        ? `WhatsApp Credit Exhausted (${reward?.whatsapp_notification?.available_credits ?? 0} left)`
-                        : "WhatsApp Delivery Failed"}
+                        ? t("rewardSuccess.whatsAppCreditExhausted", {
+                            credits:
+                              reward?.whatsapp_notification
+                                ?.available_credits ?? 0,
+                          })
+                        : t("rewardSuccess.whatsAppDeliveryFailed")}
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20">
                     <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                     <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">
-                      Sent to WhatsApp
+                      {t("rewardSuccess.sentToWhatsApp")}
                     </span>
                   </div>
                 )}
@@ -158,21 +184,18 @@ export const RewardSuccess = ({
           {hasWhatsAppError ? (
             <div className="text-center space-y-2">
               <p className="text-sm font-semibold text-red-600 italic leading-relaxed">
-                We couldn&apos;t deliver the code via WhatsApp. Please
-                screenshot this screen or note down the code above to show our
-                staff.
+                {t("rewardSuccess.whatsAppErrorInstructions")}
               </p>
             </div>
           ) : (
             <div className="text-center space-y-2">
               <p className="text-sm font-medium text-zinc-600 leading-relaxed">
-                Confirmation sent to{" "}
-                <span className="text-zinc-900 font-bold">
-                  {formValues?.phone || "your provided number"}
-                </span>
+                {t("rewardSuccess.confirmationSentTo", {
+                  phone: formValues?.phone || "",
+                })}
               </p>
               <p className="text-xs text-zinc-500 italic">
-                Show this code to our staff to claim your reward
+                {t("rewardSuccess.showToStaff")}
               </p>
             </div>
           )}
@@ -185,7 +208,7 @@ export const RewardSuccess = ({
             className="w-full h-16 rounded-2xl text-base font-bold uppercase tracking-wide bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-2xl transition-all"
           >
             <span className="flex items-center justify-center gap-3">
-              Complete Experience
+              {t("rewardSuccess.completeExperience")}
               <ArrowRight className="w-5 h-5" />
             </span>
           </Button>
@@ -195,7 +218,7 @@ export const RewardSuccess = ({
         <div className="text-center mt-8">
           <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-            Secured by QR Tenants • All data encrypted
+            {t("rewardSuccess.securedBy")}
           </p>
         </div>
       </div>

@@ -67,6 +67,7 @@ export const ReviewForm = ({
   prevStep,
   loading,
   setLoading,
+  t,
 }) => {
   const [presetReviews, setPresetReviews] = React.useState([]);
   const [loadingPresets, setLoadingPresets] = React.useState(true);
@@ -116,7 +117,7 @@ export const ReviewForm = ({
     // Validate rating
     if (!formValues.rating || formValues.rating < 1) {
       toast.error(
-        "Please provide a star rating (1-5 stars) to share your experience.",
+        t("reviewForm.ratingRequired")
       );
       return;
     }
@@ -124,7 +125,7 @@ export const ReviewForm = ({
     // Validate review content (either preset or custom text)
     if (!formValues.text && !selectedPresetId) {
       toast.error(
-        "Please share your feedback - select a quick expression or write your own.",
+        t("reviewForm.feedbackRequired")
       );
       return;
     }
@@ -136,7 +137,7 @@ export const ReviewForm = ({
       formValues.text.trim().length < 3
     ) {
       toast.error(
-        "Please provide more detailed feedback (at least 3 characters).",
+        t("reviewForm.feedbackMinLength")
       );
       return;
     }
@@ -144,28 +145,28 @@ export const ReviewForm = ({
     // Validate identity fields were filled (from previous step)
     if (!formValues.name || formValues.name.trim().length === 0) {
       toast.error(
-        "Your name is required. Please go back and fill in your details.",
+        t("reviewForm.nameRequiredError")
       );
       return;
     }
 
     if (!formValues.email || formValues.email.trim().length === 0) {
       toast.error(
-        "Email is required. Please go back and fill in your details.",
+        t("reviewForm.emailRequiredError")
       );
       return;
     }
 
     if (!formValues.phone || formValues.phone.trim().length === 0) {
       toast.error(
-        "Phone number is required. Please go back and fill in your details.",
+        t("reviewForm.phoneRequiredError")
       );
       return;
     }
 
     // Validate platform selection
     if (!selectedPlatform) {
-      toast.error("Please select a review platform to continue.");
+      toast.error(t("reviewForm.platformRequired"));
       return;
     }
 
@@ -192,7 +193,7 @@ export const ReviewForm = ({
       // Validate merchantId is required
       if (isNaN(safeMerchantId)) {
         toast.error(
-          "Invalid merchant profile. Please scan the QR code again or contact staff.",
+          t("reviewForm.invalidMerchant")
         );
         return;
       }
@@ -230,7 +231,7 @@ export const ReviewForm = ({
       if (!feedbackId) {
         // Feedback submission failed - show error and stay on form
         console.error("No feedback ID returned:", response.data);
-        toast.error("Failed to save your feedback. Please try again.");
+        toast.error(t("reviewForm.feedbackSaveFailed"));
         return;
       }
 
@@ -260,14 +261,14 @@ export const ReviewForm = ({
             newWindow.closed ||
             typeof newWindow.closed === "undefined"
           ) {
-            toast.warning("Please allow popups to open the review platform.");
+            toast.warning(t("reviewForm.popupBlockerWarning"));
           }
         } catch (err) {
-          toast.warning("Couldn't open review platform. You can review later.");
+          toast.warning(t("reviewForm.reviewPlatformError"));
         }
       }
 
-      toast.success("Feedback submitted successfully!");
+      toast.success(t("reviewForm.feedbackSubmitSuccess"));
 
       // 4. Check for coupon/reward and WhatsApp delivery status
       const whatsappStatus =
@@ -316,7 +317,7 @@ export const ReviewForm = ({
       } else if (hasCoupon) {
         // Success: Coupon issued and WhatsApp sent
         if (whatsappStatus?.sent) {
-          toast.success("Reward details sent to your WhatsApp!");
+          toast.success(t("reviewForm.rewardSentWhatsApp"));
         }
         nextStep(feedbackData);
       } else {
@@ -335,10 +336,10 @@ export const ReviewForm = ({
       const status = error.response?.status;
 
       // Detailed error handling
-      let errorMsg = "An unexpected error occurred. Please try again.";
+      let errorMsg = t("reviewForm.unexpectedError");
 
       if (status === 401 || status === 403) {
-        errorMsg = "Authentication error. Please scan the QR code again.";
+        errorMsg = t("reviewForm.authError");
       } else if (status === 422) {
         // Validation error
         const validationErrors = responseData?.errors;
@@ -349,11 +350,11 @@ export const ReviewForm = ({
           errorMsg = responseData?.message || responseData?.error || errorMsg;
         }
       } else if (status === 404) {
-        errorMsg = "Merchant or batch not found. Please contact staff.";
+        errorMsg = t("reviewForm.merchantNotFound");
       } else if (status === 500) {
-        errorMsg = "Server error occurred. Please try again later.";
+        errorMsg = t("reviewForm.serverError");
       } else if (!error.response) {
-        errorMsg = "Network error. Please check your internet connection.";
+        errorMsg = t("reviewForm.networkError");
       } else {
         errorMsg = responseData?.message || responseData?.error || errorMsg;
       }
@@ -400,7 +401,7 @@ export const ReviewForm = ({
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="text-xs font-semibold uppercase tracking-wide">
-              Back
+              {t("common.back")}
             </span>
           </Button>
 
@@ -411,29 +412,28 @@ export const ReviewForm = ({
 
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
-                Share Your
+                {t("reviewForm.shareYour")}
                 <br />
                 <span className="text-5xl md:text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
-                  Experience
+                  {t("reviewForm.experience")}
                 </span>
               </h1>
               <p className="text-base text-white/90 font-medium max-w-sm leading-relaxed mx-auto">
-                Your feedback shapes our journey. Every review helps us serve
-                you better.
+                {t("reviewForm.feedbackShapes")}
               </p>
 
               <div className="flex items-center justify-center gap-6 pt-4">
                 <div className="text-center">
                   <div className="text-3xl font-black text-white">4.9★</div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wider">
-                    Rating
+                    {t("reviewForm.rating")}
                   </div>
                 </div>
                 <div className="w-px h-12 bg-white/20"></div>
                 <div className="text-center">
                   <div className="text-3xl font-black text-white">10K+</div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wider">
-                    Reviews
+                    {t("reviewForm.reviews")}
                   </div>
                 </div>
               </div>
@@ -461,11 +461,11 @@ export const ReviewForm = ({
               <Star className="w-10 h-10 text-primary group-hover:scale-110 transition-transform duration-500" />
             </div>
             <h2 className="text-4xl font-black text-zinc-900 tracking-tight mb-2">
-              {merchantConfig?.name || "Your Feedback"}
+              {merchantConfig?.name || t("reviewForm.yourFeedback")}
             </h2>
             <div className="flex items-center justify-center gap-2 text-sm font-medium text-zinc-500">
               <MapPin className="w-4 h-4 text-primary" />
-              <span>{merchantConfig?.address || "Store Location"}</span>
+              <span>{merchantConfig?.address || t("identityForm.storeLocation")}</span>
             </div>
           </div>
 
@@ -474,7 +474,7 @@ export const ReviewForm = ({
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
-                  Overall Rating <span className="text-red-500">*</span>
+                  {t("reviewForm.overallRating")} <span className="text-red-500">*</span>
                 </Label>
                 <div
                   className={cn(
@@ -487,12 +487,12 @@ export const ReviewForm = ({
                   )}
                 >
                   {formValues.rating >= 4
-                    ? "Excellent!"
+                    ? t("reviewForm.excellent")
                     : formValues.rating >= 3
-                      ? "Good"
+                      ? t("reviewForm.good")
                       : formValues.rating
-                        ? "Could be better"
-                        : "Rate Us"}
+                        ? t("reviewForm.couldBeBetter")
+                        : t("reviewForm.rateUs")}
                 </div>
               </div>
 
@@ -512,7 +512,7 @@ export const ReviewForm = ({
             {merchantConfig.enablePresetReviews && presetReviews.length > 0 && (
               <div className="space-y-3">
                 <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
-                  Quick Expressions
+                  {t("reviewForm.quickExpressions")}
                 </Label>
 
                 <div className="max-h-60 overflow-y-auto pr-2 space-y-2 scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100 hover:scrollbar-thumb-zinc-400">
@@ -540,12 +540,12 @@ export const ReviewForm = ({
             {/* Custom Review Text */}
             <div className="space-y-2.5">
               <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
-                Detailed Remarks
+                {t("reviewForm.detailedRemarks")}
               </Label>
 
               <TextareaField
                 name="text"
-                placeholder="Share the details that made your visit special..."
+                placeholder={t("reviewForm.detailedRemarksPlaceholder")}
                 control={control}
                 onChange={onTextChange}
                 className=" pl-10
@@ -575,7 +575,7 @@ export const ReviewForm = ({
           {/* Platform Selection */}
           <div className="space-y-3">
             <Label className="text-xs font-bold text-zinc-600 uppercase tracking-wide">
-              Select Review Platform
+              {t("reviewForm.selectReviewPlatform")}
             </Label>
 
             <div className="flex items-center gap-2.5 flex-wrap pb-4">
@@ -602,7 +602,7 @@ export const ReviewForm = ({
               ) : (
                 <div className="py-6 text-center bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 w-full">
                   <p className="text-sm font-semibold text-zinc-500">
-                    No review platforms configured
+                    {t("reviewForm.noPlatformsConfigured")}
                   </p>
                 </div>
               )}
@@ -618,11 +618,11 @@ export const ReviewForm = ({
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing...
+                  {t("reviewForm.processing")}
                 </span>
               ) : (
                 <span className="flex items-center justify-center gap-2">
-                  Submit Feedback
+                  {t("reviewForm.submitFeedback")}
                   <Send className="w-4 h-4" />
                 </span>
               )}
@@ -631,7 +631,7 @@ export const ReviewForm = ({
             <div className="text-center">
               <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
-                Secured by QR Tenants • All data encrypted
+                {t("reviewForm.securedBy")}
               </p>
             </div>
           </div>

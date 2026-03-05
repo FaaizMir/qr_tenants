@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
 import { toast } from "@/lib/toast";
@@ -13,6 +14,7 @@ import { RedirectWait } from "./components/RedirectWait";
 import { LuckyDraw } from "./components/LuckyDraw";
 import { RewardSuccess } from "./components/RewardSuccess";
 import { ThankYou } from "./components/ThankYou";
+import { LanguageSwitcher } from "@/components/common/language-switcher";
 import { Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,7 +25,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-export function CustomerReviewFlow() {
+export function CustomerReviewFlow({ locale }) {
+  const t = useTranslations("customerReview");
   const [step, setStep] = useState(1); // 1: Identity, 2: Review, 3: Redirect, 4: Lucky/Reward or ThankYou
   const [loading, setLoading] = useState(false);
   const [reward, setReward] = useState(null);
@@ -192,20 +195,20 @@ export function CustomerReviewFlow() {
 
         // Show toast notification
         toast.error(
-          "Configuration load failed. Using default settings. Some features may be limited.",
+          t("reviewForm.configLoadFailed")
         );
 
         // Set default fallback config to allow user to continue
         setMerchantConfig((prev) => ({
           ...prev,
-          name: "Welcome",
-          address: "Store Location",
+          name: t("common.welcome"),
+          address: t("common.storeLocation"),
           enablePresetReviews: true,
           enableGoogle: true,
         }));
 
         console.warn(
-          "Using fallback configuration:",
+          t("flow.configurationFallback"),
           responseData || error.message,
         );
       } finally {
@@ -223,7 +226,7 @@ export function CustomerReviewFlow() {
       setStep(3);
     } catch (error) {
       console.error("Review submission handling error:", error);
-      toast.error("Failed to process submission. Please try again.");
+      toast.error(t("errors.reviewSubmissionError"));
       setLoading(false);
     }
   };
@@ -241,7 +244,7 @@ export function CustomerReviewFlow() {
 
         if (!customerId) {
           console.error("Missing customer ID for lucky draw");
-          toast.error("Session error. Redirecting to thank you page.");
+          toast.error(t("errors.luckyDrawRedirect"));
           setReward(null); // Clear any reward data
           setStep(6);
           return;
@@ -269,7 +272,7 @@ export function CustomerReviewFlow() {
         } else if (hasWhatsAppError) {
           // Error occurred, rollback - go to thank you with error data
           console.warn(
-            "WhatsApp delivery failed, proceeding without reward display",
+            t("errors.whatsAppRollback")
           );
           // Pass submissionData to ThankYou so it can display error details
           setReward(submissionData);
@@ -282,7 +285,7 @@ export function CustomerReviewFlow() {
       }
     } catch (error) {
       console.error("Post-review navigation error:", error);
-      toast.error("Navigation error occurred. Proceeding to completion.");
+      toast.error(t("errors.sessionError"));
       setReward(null); // Clear reward on error
       setStep(6); // Fallback to thank you page
     }
@@ -294,7 +297,7 @@ export function CustomerReviewFlow() {
       setLoading(false);
       setSubmissionData(null);
       setReward(null);
-      toast.info("Returning to start. You can submit another review.");
+      toast.info(t("flow.returningToStart"));
       return;
     }
     if (flag === "error") {
@@ -311,7 +314,7 @@ export function CustomerReviewFlow() {
     setLoading(false);
     setSubmissionData(null);
     setReward(null);
-    toast.info("Starting over. Please fill in your details again.");
+    toast.info(t("flow.startingOver"));
   };
 
   const resetFlow = () => {
@@ -341,13 +344,13 @@ export function CustomerReviewFlow() {
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-col items-center gap-2">
               <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 uppercase">
-                QR Tenants
+                {t("flow.qrTenants")}
               </h1>
               <div className="h-0.5 w-10 bg-primary/30 rounded-full"></div>
             </div>
 
             <p className="text-zinc-400 font-semibold text-[10px] uppercase animate-pulse">
-              Preparing your experience
+              {t("flow.preparingExperience")}
             </p>
           </div>
         </div>
@@ -356,15 +359,22 @@ export function CustomerReviewFlow() {
   }
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-slate-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 p-4 pt-8 md:p-8 flex flex-col items-center justify-center font-sans">
-      {/* Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-linear-to-br from-emerald-500/10 to-primary/5 rounded-full blur-[140px] animate-pulse-slow"></div>
-        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-linear-to-br from-blue-600/10 to-indigo-500/5 rounded-full blur-[120px]"></div>
-        <div className="absolute -bottom-[10%] left-[10%] w-[45%] h-[45%] bg-linear-to-br from-indigo-500/10 to-purple-500/5 rounded-full blur-[150px] animate-bounce-slow"></div>
+    <main className="min-h-screen relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-slate-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 font-sans">
+      {/* Language Switcher - Fixed at very top-right of viewport */}
+      <div className="fixed top-0 right-0 z-50 p-4">
+        <LanguageSwitcher />
       </div>
+      
+      {/* Main Content Area */}
+      <div className="p-4 pt-20 md:p-8 md:pt-24 flex flex-col items-center justify-center min-h-screen">
+        {/* Background Orbs */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+          <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-linear-to-br from-emerald-500/10 to-primary/5 rounded-full blur-[140px] animate-pulse-slow"></div>
+          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-linear-to-br from-blue-600/10 to-indigo-500/5 rounded-full blur-[120px]"></div>
+          <div className="absolute -bottom-[10%] left-[10%] w-[45%] h-[45%] bg-linear-to-br from-indigo-500/10 to-purple-500/5 rounded-full blur-[150px] animate-bounce-slow"></div>
+        </div>
 
-      <div className="w-full max-w-8xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700 ">
+        <div className="w-full max-w-8xl relative z-10 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 duration-700 ">
         {step === 1 && (
           <IdentityForm
             register={register}
@@ -374,6 +384,7 @@ export function CustomerReviewFlow() {
             control={control}
             errors={errors}
             merchantConfig={merchantConfig}
+            t={t}
           />
         )}
         {step === 2 && (
@@ -387,6 +398,7 @@ export function CustomerReviewFlow() {
             prevStep={prevStep}
             loading={loading}
             setLoading={setLoading}
+            t={t}
           />
         )}
         {step === 3 && (
@@ -394,6 +406,7 @@ export function CustomerReviewFlow() {
             nextStep={handlePostReviewStep}
             prevStep={prevStep}
             merchantConfig={merchantConfig}
+            t={t}
           />
         )}
         {step === 4 && (
@@ -409,6 +422,7 @@ export function CustomerReviewFlow() {
             }
             merchantId={merchantId}
             formValues={watch()}
+            t={t}
           />
         )}
         {step === 5 && (
@@ -418,6 +432,7 @@ export function CustomerReviewFlow() {
             formValues={watch()}
             prevStep={prevStep}
             nextStep={nextStep}
+            t={t}
           />
         )}
         {step === 6 && (
@@ -427,8 +442,10 @@ export function CustomerReviewFlow() {
             prevStep={prevStep}
             reward={reward}
             formValues={watch()}
+            t={t}
           />
         )}
+        </div>
       </div>
 
       {/* Modern Error Handling Dialog */}
@@ -465,12 +482,12 @@ export function CustomerReviewFlow() {
             </div>
 
             <DialogTitle className="relative text-3xl font-bold tracking-tight mb-2">
-              System Error
+              {t("errors.systemError")}
             </DialogTitle>
             <div className="flex items-center justify-center gap-2 relative">
               <div className="h-0.5 w-6 bg-white/40 rounded-full"></div>
               <p className="text-red-100 text-xs font-semibold uppercase tracking-widest">
-                Action Required
+                {t("errors.actionRequired")}
               </p>
               <div className="h-0.5 w-6 bg-white/40 rounded-full"></div>
             </div>
@@ -496,7 +513,7 @@ export function CustomerReviewFlow() {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-red-700 font-bold text-xs uppercase tracking-wide mb-2">
-                      Error Message
+                      {t("errors.errorMessage")}
                     </h4>
                     <p className="text-zinc-800 text-sm font-semibold leading-relaxed">
                       {errorDialog.message}
@@ -519,7 +536,7 @@ export function CustomerReviewFlow() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Technical Details
+                    {t("errors.technicalDetails")}
                   </p>
                   <div className="p-4 rounded-2xl bg-zinc-50 border-2 border-zinc-200/60 max-h-32 overflow-y-auto">
                     <pre className="text-xs font-mono text-zinc-600 whitespace-pre-wrap">
@@ -538,7 +555,7 @@ export function CustomerReviewFlow() {
               }
               className="w-full h-14 rounded-2xl bg-linear-to-r from-zinc-900 via-zinc-800 to-zinc-900 hover:from-zinc-800 hover:via-zinc-700 hover:to-zinc-800 text-white font-bold uppercase tracking-wide shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95"
             >
-              Close
+              {t("common.close")}
             </Button>
           </div>
         </DialogContent>

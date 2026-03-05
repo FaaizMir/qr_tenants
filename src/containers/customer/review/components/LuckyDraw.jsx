@@ -40,6 +40,7 @@ export const LuckyDraw = ({
   customerId,
   merchantId,
   formValues,
+  t,
 }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [hasSpun, setHasSpun] = useState(false);
@@ -68,9 +69,7 @@ export const LuckyDraw = ({
     const safeCustomerId = parseInt(customerId);
 
     if (isNaN(safeMerchantId) || isNaN(safeCustomerId)) {
-      toast.error(
-        "Session error: Missing required information. Please try skipping or go back.",
-      );
+      toast.error(t("luckyDraw.sessionError"));
       return;
     }
 
@@ -111,19 +110,23 @@ export const LuckyDraw = ({
         setResult(prizeData);
         setReward(prizeData);
         toast.success(
-          `Magnificent! You won ${prizeData?.prize?.prize_name || "a prize"}!`,
+          t("luckyDraw.spinSuccess", {
+            prize: prizeData?.prize?.prize_name || t("luckyDraw.specialReward"),
+          }),
         );
 
         const whatsappStatus = prizeData?.whatsapp_notification;
         if (whatsappStatus?.credits_insufficient && !whatsappStatus?.sent) {
           toast.error(
-            `Notice: WhatsApp credits are insufficient (Available: ${whatsappStatus?.available_credits ?? 0}) to send the voucher.`,
+            t("luckyDraw.whatsAppError", {
+              credits: whatsappStatus?.available_credits ?? 0,
+            }),
           );
         } else if (
           whatsappStatus?.sent &&
           !whatsappStatus?.credits_insufficient
         ) {
-          toast.success("Success: Reward details sent to your WhatsApp!");
+          toast.success(t("reviewForm.whatsAppDeliverySuccess"));
         }
       }, 8000);
     } catch (error) {
@@ -136,7 +139,7 @@ export const LuckyDraw = ({
       const errorMsg =
         responseData?.message ||
         responseData?.error ||
-        "Failed to process your spin. Please try again or contact merchant staff.";
+        t("luckyDraw.spinError");
 
       toast.error(errorMsg);
     }
@@ -144,11 +147,11 @@ export const LuckyDraw = ({
   // Validate customer ID on mount - show warning if missing
   useEffect(() => {
     if (!customerId || isNaN(parseInt(customerId))) {
-      toast.warning("Session warning: You can skip lucky draw if needed.", {
+      toast.warning(t("luckyDraw.sessionWarning"), {
         duration: 5000,
       });
     }
-  }, [customerId]);
+  }, [customerId, t]);
 
   return (
     <div className=" w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 animate-in fade-in duration-700 overflow-hidden">
@@ -169,7 +172,7 @@ export const LuckyDraw = ({
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="text-xs font-semibold uppercase tracking-wide">
-              Back
+              {t("common.back")}
             </span>
           </Button>
 
@@ -180,14 +183,14 @@ export const LuckyDraw = ({
 
             <div className="space-y-4">
               <h1 className="text-5xl font-bold text-white leading-tight tracking-tight">
-                Test Your
+                {t("luckyDraw.testYour")}
                 <br />
                 <span className="text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
-                  Luck
+                  {t("luckyDraw.luck")}
                 </span>
               </h1>
               <p className="text-lg text-white/90 font-medium max-w-md leading-relaxed">
-                Every spin is a guaranteed win! Your feedback deserves a reward.
+                {t("luckyDraw.everySpinWin")}
               </p>
 
               <div className="flex items-center justify-center gap-6 pt-6">
@@ -196,14 +199,14 @@ export const LuckyDraw = ({
                     {prizes.length || 10}+
                   </div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
-                    Prizes
+                    {t("luckyDraw.prizes")}
                   </div>
                 </div>
                 <div className="w-px h-12 bg-white/20"></div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">100%</div>
                   <div className="text-xs text-white/70 font-semibold uppercase tracking-wide">
-                    Win Rate
+                    {t("luckyDraw.winRate")}
                   </div>
                 </div>
               </div>
@@ -229,11 +232,13 @@ export const LuckyDraw = ({
               <Trophy className="w-8 h-8 text-amber-600" />
             </div>
             <h2 className="text-3xl font-bold text-zinc-900">
-              {merchantConfig?.name || "Lucky Draw"}
+              {merchantConfig?.name || t("luckyDraw.luckyDraw")}
             </h2>
             <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 mt-2">
               <MapPin className="w-4 h-4 text-amber-600" />
-              <span>{merchantConfig?.address || "Store Location"}</span>
+              <span>
+                {merchantConfig?.address || t("identityForm.storeLocation")}
+              </span>
             </div>
           </div>
 
@@ -319,10 +324,10 @@ export const LuckyDraw = ({
               <div className="text-center space-y-6 w-full max-w-md px-4">
                 <div className="space-y-3">
                   <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
-                    Ready to Win?
+                    {t("luckyDraw.readyToWin")}
                   </h3>
                   <p className="text-sm font-semibold text-zinc-600 leading-relaxed uppercase tracking-wide">
-                    Every spin is a guaranteed prize!
+                    {t("luckyDraw.everySpinPrize")}
                   </p>
                 </div>
 
@@ -336,11 +341,11 @@ export const LuckyDraw = ({
                     {isSpinning ? (
                       <span className="relative flex items-center justify-center gap-3">
                         <RotateCw className="w-6 h-6 animate-spin" />
-                        Spinning...
+                        {t("luckyDraw.spinning")}
                       </span>
                     ) : (
                       <span className="relative flex items-center justify-center gap-3">
-                        Spin the Wheel
+                        {t("luckyDraw.spinTheWheel")}
                         <Sparkles className="w-6 h-6 text-yellow-400 group-hover:scale-125 group-hover:rotate-12 transition-transform" />
                       </span>
                     )}
@@ -354,7 +359,7 @@ export const LuckyDraw = ({
                     disabled={isSpinning}
                     className="text-xs text-zinc-400 hover:text-zinc-600 font-semibold uppercase tracking-wide transition-colors disabled:opacity-30"
                   >
-                    Skip Lucky Draw →
+                    {t("luckyDraw.skipLuckyDraw")}
                   </button>
                 </div>
               </div>
@@ -367,7 +372,7 @@ export const LuckyDraw = ({
                   </div>
 
                   <h3 className="text-2xl font-bold text-zinc-900 uppercase">
-                    You Won!
+                    {t("luckyDraw.youWon")}
                   </h3>
                 </div>
 
@@ -377,12 +382,13 @@ export const LuckyDraw = ({
                     <div className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 inline-flex items-center gap-1.5">
                       <Star className="w-3 h-3 text-emerald-400" />
                       <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-400">
-                        Official Prize
+                        {t("luckyDraw.officialPrize")}
                       </span>
                     </div>
 
                     <p className="text-2xl font-bold uppercase">
-                      {result?.prize?.prize_name || "Special Reward"}
+                      {result?.prize?.prize_name ||
+                        t("luckyDraw.specialReward")}
                     </p>
 
                     {result?.prize?.prize_description && (
@@ -393,7 +399,7 @@ export const LuckyDraw = ({
 
                     <div className="pt-3">
                       <p className="text-xs text-zinc-400">
-                        Your reward details have been sent to your WhatsApp
+                        {t("luckyDraw.rewardSentWhatsApp")}
                       </p>
                     </div>
                   </div>
@@ -401,15 +407,19 @@ export const LuckyDraw = ({
 
                 {/* WhatsApp Status */}
                 {result?.whatsapp_status === "failed" ||
-                  result?.whatsapp_error ||
-                  result?.error === "whatsapp_credit_low" ||
-                  result?.whatsapp_notification?.credits_insufficient ? (
+                result?.whatsapp_error ||
+                result?.error === "whatsapp_credit_low" ||
+                result?.whatsapp_notification?.credits_insufficient ? (
                   <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200">
                     <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
                     <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
                       {result?.whatsapp_notification?.credits_insufficient
-                        ? `WhatsApp Error (${result?.whatsapp_notification?.available_credits ?? 0} credits left)`
-                        : "WhatsApp Delivery Failed"}
+                        ? t("luckyDraw.whatsAppError", {
+                            credits:
+                              result?.whatsapp_notification
+                                ?.available_credits ?? 0,
+                          })
+                        : t("luckyDraw.whatsAppDeliveryFailed")}
                     </span>
                   </div>
                 ) : null}
@@ -417,19 +427,17 @@ export const LuckyDraw = ({
                 {/* Instructions */}
                 <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
                   {result?.whatsapp_status === "failed" ||
-                    result?.whatsapp_error ||
-                    result?.error === "whatsapp_credit_low" ||
-                    result?.whatsapp_notification?.credits_insufficient ? (
+                  result?.whatsapp_error ||
+                  result?.error === "whatsapp_credit_low" ||
+                  result?.whatsapp_notification?.credits_insufficient ? (
                     <p className="text-xs font-semibold text-red-600 leading-relaxed">
-                      We couldn&apos;t send to WhatsApp. Please screenshot this
-                      screen to claim your reward.
+                      {t("luckyDraw.whatsAppErrorMessage")}
                     </p>
                   ) : (
                     <p className="text-xs font-medium text-zinc-600 leading-relaxed">
-                      Reward sent to{" "}
-                      <span className="text-zinc-900 font-bold">
-                        {formValues?.phone || "your number"}
-                      </span>
+                      {t("luckyDraw.rewardSentTo", {
+                        phone: formValues?.phone || "",
+                      })}
                     </p>
                   )}
                 </div>
@@ -441,7 +449,7 @@ export const LuckyDraw = ({
                     className="w-full h-12 rounded-xl text-sm font-bold uppercase tracking-wide bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg transition-all active:scale-95"
                   >
                     <span className="flex items-center justify-center gap-2">
-                      Claim My Reward
+                      {t("luckyDraw.claimMyReward")}
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   </Button>
@@ -454,7 +462,7 @@ export const LuckyDraw = ({
           <div className="mt-8 pt-6 border-t border-slate-200/50 text-center">
             <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-              Secured by QR Tenants • All data encrypted
+              {t("luckyDraw.securedBy")}
             </p>
           </div>
         </div>

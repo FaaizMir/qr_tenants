@@ -13,34 +13,34 @@ import {
 import { cn } from "@/lib/utils";
 import { toast } from "@/lib/toast";
 
-export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
+export const RedirectWait = ({ nextStep, prevStep, merchantConfig, t }) => {
   const [statusIndex, setStatusIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const statuses = [
     {
-      label: "Submitting Feedback",
+      label: t("redirectWait.submittingFeedback"),
       icon: Zap,
       color: "text-blue-500",
       bgColor: "bg-blue-50",
       borderColor: "border-blue-100",
-      sub: "Securing your data...",
+      sub: t("redirectWait.securingData"),
     },
     {
-      label: "Verifying Redirect",
+      label: t("redirectWait.verifyingRedirect"),
       icon: ShieldCheck,
       color: "text-amber-500",
       bgColor: "bg-amber-50",
       borderColor: "border-amber-100",
-      sub: "Linking your review platform...",
+      sub: t("redirectWait.linkingPlatform"),
     },
     {
-      label: "Almost Ready!",
+      label: t("redirectWait.almostReady"),
       icon: CheckCircle2,
       color: "text-emerald-500",
       bgColor: "bg-emerald-50",
       borderColor: "border-emerald-100",
-      sub: "Preparing your reward...",
+      sub: t("redirectWait.preparingReward"),
     },
   ];
 
@@ -102,23 +102,22 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
 
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
-                Processing...
+                {t("redirectWait.processing")}
                 <br />
                 <span className="text-5xl md:text-6xl bg-clip-text text-transparent bg-linear-to-r from-white via-primary-100 to-white animate-shimmer bg-size-[200%_100%]">
-                  Please Wait
+                  {t("redirectWait.pleaseWait")}
                 </span>
               </h1>
 
               <div className="flex items-center justify-center gap-2 text-white/80">
                 <MapPin className="w-5 h-5" />
                 <p className="text-base font-medium">
-                  {merchantConfig?.name || "Securing your visit"}
+                  {merchantConfig?.name || t("redirectWait.securingVisit")}
                 </p>
               </div>
 
               <p className="text-base text-white/90 font-medium max-w-sm leading-relaxed mx-auto pt-2">
-                We&apos;re finalizing your feedback and preparing your rewards.
-                This only takes a few moments.
+                {t("redirectWait.finalizing")}
               </p>
             </div>
           </div>
@@ -131,7 +130,7 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-50 mb-4 border border-blue-100">
               <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
             </div>
-            <h2 className="text-3xl font-bold text-zinc-900">Finalizing...</h2>
+            <h2 className="text-3xl font-bold text-zinc-900">{t("redirectWait.finalizing")}</h2>
           </div>
 
           <div className="space-y-12 flex-1 flex flex-col justify-center">
@@ -174,7 +173,7 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
               <div className="flex items-center justify-center gap-2">
                 <Shield className="w-3.5 h-3.5 text-blue-500" />
                 <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                  Secure Data Encryption Active
+                  {t("redirectWait.secureDataEncryption")}
                 </p>
               </div>
             </div>
@@ -183,15 +182,14 @@ export const RedirectWait = ({ nextStep, prevStep, merchantConfig }) => {
           {/* Note Section */}
           <div className="mt-8 p-4 bg-slate-50/50 rounded-xl border border-slate-100 text-center">
             <p className="text-xs text-zinc-500 italic leading-relaxed">
-              &quot;Please do not close this window while we prepare your reward
-              details.&quot;
+              &quot;{t("redirectWait.doNotClose")}&quot;
             </p>
           </div>
 
           <div className="mt-auto pt-8 border-t border-slate-200/50 text-center">
             <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
               <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-              Secure Channel • Powered by QR Tenants
+              {t("redirectWait.secureChannel")}
             </p>
           </div>
         </div>
