@@ -12,9 +12,7 @@
     "location": "場所",
     "merchantType": "商人タイプ",
     "noAd": "広告なし",
-    "requestedDate": "リクエスト日",
-    "adStartDate": "広告開始日",
-    "adEndDate": "広告終了日"
+    "requestedDate": "リクエスト日"
   },
   "dialog": {
     "approveDescription": "{merchantName}のリクエストを承認してもよろしいですか？この操作は元に戻せません。",

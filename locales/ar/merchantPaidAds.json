@@ -21,9 +21,6 @@
     "label": "المدة",
     "selectPlaceholder": "اختر المدة"
   },
-  "startDate": {
-    "label": "تاريخ البدء"
-  },
   "messages": {
     "errorDeleting": "فشل في الحذف",
     "errorProcessing": "خطأ في معالجة الصورة",

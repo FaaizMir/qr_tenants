@@ -8,7 +8,7 @@
       "forwarded": "Forwarded to Super Admin"
     },
     "fields": {
-      "activatedAt": "Start at",
+      "activatedAt": "Activated At",
       "batchName": "Batch Name",
       "businessName": "Business Name",
       "city": "City",

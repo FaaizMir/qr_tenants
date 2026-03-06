@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "Muat turun",
+    "scanFor": "Imbas untuk {name}",
     "tapToZoom": "TEKAN UNTUK ZOOM"
   },
   "recentRedemptions": {

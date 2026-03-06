@@ -21,9 +21,6 @@
     "label": "Thời gian",
     "selectPlaceholder": "Chọn thời gian"
   },
-  "startDate": {
-    "label": "Ngày bắt đầu"
-  },
   "messages": {
     "errorDeleting": "Xóa không thành công",
     "errorProcessing": "Lỗi xử lý hình ảnh",

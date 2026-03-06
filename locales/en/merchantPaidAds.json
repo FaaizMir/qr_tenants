@@ -21,9 +21,6 @@
     "label": "Duration",
     "selectPlaceholder": "Select duration"
   },
-  "startDate": {
-    "label": "Start Date"
-  },
   "messages": {
     "errorDeleting": "Failed to delete",
     "errorProcessing": "Error processing image",

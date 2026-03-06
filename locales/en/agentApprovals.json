@@ -12,9 +12,7 @@
     "location": "Location",
     "merchantType": "Merchant Type",
     "noAd": "No Ad",
-    "requestedDate": "Requested Date",
-    "adStartDate": "Ad Start Date",
-    "adEndDate": "Ad End Date"
+    "requestedDate": "Requested Date"
   },
   "dialog": {
     "approveDescription": "Are you sure you want to approve the request for {merchantName}? This action cannot be undone.",

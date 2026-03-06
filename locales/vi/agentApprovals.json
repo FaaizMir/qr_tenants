@@ -12,9 +12,7 @@
     "location": "Vị trí",
     "merchantType": "Loại thương nhân",
     "noAd": "Không có quảng cáo",
-    "requestedDate": "Ngày yêu cầu",
-    "adStartDate": "Ngày bắt đầu quảng cáo",
-    "adEndDate": "Ngày kết thúc quảng cáo"
+    "requestedDate": "Ngày yêu cầu"
   },
   "dialog": {
     "approveDescription": "Bạn có chắc chắn muốn phê duyệt yêu cầu cho {merchantName}? Hành động này không thể hoàn tác.",

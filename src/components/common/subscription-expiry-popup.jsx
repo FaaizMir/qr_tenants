@@ -12,9 +12,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function SubscriptionExpiryPopup({ isOpen, onClose }) {
   const router = useRouter();
+  const t = useTranslations("agentDashboard.subscriptionExpiry");
 
   const handleGoToWallet = () => {
     router.push("/agent/wallet");
@@ -32,11 +34,10 @@ export function SubscriptionExpiryPopup({ isOpen, onClose }) {
 
             <DialogHeader className="p-0">
               <DialogTitle className="text-2xl font-bold text-amber-900 tracking-tight text-center">
-                Subscription Required
+                {t("title")}
               </DialogTitle>
               <DialogDescription className="text-sm font-medium text-amber-800/70 mt-2 leading-relaxed text-center">
-                Your agent subscription is required to continue. Most features
-                will be restricted until your plan is active.
+                {t("description")}
               </DialogDescription>
             </DialogHeader>
           </div>
@@ -48,14 +49,14 @@ export function SubscriptionExpiryPopup({ isOpen, onClose }) {
             onClick={onClose}
             className="flex-1 text-black  bg-slate-200 hover:bg-slate-300 rounded-xl transition-all focus-visible:ring-0 focus-visible:ring-offset-0"
           >
-            Remind me later
+            {t("remindLater")}
           </Button>
           <Button
             onClick={handleGoToWallet}
             className="flex-1 gap-2 bg-amber-100 hover:bg-amber-200 text-black rounded-xl shadow-md  transition-all hover:scale-[1.01] active:scale-[0.98]"
           >
             <Wallet className="h-4 w-4" />
-            Go to Wallet
+            {t("goToWallet")}
           </Button>
         </DialogFooter>
       </DialogContent>

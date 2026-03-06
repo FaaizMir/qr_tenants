@@ -183,6 +183,12 @@
     "description": "エージェントのパフォーマンスと指標の概要",
     "title": "エージェントダッシュボード"
   },
+  "subscriptionExpiry": {
+    "description": "続行するにはエージェントのサブスクリプションが必要です。プランがアクティブになるまでほとんどの機能が制限されます。",
+    "goToWallet": "ウォレットに移動",
+    "remindLater": "後でリマインドする",
+    "title": "サブスクリプションが必要"
+  },
   "tabs": {
     "analytics": "分析",
     "merchants": "パフォーマンス",

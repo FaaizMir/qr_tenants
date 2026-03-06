@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "تحميل",
+    "scanFor": "امسح لـ {name}",
     "tapToZoom": "اضغط للتكبير"
   },
   "recentRedemptions": {

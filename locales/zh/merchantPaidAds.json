@@ -21,9 +21,6 @@
     "label": "持续时间",
     "selectPlaceholder": "选择持续时间"
   },
-  "startDate": {
-    "label": "开始日期"
-  },
   "messages": {
     "errorDeleting": "删除失败",
     "errorProcessing": "处理图像时出错",

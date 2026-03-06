@@ -12,9 +12,7 @@
     "location": "위치",
     "merchantType": "상인 유형",
     "noAd": "광고 없음",
-    "requestedDate": "요청 날짜",
-    "adStartDate": "광고 시작일",
-    "adEndDate": "광고 종료일"
+    "requestedDate": "요청 날짜"
   },
   "dialog": {
     "approveDescription": "정말로 {merchantName}의 요청을 승인하시겠습니까? 이 작업은 취소할 수 없습니다.",

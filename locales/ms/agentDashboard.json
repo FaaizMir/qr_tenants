@@ -183,6 +183,12 @@
     "description": "Gambaran keseluruhan prestasi dan metrik ejen anda",
     "title": "Papan Pemuka Ejen"
   },
+  "subscriptionExpiry": {
+    "description": "Langganan ejen anda diperlukan untuk meneruskan. Kebanyakan ciri akan terhad sehingga pelan anda aktif.",
+    "goToWallet": "Pergi ke Dompet",
+    "remindLater": "Ingatkan saya kemudian",
+    "title": "Langganan Diperlukan"
+  },
   "tabs": {
     "analytics": "Analitik",
     "merchants": "Prestasi",

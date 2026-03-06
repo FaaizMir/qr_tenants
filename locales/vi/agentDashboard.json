@@ -183,6 +183,12 @@
     "description": "Tổng quan về hiệu suất và chỉ số của đại lý của bạn",
     "title": "Bảng điều khiển đại lý"
   },
+  "subscriptionExpiry": {
+    "description": "Bạn cần có đăng ký đại lý để tiếp tục. Hầu hết các tính năng sẽ bị hạn chế cho đến khi gói của bạn hoạt động.",
+    "goToWallet": "Đi đến Ví",
+    "remindLater": "Nhắc tôi sau",
+    "title": "Cần có đăng ký"
+  },
   "tabs": {
     "analytics": "Phân tích",
     "merchants": "Hiệu suất",
