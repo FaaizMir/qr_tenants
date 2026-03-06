@@ -5,7 +5,9 @@
   },
   "columns": {
     "adContent": "Nội dung quảng cáo",
+    "adEndDate": "Ngày kết thúc quảng cáo",
     "adPlacement": "Đặt quảng cáo",
+    "adStartDate": "Ngày bắt đầu quảng cáo",
     "approvalStatus": "Trạng thái phê duyệt",
     "approvalType": "Loại phê duyệt",
     "businessAccount": "Doanh nghiệp & Tài khoản",
@@ -13,6 +15,11 @@
     "merchantType": "Loại thương nhân",
     "noAd": "Không có quảng cáo",
     "requestedDate": "Ngày yêu cầu"
+  },
+  "common": {
+    "adAltText": "Quảng cáo",
+    "adPreviewAlt": "Xem trước quảng cáo",
+    "notAvailable": "Không có"
   },
   "dialog": {
     "approveDescription": "Bạn có chắc chắn muốn phê duyệt yêu cầu cho {merchantName}? Hành động này không thể hoàn tác.",

@@ -5,7 +5,9 @@
   },
   "columns": {
     "adContent": "Konten Iklan",
+    "adEndDate": "Tanggal Akhir Iklan",
     "adPlacement": "Penempatan Iklan",
+    "adStartDate": "Tanggal Mulai Iklan",
     "approvalStatus": "Status Persetujuan",
     "approvalType": "Jenis Persetujuan",
     "businessAccount": "Bisnis & Akun",
@@ -13,6 +15,11 @@
     "merchantType": "Jenis Pedagang",
     "noAd": "Tidak Ada Iklan",
     "requestedDate": "Tanggal Diminta"
+  },
+  "common": {
+    "adAltText": "Iklan",
+    "adPreviewAlt": "Prabaca Iklan",
+    "notAvailable": "N/A"
   },
   "dialog": {
     "approveDescription": "Apakah Anda yakin ingin menyetujui permintaan untuk {merchantName}? Tindakan ini tidak dapat dibatalkan.",

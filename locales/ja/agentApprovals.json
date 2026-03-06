@@ -5,7 +5,9 @@
   },
   "columns": {
     "adContent": "広告コンテンツ",
+    "adEndDate": "広告終了日",
     "adPlacement": "広告掲載",
+    "adStartDate": "広告開始日",
     "approvalStatus": "承認状況",
     "approvalType": "承認タイプ",
     "businessAccount": "ビジネス & アカウント",
@@ -13,6 +15,11 @@
     "merchantType": "商人タイプ",
     "noAd": "広告なし",
     "requestedDate": "リクエスト日"
+  },
+  "common": {
+    "adAltText": "広告",
+    "adPreviewAlt": "広告プレビュー",
+    "notAvailable": "該当なし"
   },
   "dialog": {
     "approveDescription": "{merchantName}のリクエストを承認してもよろしいですか？この操作は元に戻せません。",

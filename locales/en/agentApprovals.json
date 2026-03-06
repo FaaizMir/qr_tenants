@@ -5,7 +5,9 @@
   },
   "columns": {
     "adContent": "Ad Content",
+    "adEndDate": "Ad End Date",
     "adPlacement": "Ad Placement",
+    "adStartDate": "Ad Start Date",
     "approvalStatus": "Approval Status",
     "approvalType": "Approval Type",
     "businessAccount": "Business & Account",
@@ -13,6 +15,11 @@
     "merchantType": "Merchant Type",
     "noAd": "No Ad",
     "requestedDate": "Requested Date"
+  },
+  "common": {
+    "adAltText": "Ad",
+    "adPreviewAlt": "Ad Preview",
+    "notAvailable": "N/A"
   },
   "dialog": {
     "approveDescription": "Are you sure you want to approve the request for {merchantName}? This action cannot be undone.",

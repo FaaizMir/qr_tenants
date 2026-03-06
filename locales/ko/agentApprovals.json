@@ -5,7 +5,9 @@
   },
   "columns": {
     "adContent": "광고 콘텐츠",
+    "adEndDate": "광고 종료 날짜",
     "adPlacement": "광고 게재 위치",
+    "adStartDate": "광고 시작 날짜",
     "approvalStatus": "승인 상태",
     "approvalType": "승인 유형",
     "businessAccount": "비즈니스 및 계정",
@@ -13,6 +15,11 @@
     "merchantType": "상인 유형",
     "noAd": "광고 없음",
     "requestedDate": "요청 날짜"
+  },
+  "common": {
+    "adAltText": "광고",
+    "adPreviewAlt": "광고 미리보기",
+    "notAvailable": "해당 없음"
   },
   "dialog": {
     "approveDescription": "정말로 {merchantName}의 요청을 승인하시겠습니까? 이 작업은 취소할 수 없습니다.",
