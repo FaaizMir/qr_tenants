@@ -319,14 +319,7 @@ export default function MasterAdminLandingPage() {
   }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
   const handleAgentClick = (agent) => {
-    // Store agent data with timestamp for security validation
-    const agentData = {
-      ...agent,
-      _timestamp: Date.now(),
-      _sessionId: Math.random().toString(36).substring(7), // Simple session tracking
-    };
-    localStorage.setItem("selectedAgent", JSON.stringify(agentData));
-    router.push(`/homepage/agent`);
+    router.push(`/homepage/agent/${agent.id}`);
   };
 
   // Filtered + paginated coupons
