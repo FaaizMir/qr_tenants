@@ -522,11 +522,11 @@ export default function MerchantPurchase() {
                       </div>
                       <div className="flex-1 space-y-1.5">
                         <p className="text-[10px] font-black text-amber-900 uppercase tracking-wide">
-                          Important Notice
+                          {t("confirmationDialog.importantNotice")}
                         </p>
                         <p className="text-[11px] leading-[1.6] text-amber-800/90 font-medium">
-                          By proceeding, you confirm your ad contains no gambling, adult content, illegal services, or material prohibited under Malaysian law. 
-                          <span className="font-semibold text-amber-900"> Payments are non-refundable if rejected for policy violations.</span>
+                          {t("confirmationDialog.warningText")} 
+                          <span className="font-semibold text-amber-900"> {t("confirmationDialog.refundWarning")}</span>
                         </p>
                       </div>
                     </div>
@@ -590,7 +590,7 @@ export default function MerchantPurchase() {
                       <div className="flex gap-6 items-center opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 pointer-events-none">
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
-                          alt="Visa"
+                          alt={t("checkout.visaAlt")}
                           width={48}
                           height={12}
                           className="h-3"
@@ -598,7 +598,7 @@ export default function MerchantPurchase() {
                         />
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                          alt="Mastercard"
+                          alt={t("checkout.mastercardAlt")}
                           width={64}
                           height={20}
                           className="h-5"
@@ -606,7 +606,7 @@ export default function MerchantPurchase() {
                         />
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg"
-                          alt="Stripe"
+                          alt={t("checkout.stripeAlt")}
                           width={56}
                           height={16}
                           className="h-4"
@@ -639,10 +639,10 @@ export default function MerchantPurchase() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-slate-900">
-              Confirm Advertisement Purchase
+              {t("confirmationDialog.title")}
             </DialogTitle>
             <p className="text-sm text-slate-500 mt-2">
-              Please review and confirm the following before proceeding with your purchase.
+              {t("confirmationDialog.description")}
             </p>
           </DialogHeader>
           
@@ -659,7 +659,7 @@ export default function MerchantPurchase() {
                 htmlFor="confirm-purchase-checkbox"
                 className="text-sm leading-relaxed text-red-700 font-medium cursor-pointer select-none"
               >
-                I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.
+                {t("confirmationDialog.checkboxLabel")}
               </label>
             </div>
           </div>
@@ -674,14 +674,14 @@ export default function MerchantPurchase() {
               }}
               className="flex-1"
             >
-              Cancel
+              {t("confirmationDialog.cancel")}
             </Button>
             <Button
               onClick={proceedToCheckout}
               disabled={!confirmChecked}
               className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
             >
-              Proceed to Payment
+              {t("confirmationDialog.proceedToPayment")}
             </Button>
           </div>
         </DialogContent>

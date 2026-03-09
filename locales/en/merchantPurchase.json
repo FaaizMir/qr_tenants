@@ -4,6 +4,7 @@
     "bonusGift": "Bonus Gift",
     "cardDetails": "Card Details",
     "creditsIncluded": "Credits Included",
+    "mastercardAlt": "Mastercard",
     "noSelection": "No Package Selected",
     "noSelectionMessage": "Please select a package to continue with checkout.",
     "packageType": "Package Type",
@@ -11,10 +12,22 @@
     "premiumDescription": "Premium credit package with enhanced features",
     "securePayment": "Secure Payment",
     "sslEncrypted": "SSL Encrypted",
+    "stripeAlt": "Stripe",
     "subtitle": "Review your purchase",
     "title": "Order Summary",
     "totalAmount": "Total Amount",
-    "trustedPartners": "Trusted Partners"
+    "trustedPartners": "Trusted Partners",
+    "visaAlt": "Visa"
+  },
+  "confirmationDialog": {
+    "cancel": "Cancel",
+    "checkboxLabel": "I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.",
+    "description": "Please review and confirm the following before proceeding with your purchase.",
+    "importantNotice": "Important Notice",
+    "proceedToPayment": "Proceed to Payment",
+    "refundWarning": "Payments are non-refundable if rejected for policy violations.",
+    "title": "Confirm Advertisement Purchase",
+    "warningText": "By proceeding, you confirm your ad contains no gambling, adult content, illegal services, or material prohibited under Malaysian law."
   },
   "emptyState": {
     "noPackages": "No credit packages available at the moment."

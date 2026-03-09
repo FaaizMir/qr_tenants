@@ -15,8 +15,8 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export function SubscriptionExpiryPopup({ isOpen, onClose }) {
-  const router = useRouter();
   const t = useTranslations("agentDashboard.subscriptionExpiry");
+  const router = useRouter();
 
   const handleGoToWallet = () => {
     router.push("/agent/wallet");

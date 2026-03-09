@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "激活广告",
+    "pendingUploadAlt": "待上传",
+    "previewAlt": "预览"
+  },
   "confirmation": {
     "cancel": "取消",
     "checkboxLabel": "我确认此广告不包含赌博、成人内容、非法服务或马来西亚法律禁止的任何内容。我理解如果广告因政策违规而被拒绝，付款将不予退还。",
@@ -57,6 +62,9 @@
   "preview": {
     "description": "促销广告的完整预览",
     "title": "广告预览"
+  },
+  "startDate": {
+    "label": "开始日期"
   },
   "status": {
     "active": "活跃",

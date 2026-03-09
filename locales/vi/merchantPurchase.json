@@ -4,6 +4,7 @@
     "bonusGift": "Quà tặng thưởng",
     "cardDetails": "Chi tiết thẻ",
     "creditsIncluded": "Tín dụng bao gồm",
+    "mastercardAlt": "Mastercard",
     "noSelection": "Chưa chọn gói nào",
     "noSelectionMessage": "Vui lòng chọn một gói để tiếp tục thanh toán.",
     "packageType": "Loại gói",
@@ -11,10 +12,22 @@
     "premiumDescription": "Gói tín dụng cao cấp với các tính năng nâng cao",
     "securePayment": "Thanh toán an toàn",
     "sslEncrypted": "Mã hóa SSL",
+    "stripeAlt": "Stripe",
     "subtitle": "Xem lại giao dịch của bạn",
     "title": "Tóm tắt đơn hàng",
     "totalAmount": "Tổng số tiền",
-    "trustedPartners": "Đối tác đáng tin cậy"
+    "trustedPartners": "Đối tác đáng tin cậy",
+    "visaAlt": "Visa"
+  },
+  "confirmationDialog": {
+    "cancel": "Hủy bỏ",
+    "checkboxLabel": "Tôi xác nhận rằng quảng cáo này không chứa nội dung cờ bạc, nội dung người lớn, dịch vụ bất hợp pháp, hoặc bất kỳ nội dung nào bị cấm theo luật Malaysia. Tôi hiểu rằng thanh toán là không hoàn lại nếu quảng cáo bị từ chối do vi phạm chính sách.",
+    "description": "Vui lòng xem xét và xác nhận các thông tin sau trước khi tiến hành mua hàng của bạn.",
+    "importantNotice": "Thông báo Quan trọng",
+    "proceedToPayment": "Tiến hành Thanh toán",
+    "refundWarning": "Các khoản thanh toán sẽ không được hoàn lại nếu bị từ chối do vi phạm chính sách.",
+    "title": "Xác nhận Mua Quảng cáo",
+    "warningText": "Bằng cách tiếp tục, bạn xác nhận rằng quảng cáo của bạn không chứa nội dung cờ bạc, nội dung người lớn, dịch vụ bất hợp pháp hoặc tài liệu bị cấm theo luật Malaysia."
   },
   "emptyState": {
     "noPackages": "Hiện tại không có gói tín dụng nào có sẵn."

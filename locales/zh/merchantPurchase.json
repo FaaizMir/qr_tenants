@@ -4,6 +4,7 @@
     "bonusGift": "奖励礼物",
     "cardDetails": "卡片详情",
     "creditsIncluded": "包含积分",
+    "mastercardAlt": "Mastercard",
     "noSelection": "未选择套餐",
     "noSelectionMessage": "请选择一个包以继续结账。",
     "packageType": "套餐类型",
@@ -11,10 +12,22 @@
     "premiumDescription": "具有增强功能的高级信用套餐",
     "securePayment": "安全支付",
     "sslEncrypted": "SSL 加密",
+    "stripeAlt": "Stripe",
     "subtitle": "查看您的购买",
     "title": "订单摘要",
     "totalAmount": "总金额",
-    "trustedPartners": "可信赖的合作伙伴"
+    "trustedPartners": "可信赖的合作伙伴",
+    "visaAlt": "Visa"
+  },
+  "confirmationDialog": {
+    "cancel": "取消",
+    "checkboxLabel": "我确认此广告不包含赌博、成人内容、非法服务或任何根据马来西亚法律禁止的内容。我理解如果广告因违反政策而被拒绝，付款将不予退还。",
+    "description": "请在继续购买之前审查并确认以下内容。",
+    "importantNotice": "重要通知",
+    "proceedToPayment": "继续付款",
+    "refundWarning": "如果因违反政策而被拒绝，付款将不予退款。",
+    "title": "确认广告购买",
+    "warningText": "通过继续，您确认您的广告不包含赌博、成人内容、非法服务或马来西亚法律禁止的材料。"
   },
   "emptyState": {
     "noPackages": "目前没有可用的信用包。"

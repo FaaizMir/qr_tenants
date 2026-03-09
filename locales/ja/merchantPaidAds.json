@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "アクティブ広告",
+    "pendingUploadAlt": "アップロード待機中",
+    "previewAlt": "プレビュー"
+  },
   "confirmation": {
     "cancel": "キャンセル",
     "checkboxLabel": "この広告にはギャンブル、成人向けコンテンツ、違法サービス、またはマレーシアの法律で禁止されているコンテンツが含まれていないことを確認します。ポリシー違反により広告が拒否された場合、支払いは返金不可であることを理解しています。",
@@ -57,6 +62,9 @@
   "preview": {
     "description": "プロモーション広告のフルサイズプレビュー",
     "title": "広告プレビュー"
+  },
+  "startDate": {
+    "label": "開始日"
   },
   "status": {
     "active": "アクティブ",
