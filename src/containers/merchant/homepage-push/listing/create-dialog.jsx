@@ -36,7 +36,6 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
 
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
   const [selectedBatchId, setSelectedBatchId] = useState("");
-  const [adPlacement, setAdPlacement] = useState("top");
   const [startDate, setStartDate] = useState(getTodayDateString());
   const [couponBatches, setCouponBatches] = useState([]);
   const [slots, setSlots] = useState(null);
@@ -100,10 +99,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
           start_date: startDate,
         });
       } else {
-        await axiosInstance.post("/approvals/homepage-ad-push", {
-          ad_placement: adPlacement,
-          start_date: startDate,
-        });
+        await axiosInstance.post("/approvals/homepage-ad-push", {});
       }
 
       toast.success(t("success.requestCreated"));
@@ -206,29 +202,16 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
             {/* Ad Placement (if type is ad) */}
             {type === "ad" && (
               <div className="space-y-2">
-                <Label>{t("fields.adType.label")}</Label>
-                <Select value={adPlacement} onValueChange={setAdPlacement}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="top">
-                      {t("fields.adType.options.top")}
-                    </SelectItem>
-                    <SelectItem value="left">
-                      {t("fields.adType.options.left")}
-                    </SelectItem>
-                    <SelectItem value="right">
-                      {t("fields.adType.options.right")}
-                    </SelectItem>
-                    <SelectItem value="bottom">
-                      {t("fields.adType.options.bottom")}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <Alert>
+                  <Info className="h-4 w-4" />
+                  <AlertDescription>
+                    For ad requests, media, placement, toggle and start date are taken from Merchant Settings → Superadmin Homepage Ad Settings.
+                  </AlertDescription>
+                </Alert>
               </div>
             )}
 
+            {type === "coupon" && (
             <div className="space-y-2">
               <Label>Start Date</Label>
               <Input
@@ -238,6 +221,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
                 onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
+            )}
 
             {/* Pricing Info */}
             {pricing && (

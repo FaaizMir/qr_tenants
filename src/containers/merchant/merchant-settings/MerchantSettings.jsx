@@ -16,6 +16,7 @@ import { Settings2, Rocket, Zap, Megaphone } from "lucide-react";
 
 import FeatureMasterControl from "./components/FeatureMasterControl";
 import PaidAdsSettings from "./components/PaidAdsSettings";
+import SuperadminHomepageAdSettings from "./components/SuperadminHomepageAdSettings";
 import MerchantCampaigns from "./campaigns/campaign";
 import FestivalMessages from "./festival-messages/festival";
 
@@ -155,8 +156,11 @@ export default function MerchantSettings() {
           value="paid-ads"
           className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
         >
-          <div className="flex justify-center">
-            <PaidAdsSettings config={{}} merchantId={merchantId} />
+          <div className="space-y-6">
+            <SuperadminHomepageAdSettings merchantId={merchantId} />
+            <div className="flex justify-center">
+              <PaidAdsSettings config={{}} merchantId={merchantId} />
+            </div>
           </div>
         </TabsContent>
 
