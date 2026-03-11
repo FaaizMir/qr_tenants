@@ -29,15 +29,6 @@ import { useTranslations } from "next-intl";
 
 const FEATURE_CONFIG = [
   {
-    key: "paid_ads",
-    labelKey: "paidAds.label",
-    descriptionKey: "paidAds.description",
-    icon: Megaphone,
-    color: "text-purple-500",
-    bg: "bg-purple-50",
-  },
-
-  {
     key: "enable_google_reviews",
     labelKey: "googleReviews.label",
     descriptionKey: "googleReviews.description",
@@ -196,7 +187,6 @@ export default function FeatureMasterControl() {
     const allowedKeys = [
       "enable_preset_reviews",
       "enable_google_reviews",
-      "paid_ads",
       "luckydraw_enabled",
     ];
     return allowedKeys.includes(feature.key);

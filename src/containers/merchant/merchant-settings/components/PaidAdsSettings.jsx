@@ -53,8 +53,10 @@ const getTodayDateString = () => {
   return `${year}-${month}-${day}`;
 };
 
-export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
+export default function PaidAdsSettings({ config: initialConfig, merchantId, mode = "agent" }) {
   const t = useTranslations("merchantPaidAds");
+  const isSuperadminMode = mode === "superadmin";
+  const [superadminPlacementDuration, setSuperadminPlacementDuration] = useState(7);
 
   const [state, setState] = useState({
     paid_ads: initialConfig?.paid_ads ?? false,
@@ -67,6 +69,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   });
 
   const [uploading, setUploading] = useState(false);
+  const [toggling, setToggling] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
@@ -97,12 +100,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         if (data) {
           setState((prev) => ({
             ...prev,
-            paid_ads: data.paid_ads ?? false,
-            placement: data.paid_ad_placement ?? "top",
-            paid_ad_image: data.paid_ad_image ?? "",
-            paid_ad_video: data.paid_ad_video ?? "",
-            paid_ad_video_status: data.paid_ad_video_status ?? false,
-            paid_ad_duration: data.paid_ad_duration ?? 7,
+            paid_ads: isSuperadminMode
+              ? (data.superadmin_homepage_ad_enabled ?? false)
+              : (data.paid_ads ?? false),
+            placement: isSuperadminMode
+              ? (data.superadmin_homepage_ad_placement ?? "top")
+              : (data.paid_ad_placement ?? "top"),
+            paid_ad_image: isSuperadminMode
+              ? (data.superadmin_homepage_ad_image ?? "")
+              : (data.paid_ad_image ?? ""),
+            paid_ad_video: isSuperadminMode
+              ? (data.superadmin_homepage_ad_video ?? "")
+              : (data.paid_ad_video ?? ""),
+            paid_ad_video_status: isSuperadminMode
+              ? (data.superadmin_homepage_ad_video_status ?? false)
+              : (data.paid_ad_video_status ?? false),
+            paid_ad_duration: isSuperadminMode
+              ? (superadminPlacementDuration ?? 7)
+              : (data.paid_ad_duration ?? 7),
+            paid_ad_start_date: isSuperadminMode
+              ? (data.superadmin_homepage_ad_start_date
+                  ? new Date(data.superadmin_homepage_ad_start_date).toISOString().split("T")[0]
+                  : getTodayDateString())
+              : getTodayDateString(),
           }));
         }
       } catch (error) {
@@ -110,7 +130,30 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       }
     };
     fetchSettings();
-  }, [merchantId]);
+  }, [merchantId, isSuperadminMode, superadminPlacementDuration]);
+
+  useEffect(() => {
+    if (!isSuperadminMode) return;
+
+    const fetchSuperadminDuration = async () => {
+      try {
+        const settingsResp = await axiosInstance.get(
+          "/super-admin-settings/homepage-placement-pricing",
+        );
+        const settings = settingsResp?.data?.data || settingsResp?.data || {};
+        const duration = Number(settings?.ad_homepage_placement_duration_days) || 7;
+        setSuperadminPlacementDuration(duration);
+        setState((prev) => ({
+          ...prev,
+          paid_ad_duration: duration,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch superadmin homepage ad duration:", error);
+      }
+    };
+
+    fetchSuperadminDuration();
+  }, [isSuperadminMode]);
 
   // Fetch available placements
   useEffect(() => {
@@ -192,11 +235,21 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       // 1. Update general settings (toggle, placement, duration)
-      await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, {
-        paid_ads: state.paid_ads,
-        paid_ad_placement: state.placement || "top",
-        paid_ad_duration: parseInt(state.paid_ad_duration || "7", 10),
-      });
+      await axiosInstance.patch(
+        `/merchant-settings/merchant/${merchantId}`,
+        isSuperadminMode
+          ? {
+              superadmin_homepage_ad_enabled: state.paid_ads,
+              superadmin_homepage_ad_placement: state.placement || "top",
+              superadmin_homepage_ad_start_date:
+                state.paid_ad_start_date || getTodayDateString(),
+            }
+          : {
+              paid_ads: state.paid_ads,
+              paid_ad_placement: state.placement || "top",
+              paid_ad_duration: parseInt(state.paid_ad_duration || "7", 10),
+            },
+      );
 
       // 2. Handle upload if pending
       if (pendingFile) {
@@ -204,22 +257,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         if (pendingFile.type === "image") {
           toast.info(t("messages.uploadingImage"));
           formData.append(
-            "paidAdImage",
+            isSuperadminMode ? "superadminHomepageAdImage" : "paidAdImage",
             pendingFile.file,
             pendingFile.filename || "image.jpg",
           );
-          formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
-            "paidAdDuration",
-            String(state.paid_ad_duration || "7"),
+            isSuperadminMode ? "superadminHomepageAdPlacement" : "paidAdPlacement",
+            state.placement || "top",
           );
+          if (!isSuperadminMode) {
+            formData.append(
+              "paidAdDuration",
+              String(state.paid_ad_duration || "7"),
+            );
+          }
           formData.append(
-            "paidAdStartDate",
+            isSuperadminMode ? "superadminHomepageAdStartDate" : "paidAdStartDate",
             state.paid_ad_start_date || getTodayDateString(),
           );
 
           const response = await axiosInstance.post(
-            `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
+            isSuperadminMode
+              ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-image`
+              : `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -232,8 +292,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             },
           );
 
-          if (response.data?.data?.paid_ad_image) {
-            const newImageUrl = response.data.data.paid_ad_image;
+          const newImageUrl = isSuperadminMode
+            ? response.data?.data?.superadmin_homepage_ad_image
+            : response.data?.data?.paid_ad_image;
+          if (newImageUrl) {
             setState((prev) => ({
               ...prev,
               paid_ad_image: newImageUrl,
@@ -243,19 +305,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           toast.success(t("messages.imageUploaded"));
         } else if (pendingFile.type === "video") {
           toast.info(t("messages.uploadingVideo"));
-          formData.append("paidAdVideo", pendingFile.file);
-          formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
-            "paidAdDuration",
-            String(state.paid_ad_duration || "7"),
+            isSuperadminMode ? "superadminHomepageAdVideo" : "paidAdVideo",
+            pendingFile.file,
           );
           formData.append(
-            "paidAdStartDate",
+            isSuperadminMode ? "superadminHomepageAdPlacement" : "paidAdPlacement",
+            state.placement || "top",
+          );
+          if (!isSuperadminMode) {
+            formData.append(
+              "paidAdDuration",
+              String(state.paid_ad_duration || "7"),
+            );
+          }
+          formData.append(
+            isSuperadminMode ? "superadminHomepageAdStartDate" : "paidAdStartDate",
             state.paid_ad_start_date || getTodayDateString(),
           );
 
           const response = await axiosInstance.post(
-            `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
+            isSuperadminMode
+              ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-video`
+              : `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -271,8 +343,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             },
           );
 
-          if (response.data?.data?.url) {
-            const newVideoUrl = response.data.data.url;
+          const newVideoUrl = isSuperadminMode
+            ? response.data?.data?.superadmin_homepage_ad_video
+            : response.data?.data?.url;
+          if (newVideoUrl) {
             setState((prev) => ({
               ...prev,
               paid_ad_video: newVideoUrl,
@@ -309,11 +383,47 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const handleTogglePaidAds = (checked) => {
+  const handleTogglePaidAds = async (checked) => {
+    if (!merchantId) return;
+
+    const previousValue = state.paid_ads;
     setState((p) => ({
       ...p,
       paid_ads: checked,
     }));
+    setToggling(true);
+
+    try {
+      const payload = isSuperadminMode
+        ? { superadmin_homepage_ad_enabled: checked }
+        : { paid_ads: checked };
+
+      await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, payload);
+
+      window.dispatchEvent(
+        new CustomEvent("MERCHANT_SETTINGS_UPDATED", {
+          detail: isSuperadminMode
+            ? { superadmin_homepage_ad_enabled: checked }
+            : { paid_ads: checked },
+        }),
+      );
+
+      toast.success(
+        checked
+          ? `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} enabled successfully`
+          : `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} disabled successfully`,
+      );
+    } catch (error) {
+      setState((p) => ({
+        ...p,
+        paid_ads: previousValue,
+      }));
+      toast.error(
+        error?.response?.data?.message || "Failed to update ad toggle",
+      );
+    } finally {
+      setToggling(false);
+    }
   };
 
   const handleFileChange = async (e) => {
@@ -449,7 +559,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       await axiosInstance.delete(
-        `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
+        isSuperadminMode
+          ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-image`
+          : `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
       );
 
       setState((prev) => ({
@@ -470,7 +582,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       await axiosInstance.delete(
-        `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
+        isSuperadminMode
+          ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-video`
+          : `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
       );
 
       setState((prev) => ({
@@ -514,6 +628,21 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               </div>
             </div>
           </CardHeader>
+          <div className="px-6 py-4 border-b border-gray-100 bg-white">
+            <div className="flex items-center justify-between rounded-xl border border-gray-100 px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Ad Toggle</p>
+                <p className="text-xs text-muted-foreground">
+                  Enable this to configure and submit ad placement
+                </p>
+              </div>
+              <Switch
+                checked={state.paid_ads}
+                onCheckedChange={handleTogglePaidAds}
+                disabled={toggling}
+              />
+            </div>
+          </div>
           <div
             className={`grid transition-all duration-500 ease-in-out ${
               state.paid_ads
@@ -591,36 +720,47 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
                     <div className="space-y-2">
                       <Label>{t("duration.label")}</Label>
-                      <Select
-                        value={
-                          state.paid_ad_duration
-                            ? String(state.paid_ad_duration)
-                            : "7"
-                        }
-                        onValueChange={(val) => {
-                          setState({
-                            ...state,
-                            paid_ad_duration: parseInt(val, 10),
-                          });
-                        }}
-                      >
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={t("duration.selectPlaceholder")}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="7">
-                            {t("duration.days7")}
-                          </SelectItem>
-                          <SelectItem value="14">
-                            {t("duration.days14")}
-                          </SelectItem>
-                          <SelectItem value="30">
-                            {t("duration.days30")}
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
+                      {isSuperadminMode ? (
+                        <>
+                          <div className="h-10 rounded-md border bg-muted flex items-center px-3 text-sm text-muted-foreground">
+                            {(state.paid_ad_duration || 7)} days
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            Duration is locked by superadmin settings.
+                          </p>
+                        </>
+                      ) : (
+                        <Select
+                          value={
+                            state.paid_ad_duration
+                              ? String(state.paid_ad_duration)
+                              : "7"
+                          }
+                          onValueChange={(val) => {
+                            setState({
+                              ...state,
+                              paid_ad_duration: parseInt(val, 10),
+                            });
+                          }}
+                        >
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={t("duration.selectPlaceholder")}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="7">
+                              {t("duration.days7")}
+                            </SelectItem>
+                            <SelectItem value="14">
+                              {t("duration.days14")}
+                            </SelectItem>
+                            <SelectItem value="30">
+                              {t("duration.days30")}
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
                     </div>
 
                     <div className="space-y-2">
@@ -1004,7 +1144,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                       )}
                       <Button
                         onClick={handleSubmit}
-                        disabled={uploading || availablePlacements.length === 0}
+                        disabled={uploading || toggling || availablePlacements.length === 0}
                         className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
                       >
                         {uploading ? (

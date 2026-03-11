@@ -205,7 +205,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
                 <Alert>
                   <Info className="h-4 w-4" />
                   <AlertDescription>
-                    For ad requests, media, placement, toggle and start date are taken from Merchant Settings → Superadmin Homepage Ad Settings.
+                    For ad requests, media, placement, and start date are taken from Merchant Settings → Superadmin Homepage Ad Settings.
                   </AlertDescription>
                 </Alert>
               </div>
