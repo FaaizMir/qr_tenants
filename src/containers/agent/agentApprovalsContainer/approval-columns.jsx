@@ -63,7 +63,7 @@ export const getApprovalColumns = (handleStatusUpdate, t) => [
                   width={40}
                   height={40}
                   src={url}
-                  alt="Ad"
+                  alt={t("common.adAltText")}
                   className="object-cover rounded shadow-inner group-hover:opacity-80 transition-opacity"
                 />
               )}

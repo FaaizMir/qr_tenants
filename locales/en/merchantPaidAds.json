@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "Active Ad",
+    "pendingUploadAlt": "Pending Upload",
+    "previewAlt": "Preview"
+  },
   "confirmation": {
     "cancel": "Cancel",
     "checkboxLabel": "I confirm that this advertisement does not contain gambling, adult content, illegal services, or any content prohibited under Malaysian law. I understand that payment is non-refundable if the advertisement is rejected due to policy violation.",
@@ -20,9 +25,6 @@
     "days7": "7 Days",
     "label": "Duration",
     "selectPlaceholder": "Select duration"
-  },
-  "startDate": {
-    "label": "Start Date"
   },
   "messages": {
     "errorDeleting": "Failed to delete",
@@ -60,6 +62,9 @@
   "preview": {
     "description": "Full size preview of the promotional ad",
     "title": "Ad Preview"
+  },
+  "startDate": {
+    "label": "Start Date"
   },
   "status": {
     "active": "Active",

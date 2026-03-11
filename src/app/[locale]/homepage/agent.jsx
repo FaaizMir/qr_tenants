@@ -1,28 +1,19 @@
 "use client";
 
 import { useEffect, useState, useMemo, useCallback, useRef } from "react";
-import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
 import axiosInstance from "@/lib/axios";
 import useDebounce from "@/hooks/useDebounceRef";
 import {
-  Loader2,
   Store,
   MapPin,
-  Search,
-  Filter,
-  CheckCircle2,
-  AlertCircle,
-  X,
   Menu,
   QrCode,
-  ArrowRight,
   Smartphone,
   TrendingUp,
   Globe,
   Shield,
-  ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,7 +25,6 @@ import {
 } from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   TopBannerAd,
   SidebarAd,
@@ -49,108 +39,50 @@ import { CouponForm } from "./components/CouponForm";
 import { cn } from "@/lib/utils";
 import { toast } from "@/lib/toast";
 
-export default function AgentLandingPage() {
+export default function AgentLandingPage({ agentId: agentIdProp } = {}) {
   const t = useTranslations("Homepage.agent");
   const tCommon = useTranslations("Homepage.common");
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const locale = useLocale();
 
-  /**
-   * Security measures for localStorage:
-   * 1. Data validation - Check agent object structure
-   * 2. Timestamp validation - Data expires after 1 hour
-   * 3. Session tracking - Random session ID for basic tracking
-   * 4. Error handling - Graceful failure with cleanup
-   * 5. Navigation cleanup - Clear data when leaving page
-   * 6. Visibility monitoring - Revalidate on page focus
-   */
-
-  // Get agent from localStorage with validation
-  const [agentId, setAgentId] = useState(null);
+  // agentId comes from URL prop (dynamic route) or falls back to localStorage
+  const [agentId, setAgentId] = useState(agentIdProp || null);
 
   useEffect(() => {
+    if (agentIdProp) {
+      // agentId is provided via URL — no localStorage needed
+      setAgentId(agentIdProp);
+      return;
+    }
+
+    // Fallback: read from localStorage (legacy /homepage/agent route)
     try {
       const storedAgent = localStorage.getItem("selectedAgent");
       if (storedAgent) {
         const parsedAgent = JSON.parse(storedAgent);
 
-        // Validate agent data structure
         if (parsedAgent && typeof parsedAgent === "object" && parsedAgent.id) {
-          // Check if data is fresh (within 1 hour)
           const ONE_HOUR = 60 * 60 * 1000;
           const now = Date.now();
           const timestamp = parsedAgent._timestamp || 0;
 
           if (now - timestamp < ONE_HOUR) {
-            // Valid and fresh data
             setAgentId(parsedAgent.id);
             setAgent(parsedAgent);
           } else {
-            // Data expired, clear localStorage
             console.warn(t("errors.agentDataExpired"));
             localStorage.removeItem("selectedAgent");
           }
         } else {
-          // Invalid agent data, clear localStorage
           console.warn(t("errors.invalidAgentData"));
           localStorage.removeItem("selectedAgent");
         }
       }
     } catch (error) {
-      // Handle JSON parse errors or other exceptions
       console.error(t("errors.errorLoadingAgent"), error);
       localStorage.removeItem("selectedAgent");
     }
-
-    // Cleanup function - clear localStorage when component unmounts
-    return () => {
-      // Optional: Uncomment if you want to clear on unmount
-      // localStorage.removeItem("selectedAgent");
-    };
-  }, [t]);
-
-  // Handle browser back button and page visibility
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        // Page is hidden, optionally keep data
-      } else {
-        // Page is visible again, validate data is still fresh
-        const storedAgent = localStorage.getItem("selectedAgent");
-        if (storedAgent) {
-          try {
-            const parsedAgent = JSON.parse(storedAgent);
-            const ONE_HOUR = 60 * 60 * 1000;
-            const now = Date.now();
-            const timestamp = parsedAgent._timestamp || 0;
-
-            if (now - timestamp >= ONE_HOUR) {
-              localStorage.removeItem("selectedAgent");
-              window.location.reload(); // Refresh if data expired
-            }
-          } catch (e) {
-            localStorage.removeItem("selectedAgent");
-          }
-        }
-      }
-    };
-
-    const handleBeforeUnload = () => {
-      // Optionally clean up before page unloads
-      // Uncomment if needed:
-      // localStorage.removeItem("selectedAgent");
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  }, [agentIdProp, t]);
 
   // Refs
   const merchantListRef = useRef(null);
@@ -181,7 +113,6 @@ export default function AgentLandingPage() {
 
   // Paid Ads
   const [paidAds, setPaidAds] = useState([]);
-  const [isNavOpen, setIsNavOpen] = useState(false);
 
   // Coupon Dialog State
   const [couponDialogOpen, setCouponDialogOpen] = useState(false);
@@ -361,6 +292,27 @@ export default function AgentLandingPage() {
     ],
   );
 
+  // Fetch agent profile from API (used when agentId comes from URL)
+  const fetchAgentProfile = useCallback(async () => {
+    if (!agentId) return;
+    try {
+      const response = await axiosInstance.get(`/coupons/public-feed`, {
+        params: { adminId: agentId, page: 1, pageSize: 1 },
+      });
+      const adminInfo = response.data?.data?.admin;
+      if (adminInfo && adminInfo.id) {
+        setAgent({
+          id: adminInfo.id,
+          name: adminInfo.name || adminInfo.user?.name || null,
+          location:
+            adminInfo.city || adminInfo.country || adminInfo.address || null,
+        });
+      }
+    } catch {
+      // Silently fail — agent display name is optional
+    }
+  }, [agentId]);
+
   // Fetch Main Data
   useEffect(() => {
     const fetchData = async () => {
@@ -371,8 +323,10 @@ export default function AgentLandingPage() {
 
       setLoading(true);
       try {
-        // 1. Agent is already loaded from localStorage
-        // No need to fetch or override it
+        // 1. Fetch agent profile (when using URL-based agentId)
+        if (agentIdProp) {
+          await fetchAgentProfile();
+        }
 
         // 2. Fetch Merchants with Pagination
         await fetchMerchants(1, true); // Initial load
@@ -390,10 +344,12 @@ export default function AgentLandingPage() {
     fetchData();
   }, [
     agentId,
+    agentIdProp,
     debouncedSearchQuery,
     selectedCategory,
     selectedRegion,
     expiringSoon,
+    fetchAgentProfile,
     fetchPaidAds,
     fetchMerchants,
     t,

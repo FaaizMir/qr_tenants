@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Download, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function QRImageDialogHover({
   imageBase64,
@@ -15,10 +16,15 @@ export default function QRImageDialogHover({
   label = "QR Code",
   openOnHover = false,
   sizeClass = "w-8 h-8",
-  downloadText = "Download",
+  downloadText,
+  translationNamespace = "merchantDashboard.qrCode",
 }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef(null);
+  const t = useTranslations(translationNamespace);
+
+  // Use provided downloadText or fall back to translation
+  const downloadLabel = downloadText || t("download");
 
   const handleDownload = async () => {
     try {
@@ -86,7 +92,7 @@ export default function QRImageDialogHover({
             <img src={imageBase64} alt={label} className="max-w-[360px] max-h-[360px]" />
             <div className="w-full flex gap-2">
               <Button onClick={handleDownload} variant="outline" className="flex-1">
-                <Download className="h-4 w-4 mr-2" /> {downloadText}
+                <Download className="h-4 w-4 mr-2" /> {downloadLabel}
               </Button>
             </div>
           </div>

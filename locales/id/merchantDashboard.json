@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "Unduh",
+    "scanFor": "Pindai untuk {name}",
     "tapToZoom": "TEKAN UNTUK ZOOM"
   },
   "recentRedemptions": {

@@ -4,6 +4,7 @@
     "bonusGift": "Hadiah Bonus",
     "cardDetails": "Detail Kartu",
     "creditsIncluded": "Kredit Termasuk",
+    "mastercardAlt": "Mastercard",
     "noSelection": "Tidak Ada Paket yang Dipilih",
     "noSelectionMessage": "Silakan pilih paket untuk melanjutkan proses checkout.",
     "packageType": "Jenis Paket",
@@ -11,10 +12,22 @@
     "premiumDescription": "Paket kredit premium dengan fitur yang ditingkatkan",
     "securePayment": "Pembayaran Aman",
     "sslEncrypted": "Terenkripsi SSL",
+    "stripeAlt": "Stripe",
     "subtitle": "Tinjau pembelian Anda",
     "title": "Ringkasan Pesanan",
     "totalAmount": "Jumlah Total",
-    "trustedPartners": "Mitra Terpercaya"
+    "trustedPartners": "Mitra Terpercaya",
+    "visaAlt": "Visa"
+  },
+  "confirmationDialog": {
+    "cancel": "Batal",
+    "checkboxLabel": "Saya mengonfirmasi bahwa iklan ini tidak mengandung perjudian, konten dewasa, layanan ilegal, atau konten apa pun yang dilarang berdasarkan hukum Malaysia. Saya mengerti bahwa pembayaran tidak dapat dikembalikan jika iklan ditolak karena pelanggaran kebijakan.",
+    "description": "Silakan tinjau dan konfirmasi hal berikut sebelum melanjutkan dengan pembelian Anda.",
+    "importantNotice": "Pemberitahuan Penting",
+    "proceedToPayment": "Lanjutkan ke Pembayaran",
+    "refundWarning": "Pembayaran tidak dapat dikembalikan jika ditolak karena pelanggaran kebijakan.",
+    "title": "Konfirmasi Pembelian Iklan",
+    "warningText": "Dengan melanjutkan, Anda mengonfirmasi bahwa iklan Anda tidak mengandung perjudian, konten dewasa, layanan ilegal, atau materi yang dilarang berdasarkan hukum Malaysia."
   },
   "emptyState": {
     "noPackages": "Tidak ada paket kredit yang tersedia saat ini."

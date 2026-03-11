@@ -75,7 +75,7 @@ export default function AgentApprovalsContainer() {
 
           return {
             id: item.id,
-            name: item.merchant?.business_name || "N/A",
+            name: item.merchant?.business_name || t("common.notAvailable"),
             email: item.merchant?.user?.email || null,
             adImage: fullImageUrl,
             adType: isVideo ? "video" : "image",
@@ -83,11 +83,11 @@ export default function AgentApprovalsContainer() {
             location:
               [item.merchant?.city, item.merchant?.country]
                 .filter(Boolean)
-                .join(", ") || "N/A",
+                .join(", ") || t("common.notAvailable"),
             status: item.approval_status,
             createdAt: item.created_at
               ? new Date(item.created_at).toLocaleDateString()
-              : "N/A",
+              : t("common.notAvailable"),
             adStartDate: item.ad_created_at
               ? new Date(item.ad_created_at).toLocaleDateString()
               : "—",
@@ -185,7 +185,7 @@ export default function AgentApprovalsContainer() {
             {previewContent.type === "image" ? (
               <Image
                 src={previewContent.url}
-                alt="Ad Preview"
+                alt={t("common.adPreviewAlt")}
                 width={800}
                 height={800}
                 className="max-w-full max-h-[80vh] object-contain rounded-xl"

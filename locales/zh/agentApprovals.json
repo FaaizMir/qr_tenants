@@ -5,16 +5,21 @@
   },
   "columns": {
     "adContent": "广告内容",
+    "adEndDate": "广告结束日期",
     "adPlacement": "广告投放",
+    "adStartDate": "广告开始日期",
     "approvalStatus": "批准状态",
     "approvalType": "批准类型",
     "businessAccount": "商业与账户",
     "location": "位置",
     "merchantType": "商家类型",
     "noAd": "没有广告",
-    "requestedDate": "请求日期",
-    "adStartDate": "广告开始日期",
-    "adEndDate": "广告结束日期"
+    "requestedDate": "请求日期"
+  },
+  "common": {
+    "adAltText": "广告",
+    "adPreviewAlt": "广告预览",
+    "notAvailable": "不适用"
   },
   "dialog": {
     "approveDescription": "您确定要批准 {merchantName} 的请求吗？此操作无法撤销。",

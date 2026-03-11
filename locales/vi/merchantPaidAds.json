@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "Quảng cáo đang hoạt động",
+    "pendingUploadAlt": "Đang chờ tải lên",
+    "previewAlt": "Xem trước"
+  },
   "confirmation": {
     "cancel": "Hủy",
     "checkboxLabel": "Tôi xác nhận rằng quảng cáo này không chứa cờ bạc, nội dung người lớn, dịch vụ bất hợp pháp, hoặc bất kỳ nội dung nào bị cấm theo luật Malaysia. Tôi hiểu rằng khoản thanh toán là không hoàn lại nếu quảng cáo bị từ chối do vi phạm chính sách.",
@@ -20,9 +25,6 @@
     "days7": "7 Ngày",
     "label": "Thời gian",
     "selectPlaceholder": "Chọn thời gian"
-  },
-  "startDate": {
-    "label": "Ngày bắt đầu"
   },
   "messages": {
     "errorDeleting": "Xóa không thành công",
@@ -60,6 +62,9 @@
   "preview": {
     "description": "Xem trước kích thước đầy đủ của quảng cáo",
     "title": "Xem trước quảng cáo"
+  },
+  "startDate": {
+    "label": "Ngày bắt đầu"
   },
   "status": {
     "active": "Hoạt động",

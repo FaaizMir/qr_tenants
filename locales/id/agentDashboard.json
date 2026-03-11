@@ -183,6 +183,12 @@
     "description": "Ikhtisar kinerja dan metrik agen Anda",
     "title": "Dasbor Agen"
   },
+  "subscriptionExpiry": {
+    "description": "Langganan agen Anda diperlukan untuk melanjutkan. Sebagian besar fitur akan dibatasi sampai rencana Anda aktif.",
+    "goToWallet": "Pergi ke Dompet",
+    "remindLater": "Ingatkan saya nanti",
+    "title": "Langganan Diperlukan"
+  },
   "tabs": {
     "analytics": "Analitik",
     "merchants": "Kinerja",

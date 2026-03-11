@@ -781,7 +781,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           >
                             <Image
                               src={pendingFile.previewUrl}
-                              alt="Pending Upload"
+                              alt={t("common.pendingUploadAlt")}
                               className="object-cover"
                               fill
                               unoptimized
@@ -807,7 +807,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           <div className="relative aspect-video rounded-xl overflow-hidden border bg-background group shadow-sm">
                             <Image
                               src={getImageUrl(state.paid_ad_image)}
-                              alt="Active Ad"
+                              alt={t("common.activeAdAlt")}
                               className="object-cover"
                               fill
                               unoptimized
@@ -1057,7 +1057,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={previewContent.url}
-                            alt="Preview"
+                            alt={t("common.previewAlt")}
                             className="max-w-full max-h-[80vh] object-contain rounded-xl"
                           />
                         ) : (

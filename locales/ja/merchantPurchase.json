@@ -4,6 +4,7 @@
     "bonusGift": "ボーナスギフト",
     "cardDetails": "カードの詳細",
     "creditsIncluded": "含まれているクレジット",
+    "mastercardAlt": "マスターカード",
     "noSelection": "パッケージが選択されていません",
     "noSelectionMessage": "チェックアウトを続行するにはパッケージを選択してください。",
     "packageType": "パッケージタイプ",
@@ -11,10 +12,22 @@
     "premiumDescription": "強化された機能を持つプレミアムクレジットパッケージ",
     "securePayment": "安全な支払い",
     "sslEncrypted": "SSL暗号化",
+    "stripeAlt": "ストライプ",
     "subtitle": "購入を確認する",
     "title": "注文の概要",
     "totalAmount": "合計金額",
-    "trustedPartners": "信頼できるパートナー"
+    "trustedPartners": "信頼できるパートナー",
+    "visaAlt": "ビザ"
+  },
+  "confirmationDialog": {
+    "cancel": "キャンセル",
+    "checkboxLabel": "この広告にはギャンブル、成人向けコンテンツ、違法サービス、またはマレーシアの法律で禁止されているコンテンツが含まれていないことを確認します。ポリシー違反により広告が拒否された場合、支払いは返金不可であることを理解しています。",
+    "description": "購入を進める前に以下を確認してください。",
+    "importantNotice": "重要なお知らせ",
+    "proceedToPayment": "支払いに進む",
+    "refundWarning": "支払いはポリシー違反で拒否された場合、返金不可です。",
+    "title": "広告購入を確認する",
+    "warningText": "進むことで、あなたの広告にギャンブル、成人向けコンテンツ、違法サービス、またはマレーシアの法律で禁止されている素材が含まれていないことを確認します。"
   },
   "emptyState": {
     "noPackages": "現在利用可能なクレジットパッケージはありません。"

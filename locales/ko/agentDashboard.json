@@ -183,6 +183,12 @@
     "description": "귀하의 에이전트 성과 및 지표 개요",
     "title": "에이전트 대시보드"
   },
+  "subscriptionExpiry": {
+    "description": "계속하려면 에이전트 구독이 필요합니다. 귀하의 플랜이 활성화될 때까지 대부분의 기능이 제한됩니다.",
+    "goToWallet": "지갑으로 가기",
+    "remindLater": "나중에 알림",
+    "title": "구독 필요"
+  },
   "tabs": {
     "analytics": "분석",
     "merchants": "성능",

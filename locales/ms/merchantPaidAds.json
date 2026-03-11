@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "Iklan Aktif",
+    "pendingUploadAlt": "Muat Naik Tertunda",
+    "previewAlt": "Pratonton"
+  },
   "confirmation": {
     "cancel": "Batal",
     "checkboxLabel": "Saya mengesahkan bahawa iklan ini tidak mengandungi perjudian, kandungan dewasa, perkhidmatan haram, atau sebarang kandungan yang dilarang di bawah undang-undang Malaysia. Saya faham bahawa pembayaran tidak boleh dikembalikan jika iklan ditolak kerana pelanggaran dasar.",
@@ -20,9 +25,6 @@
     "days7": "7 Hari",
     "label": "Tempoh",
     "selectPlaceholder": "Pilih tempoh"
-  },
-  "startDate": {
-    "label": "Tarikh Mula"
   },
   "messages": {
     "errorDeleting": "Gagal untuk memadam",
@@ -60,6 +62,9 @@
   "preview": {
     "description": "Pratonton saiz penuh iklan promosi",
     "title": "Pratonton Iklan"
+  },
+  "startDate": {
+    "label": "Tarikh Mula"
   },
   "status": {
     "active": "Aktif",

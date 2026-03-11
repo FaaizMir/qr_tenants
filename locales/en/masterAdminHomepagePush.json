@@ -1,7 +1,7 @@
 {
   "active": {
     "columns": {
-      "activatedAt": "Start",
+      "activatedAt": "Activated",
       "expiresAt": "Expires",
       "item": "Item",
       "merchant": "Merchant",
@@ -61,7 +61,7 @@
       "forwarded": "Forwarded by Agent"
     },
     "fields": {
-      "activatedAt": "Start at",
+      "activatedAt": "Activated At",
       "agentEmail": "Agent Email",
       "agentName": "Agent Name",
       "agentPhone": "Agent Phone",

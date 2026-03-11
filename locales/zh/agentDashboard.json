@@ -183,6 +183,12 @@
     "description": "您的代理性能和指标概述",
     "title": "代理仪表板"
   },
+  "subscriptionExpiry": {
+    "description": "需要您的代理订阅才能继续。大多数功能将在您的计划激活之前受到限制。",
+    "goToWallet": "前往钱包",
+    "remindLater": "稍后提醒我",
+    "title": "需要订阅"
+  },
   "tabs": {
     "analytics": "分析",
     "merchants": "表现",
