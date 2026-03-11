@@ -42,7 +42,9 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
   const fetchSubscriptionFee = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get("/super-admin-settings/admin-subscription-fee");
+      const response = await axiosInstance.get(
+        "/super-admin-settings/admin-subscription-fee",
+      );
       const data = response.data?.data || response.data;
       setSubscriptionFee(Number(data.fee || 0));
       setCurrency(data.currency || "MYR");
@@ -76,11 +78,14 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       const amountCents = Math.round(totalAmount * 100);
 
       // Create Stripe checkout session for subscription + balance
-      const { data } = await axiosInstance.post("/stripe/create-checkout-session", {
-        amount: amountCents,
-        currency: currency.toLowerCase(),
-        package_id: "agent_subscription_initial",
-      });
+      const { data } = await axiosInstance.post(
+        "/stripe/create-checkout-session",
+        {
+          amount: amountCents,
+          currency: currency.toLowerCase(),
+          package_id: "agent_subscription_initial",
+        },
+      );
 
       const sessionUrl = data?.sessionUrl;
 
@@ -102,7 +107,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
           subscription_fee: subscriptionFee,
           wallet_balance: balanceAmount,
           credits: `Subscription + ${currency} ${balanceAmount.toLocaleString()} balance`,
-        })
+        }),
       );
 
       // Redirect to Stripe checkout
@@ -110,7 +115,7 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
     } catch (error) {
       console.error("Failed to create checkout session:", error);
       toast.error(
-        error?.response?.data?.message || t("validation.createError")
+        error?.response?.data?.message || t("validation.createError"),
       );
       setProcessing(false);
     }
@@ -145,8 +150,12 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
               <ShieldCheck className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base">{t("subscriptionFee.title")}</CardTitle>
-              <CardDescription className="text-xs">{t("subscriptionFee.subtitle")}</CardDescription>
+              <CardTitle className="text-base">
+                {t("subscriptionFee.title")}
+              </CardTitle>
+              <CardDescription className="text-xs">
+                {t("subscriptionFee.subtitle")}
+              </CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -154,13 +163,17 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
           <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-xs text-slate-600 mb-1">{t("subscriptionFee.access")}</p>
+                <p className="text-xs text-slate-600 mb-1">
+                  {t("subscriptionFee.access")}
+                </p>
                 <p className="text-sm text-slate-500">
                   {t("subscriptionFee.description")}
                 </p>
               </div>
               <div className="text-right">
-                <Badge variant="secondary" className="mb-2">{t("subscriptionFee.required")}</Badge>
+                <Badge variant="secondary" className="mb-2">
+                  {t("subscriptionFee.required")}
+                </Badge>
                 <p className="text-2xl font-black text-slate-900">
                   {currency} {subscriptionFee.toLocaleString()}
                 </p>
@@ -174,11 +187,13 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-500/10 rounded-full text-blue-600">
+            <div className="p-2 bg-amber-500/10 rounded-full text-amber-600">
               <Wallet className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base">{t("walletBalance.title")}</CardTitle>
+              <CardTitle className="text-base">
+                {t("walletBalance.title")}
+              </CardTitle>
               <CardDescription className="text-xs">
                 {t("walletBalance.subtitle")}
               </CardDescription>
@@ -189,7 +204,9 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
           <div className="space-y-2">
             <Label htmlFor="customBalance">
               {t("walletBalance.label")}
-              <Badge variant="outline" className="ml-2">{t("walletBalance.optional")}</Badge>
+              <Badge variant="outline" className="ml-2">
+                {t("walletBalance.optional")}
+              </Badge>
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
@@ -212,10 +229,11 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             </p>
           </div>
 
-          <Alert className="bg-blue-50 border-blue-200">
-            <Info className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-xs text-blue-900">
-              <strong>{t("walletBalance.modelInfo.title")}</strong> {t("walletBalance.modelInfo.description")}
+          <Alert className="bg-amber-50 border-amber-200">
+            <Info className="h-4 w-4 text-amber-600" />
+            <AlertDescription className="text-xs text-amber-900">
+              <strong>{t("walletBalance.modelInfo.title")}</strong>{" "}
+              {t("walletBalance.modelInfo.description")}
             </AlertDescription>
           </Alert>
         </CardContent>
@@ -234,14 +252,18 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
         <CardContent className="space-y-3">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">{t("summary.subscriptionFee")}</span>
+              <span className="text-slate-600">
+                {t("summary.subscriptionFee")}
+              </span>
               <span className="font-semibold">
                 {currency} {subscriptionFee.toLocaleString()}
               </span>
             </div>
             {Number(customBalance) > 0 && (
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600">{t("summary.walletBalance")}</span>
+                <span className="text-slate-600">
+                  {t("summary.walletBalance")}
+                </span>
                 <span className="font-semibold">
                   +{currency} {Number(customBalance).toLocaleString()}
                 </span>
@@ -249,7 +271,9 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             )}
             <Separator />
             <div className="flex justify-between items-center">
-              <span className="text-base font-bold text-slate-900">{t("summary.totalPayment")}</span>
+              <span className="text-base font-bold text-slate-900">
+                {t("summary.totalPayment")}
+              </span>
               <span className="text-2xl font-black text-primary">
                 {currency} {totalAmount.toLocaleString()}
               </span>
@@ -271,7 +295,10 @@ export function InitialSubscriptionPayment({ adminId, onClose, onSuccess }) {
             ) : (
               <>
                 <ShieldCheck className="mr-2 h-5 w-5" />
-                {t("summary.payButton", { currency, amount: totalAmount.toLocaleString() })}
+                {t("summary.payButton", {
+                  currency,
+                  amount: totalAmount.toLocaleString(),
+                })}
               </>
             )}
           </Button>

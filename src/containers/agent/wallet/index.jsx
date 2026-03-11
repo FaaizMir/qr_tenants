@@ -225,12 +225,12 @@ export default function AgentWalletContainer() {
   return (
     <div className="space-y-6">
       {walletLoaded && !walletStats.is_active && (
-        <div className="flex items-start gap-4 bg-amber-50 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="flex items-start gap-4 bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 mt-0.5">
             <AlertTriangle className="h-4 w-4 text-amber-600" />
           </div>
           <div>
-            <p className="font-semibold text-amber-900 leading-tight mb-0.5">
+            <p className="font-semibold text-amber-800 leading-tight mb-0.5">
               {t("alerts.subscriptionRequired.title")}
             </p>
             <p className="text-sm text-amber-800/70 leading-relaxed">
