@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "활성 광고",
+    "pendingUploadAlt": "업로드 대기 중",
+    "previewAlt": "미리보기"
+  },
   "confirmation": {
     "cancel": "취소",
     "checkboxLabel": "이 광고에는 도박, 성인 콘텐츠, 불법 서비스 또는 말레이시아 법률에 따라 금지된 콘텐츠가 포함되어 있지 않음을 확인합니다. 정책 위반으로 광고가 거부될 경우 결제는 환불되지 않음을 이해합니다.",
@@ -20,9 +25,6 @@
     "days7": "7일",
     "label": "기간",
     "selectPlaceholder": "기간 선택"
-  },
-  "startDate": {
-    "label": "시작 날짜"
   },
   "messages": {
     "errorDeleting": "삭제 실패",
@@ -60,6 +62,9 @@
   "preview": {
     "description": "프로모션 광고의 전체 크기 미리보기",
     "title": "광고 미리보기"
+  },
+  "startDate": {
+    "label": "시작 날짜"
   },
   "status": {
     "active": "활성",

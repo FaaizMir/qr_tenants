@@ -4,6 +4,7 @@
     "bonusGift": "Hadiah Bonus",
     "cardDetails": "Butiran Kad",
     "creditsIncluded": "Kredit Termasuk",
+    "mastercardAlt": "Mastercard",
     "noSelection": "Tiada Pakej Dipilih",
     "noSelectionMessage": "Sila pilih pakej untuk meneruskan dengan pembayaran.",
     "packageType": "Jenis Pakej",
@@ -11,10 +12,22 @@
     "premiumDescription": "Pakej kredit premium dengan ciri tambahan",
     "securePayment": "Pembayaran Selamat",
     "sslEncrypted": "Disulitkan SSL",
+    "stripeAlt": "Stripe",
     "subtitle": "Semak pembelian anda",
     "title": "Ringkasan Pesanan",
     "totalAmount": "Jumlah Keseluruhan",
-    "trustedPartners": "Rakan Kongsi Dipercayai"
+    "trustedPartners": "Rakan Kongsi Dipercayai",
+    "visaAlt": "Visa"
+  },
+  "confirmationDialog": {
+    "cancel": "Batal",
+    "checkboxLabel": "Saya mengesahkan bahawa iklan ini tidak mengandungi perjudian, kandungan dewasa, perkhidmatan haram, atau sebarang kandungan yang dilarang di bawah undang-undang Malaysia. Saya faham bahawa pembayaran tidak boleh dikembalikan jika iklan ditolak kerana pelanggaran dasar.",
+    "description": "Sila semak dan sahkan yang berikut sebelum meneruskan pembelian anda.",
+    "importantNotice": "Notis Penting",
+    "proceedToPayment": "Teruskan ke Pembayaran",
+    "refundWarning": "Pembayaran tidak boleh dikembalikan jika ditolak kerana pelanggaran polisi.",
+    "title": "Sahkan Pembelian Iklan",
+    "warningText": "Dengan meneruskan, anda mengesahkan iklan anda tidak mengandungi perjudian, kandungan dewasa, perkhidmatan haram, atau bahan yang dilarang di bawah undang-undang Malaysia."
   },
   "emptyState": {
     "noPackages": "Tiada pakej kredit tersedia pada masa ini."

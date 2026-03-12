@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "ดาวน์โหลด",
+    "scanFor": "สแกนหา {name}",
     "tapToZoom": "แตะเพื่อซูม"
   },
   "recentRedemptions": {

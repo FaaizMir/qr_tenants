@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "에이전트 구독",
+    "homepagePlacementRevenue": "홈페이지 배치 수익",
     "merchantSubscriptions": "상인 구독",
     "packageCommissions": "패키지 수수료",
     "totalPlatformRevenue": "총 플랫폼 수익"

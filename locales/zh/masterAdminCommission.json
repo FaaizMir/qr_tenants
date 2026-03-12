@@ -17,6 +17,10 @@
         "description": "长期商户计划",
         "title": "年度套餐"
       },
+      "homepagePlacement": {
+        "description": "付费主页广告/优惠券位置",
+        "title": "主页位置"
+      },
       "merchantFees": {
         "description": "定期商户费用",
         "title": "商户费用"

@@ -4,6 +4,7 @@
     "bonusGift": "보너스 선물",
     "cardDetails": "카드 세부정보",
     "creditsIncluded": "포함된 크레딧",
+    "mastercardAlt": "마스터카드",
     "noSelection": "선택된 패키지 없음",
     "noSelectionMessage": "체크아웃을 계속 진행하려면 패키지를 선택하세요.",
     "packageType": "패키지 유형",
@@ -11,10 +12,22 @@
     "premiumDescription": "향상된 기능을 갖춘 프리미엄 크레딧 패키지",
     "securePayment": "안전한 결제",
     "sslEncrypted": "SSL 암호화",
+    "stripeAlt": "스트라이프",
     "subtitle": "구매를 검토하세요",
     "title": "주문 요약",
     "totalAmount": "총 금액",
-    "trustedPartners": "신뢰할 수 있는 파트너"
+    "trustedPartners": "신뢰할 수 있는 파트너",
+    "visaAlt": "비자"
+  },
+  "confirmationDialog": {
+    "cancel": "취소",
+    "checkboxLabel": "이 광고에는 도박, 성인 콘텐츠, 불법 서비스 또는 말레이시아 법률에 따라 금지된 콘텐츠가 포함되어 있지 않음을 확인합니다. 정책 위반으로 광고가 거부될 경우 결제는 환불되지 않음을 이해합니다.",
+    "description": "구매를 진행하기 전에 다음 내용을 검토하고 확인해 주십시오.",
+    "importantNotice": "중요 공지",
+    "proceedToPayment": "결제 진행",
+    "refundWarning": "정책 위반으로 거부된 경우 결제는 환불되지 않습니다.",
+    "title": "광고 구매 확인",
+    "warningText": "진행함으로써 귀하는 귀하의 광고에 도박, 성인 콘텐츠, 불법 서비스 또는 말레이시아 법률에 의해 금지된 자료가 포함되어 있지 않음을 확인합니다."
   },
   "emptyState": {
     "noPackages": "현재 사용할 수 있는 크레딧 패키지가 없습니다."

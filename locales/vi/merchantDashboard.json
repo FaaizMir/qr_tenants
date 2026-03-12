@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "Tải xuống",
+    "scanFor": "Quét cho {name}",
     "tapToZoom": "NHẤN ĐỂ PHÓNG TO"
   },
   "recentRedemptions": {

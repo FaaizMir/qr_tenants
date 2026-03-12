@@ -17,6 +17,10 @@
         "description": "長期の商人プラン",
         "title": "年間パッケージ"
       },
+      "homepagePlacement": {
+        "description": "有料ホームページ広告/クーポン掲載",
+        "title": "ホームページ掲載"
+      },
       "merchantFees": {
         "description": "定期的なマーチャント手数料",
         "title": "マーチャント手数料"

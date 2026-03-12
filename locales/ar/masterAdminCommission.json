@@ -17,6 +17,10 @@
         "description": "خطط التجار طويلة الأجل",
         "title": "حزم سنوية"
       },
+      "homepagePlacement": {
+        "description": "إعلانات/قسائم مدفوعة على الصفحة الرئيسية",
+        "title": "موضع الصفحة الرئيسية"
+      },
       "merchantFees": {
         "description": "رسوم التجار المتكررة",
         "title": "رسوم التجار"

@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "下载",
+    "scanFor": "扫描 {name}",
     "tapToZoom": "点击放大"
   },
   "recentRedemptions": {

@@ -1,12 +1,13 @@
 import { CustomerReviewFlow } from "@/containers/customer/review/CustomerReviewFlow";
+import { getTranslations } from "next-intl/server";
 
-export default function CustomerReviewPage({ params }) {
-    // In a real app, we would fetch merchant config based on ID from query or params
-    // const { merchantId } = params;
+export default async function CustomerReviewPage({ params }) {
+    const { locale } = params;
+    const t = await getTranslations("customerReview");
 
     return (
         <div className="min-h-screen bg-background text-foreground">
-            <CustomerReviewFlow />
+            <CustomerReviewFlow locale={locale} />
         </div>
     );
 }

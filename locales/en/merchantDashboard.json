@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "Download",
+    "scanFor": "Scan for {name}",
     "tapToZoom": "TAP TO ZOOM"
   },
   "recentRedemptions": {

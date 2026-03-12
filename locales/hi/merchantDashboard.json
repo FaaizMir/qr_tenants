@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "डाउनलोड करें",
+    "scanFor": "{name} के लिए स्कैन करें",
     "tapToZoom": "ज़ूम करने के लिए टैप करें"
   },
   "recentRedemptions": {

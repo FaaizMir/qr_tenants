@@ -65,7 +65,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
     paid_ad_video: initialConfig?.paid_ad_video ?? "",
     paid_ad_video_status: initialConfig?.paid_ad_video_status ?? false,
     paid_ad_duration: initialConfig?.paid_ad_duration ?? 7,
-    paid_ad_start_date: getTodayDateString(),
+    paid_ad_start_date: "", // Empty until user selects a date
   });
 
   const [uploading, setUploading] = useState(false);
@@ -87,6 +87,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   // Confirmation Dialog State
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [confirmChecked, setConfirmChecked] = useState(false);
+
+  // Booked dates state for conflict detection
+  const [bookedDates, setBookedDates] = useState([]);
+  const [loadingBookedDates, setLoadingBookedDates] = useState(false);
+  const [dateConflictWarning, setDateConflictWarning] = useState("");
 
   // Fetch true state from API on mount
   useEffect(() => {
@@ -189,6 +194,65 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
     fetchAvailablePlacements();
   }, [merchantId, state.placement]);
+
+  // Fetch booked dates when placement changes
+  useEffect(() => {
+    if (!state.placement || !merchantId) return;
+
+    const fetchBookedDates = async () => {
+      setLoadingBookedDates(true);
+      // Clear any previous conflict warning when placement changes
+      setDateConflictWarning("");
+      try {
+        const response = await axiosInstance.get(
+          `/approvals/booked-dates/${state.placement}/merchant/${merchantId}`,
+        );
+
+        if (response.data && Array.isArray(response.data.bookedDates)) {
+          setBookedDates(response.data.bookedDates);
+        } else {
+          setBookedDates([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch booked dates:", error);
+        setBookedDates([]);
+      } finally {
+        setLoadingBookedDates(false);
+      }
+    };
+
+    fetchBookedDates();
+  }, [state.placement, merchantId]);
+
+  // Check for date conflicts when start date or duration changes
+  useEffect(() => {
+    if (!state.paid_ad_start_date || bookedDates.length === 0) {
+      setDateConflictWarning("");
+      return;
+    }
+
+    const startDate = new Date(state.paid_ad_start_date);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + (state.paid_ad_duration || 7));
+
+    // Check for conflicts
+    const conflict = bookedDates.find((booking) => {
+      const bookingStart = new Date(booking.startDate);
+      const bookingEnd = new Date(booking.endDate);
+      // Check if date ranges overlap
+      return startDate < bookingEnd && bookingStart < endDate;
+    });
+
+    if (conflict) {
+      const conflictStart = new Date(conflict.startDate).toLocaleDateString();
+      const conflictEnd = new Date(conflict.endDate).toLocaleDateString();
+      setDateConflictWarning(
+        `⚠️ The selected dates conflict with an existing booking (${conflictStart} - ${conflictEnd}) for this placement. Please choose different dates or another placement.`,
+      );
+    } else {
+      setDateConflictWarning("");
+    }
+  }, [state.paid_ad_start_date, state.paid_ad_duration, bookedDates]);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -777,6 +841,46 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                         }}
                         className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                       />
+
+                      {/* Show conflict warning */}
+                      {dateConflictWarning && (
+                        <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+                          <p className="text-sm text-red-700 font-medium">
+                            {dateConflictWarning}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Show loading or booked dates */}
+                      {loadingBookedDates ? (
+                        <p className="text-xs text-gray-500">
+                          Loading booked dates...
+                        </p>
+                      ) : bookedDates.length > 0 ? (
+                        <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                          <p className="text-xs font-semibold text-blue-900 mb-2">
+                            📅 Dates already booked for "{state.placement}" placement:
+                          </p>
+                          <ul className="text-xs text-blue-800 space-y-1">
+                            {bookedDates.map((booking, idx) => (
+                              <li key={idx} className="flex items-center gap-1">
+                                <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                                {new Date(booking.startDate).toLocaleDateString()} to{" "}
+                                {new Date(booking.endDate).toLocaleDateString()}
+                                {booking.status && (
+                                  <span className="text-blue-600 font-medium ml-1">
+                                    ({booking.status})
+                                  </span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-green-600 font-medium">
+                          ✓ No bookings found for this placement. All dates are available.
+                        </p>
+                      )}
                     </div>
                   </div>
                   <Tabs
@@ -817,7 +921,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                           >
                             <Image
                               src={pendingFile.previewUrl}
-                              alt="Pending Upload"
+                              alt={t("common.pendingUploadAlt")}
                               className="object-cover"
                               fill
                               unoptimized
@@ -843,7 +947,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                           <div className="relative aspect-video rounded-xl overflow-hidden border bg-background group shadow-sm">
                             <Image
                               src={getImageUrl(state.paid_ad_image)}
-                              alt="Active Ad"
+                              alt={t("common.activeAdAlt")}
                               className="object-cover"
                               fill
                               unoptimized
@@ -884,7 +988,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               className="hidden"
                               accept="image/*"
                               onChange={handleFileChange}
-                              disabled={uploading}
+                              disabled={uploading || !!dateConflictWarning}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -984,7 +1088,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               className="hidden"
                               accept="video/*"
                               onChange={handleVideoUpload}
-                              disabled={uploading}
+                              disabled={uploading || !!dateConflictWarning}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -1093,7 +1197,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={previewContent.url}
-                            alt="Preview"
+                            alt={t("common.previewAlt")}
                             className="max-w-full max-h-[80vh] object-contain rounded-xl"
                           />
                         ) : (
@@ -1144,7 +1248,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                       )}
                       <Button
                         onClick={handleSubmit}
-                        disabled={uploading || toggling || availablePlacements.length === 0}
+                        disabled={uploading || toggling || availablePlacements.length === 0 || !!dateConflictWarning}
                         className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
                       >
                         {uploading ? (

@@ -1,4 +1,9 @@
 {
+  "common": {
+    "activeAdAlt": "Iklan Aktif",
+    "pendingUploadAlt": "Unggahan Tertunda",
+    "previewAlt": "Prabaca"
+  },
   "confirmation": {
     "cancel": "Batal",
     "checkboxLabel": "Saya mengonfirmasi bahwa iklan ini tidak mengandung perjudian, konten dewasa, layanan ilegal, atau konten apa pun yang dilarang berdasarkan hukum Malaysia. Saya mengerti bahwa pembayaran tidak dapat dikembalikan jika iklan ditolak karena pelanggaran kebijakan.",
@@ -20,9 +25,6 @@
     "days7": "7 Hari",
     "label": "Durasi",
     "selectPlaceholder": "Pilih durasi"
-  },
-  "startDate": {
-    "label": "Tanggal Mulai"
   },
   "messages": {
     "errorDeleting": "Gagal menghapus",
@@ -60,6 +62,9 @@
   "preview": {
     "description": "Prabaca ukuran penuh dari iklan promosi",
     "title": "Prabaca Iklan"
+  },
+  "startDate": {
+    "label": "Tanggal Mulai"
   },
   "status": {
     "active": "Aktif",

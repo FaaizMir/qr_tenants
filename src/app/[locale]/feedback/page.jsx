@@ -1,5 +1,5 @@
-import FeedbackClient from "@/app/feedback/page";
+import MerchantFeedbackFormContainer from "@/containers/merchant/merchant-feedbackform";
 
 export default function LocaleFeedbackPage(props) {
-  return <FeedbackClient {...props} />;
+  return <MerchantFeedbackFormContainer {...props} />;
 }

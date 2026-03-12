@@ -81,6 +81,8 @@
     "noData": "--"
   },
   "qrCode": {
+    "download": "다운로드",
+    "scanFor": "{name}에 대한 스캔",
     "tapToZoom": "확대하려면 탭하세요"
   },
   "recentRedemptions": {

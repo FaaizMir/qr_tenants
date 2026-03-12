@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import AgentForm from "@/containers/agent/agent-form";
+import CreateAgentContainer from "@/containers/master-admin/agents/create";
 import { getTranslations } from "next-intl/server";
 
 export default async function CreateAgentPage() {
@@ -13,7 +13,7 @@ export default async function CreateAgentPage() {
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <AgentForm isEdit={false} />
+      <CreateAgentContainer isEdit={false} />
     </>
   );
 }

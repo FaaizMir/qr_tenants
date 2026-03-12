@@ -183,6 +183,12 @@
     "description": "Overview of your agent performance and metrics",
     "title": "Agent Dashboard"
   },
+  "subscriptionExpiry": {
+    "description": "Your agent subscription is required to continue. Most features will be restricted until your plan is active.",
+    "goToWallet": "Go to Wallet",
+    "remindLater": "Remind me later",
+    "title": "Subscription Required"
+  },
   "tabs": {
     "analytics": "Analytics",
     "merchants": "Performance",

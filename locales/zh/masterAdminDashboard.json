@@ -23,6 +23,7 @@
   },
   "financialCards": {
     "agentSubscriptions": "代理订阅",
+    "homepagePlacementRevenue": "首页位置收入",
     "merchantSubscriptions": "商户订阅",
     "packageCommissions": "套餐佣金",
     "totalPlatformRevenue": "平台总收入"

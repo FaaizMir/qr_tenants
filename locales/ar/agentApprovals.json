@@ -5,16 +5,21 @@
   },
   "columns": {
     "adContent": "محتوى الإعلان",
+    "adEndDate": "تاريخ انتهاء الإعلان",
     "adPlacement": "وضع الإعلان",
+    "adStartDate": "تاريخ بدء الإعلان",
     "approvalStatus": "حالة الموافقة",
     "approvalType": "نوع الموافقة",
     "businessAccount": "الأعمال والحساب",
     "location": "الموقع",
     "merchantType": "نوع التاجر",
     "noAd": "لا يوجد إعلان",
-    "requestedDate": "تاريخ الطلب",
-    "adStartDate": "تاريخ بدء الإعلان",
-    "adEndDate": "تاريخ انتهاء الإعلان"
+    "requestedDate": "تاريخ الطلب"
+  },
+  "common": {
+    "adAltText": "إعلان",
+    "adPreviewAlt": "معاينة الإعلان",
+    "notAvailable": "غير متوفر"
   },
   "dialog": {
     "approveDescription": "هل أنت متأكد أنك تريد الموافقة على الطلب لـ {merchantName}? لا يمكن التراجع عن هذا الإجراء.",

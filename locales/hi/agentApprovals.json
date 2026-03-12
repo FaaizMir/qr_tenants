@@ -5,16 +5,21 @@
   },
   "columns": {
     "adContent": "विज्ञापन सामग्री",
+    "adEndDate": "विज्ञापन समाप्ति तिथि",
     "adPlacement": "विज्ञापन स्थान",
+    "adStartDate": "विज्ञापन प्रारंभ तिथि",
     "approvalStatus": "अनुमोदन स्थिति",
     "approvalType": "अनुमोदन प्रकार",
     "businessAccount": "व्यापार और खाता",
     "location": "स्थान",
     "merchantType": "व्यापारी प्रकार",
     "noAd": "कोई विज्ञापन नहीं",
-    "requestedDate": "अनुरोधित तिथि",
-    "adStartDate": "विज्ञापन प्रारंभ तिथि",
-    "adEndDate": "विज्ञापन समाप्ति तिथि"
+    "requestedDate": "अनुरोधित तिथि"
+  },
+  "common": {
+    "adAltText": "विज्ञापन",
+    "adPreviewAlt": "विज्ञापन पूर्वावलोकन",
+    "notAvailable": "अनुपलब्ध"
   },
   "dialog": {
     "approveDescription": "क्या आप सुनिश्चित हैं कि आप {merchantName} के लिए अनुरोध को मंजूरी देना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।",

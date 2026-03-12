@@ -17,6 +17,10 @@
         "description": "장기 상인 계획",
         "title": "연간 패키지"
       },
+      "homepagePlacement": {
+        "description": "유료 홈페이지 광고/쿠폰 배치",
+        "title": "홈페이지 배치"
+      },
       "merchantFees": {
         "description": "정기 상인 수수료",
         "title": "상인 수수료"

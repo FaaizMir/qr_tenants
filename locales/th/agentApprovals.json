@@ -5,16 +5,21 @@
   },
   "columns": {
     "adContent": "เนื้อหาโฆษณา",
+    "adEndDate": "วันที่สิ้นสุดโฆษณา",
     "adPlacement": "การวางโฆษณา",
+    "adStartDate": "วันที่เริ่มโฆษณา",
     "approvalStatus": "สถานะการอนุมัติ",
     "approvalType": "ประเภทการอนุมัติ",
     "businessAccount": "ธุรกิจ & บัญชี",
     "location": "ตำแหน่งที่ตั้ง",
     "merchantType": "ประเภทผู้ค้า",
     "noAd": "ไม่มีโฆษณา",
-    "requestedDate": "วันที่ขอ",
-    "adStartDate": "วันที่เริ่มโฆษณา",
-    "adEndDate": "วันที่สิ้นสุดโฆษณา"
+    "requestedDate": "วันที่ขอ"
+  },
+  "common": {
+    "adAltText": "โฆษณา",
+    "adPreviewAlt": "ตัวอย่างโฆษณา",
+    "notAvailable": "ไม่สามารถใช้ได้"
   },
   "dialog": {
     "approveDescription": "คุณแน่ใจหรือไม่ว่าต้องการอนุมัติคำขอสำหรับ {merchantName}? การกระทำนี้ไม่สามารถย้อนกลับได้.",

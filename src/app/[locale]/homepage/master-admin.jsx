@@ -18,6 +18,9 @@ import {
   ShieldCheck,
   CreditCard,
   TicketPercent,
+  Gift,
+  CalendarDays,
+  Tag,
 } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -37,11 +40,13 @@ import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import axiosInstance from "@/lib/axios";
 import { cn } from "@/lib/utils";
+import { getImageUrl } from "@/lib/utils/imageUtils";
 import {
   TopBannerAd,
   SidebarAd,
   BottomBannerAd,
 } from "./components/PaidAdsDisplay";
+import { CouponForm } from "./components/CouponForm";
 
 // --- Main Page Component ---
 export default function MasterAdminLandingPage() {
@@ -71,6 +76,18 @@ export default function MasterAdminLandingPage() {
   // Homepage push display state
   const [homepageCoupons, setHomepageCoupons] = useState([]);
   const [homepageAds, setHomepageAds] = useState([]);
+
+  // Coupon dialog
+  const [couponDialogOpen, setCouponDialogOpen] = useState(false);
+  const [selectedCouponData, setSelectedCouponData] = useState({
+    merchant: null,
+    batch: null,
+  });
+
+  const handleGetCoupon = (merchant, batch) => {
+    setSelectedCouponData({ merchant, batch });
+    setCouponDialogOpen(true);
+  };
 
   // Coupon section pagination + search
   const COUPONS_PER_PAGE = 9;
@@ -302,14 +319,7 @@ export default function MasterAdminLandingPage() {
   }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
   const handleAgentClick = (agent) => {
-    // Store agent data with timestamp for security validation
-    const agentData = {
-      ...agent,
-      _timestamp: Date.now(),
-      _sessionId: Math.random().toString(36).substring(7), // Simple session tracking
-    };
-    localStorage.setItem("selectedAgent", JSON.stringify(agentData));
-    router.push(`/homepage/agent`);
+    router.push(`/homepage/agent/${agent.id}`);
   };
 
   // Filtered + paginated coupons
@@ -549,37 +559,132 @@ export default function MasterAdminLandingPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {paginatedCoupons.map((approval) => {
                           const batch = approval?.coupon?.batch;
+                          const merchant = approval?.merchant;
                           if (!batch) return null;
+
+                          const brandImage =
+                            batch.brand_image ||
+                            approval.coupon?.brand_image ||
+                            null;
+                          const logoUrl = getImageUrl(brandImage);
+                          const templateHtml = batch.template?.html;
+                          const renderedHtml = templateHtml
+                            ? templateHtml
+                                .replace(/\{\{logo\}\}/g, logoUrl)
+                                .replace(
+                                  /\{\{header\}\}/g,
+                                  batch.header || batch.batch_name || "",
+                                )
+                                .replace(
+                                  /\{\{title\}\}/g,
+                                  batch.title || batch.batch_name || "",
+                                )
+                                .replace(
+                                  /\{\{description\}\}/g,
+                                  batch.description || "",
+                                )
+                            : null;
+
+                          const remaining =
+                            batch.total_quantity != null &&
+                            batch.issued_quantity != null
+                              ? batch.total_quantity - batch.issued_quantity
+                              : null;
+
+                          const endDate = batch.end_date
+                            ? new Date(batch.end_date).toLocaleDateString(
+                                locale,
+                                {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric",
+                                },
+                              )
+                            : null;
+
+                          const merchantForForm = merchant
+                            ? {
+                                ...merchant,
+                                name:
+                                  merchant.business_name ||
+                                  merchant.name ||
+                                  t("fallback.unknownAgent"),
+                              }
+                            : null;
 
                           return (
                             <div
                               key={approval.id}
-                              className="relative group bg-white p-8 rounded-4xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col overflow-hidden"
+                              className="group h-[270px] w-[450px] bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col items-center justify-center overflow-hidden"
                             >
-                              <span className="absolute top-5 end-6 text-xs font-bold text-primary">
-                                {t("couponBatches.active")}
-                              </span>
-                              {batch.rendered_html ? (
-                                <div
-                                  className="w-full mb-4 rounded-2xl overflow-hidden"
-                                  dangerouslySetInnerHTML={{
-                                    __html: batch.rendered_html,
-                                  }}
-                                />
-                              ) : (
-                                <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
-                                  <TicketPercent className="h-7 w-7" />
+                              {/* Template / brand image */}
+                              <div className="relative p-6 w-full">
+                                <span className="absolute top-3 end-3 z-10 bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                                  {t("couponBatches.active")}
+                                </span>
+                                {renderedHtml ? (
+                                  <div
+                                    className="w-full pointer-events-none"
+                                    dangerouslySetInnerHTML={{
+                                      __html: renderedHtml,
+                                    }}
+                                  />
+                                ) : brandImage ? (
+                                  <div className="w-full aspect-video overflow-hidden rounded-xl bg-slate-100">
+                                    <img
+                                      src={logoUrl}
+                                      alt={batch.batch_name}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="w-full aspect-video flex items-center justify-center rounded-xl bg-primary/5">
+                                    <TicketPercent className="h-12 w-12 text-primary/30" />
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Details */}
+                              <div className="px-4 pb-4 pt-0 flex flex-col gap-3 flex-1 border-t border-slate-100 w-full">
+                                {!renderedHtml && (
+                                  <div className="pt-3">
+                                    <h3 className="font-bold text-slate-900 line-clamp-1">
+                                      {batch.batch_name}
+                                    </h3>
+                                    {batch.description && (
+                                      <p className="text-sm text-slate-500 line-clamp-2 mt-1">
+                                        {batch.description}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
+
+                                <div className="flex items-center flex-wrap gap-2 text-xs font-medium text-slate-500 pt-3">
+                                  {endDate && (
+                                    <span className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 rounded-lg px-2.5 py-1.5">
+                                      <CalendarDays className="h-3 w-3 text-slate-400 shrink-0" />
+                                      {t("couponBatches.expires")} {endDate}
+                                    </span>
+                                  )}
+                                  {remaining != null && (
+                                    <span className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 rounded-lg px-2.5 py-1.5">
+                                      <Tag className="h-3 w-3 text-slate-400 shrink-0" />
+                                      {remaining} {t("couponBatches.remaining")}
+                                    </span>
+                                  )}
                                 </div>
-                              )}
 
-                              <h3 className="text-xl font-bold mb-3 text-slate-900 line-clamp-1">
-                                {batch.batch_name}
-                              </h3>
-
-                              <p className="text-slate-500 font-medium leading-relaxed text-sm line-clamp-2 flex-1 mb-5">
-                                {batch.description ||
-                                  t("couponBatches.exclusiveOffers")}
-                              </p>
+                                <Button
+                                  size="sm"
+                                  className="mt-auto w-full gap-2 rounded-xl font-bold shadow-md shadow-primary/20"
+                                  onClick={() =>
+                                    handleGetCoupon(merchantForForm, batch)
+                                  }
+                                >
+                                  <Gift className="h-4 w-4" />
+                                  {t("couponBatches.getCoupon")}
+                                </Button>
+                              </div>
                             </div>
                           );
                         })}
@@ -1211,6 +1316,14 @@ export default function MasterAdminLandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Coupon Form Dialog */}
+      <CouponForm
+        open={couponDialogOpen}
+        onOpenChange={setCouponDialogOpen}
+        merchant={selectedCouponData.merchant}
+        batch={selectedCouponData.batch}
+      />
     </div>
   );
 }

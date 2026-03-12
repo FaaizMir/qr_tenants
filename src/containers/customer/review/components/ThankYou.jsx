@@ -3,6 +3,7 @@
 import React from "react";
 import { Heart, RefreshCcw, Sparkles, Star, MapPin, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/lib/toast";
 
 export const ThankYou = ({
   resetFlow,
@@ -10,6 +11,7 @@ export const ThankYou = ({
   prevStep,
   reward,
   formValues,
+  t,
 }) => {
   const hasWhatsAppError =
     reward?.whatsapp_status === "failed" ||
@@ -26,6 +28,20 @@ export const ThankYou = ({
     !hasWhatsAppError &&
     !hasGeneralError;
 
+  // Show toast notifications for backend errors on mount
+  React.useEffect(() => {
+    if (hasWhatsAppError) {
+      toast.error(
+        reward?.whatsapp_notification?.credits_insufficient
+          ? `${t("thankYou.whatsAppDeliveryFailedMessage")} (${reward.whatsapp_notification.available_credits ?? 0} credits remaining)`
+          : t("thankYou.whatsAppDeliveryFailedMessage"),
+      );
+    } else if (hasGeneralError) {
+      toast.error(reward?.error_message || t("thankYou.luckyDrawErrorMessage"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="w-full flex items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-50 via-white to-slate-50 overflow-y-auto">
       <div className="w-full max-w-4xl">
@@ -37,22 +53,21 @@ export const ThankYou = ({
 
           <h1 className="text-5xl md:text-6xl font-bold text-zinc-900 mb-4 tracking-tight">
             <span className="bg-clip-text text-transparent bg-linear-to-r from-red-600 via-pink-600 to-red-600">
-              Thank You!
+              {t("thankYou.thankYou")}
             </span>
           </h1>
 
           <p className="text-lg text-zinc-600 font-medium max-w-md mx-auto leading-relaxed">
-            Every word you share helps us craft a more perfect experience. We
-            can&apos;t wait to serve you again!
+            {t("thankYou.feedbackMessage")}
           </p>
 
           <div className="flex items-center justify-center gap-2 mt-4 text-sm text-zinc-500">
             <MapPin className="w-4 h-4 text-red-600" />
             <span className="font-semibold">
-              {merchantConfig?.name || "Our Store"}
+              {merchantConfig?.name || t("thankYou.ourStore")}
             </span>
             <span>•</span>
-            <span>{merchantConfig?.address || "Location"}</span>
+            <span>{merchantConfig?.address || t("thankYou.location")}</span>
           </div>
         </div>
 
@@ -88,7 +103,7 @@ export const ThankYou = ({
                 {/* Error Title */}
                 <div className="space-y-2">
                   <h3 className="text-3xl md:text-4xl font-bold text-red-900 tracking-tight">
-                    Lucky Draw Error
+                    {t("thankYou.luckyDrawError")}
                   </h3>
                   <div className="flex items-center justify-center gap-2">
                     <div className="h-0.5 w-8 bg-linear-to-r from-transparent to-red-500/50 rounded-full"></div>
@@ -115,7 +130,7 @@ export const ThankYou = ({
                     </div>
                     <p className="text-base font-semibold text-red-700 leading-relaxed flex-1">
                       {reward?.error_message ||
-                        "Unable to complete lucky draw. Please contact our staff."}
+                        t("thankYou.luckyDrawErrorMessage")}
                     </p>
                   </div>
                 </div>
@@ -124,11 +139,11 @@ export const ThankYou = ({
                 <div className="bg-zinc-50/80 rounded-2xl p-5 border border-zinc-200/50 max-w-xl mx-auto">
                   <p className="text-sm font-medium text-zinc-700 leading-relaxed">
                     <span className="font-bold text-green-600">
-                      ✓ Your feedback has been recorded successfully.
+                      {t("thankYou.feedbackRecordedSuccess")}
                     </span>
                     <br />
                     <span className="text-zinc-600">
-                      Please contact our staff for assistance with your reward.
+                      {t("thankYou.contactStaffForReward")}
                     </span>
                   </p>
                 </div>
@@ -169,7 +184,7 @@ export const ThankYou = ({
                 {/* Error Title */}
                 <div className="space-y-2">
                   <h3 className="text-3xl md:text-4xl font-bold text-red-900 tracking-tight">
-                    Reward Delivery Failed
+                    {t("thankYou.rewardDeliveryFailed")}
                   </h3>
                   <div className="flex items-center justify-center gap-2">
                     <div className="h-0.5 w-8 bg-linear-to-r from-transparent to-orange-500/50 rounded-full"></div>
@@ -196,8 +211,8 @@ export const ThankYou = ({
                     </div>
                     <p className="text-base font-semibold text-red-700 leading-relaxed flex-1">
                       {reward?.whatsapp_notification?.credits_insufficient
-                        ? `WhatsApp delivery failed. Only ${reward.whatsapp_notification.available_credits ?? 0} credits remaining.`
-                        : "WhatsApp delivery failed. Unable to send reward notification."}
+                        ? `${t("thankYou.whatsAppDeliveryFailedMessage")} (${reward.whatsapp_notification.available_credits ?? 0} credits remaining)`
+                        : t("thankYou.whatsAppDeliveryFailedMessage")}
                     </p>
                   </div>
                 </div>
@@ -206,11 +221,11 @@ export const ThankYou = ({
                 <div className="bg-zinc-50/80 rounded-2xl p-5 border border-zinc-200/50 max-w-xl mx-auto">
                   <p className="text-sm font-medium text-zinc-700 leading-relaxed">
                     <span className="font-bold text-green-600">
-                      ✓ Your feedback has been recorded successfully.
+                      {t("thankYou.feedbackRecordedSuccess")}
                     </span>
                     <br />
                     <span className="text-zinc-600">
-                      Please contact our staff to claim your reward.
+                      {t("thankYou.contactStaffToClaim")}
                     </span>
                   </p>
                 </div>
@@ -226,7 +241,7 @@ export const ThankYou = ({
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border-2 border-red-500/20">
                 <Gift className="w-4 h-4 text-red-600" />
                 <span className="text-xs font-bold uppercase tracking-wide text-red-600">
-                  Your Reward Recap
+                  {t("thankYou.rewardConfirmed")}
                 </span>
               </div>
             </div>
@@ -251,7 +266,7 @@ export const ThankYou = ({
                     <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight uppercase">
                       {reward?.prize?.prize_name ||
                         reward?.name ||
-                        "Special Discount"}
+                        t("thankYou.specialDiscount")}
                     </h3>
                   </div>
 
@@ -259,7 +274,7 @@ export const ThankYou = ({
                   {reward?.prize?.prize_description && (
                     <div className="bg-white/5 border-2 border-white/10 rounded-2xl p-5 backdrop-blur-md">
                       <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide block mb-2">
-                        Prize Details
+                        {t("thankYou.prizeDetails")}
                       </span>
                       <p className="text-base text-white leading-relaxed">
                         {reward.prize.prize_description}
@@ -272,14 +287,14 @@ export const ThankYou = ({
                     <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border-2 border-red-500/20">
                       <div className="w-2 h-2 rounded-full bg-red-500"></div>
                       <span className="text-xs font-bold text-red-400 uppercase tracking-wide">
-                        WhatsApp Delivery Failed
+                        {t("thankYou.whatsAppDeliveryFailed")}
                       </span>
                     </div>
                   ) : (
                     <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20">
                       <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                       <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">
-                        Sent to WhatsApp
+                        {t("thankYou.sentToWhatsApp")}
                       </span>
                     </div>
                   )}
@@ -291,16 +306,13 @@ export const ThankYou = ({
             <div className="mt-6 bg-slate-50/80 rounded-2xl p-5 border border-slate-200/50 text-center">
               {hasWhatsAppError ? (
                 <p className="text-sm font-semibold text-red-600 italic leading-relaxed">
-                  Couldn&apos;t deliver via WhatsApp. Please screenshot this
-                  screen or note down the code above.
+                  {t("rewardSuccess.whatsAppErrorInstructions")}
                 </p>
               ) : (
                 <p className="text-sm font-medium text-zinc-600 leading-relaxed">
-                  Reward confirmation sent to{" "}
-                  <span className="text-zinc-900 font-bold">
-                    {formValues?.phone || "your number"}
-                  </span>
-                  . Present this to our staff to redeem.
+                  {t("thankYou.rewardConfirmationSent", {
+                    phone: formValues?.phone || "",
+                  })}
                 </p>
               )}
             </div>
@@ -315,12 +327,12 @@ export const ThankYou = ({
           >
             <span className="flex items-center justify-center gap-3">
               <RefreshCcw className="w-5 h-5" />
-              Submit Another Review
+              {t("thankYou.submitAnotherReview")}
             </span>
           </Button>
 
           <p className="text-center text-sm text-zinc-500 font-medium">
-            Help us improve by sharing another experience
+            {t("thankYou.helpImprove")}
           </p>
         </div>
 
@@ -328,7 +340,7 @@ export const ThankYou = ({
         <div className="text-center mt-8">
           <p className="text-xs text-zinc-400 font-medium flex items-center justify-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-red-500" />
-            Secured by QR Tenants • All data encrypted
+            {t("thankYou.securedBy")}
           </p>
         </div>
       </div>
