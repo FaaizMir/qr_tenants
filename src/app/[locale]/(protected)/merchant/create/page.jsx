@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/common/breadcrumb-component";
-import MerchantForm from "@/containers/merchant/merchant-form";
+import CreateMerchantContainer from "@/containers/agent/merchants/create";
 import { getTranslations } from "next-intl/server";
 
 export default async function CreateMerchantPage({ params }) {
@@ -15,7 +15,7 @@ export default async function CreateMerchantPage({ params }) {
   return (
     <>
       <BreadcrumbComponent data={breadcrumbData} />
-      <MerchantForm isEdit={false} />
+      <CreateMerchantContainer />
     </>
   );
 }

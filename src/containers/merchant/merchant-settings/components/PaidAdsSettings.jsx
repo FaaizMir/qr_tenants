@@ -53,8 +53,10 @@ const getTodayDateString = () => {
   return `${year}-${month}-${day}`;
 };
 
-export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
+export default function PaidAdsSettings({ config: initialConfig, merchantId, mode = "agent" }) {
   const t = useTranslations("merchantPaidAds");
+  const isSuperadminMode = mode === "superadmin";
+  const [superadminPlacementDuration, setSuperadminPlacementDuration] = useState(7);
 
   const [state, setState] = useState({
     paid_ads: initialConfig?.paid_ads ?? false,
@@ -63,10 +65,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     paid_ad_video: initialConfig?.paid_ad_video ?? "",
     paid_ad_video_status: initialConfig?.paid_ad_video_status ?? false,
     paid_ad_duration: initialConfig?.paid_ad_duration ?? 7,
-    paid_ad_start_date: getTodayDateString(),
+    paid_ad_start_date: "", // Empty until user selects a date
   });
 
   const [uploading, setUploading] = useState(false);
+  const [toggling, setToggling] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
@@ -85,6 +88,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [confirmChecked, setConfirmChecked] = useState(false);
 
+  // Booked dates state for conflict detection
+  const [bookedDates, setBookedDates] = useState([]);
+  const [loadingBookedDates, setLoadingBookedDates] = useState(false);
+  const [dateConflictWarning, setDateConflictWarning] = useState("");
+
   // Fetch true state from API on mount
   useEffect(() => {
     if (!merchantId) return;
@@ -97,12 +105,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         if (data) {
           setState((prev) => ({
             ...prev,
-            paid_ads: data.paid_ads ?? false,
-            placement: data.paid_ad_placement ?? "top",
-            paid_ad_image: data.paid_ad_image ?? "",
-            paid_ad_video: data.paid_ad_video ?? "",
-            paid_ad_video_status: data.paid_ad_video_status ?? false,
-            paid_ad_duration: data.paid_ad_duration ?? 7,
+            paid_ads: isSuperadminMode
+              ? (data.superadmin_homepage_ad_enabled ?? false)
+              : (data.paid_ads ?? false),
+            placement: isSuperadminMode
+              ? (data.superadmin_homepage_ad_placement ?? "top")
+              : (data.paid_ad_placement ?? "top"),
+            paid_ad_image: isSuperadminMode
+              ? (data.superadmin_homepage_ad_image ?? "")
+              : (data.paid_ad_image ?? ""),
+            paid_ad_video: isSuperadminMode
+              ? (data.superadmin_homepage_ad_video ?? "")
+              : (data.paid_ad_video ?? ""),
+            paid_ad_video_status: isSuperadminMode
+              ? (data.superadmin_homepage_ad_video_status ?? false)
+              : (data.paid_ad_video_status ?? false),
+            paid_ad_duration: isSuperadminMode
+              ? (superadminPlacementDuration ?? 7)
+              : (data.paid_ad_duration ?? 7),
+            paid_ad_start_date: isSuperadminMode
+              ? (data.superadmin_homepage_ad_start_date
+                  ? new Date(data.superadmin_homepage_ad_start_date).toISOString().split("T")[0]
+                  : getTodayDateString())
+              : getTodayDateString(),
           }));
         }
       } catch (error) {
@@ -110,7 +135,30 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
       }
     };
     fetchSettings();
-  }, [merchantId]);
+  }, [merchantId, isSuperadminMode, superadminPlacementDuration]);
+
+  useEffect(() => {
+    if (!isSuperadminMode) return;
+
+    const fetchSuperadminDuration = async () => {
+      try {
+        const settingsResp = await axiosInstance.get(
+          "/super-admin-settings/homepage-placement-pricing",
+        );
+        const settings = settingsResp?.data?.data || settingsResp?.data || {};
+        const duration = Number(settings?.ad_homepage_placement_duration_days) || 7;
+        setSuperadminPlacementDuration(duration);
+        setState((prev) => ({
+          ...prev,
+          paid_ad_duration: duration,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch superadmin homepage ad duration:", error);
+      }
+    };
+
+    fetchSuperadminDuration();
+  }, [isSuperadminMode]);
 
   // Fetch available placements
   useEffect(() => {
@@ -146,6 +194,65 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     fetchAvailablePlacements();
   }, [merchantId, state.placement]);
+
+  // Fetch booked dates when placement changes
+  useEffect(() => {
+    if (!state.placement || !merchantId) return;
+
+    const fetchBookedDates = async () => {
+      setLoadingBookedDates(true);
+      // Clear any previous conflict warning when placement changes
+      setDateConflictWarning("");
+      try {
+        const response = await axiosInstance.get(
+          `/approvals/booked-dates/${state.placement}/merchant/${merchantId}`,
+        );
+
+        if (response.data && Array.isArray(response.data.bookedDates)) {
+          setBookedDates(response.data.bookedDates);
+        } else {
+          setBookedDates([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch booked dates:", error);
+        setBookedDates([]);
+      } finally {
+        setLoadingBookedDates(false);
+      }
+    };
+
+    fetchBookedDates();
+  }, [state.placement, merchantId]);
+
+  // Check for date conflicts when start date or duration changes
+  useEffect(() => {
+    if (!state.paid_ad_start_date || bookedDates.length === 0) {
+      setDateConflictWarning("");
+      return;
+    }
+
+    const startDate = new Date(state.paid_ad_start_date);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + (state.paid_ad_duration || 7));
+
+    // Check for conflicts
+    const conflict = bookedDates.find((booking) => {
+      const bookingStart = new Date(booking.startDate);
+      const bookingEnd = new Date(booking.endDate);
+      // Check if date ranges overlap
+      return startDate < bookingEnd && bookingStart < endDate;
+    });
+
+    if (conflict) {
+      const conflictStart = new Date(conflict.startDate).toLocaleDateString();
+      const conflictEnd = new Date(conflict.endDate).toLocaleDateString();
+      setDateConflictWarning(
+        `⚠️ The selected dates conflict with an existing booking (${conflictStart} - ${conflictEnd}) for this placement. Please choose different dates or another placement.`,
+      );
+    } else {
+      setDateConflictWarning("");
+    }
+  }, [state.paid_ad_start_date, state.paid_ad_duration, bookedDates]);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -192,11 +299,21 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       // 1. Update general settings (toggle, placement, duration)
-      await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, {
-        paid_ads: state.paid_ads,
-        paid_ad_placement: state.placement || "top",
-        paid_ad_duration: parseInt(state.paid_ad_duration || "7", 10),
-      });
+      await axiosInstance.patch(
+        `/merchant-settings/merchant/${merchantId}`,
+        isSuperadminMode
+          ? {
+              superadmin_homepage_ad_enabled: state.paid_ads,
+              superadmin_homepage_ad_placement: state.placement || "top",
+              superadmin_homepage_ad_start_date:
+                state.paid_ad_start_date || getTodayDateString(),
+            }
+          : {
+              paid_ads: state.paid_ads,
+              paid_ad_placement: state.placement || "top",
+              paid_ad_duration: parseInt(state.paid_ad_duration || "7", 10),
+            },
+      );
 
       // 2. Handle upload if pending
       if (pendingFile) {
@@ -204,22 +321,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
         if (pendingFile.type === "image") {
           toast.info(t("messages.uploadingImage"));
           formData.append(
-            "paidAdImage",
+            isSuperadminMode ? "superadminHomepageAdImage" : "paidAdImage",
             pendingFile.file,
             pendingFile.filename || "image.jpg",
           );
-          formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
-            "paidAdDuration",
-            String(state.paid_ad_duration || "7"),
+            isSuperadminMode ? "superadminHomepageAdPlacement" : "paidAdPlacement",
+            state.placement || "top",
           );
+          if (!isSuperadminMode) {
+            formData.append(
+              "paidAdDuration",
+              String(state.paid_ad_duration || "7"),
+            );
+          }
           formData.append(
-            "paidAdStartDate",
+            isSuperadminMode ? "superadminHomepageAdStartDate" : "paidAdStartDate",
             state.paid_ad_start_date || getTodayDateString(),
           );
 
           const response = await axiosInstance.post(
-            `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
+            isSuperadminMode
+              ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-image`
+              : `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -232,8 +356,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             },
           );
 
-          if (response.data?.data?.paid_ad_image) {
-            const newImageUrl = response.data.data.paid_ad_image;
+          const newImageUrl = isSuperadminMode
+            ? response.data?.data?.superadmin_homepage_ad_image
+            : response.data?.data?.paid_ad_image;
+          if (newImageUrl) {
             setState((prev) => ({
               ...prev,
               paid_ad_image: newImageUrl,
@@ -243,19 +369,29 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
           toast.success(t("messages.imageUploaded"));
         } else if (pendingFile.type === "video") {
           toast.info(t("messages.uploadingVideo"));
-          formData.append("paidAdVideo", pendingFile.file);
-          formData.append("paidAdPlacement", state.placement || "top");
           formData.append(
-            "paidAdDuration",
-            String(state.paid_ad_duration || "7"),
+            isSuperadminMode ? "superadminHomepageAdVideo" : "paidAdVideo",
+            pendingFile.file,
           );
           formData.append(
-            "paidAdStartDate",
+            isSuperadminMode ? "superadminHomepageAdPlacement" : "paidAdPlacement",
+            state.placement || "top",
+          );
+          if (!isSuperadminMode) {
+            formData.append(
+              "paidAdDuration",
+              String(state.paid_ad_duration || "7"),
+            );
+          }
+          formData.append(
+            isSuperadminMode ? "superadminHomepageAdStartDate" : "paidAdStartDate",
             state.paid_ad_start_date || getTodayDateString(),
           );
 
           const response = await axiosInstance.post(
-            `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
+            isSuperadminMode
+              ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-video`
+              : `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -271,8 +407,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
             },
           );
 
-          if (response.data?.data?.url) {
-            const newVideoUrl = response.data.data.url;
+          const newVideoUrl = isSuperadminMode
+            ? response.data?.data?.superadmin_homepage_ad_video
+            : response.data?.data?.url;
+          if (newVideoUrl) {
             setState((prev) => ({
               ...prev,
               paid_ad_video: newVideoUrl,
@@ -309,11 +447,47 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const handleTogglePaidAds = (checked) => {
+  const handleTogglePaidAds = async (checked) => {
+    if (!merchantId) return;
+
+    const previousValue = state.paid_ads;
     setState((p) => ({
       ...p,
       paid_ads: checked,
     }));
+    setToggling(true);
+
+    try {
+      const payload = isSuperadminMode
+        ? { superadmin_homepage_ad_enabled: checked }
+        : { paid_ads: checked };
+
+      await axiosInstance.patch(`/merchant-settings/merchant/${merchantId}`, payload);
+
+      window.dispatchEvent(
+        new CustomEvent("MERCHANT_SETTINGS_UPDATED", {
+          detail: isSuperadminMode
+            ? { superadmin_homepage_ad_enabled: checked }
+            : { paid_ads: checked },
+        }),
+      );
+
+      toast.success(
+        checked
+          ? `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} enabled successfully`
+          : `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} disabled successfully`,
+      );
+    } catch (error) {
+      setState((p) => ({
+        ...p,
+        paid_ads: previousValue,
+      }));
+      toast.error(
+        error?.response?.data?.message || "Failed to update ad toggle",
+      );
+    } finally {
+      setToggling(false);
+    }
   };
 
   const handleFileChange = async (e) => {
@@ -449,7 +623,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       await axiosInstance.delete(
-        `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
+        isSuperadminMode
+          ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-image`
+          : `/merchant-settings/merchant/${merchantId}/paid-ad-image`,
       );
 
       setState((prev) => ({
@@ -470,7 +646,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
     try {
       await axiosInstance.delete(
-        `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
+        isSuperadminMode
+          ? `/merchant-settings/merchant/${merchantId}/superadmin-homepage-ad-video`
+          : `/merchant-settings/merchant/${merchantId}/paid-ad-video`,
       );
 
       setState((prev) => ({
@@ -514,6 +692,21 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
               </div>
             </div>
           </CardHeader>
+          <div className="px-6 py-4 border-b border-gray-100 bg-white">
+            <div className="flex items-center justify-between rounded-xl border border-gray-100 px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Ad Toggle</p>
+                <p className="text-xs text-muted-foreground">
+                  Enable this to configure and submit ad placement
+                </p>
+              </div>
+              <Switch
+                checked={state.paid_ads}
+                onCheckedChange={handleTogglePaidAds}
+                disabled={toggling}
+              />
+            </div>
+          </div>
           <div
             className={`grid transition-all duration-500 ease-in-out ${
               state.paid_ads
@@ -591,36 +784,47 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
 
                     <div className="space-y-2">
                       <Label>{t("duration.label")}</Label>
-                      <Select
-                        value={
-                          state.paid_ad_duration
-                            ? String(state.paid_ad_duration)
-                            : "7"
-                        }
-                        onValueChange={(val) => {
-                          setState({
-                            ...state,
-                            paid_ad_duration: parseInt(val, 10),
-                          });
-                        }}
-                      >
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={t("duration.selectPlaceholder")}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="7">
-                            {t("duration.days7")}
-                          </SelectItem>
-                          <SelectItem value="14">
-                            {t("duration.days14")}
-                          </SelectItem>
-                          <SelectItem value="30">
-                            {t("duration.days30")}
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
+                      {isSuperadminMode ? (
+                        <>
+                          <div className="h-10 rounded-md border bg-muted flex items-center px-3 text-sm text-muted-foreground">
+                            {(state.paid_ad_duration || 7)} days
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            Duration is locked by superadmin settings.
+                          </p>
+                        </>
+                      ) : (
+                        <Select
+                          value={
+                            state.paid_ad_duration
+                              ? String(state.paid_ad_duration)
+                              : "7"
+                          }
+                          onValueChange={(val) => {
+                            setState({
+                              ...state,
+                              paid_ad_duration: parseInt(val, 10),
+                            });
+                          }}
+                        >
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={t("duration.selectPlaceholder")}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="7">
+                              {t("duration.days7")}
+                            </SelectItem>
+                            <SelectItem value="14">
+                              {t("duration.days14")}
+                            </SelectItem>
+                            <SelectItem value="30">
+                              {t("duration.days30")}
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
                     </div>
 
                     <div className="space-y-2">
@@ -637,6 +841,46 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                         }}
                         className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                       />
+
+                      {/* Show conflict warning */}
+                      {dateConflictWarning && (
+                        <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+                          <p className="text-sm text-red-700 font-medium">
+                            {dateConflictWarning}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Show loading or booked dates */}
+                      {loadingBookedDates ? (
+                        <p className="text-xs text-gray-500">
+                          Loading booked dates...
+                        </p>
+                      ) : bookedDates.length > 0 ? (
+                        <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                          <p className="text-xs font-semibold text-blue-900 mb-2">
+                            📅 Dates already booked for "{state.placement}" placement:
+                          </p>
+                          <ul className="text-xs text-blue-800 space-y-1">
+                            {bookedDates.map((booking, idx) => (
+                              <li key={idx} className="flex items-center gap-1">
+                                <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                                {new Date(booking.startDate).toLocaleDateString()} to{" "}
+                                {new Date(booking.endDate).toLocaleDateString()}
+                                {booking.status && (
+                                  <span className="text-blue-600 font-medium ml-1">
+                                    ({booking.status})
+                                  </span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-green-600 font-medium">
+                          ✓ No bookings found for this placement. All dates are available.
+                        </p>
+                      )}
                     </div>
                   </div>
                   <Tabs
@@ -744,7 +988,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                               className="hidden"
                               accept="image/*"
                               onChange={handleFileChange}
-                              disabled={uploading}
+                              disabled={uploading || !!dateConflictWarning}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -844,7 +1088,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                               className="hidden"
                               accept="video/*"
                               onChange={handleVideoUpload}
-                              disabled={uploading}
+                              disabled={uploading || !!dateConflictWarning}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -1004,7 +1248,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId }) {
                       )}
                       <Button
                         onClick={handleSubmit}
-                        disabled={uploading || availablePlacements.length === 0}
+                        disabled={uploading || toggling || availablePlacements.length === 0 || !!dateConflictWarning}
                         className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
                       >
                         {uploading ? (
