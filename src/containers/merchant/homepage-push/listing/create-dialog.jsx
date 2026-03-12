@@ -36,7 +36,6 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
 
   const [type, setType] = useState("coupon"); // 'coupon' or 'ad'
   const [selectedBatchId, setSelectedBatchId] = useState("");
-  const [adPlacement, setAdPlacement] = useState("top");
   const [startDate, setStartDate] = useState(getTodayDateString());
   const [couponBatches, setCouponBatches] = useState([]);
   const [slots, setSlots] = useState(null);
@@ -188,10 +187,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
           start_date: startDate,
         });
       } else {
-        await axiosInstance.post("/approvals/homepage-ad-push", {
-          ad_placement: adPlacement,
-          start_date: startDate,
-        });
+        await axiosInstance.post("/approvals/homepage-ad-push", {});
       }
 
       toast.success(t("success.requestCreated"));
@@ -293,77 +289,17 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
 
             {/* Ad Placement (if type is ad) */}
             {type === "ad" && (
-              <>
-                <div className="space-y-2">
-                  <Label>{t("fields.adType.label")}</Label>
-                  <Select value={adPlacement} onValueChange={setAdPlacement}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="top">
-                        {t("fields.adType.options.top")}
-                      </SelectItem>
-                      <SelectItem value="left">
-                        {t("fields.adType.options.left")}
-                      </SelectItem>
-                      <SelectItem value="right">
-                        {t("fields.adType.options.right")}
-                      </SelectItem>
-                      <SelectItem value="bottom">
-                        {t("fields.adType.options.bottom")}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Show booked dates info */}
-                {loadingBookedDates && (
-                  <Alert>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <AlertDescription>
-                      Loading booked dates for {adPlacement} placement...
-                    </AlertDescription>
-                  </Alert>
-                )}
-
-                {!loadingBookedDates && bookedDates.length > 0 && (
-                  <Alert>
-                    <Info className="h-4 w-4" />
-                    <AlertDescription>
-                      <div className="font-medium mb-2">
-                        Booked dates for {adPlacement} placement:
-                      </div>
-                      <div className="space-y-1 text-xs">
-                        {bookedDates.map((booking, index) => (
-                          <div key={index} className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-red-500" />
-                            <span>
-                              {new Date(booking.startDate).toLocaleDateString()} - {" "}
-                              {new Date(booking.endDate).toLocaleDateString()}
-                            </span>
-                            <span className="text-muted-foreground">
-                              ({booking.status})
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </AlertDescription>
-                  </Alert>
-                )}
-
-                {/* Date conflict warning */}
-                {hasDateConflict() && (
-                  <Alert variant="destructive">
-                    <AlertDescription>
-                      ⚠️ The selected dates conflict with an existing booking. 
-                      Please choose a different start date or placement.
-                    </AlertDescription>
-                  </Alert>
-                )}
-              </>
+              <div className="space-y-2">
+                <Alert>
+                  <Info className="h-4 w-4" />
+                  <AlertDescription>
+                    For ad requests, media, placement, and start date are taken from Merchant Settings → Superadmin Homepage Ad Settings.
+                  </AlertDescription>
+                </Alert>
+              </div>
             )}
 
+            {type === "coupon" && (
             <div className="space-y-2">
               <Label>Start Date</Label>
               <Input
@@ -377,6 +313,7 @@ export default function CreateHomepagePushDialog({ open, onClose, onSuccess }) {
                 Select your preferred start date for the campaign
               </p>
             </div>
+            )}
 
             {/* Show calculated end date */}
             {startDate && pricing && (

@@ -111,7 +111,14 @@ export default function MerchantSettings() {
               className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
             >
               <Megaphone className="h-4 w-4" />
-              {t("main.tabs.paidAds")}
+              Agent Ads
+            </TabsTrigger>
+            <TabsTrigger
+              value="superadmin-ads"
+              className="px-8 py-3 rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary transition-all duration-300 flex items-center gap-2.5 font-semibold text-sm"
+            >
+              <Megaphone className="h-4 w-4" />
+              Superadmin Ads
             </TabsTrigger>
             <TabsTrigger
               value="settings"
@@ -157,6 +164,15 @@ export default function MerchantSettings() {
         >
           <div className="flex justify-center">
             <PaidAdsSettings config={{}} merchantId={merchantId} />
+          </div>
+        </TabsContent>
+
+        <TabsContent
+          value="superadmin-ads"
+          className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
+        >
+          <div className="flex justify-center">
+            <PaidAdsSettings config={{}} merchantId={merchantId} mode="superadmin" />
           </div>
         </TabsContent>
 
