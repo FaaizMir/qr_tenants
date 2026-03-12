@@ -214,7 +214,10 @@ export function AgentForm({
               .replace(/_/g, " ")
               .replace(/\b\w/g, (c) => c.toUpperCase());
             const errorList = Array.isArray(messages) ? messages : [messages];
-            return t("messages.validationError", { field: fieldName, message: errorList.join(", ") });
+            return t("messages.validationError", {
+              field: fieldName,
+              message: errorList.join(", "),
+            });
           },
         );
 
@@ -229,13 +232,16 @@ export function AgentForm({
       // Handle error array
       else if (Array.isArray(errorData?.errors)) {
         const firstError = errorData.errors[0];
-        toast.error(firstError?.message || firstError || t("messages.validationFailed"), {
-          description:
-            errorData.errors
-              .slice(1, 2)
-              .map((e) => e?.message || e)
-              .join("\n") || undefined,
-        });
+        toast.error(
+          firstError?.message || firstError || t("messages.validationFailed"),
+          {
+            description:
+              errorData.errors
+                .slice(1, 2)
+                .map((e) => e?.message || e)
+                .join("\n") || undefined,
+          },
+        );
       }
       // Handle single error message
       else if (errorData?.message || errorData?.error) {
@@ -243,9 +249,12 @@ export function AgentForm({
       }
       // Fallback error
       else {
-        toast.error(isEdit ? t("messages.updateError") : t("messages.createError"), {
-          description: t("messages.checkInput"),
-        });
+        toast.error(
+          isEdit ? t("messages.updateError") : t("messages.createError"),
+          {
+            description: t("messages.checkInput"),
+          },
+        );
       }
     } finally {
       setLoading(false);
@@ -276,7 +285,8 @@ export function AgentForm({
           {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name">
-              {t("form.fields.fullName")} <span className="text-red-500">{t("form.required")}</span>
+              {t("form.fields.fullName")}{" "}
+              <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
               id="name"
@@ -290,7 +300,8 @@ export function AgentForm({
           {/* Email */}
           <div className="space-y-2">
             <Label htmlFor="email">
-              {t("form.fields.emailAddress")} <span className="text-red-500">{t("form.required")}</span>
+              {t("form.fields.emailAddress")}{" "}
+              <span className="text-red-500">{t("form.required")}</span>
             </Label>
             <Input
               id="email"
@@ -331,14 +342,22 @@ export function AgentForm({
                 required={!isEdit}
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
-                placeholder={isEdit ? t("form.placeholders.passwordEdit") : t("form.placeholders.passwordCreate")}
+                placeholder={
+                  isEdit
+                    ? t("form.placeholders.passwordEdit")
+                    : t("form.placeholders.passwordCreate")
+                }
                 className="pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showPassword ? t("form.buttons.hidePassword") : t("form.buttons.showPassword")}
+                title={
+                  showPassword
+                    ? t("form.buttons.hidePassword")
+                    : t("form.buttons.showPassword")
+                }
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -364,13 +383,17 @@ export function AgentForm({
                 id="stripe_key"
                 type={showStripeKey ? "text" : "password"}
                 value={formData.stripe_secret_key}
-                onChange={(e) => handleChange("stripe_secret_key", e.target.value)}
+                onChange={(e) =>
+                  handleChange("stripe_secret_key", e.target.value)
+                }
                 placeholder={
                   isEdit && maskedStripeKey
-                    ? t("form.placeholders.stripeKeyExisting", { maskedKey: maskedStripeKey })
+                    ? t("form.placeholders.stripeKeyExisting", {
+                        maskedKey: maskedStripeKey,
+                      })
                     : isEdit
-                    ? t("form.placeholders.stripeKeyExistingGeneric")
-                    : t("form.placeholders.stripeKeyNew")
+                      ? t("form.placeholders.stripeKeyExistingGeneric")
+                      : t("form.placeholders.stripeKeyNew")
                 }
                 className="pr-10 font-mono text-sm"
               />
@@ -378,7 +401,11 @@ export function AgentForm({
                 type="button"
                 onClick={() => setShowStripeKey(!showStripeKey)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                title={showStripeKey ? t("form.buttons.hideKey") : t("form.buttons.showKey")}
+                title={
+                  showStripeKey
+                    ? t("form.buttons.hideKey")
+                    : t("form.buttons.showKey")
+                }
               >
                 {showStripeKey ? (
                   <EyeOff className="h-4 w-4" />
@@ -388,7 +415,7 @@ export function AgentForm({
               </button>
             </div>
             <p className="text-xs text-muted-foreground">
-              {isEdit 
+              {isEdit
                 ? t("form.hints.stripeKeyEdit")
                 : t("form.hints.stripeKeyCreate")}
             </p>
@@ -405,11 +432,12 @@ export function AgentForm({
             </div>
             <CardTitle>{t("form.locationDetails.title")}</CardTitle>
           </div>
-          <CardDescription>{t("form.locationDetails.description")}</CardDescription>
+          <CardDescription>
+            {t("form.locationDetails.description")}
+          </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="address">{t("form.fields.searchAddress")}</Label>
             <AddressAutocomplete
               label={t("form.fields.searchAddress")}
               name="address"
@@ -470,7 +498,9 @@ export function AgentForm({
         <CardContent>
           <div className="flex items-center justify-between p-4 rounded-lg border bg-zinc-50/50 dark:bg-zinc-800/30">
             <div className="space-y-0.5">
-              <Label className="text-base">{t("form.accountStatus.activeLabel")}</Label>
+              <Label className="text-base">
+                {t("form.accountStatus.activeLabel")}
+              </Label>
               <CardDescription>
                 {t("form.accountStatus.activeDescription")}
               </CardDescription>
@@ -482,7 +512,9 @@ export function AgentForm({
                   formData.is_active ? "text-emerald-600" : "text-zinc-500",
                 )}
               >
-                {formData.is_active ? t("form.accountStatus.active") : t("form.accountStatus.inactive")}
+                {formData.is_active
+                  ? t("form.accountStatus.active")
+                  : t("form.accountStatus.inactive")}
               </span>
               <Switch
                 checked={formData.is_active}

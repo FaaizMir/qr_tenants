@@ -137,7 +137,7 @@ export function CustomWalletTopup({ adminId, currency, onClose, onSuccess }) {
               />
             </div>
             <p className="text-xs text-muted-foreground flex items-start gap-1">
-              <Info className="h-3 w-3 mt-0.5 flex-shrink-0" />
+              <Info className="h-3 w-3 mt-0.5 shrink-0" />
               <span>{t("amountCard.hint")}</span>
             </p>
           </div>
@@ -171,7 +171,7 @@ export function CustomWalletTopup({ adminId, currency, onClose, onSuccess }) {
 
       {/* Payment Summary */}
       {balanceAmount >= 100 && (
-        <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+        <Card className="border-2 border-primary/30 bg-linear-to-br from-primary/5 to-transparent">
           <CardHeader>
             <div className="flex items-center gap-2">
               <div className="p-2 bg-primary rounded-full text-white">

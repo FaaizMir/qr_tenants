@@ -494,9 +494,6 @@ export function MerchantForm({
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="address">
-              {t("locationDetails.searchAddress")}
-            </Label>
             <AddressAutocomplete
               label="Address"
               name="address"
