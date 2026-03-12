@@ -31,6 +31,7 @@ import {
   Phone,
   MapPin,
   ShieldCheck,
+  Building2,
 } from "lucide-react";
 import { toast } from "@/lib/toast";
 import AddressAutocomplete from "@/components/address-autocomplete";
@@ -63,6 +64,7 @@ export function AgentForm({
     phone: "",
     password: "",
     stripe_secret_key: "",
+    company_name: "",
     address: "",
     city: "",
     country: "",
@@ -107,6 +109,7 @@ export function AgentForm({
             city: agent.city || "",
             country: agent.country || "",
             latitude: agent.latitude || agent.lat || "",
+            company_name: agent.company_name || "",
             longitude: agent.longitude || agent.lng || "",
             is_active:
               agent.is_active ??
@@ -149,6 +152,7 @@ export function AgentForm({
         address: initialData.address || "",
         city: initialData.city || "",
         country: initialData.country || "",
+        company_name: initialData.company_name || "",
         latitude: initialData.latitude || "",
         longitude: initialData.longitude || "",
         is_active:
@@ -177,6 +181,7 @@ export function AgentForm({
         is_active: formData.is_active,
         country: formData.country,
         city: formData.city,
+        company_name: formData.company_name,
       };
 
       // Only include password if it's provided (for create or password change)
@@ -208,23 +213,53 @@ export function AgentForm({
 
       // Handle validation errors (field-specific errors)
       if (errorData?.errors && typeof errorData.errors === "object") {
+        const translateErrorMessage = (message) => {
+          // Check for partial matches in common patterns
+          const patterns = {
+            "should not be empty": "empty",
+            "is required": "required",
+            "must be a valid email": "email",
+            "already exists": "unique",
+            "is invalid": "invalid",
+            "cannot be blank": "cannotBeBlank",
+            "is too short": "tooShort",
+            "is too long": "tooLong",
+            "must be a number": "mustBeNumber",
+            "must be a string": "mustBeString"
+          };
+          
+          for (const [pattern, key] of Object.entries(patterns)) {
+            if (message.toLowerCase().includes(pattern.toLowerCase())) {
+              return t(`validation.messages.${key}`);
+            }
+          }
+          
+          // Return original message if no pattern matches
+          return message;
+        };
+
         const errorMessages = Object.entries(errorData.errors).map(
           ([field, messages]) => {
-            const fieldName = field
+            const fieldName = t(`validation.fieldNames.${field}`) || field
               .replace(/_/g, " ")
               .replace(/\b\w/g, (c) => c.toUpperCase());
             const errorList = Array.isArray(messages) ? messages : [messages];
+            const translatedMessages = errorList
+              .filter(msg => msg && typeof msg === 'string')
+              .map(translateErrorMessage);
             return t("messages.validationError", {
               field: fieldName,
-              message: errorList.join(", "),
+              message: translatedMessages.join(", "),
             });
           },
-        );
+        ).filter(Boolean);
 
         // Display first error with details
-        toast.error(errorMessages[0], {
-          description: errorMessages.slice(1, 3).join("\n") || undefined,
-        });
+        if (errorMessages.length > 0) {
+          toast.error(errorMessages[0], {
+            description: errorMessages.slice(1, 3).join("\n") || undefined,
+          });
+        }
 
         // Log all errors for debugging
         console.error("Validation errors:", errorMessages);
@@ -419,6 +454,20 @@ export function AgentForm({
                 ? t("form.hints.stripeKeyEdit")
                 : t("form.hints.stripeKeyCreate")}
             </p>
+          </div>
+
+          {/* Company Name */}
+          <div className="space-y-2">
+            <Label htmlFor="company_name">
+              <Building2 className="h-4 w-4 inline mr-2" />
+              {t("form.fields.companyName")}
+            </Label>
+            <Input
+              id="company_name"
+              placeholder={t("form.placeholders.companyName")}
+              value={formData.company_name}
+              onChange={(e) => handleChange("company_name", e.target.value)}
+            />
           </div>
         </CardContent>
       </Card>

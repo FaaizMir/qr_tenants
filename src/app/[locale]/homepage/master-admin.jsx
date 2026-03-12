@@ -319,7 +319,7 @@ export default function MasterAdminLandingPage() {
   }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
   const handleAgentClick = (agent) => {
-    router.push(`/homepage/agent/${agent.id}`);
+    router.push(`/homepage/${agent.comapny_name}`);
   };
 
   // Filtered + paginated coupons

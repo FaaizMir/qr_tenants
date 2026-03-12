@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "เมือง",
+      "companyName": "ชื่อบริษัท",
       "country": "ประเทศ",
       "emailAddress": "ที่อยู่อีเมล",
       "fullName": "ชื่อเต็ม",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 Agent St, City, Country",
       "city": "เมือง",
+      "companyName": "กรอกชื่อบริษัท",
       "country": "ประเทศ",
       "email": "agent@example.com",
       "name": "เช่น John Doe",
@@ -144,5 +146,46 @@
     "updateError": "ไม่สามารถอัปเดตสถานะตัวแทนได้"
   },
   "subtitle": "จัดการตัวแทนและบัญชีของพวกเขา",
-  "title": "การจัดการตัวแทน"
+  "title": "การจัดการตัวแทน",
+  "validation": {
+    "fieldNames": {
+      "address": "ที่อยู่",
+      "city": "เมือง",
+      "company_name": "ชื่อบริษัท",
+      "country": "ประเทศ",
+      "email": "ที่อยู่อีเมล",
+      "name": "ชื่อเต็ม",
+      "password": "รหัสผ่าน",
+      "phone": "หมายเลขโทรศัพท์",
+      "stripe_secret_key": "รหัสลับของ Stripe"
+    },
+    "messages": {
+      "alphanumeric": "ต้องประกอบด้วยตัวอักษรและตัวเลขเท่านั้น",
+      "cannotBeBlank": "ไม่สามารถเว้นว่างได้",
+      "email": "ต้องเป็นที่อยู่อีเมลที่ถูกต้อง",
+      "empty": "ต้องไม่ว่างเปล่า",
+      "invalid": "ไม่ถูกต้อง",
+      "maxLength": "ต้องไม่เกิน {max} ตัวอักษร",
+      "minLength": "ต้องมีอย่างน้อย {min} ตัวอักษร",
+      "mustBeNumber": "ต้องเป็นหมายเลข",
+      "mustBeString": "ต้องเป็นข้อความ",
+      "phoneFormat": "ต้องเป็นหมายเลขโทรศัพท์ที่ถูกต้อง",
+      "required": "จำเป็นต้องกรอก",
+      "tooLong": "ยาวเกินไป",
+      "tooShort": "สั้นเกินไป",
+      "unique": "มีอยู่แล้ว"
+    },
+    "patterns": {
+      "already exists": "ไม่ซ้ำกัน",
+      "cannot be blank": "ไม่สามารถเว้นว่างได้",
+      "is invalid": "ไม่ถูกต้อง",
+      "is required": "จำเป็นต้องใช้",
+      "is too long": "ยาวเกินไป",
+      "is too short": "สั้นเกินไป",
+      "must be a number": "ต้องเป็นหมายเลข",
+      "must be a string": "ต้องเป็นสตริง",
+      "must be a valid email": "อีเมล",
+      "should not be empty": "ว่างเปล่า"
+    }
+  }
 }

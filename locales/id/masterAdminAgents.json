@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "Kota",
+      "companyName": "Nama Perusahaan",
       "country": "Negara",
       "emailAddress": "Alamat Email",
       "fullName": "Nama Lengkap",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 Agen St, Kota, Negara",
       "city": "Kota",
+      "companyName": "Masukkan nama perusahaan",
       "country": "Negara",
       "email": "agen@example.com",
       "name": "mis. John Doe",
@@ -144,5 +146,46 @@
     "updateError": "Gagal memperbarui status agen"
   },
   "subtitle": "Kelola agen dan akun mereka.",
-  "title": "Manajemen Agen"
+  "title": "Manajemen Agen",
+  "validation": {
+    "fieldNames": {
+      "address": "Alamat",
+      "city": "Kota",
+      "company_name": "Nama Perusahaan",
+      "country": "Negara",
+      "email": "Alamat Email",
+      "name": "Nama Lengkap",
+      "password": "Kata Sandi",
+      "phone": "Nomor Telepon",
+      "stripe_secret_key": "Kunci Rahasia Stripe"
+    },
+    "messages": {
+      "alphanumeric": "harus hanya mengandung huruf dan angka",
+      "cannotBeBlank": "tidak boleh kosong",
+      "email": "harus merupakan alamat email yang valid",
+      "empty": "tidak boleh kosong",
+      "invalid": "tidak valid",
+      "maxLength": "tidak boleh melebihi {max} karakter",
+      "minLength": "harus setidaknya {min} karakter",
+      "mustBeNumber": "harus berupa angka",
+      "mustBeString": "harus berupa teks",
+      "phoneFormat": "harus merupakan nomor telepon yang valid",
+      "required": "diperlukan",
+      "tooLong": "terlalu panjang",
+      "tooShort": "terlalu pendek",
+      "unique": "sudah ada"
+    },
+    "patterns": {
+      "already exists": "unik",
+      "cannot be blank": "tidak boleh kosong",
+      "is invalid": "tidak valid",
+      "is required": "diperlukan",
+      "is too long": "terlalu panjang",
+      "is too short": "terlalu pendek",
+      "must be a number": "harus berupa angka",
+      "must be a string": "harus berupa string",
+      "must be a valid email": "email",
+      "should not be empty": "kosong"
+    }
+  }
 }

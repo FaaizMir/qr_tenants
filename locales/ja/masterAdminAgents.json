@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "市",
+      "companyName": "会社名",
       "country": "国",
       "emailAddress": "メールアドレス",
       "fullName": "フルネーム",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 エージェント通り, 市, 国",
       "city": "市",
+      "companyName": "会社名を入力してください",
       "country": "国",
       "email": "agent@example.com",
       "name": "例: ジョン・ドー",
@@ -144,5 +146,46 @@
     "updateError": "エージェントのステータスの更新に失敗しました"
   },
   "subtitle": "エージェントとそのアカウントを管理します。",
-  "title": "エージェント管理"
+  "title": "エージェント管理",
+  "validation": {
+    "fieldNames": {
+      "address": "住所",
+      "city": "市",
+      "company_name": "会社名",
+      "country": "国",
+      "email": "メールアドレス",
+      "name": "フルネーム",
+      "password": "パスワード",
+      "phone": "電話番号",
+      "stripe_secret_key": "Stripeシークレットキー"
+    },
+    "messages": {
+      "alphanumeric": "文字と数字のみを含む必要があります",
+      "cannotBeBlank": "空白にすることはできません",
+      "email": "有効なメールアドレスでなければなりません",
+      "empty": "空であってはいけません",
+      "invalid": "無効です",
+      "maxLength": "{max}文字を超えてはいけません",
+      "minLength": "{min}文字以上でなければなりません",
+      "mustBeNumber": "数字でなければなりません",
+      "mustBeString": "テキストでなければなりません",
+      "phoneFormat": "有効な電話番号でなければなりません",
+      "required": "必須です",
+      "tooLong": "長すぎます",
+      "tooShort": "短すぎます",
+      "unique": "すでに存在します"
+    },
+    "patterns": {
+      "already exists": "ユニーク",
+      "cannot be blank": "cannotBeBlank",
+      "is invalid": "無効です",
+      "is required": "必須",
+      "is too long": "長すぎます",
+      "is too short": "短すぎます",
+      "must be a number": "mustBeNumber",
+      "must be a string": "mustBeString",
+      "must be a valid email": "メール",
+      "should not be empty": "空です"
+    }
+  }
 }

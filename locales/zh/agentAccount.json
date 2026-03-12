@@ -11,9 +11,89 @@
     "saveChanges": "保存更改",
     "saving": "保存中..."
   },
+  "errors": {
+    "business": {
+      "accountInactive": "您的账户处于非活动状态。请联系支持。",
+      "accountNotFound": "找不到账户。请联系支持。",
+      "accountSuspended": "您的帐户已被暂停。请联系支持。",
+      "adminNotFound": "未找到管理员账户。",
+      "emailAlreadyVerified": "电子邮件地址已验证。",
+      "emailNotVerified": "请在继续之前验证您的电子邮件地址。",
+      "insufficientPermissions": "您没有足够的权限执行此操作。",
+      "phoneAlreadyVerified": "电话号码已验证。",
+      "phoneNotVerified": "请在继续之前验证您的电话号码。",
+      "sessionExpired": "您的会话已过期。请重新登录。",
+      "stripeKeyInvalid": "提供的 Stripe 密钥无效或已过期。",
+      "stripeKeyLiveInDevelopment": "实时 Stripe 密钥不能在开发环境中使用。",
+      "stripeKeyTestInProduction": "测试 Stripe 密钥不能在生产环境中使用。"
+    },
+    "network": {
+      "badRequest": "无效请求。请检查您的输入。",
+      "conflict": "发生冲突。该资源可能已被其他用户修改。",
+      "connectionFailed": "连接失败。请检查您的互联网连接。",
+      "forbidden": "访问被拒绝。您没有权限访问此资源。",
+      "internalServerError": "内部服务器错误。如果问题持续，请联系支持。",
+      "notFound": "请求的资源未找到。",
+      "serverError": "发生服务器错误。请稍后再试。",
+      "timeout": "请求超时。请再试一次。",
+      "tooManyRequests": "请求过多。请稍等片刻再试。",
+      "unauthorized": "您没有权限执行此操作。"
+    },
+    "validation": {
+      "address": {
+        "invalid": "请输入有效地址",
+        "tooLong": "地址不能超过 500 个字符"
+      },
+      "city": {
+        "invalidCharacters": "城市名称只能包含字母、空格和连字符",
+        "tooLong": "城市名称不能超过100个字符",
+        "tooShort": "城市名称必须至少 2 个字符长"
+      },
+      "company_name": {
+        "alreadyExists": "该公司名称已被注册",
+        "invalidCharacters": "公司名称包含无效字符",
+        "tooLong": "公司名称不能超过200个字符",
+        "tooShort": "公司名称必须至少 2 个字符长"
+      },
+      "country": {
+        "invalidCharacters": "国家名称只能包含字母、空格和连字符",
+        "tooLong": "国家名称不能超过 100 个字符",
+        "tooShort": "国家名称必须至少包含 2 个字符"
+      },
+      "email": {
+        "alreadyExists": "该电子邮件地址已被注册",
+        "empty": "电子邮件地址不能为空",
+        "invalid": "请输入有效的电子邮件地址",
+        "required": "电子邮件地址是必需的",
+        "tooLong": "电子邮件地址不能超过 255 个字符"
+      },
+      "name": {
+        "empty": "全名不能为空",
+        "invalidCharacters": "全名只能包含字母、空格和连字符",
+        "required": "全名是必需的",
+        "tooLong": "全名不能超过100个字符",
+        "tooShort": "全名必须至少 2 个字符长"
+      },
+      "phone": {
+        "alreadyExists": "此电话号码已注册",
+        "invalid": "请输入有效的电话号码",
+        "invalidFormat": "电话号码格式无效",
+        "tooLong": "电话号码过长",
+        "tooShort": "电话号码太短"
+      },
+      "stripe_secret_key": {
+        "alreadyExists": "此 Stripe 密钥已在使用中",
+        "invalid": "无效的Stripe密钥格式",
+        "invalidPrefix": "Stripe 秘钥必须以 'sk_test_' 或 'sk_live_' 开头",
+        "tooLong": "Stripe 秘钥过长",
+        "tooShort": "Stripe 秘密密钥太短"
+      }
+    }
+  },
   "fields": {
     "address": "地址",
     "city": "城市",
+    "companyName": "公司名称",
     "country": "国家",
     "email": "电子邮件",
     "fullName": "全名",
@@ -32,6 +112,7 @@
   "placeholders": {
     "address": "开始输入地址...",
     "city": "输入您的城市",
+    "companyName": "输入您的公司名称",
     "country": "输入您的国家",
     "email": "输入您的电子邮件",
     "name": "输入您的姓名",
@@ -46,5 +127,45 @@
     "title": "个人资料"
   },
   "subtitle": "管理您的帐户信息",
-  "title": "帐户设置"
+  "title": "帐户设置",
+  "validation": {
+    "fieldNames": {
+      "address": "地址",
+      "city": "城市",
+      "company_name": "公司名称",
+      "country": "国家",
+      "email": "电子邮件地址",
+      "name": "全名",
+      "phone": "电话号码",
+      "stripe_secret_key": "Stripe 秘钥"
+    },
+    "messages": {
+      "alphanumeric": "必须仅包含字母和数字",
+      "cannotBeBlank": "不能为空",
+      "email": "必须是有效的电子邮件地址",
+      "empty": "不应为空",
+      "invalid": "无效",
+      "maxLength": "不得超过 {max} 个字符",
+      "minLength": "必须至少 {min} 个字符",
+      "mustBeNumber": "必须是一个数字",
+      "mustBeString": "必须是文本",
+      "phoneFormat": "必须是有效的电话号码",
+      "required": "是必需的",
+      "tooLong": "太长了",
+      "tooShort": "太短了",
+      "unique": "已存在"
+    },
+    "patterns": {
+      "already exists": "唯一",
+      "cannot be blank": "不能为空",
+      "is invalid": "无效",
+      "is required": "必填",
+      "is too long": "太长了",
+      "is too short": "太短了",
+      "must be a number": "必须是数字",
+      "must be a string": "必须是字符串",
+      "must be a valid email": "电子邮件",
+      "should not be empty": "空的"
+    }
+  }
 }

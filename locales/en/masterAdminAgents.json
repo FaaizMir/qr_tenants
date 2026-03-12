@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "City",
+      "companyName": "Company Name",
       "country": "Country",
       "emailAddress": "Email Address",
       "fullName": "Full Name",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 Agent St, City, Country",
       "city": "City",
+      "companyName": "Enter company name",
       "country": "Country",
       "email": "agent@example.com",
       "name": "e.g. John Doe",
@@ -144,5 +146,46 @@
     "updateError": "Failed to update agent status"
   },
   "subtitle": "Manage your agents and their accounts.",
-  "title": "Agent Management"
+  "title": "Agent Management",
+  "validation": {
+    "fieldNames": {
+      "address": "Address",
+      "city": "City",
+      "company_name": "Company Name",
+      "country": "Country",
+      "email": "Email Address",
+      "name": "Full Name",
+      "password": "Password",
+      "phone": "Phone Number",
+      "stripe_secret_key": "Stripe Secret Key"
+    },
+    "messages": {
+      "alphanumeric": "must contain only letters and numbers",
+      "cannotBeBlank": "cannot be blank",
+      "email": "must be a valid email address",
+      "empty": "should not be empty",
+      "invalid": "is invalid",
+      "maxLength": "must not exceed {max} characters",
+      "minLength": "must be at least {min} characters",
+      "mustBeNumber": "must be a number",
+      "mustBeString": "must be text",
+      "phoneFormat": "must be a valid phone number",
+      "required": "is required",
+      "tooLong": "is too long",
+      "tooShort": "is too short",
+      "unique": "already exists"
+    },
+    "patterns": {
+      "already exists": "unique",
+      "cannot be blank": "cannotBeBlank",
+      "is invalid": "invalid",
+      "is required": "required",
+      "is too long": "tooLong",
+      "is too short": "tooShort",
+      "must be a number": "mustBeNumber",
+      "must be a string": "mustBeString",
+      "must be a valid email": "email",
+      "should not be empty": "empty"
+    }
+  }
 }
