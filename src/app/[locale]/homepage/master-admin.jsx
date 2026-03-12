@@ -196,6 +196,7 @@ export default function MasterAdminLandingPage() {
                 : t("status.inactive"),
             joined: new Date().toLocaleDateString(),
             merchantsCount: agent.merchants?.length || 0,
+            company_name: agent.company_name || t("fallback.unknownAgent"),
           }));
 
         if (reset) {
@@ -319,7 +320,7 @@ export default function MasterAdminLandingPage() {
   }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
   const handleAgentClick = (agent) => {
-    router.push(`/homepage/${agent.comapny_name}`);
+    router.push(`/homepage/${agent.company_name}`);
   };
 
   // Filtered + paginated coupons
