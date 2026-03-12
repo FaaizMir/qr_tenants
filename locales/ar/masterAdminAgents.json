@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "المدينة",
+      "companyName": "اسم الشركة",
       "country": "البلد",
       "emailAddress": "عنوان البريد الإلكتروني",
       "fullName": "الاسم الكامل",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 شارع الوكيل، المدينة، الدولة",
       "city": "المدينة",
+      "companyName": "أدخل اسم الشركة",
       "country": "البلد",
       "email": "agent@example.com",
       "name": "مثل: جون دو",
@@ -144,5 +146,46 @@
     "updateError": "فشل في تحديث حالة الوكيل"
   },
   "subtitle": "إدارة وكلائك وحساباتهم.",
-  "title": "إدارة الوكلاء"
+  "title": "إدارة الوكلاء",
+  "validation": {
+    "fieldNames": {
+      "address": "العنوان",
+      "city": "المدينة",
+      "company_name": "اسم الشركة",
+      "country": "البلد",
+      "email": "عنوان البريد الإلكتروني",
+      "name": "الاسم الكامل",
+      "password": "كلمة المرور",
+      "phone": "رقم الهاتف",
+      "stripe_secret_key": "مفتاح سري لسترايب"
+    },
+    "messages": {
+      "alphanumeric": "يجب أن يحتوي على أحرف وأرقام فقط",
+      "cannotBeBlank": "لا يمكن أن يكون فارغاً",
+      "email": "يجب أن يكون عنوان بريد إلكتروني صالحًا",
+      "empty": "يجب ألا يكون فارغًا",
+      "invalid": "غير صالح",
+      "maxLength": "يجب ألا يتجاوز {max} حرفًا",
+      "minLength": "يجب أن يكون على الأقل {min} حرفًا",
+      "mustBeNumber": "يجب أن يكون رقماً",
+      "mustBeString": "يجب أن يكون نصاً",
+      "phoneFormat": "يجب أن يكون رقم هاتف صالحًا",
+      "required": "مطلوب",
+      "tooLong": "طويل جداً",
+      "tooShort": "قصير جداً",
+      "unique": "موجود بالفعل"
+    },
+    "patterns": {
+      "already exists": "فريد",
+      "cannot be blank": "لا يمكن أن يكون فارغاً",
+      "is invalid": "غير صالح",
+      "is required": "مطلوب",
+      "is too long": "طويل جداً",
+      "is too short": "قصير جداً",
+      "must be a number": "يجب أن يكون رقماً",
+      "must be a string": "يجب أن يكون نصاً",
+      "must be a valid email": "البريد الإلكتروني",
+      "should not be empty": "فارغ"
+    }
+  }
 }

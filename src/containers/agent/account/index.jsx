@@ -53,6 +53,7 @@ export default function AgentAccountContainer() {
     avatar: "",
     hasStripeKey: false,
     stripeSecretKey: "",
+    company_name: "",
   });
 
   useEffect(() => {
@@ -85,6 +86,7 @@ export default function AgentAccountContainer() {
           avatar: data.user?.avatar || "",
           hasStripeKey: data.has_stripe_key || false,
           stripeSecretKey: data.stripe_key_masked || "",
+          company_name: data.company_name || "",
         });
       } catch (error) {
         console.error("Failed to fetch account data:", error);
@@ -92,20 +94,183 @@ export default function AgentAccountContainer() {
         // Handle fetch errors
         if (error.response?.data?.errors) {
           const errors = error.response.data.errors;
+
+          const translateErrorMessage = (field, message) => {
+            if (!message || typeof message !== 'string') {
+              return message;
+            }
+
+            // Enhanced pattern matching for common validation errors
+            const patterns = {
+              "should not be empty": "empty",
+              "cannot be empty": "empty",
+              "is required": "required",
+              "required": "required",
+              "must be a valid email": "email",
+              "invalid email": "email",
+              "email is invalid": "email",
+              "already exists": "unique",
+              "already registered": "unique",
+              "already in use": "unique",
+              "is invalid": "invalid",
+              "invalid": "invalid",
+              "cannot be blank": "cannotBeBlank",
+              "is too short": "tooShort",
+              "too short": "tooShort",
+              "is too long": "tooLong",
+              "too long": "tooLong",
+              "must be a number": "mustBeNumber",
+              "must be a string": "mustBeString",
+              "invalid format": "invalidFormat",
+              "invalid characters": "invalidCharacters",
+              "must be at least": "tooShort",
+              "cannot exceed": "tooLong",
+              "must not exceed": "tooLong"
+            };
+
+            // Check for exact field-specific patterns first
+            const lowerMessage = message.toLowerCase();
+            for (const [pattern, key] of Object.entries(patterns)) {
+              if (lowerMessage.includes(pattern.toLowerCase())) {
+                // Try field-specific translation first with safe fallback
+                try {
+                  const fieldSpecificTranslation = t(`errors.validation.${field}.${key}`, { defaultValue: null });
+                  if (fieldSpecificTranslation) {
+                    return fieldSpecificTranslation;
+                  }
+                } catch (e) {
+                  // Continue to general validation message
+                }
+                
+                // Fall back to general validation message with safe fallback
+                try {
+                  const generalTranslation = t(`validation.messages.${key}`, { defaultValue: null });
+                  if (generalTranslation) {
+                    return generalTranslation;
+                  }
+                } catch (e) {
+                  // Continue to return original message
+                }
+              }
+            }
+
+            return message;
+          };
+
           Object.keys(errors).forEach((field) => {
             const messages = Array.isArray(errors[field])
               ? errors[field]
               : [errors[field]];
+            
+            let fieldName;
+            try {
+              fieldName = t(`validation.fieldNames.${field}`) || field;
+            } catch (e) {
+              fieldName = field;
+            }
+            
             messages.forEach((msg) => {
-              toast.error(
-                t("messages.validationError", { field, message: msg }),
-              );
+              if (msg && typeof msg === "string") {
+                const translatedMessage = translateErrorMessage(field, msg);
+                try {
+                  toast.error(
+                    t("messages.validationError", {
+                      field: fieldName,
+                      message: translatedMessage,
+                    }),
+                  );
+                } catch (e) {
+                  // Fallback to simple error message
+                  toast.error(`${fieldName}: ${translatedMessage}`);
+                }
+              }
             });
           });
         } else if (error.response?.data?.message) {
-          toast.error(error.response.data.message);
+          // Handle business logic errors
+          const errorMessage = error.response.data.message;
+          const statusCode = error.response?.status;
+          
+          // Try to translate common business errors with safe fallback
+          try {
+            const businessErrorKey = `errors.business.${errorMessage.toLowerCase().replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '')}`;
+            const businessTranslation = t(businessErrorKey, { defaultValue: null });
+            
+            if (businessTranslation) {
+              toast.error(businessTranslation);
+              return;
+            }
+          } catch (e) {
+            // Continue to network error handling
+          }
+
+          // Try network error translations based on status code
+          let networkErrorKey = null;
+          switch (statusCode) {
+            case 400:
+              networkErrorKey = "errors.network.badRequest";
+              break;
+            case 401:
+              networkErrorKey = "errors.network.unauthorized";
+              break;
+            case 403:
+              networkErrorKey = "errors.network.forbidden";
+              break;
+            case 404:
+              networkErrorKey = "errors.network.notFound";
+              break;
+            case 409:
+              networkErrorKey = "errors.network.conflict";
+              break;
+            case 429:
+              networkErrorKey = "errors.network.tooManyRequests";
+              break;
+            case 500:
+              networkErrorKey = "errors.network.internalServerError";
+              break;
+            case 502:
+              networkErrorKey = "errors.network.badGateway";
+              break;
+            case 503:
+              networkErrorKey = "errors.network.serviceUnavailable";
+              break;
+            case 504:
+              networkErrorKey = "errors.network.gatewayTimeout";
+              break;
+            default:
+              networkErrorKey = "errors.network.serverError";
+          }
+          
+          try {
+            if (networkErrorKey) {
+              toast.error(t(networkErrorKey));
+            } else {
+              toast.error(errorMessage);
+            }
+          } catch (e) {
+            toast.error(errorMessage);
+          }
         } else {
-          toast.error(t("messages.fetchError"));
+          // Handle network errors
+          if (error.code === 'ECONNABORTED') {
+            try {
+              toast.error(t("errors.network.timeout"));
+            } catch (e) {
+              toast.error("Request timed out. Please try again.");
+            }
+          } else if (error.message === 'Network Error') {
+            try {
+              toast.error(t("errors.network.connectionFailed"));
+            } catch (e) {
+              toast.error("Connection failed. Please check your internet connection.");
+            }
+          } else {
+            try {
+              toast.error(t("messages.fetchError"));
+            } catch (e) {
+              toast.error("Failed to load account information");
+            }
+          }
         }
       } finally {
         setLoading(false);
@@ -146,6 +311,7 @@ export default function AgentAccountContainer() {
         address: accountData.address,
         city: accountData.city,
         country: accountData.country,
+        company_name: accountData.company_name,
       };
 
       // Only include stripe_secret_key if it's been changed (not the masked value)
@@ -168,32 +334,239 @@ export default function AgentAccountContainer() {
         },
       });
 
-      toast.success(t("messages.updateSuccess"));
+      try {
+        toast.success(t("messages.updateSuccess"));
+      } catch (e) {
+        toast.success("Account updated successfully");
+      }
     } catch (error) {
       console.error("Failed to update account:", error);
 
       // Handle validation errors
       if (error.response?.data?.errors) {
         const errors = error.response.data.errors;
+        
+        const translateErrorMessage = (field, message) => {
+          if (!message || typeof message !== 'string') {
+            return message;
+          }
+
+          // Enhanced pattern matching for common validation errors
+          const patterns = {
+            "should not be empty": "empty",
+            "cannot be empty": "empty",
+            "is required": "required",
+            "required": "required",
+            "must be a valid email": "email",
+            "invalid email": "email",
+            "email is invalid": "email",
+            "already exists": "unique",
+            "already registered": "unique",
+            "already in use": "unique",
+            "is invalid": "invalid",
+            "invalid": "invalid",
+            "cannot be blank": "cannotBeBlank",
+            "is too short": "tooShort",
+            "too short": "tooShort",
+            "is too long": "tooLong",
+            "too long": "tooLong",
+            "must be a number": "mustBeNumber",
+            "must be a string": "mustBeString",
+            "invalid format": "invalidFormat",
+            "invalid characters": "invalidCharacters",
+            "must be at least": "tooShort",
+            "cannot exceed": "tooLong",
+            "must not exceed": "tooLong"
+          };
+
+          // Check for exact field-specific patterns first
+          const lowerMessage = message.toLowerCase();
+          for (const [pattern, key] of Object.entries(patterns)) {
+            if (lowerMessage.includes(pattern.toLowerCase())) {
+              // Try field-specific translation first with safe fallback
+              try {
+                const fieldSpecificTranslation = t(`errors.validation.${field}.${key}`, { defaultValue: null });
+                if (fieldSpecificTranslation) {
+                  return fieldSpecificTranslation;
+                }
+              } catch (e) {
+                // Continue to general validation message
+              }
+              
+              // Fall back to general validation message with safe fallback
+              try {
+                const generalTranslation = t(`validation.messages.${key}`, { defaultValue: null });
+                if (generalTranslation) {
+                  return generalTranslation;
+                }
+              } catch (e) {
+                // Continue to return original message
+              }
+            }
+          }
+
+          return message;
+        };
+
         // Display all validation errors
         Object.keys(errors).forEach((field) => {
           const messages = Array.isArray(errors[field])
             ? errors[field]
             : [errors[field]];
+          
+          let fieldName;
+          try {
+            fieldName = t(`validation.fieldNames.${field}`) || field;
+          } catch (e) {
+            fieldName = field;
+          }
+          
           messages.forEach((msg) => {
-            toast.error(t("messages.validationError", { field, message: msg }));
+            if (msg && typeof msg === "string") {
+              const translatedMessage = translateErrorMessage(field, msg);
+              try {
+                toast.error(
+                  t("messages.validationError", {
+                    field: fieldName,
+                    message: translatedMessage,
+                  }),
+                );
+              } catch (e) {
+                // Fallback to simple error message
+                toast.error(`${fieldName}: ${translatedMessage}`);
+              }
+            }
           });
         });
       } else if (error.response?.data?.message) {
-        // Display single error message
-        toast.error(error.response.data.message);
+        // Handle business logic errors
+        const errorMessage = error.response.data.message;
+        const statusCode = error.response?.status;
+        
+        // Try to translate common business errors with predefined patterns
+        const businessErrorPatterns = {
+          "account not found": "accountNotFound",
+          "account suspended": "accountSuspended", 
+          "account inactive": "accountInactive",
+          "admin not found": "adminNotFound",
+          "insufficient permissions": "insufficientPermissions",
+          "session expired": "sessionExpired",
+          "stripe key invalid": "stripeKeyInvalid",
+          "invalid stripe key": "stripeKeyInvalid",
+          "stripe key test in production": "stripeKeyTestInProduction",
+          "stripe key live in development": "stripeKeyLiveInDevelopment",
+          "key must start with sk_test_": "stripeKeyInvalid",
+          "key must start with sk_live_": "stripeKeyInvalid",
+          "must start with sk_": "stripeKeyInvalid",
+          "invalid stripe secret key format": "stripeKeyInvalid",
+          "email already verified": "emailAlreadyVerified",
+          "email not verified": "emailNotVerified",
+          "phone already verified": "phoneAlreadyVerified",
+          "phone not verified": "phoneNotVerified",
+          "account locked": "accountLocked",
+          "maintenance mode": "maintenanceMode",
+          "quota exceeded": "quotaExceeded",
+          "invalid credentials": "invalidCredentials",
+          "token expired": "tokenExpired",
+          "duplicate entry": "duplicateEntry",
+          "resource not found": "resourceNotFound",
+          "operation not allowed": "operationNotAllowed",
+          "data integrity error": "dataIntegrityError"
+        };
+
+        let businessTranslated = false;
+        const lowerErrorMessage = errorMessage.toLowerCase();
+        
+        for (const [pattern, key] of Object.entries(businessErrorPatterns)) {
+          if (lowerErrorMessage.includes(pattern)) {
+            try {
+              const businessTranslation = t(`errors.business.${key}`, { defaultValue: null });
+              if (businessTranslation) {
+                toast.error(businessTranslation);
+                businessTranslated = true;
+                break;
+              }
+            } catch (e) {
+              // Continue to next pattern
+            }
+          }
+        }
+        
+        if (businessTranslated) {
+          return;
+        }
+        
+        // Try network error translations based on status code
+        let networkErrorKey = null;
+        switch (statusCode) {
+          case 400:
+            networkErrorKey = "errors.network.badRequest";
+            break;
+          case 401:
+            networkErrorKey = "errors.network.unauthorized";
+            break;
+          case 403:
+            networkErrorKey = "errors.network.forbidden";
+            break;
+          case 404:
+            networkErrorKey = "errors.network.notFound";
+            break;
+          case 409:
+            networkErrorKey = "errors.network.conflict";
+            break;
+          case 429:
+            networkErrorKey = "errors.network.tooManyRequests";
+            break;
+          case 500:
+            networkErrorKey = "errors.network.internalServerError";
+            break;
+          case 502:
+            networkErrorKey = "errors.network.badGateway";
+            break;
+          case 503:
+            networkErrorKey = "errors.network.serviceUnavailable";
+            break;
+          case 504:
+            networkErrorKey = "errors.network.gatewayTimeout";
+            break;
+          default:
+            networkErrorKey = "errors.network.serverError";
+        }
+        
+        try {
+          if (networkErrorKey) {
+            toast.error(t(networkErrorKey));
+          } else {
+            toast.error(errorMessage);
+          }
+        } catch (e) {
+          toast.error(errorMessage);
+        }
       } else {
-        // Fallback error message
-        toast.error(t("messages.updateError"));
+        // Handle network errors
+        if (error.code === 'ECONNABORTED') {
+          try {
+            toast.error(t("errors.network.timeout"));
+          } catch (e) {
+            toast.error("Request timed out. Please try again.");
+          }
+        } else if (error.message === 'Network Error') {
+          try {
+            toast.error(t("errors.network.connectionFailed"));
+          } catch (e) {
+            toast.error("Connection failed. Please check your internet connection.");
+          }
+        } else {
+          try {
+            toast.error(t("messages.updateError"));
+          } catch (e) {
+            toast.error("Failed to update account");
+          }
+        }
       }
     } finally {
       setSaving(false);
-    }
+    }  
   };
 
   if (loading) {
@@ -303,6 +676,21 @@ export default function AgentAccountContainer() {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="company_name">
+                  <Building2 className="h-4 w-4 inline mr-2" />
+                  {t("fields.companyName")}
+                </Label>
+                <Input
+                  id="company_name"
+                  value={accountData.company_name}
+                  onChange={(e) =>
+                    handleInputChange("company_name", e.target.value)
+                  }
+                  placeholder={t("placeholders.companyName")}
+                />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="city">
                   <Building2 className="h-4 w-4 inline mr-2" />
                   {t("fields.city")}
@@ -355,7 +743,11 @@ export default function AgentAccountContainer() {
                 )}
               </div>
 
-              <div className="space-y-2 md:col-span-2">
+              <div className="space-y-2">
+                <Label>
+                  <MapPin className="h-4 w-4 inline mr-2" />
+                  {t("fields.address")}
+                </Label>
                 <AddressAutocomplete
                   label={t("fields.address")}
                   name="address"

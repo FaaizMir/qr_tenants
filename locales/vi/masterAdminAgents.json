@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "Thành phố",
+      "companyName": "Tên công ty",
       "country": "Quốc gia",
       "emailAddress": "Địa chỉ email",
       "fullName": "Họ và tên",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 Đại lý St, Thành phố, Quốc gia",
       "city": "Thành phố",
+      "companyName": "Nhập tên công ty",
       "country": "Quốc gia",
       "email": "agent@example.com",
       "name": "vd. John Doe",
@@ -144,5 +146,46 @@
     "updateError": "Cập nhật trạng thái đại lý không thành công"
   },
   "subtitle": "Quản lý các đại lý và tài khoản của họ.",
-  "title": "Quản lý đại lý"
+  "title": "Quản lý đại lý",
+  "validation": {
+    "fieldNames": {
+      "address": "Địa chỉ",
+      "city": "Thành phố",
+      "company_name": "Tên công ty",
+      "country": "Quốc gia",
+      "email": "Địa chỉ email",
+      "name": "Họ và tên",
+      "password": "Mật khẩu",
+      "phone": "Số điện thoại",
+      "stripe_secret_key": "Khóa bí mật Stripe"
+    },
+    "messages": {
+      "alphanumeric": "phải chỉ chứa chữ cái và số",
+      "cannotBeBlank": "không được để trống",
+      "email": "phải là một địa chỉ email hợp lệ",
+      "empty": "không được để trống",
+      "invalid": "không hợp lệ",
+      "maxLength": "không được vượt quá {max} ký tự",
+      "minLength": "phải có ít nhất {min} ký tự",
+      "mustBeNumber": "phải là một số",
+      "mustBeString": "phải là văn bản",
+      "phoneFormat": "phải là một số điện thoại hợp lệ",
+      "required": "là bắt buộc",
+      "tooLong": "quá dài",
+      "tooShort": "quá ngắn",
+      "unique": "đã tồn tại"
+    },
+    "patterns": {
+      "already exists": "duy nhất",
+      "cannot be blank": "không thể để trống",
+      "is invalid": "không hợp lệ",
+      "is required": "bắt buộc",
+      "is too long": "quá dài",
+      "is too short": "quá ngắn",
+      "must be a number": "phải là số",
+      "must be a string": "phải là chuỗi",
+      "must be a valid email": "email",
+      "should not be empty": "trống"
+    }
+  }
 }

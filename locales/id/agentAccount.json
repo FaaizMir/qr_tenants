@@ -11,9 +11,89 @@
     "saveChanges": "Simpan Perubahan",
     "saving": "Menyimpan..."
   },
+  "errors": {
+    "business": {
+      "accountInactive": "Akun Anda tidak aktif. Silakan hubungi dukungan.",
+      "accountNotFound": "Akun tidak ditemukan. Silakan hubungi dukungan.",
+      "accountSuspended": "Akun Anda telah ditangguhkan. Silakan hubungi dukungan.",
+      "adminNotFound": "Akun admin tidak ditemukan.",
+      "emailAlreadyVerified": "Alamat email sudah diverifikasi.",
+      "emailNotVerified": "Silakan verifikasi alamat email Anda sebelum melanjutkan.",
+      "insufficientPermissions": "Anda tidak memiliki izin yang cukup untuk melakukan tindakan ini.",
+      "phoneAlreadyVerified": "Nomor telepon sudah diverifikasi.",
+      "phoneNotVerified": "Silakan verifikasi nomor telepon Anda sebelum melanjutkan.",
+      "sessionExpired": "Sesi Anda telah kedaluwarsa. Silakan masuk lagi.",
+      "stripeKeyInvalid": "Kunci Stripe yang diberikan tidak valid atau telah kedaluwarsa.",
+      "stripeKeyLiveInDevelopment": "Kunci Stripe langsung tidak dapat digunakan di lingkungan pengembangan.",
+      "stripeKeyTestInProduction": "Kunci Stripe uji tidak dapat digunakan di lingkungan produksi."
+    },
+    "network": {
+      "badRequest": "Permintaan tidak valid. Silakan periksa input Anda.",
+      "conflict": "Terjadi konflik. Sumber daya mungkin telah dimodifikasi oleh pengguna lain.",
+      "connectionFailed": "Koneksi gagal. Silakan periksa koneksi internet Anda.",
+      "forbidden": "Akses ditolak. Anda tidak memiliki izin untuk mengakses sumber daya ini.",
+      "internalServerError": "Kesalahan server internal. Silakan hubungi dukungan jika ini berlanjut.",
+      "notFound": "Sumber daya yang diminta tidak ditemukan.",
+      "serverError": "Terjadi kesalahan server. Silakan coba lagi nanti.",
+      "timeout": "Permintaan telah habis waktu. Silakan coba lagi.",
+      "tooManyRequests": "Terlalu banyak permintaan. Silakan tunggu sebentar dan coba lagi.",
+      "unauthorized": "Anda tidak diizinkan untuk melakukan tindakan ini."
+    },
+    "validation": {
+      "address": {
+        "invalid": "Silakan masukkan alamat yang valid",
+        "tooLong": "Alamat tidak boleh melebihi 500 karakter"
+      },
+      "city": {
+        "invalidCharacters": "Nama kota hanya boleh mengandung huruf, spasi, dan tanda hubung",
+        "tooLong": "Nama kota tidak boleh melebihi 100 karakter",
+        "tooShort": "Nama kota harus terdiri dari setidaknya 2 karakter"
+      },
+      "company_name": {
+        "alreadyExists": "Nama perusahaan ini sudah terdaftar",
+        "invalidCharacters": "Nama perusahaan mengandung karakter yang tidak valid",
+        "tooLong": "Nama perusahaan tidak boleh melebihi 200 karakter",
+        "tooShort": "Nama perusahaan harus terdiri dari setidaknya 2 karakter"
+      },
+      "country": {
+        "invalidCharacters": "Nama negara hanya boleh mengandung huruf, spasi, dan tanda hubung",
+        "tooLong": "Nama negara tidak boleh melebihi 100 karakter",
+        "tooShort": "Nama negara harus terdiri dari setidaknya 2 karakter"
+      },
+      "email": {
+        "alreadyExists": "Alamat email ini sudah terdaftar",
+        "empty": "Alamat email tidak boleh kosong",
+        "invalid": "Silakan masukkan alamat email yang valid",
+        "required": "Alamat email diperlukan",
+        "tooLong": "Alamat email tidak boleh melebihi 255 karakter"
+      },
+      "name": {
+        "empty": "Nama lengkap tidak boleh kosong",
+        "invalidCharacters": "Nama lengkap hanya boleh mengandung huruf, spasi, dan tanda hubung",
+        "required": "Nama lengkap diperlukan",
+        "tooLong": "Nama lengkap tidak boleh melebihi 100 karakter",
+        "tooShort": "Nama lengkap harus terdiri dari setidaknya 2 karakter"
+      },
+      "phone": {
+        "alreadyExists": "Nomor telepon ini sudah terdaftar",
+        "invalid": "Silakan masukkan nomor telepon yang valid",
+        "invalidFormat": "Format nomor telepon tidak valid",
+        "tooLong": "Nomor telepon terlalu panjang",
+        "tooShort": "Nomor telepon terlalu pendek"
+      },
+      "stripe_secret_key": {
+        "alreadyExists": "Kunci Stripe ini sudah digunakan",
+        "invalid": "Format kunci rahasia Stripe tidak valid",
+        "invalidPrefix": "Kunci rahasia Stripe harus diawali dengan 'sk_test_' atau 'sk_live_'",
+        "tooLong": "Kunci rahasia Stripe terlalu panjang",
+        "tooShort": "Kunci rahasia Stripe terlalu pendek"
+      }
+    }
+  },
   "fields": {
     "address": "Alamat",
     "city": "Kota",
+    "companyName": "Nama Perusahaan",
     "country": "Negara",
     "email": "Email",
     "fullName": "Nama Lengkap",
@@ -32,6 +112,7 @@
   "placeholders": {
     "address": "Mulai mengetik alamat...",
     "city": "Masukkan kota Anda",
+    "companyName": "Masukkan nama perusahaan Anda",
     "country": "Masukkan negara Anda",
     "email": "Masukkan email Anda",
     "name": "Masukkan nama Anda",
@@ -46,5 +127,45 @@
     "title": "Profil"
   },
   "subtitle": "Kelola informasi akun Anda",
-  "title": "Pengaturan Akun"
+  "title": "Pengaturan Akun",
+  "validation": {
+    "fieldNames": {
+      "address": "Alamat",
+      "city": "Kota",
+      "company_name": "Nama Perusahaan",
+      "country": "Negara",
+      "email": "Alamat Email",
+      "name": "Nama Lengkap",
+      "phone": "Nomor Telepon",
+      "stripe_secret_key": "Kunci Rahasia Stripe"
+    },
+    "messages": {
+      "alphanumeric": "harus hanya berisi huruf dan angka",
+      "cannotBeBlank": "tidak boleh kosong",
+      "email": "harus berupa alamat email yang valid",
+      "empty": "tidak boleh kosong",
+      "invalid": "tidak valid",
+      "maxLength": "tidak boleh melebihi {max} karakter",
+      "minLength": "harus setidaknya {min} karakter",
+      "mustBeNumber": "harus berupa angka",
+      "mustBeString": "harus berupa teks",
+      "phoneFormat": "harus berupa nomor telepon yang valid",
+      "required": "diperlukan",
+      "tooLong": "terlalu panjang",
+      "tooShort": "terlalu pendek",
+      "unique": "sudah ada"
+    },
+    "patterns": {
+      "already exists": "unik",
+      "cannot be blank": "tidak boleh kosong",
+      "is invalid": "tidak valid",
+      "is required": "diperlukan",
+      "is too long": "terlalu panjang",
+      "is too short": "terlalu pendek",
+      "must be a number": "harus berupa angka",
+      "must be a string": "harus berupa string",
+      "must be a valid email": "email",
+      "should not be empty": "kosong"
+    }
+  }
 }

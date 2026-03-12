@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "Bandar",
+      "companyName": "Nama Syarikat",
       "country": "Negara",
       "emailAddress": "Alamat Emel",
       "fullName": "Nama Penuh",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 Ejen St, Bandar, Negara",
       "city": "Bandar",
+      "companyName": "Masukkan nama syarikat",
       "country": "Negara",
       "email": "agent@example.com",
       "name": "cth. John Doe",
@@ -144,5 +146,46 @@
     "updateError": "Gagal mengemas kini status ejen"
   },
   "subtitle": "Urus ejen dan akaun mereka.",
-  "title": "Pengurusan Ejen"
+  "title": "Pengurusan Ejen",
+  "validation": {
+    "fieldNames": {
+      "address": "Alamat",
+      "city": "Bandar",
+      "company_name": "Nama Syarikat",
+      "country": "Negara",
+      "email": "Alamat Emel",
+      "name": "Nama Penuh",
+      "password": "Kata Laluan",
+      "phone": "Nombor Telefon",
+      "stripe_secret_key": "Kunci Rahsia Stripe"
+    },
+    "messages": {
+      "alphanumeric": "mestilah mengandungi hanya huruf dan nombor",
+      "cannotBeBlank": "tidak boleh kosong",
+      "email": "mestilah alamat emel yang sah",
+      "empty": "tidak boleh kosong",
+      "invalid": "tidak sah",
+      "maxLength": "tidak boleh melebihi {max} aksara",
+      "minLength": "mestilah sekurang-kurangnya {min} aksara",
+      "mustBeNumber": "mestilah nombor",
+      "mustBeString": "mestilah teks",
+      "phoneFormat": "mestilah nombor telefon yang sah",
+      "required": "diperlukan",
+      "tooLong": "terlalu panjang",
+      "tooShort": "terlalu pendek",
+      "unique": "sudah wujud"
+    },
+    "patterns": {
+      "already exists": "unik",
+      "cannot be blank": "tidakBolehKosong",
+      "is invalid": "tidak sah",
+      "is required": "diperlukan",
+      "is too long": "terlaluPanjang",
+      "is too short": "terlaluPendek",
+      "must be a number": "mestilahNombor",
+      "must be a string": "mestilahString",
+      "must be a valid email": "emel",
+      "should not be empty": "kosong"
+    }
+  }
 }
