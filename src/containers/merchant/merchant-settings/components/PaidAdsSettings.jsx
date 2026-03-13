@@ -94,6 +94,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const [loadingBookedDates, setLoadingBookedDates] = useState(false);
   const [dateConflictWarning, setDateConflictWarning] = useState("");
   const [conflictingBookedDates, setConflictingBookedDates] = useState([]);
+  const [agentAdLock, setAgentAdLock] = useState({
+    locked: false,
+    message: "",
+  });
 
   // Fetch true state from API on mount
   useEffect(() => {
@@ -161,6 +165,71 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
     fetchSuperadminDuration();
   }, [isSuperadminMode]);
+
+  useEffect(() => {
+    if (!merchantId || isSuperadminMode) {
+      setAgentAdLock({ locked: false, message: "" });
+      return;
+    }
+
+    const fetchAgentAdLockState = async () => {
+      try {
+        const response = await axiosInstance.get(`/approvals/merchant/${merchantId}`);
+        const approvals = Array.isArray(response?.data)
+          ? response.data
+          : Array.isArray(response?.data?.data)
+            ? response.data.data
+            : [];
+
+        const now = new Date();
+        const pendingStatuses = [
+          "pending",
+          "pending_agent_review",
+          "forwarded_to_superadmin",
+          "approved_pending_payment",
+          "payment_completed_scheduled",
+          "payment_completed_active",
+        ];
+
+        const lockApproval = approvals.find((approval) => {
+          if (approval?.approval_type !== "paid_ad") return false;
+
+          const status = String(approval?.approval_status || "").toLowerCase();
+
+          if (pendingStatuses.includes(status)) {
+            return true;
+          }
+
+          if (status === "approved") {
+            if (!approval?.ad_expired_at) return true;
+            return new Date(approval.ad_expired_at) > now;
+          }
+
+          return false;
+        });
+
+        if (lockApproval) {
+          const status = String(lockApproval?.approval_status || "").toLowerCase();
+          const isPending = pendingStatuses.includes(status);
+          setAgentAdLock({
+            locked: true,
+            message: isPending
+              ? "Agent ad request is in progress. Editing is locked until it is approved or disapproved."
+              : "Agent ad is currently active on homepage. Editing is locked until it expires.",
+          });
+        } else {
+          setAgentAdLock({ locked: false, message: "" });
+        }
+      } catch (error) {
+        console.error("Failed to fetch agent ad lock state:", error);
+        setAgentAdLock({ locked: false, message: "" });
+      }
+    };
+
+    fetchAgentAdLockState();
+  }, [merchantId, isSuperadminMode, sendingRequest]);
+
+  const isAgentAdsLocked = !isSuperadminMode && agentAdLock.locked;
 
   // Fetch available placements
   useEffect(() => {
@@ -457,6 +526,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const handleSendAgentRequest = async () => {
     if (!merchantId || isSuperadminMode) return;
 
+    if (isAgentAdsLocked) {
+      toast.error(agentAdLock.message || "Agent ad is currently locked.");
+      return;
+    }
+
     if (pendingFile) {
       toast.error("Please click Upload & Save first to save selected media.");
       return;
@@ -502,6 +576,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
   const handleTogglePaidAds = async (checked) => {
     if (!merchantId) return;
+
+    if (isAgentAdsLocked) {
+      toast.error(agentAdLock.message || "Agent ad is currently locked.");
+      return;
+    }
 
     const previousValue = state.paid_ads;
     setState((p) => ({
@@ -756,9 +835,14 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
               <Switch
                 checked={state.paid_ads}
                 onCheckedChange={handleTogglePaidAds}
-                disabled={toggling}
+                disabled={toggling || isAgentAdsLocked}
               />
             </div>
+            {isAgentAdsLocked && (
+              <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+                {agentAdLock.message}
+              </div>
+            )}
           </div>
           <div
             className={`grid transition-all duration-500 ease-in-out ${
@@ -793,7 +877,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                             onValueChange={(val) => {
                               setState({ ...state, placement: val });
                             }}
-                            disabled={availablePlacements.length === 0}
+                            disabled={availablePlacements.length === 0 || isAgentAdsLocked}
                           >
                             <SelectTrigger>
                               <SelectValue
@@ -859,6 +943,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               paid_ad_duration: parseInt(val, 10),
                             });
                           }}
+                          disabled={isAgentAdsLocked}
                         >
                           <SelectTrigger>
                             <SelectValue
@@ -892,6 +977,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                             paid_ad_start_date: e.target.value,
                           });
                         }}
+                        disabled={isAgentAdsLocked}
                         className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                       />
 
@@ -1041,7 +1127,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               className="hidden"
                               accept="image/*"
                               onChange={handleFileChange}
-                              disabled={uploading || !!dateConflictWarning}
+                              disabled={uploading || !!dateConflictWarning || isAgentAdsLocked}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -1141,7 +1227,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               className="hidden"
                               accept="video/*"
                               onChange={handleVideoUpload}
-                              disabled={uploading || !!dateConflictWarning}
+                              disabled={uploading || !!dateConflictWarning || isAgentAdsLocked}
                             />
                             <div className="h-10 w-10 rounded-full bg-background shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                               <Plus className="h-5 w-5 text-primary" />
@@ -1307,6 +1393,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               uploading ||
                               toggling ||
                               sendingRequest ||
+                              isAgentAdsLocked ||
                               availablePlacements.length === 0 ||
                               !!dateConflictWarning ||
                               !!pendingFile ||
@@ -1328,7 +1415,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
                         <Button
                           onClick={handleSubmit}
-                          disabled={uploading || toggling || sendingRequest || availablePlacements.length === 0 || !!dateConflictWarning}
+                          disabled={uploading || toggling || sendingRequest || isAgentAdsLocked || availablePlacements.length === 0 || !!dateConflictWarning}
                           className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
                         >
                           {uploading ? (
