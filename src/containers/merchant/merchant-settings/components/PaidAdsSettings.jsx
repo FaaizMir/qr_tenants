@@ -907,7 +907,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                               )}
                             </SelectContent>
                           </Select>
-                          {availablePlacements.length < 4 && (
+                          {availablePlacements.length < 4 && !isAgentAdsLocked && (
                             <p className="text-xs text-amber-600 font-medium">
                               {t("placement.slotsOccupied", {
                                 count: 4 - availablePlacements.length,
@@ -1015,11 +1015,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                             ))}
                           </ul>
                         </div>
-                      ) : (
+                      ) : !isAgentAdsLocked ? (
                         <p className="text-xs text-green-600 font-medium">
                           ✓ Selected date range is available for this placement.
                         </p>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                   <Tabs
