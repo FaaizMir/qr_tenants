@@ -70,6 +70,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
   const [uploading, setUploading] = useState(false);
   const [toggling, setToggling] = useState(false);
+  const [sendingRequest, setSendingRequest] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [activeTab, setActiveTab] = useState(
     state.paid_ad_video_status ? "video" : "image",
@@ -451,6 +452,48 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const handlePreview = (type, url) => {
     setPreviewContent({ type, url: getImageUrl(url) });
     setIsPreviewOpen(true);
+  };
+
+  const handleSendAgentRequest = async () => {
+    if (!merchantId || isSuperadminMode) return;
+
+    if (pendingFile) {
+      toast.error("Please click Upload & Save first to save selected media.");
+      return;
+    }
+
+    if (!state.paid_ads) {
+      toast.error("Please enable Agent Ads toggle before sending request.");
+      return;
+    }
+
+    if (!state.paid_ad_image && !state.paid_ad_video) {
+      toast.error("Please upload ad image or video before sending request.");
+      return;
+    }
+
+    if (dateConflictWarning) {
+      toast.error("Selected date range has a conflict. Please change date or placement.");
+      return;
+    }
+
+    setSendingRequest(true);
+    try {
+      await axiosInstance.post(
+        `/merchant-settings/merchant/${merchantId}/paid-ad-request`,
+        {
+          paidAdStartDate: state.paid_ad_start_date || getTodayDateString(),
+        },
+      );
+      toast.success("Agent ad request sent successfully.");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to send agent ad request.",
+      );
+    } finally {
+      setSendingRequest(false);
+    }
   };
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -1256,24 +1299,52 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                           </div>
                         </div>
                       )}
-                      <Button
-                        onClick={handleSubmit}
-                        disabled={uploading || toggling || availablePlacements.length === 0 || !!dateConflictWarning}
-                        className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
-                      >
-                        {uploading ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            {uploadProgress > 0
-                              ? `${t("upload.uploading")} ${uploadProgress}%`
-                              : t("upload.uploading")}
-                          </>
-                        ) : availablePlacements.length === 0 ? (
-                          t("upload.noSlotsButton")
-                        ) : (
-                          t("upload.uploadingSave")
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+                        {!isSuperadminMode && (
+                          <Button
+                            onClick={handleSendAgentRequest}
+                            disabled={
+                              uploading ||
+                              toggling ||
+                              sendingRequest ||
+                              availablePlacements.length === 0 ||
+                              !!dateConflictWarning ||
+                              !!pendingFile ||
+                              !state.paid_ads ||
+                              (!state.paid_ad_image && !state.paid_ad_video)
+                            }
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
+                          >
+                            {sendingRequest ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Sending Request...
+                              </>
+                            ) : (
+                              "Send Request to Agent"
+                            )}
+                          </Button>
                         )}
-                      </Button>
+
+                        <Button
+                          onClick={handleSubmit}
+                          disabled={uploading || toggling || sendingRequest || availablePlacements.length === 0 || !!dateConflictWarning}
+                          className="bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-blue-200 transition-all h-9 px-4 text-sm font-semibold rounded-lg w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:shadow-none"
+                        >
+                          {uploading ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              {uploadProgress > 0
+                                ? `${t("upload.uploading")} ${uploadProgress}%`
+                                : t("upload.uploading")}
+                            </>
+                          ) : availablePlacements.length === 0 ? (
+                            t("upload.noSlotsButton")
+                          ) : (
+                            t("upload.uploadingSave")
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
