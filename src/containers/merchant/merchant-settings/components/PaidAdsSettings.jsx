@@ -92,6 +92,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const [bookedDates, setBookedDates] = useState([]);
   const [loadingBookedDates, setLoadingBookedDates] = useState(false);
   const [dateConflictWarning, setDateConflictWarning] = useState("");
+  const [conflictingBookedDates, setConflictingBookedDates] = useState([]);
 
   // Fetch true state from API on mount
   useEffect(() => {
@@ -206,6 +207,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
       try {
         const response = await axiosInstance.get(
           `/approvals/booked-dates/${state.placement}/merchant/${merchantId}`,
+          {
+            params: {
+              approvalType: isSuperadminMode ? "homepage_ad_push" : "paid_ad",
+            },
+          },
         );
 
         if (response.data && Array.isArray(response.data.bookedDates)) {
@@ -222,12 +228,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
     };
 
     fetchBookedDates();
-  }, [state.placement, merchantId]);
+  }, [state.placement, merchantId, isSuperadminMode]);
 
   // Check for date conflicts when start date or duration changes
   useEffect(() => {
     if (!state.paid_ad_start_date || bookedDates.length === 0) {
       setDateConflictWarning("");
+      setConflictingBookedDates([]);
       return;
     }
 
@@ -236,14 +243,17 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
     endDate.setDate(endDate.getDate() + (state.paid_ad_duration || 7));
 
     // Check for conflicts
-    const conflict = bookedDates.find((booking) => {
+    const conflicts = bookedDates.filter((booking) => {
       const bookingStart = new Date(booking.startDate);
       const bookingEnd = new Date(booking.endDate);
       // Check if date ranges overlap
       return startDate < bookingEnd && bookingStart < endDate;
     });
 
-    if (conflict) {
+    setConflictingBookedDates(conflicts);
+
+    if (conflicts.length > 0) {
+      const conflict = conflicts[0];
       const conflictStart = new Date(conflict.startDate).toLocaleDateString();
       const conflictEnd = new Date(conflict.endDate).toLocaleDateString();
       setDateConflictWarning(
@@ -856,13 +866,13 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                         <p className="text-xs text-gray-500">
                           Loading booked dates...
                         </p>
-                      ) : bookedDates.length > 0 ? (
+                      ) : conflictingBookedDates.length > 0 ? (
                         <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
                           <p className="text-xs font-semibold text-blue-900 mb-2">
-                            📅 Dates already booked for "{state.placement}" placement:
+                            📅 Conflicting booked dates for "{state.placement}" placement:
                           </p>
                           <ul className="text-xs text-blue-800 space-y-1">
-                            {bookedDates.map((booking, idx) => (
+                            {conflictingBookedDates.map((booking, idx) => (
                               <li key={idx} className="flex items-center gap-1">
                                 <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
                                 {new Date(booking.startDate).toLocaleDateString()} to{" "}
@@ -878,7 +888,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                         </div>
                       ) : (
                         <p className="text-xs text-green-600 font-medium">
-                          ✓ No bookings found for this placement. All dates are available.
+                          ✓ Selected date range is available for this placement.
                         </p>
                       )}
                     </div>
