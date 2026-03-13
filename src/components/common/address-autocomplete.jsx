@@ -128,7 +128,7 @@ export function AddressAutocomplete({ value, onChange, onSelectAddress, classNam
                             <li
                                 key={index}
                                 onClick={() => handleSelect(item)}
-                                className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 outline-none hover:bg-accent hover:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50"
                             >
                                 <MapPin className="mr-2 h-4 w-4 min-w-4 text-muted-foreground" />
                                 <span className="line-clamp-1">{item.display_name}</span>

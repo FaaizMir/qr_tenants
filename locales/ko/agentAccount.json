@@ -11,9 +11,89 @@
     "saveChanges": "변경 사항 저장",
     "saving": "저장 중..."
   },
+  "errors": {
+    "business": {
+      "accountInactive": "귀하의 계정은 비활성 상태입니다. 지원팀에 문의하십시오.",
+      "accountNotFound": "계정을 찾을 수 없습니다. 지원팀에 문의해 주세요.",
+      "accountSuspended": "귀하의 계정이 정지되었습니다. 지원팀에 문의하십시오.",
+      "adminNotFound": "관리자 계정을 찾을 수 없습니다.",
+      "emailAlreadyVerified": "이메일 주소는 이미 확인되었습니다.",
+      "emailNotVerified": "진행하기 전에 이메일 주소를 확인하십시오.",
+      "insufficientPermissions": "이 작업을 수행할 충분한 권한이 없습니다.",
+      "phoneAlreadyVerified": "전화번호가 이미 확인되었습니다.",
+      "phoneNotVerified": "진행하기 전에 전화번호를 확인하십시오.",
+      "sessionExpired": "세션이 만료되었습니다. 다시 로그인해 주세요.",
+      "stripeKeyInvalid": "제공된 Stripe 키가 유효하지 않거나 만료되었습니다.",
+      "stripeKeyLiveInDevelopment": "라이브 Stripe 키는 개발 환경에서 사용할 수 없습니다.",
+      "stripeKeyTestInProduction": "테스트 Stripe 키는 프로덕션 환경에서 사용할 수 없습니다."
+    },
+    "network": {
+      "badRequest": "잘못된 요청입니다. 입력 내용을 확인해 주세요.",
+      "conflict": "충돌이 발생했습니다. 리소스가 다른 사용자에 의해 수정되었을 수 있습니다.",
+      "connectionFailed": "연결 실패. 인터넷 연결을 확인하십시오.",
+      "forbidden": "접근이 거부되었습니다. 이 리소스에 접근할 권한이 없습니다.",
+      "internalServerError": "내부 서버 오류. 문제가 지속되면 지원팀에 문의하십시오.",
+      "notFound": "요청한 리소스를 찾을 수 없습니다.",
+      "serverError": "서버 오류가 발생했습니다. 나중에 다시 시도해 주세요.",
+      "timeout": "요청 시간이 초과되었습니다. 다시 시도하십시오.",
+      "tooManyRequests": "요청이 너무 많습니다. 잠시 기다렸다가 다시 시도하십시오.",
+      "unauthorized": "이 작업을 수행할 권한이 없습니다."
+    },
+    "validation": {
+      "address": {
+        "invalid": "유효한 주소를 입력하십시오.",
+        "tooLong": "주소는 500자를 초과할 수 없습니다."
+      },
+      "city": {
+        "invalidCharacters": "도시 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
+        "tooLong": "도시 이름은 100자를 초과할 수 없습니다.",
+        "tooShort": "도시 이름은 최소 2자 이상이어야 합니다."
+      },
+      "company_name": {
+        "alreadyExists": "이 회사 이름은 이미 등록되어 있습니다.",
+        "invalidCharacters": "회사 이름에 유효하지 않은 문자가 포함되어 있습니다.",
+        "tooLong": "회사 이름은 200자를 초과할 수 없습니다.",
+        "tooShort": "회사 이름은 최소 2자 이상이어야 합니다."
+      },
+      "country": {
+        "invalidCharacters": "국가 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
+        "tooLong": "국가 이름은 100자를 초과할 수 없습니다.",
+        "tooShort": "국가 이름은 최소 2자 이상이어야 합니다."
+      },
+      "email": {
+        "alreadyExists": "이 이메일 주소는 이미 등록되어 있습니다.",
+        "empty": "이메일 주소는 비워둘 수 없습니다.",
+        "invalid": "유효한 이메일 주소를 입력해 주세요.",
+        "required": "이메일 주소는 필수입니다.",
+        "tooLong": "이메일 주소는 255자를 초과할 수 없습니다."
+      },
+      "name": {
+        "empty": "전체 이름은 비워둘 수 없습니다.",
+        "invalidCharacters": "전체 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
+        "required": "전체 이름이 필요합니다.",
+        "tooLong": "전체 이름은 100자를 초과할 수 없습니다.",
+        "tooShort": "전체 이름은 최소 2자 이상이어야 합니다."
+      },
+      "phone": {
+        "alreadyExists": "이 전화번호는 이미 등록되어 있습니다.",
+        "invalid": "유효한 전화번호를 입력하십시오.",
+        "invalidFormat": "전화번호 형식이 유효하지 않습니다.",
+        "tooLong": "전화번호가 너무 깁니다.",
+        "tooShort": "전화번호가 너무 짧습니다."
+      },
+      "stripe_secret_key": {
+        "alreadyExists": "이 Stripe 키는 이미 사용 중입니다.",
+        "invalid": "유효하지 않은 Stripe 비밀 키 형식입니다.",
+        "invalidPrefix": "Stripe 비밀 키는 'sk_test_' 또는 'sk_live_'로 시작해야 합니다.",
+        "tooLong": "Stripe 비밀 키가 너무 깁니다.",
+        "tooShort": "Stripe 비밀 키가 너무 짧습니다."
+      }
+    }
+  },
   "fields": {
     "address": "주소",
     "city": "도시",
+    "companyName": "회사 이름",
     "country": "국가",
     "email": "이메일",
     "fullName": "전체 이름",
@@ -32,6 +112,7 @@
   "placeholders": {
     "address": "주소를 입력하기 시작하세요...",
     "city": "도시를 입력하세요",
+    "companyName": "회사의 이름을 입력하세요",
     "country": "국가를 입력하세요",
     "email": "이메일 입력",
     "name": "이름을 입력하세요",
@@ -46,5 +127,45 @@
     "title": "프로필"
   },
   "subtitle": "계정 정보 관리",
-  "title": "계정 설정"
+  "title": "계정 설정",
+  "validation": {
+    "fieldNames": {
+      "address": "주소",
+      "city": "도시",
+      "company_name": "회사 이름",
+      "country": "국가",
+      "email": "이메일 주소",
+      "name": "전체 이름",
+      "phone": "전화번호",
+      "stripe_secret_key": "스트라이프 비밀 키"
+    },
+    "messages": {
+      "alphanumeric": "오직 문자와 숫자만 포함해야 합니다",
+      "cannotBeBlank": "비워둘 수 없습니다",
+      "email": "유효한 이메일 주소여야 합니다",
+      "empty": "비어있지 않아야 합니다",
+      "invalid": "유효하지 않습니다",
+      "maxLength": "{max}자를 초과할 수 없습니다",
+      "minLength": "최소 {min}자 이상이어야 합니다",
+      "mustBeNumber": "숫자여야 합니다",
+      "mustBeString": "텍스트여야 합니다",
+      "phoneFormat": "유효한 전화번호여야 합니다",
+      "required": "필수 항목입니다",
+      "tooLong": "너무 깁니다",
+      "tooShort": "너무 짧습니다",
+      "unique": "이미 존재합니다"
+    },
+    "patterns": {
+      "already exists": "고유해야 합니다",
+      "cannot be blank": "비워둘 수 없습니다",
+      "is invalid": "유효하지 않습니다",
+      "is required": "필수입니다",
+      "is too long": "너무 깁니다",
+      "is too short": "너무 짧습니다",
+      "must be a number": "숫자여야 합니다",
+      "must be a string": "문자열이어야 합니다",
+      "must be a valid email": "이메일",
+      "should not be empty": "비어 있습니다"
+    }
+  }
 }

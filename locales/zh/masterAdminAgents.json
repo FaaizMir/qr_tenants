@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "城市",
+      "companyName": "公司名称",
       "country": "国家",
       "emailAddress": "电子邮件地址",
       "fullName": "全名",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 代理街，城市，国家",
       "city": "城市",
+      "companyName": "输入公司名称",
       "country": "国家",
       "email": "agent@example.com",
       "name": "例如：约翰·多",
@@ -144,5 +146,46 @@
     "updateError": "更新代理状态失败"
   },
   "subtitle": "管理您的代理及其账户。",
-  "title": "代理管理"
+  "title": "代理管理",
+  "validation": {
+    "fieldNames": {
+      "address": "地址",
+      "city": "城市",
+      "company_name": "公司名称",
+      "country": "国家",
+      "email": "电子邮件地址",
+      "name": "全名",
+      "password": "密码",
+      "phone": "电话号码",
+      "stripe_secret_key": "Stripe 秘钥"
+    },
+    "messages": {
+      "alphanumeric": "必须仅包含字母和数字",
+      "cannotBeBlank": "不能为空",
+      "email": "必须是有效的电子邮件地址",
+      "empty": "不应为空",
+      "invalid": "无效",
+      "maxLength": "不得超过 {max} 个字符",
+      "minLength": "必须至少包含 {min} 个字符",
+      "mustBeNumber": "必须是一个数字",
+      "mustBeString": "必须是文本",
+      "phoneFormat": "必须是有效的电话号码",
+      "required": "是必需的",
+      "tooLong": "太长了",
+      "tooShort": "太短了",
+      "unique": "已存在"
+    },
+    "patterns": {
+      "already exists": "唯一",
+      "cannot be blank": "不能为空",
+      "is invalid": "无效",
+      "is required": "必填",
+      "is too long": "太长了",
+      "is too short": "太短",
+      "must be a number": "必须是数字",
+      "must be a string": "必须是字符串",
+      "must be a valid email": "电子邮件",
+      "should not be empty": "空的"
+    }
+  }
 }

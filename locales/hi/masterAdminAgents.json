@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "शहर",
+      "companyName": "कंपनी का नाम",
       "country": "देश",
       "emailAddress": "ईमेल पता",
       "fullName": "पूरा नाम",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 एजेंट स्ट्रीट, शहर, देश",
       "city": "शहर",
+      "companyName": "कंपनी का नाम दर्ज करें",
       "country": "देश",
       "email": "agent@example.com",
       "name": "जैसे: जॉन डो",
@@ -144,5 +146,46 @@
     "updateError": "एजेंट की स्थिति अपडेट करने में विफल"
   },
   "subtitle": "अपने एजेंटों और उनके खातों का प्रबंधन करें।",
-  "title": "एजेंट प्रबंधन"
+  "title": "एजेंट प्रबंधन",
+  "validation": {
+    "fieldNames": {
+      "address": "पता",
+      "city": "शहर",
+      "company_name": "कंपनी का नाम",
+      "country": "देश",
+      "email": "ईमेल पता",
+      "name": "पूरा नाम",
+      "password": "पासवर्ड",
+      "phone": "फोन नंबर",
+      "stripe_secret_key": "स्ट्राइप सीक्रेट की"
+    },
+    "messages": {
+      "alphanumeric": "केवल अक्षर और संख्याएँ होनी चाहिए",
+      "cannotBeBlank": "खाली नहीं हो सकता",
+      "email": "एक मान्य ईमेल पता होना चाहिए",
+      "empty": "खाली नहीं होना चाहिए",
+      "invalid": "अमान्य है",
+      "maxLength": "{max} अक्षरों से अधिक नहीं होना चाहिए",
+      "minLength": "कम से कम {min} अक्षर होना चाहिए",
+      "mustBeNumber": "यह एक संख्या होनी चाहिए",
+      "mustBeString": "यह पाठ होना चाहिए",
+      "phoneFormat": "एक मान्य फोन नंबर होना चाहिए",
+      "required": "आवश्यक है",
+      "tooLong": "बहुत लंबा है",
+      "tooShort": "बहुत छोटा है",
+      "unique": "पहले से मौजूद है"
+    },
+    "patterns": {
+      "already exists": "अद्वितीय",
+      "cannot be blank": "खाली नहीं हो सकता",
+      "is invalid": "अमान्य",
+      "is required": "आवश्यक",
+      "is too long": "बहुत लंबा",
+      "is too short": "बहुत छोटा",
+      "must be a number": "यह संख्या होनी चाहिए",
+      "must be a string": "यह एक स्ट्रिंग होना चाहिए",
+      "must be a valid email": "ईमेल",
+      "should not be empty": "खाली"
+    }
+  }
 }

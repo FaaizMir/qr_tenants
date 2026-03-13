@@ -85,6 +85,7 @@
     },
     "fields": {
       "city": "도시",
+      "companyName": "회사 이름",
       "country": "국가",
       "emailAddress": "이메일 주소",
       "fullName": "전체 이름",
@@ -106,6 +107,7 @@
     "placeholders": {
       "address": "123 에이전트 거리, 도시, 국가",
       "city": "도시",
+      "companyName": "회사 이름을 입력하세요",
       "country": "국가",
       "email": "agent@example.com",
       "name": "예: John Doe",
@@ -144,5 +146,46 @@
     "updateError": "에이전트 상태 업데이트에 실패했습니다."
   },
   "subtitle": "귀하의 에이전트 및 그 계정을 관리하세요.",
-  "title": "에이전트 관리"
+  "title": "에이전트 관리",
+  "validation": {
+    "fieldNames": {
+      "address": "주소",
+      "city": "도시",
+      "company_name": "회사 이름",
+      "country": "국가",
+      "email": "이메일 주소",
+      "name": "전체 이름",
+      "password": "비밀번호",
+      "phone": "전화번호",
+      "stripe_secret_key": "스트라이프 비밀 키"
+    },
+    "messages": {
+      "alphanumeric": "영문자와 숫자만 포함해야 합니다",
+      "cannotBeBlank": "비워둘 수 없음",
+      "email": "유효한 이메일 주소여야 합니다",
+      "empty": "비어있지 않아야 합니다",
+      "invalid": "유효하지 않습니다",
+      "maxLength": "{max}자를 초과할 수 없습니다",
+      "minLength": "최소 {min}자 이상이어야 합니다",
+      "mustBeNumber": "숫자여야 한다",
+      "mustBeString": "텍스트여야 한다",
+      "phoneFormat": "유효한 전화번호여야 합니다",
+      "required": "필수 항목입니다",
+      "tooLong": "너무 길다",
+      "tooShort": "너무 짧다",
+      "unique": "이미 존재합니다"
+    },
+    "patterns": {
+      "already exists": "고유해야 한다",
+      "cannot be blank": "비워둘 수 없음",
+      "is invalid": "유효하지 않다",
+      "is required": "필수",
+      "is too long": "너무 길다",
+      "is too short": "너무 짧다",
+      "must be a number": "숫자여야 한다",
+      "must be a string": "문자열이어야 한다",
+      "must be a valid email": "이메일",
+      "should not be empty": "비어 있음"
+    }
+  }
 }

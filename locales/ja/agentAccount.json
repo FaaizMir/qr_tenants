@@ -11,9 +11,89 @@
     "saveChanges": "変更を保存",
     "saving": "保存中..."
   },
+  "errors": {
+    "business": {
+      "accountInactive": "あなたのアカウントは非アクティブです。サポートに連絡してください。",
+      "accountNotFound": "アカウントが見つかりません。サポートにお問い合わせください。",
+      "accountSuspended": "あなたのアカウントは一時停止されています。サポートに連絡してください。",
+      "adminNotFound": "管理者アカウントが見つかりません。",
+      "emailAlreadyVerified": "メールアドレスはすでに確認されています。",
+      "emailNotVerified": "続行する前にメールアドレスを確認してください。",
+      "insufficientPermissions": "このアクションを実行するための十分な権限がありません。",
+      "phoneAlreadyVerified": "電話番号はすでに確認されています。",
+      "phoneNotVerified": "続行する前に電話番号を確認してください。",
+      "sessionExpired": "セッションが期限切れになりました。再度ログインしてください。",
+      "stripeKeyInvalid": "提供されたStripeキーは無効または期限切れです。",
+      "stripeKeyLiveInDevelopment": "本番環境ではライブStripeキーを使用できません。",
+      "stripeKeyTestInProduction": "テスト用のStripeキーは本番環境では使用できません。"
+    },
+    "network": {
+      "badRequest": "無効なリクエストです。入力内容を確認してください。",
+      "conflict": "競合が発生しました。リソースは他のユーザーによって変更された可能性があります。",
+      "connectionFailed": "接続に失敗しました。インターネット接続を確認してください。",
+      "forbidden": "アクセスが拒否されました。このリソースにアクセスする権限がありません。",
+      "internalServerError": "内部サーバーエラーです。この問題が続く場合はサポートに連絡してください。",
+      "notFound": "要求されたリソースが見つかりませんでした。",
+      "serverError": "サーバーエラーが発生しました。後でもう一度お試しください。",
+      "timeout": "リクエストがタイムアウトしました。再試行してください。",
+      "tooManyRequests": "リクエストが多すぎます。しばらく待ってから再試行してください。",
+      "unauthorized": "このアクションを実行する権限がありません。"
+    },
+    "validation": {
+      "address": {
+        "invalid": "有効な住所を入力してください",
+        "tooLong": "住所は500文字を超えてはいけません"
+      },
+      "city": {
+        "invalidCharacters": "市名は文字、スペース、ハイフンのみを含むことができます。",
+        "tooLong": "市名は100文字を超えてはいけません",
+        "tooShort": "市名は2文字以上でなければなりません"
+      },
+      "company_name": {
+        "alreadyExists": "この会社名はすでに登録されています。",
+        "invalidCharacters": "会社名に無効な文字が含まれています。",
+        "tooLong": "会社名は200文字を超えてはいけません",
+        "tooShort": "会社名は2文字以上でなければなりません"
+      },
+      "country": {
+        "invalidCharacters": "国名は文字、スペース、ハイフンのみを含むことができます",
+        "tooLong": "国名は100文字を超えてはいけません",
+        "tooShort": "国名は少なくとも2文字以上である必要があります。"
+      },
+      "email": {
+        "alreadyExists": "このメールアドレスはすでに登録されています",
+        "empty": "メールアドレスは空にできません",
+        "invalid": "有効なメールアドレスを入力してください。",
+        "required": "メールアドレスは必須です",
+        "tooLong": "メールアドレスは255文字を超えてはいけません"
+      },
+      "name": {
+        "empty": "フルネームは空にできません",
+        "invalidCharacters": "フルネームは文字、スペース、ハイフンのみを含むことができます",
+        "required": "フルネームは必須です",
+        "tooLong": "フルネームは100文字を超えてはいけません",
+        "tooShort": "フルネームは2文字以上でなければなりません"
+      },
+      "phone": {
+        "alreadyExists": "この電話番号はすでに登録されています",
+        "invalid": "有効な電話番号を入力してください",
+        "invalidFormat": "電話番号の形式が無効です",
+        "tooLong": "電話番号が長すぎます。",
+        "tooShort": "電話番号が短すぎます"
+      },
+      "stripe_secret_key": {
+        "alreadyExists": "このStripeキーはすでに使用されています",
+        "invalid": "無効なStripeシークレットキーの形式",
+        "invalidPrefix": "Stripeの秘密鍵は'sk_test_'または'sk_live_'で始まる必要があります。",
+        "tooLong": "Stripeの秘密鍵が長すぎます。",
+        "tooShort": "Stripeの秘密鍵が短すぎます"
+      }
+    }
+  },
   "fields": {
     "address": "住所",
     "city": "市",
+    "companyName": "会社名",
     "country": "国",
     "email": "メール",
     "fullName": "フルネーム",
@@ -32,6 +112,7 @@
   "placeholders": {
     "address": "住所を入力し始めてください...",
     "city": "市を入力してください",
+    "companyName": "会社名を入力してください",
     "country": "国を入力してください",
     "email": "メールアドレスを入力してください",
     "name": "名前を入力してください",
@@ -46,5 +127,45 @@
     "title": "プロフィール"
   },
   "subtitle": "アカウント情報を管理する",
-  "title": "アカウント設定"
+  "title": "アカウント設定",
+  "validation": {
+    "fieldNames": {
+      "address": "住所",
+      "city": "市",
+      "company_name": "会社名",
+      "country": "国",
+      "email": "メールアドレス",
+      "name": "フルネーム",
+      "phone": "電話番号",
+      "stripe_secret_key": "Stripeシークレットキー"
+    },
+    "messages": {
+      "alphanumeric": "文字と数字のみを含む必要があります",
+      "cannotBeBlank": "空白にできません",
+      "email": "有効なメールアドレスでなければなりません",
+      "empty": "空であってはいけません",
+      "invalid": "無効です",
+      "maxLength": "{max}文字を超えてはいけません",
+      "minLength": "{min}文字以上でなければなりません",
+      "mustBeNumber": "数字でなければなりません",
+      "mustBeString": "テキストでなければなりません",
+      "phoneFormat": "有効な電話番号でなければなりません",
+      "required": "必須です",
+      "tooLong": "長すぎます",
+      "tooShort": "短すぎます",
+      "unique": "すでに存在します"
+    },
+    "patterns": {
+      "already exists": "ユニークです",
+      "cannot be blank": "空白にできません",
+      "is invalid": "無効です",
+      "is required": "必須です",
+      "is too long": "長すぎます",
+      "is too short": "短すぎます",
+      "must be a number": "数字でなければなりません",
+      "must be a string": "文字列でなければなりません",
+      "must be a valid email": "メール",
+      "should not be empty": "空です"
+    }
+  }
 }
