@@ -319,8 +319,16 @@ export default function MasterAdminLandingPage() {
     fetchAgents(1, true);
   }, [debouncedSearchQuery, fetchAgents, selectedCountry, expiringSoon]);
 
+  const toSlug = (name) =>
+    name
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+
   const handleAgentClick = (agent) => {
-    router.push(`/homepage/${agent.company_name}`);
+    router.push(`/homepage/${toSlug(agent.company_name)}`);
   };
 
   // Filtered + paginated coupons

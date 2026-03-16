@@ -78,10 +78,7 @@ export default function AgentHomepageById({ params }) {
           <p className="text-slate-500 mb-4">
             {error || "Unable to find the requested agent"}
           </p>
-          <a
-            href="/homepage"
-            className="text-primary hover:underline font-medium"
-          >
+          <a href="/" className="text-primary hover:underline font-medium">
             Return to homepage
           </a>
         </div>

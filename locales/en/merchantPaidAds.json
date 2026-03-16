@@ -1,4 +1,8 @@
 {
+  "buttons": {
+    "sendingRequest": "Sending Request...",
+    "sendRequest": "Send Request to Agent"
+  },
   "common": {
     "activeAdAlt": "Active Ad",
     "pendingUploadAlt": "Pending Upload",
@@ -24,18 +28,35 @@
     "days30": "30 Days",
     "days7": "7 Days",
     "label": "Duration",
+    "lockedMessage": "Duration is locked by superadmin settings.",
     "selectPlaceholder": "Select duration"
   },
   "messages": {
+    "adLocked": "Ad settings are currently locked.",
+    "agentAdActive": "Agent ad is currently active on homepage. Editing is locked until it expires.",
+    "agentAdRequestInProgress": "Agent ad request is in progress. Editing is locked until it is approved or disapproved.",
+    "agentAdsDisabled": "Agent ads disabled successfully",
+    "agentAdsEnabled": "Agent ads enabled successfully",
+    "dateConflictError": "Selected date range has a conflict. Please change date or placement.",
     "errorDeleting": "Failed to delete",
     "errorProcessing": "Error processing image",
     "errorSaving": "Error saving settings",
+    "errorToggle": "Failed to update ad toggle",
     "imageDeleted": "Image deleted successfully",
     "imageReady": "Image ready for upload. Click 'Upload & Save' to finish.",
     "imageTooLarge": "Image size must be less than 10MB",
     "imageUploaded": "Image uploaded successfully",
+    "noMediaError": "Please upload ad image or video before sending request.",
     "noSlotsWarning": "No ad slots available. All placements are currently occupied — you cannot upload a new ad until a slot opens up.",
+    "pendingFileError": "Please click Upload & Save first to save selected media.",
+    "requestFailed": "Failed to send agent ad request.",
+    "requestSent": "Agent ad request sent successfully.",
     "settingsUpdated": "Settings updated successfully",
+    "superadminAdActive": "Superadmin homepage ad is currently active. Editing is locked until it expires.",
+    "superadminAdRequestInProgress": "Superadmin homepage ad request is in progress. Editing is locked until it is approved or disapproved.",
+    "superadminAdsDisabled": "Superadmin ads disabled successfully",
+    "superadminAdsEnabled": "Superadmin ads enabled successfully",
+    "toggleDisabledError": "Please enable Agent Ads toggle before sending request.",
     "uploadingImage": "Uploading image...",
     "uploadingVideo": "Uploading video... This may take a moment.",
     "uploadTimeout": "Upload timeout. Please try with a smaller file or check your connection.",
@@ -64,7 +85,11 @@
     "title": "Ad Preview"
   },
   "startDate": {
-    "label": "Start Date"
+    "conflictingBookedDates": "📅 Conflicting booked dates for \"{placement}\" placement:",
+    "conflictWarning": "⚠️ The selected dates conflict with an existing booking ({conflictStart} - {conflictEnd}) for this placement. Please choose different dates or another placement.",
+    "dateRangeAvailable": "✓ Selected date range is available for this placement.",
+    "label": "Start Date",
+    "loadingBookedDates": "Loading booked dates..."
   },
   "status": {
     "active": "Active",
@@ -76,6 +101,10 @@
     "video": "Video Ads"
   },
   "title": "Promotional Banners",
+  "toggle": {
+    "description": "Enable this to configure and submit ad placement",
+    "label": "Ad Toggle"
+  },
   "upload": {
     "addImage": "Add Image",
     "addVideo": "Add Video",

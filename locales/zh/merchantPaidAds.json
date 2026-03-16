@@ -1,4 +1,8 @@
 {
+  "buttons": {
+    "sendingRequest": "发送请求中...",
+    "sendRequest": "发送请求给代理"
+  },
   "common": {
     "activeAdAlt": "激活广告",
     "pendingUploadAlt": "待上传",
@@ -24,18 +28,35 @@
     "days30": "30天",
     "days7": "7天",
     "label": "持续时间",
+    "lockedMessage": "持续时间被超级管理员设置锁定。",
     "selectPlaceholder": "选择持续时间"
   },
   "messages": {
+    "adLocked": "广告设置当前已锁定。",
+    "agentAdActive": "代理广告当前在主页上处于活动状态。编辑在到期之前被锁定。",
+    "agentAdRequestInProgress": "代理广告请求正在进行中。编辑在批准或拒绝之前被锁定。",
+    "agentAdsDisabled": "代理广告成功禁用",
+    "agentAdsEnabled": "代理广告成功启用",
+    "dateConflictError": "选定的日期范围存在冲突。请更改日期或投放。",
     "errorDeleting": "删除失败",
     "errorProcessing": "处理图像时出错",
     "errorSaving": "保存设置时出错",
+    "errorToggle": "更新广告切换失败",
     "imageDeleted": "图片删除成功",
     "imageReady": "图像准备上传。点击 '上传并保存' 完成。",
     "imageTooLarge": "图像大小必须小于10MB",
     "imageUploaded": "图像上传成功",
+    "noMediaError": "请在发送请求之前上传广告图片或视频。",
     "noSlotsWarning": "没有可用的广告插槽。所有位置当前已被占用 — 您无法上传新广告，直到有插槽空出。",
+    "pendingFileError": "请先点击上传并保存以保存所选媒体。",
+    "requestFailed": "发送代理广告请求失败。",
+    "requestSent": "代理广告请求成功发送。",
     "settingsUpdated": "设置更新成功",
+    "superadminAdActive": "超级管理员主页广告当前处于活动状态。编辑在到期之前被锁定。",
+    "superadminAdRequestInProgress": "超级管理员主页广告请求正在进行中。编辑在批准或拒绝之前被锁定。",
+    "superadminAdsDisabled": "超级管理员广告成功禁用",
+    "superadminAdsEnabled": "超级管理员广告成功启用",
+    "toggleDisabledError": "请在发送请求之前启用代理广告切换。",
     "uploadingImage": "正在上传图片...",
     "uploadingVideo": "正在上传视频... 这可能需要一些时间。",
     "uploadTimeout": "上传超时。请尝试使用较小的文件或检查您的连接。",
@@ -64,7 +85,11 @@
     "title": "广告预览"
   },
   "startDate": {
-    "label": "开始日期"
+    "conflictingBookedDates": "📅 \"{placement}\" 投放的冲突预订日期：",
+    "conflictWarning": "⚠️ 选定的日期与此投放的现有预订冲突（{conflictStart} - {conflictEnd}）。请选择不同的日期或其他投放。",
+    "dateRangeAvailable": "✓ 选定的日期范围可用于此投放。",
+    "label": "开始日期",
+    "loadingBookedDates": "加载已预订的日期..."
   },
   "status": {
     "active": "活跃",
@@ -76,6 +101,10 @@
     "video": "视频广告"
   },
   "title": "促销横幅",
+  "toggle": {
+    "description": "启用此选项以配置和提交广告投放",
+    "label": "广告切换"
+  },
   "upload": {
     "addImage": "添加图像",
     "addVideo": "添加视频",

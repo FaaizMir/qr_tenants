@@ -1,4 +1,8 @@
 {
+  "buttons": {
+    "sendingRequest": "Mengirim Permintaan...",
+    "sendRequest": "Kirim Permintaan ke Agen"
+  },
   "common": {
     "activeAdAlt": "Iklan Aktif",
     "pendingUploadAlt": "Unggahan Tertunda",
@@ -24,18 +28,35 @@
     "days30": "30 Hari",
     "days7": "7 Hari",
     "label": "Durasi",
+    "lockedMessage": "Durasi terkunci oleh pengaturan superadmin.",
     "selectPlaceholder": "Pilih durasi"
   },
   "messages": {
+    "adLocked": "Pengaturan iklan saat ini terkunci.",
+    "agentAdActive": "Iklan agen saat ini aktif di beranda. Pengeditan terkunci sampai kedaluwarsa.",
+    "agentAdRequestInProgress": "Permintaan iklan agen sedang diproses. Pengeditan terkunci sampai disetujui atau ditolak.",
+    "agentAdsDisabled": "Iklan agen berhasil dinonaktifkan",
+    "agentAdsEnabled": "Iklan agen berhasil diaktifkan",
+    "dateConflictError": "Rentang tanggal yang dipilih memiliki konflik. Silakan ubah tanggal atau penempatan.",
     "errorDeleting": "Gagal menghapus",
     "errorProcessing": "Kesalahan memproses gambar",
     "errorSaving": "Kesalahan menyimpan pengaturan",
+    "errorToggle": "Gagal memperbarui toggle iklan",
     "imageDeleted": "Gambar berhasil dihapus",
     "imageReady": "Gambar siap untuk diunggah. Klik 'Unggah & Simpan' untuk menyelesaikan.",
     "imageTooLarge": "Ukuran gambar harus kurang dari 10MB",
     "imageUploaded": "Gambar berhasil diunggah",
+    "noMediaError": "Silakan unggah gambar atau video iklan sebelum mengirim permintaan.",
     "noSlotsWarning": "Tidak ada slot iklan yang tersedia. Semua penempatan saat ini terisi — Anda tidak dapat mengunggah iklan baru sampai slot terbuka.",
+    "pendingFileError": "Silakan klik Unggah & Simpan terlebih dahulu untuk menyimpan media yang dipilih.",
+    "requestFailed": "Gagal mengirim permintaan iklan agen.",
+    "requestSent": "Permintaan iklan agen berhasil dikirim.",
     "settingsUpdated": "Pengaturan berhasil diperbarui",
+    "superadminAdActive": "Iklan beranda superadmin saat ini aktif. Pengeditan terkunci sampai kedaluwarsa.",
+    "superadminAdRequestInProgress": "Permintaan iklan halaman utama superadmin sedang diproses. Pengeditan terkunci sampai disetujui atau ditolak.",
+    "superadminAdsDisabled": "Iklan superadmin berhasil dinonaktifkan",
+    "superadminAdsEnabled": "Iklan superadmin berhasil diaktifkan",
+    "toggleDisabledError": "Silakan aktifkan toggle Iklan Agen sebelum mengirim permintaan.",
     "uploadingImage": "Mengunggah gambar...",
     "uploadingVideo": "Mengunggah video... Ini mungkin memerlukan waktu.",
     "uploadTimeout": "Waktu unggah habis. Silakan coba dengan file yang lebih kecil atau periksa koneksi Anda.",
@@ -64,7 +85,11 @@
     "title": "Prabaca Iklan"
   },
   "startDate": {
-    "label": "Tanggal Mulai"
+    "conflictingBookedDates": "📅 Tanggal yang dipesan bertentangan untuk penempatan \"{placement}\":",
+    "conflictWarning": "⚠️ Tanggal yang dipilih bertentangan dengan pemesanan yang ada ({conflictStart} - {conflictEnd}) untuk penempatan ini. Silakan pilih tanggal yang berbeda atau penempatan lain.",
+    "dateRangeAvailable": "✓ Rentang tanggal yang dipilih tersedia untuk penempatan ini.",
+    "label": "Tanggal Mulai",
+    "loadingBookedDates": "Memuat tanggal yang dipesan..."
   },
   "status": {
     "active": "Aktif",
@@ -76,6 +101,10 @@
     "video": "Iklan Video"
   },
   "title": "Spanduk Promosi",
+  "toggle": {
+    "description": "Aktifkan ini untuk mengonfigurasi dan mengirim penempatan iklan",
+    "label": "Togol Iklan"
+  },
   "upload": {
     "addImage": "Tambahkan Gambar",
     "addVideo": "Tambahkan Video",

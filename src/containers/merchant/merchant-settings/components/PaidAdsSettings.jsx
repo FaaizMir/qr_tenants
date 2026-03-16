@@ -244,8 +244,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
           setAgentAdLock({
             locked: true,
             message: isPending
-              ? "Agent ad request is in progress. Editing is locked until it is approved or disapproved."
-              : "Agent ad is currently active on homepage. Editing is locked until it expires.",
+              ? t("messages.agentAdRequestInProgress")
+              : t("messages.agentAdActive"),
           });
         } else {
           setAgentAdLock({ locked: false, message: "" });
@@ -260,8 +260,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
           setSuperadminAdLock({
             locked: true,
             message: isPending
-              ? "Superadmin homepage ad request is in progress. Editing is locked until it is approved or disapproved."
-              : "Superadmin homepage ad is currently active. Editing is locked until it expires.",
+              ? t("messages.superadminAdRequestInProgress")
+              : t("messages.superadminAdActive"),
           });
         } else {
           setSuperadminAdLock({ locked: false, message: "" });
@@ -579,27 +579,27 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
     if (!merchantId || isSuperadminMode) return;
 
     if (isCurrentAdsLocked) {
-      toast.error(currentAdsLockMessage || "Ad settings are currently locked.");
+      toast.error(currentAdsLockMessage || t("messages.adLocked"));
       return;
     }
 
     if (pendingFile) {
-      toast.error("Please click Upload & Save first to save selected media.");
+      toast.error(t("messages.pendingFileError"));
       return;
     }
 
     if (!state.paid_ads) {
-      toast.error("Please enable Agent Ads toggle before sending request.");
+      toast.error(t("messages.toggleDisabledError"));
       return;
     }
 
     if (!state.paid_ad_image && !state.paid_ad_video) {
-      toast.error("Please upload ad image or video before sending request.");
+      toast.error(t("messages.noMediaError"));
       return;
     }
 
     if (dateConflictWarning) {
-      toast.error("Selected date range has a conflict. Please change date or placement.");
+      toast.error(t("messages.dateConflictError"));
       return;
     }
 
@@ -611,11 +611,11 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
           paidAdStartDate: state.paid_ad_start_date || getTodayDateString(),
         },
       );
-      toast.success("Agent ad request sent successfully.");
+      toast.success(t("messages.requestSent"));
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
-          "Failed to send agent ad request.",
+          t("messages.requestFailed"),
       );
     } finally {
       setSendingRequest(false);
@@ -630,7 +630,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
     if (!merchantId) return;
 
     if (isCurrentAdsLocked) {
-      toast.error(currentAdsLockMessage || "Ad settings are currently locked.");
+      toast.error(currentAdsLockMessage || t("messages.adLocked"));
       return;
     }
 
@@ -658,8 +658,8 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
 
       toast.success(
         checked
-          ? `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} enabled successfully`
-          : `${isSuperadminMode ? "Superadmin ads" : "Agent ads"} disabled successfully`,
+          ? (isSuperadminMode ? t("messages.superadminAdsEnabled") : t("messages.agentAdsEnabled"))
+          : (isSuperadminMode ? t("messages.superadminAdsDisabled") : t("messages.agentAdsDisabled")),
       );
     } catch (error) {
       setState((p) => ({
@@ -667,7 +667,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
         paid_ads: previousValue,
       }));
       toast.error(
-        error?.response?.data?.message || "Failed to update ad toggle",
+        error?.response?.data?.message || t("messages.errorToggle"),
       );
     } finally {
       setToggling(false);
@@ -805,7 +805,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const handleDeleteImage = async () => {
     if (!merchantId) return;
     if (isCurrentAdsLocked) {
-      toast.error(currentAdsLockMessage || "Ad settings are currently locked.");
+      toast.error(currentAdsLockMessage || t("messages.adLocked"));
       return;
     }
 
@@ -832,7 +832,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
   const handleDeleteVideo = async () => {
     if (!merchantId) return;
     if (isCurrentAdsLocked) {
-      toast.error(currentAdsLockMessage || "Ad settings are currently locked.");
+      toast.error(currentAdsLockMessage || t("messages.adLocked"));
       return;
     }
 
@@ -887,9 +887,9 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
           <div className="px-6 py-4 border-b border-gray-100 bg-white">
             <div className="flex items-center justify-between rounded-xl border border-gray-100 px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-gray-900">Ad Toggle</p>
+                <p className="text-sm font-semibold text-gray-900">{t("toggle.label")}</p>
                 <p className="text-xs text-muted-foreground">
-                  Enable this to configure and submit ad placement
+                  {t("toggle.description")}
                 </p>
               </div>
               <Switch
@@ -987,7 +987,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                             {(state.paid_ad_duration || 7)} days
                           </div>
                           <p className="text-xs text-muted-foreground">
-                            Duration is locked by superadmin settings.
+                            {t("duration.lockedMessage")}
                           </p>
                         </>
                       ) : (
@@ -1053,12 +1053,12 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                       {/* Show loading or booked dates */}
                       {!isCurrentAdsLocked && loadingBookedDates ? (
                         <p className="text-xs text-gray-500">
-                          Loading booked dates...
+                          {t("startDate.loadingBookedDates")}
                         </p>
                       ) : !isCurrentAdsLocked && conflictingBookedDates.length > 0 ? (
                         <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
                           <p className="text-xs font-semibold text-blue-900 mb-2">
-                            📅 Conflicting booked dates for "{state.placement}" placement:
+                            {t("startDate.conflictingBookedDates", { placement: state.placement })}
                           </p>
                           <ul className="text-xs text-blue-800 space-y-1">
                             {conflictingBookedDates.map((booking, idx) => (
@@ -1077,7 +1077,7 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                         </div>
                       ) : !isCurrentAdsLocked ? (
                         <p className="text-xs text-green-600 font-medium">
-                          ✓ Selected date range is available for this placement.
+                          {t("startDate.dateRangeAvailable")}
                         </p>
                       ) : null}
                     </div>
@@ -1467,10 +1467,10 @@ export default function PaidAdsSettings({ config: initialConfig, merchantId, mod
                             {sendingRequest ? (
                               <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Sending Request...
+                                {t("buttons.sendingRequest")}
                               </>
                             ) : (
-                              "Send Request to Agent"
+                              t("buttons.sendRequest")
                             )}
                           </Button>
                         )}

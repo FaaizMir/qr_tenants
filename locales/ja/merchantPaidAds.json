@@ -1,4 +1,8 @@
 {
+  "buttons": {
+    "sendingRequest": "リクエストを送信中...",
+    "sendRequest": "エージェントにリクエストを送信"
+  },
   "common": {
     "activeAdAlt": "アクティブ広告",
     "pendingUploadAlt": "アップロード待機中",
@@ -24,18 +28,35 @@
     "days30": "30日",
     "days7": "7日間",
     "label": "期間",
+    "lockedMessage": "期間はスーパーユーザー設定によってロックされています。",
     "selectPlaceholder": "期間を選択"
   },
   "messages": {
+    "adLocked": "広告設定は現在ロックされています。",
+    "agentAdActive": "エージェント広告は現在ホームページにアクティブです。期限が切れるまで編集はロックされています。",
+    "agentAdRequestInProgress": "エージェント広告リクエストが進行中です。承認または却下されるまで編集はロックされています。",
+    "agentAdsDisabled": "エージェント広告が正常に無効化されました。",
+    "agentAdsEnabled": "エージェント広告が正常に有効化されました。",
+    "dateConflictError": "選択した日付範囲に競合があります。日付または配置を変更してください。",
     "errorDeleting": "削除に失敗しました",
     "errorProcessing": "画像の処理中にエラーが発生しました",
     "errorSaving": "設定の保存中にエラーが発生しました",
+    "errorToggle": "広告トグルの更新に失敗しました。",
     "imageDeleted": "画像が正常に削除されました",
     "imageReady": "画像がアップロードの準備ができました。'アップロード＆保存'をクリックして完了してください。",
     "imageTooLarge": "画像サイズは10MB未満でなければなりません",
     "imageUploaded": "画像が正常にアップロードされました",
+    "noMediaError": "リクエストを送信する前に広告画像または動画をアップロードしてください。",
     "noSlotsWarning": "広告スロットが利用できません。すべての配置が現在占有されています — スロットが空くまで新しい広告をアップロードできません。",
+    "pendingFileError": "最初にアップロードして保存をクリックして、選択したメディアを保存してください。",
+    "requestFailed": "エージェント広告リクエストの送信に失敗しました。",
+    "requestSent": "エージェント広告リクエストが正常に送信されました。",
     "settingsUpdated": "設定が正常に更新されました",
+    "superadminAdActive": "スーパーユーザーのホームページ広告は現在アクティブです。期限が切れるまで編集はロックされています。",
+    "superadminAdRequestInProgress": "スーパーユーザーのホームページ広告リクエストが進行中です。承認または却下されるまで編集はロックされています。",
+    "superadminAdsDisabled": "スーパーユーザー広告が正常に無効化されました。",
+    "superadminAdsEnabled": "スーパーユーザー広告が正常に有効化されました。",
+    "toggleDisabledError": "リクエストを送信する前にエージェント広告トグルを有効にしてください。",
     "uploadingImage": "画像をアップロード中...",
     "uploadingVideo": "ビデオをアップロード中... しばらくお待ちください。",
     "uploadTimeout": "アップロードタイムアウト。より小さいファイルで再試行するか、接続を確認してください。",
@@ -64,7 +85,11 @@
     "title": "広告プレビュー"
   },
   "startDate": {
-    "label": "開始日"
+    "conflictingBookedDates": "📅 \"{placement}\" 配置の競合する予約日付:",
+    "conflictWarning": "⚠️ 選択した日付はこの配置の既存の予約（{conflictStart} - {conflictEnd}）と競合しています。別の日付または別の配置を選択してください。",
+    "dateRangeAvailable": "✓ 選択した日付範囲はこの配置に利用可能です。",
+    "label": "開始日",
+    "loadingBookedDates": "予約された日付を読み込んでいます..."
   },
   "status": {
     "active": "アクティブ",
@@ -76,6 +101,10 @@
     "video": "動画広告"
   },
   "title": "プロモーションバナー",
+  "toggle": {
+    "description": "これを有効にして広告配置を設定および送信します",
+    "label": "広告トグル"
+  },
   "upload": {
     "addImage": "画像を追加",
     "addVideo": "ビデオを追加",

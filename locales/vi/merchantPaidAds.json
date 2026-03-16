@@ -1,4 +1,8 @@
 {
+  "buttons": {
+    "sendingRequest": "Đang gửi yêu cầu...",
+    "sendRequest": "Gửi yêu cầu đến đại lý"
+  },
   "common": {
     "activeAdAlt": "Quảng cáo đang hoạt động",
     "pendingUploadAlt": "Đang chờ tải lên",
@@ -24,18 +28,35 @@
     "days30": "30 Ngày",
     "days7": "7 Ngày",
     "label": "Thời gian",
+    "lockedMessage": "Thời gian bị khóa bởi cài đặt của siêu quản trị viên.",
     "selectPlaceholder": "Chọn thời gian"
   },
   "messages": {
+    "adLocked": "Cài đặt quảng cáo hiện đang bị khóa.",
+    "agentAdActive": "Quảng cáo của đại lý hiện đang hoạt động trên trang chính. Việc chỉnh sửa bị khóa cho đến khi hết hạn.",
+    "agentAdRequestInProgress": "Yêu cầu quảng cáo của đại lý đang được xử lý. Việc chỉnh sửa bị khóa cho đến khi được phê duyệt hoặc từ chối.",
+    "agentAdsDisabled": "Quảng cáo của đại lý đã được tắt thành công",
+    "agentAdsEnabled": "Quảng cáo của đại lý đã được kích hoạt thành công",
+    "dateConflictError": "Khoảng thời gian đã chọn có xung đột. Vui lòng thay đổi ngày hoặc vị trí.",
     "errorDeleting": "Xóa không thành công",
     "errorProcessing": "Lỗi xử lý hình ảnh",
     "errorSaving": "Lỗi lưu cài đặt",
+    "errorToggle": "Cập nhật công tắc quảng cáo không thành công",
     "imageDeleted": "Hình ảnh đã xóa thành công",
     "imageReady": "Hình ảnh đã sẵn sàng để tải lên. Nhấn 'Tải lên & Lưu' để hoàn tất.",
     "imageTooLarge": "Kích thước hình ảnh phải nhỏ hơn 10MB",
     "imageUploaded": "Hình ảnh đã được tải lên thành công",
+    "noMediaError": "Vui lòng tải lên hình ảnh hoặc video quảng cáo trước khi gửi yêu cầu.",
     "noSlotsWarning": "Không có vị trí quảng cáo nào có sẵn. Tất cả các vị trí hiện đang bị chiếm — bạn không thể tải lên quảng cáo mới cho đến khi có một vị trí mở.",
+    "pendingFileError": "Vui lòng nhấp vào Tải lên & Lưu trước để lưu phương tiện đã chọn.",
+    "requestFailed": "Gửi yêu cầu quảng cáo của đại lý không thành công.",
+    "requestSent": "Yêu cầu quảng cáo của đại lý đã được gửi thành công.",
     "settingsUpdated": "Cài đặt đã được cập nhật thành công",
+    "superadminAdActive": "Quảng cáo trên trang chính của siêu quản trị viên hiện đang hoạt động. Việc chỉnh sửa bị khóa cho đến khi hết hạn.",
+    "superadminAdRequestInProgress": "Yêu cầu quảng cáo trang chính của siêu quản trị đang được xử lý. Việc chỉnh sửa bị khóa cho đến khi nó được phê duyệt hoặc không phê duyệt.",
+    "superadminAdsDisabled": "Quảng cáo của siêu quản trị viên đã bị tắt thành công",
+    "superadminAdsEnabled": "Quảng cáo của siêu quản trị viên đã được kích hoạt thành công",
+    "toggleDisabledError": "Vui lòng bật công tắc quảng cáo của đại lý trước khi gửi yêu cầu.",
     "uploadingImage": "Đang tải hình ảnh...",
     "uploadingVideo": "Đang tải video... Điều này có thể mất một chút thời gian.",
     "uploadTimeout": "Thời gian tải lên đã hết. Vui lòng thử với tệp nhỏ hơn hoặc kiểm tra kết nối của bạn.",
@@ -64,7 +85,11 @@
     "title": "Xem trước quảng cáo"
   },
   "startDate": {
-    "label": "Ngày bắt đầu"
+    "conflictingBookedDates": "📅 Các ngày đã đặt xung đột cho vị trí \"{placement}\":",
+    "conflictWarning": "⚠️ Các ngày đã chọn xung đột với một đặt chỗ hiện có ({conflictStart} - {conflictEnd}) cho vị trí này. Vui lòng chọn ngày khác hoặc một vị trí khác.",
+    "dateRangeAvailable": "✓ Khoảng thời gian đã chọn có sẵn cho vị trí này.",
+    "label": "Ngày bắt đầu",
+    "loadingBookedDates": "Đang tải các ngày đã đặt..."
   },
   "status": {
     "active": "Hoạt động",
@@ -76,6 +101,10 @@
     "video": "Quảng cáo video"
   },
   "title": "Biểu ngữ quảng cáo",
+  "toggle": {
+    "description": "Bật cái này để cấu hình và gửi vị trí quảng cáo",
+    "label": "Bật quảng cáo"
+  },
   "upload": {
     "addImage": "Thêm hình ảnh",
     "addVideo": "Thêm video",
