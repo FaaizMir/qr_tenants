@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "Baki Pra-bayar Ejen Tidak Mencukupi",
     "agentBalanceInsufficinetDescription": "Ejen anda perlu menambah baki dompet prabayar mereka. Sila hubungi ejen anda untuk menambah dana sebelum menyelesaikan pembelian ini.",
+    "business": {
+      "creditLimitExceeded": "Had kredit melebihi untuk jenis peniaga ini",
+      "duplicatePurchase": "Pembelian duplikat dikesan. Sila tunggu sebelum mencuba lagi.",
+      "merchantInactive": "Akaun pedagang anda tidak aktif",
+      "merchantNotFound": "Akaun pedagang tidak ditemui",
+      "merchantSuspended": "Akaun pedagang anda telah digantung",
+      "packageExpired": "Tawaran pakej ini telah tamat",
+      "packageOutOfStock": "Pakej ini sedang kehabisan stok",
+      "paymentMethodRequired": "Kaedah pembayaran yang sah diperlukan",
+      "subscriptionRequired": "Langganan aktif diperlukan untuk pakej ini"
+    },
     "loadPackages": "Gagal memuatkan pakej kredit",
+    "network": {
+      "badRequest": "Permintaan tidak sah. Sila semak input anda.",
+      "conflict": "Terdapat konflik. Sumber mungkin telah diubah oleh pengguna lain.",
+      "connectionFailed": "Sambungan gagal. Sila semak sambungan internet anda.",
+      "forbidden": "Akses ditolak. Anda tidak mempunyai kebenaran untuk mengakses sumber ini.",
+      "gatewayTimeout": "Masa tamat gerbang. Sila cuba lagi.",
+      "internalServerError": "Ralat pelayan dalaman. Sila hubungi sokongan jika ini berterusan.",
+      "notFound": "Sumber yang diminta tidak dijumpai.",
+      "serverError": "Ralat pelayan berlaku. Sila cuba lagi nanti.",
+      "serviceUnavailable": "Perkhidmatan tidak tersedia buat sementara waktu. Sila cuba lagi nanti.",
+      "timeout": "Permintaan telah tamat. Sila cuba lagi.",
+      "tooManyRequests": "Terlalu banyak permintaan. Sila tunggu seketika dan cuba lagi.",
+      "unauthorized": "Anda tidak dibenarkan untuk melakukan tindakan ini."
+    },
     "noMerchantId": "ID Pedagang tidak dijumpai. Sila log masuk semula.",
-    "purchaseFailed": "Gagal membeli pakej. Sila cuba lagi."
+    "purchaseFailed": "Gagal membeli pakej. Sila cuba lagi.",
+    "stripe": {
+      "amountTooSmall": "Jumlah pembayaran adalah di bawah minimum yang diperlukan untuk pemprosesan.",
+      "authenticationRequired": "Pengesahan tambahan diperlukan untuk pembayaran ini",
+      "cardDeclined": "Kad anda ditolak",
+      "cardNotSupported": "Jenis kad ini tidak disokong",
+      "checkoutSessionFailed": "Gagal untuk membuat sesi checkout",
+      "currencyConversionError": "Tukar mata wang gagal. Sila cuba jumlah yang berbeza.",
+      "expiredCard": "Kad anda telah tamat tempoh",
+      "incorrectCvc": "Kod CVC tidak betul",
+      "insufficientFunds": "Dana tidak mencukupi pada kad anda",
+      "invalidCurrency": "Mata wang tidak sah untuk kaedah pembayaran ini",
+      "minimumAmountError": "Jumlah pembayaran terlalu kecil. Jumlah minimum yang diperlukan adalah 50 sen.",
+      "minimumAmountWithConversion": "Jumlah keseluruhan sesi pembayaran mesti ditukar kepada sekurang-kurangnya 50 sen. {originalAmount} ditukar kepada kira-kira {convertedAmount}.",
+      "paymentCancelled": "Pembayaran telah dibatalkan",
+      "paymentDeclined": "Pembayaran ditolak oleh bank anda",
+      "paymentFailed": "Pemprosesan pembayaran gagal",
+      "paymentIntentFailed": "Penciptaan niat pembayaran gagal",
+      "processingError": "Ralat pemprosesan pembayaran berlaku",
+      "rateLimitExceeded": "Terlalu banyak percubaan pembayaran. Sila tunggu sebelum mencuba lagi.",
+      "sessionExpired": "Sesi pembayaran telah tamat. Sila cuba lagi.",
+      "webhookError": "Pengesahan pembayaran gagal. Sila hubungi sokongan."
+    },
+    "validation": {
+      "invalidAmount": "Jumlah yang ditentukan tidak sah",
+      "invalidCurrency": "Mata wang yang ditentukan tidak sah",
+      "invalidPackage": "Pakej tidak sah dipilih",
+      "maximumAmount": "Jumlah melebihi maksimum yang dibenarkan",
+      "minimumAmount": "Jumlah adalah di bawah minimum yang diperlukan",
+      "packageNotFound": "Pakej yang dipilih tidak ditemui",
+      "packageUnavailable": "Pakej yang dipilih tidak lagi tersedia"
+    }
   },
   "merchantTypes": {
     "annual": "Tahunan",
@@ -74,11 +130,33 @@
     "credits": "kredit",
     "errors": {
       "insufficientBalance": "Baki dompet ejen tidak mencukupi. Diperlukan: {required}, Tersedia: {available}. Sila tambah nilai dompet anda untuk menyelesaikan pembelian ini.",
+      "network": {
+        "badRequest": "Permintaan pembayaran tidak sah. Sila semak butiran anda.",
+        "forbidden": "Akses pembayaran ditolak. Sila hubungi sokongan.",
+        "notFound": "Perkhidmatan pembayaran tidak dijumpai. Sila cuba lagi nanti.",
+        "serverError": "Ralat pelayan pembayaran. Sila cuba lagi kemudian.",
+        "serviceUnavailable": "Perkhidmatan pembayaran tidak tersedia buat sementara waktu. Sila cuba lagi kemudian.",
+        "unauthorized": "Kebenaran pembayaran gagal. Sila log masuk semula."
+      },
       "noAdminId": "Tidak dapat mengambil ID admin dari sesi. Sila log masuk semula.",
       "startCheckout": "Tidak dapat memulakan Stripe Checkout. Sila cuba lagi.",
       "startPayment": "Tidak dapat memulakan pembayaran. Sila cuba lagi.",
+      "stripe": {
+        "amountTooSmall": "Jumlah pembayaran adalah di bawah minimum yang diperlukan.",
+        "checkoutSessionFailed": "Gagal untuk membuat sesi pembayaran. Sila cuba lagi.",
+        "currencyConversionError": "Penukaran mata wang gagal. Sila cuba jumlah yang berbeza.",
+        "invalidCurrency": "Mata wang tidak sah untuk kaedah pembayaran ini",
+        "minimumAmountError": "Jumlah pembayaran terlalu kecil. Jumlah minimum yang diperlukan adalah 50 sen.",
+        "minimumAmountWithConversion": "Jumlah keseluruhan sesi pembayaran mesti ditukar kepada sekurang-kurangnya 50 sen. {originalAmount} ditukar kepada kira-kira {convertedAmount}.",
+        "processingError": "Ralat pemprosesan pembayaran. Sila cuba lagi."
+      },
       "validateBalance": "Tidak dapat mengesahkan baki dompet. Sila hubungi sokongan.",
-      "validateBalanceRetry": "Tidak dapat mengesahkan baki dompet. Sila cuba lagi."
+      "validateBalanceRetry": "Tidak dapat mengesahkan baki dompet. Sila cuba lagi.",
+      "validation": {
+        "invalidAmount": "Jumlah pembayaran yang ditentukan tidak sah",
+        "invalidCurrency": "Mata wang tidak sah untuk pembayaran",
+        "invalidPackage": "Pakej tidak sah dipilih untuk pembayaran"
+      }
     },
     "packagePurchase": "Pembelian pakej",
     "payableAmount": "Jumlah yang perlu dibayar",

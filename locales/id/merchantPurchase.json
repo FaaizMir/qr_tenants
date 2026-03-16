@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "Saldo Prabayar Agen Tidak Cukup",
     "agentBalanceInsufficinetDescription": "Agen Anda perlu mengisi ulang dompet prabayar mereka. Silakan hubungi agen Anda untuk menambahkan dana sebelum menyelesaikan pembelian ini.",
+    "business": {
+      "creditLimitExceeded": "Batas kredit terlampaui untuk jenis pedagang ini",
+      "duplicatePurchase": "Pembelian duplikat terdeteksi. Harap tunggu sebelum mencoba lagi.",
+      "merchantInactive": "Akun pedagang Anda tidak aktif",
+      "merchantNotFound": "Akun pedagang tidak ditemukan",
+      "merchantSuspended": "Akun pedagang Anda telah ditangguhkan",
+      "packageExpired": "Penawaran paket ini telah kedaluwarsa",
+      "packageOutOfStock": "Paket ini saat ini tidak tersedia",
+      "paymentMethodRequired": "Metode pembayaran yang valid diperlukan",
+      "subscriptionRequired": "Langganan aktif diperlukan untuk paket ini"
+    },
     "loadPackages": "Gagal memuat paket kredit",
+    "network": {
+      "badRequest": "Permintaan tidak valid. Silakan periksa input Anda.",
+      "conflict": "Terjadi konflik. Sumber daya mungkin telah dimodifikasi oleh pengguna lain.",
+      "connectionFailed": "Koneksi gagal. Silakan periksa koneksi internet Anda.",
+      "forbidden": "Akses ditolak. Anda tidak memiliki izin untuk mengakses sumber daya ini.",
+      "gatewayTimeout": "Waktu tunggu gateway. Silakan coba lagi.",
+      "internalServerError": "Kesalahan server internal. Silakan hubungi dukungan jika ini berlanjut.",
+      "notFound": "Sumber daya yang diminta tidak ditemukan.",
+      "serverError": "Terjadi kesalahan server. Silakan coba lagi nanti.",
+      "serviceUnavailable": "Layanan tidak tersedia sementara. Silakan coba lagi nanti.",
+      "timeout": "Permintaan telah habis waktu. Silakan coba lagi.",
+      "tooManyRequests": "Terlalu banyak permintaan. Harap tunggu sebentar dan coba lagi.",
+      "unauthorized": "Anda tidak diizinkan untuk melakukan tindakan ini."
+    },
     "noMerchantId": "ID Merchant tidak ditemukan. Silakan masuk lagi.",
-    "purchaseFailed": "Gagal membeli paket. Silakan coba lagi."
+    "purchaseFailed": "Gagal membeli paket. Silakan coba lagi.",
+    "stripe": {
+      "amountTooSmall": "Jumlah pembayaran di bawah minimum yang diperlukan untuk pemrosesan.",
+      "authenticationRequired": "Autentikasi tambahan diperlukan untuk pembayaran ini",
+      "cardDeclined": "Kartu Anda ditolak",
+      "cardNotSupported": "Jenis kartu ini tidak didukung",
+      "checkoutSessionFailed": "Gagal membuat sesi checkout",
+      "currencyConversionError": "Konversi mata uang gagal. Silakan coba jumlah yang berbeda.",
+      "expiredCard": "Kartu Anda telah kedaluwarsa",
+      "incorrectCvc": "Kode CVC tidak benar",
+      "insufficientFunds": "Dana tidak cukup di kartu Anda",
+      "invalidCurrency": "Mata uang tidak valid untuk metode pembayaran ini",
+      "minimumAmountError": "Jumlah pembayaran terlalu kecil. Jumlah minimum yang diperlukan adalah 50 sen.",
+      "minimumAmountWithConversion": "Jumlah total sesi checkout harus dikonversi menjadi setidaknya 50 sen. {originalAmount} dikonversi menjadi sekitar {convertedAmount}.",
+      "paymentCancelled": "Pembayaran dibatalkan",
+      "paymentDeclined": "Pembayaran ditolak oleh bank Anda",
+      "paymentFailed": "Proses pembayaran gagal",
+      "paymentIntentFailed": "Gagal membuat niat pembayaran",
+      "processingError": "Terjadi kesalahan dalam pemrosesan pembayaran",
+      "rateLimitExceeded": "Terlalu banyak percobaan pembayaran. Silakan tunggu sebelum mencoba lagi.",
+      "sessionExpired": "Sesi pembayaran telah kedaluwarsa. Silakan coba lagi.",
+      "webhookError": "Konfirmasi pembayaran gagal. Silakan hubungi dukungan."
+    },
+    "validation": {
+      "invalidAmount": "Jumlah yang ditentukan tidak valid",
+      "invalidCurrency": "Mata uang yang ditentukan tidak valid",
+      "invalidPackage": "Paket yang dipilih tidak valid",
+      "maximumAmount": "Jumlah melebihi batas maksimum yang diizinkan",
+      "minimumAmount": "Jumlah di bawah minimum yang diperlukan",
+      "packageNotFound": "Paket yang dipilih tidak ditemukan",
+      "packageUnavailable": "Paket yang dipilih tidak lagi tersedia"
+    }
   },
   "merchantTypes": {
     "annual": "Tahunan",
@@ -74,11 +130,33 @@
     "credits": "kredit",
     "errors": {
       "insufficientBalance": "Saldo dompet agen tidak cukup. Diperlukan: {required}, Tersedia: {available}. Silakan isi ulang dompet Anda untuk menyelesaikan pembelian ini.",
+      "network": {
+        "badRequest": "Permintaan pembayaran tidak valid. Silakan periksa detail Anda.",
+        "forbidden": "Akses pembayaran ditolak. Silakan hubungi dukungan.",
+        "notFound": "Layanan pembayaran tidak ditemukan. Silakan coba lagi nanti.",
+        "serverError": "Kesalahan server pembayaran. Silakan coba lagi nanti.",
+        "serviceUnavailable": "Layanan pembayaran sementara tidak tersedia. Silakan coba lagi nanti.",
+        "unauthorized": "Otorisasi pembayaran gagal. Silakan masuk lagi."
+      },
       "noAdminId": "Tidak dapat mengambil ID admin dari sesi. Silakan masuk lagi.",
       "startCheckout": "Tidak dapat memulai Stripe Checkout. Silakan coba lagi.",
       "startPayment": "Tidak dapat memulai pembayaran. Silakan coba lagi.",
+      "stripe": {
+        "amountTooSmall": "Jumlah pembayaran di bawah jumlah minimum yang diperlukan.",
+        "checkoutSessionFailed": "Gagal membuat sesi pembayaran. Silakan coba lagi.",
+        "currencyConversionError": "Konversi mata uang gagal. Silakan coba jumlah yang berbeda.",
+        "invalidCurrency": "Mata uang tidak valid untuk metode pembayaran ini",
+        "minimumAmountError": "Jumlah pembayaran terlalu kecil. Jumlah minimum yang diperlukan adalah 50 sen.",
+        "minimumAmountWithConversion": "Jumlah total sesi checkout harus dikonversi menjadi setidaknya 50 sen. {originalAmount} dikonversi menjadi sekitar {convertedAmount}.",
+        "processingError": "Kesalahan pemrosesan pembayaran. Silakan coba lagi."
+      },
       "validateBalance": "Tidak dapat memvalidasi saldo dompet. Silakan hubungi dukungan.",
-      "validateBalanceRetry": "Tidak dapat memvalidasi saldo dompet. Silakan coba lagi."
+      "validateBalanceRetry": "Tidak dapat memvalidasi saldo dompet. Silakan coba lagi.",
+      "validation": {
+        "invalidAmount": "Jumlah pembayaran yang ditentukan tidak valid",
+        "invalidCurrency": "Mata uang tidak valid untuk pembayaran",
+        "invalidPackage": "Paket yang dipilih untuk pembayaran tidak valid"
+      }
     },
     "packagePurchase": "Pembelian paket",
     "payableAmount": "Jumlah yang harus dibayar",

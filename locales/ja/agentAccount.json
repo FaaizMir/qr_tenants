@@ -14,61 +14,95 @@
   "errors": {
     "business": {
       "accountInactive": "あなたのアカウントは非アクティブです。サポートに連絡してください。",
+      "accountLocked": "複数回の失敗した試行により、あなたのアカウントはロックされています。",
       "accountNotFound": "アカウントが見つかりません。サポートにお問い合わせください。",
       "accountSuspended": "あなたのアカウントは一時停止されています。サポートに連絡してください。",
       "adminNotFound": "管理者アカウントが見つかりません。",
+      "dataIntegrityError": "データ整合性エラーが発生しました。サポートに連絡してください。",
+      "duplicateEntry": "このエントリはすでにシステムに存在します。",
       "emailAlreadyVerified": "メールアドレスはすでに確認されています。",
       "emailNotVerified": "続行する前にメールアドレスを確認してください。",
       "insufficientPermissions": "このアクションを実行するための十分な権限がありません。",
+      "invalidCredentials": "無効な資格情報が提供されました。",
+      "maintenanceMode": "システムは現在メンテナンス中です。後でもう一度お試しください。",
+      "operationNotAllowed": "この操作はあなたのアカウントタイプでは許可されていません。",
       "phoneAlreadyVerified": "電話番号はすでに確認されています。",
       "phoneNotVerified": "続行する前に電話番号を確認してください。",
+      "quotaExceeded": "クォータ制限を超えました。",
+      "resourceNotFound": "要求されたリソースが見つかりませんでした。",
       "sessionExpired": "セッションが期限切れになりました。再度ログインしてください。",
       "stripeKeyInvalid": "提供されたStripeキーは無効または期限切れです。",
       "stripeKeyLiveInDevelopment": "本番環境ではライブStripeキーを使用できません。",
-      "stripeKeyTestInProduction": "テスト用のStripeキーは本番環境では使用できません。"
+      "stripeKeyTestInProduction": "テスト用のStripeキーは本番環境では使用できません。",
+      "tokenExpired": "認証トークンの有効期限が切れました。"
     },
     "network": {
+      "badGateway": "不正なゲートウェイエラー。もう一度お試しください。",
       "badRequest": "無効なリクエストです。入力内容を確認してください。",
       "conflict": "競合が発生しました。リソースは他のユーザーによって変更された可能性があります。",
       "connectionFailed": "接続に失敗しました。インターネット接続を確認してください。",
       "forbidden": "アクセスが拒否されました。このリソースにアクセスする権限がありません。",
+      "gatewayTimeout": "ゲートウェイタイムアウト。もう一度お試しください。",
       "internalServerError": "内部サーバーエラーです。この問題が続く場合はサポートに連絡してください。",
+      "networkError": "ネットワークエラーが発生しました。接続を確認してください。",
       "notFound": "要求されたリソースが見つかりませんでした。",
       "serverError": "サーバーエラーが発生しました。後でもう一度お試しください。",
+      "serviceUnavailable": "サービスは一時的に利用できません。後でもう一度お試しください。",
       "timeout": "リクエストがタイムアウトしました。再試行してください。",
       "tooManyRequests": "リクエストが多すぎます。しばらく待ってから再試行してください。",
       "unauthorized": "このアクションを実行する権限がありません。"
     },
     "validation": {
       "address": {
+        "cannotBeBlank": "住所は空白にできません",
+        "empty": "住所は空にできません",
         "invalid": "有効な住所を入力してください",
+        "required": "住所は必須です",
         "tooLong": "住所は500文字を超えてはいけません"
       },
       "city": {
+        "cannotBeBlank": "市区町村は空白にできません",
+        "empty": "市区町村は空にできません",
+        "invalid": "市区町村の形式が無効です",
         "invalidCharacters": "市名は文字、スペース、ハイフンのみを含むことができます。",
+        "required": "市区町村は必須です",
         "tooLong": "市名は100文字を超えてはいけません",
         "tooShort": "市名は2文字以上でなければなりません"
       },
       "company_name": {
         "alreadyExists": "この会社名はすでに登録されています。",
+        "cannotBeBlank": "会社名は空白にできません",
+        "empty": "会社名は空にできません",
+        "invalid": "会社名の形式が無効です",
         "invalidCharacters": "会社名に無効な文字が含まれています。",
+        "required": "会社名は必須です",
         "tooLong": "会社名は200文字を超えてはいけません",
-        "tooShort": "会社名は2文字以上でなければなりません"
+        "tooShort": "会社名は2文字以上でなければなりません",
+        "unique": "この会社名はすでに使用されています"
       },
       "country": {
+        "cannotBeBlank": "国は空白にできません",
+        "empty": "国は空にできません",
+        "invalid": "国の形式が無効です",
         "invalidCharacters": "国名は文字、スペース、ハイフンのみを含むことができます",
+        "required": "国は必須です",
         "tooLong": "国名は100文字を超えてはいけません",
         "tooShort": "国名は少なくとも2文字以上である必要があります。"
       },
       "email": {
         "alreadyExists": "このメールアドレスはすでに登録されています",
+        "cannotBeBlank": "メールアドレスは空白にできません",
         "empty": "メールアドレスは空にできません",
         "invalid": "有効なメールアドレスを入力してください。",
+        "invalidFormat": "メールの形式が無効です",
         "required": "メールアドレスは必須です",
-        "tooLong": "メールアドレスは255文字を超えてはいけません"
+        "tooLong": "メールアドレスは255文字を超えてはいけません",
+        "unique": "このメールアドレスはすでに使用されています"
       },
       "name": {
+        "cannotBeBlank": "フルネームは空白にできません",
         "empty": "フルネームは空にできません",
+        "invalid": "フルネームの形式が無効です",
         "invalidCharacters": "フルネームは文字、スペース、ハイフンのみを含むことができます",
         "required": "フルネームは必須です",
         "tooLong": "フルネームは100文字を超えてはいけません",
@@ -76,17 +110,26 @@
       },
       "phone": {
         "alreadyExists": "この電話番号はすでに登録されています",
+        "cannotBeBlank": "電話番号は空白にできません",
+        "empty": "電話番号は空にできません",
         "invalid": "有効な電話番号を入力してください",
         "invalidFormat": "電話番号の形式が無効です",
+        "required": "電話番号は必須です",
         "tooLong": "電話番号が長すぎます。",
-        "tooShort": "電話番号が短すぎます"
+        "tooShort": "電話番号が短すぎます",
+        "unique": "この電話番号はすでに使用されています"
       },
       "stripe_secret_key": {
         "alreadyExists": "このStripeキーはすでに使用されています",
+        "cannotBeBlank": "Stripe秘密鍵は空白にできません",
+        "empty": "Stripeの秘密鍵は空にできません",
         "invalid": "無効なStripeシークレットキーの形式",
+        "invalidFormat": "Stripe秘密鍵の形式が無効です",
         "invalidPrefix": "Stripeの秘密鍵は'sk_test_'または'sk_live_'で始まる必要があります。",
+        "required": "Stripe秘密鍵は必須です",
         "tooLong": "Stripeの秘密鍵が長すぎます。",
-        "tooShort": "Stripeの秘密鍵が短すぎます"
+        "tooShort": "Stripeの秘密鍵が短すぎます",
+        "unique": "このStripeキーはすでに使用されています"
       }
     }
   },

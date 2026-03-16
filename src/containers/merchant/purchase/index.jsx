@@ -77,7 +77,73 @@ export default function MerchantPurchase() {
         setPackages(Array.isArray(data) ? data : []);
       } catch (err) {
         if (!mounted) return;
-        setError(t("errors.loadPackages"));
+        
+        const errorMsg = err?.response?.data?.message || err?.message;
+        const statusCode = err?.response?.status;
+        
+        // Enhanced error handling for package loading
+        const handleLoadError = (message, status) => {
+          // Check for specific business errors
+          const businessErrorPatterns = {
+            "merchant not found": "merchantNotFound",
+            "merchant inactive": "merchantInactive", 
+            "merchant suspended": "merchantSuspended",
+            "subscription required": "subscriptionRequired"
+          };
+
+          if (message) {
+            const lowerMessage = message.toLowerCase();
+            for (const [pattern, key] of Object.entries(businessErrorPatterns)) {
+              if (lowerMessage.includes(pattern)) {
+                try {
+                  const translation = t(`errors.business.${key}`);
+                  if (translation) {
+                    return translation;
+                  }
+                } catch (e) {
+                  // Continue to network error handling
+                }
+              }
+            }
+          }
+
+          // Handle network errors
+          let networkErrorKey = null;
+          switch (status) {
+            case 401:
+              networkErrorKey = "unauthorized";
+              break;
+            case 403:
+              networkErrorKey = "forbidden";
+              break;
+            case 404:
+              networkErrorKey = "notFound";
+              break;
+            case 500:
+              networkErrorKey = "internalServerError";
+              break;
+            case 503:
+              networkErrorKey = "serviceUnavailable";
+              break;
+            default:
+              networkErrorKey = "serverError";
+          }
+
+          if (networkErrorKey) {
+            try {
+              const translation = t(`errors.network.${networkErrorKey}`);
+              if (translation) {
+                return translation;
+              }
+            } catch (e) {
+              // Fall back to default
+            }
+          }
+
+          return t("errors.loadPackages");
+        };
+
+        setError(handleLoadError(errorMsg, statusCode));
       } finally {
         if (mounted) setLoading(false);
       }
@@ -173,22 +239,201 @@ export default function MerchantPurchase() {
       
       const errorData = err?.response?.data;
       const errorMsg = errorData?.message || err?.message;
+      const statusCode = err?.response?.status;
      
-      // Check if it's an insufficient agent balance error
-      if (errorMsg && errorMsg.includes("Insufficient agent wallet balance")) {
-        toast.error(t("errors.agentBalanceInsufficient"), {
-          description: t("errors.agentBalanceInsufficinetDescription"),
-          closeButton: true,
-          duration: false,
-        });
+      // Enhanced error handling with pattern matching
+      const handleError = (message, status) => {
+        // First try to match specific Stripe errors
+        const stripeErrorPatterns = {
+          "checkout session's total amount must convert to at least 50 cents": (message) => {
+            // Extract currency amounts from the message
+            const conversionMatch = message.match(/([₨$€£¥₹¢]+[\d,]+\.?\d*)\s+converts to approximately\s+([₨$€£¥₹¢]+[\d,]+\.?\d*)/i);
+            if (conversionMatch) {
+              const originalAmount = conversionMatch[1];
+              const convertedAmount = conversionMatch[2];
+              return t("errors.stripe.minimumAmountWithConversion", {
+                originalAmount,
+                convertedAmount
+              });
+            }
+            return t("errors.stripe.minimumAmountError");
+          },
+          "amount must convert to at least 50 cents": "minimumAmountError", 
+          "currency conversion failed": "currencyConversionError",
+          "amount is too small": "amountTooSmall",
+          "payment processing failed": "paymentFailed",
+          "payment was cancelled": "paymentCancelled",
+          "payment was declined": "paymentDeclined",
+          "card was declined": "cardDeclined",
+          "insufficient funds": "insufficientFunds",
+          "card has expired": "expiredCard",
+          "incorrect cvc": "incorrectCvc",
+          "checkout session failed": "checkoutSessionFailed",
+          "processing error": "processingError",
+          "session expired": "sessionExpired",
+          "rate limit exceeded": "rateLimitExceeded",
+          "card not supported": "cardNotSupported",
+          "authentication required": "authenticationRequired",
+          "payment intent failed": "paymentIntentFailed",
+          "webhook error": "webhookError"
+        };
+
+        // Check for Stripe-specific errors
+        const lowerMessage = message.toLowerCase();
+        for (const [pattern, keyOrFunction] of Object.entries(stripeErrorPatterns)) {
+          if (lowerMessage.includes(pattern)) {
+            try {
+              let translation;
+              if (typeof keyOrFunction === 'function') {
+                translation = keyOrFunction(message);
+              } else {
+                translation = t(`errors.stripe.${keyOrFunction}`);
+              }
+              if (translation) {
+                toast.error(translation, {
+                  closeButton: true,
+                  duration: false,
+                });
+                return;
+              }
+            } catch (e) {
+              // Continue to other error patterns
+            }
+          }
+        }
+
+        // Check for business logic errors
+        const businessErrorPatterns = {
+          "merchant not found": "merchantNotFound",
+          "merchant inactive": "merchantInactive",
+          "merchant suspended": "merchantSuspended",
+          "package expired": "packageExpired",
+          "package out of stock": "packageOutOfStock",
+          "credit limit exceeded": "creditLimitExceeded",
+          "subscription required": "subscriptionRequired",
+          "payment method required": "paymentMethodRequired",
+          "duplicate purchase": "duplicatePurchase",
+          "insufficient agent wallet balance": "agentBalanceInsufficient"
+        };
+
+        for (const [pattern, key] of Object.entries(businessErrorPatterns)) {
+          if (lowerMessage.includes(pattern)) {
+            try {
+              if (key === "agentBalanceInsufficient") {
+                toast.error(t(`errors.${key}`), {
+                  description: t("errors.agentBalanceInsufficinetDescription"),
+                  closeButton: true,
+                  duration: false,
+                });
+                return;
+              } else {
+                const translation = t(`errors.business.${key}`);
+                if (translation) {
+                  toast.error(translation, {
+                    closeButton: true,
+                    duration: false,
+                  });
+                  return;
+                }
+              }
+            } catch (e) {
+              // Continue to network error handling
+            }
+          }
+        }
+
+        // Check for validation errors
+        const validationErrorPatterns = {
+          "invalid amount": "invalidAmount",
+          "invalid currency": "invalidCurrency",
+          "invalid package": "invalidPackage",
+          "package not found": "packageNotFound",
+          "package unavailable": "packageUnavailable",
+          "minimum amount": "minimumAmount",
+          "maximum amount": "maximumAmount"
+        };
+
+        for (const [pattern, key] of Object.entries(validationErrorPatterns)) {
+          if (lowerMessage.includes(pattern)) {
+            try {
+              const translation = t(`errors.validation.${key}`);
+              if (translation) {
+                toast.error(translation, {
+                  closeButton: true,
+                  duration: false,
+                });
+                return;
+              }
+            } catch (e) {
+              // Continue to network error handling
+            }
+          }
+        }
+
+        // Handle network errors based on status code
+        let networkErrorKey = null;
+        switch (status) {
+          case 400:
+            networkErrorKey = "badRequest";
+            break;
+          case 401:
+            networkErrorKey = "unauthorized";
+            break;
+          case 403:
+            networkErrorKey = "forbidden";
+            break;
+          case 404:
+            networkErrorKey = "notFound";
+            break;
+          case 409:
+            networkErrorKey = "conflict";
+            break;
+          case 429:
+            networkErrorKey = "tooManyRequests";
+            break;
+          case 500:
+            networkErrorKey = "internalServerError";
+            break;
+          case 502:
+            networkErrorKey = "serverError";
+            break;
+          case 503:
+            networkErrorKey = "serviceUnavailable";
+            break;
+          case 504:
+            networkErrorKey = "gatewayTimeout";
+            break;
+          default:
+            networkErrorKey = "serverError";
+        }
+
+        if (networkErrorKey) {
+          try {
+            const translation = t(`errors.network.${networkErrorKey}`);
+            if (translation) {
+              toast.error(translation, {
+                closeButton: true,
+                duration: false,
+              });
+              return;
+            }
+          } catch (e) {
+            // Fall back to original message
+          }
+        }
+
+        // Final fallback to original message or generic error
+        const fallbackMsg = message || t("errors.purchaseFailed");
+        toast.error(fallbackMsg, { closeButton: true, duration: false });
+      };
+
+      // Handle the error
+      if (errorMsg) {
+        handleError(errorMsg, statusCode);
+      } else if (statusCode) {
+        handleError(`Request failed with status ${statusCode}.`, statusCode);
       } else {
-        const msg =
-          errorMsg ||
-          (err?.response?.status
-            ? `Request failed with status ${err.response.status}.`
-            : err?.message) ||
-          t("errors.purchaseFailed");
-        toast.error(msg, { closeButton: true, duration: false });
+        handleError(err?.message || t("errors.purchaseFailed"), statusCode);
       }
     } finally {
       setPurchasingId(null);
@@ -501,7 +746,7 @@ export default function MerchantPurchase() {
                 {/* Paid Ads Disclaimer */}
                 {selectedPackage && 
                   selectedPackage.credit_type?.toLowerCase().includes("ad") && (
-                  <div className="mt-4 p-3.5 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                  <div className="mt-4 p-3.5 rounded-lg bg-linear-to-br from-amber-50 to-orange-50 border border-amber-200">
                     <div className="flex gap-2.5">
                       <div className="shrink-0 mt-0.5">
                         <div className="p-1 bg-amber-500 rounded-md">

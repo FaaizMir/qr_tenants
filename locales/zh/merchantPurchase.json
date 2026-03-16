@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "代理预付余额不足",
     "agentBalanceInsufficinetDescription": "您的代理需要为他们的预付钱包充值。请联系您的代理在完成此购买之前添加资金。",
+    "business": {
+      "creditLimitExceeded": "此商户类型的信用额度已超出",
+      "duplicatePurchase": "检测到重复购买。请稍等再试。",
+      "merchantInactive": "您的商户账户处于非活动状态",
+      "merchantNotFound": "找不到商户账户",
+      "merchantSuspended": "您的商户账户已被暂停",
+      "packageExpired": "此套餐优惠已过期",
+      "packageOutOfStock": "该包裹目前缺货",
+      "paymentMethodRequired": "需要有效的支付方式",
+      "subscriptionRequired": "此包裹需要有效的订阅"
+    },
     "loadPackages": "加载信用包失败",
+    "network": {
+      "badRequest": "无效请求。请检查您的输入。",
+      "conflict": "发生冲突。该资源可能已被其他用户修改。",
+      "connectionFailed": "连接失败。请检查您的互联网连接。",
+      "forbidden": "访问被拒绝。您没有权限访问此资源。",
+      "gatewayTimeout": "网关超时。请再试一次。",
+      "internalServerError": "内部服务器错误。如果问题持续，请联系支持。",
+      "notFound": "请求的资源未找到。",
+      "serverError": "发生服务器错误。请稍后再试。",
+      "serviceUnavailable": "服务暂时不可用。请稍后再试。",
+      "timeout": "请求超时。请再试一次。",
+      "tooManyRequests": "请求过多。请稍等片刻再试。",
+      "unauthorized": "您没有权限执行此操作。"
+    },
     "noMerchantId": "未找到商户 ID。请重新登录。",
-    "purchaseFailed": "购买包失败。请再试一次。"
+    "purchaseFailed": "购买包失败。请再试一次。",
+    "stripe": {
+      "amountTooSmall": "支付金额低于处理所需的最低金额。",
+      "authenticationRequired": "此支付需要额外的身份验证",
+      "cardDeclined": "您的卡被拒绝",
+      "cardNotSupported": "此卡类型不受支持",
+      "checkoutSessionFailed": "创建结账会话失败",
+      "currencyConversionError": "货币转换失败。请尝试不同的金额。",
+      "expiredCard": "您的卡已过期",
+      "incorrectCvc": "无效的CVC代码",
+      "insufficientFunds": "您的卡上资金不足",
+      "invalidCurrency": "此支付方式的货币无效",
+      "minimumAmountError": "支付金额太小。最低要求金额为50美分。",
+      "minimumAmountWithConversion": "结账会话的总金额必须转换为至少50美分。{originalAmount} 转换为大约 {convertedAmount}。",
+      "paymentCancelled": "支付已被取消",
+      "paymentDeclined": "您的银行拒绝了支付",
+      "paymentFailed": "支付处理失败",
+      "paymentIntentFailed": "支付意图创建失败",
+      "processingError": "发生支付处理错误",
+      "rateLimitExceeded": "支付尝试次数过多。请稍后再试。",
+      "sessionExpired": "支付会话已过期。请再试一次。",
+      "webhookError": "支付确认失败。请联系支持。"
+    },
+    "validation": {
+      "invalidAmount": "指定的金额无效",
+      "invalidCurrency": "指定的货币无效",
+      "invalidPackage": "无效的套餐选择",
+      "maximumAmount": "金额超过允许的最大值",
+      "minimumAmount": "金额低于最低要求",
+      "packageNotFound": "未找到所选包裹",
+      "packageUnavailable": "所选套餐不再可用"
+    }
   },
   "merchantTypes": {
     "annual": "年度",
@@ -74,11 +130,33 @@
     "credits": "积分",
     "errors": {
       "insufficientBalance": "代理钱包余额不足。所需：{required}，可用：{available}。请充值您的钱包以完成此购买。",
+      "network": {
+        "badRequest": "无效的支付请求。请检查您的详细信息。",
+        "forbidden": "支付访问被拒绝。请联系支持。",
+        "notFound": "未找到支付服务。请稍后再试。",
+        "serverError": "支付服务器错误。请稍后再试。",
+        "serviceUnavailable": "支付服务暂时不可用。请稍后再试。",
+        "unauthorized": "支付授权失败。请重新登录。"
+      },
       "noAdminId": "无法从会话中检索管理员 ID。请重新登录。",
       "startCheckout": "无法启动 Stripe 结账。请再试一次。",
       "startPayment": "无法开始支付。请再试一次。",
+      "stripe": {
+        "amountTooSmall": "支付金额低于最低要求。",
+        "checkoutSessionFailed": "创建支付会话失败。请再试一次。",
+        "currencyConversionError": "货币转换失败。请尝试不同的金额。",
+        "invalidCurrency": "此支付方式的无效货币",
+        "minimumAmountError": "支付金额太小。最低要求金额为50美分。",
+        "minimumAmountWithConversion": "结账会话的总金额必须转换为至少50美分。{originalAmount} 转换为大约 {convertedAmount}。",
+        "processingError": "支付处理错误。请再试一次。"
+      },
       "validateBalance": "无法验证钱包余额。请联系支持。",
-      "validateBalanceRetry": "无法验证钱包余额。请再试一次。"
+      "validateBalanceRetry": "无法验证钱包余额。请再试一次。",
+      "validation": {
+        "invalidAmount": "指定的支付金额无效",
+        "invalidCurrency": "支付的无效货币",
+        "invalidPackage": "选择的支付包无效"
+      }
     },
     "packagePurchase": "套餐购买",
     "payableAmount": "应付金额",

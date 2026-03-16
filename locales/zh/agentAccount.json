@@ -14,61 +14,95 @@
   "errors": {
     "business": {
       "accountInactive": "您的账户处于非活动状态。请联系支持。",
+      "accountLocked": "由于多次失败尝试，您的账户已被锁定。",
       "accountNotFound": "找不到账户。请联系支持。",
       "accountSuspended": "您的帐户已被暂停。请联系支持。",
       "adminNotFound": "未找到管理员账户。",
+      "dataIntegrityError": "数据完整性错误，请联系支持。",
+      "duplicateEntry": "此条目已在系统中存在。",
       "emailAlreadyVerified": "电子邮件地址已验证。",
       "emailNotVerified": "请在继续之前验证您的电子邮件地址。",
       "insufficientPermissions": "您没有足够的权限执行此操作。",
+      "invalidCredentials": "提供的凭据无效。",
+      "maintenanceMode": "系统当前正在维护。请稍后再试。",
+      "operationNotAllowed": "此操作不允许您的账户类型。",
       "phoneAlreadyVerified": "电话号码已验证。",
       "phoneNotVerified": "请在继续之前验证您的电话号码。",
+      "quotaExceeded": "您已超出配额限制。",
+      "resourceNotFound": "请求的资源未找到。",
       "sessionExpired": "您的会话已过期。请重新登录。",
       "stripeKeyInvalid": "提供的 Stripe 密钥无效或已过期。",
       "stripeKeyLiveInDevelopment": "实时 Stripe 密钥不能在开发环境中使用。",
-      "stripeKeyTestInProduction": "测试 Stripe 密钥不能在生产环境中使用。"
+      "stripeKeyTestInProduction": "测试 Stripe 密钥不能在生产环境中使用。",
+      "tokenExpired": "您的身份验证令牌已过期。"
     },
     "network": {
+      "badGateway": "网关错误，请重试。",
       "badRequest": "无效请求。请检查您的输入。",
       "conflict": "发生冲突。该资源可能已被其他用户修改。",
       "connectionFailed": "连接失败。请检查您的互联网连接。",
       "forbidden": "访问被拒绝。您没有权限访问此资源。",
+      "gatewayTimeout": "网关超时，请重试。",
       "internalServerError": "内部服务器错误。如果问题持续，请联系支持。",
+      "networkError": "发生网络错误。请检查您的连接。",
       "notFound": "请求的资源未找到。",
       "serverError": "发生服务器错误。请稍后再试。",
+      "serviceUnavailable": "服务暂时不可用。请稍后再试。",
       "timeout": "请求超时。请再试一次。",
       "tooManyRequests": "请求过多。请稍等片刻再试。",
       "unauthorized": "您没有权限执行此操作。"
     },
     "validation": {
       "address": {
+        "cannotBeBlank": "地址不能为空",
+        "empty": "地址不能为空",
         "invalid": "请输入有效地址",
+        "required": "地址是必需的",
         "tooLong": "地址不能超过 500 个字符"
       },
       "city": {
+        "cannotBeBlank": "城市不能为空",
+        "empty": "城市不能为空",
+        "invalid": "城市格式无效",
         "invalidCharacters": "城市名称只能包含字母、空格和连字符",
+        "required": "城市是必填项",
         "tooLong": "城市名称不能超过100个字符",
         "tooShort": "城市名称必须至少 2 个字符长"
       },
       "company_name": {
         "alreadyExists": "该公司名称已被注册",
+        "cannotBeBlank": "公司名称不能为空",
+        "empty": "公司名称不能为空",
+        "invalid": "公司名称格式无效",
         "invalidCharacters": "公司名称包含无效字符",
+        "required": "公司名称是必需的",
         "tooLong": "公司名称不能超过200个字符",
-        "tooShort": "公司名称必须至少 2 个字符长"
+        "tooShort": "公司名称必须至少 2 个字符长",
+        "unique": "此公司名称已在使用中"
       },
       "country": {
+        "cannotBeBlank": "国家不能为空",
+        "empty": "国家不能为空",
+        "invalid": "国家格式无效",
         "invalidCharacters": "国家名称只能包含字母、空格和连字符",
+        "required": "国家是必填项",
         "tooLong": "国家名称不能超过 100 个字符",
         "tooShort": "国家名称必须至少包含 2 个字符"
       },
       "email": {
         "alreadyExists": "该电子邮件地址已被注册",
+        "cannotBeBlank": "电子邮件地址不能为空",
         "empty": "电子邮件地址不能为空",
         "invalid": "请输入有效的电子邮件地址",
+        "invalidFormat": "电子邮件格式无效",
         "required": "电子邮件地址是必需的",
-        "tooLong": "电子邮件地址不能超过 255 个字符"
+        "tooLong": "电子邮件地址不能超过 255 个字符",
+        "unique": "此电子邮件地址已在使用中"
       },
       "name": {
+        "cannotBeBlank": "全名不能为空",
         "empty": "全名不能为空",
+        "invalid": "全名格式无效",
         "invalidCharacters": "全名只能包含字母、空格和连字符",
         "required": "全名是必需的",
         "tooLong": "全名不能超过100个字符",
@@ -76,17 +110,26 @@
       },
       "phone": {
         "alreadyExists": "此电话号码已注册",
+        "cannotBeBlank": "电话号码不能为空",
+        "empty": "电话号码不能为空",
         "invalid": "请输入有效的电话号码",
         "invalidFormat": "电话号码格式无效",
+        "required": "电话号码是必需的",
         "tooLong": "电话号码过长",
-        "tooShort": "电话号码太短"
+        "tooShort": "电话号码太短",
+        "unique": "此电话号码已在使用中"
       },
       "stripe_secret_key": {
         "alreadyExists": "此 Stripe 密钥已在使用中",
+        "cannotBeBlank": "Stripe密钥不能为空",
+        "empty": "Stripe 秘钥不能为空",
         "invalid": "无效的Stripe密钥格式",
+        "invalidFormat": "Stripe密钥格式无效",
         "invalidPrefix": "Stripe 秘钥必须以 'sk_test_' 或 'sk_live_' 开头",
+        "required": "Stripe密钥是必填项",
         "tooLong": "Stripe 秘钥过长",
-        "tooShort": "Stripe 秘密密钥太短"
+        "tooShort": "Stripe 秘密密钥太短",
+        "unique": "此Stripe密钥已在使用中"
       }
     }
   },

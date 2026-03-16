@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "Số dư trước trả của đại lý không đủ",
     "agentBalanceInsufficinetDescription": "Đại lý của bạn cần nạp tiền vào ví trả trước. Vui lòng liên hệ với đại lý của bạn để thêm tiền trước khi hoàn tất giao dịch này.",
+    "business": {
+      "creditLimitExceeded": "Giới hạn tín dụng đã vượt quá cho loại thương nhân này",
+      "duplicatePurchase": "Phát hiện giao dịch trùng lặp. Vui lòng chờ trước khi thử lại.",
+      "merchantInactive": "Tài khoản thương nhân của bạn không hoạt động",
+      "merchantNotFound": "Tài khoản thương nhân không được tìm thấy",
+      "merchantSuspended": "Tài khoản thương nhân của bạn đã bị đình chỉ",
+      "packageExpired": "Ưu đãi gói này đã hết hạn",
+      "packageOutOfStock": "Gói hàng này hiện không có sẵn",
+      "paymentMethodRequired": "Phương thức thanh toán hợp lệ là bắt buộc",
+      "subscriptionRequired": "Cần có đăng ký hoạt động cho gói này"
+    },
     "loadPackages": "Không thể tải gói tín dụng",
+    "network": {
+      "badRequest": "Yêu cầu không hợp lệ. Vui lòng kiểm tra đầu vào của bạn.",
+      "conflict": "Đã xảy ra xung đột. Tài nguyên có thể đã được sửa đổi bởi người dùng khác.",
+      "connectionFailed": "Kết nối thất bại. Vui lòng kiểm tra kết nối internet của bạn.",
+      "forbidden": "Truy cập bị từ chối. Bạn không có quyền truy cập vào tài nguyên này.",
+      "gatewayTimeout": "Thời gian chờ cổng. Vui lòng thử lại.",
+      "internalServerError": "Lỗi máy chủ nội bộ. Vui lòng liên hệ với bộ phận hỗ trợ nếu vấn đề này tiếp diễn.",
+      "notFound": "Tài nguyên yêu cầu không được tìm thấy.",
+      "serverError": "Đã xảy ra lỗi máy chủ. Vui lòng thử lại sau.",
+      "serviceUnavailable": "Dịch vụ tạm thời không khả dụng. Vui lòng thử lại sau.",
+      "timeout": "Yêu cầu đã hết thời gian. Vui lòng thử lại.",
+      "tooManyRequests": "Quá nhiều yêu cầu. Vui lòng chờ một chút và thử lại.",
+      "unauthorized": "Bạn không được phép thực hiện hành động này."
+    },
     "noMerchantId": "Không tìm thấy ID người bán. Vui lòng đăng nhập lại.",
-    "purchaseFailed": "Không thể mua gói. Vui lòng thử lại."
+    "purchaseFailed": "Không thể mua gói. Vui lòng thử lại.",
+    "stripe": {
+      "amountTooSmall": "Số tiền thanh toán thấp hơn mức tối thiểu yêu cầu để xử lý.",
+      "authenticationRequired": "Cần xác thực bổ sung cho khoản thanh toán này",
+      "cardDeclined": "Thẻ của bạn đã bị từ chối",
+      "cardNotSupported": "Loại thẻ này không được hỗ trợ",
+      "checkoutSessionFailed": "Không thể tạo phiên thanh toán",
+      "currencyConversionError": "Chuyển đổi tiền tệ không thành công. Vui lòng thử một số tiền khác.",
+      "expiredCard": "Thẻ của bạn đã hết hạn",
+      "incorrectCvc": "Mã CVC không chính xác",
+      "insufficientFunds": "Số dư không đủ trên thẻ của bạn",
+      "invalidCurrency": "Tiền tệ không hợp lệ cho phương thức thanh toán này",
+      "minimumAmountError": "Số tiền thanh toán quá nhỏ. Số tiền tối thiểu yêu cầu là 50 xu.",
+      "minimumAmountWithConversion": "Tổng số tiền của phiên thanh toán phải chuyển đổi ít nhất thành 50 xu. {originalAmount} chuyển đổi thành khoảng {convertedAmount}.",
+      "paymentCancelled": "Thanh toán đã bị hủy",
+      "paymentDeclined": "Thanh toán đã bị từ chối bởi ngân hàng của bạn",
+      "paymentFailed": "Xử lý thanh toán không thành công",
+      "paymentIntentFailed": "Tạo ý định thanh toán thất bại",
+      "processingError": "Đã xảy ra lỗi trong quá trình xử lý thanh toán",
+      "rateLimitExceeded": "Quá nhiều lần thử thanh toán. Vui lòng chờ trước khi thử lại.",
+      "sessionExpired": "Phiên thanh toán đã hết hạn. Vui lòng thử lại.",
+      "webhookError": "Xác nhận thanh toán không thành công. Vui lòng liên hệ với bộ phận hỗ trợ."
+    },
+    "validation": {
+      "invalidAmount": "Số tiền chỉ định không hợp lệ",
+      "invalidCurrency": "Tiền tệ không hợp lệ được chỉ định",
+      "invalidPackage": "Gói không hợp lệ được chọn",
+      "maximumAmount": "Số tiền vượt quá giới hạn tối đa cho phép",
+      "minimumAmount": "Số tiền thấp hơn mức tối thiểu yêu cầu",
+      "packageNotFound": "Gói đã chọn không được tìm thấy",
+      "packageUnavailable": "Gói đã chọn không còn khả dụng"
+    }
   },
   "merchantTypes": {
     "annual": "Hàng năm",
@@ -74,11 +130,33 @@
     "credits": "tín dụng",
     "errors": {
       "insufficientBalance": "Số dư ví của đại lý không đủ. Cần: {required}, Có sẵn: {available}. Vui lòng nạp thêm tiền vào ví của bạn để hoàn tất giao dịch này.",
+      "network": {
+        "badRequest": "Yêu cầu thanh toán không hợp lệ. Vui lòng kiểm tra thông tin của bạn.",
+        "forbidden": "Truy cập thanh toán bị từ chối. Vui lòng liên hệ với bộ phận hỗ trợ.",
+        "notFound": "Dịch vụ thanh toán không được tìm thấy. Vui lòng thử lại sau.",
+        "serverError": "Lỗi máy chủ thanh toán. Vui lòng thử lại sau.",
+        "serviceUnavailable": "Dịch vụ thanh toán tạm thời không khả dụng. Vui lòng thử lại sau.",
+        "unauthorized": "Ủy quyền thanh toán không thành công. Vui lòng đăng nhập lại."
+      },
       "noAdminId": "Không thể lấy ID quản trị từ phiên. Vui lòng đăng nhập lại.",
       "startCheckout": "Không thể bắt đầu thanh toán Stripe. Vui lòng thử lại.",
       "startPayment": "Không thể bắt đầu thanh toán. Vui lòng thử lại.",
+      "stripe": {
+        "amountTooSmall": "Số tiền thanh toán thấp hơn mức tối thiểu yêu cầu.",
+        "checkoutSessionFailed": "Không thể tạo phiên thanh toán. Vui lòng thử lại.",
+        "currencyConversionError": "Chuyển đổi tiền tệ không thành công. Vui lòng thử một số tiền khác.",
+        "invalidCurrency": "Tiền tệ không hợp lệ cho phương thức thanh toán này",
+        "minimumAmountError": "Số tiền thanh toán quá nhỏ. Số tiền tối thiểu yêu cầu là 50 xu.",
+        "minimumAmountWithConversion": "Tổng số tiền của phiên thanh toán phải chuyển đổi ít nhất thành 50 xu. {originalAmount} chuyển đổi thành khoảng {convertedAmount}.",
+        "processingError": "Đã xảy ra lỗi trong quá trình xử lý thanh toán. Vui lòng thử lại."
+      },
       "validateBalance": "Không thể xác thực số dư ví. Vui lòng liên hệ với bộ phận hỗ trợ.",
-      "validateBalanceRetry": "Không thể xác thực số dư ví. Vui lòng thử lại."
+      "validateBalanceRetry": "Không thể xác thực số dư ví. Vui lòng thử lại.",
+      "validation": {
+        "invalidAmount": "Số tiền thanh toán không hợp lệ",
+        "invalidCurrency": "Tiền tệ không hợp lệ cho thanh toán",
+        "invalidPackage": "Gói không hợp lệ được chọn để thanh toán"
+      }
     },
     "packagePurchase": "Mua gói",
     "payableAmount": "Số tiền phải thanh toán",

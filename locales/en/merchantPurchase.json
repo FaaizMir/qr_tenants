@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "Agent Prepaid Balance Insufficient",
     "agentBalanceInsufficinetDescription": "Your agent needs to top up their prepaid wallet. Please contact your agent to add funds before completing this purchase.",
+    "business": {
+      "creditLimitExceeded": "Credit limit exceeded for this merchant type",
+      "duplicatePurchase": "Duplicate purchase detected. Please wait before trying again.",
+      "merchantInactive": "Your merchant account is inactive",
+      "merchantNotFound": "Merchant account not found",
+      "merchantSuspended": "Your merchant account has been suspended",
+      "packageExpired": "This package offer has expired",
+      "packageOutOfStock": "This package is currently out of stock",
+      "paymentMethodRequired": "Valid payment method required",
+      "subscriptionRequired": "Active subscription required for this package"
+    },
     "loadPackages": "Failed to load credit packages",
+    "network": {
+      "badRequest": "Invalid request. Please check your input.",
+      "conflict": "A conflict occurred. The resource may have been modified by another user.",
+      "connectionFailed": "Connection failed. Please check your internet connection.",
+      "forbidden": "Access denied. You don't have permission to access this resource.",
+      "gatewayTimeout": "Gateway timeout. Please try again.",
+      "internalServerError": "Internal server error. Please contact support if this persists.",
+      "notFound": "The requested resource was not found.",
+      "serverError": "Server error occurred. Please try again later.",
+      "serviceUnavailable": "Service is temporarily unavailable. Please try again later.",
+      "timeout": "Request timed out. Please try again.",
+      "tooManyRequests": "Too many requests. Please wait a moment and try again.",
+      "unauthorized": "You are not authorized to perform this action."
+    },
     "noMerchantId": "Merchant ID not found. Please log in again.",
-    "purchaseFailed": "Failed to purchase package. Please try again."
+    "purchaseFailed": "Failed to purchase package. Please try again.",
+    "stripe": {
+      "amountTooSmall": "Payment amount is below the minimum required for processing.",
+      "authenticationRequired": "Additional authentication required for this payment",
+      "cardDeclined": "Your card was declined",
+      "cardNotSupported": "This card type is not supported",
+      "checkoutSessionFailed": "Failed to create checkout session",
+      "currencyConversionError": "Currency conversion failed. Please try a different amount.",
+      "expiredCard": "Your card has expired",
+      "incorrectCvc": "Incorrect CVC code",
+      "insufficientFunds": "Insufficient funds on your card",
+      "invalidCurrency": "Invalid currency for this payment method",
+      "minimumAmountError": "Payment amount is too small. The minimum amount required is 50 cents.",
+      "minimumAmountWithConversion": "The checkout session's total amount must convert to at least 50 cents. {originalAmount} converts to approximately {convertedAmount}.",
+      "paymentCancelled": "Payment was cancelled",
+      "paymentDeclined": "Payment was declined by your bank",
+      "paymentFailed": "Payment processing failed",
+      "paymentIntentFailed": "Payment intent creation failed",
+      "processingError": "Payment processing error occurred",
+      "rateLimitExceeded": "Too many payment attempts. Please wait before trying again.",
+      "sessionExpired": "Payment session has expired. Please try again.",
+      "webhookError": "Payment confirmation failed. Please contact support."
+    },
+    "validation": {
+      "invalidAmount": "Invalid amount specified",
+      "invalidCurrency": "Invalid currency specified",
+      "invalidPackage": "Invalid package selected",
+      "maximumAmount": "Amount exceeds maximum allowed",
+      "minimumAmount": "Amount is below minimum required",
+      "packageNotFound": "Selected package not found",
+      "packageUnavailable": "Selected package is no longer available"
+    }
   },
   "merchantTypes": {
     "annual": "Annual",
@@ -74,11 +130,33 @@
     "credits": "credits",
     "errors": {
       "insufficientBalance": "Insufficient agent wallet balance. Required: {required}, Available: {available}. Please top up your wallet to complete this purchase.",
+      "network": {
+        "badRequest": "Invalid payment request. Please check your details.",
+        "forbidden": "Payment access denied. Please contact support.",
+        "notFound": "Payment service not found. Please try again later.",
+        "serverError": "Payment server error. Please try again later.",
+        "serviceUnavailable": "Payment service temporarily unavailable. Please try again later.",
+        "unauthorized": "Payment authorization failed. Please log in again."
+      },
       "noAdminId": "Unable to retrieve admin ID from session. Please log in again.",
       "startCheckout": "Unable to start Stripe Checkout. Please try again.",
       "startPayment": "Unable to start payment. Please try again.",
+      "stripe": {
+        "amountTooSmall": "Payment amount is below the minimum required.",
+        "checkoutSessionFailed": "Failed to create payment session. Please try again.",
+        "currencyConversionError": "Currency conversion failed. Please try a different amount.",
+        "invalidCurrency": "Invalid currency for this payment method",
+        "minimumAmountError": "Payment amount is too small. Minimum amount required is 50 cents.",
+        "minimumAmountWithConversion": "The checkout session's total amount must convert to at least 50 cents. {originalAmount} converts to approximately {convertedAmount}.",
+        "processingError": "Payment processing error. Please try again."
+      },
       "validateBalance": "Unable to validate wallet balance. Please contact support.",
-      "validateBalanceRetry": "Unable to validate wallet balance. Please try again."
+      "validateBalanceRetry": "Unable to validate wallet balance. Please try again.",
+      "validation": {
+        "invalidAmount": "Invalid payment amount specified",
+        "invalidCurrency": "Invalid currency for payment",
+        "invalidPackage": "Invalid package selected for payment"
+      }
     },
     "packagePurchase": "Package purchase",
     "payableAmount": "Payable amount",

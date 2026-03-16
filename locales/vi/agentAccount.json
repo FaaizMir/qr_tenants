@@ -14,61 +14,95 @@
   "errors": {
     "business": {
       "accountInactive": "Tài khoản của bạn không hoạt động. Vui lòng liên hệ với bộ phận hỗ trợ.",
+      "accountLocked": "Tài khoản của bạn đã bị khóa do nhiều lần thử không thành công.",
       "accountNotFound": "Tài khoản không tìm thấy. Vui lòng liên hệ với bộ phận hỗ trợ.",
       "accountSuspended": "Tài khoản của bạn đã bị đình chỉ. Vui lòng liên hệ với bộ phận hỗ trợ.",
       "adminNotFound": "Tài khoản quản trị không được tìm thấy.",
+      "dataIntegrityError": "Đã xảy ra lỗi toàn vẹn dữ liệu. Vui lòng liên hệ với bộ phận hỗ trợ.",
+      "duplicateEntry": "Mục này đã tồn tại trong hệ thống.",
       "emailAlreadyVerified": "Địa chỉ email đã được xác minh.",
       "emailNotVerified": "Vui lòng xác minh địa chỉ email của bạn trước khi tiếp tục.",
       "insufficientPermissions": "Bạn không có đủ quyền để thực hiện hành động này.",
+      "invalidCredentials": "Thông tin xác thực không hợp lệ.",
+      "maintenanceMode": "Hệ thống hiện đang bảo trì. Vui lòng thử lại sau.",
+      "operationNotAllowed": "Hoạt động này không được phép cho loại tài khoản của bạn.",
       "phoneAlreadyVerified": "Số điện thoại đã được xác minh.",
       "phoneNotVerified": "Vui lòng xác minh số điện thoại của bạn trước khi tiếp tục.",
+      "quotaExceeded": "Bạn đã vượt quá giới hạn quota của mình.",
+      "resourceNotFound": "Tài nguyên yêu cầu không thể tìm thấy.",
       "sessionExpired": "Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại.",
       "stripeKeyInvalid": "Khóa Stripe được cung cấp không hợp lệ hoặc đã hết hạn.",
       "stripeKeyLiveInDevelopment": "Khóa Stripe trực tiếp không thể được sử dụng trong môi trường phát triển.",
-      "stripeKeyTestInProduction": "Khóa thử nghiệm Stripe không thể được sử dụng trong môi trường sản xuất."
+      "stripeKeyTestInProduction": "Khóa thử nghiệm Stripe không thể được sử dụng trong môi trường sản xuất.",
+      "tokenExpired": "Mã xác thực của bạn đã hết hạn."
     },
     "network": {
+      "badGateway": "Lỗi cổng xấu. Vui lòng thử lại.",
       "badRequest": "Yêu cầu không hợp lệ. Vui lòng kiểm tra đầu vào của bạn.",
       "conflict": "Đã xảy ra xung đột. Tài nguyên có thể đã được sửa đổi bởi người dùng khác.",
       "connectionFailed": "Kết nối thất bại. Vui lòng kiểm tra kết nối internet của bạn.",
       "forbidden": "Truy cập bị từ chối. Bạn không có quyền truy cập vào tài nguyên này.",
+      "gatewayTimeout": "Thời gian chờ cổng. Vui lòng thử lại.",
       "internalServerError": "Lỗi máy chủ nội bộ. Vui lòng liên hệ với bộ phận hỗ trợ nếu vấn đề này tiếp diễn.",
+      "networkError": "Đã xảy ra lỗi mạng. Vui lòng kiểm tra kết nối của bạn.",
       "notFound": "Tài nguyên yêu cầu không được tìm thấy.",
       "serverError": "Đã xảy ra lỗi máy chủ. Vui lòng thử lại sau.",
+      "serviceUnavailable": "Dịch vụ tạm thời không khả dụng. Vui lòng thử lại sau.",
       "timeout": "Yêu cầu đã hết thời gian. Vui lòng thử lại.",
       "tooManyRequests": "Quá nhiều yêu cầu. Vui lòng chờ một chút và thử lại.",
       "unauthorized": "Bạn không được phép thực hiện hành động này."
     },
     "validation": {
       "address": {
+        "cannotBeBlank": "Địa chỉ không được để trống",
+        "empty": "Địa chỉ không được để trống",
         "invalid": "Vui lòng nhập một địa chỉ hợp lệ",
+        "required": "Địa chỉ là bắt buộc",
         "tooLong": "Địa chỉ không được vượt quá 500 ký tự"
       },
       "city": {
+        "cannotBeBlank": "Thành phố không được để trống",
+        "empty": "Thành phố không được để trống",
+        "invalid": "Định dạng thành phố không hợp lệ",
         "invalidCharacters": "Tên thành phố chỉ có thể chứa chữ cái, khoảng trắng và dấu gạch ngang",
+        "required": "Thành phố là bắt buộc",
         "tooLong": "Tên thành phố không được vượt quá 100 ký tự",
         "tooShort": "Tên thành phố phải có ít nhất 2 ký tự"
       },
       "company_name": {
         "alreadyExists": "Tên công ty này đã được đăng ký",
+        "cannotBeBlank": "Tên công ty không được để trống",
+        "empty": "Tên công ty không được để trống",
+        "invalid": "Định dạng tên công ty không hợp lệ",
         "invalidCharacters": "Tên công ty chứa ký tự không hợp lệ",
+        "required": "Tên công ty là bắt buộc",
         "tooLong": "Tên công ty không được vượt quá 200 ký tự",
-        "tooShort": "Tên công ty phải có ít nhất 2 ký tự"
+        "tooShort": "Tên công ty phải có ít nhất 2 ký tự",
+        "unique": "Tên công ty này đã được sử dụng"
       },
       "country": {
+        "cannotBeBlank": "Quốc gia không được để trống",
+        "empty": "Quốc gia không được để trống",
+        "invalid": "Định dạng quốc gia không hợp lệ",
         "invalidCharacters": "Tên quốc gia chỉ có thể chứa chữ cái, khoảng trắng và dấu gạch ngang",
+        "required": "Quốc gia là bắt buộc",
         "tooLong": "Tên quốc gia không được vượt quá 100 ký tự",
         "tooShort": "Tên quốc gia phải có ít nhất 2 ký tự"
       },
       "email": {
         "alreadyExists": "Địa chỉ email này đã được đăng ký",
+        "cannotBeBlank": "Địa chỉ email không được để trống",
         "empty": "Địa chỉ email không được để trống",
         "invalid": "Vui lòng nhập địa chỉ email hợp lệ",
+        "invalidFormat": "Định dạng email không hợp lệ",
         "required": "Địa chỉ email là bắt buộc",
-        "tooLong": "Địa chỉ email không được vượt quá 255 ký tự"
+        "tooLong": "Địa chỉ email không được vượt quá 255 ký tự",
+        "unique": "Địa chỉ email này đã được sử dụng"
       },
       "name": {
+        "cannotBeBlank": "Họ tên không được để trống",
         "empty": "Họ và tên không được để trống",
+        "invalid": "Định dạng họ tên không hợp lệ",
         "invalidCharacters": "Họ và tên chỉ có thể chứa chữ cái, khoảng trắng và dấu gạch ngang",
         "required": "Họ và tên là bắt buộc",
         "tooLong": "Họ và tên không được vượt quá 100 ký tự",
@@ -76,17 +110,26 @@
       },
       "phone": {
         "alreadyExists": "Số điện thoại này đã được đăng ký",
+        "cannotBeBlank": "Số điện thoại không được để trống",
+        "empty": "Số điện thoại không được để trống",
         "invalid": "Vui lòng nhập số điện thoại hợp lệ",
         "invalidFormat": "Định dạng số điện thoại không hợp lệ",
+        "required": "Số điện thoại là bắt buộc",
         "tooLong": "Số điện thoại quá dài",
-        "tooShort": "Số điện thoại quá ngắn"
+        "tooShort": "Số điện thoại quá ngắn",
+        "unique": "Số điện thoại này đã được sử dụng"
       },
       "stripe_secret_key": {
         "alreadyExists": "Khóa Stripe này đã được sử dụng",
+        "cannotBeBlank": "Khóa bí mật Stripe không được để trống",
+        "empty": "Khóa bí mật Stripe không được để trống",
         "invalid": "Định dạng khóa bí mật Stripe không hợp lệ",
+        "invalidFormat": "Định dạng khóa bí mật Stripe không hợp lệ",
         "invalidPrefix": "Khóa bí mật Stripe phải bắt đầu bằng 'sk_test_' hoặc 'sk_live_'",
+        "required": "Khóa bí mật Stripe là bắt buộc",
         "tooLong": "Khóa bí mật Stripe quá dài",
-        "tooShort": "Khóa bí mật Stripe quá ngắn"
+        "tooShort": "Khóa bí mật Stripe quá ngắn",
+        "unique": "Khóa Stripe này đã được sử dụng"
       }
     }
   },

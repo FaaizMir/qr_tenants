@@ -14,61 +14,95 @@
   "errors": {
     "business": {
       "accountInactive": "귀하의 계정은 비활성 상태입니다. 지원팀에 문의하십시오.",
+      "accountLocked": "여러 번의 실패한 시도로 인해 귀하의 계정이 잠겼습니다.",
       "accountNotFound": "계정을 찾을 수 없습니다. 지원팀에 문의해 주세요.",
       "accountSuspended": "귀하의 계정이 정지되었습니다. 지원팀에 문의하십시오.",
       "adminNotFound": "관리자 계정을 찾을 수 없습니다.",
+      "dataIntegrityError": "데이터 무결성 오류가 발생했습니다. 지원팀에 문의하십시오.",
+      "duplicateEntry": "이 항목은 시스템에 이미 존재합니다.",
       "emailAlreadyVerified": "이메일 주소는 이미 확인되었습니다.",
       "emailNotVerified": "진행하기 전에 이메일 주소를 확인하십시오.",
       "insufficientPermissions": "이 작업을 수행할 충분한 권한이 없습니다.",
+      "invalidCredentials": "잘못된 자격 증명이 제공되었습니다.",
+      "maintenanceMode": "시스템이 현재 유지 관리 중입니다. 나중에 다시 시도해 주세요.",
+      "operationNotAllowed": "이 작업은 귀하의 계정 유형에 대해 허용되지 않습니다.",
       "phoneAlreadyVerified": "전화번호가 이미 확인되었습니다.",
       "phoneNotVerified": "진행하기 전에 전화번호를 확인하십시오.",
+      "quotaExceeded": "쿼타 한도를 초과했습니다.",
+      "resourceNotFound": "요청한 리소스를 찾을 수 없습니다.",
       "sessionExpired": "세션이 만료되었습니다. 다시 로그인해 주세요.",
       "stripeKeyInvalid": "제공된 Stripe 키가 유효하지 않거나 만료되었습니다.",
       "stripeKeyLiveInDevelopment": "라이브 Stripe 키는 개발 환경에서 사용할 수 없습니다.",
-      "stripeKeyTestInProduction": "테스트 Stripe 키는 프로덕션 환경에서 사용할 수 없습니다."
+      "stripeKeyTestInProduction": "테스트 Stripe 키는 프로덕션 환경에서 사용할 수 없습니다.",
+      "tokenExpired": "인증 토큰이 만료되었습니다."
     },
     "network": {
+      "badGateway": "잘못된 게이트웨이 오류입니다. 다시 시도하십시오.",
       "badRequest": "잘못된 요청입니다. 입력 내용을 확인해 주세요.",
       "conflict": "충돌이 발생했습니다. 리소스가 다른 사용자에 의해 수정되었을 수 있습니다.",
       "connectionFailed": "연결 실패. 인터넷 연결을 확인하십시오.",
       "forbidden": "접근이 거부되었습니다. 이 리소스에 접근할 권한이 없습니다.",
+      "gatewayTimeout": "게이트웨이 시간 초과. 다시 시도하십시오.",
       "internalServerError": "내부 서버 오류. 문제가 지속되면 지원팀에 문의하십시오.",
+      "networkError": "네트워크 오류가 발생했습니다. 연결을 확인해 주세요.",
       "notFound": "요청한 리소스를 찾을 수 없습니다.",
       "serverError": "서버 오류가 발생했습니다. 나중에 다시 시도해 주세요.",
+      "serviceUnavailable": "서비스를 일시적으로 사용할 수 없습니다. 나중에 다시 시도해 주세요.",
       "timeout": "요청 시간이 초과되었습니다. 다시 시도하십시오.",
       "tooManyRequests": "요청이 너무 많습니다. 잠시 기다렸다가 다시 시도하십시오.",
       "unauthorized": "이 작업을 수행할 권한이 없습니다."
     },
     "validation": {
       "address": {
+        "cannotBeBlank": "주소는 비워둘 수 없습니다.",
+        "empty": "주소는 비어 있을 수 없습니다.",
         "invalid": "유효한 주소를 입력하십시오.",
+        "required": "주소는 필수입니다.",
         "tooLong": "주소는 500자를 초과할 수 없습니다."
       },
       "city": {
+        "cannotBeBlank": "도시는 비워둘 수 없습니다.",
+        "empty": "도시는 비워둘 수 없습니다.",
+        "invalid": "도시 형식이 유효하지 않습니다.",
         "invalidCharacters": "도시 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
+        "required": "도시가 필요합니다.",
         "tooLong": "도시 이름은 100자를 초과할 수 없습니다.",
         "tooShort": "도시 이름은 최소 2자 이상이어야 합니다."
       },
       "company_name": {
         "alreadyExists": "이 회사 이름은 이미 등록되어 있습니다.",
+        "cannotBeBlank": "회사 이름은 비워둘 수 없습니다.",
+        "empty": "회사 이름은 비워둘 수 없습니다.",
+        "invalid": "회사 이름 형식이 유효하지 않습니다.",
         "invalidCharacters": "회사 이름에 유효하지 않은 문자가 포함되어 있습니다.",
+        "required": "회사 이름은 필수입니다.",
         "tooLong": "회사 이름은 200자를 초과할 수 없습니다.",
-        "tooShort": "회사 이름은 최소 2자 이상이어야 합니다."
+        "tooShort": "회사 이름은 최소 2자 이상이어야 합니다.",
+        "unique": "이 회사 이름은 이미 사용 중입니다."
       },
       "country": {
+        "cannotBeBlank": "국가는 비워둘 수 없습니다.",
+        "empty": "국가는 비워둘 수 없습니다.",
+        "invalid": "국가 형식이 유효하지 않습니다.",
         "invalidCharacters": "국가 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
+        "required": "국가가 필요합니다.",
         "tooLong": "국가 이름은 100자를 초과할 수 없습니다.",
         "tooShort": "국가 이름은 최소 2자 이상이어야 합니다."
       },
       "email": {
         "alreadyExists": "이 이메일 주소는 이미 등록되어 있습니다.",
+        "cannotBeBlank": "이메일 주소는 비워둘 수 없습니다.",
         "empty": "이메일 주소는 비워둘 수 없습니다.",
         "invalid": "유효한 이메일 주소를 입력해 주세요.",
+        "invalidFormat": "이메일 형식이 유효하지 않습니다.",
         "required": "이메일 주소는 필수입니다.",
-        "tooLong": "이메일 주소는 255자를 초과할 수 없습니다."
+        "tooLong": "이메일 주소는 255자를 초과할 수 없습니다.",
+        "unique": "이 이메일 주소는 이미 사용 중입니다."
       },
       "name": {
+        "cannotBeBlank": "전체 이름은 비워둘 수 없습니다.",
         "empty": "전체 이름은 비워둘 수 없습니다.",
+        "invalid": "전체 이름 형식이 유효하지 않습니다.",
         "invalidCharacters": "전체 이름은 문자, 공백 및 하이픈만 포함할 수 있습니다.",
         "required": "전체 이름이 필요합니다.",
         "tooLong": "전체 이름은 100자를 초과할 수 없습니다.",
@@ -76,17 +110,26 @@
       },
       "phone": {
         "alreadyExists": "이 전화번호는 이미 등록되어 있습니다.",
+        "cannotBeBlank": "전화번호는 비워둘 수 없습니다.",
+        "empty": "전화번호는 비어 있을 수 없습니다.",
         "invalid": "유효한 전화번호를 입력하십시오.",
         "invalidFormat": "전화번호 형식이 유효하지 않습니다.",
+        "required": "전화번호는 필수입니다.",
         "tooLong": "전화번호가 너무 깁니다.",
-        "tooShort": "전화번호가 너무 짧습니다."
+        "tooShort": "전화번호가 너무 짧습니다.",
+        "unique": "이 전화번호는 이미 사용 중입니다."
       },
       "stripe_secret_key": {
         "alreadyExists": "이 Stripe 키는 이미 사용 중입니다.",
+        "cannotBeBlank": "Stripe 비밀 키는 비워둘 수 없습니다.",
+        "empty": "Stripe 비밀 키는 비어 있을 수 없습니다.",
         "invalid": "유효하지 않은 Stripe 비밀 키 형식입니다.",
+        "invalidFormat": "Stripe 비밀 키 형식이 유효하지 않습니다.",
         "invalidPrefix": "Stripe 비밀 키는 'sk_test_' 또는 'sk_live_'로 시작해야 합니다.",
+        "required": "Stripe 비밀 키가 필요합니다.",
         "tooLong": "Stripe 비밀 키가 너무 깁니다.",
-        "tooShort": "Stripe 비밀 키가 너무 짧습니다."
+        "tooShort": "Stripe 비밀 키가 너무 짧습니다.",
+        "unique": "이 Stripe 키는 이미 사용 중입니다."
       }
     }
   },

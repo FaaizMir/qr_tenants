@@ -35,9 +35,65 @@
   "errors": {
     "agentBalanceInsufficient": "エージェントのプリペイド残高が不足しています",
     "agentBalanceInsufficinetDescription": "エージェントはプリペイドウォレットにチャージする必要があります。この購入を完了する前に、エージェントに連絡して資金を追加してください。",
+    "business": {
+      "creditLimitExceeded": "この商人タイプのクレジット限度を超えました",
+      "duplicatePurchase": "重複購入が検出されました。再試行する前にお待ちください。",
+      "merchantInactive": "あなたのマーチャントアカウントは非アクティブです",
+      "merchantNotFound": "マーチャントアカウントが見つかりません",
+      "merchantSuspended": "あなたのマーチャントアカウントは停止されています",
+      "packageExpired": "このパッケージオファーは期限切れです",
+      "packageOutOfStock": "このパッケージは現在在庫切れです",
+      "paymentMethodRequired": "有効な支払い方法が必要です",
+      "subscriptionRequired": "このパッケージにはアクティブなサブスクリプションが必要です"
+    },
     "loadPackages": "クレジットパッケージの読み込みに失敗しました",
+    "network": {
+      "badRequest": "無効なリクエストです。入力内容を確認してください。",
+      "conflict": "競合が発生しました。リソースは別のユーザーによって変更された可能性があります。",
+      "connectionFailed": "接続に失敗しました。インターネット接続を確認してください。",
+      "forbidden": "アクセスが拒否されました。このリソースにアクセスする権限がありません。",
+      "gatewayTimeout": "ゲートウェイタイムアウト。もう一度お試しください。",
+      "internalServerError": "内部サーバーエラー。問題が続く場合はサポートに連絡してください。",
+      "notFound": "要求されたリソースが見つかりませんでした。",
+      "serverError": "サーバーエラーが発生しました。後でもう一度お試しください。",
+      "serviceUnavailable": "サービスは一時的に利用できません。後でもう一度お試しください。",
+      "timeout": "リクエストがタイムアウトしました。もう一度お試しください。",
+      "tooManyRequests": "リクエストが多すぎます。少々お待ちいただいてから再試行してください。",
+      "unauthorized": "このアクションを実行する権限がありません。"
+    },
     "noMerchantId": "マーチャントIDが見つかりません。再度ログインしてください。",
-    "purchaseFailed": "パッケージの購入に失敗しました。再試行してください。"
+    "purchaseFailed": "パッケージの購入に失敗しました。再試行してください。",
+    "stripe": {
+      "amountTooSmall": "支払い金額が処理に必要な最低額を下回っています。",
+      "authenticationRequired": "この支払いには追加の認証が必要です",
+      "cardDeclined": "カードが拒否されました",
+      "cardNotSupported": "このカードタイプはサポートされていません",
+      "checkoutSessionFailed": "チェックアウトセッションの作成に失敗しました",
+      "currencyConversionError": "通貨の変換に失敗しました。別の金額をお試しください。",
+      "expiredCard": "カードの有効期限が切れています",
+      "incorrectCvc": "CVCコードが無効です",
+      "insufficientFunds": "カードの残高が不足しています",
+      "invalidCurrency": "この支払い方法には無効な通貨です",
+      "minimumAmountError": "支払い金額が小さすぎます。必要な最小金額は50セントです。",
+      "minimumAmountWithConversion": "チェックアウトセッションの合計金額は、少なくとも50セントに変換される必要があります。{originalAmount}は約{convertedAmount}に変換されます。",
+      "paymentCancelled": "支払いがキャンセルされました",
+      "paymentDeclined": "支払いは銀行によって拒否されました",
+      "paymentFailed": "支払い処理に失敗しました",
+      "paymentIntentFailed": "支払い意図の作成に失敗しました",
+      "processingError": "支払い処理中にエラーが発生しました",
+      "rateLimitExceeded": "支払いの試行回数が多すぎます。再試行する前にお待ちください。",
+      "sessionExpired": "支払いセッションが期限切れです。もう一度お試しください。",
+      "webhookError": "支払い確認に失敗しました。サポートに連絡してください。"
+    },
+    "validation": {
+      "invalidAmount": "指定された金額が無効です",
+      "invalidCurrency": "指定された通貨が無効です",
+      "invalidPackage": "無効なパッケージが選択されました",
+      "maximumAmount": "金額が許可されている最大値を超えています",
+      "minimumAmount": "金額が必要な最小限度を下回っています",
+      "packageNotFound": "選択したパッケージが見つかりません",
+      "packageUnavailable": "選択したパッケージはもはや利用できません"
+    }
   },
   "merchantTypes": {
     "annual": "年次",
@@ -74,11 +130,33 @@
     "credits": "クレジット",
     "errors": {
       "insufficientBalance": "エージェントのウォレット残高が不足しています。必要: {required}, 利用可能: {available}。この購入を完了するにはウォレットにチャージしてください。",
+      "network": {
+        "badRequest": "無効な支払いリクエストです。詳細を確認してください。",
+        "forbidden": "支払いアクセスが拒否されました。サポートに連絡してください。",
+        "notFound": "支払いサービスが見つかりません。後でもう一度お試しください。",
+        "serverError": "支払いサーバーエラー。後でもう一度お試しください。",
+        "serviceUnavailable": "支払いサービスは一時的に利用できません。後でもう一度お試しください。",
+        "unauthorized": "支払いの承認に失敗しました。もう一度ログインしてください。"
+      },
       "noAdminId": "セッションから管理者IDを取得できませんでした。再度ログインしてください。",
       "startCheckout": "Stripeチェックアウトを開始できませんでした。もう一度お試しください。",
       "startPayment": "支払いを開始できませんでした。再試行してください。",
+      "stripe": {
+        "amountTooSmall": "支払い金額が必要な最小限度を下回っています。",
+        "checkoutSessionFailed": "支払いセッションの作成に失敗しました。もう一度お試しください。",
+        "currencyConversionError": "通貨変換に失敗しました。別の金額をお試しください。",
+        "invalidCurrency": "この支払い方法には無効な通貨です",
+        "minimumAmountError": "支払い金額が小さすぎます。必要な最小金額は50セントです。",
+        "minimumAmountWithConversion": "チェックアウトセッションの合計金額は、少なくとも50セントに変換される必要があります。{originalAmount}は約{convertedAmount}に変換されます。",
+        "processingError": "支払い処理中にエラーが発生しました。もう一度お試しください。"
+      },
       "validateBalance": "ウォレット残高を検証できませんでした。サポートにお問い合わせください。",
-      "validateBalanceRetry": "ウォレット残高を検証できませんでした。もう一度お試しください。"
+      "validateBalanceRetry": "ウォレット残高を検証できませんでした。もう一度お試しください。",
+      "validation": {
+        "invalidAmount": "指定された支払い金額が無効です",
+        "invalidCurrency": "支払いに無効な通貨です",
+        "invalidPackage": "支払いのために選択されたパッケージが無効です"
+      }
     },
     "packagePurchase": "パッケージ購入",
     "payableAmount": "支払うべき金額",

@@ -14,61 +14,95 @@
   "errors": {
     "business": {
       "accountInactive": "Akaun anda tidak aktif. Sila hubungi sokongan.",
+      "accountLocked": "Akaun anda telah dikunci kerana beberapa percubaan gagal.",
       "accountNotFound": "Akaun tidak ditemui. Sila hubungi sokongan.",
       "accountSuspended": "Akaun anda telah digantung. Sila hubungi sokongan.",
       "adminNotFound": "Akaun admin tidak ditemui.",
+      "dataIntegrityError": "Ralat integriti data berlaku. Sila hubungi sokongan.",
+      "duplicateEntry": "Entri ini sudah wujud dalam sistem.",
       "emailAlreadyVerified": "Alamat emel sudah disahkan.",
       "emailNotVerified": "Sila sahkan alamat emel anda sebelum meneruskan.",
       "insufficientPermissions": "Anda tidak mempunyai kebenaran yang mencukupi untuk melakukan tindakan ini.",
+      "invalidCredentials": "Kelayakan yang diberikan tidak sah.",
+      "maintenanceMode": "Sistem sedang dalam penyelenggaraan. Sila cuba lagi nanti.",
+      "operationNotAllowed": "Operasi ini tidak dibenarkan untuk jenis akaun anda.",
       "phoneAlreadyVerified": "Nombor telefon sudah disahkan.",
       "phoneNotVerified": "Sila sahkan nombor telefon anda sebelum meneruskan.",
+      "quotaExceeded": "Anda telah melebihi had kuota anda.",
+      "resourceNotFound": "Sumber yang diminta tidak dapat dijumpai.",
       "sessionExpired": "Sesi anda telah tamat. Sila log masuk semula.",
       "stripeKeyInvalid": "Kunci Stripe yang diberikan tidak sah atau telah tamat tempoh.",
       "stripeKeyLiveInDevelopment": "Kunci Stripe langsung tidak boleh digunakan dalam persekitaran pembangunan.",
-      "stripeKeyTestInProduction": "Kunci Stripe ujian tidak boleh digunakan dalam persekitaran pengeluaran."
+      "stripeKeyTestInProduction": "Kunci Stripe ujian tidak boleh digunakan dalam persekitaran pengeluaran.",
+      "tokenExpired": "Token pengesahan anda telah tamat tempoh."
     },
     "network": {
+      "badGateway": "Ralat pintu masuk buruk. Sila cuba lagi.",
       "badRequest": "Permintaan tidak sah. Sila semak input anda.",
       "conflict": "Satu konflik telah berlaku. Sumber mungkin telah diubah oleh pengguna lain.",
       "connectionFailed": "Sambungan gagal. Sila semak sambungan internet anda.",
       "forbidden": "Akses ditolak. Anda tidak mempunyai kebenaran untuk mengakses sumber ini.",
+      "gatewayTimeout": "Masa tamat pintu masuk. Sila cuba lagi.",
       "internalServerError": "Ralat pelayan dalaman. Sila hubungi sokongan jika ini berterusan.",
+      "networkError": "Ralat rangkaian berlaku. Sila semak sambungan anda.",
       "notFound": "Sumber yang diminta tidak ditemui.",
       "serverError": "Ralat pelayan telah berlaku. Sila cuba lagi nanti.",
+      "serviceUnavailable": "Perkhidmatan tidak tersedia buat sementara waktu. Sila cuba lagi nanti.",
       "timeout": "Permintaan telah tamat. Sila cuba lagi.",
       "tooManyRequests": "Terlalu banyak permintaan. Sila tunggu seketika dan cuba lagi.",
       "unauthorized": "Anda tidak dibenarkan untuk melakukan tindakan ini."
     },
     "validation": {
       "address": {
+        "cannotBeBlank": "Alamat tidak boleh kosong",
+        "empty": "Alamat tidak boleh kosong",
         "invalid": "Sila masukkan alamat yang sah",
+        "required": "Alamat diperlukan",
         "tooLong": "Alamat tidak boleh melebihi 500 aksara"
       },
       "city": {
+        "cannotBeBlank": "Bandar tidak boleh kosong",
+        "empty": "Bandar tidak boleh kosong",
+        "invalid": "Format bandar tidak sah",
         "invalidCharacters": "Nama bandar hanya boleh mengandungi huruf, ruang, dan tanda hubung",
+        "required": "Bandar diperlukan",
         "tooLong": "Nama bandar tidak boleh melebihi 100 aksara",
         "tooShort": "Nama bandar mesti sekurang-kurangnya 2 aksara panjang"
       },
       "company_name": {
         "alreadyExists": "Nama syarikat ini sudah didaftarkan",
+        "cannotBeBlank": "Nama syarikat tidak boleh kosong",
+        "empty": "Nama syarikat tidak boleh kosong",
+        "invalid": "Format nama syarikat tidak sah",
         "invalidCharacters": "Nama syarikat mengandungi aksara yang tidak sah",
+        "required": "Nama syarikat diperlukan",
         "tooLong": "Nama syarikat tidak boleh melebihi 200 aksara",
-        "tooShort": "Nama syarikat mesti sekurang-kurangnya 2 aksara panjang"
+        "tooShort": "Nama syarikat mesti sekurang-kurangnya 2 aksara panjang",
+        "unique": "Nama syarikat ini sudah digunakan"
       },
       "country": {
+        "cannotBeBlank": "Negara tidak boleh kosong",
+        "empty": "Negara tidak boleh kosong",
+        "invalid": "Format negara tidak sah",
         "invalidCharacters": "Nama negara hanya boleh mengandungi huruf, ruang, dan tanda hubung",
+        "required": "Negara diperlukan",
         "tooLong": "Nama negara tidak boleh melebihi 100 aksara",
         "tooShort": "Nama negara mesti sekurang-kurangnya 2 aksara panjang"
       },
       "email": {
         "alreadyExists": "Alamat emel ini sudah didaftarkan",
+        "cannotBeBlank": "Alamat emel tidak boleh kosong",
         "empty": "Alamat emel tidak boleh kosong",
         "invalid": "Sila masukkan alamat emel yang sah",
+        "invalidFormat": "Format emel tidak sah",
         "required": "Alamat emel diperlukan",
-        "tooLong": "Alamat emel tidak boleh melebihi 255 aksara"
+        "tooLong": "Alamat emel tidak boleh melebihi 255 aksara",
+        "unique": "Alamat emel ini sudah digunakan"
       },
       "name": {
+        "cannotBeBlank": "Nama penuh tidak boleh kosong",
         "empty": "Nama penuh tidak boleh kosong",
+        "invalid": "Format nama penuh tidak sah",
         "invalidCharacters": "Nama penuh hanya boleh mengandungi huruf, ruang, dan tanda hubung",
         "required": "Nama penuh diperlukan",
         "tooLong": "Nama penuh tidak boleh melebihi 100 aksara",
@@ -76,17 +110,26 @@
       },
       "phone": {
         "alreadyExists": "Nombor telefon ini sudah didaftarkan",
+        "cannotBeBlank": "Nombor telefon tidak boleh kosong",
+        "empty": "Nombor telefon tidak boleh kosong",
         "invalid": "Sila masukkan nombor telefon yang sah",
         "invalidFormat": "Format nombor telefon tidak sah",
+        "required": "Nombor telefon diperlukan",
         "tooLong": "Nombor telefon terlalu panjang",
-        "tooShort": "Nombor telefon terlalu pendek"
+        "tooShort": "Nombor telefon terlalu pendek",
+        "unique": "Nombor telefon ini sudah digunakan"
       },
       "stripe_secret_key": {
         "alreadyExists": "Kunci Stripe ini sudah digunakan",
+        "cannotBeBlank": "Kunci rahsia Stripe tidak boleh kosong",
+        "empty": "Kunci rahsia Stripe tidak boleh kosong",
         "invalid": "Format kunci rahsia Stripe tidak sah",
+        "invalidFormat": "Format kunci rahsia Stripe tidak sah",
         "invalidPrefix": "Kunci rahsia Stripe mesti bermula dengan 'sk_test_' atau 'sk_live_'",
+        "required": "Kunci rahsia Stripe diperlukan",
         "tooLong": "Kunci rahsia Stripe terlalu panjang",
-        "tooShort": "Kunci rahsia Stripe terlalu pendek"
+        "tooShort": "Kunci rahsia Stripe terlalu pendek",
+        "unique": "Kunci Stripe ini sudah digunakan"
       }
     }
   },
